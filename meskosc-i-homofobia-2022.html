@@ -170,7 +170,7 @@ pre code {
 
 <h1 class="title toc-ignore">Homofobia w zagrożeniu męskości</h1>
 <h4 class="author">Jakub Jędrusiak</h4>
-<h4 class="date">2022-03-18 08:17:46</h4>
+<h4 class="date">2022-03-18 09:34:05</h4>
 
 </div>
 
@@ -194,7 +194,11 @@ pre code {
 <li><a href="#różnice-w-homofobii-między-warunkami"><span class="toc-section-number">6</span> Różnice w homofobii między warunkami</a>
 <ul>
 <li><a href="#wykresy-pudełkowe"><span class="toc-section-number">6.1</span> Wykresy pudełkowe</a></li>
-<li><a href="#testy-t-dla-różnic-między-warunkami"><span class="toc-section-number">6.2</span> Testy <em>t</em> dla różnic między warunkami</a></li>
+<li><a href="#testy-t-dla-różnic-między-warunkami"><span class="toc-section-number">6.2</span> Testy <em>t</em> dla różnic między warunkami</a>
+<ul>
+<li><a href="#dla-normatywnej-męskości-powyżej-średniej"><span class="toc-section-number">6.2.1</span> Dla normatywnej męskości powyżej średniej</a></li>
+<li><a href="#dla-normatywnej-męskości-poniżej-średniej"><span class="toc-section-number">6.2.2</span> Dla normatywnej męskości poniżej średniej</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#normatywna-męskość-a-homofobia"><span class="toc-section-number">7</span> Normatywna męskość a homofobia</a>
 <ul>
@@ -304,7 +308,7 @@ pre code {
 <li><p><strong>HF_geje</strong> – homofobia wobec gejów (skala od 5 do 60);</p></li>
 <li><p><strong>HF_lesbijki</strong> – homofobia wobec lesbijek (skala od 5 do 60);</p></li>
 <li><p><strong>NM</strong> – normatywna męskość bez pozycji ze skali homofobii (skala od 43 do 301);</p></li>
-<li><p><strong>NM_grupa</strong> – podział na górną i dolną w zależności od tego, czy dany wynik normatywnej męskości jest powyżej, czy poniżej średniej z próby.</p></li>
+<li><p><strong>NM_grupa</strong> – podział na górną i dolną w zależności od tego, czy dany wynik normatywnej męskości jest powyżej, czy poniżej średniej z całej próby.</p></li>
 </ul>
 <p><br></p>
 </div>
@@ -760,7 +764,112 @@ t_HF_lesbijki</code></pre>
 ##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
 ## 1     1   102   0.00370 0.952</code></pre>
 </div>
+<div id="dla-normatywnej-męskości-powyżej-średniej" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Dla normatywnej męskości powyżej średniej</h3>
+<p><strong>Uwaga:</strong> tutaj porównuję mężczyzn z grupy eksperymentalnej z normatywną męskością powyżej średniej <em>całej próby</em> (KNM był przed manipulacją, więc wyniki KNM powinny nie mieć związku z warunkiem) z mężczyznami z <em>całej</em> grupy kontrolnej, bez względu na ich normatywną męskość. Nie wiem, czy to dobrze, ale porównanie grup z NM powyżej średniej daje nieistotne różnice.</p>
+<div>
+<div class="info-tile" style="background: #173F5F;">
+<p><span class="info-tile-large-text"><em>p =</em> 0.03</span> <br /> <span class="info-tile-small-text">homofobia ogólnie</span></p>
+</div>
+<div class="info-tile" style="background: #3CAEA3;">
+<p><span class="info-tile-large-text"><em>p =</em> 0.01</span> <br /> <span class="info-tile-small-text">homofobia wobec gejów</span></p>
+</div>
+<div class="info-tile" style="background: #ED553B;">
+<p><span class="info-tile-large-text"><em>p =</em> 0.16</span> <br /> <span class="info-tile-small-text">homofobia wobec lesbijek</span></p>
+</div>
+</div>
+<button type="button" class="collapsible">
+Pokaż/ukryj wyniki testów
+</button>
+<div class="content">
+<pre class="r"><code># homofobia ogólnie
+t_HF_NM_gorna</code></pre>
+<pre><code>## # A tibble: 1 × 8
+##   .y.   group1    group2         n1    n2 statistic    df      p
+## * &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 HF    kontrolna eksperyment    45    31     -2.18    74 0.0322</code></pre>
+<pre class="r"><code>levene_HF_NM_gorna</code></pre>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    74    0.0609 0.806</code></pre>
+<pre class="r"><code># homofobia wobec gejów
+t_HF_geje_NM_gorna</code></pre>
+<pre><code>## # A tibble: 1 × 8
+##   .y.     group1    group2         n1    n2 statistic    df       p
+## * &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1 HF_geje kontrolna eksperyment    45    31     -2.70    74 0.00864</code></pre>
+<pre class="r"><code>levene_HF_geje_NM_gorna</code></pre>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    74     0.987 0.324</code></pre>
+<pre class="r"><code># homofobia wobec lesbijek
+t_HF_lesbijki_NM_gorna</code></pre>
+<pre><code>## # A tibble: 1 × 8
+##   .y.         group1    group2         n1    n2 statistic    df     p
+## * &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;       &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 HF_lesbijki kontrolna eksperyment    45    31     -1.40    74 0.164</code></pre>
+<pre class="r"><code>levene_HF_lesbijki_NM_gorna</code></pre>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    74    0.0572 0.812</code></pre>
+</div>
+</div>
+<div id="dla-normatywnej-męskości-poniżej-średniej" class="section level3" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Dla normatywnej męskości poniżej średniej</h3>
+<div>
+<div class="info-tile" style="background: #173F5F;">
+<p><span class="info-tile-large-text"><em>p =</em> 0.88</span> <br /> <span class="info-tile-small-text">homofobia ogólnie</span></p>
+</div>
+<div class="info-tile" style="background: #3CAEA3;">
+<p><span class="info-tile-large-text"><em>p =</em> 0.74</span> <br /> <span class="info-tile-small-text">homofobia wobec gejów</span></p>
+</div>
+<div class="info-tile" style="background: #ED553B;">
+<p><span class="info-tile-large-text"><em>p =</em> 0.99</span> <br /> <span class="info-tile-small-text">homofobia wobec lesbijek</span></p>
+</div>
+</div>
+<button type="button" class="collapsible">
+Pokaż/ukryj wyniki testów
+</button>
+<div class="content">
+<pre class="r"><code># homofobia ogólnie
+t_HF_NM_dolna</code></pre>
+<pre><code>## # A tibble: 1 × 8
+##   .y.   group1    group2         n1    n2 statistic    df     p
+## * &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 HF    kontrolna eksperyment    45    28     0.158    71 0.875</code></pre>
+<pre class="r"><code>levene_HF_NM_dolna</code></pre>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    71     0.321 0.573</code></pre>
+<pre class="r"><code># homofobia wobec gejów
+t_HF_geje_NM_dolna</code></pre>
+<pre><code>## # A tibble: 1 × 8
+##   .y.     group1    group2         n1    n2 statistic    df     p
+## * &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 HF_geje kontrolna eksperyment    45    28     0.337    71 0.737</code></pre>
+<pre class="r"><code>levene_HF_geje_NM_dolna</code></pre>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    71     0.762 0.386</code></pre>
+<pre class="r"><code># homofobia wobec lesbijek
+t_HF_lesbijki_NM_dolna</code></pre>
+<pre><code>## # A tibble: 1 × 8
+##   .y.         group1    group2         n1    n2 statistic    df     p
+## * &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;       &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 HF_lesbijki kontrolna eksperyment    45    28   -0.0160    71 0.987</code></pre>
+<pre class="r"><code>levene_HF_lesbijki_NM_dolna</code></pre>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    71    0.0813 0.776</code></pre>
+</div>
 <p><br></p>
+</div>
 </div>
 </div>
 <div id="normatywna-męskość-a-homofobia" class="section level1" number="7">
