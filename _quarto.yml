@@ -22,5 +22,6 @@ format:
     toc: true
     lang: pl
 
-
+bibliography: ./bibliografia/references.bib
+csl: ./bibliografia/apa-6th-edition.csl
 
