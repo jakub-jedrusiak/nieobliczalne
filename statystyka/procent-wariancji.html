@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Jakub Jędrusiak – procent-wariancji</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Brak wyników",
+    "search-matching-documents-text": "dopasowane dokumenty",
+    "search-copy-link-title": "Kopiuj link do wyszukiwania",
+    "search-hide-matches-text": "Ukryj dodatkowe dopasowania",
+    "search-more-match-text": "więcej dopasowań w tym dokumencie",
+    "search-more-matches-text": "więcej dopasowań w tym dokumencie",
+    "search-clear-button-title": "Wyczyść",
+    "search-detached-cancel-button-title": "Anuluj",
+    "search-submit-button-title": "Zatwierdź"
+  }
+}</script>
+
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Jakub Jędrusiak</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+ <span class="menu-text">Strona główna</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        <div class="sidebar-tools-collapse">
+    <a href="https://github.com/jakub-jedrusiak" title="" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Matematyka</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../matematyka/kombinatoryka.html" class="sidebar-item-text sidebar-link">Kombinatoryka</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Statystyka</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statystyka/procent-wariancji.html" class="sidebar-item-text sidebar-link active">Wyjaśnianie wariancji i test <em>F</em></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Na tej stronie</h2>
+   
+  <ul>
+  <li><a href="#sec-procent-wariancji" id="toc-sec-procent-wariancji" class="nav-link active" data-scroll-target="#sec-procent-wariancji">Wyjaśnianie wariancji i test <em>F</em></a>
+  <ul class="collapse">
+  <li><a href="#średnia-jako-model" id="toc-średnia-jako-model" class="nav-link" data-scroll-target="#średnia-jako-model">Średnia jako model</a></li>
+  <li><a href="#wariancja" id="toc-wariancja" class="nav-link" data-scroll-target="#wariancja">Wariancja</a></li>
+  <li><a href="#średnia-to-nie-wszystko" id="toc-średnia-to-nie-wszystko" class="nav-link" data-scroll-target="#średnia-to-nie-wszystko">Średnia to nie wszystko</a></li>
+  <li><a href="#test-f" id="toc-test-f" class="nav-link" data-scroll-target="#test-f">Test <em>F</em></a></li>
+  <li><a href="#postscriptum-jak-szybciej-liczyć-ssm" id="toc-postscriptum-jak-szybciej-liczyć-ssm" class="nav-link" data-scroll-target="#postscriptum-jak-szybciej-liczyć-ssm"><em>Postscriptum</em> – jak szybciej liczyć <em>SS<sub>M</sub></em></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="sec-procent-wariancji" class="level1">
+<h1>Wyjaśnianie wariancji i test <em>F</em></h1>
+<p>W psychologii można spotkać się z przytaczaniem wartości odziedziczalności. Możemy, dla przykładu, przeczytać, że wzrost jest odziedziczalny w 90% <span class="citation" data-cites="plomin2001">(<a href="#ref-plomin2001" role="doc-biblioref">Plomin, DeFries, McClearn, &amp; McGuffin, 2001</a>)</span>. Ale co to znaczy? Że z moich 170 cm wzrostu 153 cm zawdzięczam genom, a pozostałe 17 cm środowisku? To jest bez sensu. Czy odziedziczalność powie mi, czy byłem skazany na bycie niskim od początku albo czy dało się tego uniknąć? W <em>Genetyce zachowania</em> możemy przeczytać, że odziedziczalność to:</p>
+<blockquote class="blockquote">
+<p>Część zmienności fenotypowej pomiędzy osobnikami, która może być przypisana różnicom genetycznym w określonej populacji <span class="citation" data-cites="plomin2001">(<a href="#ref-plomin2001" role="doc-biblioref">Plomin i in., 2001, s. 401</a>)</span>.</p>
+</blockquote>
+<p>W innym miejscu spotykamy uszczegółowienie:</p>
+<blockquote class="blockquote">
+<p>Odziedziczalność to odsetek (część) wariancji fenotypowej, którą można przypisać różnicom genetycznym pomiędzy jednostkami <span class="citation" data-cites="plomin2001">(<a href="#ref-plomin2001" role="doc-biblioref">Plomin i in., 2001, s. 104</a>)</span>.</p>
+</blockquote>
+<p>Po którym następuje groźnie brzmiące ostrzeżenie:</p>
+<blockquote class="blockquote">
+<p>Odziedziczalność odnosi się do wkładu genetycznego do różnic indywidualnych (wariancji), a nie do fenotypu pojedynczej jednostki <span class="citation" data-cites="plomin2001">(<a href="#ref-plomin2001" role="doc-biblioref">Plomin i in., 2001, s. 106</a>)</span>.</p>
+</blockquote>
+<p>Łatwo jest zrozumieć, że istnieje jakieś nieporozumienie co do tego, czym jest odziedziczalność. Widzimy wyraźnie, że odziedziczalność nie ma oznaczać ograniczeń, jakie biologia narzuca na jednostkę, ale że jest to miara, która w jakiś sposób dotyczy całej populacji. Pojawia się tajemnicza wariancja, co powoduje mroczne skojarzenia z matematyką. Ale ciągle możemy mieć wątpliwości co do tego, co ma znaczyć, że wzrost jest odziedziczalny w 90%? Bez tła statystycznego powyższe wyjaśnienia właściwie nic nie wyjaśniają. Ale na ich podstawie możemy wyrazić myśl o wzroście tak: czynniki genetyczne wyjaśniają 90% wariancji w zakresie wzrostu w populacji. I tak dochodzimy do <em>clou</em> tego tekstu – co to znaczy, że coś wyjaśnia 90% wariancji?</p>
+<section id="średnia-jako-model" class="level2">
+<h2 class="anchored" data-anchor-id="średnia-jako-model">Średnia jako model</h2>
+<p>By zrozumieć sens odziedziczalności (i podobnych tworów) w kontekście wyjaśniania wariancji, musimy najpierw powiedzieć sobie coś o tym, czym jest owa tajemnicza wariancja. Wykorzystamy do tego spreparowany zbiór danych nt. związku wielkości pająków z niepokojem odczuwanym przez obserwatorów<span class="citation" data-cites="field2012">(na podstawie: <a href="#ref-field2012" role="doc-biblioref">Field, Miles, &amp; Field, 2012</a>)</span>. Wyobraźmy sobie, że wielkość pająka wyrażono na Międzynarodowej Skali Wielkości Pająków, zaś niepokój mierzono kwestionariuszowo. Dane zebrano w tabeli poniżej.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="tbl-spiders" class="anchored">
+
+<table class="table" style="margin-left: auto; margin-right: auto;"><caption>Tabela&nbsp;1:  Wielkość pająka i niepokój, jaki wzbudza. </caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> wielkość pająka </th>
+   <th style="text-align:right;"> niepokój </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 11 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 18 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 15 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Dla takich danych możemy policzyć całkiem sporo rzeczy. Łatwiej jest jednak zrozumieć dane, jak się je rzeczywiście widzi. Spróbujmy więc stworzyć wykres. Chcielibyśmy wiedzieć, jaki jest związek wielkości pająka z niepokojem, jaki wywołuje<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-scatter-anxiety" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza, tyle że na wykresie.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Widzimy więc wyraźnie, że im większy pająk, tym większy lęk wywołuje. Ale z tym wnioskiem wybiegliśmy sporo w przyszłość. Zazwyczaj w pierwszym odruchu robimy coś znacznie prostszego – liczymy średnią. Średni niepokój wyniósł tutaj dokładnie 9,875. Szybkie spojrzenie w tabelę pozwala nam stwierdzić, że żaden badany takiego wyniku niepokoju nie uzyskał i niezbyt nas to dziwi. W końcu to tylko średnia, żaden prawdziwy wynik nie musi mieć dokładnie średniej wartości. Jak w znienawidzonym przez statystyków kawale o średniej liczbie nóg na spacerze z psem. Rozumiemy więc, że średnia tylko w pewnym przybliżeniu oddaje cały zbiór danych, a konkretne wartości mogą się od średniej mniej lub bardziej odchylać. Te odchylenia możemy nanieść na wykres.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-scatter-anxiety-mean" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-mean-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;2: Średnia to rodzaj modelu, czyli narzędzia do przewidywania danych. Żaden z naszych pająków nie wywoływał średniego niepokoju, każdy punkt ma większe lub mniejsze odchylenie od średniej.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Przerywane linie pokazują nam odchylenie każdego punktu od średniej (<em>residual</em>). Dla przykładu pierwszy punkt ma wartość niepokoju 2, więc jego odchylenie to <span class="math inline">\(2 - 9,875 = -7,875\)</span>. Dlaczego na minusie? Bo pierwszy punkt jest <strong>poniżej</strong> średniej, więc żeby przejść od średniej do wartości tego konkretnego punktu musimy wykonać <strong>odejmowanie</strong>. Inny przykład – ostatni punkt ma wartość niepokoju 15, więc jego odchylenie od średniej wynosi <span class="math inline">\(15 - 9,875 = 5,125\)</span>. Tutaj odchylenie jest już dodatnie, co ma sens, bo ostatni punkt jest <strong>powyżej</strong> średniej, więc żeby przesunąć się od wartości średniej do wartości tego punktu musimy <strong>dodawać</strong>. Jak widać, żeby policzyć odchylenie, wystarczy od wartości punktu odjąć średnią. Można zapisać to matematycznie:</p>
+<p><span class="math display">\[
+S_i = x_i - \bar x
+\]</span> gdzie <span class="math inline">\(S_i\)</span> to odchylenie, <span class="math inline">\(x_i\)</span> to wartość konkretnego punktu, a <span class="math inline">\(\bar x\)</span> to średnia. Pozioma kreska nad czymś zawsze oznacza średnią. Dla każdego punktu moglibyśmy policzyć takie odchylenie i dopisać sobie je do tabeli.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="tbl-spider-residual" class="anchored">
+
+<table class="table" style="margin-left: auto; margin-right: auto;"><caption>Tabela&nbsp;2:  Każdy punkt ma swoje odchylenie od średniej, które możemy policzyć. Dodatnie odchylenia oznaczają, że wartość jest wyższa od średniej, a ujemne, że jest niższa. </caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> wielkość pająka </th>
+   <th style="text-align:right;"> niepokój </th>
+   <th style="text-align:left;"> Si </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;"> 2 - 9,875 = -7,88 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> 8 - 9,875 = -1,88 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:left;"> 5 - 9,875 = -4,88 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> 8 - 9,875 = -1,88 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:left;"> 12 - 9,875 = 2,12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:left;"> 11 - 9,875 = 1,12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:left;"> 18 - 9,875 = 8,12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:left;"> 15 - 9,875 = 5,12 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Średnia jest więc pewnym <strong>modelem</strong>, czyli służy nam jako uproszczony opis danych. Ponieważ modele są uproszczone, zawsze zawierają w sobie jakiś błąd. tym wypadku błędem jest po prostu odchylenie, które właśnie policzyliśmy.</p>
+<p>Jakby ktoś zapytał mnie, jak duży niepokój wywołują pająki i uparł się, żeby podać mu jedną liczbę, to podałbym właśnie średnią. Dlaczego? Średnie mają tę niezwykłą właściwość, że starają się być tak bardzo na środku, tak blisko każdego punktu, jak to możliwe. Innymi słowy zwykła średnia daje nam mniejsze odchylenia niż jakakolwiek inna pojedyncza liczba. Dla przykładu, jakbyśmy stwierdzili sobie, że nie chcemy brać za model takiej brzydkiej liczby jak 9,875, a chcemy wziąć, powiedzmy, 15, to nagle okazałoby się, że odchylenia nam wzrosły. Obrazowo mówiąc, przerywane kreski na wykresie zrobiłyby się dłuższe.</p>
+<p>Średnia gwarantuje mi, że pomylę się tak mało, jak to tylko możliwe, czyli że sumarycznie przerywane kreski na wykresie będą tak krótkie, jak się da. Średnia jest więc modelem niedoskonałym (bo ma błąd), ale lepszym niż jakakolwiek inna pojedyncza liczba (bo ma najmniejszy błąd).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-scatter-anxiety-15" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-15-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;3: Modelem mogłaby być dowolna liczba, jeśli się uprzeć, ale żadna pojedyncza liczba nie będzie miała tak małych odchyleń, jak średnia.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="wariancja" class="level2">
+<h2 class="anchored" data-anchor-id="wariancja">Wariancja</h2>
+<p>Potrafimy policzyć odchylenie dowolnego punktu od średniej i wiemy, jak wyglądają te odchylenia na wykresie. Powiedziałem też, że sumarycznie średnia daje mniejsze odchylenia niż jakakolwiek inna liczba. Kusi więc, żeby odchylenia te rzeczywiście zsumować. W końcu w ten sposób wiedzielibyśmy, ile mamy błędu w modelu, czy jest go dużo, czy mało. Co więcej, poszczególne odchylenia różnią się między sobą. Fajnie więc by było policzyć średnią odchyleń. Takie średnie odchylenie powiedziałoby nam, czy ogólnie patrząc odchylenia są duże, czy niewielkie, a więc czy sama średnia jest blisko danych (dobrze je przybliża), czy może jest kompletnie od czapy (nie oddaje dobrze danych)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>Skuszeni matematyczną perspektywą bierzemy kalkulator w dłoń, dodajemy do siebie wartości odchyleń (co ładnie, matematycznie możemy zapisać jako <span class="math inline">\(\sum S_i\)</span>, bo wielka litera sigma znaczy po prostu dodawanie)<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> i bardzo się dziwimy, kiedy wychodzi nam 0. Ale jak 0? W końcu sumaryczne odchylenie nie może nam wyjść 0! Chcieliśmy jakiejś dużej liczby, która da nam ogólne pojęcie o tym, jak nasze dane odchylają się od średniej, a wychodzi nam 0, tak jakby w ogóle nie było żadnych odchyleń. Po chwili jednak orientujemy się dlaczego – część odchyleń jest dodatnich, a część ujemnych, to jak się je doda, to się zerują. No tak. A średnia (jak sama nazwa wskazuje) jest dokładnie pośrodku tych danych.</p>
+<p>To w takim razie, jak chcemy dostać to nasze ogólne odchylenie, to musimy pozbyć się minusów. Moglibyśmy je po prostu zignorować (tzn. dodawać wartości bezwzględne odchyleń <span class="math inline">\(|S_i|\)</span>), ale to by przecież by łoza proste. Statystycy, chcąc utrudnić wszystkim życie<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, wybrali inny sposób na pozbywanie się minusów, czyli podnoszenie do potęgi drugiej. Minus razy minus daje plus, głosi szkolna formułka. Opanowujemy więc flashbacki z liceum, zaciskamy zęby, podnosimy odchylenia do kwadratu i znowu je do siebie dodajemy. Matematycznie wyrazilibyśmy to tak:</p>
+<p><span class="math display">\[
+SS_T = \sum_{i=1}^N S_i^2 = \sum_{i=1}^N (x_i - \bar x)^2
+\]</span></p>
+<p>Za tym przerażającym zapisem kryje się prosta idea – weź wszystkie odchylenia (a mamy ich <em>N</em>, bo tak się oznacza liczbę zebranych obserwacji) i dodaj je wszystkie po kolei, zaczynając od 1. i na <em>N</em>-tym (w naszym przypadku 8.) kończąc. Po znaku równa się przypominam, co właściwie oznaczaliśmy przez <span class="math inline">\(S_i\)</span>, czyli obserwacja odjąć średnia do kwadratu. Jak to rzeczywiście zrobimy, wyjdzie nam 190,875. Niezbyt ładna liczba, ale daje więcej satysfakcji niż 0. Tę liczbę we wzorze nazwałem <span class="math inline">\(SS_T\)</span>, co jest skrótem od <em>total sum of squares</em>, czyli <strong>całkowita suma kwadratów</strong>. Jak się zastanowić, to jest to niezła nazwa, bo od razu jest praktycznie wzorem.</p>
+<p>Ale z całkowitą sumą kwadratów jest pewien problem. Siłą rzeczy, im będzie więcej obserwacji, tym ta liczba będzie większa, nawet jeśli odchylenia będą mniejsze. 100 ciężarówek z 50 paletami każda dadzą w sumie więcej towaru, niż 1 ciężarówka z 200 paletami. Suma ocen wzrasta z każdą oceną, mimo że średnia może nawet nie drgnąć. Ale możemy sobie z tym poradzić dość łatwo – po prostu zróbmy z tego średnią. Średnia to suma dzielona przez liczbę przypadków. <span class="math inline">\(SS_T\)</span> jest sumą kwadratów odchyleń (w tym miejscu tekstu należy się zatrzymać i upewnić się, że rozumie się wyrażenie „suma kwadratów odchyleń”), więc jak podzielimy ją przez liczbę obserwacji, to wyjdzie nam średnia z kwadratów odchyleń. Prawda? No prawie, bo to znowu byłoby za proste.</p>
+<p>Nie rozwodząc się za bardzo, bo to też jest szeroki temat, zamiast dzielić <span class="math inline">\(SS_T\)</span> przez 8, musimy podzielić ją przez 7. Mówiąc w dużym skrócie, nas w badaniach obchodzi cała populacja. Badamy tylko (losową) próbę z tej populacji, ale tak naprawdę to o samej populacji chcemy wnioskować. Nie wystawiłem 8 osób na kontakt z dużymi i małymi pająkami, bo ciekawiły mnie te konkretne osoby, tylko dlatego, że chcę powiedzieć coś ogólnie o ludziach, o Polakach, o nastolatkach czy jakiejkolwiek innej interesującej mnie populacji. Jeśli podzielilibyśmy przez 8, to wyszłaby nam średnia, która jest prawdziwa dla tej konkretnej próby, ale prawie na pewno niższa, niż ta prawdziwa, populacyjna. Ale jak podzielimy przez 7, to będziemy znacznie, znacznie bliżej prawdziwym wartościom. To da się matematycznie udowodnić, ale bez przesady, nie wszystko naraz. Ta skorygowana liczba nazywa się <em>stopniami swobody</em> i dla średniej zawsze jest ich <span class="math inline">\(N-1\)</span>. To będzie ogólnie problem w statystyce, że od czasu do czasu będziemy musieli dzielić przez stopnie swobody zamiast normalnie przez wielkość próby, żeby dostać bardziej wiarygodne liczby. Jeśli uczy się tego pierwszy raz, to można to <span class="math inline">\(N-1\)</span> przyjąć na wiarę, bo sama wariancja jest wystarczająco skomplikowana. Nie trzeba wszystkiego w pełni zrozumieć od razu.</p>
+<p>Także jeśli chcemy uzyskać średnią kwadratów odchyleń, to bierzemy naszą całkowitą sumę kwadratów i dzielimy ją przez <span class="math inline">\(N-1\)</span>. Tak jak średnią ocen liczymy dzieląc sumę ocen przez ich liczbę. Możemy to zapisać matematycznie na kilka sposobów:</p>
+<p><span class="math display">\[
+\sigma^2 = \frac{SS_T}{N-1} = \frac{\sum^N_{i = 1} S_i^2}{N-1} = \frac{\sum^N_{i = 1} (x_i - \bar x)^2}{N-1}
+\]</span>Spokojnie. To są tylko wzory, nie trzeba się ich bać. Każdy z tych trzech wzorów znaczy to samo i opiera się na tym, co już wiemy z poprzednich części tekstu. Tak naprawdę to ciągle wzór na <span class="math inline">\(SS_T\)</span>, tylko teraz podzielony na <span class="math inline">\(N-1\)</span>. Po pokonaniu pierwszego szoku można zacząć świętować! W ten sposób udało nam się wreszcie policzyć średnią kwadratów odchyleń (ponownie – trzeba się zatrzymać, upewnić się, że się rozumie, ewentualnie trochę się cofnąć i dopiero można iść dalej).</p>
+<p>Trzeba przyznać, że „średni kwadrat odchylenia” albo „średnia z odchyleń podniesionych do potęgi drugiej” to nie są zbyt chwytliwe nazwy. Dlatego właśnie nazwano to <strong>wariancją</strong> i oznaczono przez <span class="math inline">\(\sigma^2\)</span>. To jest mała grecka litera sigma. A dlaczego <span class="math inline">\(\sigma^2\)</span> a nie po prostu <span class="math inline">\(\sigma\)</span>? Bo to średnia z <em>kwadratów</em> odchyleń. Jeśli byśmy chcieli wycofać się teraz z tej gmatwającej wszystko decyzji o podnoszeniu czegokolwiek do kwadratu i uzyskać upragnione średnie odchylenie, to możemy teraz wyciągnąć pierwiastek ze wzoru na wariancję, jaki nam przed chwilą wyszedł i który na pierwszy rzut oka może przytłaczać.</p>
+<p><span class="math display">\[
+\sigma = \sqrt{\frac{SS_T}{N-1}} = \sqrt{\frac{\sum^N_{i = 1} S_i^2}{N-1}} = \sqrt{\frac{\sum^N_{i = 1} (x_i - \bar x)^2}{N-1}}
+\]</span>Każdy z tych wzorów znaczy ostatecznie to samo, więc można używać któregokolwiek. Ważne jest to, że wychodzi nam z tego średnie odchylenie, które nazywamy <strong>odchyleniem standardowym</strong> i które oznaczamy literą <span class="math inline">\(\sigma\)</span> lub skrótem <em>SD</em> (<em>standard deviation</em>). Odchylenie standardowe, jak już wyżej wspomniałem, mówi nam, czy średnia dobrze reprezentuje dane. Jeśli jest wysokie, to znaczy, że dane są mocno rozproszone (odchylenia są ogólnie duże) i sama średnia jest mało wiarygodna. Jeśli <em>SD</em> jest niewielkie, to średniej zasadniczo można zaufać. To jakie <em>SD</em> jest duże, a jakie małe, zależy od tego, co mierzymy. Dla średniej pensji <em>SD</em> = 10 uznalibyśmy za raczej niewielkie, ale takie samo odchylenie standardowe dla średniej liczby nóg takie małe już się nie wydaje. Także może i mamy średnio po 3 nogi jak wychodzimy z psem na spacer, ale ta średnia ma całą nogę odchylenia standardowego!</p>
+<p>Podsumowując ten fragment:</p>
+<ol type="1">
+<li><p>Zauważyliśmy, że każdy punkt ma swoje większe lub mniejsze odchylenie od średniej.</p></li>
+<li><p>Próbowaliśmy sumować te odchylenia, ale przeszkadzały nam minusy, więc przed sumowaniem podnosiliśmy nasze odchylenia do kwadratu, uzyskując w ten sposób całkowitą sumę kwadratów (<span class="math inline">\(SS_T\)</span>).</p></li>
+<li><p>Wykorzystaliśmy całkowitą sumę kwadratów do policzenia <strong>wariancji</strong> (średniej z kwadratów odchyleń) w taki sposób, że podzieliliśmy <span class="math inline">\(SS_T\)</span> przez <span class="math inline">\(N-1\)</span> (stopnie swobody). Nie mogliśmy podzielić <span class="math inline">\(SS_T\)</span> przez <span class="math inline">\(N\)</span>, bo to zaniżyłoby prawdziwą wariancję w populacji.</p></li>
+<li><p>Wyciągnęliśmy pierwiastek z wariacji, żeby wreszcie dostać średnie odchylenie, które nazywamy <strong>odchyleniem standardowym</strong>.</p></li>
+</ol>
+</section>
+<section id="średnia-to-nie-wszystko" class="level2">
+<h2 class="anchored" data-anchor-id="średnia-to-nie-wszystko">Średnia to nie wszystko</h2>
+<p>Wiemy już bardzo dokładnie czym jest wariancja i jaki ma związek ze średnią. Ale nie oszukujmy się, jesteśmy w stanie wymyślić lepsze modele niż średnia. Od samego początku korci nas, żeby na wykresie niepokoju od wielkości pająka narysować piękną, skośną, rosnącą linię, która będzie zależała nie tylko od wartości niepokoju, ale również od wielkości pająka. Przecież od razu widać, że pasowałaby do naszych danych znacznie bardziej.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-scatter-anxiety-lm" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-lm-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;4: Linia rosnąca sugeruje nam, że im większy pająk, tym większy niepokój wywołuje. Na pierwszy rzut oka widać, że odchylenia są mniejsze, niż przy średniej.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Od razu lepiej. Od początku chcieliśmy móc powiedzieć, że im większy pająk, tym większy niepokój, a teraz mamy tego dowód. W końcu ta linia ewidentnie pasuje do danych lepiej – na pierwszy rzut oka widać, że odchylenia są mniejsze. No właśnie! Dzięki łamaniu sobie głowy nad odchyleniami od średniej zyskaliśmy sposób na stwierdzenie, czy jakiś model jest lepszy od średniej, czy nie – wystarczy sprawdzić, czy odchylenia zrobiły się istotnie mniejsze.</p>
+<p>Spróbujmy więc zrobić dla tych nowych odchyleń to samo, co zrobiliśmy dla odchyleń od średniej. Ponieważ samo wyznaczanie wartości tych odchyleń wymaga bardziej złożonych obliczeń ze wzoru na prostą, po prostu je podam (bo policzył je za mnie program statystyczny). Powiem tylko, że procedura jest identyczna, jak w przypadku liczenia <span class="math inline">\(SS_T\)</span>, ale licząc odchylenia zamiast wartości średniej (która poprzednio była naszym modelem) odejmujemy wartość, którą przewiduje nasz nowy, lepszy model, a którą w tabeli oznaczyłem jako <span class="math inline">\(x_M\)</span>. Podnosimy więc wartości odchyleń (oznaczone w tabeli <span class="math inline">\(S_R\)</span>) do kwadratu, sumujemy i wychodzi nam w zaokrągleniu <span class="math inline">\(SS_R = 32,726\)</span>. <span class="math inline">\(SS_R\)</span> oznacza <em>residual sum of squares</em> i w gruncie rzeczy mówi nam o tych odchyleniach, które ciągle są, które nie zniknęły, mimo że nowy model jest lepszy.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="tbl-lm-resid" class="anchored">
+
+<table class="table" style="margin-left: auto; margin-right: auto;"><caption>Tabela&nbsp;3:  Nowy model magicznie przewiduje niepokój z wielkości pająka (xM), ale nie robi tego doskonale. Tak jak dla średniej, możemy policzyć, jak wartość prawdziwa odchyla się od tej z modelu. </caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> wielkość pająka </th>
+   <th style="text-align:right;"> niepokój </th>
+   <th style="text-align:left;"> xM </th>
+   <th style="text-align:left;"> SR </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;"> 3,08 </td>
+   <td style="text-align:left;"> -1,08 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> 5,02 </td>
+   <td style="text-align:left;"> 2,98 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:left;"> 6,96 </td>
+   <td style="text-align:left;"> -1,96 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> 8,9 </td>
+   <td style="text-align:left;"> -0,9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:left;"> 10,85 </td>
+   <td style="text-align:left;"> 1,15 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:left;"> 12,79 </td>
+   <td style="text-align:left;"> -1,79 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:left;"> 14,73 </td>
+   <td style="text-align:left;"> 3,27 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:left;"> 16,67 </td>
+   <td style="text-align:left;"> -1,67 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Możemy w pewnym sensie mówić o wariancji wokół średniej i wariancji wokół modelu<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Wariancja, niezależnie wokół czego, to suma kwadratów podzielona przez <span class="math inline">\(N-1\)</span>, więc naturalnie musielibyśmy teraz <span class="math inline">\(SS_T\)</span> i <span class="math inline">\(SS_R\)</span> podzielić przez <span class="math inline">\(N-1\)</span>. Jednak to, co chcę pokazać dalej, będzie łatwiejsze do zrozumienia, jeśli będziemy się posługiwać surowymi sumami kwadratów. Możemy więc zignorować dzielenie przez <span class="math inline">\(N-1\)</span>. Jeśli ktoś mi nie ufa, to może robić to, co za moment zrobię, ale wcześniej podzielić nasze sumy kwadratów przez <span class="math inline">\(N-1\)</span> i gwarantuję, że wyjdzie mu to samo<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p>
+<p>Możemy więc spojrzeć na to w ten sposób – na początku mieliśmy 190,875 jednostek wariancji, a teraz, po dopasowaniu nowego modelu, mamy ich tylko 32,726. Dla wygody zaokrąglijmy te liczby do całości. Także cała różnica, <span class="math inline">\(191 - 33 = 158\)</span>, gdzieś nam wyparowała. Ta wariancja była, a teraz nagle jej nie ma. O takiej wariancji możemy powiedzieć, że została <em>wyjaśniona</em> i możemy ją oznaczyć <span class="math inline">\(SS_M\)</span> od <em>model sum of squares</em>. Czyli stworzyliśmy nowy model, który pozwala nam przewidywać niepokój z wielkości pająka i w ten sposób wyjaśniliśmy jakąś część wariancji. Jaką? Coż, wystarczy to przeliczyć na procenty. Cała wariancja<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> wynosiła191 jednostek, a wariacja wyjaśniona wyniosła158 jednostek. Odsetek wariancji, który udało nam się wyjaśnić, oznaczamy <span class="math inline">\(R^2\)</span> i możemy go wyrazić w procentach<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>.</p>
+<p><span class="math display">\[
+R^2 = \frac{158}{191}\times 100\% = 82,7\%
+\]</span>Możemy więc powiedzieć, że wielkość pająka (bo nowy model przewiduje niepokój na podstawie wielkości pająka) wyjaśnia 82,7% wariancji niepokoju. Ludzie ciągle różnią się niepokojem w reagowaniu na pająki, ale odchylenia od nowego modelu są znacznie mniejsze. Ogólny wzór na <span class="math inline">\(R^2\)</span> wygląda więc tak<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>:</p>
+<p><span class="math display">\[
+R^2 = \frac{SS_M}{SS_T} = \frac{SS_T - SS_R}{SS_T}
+\]</span></p>
+<p>Moglibyśmy się pytać, co odpowiada za pozostałe 17,3% wariancji. Mogą to być dodatkowe czynniki, takie jak doświadczenia z pająkami w dzieciństwie albo uszkodzenia mózgu. To wymaga dalszych badań.</p>
+<p>Możemy wyobrazić sobie, że pojawia nam się nowa osoba badana, która pająków nie boi się w ogóle, co pokazałem na wykresie. Jak to wpływa na nasz model?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-scatter-anxiety-lm2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-lm2-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;5: Nowa osoba badana, która nie boi się pająków wcale, nie przystaje do naszego modelu. Może to sugerować, że nasz model jest adekwatny tylko dla pewnej grupy osób (czyli możemy stworzyć bardziej złożony model, który weźmie to pod uwagę) albo że odważny badany kłamie (i powinien zostać wykluczony z bazy).</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Jak widzimy model się trochę pozmieniał. <span class="math inline">\(R^2\)</span> spadło dramatycznie, bo w tym drugim modelu wyniosło zaledwie 21,9%. Ale pojawienie się tego nowego, odważnego badanego nie zmieniło wyników pozostałych.</p>
+<p>Tak samo jest z odziedziczalnością. Odziedziczalność mówi nam, jaką część różnic w populacji da się wyjaśnić czynnikami genetycznymi, ale nawet bardzo wysoka odziedziczalność nie mówi nam, jakie są biologiczne, genetyczne granice ludzkich możliwości rozwoju. Jeśli pojawi się zdeterminowana jednostka, to może ona wstrząsnąć naszym modelem albo, co ciekawsze, nie zrobić żadnej różnicy w modelu (jeśli próba byłaby odpowiednio duża)<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>. W takim wypadku model ciągle byłby bardzo adekwatny, wyjaśniałby bardzo dużo wariancji, a jednocześnie nie wykluczał istnienia jednostek, które całkowicie do niego nie przystają.</p>
+<p>Dlatego właśnie odziedziczalność tej samej cechy może być różna w różnych populacjach albo zmieniać się w czasie – odziedziczalność, tak jak każdy model statystyczny, opisuje różnice tu i teraz, na poziomie populacji. Niestety (albo na szczęście) sama odziedziczalność nie może rozstrzygnąć, czy ja, konkretna jednostka, od urodzenia byłem skazany na bycie tak niskim. Może mi jednak powiedzieć, że czynniki genetyczne wyjaśniają 90% wariancji wzrostu w mojej populacji. Tylko teraz już wiem, co to znaczy.</p>
+</section>
+<section id="test-f" class="level2">
+<h2 class="anchored" data-anchor-id="test-f">Test <em>F</em></h2>
+<p>Moglibyśmy w tym momencie skończyć, ale skoro mamy wszystkie skróty powtórzone na świeżo, dobrze byłoby jeszcze jedną sprawę omówić. Wiedzę o tym, czym jest <span class="math inline">\(SS_M\)</span> i <span class="math inline">\(SS_R\)</span> (tzn. cała wariancja wyjaśniona przez model i cała wariancja niewyjaśniona przez model) możemy wykorzystać, do zrozumienia potężnej, uniwersalnej statystyki diagnostycznej – <span class="math inline">\(F\)</span>. Najpierw wyjaśnię, jak to się liczy, a potem jak się to interpretuje.</p>
+<p>Statystyka <span class="math inline">\(F\)</span> to stosunek (czyli wynik dzielenia) wariancji wyjaśnionej do wariancji niewyjaśnionej. Matematycznie możemy zapisać to tak:</p>
+<p><span class="math display">\[
+F = \frac{MS_M}{MS_R}
+\]</span></p>
+<p>Moment. Dopiero akapit wyżej pisałem, że wariancja wyjaśniona to <span class="math inline">\(SS_M\)</span>, a niewyjaśniona to <span class="math inline">\(SS_R\)</span>, a teraz nagle piszę <span class="math inline">\(MS_M\)</span> i <span class="math inline">\(MS_R\)</span>. Czy to podważa moją wiarygodność? Czy należy rzucić komputerem w proteście przeciw umowności matematyki? Nie. Bez przesady. <span class="math inline">\(M\)</span> znaczy średnia.</p>
+<p>Przypominam – <span class="math inline">\(SS_M\)</span> i <span class="math inline">\(SS_R\)</span> to <strong>sumy</strong> kwadratów, tak jakbyśmy tylko zsumowali swoje oceny bez liczenia średniej. Do policzenia <span class="math inline">\(F\)</span> potrzebujemy nie <em>sum</em> kwadratów, a <em>średniego</em> kwadratu. Ponownie, średnią ocen liczymy dzieląc sumę ocen przez ich liczbę. Mamy już policzone sumy kwadratów <span class="math inline">\(SS_M\)</span> i <span class="math inline">\(SS_R\)</span>, więc dzielimy je przez liczbę obserwacji. Uważnemu czytelnikowi zapaliła się właśnie w głowie lampka ostrzegawcza, bo pisałem przecież, że liczba przypadków jest zakłamana i nie można jej ufać. Nie pożyczamy jej pieniędzy. Ufać można stopniom swobody i przez nie powinniśmy podzielić. Już raz to zrobiliśmy, podzieliliśmy <span class="math inline">\(SS_T\)</span> przez stopnie swobody i nazwaliśmy to wariancją. Teraz tę samą logikę chcemy zastosować do <span class="math inline">\(SS_R\)</span> i <span class="math inline">\(SS_M\)</span>.</p>
+<p>Tylko pojawia się trudne pytanie – ile stopni swobody mają nasze <span class="math inline">\(SS_M\)</span> i <span class="math inline">\(SS_R\)</span>? Już odpowiadam. Liczba stopni swobody dla <span class="math inline">\(SS_M\)</span> to liczba zmiennych niezależnych (w przykładzie z pająkami to 1, bo lęk przewidujemy tylko na podstawie wielkości pająka). Liczba stopni swobody dla <span class="math inline">\(SS_R\)</span> to liczba obserwacji – liczba zmiennych niezależnych – 1 (w naszym przypadku <span class="math inline">\(8-1-1 = 6\)</span>). I to trzeba po prostu wziąć na wiarę.</p>
+<p>Także bierzemy nasze sumy kwadratów i robimy z nich średnie. <span class="math inline">\(MS_M = \frac{158,15}{1} = 158,15\)</span> oraz <span class="math inline">\(MS_R = \frac{32,73}{6} = 5,45\)</span>. Mając średnie możemy policzyć wartość naszej statystyki <span class="math inline">\(F = \frac{158,15}{5,45} \approx 29\)</span>. Czad. Tylko co z tego?</p>
+<p>Ta liczba, 29, informuje nas, że ilość wariancji wyjaśnionej przez model jest <em>29 razy większa</em> niż ilość wariancji niewyjaśnionej. Czyli że model więcej wyjaśnia niż nie wyjaśnia, bo wyjaśnia średnio 158,15 jednostek wariancji, a nie wyjaśnia średnio 5,45 jednostek wariacji. Dobry model ma co najmniej <span class="math inline">\(F &gt; 1\)</span>, bo – jak się zastanowić – wtedy właśnie więcej wyjaśnia, bo nie wyjaśnia<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a>. Licznik jest większy niż mianownik. <span class="math inline">\(SS_M &gt; SS_R\)</span>. Jakby wyszło nam, że <span class="math inline">\(F = 0,25\)</span>, to znaczyłoby to, że model jest fatalny, bo ma więcej (4 razy więcej!) błędu niż racji. W skrócie mówiąc – im większe <span class="math inline">\(F\)</span>, tym lepiej, a <span class="math inline">\(F &gt; 1\)</span> to absolutne minimum.</p>
+</section>
+<section id="postscriptum-jak-szybciej-liczyć-ssm" class="level2">
+<h2 class="anchored" data-anchor-id="postscriptum-jak-szybciej-liczyć-ssm"><em>Postscriptum</em> – jak szybciej liczyć <em>SS<sub>M</sub></em></h2>
+<p>Można zauważyć ciekawą rzecz związaną z obliczaniem <span class="math inline">\(SS_M\)</span>. Jak się okazuje, <span class="math inline">\(SS_M\)</span> da się policzyć bez liczenia <span class="math inline">\(SS_T\)</span> i <span class="math inline">\(SS_R\)</span>. <span class="math inline">\(SS_M\)</span> uzyskujemy, jeśli zignorujemy obserwacje i zsumujemy kwadraty różnic między średnią a nowym modelem. Zaznaczyłem te różnice na poniższym wykresie przerywanymi liniami.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-scatter-anxiety-ssm" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-ssm-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;6: <span class="math inline">\(SS_M\)</span> można szybciej policzyć za pomocą odchyleń modelu od średniej, czyli kresek między średnią wartościami przewidywanymi przez nasz nowy model.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Można to przetestować za pomocą danych z tabeli niżej. <span class="math inline">\(x_M\)</span> to wartość przewidywana przez model, a <span class="math inline">\(S_M\)</span> to różnica między modelem a średnim niepokojem. Podniesienie wartości <span class="math inline">\(S_M\)</span> do kwadratu i zsumowanie ich daje w wyniku nasze <span class="math inline">\(SS_M\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="tbl-lm-ssm" class="anchored">
+
+<table class="table" style="margin-left: auto; margin-right: auto;"><caption>Tabela&nbsp;4:  Podstawą do policzenia SSM mogą być odchylenia modelu od średniej SM. Trzeba je policzyć dla każdego punktu, podnieść do kwadratu i dodać. </caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> wielkość pająka </th>
+   <th style="text-align:right;"> niepokój </th>
+   <th style="text-align:left;"> xM </th>
+   <th style="text-align:left;"> S_M </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;"> 3,08 </td>
+   <td style="text-align:left;"> 3,08 - 9,875 = -6,8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> 5,02 </td>
+   <td style="text-align:left;"> 5,02 - 9,875 = -4,86 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:left;"> 6,96 </td>
+   <td style="text-align:left;"> 6,96 - 9,875 = -2,92 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> 8,90 </td>
+   <td style="text-align:left;"> 8,9 - 9,875 = -0,97 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:left;"> 10,85 </td>
+   <td style="text-align:left;"> 10,85 - 9,875 = 0,97 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:left;"> 12,79 </td>
+   <td style="text-align:left;"> 12,79 - 9,875 = 2,91 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:left;"> 14,73 </td>
+   <td style="text-align:left;"> 14,73 - 9,875 = 4,86 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:left;"> 16,67 </td>
+   <td style="text-align:left;"> 16,67 - 9,875 = 6,8 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Jest to jeszcze jeden sposób myślenia o <span class="math inline">\(SS_M\)</span>, który może pojawić się w niektórych opracowaniach. Zgłębienie tego może dać nam nowy sposób myślenia o wariancji wyjaśnianej, ale nie jest konieczne, bo ostatecznie liczy nam to komputer. Rozumienie tego, jak działa <span class="math inline">\(SS_M\)</span> według poprzedniego sposobu (wariancja, która zniknęła, jak zmieniliśmy model ze średniej na jakiś inny) to i tak dużo i powinno wystarczyć.</p>
+
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-field2012" class="csl-entry" role="doc-biblioentry">
+Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
+</div>
+<div id="ref-plomin2001" class="csl-entry" role="doc-biblioentry">
+Plomin, R., DeFries, J., McClearn, G., &amp; McGuffin, P. (2001). <em>Genetyka zachowania</em>. Warszawa: Wydawnictwo Naukowe PWN.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
+<ol>
+<li id="fn1"><p>Wszystko, co napiszę dalej o średniej, mogłoby równie dobrze być pokazane na innym wykresie. To, że na oś poziomą wrzuciłem wielkość pająka wynika tylko ze względów estetycznych. Mógłbym te punkty rozrzucić losowo. Zauważ, że aż do podrozdziału <em>Średnia to nie wszystko</em> nie będę używał wielkości pająka w obliczeniach.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Uważny Czytelnik może zwrócić uwagę, że <em>de facto</em> się powtarzam. Skoro średnia <em>jest</em> modelem, to i suma odchyleń, i średnie odchylenie mówią nam o tym samym – ile błędu jest w modelu. Jest to prawda, bo informacja jest ta sama ale nieco inna perspektywa. Można porównać do to ocen – możemy policzyć sumę wszystkich swoich ocen, a możemy policzyć swoją średnią ocen. Suma ocen nie wydaje się szczególnie potrzebną informacją, oceny sumujemy zazwyczaj po to, by policzyć średnią, ale – jak się przekonamy – gdy mówimy o wariancji sama suma też może być użyteczna.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>A będąc dokładniejszym, moglibyśmy zapisać <span class="math inline">\(\sum_{i = 1}^8 S_i\)</span>, co znaczy „zamiast <span class="math inline">\(i\)</span> napisz 1, potem 2, potem 3 itd. aż dojdziesz do 8 (bo tyle mamy obserwacji) i to wszystko do siebie dodaj” albo bardziej matematycznie <span class="math inline">\(S_1+S_2+S_3+…+S_8\)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Tak naprawdę mieli ku temu dobry, ale bardzo matematyczny powód. Kiedy podnosimy coś do kwadratu, to wychodzą nam na wykresach parabole, a jak wyciągamy wartość bezwzględną, to wykresy mają ostre czubki. Parabole mają tę przewagę nad ostrymi czubkami, że da się na nich wykonywać rachunek różniczkowy, a to się – wbrew pozorom! – przydaje, jak się wymyśla testy czy inne innowacje matematyczne.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Ale musimy pamiętać, że słowo <em>wariancja</em> bez żadnego uszczegółowienia zawsze odnosi się do wariancji wokół średniej.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Mogę udowodnić to ze wzoru, który wyprowadzam w dalszej części tekstu. Po kilku akapitach można tu wrócić i to przeanalizować.</p>
+<p><span class="math display">\[
+R^2 = \frac{\frac{SS_M}{N-1}}{\frac{SS_T}{N-1}} = \frac{SS_M}{\cancel{N-1}} \times \frac{\cancel{N-1}}{SS_T} = \frac{SS_M}{SS_T}
+\]</span><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Powtórzę – cała wariancja to znaczy wariancja wokół średniej, bo średnia to najprostszy model, jaki da się dopasować do danych.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Ale, oczywiście, nie musimy. Ja osobiście nie lubię notacji z procentami, wolę pisać ułamki dziesiętne i w razie czego czytać je jak procenty. Ale to kwestia gustu.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Tak naprawdę <span class="math inline">\(SS_M\)</span> da się policzyć bezpośrednio, bez liczenia <span class="math inline">\(SS_T\)</span> i <span class="math inline">\(SS_R\)</span>, co pokazuję w <em>postscriptum</em>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Gdy Bill Gates wchodzi do pubu, średnia pensja (i jej odchylenie standardowe!) osób w pubie nagle dramatycznie skacze, mimo że nikt ze zgromadzonych nie czuje się bogatszy. Niemniej sam jeden Bill Gates nie miałby tak wielkiego wpływu na średnią pensję wszystkich mieszkańców Polski. Tak samo jedna piątka nie zmieni za bardzo średniej z 20 ocen, ale może całkowicie zmienić średnią z 3 ocen. Modele oparte o dużą liczbę obserwacji są więc stabilniejsze.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>Tak naprawdę potrzeba nam sporo więcej niż 1, żeby uznać model na wiarygodny. Statystyka <span class="math inline">\(F\)</span> musi <em>istotnie</em> odchylać się od 1. Musimy mieć co najmniej 95% pewności, że <span class="math inline">\(F\)</span> jest większe od 1. Ale prawdopodobieństwo trudno się liczy, zależy od liczby obserwacji i w ogóle bez sensu się tym zajmować, bo program statystyczny nam to pokaże.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Skopiowano!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Skopiowano!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
