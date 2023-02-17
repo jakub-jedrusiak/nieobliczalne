@@ -236,7 +236,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> variations(iterable, subset_length):</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''Kombinacje w wierszach, permutacje w kolumnach, wszystko razem to wariacje'''</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame([<span class="bu">list</span>(itertools.permutations(x)) <span class="cf">for</span> x <span class="kw">in</span> itertools.combinations(iterable, subset_length)]).T</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame([<span class="bu">list</span>(itertools.permutations(x)) <span class="cf">for</span> x <span class="kw">in</span> itertools.combinations(iterable, subset_length)])</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    df.index <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(df.index) <span class="op">+</span> <span class="dv">1</span>)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    df.columns <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(df.columns) <span class="op">+</span> <span class="dv">1</span>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -257,7 +257,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Omówmy to na przykładzie naszego zbioru liter od A do E. Permutacja tego zbioru będzie wyglądała tak:</p>
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(itertools.permutations(Z))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="3">
 
 <div>
 
@@ -377,7 +377,7 @@ P_n = n!
 <p>Ciekawie zaczyna się robić, gdy przed zmianą kolejności chcemy jeszcze rozbić nasz zbiór na mniejsze zbiory. Dla przykładu możemy sobie wyobrazić, że chcemy z naszego zbioru 5 liter wybrać wszystkie możliwe zbiory po 2 litery, np. AB, AC, AD itd. Mamy do dyspozycji mniej miejsca, niż liter w zbiorze. Liczenie czegoś takiego jest analogiczne. Na pierwszym miejscu może pojawić się 1 z 5 liter, na drugim tylko 1 z 4: <span class="math inline">\(V^2_5 = 5 \times 4 = 20\)</span>. Powinno więc istnieć 20 takich zbiorów. Wypiszmy je wszystkie.</p>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>variations(Z, <span class="dv">2</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="4">
 
 <div>
 
@@ -387,41 +387,57 @@ P_n = n!
       <th></th>
       <th>1</th>
       <th>2</th>
-      <th>3</th>
-      <th>4</th>
-      <th>5</th>
-      <th>6</th>
-      <th>7</th>
-      <th>8</th>
-      <th>9</th>
-      <th>10</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>1</th>
       <td>(A, B)</td>
-      <td>(A, C)</td>
-      <td>(A, D)</td>
-      <td>(A, E)</td>
-      <td>(B, C)</td>
-      <td>(B, D)</td>
-      <td>(B, E)</td>
-      <td>(C, D)</td>
-      <td>(C, E)</td>
-      <td>(D, E)</td>
+      <td>(B, A)</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>(B, A)</td>
+      <td>(A, C)</td>
       <td>(C, A)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>(A, D)</td>
       <td>(D, A)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>(A, E)</td>
       <td>(E, A)</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>(B, C)</td>
       <td>(C, B)</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>(B, D)</td>
       <td>(D, B)</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>(B, E)</td>
       <td>(E, B)</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>(C, D)</td>
       <td>(D, C)</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>(C, E)</td>
       <td>(E, C)</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>(D, E)</td>
       <td>(E, D)</td>
     </tr>
   </tbody>
@@ -440,7 +456,7 @@ V^k_n = \frac{n!}{(n-k)!}
 <p>Spróbujmy wypisać wariacje naszego zbioru po 3 elementy.</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>variations(Z, <span class="dv">3</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="5">
 
 <div>
 
@@ -454,89 +470,97 @@ V^k_n = \frac{n!}{(n-k)!}
       <th>4</th>
       <th>5</th>
       <th>6</th>
-      <th>7</th>
-      <th>8</th>
-      <th>9</th>
-      <th>10</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>1</th>
       <td>(A, B, C)</td>
-      <td>(A, B, D)</td>
-      <td>(A, B, E)</td>
-      <td>(A, C, D)</td>
-      <td>(A, C, E)</td>
-      <td>(A, D, E)</td>
-      <td>(B, C, D)</td>
-      <td>(B, C, E)</td>
-      <td>(B, D, E)</td>
-      <td>(C, D, E)</td>
+      <td>(A, C, B)</td>
+      <td>(B, A, C)</td>
+      <td>(B, C, A)</td>
+      <td>(C, A, B)</td>
+      <td>(C, B, A)</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>(A, C, B)</td>
+      <td>(A, B, D)</td>
       <td>(A, D, B)</td>
-      <td>(A, E, B)</td>
-      <td>(A, D, C)</td>
-      <td>(A, E, C)</td>
-      <td>(A, E, D)</td>
-      <td>(B, D, C)</td>
-      <td>(B, E, C)</td>
-      <td>(B, E, D)</td>
-      <td>(C, E, D)</td>
+      <td>(B, A, D)</td>
+      <td>(B, D, A)</td>
+      <td>(D, A, B)</td>
+      <td>(D, B, A)</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>(B, A, C)</td>
-      <td>(B, A, D)</td>
+      <td>(A, B, E)</td>
+      <td>(A, E, B)</td>
       <td>(B, A, E)</td>
-      <td>(C, A, D)</td>
-      <td>(C, A, E)</td>
-      <td>(D, A, E)</td>
-      <td>(C, B, D)</td>
-      <td>(C, B, E)</td>
-      <td>(D, B, E)</td>
-      <td>(D, C, E)</td>
+      <td>(B, E, A)</td>
+      <td>(E, A, B)</td>
+      <td>(E, B, A)</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>(B, C, A)</td>
-      <td>(B, D, A)</td>
-      <td>(B, E, A)</td>
+      <td>(A, C, D)</td>
+      <td>(A, D, C)</td>
+      <td>(C, A, D)</td>
       <td>(C, D, A)</td>
-      <td>(C, E, A)</td>
-      <td>(D, E, A)</td>
-      <td>(C, D, B)</td>
-      <td>(C, E, B)</td>
-      <td>(D, E, B)</td>
-      <td>(D, E, C)</td>
+      <td>(D, A, C)</td>
+      <td>(D, C, A)</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>(C, A, B)</td>
-      <td>(D, A, B)</td>
-      <td>(E, A, B)</td>
-      <td>(D, A, C)</td>
+      <td>(A, C, E)</td>
+      <td>(A, E, C)</td>
+      <td>(C, A, E)</td>
+      <td>(C, E, A)</td>
       <td>(E, A, C)</td>
-      <td>(E, A, D)</td>
-      <td>(D, B, C)</td>
-      <td>(E, B, C)</td>
-      <td>(E, B, D)</td>
-      <td>(E, C, D)</td>
+      <td>(E, C, A)</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>(C, B, A)</td>
-      <td>(D, B, A)</td>
-      <td>(E, B, A)</td>
-      <td>(D, C, A)</td>
-      <td>(E, C, A)</td>
+      <td>(A, D, E)</td>
+      <td>(A, E, D)</td>
+      <td>(D, A, E)</td>
+      <td>(D, E, A)</td>
+      <td>(E, A, D)</td>
       <td>(E, D, A)</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>(B, C, D)</td>
+      <td>(B, D, C)</td>
+      <td>(C, B, D)</td>
+      <td>(C, D, B)</td>
+      <td>(D, B, C)</td>
       <td>(D, C, B)</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>(B, C, E)</td>
+      <td>(B, E, C)</td>
+      <td>(C, B, E)</td>
+      <td>(C, E, B)</td>
+      <td>(E, B, C)</td>
       <td>(E, C, B)</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>(B, D, E)</td>
+      <td>(B, E, D)</td>
+      <td>(D, B, E)</td>
+      <td>(D, E, B)</td>
+      <td>(E, B, D)</td>
       <td>(E, D, B)</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>(C, D, E)</td>
+      <td>(C, E, D)</td>
+      <td>(D, C, E)</td>
+      <td>(D, E, C)</td>
+      <td>(E, C, D)</td>
       <td>(E, D, C)</td>
     </tr>
   </tbody>
@@ -556,11 +580,11 @@ V^3_5 = \frac{5!}{(5-3)!} = \frac{5!}{2!} = \\
 </section>
 <section id="kombinacje" class="level1">
 <h1>Kombinacje</h1>
-<p>Możemy zwrócić uwagę, że tabela powyżej ma ściśle określoną strukturę. W pierwszej kolumnie wszystkie podzbiory składają się z literek A, B i C ułożonych na różne sposoby. Można więc powiedzieć, że podzbiory w każdej kolumnie to dla siebie <em>permutacje</em>, bo składają się z tych samych elementów, różnią się tylko kolejnością. Widzimy więc, że ze zbioru 5 literek możemy wybrać 10 różnych zestawów literek, a w każdym z tych zestawów można ułożyć literki na 6 sposobów, co daje łącznie 60 wariacji. Wariacje możemy więc uzyskać tak, że weźmiemy wszyskie unikalne mniejsze zestawy literek, a potem rozpiszemy permutacje każdego z tych zestawów. Takie unikalne zestawy literek, bez zwracania uwagi na ich kolejność, to <em>kombinacje</em>. W tabeli każdy wiersz to pełny zestaw kombinacji. Wynika nam z tego inny wzór na liczbę wariacji:</p>
+<p>Możemy zwrócić uwagę, że tabela powyżej ma ściśle określoną strukturę. W pierwszym wierszu wszystkie podzbiory składają się z literek A, B i C ułożonych na różne sposoby. Można więc powiedzieć, że podzbiory w każdym wierszu są dla siebie <em>permutacjami</em>, bo składają się z tych samych elementów, różnią się tylko kolejnością. Każda kolumna zawiera unikalne zestawy literek. Widzimy więc, że ze zbioru 5 literek możemy wybrać 10 różnych zestawów literek, a w każdym z tych zestawów można ułożyć literki na 6 sposobów, co daje łącznie 60 wariacji. Wariacje możemy więc uzyskać tak, że weźmiemy wszyskie unikalne mniejsze zestawy literek, a potem rozpiszemy permutacje każdego z tych zestawów. Takie unikalne zestawy literek, bez zwracania uwagi na ich kolejność, to <em>kombinacje</em>. W tabeli każdy wiersz to pełny zestaw kombinacji. Wynika nam z tego inny wzór na liczbę wariacji:</p>
 <p><span class="math display">\[
 V^k_n = C^k_n \times P_k
 \]</span></p>
-<p>Są to w rzeczywistości wymiary naszej tabeli. Liczba kombinacji (tj. unikalnych zestawów) to liczba kolumn, a liczba permutacji to liczba wierszy. Tabela powyżej ma wymiary <span class="math inline">\(6 \times 10\)</span>, bo mamy 10 unikalnych zestawów po 3 elementy i każdy taki zestaw da się ułożyć na 6 różnych sposobów, co ostatecznie daje 60 komórek.</p>
+<p>Są to w rzeczywistości wymiary naszej tabeli. Liczba kombinacji (tj. unikalnych zestawów) to liczba wierszy, a liczba permutacji to liczba kolumn. Tabela powyżej ma wymiary <span class="math inline">\(10 \times 6\)</span>, bo mamy 10 unikalnych zestawów po 3 elementy i każdy taki zestaw da się ułożyć na 6 różnych sposobów, co ostatecznie daje 60 komórek.</p>
 <p>Żeby wyprowadzić wzór na liczbę kombinacji, możemy wykorzystać fakt, że wiemy, jak się liczy liczbę wariacji i permutacji. W powyższej tabeli mamy 60 wariacji, a każda kombinacja ma 6 możliwych permutacji. Żeby więc pozbyć się informacji o permutacjach, musimy podzielić 60 wariacji na 6. Podstawiając do wzoru:</p>
 <p><span class="math display">\[
 \displaylines{
@@ -569,7 +593,7 @@ V^3_5 = C^3_5 \times P_3 \\
 C^3_5 = \frac{60}{6} = 10
 }
 \]</span></p>
-<p>Czyli jeśli mamy tabelę z 6 wierszami i ilomaś komulmnami, która ma 60 komórek, to kolumn musi być 10.</p>
+<p>Czyli jeśli mamy tabelę z 6 kolumnami i ilomaś wierszami, która ma 60 komórek, to wierszy musi być 10.</p>
 <p>Możemy do naszego nowego wzoru podstawić wzory na liczbę wariacji i permutacji i w ten sposób uzyskać ogólny wzór na liczbę kombinacji:</p>
 <p><span class="math display">\[
 \displaylines{
@@ -604,7 +628,7 @@ C^k_n = \frac{\frac{n!}{(n-k)!}}{k!} = \frac{n!}{k!(n-k)!} = \binom{n}{k}
 </section>
 <section id="podsumowanie" class="level1">
 <h1>Podsumowanie</h1>
-<p>Permutacje to zmiany kolejności, kombinacje to unikalne podzbiory. Jeśli zaczniemy robić permutacje unikalnych podzbiorów, wyjdą nam wariacje. Albo patrząc inaczej – permutacje to wariacje <span class="math inline">\(V^n_n\)</span>. Permutacje i wariacje możemy liczyć kreskami i silnią. liczbę kombinacji uzyskamy dzieląc liczbę wariacji po <em>k</em> elementów przez liczbę permutacji <em>k</em>. Powstały wzór oznacza się symbolem Newtona <span class="math inline">\(\binom{n}{k}\)</span>. Pomocny może okazać się poniższy schemat.</p>
+<p>Permutacje to zmiany kolejności, kombinacje to unikalne podzbiory. Jeśli zaczniemy robić permutacje unikalnych podzbiorów, wyjdą nam wariacje. Albo patrząc inaczej – permutacje to wariacje <span class="math inline">\(V^n_n\)</span>. Permutacje i wariacje możemy liczyć kreskami i silnią. Liczbę kombinacji uzyskamy dzieląc liczbę wariacji po <em>k</em> elementów przez liczbę permutacji <em>k</em>. Powstały wzór oznacza się symbolem Newtona <span class="math inline">\(\binom{n}{k}\)</span>. Pomocny może okazać się poniższy schemat.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./images/kombinatoryka-flowchart.svg" class="img-fluid figure-img"></p>
