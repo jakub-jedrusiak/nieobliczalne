@@ -11,7 +11,7 @@ import pandas as pd
 
 def variations(iterable, subset_length):
     '''Kombinacje w wierszach, permutacje w kolumnach, wszystko razem to wariacje'''
-    df = pd.DataFrame([list(itertools.permutations(x)) for x in itertools.combinations(iterable, subset_length)]).T
+    df = pd.DataFrame([list(itertools.permutations(x)) for x in itertools.combinations(iterable, subset_length)])
     df.index = range(1, len(df.index) + 1)
     df.columns = range(1, len(df.columns) + 1)
     return df
@@ -86,13 +86,13 @@ Czyli wariacji po 3 elementy jest w naszym przykładzie 3 razy więcej, niż war
 
 # Kombinacje
 
-Możemy zwrócić uwagę, że tabela powyżej ma ściśle określoną strukturę. W pierwszej kolumnie wszystkie podzbiory składają się z literek A, B i C ułożonych na różne sposoby. Można więc powiedzieć, że podzbiory w każdej kolumnie to dla siebie *permutacje*, bo składają się z tych samych elementów, różnią się tylko kolejnością. Widzimy więc, że ze zbioru 5 literek możemy wybrać 10 różnych zestawów literek, a w każdym z tych zestawów można ułożyć literki na 6 sposobów, co daje łącznie 60 wariacji. Wariacje możemy więc uzyskać tak, że weźmiemy wszyskie unikalne mniejsze zestawy literek, a potem rozpiszemy permutacje każdego z tych zestawów. Takie unikalne zestawy literek, bez zwracania uwagi na ich kolejność, to *kombinacje*. W tabeli każdy wiersz to pełny zestaw kombinacji. Wynika nam z tego inny wzór na liczbę wariacji:
+Możemy zwrócić uwagę, że tabela powyżej ma ściśle określoną strukturę. W pierwszym wierszu wszystkie podzbiory składają się z literek A, B i C ułożonych na różne sposoby. Można więc powiedzieć, że podzbiory w każdym wierszu są dla siebie *permutacjami*, bo składają się z tych samych elementów, różnią się tylko kolejnością. Każda kolumna zawiera unikalne zestawy literek. Widzimy więc, że ze zbioru 5 literek możemy wybrać 10 różnych zestawów literek, a w każdym z tych zestawów można ułożyć literki na 6 sposobów, co daje łącznie 60 wariacji. Wariacje możemy więc uzyskać tak, że weźmiemy wszyskie unikalne mniejsze zestawy literek, a potem rozpiszemy permutacje każdego z tych zestawów. Takie unikalne zestawy literek, bez zwracania uwagi na ich kolejność, to *kombinacje*. W tabeli każdy wiersz to pełny zestaw kombinacji. Wynika nam z tego inny wzór na liczbę wariacji:
 
 $$
 V^k_n = C^k_n \times P_k
 $$
 
-Są to w rzeczywistości wymiary naszej tabeli. Liczba kombinacji (tj. unikalnych zestawów) to liczba kolumn, a liczba permutacji to liczba wierszy. Tabela powyżej ma wymiary $6 \times 10$, bo mamy 10 unikalnych zestawów po 3 elementy i każdy taki zestaw da się ułożyć na 6 różnych sposobów, co ostatecznie daje 60 komórek.
+Są to w rzeczywistości wymiary naszej tabeli. Liczba kombinacji (tj. unikalnych zestawów) to liczba wierszy, a liczba permutacji to liczba kolumn. Tabela powyżej ma wymiary $10 \times 6$, bo mamy 10 unikalnych zestawów po 3 elementy i każdy taki zestaw da się ułożyć na 6 różnych sposobów, co ostatecznie daje 60 komórek.
 
 Żeby wyprowadzić wzór na liczbę kombinacji, możemy wykorzystać fakt, że wiemy, jak się liczy liczbę wariacji i permutacji. W powyższej tabeli mamy 60 wariacji, a każda kombinacja ma 6 możliwych permutacji. Żeby więc pozbyć się informacji o permutacjach, musimy podzielić 60 wariacji na 6. Podstawiając do wzoru:
 
@@ -104,7 +104,7 @@ C^3_5 = \frac{60}{6} = 10
 }
 $$
 
-Czyli jeśli mamy tabelę z 6 wierszami i ilomaś komulmnami, która ma 60 komórek, to kolumn musi być 10.
+Czyli jeśli mamy tabelę z 6 kolumnami i ilomaś wierszami, która ma 60 komórek, to wierszy musi być 10.
 
 Możemy do naszego nowego wzoru podstawić wzory na liczbę wariacji i permutacji i w ten sposób uzyskać ogólny wzór na liczbę kombinacji:
 
@@ -148,6 +148,6 @@ $$
 
 # Podsumowanie
 
-Permutacje to zmiany kolejności, kombinacje to unikalne podzbiory. Jeśli zaczniemy robić permutacje unikalnych podzbiorów, wyjdą nam wariacje. Albo patrząc inaczej – permutacje to wariacje $V^n_n$. Permutacje i wariacje możemy liczyć kreskami i silnią. liczbę kombinacji uzyskamy dzieląc liczbę wariacji po *k* elementów przez liczbę permutacji *k*. Powstały wzór oznacza się symbolem Newtona $\binom{n}{k}$. Pomocny może okazać się poniższy schemat.
+Permutacje to zmiany kolejności, kombinacje to unikalne podzbiory. Jeśli zaczniemy robić permutacje unikalnych podzbiorów, wyjdą nam wariacje. Albo patrząc inaczej – permutacje to wariacje $V^n_n$. Permutacje i wariacje możemy liczyć kreskami i silnią. Liczbę kombinacji uzyskamy dzieląc liczbę wariacji po *k* elementów przez liczbę permutacji *k*. Powstały wzór oznacza się symbolem Newtona $\binom{n}{k}$. Pomocny może okazać się poniższy schemat.
 
 ![](./images/kombinatoryka-flowchart.svg){fig-align="center"}
