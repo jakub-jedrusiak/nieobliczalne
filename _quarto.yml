@@ -6,9 +6,14 @@ website:
   navbar:
     left:
       - href: index.qmd
-        text: Home
-      - about.qmd
-      - kombinatoryka.qmd
+        text: Strona główna
+  sidebar:
+    style: "docked"
+    search: true
+    tools:
+      - icon: github
+        href: https://github.com/jakub-jedrusiak
+    contents: auto
 
 format:
   html:
