@@ -1,5 +1,16 @@
 ---
 title: "Jakub Jędrusiak"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/jakub-jedrusiak/
+    - text: ResearchGate
+      href: https://www.researchgate.net/profile/Jakub_Jedrusiak
+    - text: ORCID
+      href: https://orcid.org/0000-0002-6481-8210
 ---
 
-Strona poglądowa. Do gromadzenia rzeczy. Aktualnie niewiele się tu dzieje.
+Student psychologii Uniwersytetu Wrocławskiego. Strona pogądowa do gromadzenia materiałów. Aktualnie niewiele się tu dzieje.
