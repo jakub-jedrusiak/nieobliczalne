@@ -622,8 +622,9 @@ Kod ten możemy uruchomić dla dowolnej ilości danych, w dowolnym momencie. Jes
 df
 ```
 
-```{=html}
-<!-- ### Grupowanie i agregowanie
+> Pozostała część już wkrótce.
+
+### Grupowanie i agregowanie
 
 ## Format długi i szeroki
 
@@ -635,5 +636,4 @@ df
 
 ## Czyste wyniki, czyli pakiet `broom`
 
-# Formatowanie kodu -->
-```
+# Formatowanie kodu
