@@ -6,6 +6,8 @@ editor: visual
 
 ```{python}
 #| label: setup
+#| code-fold: true
+#| code-summary: "Pokaż kod"
 import itertools
 import pandas as pd
 
@@ -155,18 +157,22 @@ Permutacje to zmiany kolejności, kombinacje to unikalne podzbiory. Jeśli zaczn
 ```{mermaid}
 %%| fig-responsive: true
 %%| fig-width: 80%
+%%| echo: true
+%%| code-fold: true
+%%| code-summary: "Pokaż kod"
 flowchart TD
     START(START) --> zbior
     zbior[/Mam zbiór, z którym chcę coś zrobić/] -->
     kolejnosc{Czy kolejność ma znaczenie?}
     kolejnosc -->|Nie| C[kombinacja]
-        C --> Cp{Czy elementy mogą się powtarzać?}
-        Cp -->|Tak| Cbar_res(kombinacja z powtórzeniami)
-        Cp -->|Nie| C_res(kombinacja bez powrótrzeń)
+        C --> C_powtorzenia{Czy elementy mogą się powtarzać?}
+        C_powtorzenia -->|Tak| C_powtorzenia_koniec(kombinacja z powtórzeniami)
+        C_powtorzenia -->|Nie| C_koniec(kombinacja bez powrótrzeń)
     kolejnosc -->|Tak| V[wariacja]
-        V --> V_c{Czy wykorzystuję cały zbiór?}
-        V_c -->|Tak| P(Permutacja)
-        V_c -->|Nie| Vp{Czy elementy mogą się powtarzać?}
-        Vp -->|Tak| Vbar_res(wariacja z powtórzeniami)
-        Vp -->|Nie| V_res(wariacja bez powrótrzeń)
+        V --> V_calosc{Czy wykorzystuję cały zbiór?}
+        V_calosc -->|Tak| P(permutacja)
+        V_calosc -->|Nie| V_powtorzenia{Czy elementy mogą się powtarzać?}
+        V_powtorzenia -->|Tak| V_powtorzenia_koniec(wariacja z powtórzeniami)
+        V_powtorzenia -->|Nie| V_koniec(wariacja bez powrótrzeń)
 ```
+
