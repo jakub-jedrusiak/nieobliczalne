@@ -260,8 +260,6 @@ df %>%
     select(-(2:5), -`Wyrażam świadomą i dobrowolną zgodę na udział w badaniu.`)
 ```
 
-## Modyfikowanie danych
-
 ### Zmiana nazw kolumn
 
 Co zrobić, jeśli chcemy w naszej bazie coś pozmieniać? Zacznijmy może od zmiany nazw kolumn, żeby łatwiej nam się pisało dalsze komendy. Do tego służą komendy `rename` z pakietu `dplyr` i `set_names` z pakietu `purrr`[^podstawy_r-13]. `rename` służy do zmiany nazw pojedynczych kolumn i przyjmuje argumenty w postaci `rename("nowa_nazwa" = "stara nazwa")`. Za jednym zamachem możemy zmienić ile nazw chcemy. Jeśli chcemy zmienić wszystkie nazwy, wygodniejsza jest funkcja `set_names` do której **po kolei** wrzucamy nowe nazwy, których potrzebujemy. Znowu -- nazwy to dosłowne ciągi znaków, więc zawsze piszemy je w cudzysłowie.
@@ -403,7 +401,7 @@ df %>%
 
 Pierwszym argumentem jest zestaw kolumn, dlatego nazwy kolumn opakowałem w `c()`. Jest to podstawowa funkcja, która zbiera kilka rzeczy w jeden zestaw. `select` czy `filter` nie potrzebowały, żeby robić takie zestawy, ale wiele funkcji (zwłaszcza spoza `tidyverse`) tego wymaga. Co z drugim argumentem, czyli funkcją? Tutaj wchodzimy głębiej w programistyczne meandry i można, oczywiście, zostać przy wersji bez `across`. Odważnych zapraszam do świata funckji anonimowych.
 
-##### Własne funkcje
+#### Własne funkcje
 
 Drugi argument w `across` to funkcja, jakiej `across` ma użyć do przekształcenia kolumn. Niestety nie ma funkcji, która odejmowałaby od 7. Żeby sobie z tym poradzić, musimy albo taką funkcję wcześniej zadeklarować, albo użyć tzw. funkcji anonimowej (zwanej też *lambda*). Pierwsza opcja jest łatwa do zrozumienia, ale wymaga sporo pisania jak na coś, czego użyjemy tylko raz. Tworzenie własnych funkcji w R jest dość łatwe. Nasza funkcja mogłaby wyglądać tak:
 
