@@ -150,4 +150,23 @@ $$
 
 Permutacje to zmiany kolejności, kombinacje to unikalne podzbiory. Jeśli zaczniemy robić permutacje unikalnych podzbiorów, wyjdą nam wariacje. Albo patrząc inaczej – permutacje to wariacje $V^n_n$. Permutacje i wariacje możemy liczyć kreskami i silnią. Liczbę kombinacji uzyskamy dzieląc liczbę wariacji po *k* elementów przez liczbę permutacji *k*. Powstały wzór oznacza się symbolem Newtona $\binom{n}{k}$. Pomocny może okazać się poniższy schemat.
 
-![](./images/kombinatoryka-flowchart.svg){fig-align="center"}
+<!-- ![](./images/kombinatoryka-flowchart.svg){fig-align="center"} -->
+
+```{mermaid}
+%%| fig-responsive: true
+%%| fig-width: 80%
+flowchart TD
+    START(START) --> zbior
+    zbior[/Mam zbiór, z którym chcę coś zrobić/] -->
+    kolejnosc{Czy kolejność ma znaczenie?}
+    kolejnosc -->|Nie| C[kombinacja]
+        C --> Cp{Czy elementy mogą się powtarzać?}
+        Cp -->|Tak| Cbar_res(kombinacja z powtórzeniami)
+        Cp -->|Nie| C_res(kombinacja bez powrótrzeń)
+    kolejnosc -->|Tak| V[wariacja]
+        V --> V_c{Czy wykorzystuję cały zbiór?}
+        V_c -->|Tak| P(Permutacja)
+        V_c -->|Nie| Vp{Czy elementy mogą się powtarzać?}
+        Vp -->|Tak| Vbar_res(wariacja z powtórzeniami)
+        Vp -->|Nie| V_res(wariacja bez powrótrzeń)
+```
