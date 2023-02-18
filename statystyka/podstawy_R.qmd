@@ -125,11 +125,11 @@ Jeśli wykonamy taką linijkę, konsola zignoruje wszystko po znaku `#`. Pozwala
 ```{r}
 # Przygotowanie ----
 
-# Ładowanie danych ----
+## Ładowanie danych ----
 
 # kod ładujący dane
 
-# Ładowanie bibliotek ----
+## Ładowanie bibliotek ----
 
 # kod ładujący biblioteki
 ```
