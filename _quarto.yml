@@ -25,6 +25,7 @@ format:
     css: styles.css
     toc: true
     lang: pl
+    default-image-extension: svg
 
 bibliography: ./bibliografia/references.bib
 csl: ./bibliografia/apa-6th-edition.csl
