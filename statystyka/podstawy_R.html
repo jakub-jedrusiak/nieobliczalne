@@ -252,9 +252,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">Data wrangling</a>
   <ul class="collapse">
   <li><a href="#wybieranie-kolumn-i-wierszy" id="toc-wybieranie-kolumn-i-wierszy" class="nav-link" data-scroll-target="#wybieranie-kolumn-i-wierszy">Wybieranie kolumn i wierszy</a></li>
-  </ul></li>
-  <li><a href="#modyfikowanie-danych" id="toc-modyfikowanie-danych" class="nav-link" data-scroll-target="#modyfikowanie-danych">Modyfikowanie danych</a>
-  <ul class="collapse">
   <li><a href="#zmiana-nazw-kolumn" id="toc-zmiana-nazw-kolumn" class="nav-link" data-scroll-target="#zmiana-nazw-kolumn">Zmiana nazw kolumn</a></li>
   <li><a href="#zmiana-wartości-komórek" id="toc-zmiana-wartości-komórek" class="nav-link" data-scroll-target="#zmiana-wartości-komórek">Zmiana wartości komórek</a></li>
   <li><a href="#nowe-kolumny" id="toc-nowe-kolumny" class="nav-link" data-scroll-target="#nowe-kolumny">Nowe kolumny</a></li>
@@ -555,9 +552,6 @@ dbl  (1): ID
 </div>
 </section>
 </section>
-</section>
-<section id="modyfikowanie-danych" class="level2">
-<h2 class="anchored" data-anchor-id="modyfikowanie-danych">Modyfikowanie danych</h2>
 <section id="zmiana-nazw-kolumn" class="level3">
 <h3 class="anchored" data-anchor-id="zmiana-nazw-kolumn">Zmiana nazw kolumn</h3>
 <p>Co zrobić, jeśli chcemy w naszej bazie coś pozmieniać? Zacznijmy może od zmiany nazw kolumn, żeby łatwiej nam się pisało dalsze komendy. Do tego służą komendy <code>rename</code> z pakietu <code>dplyr</code> i <code>set_names</code> z pakietu <code>purrr</code><a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a>. <code>rename</code> służy do zmiany nazw pojedynczych kolumn i przyjmuje argumenty w postaci <code>rename("nowa_nazwa" = "stara nazwa")</code>. Za jednym zamachem możemy zmienić ile nazw chcemy. Jeśli chcemy zmienić wszystkie nazwy, wygodniejsza jest funkcja <code>set_names</code> do której <strong>po kolei</strong> wrzucamy nowe nazwy, których potrzebujemy. Znowu – nazwy to dosłowne ciągi znaków, więc zawsze piszemy je w cudzysłowie.</p>
@@ -701,8 +695,9 @@ dbl  (1): ID
 <span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Pierwszym argumentem jest zestaw kolumn, dlatego nazwy kolumn opakowałem w <code>c()</code>. Jest to podstawowa funkcja, która zbiera kilka rzeczy w jeden zestaw. <code>select</code> czy <code>filter</code> nie potrzebowały, żeby robić takie zestawy, ale wiele funkcji (zwłaszcza spoza <code>tidyverse</code>) tego wymaga. Co z drugim argumentem, czyli funkcją? Tutaj wchodzimy głębiej w programistyczne meandry i można, oczywiście, zostać przy wersji bez <code>across</code>. Odważnych zapraszam do świata funckji anonimowych.</p>
-<section id="własne-funkcje" class="level5">
-<h5 class="anchored" data-anchor-id="własne-funkcje">Własne funkcje</h5>
+</section>
+<section id="własne-funkcje" class="level4">
+<h4 class="anchored" data-anchor-id="własne-funkcje">Własne funkcje</h4>
 <p>Drugi argument w <code>across</code> to funkcja, jakiej <code>across</code> ma użyć do przekształcenia kolumn. Niestety nie ma funkcji, która odejmowałaby od 7. Żeby sobie z tym poradzić, musimy albo taką funkcję wcześniej zadeklarować, albo użyć tzw. funkcji anonimowej (zwanej też <em>lambda</em>). Pierwsza opcja jest łatwa do zrozumienia, ale wymaga sporo pisania jak na coś, czego użyjemy tylko raz. Tworzenie własnych funkcji w R jest dość łatwe. Nasza funkcja mogłaby wyglądać tak:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>odejmij_od_7 <span class="ot">&lt;-</span> <span class="cf">function</span>(wynik) {</span>
@@ -747,7 +742,6 @@ dbl  (1): ID
 <span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), odejmij_od, <span class="at">od_czego =</span> <span class="dv">7</span>)</span>
 <span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
 <section id="funkcje-anonimowe" class="level5">
 <h5 class="anchored" data-anchor-id="funkcje-anonimowe">Funkcje anonimowe</h5>
 <p>Jeśli funkcja jest prosta i używamy jej tylko raz, często nie chcemy zaśmiecać sobie kodu jej definicją. Wtedy z pomocą przychodzą nam funkcje anonimowe (zwane też funckjami <em>lambda</em>). Anonimowe, bo nie mają swojej nazwy. Podstawowy sposób ich używania to zadeklarowanie ich od razu w miejscu użycia.</p>
