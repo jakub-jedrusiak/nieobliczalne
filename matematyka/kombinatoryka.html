@@ -268,6 +268,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <div id="setup" class="cell" data-execution_count="1">
+<details>
+<summary>Pokaż kod</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -277,6 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    df.index <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(df.index) <span class="op">+</span> <span class="dv">1</span>)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    df.columns <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(df.columns) <span class="op">+</span> <span class="dv">1</span>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Kombinatoryka to część matematyki zajmująca się modyfikacjami zbiorów. Weźmy sobie zbiór 5 pierwszych liter alfabetu i nazwijmy go Z jak zbiór. Zacznę od skomplikowanie brzmiącego wstępu, a potem wyjaśnię to na przykładach.</p>
 <div class="cell" data-execution_count="2">
@@ -668,7 +671,21 @@ C^k_n = \frac{\frac{n!}{(n-k)!}}{k!} = \frac{n!}{k!(n-k)!} = \binom{n}{k}
 <p>Permutacje to zmiany kolejności, kombinacje to unikalne podzbiory. Jeśli zaczniemy robić permutacje unikalnych podzbiorów, wyjdą nam wariacje. Albo patrząc inaczej – permutacje to wariacje <span class="math inline">\(V^n_n\)</span>. Permutacje i wariacje możemy liczyć kreskami i silnią. Liczbę kombinacji uzyskamy dzieląc liczbę wariacji po <em>k</em> elementów przez liczbę permutacji <em>k</em>. Powstały wzór oznacza się symbolem Newtona <span class="math inline">\(\binom{n}{k}\)</span>. Pomocny może okazać się poniższy schemat.</p>
 <!-- ![](./images/kombinatoryka-flowchart.svg){fig-align="center"} -->
 <div class="cell" data-fig-responsive="true" data-fig-width="80%">
-<div class="cell-output-display">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>flowchart TD</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    START(START) --&gt; zbior</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    zbior[/Mam zbiór, z którym chcę coś zrobić/] --&gt;</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    kolejnosc{Czy kolejność ma znaczenie?}</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    kolejnosc --&gt;|Nie| C[kombinacja]</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        C --&gt; C_powtorzenia{Czy elementy mogą się powtarzać?}</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        C_powtorzenia --&gt;|Tak| C_powtorzenia_koniec(kombinacja z powtórzeniami)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        C_powtorzenia --&gt;|Nie| C_koniec(kombinacja bez powrótrzeń)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    kolejnosc --&gt;|Tak| V[wariacja]</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        V --&gt; V_calosc{Czy wykorzystuję cały zbiór?}</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        V_calosc --&gt;|Tak| P(permutacja)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        V_calosc --&gt;|Nie| V_powtorzenia{Czy elementy mogą się powtarzać?}</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        V_powtorzenia --&gt;|Tak| V_powtorzenia_koniec(wariacja z powtórzeniami)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        V_powtorzenia --&gt;|Nie| V_koniec(wariacja bez powrótrzeń)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display" data-code-fold="true">
 <div>
 <p>
 </p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-1">flowchart TD
@@ -676,15 +693,15 @@ C^k_n = \frac{\frac{n!}{(n-k)!}}{k!} = \frac{n!}{k!(n-k)!} = \binom{n}{k}
     zbior[/Mam zbiór, z którym chcę coś zrobić/] --&gt;
     kolejnosc{Czy kolejność ma znaczenie?}
     kolejnosc --&gt;|Nie| C[kombinacja]
-        C --&gt; Cp{Czy elementy mogą się powtarzać?}
-        Cp --&gt;|Tak| Cbar_res(kombinacja z powtórzeniami)
-        Cp --&gt;|Nie| C_res(kombinacja bez powrótrzeń)
+        C --&gt; C_powtorzenia{Czy elementy mogą się powtarzać?}
+        C_powtorzenia --&gt;|Tak| C_powtorzenia_koniec(kombinacja z powtórzeniami)
+        C_powtorzenia --&gt;|Nie| C_koniec(kombinacja bez powrótrzeń)
     kolejnosc --&gt;|Tak| V[wariacja]
-        V --&gt; V_c{Czy wykorzystuję cały zbiór?}
-        V_c --&gt;|Tak| P(Permutacja)
-        V_c --&gt;|Nie| Vp{Czy elementy mogą się powtarzać?}
-        Vp --&gt;|Tak| Vbar_res(wariacja z powtórzeniami)
-        Vp --&gt;|Nie| V_res(wariacja bez powrótrzeń)
+        V --&gt; V_calosc{Czy wykorzystuję cały zbiór?}
+        V_calosc --&gt;|Tak| P(permutacja)
+        V_calosc --&gt;|Nie| V_powtorzenia{Czy elementy mogą się powtarzać?}
+        V_powtorzenia --&gt;|Tak| V_powtorzenia_koniec(wariacja z powtórzeniami)
+        V_powtorzenia --&gt;|Nie| V_koniec(wariacja bez powrótrzeń)
 </pre>
 <div id="mermaid-tooltip-1" class="mermaidTooltip">
 
