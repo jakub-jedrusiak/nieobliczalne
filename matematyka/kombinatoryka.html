@@ -123,6 +123,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Zatwierdź"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
@@ -663,10 +666,32 @@ C^k_n = \frac{\frac{n!}{(n-k)!}}{k!} = \frac{n!}{k!(n-k)!} = \binom{n}{k}
 <section id="podsumowanie" class="level1">
 <h1>Podsumowanie</h1>
 <p>Permutacje to zmiany kolejności, kombinacje to unikalne podzbiory. Jeśli zaczniemy robić permutacje unikalnych podzbiorów, wyjdą nam wariacje. Albo patrząc inaczej – permutacje to wariacje <span class="math inline">\(V^n_n\)</span>. Permutacje i wariacje możemy liczyć kreskami i silnią. Liczbę kombinacji uzyskamy dzieląc liczbę wariacji po <em>k</em> elementów przez liczbę permutacji <em>k</em>. Powstały wzór oznacza się symbolem Newtona <span class="math inline">\(\binom{n}{k}\)</span>. Pomocny może okazać się poniższy schemat.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./images/kombinatoryka-flowchart.svg" class="img-fluid figure-img"></p>
-</figure>
+<!-- ![](./images/kombinatoryka-flowchart.svg){fig-align="center"} -->
+<div class="cell" data-fig-responsive="true" data-fig-width="80%">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-1">flowchart TD
+    START(START) --&gt; zbior
+    zbior[/Mam zbiór, z którym chcę coś zrobić/] --&gt;
+    kolejnosc{Czy kolejność ma znaczenie?}
+    kolejnosc --&gt;|Nie| C[kombinacja]
+        C --&gt; Cp{Czy elementy mogą się powtarzać?}
+        Cp --&gt;|Tak| Cbar_res(kombinacja z powtórzeniami)
+        Cp --&gt;|Nie| C_res(kombinacja bez powrótrzeń)
+    kolejnosc --&gt;|Tak| V[wariacja]
+        V --&gt; V_c{Czy wykorzystuję cały zbiór?}
+        V_c --&gt;|Tak| P(Permutacja)
+        V_c --&gt;|Nie| Vp{Czy elementy mogą się powtarzać?}
+        Vp --&gt;|Tak| Vbar_res(wariacja z powtórzeniami)
+        Vp --&gt;|Nie| V_res(wariacja bez powrótrzeń)
+</pre>
+<div id="mermaid-tooltip-1" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
 </div>
 
 
