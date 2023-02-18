@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Jakub Jędrusiak – podstawy_r</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Brak wyników",
+    "search-matching-documents-text": "dopasowane dokumenty",
+    "search-copy-link-title": "Kopiuj link do wyszukiwania",
+    "search-hide-matches-text": "Ukryj dodatkowe dopasowania",
+    "search-more-match-text": "więcej dopasowań w tym dokumencie",
+    "search-more-matches-text": "więcej dopasowań w tym dokumencie",
+    "search-clear-button-title": "Wyczyść",
+    "search-detached-cancel-button-title": "Anuluj",
+    "search-submit-button-title": "Zatwierdź"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Jakub Jędrusiak</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+ <span class="menu-text">Strona główna</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../publications.html" aria-current="page">
+ <span class="menu-text">Publikacje</span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        <div class="sidebar-tools-collapse">
+    <a href="https://github.com/jakub-jedrusiak" title="" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../publications.html" class="sidebar-item-text sidebar-link">Publikacje</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Matematyka</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../matematyka/kombinatoryka.html" class="sidebar-item-text sidebar-link">Kombinatoryka</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Statystyka</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statystyka/podstawy_R.html" class="sidebar-item-text sidebar-link active">Podstawy programowania w R</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statystyka/procent-wariancji.html" class="sidebar-item-text sidebar-link">Wyjaśnianie wariancji i test <em>F</em></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Na tej stronie</h2>
+   
+  <ul>
+  <li><a href="#podstawy-programowania-w-r" id="toc-podstawy-programowania-w-r" class="nav-link active" data-scroll-target="#podstawy-programowania-w-r">Podstawy programowania w R</a>
+  <ul class="collapse">
+  <li><a href="#dlaczego-warto-uczyć-się-r" id="toc-dlaczego-warto-uczyć-się-r" class="nav-link" data-scroll-target="#dlaczego-warto-uczyć-się-r">Dlaczego warto uczyć się R?</a></li>
+  <li><a href="#przygotowanie" id="toc-przygotowanie" class="nav-link" data-scroll-target="#przygotowanie">Przygotowanie</a></li>
+  <li><a href="#konsola-zmienne-i-matematyka" id="toc-konsola-zmienne-i-matematyka" class="nav-link" data-scroll-target="#konsola-zmienne-i-matematyka">Konsola, zmienne i matematyka</a></li>
+  <li><a href="#funkcje" id="toc-funkcje" class="nav-link" data-scroll-target="#funkcje">Funkcje</a>
+  <ul class="collapse">
+  <li><a href="#dokumentacja" id="toc-dokumentacja" class="nav-link" data-scroll-target="#dokumentacja">Dokumentacja</a></li>
+  </ul></li>
+  <li><a href="#skrypty" id="toc-skrypty" class="nav-link" data-scroll-target="#skrypty">Skrypty</a>
+  <ul class="collapse">
+  <li><a href="#komentarze" id="toc-komentarze" class="nav-link" data-scroll-target="#komentarze">Komentarze</a></li>
+  </ul></li>
+  <li><a href="#projekty" id="toc-projekty" class="nav-link" data-scroll-target="#projekty">Projekty</a></li>
+  <li><a href="#pakiety" id="toc-pakiety" class="nav-link" data-scroll-target="#pakiety">Pakiety</a></li>
+  <li><a href="#ładowanie-danych" id="toc-ładowanie-danych" class="nav-link" data-scroll-target="#ładowanie-danych">Ładowanie danych</a></li>
+  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">Data wrangling</a>
+  <ul class="collapse">
+  <li><a href="#wybieranie-kolumn-i-wierszy" id="toc-wybieranie-kolumn-i-wierszy" class="nav-link" data-scroll-target="#wybieranie-kolumn-i-wierszy">Wybieranie kolumn i wierszy</a></li>
+  </ul></li>
+  <li><a href="#modyfikowanie-danych" id="toc-modyfikowanie-danych" class="nav-link" data-scroll-target="#modyfikowanie-danych">Modyfikowanie danych</a>
+  <ul class="collapse">
+  <li><a href="#zmiana-nazw-kolumn" id="toc-zmiana-nazw-kolumn" class="nav-link" data-scroll-target="#zmiana-nazw-kolumn">Zmiana nazw kolumn</a></li>
+  <li><a href="#zmiana-wartości-komórek" id="toc-zmiana-wartości-komórek" class="nav-link" data-scroll-target="#zmiana-wartości-komórek">Zmiana wartości komórek</a></li>
+  <li><a href="#nowe-kolumny" id="toc-nowe-kolumny" class="nav-link" data-scroll-target="#nowe-kolumny">Nowe kolumny</a></li>
+  <li><a href="#sortowanie-i-kolejność-kolumn" id="toc-sortowanie-i-kolejność-kolumn" class="nav-link" data-scroll-target="#sortowanie-i-kolejność-kolumn">Sortowanie i kolejność kolumn</a></li>
+  <li><a href="#zapisywanie-zmian" id="toc-zapisywanie-zmian" class="nav-link" data-scroll-target="#zapisywanie-zmian">Zapisywanie zmian</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="podstawy-programowania-w-r" class="level1">
+<h1>Podstawy programowania w R</h1>
+<p>W kilku miejscach w dalszej części wrzucam informacje, jak daną rzecz omawianą teoretycznie można zrobić w R. <strong>Absolutnie nie jest to konieczne do zrozumienia statystyki!</strong> Jest to tylko jedna z możliwości, jak można opisaną dalej teorię przekuć w praktykę. O R można myśleć jako o programie do robienia statystyki. Podobnie jak SPSS, Statistica, Stata czy (oparte na R, darmowe i otwartoźródłowe) jamovi. Jeśli jednak Czytelnik widział kiedyś program statystyczny, spodziewać się będzie ekranu podobnego do Excela, gdzie na górnej belce wybiera się testy statystyczne, jakie chce się przeprowadzić. Praca w R tak nie wygląda. Największa wada i zaleta R polega na tym, że jest on jednocześnie językiem programowania. A to daje bardzo ciekawe możliwości, o których niżej. Także praca w R wygląda tak, że w specjalnym języku piszemy komputerowi, co ma zrobić, potem uruchamiamy te instrukcje i gotowe.</p>
+<p>W tym miejscu spróbuję krótko opisać, jak zacząć pracę z R. Nie mam ambicji zrobić pełnego wprowadzenia, bo wyszedłby z tego osobny podręcznik. Mam ambicje dać jakikolwiek zarys fundametu, który pozwoli Czytelnikowi wyczyścić mało brudne dane i zrobić proste testy. Jeśli ktoś po przeczytaniu tego stwierdzi „Może warto się zagłębić”, to znajdzie mnóstwo materiałów, które mu na to pozwolą. Ze swojej strony mogę polecić podręcznik „Język R. Kompletny zestaw narzędzi dla analityków danych” Wickhama i Grolemunda, interaktywne kursy na DataCamp, a pomocy w rozwiązaniu konkretnych problemów zawsze można szukać na StackOverflow.</p>
+<section id="dlaczego-warto-uczyć-się-r" class="level2">
+<h2 class="anchored" data-anchor-id="dlaczego-warto-uczyć-się-r">Dlaczego warto uczyć się R?</h2>
+<p>Dla niektórych ludzi perspektywa uczenia się języka programowania tylko po to, żeby móc robić testy statystyczne, wydaje się być stratą czasu. Albo budzi lęk. Po co poświęcać tyle czasu i energii dla czegoś, co możemy zrobić poprzez klikanie w obrazki w jamovi? Powodów jest wiele i kilka pozwolę sobie wymienić.</p>
+<ol type="1">
+<li><p>Można zrobić wszystko. Aboslutnie wszystko. Nie ma sensu pytać „czy da się to zrobić?“, w R pytamy „jak to zrobić?”. Wyobraźmy sobie, że chcemy zastosować jakiś test i nagle odkrywamy, że nie ma go w naszym programie statystycznym. Jeżeli jest nim coś w rodzaju Statistici, to możemy co najwyżej napisać do dewewloperów z nadzieją, że dołożą. W R prawdopodobnie istnieje już pakiet, który interesujący nas test zawiera. A jeśli nie, to jeśli mamy wzór matematyczny, to wklepanie go w R to nic trudnego.</p></li>
+<li><p>R to darmowe, otwartoźródłowe oprogramowanie (tzw. FOSS). Wszystkie pakiety, których używam dalej, nie kosztują nic. Dla porównania najpopularniejszy program statystyczny na świecie, SPSS <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> w podstawowej wersji w chwili pisania tego tekstu kosztuje od 99 dolarów miesięcznie za osobę. I to nawet nie jest wersja dająca wszystkie możliwości. W R da się policzyć właściwie wszystko to, co w SPSS, korzysta się ze wszystkich innych zalet języka programowania (patrz niżej), a to wszystko za okrągłe 0 dolarów miesięcznie za osobę.</p></li>
+</ol>
+<!-- -->
+<ol start="3" type="1">
+<li><p>R to język programowania. Pozwala to na szybką automatyzację dużej liczby zadań i radzenia sobie z nieprzewidzianymi okolicznościami. Dla przykładu program do prowadzenia eksperymentów PsychoPy generuje dane w dość pogmatwanych arkuszach kalkulacyjnych, które trzeba dość mocno wyczyścić przed analizą. Problem jest jednak taki, że wyniki każdej osoby badanej zapisują się w osobnych plikach. Jeśli przebadaliśmy 150 osób, mamy 150 plików do wyczyszczenia. Jeśli piszemy analizę w R, to wystarczy wyczyścić jeden plik, a potem dopisać linijkę czy dwie, żeby R tak samo wyczyścił pozostałe 149 plików. Bardzo cenię sobie też możliwość łatwego wygenerowania nazw dla kolumn typu MMPI_001, MMPI_002, …, MMPI_567. Wpisywanie tego ręcznie to nuda i marnowanie mnóstwa czasu, a w R to jedna linijka kodu.</p></li>
+<li><p>Analizy są modyfikowalne i wielorazowego użytku. Co mam na myśli? Załóżmy, że zrobiliśmy całą analizę i nagle się orientujemy, że nie usunęliśmy z bazy kilku wierszy, które przez przypadek wytworzyliśmy, jak bawiliśmy się kwestionariuszem, zanim go upubliczniliśmy. Albo prowadzący przy sprawdzaniu prosi, żeby zmodyfikować nieco analizę, bo chce wyniki kwestionariuszy wyrażone jako średnia, a nie suma. Jeśli korzystamy ze zwykłego oprogramowania, w obu przypadkach musimy wyklikiwać analizy od początku. Jeśli nasza analiza jest w R, to mamy ją całą zapisaną przed oczami. Możemy zmienić coś na samym jej początku, kliknąć jeden guzik i gotowe. Jeszcze lepiej – ta analiza siedzi na naszym komputerze, póki jej nie usuniemy, więc jeśli kiedyś trzeba by było wykonać podobne zadanie, to wystarczy prosta operacja kopiuj-wklej.</p></li>
+<li><p>R to kompletny zestaw narzędzi dla analityków danych, jak głosi tytuł polecanej na wstępie książki. Nie są to słowa rzucone na wiatr. Korzystając np. z jamovi, zazwyczaj wcześniej czyścimy dane w Excelu. Jeśli potrzebujemy dane zmodyfikować, np. połączyć dwie bazy albo zmienić format szeroki na długi<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, to również w Excelu. A to się ciężko robi w Excelu, bo albo robimy to ręcznie, albo musimy nauczyć się Power Query. Potem robimy analizę, ładne wykresy (często wracamy się do Excela w tym celu) i piszemy raport w Wordzie. W R da się zrobić to wszystko. Niezwykle potężne i giętkie czyszczenie danych (za które uwielbiam R) z <code>tidyverse</code>, testy statystyczne, ładne wykresy w <code>ggplot2</code>, a na końcu nawet raport w Quarto (dawniej RMarkdown). Możemy nie wychodzić z R i często tak będziemy robić.</p></li>
+</ol>
+<!-- -->
+<ol start="6" type="1">
+<li>Wykresy. Wspominałem o tym wyżej, ale wykresy są warte osobnego punktu. Możliwości Excela są ograniczone. Dla przykładu wykres poniżej prezentuje wyniki badania nt. tego, jak wygląda homofobia u mężczyzn, którym się powie, że są niemęscy. W badaniu mierzyliśmy dodatkowo zmienną psychologiczną o nazwie normatywna męskość, czyli niejako stopień przywiązania do reguł, co <em>prawdziwy mężczyzna</em> powinien, a czego nie powinien. Wykres jest dość skomplikowany. Zawiera trzy zmienne dychotomiczne, co daje łącznie 8 kolumn w grupach po 4 i 2. Nie powiem, że zrobić taki wykres jest łatwo, bo dobre opanowanie <code>ggplot2</code> trochę zajmuje, ale gdy już opanujemy, co jest do opanowania, to hulaj dusza. Nawet najbardziej skomplikowane wykresy stają się możliwe. Gdy połączyć to z możliwościami dawanymi przez programistyczną warstwę R, nagle łatwe staje się wytworzenie serii pasujących do siebie stylem wykresów o tych samych wymiarach. Pozwala to uzyskać pełną spójność bez ręcznego poprawiania szczególików.</li>
+</ol>
+<div id="fig-homofobia" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><embed src="./ilustracje/homofobia.pdf" class="img-fluid"></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;1: Homofobia u mężczyzn o zagrożonej i niezagrożonej męskości, w zależności od tego, jak wysoką mieli tzw. normatywną męskość. Gdy dodać to tego jeszcze podział na dwa rodzaje homofobii, robią się z tego trzy podziały i osiem różnych kolumn ze wspólnymi osiami, legendą i kolorami. Zrobienie tego w Excelu, o ile w ogóle możliwe, byłoby bardzo trudne.</figcaption><p></p>
+</figure>
+</div>
+<ol start="6" type="1">
+<li><p>Analizy można napisać niezależnie od procesu zbierania danych. Na III roku studiów miałem projekt studencki, w którym musieliśmy zrobić prosty eksperyment w PsychoPy, przeanalizować dane i zaprezentować wyniki. Termin był krótki, także ostatnie dane większość grup zdążyła zebrać dopiero na dzień przed terminem, w tym moja. Oznaczało to, że osoby robiące analizę statystyczną musiały siedzieć do późna, żeby wyrobić się z prezentacją. Ale że już wtedy umiałem co nieco R, to napisałem całą analizę kilka dni wcześniej, kiedy akurat miałem wolny wieczór. Kiedy zebraliśmy ostatnie dane, wystarczyło kliknąć „Run” i gotowe – wykresy, testy, w mgnieniu oka policzone dla całego zestawu danych (wyczyszczonych! jak wspominałem wyżej, w PsychoPy czyszczenie danych bywa żmudne).</p></li>
+<li><p>R jest zgodny z filozofią Open Science. O ruchu Open Science można mówić bardzo długo, ale ogólnie jest to ruch dążący do otwartego dostępu do raportów naukowych (za darmo), surowych danych i dokładnych opisów analiz statystycznych. Jeśli naukowiec załącza do swojego artykułu surową bazę danych i skrypt w R, inni naukowcy mogą sprawdzić, czy tamten nie manipulował danymi, nie stosował podejrzanych praktyk oraz czy po ludzku się gdzieś nie pomylił. Poza tym każdy może powtórzyć jego analizę i sprawdzić, czy rzeczywiście wychodzi, jak naukowiec zaraportował.</p></li>
+<li><p>R jest świetnym&nbsp;środowiskiem do współpracy. Wiele osób może pracować nad jedną analizą statystyczą podobnie jak teraz pracujemy nad prezentacjami czy plikami w Wordzie – online. Współpracownicy mogą czytać swój kod, uzupełniać się nawzajem, wprowadzać poprawki i dzielić się pracą nawet w obrębie pojedynczych czynności do wykonania. W programach, w których analizy wyklikujemy, jest to znacznie trudniejsze. Gdy zaś mamy kod przed oczami, widzimy wyraźnie, co współpracownik robi i jak mu pomóc.</p></li>
+<li><p>R wymaga, by wiedzieć, co się robi. Niektórzy mogą to potraktować jako wadę, ale ja sądzę, że to wielka zaleta. Jeśli chcę nauczyć się statystyki, żeby sprawnie zrobić analizy do swojej pracy magisterskiej i rozumieć analizy z artykułów naukowych, to muszę wiedzieć, co robię. Z R ciężko jest nauczyć się, w co klikać, a potem po prostu robić to za każdym razem tak samo. Jest to swego rodzaju wyzwanie, ale cenne.</p></li>
+</ol>
+</section>
+<section id="przygotowanie" class="level2">
+<h2 class="anchored" data-anchor-id="przygotowanie">Przygotowanie</h2>
+<p>Żeby zacząć pracować z R, trzeba R pobrać i zainstalować<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Pobrać R możemy ze strony <a href="https://www.r-project.org">r-project.org</a>. W menu po lewej znajduje się nagłówek <em>Downlowad</em>, a pod nim odnośnik <em>CRAN</em> (<em>Comprehensive R Archive Network</em>, można to nazwać głównym serwerem R). Podchwytliwe jest to, że po wejściu w odnośnik do CRAN pojawi nam się dziwnie wyglądająca lista linków. To strona internetowa pyta nas, z jakiego serwera chcemy pobrać R. Najsensowniej jest wybrać <em>0-Cloud</em>, czyli coś, co przekieruje nas do optymalnego serwera. Reszta jest już dość intuicyjna – pobieramy R dla naszego systemu i instalujemy jak każdy inny program.</p>
+<p>Druga sprawa to IDE, czyli coś, w czym będziemy pisać nasze skrypty. Ale jak to? R nie wystarczy? Technicznie wystarczy, ale R to program działający z wiersza poleceń. To jest to czarne okienko, gdzie wpisujemy polecenia ręcznie. Większość z nas będzie chciała skorzystać z czegoś bardziej przystępnego niż goły wiesz poleceń. Standardem jest tu program o nazwie RStudio<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Możemy go pobrać ze strony <a href="https://posit.co">posit.co</a> w wersji Desktop. Z tym raczej nie będzie już problemu.</p>
+<p>Gdy zainstalujemy i uruchomimy RStudio, naszym oczom ukaże się biały ekran, który narazie nie ma sensu, ale go nabierze. Przed rozpoczęciem pracy warto jest zajrzeć w ustawienia (Tools → Global options…), gdzie możemy zmienić kilka rzeczy. W zakładce Appearence możemy ustawić sobie ciemny tryb<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> i poczuć się jak programista. W zakładce Spelling możemy wybrać polski słownik do sprawdzania pisowni. Na ten moment tyle zmian powinno wystarczyć.</p>
+</section>
+<section id="konsola-zmienne-i-matematyka" class="level2">
+<h2 class="anchored" data-anchor-id="konsola-zmienne-i-matematyka">Konsola, zmienne i matematyka</h2>
+<p>Ekran RStudio składa się z trzech okienek. Duże okienko po lewej i dwa mniejsze po prawej. Skierujmy naszą uwagę na okienko po lewej, czyli konsolę. Wita nas ona ciepłą informacją, że R jest zainstalowany i znakiem zachęty <code>&gt;</code> zachęca nas do wydawania jej poleceń. Konsola R to miejsce, w którym możemy mówić R, żeby coś dla nas liczył. Można to potraktować jako super kalkulator. Spróbuj – wpisz w konsolę <code>2+3*5</code>, zatwierdź enterem i zwróć uwagę, że R stosuje poprawną kolejność wykonywania działań. Spacje nie mają znaczenia, także możemy wpisać również bardziej estetyczną wersję <code>2 + 3 * 5</code>. Nie wiem po co, ale można.</p>
+<p>Wynik takiego działania nigdzie się nie zapisuje, tylko wyświetla się w konsoli. Jeśli chcemy zapisać nasz wynik, możemy to zrobić stosując znaczek <code>&lt;-</code><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. Przydatnym skrótem jest tu w RStudio jest alt+-, który od razu wstawia nam tę strzałeczę. Wyjaśnijmy to na przykładzie.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>wynik <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> <span class="dv">5</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> wynik <span class="sc">*</span> <span class="dv">3</span><span class="sc">^</span><span class="dv">3</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Powyżej zapisałem dwa polecenia, które do konsoli powinniśmy wpisać jedno po drugim i każde z nich zatwierdzić enterem. Pierwsze polecenie mówi coś takiego – policz <code>2 + 3 * 5</code> i zapisz to w zmiennej <code>wynik</code>. Po zatwierdzeniu tego polecenia możemy zauważyć, że wynik działania nam się nie wyświetlił, za to w prawym górnym okienku pojawiło się słowo <code>wynik</code> i obok wartość <code>17</code>. Od tego momentu możemy używać słowa <code>wynik</code> zamiast 17. Spróbuj wpisać w konsolę samo słowo <code>wynik</code> i zatwierdzić enterem. Konsola informuje nas, że w zmiennej <code>wynik</code> kryje się liczba 17. Jeśli teraz wpiszesz np. <code>wynik * 2</code>, to konsola zwróci to samo, co zwróciłaby po wpisaniu <code>17 * 2</code>. Co więc robi drugie polecenie? Możemy je odczytać jako „W zmiennej o nazwie <code>a</code> zapisz wynik mnożenia <code>wynik</code> i 3 do potęgi 3”. Operator <code>^</code> to właśnie potęgowanie. Jeśli wpiszemy w konsolę <code>a</code>, naszym oczom ukaże się wynik 459.</p>
+<p>Jak się potem okaże, w zmiennych możemy zapisywać dużo więcej, niż tylko wyniki prostych działań matematycznych. W identyczny sposób do odpowiednich zmiennych trafią wyniki testów statystycznych albo całe bazy danych. Ale o tym dalej.</p>
+</section>
+<section id="funkcje" class="level2">
+<h2 class="anchored" data-anchor-id="funkcje">Funkcje</h2>
+<p>Tym, co robi robotę w R (jak i w każdym innym języku programowania) są funkcje. Funkcja to taka maszynka, do której coś wrzucamy, ona nam to przekształca i wywala coś innego. Tak jak w matematyce. Podobnie jak w matematyce, funkcje zapisujemy konwencją <code>f(x)</code>, czyli <code>nazwa(co_wrzucam_do_funkcji)</code>. Dla przykładu funkcja <code>seq</code> pozwala nam wytwarzać sekwencje liczb. Musimy do tej funkcji wrzucić od jakiej liczby chcemy zacząć, na jakiej chcemy skończyć i jaki chcemy mieć krok. Dla przykładu:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">62</span>, <span class="dv">3</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  5  8 11 14 17 20 23 26 29 32 35 38 41 44 47 50 53 56 59 62</code></pre>
+</div>
+</div>
+<p>To, co wrzucamy do funkcji, nazywamy argumentami. Funkcja <code>seq</code> wie, że ma zacząć od 5 i skończyć na 62, a nie zacząć od 62 i skończyć na 5, bo ma pod maską zapisane, w jakiej kolejności będzie dostawać te liczby. Takie argumenty nazywamy pozycyjnymi – funkcja wie, co to jest, na podstawie pozycji. W R każdy argument możemy też nazwać. Dla przykładu wiemy, że funkcja <code>seq</code> oczekuje argumentów <code>from</code>, <code>to</code> i <code>by</code>. Możemy więc wprost powiedzieć funkcji, że oto dajemy jej <code>from</code>, <code>to</code> i <code>by</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">5</span>, <span class="at">to =</span> <span class="dv">62</span>, <span class="at">by =</span> <span class="dv">3</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  5  8 11 14 17 20 23 26 29 32 35 38 41 44 47 50 53 56 59 62</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">to =</span> <span class="dv">62</span>, <span class="at">by =</span> <span class="dv">3</span>, <span class="at">from =</span> <span class="dv">5</span>) <span class="co"># jeśli nazywamy arguenty, kolejność nie ma znaczenia</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  5  8 11 14 17 20 23 26 29 32 35 38 41 44 47 50 53 56 59 62</code></pre>
+</div>
+</div>
+<p>Tego typu argenty nazywamy kluczowymi (<em>keyword</em>). W praktyce wykorzystuje się mieszankę jednego i drugiego typu argumentów. Nazywanie argumentów zwiększa czytelność kodu, ale czasem pozycja jest wystarczająco jasna. Dla przykładu mogę napisać <code>sqrt(x = 9)</code>, żeby wyciągnąć pierwiastek kwadratowy (<em>square root</em>) z 9, ale czy zapis <code>sqrt(9)</code> jest jakkolwiek mniej jasny?</p>
+<p>Czasami też używamy argumentów kluczowych, żeby przestawić jakieś ustawienia domyślne albo odblokować nowe możliwości. Dla przykładu funkcja <code>seq</code> dysponuje dodatkowym argumentem <code>length.out</code>. Jeśli ustawimy <code>length.out</code>, możemy ustalić długość naszego wyniku zamiast punktu końcowego albo kroku.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">5</span>, <span class="at">by =</span> <span class="dv">3</span>, <span class="at">length.out =</span> <span class="dv">10</span>) <span class="co"># daj mi 10 kolejnych liczb zaczynając od 5 i co 3</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  5  8 11 14 17 20 23 26 29 32</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">100</span>, <span class="at">length.out =</span> <span class="dv">10</span>) <span class="co"># podaj 10 liczb między 1 a 100</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]   1  12  23  34  45  56  67  78  89 100</code></pre>
+</div>
+</div>
+<section id="dokumentacja" class="level3">
+<h3 class="anchored" data-anchor-id="dokumentacja">Dokumentacja</h3>
+<p>Różne funkcje przyjmują różne argumenty. Podobnie jak nie powiemy piekarzowi, żeby stosował białą fugę do chleba, tak samo nie wrzucimy do funkcji <code>seq</code> słów zamiast liczb. Tak jak musimy wiedzieć, że piekarz zajmuje się pieczywem, tak samo musimy znać funkcje, których używamy. W poprzednim podrozdziale wiedzieliśmy, co można wrzucić do funkcji <code>seq</code> i jak nazywają się jej arguemnty, bo to napisałem. Tak samo podałem ot tak, że argument funckji <code>sqrt</code> nazywa się <code>x</code>. Skąd mam to jednak wiedzieć?</p>
+<p>Nie bez powodu mówimy o <em>językach programowania</em> – wiele funkcji nauczymy się na pamięć i będziemy po prostu wiedzieć, jak z nich korzystać. Jednak znacznie częściej, w wielu przypadkach też dla funkcji, które znamy, będziemy korzystać z dokumentacji. R dysponuje świetną dokumentacją dla każdej funkcji<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. Zawiera ona opis, co dana funkcja robi, jakie arguemnty przyjmuje, a często nawet tło toretyczne jej działania. Żeby dostać się do dokumentacji danej funkcji, wywołujemy ją <strong>w konsoli</strong> ze znakiem zapytania, np. <code>?seq</code>. Powoduje to, że w okienku <em>Help</em> po prawej wyświetla nam się pełna dokumentacja tej funkcji. Nie trzeba więc sięgać do Google, żeby uzyskać odpowiedź na podstawowe problemy. O ile wiemy, jakiej funkcji chcemy użyć. Zachęcam do częstego sięgania do dokumentacji. To absolutnie podstawowe narzędzie w programowaniu czegokolwiek.</p>
+<p>Świetnym źródłem informacji o funkcjach, pozwalającym również znaleźć odpowiednią funkcję do naszego celu, są ściągi (<em>cheat sheets</em>). Pakiety <code>tidyverse</code> mają nawet swoje oficjalne ściągi, które na początku swojej nauki R wydrukowałem i zalaminowałem. Polecam je gorąco, zwłaszcza do pakietów <code>dplyr</code>, <code>ggplot2</code> i <code>stringr</code>. Można je znaleźć bezpośrednio w RStudio wybierając Help → Cheat sheets → Browse all cheat scheets albo na stronie Posit, czyli firmy, która wypuszcza RStudio.</p>
+</section>
+</section>
+<section id="skrypty" class="level2">
+<h2 class="anchored" data-anchor-id="skrypty">Skrypty</h2>
+<p>Wpisaliśmy w konsolę już sporo rzeczy i historię naszych komend możemy zobaczyć przechodząc do odpowiedniej zakładki w prawym górnym okienku. Jednak wyjście z programu może nam skutecznie skasować tę historię. Jeśli mamy całą sporą analizę statystyczną, która składa się z 200 linijek kodu, to chcielibyśmy mieć jakiś sposób na zapisanie tego na przyszłość, żeby nie musieć za każdym razem wklepywać tego kodu z pamięci. Zaopatrujemy się więc w gruby zeszyt w linie i wszystkie komendy piszemy również tam. Żarcik. Do przechowywania kodu służą specjalne pliki zwane skryptami. Tak jak mamy pliki .pdf, .txt, .docx, tak w plikach .R zapisujemy kod R.</p>
+<p>Najprościej wytworzyć nowy skrypt klikając w biały kwadracik z plusem w lewym górnym rogu RStudio. Spowoduje to otworzenie listy rzeczy, które możemy wytworzyć. Nas w tej chwili interesuje <code>R Script</code>. Gdy utworzymy nasz skrypt, otworzy się on nad konsolą. Warto od razu zapisać go na dysku skrótem Ctrl+S (lub File → Save). Warto się upewnić, że zapisywany plik rzeczywiście kończy się rozszerzeiem .R.</p>
+<p>Narazie nasz skrypt jest pusty, ale możemy w nim pisać dowolne polecenia tak samo, jak napisalibyśmy w konsoli. Różnica jest taka, że nie są one od razu wykonywane. Skrypt to tekst. Jeśli chcemy wykonać jakieś polecenie ze skryptu, to albo kopiujemy je do konsoli, albo umieszczamy na nim kursor i klikamy ctrl+enter. Możemy też myszką zaznaczyć większy fragment kodu i kliknąć Ctrl+Enter, żeby go wykonać. Jeśli chcielibyśmy wykonać cały nasz skrypt, to zaznaczamy cały kod (Ctrl+A) i ponownie używamy Ctrl+Enter. Ewentualnie możemy skorzystać ze skrótu Ctrl+Shift+S<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>.</p>
+<section id="komentarze" class="level3">
+<h3 class="anchored" data-anchor-id="komentarze">Komentarze</h3>
+<p>Jeśli chcielibyśmy zrobić w skrypcie jakąś notatkę dla siebie, która nie jest kodem używamy znaczka <code>#</code>. Jest to tzw. komentarz. Możemy na przykład napisać:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello world!"</span>) <span class="co"># czuję się programistą</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Jeśli wykonamy taką linijkę, konsola zignoruje wszystko po znaku <code>#</code>. Pozwala to nam zostawiać sobie notatki w rodzaju <code># hipoteza 1</code> albo <code># nie wiem, czemu to działa, ale działa</code>. Komentowanie kodu może nam (i naszym współpracownikom) ułatwić zrozumienie, o co nam chodziło, gdy to pisaliśmy. Jeśli chcemy zapoatrzyć nasz kod w nagłówki, konwencja mówi, żeby formatować je tak:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Przygotowanie ----</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Ładowanie danych ----</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># kod ładujący dane</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Ładowanie bibliotek ----</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># kod ładujący biblioteki</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Każdy znaczek <code>#</code> to niższy poziom nagłówka, czyli wytworzyłem sekcję <code>Przygotowanie</code>, a w niej dwie podsekcje <code>Ładowanie danych</code> i <code>Ładowanie bibliotek</code>. Takich poziomów nagłówków możemy mieć ile chcemy. Nagłówek tym się różni od zwykłego komentarza, że po nim występują cztery myślniki <code>----</code> lub inne znaki. Tak sformatowane nagłówki wyświetlają się w bocznym panelu RStudio i pozwalają się lepiej ogarnąć w długim kodzie. Panel <em>outline</em> możemy rozwinąć skrótem Ctrl+Shift+O albo klikając skrajną prawą ikonkę nad edytorem skrytpu (poziome kreski na prawo od guzika <code>Source</code>).</p>
+</section>
+</section>
+<section id="projekty" class="level2">
+<h2 class="anchored" data-anchor-id="projekty">Projekty</h2>
+<p>Zazwyczaj projekt badawczy składa się z wielu plików. Nie jest to tylko kod R, ale też chociażby pliki z danymi i inne. Zazwyczaj trzymamy to wszystko w jednym folderze, o ile utrzymujemy jakikolwiek porządek w plikach. Możemy też mieć całe studia luzem na pulpicie, nie oceniam. RStudio pomaga nam w zarządzaniu takimi grupami plików poprzez projekty. Projekty w RStudio robią kilka rzeczy, m.in. pozwazają ustawić niestandardowe opcje (np. zmienić język słownika na angielski tylko dla tego jednego projektu), zapamiętać otwarte okna i ich układ, ale przede wszystkim pomagają nam lokalizować pliki znajdujące się w tym samym folderze<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>. Zawsze, kiedy planujemy zachować jakiś zbiór powiązanych plików na dłużej, warto jest wytworzyć projekt.</p>
+<p>Projekty tworzymy i otwieramy przez guzik w prawym górnym rogu. Rozwijane menu pozwana nam wytworzyć nowy projekt, a wyskakujące okienko pyta, czy wytworzyć go w już istniejącym folderze, stworzyć nowy folder, czy może pobrać repozytorium Git. Jeśli wybraliśmy nowy folder, mamy kilka typów projektów do wyboru, ale w większości przypadków wybieramy po prostu <code>New Project</code>. Okienko pozwala nam nadać projektowi nazwę, wybrać jego lokalizację, a także wytworzyć puste repozytorium Git<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>. RStudio wytorzy nam w ten sposób plik .Rproj organizujący nasz projekt.</p>
+</section>
+<section id="pakiety" class="level2">
+<h2 class="anchored" data-anchor-id="pakiety">Pakiety</h2>
+<p>Pakiety to pewnie dodatki do R, które rozszerzają jego możliwości. Dla przykładu – R w swojej podstawowej wersji nie ma funkcji liczącej skośność. Nie jest to jednak żaden problem, bo możemy R rozszerzyć np. o pakiet o nazwie <code>e1071</code> albo <code>moments</code>. Oba te pakiety dodają nam do R możliwość szybkiego i prostego policzenia skośności. Pakiety – w olbrzymiej większości – są darmowe.</p>
+<p>Absolutnie podstawowym pakietem, czy właściwie zbiorem pakietów, jest <code>tidyverse</code>. <code>Tidyverse</code> usprawnia R właściwie we wszystkim, co w podstawowej wersji jest niewygodne – <code>readr</code> (<em>czyt.</em> rider) pozwala łatwo ładować dane, <code>dplyr</code> (<em>czyt.</em> diplajer) niesamowicie usprawnia czyszczenie danych, <code>lubridate</code> i <code>stringr</code> (<em>czyt.</em> stringer) to podstawowe narzędzie do pracy z datami i z tekstem<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a>, nie mówiąc już o <code>ggplot2</code>, czyli najpotężniejszym narzędziu do tworzenia wykresów. Na szczęście nie musimy wszystkich tych pakietów przywoływać z osobna, bo możemy załadować je wszystkie naraz, ładując jeden zbiorczy pakiet <code>tidyverse</code>. Współcześnie <code>tidyverse</code> to podstawowy sposób programowania w R. Pakiety ładujemy za pomocą funkcji <code>library</code>, do której wrzucamy nazwę pakietu w cudzysłowie. Nasz skrypt zaczniemy więc od takiej instrukcji:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Jeśli robimy to po raz pierwszy, to po wykonaniu skryptu konsola wyrzuci nam błąd <code>Błąd w poleceniu 'library("tidyverse")':nie ma pakietu o nazwie ‘tidyverse’</code>. Wynika to z faktu, że instrukcja <code>library</code> tylko ładuje pakiet, ale przed załadowaniem trzeba go pobrać i zainstalować. Na szczęście robimy to tylko raz, zawsze później wystarczy samo <code>library</code>. Dlatego też nie będziemy wpisywać komendy instalującej pakiet do skryptu, tylko bezpośrednio do konsoli. Nie chcemy w końcu, żeby pakiet <code>tidyverse</code> instalował się za każdym razem, kiedy będziemy uruchamiać skrypt. Będzie to niemiłosiernie spowalniało skrypt i wymuszało dostęp do Internetu. Dlatego też do konsoli wpisujemy:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Innym sposobem instalowania pakietów jest skierowanie się w prawe dolne okienko w RStudio, przejście do zakładki Packages, kliknięcie guzika Install, wpisanie nazwy pakietu w wyskakującym okienku (już bez cudzysłowu) i zatwierdzenie guzikiem Install.</p>
+<p>Gdy zainstalujemy już pakiet <code>tidyverse</code> – dowolną z metod – ponownie próbujemy go załadować, tym razem, mam nadzieję, już bez błędu. Konsola poinformuje nas wtedy co dokładnie załadowała.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+✔ ggplot2 3.4.1     ✔ purrr   1.0.1
+✔ tibble  3.1.8     ✔ dplyr   1.1.0
+✔ tidyr   1.3.0     ✔ stringr 1.5.0
+✔ readr   2.1.4     ✔ forcats 1.0.0
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+</div>
+</section>
+<section id="ładowanie-danych" class="level2">
+<h2 class="anchored" data-anchor-id="ładowanie-danych">Ładowanie danych</h2>
+<p>Jeśli chcemy cokolwiek liczyć, musimy mieć na czym liczyć. R ma wiele sposobów ładowania danych, które w każdym podręczniku zajmują cały rozdział. R poradzi sobie z prawie każdym formatem danych, a także potrafi ładować je bezpośrednio z serwera (dla przykładu pakiet <code>googlesheets4</code> pozwala ładować pliki z Google Sheets bez pobierania ich na dysk albo <code>QualtRics</code> ułatwiający importowanie plików z danymi ankietowymi z Qualtrics).</p>
+<p>Podstawowe pakiety do ładowania danych do <code>readr</code> i <code>readxl</code> dla plików Excela. Na początek nie trzeba znać struktury funkcji ładujących dane, bo RStudio dysponuje przyjemnym graficznym narzędziem do tego celu. Jeśli w prawym dolnym oknie, w zakładce Files, klikniemy na plik zawierający dane, dostaniemy do dyspozycji opcję Import Dataset… Po jej wybraniu otworzy nam się okno z podglądem danych i kilkoma opcjami do dostosowania, m.in. czy jakichś wierszy nie pominąć albo z którego arkusza pobrać dane. W plikach .csv czasem musimy też wybrać rodzaj separatora i znaku dziesiętnego (opcja Locale). W polskich plikach z danymi separatorem jest zazwyczaj średnik, a znakiem dziesiętnym przecinek, podczas gdy w angielskich danych będą to odpowiednio przecinek i kropka. Jeśli nie ustawimy znaku dziesiętnego, R może potraktować liczby z przecinkiem jako tekst. Poza tym możemy kliknąć w każdy nagłówek kolumny i wybrać typ danych. Dane powinny być czyste, tj. kolumny liczbowe powinny zawierać same liczby. Jeśli dane nie są czyste (a zazwyczaj nie są), możemy je wyczyścić potem.</p>
+<p>Możemy kliknąć Import, by dopełnić dzieła, ale jeśli tworzymy skrypt, będzie nas interesowała komenda, jaką RStudio dla nas przygotowało w czarnym okienku w prawym dolnym rogu. W pierwszej linijce RStudio proponuje załadowanie odpowiedniego pakietu. Warto to wpisać na początku skryptu, w miejscu, gdzie załadowaliśmy <code>tidyverse</code>. Jeśli proponowanym pakietem jest <code>readr</code>, nie musimy ładować go oddzielnie, bo ładując pakiet <code>tidyverse</code> załadowaliśmy od razu <code>readr</code>. Druga linijka do właściwe ładowanie danych. Widzimy znaną nam już składnię <code>nazwa &lt;-</code>. Nasze dane potrzebują jakiejś nazwy, za pomocą której będziemy się do niej odnosić. Może być to <code>df</code>, <code>dane</code>, <code>warunek_kontrolny</code> czy cokolwiek innego. Za strzałką mamy funkcję odczytującą dane. Najpewniej będzie to <code>read_csv()</code> albo <code>read_excel()</code>. Do tych funkcji wrzucamy jako pierwszy argument lokalizację naszego pliku z danymi w cudzysłowie (‘pojedynczym’ lub “podwójnym”). Ponieważ nam komendę przygotowało RStudio, możemy ją po prostu skopiować i wleić do naszego skryptu, zmieniając tylko nazwę zmeinnej. Co robią poszczególne argumenty, możemy sprawdzić w dokumentacji. Jeśli dane ładuje <code>readr</code>, wykonanie takiej komendy spowoduje ukazanie się informacji zwrotnej – jakie kolumny załadowano i jaki mają typ. Dla przykładu:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dane/podstawy-R/complex_database.csv"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 54 Columns: 18
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (17): Godzina rozpoczęcia, Godzina ukończenia, Adres e-mail, Płeć, Wiek ...
+dbl  (1): ID
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>Już widzę, że nic mi się nie zgadza, z 18 kolumn 17 zostało rozpoznane jako kolumny tekstowe (<code>chr</code>), a tylko kolumna ID jako liczby (<code>dbl</code>). Za chwilę będziemy to czyścić. Żeby wyświetlić nasze dane, mogę wpisać w konsolę nazwę, pod którą je zapisałem. Nasza baza pojawiła się też w okienku w prawym górnym rogu. Kliknięcie na nią tam spowoduje wyświetlenie jej w oddzielnej karcie. Warto zauważyć, że nie możemy jej tam edytować.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 54 × 18
+      ID Godzina…¹ Godzi…² Adres…³ Płeć  Wiek …⁴ Wyksz…⁵ Wyraż…⁶ Takie…⁷ Takie…⁸
+   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+ 1     1 1.19.22 … 1.19.2… anonym… Mężc… 21      Średnie Tak     5 – zg… 5 – zg…
+ 2     2 1.24.22 … 1.24.2… anonym… Mężc… 52      Wyższe  Tak     5 – zg… 5 – zg…
+ 3     3 1.25.22 … 1.25.2… anonym… Mężc… 64      Wyższe  Tak     4 – ra… 5 – zg…
+ 4     5 3.2.22 1… 3.2.22… anonym… Kobi… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 5     6 3.2.22 1… 3.2.22… anonym… Mężc… 25      Średnie Tak     6 – zd… 6 – zd…
+ 6     7 3.2.22 1… 3.2.22… anonym… Mężc… 22      Zawodo… Tak     5 – zg… 5 – zg…
+ 7     8 3.2.22 1… 3.2.22… anonym… Kobi… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 8     9 3.2.22 1… 3.2.22… anonym… Mężc… 18      Podsta… Tak     4 – ra… 5 – zg…
+ 9    10 3.2.22 1… 3.2.22… anonym… Mężc… 18      Podsta… Tak     5 – zg… 6 – zd…
+10    11 3.2.22 1… 3.2.22… anonym… Kobi… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+# … with 44 more rows, 8 more variables:
+#   `Takie widoki w przestrzeni publicznej są normalne [3/10]` &lt;chr&gt;,
+#   `Takie widoki w przestrzeni publicznej są normalne [4/10]` &lt;chr&gt;,
+#   `Takie widoki w przestrzeni publicznej są normalne [5/10]` &lt;chr&gt;,
+#   `Takie widoki w przestrzeni publicznej są normalne [6/10]` &lt;chr&gt;,
+#   `Takie widoki w przestrzeni publicznej są normalne [7/10]` &lt;chr&gt;,
+#   `Takie widoki w przestrzeni publicznej są normalne [8/10]` &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="data-wrangling" class="level2">
+<h2 class="anchored" data-anchor-id="data-wrangling">Data wrangling</h2>
+<p>Tutaj zaczyna się zabawa. <em>Data wrangling</em> to zbiorcze określenie na wszystkie te zdarzenia, kiedy musimy zmienić formę naszych danych, na przykład wziąć tylko niektóre kolumny, odfiltrować jakieś przypadki (np. wybrać tylko osoby z grupy kontrolnej), całkiem zmienić formę danych (np. z szerokiej na długą), dodać nowe zmienne czy przypadki (np. zsumować wyniki kwestionariusza), zmodyfikować kolumny (np. odwrócić punktację w jakiejś pozycji kwestionariusza) itp. itd. Tak naprawdę to, a nie samo wykonywanie testów statystycznych, zajmuje najwięcej czasu i powoduje najwięcej problemów. Jak więc się za to zabrać?</p>
+<p>Zarówno tutaj, jak i później, nie będę wchodził w to, <em>dlaczego</em> to działa jak działa. Większość poradników R opisuje, jak wykonać pewne operacje w podstawowym R, a następnie jak to robi się współcześnie, czyli wykorzystując pakiet <code>tidyverse</code>. O ile znajomość podstawowego R jest niezbędna do wykonywania bardziej skomplikowanych operacji i przydaje się, gdy coś nie działa i trzeba to jakoś naprawić, to tutaj jednak skupię się na podstawach, a współcześnie podstawy to <code>tidyverse</code>.</p>
+<section id="wybieranie-kolumn-i-wierszy" class="level3">
+<h3 class="anchored" data-anchor-id="wybieranie-kolumn-i-wierszy">Wybieranie kolumn i wierszy</h3>
+<p>Bardzo często będziemy potrzebowali tylko określonych kolumn albo tylko określonych przypadków. Przeglądając nasze dane zauważamy, że składają się w dużej części z niepotrzebnych kolumn, jakie wygenerował dla nas program do ankiet. Kolumny takie jak godziny wypełniania są nam niepotrzebne do analizy. Nasze dane to fragment bazy danych z badania, w którym mówiliśmy mężczyznom, że są mało męscy i patrzyliśmy, jak to wplynie na nich homofobię. Badaliśmy więc wyłącznie mężczyzn, a mimo to ankietę próbowało też wypełnić kilka kobiet i osób o innej płci. Ponieważ ankieta nie dopuściła ich nawet do metryczki, widzimy w ich przypadkach wartości <code>NA</code>, co w R oznacza „brak danych”.</p>
+<section id="filtrowanie-wierszy" class="level4">
+<h4 class="anchored" data-anchor-id="filtrowanie-wierszy">Filtrowanie wierszy</h4>
+<p>Zacznijmy od tego, że w naszej bazie zostawimy tylko mężczyzn. Wszystkie komendy poniżej wpisuję w konsoli, dla testów. Jeśli wpisujemy komendy modyfikujące dane w konsolę, to nie zapisujemy zmian, tylko sprawdzamy, co się stanie, jak tak zrobimy. Dopiero na koniec podam, jak nasze zmiany rzeczywiście zapisać. Jak więc odfiltrować nie-mężczyzn? Robimy to za pomocą komendy <code>filter()</code><a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a>. <code>Tidyverse</code> opiera się o intuicyjnie brzmiące czasowniki takie jak <code>filter</code>, <code>select</code>, <code>group_by</code>, <code>summarise</code> itd. Komenda <code>filter</code> przyjmuje naszą bazę i jakieś warunki, np. płeć męska. W naszym wypadku będzie to wyglądać tak:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Dobra, co to jest <code>%&gt;%</code>? Nie było o tym mowy. Owszem, nie było, ale to bardzo wygodna rzecz. Nazywa się <em>pipe</em> (czasem tłumaczone jako <em>potok</em>). Mówi mniej więcej „wrzuć to do tego”. W naszym przykładzie <code>df %&gt;% filter()</code> oznacza „wrzuć bazę danych <code>df</code> do funkcji <code>filter</code>“, czyli dokładnie to samo, co <code>filter(df)</code>. Po co więc w ogóle bawić się w potoki? Bo pozwalają nam wygodnie łączyć komendy w ciągi, jak zobaczymy za chwilę. Do wstawiania potoków służy nam wygodny skrót klawiszowy Ctrl+Shift+M, który jest chyba najczęściej stosowanym skrótem przy pisaniu dowolnego programu. Druga kwestia to podział na linijki. Rozbiłem tę komendę na dwie linijki dla czytelności, ale spokojnie mógłbym zapisać to w jednej linijce. Warto jednak pisać kod tak, żeby dało się go potem łatwo czytać. RStudio podpowiada nam też wcięcia, żebyśmy widzieli, że te linijki tworzą jedną całość. Potem opiszę, jak wygodnie formatować kod.</p>
+<p>Ta komenda oznacza „weź zmienną <code>df</code>, wrzuć ją do komendy <code>filter</code> i zostaw tylko te przypadki, w których w kolumnie <code>Płeć</code> jest wartość <code>"Mężczyzna"</code>.” Nazwy kolumn piszemy bez cudzysłowia, ale jeśli wartość komórki to tekst, to zawsze piszemy go w cudzysłowie. Inaczej R pomyśli, że podajemy mu jakąś zmienną, z której ma dopiero odczytać, co ma być w kolumnie <code>Płeć</code>. Nam chodzi o dosłowny tekst <code>"Mężczyzna"</code>.</p>
+<p>Ostatecznie zostaje operator logiczny. Dlaczego piszę <code>==</code> zamiast <code>=</code>? W programowaniu znak <code>=</code> służy do przypisywania wartości do zmiennych. Zapis <code>a = 5</code> ocznacza „niech <code>a</code> ma wartość 5”. Sprawdzenie <em>czy</em> <code>a</code> ma wartość 5 odbywa się poprzez komendę <code>a == 5</code>. Konsola wyrzci nam wtedy <code>TRUE</code>, <code>FALSE</code> albo <code>BŁĄD: nie znaleziono obiektu 'a'</code>. Kilka innych operatorów logicznych prezentuje tabela.</p>
+<table class="table">
+<caption>Część operatorów logicznych dostępnych w R.</caption>
+<colgroup>
+<col style="width: 22%">
+<col style="width: 40%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Operator</strong></th>
+<th style="text-align: center;"><strong>Znaczenie</strong></th>
+<th style="text-align: right;"><strong>Przykład</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>==</td>
+<td style="text-align: center;">równa się</td>
+<td style="text-align: right;"><code>Płeć == "Mężczyzna"</code></td>
+</tr>
+<tr class="even">
+<td>!=</td>
+<td style="text-align: center;">nie równa się</td>
+<td style="text-align: right;"><code>Płeć != "Kobieta"</code></td>
+</tr>
+<tr class="odd">
+<td>&gt; (&gt;=)</td>
+<td style="text-align: center;">większe niż<br>(większe lub równe)</td>
+<td style="text-align: right;"><code>Wiek &gt; 40</code></td>
+</tr>
+<tr class="even">
+<td>&lt; (&lt;=)</td>
+<td style="text-align: center;">mniejsze niż<br>(mniejsze lub równe)</td>
+<td style="text-align: right;"><code>Wiek &lt; 40</code></td>
+</tr>
+<tr class="odd">
+<td>|</td>
+<td style="text-align: center;">lub</td>
+<td style="text-align: right;"><code>Wiek &lt; 18 \| Wiek &gt; 60</code></td>
+</tr>
+<tr class="even">
+<td>&amp;</td>
+<td style="text-align: center;">i</td>
+<td style="text-align: right;"><code>Płeć == "Mężczyzna" &amp; Wiek &gt; 40</code></td>
+</tr>
+<tr class="odd">
+<td>%in%</td>
+<td style="text-align: center;">zawiera się w zbiorze</td>
+<td style="text-align: right;"><code>Płeć %in% c("Kobieta", "Inna")</code></td>
+</tr>
+<tr class="even">
+<td>!</td>
+<td style="text-align: center;">zaprzeczenie</td>
+<td style="text-align: right;"><code>! Płeć %in% c("Kobieta", "Inna")</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="wybieranie-kolumn" class="level4">
+<h4 class="anchored" data-anchor-id="wybieranie-kolumn">Wybieranie kolumn</h4>
+<p>Odfiltrowaliśmy więc nie-mężczyzn. Kolejny problem to cała seria niepotrzebnych kolumn. Godziny, adres, zgoda etyczna (która była obowiązkowa i wszyscy się zgodzili) i płeć (już jednakowa dla wszystkich) są nam do niczego niepotrzebne. Do wybierania, jakie kolumny zostawić, służy funkcja <code>select()</code>. Wrzucamy do niej nazwy albo numery kolumn, które chcemy zostawić w bazie. Rozszerzmy więc naszą poprzednią instrukcję o dodatkową komendę za pomocą potoku.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Po pierwsze zauważmy, że wystarczyło dodać potok i kolejną komendę. Teraz cała nasza instrukcja oznacza „Weź <code>df</code>, odfiltruj mężczyn i potem wybierz kolumny <code>Id</code> <code>Wiek (ukończony w latach)</code>, <code>Wykształcenie</code> oraz kolumny od 9. do 18.”. Do tego więc służą potoki – pozwalają naraz wykonać całą serię modyfikacji tego samego obiektu. Wypada tu wyjaśnić dwie sprawy. Po pierwsze kolumna z wiekiem zawiera w nazwie spacje. Jeśli nazwa kolumny zawiera niestandardowe znaki, trzeba ją otoczyć znakami ` (<em>pol.</em> grawis, <em>ang.</em> <em>backtick</em>), który znajduje się na klawiaturze tuż pod Esc. Druga rzecz to <code>9:18</code>, co znaczy „liczby od 9 do 18” i jest wygodnym, skrótowym zapisem <code>seq(9, 18)</code>.</p>
+<p>Ewentualnie możemy chcieć powiedzieć, żeby zostawić wszystkie kolumny <em>poza</em> jakąś kolumną. Jeśli chcemy wykluczyć 2 kolumny z 200, to lepiej wskazać te 2 do wywalenia niż pozostałe 198 do zachowania. Możemy to zrobić dodając przed kolumną <code>-</code>. Możemy ustawić minus zarówno przed nazwą kolumny lub zakresem, ale warto zauważyć, że zakres pozycji trzeba wziąć w nawias. Inaczej R pomyśli, że chodzi nam np. o kolumny od -2 do 5. Gdzie nie jest to głupie, kolumna -2 oznacza „druga od końca”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>), <span class="sc">-</span><span class="st">`</span><span class="at">Wyrażam świadomą i dobrowolną zgodę na udział w badaniu.</span><span class="st">`</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="modyfikowanie-danych" class="level2">
+<h2 class="anchored" data-anchor-id="modyfikowanie-danych">Modyfikowanie danych</h2>
+<section id="zmiana-nazw-kolumn" class="level3">
+<h3 class="anchored" data-anchor-id="zmiana-nazw-kolumn">Zmiana nazw kolumn</h3>
+<p>Co zrobić, jeśli chcemy w naszej bazie coś pozmieniać? Zacznijmy może od zmiany nazw kolumn, żeby łatwiej nam się pisało dalsze komendy. Do tego służą komendy <code>rename</code> z pakietu <code>dplyr</code> i <code>set_names</code> z pakietu <code>purrr</code><a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a>. <code>rename</code> służy do zmiany nazw pojedynczych kolumn i przyjmuje argumenty w postaci <code>rename("nowa_nazwa" = "stara nazwa")</code>. Za jednym zamachem możemy zmienić ile nazw chcemy. Jeśli chcemy zmienić wszystkie nazwy, wygodniejsza jest funkcja <code>set_names</code> do której <strong>po kolei</strong> wrzucamy nowe nazwy, których potrzebujemy. Znowu – nazwy to dosłowne ciągi znaków, więc zawsze piszemy je w cudzysłowie.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Co znowu namieszałem? Czemu znowu coś utrudniam? Cóż, żeby ułatwić. o ile kolejne nazwy <code>"id"</code>, <code>"wiek"</code> i <code>"wyksztalcenie"</code> rozumieją się same przez się, to do czego służy tutaj funkcja <code>paste</code>? Jeśli zerkniemy w bazę danych, zawuażymy, że kolejne 10 kolumn to to samo pytanie „Takie widoki w przestrzeni publicznej są normalne”. Odpowiedź na to pytanie (znajdujące się pod obrazkiem neutralnym lub przedstawiającym parę jednopłciową) traktowaliśmy jako wskaźnik homofobii. Jest bardzo częste, że czyszcząc dane z badania mamy serię odpowiedzi z jednego kwestionariusza. Zazwyczaj wszystkie te pytania nazywamy według jednej konwencji np. wszystkie odpowiedzi z kwestionariusza TIPI nazywamy <code>TIPI_1</code>, <code>TIPI_2</code>, <code>TIPI_3</code> itd. Ale po co pisać te etykiety ręcznie, skoro możemy je wygenerować? Do tego służy funkcja <code>paste</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "H_1"  "H_2"  "H_3"  "H_4"  "H_5"  "H_6"  "H_7"  "H_8"  "H_9"  "H_10"</code></pre>
+</div>
+</div>
+<p>Jak widzimy, <code>paste</code> wygenerowało nam 10 kolejnych etykiet łącząc <code>"H"</code> i liczby od 1 do 10. Argument <code>sep = "_"</code> mówi, żeby między kolejnymi kawałkami wstawiać podkreślnik. Do <code>paste</code> możemy wrzucić dowolną liczbę znaków do połączenia. Jeśli nie chcemy żadnego separatora, możemy ustawić <code>sep = ""</code>, czyli pusty ciąg znaków w separatorze albo możemy użyć bliźniaczej funkcji <code>paste0</code>, która nie ma separatora.</p>
+</section>
+<section id="zmiana-wartości-komórek" class="level3">
+<h3 class="anchored" data-anchor-id="zmiana-wartości-komórek">Zmiana wartości komórek</h3>
+<p>Jak widzimy, odpowiedzi na pytania z homofobią zawierają nie tylko liczby, ale też tekst z legendą. My jednak chcemy zostawić same liczby. Jeśli spojrzymy na kolumnę z wiekiem, możemy zauważyć, że jest to również jest kolumna tekstowa. Dziwne, przecież wiek to (tylko) liczba. Przejrzenie danych pozwala stwierdzić, że respondent o id 50 w pytaniu o wiek wpisał „18 (2021)“. Nieważne, jak się będziemy przed tym bronić, co dopiszemy do pytania o wiek, zawsze znajdzie się ktoś, kto zrobi w nim elaborat. Ten jeden respondent sprawił, że cała kolumna nie jest traktowana jako kolumna liczbowa, ale jako tekst. Odpowiedź na oba te problemy jest taka sama – <code>mutate</code> i <code>parse_number</code>.</p>
+<p>Funkcja <code>mutate</code> to ogólna funkcja, za pomocą której modyfikujemy kolumny albo dodajemy nowe. Jej składnia wygląda następująco:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>zmienna_z_danymi <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">kolumna_do_modyfikacji =</span> <span class="fu">jakas_funkcja</span>(kolumna_do_modyfikacji),</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">nowa_kolumna =</span> <span class="fu">inna_funkcja</span>(jak_stworzyc_nowa_kolumne)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>mutate</code> w pewnym sensie zawsze tworzy nową kolumnę. Jeśli nowa kolumna ma taką samą nazwę, jak stara, to zastępuje starą. W naszym przykładzie chcemy do całej kolumny <code>wiek</code> zastosować funkcję <code>parse_number</code>, która pozbywa się wszystkiego poza pierwszą napotkaną liczbą<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a>. Taka instrukcja będzie wyglądała następująco:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="przekształcanie-wielu-kolumn-jednocześnie" class="level4">
+<h4 class="anchored" data-anchor-id="przekształcanie-wielu-kolumn-jednocześnie">Przekształcanie wielu kolumn jednocześnie</h4>
+<p>Po wykonaniu tej funkcji widzimy, że cała kolumna jest już numeryczna. To samo możemy zrobić dla pytań z homofobią. Moglibyśmy, oczywiście, zapisać <code>H_1 = parse_number(H_1), H_2 = parse_number(H_2)</code> itd., ale po co się męczyć? Na początku roku 2020 dostaliśmy cudowną funkcję pomocniczą <code>across</code>, która przydaje nam się w takich dokładnie wypadkach, czyli gdy chcemy zmodyfikować serię kolumn w taki sam sposób. Jak jej używać?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"H_"</span>), parse_number)</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery, ale możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu <code>tidy-select</code>. Tutaj akurat użyłem <code>starts_with("H_")</code>, żeby powiedzieć, że ma to zrobić ze wszystkimi kolumnami, których nazwy zaczynają się od <code>H_</code>. Te same funkcje możemy wykorzystywać w funkcji <code>select</code>. Kilka innych tego typu funkcji umieściłem w tabeli.</p>
+<table class="table">
+<caption>Funkcje pomocnicze do <code>select</code> i <code>across</code>.</caption>
+<colgroup>
+<col style="width: 19%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Funkcja</th>
+<th style="text-align: right;">Wybierz wszystkie kolumny…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>starts_with()</code></td>
+<td style="text-align: right;">których nazwy zaczynają się od</td>
+</tr>
+<tr class="even">
+<td><code>ends_with()</code></td>
+<td style="text-align: right;">których nazwy kończą się na</td>
+</tr>
+<tr class="odd">
+<td><code>contains()</code></td>
+<td style="text-align: right;">których nazwy zawierają w sobie</td>
+</tr>
+<tr class="even">
+<td><code>matches()</code></td>
+<td style="text-align: right;">których nazwy zawierają w sobie<br>wyrażenie regularne<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></td>
+</tr>
+<tr class="odd">
+<td><code>:</code></td>
+<td style="text-align: right;">zawierają się w zakresie<br>(np. <code>H_1:H_10</code>)</td>
+</tr>
+<tr class="even">
+<td><code>all_of()</code></td>
+<td style="text-align: right;">w których wszystkie wartości<br>spełniają jakiś warunek</td>
+</tr>
+<tr class="odd">
+<td><code>any_of()</code></td>
+<td style="text-align: right;">w których jakakolwiek<br>wartość spełnia warunek</td>
+</tr>
+<tr class="even">
+<td><code>everything()</code></td>
+<td style="text-align: right;">w ogóle wszystkie kolumny</td>
+</tr>
+</tbody>
+</table>
+<p>Drugim argumentem, jaki przyjmuje <code>across</code> jest nazwa funkcji, którą chcemy zastosować. Co ważne, musi to być jej nazwa <strong>bez nawiasów</strong>. Jest to częsty błąd i subtelna różnica, polegająca na tym, że jeśli nie używamy nawiasów, podajemy <code>across</code> samą funkcję, a jeśli damy nawiasy, to wrzucamy w ten sposób do <code>across</code> <em>wynik działania</em> tej funkcji. Spowodowałoby to, że w tym wypadku dostalibyśmy błąd, że funkcja <code>parse_number()</code> nie dostała wymaganych argumentów. Jeśli chcielibyśmy dorzucić do <code>parse_number</code> jakieś argumenty (jak <code>locale</code><a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a>), możemy to zrobić po przecinku. Szczegóły, jak zwykle, znajdziemy w dokumentacji funkcji <code>across</code>.</p>
+</section>
+<section id="odwracanie-punktacji" class="level4">
+<h4 class="anchored" data-anchor-id="odwracanie-punktacji">Odwracanie punktacji</h4>
+<p>Bardzo często zdarza nam się, że w kwestionariuszasz niektóre pozycje mają odwróconą punktację. Na przykład w kwestionariuszu samooceny Rosenberga SES pojawia się pozycja „Czasem czuję się bezużyteczny(-a)“. Odpowiada się na skali 1 do 4. Wiadomo, że osoba, która zaznacza przy takiej pozycji 4, nie pokazuje swojej wysokiej samooceny. Jest to pozycja z odwróconą punktacją, czyli 4 należy liczyć jako 1, 3 jako 2 itd. Przekształcenie to można zrobić bardzo łatwo. Najpierw dodajemy skrajne wartości skali, np. dla SES <span class="math inline">\(1 + 4 = 5\)</span>. Teraz od 5 odejmujemy odpowedź osoby badanej i dzięki temu rzeczywiście 4 zamienia się w 1, 3 w 2 itd. Jak odwrócić punktację w R?</p>
+<p>Ponieważ jest to modyfikacja kolumny, użyjemy funkcji <code>mutate</code>. Załóżmy, że <code>H_5</code> ma odwróconą punktację. Oceny były na skali od 1 do 6, więc wyniki osób badanych musimy odjąć od 7. W takiej sytuacji kod wyglądałby następująco:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_5 =</span> <span class="dv">7</span> <span class="sc">-</span> H_5</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Niektórzy lubią tworzyć nowe kolumny na odwróconą punktację, my jednak po prostu zastąpiliśmy oryginalną kolumnę <code>H_5</code>. Jeśli chcemy odwrócić wiele kolumn, możemy użyć <code>across</code>. Załóżmy, że <code>H_7</code> też ma odwróconą punktację. W takim wypadku nasz kod mógłby wyglądać tak:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_5 =</span> <span class="dv">7</span> <span class="sc">-</span> H_5</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_7 =</span> <span class="dv">7</span> <span class="sc">-</span> H_7</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Albo z użyciem <code>across</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), <span class="sc">~</span> <span class="dv">7</span> <span class="sc">-</span> .x)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Pierwszym argumentem jest zestaw kolumn, dlatego nazwy kolumn opakowałem w <code>c()</code>. Jest to podstawowa funkcja, która zbiera kilka rzeczy w jeden zestaw. <code>select</code> czy <code>filter</code> nie potrzebowały, żeby robić takie zestawy, ale wiele funkcji (zwłaszcza spoza <code>tidyverse</code>) tego wymaga. Co z drugim argumentem, czyli funkcją? Tutaj wchodzimy głębiej w programistyczne meandry i można, oczywiście, zostać przy wersji bez <code>across</code>. Odważnych zapraszam do świata funckji anonimowych.</p>
+<section id="własne-funkcje" class="level5">
+<h5 class="anchored" data-anchor-id="własne-funkcje">Własne funkcje</h5>
+<p>Drugi argument w <code>across</code> to funkcja, jakiej <code>across</code> ma użyć do przekształcenia kolumn. Niestety nie ma funkcji, która odejmowałaby od 7. Żeby sobie z tym poradzić, musimy albo taką funkcję wcześniej zadeklarować, albo użyć tzw. funkcji anonimowej (zwanej też <em>lambda</em>). Pierwsza opcja jest łatwa do zrozumienia, ale wymaga sporo pisania jak na coś, czego użyjemy tylko raz. Tworzenie własnych funkcji w R jest dość łatwe. Nasza funkcja mogłaby wyglądać tak:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>odejmij_od_7 <span class="ot">&lt;-</span> <span class="cf">function</span>(wynik) {</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">7</span> <span class="sc">-</span> wynik</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Pierwsza rzecz to nazwa. Obrazowo nazwałem naszą funkcję <code>odejmij_od_7</code>. Dalej następuje słowo kluczowe <code>function</code> i w nawiasie argumenty naszej funkcji. Do naszej funkcji wrzucamy wynik osoby badanej, więc nasz argument nazwałem obrazowo <code>wynik</code>. Jeśli chcemy, dla czytelności, rozbić funkcję na kilka linijek otwieramy teraz nawiasy klamrowe i w nich opisujemy, co funkcja ma robić. Nic nie stoi na przeszkodzie, żeby opisać to wszystko w jednej linijce <code>function(wynik) 7 - wynik</code>. Po wykonaniu nasza funkcja rzeczywiście działa, co możemy sprawdzić używając jej w konsoli.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">odejmij_od_7</span>(<span class="dv">3</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">odejmij_od_7</span>(<span class="dv">12</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -5</code></pre>
+</div>
+</div>
+<p>Jeśli mamy kilka kwestionariuszy z odwróconą punktacją, każdy z inną skalą, możemy od razu zrobić bardziej ogólną funkcję do odwracania.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>odejmij_od <span class="ot">&lt;-</span> <span class="cf">function</span>(wynik, od_czego) {</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    od_czego <span class="sc">-</span> wynik</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">odejmij_od</span>(<span class="dv">3</span>, <span class="dv">7</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">odejmij_od</span>(<span class="dv">2</span>, <span class="at">od_czego =</span> <span class="dv">4</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<p>Bardziej ogólna funkcja wymaga podania drugiego argumentu, tzn. od czego trzeba odjąć wynik. Jak widać, ta funkcja też działa i przyjmuje argumenty pozycyjne lub nazwane. Jednej albo drugiej funkcji po zadeklarowaniu możemy użyć w <code>across</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), odejmij_od, <span class="at">od_czego =</span> <span class="dv">7</span>)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="funkcje-anonimowe" class="level5">
+<h5 class="anchored" data-anchor-id="funkcje-anonimowe">Funkcje anonimowe</h5>
+<p>Jeśli funkcja jest prosta i używamy jej tylko raz, często nie chcemy zaśmiecać sobie kodu jej definicją. Wtedy z pomocą przychodzą nam funkcje anonimowe (zwane też funckjami <em>lambda</em>). Anonimowe, bo nie mają swojej nazwy. Podstawowy sposób ich używania to zadeklarowanie ich od razu w miejscu użycia.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), <span class="cf">function</span>(wynik) <span class="dv">7</span> <span class="sc">-</span> wynik)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Zamiast nazwy funkcji użyliśmy tutaj od razu jej definicji. Funkcja jest w pełni sprawna i różni się od <code>odejmij_od_7</code> tylko tym, że nie ma nazwy.</p>
+<p>Inny, jeszcze bardziej zwięzły, sposób używania funkcji anonimowych dodaje pakiet <code>purrr</code> wchodzący w skład <code>tidyverse</code>. Polega on na użyciu znaczka <code>~</code> (<em>czyt.</em> tylda). Nasza funkcja <code>odejmij_od_7</code> ma w tej konwencji postać <code>~ 7 - .x</code>. Poprzez <code>.x</code> oznacza się to, co do funkcji wrzucamy, czyli to, co w <code>odejmij_od_7</code> oznaczyliśmy jako <code>wynik</code>. Takie coś możemy zapisać w miejscu funkcji w <code>across</code>, co zrobiłem na początku.</p>
+</section>
+</section>
+</section>
+<section id="nowe-kolumny" class="level3">
+<h3 class="anchored" data-anchor-id="nowe-kolumny">Nowe kolumny</h3>
+<p>Jak wspomniałem, funkcja <code>mutate</code> nie tylko pozwala na modyfikowanie istniejących kolumn, ale też na tworzenie nowych. Zazwyczaj robimy to w dwóch przypadkach – gdy chcemy zagregować dane z wierszy, np. zsumować wyniki kwestionariusza albo gdy chcemy podzielić naszą bazę na kategorie, np. „młodzi”, „w średnim wieku”, „seniorzy”. Omówmy to po kolei.</p>
+<section id="agregowanie-danych-z-wierszy" class="level4">
+<h4 class="anchored" data-anchor-id="agregowanie-danych-z-wierszy">Agregowanie danych z wierszy</h4>
+<p>Załóżmy, że homofobię będziemy liczyć poprzez dodanie <code>H_1</code> + <code>H_2</code> + <code>H_3</code> itd. Czasami będziemy chcieli robić sumy, czasami policzyć średnią. W kwestionariuszach zazwyczaj liczymy sumy, ale dla czasów reakcji często będziemy chcieli policzyć średnią. Jak więc dodać taką sumującą kolumnę w R? Mamy dwa sposoby. Pierwszy to wprost opisanie, co dodajemy, wewnątrz <code>mutate</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), <span class="sc">~</span> <span class="dv">7</span> <span class="sc">-</span> .x),</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_suma =</span> H_1 <span class="sc">+</span> H_2 <span class="sc">+</span> H_3 <span class="sc">+</span> H_4 <span class="sc">+</span> H_5 <span class="sc">+</span> H_6 <span class="sc">+</span> H_7 <span class="sc">+</span> H_8 <span class="sc">+</span> H_9 <span class="sc">+</span> H_10</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Jak można się domyślić, istnieje sposób niewymagający tyle pisania, które w skomplikowanych bazach i długich kwestionariuszach naprawdę może być długotrwałe i uciążliwe. <code>tidyverse</code> ratuje nas tutaj funkcją <code>pick</code><a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a>, a standardowy R dokłada funkcję <code>rowSums</code> (i <code>rowMeans</code>). Wystarczy, że do funkcji <code>rowSums</code> wrzucimy, które kolumny chcemy zsumować, wskazując je właśnie za pomocą <code>pick</code> i funkcji pomocniczych.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), <span class="sc">~</span> <span class="dv">7</span> <span class="sc">-</span> .x),</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_suma =</span> <span class="fu">rowSums</span>(<span class="fu">pick</span>(H_1<span class="sc">:</span>H_10))</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="kategoryzowanie-przypadków-i-przekodowywanie" class="level4">
+<h4 class="anchored" data-anchor-id="kategoryzowanie-przypadków-i-przekodowywanie">Kategoryzowanie przypadków i przekodowywanie</h4>
+<p>Czasem zdarza się, że chcemy podzielić dane ilościowe (np. wiek, wzrost, szczeście mierzone kwestionariuszowo) na kategorie (młodzi vs nie-aż-tak-młodzi, wysocy vs niscy, szczęśliwi vs nieszczęśliwi). Zdarza się też, że osoba tworząca ankietę nie buła na tyle przewidująca, żeby w odpowiedziach na pozycję kwesionariuszową do „zdecydowanie się zgadzam” dodać 6, więc nie możemy po prostu użyć <code>parse_number</code>. I w jednym, i w drugim wypadku musimy stworzyć wartości na podstawie innych wartości, np. wzrost poniżej 160 cm zamienić na „niski” albo tekst „zdecydowanie się nie zgadzam” zamienić na 1. Do takich celów służy niezwykle przydatna funkcja <code>case_when</code> z pakietu <code>dplyr</code>. Załóżmy, że chcemy podzielić mężczyzn w naszej bazie na trzy kategorie wykształcenia – podstawowe, ponadpodstawowe i wyższe. Oznacza to, że osoby z wykształceniem średnim i zawodowym musimy wrzucić do jednego worka. W tym celu rozszerzymy naszą instrukcję o kolejną komendę. Funkcja <code>case_when</code> ma dość prostą składnię.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_when</span>(</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    warunek_1 <span class="sc">~</span> wartosc_jesli_prawda,</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    warunek_2 <span class="sc">~</span> wartosc_jesli_prawda,</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    warunek_3 <span class="sc">~</span> wartosc_jesli_prawda,</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> wartosc_dla_calej_reszty</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Funkcja po kolei sprawdza warunki. Jeśli natrafi na jakiś spełniony warunek zatrzyma się i da taką wartość, jaką temu warunkowi przypisaliśmy. Warunek jest logiczny, czyli może to być cokolwiek od <code>wyksztalcenie == "Średnie"</code> po <code>wzrost &lt;= 160</code>. Należy pamiętać, że jeśli wartość wynikowa ma być tekstem, musimy napisać ją w cudzysłowie, jak każdy dosłowny tekst. Na końcu funkcja dochodzi do <code>TRUE</code>, które jest zawsze prawdziwe, więc <code>TRUE ~ wartosc</code> może nam służyć do ustalania, co ma być, jeśli żaden z powyższych warunków się nie sprawdzi. Jeśli chodzi o przykład z wykształceniem, moglibyśmy rozwiązać go tak:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), <span class="sc">~</span> <span class="dv">7</span> <span class="sc">-</span> .x),</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_suma =</span> <span class="fu">rowSums</span>(<span class="fu">pick</span>(H_1<span class="sc">:</span>H_10)),</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie_grupa =</span> <span class="fu">case_when</span>(</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Średnie"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Zawodowe"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>            <span class="cn">TRUE</span> <span class="sc">~</span> wyksztalcenie</span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>W tym wypadku <code>case_when</code>, idąc wiersz po wierszu, sprawdza, czy w kolumnie <code>wyksztalcenie</code> nie znajduje się wartość <code>"Średnie"</code>. Jeśli tak, to w tworzonej właśnie kolumnie <code>wyksztalcenie_grupa</code> wstawia wartość <code>"Ponadpodstawowe"</code> i przechodzi do kolejnego. Jeśli wykształcenie nie jest średnie, to sprawdza, czy jest zawodowe i w razie czego również wstawia <code>"Ponadpodstawowe"</code>. Jeśli nie jest ani średnie, ani zawodowe, to wstawia to, co akurat jest w kolumnie <code>wyksztalcenie</code>, czyli dla osób z wykształceniem podstawowym wstawia <code>"Podstawowe"</code>, a dla osób z wykształceniem wyższym <code>"Wyższe"</code>. W ten sposób z 4 kategorii wykształcenia zrobiły nam się 3. W podobny sposób przekodowywalibyśmy klucz w ankiecie na liczby, np. pisząc <code>H_1 == "Zdecydowanie się zgadzam" ~ 6</code>.</p>
+</section>
+</section>
+<section id="sortowanie-i-kolejność-kolumn" class="level3">
+<h3 class="anchored" data-anchor-id="sortowanie-i-kolejność-kolumn">Sortowanie i kolejność kolumn</h3>
+<p>Wychodzimy już z potężnej funkcji <code>mutate</code> i możemy czyścić dalej. Ostatnia rzecz, którą czasem chcemy zrobić (zazwyczaj ze względów estetycznych), to posortowanie wartości i ustawienie kolumn w określonej kolejności.</p>
+<section id="sortowanie" class="level4">
+<h4 class="anchored" data-anchor-id="sortowanie">Sortowanie</h4>
+<p>Za sortowanie w <code>tidyverse</code> odpowiada funkcja <code>arrange</code>. Domyślnie sortuje ona rosnąco, więc jeśli chcemy sortowanie malejące, użyjemy pomocniczej funkcji <code>desc</code> (od <em>descending</em>). Załóżmy, że chcemy posortować nasze dane najpierw według wykształcenia (od najwyższego, do najniższego), a w obrębie wykształcenia według wieku (od najmłodszych do najstarszych). W pierwszym odruchu chcielibyśmy wpisać <code>arrange(desc(wyksztalcenie), wiek)</code>. Jest to dobry odruch, jednak jeśli to zrobimy zorientujemy się, że najwyższym z wykształceń jest wykształcenie zawodowe. Dzieje się tak dlatego, że w tej chwili wykształcenie to zwykły teskt, a więc jest sortowany alfabetycznie, nie według naszego klucza. Żeby to zmienić, musimy poznać nowy rodzaj danych.</p>
+<section id="factors" class="level5">
+<h5 class="anchored" data-anchor-id="factors">Factors</h5>
+<p><em>Factor</em> to rodzaj danych, za pomocą których przechowujemy tekst, który ma tylko kilka możliwych wartości albo te wartości mają jakąś kolejność, którą chcemy wziąć pod uwagę. Jeśli mamy etykiety takie jak wykształcenie, czy grupa kontrolna/eksperymentalna, to powinniśmy je przechowywać właśnie w tej postaci. Danymi tego typu w <code>tidyverse</code> zarządza pakiet <code>forcats</code>. Żeby zmienić wykształcenie z tekstu na factor, dopiszemy jedną linijkę do naszego <code>mutate</code> i od razu posortujemy.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), <span class="sc">~</span> <span class="dv">7</span> <span class="sc">-</span> .x),</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_suma =</span> <span class="fu">rowSums</span>(<span class="fu">pick</span>(H_1<span class="sc">:</span>H_10)),</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie_grupa =</span> <span class="fu">case_when</span>(</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Średnie"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Zawodowe"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>            <span class="cn">TRUE</span> <span class="sc">~</span> wyksztalcenie</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie =</span> <span class="fu">factor</span>(</span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie,</span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Podstawowe"</span>, <span class="st">"Zawodowe"</span>, <span class="st">"Średnie"</span>, <span class="st">"Wyższe"</span>),</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(wyksztalcenie), wiek)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Komendę <code>factor</code> dla czytelniości rozbiłem tutaj na trzy linijki, ale – oczywiście – można ją całą zapisać w jednej. Po pierwsze wskazałem, że na factor przerobiona ma być kolumna <code>wyksztalcenie</code>. Po drugie wskazałem, jakie wykształcenie może mieć wartości, zbierając je w jeden zestaw funkcją <code>c</code> i wrzucając do argumentu <code>levels</code>. Na koniec poinformowałem R, że w kolejność jest tutaj ważna, dopisując <code>ordered = TRUE</code>. Jeśli tak przerobione dane posortujemy, zobaczymy, że baza rzeczywiście zaczyna się od wykształcenia wyższego.</p>
+</section>
+</section>
+<section id="kolejność-kolumn" class="level4">
+<h4 class="anchored" data-anchor-id="kolejność-kolumn">Kolejność kolumn</h4>
+<p>Możemy chcieć mieć nasze kolumny w określonej kolejności. Są zadadniczo dwa sposoby zmieniania kolejności kolumn. Jest funkcja <code>relocate</code>, która służy raczej przestawianiu pojedynczych kolumn lub ich niewielkiej liczby. Jeśli chcemy od nowa określić kolejność kolumn, możemy wykorzystać w tym celu znaną nam już funkcję <code>select</code>. Załóżmy, że chcielibyśmy przestawić kolumnę <code>H_suma</code> przed kolumny z cząstkowymi wynikami.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># z użyciem relocate</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(H_suma, <span class="at">.before =</span> H_1)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="co"># z użyciem select</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, wiek, wyksztalcenie, H_suma, <span class="fu">everything</span>())</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Jeśli przestawiamy kolumny z użyciem <code>relocate</code>, powinniśmy ustawić argument <code>.before</code> albo <code>.after</code>. Oba wymagają nazwy kolumny przed którą lub po której chcemy przenieść naszą kolumnę. Jeśli nie ustawimy żadnego, nasze kolumny zostaną przeniesione na początek tabeli. Jeśli używamy <code>select</code> musimy wpisać kolejność naszych kolumn ręcznie. Ciekawe może być użycie przeze mnie <code>everything()</code>. W tym kontekście znaczy ono „i cała reszta”.</p>
+</section>
+</section>
+<section id="zapisywanie-zmian" class="level3">
+<h3 class="anchored" data-anchor-id="zapisywanie-zmian">Zapisywanie zmian</h3>
+<p>W ten sposób uzyskaliśmy cały kod czyszczący. Mamy ów kod zapisany w naszym skrypcie, jeśli go uruchomimy, to widzimy, że działa. Jednak jeśli w konsolę wpiszemy <code>df</code>, naszym oczom ciągle ukazuje się stara, brzydka baza. Jak więc zmienić nasze <code>df</code> na wyczyszczoną wersję? Tak jak zawsze przypisujemy wartości w R – operatorem <code>&lt;-</code>. Nasz kod na zmianę brudnej bazy w czystą ostatecznie przyjmie postać:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), <span class="sc">~</span> <span class="dv">7</span> <span class="sc">-</span> .x),</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_suma =</span> <span class="fu">rowSums</span>(<span class="fu">pick</span>(H_1<span class="sc">:</span>H_10)),</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie_grupa =</span> <span class="fu">case_when</span>(</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Średnie"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Zawodowe"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>            <span class="cn">TRUE</span> <span class="sc">~</span> wyksztalcenie</span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie =</span> <span class="fu">factor</span>(</span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie,</span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Podstawowe"</span>, <span class="st">"Zawodowe"</span>, <span class="st">"Średnie"</span>, <span class="st">"Wyższe"</span>),</span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(wyksztalcenie), wiek) <span class="sc">%&gt;%</span></span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(H_suma, <span class="at">.before =</span> H_1)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Kod ten możemy uruchomić dla dowolnej ilości danych, w dowolnym momencie. Jest wielokrotnego użytku i spokojnie możemy go wykorzystać, kiedy baza się rozrośnie. Nie musimy go wtedy pisać od nowa, wystarczy, że go uruchomimy. Co więcej, mogę wpaść jeszcze na jakiś pomysł i dopisać linijkę na samym początku, nie musząc całej reszty robić od nowa. Sprawmy sobie tę przyjemność i zerknijmy na naszą wyczyszczoną bazę.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 45 × 15
+      id  wiek wyksztal…¹ H_suma   H_1   H_2   H_3   H_4   H_5   H_6   H_7   H_8
+   &lt;dbl&gt; &lt;dbl&gt; &lt;ord&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1    54    21 Wyższe         44     5     5     5     5     2     5     2     5
+ 2    33    22 Wyższe         43     5     5     4     5     2     5     2     5
+ 3    30    23 Wyższe         45     6     5     5     5     2     5     3     5
+ 4    49    23 Wyższe         45     6     6     6     6     1     6     1     6
+ 5    31    24 Wyższe         39     3     4     4     4     3     4     4     4
+ 6    38    25 Wyższe         44     5     5     5     5     2     5     2     5
+ 7    46    25 Wyższe         33     5     5     1     5     2     1     3     5
+ 8    43    26 Wyższe         45     6     6     6     6     1     6     1     6
+ 9    35    29 Wyższe         50     6     6     6     6     1     6     1     6
+10     2    52 Wyższe         44     5     5     5     5     2     5     2     5
+# … with 35 more rows, 3 more variables: H_9 &lt;dbl&gt;, H_10 &lt;dbl&gt;,
+#   wyksztalcenie_grupa &lt;chr&gt;, and abbreviated variable name ¹​wyksztalcenie</code></pre>
+</div>
+</div>
+<!-- ### Grupowanie i agregowanie
+
+### Format długi i szeroki
+
+### Złączenia (*joins*)
+
+## Eksploracja danych
+
+## Testy statystyczne
+
+### Czyste wyniki, czyli pakiet `broom`
+
+## Formatowanie kodu -->
+
+
+</section>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
+<ol>
+<li id="fn1"><p>Drugim najpopularniejszym jest R.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>To trudno sobie wyobrazić, łatwiej zobaczyć na obrazkach. Chodzi o to, czy mamy klasyczną wyczyszczoną bazę, w której jedna osoba badana to jeden wiersz, a każda kolumna to jeden pomiar (np. odpowiedź na pytanie). Czasem chcemy zamiast 11 kolumn (ID osoby badanej + 10 odpowiedzi na pytania) mieć tylko 3 kolumny (ID osoby badanej, numer pytania, odpowiedź). Wtedy każda osoba badana zajmuje 10 wierszy, ale każdy wiersz ma odpowiedź na tylko jedno pytanie. To potrafi być potrzebne do niektórych testów, grupowania danych itp. To jest technikalium, to nie jest statystyka <em>per se</em>, ale czasem trzeba to ogarniać, żeby rzeczywiście zrobić analizę.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Jeśli korzystasz z jakiejś dystrybucji linuxa, R możesz zainstalować z oficjalnych repozytoriów. Pakiet zazwyczaj nazywa się <code>r-base</code>. W Ubuntu wystarczy użyć komendy <code>sudo apt install r-base</code>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>W R da się programować też w innych IDE, np. w Visual Studio Code. Niemniej na sam początek lepiej przylgnąć do standardu RStudio, który pomoże nam nabrać najlepszych praktyk i nauczyć się, z czym się R je.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Polecam Monokai.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Jeśli znasz jakiś inny język programowania, możesz zapytać, dlaczego nie używamy <code>=</code>. Operator <code>=</code> też zadziała, ale za dobrą praktykę w R uznawane jest stosowanie <code>&lt;-</code> do przypisywania obiektów do zmiennych, a <code>=</code> do ustalania wartości argumentów.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Z założenia. Struktura dokumentacji jest bardzo dobra, a każda funkcja w pakietach CRAN musi być udokumentowana. Zdarzało mi się jednak mieć problem ze zrozumieniem, o co chodzi autorom funkcji, co ma być czym. Jak to w życiu bywa, niektórzy tłumaczą lepiej, a inni piszą treść tego przpisu.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Piszę o wielu skrótach klawiszowych, bo umiejętność pisania kodu bez odrywania rąk od klawiatury znacząco przyspiesza pracę. Jednocześnie wiele z tych rzeczy da się wyklikać myszką. Zachęcam jednak, żeby próbować uczyć się skrótów. Listę wszystkich skrótów w RStudio znajdziemy w menu Tools → Keyboard Shortcuts Help (albo pod skrótem Alt+Shift+K).<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Ustawiają katalog roboczy (<em>working dircectory</em>), dzięki czemu, kiedy musimy powiedzieć, gdzie jest, powiedzmy, plik z danymi, możemy napisać <code>"./dane/dane.xlsx"</code>. <code>./</code> oznacza “w tym folderze”, <code>/dane/</code> oznacza “w podfolderze dane”, a <code>/dane.xlsx</code> oznacza “w pliku <code>dane.xlsx</code>”. Możemy to też zrobić ręcznie funkcją <code>setwd</code>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Jeśli nie wiesz o co chodzi, nie przejmuj się. To duży temat i nie jest to coś, bez czego nie da się żyć.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>Ciągi znaków tekstowych w informatyce określamy mianem <em>string</em>, stąd <code>stringr</code>.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p><code>filter</code> wybiera wiersze spełniające jakiś warunek. Jeśli chcemy wybrać wiersze na podstawie ich pozycji (np. pierwsze 10 wierszy), użyjemy funkcji <code>slice</code>.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>Zdążyłem zauważyć, że różne funkcje <code>set_names</code> występują w różnych pakietach i wiele razy zdarzyło mi się szukać, dlaczego mój kod nie działa, jak wszystko jest dobrze. Okazywało się potem, że R bierze <code>set_names</code> nie z <code>purrr</code>, tylko np. z <code>magrittr</code>, a to są zupełnie inne funkcje. Jeśli R napotyka w dwóch różnych pakietach funkcje o takich samych nazwach, domyślnie wybiera tę załadowaną <strong>później</strong>. Jeśli więc najpierw załadowałem <code>tidyverse</code> a potem <code>magrittr</code>, to gdy piszę <code>set_names</code> R wybiera wersję z <code>magrittr</code>. Na szczęście możemy wprost powiedzieć R, z którego pakietu ma brać daną funkcję, używając jej pełnej nazwy <code>purrr::set_names</code>. Warto też wiedzieć, że używając takiego zapisu nie musimy ładować całego pakietu, żeby użyć funkcji z danego pakietu, której np. używamy tylko raz w całym kodzie. Osobiście, dla spokoju ducha, akurat <code>set_names</code> zawsze zapisuję <code>purrr::set_names</code>. Zbyt dużo czasu straciłem na szukanie tego błędu.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>Jej zachowanie możemy modyfikować, np. mówiąc jej, że w liczbach typu <code>128 242,78</code> spację ma traktować jako rozdzielacz dużych liczb, a przecinek jako operator dziesiętny (w krajach anglosaskich tę funkcję pełni zazwyczaj kropka). Inaczej <code>parse_number("128 242,78")</code> zwróci nam pierwszą napotkaną liczbę, czyli 128. Szczegóły można znaleźć w dokumentacji, ale w takim wypadku powinniśmy użyć <code>parse_number("128 242,78", locale = locale(grouping_mark = " ", decimal_mark = ","))</code>.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>Wyrażenia regularne (<em>Regular exprerssions</em> w skrócie <em>RegEx</em>) to wielki temat, a liźnięcie go polecam każdemu, czy programuje, czy nie. Pozwalają one na wyszukiwanie regularnych wzorców w tekście, np. <code>"H_\d+"</code> oznacza „“H_” a potem jedna lub więcej liczba”. Można je wykorzystywać np. w LibreOffice czy Google Docs (Word zrobił własny system, bo przecież czemu wdrażać światowe standardy, jak można zrobić coś tylko dla tego jednego programu?). Wiele razy oszczędzały mi godzin mechanicznej pracy. Obfita instrukcja znajduje się w ściądze do <code>stringr</code>.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16"><p>Jej zachowanie możemy modyfikować, np. mówiąc jej, że w liczbach typu <code>128 242,78</code> spację ma traktować jako rozdzielacz dużych liczb, a przecinek jako operator dziesiętny (w krajach anglosaskich tę funkcję pełni zazwyczaj kropka). Inaczej <code>parse_number("128 242,78")</code> zwróci nam pierwszą napotkaną liczbę, czyli 128. Szczegóły można znaleźć w dokumentacji, ale w takim wypadku powinniśmy użyć <code>parse_number("128 242,78", locale = locale(grouping_mark = " ", decimal_mark = ","))</code>.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn17"><p>W chwili kiedy to piszę, czyli luty 2023 r., <code>pick</code> jest świeżynką, wprowadzoną do <code>dplyr</code> w wersji 1.1.0 na koniec stycznia 2023 r. Jeśli Twój R jej nie znajduje, warto zaktualizować pakiety, albo guzikami w RStudio, albo funkcją <code>devtools::update_packages()</code>. Jeśli nie ma takiej możliwości, w miejsce <code>pick</code> można użyć <code>across</code>.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Skopiowano!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Skopiowano!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
