@@ -293,7 +293,7 @@ sp_lm %>%
   augment() %>% 
   select(2,1,3) %>%
   mutate(across(where(is.numeric), round, 2), SM = paste0(apa_num_pl(.fitted, digits = 2, add_equals = FALSE), " - 9,875 ", apa_num_pl(.fitted-9.875, digits = 2)), across(3:4, apa_num, digits = 2, decimal.mark = ",")) %>% 
-  kbl(booktabs = TRUE, col.names = c("wielkość pająka", "niepokój", "xM", "S_M"), escape = FALSE) %>%
+  kbl(booktabs = TRUE, col.names = c("wielkość pająka", "niepokój", "xM", "SM"), escape = FALSE) %>%
   kable_styling(latex_options = c("striped", "HOLD_position"))
 ```
 
