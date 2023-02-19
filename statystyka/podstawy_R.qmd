@@ -515,11 +515,13 @@ case_when(
     warunek_1 ~ wartosc_jesli_prawda,
     warunek_2 ~ wartosc_jesli_prawda,
     warunek_3 ~ wartosc_jesli_prawda,
-    TRUE ~ wartosc_dla_calej_reszty
+    .default = wartosc_dla_calej_reszty
 )
 ```
 
-Funkcja po kolei sprawdza warunki. Jeśli natrafi na jakiś spełniony warunek zatrzyma się i da taką wartość, jaką temu warunkowi przypisaliśmy. Warunek jest logiczny, czyli może to być cokolwiek od `wyksztalcenie == "Średnie"` po `wzrost <= 160`. Należy pamiętać, że jeśli wartość wynikowa ma być tekstem, musimy napisać ją w cudzysłowie, jak każdy dosłowny tekst. Na końcu funkcja dochodzi do `TRUE`, które jest zawsze prawdziwe, więc `TRUE ~ wartosc` może nam służyć do ustalania, co ma być, jeśli żaden z powyższych warunków się nie sprawdzi. Jeśli chodzi o przykład z wykształceniem, moglibyśmy rozwiązać go tak:
+Funkcja po kolei sprawdza warunki. Jeśli natrafi na jakiś spełniony warunek zatrzyma się i da taką wartość, jaką temu warunkowi przypisaliśmy. Warunek jest logiczny, czyli może to być cokolwiek od `wyksztalcenie == "Średnie"` po `wzrost <= 160`. Należy pamiętać, że jeśli wartość wynikowa ma być tekstem, musimy napisać ją w cudzysłowie, jak każdy dosłowny tekst. `.default = wartosc` może nam służyć do ustalania, co ma być, jeśli żaden z powyższych warunków się nie sprawdzi[^podstawy_r-23]. Jeśli chodzi o przykład z wykształceniem, moglibyśmy rozwiązać go tak:
+
+[^podstawy_r-23]: W starszych tekstach (z mojej perspektywy starszych niż 3 tygodnie) można zamiast argumentu `.default` spotkać konstrukcję typu `TRUE ~ wyksztalcenie`. Aktualnie ona jeszcze działa, ale powoli będzie wycofywana. Lepiej jest przestawiać się na `.default`.
 
 ```{r}
 #| eval: false
@@ -535,7 +537,7 @@ df %>%
         wyksztalcenie_grupa = case_when(
             wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
             wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
-            TRUE ~ wyksztalcenie
+            .default = wyksztalcenie
         )
     )
 ```
@@ -570,7 +572,7 @@ df %>%
         wyksztalcenie_grupa = case_when(
             wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
             wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
-            TRUE ~ wyksztalcenie
+            .default = wyksztalcenie
         ),
         wyksztalcenie = factor(
             wyksztalcenie,
@@ -617,7 +619,7 @@ df <- df %>%
         wyksztalcenie_grupa = case_when(
             wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
             wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
-            TRUE ~ wyksztalcenie
+            .default = wyksztalcenie
         ),
         wyksztalcenie = factor(
             wyksztalcenie,
