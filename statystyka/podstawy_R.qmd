@@ -1,6 +1,7 @@
 ---
 title: Podstawy programowania w R
 ---
+
 W kilku miejscach w dalszej części wrzucam informacje, jak daną rzecz omawianą teoretycznie można zrobić w R. **Absolutnie nie jest to konieczne do zrozumienia statystyki!** Jest to tylko jedna z możliwości, jak można opisaną dalej teorię przekuć w praktykę. O R można myśleć jako o programie do robienia statystyki. Podobnie jak SPSS, Statistica, Stata czy (oparte na R, darmowe i otwartoźródłowe) jamovi. Jeśli jednak Czytelnik widział kiedyś program statystyczny, spodziewać się będzie ekranu podobnego do Excela, gdzie na górnej belce wybiera się testy statystyczne, jakie chce się przeprowadzić. Praca w R tak nie wygląda. Największa wada i zaleta R polega na tym, że jest on jednocześnie językiem programowania. A to daje bardzo ciekawe możliwości, o których niżej. Także praca w R wygląda tak, że w specjalnym języku piszemy komputerowi, co ma zrobić, potem uruchamiamy te instrukcje i gotowe.
 
 W tym miejscu spróbuję krótko opisać, jak zacząć pracę z R. Nie mam ambicji zrobić pełnego wprowadzenia, bo wyszedłby z tego osobny podręcznik. Mam ambicje dać jakikolwiek zarys fundamentu, który pozwoli Czytelnikowi wyczyścić mało brudne dane i zrobić proste testy. Jeśli ktoś po przeczytaniu tego stwierdzi „Może warto się zagłębić", to znajdzie mnóstwo materiałów, które mu na to pozwolą. Ze swojej strony mogę polecić podręcznik „Język R. Kompletny zestaw narzędzi dla analityków danych" Wickhama i Grolemunda, interaktywne kursy na DataCamp, a pomocy w rozwiązaniu konkretnych problemów zawsze można szukać na StackOverflow.
@@ -15,6 +16,9 @@ Dla niektórych ludzi perspektywa uczenia się języka programowania tylko po to
 
 [^podstawy_r-1]: Drugim najpopularniejszym jest R.
 
+```{=html}
+<!-- -->
+```
 3.  R to język programowania. Pozwala to na szybką automatyzację dużej liczby zadań i radzenia sobie z nieprzewidzianymi okolicznościami. Dla przykładu program do prowadzenia eksperymentów PsychoPy generuje dane w dość pogmatwanych arkuszach kalkulacyjnych, które trzeba dość mocno wyczyścić przed analizą. Problem jest jednak taki, że wyniki każdej osoby badanej zapisują się w osobnych plikach. Jeśli przebadaliśmy 150 osób, mamy 150 plików do wyczyszczenia. Jeśli piszemy analizę w R, to wystarczy wyczyścić jeden plik, a potem dopisać linijkę czy dwie, żeby R tak samo wyczyścił pozostałe 149 plików. Bardzo cenię sobie też możliwość łatwego wygenerowania nazw dla kolumn typu MMPI_001, MMPI_002, ..., MMPI_567. Wpisywanie tego ręcznie to nuda i marnowanie mnóstwa czasu, a w R to jedna linijka kodu.
 
 4.  Analizy są modyfikowalne i wielorazowego użytku. Co mam na myśli? Załóżmy, że zrobiliśmy całą analizę i nagle się orientujemy, że nie usunęliśmy z bazy kilku wierszy, które przez przypadek wytworzyliśmy, jak bawiliśmy się kwestionariuszem, zanim go upubliczniliśmy. Albo prowadzący przy sprawdzaniu prosi, żeby zmodyfikować nieco analizę, bo chce wyniki kwestionariuszy wyrażone jako średnia, a nie suma. Jeśli korzystamy ze zwykłego oprogramowania, w obu przypadkach musimy wyklikiwać analizy od początku. Jeśli nasza analiza jest w R, to mamy ją całą zapisaną przed oczami. Możemy zmienić coś na samym jej początku, kliknąć jeden guzik i gotowe. Jeszcze lepiej -- ta analiza siedzi na naszym komputerze, póki jej nie usuniemy, więc jeśli kiedyś trzeba by było wykonać podobne zadanie, to wystarczy prosta operacja kopiuj-wklej.
@@ -23,6 +27,9 @@ Dla niektórych ludzi perspektywa uczenia się języka programowania tylko po to
 
 [^podstawy_r-2]: To trudno sobie wyobrazić, łatwiej zobaczyć na obrazkach. Chodzi o to, czy mamy klasyczną wyczyszczoną bazę, w której jedna osoba badana to jeden wiersz, a każda kolumna to jeden pomiar (np. odpowiedź na pytanie). Czasem chcemy zamiast 11 kolumn (ID osoby badanej + 10 odpowiedzi na pytania) mieć tylko 3 kolumny (ID osoby badanej, numer pytania, odpowiedź). Wtedy każda osoba badana zajmuje 10 wierszy, ale każdy wiersz ma odpowiedź na tylko jedno pytanie. To potrafi być potrzebne do niektórych testów, grupowania danych itp. To jest technikalium, to nie jest statystyka *per se*, ale czasem trzeba to ogarniać, żeby rzeczywiście zrobić analizę.
 
+```{=html}
+<!-- -->
+```
 6.  Wykresy. Wspominałem o tym wyżej, ale wykresy są warte osobnego punktu. Możliwości Excela są ograniczone. Dla przykładu wykres poniżej prezentuje wyniki badania nt. tego, jak wygląda homofobia u mężczyzn, którym się powie, że są niemęscy. W badaniu mierzyliśmy dodatkowo zmienną psychologiczną o nazwie normatywna męskość, czyli niejako stopień przywiązania do reguł, co *prawdziwy mężczyzna* powinien, a czego nie powinien. Wykres jest dość skomplikowany. Zawiera trzy zmienne dychotomiczne, co daje łącznie 8 kolumn w grupach po 4 i 2. Nie powiem, że zrobić taki wykres jest łatwo, bo dobre opanowanie `ggplot2` trochę zajmuje, ale gdy już opanujemy, co jest do opanowania, to hulaj dusza. Nawet najbardziej skomplikowane wykresy stają się możliwe. Gdy połączyć to z możliwościami dawanymi przez programistyczną warstwę R, nagle łatwe staje się wytworzenie serii pasujących do siebie stylem wykresów o tych samych wymiarach. Pozwala to uzyskać pełną spójność bez ręcznego poprawiania szczególików.
 
 ![Homofobia u mężczyzn o zagrożonej i niezagrożonej męskości, w zależności od tego, jak wysoką mieli tzw. normatywną męskość. Gdy dodać to tego jeszcze podział na dwa rodzaje homofobii, robią się z tego trzy podziały i osiem różnych kolumn ze wspólnymi osiami, legendą i kolorami. Zrobienie tego w Excelu, o ile w ogóle możliwe, byłoby bardzo trudne.](./ilustracje/homofobia){#fig-homofobia}
@@ -109,9 +116,9 @@ Najprościej wytworzyć nowy skrypt klikając w biały kwadracik z plusem w lewy
 
 Na razie nasz skrypt jest pusty, ale możemy w nim pisać dowolne polecenia tak samo, jak napisalibyśmy w konsoli. Różnica jest taka, że nie są one od razu wykonywane. Skrypt to tekst. Jeśli chcemy wykonać jakieś polecenie ze skryptu, to albo kopiujemy je do konsoli, albo umieszczamy na nim kursor i klikamy ctrl+enter. Możemy też myszką zaznaczyć większy fragment kodu i kliknąć Ctrl+Enter, żeby go wykonać. Jeśli chcielibyśmy wykonać cały nasz skrypt, to zaznaczamy cały kod (Ctrl+A) i ponownie używamy Ctrl+Enter. Ewentualnie możemy skorzystać ze skrótu Ctrl+Shift+S[^podstawy_r-8].
 
-To jest najważniejsza różnica między skryptem a konsolą – cokolwiek wpisane w konsolę jest wykonywane natychmiast i znika. Z konsoli korzystamy, kiedy chcemy zrobić jakieś jednorazowe operacje albo coś sobie przetestować. W skrypt wpisujemy to, co chcemy zachować. Ewentualnie szkic. Gdy ludzie przechodzą nagle z konsoli do skryptu, bardzo często zaczynają wpisywać w swój skrypt różne śmieci, które wcześniej wpisaliby w konsolę. Konsola nie zniknęła, ciągle jest do naszej dyspozycji. Skrypt w swojej ostatecznej postaci powinien jednak działać tak, że jak go uruchomimy, to cały przeleci bez błędów. No, przynajmniej do tego dążymy. Czyli konsola do testów, skrypt do prawdziwego kodu. 
-
 [^podstawy_r-8]: Piszę o wielu skrótach klawiszowych, bo umiejętność pisania kodu bez odrywania rąk od klawiatury znacząco przyspiesza pracę. Jednocześnie wiele z tych rzeczy da się wyklikać myszką. Zachęcam jednak, żeby próbować uczyć się skrótów. Listę wszystkich skrótów w RStudio znajdziemy w menu Tools → Keyboard Shortcuts Help (albo pod skrótem Alt+Shift+K).
+
+To jest najważniejsza różnica między skryptem a konsolą -- cokolwiek wpisane w konsolę jest wykonywane natychmiast i znika. Z konsoli korzystamy, kiedy chcemy zrobić jakieś jednorazowe operacje albo coś sobie przetestować. W skrypt wpisujemy to, co chcemy zachować. Ewentualnie szkic. Gdy ludzie przechodzą nagle z konsoli do skryptu, bardzo często zaczynają wpisywać w swój skrypt różne śmieci, które wcześniej wpisaliby w konsolę. Konsola nie zniknęła, ciągle jest do naszej dyspozycji. Skrypt w swojej ostatecznej postaci powinien jednak działać tak, że jak go uruchomimy, to cały przeleci bez błędów. No, przynajmniej do tego dążymy. Czyli konsola do testów, skrypt do prawdziwego kodu.
 
 ## Komentarze
 
@@ -223,7 +230,7 @@ Ta komenda oznacza „weź zmienną `df`, wrzuć ją do komendy `filter` i zosta
 Ostatecznie zostaje operator logiczny. Dlaczego piszę `==` zamiast `=`? W programowaniu znak `=` służy do przypisywania wartości do zmiennych. Zapis `a = 5` oznacza „niech `a` ma wartość 5". Sprawdzenie *czy* `a` ma wartość 5 odbywa się poprzez komendę `a == 5`. Konsola wyrzuci nam wtedy `TRUE`, `FALSE` albo `BŁĄD: nie znaleziono obiektu 'a'`. Kilka innych operatorów logicznych prezentuje tabela.
 
 | **Operator** |            **Znaczenie**             |                       **Przykład** |
-|----------------|:---------------------------:|--------------------------:|
+|------------------|:--------------------------:|-------------------------:|
 | ==           |              równa się               |              `Płeć == "Mężczyzna"` |
 | !=           |            nie równa się             |                `Płeć != "Kobieta"` |
 | \> (\>=)     |  większe niż<br>(większe lub równe)  |                        `Wiek > 40` |
@@ -328,7 +335,7 @@ df %>%
 Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery, ale możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu `tidy-select`. Tutaj akurat użyłem `starts_with("H_")`, żeby powiedzieć, że ma to zrobić ze wszystkimi kolumnami, których nazwy zaczynają się od `H_`. Te same funkcje możemy wykorzystywać w funkcji `select`. Kilka innych tego typu funkcji umieściłem w tabeli.
 
 | Funkcja         |                                           Wybierz wszystkie kolumny... |
-|--------------|---------------------------------------------------------:|
+|-----------------|------------------------------------------------------:|
 | `starts_with()` |                                         których nazwy zaczynają się od |
 | `ends_with()`   |                                            których nazwy kończą się na |
 | `contains()`    |                                        których nazwy zawierają w sobie |
@@ -624,7 +631,7 @@ Kod ten możemy uruchomić dla dowolnej ilości danych, w dowolnym momencie. Jes
 df
 ```
 
-Po zapisaniu zmiennej `df`, tracimy naszą starą zmienną. Tym samym, jeśli uruchomilibyśmy nasz kod jeszcze raz, ale już na nowej zmiennej `df`, wyskoczy nam błąd. W końcu nowa zmienna nie ma tych samych kolumn, co stara zmienna. Co więcej, takiej operacji nie da się cofnąć. Jeśli chcemy dostać swoją starą, brudną bazę, musimy ponownie załadować ją z pliku. To prowadzi nas do ważnego wniosku co do pisania skryptów – powinniśmy pisać je tak, żeby dało się z nich odtworzyć wszystko, co robiliśmy od samego początku[^podstawy_r-18]. Dzięki temu, jeśli chcemy się wycofać, zaznaczamy i wykonujemy cały kod przed interesującym nas momentem. Brak skrótu Ctrl+Z jest jedną z ważniejszych różnic w analizie w programach typu SPSS czy Statistica a w językach programowania typu R czy Python. Wbrew pozorom, idzie się przyzwyczaić. Ta sama właściwość pozwala na zachowanie przejrzystości w nauce – pokaż mi swój kod, a będę wiedział bardzo dokładnie, jak prowadziłeś(-aś) swoją analizę.
+Po zapisaniu zmiennej `df`, tracimy naszą starą zmienną. Tym samym, jeśli uruchomilibyśmy nasz kod jeszcze raz, ale już na nowej zmiennej `df`, wyskoczy nam błąd. W końcu nowa zmienna nie ma tych samych kolumn, co stara zmienna. Co więcej, takiej operacji nie da się cofnąć. Jeśli chcemy dostać swoją starą, brudną bazę, musimy ponownie załadować ją z pliku. To prowadzi nas do ważnego wniosku co do pisania skryptów -- powinniśmy pisać je tak, żeby dało się z nich odtworzyć wszystko, co robiliśmy od samego początku[^podstawy_r-18]. Dzięki temu, jeśli chcemy się wycofać, zaznaczamy i wykonujemy cały kod przed interesującym nas momentem. Brak skrótu Ctrl+Z jest jedną z ważniejszych różnic w analizie w programach typu SPSS czy Statistica a w językach programowania typu R czy Python. Wbrew pozorom, idzie się przyzwyczaić. Ta sama właściwość pozwala na zachowanie przejrzystości w nauce -- pokaż mi swój kod, a będę wiedział bardzo dokładnie, jak prowadziłeś(-aś) swoją analizę.
 
 [^podstawy_r-18]: Dlatego ja zazwyczaj wstępną bazę ładuję do zmiennej typu `df_raw`, i ją przekształcam, zaś do zmiennej `df` zapisuję już wyczyszczoną bazę. Swój kod czyszczący zaczynam więc od `df <- df_raw %>%`. Dzięki temu zawsze mogę na szybko zerknąć do niewyczyszczonej bazy, jakbym czegoś z niej potrzebował.
 
@@ -667,11 +674,62 @@ df_gaze %>%
 
 Kolumny do grupowania podałem jako zestaw, czyli wewnątrz `c()`. Zgrupowane w ten sposób dane pokazują nam, że Andy pisze bardziej krzykliwe piosenki od Malcolma, ale różnica powiększa się, gdy chodzi o piosenki symfoniczne.
 
-> Pozostała część już wkrótce.
-
 ## Format długi i szeroki
 
 Format długi i szeroki to coś, co rzadko pojawia się w tekstach wprowadzających i nie mam pojęcia czemu. To jest naprawdę ważne. Przełożenie danych z jednego formatu na drugi to często podstawowa operacja, jaką musimy wykonać, kiedy chcemy coś policzyć. Nie mam chyba ani jednego projektu, w którym bym tego nie robił. Do tego współczesne komendy, które to robią, są naprawdę proste. Zacznijmy jednak od tego, co to jest format długi i szeroki.
+
+Terminy te odnoszą się do sposobu, w jaki składujemy dane. Format szeroki jest tym, co odruchowo tworzymy, kiedy robimy czyste tabelki. Jeden wiersz to jedna obserwacja. Wszystkie dane o konkretnej osobie badanej znajdują się w tym jednym wierszu. Każda kolumna to jedna zebrana dana, np. odpowiedź na konkretne pytanie. W takim formacie znajduje się teraz nasza baza. Weźmy z niej kilka kolumn, po czym użyjmy `head`, żeby zobaczyć pierwszych pięć wierszy.
+
+```{r}
+df_wide <- df %>% # zapiszę to jako df_wide, na później
+    select(id, H_1:H_5) %>%
+    mutate(id = 1:nrow(df)) %>% # poprawiam id, żeby były kolejne liczby, zmiana kosmetyczna
+    arrange(id) # sortuję wg id
+
+df_wide %>% # zapisane dane trzeba jeszcze wyświetlić
+    head(n = 5) # tylko 5 pierwszych wierszy
+```
+
+Są to typowe dane w formacie szerokim. Żeby jednak zrozumieć różnicę, między formatem długim, a szerokim, trzeba jeszcze zobaczyć dane długie. Stwórzmy więc takie.
+
+```{r}
+df_long <- df_wide %>%
+    pivot_longer(H_1:H_5, names_to = "pytanie", values_to = "ocena")
+
+df_long %>%
+    head(n = 10)
+```
+
+Zacznę od skomentowania samych danych, a potem wyjaśnię funkcję. Dane w formacie długim mają oddzielną kolumnę na numer pytania i odpowiedź. Pięć kolumn z odpowiedziami na pytania zmieniliśmy w dwie. Powoduje to jednak, że każda osoba badana ma pięć wierszy – w każdym odpowiedź na tylko jedno pytanie. Najpierw następuje 5 wierszy osoby z id 1, potem 5 wierszy osoby z id 2 itd. Widać więc dlaczego formaty te nazywają się szeroki i długi. Szeroki ma wiele kolumn, mało wierszy (1 na osobę), długi mało kolumn, wiele wierszy (1 na każde pytanie).
+
+Po co nam taki format? Zawiera te same informacje, co format długi, a trudniej się to czyta. Po pierwsze umożliwia nam to policzenie niektórych rzeczy, których nie policzylibyśmy z formatu szerokiego. Dla przykładu, teraz mogę grupować dane według pytań, żeby sprawdzić, czy na każde pytanie badani odpowiadają podobnie. Jeśli moja skala jest dobra i każde pytanie rzeczywiście mierzy to samo, to odpowiedzi na wszystkie pytania powinny być podobne. Być może zrobiłem jakieś kontrowersyjne pytanie, na które wszyscy odpowiadają nisko, mimo że nie różnią się, w tym przykładzie, poziomem homofobii. Mogę więc, na oko, sprawdzić rzetelność pozycji testowych[^podstawy_r-20]. Formatu długiego wymagają też niektóre testy statystyczne.
+
+[^podstawy_r-20]: Oczywiście psychometria dysponuje lepszymi wskaźnikami rzetelności testów niż proste średnie odpowiedzi. Fakt pozostaje faktem jednak, że grupować dane po pytaniach można tylko wtedy, gdy są w jednej kolumnie.
+
+```{r}
+df_long %>%
+    summarise(
+        M = mean(ocena),
+        SD = sd(ocena),
+        .by = c(pytanie)
+    )
+```
+
+Nawet częściej niż do grupowania po pytaniach, wykorzystujemy format długi do wykresów. Jak się przekonamy dalej, w gramatyce graficznej (*the grammar of graphics*) do jednego obiektu na wykresie możemy przypisać tylko jedną kolumnę. Jeśli więc chcemy zrobić wykres słupkowy np. wyników *przed* i *po*, to do osi X przypiszemy kolumnę z etykietami, a do osi Y kolumnę z wynikami. Nie da się więc sensownie zrobić wykresu, jeśli wyniki *przed* i *po* mamy w osobnych kolumnach.
+
+Omówmy więc funkcję, której użyłem do zmiany formatu. Kiedyś robiło się to skomplikowanymi funkcjami `melt` i `cast`, które często można znaleźć w innych językach programowania. Dziś w R mamy, na szczęście, intuicyjne funkcje `pivot_wider` i `pivot_longer`. Tej pierwszej używamy zmieniając format na szeroki, tą drugą zmieniamy format na długi. Na przykładzie powyżej można stwierdzić, że `pivot_longer` przyjmuje trzy argumenty. Pierwszy to zbiór kolumn, do jakich chcemy tę funkcję zastosować. Można tu skorzystać z funkcji pomocniczych typu `starts_with()` albo `everything()`. Kolejne dwa argumenty funkcji `pivot_longer` to `names_to` i `values_to`. Są to nazwy kolumn, do których mają trafić, jak nazwa wskazuje, nazwy i wartości kolumn. W naszym przykładzie etykiety `H_1`, `H_2` itd. trafiły do kolumny `pytanie`, zaś same odpowiedzi na te pytania do kolumny `ocena`.
+
+```{r}
+#| eval: false
+df_long %>%
+    pivot_wider(names_from = "pytanie", values_from = "ocena")
+```
+
+`pivot_wider` ma prostszą składnię, ponieważ nie trzeba w niej wskazywać zakresu kolumn do rozwinięcia, a jedynie w jakiej kolumnie znajdują się nazwy kolumn, a w jakiej jej wartości. Robimy to odpowiednio argumentami `names_from` i `values_from`. Jeśli jakiejś wartości nie ma w formacie długim (np. gdy osoba z numerem 4 nie odpowiedziała na pytanie 2, to w formacie długim może nie być wiersza `4 H_2`), to `pivot_wider` automatycznie wstawi w tę komórkę `NA`[^podstawy_r-21].
+
+[^podstawy_r-21]: To zachowanie można zmodyfikować argumentem `values_fill`. Szczegóły można znaleźć w dokumentacji. Swoją drogą to jest piękne w R, jak bardzo jest on giętki. Funkcje mają domyślne zachowania, ale jeśli użytkownik w swojej szczególnej sytuacji potrzebuje czegoś innego, to zawsze może to ustawić. Ta uniwersalność jest sama w sobie dobrym powodem, żeby uczyć się programowania.
+
+> Pozostała część już wkrótce.
 
 ## Złączenia (*joins*)
 
