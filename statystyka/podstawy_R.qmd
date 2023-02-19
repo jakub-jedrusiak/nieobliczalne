@@ -185,7 +185,9 @@ library("tidyverse")
 
 # Ładowanie danych
 
-Jeśli chcemy cokolwiek liczyć, musimy mieć na czym liczyć. R ma wiele sposobów ładowania danych, które w każdym podręczniku zajmują cały rozdział. R poradzi sobie z prawie każdym formatem danych, a także potrafi ładować je bezpośrednio z serwera (dla przykładu pakiet `googlesheets4` pozwala ładować pliki z Google Sheets bez pobierania ich na dysk albo `QualtRics` ułatwiający importowanie plików z danymi ankietowymi z Qualtrics).
+Jeśli chcemy cokolwiek liczyć, musimy mieć na czym liczyć[podstawy_r-23]. R ma wiele sposobów ładowania danych, które w każdym podręczniku zajmują cały rozdział. R poradzi sobie z prawie każdym formatem danych, a także potrafi ładować je bezpośrednio z serwera (dla przykładu pakiet `googlesheets4` pozwala ładować pliki z Google Sheets bez pobierania ich na dysk albo `QualtRics` ułatwiający importowanie plików z danymi ankietowymi z Qualtrics).
+
+[podstawy_r-23]: Wszystkie bazy, których używam w tym tekście, są dostępne w repozytorium na GitHubie. Można wejść w [ten link](https://github.com/jakub-jedrusiak/jakub-jedrusiak.github.io/tree/main/statystyka/dane/podstawy-R), wybrać pożądany plik i albo pobrać go na własny dysk, albo zmodyfikować link zamieniając "github.com" na "raw.github.com" i usuwając słowo "blob/" nieco dalej. Takie linki można wklejać w komendy czytające dane zamiast ścieżek. Przykład linku, jak i tego, jak używać ich z funkcjami typu `read_csv` podaję w podrozdziale o grupowaniu i agregowaniu.
 
 Podstawowe pakiety do ładowania danych do `readr` i `readxl` dla plików Excela. Na początek nie trzeba znać struktury funkcji ładujących dane, bo RStudio dysponuje przyjemnym graficznym narzędziem do tego celu. Jeśli w prawym dolnym oknie, w zakładce Files, klikniemy na plik zawierający dane, dostaniemy do dyspozycji opcję Import Dataset... Po jej wybraniu otworzy nam się okno z podglądem danych i kilkoma opcjami do dostosowania, m.in. czy jakichś wierszy nie pominąć albo z którego arkusza pobrać dane. W plikach .csv czasem musimy też wybrać rodzaj separatora i znaku dziesiętnego (opcja Locale). W polskich plikach z danymi separatorem jest zazwyczaj średnik, a znakiem dziesiętnym przecinek, podczas gdy w angielskich danych będą to odpowiednio przecinek i kropka. Jeśli nie ustawimy znaku dziesiętnego, R może potraktować liczby z przecinkiem jako tekst. Poza tym możemy kliknąć w każdy nagłówek kolumny i wybrać typ danych. Dane powinny być czyste, tj. kolumny liczbowe powinny zawierać same liczby. Jeśli dane nie są czyste (a zazwyczaj nie są), możemy je wyczyścić potem.
 
@@ -538,7 +540,9 @@ df %>%
     )
 ```
 
-W tym wypadku `case_when`, idąc wiersz po wierszu, sprawdza, czy w kolumnie `wyksztalcenie` nie znajduje się wartość `"Średnie"`. Jeśli tak, to w tworzonej właśnie kolumnie `wyksztalcenie_grupa` wstawia wartość `"Ponadpodstawowe"` i przechodzi do kolejnego. Jeśli wykształcenie nie jest średnie, to sprawdza, czy jest zawodowe i w razie czego również wstawia `"Ponadpodstawowe"`. Jeśli nie jest ani średnie, ani zawodowe, to wstawia to, co akurat jest w kolumnie `wyksztalcenie`, czyli dla osób z wykształceniem podstawowym wstawia `"Podstawowe"`, a dla osób z wykształceniem wyższym `"Wyższe"`. W ten sposób z 4 kategorii wykształcenia zrobiły nam się 3. W podobny sposób przekodowywalibyśmy klucz w ankiecie na liczby, np. pisząc `H_1 == "Zdecydowanie się zgadzam" ~ 6`.
+W tym wypadku `case_when`, idąc wiersz po wierszu, sprawdza, czy w kolumnie `wyksztalcenie` nie znajduje się wartość `"Średnie"`. Jeśli tak, to w tworzonej właśnie kolumnie `wyksztalcenie_grupa` wstawia wartość `"Ponadpodstawowe"` i przechodzi do kolejnego. Jeśli wykształcenie nie jest średnie, to sprawdza, czy jest zawodowe i w razie czego również wstawia `"Ponadpodstawowe"`. Jeśli nie jest ani średnie, ani zawodowe, to wstawia to, co akurat jest w kolumnie `wyksztalcenie`, czyli dla osób z wykształceniem podstawowym wstawia `"Podstawowe"`, a dla osób z wykształceniem wyższym `"Wyższe"`[^podstawy_r-22]. W ten sposób z 4 kategorii wykształcenia zrobiły nam się 3. W podobny sposób przekodowywalibyśmy klucz w ankiecie na liczby, np. pisząc `H_1 == "Zdecydowanie się zgadzam" ~ 6`.
+
+[^podstawy_r-22]: Warto zauważyć, że zapisane tu warunki moglibyśmy uprościć do postaci `wyksztalcenie == "Średnie" | wyksztalcenie == "Podstawowe"` albo jeszcze bardziej `wyksztalcenie %in% c("Średnie", "Podstawowe")`. Warto też zerknąć w nową siostrę `case_when`, tj. `case_match`, która również mogłaby nam tutaj pomóc. Szczegóły, oczywiście, w dokumentacji.
 
 ## Sortowanie i kolejność kolumn
 
@@ -676,7 +680,7 @@ Kolumny do grupowania podałem jako zestaw, czyli wewnątrz `c()`. Zgrupowane w 
 
 ## Format długi i szeroki
 
-Format długi i szeroki to coś, co rzadko pojawia się w tekstach wprowadzających i nie mam pojęcia czemu. To jest naprawdę ważne. Przełożenie danych z jednego formatu na drugi to często podstawowa operacja, jaką musimy wykonać, kiedy chcemy coś policzyć. Nie mam chyba ani jednego projektu, w którym bym tego nie robił. Do tego współczesne komendy, które to robią, są naprawdę proste. Zacznijmy jednak od tego, co to jest format długi i szeroki.
+Format długi i szeroki to coś, co rzadko pojawia się w tekstach wprowadzających i nie mam pojęcia czemu. To jest naprawdę ważne. Przełożenie danych z jednego formatu na drugi to często podstawowa operacja, jaką musimy wykonać, kiedy chcemy coś policzyć. Nie mam chyba ani jednego projektu, w którym bym tego nie robił. Do tego współczesne komendy, które to robią, są naprawdę proste. Tym bardziej zaskakujące jest, że np. w Excelu wykonać taką operację jest trudno, jeśli nie umie się korzystać z Power Query. Zacznijmy jednak od tego, co to jest format długi i szeroki.
 
 Terminy te odnoszą się do sposobu, w jaki składujemy dane. Format szeroki jest tym, co odruchowo tworzymy, kiedy robimy czyste tabelki. Jeden wiersz to jedna obserwacja. Wszystkie dane o konkretnej osobie badanej znajdują się w tym jednym wierszu. Każda kolumna to jedna zebrana dana, np. odpowiedź na konkretne pytanie. W takim formacie znajduje się teraz nasza baza. Weźmy z niej kilka kolumn, po czym użyjmy `head`, żeby zobaczyć pierwszych pięć wierszy.
 
@@ -725,13 +729,47 @@ df_long %>%
     pivot_wider(names_from = "pytanie", values_from = "ocena")
 ```
 
-`pivot_wider` ma prostszą składnię, ponieważ nie trzeba w niej wskazywać zakresu kolumn do rozwinięcia, a jedynie w jakiej kolumnie znajdują się nazwy kolumn, a w jakiej jej wartości. Robimy to odpowiednio argumentami `names_from` i `values_from`. Jeśli jakiejś wartości nie ma w formacie długim (np. gdy osoba z numerem 4 nie odpowiedziała na pytanie 2, to w formacie długim może nie być wiersza `4 H_2`), to `pivot_wider` automatycznie wstawi w tę komórkę `NA`[^podstawy_r-21].
+`pivot_wider` ma prostszą składnię, ponieważ nie trzeba w niej wskazywać zakresu kolumn do rozwinięcia, a jedynie w jakiej kolumnie znajdują się nazwy kolumn, a w jakiej jej wartości. Robimy to odpowiednio argumentami `names_from` i `values_from`. Jeśli jakiejś wartości nie ma w formacie długim (np. gdy osoba z numerem 4 nie odpowiedziała na pytanie 2, to w formacie długim może nie być wiersza `4 H_2`), to `pivot_wider` automatycznie wstawi w tę komórkę `NA`[^podstawy_r-21]. Zdarza się, że funkcji tej musimy użyć dlatego, że niektóre programy generują dane w formacie długim.
 
 [^podstawy_r-21]: To zachowanie można zmodyfikować argumentem `values_fill`. Szczegóły można znaleźć w dokumentacji. Swoją drogą to jest piękne w R, jak bardzo jest on giętki. Funkcje mają domyślne zachowania, ale jeśli użytkownik w swojej szczególnej sytuacji potrzebuje czegoś innego, to zawsze może to ustawić. Ta uniwersalność jest sama w sobie dobrym powodem, żeby uczyć się programowania.
 
-> Pozostała część już wkrótce.
+## Retesty czyli złączenia (*joins*)
 
-## Złączenia (*joins*)
+Złączenia (*joins*) to, jak nazwa wskazuje, metoda łączenia dwóch baz danych. Jest to jedna z podstawowych operacji na bazach danych, znana co najmniej od lat 70. i instrukcji `JOIN` w SQL. Jest to także jedna z operacji niedostępnych w Excelu bez Power Query. W praktyce badawczej może być ona konieczna, gdy mamy badanie wieloczęściowe, w którym musimy stosować wiele baz danych (np. jedną tworzą pomiary z eyetrackera, drugą wyniki w ankiecie, a trzecią test szybkości reakcji). Zdarza się to również często w prostych badaniach ankietowych, kiedy po jakimś czasie musimy wykonać retest. W obu tych przypadkach lądujemy z dwiema (lub więcej) bazami, które -- miejmy nadzieję -- mają jaką wspólną kolumnę, identyfikator osoby badanej, taki sam w każdej z trzech baz[^podstawy_r-21].
+
+[^podstawy_r-21]: Czasami możemy też wykorzystać inną informację o osobie badanej jako identyfikator. Brałem udział w badaniach, w których osoba badana wypełniała ankietę i w tym samym czasie była nagrywana. Potem łączyłem informacje z nagrania z informacjami z ankiety na podstawie czasu wypełniania ankiety i czasu nagrywania. Jak widać, wszystko jest możliwe, choć domyślne złączenia z `dplyr`, w chwili pisania tego tekstu, nie pozwalają na pełną giętkość. Wtedy użyłem złączeń z pakietu `fuzzyjoin`.
+
+Jak więc takie bazy połączyć? Wykorzystajmy tutaj dwie bazy zawierające test i retest, zrobione podczas walidacji kwestionariusza o nazwie KTR. Składał się on z dwóch skal oznaczonych tutaj literkami O i W. Standardową procedurą przy projektowaniu kwestionariusza jest powtórzenie pomiaru po jakimś czasie, żeby sprawdzić, na ile wyniki są stabilne. My taką procedurę wykonaliśmy, przez co dysponujemy dwoma oddzielnymi bazami. Zerknijmy na nie.
+
+```{r}
+db_test <- read_csv("./dane/podstawy-R/join-test.csv", show_col_types = FALSE)
+db_retest <- read_csv("./dane/podstawy-R/join-retest.csv", show_col_types = FALSE)
+
+db_test
+
+db_retest
+```
+
+Pierwsza rzecz, która może zwrócić naszą uwagę, to znacznie mniejsza liczba osób badanych przy reteście. Jest to naturalne, jako że wiele osób, mimo wcześniejszych deklaracji nie wypełnia naszego testu po raz drugi. Widzimy też, że każdy wiersz posiada jakiegoś rodzaju kolumnę z unikatowym identyfikatorem osoby badanej. W języku relacyjnych baz danych takie unikatowe kolumny określa się jako `PRIMARY KEY`. W bazie danych z pierwszego testu kolumna ta nosi nazwę `ID`, a w bazie danych z retestu nazywa się ona `Subject`. Od razu wychodzi na jaw, że identyfikatory są spreparowane, bo nikt się nie pomylił, nie robił dopisków ani nie zdecydował się z jakiegoś powodu NaGlE pIsAć TaK.
+
+Żeby połączyć te bazy, musimy najpierw zdecydować, jak chcemy to zrobić. Możemy albo przyłączyć wyniki z retestu do bazy z testem, albo przyłączyć wyniki z testu do bazy z retestem. Jest to o tyle istotne, że jeśli przyłączymy retest do testu, to będziemy mieli puste wartości u tych osób, które nie wypełniły retestu. Jeśli zrobimy odwrotnie, to z założenia każda osoba, która wypełniła retest, wcześniej wypełniła test, a więc figuruje w pierwotnej bazie. W praktyce bywa różnie. Na przykład ludzie kłamią, że wypełnili test, a jak dostaną link do retestu, to myślą, że w takim razie chociaż to wypełnią. Tak czy inaczej, ta decyzja determinuje typ złączenia, jaki wybierzemy. Najbardziej powszechnym typem jest `LEFT JOIN`, który do każdego wiersza jednej bazy (pisanej jako pierwszej, czyli po lewej) przypisuje pasujący wiersz drugiej bazy (pisanej jako drugiej, czyli po prawej). Jeśli jakiś wiersz w lewej bazie nie ma odpowiednika w prawej bazie, otrzymujemy puste wartości. Jeśli jakiś wiersz w bazie po prawej nie został przypisany do żadnego wiersza po lewej, nie jesteśmy o tym informowani. Więcej o różnych typach złączeń (np. pozwalających uzyskać wszystkie możliwe kombinacje wierszy) można przeczytać i zobaczyć na obrazkach [na przykład tutaj](https://dataschool.com/how-to-teach-people-sql/sql-join-types-explained-visually/).
+
+Ja przyłączę retest do bazy z wynikami pierwszego testu. Widzę jednak dwa problemy, które będę musiał rozwiązać. Po pierwsze, kolumna z identyfikatorem osoby badanej nazywa się inaczej w obu bazach. Po drugie, kolumny `KTR_O` i `KTR_W` nazywają się tak samo w obu bazach. Będę więc musiał wskazać R, na podstawie jakich kolumn ma dokonać złączenia, a także jak ma nazwać kolumny w gotowej bazie, żebym wiedział, które wyniki dotyczą pierwszego testu, a które retestu.
+
+```{r}
+db_test %>%
+    left_join(
+        db_retest,
+        by = join_by(ID == Subject),
+        suffix = c("", "_retest")
+    )
+```
+
+Pierwszy problem rozwiązałem za pomocą argumentu `by`. Od wersji `dplyr` 1.1.0 przyjmuje on inną funkcję o nazwie `join_by`. W jej nawiasach precyzujemy, na podstawie jakich kolumn należy dokonać złączenia. Identyczne kolumny łączymy znakiem `==`. Drugi problem rozwiązałem dodając w argumencie `suffix` przyrostki do nazw kolumn. Zawsze zapisuje się je jako zestaw, czyli wewnątrz `c()` i zawsze najpierw jest w cudzysłowie przyrostek lewej bazy (u nas `db_test`), a potem przyrostek prawej bazy (u nas `db_retest`). Ja chciałem, by kolumny pierwotnej bazy nie miały przyrostka, więc za przyrostek dałem pusty ciąg znaków (czyli po prostu nic w cudzysłowie), zaś do kolumn bazy z retestem dodałem przyrostek `"_retest"`. Efekt widać na obrazku -- 5 kolumn i puste wartości u osób, które nie wypełniły retestu.
+
+Jak widać złączenia to zaskakująco szeroki temat, który daje duże możliwości. Omówiona tu funkcja `left_join` jest najczęściej stosowana, ale warto zerknąć do dokumentacji i w tutoriale, żeby chociaż dowiedzieć się, co możemy za pomocą złączeń zrobić.
+
+> Pozostała część już wkrótce.
 
 # Eksploracja danych
 
@@ -742,3 +780,5 @@ df_long %>%
 ## Czyste wyniki, czyli pakiet `broom`
 
 # Formatowanie kodu
+
+# Bibliografia
