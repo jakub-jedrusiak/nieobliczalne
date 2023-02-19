@@ -295,7 +295,7 @@ div.csl-indent {
   <li><a href="#grupowanie-i-agregowanie" id="toc-grupowanie-i-agregowanie" class="nav-link" data-scroll-target="#grupowanie-i-agregowanie">Grupowanie i agregowanie</a></li>
   </ul></li>
   <li><a href="#format-długi-i-szeroki" id="toc-format-długi-i-szeroki" class="nav-link" data-scroll-target="#format-długi-i-szeroki">Format długi i szeroki</a></li>
-  <li><a href="#złączenia-joins" id="toc-złączenia-joins" class="nav-link" data-scroll-target="#złączenia-joins">Złączenia (<em>joins</em>)</a></li>
+  <li><a href="#retesty-czyli-złączenia-joins" id="toc-retesty-czyli-złączenia-joins" class="nav-link" data-scroll-target="#retesty-czyli-złączenia-joins">Retesty czyli złączenia (<em>joins</em>)</a></li>
   </ul></li>
   <li><a href="#eksploracja-danych" id="toc-eksploracja-danych" class="nav-link" data-scroll-target="#eksploracja-danych">Eksploracja danych</a></li>
   <li><a href="#wykresy" id="toc-wykresy" class="nav-link" data-scroll-target="#wykresy">Wykresy</a></li>
@@ -304,6 +304,7 @@ div.csl-indent {
   <li><a href="#czyste-wyniki-czyli-pakiet-broom" id="toc-czyste-wyniki-czyli-pakiet-broom" class="nav-link" data-scroll-target="#czyste-wyniki-czyli-pakiet-broom">Czyste wyniki, czyli pakiet <code>broom</code></a></li>
   </ul></li>
   <li><a href="#formatowanie-kodu" id="toc-formatowanie-kodu" class="nav-link" data-scroll-target="#formatowanie-kodu">Formatowanie kodu</a></li>
+  <li><a href="#bibliografia" id="toc-bibliografia" class="nav-link" data-scroll-target="#bibliografia">Bibliografia</a></li>
   </ul>
 </nav>
     </div>
@@ -476,7 +477,8 @@ div.csl-indent {
 </section>
 <section id="ładowanie-danych" class="level1">
 <h1>Ładowanie danych</h1>
-<p>Jeśli chcemy cokolwiek liczyć, musimy mieć na czym liczyć. R ma wiele sposobów ładowania danych, które w każdym podręczniku zajmują cały rozdział. R poradzi sobie z prawie każdym formatem danych, a także potrafi ładować je bezpośrednio z serwera (dla przykładu pakiet <code>googlesheets4</code> pozwala ładować pliki z Google Sheets bez pobierania ich na dysk albo <code>QualtRics</code> ułatwiający importowanie plików z danymi ankietowymi z Qualtrics).</p>
+<p>Jeśli chcemy cokolwiek liczyć, musimy mieć na czym liczyć[podstawy_r-23]. R ma wiele sposobów ładowania danych, które w każdym podręczniku zajmują cały rozdział. R poradzi sobie z prawie każdym formatem danych, a także potrafi ładować je bezpośrednio z serwera (dla przykładu pakiet <code>googlesheets4</code> pozwala ładować pliki z Google Sheets bez pobierania ich na dysk albo <code>QualtRics</code> ułatwiający importowanie plików z danymi ankietowymi z Qualtrics).</p>
+<p>[podstawy_r-23]: Wszystkie bazy, których używam w tym tekście, są dostępne w repozytorium na GitHubie. Można wejść w <a href="https://github.com/jakub-jedrusiak/jakub-jedrusiak.github.io/tree/main/statystyka/dane/podstawy-R">ten link</a>, wybrać pożądany plik i albo pobrać go na własny dysk, albo zmodyfikować link zamieniając “github.com” na “raw.github.com” i usuwając słowo “blob/” nieco dalej. Takie linki można wklejać w komendy czytające dane zamiast ścieżek. Przykład linku, jak i tego, jak używać ich z funkcjami typu <code>read_csv</code> podaję w podrozdziale o grupowaniu i agregowaniu.</p>
 <p>Podstawowe pakiety do ładowania danych do <code>readr</code> i <code>readxl</code> dla plików Excela. Na początek nie trzeba znać struktury funkcji ładujących dane, bo RStudio dysponuje przyjemnym graficznym narzędziem do tego celu. Jeśli w prawym dolnym oknie, w zakładce Files, klikniemy na plik zawierający dane, dostaniemy do dyspozycji opcję Import Dataset… Po jej wybraniu otworzy nam się okno z podglądem danych i kilkoma opcjami do dostosowania, m.in. czy jakichś wierszy nie pominąć albo z którego arkusza pobrać dane. W plikach .csv czasem musimy też wybrać rodzaj separatora i znaku dziesiętnego (opcja Locale). W polskich plikach z danymi separatorem jest zazwyczaj średnik, a znakiem dziesiętnym przecinek, podczas gdy w angielskich danych będą to odpowiednio przecinek i kropka. Jeśli nie ustawimy znaku dziesiętnego, R może potraktować liczby z przecinkiem jako tekst. Poza tym możemy kliknąć w każdy nagłówek kolumny i wybrać typ danych. Dane powinny być czyste, tj. kolumny liczbowe powinny zawierać same liczby. Jeśli dane nie są czyste (a zazwyczaj nie są), możemy je wyczyścić potem.</p>
 <p>Możemy kliknąć Import, by dopełnić dzieła, ale jeśli tworzymy skrypt, będzie nas interesowała komenda, jaką RStudio dla nas przygotowało w czarnym okienku w prawym dolnym rogu. W pierwszej linijce RStudio proponuje załadowanie odpowiedniego pakietu. Warto to wpisać na początku skryptu, w miejscu, gdzie załadowaliśmy <code>tidyverse</code>. Jeśli proponowanym pakietem jest <code>readr</code>, nie musimy ładować go oddzielnie, bo ładując pakiet <code>tidyverse</code> załadowaliśmy od razu <code>readr</code>. Druga linijka do właściwe ładowanie danych. Widzimy znaną nam już składnię <code>nazwa &lt;-</code>. Nasze dane potrzebują jakiejś nazwy, za pomocą której będziemy się do niej odnosić. Może być to <code>df</code>, <code>dane</code>, <code>warunek_kontrolny</code> czy cokolwiek innego. Za strzałką mamy funkcję odczytującą dane. Najpewniej będzie to <code>read_csv()</code> albo <code>read_excel()</code>. Do tych funkcji wrzucamy jako pierwszy argument lokalizację naszego pliku z danymi w cudzysłowie (‘pojedynczym’ lub “podwójnym”). Ponieważ nam komendę przygotowało RStudio, możemy ją po prostu skopiować i wkleić do naszego skryptu, zmieniając tylko nazwę zmiennej. Co robią poszczególne argumenty, możemy sprawdzić w dokumentacji. Jeśli dane ładuje <code>readr</code>, wykonanie takiej komendy spowoduje ukazanie się informacji zwrotnej – jakie kolumny załadowano i jaki mają typ. Dla przykładu:</p>
 <div class="cell">
@@ -873,7 +875,7 @@ dbl  (1): ID
 <span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>W tym wypadku <code>case_when</code>, idąc wiersz po wierszu, sprawdza, czy w kolumnie <code>wyksztalcenie</code> nie znajduje się wartość <code>"Średnie"</code>. Jeśli tak, to w tworzonej właśnie kolumnie <code>wyksztalcenie_grupa</code> wstawia wartość <code>"Ponadpodstawowe"</code> i przechodzi do kolejnego. Jeśli wykształcenie nie jest średnie, to sprawdza, czy jest zawodowe i w razie czego również wstawia <code>"Ponadpodstawowe"</code>. Jeśli nie jest ani średnie, ani zawodowe, to wstawia to, co akurat jest w kolumnie <code>wyksztalcenie</code>, czyli dla osób z wykształceniem podstawowym wstawia <code>"Podstawowe"</code>, a dla osób z wykształceniem wyższym <code>"Wyższe"</code>. W ten sposób z 4 kategorii wykształcenia zrobiły nam się 3. W podobny sposób przekodowywalibyśmy klucz w ankiecie na liczby, np. pisząc <code>H_1 == "Zdecydowanie się zgadzam" ~ 6</code>.</p>
+<p>W tym wypadku <code>case_when</code>, idąc wiersz po wierszu, sprawdza, czy w kolumnie <code>wyksztalcenie</code> nie znajduje się wartość <code>"Średnie"</code>. Jeśli tak, to w tworzonej właśnie kolumnie <code>wyksztalcenie_grupa</code> wstawia wartość <code>"Ponadpodstawowe"</code> i przechodzi do kolejnego. Jeśli wykształcenie nie jest średnie, to sprawdza, czy jest zawodowe i w razie czego również wstawia <code>"Ponadpodstawowe"</code>. Jeśli nie jest ani średnie, ani zawodowe, to wstawia to, co akurat jest w kolumnie <code>wyksztalcenie</code>, czyli dla osób z wykształceniem podstawowym wstawia <code>"Podstawowe"</code>, a dla osób z wykształceniem wyższym <code>"Wyższe"</code><a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a>. W ten sposób z 4 kategorii wykształcenia zrobiły nam się 3. W podobny sposób przekodowywalibyśmy klucz w ankiecie na liczby, np. pisząc <code>H_1 == "Zdecydowanie się zgadzam" ~ 6</code>.</p>
 </section>
 </section>
 <section id="sortowanie-i-kolejność-kolumn" class="level2">
@@ -974,10 +976,10 @@ dbl  (1): ID
 #   wyksztalcenie_grupa &lt;chr&gt;, and abbreviated variable name ¹​wyksztalcenie</code></pre>
 </div>
 </div>
-<p>Po zapisaniu zmiennej <code>df</code>, tracimy naszą starą zmienną. Tym samym, jeśli uruchomilibyśmy nasz kod jeszcze raz, ale już na nowej zmiennej <code>df</code>, wyskoczy nam błąd. W końcu nowa zmienna nie ma tych samych kolumn, co stara zmienna. Co więcej, takiej operacji nie da się cofnąć. Jeśli chcemy dostać swoją starą, brudną bazę, musimy ponownie załadować ją z pliku. To prowadzi nas do ważnego wniosku co do pisania skryptów – powinniśmy pisać je tak, żeby dało się z nich odtworzyć wszystko, co robiliśmy od samego początku<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a>. Dzięki temu, jeśli chcemy się wycofać, zaznaczamy i wykonujemy cały kod przed interesującym nas momentem. Brak skrótu Ctrl+Z jest jedną z ważniejszych różnic w analizie w programach typu SPSS czy Statistica a w językach programowania typu R czy Python. Wbrew pozorom, idzie się przyzwyczaić. Ta sama właściwość pozwala na zachowanie przejrzystości w nauce – pokaż mi swój kod, a będę wiedział bardzo dokładnie, jak prowadziłeś(-aś) swoją analizę.</p>
+<p>Po zapisaniu zmiennej <code>df</code>, tracimy naszą starą zmienną. Tym samym, jeśli uruchomilibyśmy nasz kod jeszcze raz, ale już na nowej zmiennej <code>df</code>, wyskoczy nam błąd. W końcu nowa zmienna nie ma tych samych kolumn, co stara zmienna. Co więcej, takiej operacji nie da się cofnąć. Jeśli chcemy dostać swoją starą, brudną bazę, musimy ponownie załadować ją z pliku. To prowadzi nas do ważnego wniosku co do pisania skryptów – powinniśmy pisać je tak, żeby dało się z nich odtworzyć wszystko, co robiliśmy od samego początku<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a>. Dzięki temu, jeśli chcemy się wycofać, zaznaczamy i wykonujemy cały kod przed interesującym nas momentem. Brak skrótu Ctrl+Z jest jedną z ważniejszych różnic w analizie w programach typu SPSS czy Statistica a w językach programowania typu R czy Python. Wbrew pozorom, idzie się przyzwyczaić. Ta sama właściwość pozwala na zachowanie przejrzystości w nauce – pokaż mi swój kod, a będę wiedział bardzo dokładnie, jak prowadziłeś(-aś) swoją analizę.</p>
 <section id="grupowanie-i-agregowanie" class="level3">
 <h3 class="anchored" data-anchor-id="grupowanie-i-agregowanie">Grupowanie i agregowanie</h3>
-<p>Gdy mamy już bazę, zazwyczaj chcemy policzyć pewne statystyki dla grup badanych, np. dla osób różniących się wykształceniem, płcią czy jakąś manipulacją. Chcemy na przykład poznać średnią homofobię osób o różnym wykształceniu, sprawdzić liczność naszych podgrup czy policzyć inne zbiorcze statystyki. Możemy, oczywiście, odfiltrować najpierw osoby o wykształceniu podstawowym, policzyć dla nich, potem osoby o wykształceniu średnim itd. Są jednak prostsze sposoby, a obejmują one użycie <code>group_by</code> i <code>summarise</code><a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a>. Te dwie funkcje zazwyczaj idą ze sobą w parze i zgrupowane dane od razu trafiają do <code>summarise</code>. Poniżej przykład.</p>
+<p>Gdy mamy już bazę, zazwyczaj chcemy policzyć pewne statystyki dla grup badanych, np. dla osób różniących się wykształceniem, płcią czy jakąś manipulacją. Chcemy na przykład poznać średnią homofobię osób o różnym wykształceniu, sprawdzić liczność naszych podgrup czy policzyć inne zbiorcze statystyki. Możemy, oczywiście, odfiltrować najpierw osoby o wykształceniu podstawowym, policzyć dla nich, potem osoby o wykształceniu średnim itd. Są jednak prostsze sposoby, a obejmują one użycie <code>group_by</code> i <code>summarise</code><a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a>. Te dwie funkcje zazwyczaj idą ze sobą w parze i zgrupowane dane od razu trafiają do <code>summarise</code>. Poniżej przykład.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(wyksztalcenie) <span class="sc">%&gt;%</span></span>
@@ -1044,7 +1046,7 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 </section>
 <section id="format-długi-i-szeroki" class="level2">
 <h2 class="anchored" data-anchor-id="format-długi-i-szeroki">Format długi i szeroki</h2>
-<p>Format długi i szeroki to coś, co rzadko pojawia się w tekstach wprowadzających i nie mam pojęcia czemu. To jest naprawdę ważne. Przełożenie danych z jednego formatu na drugi to często podstawowa operacja, jaką musimy wykonać, kiedy chcemy coś policzyć. Nie mam chyba ani jednego projektu, w którym bym tego nie robił. Do tego współczesne komendy, które to robią, są naprawdę proste. Zacznijmy jednak od tego, co to jest format długi i szeroki.</p>
+<p>Format długi i szeroki to coś, co rzadko pojawia się w tekstach wprowadzających i nie mam pojęcia czemu. To jest naprawdę ważne. Przełożenie danych z jednego formatu na drugi to często podstawowa operacja, jaką musimy wykonać, kiedy chcemy coś policzyć. Nie mam chyba ani jednego projektu, w którym bym tego nie robił. Do tego współczesne komendy, które to robią, są naprawdę proste. Tym bardziej zaskakujące jest, że np. w Excelu wykonać taką operację jest trudno, jeśli nie umie się korzystać z Power Query. Zacznijmy jednak od tego, co to jest format długi i szeroki.</p>
 <p>Terminy te odnoszą się do sposobu, w jaki składujemy dane. Format szeroki jest tym, co odruchowo tworzymy, kiedy robimy czyste tabelki. Jeden wiersz to jedna obserwacja. Wszystkie dane o konkretnej osobie badanej znajdują się w tym jednym wierszu. Każda kolumna to jedna zebrana dana, np. odpowiedź na konkretne pytanie. W takim formacie znajduje się teraz nasza baza. Weźmy z niej kilka kolumn, po czym użyjmy <code>head</code>, żeby zobaczyć pierwszych pięć wierszy.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>df_wide <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="co"># zapiszę to jako df_wide, na później</span></span>
@@ -1089,7 +1091,7 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 </div>
 </div>
 <p>Zacznę od skomentowania samych danych, a potem wyjaśnię funkcję. Dane w formacie długim mają oddzielną kolumnę na numer pytania i odpowiedź. Pięć kolumn z odpowiedziami na pytania zmieniliśmy w dwie. Powoduje to jednak, że każda osoba badana ma pięć wierszy – w każdym odpowiedź na tylko jedno pytanie. Najpierw następuje 5 wierszy osoby z id 1, potem 5 wierszy osoby z id 2 itd. Widać więc dlaczego formaty te nazywają się szeroki i długi. Szeroki ma wiele kolumn, mało wierszy (1 na osobę), długi mało kolumn, wiele wierszy (1 na każde pytanie).</p>
-<p>Po co nam taki format? Zawiera te same informacje, co format długi, a trudniej się to czyta. Po pierwsze umożliwia nam to policzenie niektórych rzeczy, których nie policzylibyśmy z formatu szerokiego. Dla przykładu, teraz mogę grupować dane według pytań, żeby sprawdzić, czy na każde pytanie badani odpowiadają podobnie. Jeśli moja skala jest dobra i każde pytanie rzeczywiście mierzy to samo, to odpowiedzi na wszystkie pytania powinny być podobne. Być może zrobiłem jakieś kontrowersyjne pytanie, na które wszyscy odpowiadają nisko, mimo że nie różnią się, w tym przykładzie, poziomem homofobii. Mogę więc, na oko, sprawdzić rzetelność pozycji testowych<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a>. Formatu długiego wymagają też niektóre testy statystyczne.</p>
+<p>Po co nam taki format? Zawiera te same informacje, co format długi, a trudniej się to czyta. Po pierwsze umożliwia nam to policzenie niektórych rzeczy, których nie policzylibyśmy z formatu szerokiego. Dla przykładu, teraz mogę grupować dane według pytań, żeby sprawdzić, czy na każde pytanie badani odpowiadają podobnie. Jeśli moja skala jest dobra i każde pytanie rzeczywiście mierzy to samo, to odpowiedzi na wszystkie pytania powinny być podobne. Być może zrobiłem jakieś kontrowersyjne pytanie, na które wszyscy odpowiadają nisko, mimo że nie różnią się, w tym przykładzie, poziomem homofobii. Mogę więc, na oko, sprawdzić rzetelność pozycji testowych<a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a>. Formatu długiego wymagają też niektóre testy statystyczne.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="sc">%&gt;%</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
@@ -1114,13 +1116,83 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="sc">%&gt;%</span></span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"pytanie"</span>, <span class="at">values_from =</span> <span class="st">"ocena"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><code>pivot_wider</code> ma prostszą składnię, ponieważ nie trzeba w niej wskazywać zakresu kolumn do rozwinięcia, a jedynie w jakiej kolumnie znajdują się nazwy kolumn, a w jakiej jej wartości. Robimy to odpowiednio argumentami <code>names_from</code> i <code>values_from</code>. Jeśli jakiejś wartości nie ma w formacie długim (np. gdy osoba z numerem 4 nie odpowiedziała na pytanie 2, to w formacie długim może nie być wiersza <code>4 H_2</code>), to <code>pivot_wider</code> automatycznie wstawi w tę komórkę <code>NA</code><a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a>.</p>
+<p><code>pivot_wider</code> ma prostszą składnię, ponieważ nie trzeba w niej wskazywać zakresu kolumn do rozwinięcia, a jedynie w jakiej kolumnie znajdują się nazwy kolumn, a w jakiej jej wartości. Robimy to odpowiednio argumentami <code>names_from</code> i <code>values_from</code>. Jeśli jakiejś wartości nie ma w formacie długim (np. gdy osoba z numerem 4 nie odpowiedziała na pytanie 2, to w formacie długim może nie być wiersza <code>4 H_2</code>), to <code>pivot_wider</code> automatycznie wstawi w tę komórkę <code>NA</code><a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a>. Zdarza się, że funkcji tej musimy użyć dlatego, że niektóre programy generują dane w formacie długim.</p>
+</section>
+<section id="retesty-czyli-złączenia-joins" class="level2">
+<h2 class="anchored" data-anchor-id="retesty-czyli-złączenia-joins">Retesty czyli złączenia (<em>joins</em>)</h2>
+<p>Złączenia (<em>joins</em>) to, jak nazwa wskazuje, metoda łączenia dwóch baz danych. Jest to jedna z podstawowych operacji na bazach danych, znana co najmniej od lat 70. i instrukcji <code>JOIN</code> w SQL. Jest to także jedna z operacji niedostępnych w Excelu bez Power Query. W praktyce badawczej może być ona konieczna, gdy mamy badanie wieloczęściowe, w którym musimy stosować wiele baz danych (np. jedną tworzą pomiary z eyetrackera, drugą wyniki w ankiecie, a trzecią test szybkości reakcji). Zdarza się to również często w prostych badaniach ankietowych, kiedy po jakimś czasie musimy wykonać retest. W obu tych przypadkach lądujemy z dwiema (lub więcej) bazami, które – miejmy nadzieję – mają jaką wspólną kolumnę, identyfikator osoby badanej, taki sam w każdej z trzech baz<a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a>.</p>
+<p>Jak więc takie bazy połączyć? Wykorzystajmy tutaj dwie bazy zawierające test i retest, zrobione podczas walidacji kwestionariusza o nazwie KTR. Składał się on z dwóch skal oznaczonych tutaj literkami O i W. Standardową procedurą przy projektowaniu kwestionariusza jest powtórzenie pomiaru po jakimś czasie, żeby sprawdzić, na ile wyniki są stabilne. My taką procedurę wykonaliśmy, przez co dysponujemy dwoma oddzielnymi bazami. Zerknijmy na nie.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>db_test <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./dane/podstawy-R/join-test.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>db_retest <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./dane/podstawy-R/join-retest.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>db_test</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 76 × 3
+   ID    KTR_O KTR_W
+   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 B3RP     26    30
+ 2 v4Eb     31    36
+ 3 j3vB     20    31
+ 4 wced     27    37
+ 5 RhPy     15    31
+ 6 aoEF     32    31
+ 7 CjRB     23    28
+ 8 bYhC     28    41
+ 9 zCdZ     17    27
+10 wspA     21    34
+# … with 66 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>db_retest</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 66 × 3
+   Subject KTR_O KTR_W
+   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+ 1 j3vB       23    31
+ 2 wced       25    38
+ 3 aoEF       33    31
+ 4 CjRB       24    34
+ 5 bYhC       29    41
+ 6 zCdZ       17    28
+ 7 wspA       24    29
+ 8 GGwI       18    35
+ 9 L9ZW       23    35
+10 1stk       24    33
+# … with 56 more rows</code></pre>
+</div>
+</div>
+<p>Pierwsza rzecz, która może zwrócić naszą uwagę, to znacznie mniejsza liczba osób badanych przy reteście. Jest to naturalne, jako że wiele osób, mimo wcześniejszych deklaracji nie wypełnia naszego testu po raz drugi. Widzimy też, że każdy wiersz posiada jakiegoś rodzaju kolumnę z unikatowym identyfikatorem osoby badanej. W języku relacyjnych baz danych takie unikatowe kolumny określa się jako <code>PRIMARY KEY</code>. W bazie danych z pierwszego testu kolumna ta nosi nazwę <code>ID</code>, a w bazie danych z retestu nazywa się ona <code>Subject</code>. Od razu wychodzi na jaw, że identyfikatory są spreparowane, bo nikt się nie pomylił, nie robił dopisków ani nie zdecydował się z jakiegoś powodu NaGlE pIsAć TaK.</p>
+<p>Żeby połączyć te bazy, musimy najpierw zdecydować, jak chcemy to zrobić. Możemy albo przyłączyć wyniki z retestu do bazy z testem, albo przyłączyć wyniki z testu do bazy z retestem. Jest to o tyle istotne, że jeśli przyłączymy retest do testu, to będziemy mieli puste wartości u tych osób, które nie wypełniły retestu. Jeśli zrobimy odwrotnie, to z założenia każda osoba, która wypełniła retest, wcześniej wypełniła test, a więc figuruje w pierwotnej bazie. W praktyce bywa różnie. Na przykład ludzie kłamią, że wypełnili test, a jak dostaną link do retestu, to myślą, że w takim razie chociaż to wypełnią. Tak czy inaczej, ta decyzja determinuje typ złączenia, jaki wybierzemy. Najbardziej powszechnym typem jest <code>LEFT JOIN</code>, który do każdego wiersza jednej bazy (pisanej jako pierwszej, czyli po lewej) przypisuje pasujący wiersz drugiej bazy (pisanej jako drugiej, czyli po prawej). Jeśli jakiś wiersz w lewej bazie nie ma odpowiednika w prawej bazie, otrzymujemy puste wartości. Jeśli jakiś wiersz w bazie po prawej nie został przypisany do żadnego wiersza po lewej, nie jesteśmy o tym informowani. Więcej o różnych typach złączeń (np. pozwalających uzyskać wszystkie możliwe kombinacje wierszy) można przeczytać i zobaczyć na obrazkach <a href="https://dataschool.com/how-to-teach-people-sql/sql-join-types-explained-visually/">na przykład tutaj</a>.</p>
+<p>Ja przyłączę retest do bazy z wynikami pierwszego testu. Widzę jednak dwa problemy, które będę musiał rozwiązać. Po pierwsze, kolumna z identyfikatorem osoby badanej nazywa się inaczej w obu bazach. Po drugie, kolumny <code>KTR_O</code> i <code>KTR_W</code> nazywają się tak samo w obu bazach. Będę więc musiał wskazać R, na podstawie jakich kolumn ma dokonać złączenia, a także jak ma nazwać kolumny w gotowej bazie, żebym wiedział, które wyniki dotyczą pierwszego testu, a które retestu.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>db_test <span class="sc">%&gt;%</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>        db_retest,</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">by =</span> <span class="fu">join_by</span>(ID <span class="sc">==</span> Subject),</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"_retest"</span>)</span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 76 × 5
+   ID    KTR_O KTR_W KTR_O_retest KTR_W_retest
+   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+ 1 B3RP     26    30           NA           NA
+ 2 v4Eb     31    36           NA           NA
+ 3 j3vB     20    31           23           31
+ 4 wced     27    37           25           38
+ 5 RhPy     15    31           NA           NA
+ 6 aoEF     32    31           33           31
+ 7 CjRB     23    28           24           34
+ 8 bYhC     28    41           29           41
+ 9 zCdZ     17    27           17           28
+10 wspA     21    34           24           29
+# … with 66 more rows</code></pre>
+</div>
+</div>
+<p>Pierwszy problem rozwiązałem za pomocą argumentu <code>by</code>. Od wersji <code>dplyr</code> 1.1.0 przyjmuje on inną funkcję o nazwie <code>join_by</code>. W jej nawiasach precyzujemy, na podstawie jakich kolumn należy dokonać złączenia. Identyczne kolumny łączymy znakiem <code>==</code>. Drugi problem rozwiązałem dodając w argumencie <code>suffix</code> przyrostki do nazw kolumn. Zawsze zapisuje się je jako zestaw, czyli wewnątrz <code>c()</code> i zawsze najpierw jest w cudzysłowie przyrostek lewej bazy (u nas <code>db_test</code>), a potem przyrostek prawej bazy (u nas <code>db_retest</code>). Ja chciałem, by kolumny pierwotnej bazy nie miały przyrostka, więc za przyrostek dałem pusty ciąg znaków (czyli po prostu nic w cudzysłowie), zaś do kolumn bazy z retestem dodałem przyrostek <code>"_retest"</code>. Efekt widać na obrazku – 5 kolumn i puste wartości u osób, które nie wypełniły retestu.</p>
+<p>Jak widać złączenia to zaskakująco szeroki temat, który daje duże możliwości. Omówiona tu funkcja <code>left_join</code> jest najczęściej stosowana, ale warto zerknąć do dokumentacji i w tutoriale, żeby chociaż dowiedzieć się, co możemy za pomocą złączeń zrobić.</p>
 <blockquote class="blockquote">
 <p>Pozostała część już wkrótce.</p>
 </blockquote>
-</section>
-<section id="złączenia-joins" class="level2">
-<h2 class="anchored" data-anchor-id="złączenia-joins">Złączenia (<em>joins</em>)</h2>
 </section>
 </section>
 <section id="eksploracja-danych" class="level1">
@@ -1136,6 +1208,9 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 </section>
 </section>
 <section id="formatowanie-kodu" class="level1">
+<h1>Formatowanie kodu</h1>
+</section>
+<section id="bibliografia" class="level1">
 
 
 
@@ -1143,7 +1218,7 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Formatowanie kodu</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
 <div id="ref-field2012" class="csl-entry" role="doc-biblioentry">
 Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
 </div>
@@ -1167,10 +1242,12 @@ Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R
 <li id="fn15"><p>Wyrażenia regularne (<em>Regular expressions</em> w skrócie <em>RegEx</em>) to wielki temat, a liźnięcie go polecam każdemu, czy programuje, czy nie. Pozwalają one na wyszukiwanie regularnych wzorców w tekście, np. <code>"H_\d+"</code> oznacza „“H_” a potem jedna lub więcej liczba”. Można je wykorzystywać np. w LibreOffice czy Google Docs (Word zrobił własny system, bo przecież czemu wdrażać światowe standardy, jak można zrobić coś tylko dla tego jednego programu?). Wiele razy oszczędzały mi godzin mechanicznej pracy. Obfita instrukcja znajduje się w ściądze do <code>stringr</code>.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn16"><p>Jej zachowanie możemy modyfikować, np. mówiąc jej, że w liczbach typu <code>128 242,78</code> spację ma traktować jako rozdzielacz dużych liczb, a przecinek jako operator dziesiętny (w krajach anglosaskich tę funkcję pełni zazwyczaj kropka). Inaczej <code>parse_number("128 242,78")</code> zwróci nam pierwszą napotkaną liczbę, czyli 128. Szczegóły można znaleźć w dokumentacji, ale w takim wypadku powinniśmy użyć <code>parse_number("128 242,78", locale = locale(grouping_mark = " ", decimal_mark = ","))</code>.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn17"><p>W chwili kiedy to piszę, czyli luty 2023 r., <code>pick</code> jest świeżynką, wprowadzoną do <code>dplyr</code> w wersji 1.1.0 na koniec stycznia 2023 r. Jeśli Twój R jej nie znajduje, warto zaktualizować pakiety, albo guzikami w RStudio, albo funkcją <code>devtools::update_packages()</code>. Jeśli nie ma takiej możliwości, w miejsce <code>pick</code> można użyć <code>across</code>.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn18"><p>Dlatego ja zazwyczaj wstępną bazę ładuję do zmiennej typu <code>df_raw</code>, i ją przekształcam, zaś do zmiennej <code>df</code> zapisuję już wyczyszczoną bazę. Swój kod czyszczący zaczynam więc od <code>df &lt;- df_raw %&gt;%</code>. Dzięki temu zawsze mogę na szybko zerknąć do niewyczyszczonej bazy, jakbym czegoś z niej potrzebował.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn19"><p><code>tidyverse</code> dopuszcza zarówno pisownię brytyjską <code>summarise</code> jak i amerykańską <code>summarize</code>. Podobnie w przypadku innych rozbieżności. Dokumentacja wskazuje jednak, że pisownia brytyjska jest preferowana. Też ją preferuję.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn20"><p>Oczywiście psychometria dysponuje lepszymi wskaźnikami rzetelności testów niż proste średnie odpowiedzi. Fakt pozostaje faktem jednak, że grupować dane po pytaniach można tylko wtedy, gdy są w jednej kolumnie.<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn21"><p>To zachowanie można zmodyfikować argumentem <code>values_fill</code>. Szczegóły można znaleźć w dokumentacji. Swoją drogą to jest piękne w R, jak bardzo jest on giętki. Funkcje mają domyślne zachowania, ale jeśli użytkownik w swojej szczególnej sytuacji potrzebuje czegoś innego, to zawsze może to ustawić. Ta uniwersalność jest sama w sobie dobrym powodem, żeby uczyć się&nbsp;programowania.<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn18"><p>Warto zauważyć, że zapisane tu warunki moglibyśmy uprościć do postaci <code>wyksztalcenie == "Średnie" | wyksztalcenie == "Podstawowe"</code> albo jeszcze bardziej <code>wyksztalcenie %in% c("Średnie", "Podstawowe")</code>. Warto też zerknąć w nową siostrę <code>case_when</code>, tj. <code>case_match</code>, która również mogłaby nam tutaj pomóc. Szczegóły, oczywiście, w dokumentacji.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn19"><p>Dlatego ja zazwyczaj wstępną bazę ładuję do zmiennej typu <code>df_raw</code>, i ją przekształcam, zaś do zmiennej <code>df</code> zapisuję już wyczyszczoną bazę. Swój kod czyszczący zaczynam więc od <code>df &lt;- df_raw %&gt;%</code>. Dzięki temu zawsze mogę na szybko zerknąć do niewyczyszczonej bazy, jakbym czegoś z niej potrzebował.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn20"><p><code>tidyverse</code> dopuszcza zarówno pisownię brytyjską <code>summarise</code> jak i amerykańską <code>summarize</code>. Podobnie w przypadku innych rozbieżności. Dokumentacja wskazuje jednak, że pisownia brytyjska jest preferowana. Też ją preferuję.<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn21"><p>Oczywiście psychometria dysponuje lepszymi wskaźnikami rzetelności testów niż proste średnie odpowiedzi. Fakt pozostaje faktem jednak, że grupować dane po pytaniach można tylko wtedy, gdy są w jednej kolumnie.<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn22"><p>Czasami możemy też wykorzystać inną informację o osobie badanej jako identyfikator. Brałem udział w badaniach, w których osoba badana wypełniała ankietę i w tym samym czasie była nagrywana. Potem łączyłem informacje z nagrania z informacjami z ankiety na podstawie czasu wypełniania ankiety i czasu nagrywania. Jak widać, wszystko jest możliwe, choć domyślne złączenia z <code>dplyr</code>, w chwili pisania tego tekstu, nie pozwalają na pełną giętkość. Wtedy użyłem złączeń z pakietu <code>fuzzyjoin</code>.<a href="#fnref22" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn23"><p>Czasami możemy też wykorzystać inną informację o osobie badanej jako identyfikator. Brałem udział w badaniach, w których osoba badana wypełniała ankietę i w tym samym czasie była nagrywana. Potem łączyłem informacje z nagrania z informacjami z ankiety na podstawie czasu wypełniania ankiety i czasu nagrywania. Jak widać, wszystko jest możliwe, choć domyślne złączenia z <code>dplyr</code>, w chwili pisania tego tekstu, nie pozwalają na pełną giętkość. Wtedy użyłem złączeń z pakietu <code>fuzzyjoin</code>.<a href="#fnref23" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
