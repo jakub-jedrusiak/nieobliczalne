@@ -624,13 +624,13 @@ Kod ten możemy uruchomić dla dowolnej ilości danych, w dowolnym momencie. Jes
 df
 ```
 
-Po zapisaniu zmiennej `df`, tracimy naszą starą zmienną. Tym samym, jeśli uruchomilibyśmy nasz kod jeszcze raz, ale już na nowej zmiennej `df`, wyskoczy nam błąd. W końcu nowa zmienna nie ma tych samych kolumn, co stara zmienna. Co więcej, takiej operacji nie da się cofnąć. Jeśli chcemy dostać swoją starą, brudną bazę, musimy ponownie załadować ją z pliku. To prowadzi nas do ważnego wniosku co do pisania skryptów – powinniśmy pisać je tak, żeby dało się z nich odtworzyć wszystko, co robiliśmy od samego początku[^podstawy_r-19]. Dzięki temu, jeśli chcemy się wycofać, zaznaczamy i wykonujemy cały kod przed interesującym nas momentem. Brak skrótu Ctrl+Z jest jedną z ważniejszych różnic w analizie w programach typu SPSS czy Statistica a w językach programowania typu R czy Python. Wbrew pozorom, idzie się przyzwyczaić. Ta sama właściwość pozwala na zachowanie przejrzystości w nauce – pokaż mi swój kod, a będę wiedział bardzo dokładnie, jak prowadziłeś(-aś) swoją analizę.
+Po zapisaniu zmiennej `df`, tracimy naszą starą zmienną. Tym samym, jeśli uruchomilibyśmy nasz kod jeszcze raz, ale już na nowej zmiennej `df`, wyskoczy nam błąd. W końcu nowa zmienna nie ma tych samych kolumn, co stara zmienna. Co więcej, takiej operacji nie da się cofnąć. Jeśli chcemy dostać swoją starą, brudną bazę, musimy ponownie załadować ją z pliku. To prowadzi nas do ważnego wniosku co do pisania skryptów – powinniśmy pisać je tak, żeby dało się z nich odtworzyć wszystko, co robiliśmy od samego początku[^podstawy_r-18]. Dzięki temu, jeśli chcemy się wycofać, zaznaczamy i wykonujemy cały kod przed interesującym nas momentem. Brak skrótu Ctrl+Z jest jedną z ważniejszych różnic w analizie w programach typu SPSS czy Statistica a w językach programowania typu R czy Python. Wbrew pozorom, idzie się przyzwyczaić. Ta sama właściwość pozwala na zachowanie przejrzystości w nauce – pokaż mi swój kod, a będę wiedział bardzo dokładnie, jak prowadziłeś(-aś) swoją analizę.
 
-[^podstawy_r-19]: Dlatego ja zazwyczaj wstępną bazę ładuję do zmiennej typu `df_raw`, i ją przekształcam, zaś do zmiennej `df` zapisuję już wyczyszczoną bazę. Swój kod czyszczący zaczynam więc od `df <- df_raw %>%`. Dzięki temu zawsze mogę na szybko zerknąć do niewyczyszczonej bazy, jakbym czegoś z niej potrzebował.
+[^podstawy_r-18]: Dlatego ja zazwyczaj wstępną bazę ładuję do zmiennej typu `df_raw`, i ją przekształcam, zaś do zmiennej `df` zapisuję już wyczyszczoną bazę. Swój kod czyszczący zaczynam więc od `df <- df_raw %>%`. Dzięki temu zawsze mogę na szybko zerknąć do niewyczyszczonej bazy, jakbym czegoś z niej potrzebował.
 
 ### Grupowanie i agregowanie
 
-Gdy mamy już bazę, zazwyczaj chcemy policzyć pewne statystyki dla grup badanych, np. dla osób różniących się wykształceniem, płcią czy jakąś manipulacją. Chcemy na przykład poznać średnią homofobię osób o różnym wykształceniu, sprawdzić liczność naszych podgrup czy policzyć inne zbiorcze statystyki. Możemy, oczywiście, odfiltrować najpierw osoby o wykształceniu podstawowym, policzyć dla nich, potem osoby o wykształceniu średnim itd. Są jednak prostsze sposoby, a obejmują one użycie `group_by` i `summarise`[^podstawy_r-18]. Te dwie funkcje zazwyczaj idą ze sobą w parze i zgrupowane dane od razu trafiają do `summarise`. Poniżej przykład.
+Gdy mamy już bazę, zazwyczaj chcemy policzyć pewne statystyki dla grup badanych, np. dla osób różniących się wykształceniem, płcią czy jakąś manipulacją. Chcemy na przykład poznać średnią homofobię osób o różnym wykształceniu, sprawdzić liczność naszych podgrup czy policzyć inne zbiorcze statystyki. Możemy, oczywiście, odfiltrować najpierw osoby o wykształceniu podstawowym, policzyć dla nich, potem osoby o wykształceniu średnim itd. Są jednak prostsze sposoby, a obejmują one użycie `group_by` i `summarise`[^podstawy_r-19]. Te dwie funkcje zazwyczaj idą ze sobą w parze i zgrupowane dane od razu trafiają do `summarise`. Poniżej przykład.
 
 [^podstawy_r-19]: `tidyverse` dopuszcza zarówno pisownię brytyjską `summarise` jak i amerykańską `summarize`. Podobnie w przypadku innych rozbieżności. Dokumentacja wskazuje jednak, że pisownia brytyjska jest preferowana. Też ją preferuję.
 
@@ -646,9 +646,9 @@ df %>%
     )
 ```
 
-Jak widzimy, dostaliśmy tabelkę z wykształceniem i wskazanymi statystykami. Funkcja `n` zliczyła nam przypadki osób z poszczególnym wykształceniem, `mean` policzyła średnią, `sd` odchylenie standardowe, a `median` medianę. `V` to tzw. współczynnik zmienności. Co to jest, nie jest teraz szczególnie ważne. Policzyłem to tutaj, żeby pokazać, że w obliczeniach możemy też wpisywać niestandardowe operacje (jak dzielenie) bez żadnych strasznych funkcji anonimowych, a także że możemy wziąć wartości z innych kolumn jako argumenty do naszych przekształceń. Tutaj `V` to odchylenie standardowe średniej homofobii (`H_SD`) podzielone przez samą średnią (`H_M`). Każdą kolumnę mogliśmy nazwać wedle życzenia. Jak dowiemy się w podrozdziale o eksploracji danych, istnieją funkcje, które najpopularniejsze zastawy danych eksploracyjnych liczą za nas.
+Jak widzimy, dostaliśmy tabelkę z wykształceniem i wskazanymi statystykami. Funkcja `n` zliczyła nam przypadki osób z poszczególnym wykształceniem, `mean` policzyła średnią, `sd` odchylenie standardowe, a `median` medianę. `V` to tzw. współczynnik zmienności. Co to jest, nie jest teraz szczególnie ważne. Policzyłem to tutaj, żeby pokazać, że w obliczeniach możemy też wpisywać niestandardowe operacje (jak dzielenie) bez żadnych strasznych funkcji anonimowych, a także że możemy wziąć wartości z innych kolumn jako argumenty do naszych przekształceń. Tutaj `V` to odchylenie standardowe średniej homofobii (`H_SD`) podzielone przez samą średnią (`H_M`). Każdą kolumnę mogliśmy nazwać wedle życzenia. Grupować możemy na podstawie wielu zmiennych. Jak dowiemy się w podrozdziale o eksploracji danych, istnieją funkcje, które najpopularniejsze zastawy danych eksploracyjnych liczą za nas.
 
-Grupować możemy na podstawie wielu zmiennych. Poniżej przykład z innego zbioru danych, w którym pojawia się liczba krzyków w piosence w zależności od typu piosenki i jej autora [@field2012].
+Tak robiliśmy to zawsze, jednak `dplyr` 1.1.0. wprowadził inny sposób grupowania. Jeśli nie chcemy zapisywać grup w naszej bazie danych na później (czyli w większości przypadków), nie musimy w ogóle używać funkcji `group_by`. Zamiast tego `summarise` dostał argument `.by`, za pomocą którego możemy wskazać grupy jednorazowo, tylko na potrzeby tego jednego podsumowania. Więcej na temat argumentu `.by` można znaleźć w dokumentacji. Poniżej przykład z innego zbioru danych, w którym pojawia się liczba krzyków w piosence w zależności od typu piosenki i jej autora [@field2012].
 
 ```{r}
 # załadowanie danych z sieci
@@ -659,13 +659,13 @@ glimpse(df_gaze)
 
 # pogrupowanie i zliczenie średniej liczby krzyków
 df_gaze %>%
-    group_by(song_type, songwriter) %>%
     summarise(
-        M = mean(screams)
+        M = mean(screams),
+        .by = c(song_type, songwriter)
     )
 ```
 
-Zgrupowane dane pokazują nam, że Andy pisze bardziej krzykliwe piosenki od Malcolma, ale różnica powiększa się, gdy chodzi o piosenki symfoniczne.
+Kolumny do grupowania podałem jako zestaw, czyli wewnątrz `c()`. Zgrupowane w ten sposób dane pokazują nam, że Andy pisze bardziej krzykliwe piosenki od Malcolma, ale różnica powiększa się, gdy chodzi o piosenki symfoniczne.
 
 > Pozostała część już wkrótce.
 
