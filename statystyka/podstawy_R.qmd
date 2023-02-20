@@ -16,22 +16,25 @@ Dla niektórych ludzi perspektywa uczenia się języka programowania tylko po to
 
 [^podstawy_r-1]: Drugim najpopularniejszym jest R.
 
+```{=html}
 <!-- -->
-
+```
 3.  R to język programowania. Pozwala to na szybką automatyzację dużej liczby zadań i radzenia sobie z nieprzewidzianymi okolicznościami. Dla przykładu program do prowadzenia eksperymentów PsychoPy generuje dane w dość pogmatwanych arkuszach kalkulacyjnych, które trzeba dość mocno wyczyścić przed analizą. Problem jest jednak taki, że wyniki każdej osoby badanej zapisują się w osobnych plikach. Jeśli przebadaliśmy 150 osób, mamy 150 plików do wyczyszczenia. Jeśli piszemy analizę w R, to wystarczy wyczyścić jeden plik, a potem dopisać linijkę czy dwie, żeby R tak samo wyczyścił pozostałe 149 plików. Bardzo cenię sobie też możliwość łatwego wygenerowania nazw dla kolumn typu MMPI_001, MMPI_002, ..., MMPI_567. Wpisywanie tego ręcznie to nuda i marnowanie mnóstwa czasu, a w R to jedna linijka kodu.
 
 4.  Analizy są modyfikowalne i wielorazowego użytku. Co mam na myśli? Załóżmy, że zrobiliśmy całą analizę i nagle się orientujemy, że nie usunęliśmy z bazy kilku wierszy, które przez przypadek wytworzyliśmy, jak bawiliśmy się kwestionariuszem, zanim go upubliczniliśmy. Albo prowadzący przy sprawdzaniu prosi, żeby zmodyfikować nieco analizę, bo chce wyniki kwestionariuszy wyrażone jako średnia, a nie suma. Jeśli korzystamy ze zwykłego oprogramowania, w obu przypadkach musimy wyklikiwać analizy od początku. Jeśli nasza analiza jest w R, to mamy ją całą zapisaną przed oczami. Możemy zmienić coś na samym jej początku, kliknąć jeden guzik i gotowe. Jeszcze lepiej -- ta analiza siedzi na naszym komputerze, póki jej nie usuniemy, więc jeśli kiedyś trzeba by było wykonać podobne zadanie, to wystarczy prosta operacja kopiuj-wklej.
 
 5.  R to kompletny zestaw narzędzi dla analityków danych, jak głosi tytuł polecanej na wstępie książki. Nie są to słowa rzucone na wiatr. Korzystając np. z jamovi, zazwyczaj wcześniej czyścimy dane w Excelu. Jeśli potrzebujemy dane zmodyfikować, np. połączyć dwie bazy albo zmienić format szeroki na długi[^podstawy_r-2], to również w Excelu. A to się ciężko robi w Excelu, bo albo robimy to ręcznie, albo musimy nauczyć się Power Query. Potem robimy analizę, ładne wykresy (często wracamy się do Excela w tym celu) i piszemy raport w Wordzie. W R da się zrobić to wszystko. Niezwykle potężne i giętkie czyszczenie danych (za które uwielbiam R) z `tidyverse`, testy statystyczne, ładne wykresy w `ggplot2`, a na końcu nawet raport w Quarto (dawniej RMarkdown). Możemy nie wychodzić z R i często tak będziemy robić.
 
-[^podstawy_r-2]: To trudno sobie wyobrazić, łatwiej zobaczyć na obrazkach. Chodzi o to, czy mamy klasyczną wyczyszczoną bazę, w której jedna osoba badana to jeden wiersz, a każda kolumna to jeden pomiar (np. odpowiedź na pytanie). Czasem chcemy zamiast 11 kolumn (ID osoby badanej + 10 odpowiedzi na pytania) mieć tylko 3 kolumny (ID osoby badanej, numer pytania, odpowiedź). Wtedy każda osoba badana zajmuje 10 wierszy, ale każdy wiersz ma odpowiedź na tylko jedno pytanie. To potrafi być potrzebne do niektórych testów, grupowania danych itp. To jest technikalium, to nie jest statystyka *per se*, ale czasem trzeba to ogarniać, żeby rzeczywiście zrobić analizę.
+[^podstawy_r-2]: To trudno sobie wyobrazić, łatwiej zobaczyć na obrazkach. Chodzi o to, czy mamy klasyczną wyczyszczoną bazę, w której jedna osoba badana to jeden wiersz, a każda kolumna to jeden pomiar (np. odpowiedź na pytanie). Czasem chcemy zamiast 11 kolumn (ID osoby badanej + 10 odpowiedzi na pytania) mieć tylko 3 kolumny (ID osoby badanej, numer pytania, odpowiedź). Wtedy każda osoba badana zajmuje 10 wierszy, ale każdy wiersz ma odpowiedź na tylko jedno pytanie. To potrafi być potrzebne do niektórych testów, grupowania danych itp. To jest technikalium, to nie jest statystyka *per se*, ale czasem trzeba to ogarniać, żeby rzeczywiście zrobić analizę. Poświęciłem temu cały podrozdział @sec-pivot.
 
+```{=html}
 <!-- -->
-
+```
 6.  Wykresy. Wspominałem o tym wyżej, ale wykresy są warte osobnego punktu. Możliwości Excela są ograniczone. Dla przykładu wykres poniżej prezentuje wyniki badania nt. tego, jak wygląda homofobia u mężczyzn, którym się powie, że są niemęscy. W badaniu mierzyliśmy dodatkowo zmienną psychologiczną o nazwie normatywna męskość, czyli niejako stopień przywiązania do reguł, co *prawdziwy mężczyzna* powinien, a czego nie powinien. Wykres jest dość skomplikowany. Zawiera trzy zmienne dychotomiczne, co daje łącznie 8 kolumn w grupach po 4 i 2. Nie powiem, że zrobić taki wykres jest łatwo, bo dobre opanowanie `ggplot2` trochę zajmuje, ale gdy już opanujemy, co jest do opanowania, to hulaj dusza. Nawet najbardziej skomplikowane wykresy stają się możliwe. Gdy połączyć to z możliwościami dawanymi przez programistyczną warstwę R, nagle łatwe staje się wytworzenie serii pasujących do siebie stylem wykresów o tych samych wymiarach. Pozwala to uzyskać pełną spójność bez ręcznego poprawiania szczególików.
 
-![Homofobia u mężczyzn o zagrożonej i niezagrożonej męskości, w zależności od tego, jak wysoką mieli tzw. normatywną męskość. Gdy dodać to tego jeszcze podział na dwa rodzaje homofobii, robią się z tego trzy podziały i osiem różnych kolumn ze wspólnymi osiami, legendą i kolorami. Zrobienie tego w Excelu, o ile w ogóle możliwe, byłoby bardzo trudne.](./ilustracje/homofobia){#fig-homofobia}
-
+```{=html}
+<!-- -->
+```
 7.  Analizy można napisać niezależnie od procesu zbierania danych. Na III roku studiów miałem projekt studencki, w którym musieliśmy zrobić prosty eksperyment w PsychoPy, przeanalizować dane i zaprezentować wyniki. Termin był krótki, także ostatnie dane większość grup zdążyła zebrać dopiero na dzień przed terminem, w tym moja. Oznaczało to, że osoby robiące analizę statystyczną musiały siedzieć do późna, żeby wyrobić się z prezentacją. Ale że już wtedy umiałem co nieco R, to napisałem całą analizę kilka dni wcześniej, kiedy akurat miałem wolny wieczór. Kiedy zebraliśmy ostatnie dane, wystarczyło kliknąć „Run" i gotowe -- wykresy, testy, w mgnieniu oka policzone dla całego zestawu danych (wyczyszczonych! jak wspominałem wyżej, w PsychoPy czyszczenie danych bywa żmudne).
 
 8.  R jest zgodny z filozofią Open Science. O ruchu Open Science można mówić bardzo długo, ale ogólnie jest to ruch dążący do otwartego dostępu do raportów naukowych (za darmo), surowych danych i dokładnych opisów analiz statystycznych. Jeśli naukowiec załącza do swojego artykułu surową bazę danych i skrypt w R, inni naukowcy mogą sprawdzić, czy tamten nie manipulował danymi, nie stosował podejrzanych praktyk oraz czy po ludzku się gdzieś nie pomylił. Poza tym każdy może powtórzyć jego analizę i sprawdzić, czy rzeczywiście wychodzi, jak naukowiec zaraportował.
@@ -52,7 +55,7 @@ Druga sprawa to IDE, czyli coś, w czym będziemy pisać nasze skrypty. Ale jak 
 
 Gdy zainstalujemy i uruchomimy RStudio, naszym oczom ukaże się biały ekran, który na razie nie ma sensu, ale go nabierze. Przed rozpoczęciem pracy warto jest zajrzeć w ustawienia (Tools → Global options...), gdzie możemy zmienić kilka rzeczy. W zakładce Appearance możemy ustawić sobie ciemny tryb[^podstawy_r-5] i poczuć się jak programista. W zakładce Spelling możemy wybrać polski słownik do sprawdzania pisowni. Na ten moment tyle zmian powinno wystarczyć.
 
-[^podstawy_r-5]: Polecam Monokai.
+[^podstawy_r-5]: Sam używam [rscodeio](https://github.com/anthonynorth/rscodeio).
 
 # Środowisko R i RStudio {#sec-env}
 
@@ -339,7 +342,7 @@ df %>%
 Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery, ale możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu `tidy-select`. Tutaj akurat użyłem `starts_with("H_")`, żeby powiedzieć, że ma to zrobić ze wszystkimi kolumnami, których nazwy zaczynają się od `H_`. Te same funkcje możemy wykorzystywać w funkcji `select`. Kilka innych tego typu funkcji umieściłem w tabeli.
 
 | Funkcja         |                                           Wybierz wszystkie kolumny... |
-|------------------|-----------------------------------------------------:|
+|-------------------|----------------------------------------------------:|
 | `starts_with()` |                                         których nazwy zaczynają się od |
 | `ends_with()`   |                                            których nazwy kończą się na |
 | `contains()`    |                                        których nazwy zawierają w sobie |
@@ -549,7 +552,7 @@ W tym wypadku `case_when`, idąc wiersz po wierszu, sprawdza, czy w kolumnie `wy
 
 [^podstawy_r-20]: Warto zauważyć, że zapisane tu warunki moglibyśmy uprościć do postaci `wyksztalcenie == "Średnie" | wyksztalcenie == "Podstawowe"` albo jeszcze bardziej `wyksztalcenie %in% c("Średnie", "Podstawowe")`. Warto też zerknąć w nową siostrę `case_when`, tj. `case_match`, która również mogłaby nam tutaj pomóc. Szczegóły, oczywiście, w dokumentacji.
 
-## Sortowanie i kolejność kolumn
+## Sortowanie i kolejność kolumn {#sortowanie-i-kolejność-kolumn}
 
 Wychodzimy już z potężnej funkcji `mutate` i możemy czyścić dalej. Ostatnia rzecz, którą czasem chcemy zrobić (zazwyczaj ze względów estetycznych), to posortowanie wartości i ustawienie kolumn w określonej kolejności.
 
@@ -559,7 +562,7 @@ Za sortowanie w `tidyverse` odpowiada funkcja `arrange`. Domyślnie sortuje ona 
 
 #### Factors {#sec-factor}
 
-*Factor* to rodzaj danych, za pomocą których przechowujemy tekst, który ma tylko kilka możliwych wartości albo te wartości mają jakąś kolejność, którą chcemy wziąć pod uwagę. Jeśli mamy etykiety takie jak wykształcenie, czy grupa kontrolna/eksperymentalna, to powinniśmy je przechowywać właśnie w tej postaci. Danymi tego typu w `tidyverse` zarządza pakiet `forcats`. Żeby zmienić wykształcenie z tekstu na factor, dopiszemy jedną linijkę do naszego `mutate` i od razu posortujemy.
+Czynniki (*factors*) to rodzaj danych, za pomocą których przechowujemy tekst, który ma tylko kilka możliwych wartości albo te wartości mają jakąś kolejność, którą chcemy wziąć pod uwagę. Jeśli mamy etykiety takie jak wykształcenie, czy grupa kontrolna/eksperymentalna, to powinniśmy je przechowywać właśnie w tej postaci. Danymi tego typu w `tidyverse` zarządza pakiet `forcats`. Żeby zmienić wykształcenie z tekstu na factor, dopiszemy jedną linijkę do naszego `mutate` i od razu posortujemy.
 
 ```{r}
 #| eval: false
@@ -589,6 +592,29 @@ df %>%
 Komendę `factor` dla czytelności rozbiłem tutaj na trzy linijki, ale -- oczywiście -- można ją całą zapisać w jednej. Po pierwsze wskazałem, że na factor przerobiona ma być kolumna `wyksztalcenie`. Po drugie wskazałem, jakie wykształcenie może mieć wartości, zbierając je w jeden zestaw funkcją `c` i wrzucając do argumentu `levels`. Na koniec poinformowałem R, że w kolejność jest tutaj ważna, dopisując `ordered = TRUE`. Jeśli tak przerobione dane posortujemy, zobaczymy, że baza rzeczywiście zaczyna się od wykształcenia wyższego.
 
 ##### `Questionr` {#sec-questionr}
+
+Przy okazji czynników chciałbym wspomnieć o pierwszym dodatku (*addins*) do RStudio, jaki może nam się przydać. Dodatki to przyjmują różną formę, ale tutaj omówię dwa, które są graficznymi narzędziami pomagającymi pisać nam kod. Można mieć do nich mieszany stosunek, ale póki umiemy też napisać kod ręcznie (lub chociaż wiemy, jak skorzystać z dokumentacji), to mogą być dużą pomocą. Zwłaszcza na początku przygody z R. Pierwszym takim dodatkiem jest `Questionr`, który pozwala nam stworzyć komendy związane z czynnikami (i kategoryzować dane ilościowe, co ręcznie zrobimy w podrozdziale @sec-casewhen).
+
+`Questionr` instalujemy jak każdy inny pakiet (`install.packages("questionr")`). Od tego momentu (lub po zresetowaniu RStudio) w menu `addins` na górnej belce znajdziemy trzy nowe opcje. Ta interesująca nas to Level ordering. Na początku zobaczymy okienko, w którym możemy wybrać kilka rzeczy. W jakiej zmiennej chcemy zmienić kolejność, w jakiej kolumnie i z jakiego pakietu wziąć funkcję do zmiany kolejności (domyślnie jest to `fct_relevel` z `forcats`). W drugiej zakładce możemy graficznie ustawić taką kolejność, jaką chcemy. W ostatniej zakładce otrzymujemy gotowy kod. `Questionr` nie robi nic samodzielnie, ten kod trzeba jeszcze wkleić w skrypt. Z jednym kruczkiem. Nam chodzi o samą komendę `fct_relevel`, bez pierwszej linijki, która służy do zapisania zmian. Ponieważ my tworzymy `mutate`, to wystarczy, że skopiujemy nasze gotowe `fct_relevel()` do funkcji `mutate`, dopisując nazwę kolumny i pierwszy argument. Może być to użyteczne, jeśli mamy dużo czynników lub dużo poziomów w czynniku. Ostatecznie nasza komenda `mutate` z użyciem `questionr` wyglądałaby tak:
+
+```{r}
+#| eval: false
+mutate(
+        wiek = parse_number(wiek),
+        across(H_1:H_10, parse_number),
+        across(c(H_5, H_7), ~ 7 - .x),
+        H_suma = rowSums(pick(H_1:H_10)),
+        wyksztalcenie_grupa = case_when(
+            wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
+            wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
+            .default = wyksztalcenie
+        ),
+        wyksztalcenie = fct_relevel(
+            wyksztalcenie,
+            "Podstawowe", "Zawodowe", "Średnie", "Wyższe"
+        )
+)
+```
 
 ### Kolejność kolumn {#sec-relocate}
 
@@ -831,7 +857,7 @@ describeBy(screams ~ songwriter + song_type, data = as.data.frame(df_scream))
 
 W krótkich instrukcjach takie coś jest nawet czytelne. Warto pamiętać, że potoki nie są obowiązkowe, można równie dobrze zagnieżdżać funkcje. Cierpi na tym tylko czytelność kodu. Druga opcja, to wprost powiedzenie potokowi, gdzie ma wrzucić naszą bazę danych. Do tego właśnie służy `.`. Zapis `data = .` mówi potokowi „halo halo, proszę nie wrzucać bazy do pierwszego argumentu, tylko o tu, gdzie pokazałem(-am) kropką". Ostatecznie oba przykłady z tego podrozdziału są równoważne.
 
-## Statystyki opisowe z `rstatix::get_summary_stats`
+## Statystyki opisowe z `rstatix::get_summary_stats` {#statystyki-opisowe-z-rstatixget_summary_stats}
 
 Muszę się do czegoś przyznać. Przez lata wykorzystywałem `describe` i `describeBy` do statystyk opisowych, ale... są lepsze alternatywy. Chciałem jednak wykorzystać te funkcje jako praktyczny pretekst to pokazania różnic między `data.frame` i `tibble`, używania kropki z potokami i ogólnie jak sobie radzić, jak nowszych alternatyw nie ma. Jednak do liczenia statystyk opisowych takie alternatywy są. I przychodzą do nas z `rstatix`. Jest to świetny, nowoczesny pakiet, który szerzej omówimy w podrozdziale @sec-rstatix.
 
@@ -849,7 +875,7 @@ df_scream %>%
     get_summary_stats()
 ```
 
-## Tabele liczności z `rstatix::freq_table`
+## Tabele liczności z `rstatix::freq_table` {#tabele-liczności-z-rstatixfreq_table}
 
 Dla danych kategorialnych (np. płeć, wykształcenie, klasa) nie liczymy statystyk opisowych, a tabele liczności. Chcemy na przykład wiedzieć, ile w naszej bazie mamy osób z wykształceniem wyższym, ile ze średnim itd. W podrozdziale @sec-summarise pokazałem, jak to zrobić ręcznie funkcjami `summarise` i `n`. Pakiet `rstatix` ma dla nas gotową funkcję `freq_table` właśnie do tego celu. Wymaga ona jedynie podania, które kolumny z naszej tabeli ująć. Robimy to tak samo, jak zrobilibyśmy w funkcji `select` (patrz @sec-select) czy `across` (patrz @sec-across).
 
@@ -857,7 +883,7 @@ Dla danych kategorialnych (np. płeć, wykształcenie, klasa) nie liczymy statys
 freq_table(df, wyksztalcenie)
 ```
 
-## Macierze korelacji i ich istotność z `rstatix::cor_mat`
+## Macierze korelacji i ich istotność z `rstatix::cor_mat` {#macierze-korelacji-i-ich-istotność-z-rstatixcor_mat}
 
 W ramach eksploracji chcemy czasami zrobić macierz korelacji całego naszego zestawu danych. Może nam do tego posłużyć funkcja `cor_mat` z pakietu `rstatix`. Zobaczmy to na przykładzie bazy `db_joined` z podrozdziału @sec-join.
 
@@ -898,30 +924,32 @@ Otrzymujemy naszą macierz korelacji wzbogaconą o gwiazdki. Domyślnie mamy sta
 
 > Pozostała część już wkrótce.
 
-# Wykresy
+# Wykresy {#wykresy}
 
-## Mapowanie estetyk
+## Mapowanie estetyk {#mapowanie-estetyk}
 
-## Obiekty `geom_`
+## Obiekty `geom_` {#obiekty-geom_}
 
-## Tytuły osi i wykresu
+## Tytuły osi i wykresu {#tytuły-osi-i-wykresu}
 
-## Wygląd wykresów
+## Wygląd wykresów {#wygląd-wykresów}
 
-### `ggThemeAssist`
+### `ggThemeAssist` {#ggthemeassist}
 
-### Gotowe szablony
+### Gotowe szablony {#gotowe-szablony}
 
 # Testy statystyczne {#sec-tests}
 
-## Czyste wyniki, czyli pakiet `broom`
+## Czyste wyniki, czyli pakiet `broom` {#czyste-wyniki-czyli-pakiet-broom}
 
 ## Pipe-friendly `rstatix` {#sec-rstatix}
 
-# Formatowanie kodu
+# Formatowanie kodu {#formatowanie-kodu}
 
-## `lintr`
+## `lintr` {#lintr}
 
-## `styler`
+## `styler` {#styler}
 
-# Bibliografia
+# Posłowie {#posłowie}
+
+# Bibliografia {#bibliografia}
