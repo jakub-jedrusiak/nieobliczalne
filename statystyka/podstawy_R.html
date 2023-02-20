@@ -323,6 +323,7 @@ div.csl-indent {
   <li><a href="#lintr" id="toc-lintr" class="nav-link" data-scroll-target="#lintr"><code>lintr</code></a></li>
   <li><a href="#styler" id="toc-styler" class="nav-link" data-scroll-target="#styler"><code>styler</code></a></li>
   </ul></li>
+  <li><a href="#posłowie" id="toc-posłowie" class="nav-link" data-scroll-target="#posłowie">Posłowie</a></li>
   <li><a href="#bibliografia" id="toc-bibliografia" class="nav-link" data-scroll-target="#bibliografia">Bibliografia</a></li>
   </ul>
 </nav>
@@ -366,12 +367,7 @@ div.csl-indent {
 <ol start="6" type="1">
 <li>Wykresy. Wspominałem o tym wyżej, ale wykresy są warte osobnego punktu. Możliwości Excela są ograniczone. Dla przykładu wykres poniżej prezentuje wyniki badania nt. tego, jak wygląda homofobia u mężczyzn, którym się powie, że są niemęscy. W badaniu mierzyliśmy dodatkowo zmienną psychologiczną o nazwie normatywna męskość, czyli niejako stopień przywiązania do reguł, co <em>prawdziwy mężczyzna</em> powinien, a czego nie powinien. Wykres jest dość skomplikowany. Zawiera trzy zmienne dychotomiczne, co daje łącznie 8 kolumn w grupach po 4 i 2. Nie powiem, że zrobić taki wykres jest łatwo, bo dobre opanowanie <code>ggplot2</code> trochę zajmuje, ale gdy już opanujemy, co jest do opanowania, to hulaj dusza. Nawet najbardziej skomplikowane wykresy stają się możliwe. Gdy połączyć to z możliwościami dawanymi przez programistyczną warstwę R, nagle łatwe staje się wytworzenie serii pasujących do siebie stylem wykresów o tych samych wymiarach. Pozwala to uzyskać pełną spójność bez ręcznego poprawiania szczególików.</li>
 </ol>
-<div id="fig-homofobia" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="./ilustracje/homofobia.svg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;1: Homofobia u mężczyzn o zagrożonej i niezagrożonej męskości, w zależności od tego, jak wysoką mieli tzw. normatywną męskość. Gdy dodać to tego jeszcze podział na dwa rodzaje homofobii, robią się z tego trzy podziały i osiem różnych kolumn ze wspólnymi osiami, legendą i kolorami. Zrobienie tego w Excelu, o ile w ogóle możliwe, byłoby bardzo trudne.</figcaption><p></p>
-</figure>
-</div>
+<!-- -->
 <ol start="7" type="1">
 <li><p>Analizy można napisać niezależnie od procesu zbierania danych. Na III roku studiów miałem projekt studencki, w którym musieliśmy zrobić prosty eksperyment w PsychoPy, przeanalizować dane i zaprezentować wyniki. Termin był krótki, także ostatnie dane większość grup zdążyła zebrać dopiero na dzień przed terminem, w tym moja. Oznaczało to, że osoby robiące analizę statystyczną musiały siedzieć do późna, żeby wyrobić się z prezentacją. Ale że już wtedy umiałem co nieco R, to napisałem całą analizę kilka dni wcześniej, kiedy akurat miałem wolny wieczór. Kiedy zebraliśmy ostatnie dane, wystarczyło kliknąć „Run” i gotowe – wykresy, testy, w mgnieniu oka policzone dla całego zestawu danych (wyczyszczonych! jak wspominałem wyżej, w PsychoPy czyszczenie danych bywa żmudne).</p></li>
 <li><p>R jest zgodny z filozofią Open Science. O ruchu Open Science można mówić bardzo długo, ale ogólnie jest to ruch dążący do otwartego dostępu do raportów naukowych (za darmo), surowych danych i dokładnych opisów analiz statystycznych. Jeśli naukowiec załącza do swojego artykułu surową bazę danych i skrypt w R, inni naukowcy mogą sprawdzić, czy tamten nie manipulował danymi, nie stosował podejrzanych praktyk oraz czy po ludzku się gdzieś nie pomylił. Poza tym każdy może powtórzyć jego analizę i sprawdzić, czy rzeczywiście wychodzi, jak naukowiec zaraportował.</p></li>
@@ -691,8 +687,8 @@ dbl  (1): ID
 <table class="table">
 <caption>Funkcje pomocnicze do <code>select</code> i <code>across</code>.</caption>
 <colgroup>
-<col style="width: 25%">
-<col style="width: 75%">
+<col style="width: 26%">
+<col style="width: 73%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -912,7 +908,7 @@ dbl  (1): ID
 <p>Za sortowanie w <code>tidyverse</code> odpowiada funkcja <code>arrange</code>. Domyślnie sortuje ona rosnąco, więc jeśli chcemy sortowanie malejące, użyjemy pomocniczej funkcji <code>desc</code> (od <em>descending</em>). Załóżmy, że chcemy posortować nasze dane najpierw według wykształcenia (od najwyższego, do najniższego), a w obrębie wykształcenia według wieku (od najmłodszych do najstarszych). W pierwszym odruchu chcielibyśmy wpisać <code>arrange(desc(wyksztalcenie), wiek)</code>. Jest to dobry odruch, jednak jeśli to zrobimy zorientujemy się, że najwyższym z wykształceń jest wykształcenie zawodowe. Dzieje się tak dlatego, że w tej chwili wykształcenie to zwykły tekst, a więc jest sortowany alfabetycznie, nie według naszego klucza. Żeby to zmienić, musimy poznać nowy rodzaj danych.</p>
 <section id="sec-factor" class="level4">
 <h4 class="anchored" data-anchor-id="sec-factor">Factors</h4>
-<p><em>Factor</em> to rodzaj danych, za pomocą których przechowujemy tekst, który ma tylko kilka możliwych wartości albo te wartości mają jakąś kolejność, którą chcemy wziąć pod uwagę. Jeśli mamy etykiety takie jak wykształcenie, czy grupa kontrolna/eksperymentalna, to powinniśmy je przechowywać właśnie w tej postaci. Danymi tego typu w <code>tidyverse</code> zarządza pakiet <code>forcats</code>. Żeby zmienić wykształcenie z tekstu na factor, dopiszemy jedną linijkę do naszego <code>mutate</code> i od razu posortujemy.</p>
+<p>Czynniki (<em>factors</em>) to rodzaj danych, za pomocą których przechowujemy tekst, który ma tylko kilka możliwych wartości albo te wartości mają jakąś kolejność, którą chcemy wziąć pod uwagę. Jeśli mamy etykiety takie jak wykształcenie, czy grupa kontrolna/eksperymentalna, to powinniśmy je przechowywać właśnie w tej postaci. Danymi tego typu w <code>tidyverse</code> zarządza pakiet <code>forcats</code>. Żeby zmienić wykształcenie z tekstu na factor, dopiszemy jedną linijkę do naszego <code>mutate</code> i od razu posortujemy.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
@@ -939,6 +935,25 @@ dbl  (1): ID
 <p>Komendę <code>factor</code> dla czytelności rozbiłem tutaj na trzy linijki, ale – oczywiście – można ją całą zapisać w jednej. Po pierwsze wskazałem, że na factor przerobiona ma być kolumna <code>wyksztalcenie</code>. Po drugie wskazałem, jakie wykształcenie może mieć wartości, zbierając je w jeden zestaw funkcją <code>c</code> i wrzucając do argumentu <code>levels</code>. Na koniec poinformowałem R, że w kolejność jest tutaj ważna, dopisując <code>ordered = TRUE</code>. Jeśli tak przerobione dane posortujemy, zobaczymy, że baza rzeczywiście zaczyna się od wykształcenia wyższego.</p>
 <section id="sec-questionr" class="level5">
 <h5 class="anchored" data-anchor-id="sec-questionr"><code>Questionr</code></h5>
+<p>Przy okazji czynników chciałbym wspomnieć o pierwszym dodatku (<em>addins</em>) do RStudio, jaki może nam się przydać. Dodatki to przyjmują różną formę, ale tutaj omówię dwa, które są graficznymi narzędziami pomagającymi pisać nam kod. Można mieć do nich mieszany stosunek, ale póki umiemy też napisać kod ręcznie (lub chociaż wiemy, jak skorzystać z dokumentacji), to mogą być dużą pomocą. Zwłaszcza na początku przygody z R. Pierwszym takim dodatkiem jest <code>Questionr</code>, który pozwala nam stworzyć komendy związane z czynnikami (i kategoryzować dane ilościowe, co ręcznie zrobimy w podrozdziale <a href="#sec-casewhen">Sekcja&nbsp;5.4.2</a>).</p>
+<p><code>Questionr</code> instalujemy jak każdy inny pakiet (<code>install.packages("questionr")</code>). Od tego momentu (lub po zresetowaniu RStudio) w menu <code>addins</code> na górnej belce znajdziemy trzy nowe opcje. Ta interesująca nas to Level ordering. Na początku zobaczymy okienko, w którym możemy wybrać kilka rzeczy. W jakiej zmiennej chcemy zmienić kolejność, w jakiej kolumnie i z jakiego pakietu wziąć funkcję do zmiany kolejności (domyślnie jest to <code>fct_relevel</code> z <code>forcats</code>). W drugiej zakładce możemy graficznie ustawić taką kolejność, jaką chcemy. W ostatniej zakładce otrzymujemy gotowy kod. <code>Questionr</code> nie robi nic samodzielnie, ten kod trzeba jeszcze wkleić w skrypt. Z jednym kruczkiem. Nam chodzi o samą komendę <code>fct_relevel</code>, bez pierwszej linijki, która służy do zapisania zmian. Ponieważ my tworzymy <code>mutate</code>, to wystarczy, że skopiujemy nasze gotowe <code>fct_relevel()</code> do funkcji <code>mutate</code>, dopisując nazwę kolumny i pierwszy argument. Może być to użyteczne, jeśli mamy dużo czynników lub dużo poziomów w czynniku. Ostatecznie nasza komenda <code>mutate</code> z użyciem <code>questionr</code> wyglądałaby tak:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), <span class="sc">~</span> <span class="dv">7</span> <span class="sc">-</span> .x),</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_suma =</span> <span class="fu">rowSums</span>(<span class="fu">pick</span>(H_1<span class="sc">:</span>H_10)),</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie_grupa =</span> <span class="fu">case_when</span>(</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Średnie"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Zawodowe"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">.default =</span> wyksztalcenie</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie =</span> <span class="fu">fct_relevel</span>(</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie,</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Podstawowe"</span>, <span class="st">"Zawodowe"</span>, <span class="st">"Średnie"</span>, <span class="st">"Wyższe"</span></span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -946,13 +961,13 @@ dbl  (1): ID
 <h3 class="anchored" data-anchor-id="sec-relocate">Kolejność kolumn</h3>
 <p>Możemy chcieć mieć nasze kolumny w określonej kolejności. Są zasadniczo dwa sposoby zmieniania kolejności kolumn. Jest funkcja <code>relocate</code>, która służy raczej przestawianiu pojedynczych kolumn lub ich niewielkiej liczby. Jeśli chcemy od nowa określić kolejność kolumn, możemy wykorzystać w tym celu znaną nam już funkcję <code>select</code>. Załóżmy, że chcielibyśmy przestawić kolumnę <code>H_suma</code> przed kolumny z cząstkowymi wynikami.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># z użyciem relocate</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(H_suma, <span class="at">.before =</span> H_1)</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="co"># z użyciem select</span></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, wiek, wyksztalcenie, H_suma, <span class="fu">everything</span>())</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># z użyciem relocate</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(H_suma, <span class="at">.before =</span> H_1)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="co"># z użyciem select</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, wiek, wyksztalcenie, H_suma, <span class="fu">everything</span>())</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Jeśli przestawiamy kolumny z użyciem <code>relocate</code>, powinniśmy ustawić argument <code>.before</code> albo <code>.after</code>. Oba wymagają nazwy kolumny przed którą lub po której chcemy przenieść naszą kolumnę. Jeśli nie ustawimy żadnego, nasze kolumny zostaną przeniesione na początek tabeli. Jeśli używamy <code>select</code> musimy wpisać kolejność naszych kolumn ręcznie. Ciekawe może być użycie przeze mnie <code>everything()</code>. W tym kontekście znaczy ono „i cała reszta”.</p>
 </section>
@@ -961,32 +976,32 @@ dbl  (1): ID
 <h2 class="anchored" data-anchor-id="sec-save">Zapisywanie zmian</h2>
 <p>W ten sposób uzyskaliśmy cały kod czyszczący. Mamy ów kod zapisany w naszym skrypcie, jeśli go uruchomimy, to widzimy, że działa. Jednak jeśli w konsolę wpiszemy <code>df</code>, naszym oczom ciągle ukazuje się stara, brzydka baza. Jak więc zmienić nasze <code>df</code> na wyczyszczoną wersję? Tak jak zawsze przypisujemy wartości w R – operatorem <code>&lt;-</code>. Nasz kod na zmianę brudnej bazy w czystą ostatecznie przyjmie postać:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), <span class="sc">~</span> <span class="dv">7</span> <span class="sc">-</span> .x),</span>
-<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_suma =</span> <span class="fu">rowSums</span>(<span class="fu">pick</span>(H_1<span class="sc">:</span>H_10)),</span>
-<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie_grupa =</span> <span class="fu">case_when</span>(</span>
-<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Średnie"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
-<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Zawodowe"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
-<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">.default =</span> wyksztalcenie</span>
-<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie =</span> <span class="fu">factor</span>(</span>
-<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie,</span>
-<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Podstawowe"</span>, <span class="st">"Zawodowe"</span>, <span class="st">"Średnie"</span>, <span class="st">"Wyższe"</span>),</span>
-<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
-<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(wyksztalcenie), wiek) <span class="sc">%&gt;%</span></span>
-<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(H_suma, <span class="at">.before =</span> H_1)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), <span class="sc">~</span> <span class="dv">7</span> <span class="sc">-</span> .x),</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_suma =</span> <span class="fu">rowSums</span>(<span class="fu">pick</span>(H_1<span class="sc">:</span>H_10)),</span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie_grupa =</span> <span class="fu">case_when</span>(</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Średnie"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Zawodowe"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">.default =</span> wyksztalcenie</span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie =</span> <span class="fu">factor</span>(</span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie,</span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Podstawowe"</span>, <span class="st">"Zawodowe"</span>, <span class="st">"Średnie"</span>, <span class="st">"Wyższe"</span>),</span>
+<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(wyksztalcenie), wiek) <span class="sc">%&gt;%</span></span>
+<span id="cb52-22"><a href="#cb52-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(H_suma, <span class="at">.before =</span> H_1)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Kod ten możemy uruchomić dla dowolnej ilości danych, w dowolnym momencie. Jest wielokrotnego użytku i spokojnie możemy go wykorzystać, kiedy baza się rozrośnie. Nie musimy go wtedy pisać od nowa, wystarczy, że go uruchomimy. Co więcej, mogę wpaść jeszcze na jakiś pomysł i dopisać linijkę na samym początku, nie musząc całej reszty robić od nowa. Sprawmy sobie tę przyjemność i zerknijmy na naszą wyczyszczoną bazę.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 45 × 15
       id  wiek wyksztal…¹ H_suma   H_1   H_2   H_3   H_4   H_5   H_6   H_7   H_8
@@ -1011,15 +1026,15 @@ dbl  (1): ID
 <h2 class="anchored" data-anchor-id="sec-summarise">Grupowanie i agregowanie</h2>
 <p>Gdy mamy już bazę, zazwyczaj chcemy policzyć pewne statystyki dla grup badanych, np. dla osób różniących się wykształceniem, płcią czy jakąś manipulacją. Chcemy na przykład poznać średnią homofobię osób o różnym wykształceniu, sprawdzić liczność naszych podgrup czy policzyć inne zbiorcze statystyki. Możemy, oczywiście, odfiltrować najpierw osoby o wykształceniu podstawowym, policzyć dla nich, potem osoby o wykształceniu średnim itd. Są jednak prostsze sposoby, a obejmują one użycie <code>group_by</code> i <code>summarise</code><a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a>. Te dwie funkcje zazwyczaj idą ze sobą w parze i zgrupowane dane od razu trafiają do <code>summarise</code>. Poniżej przykład.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(wyksztalcenie) <span class="sc">%&gt;%</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_M =</span> <span class="fu">mean</span>(H_suma),</span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_SD =</span> <span class="fu">sd</span>(H_suma),</span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_Me =</span> <span class="fu">median</span>(H_suma),</span>
-<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">V =</span> H_SD <span class="sc">/</span> H_M</span>
-<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(wyksztalcenie) <span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_M =</span> <span class="fu">mean</span>(H_suma),</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_SD =</span> <span class="fu">sd</span>(H_suma),</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_Me =</span> <span class="fu">median</span>(H_suma),</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">V =</span> H_SD <span class="sc">/</span> H_M</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 6
   wyksztalcenie     n   H_M  H_SD  H_Me      V
@@ -1033,8 +1048,8 @@ dbl  (1): ID
 <p>Jak widzimy, dostaliśmy tabelkę z wykształceniem i wskazanymi statystykami. Funkcja <code>n</code> zliczyła nam przypadki osób z poszczególnym wykształceniem, <code>mean</code> policzyła średnią, <code>sd</code> odchylenie standardowe, a <code>median</code> medianę. <code>V</code> to tzw. współczynnik zmienności. Co to jest, nie jest teraz szczególnie ważne. Policzyłem to tutaj, żeby pokazać, że w obliczeniach możemy też wpisywać niestandardowe operacje (jak dzielenie) bez żadnych strasznych funkcji anonimowych, a także że możemy wziąć wartości z innych kolumn jako argumenty do naszych przekształceń. Tutaj <code>V</code> to odchylenie standardowe średniej homofobii (<code>H_SD</code>) podzielone przez samą średnią (<code>H_M</code>). Każdą kolumnę mogliśmy nazwać wedle życzenia. Grupować możemy na podstawie wielu zmiennych. Jak dowiemy się w podrozdziale o eksploracji danych, istnieją funkcje, które najpopularniejsze zastawy danych eksploracyjnych liczą za nas.</p>
 <p>Tak robiliśmy to zawsze, jednak <code>dplyr</code> 1.1.0. wprowadził inny sposób grupowania. Jeśli nie chcemy zapisywać grup w naszej bazie danych na później (czyli w większości przypadków), nie musimy w ogóle używać funkcji <code>group_by</code>. Zamiast tego <code>summarise</code> dostał argument <code>.by</code>, za pomocą którego możemy wskazać grupy jednorazowo, tylko na potrzeby tego jednego podsumowania. Więcej na temat argumentu <code>.by</code> można znaleźć w dokumentacji. Poniżej przykład z innego zbioru danych, w którym pojawia się liczba krzyków w piosence w zależności od typu piosenki i jej autora <span class="citation" data-cites="field2012">(<a href="#ref-field2012" role="doc-biblioref">Field, Miles, &amp; Field, 2012</a>)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># załadowanie danych z sieci</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>df_scream <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://github.com/profandyfield/discovr/blob/master/data-raw/csv_files/escape.csv?raw=true"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># załadowanie danych z sieci</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>df_scream <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://github.com/profandyfield/discovr/blob/master/data-raw/csv_files/escape.csv?raw=true"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 68 Columns: 4
 ── Column specification ────────────────────────────────────────────────────────
@@ -1045,8 +1060,8 @@ dbl (1): screams
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># podejrzenie, jak dane wyglądają</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df_scream)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># podejrzenie, jak dane wyglądają</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df_scream)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 68
 Columns: 4
@@ -1055,12 +1070,12 @@ $ song_type  &lt;chr&gt; "Fly song", "Fly song", "Fly song", "Fly song", "Fly so
 $ songwriter &lt;chr&gt; "Andy", "Andy", "Andy", "Andy", "Andy", "Andy", "Andy", "An…
 $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6, 8, …</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pogrupowanie i zliczenie średniej liczby krzyków</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>df_scream <span class="sc">%&gt;%</span></span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">M =</span> <span class="fu">mean</span>(screams),</span>
-<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">.by =</span> <span class="fu">c</span>(song_type, songwriter)</span>
-<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pogrupowanie i zliczenie średniej liczby krzyków</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>df_scream <span class="sc">%&gt;%</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">M =</span> <span class="fu">mean</span>(screams),</span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">.by =</span> <span class="fu">c</span>(song_type, songwriter)</span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
   song_type songwriter     M
@@ -1078,13 +1093,13 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 <p>Format długi i szeroki to coś, co rzadko pojawia się w tekstach wprowadzających i nie mam pojęcia czemu. To jest naprawdę ważne. Przełożenie danych z jednego formatu na drugi to często podstawowa operacja, jaką musimy wykonać, kiedy chcemy coś policzyć. Nie mam chyba ani jednego projektu, w którym bym tego nie robił. Do tego współczesne komendy, które to robią, są naprawdę proste. Tym bardziej zaskakujące jest, że np. w Excelu wykonać taką operację jest trudno, jeśli nie umie się korzystać z Power Query. Zacznijmy jednak od tego, co to jest format długi i szeroki.</p>
 <p>Terminy te odnoszą się do sposobu, w jaki składujemy dane. Format szeroki jest tym, co odruchowo tworzymy, kiedy robimy czyste tabelki. Jeden wiersz to jedna obserwacja. Wszystkie dane o konkretnej osobie badanej znajdują się w tym jednym wierszu. Każda kolumna to jedna zebrana dana, np. odpowiedź na konkretne pytanie. W takim formacie znajduje się teraz nasza baza. Weźmy z niej kilka kolumn, po czym użyjmy <code>head</code>, żeby zobaczyć pierwszych pięć wierszy.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>df_wide <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="co"># zapiszę to jako df_wide, na później</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, H_1<span class="sc">:</span>H_5) <span class="sc">%&gt;%</span></span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df)) <span class="sc">%&gt;%</span> <span class="co"># poprawiam id, żeby były kolejne liczby, zmiana kosmetyczna</span></span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(id) <span class="co"># sortuję wg id</span></span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>df_wide <span class="sc">%&gt;%</span> <span class="co"># zapisane dane trzeba jeszcze wyświetlić</span></span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="co"># tylko 5 pierwszych wierszy</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>df_wide <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="co"># zapiszę to jako df_wide, na później</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, H_1<span class="sc">:</span>H_5) <span class="sc">%&gt;%</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df)) <span class="sc">%&gt;%</span> <span class="co"># poprawiam id, żeby były kolejne liczby, zmiana kosmetyczna</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(id) <span class="co"># sortuję wg id</span></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>df_wide <span class="sc">%&gt;%</span> <span class="co"># zapisane dane trzeba jeszcze wyświetlić</span></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="co"># tylko 5 pierwszych wierszy</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 6
      id   H_1   H_2   H_3   H_4   H_5
@@ -1098,11 +1113,11 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 </div>
 <p>Są to typowe dane w formacie szerokim. Żeby jednak zrozumieć różnicę, między formatem długim, a szerokim, trzeba jeszcze zobaczyć dane długie. Stwórzmy więc takie.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df_wide <span class="sc">%&gt;%</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(H_1<span class="sc">:</span>H_5, <span class="at">names_to =</span> <span class="st">"pytanie"</span>, <span class="at">values_to =</span> <span class="st">"ocena"</span>)</span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>df_long <span class="sc">%&gt;%</span></span>
-<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df_wide <span class="sc">%&gt;%</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(H_1<span class="sc">:</span>H_5, <span class="at">names_to =</span> <span class="st">"pytanie"</span>, <span class="at">values_to =</span> <span class="st">"ocena"</span>)</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>df_long <span class="sc">%&gt;%</span></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
       id pytanie ocena
@@ -1122,12 +1137,12 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 <p>Zacznę od skomentowania samych danych, a potem wyjaśnię funkcję. Dane w formacie długim mają oddzielną kolumnę na numer pytania i odpowiedź. Pięć kolumn z odpowiedziami na pytania zmieniliśmy w dwie. Powoduje to jednak, że każda osoba badana ma pięć wierszy – w każdym odpowiedź na tylko jedno pytanie. Najpierw następuje 5 wierszy osoby z id 1, potem 5 wierszy osoby z id 2 itd. Widać więc dlaczego formaty te nazywają się szeroki i długi. Szeroki ma wiele kolumn, mało wierszy (1 na osobę), długi mało kolumn, wiele wierszy (1 na każde pytanie).</p>
 <p>Po co nam taki format? Zawiera te same informacje, co format długi, a trudniej się to czyta. Po pierwsze umożliwia nam to policzenie niektórych rzeczy, których nie policzylibyśmy z formatu szerokiego. Dla przykładu, teraz mogę grupować dane według pytań, żeby sprawdzić, czy na każde pytanie badani odpowiadają podobnie. Jeśli moja skala jest dobra i każde pytanie rzeczywiście mierzy to samo, to odpowiedzi na wszystkie pytania powinny być podobne. Być może zrobiłem jakieś kontrowersyjne pytanie, na które wszyscy odpowiadają nisko, mimo że nie różnią się, w tym przykładzie, poziomem homofobii. Mogę więc, na oko, sprawdzić rzetelność pozycji testowych<a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a>. Formatu długiego wymagają też niektóre testy statystyczne.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="sc">%&gt;%</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">M =</span> <span class="fu">mean</span>(ocena),</span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">SD =</span> <span class="fu">sd</span>(ocena),</span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">.by =</span> <span class="fu">c</span>(pytanie)</span>
-<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="sc">%&gt;%</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">M =</span> <span class="fu">mean</span>(ocena),</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">SD =</span> <span class="fu">sd</span>(ocena),</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">.by =</span> <span class="fu">c</span>(pytanie)</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
   pytanie     M    SD
@@ -1142,8 +1157,8 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 <p>Nawet częściej niż do grupowania po pytaniach, wykorzystujemy format długi do wykresów. Jak się przekonamy dalej, w gramatyce graficznej (<em>the grammar of graphics</em>) do jednego obiektu na wykresie możemy przypisać tylko jedną kolumnę. Jeśli więc chcemy zrobić wykres słupkowy np. wyników <em>przed</em> i <em>po</em>, to do osi X przypiszemy kolumnę z etykietami, a do osi Y kolumnę z wynikami. Nie da się więc sensownie zrobić wykresu, jeśli wyniki <em>przed</em> i <em>po</em> mamy w osobnych kolumnach.</p>
 <p>Omówmy więc funkcję, której użyłem do zmiany formatu. Kiedyś robiło się to skomplikowanymi funkcjami <code>melt</code> i <code>cast</code>, które często można znaleźć w innych językach programowania. Dziś w R mamy, na szczęście, intuicyjne funkcje <code>pivot_wider</code> i <code>pivot_longer</code>. Tej pierwszej używamy zmieniając format na szeroki, tą drugą zmieniamy format na długi. Na przykładzie powyżej można stwierdzić, że <code>pivot_longer</code> przyjmuje trzy argumenty. Pierwszy to zbiór kolumn, do jakich chcemy tę funkcję zastosować. Można tu skorzystać z funkcji pomocniczych typu <code>starts_with()</code> albo <code>everything()</code>. Kolejne dwa argumenty funkcji <code>pivot_longer</code> to <code>names_to</code> i <code>values_to</code>. Są to nazwy kolumn, do których mają trafić, jak nazwa wskazuje, nazwy i wartości kolumn. W naszym przykładzie etykiety <code>H_1</code>, <code>H_2</code> itd. trafiły do kolumny <code>pytanie</code>, zaś same odpowiedzi na te pytania do kolumny <code>ocena</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="sc">%&gt;%</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"pytanie"</span>, <span class="at">values_from =</span> <span class="st">"ocena"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="sc">%&gt;%</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"pytanie"</span>, <span class="at">values_from =</span> <span class="st">"ocena"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>pivot_wider</code> ma prostszą składnię, ponieważ nie trzeba w niej wskazywać zakresu kolumn do rozwinięcia, a jedynie w jakiej kolumnie znajdują się nazwy kolumn, a w jakiej jej wartości. Robimy to odpowiednio argumentami <code>names_from</code> i <code>values_from</code>. Jeśli jakiejś wartości nie ma w formacie długim (np. gdy osoba z numerem 4 nie odpowiedziała na pytanie 2, to w formacie długim może nie być wiersza <code>4 H_2</code>), to <code>pivot_wider</code> automatycznie wstawi w tę komórkę <code>NA</code><a href="#fn24" class="footnote-ref" id="fnref24" role="doc-noteref"><sup>24</sup></a>. Zdarza się, że funkcji tej musimy użyć dlatego, że niektóre programy generują dane w formacie długim.</p>
 </section>
@@ -1152,10 +1167,10 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 <p>Złączenia (<em>joins</em>) to, jak nazwa wskazuje, metoda łączenia dwóch baz danych. Jest to jedna z podstawowych operacji na bazach danych, znana co najmniej od lat 70. i instrukcji <code>JOIN</code> w SQL. Jest to także jedna z operacji niedostępnych w Excelu bez Power Query. W praktyce badawczej może być ona konieczna, gdy mamy badanie wieloczęściowe, w którym musimy stosować wiele baz danych (np. jedną tworzą pomiary z eyetrackera, drugą wyniki w ankiecie, a trzecią test szybkości reakcji). Zdarza się to również często w prostych badaniach ankietowych, kiedy po jakimś czasie musimy wykonać retest. W obu tych przypadkach lądujemy z dwiema (lub więcej) bazami, które – miejmy nadzieję – mają jaką wspólną kolumnę, identyfikator osoby badanej, taki sam w każdej z trzech baz<a href="#fn25" class="footnote-ref" id="fnref25" role="doc-noteref"><sup>25</sup></a>.</p>
 <p>Jak więc takie bazy połączyć? Wykorzystajmy tutaj dwie bazy zawierające test i retest, zrobione podczas walidacji kwestionariusza o nazwie KTR. Składał się on z dwóch skal oznaczonych tutaj literkami O i W. Standardową procedurą przy projektowaniu kwestionariusza jest powtórzenie pomiaru po jakimś czasie, żeby sprawdzić, na ile wyniki są stabilne. My taką procedurę wykonaliśmy, przez co dysponujemy dwoma oddzielnymi bazami. Zerknijmy na nie.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>db_test <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./dane/podstawy-R/join-test.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>db_retest <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./dane/podstawy-R/join-retest.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>db_test</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>db_test <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./dane/podstawy-R/join-test.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>db_retest <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./dane/podstawy-R/join-retest.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>db_test</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 76 × 3
    ID    KTR_O KTR_W
@@ -1172,7 +1187,7 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 10 wspA     21    34
 # … with 66 more rows</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>db_retest</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>db_retest</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 66 × 3
    Subject KTR_O KTR_W
@@ -1194,14 +1209,14 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 <p>Żeby połączyć te bazy, musimy najpierw zdecydować, jak chcemy to zrobić. Możemy albo przyłączyć wyniki z retestu do bazy z testem, albo przyłączyć wyniki z testu do bazy z retestem. Jest to o tyle istotne, że jeśli przyłączymy retest do testu, to będziemy mieli puste wartości u tych osób, które nie wypełniły retestu. Jeśli zrobimy odwrotnie, to z założenia każda osoba, która wypełniła retest, wcześniej wypełniła test, a więc figuruje w pierwotnej bazie. W praktyce bywa różnie. Na przykład ludzie kłamią, że wypełnili test, a jak dostaną link do retestu, to myślą, że w takim razie chociaż to wypełnią. Tak czy inaczej, ta decyzja determinuje typ złączenia, jaki wybierzemy. Najbardziej powszechnym typem jest <code>LEFT JOIN</code>, który do każdego wiersza jednej bazy (pisanej jako pierwszej, czyli po lewej) przypisuje pasujący wiersz drugiej bazy (pisanej jako drugiej, czyli po prawej). Jeśli jakiś wiersz w lewej bazie nie ma odpowiednika w prawej bazie, otrzymujemy puste wartości. Jeśli jakiś wiersz w bazie po prawej nie został przypisany do żadnego wiersza po lewej, nie jesteśmy o tym informowani. Więcej o różnych typach złączeń (np. pozwalających uzyskać wszystkie możliwe kombinacje wierszy) można przeczytać i zobaczyć na obrazkach <a href="https://dataschool.com/how-to-teach-people-sql/sql-join-types-explained-visually/">na przykład tutaj</a>.</p>
 <p>Ja przyłączę retest do bazy z wynikami pierwszego testu. Widzę jednak dwa problemy, które będę musiał rozwiązać. Po pierwsze, kolumna z identyfikatorem osoby badanej nazywa się inaczej w obu bazach. Po drugie, kolumny <code>KTR_O</code> i <code>KTR_W</code> nazywają się tak samo w obu bazach. Będę więc musiał wskazać R, na podstawie jakich kolumn ma dokonać złączenia, a także jak ma nazwać kolumny w gotowej bazie, żebym wiedział, które wyniki dotyczą pierwszego testu, a które retestu.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>db_joined <span class="ot">&lt;-</span> db_test <span class="sc">%&gt;%</span></span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>        db_retest,</span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">by =</span> <span class="fu">join_by</span>(ID <span class="sc">==</span> Subject),</span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"_retest"</span>)</span>
-<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>db_joined</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>db_joined <span class="ot">&lt;-</span> db_test <span class="sc">%&gt;%</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>        db_retest,</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">by =</span> <span class="fu">join_by</span>(ID <span class="sc">==</span> Subject),</span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"_retest"</span>)</span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a>db_joined</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 76 × 5
    ID    KTR_O KTR_W KTR_O_retest KTR_W_retest
@@ -1230,7 +1245,7 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 <h2 class="anchored" data-anchor-id="sec-describe">Statystyki opisowe z <code>psych::describe</code></h2>
 <p>Funkcja <code>describe</code> pozwala szybko uzyskać zestaw wielu podstawowych statystyk opisowych dla wszystkich kolumn naraz. Powstaje z tego duża tabela, która zawiera znacznie więcej danych niż nam potrzeba, ale ma tę zaletę, że można ją zrobić szybko. Składnia jest tutaj tak banalna, że ciężko mówić o składni, bo polega na tym, że piszemy <code>describe(df)</code>. I to zazwyczaj zupełnie wystarczy. Że to za proste, to pokażę trochę więcej możliwości.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"psych"</span>) <span class="co"># normalnie wszystkie pakiety ładowałbym w jednym miejscu, gdzieś na początku kodu</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"psych"</span>) <span class="co"># normalnie wszystkie pakiety ładowałbym w jednym miejscu, gdzieś na początku kodu</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Dołączanie pakietu: 'psych'</code></pre>
@@ -1240,15 +1255,15 @@ Dołączanie pakietu: 'psych'</code></pre>
 
     %+%, alpha</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>descr <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">describe</span>(<span class="at">quant =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>), <span class="at">IQR =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">"var"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>descr <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">describe</span>(<span class="at">quant =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>), <span class="at">IQR =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">"var"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Źródłem problemów czasem bywa to, że mamy dwa główne sposoby przechowywania tabelek w R. Pierwszy to <code>data.frame</code> czyli natywny typ danych w R. Drugi to <code>tibble</code>, czyli <code>data.frame</code> na prochach. Jak nietrudno się domyślić, <code>tibble</code> pochodzi z ze świata <code>tidyverse</code> i właściwie wszystko robi lepiej. Przede wszystkim lepsze jest to, jak wyświetla się w konsoli, ale też kilka rzeczy pod maską. Wszystkie dotychczasowe „ramki danych” (jak to się czasem tłumaczy), z jakimi mieliśmy do czynienia, to właśnie <code>tibble</code>. Żeby na własnej skórze przekonać się o wyższości <code>tibble</code> nad <code>data.frame</code> można wpisać w konsolę <code>df</code> (która jest w formacie <code>tibble</code>), a potem <code>as.data.frame(df)</code>. Dlatego też w ostatniej linijce kodu przerabiam wynik działania <code>describe</code> na format <code>tibble</code>.</p>
 <p>Jedną rzecz muszę jednak dodać. Z wielu praktycznych przyczyn <code>tibble</code> nie używa nazwanych wierszy. Tylko kolumny mogą mieć nazwy własne, jeśli chcemy mieć identyfikatory wierszy, powinniśmy zrobić z nich oddzielną kolumnę. <code>describe</code> zaś w czystej postaci wyrzuca <code>data.frame</code>, w której nazwy opisanych zmiennych to właśnie nazwy wierszy, dlatego muszę powiedzieć funkcji <code>as_tibble</code>, do jakiej kolumny ma mi wrzucić nazwy tych zmiennych. Swoją nazwałem <code>var</code>.</p>
 <p>Powstała tabela jest na tyle rozległa, że nie chciałem jej tu umieszczać, ale można ją sobie samodzielnie wyświetlić. Mam nadzieję, że wiesz już, jak to zrobić. Żeby podejrzeć zawartość naszej tabeli skorzystam z raz już użytej funkcji <code>glimpse</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(descr)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(descr)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 15
 Columns: 17
@@ -1277,7 +1292,7 @@ $ Q0.75    &lt;dbl&gt; 43, 23, 3, 46, 6, 6, 6, 6, 2, 6, 2, 6, 6, 6, 2</code></pr
 <h2 class="anchored" data-anchor-id="sec-describeBy">Statystyki opisowe dla grup z <code>psych::describeBy</code></h2>
 <p>Co jeśli chcielibyśmy policzyć statystyki opisowe w grupach? Niestety <code>psych</code> nie współpracuje z <code>group_by</code> (patrz <a href="#sec-summarise">Sekcja&nbsp;5.7</a>), ale ma własną metodę grupowania danych. Służy temu funkcja <code>describeBy</code>. Przypomnijmy sobie tutaj bazę <code>df_scream</code> z podrozdziału <a href="#sec-summarise">Sekcja&nbsp;5.7</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_scream)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_scream)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   id    song_type songwriter screams
@@ -1292,9 +1307,9 @@ $ Q0.75    &lt;dbl&gt; 43, 23, 3, 46, 6, 6, 6, 6, 2, 6, 2, 6, 6, 6, 2</code></pr
 </div>
 <p>Mamy dwa sposoby, żeby naszą bazę wrzucić do <code>describeBy</code>, z czego ja pokażę ten bardziej intuicyjny. Ma od postać tzw. formuły (<em>formula</em>), z którymi spotkamy się jeszcze przy okazji testów statystycznych (<a href="#sec-tests">Sekcja&nbsp;8</a>), zwłaszcza w <code>rstatix</code> (<a href="#sec-rstatix">Sekcja&nbsp;8.2</a>). Przy tej okazji omówimy sobie też głębiej działanie potoków. Najpierw jednak pokażę przykład formuły. Jeśli chcielibyśmy dostać statystyki opisowe dla liczby krzyków w zależności od tego, kto tę piosenkę napisał, skorzystalibyśmy z takiej formuły <code>screams ~ songwriter</code>. Ten znaczek pośrodku to tylda, używana też w funkcjach anonimowych z <code>purrr</code> (<a href="#sec-lambda">Sekcja&nbsp;5.3.3.1</a>). Jeśli chcielibyśmy dołożyć też do tego podziału typ piosenki, użylibyśmy znaku <code>+</code> pisząc <code>screams ~ songwriter + song_type</code>. Jak mogłaby wyglądać taka funkcja?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>df_scream <span class="sc">%&gt;%</span></span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">describeBy</span>(screams <span class="sc">~</span> songwriter <span class="sc">+</span> song_type, <span class="at">data =</span> .)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>df_scream <span class="sc">%&gt;%</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">describeBy</span>(screams <span class="sc">~</span> songwriter <span class="sc">+</span> song_type, <span class="at">data =</span> .)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  Descriptive statistics by group 
@@ -1321,7 +1336,7 @@ screams    1 17 7.06 1.75      7       7 1.48   4  11     7 0.25    -0.39 0.42</
 </div>
 <p>Wynikiem działania takiej funkcji jest lista (też nieużywany wcześniej typ danych). W tytule możemy zobaczyć autora i typ piosenki. Jeśli to jest jasne, wyjaśnijmy pozostałą część instrukcji. Po pierwsze znów spotykamy problem, że <code>describeBy</code> nie chce współpracować z <code>tibble</code>, więc musimy przekształcić naszą bazę na stary dobry format <code>data.frame</code>. Robimy to funkcją <code>as.data.frame</code>. Druga sprawa to <code>data = .</code>. Argument <code>data</code> to obowiązkowy argument, do którego wrzucamy naszą bazę danych. Dzięki temu R wie, gdzie ma szukać kolumn <code>screams</code>, <code>songwriter</code> i <code>song_type</code> z naszej formuły. Problem polega jednak na użyciu potoków. Standardowo potok <code>%&gt;%</code> wrzuca rzeczy do pierwszego argumentu. Wiele funkcji, tak jak <code>describeBy</code>, nie przyjmuje bazy danych w pierwszym argumencie. Jak na złość <code>data</code> w <code>describeBy</code> to ostatni argument, więc najlepiej wprost go nazwać. Omawiany w podrozdziale <a href="#sec-rstatix">Sekcja&nbsp;8.2</a> pakiet <code>rstatix</code> za pierwszy cel postawił sobie nawet przerobienie testów statystycznych tak, żeby lepiej współpracowały z potokami. Jak więc poradzić sobie w takiej sytuacji? Jedna opcja, to całkiem zrezygnować z potoków.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describeBy</span>(screams <span class="sc">~</span> songwriter <span class="sc">+</span> song_type, <span class="at">data =</span> <span class="fu">as.data.frame</span>(df_scream))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describeBy</span>(screams <span class="sc">~</span> songwriter <span class="sc">+</span> song_type, <span class="at">data =</span> <span class="fu">as.data.frame</span>(df_scream))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>W krótkich instrukcjach takie coś jest nawet czytelne. Warto pamiętać, że potoki nie są obowiązkowe, można równie dobrze zagnieżdżać funkcje. Cierpi na tym tylko czytelność kodu. Druga opcja, to wprost powiedzenie potokowi, gdzie ma wrzucić naszą bazę danych. Do tego właśnie służy <code>.</code>. Zapis <code>data = .</code> mówi potokowi „halo halo, proszę nie wrzucać bazy do pierwszego argumentu, tylko o tu, gdzie pokazałem(-am) kropką”. Ostatecznie oba przykłady z tego podrozdziału są równoważne.</p>
 </section>
@@ -1330,7 +1345,7 @@ screams    1 17 7.06 1.75      7       7 1.48   4  11     7 0.25    -0.39 0.42</
 <p>Muszę się do czegoś przyznać. Przez lata wykorzystywałem <code>describe</code> i <code>describeBy</code> do statystyk opisowych, ale… są lepsze alternatywy. Chciałem jednak wykorzystać te funkcje jako praktyczny pretekst to pokazania różnic między <code>data.frame</code> i <code>tibble</code>, używania kropki z potokami i ogólnie jak sobie radzić, jak nowszych alternatyw nie ma. Jednak do liczenia statystyk opisowych takie alternatywy są. I przychodzą do nas z <code>rstatix</code>. Jest to świetny, nowoczesny pakiet, który szerzej omówimy w podrozdziale <a href="#sec-rstatix">Sekcja&nbsp;8.2</a>.</p>
 <p>Do liczenia statystyk opisowych w <code>rstatix</code> wykorzystujemy funkcję <code>get_summary_stats</code>. Dobrze współpracuje ona z <code>tidyverse</code>, potokami i funkcją <code>group_by</code>. Ma też bardzo prostą składnię. Szczegóły i wyjaśnienia poszczególnych statystyk znajdują się w dokumentacji.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rstatix"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rstatix"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Dołączanie pakietu: 'rstatix'</code></pre>
@@ -1340,8 +1355,8 @@ Dołączanie pakietu: 'rstatix'</code></pre>
 
     filter</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bez grupowania</span></span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_summary_stats</span>(df)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bez grupowania</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_summary_stats</span>(df)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 13 × 13
    variable     n   min   max median    q1    q3   iqr   mad  mean     sd    se
@@ -1361,10 +1376,10 @@ Dołączanie pakietu: 'rstatix'</code></pre>
 13 H_10        45     1     6      5     5     6     1  1.48  5.07  1.29  0.192
 # … with 1 more variable: ci &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># z grupowaniem</span></span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>df_scream <span class="sc">%&gt;%</span></span>
-<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(songwriter, song_type) <span class="sc">%&gt;%</span></span>
-<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_summary_stats</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># z grupowaniem</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>df_scream <span class="sc">%&gt;%</span></span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(songwriter, song_type) <span class="sc">%&gt;%</span></span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_summary_stats</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 15
   song_…¹ songw…² varia…³     n   min   max median    q1    q3   iqr   mad  mean
@@ -1382,7 +1397,7 @@ Dołączanie pakietu: 'rstatix'</code></pre>
 <h2 class="anchored" data-anchor-id="tabele-liczności-z-rstatixfreq_table">Tabele liczności z <code>rstatix::freq_table</code></h2>
 <p>Dla danych kategorialnych (np. płeć, wykształcenie, klasa) nie liczymy statystyk opisowych, a tabele liczności. Chcemy na przykład wiedzieć, ile w naszej bazie mamy osób z wykształceniem wyższym, ile ze średnim itd. W podrozdziale <a href="#sec-summarise">Sekcja&nbsp;5.7</a> pokazałem, jak to zrobić ręcznie funkcjami <code>summarise</code> i <code>n</code>. Pakiet <code>rstatix</code> ma dla nas gotową funkcję <code>freq_table</code> właśnie do tego celu. Wymaga ona jedynie podania, które kolumny z naszej tabeli ująć. Robimy to tak samo, jak zrobilibyśmy w funkcji <code>select</code> (patrz <a href="#sec-select">Sekcja&nbsp;5.1.2</a>) czy <code>across</code> (patrz <a href="#sec-across">Sekcja&nbsp;5.3.1</a>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">freq_table</span>(df, wyksztalcenie)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">freq_table</span>(df, wyksztalcenie)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
   wyksztalcenie     n  prop
@@ -1398,7 +1413,7 @@ Dołączanie pakietu: 'rstatix'</code></pre>
 <h2 class="anchored" data-anchor-id="macierze-korelacji-i-ich-istotność-z-rstatixcor_mat">Macierze korelacji i ich istotność z <code>rstatix::cor_mat</code></h2>
 <p>W ramach eksploracji chcemy czasami zrobić macierz korelacji całego naszego zestawu danych. Może nam do tego posłużyć funkcja <code>cor_mat</code> z pakietu <code>rstatix</code>. Zobaczmy to na przykładzie bazy <code>db_joined</code> z podrozdziału <a href="#sec-join">Sekcja&nbsp;5.9</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>(korelacje <span class="ot">&lt;-</span> <span class="fu">cor_mat</span>(db_joined, <span class="sc">-</span>ID))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>(korelacje <span class="ot">&lt;-</span> <span class="fu">cor_mat</span>(db_joined, <span class="sc">-</span>ID))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
   rowname      KTR_O KTR_W KTR_O_retest KTR_W_retest
@@ -1413,17 +1428,17 @@ Dołączanie pakietu: 'rstatix'</code></pre>
 <p>Można zwrócić uwagę na to, że powyższa komenda wyświetliła nam macierz korelacji, pomimo że normalnie musiałbym jeszcze wywołać samą zmienną <code>korelacje</code>, do której ją zapisałem. Tak to robiliśmy wcześniej. Wykorzystałem tutaj wygodą sztuczkę – jeśli weźmie się całe przypisanie w nawiasy, R potraktuje to jako „przypisz i wyświetl”.</p>
 <p>Korelacje mają jednak swoją istotność, którą możemy tu oznaczyć. Jeśli policzyliśmy już macierz korelacji, możemy ją wrzucić do funkcji <code>cor_get_pval</code>. Ewentualnie możemy samą bazę wrzucić do funkcji <code>cor_pmat</code>. Efekt jest ostatecznie ten sam.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>korelacje_p_1 <span class="ot">&lt;-</span> <span class="fu">cor_get_pval</span>(korelacje)</span>
-<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>korelacje_p_2 <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(db_joined, <span class="sc">-</span>ID)</span>
-<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(korelacje_p_1, korelacje_p_2)</span>
-<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a>korelacje_p_1</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>korelacje_p_1 <span class="ot">&lt;-</span> <span class="fu">cor_get_pval</span>(korelacje)</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>korelacje_p_2 <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(db_joined, <span class="sc">-</span>ID)</span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(korelacje_p_1, korelacje_p_2)</span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a>korelacje_p_1</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Funkcja <code>identical</code> informuje nas, że obiekty stworzone obiema funkcjami rzeczywiście są identyczne. Powstała nam macierz istotności korelacji. Może być mylące, że korelacje wyświetlają się w notacji naukowej, co jest wygodnym sposobem oznaczania bardzo małych lub bardzo dużych liczb. Zasada jest tu prosta: <span class="math inline">\(1,22e-4 = 1,22 \times 10^{-4} = 0,000122\)</span>. Jeśli jednak chcemy dostać tę macierz w przyjaźniejszej formie, możemy użyć funkcji <code>cor_mark_significant</code><a href="#fn26" class="footnote-ref" id="fnref26" role="doc-noteref"><sup>26</sup></a>, do której wrzucamy macierz korelacji (nie macierz istotności).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor_mark_significant</span>(korelacje)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor_mark_significant</span>(korelacje)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       rowname    KTR_O    KTR_W KTR_O_retest KTR_W_retest
 1        KTR_O                                            
@@ -1477,6 +1492,9 @@ Dołączanie pakietu: 'rstatix'</code></pre>
 <h2 class="anchored" data-anchor-id="styler"><code>styler</code></h2>
 </section>
 </section>
+<section id="posłowie" class="level1">
+<h1>Posłowie</h1>
+</section>
 <section id="bibliografia" class="level1">
 
 
@@ -1493,10 +1511,10 @@ Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R
 
 <ol>
 <li id="fn1"><p>Drugim najpopularniejszym jest R.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>To trudno sobie wyobrazić, łatwiej zobaczyć na obrazkach. Chodzi o to, czy mamy klasyczną wyczyszczoną bazę, w której jedna osoba badana to jeden wiersz, a każda kolumna to jeden pomiar (np. odpowiedź na pytanie). Czasem chcemy zamiast 11 kolumn (ID osoby badanej + 10 odpowiedzi na pytania) mieć tylko 3 kolumny (ID osoby badanej, numer pytania, odpowiedź). Wtedy każda osoba badana zajmuje 10 wierszy, ale każdy wiersz ma odpowiedź na tylko jedno pytanie. To potrafi być potrzebne do niektórych testów, grupowania danych itp. To jest technikalium, to nie jest statystyka <em>per se</em>, ale czasem trzeba to ogarniać, żeby rzeczywiście zrobić analizę.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>To trudno sobie wyobrazić, łatwiej zobaczyć na obrazkach. Chodzi o to, czy mamy klasyczną wyczyszczoną bazę, w której jedna osoba badana to jeden wiersz, a każda kolumna to jeden pomiar (np. odpowiedź na pytanie). Czasem chcemy zamiast 11 kolumn (ID osoby badanej + 10 odpowiedzi na pytania) mieć tylko 3 kolumny (ID osoby badanej, numer pytania, odpowiedź). Wtedy każda osoba badana zajmuje 10 wierszy, ale każdy wiersz ma odpowiedź na tylko jedno pytanie. To potrafi być potrzebne do niektórych testów, grupowania danych itp. To jest technikalium, to nie jest statystyka <em>per se</em>, ale czasem trzeba to ogarniać, żeby rzeczywiście zrobić analizę. Poświęciłem temu cały podrozdział <a href="#sec-pivot">Sekcja&nbsp;5.8</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Jeśli korzystasz z jakiejś dystrybucji linuxa, R możesz zainstalować z oficjalnych repozytoriów. Pakiet zazwyczaj nazywa się <code>r-base</code>. W Ubuntu wystarczy użyć komendy <code>sudo apt install r-base</code>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>W R da się programować też w innych IDE, np. w Visual Studio Code. Niemniej na sam początek lepiej przylgnąć do standardu RStudio, który pomoże nam nabrać najlepszych praktyk i nauczyć się, z czym się R je.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Polecam Monokai.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Sam używam <a href="https://github.com/anthonynorth/rscodeio">rscodeio</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>Jeśli znasz jakiś inny język programowania, możesz zapytać, dlaczego nie używamy <code>=</code>. Operator <code>=</code> też zadziała, ale za dobrą praktykę w R uznawane jest stosowanie <code>&lt;-</code> do przypisywania obiektów do zmiennych, a <code>=</code> do ustalania wartości argumentów.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>Z założenia. Struktura dokumentacji jest bardzo dobra, a każda funkcja w pakietach CRAN musi być udokumentowana. Zdarzało mi się jednak mieć problem ze zrozumieniem, o co chodzi autorom funkcji, co ma być czym. Jak to w życiu bywa, niektórzy tłumaczą lepiej, a inni piszą treść tego przypisu.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn8"><p>Piszę o wielu skrótach klawiszowych, bo umiejętność pisania kodu bez odrywania rąk od klawiatury znacząco przyspiesza pracę. Jednocześnie wiele z tych rzeczy da się wyklikać myszką. Zachęcam jednak, żeby próbować uczyć się skrótów. Listę wszystkich skrótów w RStudio znajdziemy w menu Tools → Keyboard Shortcuts Help (albo pod skrótem Alt+Shift+K).<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
