@@ -56,7 +56,9 @@ Gdy zainstalujemy i uruchomimy RStudio, naszym oczom ukaże się biały ekran, k
 
 [^podstawy_r-5]: Polecam Monokai.
 
-# Konsola, zmienne i matematyka
+# Środowisko R i RStudio
+
+## Konsola, zmienne i matematyka
 
 Ekran RStudio składa się z trzech okienek. Duże okienko po lewej i dwa mniejsze po prawej. Skierujmy naszą uwagę na okienko po lewej, czyli konsolę. Wita nas ona ciepłą informacją, że R jest zainstalowany i znakiem zachęty `>` zachęca nas do wydawania jej poleceń. Konsola R to miejsce, w którym możemy mówić R, żeby coś dla nas liczył. Można to potraktować jako super kalkulator. Spróbuj -- wpisz w konsolę `2+3*5`, zatwierdź enterem i zwróć uwagę, że R stosuje poprawną kolejność wykonywania działań. Spacje nie mają znaczenia, także możemy wpisać również bardziej estetyczną wersję `2 + 3 * 5`. Nie wiem po co, ale można.
 
@@ -74,7 +76,7 @@ Powyżej zapisałem dwa polecenia, które do konsoli powinniśmy wpisać jedno p
 
 Jak się potem okaże, w zmiennych możemy zapisywać dużo więcej, niż tylko wyniki prostych działań matematycznych. W identyczny sposób do odpowiednich zmiennych trafią wyniki testów statystycznych albo całe bazy danych. Ale o tym dalej.
 
-# Funkcje
+## Funkcje
 
 Tym, co robi robotę w R (jak i w każdym innym języku programowania) są funkcje. Funkcja to taka maszynka, do której coś wrzucamy, ona nam to przekształca i wywala coś innego. Tak jak w matematyce. Podobnie jak w matematyce, funkcje zapisujemy konwencją `f(x)`, czyli `nazwa(co_wrzucam_do_funkcji)`. Dla przykładu funkcja `seq` pozwala nam wytwarzać sekwencje liczb. Musimy do tej funkcji wrzucić od jakiej liczby chcemy zacząć, na jakiej chcemy skończyć i jaki chcemy mieć krok. Dla przykładu:
 
@@ -108,7 +110,7 @@ Nie bez powodu mówimy o *językach programowania* -- wiele funkcji nauczymy si�
 
 Świetnym źródłem informacji o funkcjach, pozwalającym również znaleźć odpowiednią funkcję do naszego celu, są ściągi (*cheat sheets*). Pakiety `tidyverse` mają nawet swoje oficjalne ściągi, które na początku swojej nauki R wydrukowałem i zalaminowałem. Polecam je gorąco, zwłaszcza do pakietów `dplyr`, `ggplot2` i `stringr`. Można je znaleźć bezpośrednio w RStudio wybierając Help → Cheat sheets → Browse all cheat sheets albo na stronie Posit, czyli firmy, która wypuszcza RStudio.
 
-# Skrypty
+## Skrypty
 
 Wpisaliśmy w konsolę już sporo rzeczy i historię naszych komend możemy zobaczyć przechodząc do odpowiedniej zakładki w prawym górnym okienku. Jednak wyjście z programu może nam skutecznie skasować tę historię. Jeśli mamy całą sporą analizę statystyczną, która składa się z 200 linijek kodu, to chcielibyśmy mieć jakiś sposób na zapisanie tego na przyszłość, żeby nie musieć za każdym razem wklepywać tego kodu z pamięci. Zaopatrujemy się więc w gruby zeszyt w linie i wszystkie komendy piszemy również tam. Żarcik. Do przechowywania kodu służą specjalne pliki zwane skryptami. Tak jak mamy pliki .pdf, .txt, .docx, tak w plikach .R zapisujemy kod R.
 
@@ -145,7 +147,7 @@ Jeśli wykonamy taką linijkę, konsola zignoruje wszystko po znaku `#`. Pozwala
 
 Każdy znaczek `#` to niższy poziom nagłówka, czyli wytworzyłem sekcję `Przygotowanie`, a w niej dwie podsekcje `Ładowanie danych` i `Ładowanie bibliotek`. Takich poziomów nagłówków możemy mieć ile chcemy. Nagłówek tym się różni od zwykłego komentarza, że po nim występują cztery myślniki `----` lub inne znaki. Tak sformatowane nagłówki wyświetlają się w bocznym panelu RStudio i pozwalają się lepiej ogarnąć w długim kodzie. Panel *outline* możemy rozwinąć skrótem Ctrl+Shift+O albo klikając skrajną prawą ikonkę nad edytorem skryptu (poziome kreski na prawo od guzika `Source`).
 
-# Projekty
+## Projekty
 
 Zazwyczaj projekt badawczy składa się z wielu plików. Nie jest to tylko kod R, ale też chociażby pliki z danymi i inne. Zazwyczaj trzymamy to wszystko w jednym folderze, o ile utrzymujemy jakikolwiek porządek w plikach. Możemy też mieć całe studia luzem na pulpicie, nie oceniam. RStudio pomaga nam w zarządzaniu takimi grupami plików poprzez projekty. Projekty w RStudio robią kilka rzeczy, m.in. pozwalają ustawić niestandardowe opcje (np. zmienić język słownika na angielski tylko dla tego jednego projektu), zapamiętać otwarte okna i ich układ, ale przede wszystkim pomagają nam lokalizować pliki znajdujące się w tym samym folderze[^podstawy_r-9]. Zawsze, kiedy planujemy zachować jakiś zbiór powiązanych plików na dłużej, warto jest wytworzyć projekt.
 
@@ -155,7 +157,7 @@ Projekty tworzymy i otwieramy przez guzik w prawym górnym rogu. Rozwijane menu 
 
 [^podstawy_r-10]: Jeśli nie wiesz o co chodzi, nie przejmuj się. To duży temat i nie jest to coś, bez czego nie da się żyć.
 
-# Pakiety
+## Pakiety
 
 Pakiety to pewnie dodatki do R, które rozszerzają jego możliwości. Dla przykładu -- R w swojej podstawowej wersji nie ma funkcji liczącej skośność. Nie jest to jednak żaden problem, bo możemy R rozszerzyć np. o pakiet o nazwie `e1071` albo `moments`. Oba te pakiety dodają nam do R możliwość szybkiego i prostego policzenia skośności. Pakiety -- w olbrzymiej większości -- są darmowe.
 
@@ -187,7 +189,7 @@ library("tidyverse")
 
 Jeśli chcemy cokolwiek liczyć, musimy mieć na czym liczyć[podstawy_r-23]. R ma wiele sposobów ładowania danych, które w każdym podręczniku zajmują cały rozdział. R poradzi sobie z prawie każdym formatem danych, a także potrafi ładować je bezpośrednio z serwera (dla przykładu pakiet `googlesheets4` pozwala ładować pliki z Google Sheets bez pobierania ich na dysk albo `QualtRics` ułatwiający importowanie plików z danymi ankietowymi z Qualtrics).
 
-[podstawy_r-23]: Wszystkie bazy, których używam w tym tekście, są dostępne w repozytorium na GitHubie. Można wejść w [ten link](https://github.com/jakub-jedrusiak/jakub-jedrusiak.github.io/tree/main/statystyka/dane/podstawy-R), wybrać pożądany plik i albo pobrać go na własny dysk, albo zamiast ścieżki do pliku użyć linku. By uzyskać działający link, nazleży na koniec właściwego linku dopisać `?raw=true`. Takie linki można wklejać w komendy czytające dane zamiast ścieżek. Przykład linku, jak i tego, jak używać ich z funkcjami typu `read_csv` podaję w podrozdziale o grupowaniu i agregowaniu.
+[podstawy_r-23]: Wszystkie bazy, których używam w tym tekście, są dostępne w repozytorium na GitHubie. Można wejść w [ten link](https://github.com/jakub-jedrusiak/jakub-jedrusiak.github.io/tree/main/statystyka/dane/podstawy-R), wybrać pożądany plik i albo pobrać go na własny dysk, albo zamiast ścieżki do pliku użyć linku. By uzyskać działający link, należy na koniec właściwego linku dopisać `?raw=true`. Takie linki można wklejać w komendy czytające dane zamiast ścieżek. Przykład linku, jak i tego, jak używać ich z funkcjami typu `read_csv` podaję w podrozdziale o grupowaniu i agregowaniu.
 
 Podstawowe pakiety do ładowania danych do `readr` i `readxl` dla plików Excela. Na początek nie trzeba znać struktury funkcji ładujących dane, bo RStudio dysponuje przyjemnym graficznym narzędziem do tego celu. Jeśli w prawym dolnym oknie, w zakładce Files, klikniemy na plik zawierający dane, dostaniemy do dyspozycji opcję Import Dataset... Po jej wybraniu otworzy nam się okno z podglądem danych i kilkoma opcjami do dostosowania, m.in. czy jakichś wierszy nie pominąć albo z którego arkusza pobrać dane. W plikach .csv czasem musimy też wybrać rodzaj separatora i znaku dziesiętnego (opcja Locale). W polskich plikach z danymi separatorem jest zazwyczaj średnik, a znakiem dziesiętnym przecinek, podczas gdy w angielskich danych będą to odpowiednio przecinek i kropka. Jeśli nie ustawimy znaku dziesiętnego, R może potraktować liczby z przecinkiem jako tekst. Poza tym możemy kliknąć w każdy nagłówek kolumny i wybrać typ danych. Dane powinny być czyste, tj. kolumny liczbowe powinny zawierać same liczby. Jeśli dane nie są czyste (a zazwyczaj nie są), możemy je wyczyścić potem.
 
@@ -585,6 +587,8 @@ df %>%
 
 Komendę `factor` dla czytelności rozbiłem tutaj na trzy linijki, ale -- oczywiście -- można ją całą zapisać w jednej. Po pierwsze wskazałem, że na factor przerobiona ma być kolumna `wyksztalcenie`. Po drugie wskazałem, jakie wykształcenie może mieć wartości, zbierając je w jeden zestaw funkcją `c` i wrzucając do argumentu `levels`. Na koniec poinformowałem R, że w kolejność jest tutaj ważna, dopisując `ordered = TRUE`. Jeśli tak przerobione dane posortujemy, zobaczymy, że baza rzeczywiście zaczyna się od wykształcenia wyższego.
 
+##### `Questionr`
+
 ### Kolejność kolumn
 
 Możemy chcieć mieć nasze kolumny w określonej kolejności. Są zasadniczo dwa sposoby zmieniania kolejności kolumn. Jest funkcja `relocate`, która służy raczej przestawianiu pojedynczych kolumn lub ich niewielkiej liczby. Jeśli chcemy od nowa określić kolejność kolumn, możemy wykorzystać w tym celu znaną nam już funkcję `select`. Załóżmy, że chcielibyśmy przestawić kolumnę `H_suma` przed kolumny z cząstkowymi wynikami.
@@ -771,16 +775,62 @@ Pierwszy problem rozwiązałem za pomocą argumentu `by`. Od wersji `dplyr` 1.1.
 
 Jak widać złączenia to zaskakująco szeroki temat, który daje duże możliwości. Omówiona tu funkcja `left_join` jest najczęściej stosowana, ale warto zerknąć do dokumentacji i w tutoriale, żeby chociaż dowiedzieć się, co możemy za pomocą złączeń zrobić.
 
-> Pozostała część już wkrótce.
-
 # Eksploracja danych
 
+O ile ogólna możliwość liczenia statystyk została omówiona w podrozdziale o grupowaniu i agregacji, tak tutaj chciałbym podrzucić dwie użyteczne funkcje do szybkiego uzyskania statystyk dla całego zestawu danych. Będą to funkcje `describe` i `describeBy` z pakietu `psych` (który trzeba, oczywiście, zainstalować i załadować przed użyciem). Jest to pierwszy omawiany tu pakiet spoza `tidyverse`. `psych` to rozległy zestaw narzędzi zaprojektowanych specjalnie do obliczeń szeroko wykorzystywanych w psychologii. Składa się z kilkudziesięciu funkcji zaprojektowanych jako zestaw narzędzi do badań empirycznych w psychologii. Jest tylko jeden problem. `psych` miał premierę w 2007 r. i o ile co jakiś czas dostaje update, to nie jest opublikowany na GitHubie. Oznacza to, że społeczność nie może wprowadzać poprawek do kodu. Profesor Revelle rzeczywiście zna się na rzeczy, jako że od 40 lat jest profesorem, ale to ciągle jedna osoba. Dlatego czasem trzeba się trochę nagimnastykować, żeby zmusić `psych` do współpracy z `tidyverse`.
+
+## Statystyki opisowe z `psych::describe`
+
+Funkcja `describe` pozwala szybko uzyskać zestaw wielu podstawowych statystyk opisowych dla wszystkich kolumn naraz. Powstaje z tego duża tabela, która zawiera znacznie więcej danych niż nam potrzeba, ale ma tę zaletę, że można ją zrobić szybko. Składnia jest tutaj tak banalna, że ciężko mówić o składni, bo polega na tym, że piszemy `describe(df)`. I to zazwyczaj zupełnie wystarczy. Że to za proste, to pokażę trochę więcej możliwości.
+
+```{r}
+library("psych") # normalnie wszystkie pakiety ładowałbym w jednym miejscu, gdzieś na początku kodu
+
+descriptives <- df %>%
+    describe(quant = c(0.25, 0.75), IQR = TRUE) %>%
+    as_tibble(rownames = "var")
+```
+
+Źródłem problemów czasem bywa to, że mamy dwa główne sposoby przechowywania tabelek w R. Pierwszy to `data.frame` czyli natywny typ danych w R. Drugi to `tibble`, czyli `data.frame` na prochach. Jak nietrudno się domyślić, `tibble` pochodzi z ze świata `tidyverse` i właściwie wszystko robi lepiej. Przede wszystkim lepsze jest to, jak wyświetla się w konsoli, ale też kilka rzeczy pod maską. Wszystkie dotychczasowe „ramki danych” (jak to się czasem tłumaczy), z jakimi mieliśmy do czynienia, to właśnie `tibble`. Żeby na własnej skórze przekonać się o wyższości `tibble` nad `data.frame` można wpisać w konsolę `df` (która jest w formacie `tibble`), a potem `as.data.frame(df)`. Dlatego też w ostatniej linijce kodu przerabiam wynik działania `describe` na format `tibble`.
+
+Jedną rzecz muszę jednak dodać. Z wielu praktycznych przyczyn `tibble` nie używa nazwanych wierszy. Tylko kolumny mogą mieć nazwy własne, jeśli chcemy mieć identyfikatory wierszy, powinniśmy zrobić z nich oddzielną kolumnę. `describe` zaś w czystej postaci wyrzuca `data.frame`, w której nazwy opisanych zmiennych to właśnie nazwy wierszy, dlatego muszę powiedzieć funkcji `as_tibble`, do jakiej kolumny ma mi wrzucić nazwy tych zmiennych. Swoją nazwałem `var`.
+
+Powstała tabela jest na tyle rozległa, że nie chciałem jej tu umieszczać, ale można ją sobie samodzielnie wyświetlić. Mam nadzieję, że wiesz już, jak to zrobić. Żeby podejrzeć zawartość naszej tabeli skorzystam z raz już użytej funkcji `glimpse`.
+
+```{r}
+glimpse(descriptives)
+```
+
+Nazwy kolumn mówią nam już, co udało nam się wygenerować. Jest nasza kolumna `var` z nazwami zmiennych z bazy. Jest cała seria statystyk opisowych. Warto zauważyć, że swoje statystyki typu średnia dostała też zmienna tekstowa `wyksztalcenie`. Żeby ostrzec, że liczby te nie mają za wiele sensu, nazwa tej kolumny automatycznie dostała gwiazdkę `wyksztalcenie*`. Opis wszystkich policzonych statystyk znajduje się, a jakże, w dokumentacji. Powiem tylko o dwóch rzeczach, które wprost musiałem wywołać argumentami. Pierwsza to kwantyle, czyli wartości dzielące zbiór danych na części. 25. kwantyl to obserwacja, poniżej której znajduje się 25% danych. Jeśli mielibyśmy dokładnie 100 obserwacji, to 25. kwantylem byłaby 25. obserwacja. Mediana to nic innego jak 50. kwantyl. Możemy poprosić `describe` o podanie nam dowolnych kwantyli. Wystarczy, że zbierzemy je wszystkie w `c` jako ułamki dziesiętne i wrzucimy do argumentu `quant`. Druga rzecz, o którą wprost poprosiłem, to IQR, czyli rozstęp międzykwartylowy. Bywa wykorzystywany jako wskaźnik rozproszenia danych. Ponieważ jest to argument typu „licz albo nie licz”, to wpisałem w niego `TRUE`, czyli kazałem `describe` ten rozstęp policzyć.
+
+> Pozostała część już wkrótce.
+
+## Statystyki opisowe dla grup z `psych::describeBy`
+
+## Macierze korelacji i ich istotność z `rstatix::cor_mat`
+
 # Wykresy
+
+## Mapowanie estetyk
+
+## Obiekty `geom_`
+
+## Tytuły osi i wykresu
+
+## Wygląd wykresów
+
+### `ggThemeAssist`
+
+### Gotowe szablony
 
 # Testy statystyczne
 
 ## Czyste wyniki, czyli pakiet `broom`
 
 # Formatowanie kodu
+
+## `lintr`
+
+## `styler`
 
 # Bibliografia
