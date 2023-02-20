@@ -872,6 +872,9 @@ Można zwrócić uwagę na to, że powyższa komenda wyświetliła nam macierz k
 Korelacje mają jednak swoją istotność, którą możemy tu oznaczyć. Jeśli policzyliśmy już macierz korelacji, możemy ją wrzucić do funkcji `cor_get_pval`. Ewentualnie możemy samą bazę wrzucić do funkcji `cor_pmat`. Efekt jest ostatecznie ten sam.
 
 ```{r}
+#| label: cor_pmat
+#| eval: false
+
 korelacje_p_1 <- cor_get_pval(korelacje)
 
 korelacje_p_2 <- cor_pmat(db_joined, -ID)
