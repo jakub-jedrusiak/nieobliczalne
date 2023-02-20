@@ -348,6 +348,7 @@ Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je w
 | `all_of()`      |                w których wszystkie wartości<br>spełniają jakiś warunek |
 | `any_of()`      |                       w których jakakolwiek<br>wartość spełnia warunek |
 | `everything()`  |                                              w ogóle wszystkie kolumny |
+| `where()`       |        gdzie spełniony jest inny warunek<br>(np. `where(is.numeric))`) |
 
 : Funkcje pomocnicze do `select` i `across`.
 
@@ -409,7 +410,7 @@ df %>%
 
 Pierwszym argumentem jest zestaw kolumn, dlatego nazwy kolumn opakowałem w `c()`. Jest to podstawowa funkcja, która zbiera kilka rzeczy w jeden zestaw. `select` czy `filter` nie potrzebowały, żeby robić takie zestawy, ale wiele funkcji (zwłaszcza spoza `tidyverse`) tego wymaga. Co z drugim argumentem, czyli funkcją? Tutaj wchodzimy głębiej w programistyczne meandry i można, oczywiście, zostać przy wersji bez `across`. Odważnych zapraszam do świata funkcji anonimowych.
 
-### Własne funkcje {#sec-functions}
+### Własne funkcje {#sec-customfunctions}
 
 Drugi argument w `across` to funkcja, jakiej `across` ma użyć do przekształcenia kolumn. Niestety nie ma funkcji, która odejmowałaby od 7. Żeby sobie z tym poradzić, musimy albo taką funkcję wcześniej zadeklarować, albo użyć tzw. funkcji anonimowej (zwanej też *lambda*). Pierwsza opcja jest łatwa do zrozumienia, ale wymaga sporo pisania jak na coś, czego użyjemy tylko raz. Tworzenie własnych funkcji w R jest dość łatwe. Nasza funkcja mogłaby wyglądać tak:
 
@@ -521,9 +522,9 @@ case_when(
 )
 ```
 
-Funkcja po kolei sprawdza warunki. Jeśli natrafi na jakiś spełniony warunek zatrzyma się i da taką wartość, jaką temu warunkowi przypisaliśmy. Warunek jest logiczny, czyli może to być cokolwiek od `wyksztalcenie == "Średnie"` po `wzrost <= 160`. Należy pamiętać, że jeśli wartość wynikowa ma być tekstem, musimy napisać ją w cudzysłowie, jak każdy dosłowny tekst. `.default = wartosc` może nam służyć do ustalania, co ma być, jeśli żaden z powyższych warunków się nie sprawdzi[^podstawy_r-23]. Jeśli chodzi o przykład z wykształceniem, moglibyśmy rozwiązać go tak:
+Funkcja po kolei sprawdza warunki. Jeśli natrafi na jakiś spełniony warunek zatrzyma się i da taką wartość, jaką temu warunkowi przypisaliśmy. Warunek jest logiczny, czyli może to być cokolwiek od `wyksztalcenie == "Średnie"` po `wzrost <= 160`. Należy pamiętać, że jeśli wartość wynikowa ma być tekstem, musimy napisać ją w cudzysłowie, jak każdy dosłowny tekst. `.default = wartosc` może nam służyć do ustalania, co ma być, jeśli żaden z powyższych warunków się nie sprawdzi[^podstawy_r-24]. Jeśli chodzi o przykład z wykształceniem, moglibyśmy rozwiązać go tak:
 
-[^podstawy_r-23]: W starszych tekstach (z mojej perspektywy starszych niż 3 tygodnie) można zamiast argumentu `.default` spotkać konstrukcję typu `TRUE ~ wyksztalcenie`. Aktualnie ona jeszcze działa, ale powoli będzie wycofywana. Lepiej jest przestawiać się na `.default`.
+[^podstawy_r-24]: W starszych tekstach (z mojej perspektywy starszych niż 3 tygodnie) można zamiast argumentu `.default` spotkać konstrukcję typu `TRUE ~ wyksztalcenie`. Aktualnie ona jeszcze działa, ale powoli będzie wycofywana. Lepiej jest przestawiać się na `.default`.
 
 ```{r}
 #| eval: false
@@ -741,9 +742,9 @@ df_long %>%
 
 ## Retesty czyli złączenia (*joins*) {#sec-join}
 
-Złączenia (*joins*) to, jak nazwa wskazuje, metoda łączenia dwóch baz danych. Jest to jedna z podstawowych operacji na bazach danych, znana co najmniej od lat 70. i instrukcji `JOIN` w SQL. Jest to także jedna z operacji niedostępnych w Excelu bez Power Query. W praktyce badawczej może być ona konieczna, gdy mamy badanie wieloczęściowe, w którym musimy stosować wiele baz danych (np. jedną tworzą pomiary z eyetrackera, drugą wyniki w ankiecie, a trzecią test szybkości reakcji). Zdarza się to również często w prostych badaniach ankietowych, kiedy po jakimś czasie musimy wykonać retest. W obu tych przypadkach lądujemy z dwiema (lub więcej) bazami, które -- miejmy nadzieję -- mają jaką wspólną kolumnę, identyfikator osoby badanej, taki sam w każdej z trzech baz[^podstawy_r-21].
+Złączenia (*joins*) to, jak nazwa wskazuje, metoda łączenia dwóch baz danych. Jest to jedna z podstawowych operacji na bazach danych, znana co najmniej od lat 70. i instrukcji `JOIN` w SQL. Jest to także jedna z operacji niedostępnych w Excelu bez Power Query. W praktyce badawczej może być ona konieczna, gdy mamy badanie wieloczęściowe, w którym musimy stosować wiele baz danych (np. jedną tworzą pomiary z eyetrackera, drugą wyniki w ankiecie, a trzecią test szybkości reakcji). Zdarza się to również często w prostych badaniach ankietowych, kiedy po jakimś czasie musimy wykonać retest. W obu tych przypadkach lądujemy z dwiema (lub więcej) bazami, które -- miejmy nadzieję -- mają jaką wspólną kolumnę, identyfikator osoby badanej, taki sam w każdej z trzech baz[^podstawy_r-25].
 
-[^podstawy_r-21]: Czasami możemy też wykorzystać inną informację o osobie badanej jako identyfikator. Brałem udział w badaniach, w których osoba badana wypełniała ankietę i w tym samym czasie była nagrywana. Potem łączyłem informacje z nagrania z informacjami z ankiety na podstawie czasu wypełniania ankiety i czasu nagrywania. Jak widać, wszystko jest możliwe, choć domyślne złączenia z `dplyr`, w chwili pisania tego tekstu, nie pozwalają na pełną giętkość. Wtedy użyłem złączeń z pakietu `fuzzyjoin`.
+[^podstawy_r-25]: Czasami możemy też wykorzystać inną informację o osobie badanej jako identyfikator. Brałem udział w badaniach, w których osoba badana wypełniała ankietę i w tym samym czasie była nagrywana. Potem łączyłem informacje z nagrania z informacjami z ankiety na podstawie czasu wypełniania ankiety i czasu nagrywania. Jak widać, wszystko jest możliwe, choć domyślne złączenia z `dplyr`, w chwili pisania tego tekstu, nie pozwalają na pełną giętkość. Wtedy użyłem złączeń z pakietu `fuzzyjoin`.
 
 Jak więc takie bazy połączyć? Wykorzystajmy tutaj dwie bazy zawierające test i retest, zrobione podczas walidacji kwestionariusza o nazwie KTR. Składał się on z dwóch skal oznaczonych tutaj literkami O i W. Standardową procedurą przy projektowaniu kwestionariusza jest powtórzenie pomiaru po jakimś czasie, żeby sprawdzić, na ile wyniki są stabilne. My taką procedurę wykonaliśmy, przez co dysponujemy dwoma oddzielnymi bazami. Zerknijmy na nie.
 
@@ -763,12 +764,14 @@ Pierwsza rzecz, która może zwrócić naszą uwagę, to znacznie mniejsza liczb
 Ja przyłączę retest do bazy z wynikami pierwszego testu. Widzę jednak dwa problemy, które będę musiał rozwiązać. Po pierwsze, kolumna z identyfikatorem osoby badanej nazywa się inaczej w obu bazach. Po drugie, kolumny `KTR_O` i `KTR_W` nazywają się tak samo w obu bazach. Będę więc musiał wskazać R, na podstawie jakich kolumn ma dokonać złączenia, a także jak ma nazwać kolumny w gotowej bazie, żebym wiedział, które wyniki dotyczą pierwszego testu, a które retestu.
 
 ```{r}
-db_test %>%
+db_joined <- db_test %>%
     left_join(
         db_retest,
         by = join_by(ID == Subject),
         suffix = c("", "_retest")
     )
+
+db_joined
 ```
 
 Pierwszy problem rozwiązałem za pomocą argumentu `by`. Od wersji `dplyr` 1.1.0 przyjmuje on inną funkcję o nazwie `join_by`. W jej nawiasach precyzujemy, na podstawie jakich kolumn należy dokonać złączenia. Identyczne kolumny łączymy znakiem `==`. Drugi problem rozwiązałem dodając w argumencie `suffix` przyrostki do nazw kolumn. Zawsze zapisuje się je jako zestaw, czyli wewnątrz `c()` i zawsze najpierw jest w cudzysłowie przyrostek lewej bazy (u nas `db_test`), a potem przyrostek prawej bazy (u nas `db_retest`). Ja chciałem, by kolumny pierwotnej bazy nie miały przyrostka, więc za przyrostek dałem pusty ciąg znaków (czyli po prostu nic w cudzysłowie), zaś do kolumn bazy z retestem dodałem przyrostek `"_retest"`. Efekt widać na obrazku -- 5 kolumn i puste wartości u osób, które nie wypełniły retestu.
@@ -777,7 +780,7 @@ Jak widać złączenia to zaskakująco szeroki temat, który daje duże możliwo
 
 # Eksploracja danych {#sec-exploration}
 
-O ile ogólna możliwość liczenia statystyk została omówiona w podrozdziale o grupowaniu i agregacji, tak tutaj chciałbym podrzucić dwie użyteczne funkcje do szybkiego uzyskania statystyk dla całego zestawu danych. Będą to funkcje `describe` i `describeBy` z pakietu `psych` (który trzeba, oczywiście, zainstalować i załadować przed użyciem). Jest to pierwszy omawiany tu pakiet spoza `tidyverse`. `psych` to rozległy zestaw narzędzi zaprojektowanych specjalnie do obliczeń szeroko wykorzystywanych w psychologii. Składa się z kilkudziesięciu funkcji zaprojektowanych jako zestaw narzędzi do badań empirycznych w psychologii. Jest tylko jeden problem. `psych` miał premierę w 2007 r. i o ile co jakiś czas dostaje update, to nie jest opublikowany na GitHubie. Oznacza to, że społeczność nie może wprowadzać poprawek do kodu. Profesor Revelle rzeczywiście zna się na rzeczy, jako że od 40 lat jest profesorem, ale to ciągle jedna osoba. Dlatego czasem trzeba się trochę nagimnastykować, żeby zmusić `psych` do współpracy z `tidyverse`.
+O ile ogólna możliwość liczenia statystyk została omówiona w podrozdziale o grupowaniu i agregacji (@sec-summarise), tak tutaj chciałbym podrzucić dwie użyteczne funkcje do szybkiego uzyskania statystyk dla całego zestawu danych. Będą to funkcje `describe` i `describeBy` z pakietu `psych` (który trzeba, oczywiście, zainstalować i załadować przed użyciem). Jest to pierwszy omawiany tu pakiet spoza `tidyverse`. `psych` to rozległy zestaw narzędzi zaprojektowanych specjalnie do obliczeń szeroko wykorzystywanych w psychologii. Składa się z kilkudziesięciu funkcji zaprojektowanych jako zestaw narzędzi do badań empirycznych w psychologii. Jest tylko jeden problem. `psych` miał premierę w 2007 r. i o ile co jakiś czas dostaje update, to nie jest opublikowany na GitHubie. Oznacza to, że społeczność nie może wprowadzać poprawek do kodu. Profesor Revelle rzeczywiście zna się na rzeczy, jako że od 40 lat jest profesorem, ale to ciągle jedna osoba. Dlatego czasem trzeba się trochę nagimnastykować, żeby zmusić `psych` do współpracy z `tidyverse`.
 
 ## Statystyki opisowe z `psych::describe` {#sec-describe}
 
@@ -828,9 +831,69 @@ describeBy(screams ~ songwriter + song_type, data = as.data.frame(df_scream))
 
 W krótkich instrukcjach takie coś jest nawet czytelne. Warto pamiętać, że potoki nie są obowiązkowe, można równie dobrze zagnieżdżać funkcje. Cierpi na tym tylko czytelność kodu. Druga opcja, to wprost powiedzenie potokowi, gdzie ma wrzucić naszą bazę danych. Do tego właśnie służy `.`. Zapis `data = .` mówi potokowi „halo halo, proszę nie wrzucać bazy do pierwszego argumentu, tylko o tu, gdzie pokazałem(-am) kropką”. Ostatecznie oba przykłady z tego podrozdziału są równoważne.
 
-> Pozostała część już wkrótce.
+## Statystyki opisowe z `rstatix::get_summary_stats`
+
+Muszę się do czegoś przyznać. Przez lata wykorzystywałem `describe` i `describeBy` do statystyk opisowych, ale... są lepsze alternatywy. Chciałem jednak wykorzystać te funkcje jako praktyczny pretekst to pokazania różnic między `data.frame` i `tibble`, używania kropki z potokami i ogólnie jak sobie radzić, jak nowszych alternatyw nie ma. Jednak do liczenia statystyk opisowych takie alternatywy są. I przychodzą do nas z `rstatix`. Jest to świetny, nowoczesny pakiet, który szerzej omówimy w podrozdziale @sec-rstatix.
+
+Do liczenia statystyk opisowych w `rstatix` wykorzystujemy funkcję `get_summary_stats`. Dobrze współpracuje ona z `tidyverse`, potokami i funkcją `group_by`. Ma też bardzo prostą składnię. Szczegóły i wyjaśnienia poszczególnych statystyk znajdują się w dokumentacji.
+
+```{r}
+library("rstatix")
+
+# bez grupowania
+get_summary_stats(df)
+
+# z grupowaniem
+df_scream %>%
+    group_by(songwriter, song_type) %>%
+    get_summary_stats()
+```
+
+## Tabele liczności z `rstatix::freq_table`
+
+Dla danych kategorialnych (np. płeć, wykształcenie, klasa) nie liczymy statystyk opisowych, a tabele liczności. Chcemy na przykład wiedzieć, ile w naszej bazie mamy osób z wykształceniem wyższym, ile ze średnim itd. W podrozdziale @sec-summarise pokazałem, jak to zrobić ręcznie funkcjami `summarise` i `n`. Pakiet `rstatix` ma dla nas gotową funkcję `freq_table` właśnie do tego celu. Wymaga ona jedynie podania, które kolumny z naszej tabeli ująć. Robimy to tak samo, jak zrobilibyśmy w funkcji `select` (patrz @sec-select) czy `across` (patrz @sec-across).
+
+```{r}
+freq_table(df, wyksztalcenie)
+```
 
 ## Macierze korelacji i ich istotność z `rstatix::cor_mat`
+
+W ramach eksploracji chcemy czasami zrobić macierz korelacji całego naszego zestawu danych. Może nam do tego posłużyć funkcja `cor_mat` z pakietu `rstatix`. Zobaczmy to na przykładzie bazy `db_joined` z podrozdziału @sec-join.
+
+```{r}
+(korelacje <- cor_mat(db_joined, -ID))
+```
+
+Użycie, jak widać, jest bardzo proste. Jedyna dodatkowa informacja, jaką sprecyzowałem, to żeby nie brać pod uwagę kolumny ID. W tym wypadku mógłbym też użyć `starts_with("KTR")`. Efektem działania funkcji jest macierz korelacji. Możemy z niej wyczytać m.in., że korelacja `KTR_O` i `KTR_W` z ich retestami wyniosła odpowiednio `r jedrusiakr::apa_num_pl(cor_mat(db_joined, -ID)[[3,1]], add_equals = FALSE)` i `r jedrusiakr::apa_num_pl(cor_mat(db_joined, -ID)[[4,2]], add_equals = FALSE)`. Nie są to jakoś oszałamiające wyniki jak na testy, które mają mierzyć względnie stałe cechy.
+
+Można zwrócić uwagę na to, że powyższa komenda wyświetliła nam macierz korelacji, pomimo że normalnie musiałbym jeszcze wywołać samą zmienną `korelacje`, do której ją zapisałem. Tak to robiliśmy wcześniej. Wykorzystałem tutaj wygodą sztuczkę -- jeśli weźmie się całe przypisanie w nawiasy, R potraktuje to jako „przypisz i wyświetl”.
+
+Korelacje mają jednak swoją istotność, którą możemy tu oznaczyć. Jeśli policzyliśmy już macierz korelacji, możemy ją wrzucić do funkcji `cor_get_pval`. Ewentualnie możemy samą bazę wrzucić do funkcji `cor_pmat`. Efekt jest ostatecznie ten sam.
+
+```{r}
+korelacje_p_1 <- cor_get_pval(korelacje)
+
+korelacje_p_2 <- cor_pmat(db_joined, -ID)
+
+identical(korelacje_p_1, korelacje_p_2)
+
+korelacje_p_1
+```
+
+Funkcja `identical` informuje nas, że obiekty stworzone obiema funkcjami rzeczywiście są identyczne. Powstała nam macierz istotności korelacji. Może być mylące, że korelacje wyświetlają się w notacji naukowej, co jest wygodnym sposobem oznaczania bardzo małych lub bardzo dużych liczb. Zasada jest tu prosta: $1,22e-4 = 1,22 \times 10^{-4} = 0,000122$. Jeśli jednak chcemy dostać tę macierz w przyjaźniejszej formie, możemy użyć funkcji `cor_mark_significant`[^podstawy_r-26], do której wrzucamy macierz korelacji (nie macierz istotności).
+
+[^podstawy_r-26]: Ewentualnie można zaokrąglić kolumny z korelacjami do 3 lub 4 miejsc po przecinku z użyciem funkcji `mutate` i `round` albo też wyłączając notację naukową komendą `format`; można napisać na przykład `korelacje_p_1 %>% mutate(across(where(is.numeric), ~ format(.x, scientific = FALSE)))`. Tylko to naprawdę dziwnie wygląda.
+
+```{r}
+cor_mark_significant(korelacje)
+```
+
+Otrzymujemy naszą macierz korelacji wzbogaconą o gwiazdki. Domyślnie mamy standardowy układ[^podstawy_r-27] z dodatkiem \*\*\*\* oznaczającym mniej niż 0,0001. Gwiazdki możemy dostosowywać, a szczegóły znajdują się w dokumentacji.
+
+[^podstawy_r-27]: $* < 0,05$; $** < 0,01$; $*** < 0,001$.
+
+> Pozostała część już wkrótce.
 
 # Wykresy
 
