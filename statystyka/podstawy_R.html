@@ -646,6 +646,7 @@ div.csl-indent {
 </div>
 </div>
 <p>Jak widzimy, <code>paste</code> wygenerowało nam 10 kolejnych etykiet łącząc <code>"H"</code> i liczby od 1 do 10. Argument <code>sep = "_"</code> mówi, żeby między kolejnymi kawałkami wstawiać podkreślnik. Do <code>paste</code> możemy wrzucić dowolną liczbę znaków do połączenia. Jeśli nie chcemy żadnego separatora, możemy ustawić <code>sep = ""</code>, czyli pusty ciąg znaków w separatorze albo możemy użyć bliźniaczej funkcji <code>paste0</code>, która nie ma separatora.</p>
+<p>Co ciekawe, zmieniać nazwy możemy też za pomocą funkcji <code>select</code>, ale wyłącznie pojedynczo. Składnia jest taka sama, jak <code>rename</code>, ale <code>select</code> zmienia też kolejność kolum, a w wynikowej tabeli zostają tylko wskazane kolumny, więc trzeba uważać. Jednak do małych tabel, gdzie nie jest problemem wypisać wszystkie kolumny, można spokojnie za jednym zamachem kolumny wybrać i nazwać.</p>
 </section>
 <section id="sec-values" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="sec-values"><span class="header-section-number">6.3</span> Zmiana wartości komórek z <code>dplyr::mutate</code> i <code>readr::parse_number</code></h2>
