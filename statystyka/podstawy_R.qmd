@@ -330,6 +330,8 @@ paste("H", 1:10, sep = "_")
 
 Jak widzimy, `paste` wygenerowało nam 10 kolejnych etykiet łącząc `"H"` i liczby od 1 do 10. Argument `sep = "_"` mówi, żeby między kolejnymi kawałkami wstawiać podkreślnik. Do `paste` możemy wrzucić dowolną liczbę znaków do połączenia. Jeśli nie chcemy żadnego separatora, możemy ustawić `sep = ""`, czyli pusty ciąg znaków w separatorze albo możemy użyć bliźniaczej funkcji `paste0`, która nie ma separatora.
 
+Co ciekawe, zmieniać nazwy możemy też za pomocą funkcji `select`, ale wyłącznie pojedynczo. Składnia jest taka sama, jak `rename`, ale `select` zmienia też kolejność kolum, a w wynikowej tabeli zostają tylko wskazane kolumny, więc trzeba uważać. Jednak do małych tabel, gdzie nie jest problemem wypisać wszystkie kolumny, można spokojnie za jednym zamachem kolumny wybrać i nazwać.
+
 ## Zmiana wartości komórek z `dplyr::mutate` i `readr::parse_number` {#sec-values}
 
 Jak widzimy, odpowiedzi na pytania z homofobią zawierają nie tylko liczby, ale też tekst z legendą. My jednak chcemy zostawić same liczby. Jeśli spojrzymy na kolumnę z wiekiem, możemy zauważyć, że jest to również jest kolumna tekstowa. Dziwne, przecież wiek to (tylko) liczba. Przejrzenie danych pozwala stwierdzić, że respondent o id 50 w pytaniu o wiek wpisał „18 (2021)". Nieważne, jak się będziemy przed tym bronić, co dopiszemy do pytania o wiek, zawsze znajdzie się ktoś, kto zrobi w nim elaborat. Ten jeden respondent sprawił, że cała kolumna nie jest traktowana jako kolumna liczbowa, ale jako tekst. Odpowiedź na oba te problemy jest taka sama -- `mutate` i `parse_number`.
