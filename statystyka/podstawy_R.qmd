@@ -2,6 +2,8 @@
 number-sections: true
 ---
 
+# Podstawy programowania w R {#podstawy-programowania-w-r}
+
 ```{r}
 #| label: setup
 #| include: false
@@ -39,8 +41,6 @@ knitr::knit_hooks$set(
   error = colourise_chunk("error")
 )
 ```
-
-# Podstawy programowania w R {#podstawy-programowania-w-r}
 
 W kilku miejscach w dalszej części wrzucam informacje, jak daną rzecz omawianą teoretycznie można zrobić w R. **Absolutnie nie jest to konieczne do zrozumienia statystyki!** Jest to tylko jedna z możliwości, jak można opisaną dalej teorię przekuć w praktykę. O R można myśleć jako o programie do robienia statystyki. Podobnie jak SPSS, Statistica, Stata czy (oparte na R, darmowe i otwartoźródłowe) jamovi. Jeśli jednak Czytelnik widział kiedyś program statystyczny, spodziewać się będzie ekranu podobnego do Excela, gdzie na górnej belce wybiera się testy statystyczne, jakie chce się przeprowadzić. Praca w R tak nie wygląda. Największa wada i zaleta R polega na tym, że jest on jednocześnie językiem programowania. A to daje bardzo ciekawe możliwości, o których niżej. Także praca w R wygląda tak, że w specjalnym języku piszemy komputerowi, co ma zrobić, potem uruchamiamy te instrukcje i gotowe.
 
@@ -379,7 +379,7 @@ df %>%
 Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery, ale możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu `tidy-select`. Tutaj akurat użyłem `starts_with("H_")`, żeby powiedzieć, że ma to zrobić ze wszystkimi kolumnami, których nazwy zaczynają się od `H_`. Te same funkcje możemy wykorzystywać w funkcji `select`. Kilka innych tego typu funkcji umieściłem w tabeli.
 
 | Funkcja         |                                           Wybierz wszystkie kolumny... |
-|-------------------|----------------------------------------------------:|
+|--------------------|---------------------------------------------------:|
 | `starts_with()` |                                         których nazwy zaczynają się od |
 | `ends_with()`   |                                            których nazwy kończą się na |
 | `contains()`    |                                        których nazwy zawierają w sobie |
@@ -942,7 +942,7 @@ Dla danych kategorialnych (np. płeć, wykształcenie, klasa) nie liczymy statys
 freq_table(df, wyksztalcenie)
 ```
 
-## Macierze korelacji i ich istotność z `rstatix::cor_mat` {#macierze-korelacji-i-ich-istotność-z-rstatixcor_mat}
+## Macierze korelacji i ich istotność z `rstatix::cor_mat` {#sec-cor_mat}
 
 W ramach eksploracji chcemy czasami zrobić macierz korelacji całego naszego zestawu danych. Może nam do tego posłużyć funkcja `cor_mat` z pakietu `rstatix`. Zobaczmy to na przykładzie bazy `db_joined` z podrozdziału [-@sec-join].
 
@@ -1247,6 +1247,7 @@ Funkcja `tidy` wyświetla nam najważniejsze elementy modelu. Dla wszelkich regr
 ```{r}
 tidy(lm_price)
 ```
+
 Widzimy więc, że oba współczynniki (`estimate`) są istotne statystycznie, z czego długość działki kielicha ma współczynnik dodatni, a szerokość ujemny.
 
 ### `augment` {#sec-augment}
@@ -1258,6 +1259,48 @@ augment(lm_price)
 ```
 
 ## Swiss Army Knife w R, czyli `rstatix` {#sec-rstatix}
+
+Niezwykłe możliwości i giętkość pakietu `rstatix` były już w tym tekście wychwalane i pokazywane. Tutaj jednak chciałbym powiedzieć o głównej zawartości `rstatix` czy funkcjach wykonujących testy statystyczne.
+
+R posiada dużą bibliotekę domyślnych funkcji do testów statystycznych, takich jak `t.test` czy `cor.test`. I one liczą dobrze, ale w wielu przypadkach są niewygodne. Nie ma się co dziwić, to są stare funkcje, swoją historią sięgające roku 2000, czyli początków R. Nie było wtedy `dplyr`, RStudio, potoków i całego dobrodziejstwa, które sprawia, że współczesny kod R średnio przypomina klasyczny kod, którego tu nie omawiam, ale który ciągle działa i buduje fundamenty tego języka. Dlatego właśnie wyniki tych testów są niewystandaryzowane, wymagają one niewygodnego wskazywania kolumn jako wektorów[^podstawy_r-30] i mają argument `data` na drugim miejscu, przez co potoki zawsze wymagają, by używać z nimi kropki.
+
+`rstatix` jest odpowiedzią na te problemy. Poza tym, że dodaje mnóstwo przyjaznych funkcji od siebie, to uwspółcześnia stare funkcje, naprawiając w nich wszystko, co złe, m.in. poprawiając pracę z potokami. Dodatkowo wykorzystuje sprytną nomenklaturę, która ułatwia uczenie się -- jeśli w klasycznym R funkcja nazywa się `t.test`, to w `rstatix` nazywa się `t_test`, `cor.test` zmienia się w `cor_test` i tak dalej. Jest to zgodne z ogólnym trendem `tidyverse`, żeby te nowe, współczesne funkcje zawsze były pisane snake_case (więcej o formatowaniu kodu w podrozdziale [-@sec-formatting]). Większość funkcji pozwala też na wykonywanie wielu testów jednocześnie i radzi sobie ze zgrupowanymi danymi.
+
+```{r}
+# Test korelacji Pearsona
+cor_test(diamonds, price, carat)
+
+# Test t-Studenta
+t_test(df_scream, screams ~ songwriter)
+
+# Test korelacji na zgrupowanych danych
+iris %>%
+    group_by(Species) %>%
+    cor_test(Sepal.Length, Sepal.Width)
+
+# ANOVA
+anova_test(diamonds, price ~ cut + color + clarity)
+
+# Testy post-hoc
+tukey_hsd(diamonds, price ~ cut + color + clarity)
+
+# Wielkość efektu d Cohena
+cohens_d(df_scream, screams ~ songwriter)
+
+# wielkość efektu eta^2
+diamonds %>%
+    aov(price ~ cut + color + clarity, .) %>%
+    eta_squared()
+```
+
+Dodatkowo `rstatix` dostarcza nam wygodą funkcję `add_significance`, która do obiektu z modelem zgodnym z `broom` dodaje kolumnę z gwiazdkami istotności wartości $p$. Domyślne ustawienia są takie same jak dla funkcji `cor_mark_significance`[^podstawy_r-27] i również można je modyfikować (por. [-@sec-cor_mat]).
+
+```{r}
+lm_price %>%
+    tidy() %>%
+    add_significance()
+```
+Nie są to wszystkie funkcje, które oferuje `rstatix` i zachęcam do zerknięcia do [repozytorium `rstatix` na GitHubie](https://github.com/kassambara/rstatix), gdzie autor umieścił długą listę funkcji ze streszczeniem ich działania.
 
 # Formatowanie kodu {#sec-formatting}
 
