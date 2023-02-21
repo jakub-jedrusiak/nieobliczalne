@@ -1,7 +1,8 @@
 ---
 number-sections: true
 ---
-# Podstawy programowania w R
+
+# Podstawy programowania w R {#podstawy-programowania-w-r}
 
 W kilku miejscach w dalszej części wrzucam informacje, jak daną rzecz omawianą teoretycznie można zrobić w R. **Absolutnie nie jest to konieczne do zrozumienia statystyki!** Jest to tylko jedna z możliwości, jak można opisaną dalej teorię przekuć w praktykę. O R można myśleć jako o programie do robienia statystyki. Podobnie jak SPSS, Statistica, Stata czy (oparte na R, darmowe i otwartoźródłowe) jamovi. Jeśli jednak Czytelnik widział kiedyś program statystyczny, spodziewać się będzie ekranu podobnego do Excela, gdzie na górnej belce wybiera się testy statystyczne, jakie chce się przeprowadzić. Praca w R tak nie wygląda. Największa wada i zaleta R polega na tym, że jest on jednocześnie językiem programowania. A to daje bardzo ciekawe możliwości, o których niżej. Także praca w R wygląda tak, że w specjalnym języku piszemy komputerowi, co ma zrobić, potem uruchamiamy te instrukcje i gotowe.
 
@@ -17,9 +18,8 @@ Dla niektórych ludzi perspektywa uczenia się języka programowania tylko po to
 
 [^podstawy_r-1]: Drugim najpopularniejszym jest R.
 
-```{=html}
 <!-- -->
-```
+
 3.  R to język programowania. Pozwala to na szybką automatyzację dużej liczby zadań i radzenia sobie z nieprzewidzianymi okolicznościami. Dla przykładu program do prowadzenia eksperymentów PsychoPy generuje dane w dość pogmatwanych arkuszach kalkulacyjnych, które trzeba dość mocno wyczyścić przed analizą. Problem jest jednak taki, że wyniki każdej osoby badanej zapisują się w osobnych plikach. Jeśli przebadaliśmy 150 osób, mamy 150 plików do wyczyszczenia. Jeśli piszemy analizę w R, to wystarczy wyczyścić jeden plik, a potem dopisać linijkę czy dwie, żeby R tak samo wyczyścił pozostałe 149 plików. Bardzo cenię sobie też możliwość łatwego wygenerowania nazw dla kolumn typu MMPI_001, MMPI_002, ..., MMPI_567. Wpisywanie tego ręcznie to nuda i marnowanie mnóstwa czasu, a w R to jedna linijka kodu.
 
 4.  Analizy są modyfikowalne i wielorazowego użytku. Co mam na myśli? Załóżmy, że zrobiliśmy całą analizę i nagle się orientujemy, że nie usunęliśmy z bazy kilku wierszy, które przez przypadek wytworzyliśmy, jak bawiliśmy się kwestionariuszem, zanim go upubliczniliśmy. Albo prowadzący przy sprawdzaniu prosi, żeby zmodyfikować nieco analizę, bo chce wyniki kwestionariuszy wyrażone jako średnia, a nie suma. Jeśli korzystamy ze zwykłego oprogramowania, w obu przypadkach musimy wyklikiwać analizy od początku. Jeśli nasza analiza jest w R, to mamy ją całą zapisaną przed oczami. Możemy zmienić coś na samym jej początku, kliknąć jeden guzik i gotowe. Jeszcze lepiej -- ta analiza siedzi na naszym komputerze, póki jej nie usuniemy, więc jeśli kiedyś trzeba by było wykonać podobne zadanie, to wystarczy prosta operacja kopiuj-wklej.
@@ -28,9 +28,11 @@ Dla niektórych ludzi perspektywa uczenia się języka programowania tylko po to
 
 [^podstawy_r-2]: To trudno sobie wyobrazić, łatwiej zobaczyć na obrazkach. Chodzi o to, czy mamy klasyczną wyczyszczoną bazę, w której jedna osoba badana to jeden wiersz, a każda kolumna to jeden pomiar (np. odpowiedź na pytanie). Czasem chcemy zamiast 11 kolumn (ID osoby badanej + 10 odpowiedzi na pytania) mieć tylko 3 kolumny (ID osoby badanej, numer pytania, odpowiedź). Wtedy każda osoba badana zajmuje 10 wierszy, ale każdy wiersz ma odpowiedź na tylko jedno pytanie. To potrafi być potrzebne do niektórych testów, grupowania danych itp. To jest technikalium, to nie jest statystyka *per se*, ale czasem trzeba to ogarniać, żeby rzeczywiście zrobić analizę. Poświęciłem temu cały podrozdział [-@sec-pivot].
 
+<!-- -->
+
 6.  Wykresy. Wspominałem o tym wyżej, ale wykresy są warte osobnego punktu. Możliwości Excela są ograniczone. Dla przykładu wykres poniżej prezentuje wyniki badania nt. tego, jak wygląda homofobia u mężczyzn, którym się powie, że są niemęscy. W badaniu mierzyliśmy dodatkowo zmienną psychologiczną o nazwie normatywna męskość, czyli niejako stopień przywiązania do reguł, co *prawdziwy mężczyzna* powinien, a czego nie powinien. Wykres jest dość skomplikowany. Zawiera trzy zmienne dychotomiczne, co daje łącznie 8 kolumn w grupach po 4 i 2. Nie powiem, że zrobić taki wykres jest łatwo, bo dobre opanowanie `ggplot2` trochę zajmuje, ale gdy już opanujemy, co jest do opanowania, to hulaj dusza. Nawet najbardziej skomplikowane wykresy stają się możliwe. Gdy połączyć to z możliwościami dawanymi przez programistyczną warstwę R, nagle łatwe staje się wytworzenie serii pasujących do siebie stylem wykresów o tych samych wymiarach. Pozwala to uzyskać pełną spójność bez ręcznego poprawiania szczególików.
 
-![Homofobia u mężczyzn o zagrożonej i niezagrożonej męskości, w zależności od tego, jak wysoką mieli tzw. normatywną męskość. Gdy dodać to tego jeszcze podział na dwa rodzaje homofobii, robią się z tego trzy podziały i osiem różnych kolumn ze wspólnymi osiami, legendą i kolorami. Zrobienie tego w Excelu, o ile w ogóle możliwe, byłoby bardzo trudne.](./ilustracje/homofobia){#fig-homofobia}
+<!-- -->
 
 7.  Analizy można napisać niezależnie od procesu zbierania danych. Na III roku studiów miałem projekt studencki, w którym musieliśmy zrobić prosty eksperyment w PsychoPy, przeanalizować dane i zaprezentować wyniki. Termin był krótki, także ostatnie dane większość grup zdążyła zebrać dopiero na dzień przed terminem, w tym moja. Oznaczało to, że osoby robiące analizę statystyczną musiały siedzieć do późna, żeby wyrobić się z prezentacją. Ale że już wtedy umiałem co nieco R, to napisałem całą analizę kilka dni wcześniej, kiedy akurat miałem wolny wieczór. Kiedy zebraliśmy ostatnie dane, wystarczyło kliknąć „Run" i gotowe -- wykresy, testy, w mgnieniu oka policzone dla całego zestawu danych (wyczyszczonych! jak wspominałem wyżej, w PsychoPy czyszczenie danych bywa żmudne).
 
@@ -106,7 +108,7 @@ Nie bez powodu mówimy o *językach programowania* -- wiele funkcji nauczymy si�
 
 [^podstawy_r-7]: Z założenia. Struktura dokumentacji jest bardzo dobra, a każda funkcja w pakietach CRAN musi być udokumentowana. Zdarzało mi się jednak mieć problem ze zrozumieniem, o co chodzi autorom funkcji, co ma być czym. Jak to w życiu bywa, niektórzy tłumaczą lepiej, a inni piszą treść tego przypisu.
 
-Świetnym źródłem informacji o funkcjach, pozwalającym również znaleźć odpowiednią funkcję do naszego celu, są ściągi (*cheat sheets*). Pakiety `tidyverse` mają nawet swoje oficjalne ściągi, które na początku swojej nauki R wydrukowałem i zalaminowałem. Polecam je gorąco, zwłaszcza do pakietów `dplyr`, `ggplot2` i `stringr`. Można je znaleźć bezpośrednio w RStudio wybierając Help → Cheat sheets → Browse all cheat sheets albo na stronie Posit, czyli firmy, która wypuszcza RStudio.
+Świetnym źródłem informacji o funkcjach, pozwalającym również znaleźć odpowiednią funkcję do naszego celu, są ściągi (*cheat sheets*). Pakiety `tidyverse` mają nawet swoje oficjalne ściągi, które na początku swojej nauki R wydrukowałem i zalaminowałem. Polecam je gorąco, zwłaszcza do pakietów `dplyr`, `ggplot2` i `stringr`. Można je znaleźć bezpośrednio w RStudio wybierając Help → Cheat sheets → Browse all cheat sheets albo na stronie Posit, czyli firmy, która wypuszcza RStudio. Jak przejdziemy dalej, do części praktycznej, polecam, żeby mieć te ściągi już przygotowane, tuż obok.
 
 ## Skrypty {#sec-scripts}
 
@@ -339,7 +341,7 @@ df %>%
 Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery, ale możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu `tidy-select`. Tutaj akurat użyłem `starts_with("H_")`, żeby powiedzieć, że ma to zrobić ze wszystkimi kolumnami, których nazwy zaczynają się od `H_`. Te same funkcje możemy wykorzystywać w funkcji `select`. Kilka innych tego typu funkcji umieściłem w tabeli.
 
 | Funkcja         |                                           Wybierz wszystkie kolumny... |
-|-------------------|----------------------------------------------------:|
+|----------------------|-------------------------------------------------:|
 | `starts_with()` |                                         których nazwy zaczynają się od |
 | `ends_with()`   |                                            których nazwy kończą się na |
 | `contains()`    |                                        których nazwy zawierają w sobie |
@@ -921,34 +923,223 @@ Otrzymujemy naszą macierz korelacji wzbogaconą o gwiazdki. Domyślnie mamy sta
 
 [^podstawy_r-27]: $* < 0,05$; $** < 0,01$; $*** < 0,001$.
 
+# Wykresy z `ggplot2` {#sec-ggplot}
+
+Wykresy to wielki temat i o samym pakiecie, za pomocą którego będziemy je wykonywać, `ggplot2`, powstawały osobne książki. Naturalnie więc ja pokażę tylko tyle, ile jest konieczne, żeby zacząć. Zwłaszcza, że nie lubię robić wykresów. Na matematyce najbardziej lubiłem algebrę, funkcje, ciągi, rachunek pochodnych, ale planimetria, a tym bardziej stereometria, to mój słaby punkt. Tym bardziej dziwi mnie zawsze jak spotykam ludzi, którzy lubią to robić. Zwłaszcza pozdrawiam Wiktorię J., która mówiła mi kiedyś, że szczególnie lubi się babrać z `ggplot2`. Szacuneczek.
+
+Nie zmienia to jednak faktu, że wykresy to przepotężne narzędzia poznawcze. Dane w postaci liczb w tabelach za wiele nam nie mówią, aż nie naniesiemy ich na rysunek. Na rysunkach widzimy trendy, rozkłady, outliery i mnóstwo innych rzeczy, które dopiero wykres ujawni. Wykresy pojawiają się w prawie każdej pracy naukowej, więc zdolność efektywnego ich wytwarzania i dostosowywania do wymogów (np. APA) jest podstawową umiejętnością analityka. Na szczęście nie musimy ruszać się z R.
+
+Fundamentem teoretycznym, na którym zbudowany jest `ggplot2` jest idea *The Grammar of Graphics*, którą Leland Wilkinson [-@wilkinson_grammar_2005] opisał na 700 stronach (sic!) swojej książki o tym tytule. Tak jak mówiłem, wykresy to duży temat. Nam wystarczą jednak podstawowe idee, a absolutnym fundamentem jest stwierdzenie, że właściwie każdy wykres składa się z trzech elementów, które możemy wyobrazić sobie jako warstwy -- danych, jakiegoś układu współrzędnych i jakiegoś obiektu, który Wilkinson nazywa *geom*, czyli wizualna reprezentacja danych. Takimi obiektami są na przykład punkty na wykresie punktowym, słupki histogramu, linia trendu itd. Dodatkowo obiekt *geom* ma pewne właściwości wizualne, takie jak kolor, wielkość, czy przede wszystkim lokalizacja na osiach X i y. Nazywamy te właściwości estetykami, a wiązanie ich z danymi -- mapowaniem. Teraz może się to wydawać skomplikowane, ale wdrażanie tych idei w praktyce w `ggplot2` nie jest wcale trudne. Jak już raz się to załapie, to nagle takie narzędzia jak wykresy w Excelu zaczną się wydawać wybrakowane i chaotyczne.
+
+## Mapowanie estetyk (`aes`) {#sec-aes}
+
+Przejdźmy więc do praktyki. Pakietu `ggplot2` nie musimy ładować osobno, bo wchodzi w skład, a jakże, `tidyverse`. Żeby zacząć tworzyć wykres, musimy zacząć od wywołania funkcji `ggplot()` (ważne -- nie `ggplot2`, `ggplot2` to nazwa pakietu, funkcja to `ggplot`). W jej obrębie wskazujemy na zbiór danych, na którym chcemy pracować i dokonujemy *mapowania estetyk*, czyli mówimy naszej funkcji jakie kolumny mają przełożyć się na jakie elementy wizualne. Wykorzystajmy sobie tutaj jeden z klasycznych zbiorów danych o nazwie `diamonds`, który powinien stać się dostępny po załadowaniu `ggplot2`. Zerknijmy na niego.
+
+```{r}
+glimpse(diamonds)
+```
+
+`diamonds` to zbiór różnych danych na temat 53940 diamentów. Szczegółowe dane na jego temat można uzyskać wpisując w konsoli `?diamonds`. Ponieważ jest to gigantyczny zbiór, wybierzmy sobie losowo 100 diamentów za pomocą funkcji `slice_sample`. Użyję jeszcze funkcji `set.seed`, żeby wyniki losowania były za każdym razem takie same. Nie jest ona obowiązkowa, ale użycie jej sprawi że wykresy wyjdą identyczne jak moje.
+
+```{r}
+set.seed(123)
+
+df_diamonds <- slice_sample(diamonds, n = 100)
+```
+
+Znacznie lepiej. Zrobimy sobie prosty wykres ceny diamentu od jego masy w karatach. Pierwsza rzecz, którą musimy wykonać, to mapowanie kolumn `carat` i `price` do osi X i y. Estetyki mapujemy wrzucając je do funkcji `aes` -- najpierw x, potem y.
+
+```{r}
+ggplot(df_diamonds, aes(carat, price))
+```
+
+Jak widzimy, powstał nam pusty wykres. To jest właśnie układ współrzędnych, o którym mówiłem wcześniej.
+
+Poza estetykami X i Y mamy do dyspozycji mnóstwo innych estetyk, m.in. *colour*, *fill*, *alpha* (przeźroczystość), *size*, *linetype*, *shape*. Estetyki mają jedną wspólną cechę -- są powiązane z jakimiś danymi. Jeśli stwierdzę, że wszystkie moje punkty mają być czerwone, to nie będzie to estetyka, tylko *atrybut*. O estetyce będę mógł mówić wtedy, gdy kolor będzie zależał np. od przejrzystości diamentu. To rozróżnienie, że atrybuty to stałe właściwości wyglądu, a estetyki to związek wyglądu z danymi, jest o tyle ważne, że nieco inaczej się je definiuje, jak zobaczymy za chwilę.
+
+## Obiekty `geom_*` {#sec-geom}
+
+Pusty układ współrzędnych to jeszcze nie wykres. Musimy jeszcze dodać jakiegoś rodzaju *geom*. W naszym przypadku będą to punkty, gdzie każdy punkt będzie reprezentował inny brylant. Ściąga do `ggplot2` zawiera świetną rozpiskę, jakie można stworzyć wykresy, w zależności od typu zmiennych, jakimi dysponujemy.
+
+Do tworzenia wykresów punktowych mamy dwa rodzaje obiektów *geom* -- `geom_point` i `geom_jitter`. `geom_point` to typowy wykres punktowy. `geom_jitter` przydaje się wtedy, kiedy mamy wiele danych o tych samych współrzędnych, np. wiele brylantów o masie dokładnie 0,2 karata i cenie dokładnie \$ 300. W takim wypadku wszystkie te punkty nałożyłyby się na siebie, ukryły jeden pod drugim i wydawałoby się, że mamy mniej danych, niż w rzeczywistości mamy. `geom_jitter` rozwiązuje ten problem odrobinkę przesuwając każdy punkt w losowym kierunku. Odrobinę tracimy wtedy na dokładności, ale widzimy wszystkie nasze dane. Żeby do naszego wykresu dołożyć kolejne elementy, używamy znaku `+`.
+
+```{r}
+ggplot(df_diamonds, aes(carat, price)) +
+    geom_point()
+```
+
+Wygląda na to, że im większy diament, tym droższy. Bez zaskoczenia. Możemy do naszego wykresy dołożyć linię trendu jako kolejny *geom* -- `geom_smooth`. Jeśli chcemy mieć prostą linię, musimy ustawić argument `method = "lm"`, co jest skrótem od *linear model*.
+
+```{r}
+ggplot(df_diamonds, aes(carat, price)) +
+    geom_point() +
+    geom_smooth(method = "lm")
+```
+
+Szare pole wokół niebieskiej linii to przedział ufności. Możemy go wyłączyć ustawiając `se = FALSE`. Przy tej okazji powiedzmy sobie jeszcze raz o estetykach i atrybutach. Mogę chcieć, żeby kolor mojego punktu zależał od jakości wyszlifowania brylantu z kolumny `cut`. Ponieważ jest to związek wyglądu z danymi, to jest to estetyka i ustawiam ją wewnątrz `aes`. mogę to `aes` wrzucić albo do funkcji `ggplot`, jak robiłem wcześniej, albo też do funkcji `geom_point`. Zwyczajowo argumenty X i Y w `aes` są nienazwane, ale wszystkie inne już tak. Mogę też zmienić kolor linii trendu z niebieskiego na czarny i zrobić ją trochę cieńszą. Jest to zmiana wyglądu, ale arbitralna, bez związku z danymi. Jest to więc atrybut i ustawiam go poza `aes`, wewnątrz funkcji, której ten atrybut dotyczy. Zobaczmy to.
+
+```{r}
+ggplot(df_diamonds, aes(carat, price, colour = cut)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black")
+```
+
+## Tytuły osi i wykresu (`labs`) {#sec-labs}
+
+Kolejną rzeczą, którą moglibyśmy chcieć zmienić, są tytuły osi. Możemy też dodać tytuł do samego wykresu. Najwygodniej jest to zrobić dodając do wykresy kolejny element, `labs`, w którym dopiszemy nasze tytuły.
+
+```{r}
+ggplot(df_diamonds, aes(carat, price, colour = cut)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black") +
+    labs(
+        x = "Masa [karaty]",
+        y = "Cena [$]",
+        colour = "Szlif",
+        title = "Cena brylantu z zależności od masy"
+    )
+
+```
+
+Jeśli chcemy zmienić etykiety wartości z legendy, mamy dwie opcje -- albo przekodujemy te etykiety bezpośrednio w bazie danych, chociażby zaprzęgając do pracy `questionr` (zob. [-@sec-questionr]), albo używając jednej z funkcji `scale_*_discrete` i jej argumentu `labels`, gdzie zamiast gwiazdki piszemy nazwę naszej estetyki. Szlif naszych diamentów jest zmapowany do estetyki `colour`, więc użyjemy funkcji `scale_colour_discrete`.
+
+```{r}
+ggplot(df_diamonds, aes(carat, price, colour = cut)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black") +
+    labs(
+        x = "Masa [karaty]",
+        y = "Cena [$]",
+        colour = "Szlif",
+        title = "Cena brylantu z zależności od masy"
+    ) +
+    scale_colour_discrete(labels = c("Zadowalający", "Dobry", "Bardzo dobry", "Premium", "Idealny"))
+```
+
+## Wygląd wykresów {#sec-appearance}
+
+Wykres ma wszystkie elementy na miejscu, ale nie oszukujmy się, nie jest to dzieło sztuki. Żeby poprawić wygląd naszego wykresu, sięgniemy po dwa narzędzia. Po pierwsze ustalimy jego ogólny styl za pomocą jednego z motywów (*theme*), a potem poprawimy szczegóły z użyciem dodatku do RStudio `esquisse`.
+
+### Gotowe szablony (`theme_*`) {#sec-theme}
+
+Ogólny styl wykresu ustala się za pomocą elementów zaczynających się słówkiem `theme_`. `ggplot2` ma wbudowane osiem takich motywów, które można przejrzeć [tutaj](https://ggplot2.tidyverse.org/reference/ggtheme.html). W Internecie roi się jednak od niestandardowych motywów, które mogą zaczarować nasze wykresy. Kluczowym ich źródłem może być pakiet `ggthemes`, z motywy z którego można zobaczyć [tutaj](https://github.com/jrnold/ggthemes). Ja jednak chciałem pokazać dwa inne -- `theme_apa` z pakietu `papaja` i `theme_Publication` z repozytorium na GitHubie [koundy/ggplot_theme_Publication](https://github.com/koundy/ggplot_theme_Publication).
+
+`papaja` to skrótowiec od *Preparing APA Journal Articles* i jest to rozległy pakiet pomagający pisać artykuły zgodne ze standardami Amerykańskiego Towarzystwa Psychologicznego (APA). Z tych standardów korzystają nie tylko psychologowie, ale też wiele czasopism z zakresu nauk przyrodniczych. Daje nam on dostęp m.in. do motywu `theme_apa` dostosowującego wykres do standardów APA.
+
+```{r}
+#| warning: false
+library("papaja")
+
+ggplot(df_diamonds, aes(carat, price, colour = cut)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black") +
+    labs(
+        x = "Masa [karaty]",
+        y = "Cena [$]",
+        colour = "Szlif",
+        title = "Cena brylantu z zależności od masy"
+    ) +
+    scale_colour_discrete(
+        labels = c("Zadowalający", "Dobry", "Bardzo dobry", "Premium", "Idealny")
+    ) +
+    theme_apa()
+```
+
+Drugi motyw nie jest szałowo popularny w społeczności, ale bardzo go lubię. Żeby zadziałał, musimy wcześniej zainstalować u siebie pakiety `grid`, `scales` i `ggthemes`. Spojrzenie w repozytorium pozwoli nam stwierdzić, że nie jest to pakiet, a po prostu zbiór plików. Wchodzimy więc w plik `ggplot_theme_Publication-2.R`, kopiujemy link i dodajemy na końcu `?raw=true`, co pozwoli R go odczytać. Następnie użyjemy komendy `source`, która pozwala nam uruchamiać z innych plików .R, jak podamy ich ścieżkę lub link. Cały kod mółgby więc wyglądać tak:
+
+```{r}
+source("https://github.com/koundy/ggplot_theme_Publication/blob/master/ggplot_theme_Publication-2.R?raw=true")
+
+ggplot(df_diamonds, aes(carat, price, colour = cut)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black") +
+    labs(
+        x = "Masa [karaty]",
+        y = "Cena [$]",
+        colour = "Szlif",
+        title = "Cena brylantu z zależności od masy"
+    ) +
+    scale_colour_discrete(
+        labels = c("Zadowalający", "Dobry", "Bardzo dobry", "Premium", "Idealny"),
+    ) +
+    theme_Publication()
+```
+
+## `esquisse` {#sec-esquisse}
+
+Wykres w takiej formie można już uznać za zadowalający. Ale co jeśli chcemy poprawić jakieś szczegóły? Na przykład dostosować kolory? Są na to odpowiednie funkcje, ale jeśli mam być szczery, jest ich na tyle dużo, a w tutorialach tak bardzo przeplatają się stare i nowe metody, że bez gruntownego wyszkolenia (którego na przykład ja nie posiadam) bardzo łatwo jest się zgubić i bez zrozumienia kopiować kod znaleziony w Internecie. Na szczęście istnieje pewne narzędzie, które może nam w tej sytuacji pomóc. Nazywa się `esquisse` i jest dodatkiem do RStudio.
+
+Instalujemy `esquisse` jak każdy inny pakiet (`install.packages("esquisse")`). Po zainstalowaniu, jeśli jest taka potrzeba, można spróbować zmienić język na polski komendą `set_i18n("pl")`. Będzie to jednak możliwe dopiero, gdy autorzy zaakceptują [polskie tłumaczenie](https://github.com/dreamRs/esquisse/pull/248) do swojego repozytorium. Po zainstalowaniu pakietu, w menu Addins na górnej belce powinniśmy uzyskać dostęp do opcji *ggplot2 builder*[^podstawy_r-28], które jest narzędziem do interaktywnego konstruowania wykresów. Pozwala na stworzenie kodu w wygodnym, graficznym interfejsie. Po wygenerowaniu możemy skopiować gotowy kod do skryptu.
+
+[^podstawy_r-28]: Narzędzie można wywołać też komendą `esquisse::esquisser().`
+
+```{r}
+ggplot(df_diamonds) +
+    aes(x = carat, y = price, colour = clarity) +
+    geom_point(shape = "diamond", size = 2L) +
+    scale_color_brewer(palette = "YlOrRd", direction = 1) +
+    labs(
+        x = "Masa [karaty]",
+        y = "Cena [$]",
+        title = "Cena diamentów od ich masy według szlifu",
+        caption = "Źródło danych: ggplot2",
+        color = "Przejrzystość"
+    ) +
+    theme_bw() +
+    theme(
+        legend.position = "bottom",
+        plot.title = element_text(face = "bold")
+    ) +
+    facet_wrap(vars(cut))
+```
+
+Powyżej wykres, który stworzyłem w `equisse`. Warto jednak zwrócić uwagę na jego niedoskonałości, takie jak brak polskich tłumaczeń typów szlifu. Pewnym wyjaśnieniem może być dla nas nazwa francuskiego słowa *equisse* -- szkic. Takie narzędzia jak `equisse` nie zwalniają nas całkowicie z umiejętności kodowania wykresów, ale pozwalają wygodnie tworzyć `szkice` naszego kodu. Ten szkic mogę pozmieniać, np. zamieniając `theme_bw` na `theme_Publication` i dodając polskie tłumaczenia.
+
+```{r}
+ggplot(df_diamonds) +
+    aes(x = carat, y = price, colour = clarity) +
+    geom_point(shape = "diamond", size = 2L) +
+    scale_color_brewer(palette = "YlOrRd", direction = 1) +
+    labs(
+        x = "Masa [karaty]",
+        y = "Cena [$]",
+        title = "Cena diamentów od ich masy według szlifu",
+        caption = "Źródło danych: ggplot2",
+        color = "Przejrzystość"
+    ) +
+    theme_Publication() +
+    theme(
+        legend.position = "bottom",
+        plot.title = element_text(face = "bold")
+    ) +
+    facet_wrap(
+        vars(cut),
+        labeller = labeller(cut = c(
+            "Fair" = "Zadowalający",
+            "Good" = "Dobry",
+            "Very Good" = "Bardzo dobry",
+            "Premium" = "Premium",
+            "Ideal" = "Idealny"
+            )
+        )
+    )
+```
+Wykresy to olbrzymi temat, który tutaj tylko liznęliśmy z wierzchu. Sądzę jednak, że ta wiedza wystarczy, żeby – z pomocą dokumentacji i Google – być w stanie powoli rozbudowywać swoje umiejętności z zakresu `ggplot2`.
+
 > Pozostała część już wkrótce.
-
-# Wykresy z `ggplot2` {#wykresy}
-
-## Mapowanie estetyk (`aes`) {#mapowanie-estetyk}
-
-## Obiekty `geom_*` {#obiekty-geom_}
-
-## Tytuły osi i wykresu (`labs`) {#tytuły-osi-i-wykresu}
-
-## Wygląd wykresów {#wygląd-wykresów}
-
-### Gotowe szablony (`theme_*`) {#gotowe-szablony}
-
-### `ggThemeAssist` {#ggthemeassist}
 
 # Testy statystyczne {#sec-tests}
 
-## Czyste wyniki, czyli pakiet `broom` {#czyste-wyniki-czyli-pakiet-broom}
+## Czyste wyniki, czyli pakiet `broom` {#sec-broom}
 
-## Pipe-friendly `rstatix` {#sec-rstatix}
+## Swiss Army Knife w R, czyli `rstatix` {#sec-rstatix}
 
-# Formatowanie kodu {#formatowanie-kodu}
+# Formatowanie kodu {#sec-formatting}
 
 ## `lintr` {#lintr}
 
 ## `styler` {#styler}
 
-# Posłowie {#posłowie}
+# Posłowie {#sec-ending}
 
-# Bibliografia {#bibliografia}
+# Bibliografia {#sec-bibliography}
