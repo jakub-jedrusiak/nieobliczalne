@@ -265,34 +265,34 @@ div.csl-indent {
   <li><a href="#sec-projects" id="toc-sec-projects" class="nav-link" data-scroll-target="#sec-projects"><span class="toc-section-number">4.6</span>  Projekty</a></li>
   <li><a href="#sec-libs" id="toc-sec-libs" class="nav-link" data-scroll-target="#sec-libs"><span class="toc-section-number">4.7</span>  Pakiety</a></li>
   </ul></li>
-  <li><a href="#sec-loading" id="toc-sec-loading" class="nav-link" data-scroll-target="#sec-loading"><span class="toc-section-number">5</span>  Ładowanie danych</a></li>
+  <li><a href="#sec-loading" id="toc-sec-loading" class="nav-link" data-scroll-target="#sec-loading"><span class="toc-section-number">5</span>  Ładowanie danych z <code>readr</code></a></li>
   <li><a href="#sec-wrangling" id="toc-sec-wrangling" class="nav-link" data-scroll-target="#sec-wrangling"><span class="toc-section-number">6</span>  Data wrangling</a>
   <ul class="collapse">
   <li><a href="#sec-choosing" id="toc-sec-choosing" class="nav-link" data-scroll-target="#sec-choosing"><span class="toc-section-number">6.1</span>  Wybieranie kolumn i wierszy</a>
   <ul class="collapse">
-  <li><a href="#sec-filter" id="toc-sec-filter" class="nav-link" data-scroll-target="#sec-filter"><span class="toc-section-number">6.1.1</span>  Filtrowanie wierszy</a></li>
-  <li><a href="#sec-select" id="toc-sec-select" class="nav-link" data-scroll-target="#sec-select"><span class="toc-section-number">6.1.2</span>  Wybieranie kolumn</a></li>
+  <li><a href="#sec-filter" id="toc-sec-filter" class="nav-link" data-scroll-target="#sec-filter"><span class="toc-section-number">6.1.1</span>  Filtrowanie wierszy z <code>dplyr::filter</code></a></li>
+  <li><a href="#sec-select" id="toc-sec-select" class="nav-link" data-scroll-target="#sec-select"><span class="toc-section-number">6.1.2</span>  Wybieranie kolumn z <code>dplyr::select</code></a></li>
   </ul></li>
-  <li><a href="#sec-rename" id="toc-sec-rename" class="nav-link" data-scroll-target="#sec-rename"><span class="toc-section-number">6.2</span>  Zmiana nazw kolumn</a></li>
-  <li><a href="#sec-values" id="toc-sec-values" class="nav-link" data-scroll-target="#sec-values"><span class="toc-section-number">6.3</span>  Zmiana wartości komórek</a>
+  <li><a href="#sec-rename" id="toc-sec-rename" class="nav-link" data-scroll-target="#sec-rename"><span class="toc-section-number">6.2</span>  Zmiana nazw kolumn z <code>dplyr::rename</code> i <code>purrr::set_names</code></a></li>
+  <li><a href="#sec-values" id="toc-sec-values" class="nav-link" data-scroll-target="#sec-values"><span class="toc-section-number">6.3</span>  Zmiana wartości komórek z <code>dplyr::mutate</code> i <code>readr::parse_number</code></a>
   <ul class="collapse">
-  <li><a href="#sec-across" id="toc-sec-across" class="nav-link" data-scroll-target="#sec-across"><span class="toc-section-number">6.3.1</span>  Przekształcanie wielu kolumn jednocześnie</a></li>
+  <li><a href="#sec-across" id="toc-sec-across" class="nav-link" data-scroll-target="#sec-across"><span class="toc-section-number">6.3.1</span>  Przekształcanie wielu kolumn jednocześnie z <code>dplyr::across</code></a></li>
   <li><a href="#sec-recode" id="toc-sec-recode" class="nav-link" data-scroll-target="#sec-recode"><span class="toc-section-number">6.3.2</span>  Odwracanie punktacji</a></li>
   <li><a href="#sec-customfunctions" id="toc-sec-customfunctions" class="nav-link" data-scroll-target="#sec-customfunctions"><span class="toc-section-number">6.3.3</span>  Własne funkcje</a></li>
   </ul></li>
   <li><a href="#sec-newcols" id="toc-sec-newcols" class="nav-link" data-scroll-target="#sec-newcols"><span class="toc-section-number">6.4</span>  Nowe kolumny</a>
   <ul class="collapse">
-  <li><a href="#sec-pick" id="toc-sec-pick" class="nav-link" data-scroll-target="#sec-pick"><span class="toc-section-number">6.4.1</span>  Agregowanie danych z wierszy</a></li>
-  <li><a href="#sec-casewhen" id="toc-sec-casewhen" class="nav-link" data-scroll-target="#sec-casewhen"><span class="toc-section-number">6.4.2</span>  Kategoryzowanie przypadków i przekodowywanie</a></li>
+  <li><a href="#sec-pick" id="toc-sec-pick" class="nav-link" data-scroll-target="#sec-pick"><span class="toc-section-number">6.4.1</span>  Agregowanie danych z wierszy z <code>dplyr::pick</code></a></li>
+  <li><a href="#sec-casewhen" id="toc-sec-casewhen" class="nav-link" data-scroll-target="#sec-casewhen"><span class="toc-section-number">6.4.2</span>  Kategoryzowanie przypadków i przekodowywanie z <code>dplyr::case_when</code></a></li>
   </ul></li>
   <li><a href="#sortowanie-i-kolejność-kolumn" id="toc-sortowanie-i-kolejność-kolumn" class="nav-link" data-scroll-target="#sortowanie-i-kolejność-kolumn"><span class="toc-section-number">6.5</span>  Sortowanie i kolejność kolumn</a>
   <ul class="collapse">
-  <li><a href="#sec-arrange" id="toc-sec-arrange" class="nav-link" data-scroll-target="#sec-arrange"><span class="toc-section-number">6.5.1</span>  Sortowanie</a></li>
-  <li><a href="#sec-relocate" id="toc-sec-relocate" class="nav-link" data-scroll-target="#sec-relocate"><span class="toc-section-number">6.5.2</span>  Kolejność kolumn</a></li>
+  <li><a href="#sec-arrange" id="toc-sec-arrange" class="nav-link" data-scroll-target="#sec-arrange"><span class="toc-section-number">6.5.1</span>  Sortowanie z <code>dplyr::arrange</code></a></li>
+  <li><a href="#sec-relocate" id="toc-sec-relocate" class="nav-link" data-scroll-target="#sec-relocate"><span class="toc-section-number">6.5.2</span>  Kolejność kolumn z <code>dplyr::relocate</code></a></li>
   </ul></li>
-  <li><a href="#sec-save" id="toc-sec-save" class="nav-link" data-scroll-target="#sec-save"><span class="toc-section-number">6.6</span>  Zapisywanie zmian</a></li>
-  <li><a href="#sec-summarise" id="toc-sec-summarise" class="nav-link" data-scroll-target="#sec-summarise"><span class="toc-section-number">6.7</span>  Grupowanie i agregowanie</a></li>
-  <li><a href="#sec-pivot" id="toc-sec-pivot" class="nav-link" data-scroll-target="#sec-pivot"><span class="toc-section-number">6.8</span>  Format długi i szeroki</a></li>
+  <li><a href="#sec-save" id="toc-sec-save" class="nav-link" data-scroll-target="#sec-save"><span class="toc-section-number">6.6</span>  Zapisywanie zmian z <code>&lt;-</code></a></li>
+  <li><a href="#sec-summarise" id="toc-sec-summarise" class="nav-link" data-scroll-target="#sec-summarise"><span class="toc-section-number">6.7</span>  Grupowanie (<code>dplyr::group_by</code>) i agregowanie (<code>dplyr::summarise</code>)</a></li>
+  <li><a href="#sec-pivot" id="toc-sec-pivot" class="nav-link" data-scroll-target="#sec-pivot"><span class="toc-section-number">6.8</span>  Format długi i szeroki z <code>tidyr::pivot_*</code></a></li>
   <li><a href="#sec-join" id="toc-sec-join" class="nav-link" data-scroll-target="#sec-join"><span class="toc-section-number">6.9</span>  Retesty czyli złączenia (<em>joins</em>)</a></li>
   </ul></li>
   <li><a href="#sec-exploration" id="toc-sec-exploration" class="nav-link" data-scroll-target="#sec-exploration"><span class="toc-section-number">7</span>  Eksploracja danych</a>
@@ -303,15 +303,15 @@ div.csl-indent {
   <li><a href="#tabele-liczności-z-rstatixfreq_table" id="toc-tabele-liczności-z-rstatixfreq_table" class="nav-link" data-scroll-target="#tabele-liczności-z-rstatixfreq_table"><span class="toc-section-number">7.4</span>  Tabele liczności z <code>rstatix::freq_table</code></a></li>
   <li><a href="#macierze-korelacji-i-ich-istotność-z-rstatixcor_mat" id="toc-macierze-korelacji-i-ich-istotność-z-rstatixcor_mat" class="nav-link" data-scroll-target="#macierze-korelacji-i-ich-istotność-z-rstatixcor_mat"><span class="toc-section-number">7.5</span>  Macierze korelacji i ich istotność z <code>rstatix::cor_mat</code></a></li>
   </ul></li>
-  <li><a href="#wykresy" id="toc-wykresy" class="nav-link" data-scroll-target="#wykresy"><span class="toc-section-number">8</span>  Wykresy</a>
+  <li><a href="#wykresy" id="toc-wykresy" class="nav-link" data-scroll-target="#wykresy"><span class="toc-section-number">8</span>  Wykresy z <code>ggplot2</code></a>
   <ul class="collapse">
-  <li><a href="#mapowanie-estetyk" id="toc-mapowanie-estetyk" class="nav-link" data-scroll-target="#mapowanie-estetyk"><span class="toc-section-number">8.1</span>  Mapowanie estetyk</a></li>
-  <li><a href="#obiekty-geom_" id="toc-obiekty-geom_" class="nav-link" data-scroll-target="#obiekty-geom_"><span class="toc-section-number">8.2</span>  Obiekty <code>geom_</code></a></li>
-  <li><a href="#tytuły-osi-i-wykresu" id="toc-tytuły-osi-i-wykresu" class="nav-link" data-scroll-target="#tytuły-osi-i-wykresu"><span class="toc-section-number">8.3</span>  Tytuły osi i wykresu</a></li>
+  <li><a href="#mapowanie-estetyk" id="toc-mapowanie-estetyk" class="nav-link" data-scroll-target="#mapowanie-estetyk"><span class="toc-section-number">8.1</span>  Mapowanie estetyk (<code>aes</code>)</a></li>
+  <li><a href="#obiekty-geom_" id="toc-obiekty-geom_" class="nav-link" data-scroll-target="#obiekty-geom_"><span class="toc-section-number">8.2</span>  Obiekty <code>geom_*</code></a></li>
+  <li><a href="#tytuły-osi-i-wykresu" id="toc-tytuły-osi-i-wykresu" class="nav-link" data-scroll-target="#tytuły-osi-i-wykresu"><span class="toc-section-number">8.3</span>  Tytuły osi i wykresu (<code>labs</code>)</a></li>
   <li><a href="#wygląd-wykresów" id="toc-wygląd-wykresów" class="nav-link" data-scroll-target="#wygląd-wykresów"><span class="toc-section-number">8.4</span>  Wygląd wykresów</a>
   <ul class="collapse">
-  <li><a href="#ggthemeassist" id="toc-ggthemeassist" class="nav-link" data-scroll-target="#ggthemeassist"><span class="toc-section-number">8.4.1</span>  <code>ggThemeAssist</code></a></li>
-  <li><a href="#gotowe-szablony" id="toc-gotowe-szablony" class="nav-link" data-scroll-target="#gotowe-szablony"><span class="toc-section-number">8.4.2</span>  Gotowe szablony</a></li>
+  <li><a href="#gotowe-szablony" id="toc-gotowe-szablony" class="nav-link" data-scroll-target="#gotowe-szablony"><span class="toc-section-number">8.4.1</span>  Gotowe szablony (<code>theme_*</code>)</a></li>
+  <li><a href="#ggthemeassist" id="toc-ggthemeassist" class="nav-link" data-scroll-target="#ggthemeassist"><span class="toc-section-number">8.4.2</span>  <code>ggThemeAssist</code></a></li>
   </ul></li>
   </ul></li>
   <li><a href="#sec-tests" id="toc-sec-tests" class="nav-link" data-scroll-target="#sec-tests"><span class="toc-section-number">9</span>  Testy statystyczne</a>
@@ -487,9 +487,9 @@ div.csl-indent {
 </section>
 </section>
 <section id="sec-loading" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Ładowanie danych</h1>
+<h1 data-number="5"><span class="header-section-number">5</span> Ładowanie danych z <code>readr</code></h1>
 <p>Jeśli chcemy cokolwiek liczyć, musimy mieć na czym liczyć[podstawy_r-23]. R ma wiele sposobów ładowania danych, które w każdym podręczniku zajmują cały rozdział. R poradzi sobie z prawie każdym formatem danych, a także potrafi ładować je bezpośrednio z serwera (dla przykładu pakiet <code>googlesheets4</code> pozwala ładować pliki z Google Sheets bez pobierania ich na dysk albo <code>QualtRics</code> ułatwiający importowanie plików z danymi ankietowymi z Qualtrics).</p>
-<p>[podstawy_r-23]: Wszystkie bazy, których używam w tym tekście, są dostępne w repozytorium na GitHubie. Można wejść w <a href="https://github.com/jakub-jedrusiak/jakub-jedrusiak.github.io/tree/main/statystyka/dane/podstawy-R">ten link</a>, wybrać pożądany plik i albo pobrać go na własny dysk, albo zamiast ścieżki do pliku użyć linku. By uzyskać działający link, należy na koniec właściwego linku dopisać <code>?raw=true</code>. Takie linki można wklejać w komendy czytające dane zamiast ścieżek. Przykład linku, jak i tego, jak używać ich z funkcjami typu <code>read_csv</code> podaję w podrozdziale <a href="#sec-summarise">Sekcja&nbsp;6.7</a> o grupowaniu.</p>
+<p>[podstawy_r-23]: Wszystkie bazy, których używam w tym tekście, są dostępne w repozytorium na GitHubie. Można wejść w <a href="https://github.com/jakub-jedrusiak/jakub-jedrusiak.github.io/tree/main/statystyka/dane/podstawy-R">ten link</a>, wybrać pożądany plik i albo pobrać go na własny dysk, albo zamiast ścieżki do pliku użyć linku. By uzyskać działający link, należy na koniec właściwego linku dopisać <code>?raw=true</code>. Takie linki można wklejać w komendy czytające dane zamiast ścieżek. Przykład linku, jak i tego, jak używać ich z funkcjami typu <code>read_csv</code> podaję w podrozdziale <a href="#sec-summarise">6.7</a> o grupowaniu.</p>
 <p>Podstawowe pakiety do ładowania danych do <code>readr</code> i <code>readxl</code> dla plików Excela. Na początek nie trzeba znać struktury funkcji ładujących dane, bo RStudio dysponuje przyjemnym graficznym narzędziem do tego celu. Jeśli w prawym dolnym oknie, w zakładce Files, klikniemy na plik zawierający dane, dostaniemy do dyspozycji opcję Import Dataset… Po jej wybraniu otworzy nam się okno z podglądem danych i kilkoma opcjami do dostosowania, m.in. czy jakichś wierszy nie pominąć albo z którego arkusza pobrać dane. W plikach .csv czasem musimy też wybrać rodzaj separatora i znaku dziesiętnego (opcja Locale). W polskich plikach z danymi separatorem jest zazwyczaj średnik, a znakiem dziesiętnym przecinek, podczas gdy w angielskich danych będą to odpowiednio przecinek i kropka. Jeśli nie ustawimy znaku dziesiętnego, R może potraktować liczby z przecinkiem jako tekst. Poza tym możemy kliknąć w każdy nagłówek kolumny i wybrać typ danych. Dane powinny być czyste, tj. kolumny liczbowe powinny zawierać same liczby. Jeśli dane nie są czyste (a zazwyczaj nie są), możemy je wyczyścić potem.</p>
 <p>Możemy kliknąć Import, by dopełnić dzieła, ale jeśli tworzymy skrypt, będzie nas interesowała komenda, jaką RStudio dla nas przygotowało w czarnym okienku w prawym dolnym rogu. W pierwszej linijce RStudio proponuje załadowanie odpowiedniego pakietu. Warto to wpisać na początku skryptu, w miejscu, gdzie załadowaliśmy <code>tidyverse</code>. Jeśli proponowanym pakietem jest <code>readr</code>, nie musimy ładować go oddzielnie, bo ładując pakiet <code>tidyverse</code> załadowaliśmy od razu <code>readr</code>. Druga linijka do właściwe ładowanie danych. Widzimy znaną nam już składnię <code>nazwa &lt;-</code>. Nasze dane potrzebują jakiejś nazwy, za pomocą której będziemy się do niej odnosić. Może być to <code>df</code>, <code>dane</code>, <code>warunek_kontrolny</code> czy cokolwiek innego. Za strzałką mamy funkcję odczytującą dane. Najpewniej będzie to <code>read_csv()</code> albo <code>read_excel()</code>. Do tych funkcji wrzucamy jako pierwszy argument lokalizację naszego pliku z danymi w cudzysłowie (‘pojedynczym’ lub “podwójnym”). Ponieważ nam komendę przygotowało RStudio, możemy ją po prostu skopiować i wkleić do naszego skryptu, zmieniając tylko nazwę zmiennej. Co robią poszczególne argumenty, możemy sprawdzić w dokumentacji. Jeśli dane ładuje <code>readr</code>, wykonanie takiej komendy spowoduje ukazanie się informacji zwrotnej – jakie kolumny załadowano i jaki mają typ. Dla przykładu:</p>
 <div class="cell">
@@ -540,7 +540,7 @@ dbl  (1): ID
 <h2 data-number="6.1" class="anchored" data-anchor-id="sec-choosing"><span class="header-section-number">6.1</span> Wybieranie kolumn i wierszy</h2>
 <p>Bardzo często będziemy potrzebowali tylko określonych kolumn albo tylko określonych przypadków. Przeglądając nasze dane zauważamy, że składają się w dużej części z niepotrzebnych kolumn, jakie wygenerował dla nas program do ankiet. Kolumny takie jak godziny wypełniania są nam niepotrzebne do analizy. Nasze dane to fragment bazy danych z badania, w którym mówiliśmy mężczyznom, że są mało męscy i patrzyliśmy, jak to wpłynie na nich homofobię. Badaliśmy więc wyłącznie mężczyzn, a mimo to ankietę próbowało też wypełnić kilka kobiet i osób o innej płci. Ponieważ ankieta nie dopuściła ich nawet do metryczki, widzimy w ich przypadkach wartości <code>NA</code>, co w R oznacza „brak danych”.</p>
 <section id="sec-filter" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="sec-filter"><span class="header-section-number">6.1.1</span> Filtrowanie wierszy</h3>
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="sec-filter"><span class="header-section-number">6.1.1</span> Filtrowanie wierszy z <code>dplyr::filter</code></h3>
 <p>Zacznijmy od tego, że w naszej bazie zostawimy tylko mężczyzn. Wszystkie komendy poniżej wpisuję w konsoli, dla testów. Jeśli wpisujemy komendy modyfikujące dane w konsolę, to nie zapisujemy zmian, tylko sprawdzamy, co się stanie, jak tak zrobimy. Dopiero na koniec podam, jak nasze zmiany rzeczywiście zapisać. Jak więc odfiltrować nie-mężczyzn? Robimy to za pomocą komendy <code>filter()</code><a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a>. <code>Tidyverse</code> opiera się o intuicyjnie brzmiące czasowniki takie jak <code>filter</code>, <code>select</code>, <code>group_by</code>, <code>summarise</code> itd. Komenda <code>filter</code> przyjmuje naszą bazę i jakieś warunki, np. płeć męska. W naszym wypadku będzie to wyglądać tak:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
@@ -608,7 +608,7 @@ dbl  (1): ID
 </table>
 </section>
 <section id="sec-select" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="sec-select"><span class="header-section-number">6.1.2</span> Wybieranie kolumn</h3>
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="sec-select"><span class="header-section-number">6.1.2</span> Wybieranie kolumn z <code>dplyr::select</code></h3>
 <p>Odfiltrowaliśmy więc nie-mężczyzn. Kolejny problem to cała seria niepotrzebnych kolumn. Godziny, adres, zgoda etyczna (która była obowiązkowa i wszyscy się zgodzili) i płeć (już jednakowa dla wszystkich) są nam do niczego niepotrzebne. Do wybierania, jakie kolumny zostawić, służy funkcja <code>select()</code>. Wrzucamy do niej nazwy albo numery kolumn, które chcemy zostawić w bazie. Rozszerzmy więc naszą poprzednią instrukcję o dodatkową komendę za pomocą potoku.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
@@ -625,7 +625,7 @@ dbl  (1): ID
 </section>
 </section>
 <section id="sec-rename" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="sec-rename"><span class="header-section-number">6.2</span> Zmiana nazw kolumn</h2>
+<h2 data-number="6.2" class="anchored" data-anchor-id="sec-rename"><span class="header-section-number">6.2</span> Zmiana nazw kolumn z <code>dplyr::rename</code> i <code>purrr::set_names</code></h2>
 <p>Co zrobić, jeśli chcemy w naszej bazie coś pozmieniać? Zacznijmy może od zmiany nazw kolumn, żeby łatwiej nam się pisało dalsze komendy. Do tego służą komendy <code>rename</code> z pakietu <code>dplyr</code> i <code>set_names</code> z pakietu <code>purrr</code><a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a>. <code>rename</code> służy do zmiany nazw pojedynczych kolumn i przyjmuje argumenty w postaci <code>rename("nowa_nazwa" = "stara nazwa")</code>. Za jednym zamachem możemy zmienić ile nazw chcemy. Jeśli chcemy zmienić wszystkie nazwy, wygodniejsza jest funkcja <code>set_names</code> do której <strong>po kolei</strong> wrzucamy nowe nazwy, których potrzebujemy. Znowu – nazwy to dosłowne ciągi znaków, więc zawsze piszemy je w cudzysłowie.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
@@ -643,7 +643,7 @@ dbl  (1): ID
 <p>Jak widzimy, <code>paste</code> wygenerowało nam 10 kolejnych etykiet łącząc <code>"H"</code> i liczby od 1 do 10. Argument <code>sep = "_"</code> mówi, żeby między kolejnymi kawałkami wstawiać podkreślnik. Do <code>paste</code> możemy wrzucić dowolną liczbę znaków do połączenia. Jeśli nie chcemy żadnego separatora, możemy ustawić <code>sep = ""</code>, czyli pusty ciąg znaków w separatorze albo możemy użyć bliźniaczej funkcji <code>paste0</code>, która nie ma separatora.</p>
 </section>
 <section id="sec-values" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="sec-values"><span class="header-section-number">6.3</span> Zmiana wartości komórek</h2>
+<h2 data-number="6.3" class="anchored" data-anchor-id="sec-values"><span class="header-section-number">6.3</span> Zmiana wartości komórek z <code>dplyr::mutate</code> i <code>readr::parse_number</code></h2>
 <p>Jak widzimy, odpowiedzi na pytania z homofobią zawierają nie tylko liczby, ale też tekst z legendą. My jednak chcemy zostawić same liczby. Jeśli spojrzymy na kolumnę z wiekiem, możemy zauważyć, że jest to również jest kolumna tekstowa. Dziwne, przecież wiek to (tylko) liczba. Przejrzenie danych pozwala stwierdzić, że respondent o id 50 w pytaniu o wiek wpisał „18 (2021)“. Nieważne, jak się będziemy przed tym bronić, co dopiszemy do pytania o wiek, zawsze znajdzie się ktoś, kto zrobi w nim elaborat. Ten jeden respondent sprawił, że cała kolumna nie jest traktowana jako kolumna liczbowa, ale jako tekst. Odpowiedź na oba te problemy jest taka sama – <code>mutate</code> i <code>parse_number</code>.</p>
 <p>Funkcja <code>mutate</code> to ogólna funkcja, za pomocą której modyfikujemy kolumny albo dodajemy nowe. Jej składnia wygląda następująco:</p>
 <div class="cell">
@@ -664,7 +664,7 @@ dbl  (1): ID
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="sec-across" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="sec-across"><span class="header-section-number">6.3.1</span> Przekształcanie wielu kolumn jednocześnie</h3>
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="sec-across"><span class="header-section-number">6.3.1</span> Przekształcanie wielu kolumn jednocześnie z <code>dplyr::across</code></h3>
 <p>Po wykonaniu tej funkcji widzimy, że cała kolumna jest już numeryczna. To samo możemy zrobić dla pytań z homofobią. Moglibyśmy, oczywiście, zapisać <code>H_1 = parse_number(H_1), H_2 = parse_number(H_2)</code> itd., ale po co się męczyć? Na początku roku 2020 dostaliśmy cudowną funkcję pomocniczą <code>across</code>, która przydaje nam się w takich dokładnie wypadkach, czyli gdy chcemy zmodyfikować serię kolumn w taki sam sposób. Jak jej używać?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
@@ -833,7 +833,7 @@ dbl  (1): ID
 <h2 data-number="6.4" class="anchored" data-anchor-id="sec-newcols"><span class="header-section-number">6.4</span> Nowe kolumny</h2>
 <p>Jak wspomniałem, funkcja <code>mutate</code> nie tylko pozwala na modyfikowanie istniejących kolumn, ale też na tworzenie nowych. Zazwyczaj robimy to w dwóch przypadkach – gdy chcemy zagregować dane z wierszy, np. zsumować wyniki kwestionariusza albo gdy chcemy podzielić naszą bazę na kategorie, np. „młodzi”, „w średnim wieku”, „seniorzy”. Omówmy to po kolei.</p>
 <section id="sec-pick" class="level3" data-number="6.4.1">
-<h3 data-number="6.4.1" class="anchored" data-anchor-id="sec-pick"><span class="header-section-number">6.4.1</span> Agregowanie danych z wierszy</h3>
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="sec-pick"><span class="header-section-number">6.4.1</span> Agregowanie danych z wierszy z <code>dplyr::pick</code></h3>
 <p>Załóżmy, że homofobię będziemy liczyć poprzez dodanie <code>H_1</code> + <code>H_2</code> + <code>H_3</code> itd. Czasami będziemy chcieli robić sumy, czasami policzyć średnią. W kwestionariuszach zazwyczaj liczymy sumy, ale dla czasów reakcji często będziemy chcieli policzyć średnią. Jak więc dodać taką sumującą kolumnę w R? Mamy dwa sposoby. Pierwszy to wprost opisanie, co dodajemy, wewnątrz <code>mutate</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
@@ -862,7 +862,7 @@ dbl  (1): ID
 </div>
 </section>
 <section id="sec-casewhen" class="level3" data-number="6.4.2">
-<h3 data-number="6.4.2" class="anchored" data-anchor-id="sec-casewhen"><span class="header-section-number">6.4.2</span> Kategoryzowanie przypadków i przekodowywanie</h3>
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="sec-casewhen"><span class="header-section-number">6.4.2</span> Kategoryzowanie przypadków i przekodowywanie z <code>dplyr::case_when</code></h3>
 <p>Czasem zdarza się, że chcemy podzielić dane ilościowe (np. wiek, wzrost, szczęście mierzone kwestionariuszowo) na kategorie (młodzi vs nie-aż-tak-młodzi, wysocy vs niscy, szczęśliwi vs nieszczęśliwi). Zdarza się też, że osoba tworząca ankietę nie buła na tyle przewidująca, żeby w odpowiedziach na pozycję kwestionariuszową do „zdecydowanie się zgadzam” dodać 6, więc nie możemy po prostu użyć <code>parse_number</code>. I w jednym, i w drugim wypadku musimy stworzyć wartości na podstawie innych wartości, np. wzrost poniżej 160 cm zamienić na „niski” albo tekst „zdecydowanie się nie zgadzam” zamienić na 1. Do takich celów służy niezwykle przydatna funkcja <code>case_when</code> z pakietu <code>dplyr</code>. Załóżmy, że chcemy podzielić mężczyzn w naszej bazie na trzy kategorie wykształcenia – podstawowe, ponadpodstawowe i wyższe. Oznacza to, że osoby z wykształceniem średnim i zawodowym musimy wrzucić do jednego worka. W tym celu rozszerzymy naszą instrukcję o kolejną komendę. Funkcja <code>case_when</code> ma dość prostą składnię.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_when</span>(</span>
@@ -897,7 +897,7 @@ dbl  (1): ID
 <h2 data-number="6.5" class="anchored" data-anchor-id="sortowanie-i-kolejność-kolumn"><span class="header-section-number">6.5</span> Sortowanie i kolejność kolumn</h2>
 <p>Wychodzimy już z potężnej funkcji <code>mutate</code> i możemy czyścić dalej. Ostatnia rzecz, którą czasem chcemy zrobić (zazwyczaj ze względów estetycznych), to posortowanie wartości i ustawienie kolumn w określonej kolejności.</p>
 <section id="sec-arrange" class="level3" data-number="6.5.1">
-<h3 data-number="6.5.1" class="anchored" data-anchor-id="sec-arrange"><span class="header-section-number">6.5.1</span> Sortowanie</h3>
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="sec-arrange"><span class="header-section-number">6.5.1</span> Sortowanie z <code>dplyr::arrange</code></h3>
 <p>Za sortowanie w <code>tidyverse</code> odpowiada funkcja <code>arrange</code>. Domyślnie sortuje ona rosnąco, więc jeśli chcemy sortowanie malejące, użyjemy pomocniczej funkcji <code>desc</code> (od <em>descending</em>). Załóżmy, że chcemy posortować nasze dane najpierw według wykształcenia (od najwyższego, do najniższego), a w obrębie wykształcenia według wieku (od najmłodszych do najstarszych). W pierwszym odruchu chcielibyśmy wpisać <code>arrange(desc(wyksztalcenie), wiek)</code>. Jest to dobry odruch, jednak jeśli to zrobimy zorientujemy się, że najwyższym z wykształceń jest wykształcenie zawodowe. Dzieje się tak dlatego, że w tej chwili wykształcenie to zwykły tekst, a więc jest sortowany alfabetycznie, nie według naszego klucza. Żeby to zmienić, musimy poznać nowy rodzaj danych.</p>
 <section id="sec-factor" class="level4" data-number="6.5.1.1">
 <h4 data-number="6.5.1.1" class="anchored" data-anchor-id="sec-factor"><span class="header-section-number">6.5.1.1</span> Factors</h4>
@@ -928,7 +928,7 @@ dbl  (1): ID
 <p>Komendę <code>factor</code> dla czytelności rozbiłem tutaj na trzy linijki, ale – oczywiście – można ją całą zapisać w jednej. Po pierwsze wskazałem, że na factor przerobiona ma być kolumna <code>wyksztalcenie</code>. Po drugie wskazałem, jakie wykształcenie może mieć wartości, zbierając je w jeden zestaw funkcją <code>c</code> i wrzucając do argumentu <code>levels</code>. Na koniec poinformowałem R, że w kolejność jest tutaj ważna, dopisując <code>ordered = TRUE</code>. Jeśli tak przerobione dane posortujemy, zobaczymy, że baza rzeczywiście zaczyna się od wykształcenia wyższego.</p>
 <section id="sec-questionr" class="level5" data-number="6.5.1.1.1">
 <h5 data-number="6.5.1.1.1" class="anchored" data-anchor-id="sec-questionr"><span class="header-section-number">6.5.1.1.1</span> <code>Questionr</code></h5>
-<p>Przy okazji czynników chciałbym wspomnieć o pierwszym dodatku (<em>addins</em>) do RStudio, jaki może nam się przydać. Dodatki to przyjmują różną formę, ale tutaj omówię dwa, które są graficznymi narzędziami pomagającymi pisać nam kod. Można mieć do nich mieszany stosunek, ale póki umiemy też napisać kod ręcznie (lub chociaż wiemy, jak skorzystać z dokumentacji), to mogą być dużą pomocą. Zwłaszcza na początku przygody z R. Pierwszym takim dodatkiem jest <code>Questionr</code>, który pozwala nam stworzyć komendy związane z czynnikami (i kategoryzować dane ilościowe, co ręcznie zrobimy w podrozdziale <a href="#sec-casewhen">Sekcja&nbsp;6.4.2</a>).</p>
+<p>Przy okazji czynników chciałbym wspomnieć o pierwszym dodatku (<em>addins</em>) do RStudio, jaki może nam się przydać. Dodatki to przyjmują różną formę, ale tutaj omówię dwa, które są graficznymi narzędziami pomagającymi pisać nam kod. Można mieć do nich mieszany stosunek, ale póki umiemy też napisać kod ręcznie (lub chociaż wiemy, jak skorzystać z dokumentacji), to mogą być dużą pomocą. Zwłaszcza na początku przygody z R. Pierwszym takim dodatkiem jest <code>Questionr</code>, który pozwala nam stworzyć komendy związane z czynnikami (i kategoryzować dane ilościowe, co ręcznie zrobimy w podrozdziale <a href="#sec-casewhen">6.4.2</a>).</p>
 <p><code>Questionr</code> instalujemy jak każdy inny pakiet (<code>install.packages("questionr")</code>). Od tego momentu (lub po zresetowaniu RStudio) w menu <code>addins</code> na górnej belce znajdziemy trzy nowe opcje. Ta interesująca nas to Level ordering. Na początku zobaczymy okienko, w którym możemy wybrać kilka rzeczy. W jakiej zmiennej chcemy zmienić kolejność, w jakiej kolumnie i z jakiego pakietu wziąć funkcję do zmiany kolejności (domyślnie jest to <code>fct_relevel</code> z <code>forcats</code>). W drugiej zakładce możemy graficznie ustawić taką kolejność, jaką chcemy. W ostatniej zakładce otrzymujemy gotowy kod. <code>Questionr</code> nie robi nic samodzielnie, ten kod trzeba jeszcze wkleić w skrypt. Z jednym kruczkiem. Nam chodzi o samą komendę <code>fct_relevel</code>, bez pierwszej linijki, która służy do zapisania zmian. Ponieważ my tworzymy <code>mutate</code>, to wystarczy, że skopiujemy nasze gotowe <code>fct_relevel()</code> do funkcji <code>mutate</code>, dopisując nazwę kolumny i pierwszy argument. Może być to użyteczne, jeśli mamy dużo czynników lub dużo poziomów w czynniku. Ostatecznie nasza komenda <code>mutate</code> z użyciem <code>questionr</code> wyglądałaby tak:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
@@ -951,7 +951,7 @@ dbl  (1): ID
 </section>
 </section>
 <section id="sec-relocate" class="level3" data-number="6.5.2">
-<h3 data-number="6.5.2" class="anchored" data-anchor-id="sec-relocate"><span class="header-section-number">6.5.2</span> Kolejność kolumn</h3>
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="sec-relocate"><span class="header-section-number">6.5.2</span> Kolejność kolumn z <code>dplyr::relocate</code></h3>
 <p>Możemy chcieć mieć nasze kolumny w określonej kolejności. Są zasadniczo dwa sposoby zmieniania kolejności kolumn. Jest funkcja <code>relocate</code>, która służy raczej przestawianiu pojedynczych kolumn lub ich niewielkiej liczby. Jeśli chcemy od nowa określić kolejność kolumn, możemy wykorzystać w tym celu znaną nam już funkcję <code>select</code>. Załóżmy, że chcielibyśmy przestawić kolumnę <code>H_suma</code> przed kolumny z cząstkowymi wynikami.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># z użyciem relocate</span></span>
@@ -966,7 +966,7 @@ dbl  (1): ID
 </section>
 </section>
 <section id="sec-save" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="sec-save"><span class="header-section-number">6.6</span> Zapisywanie zmian</h2>
+<h2 data-number="6.6" class="anchored" data-anchor-id="sec-save"><span class="header-section-number">6.6</span> Zapisywanie zmian z <code>&lt;-</code></h2>
 <p>W ten sposób uzyskaliśmy cały kod czyszczący. Mamy ów kod zapisany w naszym skrypcie, jeśli go uruchomimy, to widzimy, że działa. Jednak jeśli w konsolę wpiszemy <code>df</code>, naszym oczom ciągle ukazuje się stara, brzydka baza. Jak więc zmienić nasze <code>df</code> na wyczyszczoną wersję? Tak jak zawsze przypisujemy wartości w R – operatorem <code>&lt;-</code>. Nasz kod na zmianę brudnej bazy w czystą ostatecznie przyjmie postać:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
@@ -1016,7 +1016,7 @@ dbl  (1): ID
 <p>Po zapisaniu zmiennej <code>df</code>, tracimy naszą starą zmienną. Tym samym, jeśli uruchomilibyśmy nasz kod jeszcze raz, ale już na nowej zmiennej <code>df</code>, wyskoczy nam błąd. W końcu nowa zmienna nie ma tych samych kolumn, co stara zmienna. Co więcej, takiej operacji nie da się cofnąć. Jeśli chcemy dostać swoją starą, brudną bazę, musimy ponownie załadować ją z pliku. To prowadzi nas do ważnego wniosku co do pisania skryptów – powinniśmy pisać je tak, żeby dało się z nich odtworzyć wszystko, co robiliśmy od samego początku<a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a>. Dzięki temu, jeśli chcemy się wycofać, zaznaczamy i wykonujemy cały kod przed interesującym nas momentem. Brak skrótu Ctrl+Z jest jedną z ważniejszych różnic w analizie w programach typu SPSS czy Statistica a w językach programowania typu R czy Python. Wbrew pozorom, idzie się przyzwyczaić. Ta sama właściwość pozwala na zachowanie przejrzystości w nauce – pokaż mi swój kod, a będę wiedział bardzo dokładnie, jak prowadziłeś(-aś) swoją analizę.</p>
 </section>
 <section id="sec-summarise" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="sec-summarise"><span class="header-section-number">6.7</span> Grupowanie i agregowanie</h2>
+<h2 data-number="6.7" class="anchored" data-anchor-id="sec-summarise"><span class="header-section-number">6.7</span> Grupowanie (<code>dplyr::group_by</code>) i agregowanie (<code>dplyr::summarise</code>)</h2>
 <p>Gdy mamy już bazę, zazwyczaj chcemy policzyć pewne statystyki dla grup badanych, np. dla osób różniących się wykształceniem, płcią czy jakąś manipulacją. Chcemy na przykład poznać średnią homofobię osób o różnym wykształceniu, sprawdzić liczność naszych podgrup czy policzyć inne zbiorcze statystyki. Możemy, oczywiście, odfiltrować najpierw osoby o wykształceniu podstawowym, policzyć dla nich, potem osoby o wykształceniu średnim itd. Są jednak prostsze sposoby, a obejmują one użycie <code>group_by</code> i <code>summarise</code><a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a>. Te dwie funkcje zazwyczaj idą ze sobą w parze i zgrupowane dane od razu trafiają do <code>summarise</code>. Poniżej przykład.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
@@ -1082,7 +1082,7 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 <p>Kolumny do grupowania podałem jako zestaw, czyli wewnątrz <code>c()</code>. Zgrupowane w ten sposób dane pokazują nam, że Andy pisze bardziej krzykliwe piosenki od Malcolma, ale różnica powiększa się, gdy chodzi o piosenki symfoniczne.</p>
 </section>
 <section id="sec-pivot" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="sec-pivot"><span class="header-section-number">6.8</span> Format długi i szeroki</h2>
+<h2 data-number="6.8" class="anchored" data-anchor-id="sec-pivot"><span class="header-section-number">6.8</span> Format długi i szeroki z <code>tidyr::pivot_*</code></h2>
 <p>Format długi i szeroki to coś, co rzadko pojawia się w tekstach wprowadzających i nie mam pojęcia czemu. To jest naprawdę ważne. Przełożenie danych z jednego formatu na drugi to często podstawowa operacja, jaką musimy wykonać, kiedy chcemy coś policzyć. Nie mam chyba ani jednego projektu, w którym bym tego nie robił. Do tego współczesne komendy, które to robią, są naprawdę proste. Tym bardziej zaskakujące jest, że np. w Excelu wykonać taką operację jest trudno, jeśli nie umie się korzystać z Power Query. Zacznijmy jednak od tego, co to jest format długi i szeroki.</p>
 <p>Terminy te odnoszą się do sposobu, w jaki składujemy dane. Format szeroki jest tym, co odruchowo tworzymy, kiedy robimy czyste tabelki. Jeden wiersz to jedna obserwacja. Wszystkie dane o konkretnej osobie badanej znajdują się w tym jednym wierszu. Każda kolumna to jedna zebrana dana, np. odpowiedź na konkretne pytanie. W takim formacie znajduje się teraz nasza baza. Weźmy z niej kilka kolumn, po czym użyjmy <code>head</code>, żeby zobaczyć pierwszych pięć wierszy.</p>
 <div class="cell">
@@ -1233,30 +1233,22 @@ $ screams    &lt;dbl&gt; 5, 7, 3, 5, 7, 7, 7, 11, 6, 8, 4, 10, 8, 5, 5, 6, 5, 6,
 </section>
 <section id="sec-exploration" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Eksploracja danych</h1>
-<p>O ile ogólna możliwość liczenia statystyk została omówiona w podrozdziale o grupowaniu i agregacji (<a href="#sec-summarise">Sekcja&nbsp;6.7</a>), tak tutaj chciałbym podrzucić dwie użyteczne funkcje do szybkiego uzyskania statystyk dla całego zestawu danych. Będą to funkcje <code>describe</code> i <code>describeBy</code> z pakietu <code>psych</code> (który trzeba, oczywiście, zainstalować i załadować przed użyciem). Jest to pierwszy omawiany tu pakiet spoza <code>tidyverse</code>. <code>psych</code> to rozległy zestaw narzędzi zaprojektowanych specjalnie do obliczeń szeroko wykorzystywanych w psychologii. Składa się z kilkudziesięciu funkcji zaprojektowanych jako zestaw narzędzi do badań empirycznych w psychologii. Jest tylko jeden problem. <code>psych</code> miał premierę w 2007 r. i o ile co jakiś czas dostaje update, to nie jest opublikowany na GitHubie. Oznacza to, że społeczność nie może wprowadzać poprawek do kodu. Profesor Revelle rzeczywiście zna się na rzeczy, jako że od 40 lat jest profesorem, ale to ciągle jedna osoba. Dlatego czasem trzeba się trochę nagimnastykować, żeby zmusić <code>psych</code> do współpracy z <code>tidyverse</code>.</p>
+<p>O ile ogólna możliwość liczenia statystyk została omówiona w podrozdziale o grupowaniu i agregacji (<a href="#sec-summarise">6.7</a>), tak tutaj chciałbym podrzucić dwie użyteczne funkcje do szybkiego uzyskania statystyk dla całego zestawu danych. Będą to funkcje <code>describe</code> i <code>describeBy</code> z pakietu <code>psych</code> (który trzeba, oczywiście, zainstalować i załadować przed użyciem). Jest to pierwszy omawiany tu pakiet spoza <code>tidyverse</code>. <code>psych</code> to rozległy zestaw narzędzi zaprojektowanych specjalnie do obliczeń szeroko wykorzystywanych w psychologii. Składa się z kilkudziesięciu funkcji zaprojektowanych jako zestaw narzędzi do badań empirycznych w psychologii. Jest tylko jeden problem. <code>psych</code> miał premierę w 2007 r. i o ile co jakiś czas dostaje update, to nie jest opublikowany na GitHubie. Oznacza to, że społeczność nie może wprowadzać poprawek do kodu. Profesor Revelle rzeczywiście zna się na rzeczy, jako że od 40 lat jest profesorem, ale to ciągle jedna osoba. Dlatego czasem trzeba się trochę nagimnastykować, żeby zmusić <code>psych</code> do współpracy z <code>tidyverse</code>.</p>
 <section id="sec-describe" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="sec-describe"><span class="header-section-number">7.1</span> Statystyki opisowe z <code>psych::describe</code></h2>
 <p>Funkcja <code>describe</code> pozwala szybko uzyskać zestaw wielu podstawowych statystyk opisowych dla wszystkich kolumn naraz. Powstaje z tego duża tabela, która zawiera znacznie więcej danych niż nam potrzeba, ale ma tę zaletę, że można ją zrobić szybko. Składnia jest tutaj tak banalna, że ciężko mówić o składni, bo polega na tym, że piszemy <code>describe(df)</code>. I to zazwyczaj zupełnie wystarczy. Że to za proste, to pokażę trochę więcej możliwości.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"psych"</span>) <span class="co"># normalnie wszystkie pakiety ładowałbym w jednym miejscu, gdzieś na początku kodu</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Dołączanie pakietu: 'psych'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Następujące obiekty zostały zakryte z 'package:ggplot2':
-
-    %+%, alpha</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>descr <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">describe</span>(<span class="at">quant =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>), <span class="at">IQR =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">"var"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"psych"</span>) <span class="co"># normalnie wszystkie pakiety ładowałbym w jednym miejscu, gdzieś na początku kodu</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>descr <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">describe</span>(<span class="at">quant =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>), <span class="at">IQR =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">"var"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Źródłem problemów czasem bywa to, że mamy dwa główne sposoby przechowywania tabelek w R. Pierwszy to <code>data.frame</code> czyli natywny typ danych w R. Drugi to <code>tibble</code>, czyli <code>data.frame</code> na prochach. Jak nietrudno się domyślić, <code>tibble</code> pochodzi z ze świata <code>tidyverse</code> i właściwie wszystko robi lepiej. Przede wszystkim lepsze jest to, jak wyświetla się w konsoli, ale też kilka rzeczy pod maską. Wszystkie dotychczasowe „ramki danych” (jak to się czasem tłumaczy), z jakimi mieliśmy do czynienia, to właśnie <code>tibble</code>. Żeby na własnej skórze przekonać się o wyższości <code>tibble</code> nad <code>data.frame</code> można wpisać w konsolę <code>df</code> (która jest w formacie <code>tibble</code>), a potem <code>as.data.frame(df)</code>. Dlatego też w ostatniej linijce kodu przerabiam wynik działania <code>describe</code> na format <code>tibble</code>.</p>
 <p>Jedną rzecz muszę jednak dodać. Z wielu praktycznych przyczyn <code>tibble</code> nie używa nazwanych wierszy. Tylko kolumny mogą mieć nazwy własne, jeśli chcemy mieć identyfikatory wierszy, powinniśmy zrobić z nich oddzielną kolumnę. <code>describe</code> zaś w czystej postaci wyrzuca <code>data.frame</code>, w której nazwy opisanych zmiennych to właśnie nazwy wierszy, dlatego muszę powiedzieć funkcji <code>as_tibble</code>, do jakiej kolumny ma mi wrzucić nazwy tych zmiennych. Swoją nazwałem <code>var</code>.</p>
 <p>Powstała tabela jest na tyle rozległa, że nie chciałem jej tu umieszczać, ale można ją sobie samodzielnie wyświetlić. Mam nadzieję, że wiesz już, jak to zrobić. Żeby podejrzeć zawartość naszej tabeli skorzystam z raz już użytej funkcji <code>glimpse</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(descr)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(descr)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 15
 Columns: 17
@@ -1283,9 +1275,9 @@ $ Q0.75    &lt;dbl&gt; 43, 23, 3, 46, 6, 6, 6, 6, 2, 6, 2, 6, 6, 6, 2</code></pr
 </section>
 <section id="sec-describeBy" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="sec-describeBy"><span class="header-section-number">7.2</span> Statystyki opisowe dla grup z <code>psych::describeBy</code></h2>
-<p>Co jeśli chcielibyśmy policzyć statystyki opisowe w grupach? Niestety <code>psych</code> nie współpracuje z <code>group_by</code> (patrz <a href="#sec-summarise">Sekcja&nbsp;6.7</a>), ale ma własną metodę grupowania danych. Służy temu funkcja <code>describeBy</code>. Przypomnijmy sobie tutaj bazę <code>df_scream</code> z podrozdziału <a href="#sec-summarise">Sekcja&nbsp;6.7</a>.</p>
+<p>Co jeśli chcielibyśmy policzyć statystyki opisowe w grupach? Niestety <code>psych</code> nie współpracuje z <code>group_by</code> (patrz <a href="#sec-summarise">6.7</a>), ale ma własną metodę grupowania danych. Służy temu funkcja <code>describeBy</code>. Przypomnijmy sobie tutaj bazę <code>df_scream</code> z podrozdziału <a href="#sec-summarise">6.7</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_scream)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_scream)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   id    song_type songwriter screams
@@ -1298,11 +1290,11 @@ $ Q0.75    &lt;dbl&gt; 43, 23, 3, 46, 6, 6, 6, 6, 2, 6, 2, 6, 6, 6, 2</code></pr
 6 fug   Fly song  Andy             7</code></pre>
 </div>
 </div>
-<p>Mamy dwa sposoby, żeby naszą bazę wrzucić do <code>describeBy</code>, z czego ja pokażę ten bardziej intuicyjny. Ma od postać tzw. formuły (<em>formula</em>), z którymi spotkamy się jeszcze przy okazji testów statystycznych (<a href="#sec-tests">Sekcja&nbsp;9</a>), zwłaszcza w <code>rstatix</code> (<a href="#sec-rstatix">Sekcja&nbsp;9.2</a>). Przy tej okazji omówimy sobie też głębiej działanie potoków. Najpierw jednak pokażę przykład formuły. Jeśli chcielibyśmy dostać statystyki opisowe dla liczby krzyków w zależności od tego, kto tę piosenkę napisał, skorzystalibyśmy z takiej formuły <code>screams ~ songwriter</code>. Ten znaczek pośrodku to tylda, używana też w funkcjach anonimowych z <code>purrr</code> (<a href="#sec-lambda">Sekcja&nbsp;6.3.3.1</a>). Jeśli chcielibyśmy dołożyć też do tego podziału typ piosenki, użylibyśmy znaku <code>+</code> pisząc <code>screams ~ songwriter + song_type</code>. Jak mogłaby wyglądać taka funkcja?</p>
+<p>Mamy dwa sposoby, żeby naszą bazę wrzucić do <code>describeBy</code>, z czego ja pokażę ten bardziej intuicyjny. Ma od postać tzw. formuły (<em>formula</em>), z którymi spotkamy się jeszcze przy okazji testów statystycznych (<a href="#sec-tests">9</a>), zwłaszcza w <code>rstatix</code> (<a href="#sec-rstatix">9.2</a>). Przy tej okazji omówimy sobie też głębiej działanie potoków. Najpierw jednak pokażę przykład formuły. Jeśli chcielibyśmy dostać statystyki opisowe dla liczby krzyków w zależności od tego, kto tę piosenkę napisał, skorzystalibyśmy z takiej formuły <code>screams ~ songwriter</code>. Ten znaczek pośrodku to tylda, używana też w funkcjach anonimowych z <code>purrr</code> (<a href="#sec-lambda">6.3.3.1</a>). Jeśli chcielibyśmy dołożyć też do tego podziału typ piosenki, użylibyśmy znaku <code>+</code> pisząc <code>screams ~ songwriter + song_type</code>. Jak mogłaby wyglądać taka funkcja?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>df_scream <span class="sc">%&gt;%</span></span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">describeBy</span>(screams <span class="sc">~</span> songwriter <span class="sc">+</span> song_type, <span class="at">data =</span> .)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>df_scream <span class="sc">%&gt;%</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">describeBy</span>(screams <span class="sc">~</span> songwriter <span class="sc">+</span> song_type, <span class="at">data =</span> .)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  Descriptive statistics by group 
@@ -1327,29 +1319,21 @@ song_type: Symphony
 screams    1 17 7.06 1.75      7       7 1.48   4  11     7 0.25    -0.39 0.42</code></pre>
 </div>
 </div>
-<p>Wynikiem działania takiej funkcji jest lista (też nieużywany wcześniej typ danych). W tytule możemy zobaczyć autora i typ piosenki. Jeśli to jest jasne, wyjaśnijmy pozostałą część instrukcji. Po pierwsze znów spotykamy problem, że <code>describeBy</code> nie chce współpracować z <code>tibble</code>, więc musimy przekształcić naszą bazę na stary dobry format <code>data.frame</code>. Robimy to funkcją <code>as.data.frame</code>. Druga sprawa to <code>data = .</code>. Argument <code>data</code> to obowiązkowy argument, do którego wrzucamy naszą bazę danych. Dzięki temu R wie, gdzie ma szukać kolumn <code>screams</code>, <code>songwriter</code> i <code>song_type</code> z naszej formuły. Problem polega jednak na użyciu potoków. Standardowo potok <code>%&gt;%</code> wrzuca rzeczy do pierwszego argumentu. Wiele funkcji, tak jak <code>describeBy</code>, nie przyjmuje bazy danych w pierwszym argumencie. Jak na złość <code>data</code> w <code>describeBy</code> to ostatni argument, więc najlepiej wprost go nazwać. Omawiany w podrozdziale <a href="#sec-rstatix">Sekcja&nbsp;9.2</a> pakiet <code>rstatix</code> za pierwszy cel postawił sobie nawet przerobienie testów statystycznych tak, żeby lepiej współpracowały z potokami. Jak więc poradzić sobie w takiej sytuacji? Jedna opcja, to całkiem zrezygnować z potoków.</p>
+<p>Wynikiem działania takiej funkcji jest lista (też nieużywany wcześniej typ danych). W tytule możemy zobaczyć autora i typ piosenki. Jeśli to jest jasne, wyjaśnijmy pozostałą część instrukcji. Po pierwsze znów spotykamy problem, że <code>describeBy</code> nie chce współpracować z <code>tibble</code>, więc musimy przekształcić naszą bazę na stary dobry format <code>data.frame</code>. Robimy to funkcją <code>as.data.frame</code>. Druga sprawa to <code>data = .</code>. Argument <code>data</code> to obowiązkowy argument, do którego wrzucamy naszą bazę danych. Dzięki temu R wie, gdzie ma szukać kolumn <code>screams</code>, <code>songwriter</code> i <code>song_type</code> z naszej formuły. Problem polega jednak na użyciu potoków. Standardowo potok <code>%&gt;%</code> wrzuca rzeczy do pierwszego argumentu. Wiele funkcji, tak jak <code>describeBy</code>, nie przyjmuje bazy danych w pierwszym argumencie. Jak na złość <code>data</code> w <code>describeBy</code> to ostatni argument, więc najlepiej wprost go nazwać. Omawiany w podrozdziale <a href="#sec-rstatix">9.2</a> pakiet <code>rstatix</code> za pierwszy cel postawił sobie nawet przerobienie testów statystycznych tak, żeby lepiej współpracowały z potokami. Jak więc poradzić sobie w takiej sytuacji? Jedna opcja, to całkiem zrezygnować z potoków.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describeBy</span>(screams <span class="sc">~</span> songwriter <span class="sc">+</span> song_type, <span class="at">data =</span> <span class="fu">as.data.frame</span>(df_scream))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describeBy</span>(screams <span class="sc">~</span> songwriter <span class="sc">+</span> song_type, <span class="at">data =</span> <span class="fu">as.data.frame</span>(df_scream))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>W krótkich instrukcjach takie coś jest nawet czytelne. Warto pamiętać, że potoki nie są obowiązkowe, można równie dobrze zagnieżdżać funkcje. Cierpi na tym tylko czytelność kodu. Druga opcja, to wprost powiedzenie potokowi, gdzie ma wrzucić naszą bazę danych. Do tego właśnie służy <code>.</code>. Zapis <code>data = .</code> mówi potokowi „halo halo, proszę nie wrzucać bazy do pierwszego argumentu, tylko o tu, gdzie pokazałem(-am) kropką”. Ostatecznie oba przykłady z tego podrozdziału są równoważne.</p>
 </section>
 <section id="statystyki-opisowe-z-rstatixget_summary_stats" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="statystyki-opisowe-z-rstatixget_summary_stats"><span class="header-section-number">7.3</span> Statystyki opisowe z <code>rstatix::get_summary_stats</code></h2>
-<p>Muszę się do czegoś przyznać. Przez lata wykorzystywałem <code>describe</code> i <code>describeBy</code> do statystyk opisowych, ale… są lepsze alternatywy. Chciałem jednak wykorzystać te funkcje jako praktyczny pretekst to pokazania różnic między <code>data.frame</code> i <code>tibble</code>, używania kropki z potokami i ogólnie jak sobie radzić, jak nowszych alternatyw nie ma. Jednak do liczenia statystyk opisowych takie alternatywy są. I przychodzą do nas z <code>rstatix</code>. Jest to świetny, nowoczesny pakiet, który szerzej omówimy w podrozdziale <a href="#sec-rstatix">Sekcja&nbsp;9.2</a>.</p>
+<p>Muszę się do czegoś przyznać. Przez lata wykorzystywałem <code>describe</code> i <code>describeBy</code> do statystyk opisowych, ale… są lepsze alternatywy. Chciałem jednak wykorzystać te funkcje jako praktyczny pretekst to pokazania różnic między <code>data.frame</code> i <code>tibble</code>, używania kropki z potokami i ogólnie jak sobie radzić, jak nowszych alternatyw nie ma. Jednak do liczenia statystyk opisowych takie alternatywy są. I przychodzą do nas z <code>rstatix</code>. Jest to świetny, nowoczesny pakiet, który szerzej omówimy w podrozdziale <a href="#sec-rstatix">9.2</a>.</p>
 <p>Do liczenia statystyk opisowych w <code>rstatix</code> wykorzystujemy funkcję <code>get_summary_stats</code>. Dobrze współpracuje ona z <code>tidyverse</code>, potokami i funkcją <code>group_by</code>. Ma też bardzo prostą składnię. Szczegóły i wyjaśnienia poszczególnych statystyk znajdują się w dokumentacji.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rstatix"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Dołączanie pakietu: 'rstatix'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Następujący obiekt został zakryty z 'package:stats':
-
-    filter</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bez grupowania</span></span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_summary_stats</span>(df)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rstatix"</span>)</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="co"># bez grupowania</span></span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a><span class="fu">get_summary_stats</span>(df)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 13 × 13
    variable     n   min   max median    q1    q3   iqr   mad  mean     sd    se
@@ -1369,10 +1353,10 @@ Dołączanie pakietu: 'rstatix'</code></pre>
 13 H_10        45     1     6      5     5     6     1  1.48  5.07  1.29  0.192
 # … with 1 more variable: ci &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># z grupowaniem</span></span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>df_scream <span class="sc">%&gt;%</span></span>
-<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(songwriter, song_type) <span class="sc">%&gt;%</span></span>
-<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_summary_stats</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># z grupowaniem</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>df_scream <span class="sc">%&gt;%</span></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(songwriter, song_type) <span class="sc">%&gt;%</span></span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_summary_stats</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 15
   song_…¹ songw…² varia…³     n   min   max median    q1    q3   iqr   mad  mean
@@ -1388,9 +1372,9 @@ Dołączanie pakietu: 'rstatix'</code></pre>
 </section>
 <section id="tabele-liczności-z-rstatixfreq_table" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="tabele-liczności-z-rstatixfreq_table"><span class="header-section-number">7.4</span> Tabele liczności z <code>rstatix::freq_table</code></h2>
-<p>Dla danych kategorialnych (np. płeć, wykształcenie, klasa) nie liczymy statystyk opisowych, a tabele liczności. Chcemy na przykład wiedzieć, ile w naszej bazie mamy osób z wykształceniem wyższym, ile ze średnim itd. W podrozdziale <a href="#sec-summarise">Sekcja&nbsp;6.7</a> pokazałem, jak to zrobić ręcznie funkcjami <code>summarise</code> i <code>n</code>. Pakiet <code>rstatix</code> ma dla nas gotową funkcję <code>freq_table</code> właśnie do tego celu. Wymaga ona jedynie podania, które kolumny z naszej tabeli ująć. Robimy to tak samo, jak zrobilibyśmy w funkcji <code>select</code> (patrz <a href="#sec-select">Sekcja&nbsp;6.1.2</a>) czy <code>across</code> (patrz <a href="#sec-across">Sekcja&nbsp;6.3.1</a>).</p>
+<p>Dla danych kategorialnych (np. płeć, wykształcenie, klasa) nie liczymy statystyk opisowych, a tabele liczności. Chcemy na przykład wiedzieć, ile w naszej bazie mamy osób z wykształceniem wyższym, ile ze średnim itd. W podrozdziale <a href="#sec-summarise">6.7</a> pokazałem, jak to zrobić ręcznie funkcjami <code>summarise</code> i <code>n</code>. Pakiet <code>rstatix</code> ma dla nas gotową funkcję <code>freq_table</code> właśnie do tego celu. Wymaga ona jedynie podania, które kolumny z naszej tabeli ująć. Robimy to tak samo, jak zrobilibyśmy w funkcji <code>select</code> (patrz <a href="#sec-select">6.1.2</a>) czy <code>across</code> (patrz <a href="#sec-across">6.3.1</a>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">freq_table</span>(df, wyksztalcenie)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">freq_table</span>(df, wyksztalcenie)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
   wyksztalcenie     n  prop
@@ -1404,9 +1388,9 @@ Dołączanie pakietu: 'rstatix'</code></pre>
 </section>
 <section id="macierze-korelacji-i-ich-istotność-z-rstatixcor_mat" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="macierze-korelacji-i-ich-istotność-z-rstatixcor_mat"><span class="header-section-number">7.5</span> Macierze korelacji i ich istotność z <code>rstatix::cor_mat</code></h2>
-<p>W ramach eksploracji chcemy czasami zrobić macierz korelacji całego naszego zestawu danych. Może nam do tego posłużyć funkcja <code>cor_mat</code> z pakietu <code>rstatix</code>. Zobaczmy to na przykładzie bazy <code>db_joined</code> z podrozdziału <a href="#sec-join">Sekcja&nbsp;6.9</a>.</p>
+<p>W ramach eksploracji chcemy czasami zrobić macierz korelacji całego naszego zestawu danych. Może nam do tego posłużyć funkcja <code>cor_mat</code> z pakietu <code>rstatix</code>. Zobaczmy to na przykładzie bazy <code>db_joined</code> z podrozdziału <a href="#sec-join">6.9</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>(korelacje <span class="ot">&lt;-</span> <span class="fu">cor_mat</span>(db_joined, <span class="sc">-</span>ID))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>(korelacje <span class="ot">&lt;-</span> <span class="fu">cor_mat</span>(db_joined, <span class="sc">-</span>ID))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
   rowname      KTR_O KTR_W KTR_O_retest KTR_W_retest
@@ -1421,17 +1405,17 @@ Dołączanie pakietu: 'rstatix'</code></pre>
 <p>Można zwrócić uwagę na to, że powyższa komenda wyświetliła nam macierz korelacji, pomimo że normalnie musiałbym jeszcze wywołać samą zmienną <code>korelacje</code>, do której ją zapisałem. Tak to robiliśmy wcześniej. Wykorzystałem tutaj wygodą sztuczkę – jeśli weźmie się całe przypisanie w nawiasy, R potraktuje to jako „przypisz i wyświetl”.</p>
 <p>Korelacje mają jednak swoją istotność, którą możemy tu oznaczyć. Jeśli policzyliśmy już macierz korelacji, możemy ją wrzucić do funkcji <code>cor_get_pval</code>. Ewentualnie możemy samą bazę wrzucić do funkcji <code>cor_pmat</code>. Efekt jest ostatecznie ten sam.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>korelacje_p_1 <span class="ot">&lt;-</span> <span class="fu">cor_get_pval</span>(korelacje)</span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>korelacje_p_2 <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(db_joined, <span class="sc">-</span>ID)</span>
-<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(korelacje_p_1, korelacje_p_2)</span>
-<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a>korelacje_p_1</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>korelacje_p_1 <span class="ot">&lt;-</span> <span class="fu">cor_get_pval</span>(korelacje)</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>korelacje_p_2 <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(db_joined, <span class="sc">-</span>ID)</span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(korelacje_p_1, korelacje_p_2)</span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a>korelacje_p_1</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Funkcja <code>identical</code> informuje nas, że obiekty stworzone obiema funkcjami rzeczywiście są identyczne. Powstała nam macierz istotności korelacji. Może być mylące, że korelacje wyświetlają się w notacji naukowej, co jest wygodnym sposobem oznaczania bardzo małych lub bardzo dużych liczb. Zasada jest tu prosta: <span class="math inline">\(1,22e-4 = 1,22 \times 10^{-4} = 0,000122\)</span>. Jeśli jednak chcemy dostać tę macierz w przyjaźniejszej formie, możemy użyć funkcji <code>cor_mark_significant</code><a href="#fn26" class="footnote-ref" id="fnref26" role="doc-noteref"><sup>26</sup></a>, do której wrzucamy macierz korelacji (nie macierz istotności).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor_mark_significant</span>(korelacje)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor_mark_significant</span>(korelacje)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       rowname    KTR_O    KTR_W KTR_O_retest KTR_W_retest
 1        KTR_O                                            
@@ -1447,23 +1431,23 @@ Dołączanie pakietu: 'rstatix'</code></pre>
 </section>
 </section>
 <section id="wykresy" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Wykresy</h1>
+<h1 data-number="8"><span class="header-section-number">8</span> Wykresy z <code>ggplot2</code></h1>
 <section id="mapowanie-estetyk" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="mapowanie-estetyk"><span class="header-section-number">8.1</span> Mapowanie estetyk</h2>
+<h2 data-number="8.1" class="anchored" data-anchor-id="mapowanie-estetyk"><span class="header-section-number">8.1</span> Mapowanie estetyk (<code>aes</code>)</h2>
 </section>
 <section id="obiekty-geom_" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="obiekty-geom_"><span class="header-section-number">8.2</span> Obiekty <code>geom_</code></h2>
+<h2 data-number="8.2" class="anchored" data-anchor-id="obiekty-geom_"><span class="header-section-number">8.2</span> Obiekty <code>geom_*</code></h2>
 </section>
 <section id="tytuły-osi-i-wykresu" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="tytuły-osi-i-wykresu"><span class="header-section-number">8.3</span> Tytuły osi i wykresu</h2>
+<h2 data-number="8.3" class="anchored" data-anchor-id="tytuły-osi-i-wykresu"><span class="header-section-number">8.3</span> Tytuły osi i wykresu (<code>labs</code>)</h2>
 </section>
 <section id="wygląd-wykresów" class="level2" data-number="8.4">
 <h2 data-number="8.4" class="anchored" data-anchor-id="wygląd-wykresów"><span class="header-section-number">8.4</span> Wygląd wykresów</h2>
-<section id="ggthemeassist" class="level3" data-number="8.4.1">
-<h3 data-number="8.4.1" class="anchored" data-anchor-id="ggthemeassist"><span class="header-section-number">8.4.1</span> <code>ggThemeAssist</code></h3>
+<section id="gotowe-szablony" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="gotowe-szablony"><span class="header-section-number">8.4.1</span> Gotowe szablony (<code>theme_*</code>)</h3>
 </section>
-<section id="gotowe-szablony" class="level3" data-number="8.4.2">
-<h3 data-number="8.4.2" class="anchored" data-anchor-id="gotowe-szablony"><span class="header-section-number">8.4.2</span> Gotowe szablony</h3>
+<section id="ggthemeassist" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="ggthemeassist"><span class="header-section-number">8.4.2</span> <code>ggThemeAssist</code></h3>
 </section>
 </section>
 </section>
@@ -1504,7 +1488,7 @@ Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R
 
 <ol>
 <li id="fn1"><p>Drugim najpopularniejszym jest R.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>To trudno sobie wyobrazić, łatwiej zobaczyć na obrazkach. Chodzi o to, czy mamy klasyczną wyczyszczoną bazę, w której jedna osoba badana to jeden wiersz, a każda kolumna to jeden pomiar (np. odpowiedź na pytanie). Czasem chcemy zamiast 11 kolumn (ID osoby badanej + 10 odpowiedzi na pytania) mieć tylko 3 kolumny (ID osoby badanej, numer pytania, odpowiedź). Wtedy każda osoba badana zajmuje 10 wierszy, ale każdy wiersz ma odpowiedź na tylko jedno pytanie. To potrafi być potrzebne do niektórych testów, grupowania danych itp. To jest technikalium, to nie jest statystyka <em>per se</em>, ale czasem trzeba to ogarniać, żeby rzeczywiście zrobić analizę. Poświęciłem temu cały podrozdział <a href="#sec-pivot">Sekcja&nbsp;6.8</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>To trudno sobie wyobrazić, łatwiej zobaczyć na obrazkach. Chodzi o to, czy mamy klasyczną wyczyszczoną bazę, w której jedna osoba badana to jeden wiersz, a każda kolumna to jeden pomiar (np. odpowiedź na pytanie). Czasem chcemy zamiast 11 kolumn (ID osoby badanej + 10 odpowiedzi na pytania) mieć tylko 3 kolumny (ID osoby badanej, numer pytania, odpowiedź). Wtedy każda osoba badana zajmuje 10 wierszy, ale każdy wiersz ma odpowiedź na tylko jedno pytanie. To potrafi być potrzebne do niektórych testów, grupowania danych itp. To jest technikalium, to nie jest statystyka <em>per se</em>, ale czasem trzeba to ogarniać, żeby rzeczywiście zrobić analizę. Poświęciłem temu cały podrozdział <a href="#sec-pivot">6.8</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Jeśli korzystasz z jakiejś dystrybucji linuxa, R możesz zainstalować z oficjalnych repozytoriów. Pakiet zazwyczaj nazywa się <code>r-base</code>. W Ubuntu wystarczy użyć komendy <code>sudo apt install r-base</code>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>W R da się programować też w innych IDE, np. w Visual Studio Code. Niemniej na sam początek lepiej przylgnąć do standardu RStudio, który pomoże nam nabrać najlepszych praktyk i nauczyć się, z czym się R je.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Sam używam <a href="https://github.com/anthonynorth/rscodeio">rscodeio</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
