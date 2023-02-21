@@ -341,7 +341,7 @@ df %>%
 Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery, ale możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu `tidy-select`. Tutaj akurat użyłem `starts_with("H_")`, żeby powiedzieć, że ma to zrobić ze wszystkimi kolumnami, których nazwy zaczynają się od `H_`. Te same funkcje możemy wykorzystywać w funkcji `select`. Kilka innych tego typu funkcji umieściłem w tabeli.
 
 | Funkcja         |                                           Wybierz wszystkie kolumny... |
-|----------------------|-------------------------------------------------:|
+|------------------|-----------------------------------------------------:|
 | `starts_with()` |                                         których nazwy zaczynają się od |
 | `ends_with()`   |                                            których nazwy kończą się na |
 | `contains()`    |                                        których nazwy zawierają w sobie |
@@ -805,72 +805,92 @@ Jak widać złączenia to zaskakująco szeroki temat, który daje duże możliwo
 
 # Eksploracja danych {#sec-exploration}
 
-O ile ogólna możliwość liczenia statystyk została omówiona w podrozdziale o grupowaniu i agregacji ([-@sec-summarise]), tak tutaj chciałbym podrzucić dwie użyteczne funkcje do szybkiego uzyskania statystyk dla całego zestawu danych. Będą to funkcje `describe` i `describeBy` z pakietu `psych` (który trzeba, oczywiście, zainstalować i załadować przed użyciem). Jest to pierwszy omawiany tu pakiet spoza `tidyverse`. `psych` to rozległy zestaw narzędzi zaprojektowanych specjalnie do obliczeń szeroko wykorzystywanych w psychologii. Składa się z kilkudziesięciu funkcji zaprojektowanych jako zestaw narzędzi do badań empirycznych w psychologii. Jest tylko jeden problem. `psych` miał premierę w 2007 r. i o ile co jakiś czas dostaje update, to nie jest opublikowany na GitHubie. Oznacza to, że społeczność nie może wprowadzać poprawek do kodu. Profesor Revelle rzeczywiście zna się na rzeczy, jako że od 40 lat jest profesorem, ale to ciągle jedna osoba. Dlatego czasem trzeba się trochę nagimnastykować, żeby zmusić `psych` do współpracy z `tidyverse`.
+Dane możemy eksplorować ręcznie za pomocą funkcji `group_by` i `summarise`, jak to opisałem w podrozdziale ([-@sec-summarise]). Ponieważ jednak wiele czynności, takich jak liczenie statystyk opisowych, wykonujemy za każdym razem, kiedy siadamy do analizy, powstały funkcje, które znacznie ten proces przyspieszają i upraszczają. Te, które omówię tutaj, stanowią część świetnego pakietu `rstatix`, który omawiam także w podrozdziale [-@sec-rstatix].
 
-## Statystyki opisowe z `psych::describe` {#sec-describe}
+<!-- O ile ogólna możliwość liczenia statystyk została omówiona w podrozdziale o grupowaniu i agregacji ([-@sec-summarise]), tak tutaj chciałbym podrzucić dwie użyteczne funkcje do szybkiego uzyskania statystyk dla całego zestawu danych. Będą to funkcje `describe` i `describeBy` z pakietu `psych` (który trzeba, oczywiście, zainstalować i załadować przed użyciem). Jest to pierwszy omawiany tu pakiet spoza `tidyverse`. `psych` to rozległy zestaw narzędzi zaprojektowanych specjalnie do obliczeń szeroko wykorzystywanych w psychologii. Składa się z kilkudziesięciu funkcji zaprojektowanych jako zestaw narzędzi do badań empirycznych w psychologii. Jest tylko jeden problem. `psych` miał premierę w 2007 r. i o ile co jakiś czas dostaje update, to nie jest opublikowany na GitHubie. Oznacza to, że społeczność nie może wprowadzać poprawek do kodu. Profesor Revelle rzeczywiście zna się na rzeczy, jako że od 40 lat jest profesorem, ale to ciągle jedna osoba. Dlatego czasem trzeba się trochę nagimnastykować, żeby zmusić `psych` do współpracy z `tidyverse`. -->
 
-Funkcja `describe` pozwala szybko uzyskać zestaw wielu podstawowych statystyk opisowych dla wszystkich kolumn naraz. Powstaje z tego duża tabela, która zawiera znacznie więcej danych niż nam potrzeba, ale ma tę zaletę, że można ją zrobić szybko. Składnia jest tutaj tak banalna, że ciężko mówić o składni, bo polega na tym, że piszemy `describe(df)`. I to zazwyczaj zupełnie wystarczy. Że to za proste, to pokażę trochę więcej możliwości.
+<!-- ## Statystyki opisowe z `psych::describe` {#sec-describe} -->
 
-```{r}
-#| warning: false
-library("psych") # normalnie wszystkie pakiety ładowałbym w jednym miejscu, gdzieś na początku kodu
+<!-- Funkcja `describe` pozwala szybko uzyskać zestaw wielu podstawowych statystyk opisowych dla wszystkich kolumn naraz. Powstaje z tego duża tabela, która zawiera znacznie więcej danych niż nam potrzeba, ale ma tę zaletę, że można ją zrobić szybko. Składnia jest tutaj tak banalna, że ciężko mówić o składni, bo polega na tym, że piszemy `describe(df)`. I to zazwyczaj zupełnie wystarczy. Że to za proste, to pokażę trochę więcej możliwości. -->
 
-descr <- df %>%
-    describe(quant = c(0.25, 0.75), IQR = TRUE) %>%
-    as_tibble(rownames = "var")
-```
+<!-- ```{r} -->
 
-Źródłem problemów czasem bywa to, że mamy dwa główne sposoby przechowywania tabelek w R. Pierwszy to `data.frame` czyli natywny typ danych w R. Drugi to `tibble`, czyli `data.frame` na prochach. Jak nietrudno się domyślić, `tibble` pochodzi z ze świata `tidyverse` i właściwie wszystko robi lepiej. Przede wszystkim lepsze jest to, jak wyświetla się w konsoli, ale też kilka rzeczy pod maską. Wszystkie dotychczasowe „ramki danych" (jak to się czasem tłumaczy), z jakimi mieliśmy do czynienia, to właśnie `tibble`. Żeby na własnej skórze przekonać się o wyższości `tibble` nad `data.frame` można wpisać w konsolę `df` (która jest w formacie `tibble`), a potem `as.data.frame(df)`. Dlatego też w ostatniej linijce kodu przerabiam wynik działania `describe` na format `tibble`.
+<!-- #| warning: false -->
 
-Jedną rzecz muszę jednak dodać. Z wielu praktycznych przyczyn `tibble` nie używa nazwanych wierszy. Tylko kolumny mogą mieć nazwy własne, jeśli chcemy mieć identyfikatory wierszy, powinniśmy zrobić z nich oddzielną kolumnę. `describe` zaś w czystej postaci wyrzuca `data.frame`, w której nazwy opisanych zmiennych to właśnie nazwy wierszy, dlatego muszę powiedzieć funkcji `as_tibble`, do jakiej kolumny ma mi wrzucić nazwy tych zmiennych. Swoją nazwałem `var`.
+<!-- library("psych") # normalnie wszystkie pakiety ładowałbym w jednym miejscu, gdzieś na początku kodu -->
 
-Powstała tabela jest na tyle rozległa, że nie chciałem jej tu umieszczać, ale można ją sobie samodzielnie wyświetlić. Mam nadzieję, że wiesz już, jak to zrobić. Żeby podejrzeć zawartość naszej tabeli skorzystam z raz już użytej funkcji `glimpse`.
+<!-- descr <- df %>% -->
 
-```{r}
-glimpse(descr)
-```
+<!--     describe(quant = c(0.25, 0.75), IQR = TRUE) %>% -->
 
-Nazwy kolumn mówią nam już, co udało nam się wygenerować. Jest nasza kolumna `var` z nazwami zmiennych z bazy. Jest cała seria statystyk opisowych. Warto zauważyć, że swoje statystyki typu średnia dostała też zmienna tekstowa `wyksztalcenie`. Żeby ostrzec, że liczby te nie mają za wiele sensu, nazwa tej kolumny automatycznie dostała gwiazdkę `wyksztalcenie*`. Opis wszystkich policzonych statystyk znajduje się, a jakże, w dokumentacji. Powiem tylko o dwóch rzeczach, które wprost musiałem wywołać argumentami. Pierwsza to kwantyle, czyli wartości dzielące zbiór danych na części. 25. kwantyl to obserwacja, poniżej której znajduje się 25% danych. Jeśli mielibyśmy dokładnie 100 obserwacji, to 25. kwantylem byłaby 25. obserwacja. Mediana to nic innego jak 50. kwantyl. Możemy poprosić `describe` o podanie nam dowolnych kwantyli. Wystarczy, że zbierzemy je wszystkie w `c` jako ułamki dziesiętne i wrzucimy do argumentu `quant`. Druga rzecz, o którą wprost poprosiłem, to IQR, czyli rozstęp międzykwartylowy. Bywa wykorzystywany jako wskaźnik rozproszenia danych. Ponieważ jest to argument typu „licz albo nie licz", to wpisałem w niego `TRUE`, czyli kazałem `describe` ten rozstęp policzyć.
+<!--     as_tibble(rownames = "var") -->
 
-## Statystyki opisowe dla grup z `psych::describeBy` {#sec-describeBy}
+<!-- ``` -->
 
-Co jeśli chcielibyśmy policzyć statystyki opisowe w grupach? Niestety `psych` nie współpracuje z `group_by` (patrz [-@sec-summarise]), ale ma własną metodę grupowania danych. Służy temu funkcja `describeBy`. Przypomnijmy sobie tutaj bazę `df_scream` z podrozdziału [-@sec-summarise].
+<!-- Źródłem problemów czasem bywa to, że mamy dwa główne sposoby przechowywania tabelek w R. Pierwszy to `data.frame` czyli natywny typ danych w R. Drugi to `tibble`, czyli `data.frame` na prochach. Jak nietrudno się domyślić, `tibble` pochodzi z ze świata `tidyverse` i właściwie wszystko robi lepiej. Przede wszystkim lepsze jest to, jak wyświetla się w konsoli, ale też kilka rzeczy pod maską. Wszystkie dotychczasowe „ramki danych" (jak to się czasem tłumaczy), z jakimi mieliśmy do czynienia, to właśnie `tibble`. Żeby na własnej skórze przekonać się o wyższości `tibble` nad `data.frame` można wpisać w konsolę `df` (która jest w formacie `tibble`), a potem `as.data.frame(df)`. Dlatego też w ostatniej linijce kodu przerabiam wynik działania `describe` na format `tibble`. -->
 
-```{r}
-head(df_scream)
-```
+<!-- Jedną rzecz muszę jednak dodać. Z wielu praktycznych przyczyn `tibble` nie używa nazwanych wierszy. Tylko kolumny mogą mieć nazwy własne, jeśli chcemy mieć identyfikatory wierszy, powinniśmy zrobić z nich oddzielną kolumnę. `describe` zaś w czystej postaci wyrzuca `data.frame`, w której nazwy opisanych zmiennych to właśnie nazwy wierszy, dlatego muszę powiedzieć funkcji `as_tibble`, do jakiej kolumny ma mi wrzucić nazwy tych zmiennych. Swoją nazwałem `var`. -->
 
-Mamy dwa sposoby, żeby naszą bazę wrzucić do `describeBy`, z czego ja pokażę ten bardziej intuicyjny. Ma od postać tzw. formuły (*formula*), z którymi spotkamy się jeszcze przy okazji testów statystycznych ([-@sec-tests]), zwłaszcza w `rstatix` ([-@sec-rstatix]). Przy tej okazji omówimy sobie też głębiej działanie potoków. Najpierw jednak pokażę przykład formuły. Jeśli chcielibyśmy dostać statystyki opisowe dla liczby krzyków w zależności od tego, kto tę piosenkę napisał, skorzystalibyśmy z takiej formuły `screams ~ songwriter`. Ten znaczek pośrodku to tylda, używana też w funkcjach anonimowych z `purrr` ([-@sec-lambda]). Jeśli chcielibyśmy dołożyć też do tego podziału typ piosenki, użylibyśmy znaku `+` pisząc `screams ~ songwriter + song_type`. Jak mogłaby wyglądać taka funkcja?
+<!-- Powstała tabela jest na tyle rozległa, że nie chciałem jej tu umieszczać, ale można ją sobie samodzielnie wyświetlić. Mam nadzieję, że wiesz już, jak to zrobić. Żeby podejrzeć zawartość naszej tabeli skorzystam z raz już użytej funkcji `glimpse`. -->
 
-```{r}
-df_scream %>%
-    as.data.frame() %>%
-    describeBy(screams ~ songwriter + song_type, data = .)
-```
+<!-- ```{r} -->
 
-Wynikiem działania takiej funkcji jest lista (też nieużywany wcześniej typ danych). W tytule możemy zobaczyć autora i typ piosenki. Jeśli to jest jasne, wyjaśnijmy pozostałą część instrukcji. Po pierwsze znów spotykamy problem, że `describeBy` nie chce współpracować z `tibble`, więc musimy przekształcić naszą bazę na stary dobry format `data.frame`. Robimy to funkcją `as.data.frame`. Druga sprawa to `data = .`. Argument `data` to obowiązkowy argument, do którego wrzucamy naszą bazę danych. Dzięki temu R wie, gdzie ma szukać kolumn `screams`, `songwriter` i `song_type` z naszej formuły. Problem polega jednak na użyciu potoków. Standardowo potok `%>%` wrzuca rzeczy do pierwszego argumentu. Wiele funkcji, tak jak `describeBy`, nie przyjmuje bazy danych w pierwszym argumencie. Jak na złość `data` w `describeBy` to ostatni argument, więc najlepiej wprost go nazwać. Omawiany w podrozdziale [-@sec-rstatix] pakiet `rstatix` za pierwszy cel postawił sobie nawet przerobienie testów statystycznych tak, żeby lepiej współpracowały z potokami. Jak więc poradzić sobie w takiej sytuacji? Jedna opcja, to całkiem zrezygnować z potoków.
+<!-- glimpse(descr) -->
 
-```{r}
-#| eval: false
-describeBy(screams ~ songwriter + song_type, data = as.data.frame(df_scream))
-```
+<!-- ``` -->
 
-W krótkich instrukcjach takie coś jest nawet czytelne. Warto pamiętać, że potoki nie są obowiązkowe, można równie dobrze zagnieżdżać funkcje. Cierpi na tym tylko czytelność kodu. Druga opcja, to wprost powiedzenie potokowi, gdzie ma wrzucić naszą bazę danych. Do tego właśnie służy `.`. Zapis `data = .` mówi potokowi „halo halo, proszę nie wrzucać bazy do pierwszego argumentu, tylko o tu, gdzie pokazałem(-am) kropką". Ostatecznie oba przykłady z tego podrozdziału są równoważne.
+<!-- Nazwy kolumn mówią nam już, co udało nam się wygenerować. Jest nasza kolumna `var` z nazwami zmiennych z bazy. Jest cała seria statystyk opisowych. Warto zauważyć, że swoje statystyki typu średnia dostała też zmienna tekstowa `wyksztalcenie`. Żeby ostrzec, że liczby te nie mają za wiele sensu, nazwa tej kolumny automatycznie dostała gwiazdkę `wyksztalcenie*`. Opis wszystkich policzonych statystyk znajduje się, a jakże, w dokumentacji. Powiem tylko o dwóch rzeczach, które wprost musiałem wywołać argumentami. Pierwsza to kwantyle, czyli wartości dzielące zbiór danych na części. 25. kwantyl to obserwacja, poniżej której znajduje się 25% danych. Jeśli mielibyśmy dokładnie 100 obserwacji, to 25. kwantylem byłaby 25. obserwacja. Mediana to nic innego jak 50. kwantyl. Możemy poprosić `describe` o podanie nam dowolnych kwantyli. Wystarczy, że zbierzemy je wszystkie w `c` jako ułamki dziesiętne i wrzucimy do argumentu `quant`. Druga rzecz, o którą wprost poprosiłem, to IQR, czyli rozstęp międzykwartylowy. Bywa wykorzystywany jako wskaźnik rozproszenia danych. Ponieważ jest to argument typu „licz albo nie licz", to wpisałem w niego `TRUE`, czyli kazałem `describe` ten rozstęp policzyć. -->
+
+<!-- ## Statystyki opisowe dla grup z `psych::describeBy` {#sec-describeBy} -->
+
+<!-- Co jeśli chcielibyśmy policzyć statystyki opisowe w grupach? Niestety `psych` nie współpracuje z `group_by` (patrz [-@sec-summarise]), ale ma własną metodę grupowania danych. Służy temu funkcja `describeBy`. Przypomnijmy sobie tutaj bazę `df_scream` z podrozdziału [-@sec-summarise]. -->
+
+<!-- ```{r} -->
+
+<!-- head(df_scream) -->
+
+<!-- ``` -->
+
+<!-- Mamy dwa sposoby, żeby naszą bazę wrzucić do `describeBy`, z czego ja pokażę ten bardziej intuicyjny. Ma od postać tzw. formuły (*formula*), z którymi spotkamy się jeszcze przy okazji testów statystycznych ([-@sec-tests]), zwłaszcza w `rstatix` ([-@sec-rstatix]). Przy tej okazji omówimy sobie też głębiej działanie potoków. Najpierw jednak pokażę przykład formuły. Jeśli chcielibyśmy dostać statystyki opisowe dla liczby krzyków w zależności od tego, kto tę piosenkę napisał, skorzystalibyśmy z takiej formuły `screams ~ songwriter`. Ten znaczek pośrodku to tylda, używana też w funkcjach anonimowych z `purrr` ([-@sec-lambda]). Jeśli chcielibyśmy dołożyć też do tego podziału typ piosenki, użylibyśmy znaku `+` pisząc `screams ~ songwriter + song_type`. Jak mogłaby wyglądać taka funkcja? -->
+
+<!-- ```{r} -->
+
+<!-- df_scream %>% -->
+
+<!--     as.data.frame() %>% -->
+
+<!--     describeBy(screams ~ songwriter + song_type, data = .) -->
+
+<!-- ``` -->
+
+<!-- Wynikiem działania takiej funkcji jest lista (też nieużywany wcześniej typ danych). W tytule możemy zobaczyć autora i typ piosenki. Jeśli to jest jasne, wyjaśnijmy pozostałą część instrukcji. Po pierwsze znów spotykamy problem, że `describeBy` nie chce współpracować z `tibble`, więc musimy przekształcić naszą bazę na stary dobry format `data.frame`. Robimy to funkcją `as.data.frame`. Druga sprawa to `data = .`. Argument `data` to obowiązkowy argument, do którego wrzucamy naszą bazę danych. Dzięki temu R wie, gdzie ma szukać kolumn `screams`, `songwriter` i `song_type` z naszej formuły. Problem polega jednak na użyciu potoków. Standardowo potok `%>%` wrzuca rzeczy do pierwszego argumentu. Wiele funkcji, tak jak `describeBy`, nie przyjmuje bazy danych w pierwszym argumencie. Jak na złość `data` w `describeBy` to ostatni argument, więc najlepiej wprost go nazwać. Omawiany w podrozdziale [-@sec-rstatix] pakiet `rstatix` za pierwszy cel postawił sobie nawet przerobienie testów statystycznych tak, żeby lepiej współpracowały z potokami. Jak więc poradzić sobie w takiej sytuacji? Jedna opcja, to całkiem zrezygnować z potoków. -->
+
+<!-- ```{r} -->
+
+<!-- #| eval: false -->
+
+<!-- describeBy(screams ~ songwriter + song_type, data = as.data.frame(df_scream)) -->
+
+<!-- ``` -->
+
+<!-- W krótkich instrukcjach takie coś jest nawet czytelne. Warto pamiętać, że potoki nie są obowiązkowe, można równie dobrze zagnieżdżać funkcje. Cierpi na tym tylko czytelność kodu. Druga opcja, to wprost powiedzenie potokowi, gdzie ma wrzucić naszą bazę danych. Do tego właśnie służy `.`. Zapis `data = .` mówi potokowi „halo halo, proszę nie wrzucać bazy do pierwszego argumentu, tylko o tu, gdzie pokazałem(-am) kropką". Ostatecznie oba przykłady z tego podrozdziału są równoważne. -->
 
 ## Statystyki opisowe z `rstatix::get_summary_stats` {#statystyki-opisowe-z-rstatixget_summary_stats}
 
-Muszę się do czegoś przyznać. Przez lata wykorzystywałem `describe` i `describeBy` do statystyk opisowych, ale... są lepsze alternatywy. Chciałem jednak wykorzystać te funkcje jako praktyczny pretekst to pokazania różnic między `data.frame` i `tibble`, używania kropki z potokami i ogólnie jak sobie radzić, jak nowszych alternatyw nie ma. Jednak do liczenia statystyk opisowych takie alternatywy są. I przychodzą do nas z `rstatix`. Jest to świetny, nowoczesny pakiet, który szerzej omówimy w podrozdziale [-@sec-rstatix].
+<!-- Muszę się do czegoś przyznać. Przez lata wykorzystywałem `describe` i `describeBy` do statystyk opisowych, ale... są lepsze alternatywy. Chciałem jednak wykorzystać te funkcje jako praktyczny pretekst to pokazania różnic między `data.frame` i `tibble`, używania kropki z potokami i ogólnie jak sobie radzić, jak nowszych alternatyw nie ma. Jednak do liczenia statystyk opisowych takie alternatywy są. I przychodzą do nas z `rstatix`. Jest to świetny, nowoczesny pakiet, który szerzej omówimy w podrozdziale [-@sec-rstatix]. -->
 
-Do liczenia statystyk opisowych w `rstatix` wykorzystujemy funkcję `get_summary_stats`. Dobrze współpracuje ona z `tidyverse`, potokami i funkcją `group_by`. Ma też bardzo prostą składnię. Szczegóły i wyjaśnienia poszczególnych statystyk znajdują się w dokumentacji.
+Do liczenia statystyk opisowych w `rstatix` wykorzystujemy funkcję `get_summary_stats`. Dobrze współpracuje ona z `tidyverse`, potokami i funkcją `group_by`. Ma też bardzo prostą składnię. Jedyne, co musimy zrobić, to wrzucić do naszej funkcji naszą bazę danych, a otrzymamy rozległą tabelę ze statystykami opisowymi dla wszystkich zmiennych. Szczegóły, wyjaśnienia i ewentualne możliwości modyfikacji poszczególnych statystyk znajdują się w dokumentacji. Jeśli do podstawowych statystych chcielibyśmy doliczyć coś niestandardowego, zawsze możemy użyć `mutate`.
 
 ```{r}
 #| warning: false
 library("rstatix")
 
-# bez grupowania
 get_summary_stats(df)
+```
 
-# z grupowaniem
+Jeśli chcemy otrzymać statysyki opisowe dla zgrupowanych danych, czyli np. osobno dla każdego poziomu wykształcenia, wystarczy, że przed użyciem funkcji `get_summary_stats` zgrupujemy dane funkcją `group_by`. W chwili, kiedy to piszę, funkcje `rstatix` nie posiadają argumentu `.by`. Jako przykład wykorzystam bazę `df_scream` z podrozdziału [-@sec-summarise].
+
+```{r}
 df_scream %>%
     group_by(songwriter, song_type) %>%
     get_summary_stats()
@@ -1016,11 +1036,9 @@ ggplot(df_diamonds, aes(carat, price, colour = cut)) +
     scale_colour_discrete(labels = c("Zadowalający", "Dobry", "Bardzo dobry", "Premium", "Idealny"))
 ```
 
-## Wygląd wykresów {#sec-appearance}
+## Wygląd wykresów (`theme_*`) {#sec-theme}
 
 Wykres ma wszystkie elementy na miejscu, ale nie oszukujmy się, nie jest to dzieło sztuki. Żeby poprawić wygląd naszego wykresu, sięgniemy po dwa narzędzia. Po pierwsze ustalimy jego ogólny styl za pomocą jednego z motywów (*theme*), a potem poprawimy szczegóły z użyciem dodatku do RStudio `esquisse`.
-
-### Gotowe szablony (`theme_*`) {#sec-theme}
 
 Ogólny styl wykresu ustala się za pomocą elementów zaczynających się słówkiem `theme_`. `ggplot2` ma wbudowane osiem takich motywów, które można przejrzeć [tutaj](https://ggplot2.tidyverse.org/reference/ggtheme.html). W Internecie roi się jednak od niestandardowych motywów, które mogą zaczarować nasze wykresy. Kluczowym ich źródłem może być pakiet `ggthemes`, z motywy z którego można zobaczyć [tutaj](https://github.com/jrnold/ggthemes). Ja jednak chciałem pokazać dwa inne -- `theme_apa` z pakietu `papaja` i `theme_Publication` z repozytorium na GitHubie [koundy/ggplot_theme_Publication](https://github.com/koundy/ggplot_theme_Publication).
 
@@ -1069,9 +1087,11 @@ ggplot(df_diamonds, aes(carat, price, colour = cut)) +
 
 Wykres w takiej formie można już uznać za zadowalający. Ale co jeśli chcemy poprawić jakieś szczegóły? Na przykład dostosować kolory? Są na to odpowiednie funkcje, ale jeśli mam być szczery, jest ich na tyle dużo, a w tutorialach tak bardzo przeplatają się stare i nowe metody, że bez gruntownego wyszkolenia (którego na przykład ja nie posiadam) bardzo łatwo jest się zgubić i bez zrozumienia kopiować kod znaleziony w Internecie. Na szczęście istnieje pewne narzędzie, które może nam w tej sytuacji pomóc. Nazywa się `esquisse` i jest dodatkiem do RStudio.
 
-Instalujemy `esquisse` jak każdy inny pakiet (`install.packages("esquisse")`). Po zainstalowaniu, jeśli jest taka potrzeba, można spróbować zmienić język na polski komendą `set_i18n("pl")`. Będzie to jednak możliwe dopiero, gdy autorzy zaakceptują [polskie tłumaczenie](https://github.com/dreamRs/esquisse/pull/248) do swojego repozytorium. Po zainstalowaniu pakietu, w menu Addins na górnej belce powinniśmy uzyskać dostęp do opcji *ggplot2 builder*[^podstawy_r-28], które jest narzędziem do interaktywnego konstruowania wykresów. Pozwala na stworzenie kodu w wygodnym, graficznym interfejsie. Po wygenerowaniu możemy skopiować gotowy kod do skryptu.
+Instalujemy `esquisse` jak każdy inny pakiet (`install.packages("esquisse")`). Po zainstalowaniu, jeśli jest taka potrzeba, można spróbować zmienić język na polski komendą `set_i18n("pl")`[^podstawy_r-28]. Po zainstalowaniu pakietu, w menu Addins na górnej belce powinniśmy uzyskać dostęp do opcji *ggplot2 builder*[^podstawy_r-29], które jest narzędziem do interaktywnego konstruowania wykresów. Pozwala na stworzenie kodu w wygodnym, graficznym interfejsie. Po wygenerowaniu możemy skopiować gotowy kod do skryptu.
 
-[^podstawy_r-28]: Narzędzie można wywołać też komendą `esquisse::esquisser().`
+[^podstawy_r-28]: Piszę „spróbować", bo gdy to piszę polskie tłumaczenie znajduje się w wersji rozwojowej. Wersje stabilne pakietów znajdują się w CRAN i to one się pobierają, gdy piszemy komendę `install.packages()`. Jednak wiele pakietów ma też swoje wersje rozwojowe, które szybciej dostają nowe funkcje, ale bywają niestabilne. Można je pobrać poleceniem `install_github` z pakietu `devtools`, do którego wrzucamy nazwę repozytorium. Na przykład wersję rozwojową `esquisse` można zainstalować komendą `devtools::install_github("dreamRs/esquisse")`. Takie pakiety można potem aktualizować komendą `devtools::update_packages()`.
+
+[^podstawy_r-29]: Narzędzie można wywołać też komendą `esquisse::esquisser()`.
 
 ```{r}
 ggplot(df_diamonds) +
@@ -1124,13 +1144,48 @@ ggplot(df_diamonds) +
         )
     )
 ```
-Wykresy to olbrzymi temat, który tutaj tylko liznęliśmy z wierzchu. Sądzę jednak, że ta wiedza wystarczy, żeby – z pomocą dokumentacji i Google – być w stanie powoli rozbudowywać swoje umiejętności z zakresu `ggplot2`.
+
+Wykresy to olbrzymi temat, który tutaj tylko liznęliśmy z wierzchu. Sądzę jednak, że ta wiedza wystarczy, żeby -- z pomocą dokumentacji i Google -- być w stanie powoli rozbudowywać swoje umiejętności z zakresu `ggplot2`.
+
+# Modele statystyczne {#sec-tests}
+
+Największą trudnością nie jest tworzenie modeli statystycznych, tylko wiedza kiedy zrobić jaki test i jak je interpretować. Stąd też nie będę się tutaj rozwodził nad samymi testami, a omówię raczej ogólną specyfikę wykonywania testów statystycznych w R i ich wyświetlania. Szczegóły co do tego, jak wykonywać konkretne testy, znajdują się w dokumentacji funkcji, zaś informacje jakimi funkcjami robić jakie testy są w innych miejscach, z których kilka polecę.
+
+Modele statystyczne w R można ogólnie podzielić na te, które wykonuje się wprowadzając formuły i na te, w których wskazuje się kolumny. Fundamentalnym przykładem pierwszego typu jest funkcja do wykonywania regresji liniowej `lm`. Drugi typ omówię w podrozdziale [-@sec-rstatix].
+
+Funkcja `lm` to prototyp modeli regresyjnych. W identyczny sposób wykonujemy w R inne podstawowe modele takie jak ANOVA (`aov`). W sposób bardzo podobny wykonujemy w `rstatix` test t, więc nie tylko w regresji używamy formuł. Także co to jest ta formuła? To szczególny typ wskazywania kolumn z użyciem znaku `~` (tylda). Jeśli chcielibyśmy wykonać regresję, w której sprawdzalibyśmy związek długości płatków irysa długością i szerokością jego działek kielicha (słynna baza danych `iris`, dostępna automatycznie w R), zrobilibyśmy coś takiego:
+
+```{r}
+# zerkamy w bazę
+glimpse(iris)
+
+# tworzymy model
+lm_price <- iris %>%
+    lm(Petal.Length ~ Sepal.Length + Sepal.Width, data = .)
+
+# próbujemy wyświetlić
+lm_price
+```
+
+Obiekty tego typu zawsze potrzebują otrzymać argument `data`. Dlaczego jednak zapisałem `data = .`? Problem polega na użyciu potoków. Standardowo potok `%>%` wrzuca rzeczy do pierwszego argumentu. Wiele funkcji, tak jak `lm`, nie przyjmuje bazy danych w pierwszym argumencie. Często nawet nie w drugim, więc najlepiej wprost go nazwać. Omawiany w podrozdziale [-@sec-rstatix] pakiet `rstatix` za pierwszy cel postawił sobie nawet przerobienie testów statystycznych tak, żeby lepiej współpracowały z potokami. Jak więc poradzić sobie w takiej sytuacji? Jedna opcja, to całkiem zrezygnować z potoków i zapisać `data = iris`. Tak też jest dobrze, ale co jeśli potrzebujemy użyć potoku? Na przykład przed stworzeniem modelu wykonujemy serię przekształceń danych? Warto pamiętać, że potoki nie są obowiązkowe, można równie dobrze zagnieżdżać funkcje, Cierpi na tym tylko czytelność kodu. Druga opcja, to wprost powiedzenie potokowi, gdzie ma wrzucić naszą bazę danych. Do tego właśnie służy `.`. Zapis `data = .` mówi potokowi „halo halo, proszę nie wrzucać bazy do pierwszego argumentu, tylko o tu, gdzie pokazałem(-am) kropką".
+
+W powyższym przykładzie widać też, że `lm`, i podobnie wiele innych obiektów modeli, nie daje nam domyślnie sensownego podsumowania modelu. Wiele modeli wymaga od nas, byśmy wrzucili je do funkcji `summary` (nie mylić z `summarise`) żeby powiedziały nam coś sensownego.
+
+```{r}
+summary(lm_price)
+```
+
+Ten widok już jest możliwy do zinterpretowania. Jeśli wiemy co nieco o regresjach, możemy z niego odczytać, że oba predyktory są istotne statystycznie, podobnie jak statystyka *F*, a także że wyjaśniliśmy 87% wariancji. Nie jest to jednak najlepszy format wyświetlania wyników.
 
 > Pozostała część już wkrótce.
 
-# Testy statystyczne {#sec-tests}
-
 ## Czyste wyniki, czyli pakiet `broom` {#sec-broom}
+
+### `glance` {#tidy}
+
+### `tidy` {#glance}
+
+### `augment` {#augment}
 
 ## Swiss Army Knife w R, czyli `rstatix` {#sec-rstatix}
 
