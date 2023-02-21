@@ -233,7 +233,7 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../statystyka/podstawy_R.html" class="sidebar-item-text sidebar-link active">| label: setup</a>
+  <a href="../statystyka/podstawy_R.html" class="sidebar-item-text sidebar-link active">Podstawy programowania w R</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -299,7 +299,7 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#statystyki-opisowe-z-rstatixget_summary_stats" id="toc-statystyki-opisowe-z-rstatixget_summary_stats" class="nav-link" data-scroll-target="#statystyki-opisowe-z-rstatixget_summary_stats"><span class="toc-section-number">7.1</span>  Statystyki opisowe z <code>rstatix::get_summary_stats</code></a></li>
   <li><a href="#tabele-liczności-z-rstatixfreq_table" id="toc-tabele-liczności-z-rstatixfreq_table" class="nav-link" data-scroll-target="#tabele-liczności-z-rstatixfreq_table"><span class="toc-section-number">7.2</span>  Tabele liczności z <code>rstatix::freq_table</code></a></li>
-  <li><a href="#macierze-korelacji-i-ich-istotność-z-rstatixcor_mat" id="toc-macierze-korelacji-i-ich-istotność-z-rstatixcor_mat" class="nav-link" data-scroll-target="#macierze-korelacji-i-ich-istotność-z-rstatixcor_mat"><span class="toc-section-number">7.3</span>  Macierze korelacji i ich istotność z <code>rstatix::cor_mat</code></a></li>
+  <li><a href="#sec-cor_mat" id="toc-sec-cor_mat" class="nav-link" data-scroll-target="#sec-cor_mat"><span class="toc-section-number">7.3</span>  Macierze korelacji i ich istotność z <code>rstatix::cor_mat</code></a></li>
   </ul></li>
   <li><a href="#sec-ggplot" id="toc-sec-ggplot" class="nav-link" data-scroll-target="#sec-ggplot"><span class="toc-section-number">8</span>  Wykresy z <code>ggplot2</code></a>
   <ul class="collapse">
@@ -321,8 +321,8 @@ div.csl-indent {
   </ul></li>
   <li><a href="#sec-formatting" id="toc-sec-formatting" class="nav-link" data-scroll-target="#sec-formatting"><span class="toc-section-number">10</span>  Formatowanie kodu</a>
   <ul class="collapse">
-  <li><a href="#lintr" id="toc-lintr" class="nav-link" data-scroll-target="#lintr"><span class="toc-section-number">10.1</span>  <code>lintr</code></a></li>
-  <li><a href="#styler" id="toc-styler" class="nav-link" data-scroll-target="#styler"><span class="toc-section-number">10.2</span>  <code>styler</code></a></li>
+  <li><a href="#styler" id="toc-styler" class="nav-link" data-scroll-target="#styler"><span class="toc-section-number">10.1</span>  <code>styler</code></a></li>
+  <li><a href="#lintr" id="toc-lintr" class="nav-link" data-scroll-target="#lintr"><span class="toc-section-number">10.2</span>  <code>lintr</code></a></li>
   </ul></li>
   <li><a href="#sec-ending" id="toc-sec-ending" class="nav-link" data-scroll-target="#sec-ending"><span class="toc-section-number">11</span>  Posłowie</a></li>
   <li><a href="#sec-bibliography" id="toc-sec-bibliography" class="nav-link" data-scroll-target="#sec-bibliography"><span class="toc-section-number">12</span>  Bibliografia</a></li>
@@ -337,7 +337,7 @@ div.csl-indent {
 <section id="podstawy-programowania-w-r" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Podstawy programowania w R</h1>
 <p>W kilku miejscach w dalszej części wrzucam informacje, jak daną rzecz omawianą teoretycznie można zrobić w R. <strong>Absolutnie nie jest to konieczne do zrozumienia statystyki!</strong> Jest to tylko jedna z możliwości, jak można opisaną dalej teorię przekuć w praktykę. O R można myśleć jako o programie do robienia statystyki. Podobnie jak SPSS, Statistica, Stata czy (oparte na R, darmowe i otwartoźródłowe) jamovi. Jeśli jednak Czytelnik widział kiedyś program statystyczny, spodziewać się będzie ekranu podobnego do Excela, gdzie na górnej belce wybiera się testy statystyczne, jakie chce się przeprowadzić. Praca w R tak nie wygląda. Największa wada i zaleta R polega na tym, że jest on jednocześnie językiem programowania. A to daje bardzo ciekawe możliwości, o których niżej. Także praca w R wygląda tak, że w specjalnym języku piszemy komputerowi, co ma zrobić, potem uruchamiamy te instrukcje i gotowe.</p>
-<p>W tym miejscu spróbuję krótko opisać, jak zacząć pracę z R. Nie mam ambicji zrobić pełnego wprowadzenia, bo wyszedłby z tego osobny podręcznik. Mam ambicje dać jakikolwiek zarys fundamentu, który pozwoli Czytelnikowi wyczyścić mało brudne dane i zrobić proste testy. Jeśli ktoś po przeczytaniu tego stwierdzi „Może warto się zagłębić”, to znajdzie mnóstwo materiałów, które mu na to pozwolą. Ze swojej strony mogę polecić podręcznik „Język R. Kompletny zestaw narzędzi dla analityków danych” Wickhama i Grolemunda, interaktywne kursy na DataCamp, a pomocy w rozwiązaniu konkretnych problemów zawsze można szukać na StackOverflow.</p>
+<p>W tym miejscu spróbuję krótko opisać, jak zacząć pracę z R. Nie mam ambicji zrobić pełnego wprowadzenia, bo wyszedłby z tego osobny podręcznik. Mam ambicje dać jakikolwiek zarys fundamentu, który pozwoli Czytelnikowi wyczyścić mało brudne dane i zrobić proste testy. Jeśli ktoś po przeczytaniu tego stwierdzi „Może warto się zagłębić”, to znajdzie mnóstwo materiałów, które mu na to pozwolą. Ze swojej strony mogę polecić podręcznik „Język R. Kompletny zestaw narzędzi dla analityków danych" Wickhama i Grolemunda <span class="citation" data-cites="wickham2020">(<a href="#ref-wickham2020" role="doc-biblioref"><strong>wickham2020?</strong></a>)</span>, interaktywne kursy na DataCamp, a pomocy w rozwiązaniu konkretnych problemów zawsze można szukać na StackOverflow.</p>
 </section>
 <section id="sec-reasons" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> 10 powodów dla których warto uczyć się R</h1>
@@ -685,8 +685,8 @@ div.csl-indent {
 <table class="table">
 <caption>Funkcje pomocnicze do <code>select</code> i <code>across</code>.</caption>
 <colgroup>
-<col style="width: 26%">
-<col style="width: 73%">
+<col style="width: 33%">
+<col style="width: 66%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -759,7 +759,7 @@ div.csl-indent {
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_5 =</span> <span class="dv">7</span> <span class="sc">-</span> H_5</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_5 =</span> <span class="dv">7</span> <span class="sc">-</span> H_5,</span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_7 =</span> <span class="dv">7</span> <span class="sc">-</span> H_7</span>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1358,8 +1358,8 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="macierze-korelacji-i-ich-istotność-z-rstatixcor_mat" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="macierze-korelacji-i-ich-istotność-z-rstatixcor_mat"><span class="header-section-number">7.3</span> Macierze korelacji i ich istotność z <code>rstatix::cor_mat</code></h2>
+<section id="sec-cor_mat" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="sec-cor_mat"><span class="header-section-number">7.3</span> Macierze korelacji i ich istotność z <code>rstatix::cor_mat</code></h2>
 <p>W ramach eksploracji chcemy czasami zrobić macierz korelacji całego naszego zestawu danych. Może nam do tego posłużyć funkcja <code>cor_mat</code> z pakietu <code>rstatix</code>. Zobaczmy to na przykładzie bazy <code>db_joined</code> z podrozdziału <a href="#sec-join">6.9</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>(korelacje <span class="ot">&lt;-</span> <span class="fu">cor_mat</span>(db_joined, <span class="sc">-</span>ID))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1701,9 +1701,6 @@ div.csl-indent {
 </div>
 </div>
 <p>Ten widok już jest możliwy do zinterpretowania. Jeśli wiemy co nieco o regresjach, możemy z niego odczytać, że oba predyktory są istotne statystycznie, podobnie jak statystyka <span class="math inline">\(F\)</span>, a także że wyjaśniliśmy 87% wariancji. Nie jest to jednak najlepszy format wyświetlania wyników.</p>
-<blockquote class="blockquote">
-<p>Pozostała część już wkrótce.</p>
-</blockquote>
 <section id="sec-broom" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="sec-broom"><span class="header-section-number">9.1</span> Czyste wyniki, czyli pakiet <code>broom</code></h2>
 <p>Dlaczego nie jest to dobry format? Bo jest niejednolity i chaotyczny. Nie tylko w widocznej postaci, ale też pod maską, co przeszkadza nam, kiedy chcemy wejść głębiej z programowaniem albo pisać automatyczne raporty. Niestandardowe wykresy również mogą być problemem. Odpowiedzią na te problemy stał się pakiet <code>broom</code>, który należy do świata <code>tidyverse</code>, ale nie jest ładowany z pakietem <code>tidyverse</code>, więc trzeba załadować go ręcznie. Rdzeniem tego pakietu jest specjalny słownik, standard tworzenia modeli, w którym kolumny zawierające określone informacje muszą nazywać się w określony sposób. Kolumny, bo wyczyszczony model ma zawsze postać <code>tibble</code>. Dla przykładu kolumna z wartością <span class="math inline">\(p\)</span> zawsze musi nazywać się <code>p.value</code>, a kolumna z wartością statystyki <code>estimate</code>. Wymusza to spójność i zapewnia przewidywalność obiektów zawierających modele. Wiele współczesnych pakietów do modelowania od razu dostosowuje swoje modele do wymogów czystych danych.</p>
@@ -1772,19 +1769,171 @@ div.csl-indent {
 </section>
 <section id="sec-rstatix" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="sec-rstatix"><span class="header-section-number">9.2</span> Swiss Army Knife w R, czyli <code>rstatix</code></h2>
+<p>Niezwykłe możliwości i giętkość pakietu <code>rstatix</code> były już w tym tekście wychwalane i pokazywane. Tutaj jednak chciałbym powiedzieć o głównej zawartości <code>rstatix</code> czy funkcjach wykonujących testy statystyczne.</p>
+<p>R posiada dużą bibliotekę domyślnych funkcji do testów statystycznych, takich jak <code>t.test</code> czy <code>cor.test</code>. I one liczą dobrze, ale w wielu przypadkach są niewygodne. Nie ma się co dziwić, to są stare funkcje, swoją historią sięgające roku 2000, czyli początków R. Nie było wtedy <code>dplyr</code>, RStudio, potoków i całego dobrodziejstwa, które sprawia, że współczesny kod R średnio przypomina klasyczny kod, którego tu nie omawiam, ale który ciągle działa i buduje fundamenty tego języka. Dlatego właśnie wyniki tych testów są niewystandaryzowane, wymagają one niewygodnego wskazywania kolumn jako wektorów[^podstawy_r-30] i mają argument <code>data</code> na drugim miejscu, przez co potoki zawsze wymagają, by używać z nimi kropki.</p>
+<p><code>rstatix</code> jest odpowiedzią na te problemy. Poza tym, że dodaje mnóstwo przyjaznych funkcji od siebie, to uwspółcześnia stare funkcje, naprawiając w nich wszystko, co złe, m.in. poprawiając pracę z potokami. Dodatkowo wykorzystuje sprytną nomenklaturę, która ułatwia uczenie się – jeśli w klasycznym R funkcja nazywa się <code>t.test</code>, to w <code>rstatix</code> nazywa się <code>t_test</code>, <code>cor.test</code> zmienia się w <code>cor_test</code> i tak dalej. Jest to zgodne z ogólnym trendem <code>tidyverse</code>, żeby te nowe, współczesne funkcje zawsze były pisane snake_case (więcej o formatowaniu kodu w podrozdziale <a href="#sec-formatting">10</a>). Większość funkcji pozwala też na wykonywanie wielu testów jednocześnie i radzi sobie ze zgrupowanymi danymi.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test korelacji Pearsona</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor_test</span>(diamonds, price, carat)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 1 × 8</span>
+<span style="color: #555555;">#&gt;</span>   <span style="font-weight: bold;">var1</span>  <span style="font-weight: bold;">var2</span>    <span style="font-weight: bold;">cor</span> <span style="font-weight: bold;">statistic</span>     <span style="font-weight: bold;">p</span> <span style="font-weight: bold;">conf.low</span> <span style="font-weight: bold;">conf.high</span> <span style="font-weight: bold;">method</span> 
+<span style="color: #555555;">#&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>  
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">1</span> price carat  <span style="color: #555555;">0.</span>92      551.     <span style="color: #555555;">0</span>    <span style="color: #555555;">0.</span>920     <span style="color: #555555;">0.</span>923 Pearson
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Test t-Studenta</span></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t_test</span>(df_scream, screams <span class="sc">~</span> songwriter)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 1 × 8</span>
+<span style="color: #555555;">#&gt;</span>   <span style="font-weight: bold;">.y.</span>     <span style="font-weight: bold;">group1</span> <span style="font-weight: bold;">group2</span>     <span style="font-weight: bold;">n1</span>    <span style="font-weight: bold;">n2</span> <span style="font-weight: bold;">statistic</span>    <span style="font-weight: bold;">df</span>      <span style="font-weight: bold;">p</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">*</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;int&gt;</span> <span style="color: #555555; font-style: italic;">&lt;int&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">1</span> screams Andy   Malcolm    34    34      2.70  62.2 <span style="color: #555555;">0.00</span>8<span style="text-decoration: underline;">9</span>
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Test korelacji na zgrupowanych danych</span></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cor_test</span>(Sepal.Length, Sepal.Width)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 3 × 9</span>
+<span style="color: #555555;">#&gt;</span>   <span style="font-weight: bold;">Species</span>    <span style="font-weight: bold;">var1</span>         <span style="font-weight: bold;">var2</span>       <span style="font-weight: bold;">cor</span> <span style="font-weight: bold;">stati…¹</span>        <span style="font-weight: bold;">p</span> <span style="font-weight: bold;">conf.…²</span> <span style="font-weight: bold;">conf.…³</span> <span style="font-weight: bold;">method</span>
+<span style="color: #555555;">#&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> 
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">1</span> setosa     Sepal.Length Sepal.W…  <span style="color: #555555;">0.</span>74    7.68 6.71<span style="color: #555555;">e</span><span style="color: #BB0000;">-10</span>   <span style="color: #555555;">0.</span>585   <span style="color: #555555;">0.</span>846 Pears…
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">2</span> versicolor Sepal.Length Sepal.W…  <span style="color: #555555;">0.</span>53    4.28 8.77<span style="color: #555555;">e</span><span style="color: #BB0000;">- 5</span>   <span style="color: #555555;">0.</span>290   <span style="color: #555555;">0.</span>702 Pears…
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">3</span> virginica  Sepal.Length Sepal.W…  <span style="color: #555555;">0.</span>46    3.56 8.43<span style="color: #555555;">e</span><span style="color: #BB0000;">- 4</span>   <span style="color: #555555;">0.</span>205   <span style="color: #555555;">0.</span>653 Pears…
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># … with abbreviated variable names ¹​statistic, ²​conf.low, ³​conf.high</span>
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA</span></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_test</span>(diamonds, price <span class="sc">~</span> cut <span class="sc">+</span> color <span class="sc">+</span> clarity)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> ANOVA Table (type II tests)
+<span style="color: #555555;">#&gt;</span> 
+<span style="color: #555555;">#&gt;</span>    Effect DFn   DFd       F         p p&lt;.05   ges
+<span style="color: #555555;">#&gt;</span> 1     cut   4 53922  93.715  1.42e-79     * 0.007
+<span style="color: #555555;">#&gt;</span> 2   color   6 53922 298.044  0.00e+00     * 0.032
+<span style="color: #555555;">#&gt;</span> 3 clarity   7 53922 192.094 1.30e-282     * 0.024
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Testy post-hoc</span></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tukey_hsd</span>(diamonds, price <span class="sc">~</span> cut <span class="sc">+</span> color <span class="sc">+</span> clarity)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 59 × 9</span>
+<span style="color: #555555;">#&gt;</span>    <span style="font-weight: bold;">term</span>  <span style="font-weight: bold;">group1</span>    <span style="font-weight: bold;">group2</span>    <span style="font-weight: bold;">null.value</span> <span style="font-weight: bold;">estim…¹</span> <span style="font-weight: bold;">conf.…²</span> <span style="font-weight: bold;">conf.…³</span>    <span style="font-weight: bold;">p.adj</span> <span style="font-weight: bold;">p.adj…⁴</span>
+<span style="color: #555555;">#&gt;</span>  <span style="color: #555555;">*</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>  
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 1</span> cut   Fair      Good               <span style="color: #555555;">0</span>  -<span style="color: #BB0000;">430.</span>   -<span style="color: #BB0000;">732.</span>   -<span style="color: #BB0000;">128.</span>  9.86<span style="color: #555555;">e</span><span style="color: #BB0000;">- 4</span> ***    
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 2</span> cut   Fair      Very Good          <span style="color: #555555;">0</span>  -<span style="color: #BB0000;">377.</span>   -<span style="color: #BB0000;">656.</span>    -<span style="color: #BB0000;">97.9</span> 2.13<span style="color: #555555;">e</span><span style="color: #BB0000;">- 3</span> **     
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 3</span> cut   Fair      Premium            <span style="color: #555555;">0</span>   225.    -<span style="color: #BB0000;">51.5</span>   503.  1.72<span style="color: #555555;">e</span><span style="color: #BB0000;">- 1</span> ns     
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 4</span> cut   Fair      Ideal              <span style="color: #555555;">0</span>  -<span style="color: #BB0000;">901.</span>  -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">17</span><span style="color: #555555;">3</span><span style="color: #BB0000;">.</span>   -<span style="color: #BB0000;">629.</span>  6.68<span style="color: #555555;">e</span><span style="color: #BB0000;">-14</span> ****   
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 5</span> cut   Good      Very Good          <span style="color: #555555;">0</span>    52.9  -<span style="color: #BB0000;">125.</span>    231.  9.28<span style="color: #555555;">e</span><span style="color: #BB0000;">- 1</span> ns     
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 6</span> cut   Good      Premium            <span style="color: #555555;">0</span>   655.    481.    830.  4.22<span style="color: #555555;">e</span><span style="color: #BB0000;">-14</span> ****   
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 7</span> cut   Good      Ideal              <span style="color: #555555;">0</span>  -<span style="color: #BB0000;">471.</span>   -<span style="color: #BB0000;">638.</span>   -<span style="color: #BB0000;">305.</span>  1.4 <span style="color: #555555;">e</span><span style="color: #BB0000;">-13</span> ****   
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 8</span> cut   Very Good Premium            <span style="color: #555555;">0</span>   602.    471.    734.  <span style="color: #555555;">0</span>   <span style="color: #555555;"> </span>    ****   
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 9</span> cut   Very Good Ideal              <span style="color: #555555;">0</span>  -<span style="color: #BB0000;">524.</span>   -<span style="color: #BB0000;">644.</span>   -<span style="color: #BB0000;">405.</span>  <span style="color: #555555;">0</span>   <span style="color: #555555;"> </span>    ****   
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">10</span> cut   Premium   Ideal              <span style="color: #555555;">0</span> -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">12</span><span style="color: #555555;">7</span><span style="color: #BB0000;">.</span>  -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">24</span><span style="color: #555555;">1</span><span style="color: #BB0000;">.</span>  -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">01</span><span style="color: #555555;">2</span><span style="color: #BB0000;">.</span>  <span style="color: #555555;">0</span>   <span style="color: #555555;"> </span>    ****   
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># … with 49 more rows, and abbreviated variable names ¹​estimate, ²​conf.low,</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   ³​conf.high, ⁴​p.adj.signif</span>
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Wielkość efektu d Cohena</span></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cohens_d</span>(df_scream, screams <span class="sc">~</span> songwriter)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 1 × 7</span>
+<span style="color: #555555;">#&gt;</span>   <span style="font-weight: bold;">.y.</span>     <span style="font-weight: bold;">group1</span> <span style="font-weight: bold;">group2</span>  <span style="font-weight: bold;">effsize</span>    <span style="font-weight: bold;">n1</span>    <span style="font-weight: bold;">n2</span> <span style="font-weight: bold;">magnitude</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">*</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;int&gt;</span> <span style="color: #555555; font-style: italic;">&lt;int&gt;</span> <span style="color: #555555; font-style: italic;">&lt;ord&gt;</span>    
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">1</span> screams Andy   Malcolm   <span style="color: #555555;">0.</span>655    34    34 moderate
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="co"># wielkość efektu eta^2</span></span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aov</span>(price <span class="sc">~</span> cut <span class="sc">+</span> color <span class="sc">+</span> clarity, .) <span class="sc">%&gt;%</span></span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eta_squared</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span>        cut      color    clarity 
+<span style="color: #555555;">#&gt;</span> 0.01286207 0.02971211 0.02329457
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+</div>
+<p>Dodatkowo <code>rstatix</code> dostarcza nam wygodą funkcję <code>add_significance</code>, która do obiektu z modelem zgodnym z <code>broom</code> dodaje kolumnę z gwiazdkami istotności wartości <span class="math inline">\(p\)</span>. Domyślne ustawienia są takie same jak dla funkcji <code>cor_mark_significance</code><a href="#fn30" class="footnote-ref" id="fnref30" role="doc-noteref"><sup>30</sup></a> i również można je modyfikować (por. <a href="#sec-cor_mat">7.3</a>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>lm_price <span class="sc">%&gt;%</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_significance</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 3 × 6</span>
+<span style="color: #555555;">#&gt;</span>   <span style="font-weight: bold;">term</span>         <span style="font-weight: bold;">estimate</span> <span style="font-weight: bold;">std.error</span> <span style="font-weight: bold;">statistic</span>  <span style="font-weight: bold;">p.value</span> <span style="font-weight: bold;">p.value.signif</span>
+<span style="color: #555555;">#&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>         
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">1</span> (Intercept)     -<span style="color: #BB0000;">2.52</span>    <span style="color: #555555;">0.</span>563      -<span style="color: #BB0000;">4.48</span> 1.48<span style="color: #555555;">e</span><span style="color: #BB0000;">- 5</span> ****          
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">2</span> Sepal.Length     1.78    <span style="color: #555555;">0.0</span>64<span style="text-decoration: underline;">4</span>     27.6  5.85<span style="color: #555555;">e</span><span style="color: #BB0000;">-60</span> ****          
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">3</span> Sepal.Width     -<span style="color: #BB0000;">1.34</span>    <span style="color: #555555;">0.</span>122     -<span style="color: #BB0000;">10.9</span>  9.43<span style="color: #555555;">e</span><span style="color: #BB0000;">-21</span> ****
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+</div>
+<p>Nie są to wszystkie funkcje, które oferuje <code>rstatix</code> i zachęcam do zerknięcia do <a href="https://github.com/kassambara/rstatix">repozytorium <code>rstatix</code> na GitHubie</a>, gdzie autor umieścił długą listę funkcji ze streszczeniem ich działania.</p>
 </section>
 </section>
 <section id="sec-formatting" class="level1" data-number="10">
 <h1 data-number="10"><span class="header-section-number">10</span> Formatowanie kodu</h1>
-<section id="lintr" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="lintr"><span class="header-section-number">10.1</span> <code>lintr</code></h2>
+<p>Ostatnia rzecz, którą chciałbym napisać w tym tekście, dotyczy formatowania kodu. Powiedzmy sobie szczerze – czytanie kodu jest trudne, choć <code>tidyverse</code> już i tak to mocno ułatwia. Gdy piszemy kod, powinniśmy mieć w głowie, że ktoś go kiedyś będzie czytał, gdzie tym ktosiem możemy być nawet przyszli my. Budzi to potrzebę, żeby kod wyglądał dobrze, przestrzegał pewnych standardów, aby był zrozumiały i spójny. Poza tym istnieje seria dobrych praktyk, które zwiększają czytelność kodu. Kod jest giętki przyjmie wiele rzeczy i nawet brzydki będzie działał. Dla przykładu, jeśli tam, gdzie powinno być <code>TRUE</code> napiszemy <code>1</code>, to kod i tak zadziała, bo głęboko pod maską <code>TRUE</code> to takie fancy <code>1</code>, ale nie powinniśmy tego robić. Jest to szczególnie ważne, kiedy piszemy kod z kimś. Jeśli nie mamy jednolitych standardów, chociażby wewnętrznych, to nagle może się okazać, że kod działa, ale potrafi być niespójny nawet w obrębie pojedynczego pliku.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>(<span class="fu">rep</span>(<span class="fu">round</span>(<span class="fu">runif</span>(<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">10</span>),<span class="dv">0</span>),<span class="at">times=</span><span class="dv">2</span>,<span class="at">each=</span><span class="dv">3</span>)<span class="ot">-&gt;</span>My.own_NUMBERS)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span>  [1] 4 4 4 8 8 8 5 5 5 9 9 9 9 9 9 4 4 4 8 8 8 5 5 5 9 9 9 9 9 9
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+</div>
+<p>Powyższy kod działa, czyli spełnia swoją funkcję, ale wygląda paskudnie. Sprawia to, że jeśli się nie wie, co ten kod robi, to jest to ciężko rozszyfrować. Jednak wszystko staje się prostsze, jeśli napiszemy go w sposób czystszy.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>(my_own_numbers <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">5</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="co"># wylosuj 5 liczb między 1 a 10</span></span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">0</span>) <span class="sc">%&gt;%</span> <span class="co"># zaokrąglij do całości</span></span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="at">times =</span> <span class="dv">2</span>, <span class="at">each =</span> <span class="dv">3</span>)) <span class="co"># każdą powtórz 3 razy, a całość 2 razy</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span>  [1] 4 4 4 8 8 8 5 5 5 9 9 9 9 9 9 4 4 4 8 8 8 5 5 5 9 9 9 9 9 9
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+</div>
+<p>Kod ten od razu jest czytelniejszy, milszy dla oka, mimo że efekt jego działania jest identyczny. Sądzę, że łatwiej jest od razu nasiąkać dobrymi praktykami i standardami, od samego początku nauki, niż potem rugować złe przyzwyczajenia. A skąd mamy wiedzieć, jakie to są „dobre praktyki”? Cóż, standardy wewnętrzne to jedna sprawa, ale takie standardy trzeba ustalać w każdym zespole od nowa. Na szczęście istnieje pewna baza, fundament, standard który – według mnie – powinna znać każda osoba programująca w R, czyli standard <code>tidyverse</code>. Jeśli znamy te standardy, możemy je potraktować jako bazę dla standardów wewnętrznych. Nie umówiliśmy się, jak powinien wyglądać ten kod? To napiszę zgodnie ze standardem. Jeśli z powodu osobistej preferencji odchodzimy od standardów, robimy to wtedy świadomie. Poradnik formatowania kodu zgodnie z <code>tidyverse</code> znajdziemy <a href="https://style.tidyverse.org">tutaj</a>.</p>
+<p>Pamiętanie o wszystkich standardach podczas pisania kodu jest trudne, zwłaszcza na początku. Na szczęście mamy narzędzia, które nam w tym pomogą.</p>
+<section id="styler" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="styler"><span class="header-section-number">10.1</span> <code>styler</code></h2>
+<p>Pierwszy z tych narzędzi to <code>styler</code>, który sam poprawia wiele aspektów kodu, w tym wiele oczywistych błędów. Instalujemy go jak każdy inny pakiet (<code>install.packages("styler")</code>). Po zainstalowaniu menu Addins wzbogaca się o kilka opcji, z których najważniejsza to <em>style active file</em><a href="#fn31" class="footnote-ref" id="fnref31" role="doc-noteref"><sup>31</sup></a>. Podczas pracy uruchamiam to co jakiś czas i zazwyczaj znajdują się jakieś przeoczenia.</p>
 </section>
-<section id="styler" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="styler"><span class="header-section-number">10.2</span> <code>styler</code></h2>
+<section id="lintr" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="lintr"><span class="header-section-number">10.2</span> <code>lintr</code></h2>
+<p><code>styler</code> nie poprawia wszystkich błędów, bo byłoby to zbyt destrukcyjne. Na szczęście <code>lintr</code> może nam je wszystkie wypomnieć. Dla każdego naszego projektu powinniśmy raz uruchomić komendę <code>lintr::use_lintr(type = "tidyverse")</code>. Spowoduje to wytworzenie w folderze pliku <code>.lintr</code>. Zawiera on konfigurację <code>lintr</code> dla danego projektu. Za jego pomocą będziemy mogli tę konfigurację również zmieniać.</p>
+<p>Zmiana dokonuje się przez wpisanie do pliku <code>.lintr</code><a href="#fn32" class="footnote-ref" id="fnref32" role="doc-noteref"><sup>32</sup></a> odpowiednich opcji. Szczegóły omawia dokumentacja (<code>vignette("lintr")</code>), ale na pewno chciałbym wskazać jedną, której zmiana jest wręcz konieczna. Domyślnie <code>lintr</code> uznaje za za długie linie linie powyżej 80 znaków. To jest strasznie mało! Ja zazwyczaj ustawiam ten limit to na 120-150 znaków. Domyślna zawartość pliku <code>.lintr</code> wygląda tak:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>linters<span class="sc">:</span> <span class="fu">linters_with_defaults</span>()</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>encoding<span class="sc">:</span> <span class="st">"UTF-8"</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>By zmienić limit znaków należy przekształcić go w ten sposób:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>linters<span class="sc">:</span> <span class="fu">linters_with_defaults</span>(</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">line_length_linter</span>(<span class="dv">120</span>)</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>encoding<span class="sc">:</span> <span class="st">"UTF-8"</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Gdzie 120 to nowy limit znaków. W podobny sposób możemy zmienić wymagany styl nazywania obiektów. Standardem <code>tidyverse</code> jest snake_case, czyli nazywanie małymi literami, oddzielając słowa podkreślnikiem. Poza tym wyróżniamy jeszcze camelCase, czyli każde słowo składowe wielką literą poza pierwszym, PascalCase, czyli każde słowo wielką literą (choć czasem <em>Pascal case</em> też nazywa się <em>camel case</em>), kebab-case, czyli oddzielanie słów myślnikiem i dot.notation, czyli oddzielanie słów kropką, żeby wymienić do bardziej znane. Żaden ze stylów nie jest zły, tylko jak już się zdecydujemy na jeden, powinniśmy się go trzymać.</p>
+<p>Oba te pakiety, <code>lintr</code> i <code>styler</code>, są bardzo użyteczne, jednak ostatecznie nie zastępują ludzkiej decyzji. Nie wystarczy więc tylko mieć te pakiety, trzeba też – choć pobieżnie – znać same standardy.</p>
 </section>
 </section>
 <section id="sec-ending" class="level1" data-number="11">
 <h1 data-number="11"><span class="header-section-number">11</span> Posłowie</h1>
+<p>W ten sposób kończymy to przydługie wprowadzenie do R. Wielu rzeczy tutaj nie omówiłem, np. elementów klasycznego R takich jak wybór pojedynczej kolumny jako wektora (np. <code>df$wyksztalcenie</code>), czy w ogóle wektorów. Nie poznaliśmy klasycznych sposobów selekcji danych jak np. <code>df[df$wyksztalcenie == "Wyższe", 1:10]</code>. Nie powiedzieliśmy nic o listach ani pętlach, czyli tym kawałku R, który umożliwia automatyzację. Nie liznęliśmy nawet Quarto, czyli standardu do łączenia R z pisaniem raportów, w którym zresztą piszę ten tekst. Części rzeczy nie omówiłem, bo na początek da się je skutecznie zastąpić nowszymi i bardziej czytelnymi funkcjami <code>tidyverse</code>. Część natomiast bywa bardzo przydatna, ale jest po prostu, według mnie, zbyt zaawansowana jak na pierwszy raz.</p>
+<p>Tym samym zachęcam do dalszej nauki! Jeśli opanowaliście elementy zawarte w tym tekście, macie solidny fundament, by zrozumieć takie książki jak polecana przeze mnie na wstępie publikacja „Język R. Kompletny zestaw narzędzi dla analityków danych" <span class="citation" data-cites="wickham2020">(<a href="#ref-wickham2020" role="doc-biblioref"><strong>wickham2020?</strong></a>)</span>. Zaznaczam tylko, że ten tekst jest od tej książki nowszy, więc czasem pojawią się rozbieżności. W kilku miejscach wspominałem, że to, co opisuję, to nowinka, ale co do wielu rzeczy już nawet nie pamiętam, że były kiedyś nowe. Zawsze jednak pierwszym, podstawowym źródłem powinna być zawsze aktualna dokumentacja, a dopiero potem StackOverflow.</p>
+<p>Jeśli czytasz to teraz, oznacza to, że ten tekst to praca w toku. Za każdą informację zwrotną będę wdzięczny. Jeśli coś było niejasne, jeśli coś powinienem wyjaśnić szerzej albo prościej, jeśli czegoś mocno zabrakło, to można (trzeba!) do mnie pisać: <a href="mailto:315695@uwr.edu.pl">315695@uwr.edu.pl</a>.</p>
+<p>Z tego miejsca pozostaje mi życzyć jak najmniej błędów. Ostatnie przesłanie jest jednak takie, że błędy będą się pojawiać. W dużych ilościach. Debugowanie potrafi zajmować mnóstwo czasu, zwłaszcza na początku drogi. Nie trzeba się jednak bać ani frustrować, trzeba czytać komunikaty o błędach i w razie czego wyszukiwać je w Google. Po pewnym czasie tych błędów będzie coraz mniej, podobnie jak zawahań i potrzeby sięgania po pomoc poza dokumentację. Choć pewnie nigdy nie znikną całkiem.</p>
 </section>
 <section id="sec-bibliography" class="level1" data-number="12">
 
@@ -1833,6 +1982,9 @@ Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>
 <li id="fn27"><p><span class="math inline">\(* &lt; 0,05\)</span>; <span class="math inline">\(** &lt; 0,01\)</span>; <span class="math inline">\(*** &lt; 0,001\)</span>.<a href="#fnref27" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn28"><p>Piszę „spróbować”, bo gdy to piszę polskie tłumaczenie znajduje się w wersji rozwojowej. Wersje stabilne pakietów znajdują się w CRAN i to one się pobierają, gdy piszemy komendę <code>install.packages()</code>. Jednak wiele pakietów ma też swoje wersje rozwojowe, które szybciej dostają nowe funkcje, ale bywają niestabilne. Można je pobrać poleceniem <code>install_github</code> z pakietu <code>devtools</code>, do którego wrzucamy nazwę repozytorium. Na przykład wersję rozwojową <code>esquisse</code> można zainstalować komendą <code>devtools::install_github("dreamRs/esquisse")</code>. Takie pakiety można potem aktualizować komendą <code>devtools::update_packages()</code>.<a href="#fnref28" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn29"><p>Narzędzie można wywołać też komendą <code>esquisse::esquisser()</code>.<a href="#fnref29" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn30"><p><span class="math inline">\(* &lt; 0,05\)</span>; <span class="math inline">\(** &lt; 0,01\)</span>; <span class="math inline">\(*** &lt; 0,001\)</span>.<a href="#fnref30" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn31"><p>To samo możemy uzyskać używając komendy <code>styler::style_file("ścieżka/do/pliku")</code>.<a href="#fnref31" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn32"><p>Nazwa tego pliku zaczyna się od kropki, co oznacza, że jest on ukryty. Aby wyświetlić ukryte pliki można użyć skrótu klawiszowego Ctrl+H lub przeszukać opcje eksploratora.<a href="#fnref32" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
