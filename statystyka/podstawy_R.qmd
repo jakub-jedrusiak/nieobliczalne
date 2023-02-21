@@ -2,6 +2,44 @@
 number-sections: true
 ---
 
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(tibble)
+set.seed(1014)
+
+options(crayon.enabled = TRUE)
+options(pillar.bold = TRUE, pillar.subtle_num = TRUE)
+
+knitr::opts_chunk$set(collapse = TRUE, comment = pillar::style_subtle("#>"))
+
+colourise_chunk <- function(type) {
+  function(x, options) {
+    lines <- x
+    if (type != "output") {
+      lines <- crayon::red(lines)
+    }
+    paste0(
+      '<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode">',
+      paste0(
+        fansi::sgr_to_html(htmltools::htmlEscape(lines)),
+        collapse = "\n"
+      ),
+      "</code></pre></div>"
+    )
+  }
+}
+
+knitr::knit_hooks$set(
+  output = colourise_chunk("output"),
+  message = colourise_chunk("message"),
+  warning = colourise_chunk("warning"),
+  error = colourise_chunk("error")
+)
+```
+
 # Podstawy programowania w R {#podstawy-programowania-w-r}
 
 W kilku miejscach w dalszej części wrzucam informacje, jak daną rzecz omawianą teoretycznie można zrobić w R. **Absolutnie nie jest to konieczne do zrozumienia statystyki!** Jest to tylko jedna z możliwości, jak można opisaną dalej teorię przekuć w praktykę. O R można myśleć jako o programie do robienia statystyki. Podobnie jak SPSS, Statistica, Stata czy (oparte na R, darmowe i otwartoźródłowe) jamovi. Jeśli jednak Czytelnik widział kiedyś program statystyczny, spodziewać się będzie ekranu podobnego do Excela, gdzie na górnej belce wybiera się testy statystyczne, jakie chce się przeprowadzić. Praca w R tak nie wygląda. Największa wada i zaleta R polega na tym, że jest on jednocześnie językiem programowania. A to daje bardzo ciekawe możliwości, o których niżej. Także praca w R wygląda tak, że w specjalnym języku piszemy komputerowi, co ma zrobić, potem uruchamiamy te instrukcje i gotowe.
@@ -187,9 +225,9 @@ library("tidyverse")
 
 # Ładowanie danych z `readr` {#sec-loading}
 
-Jeśli chcemy cokolwiek liczyć, musimy mieć na czym liczyć\[podstawy_r-23\]. R ma wiele sposobów ładowania danych, które w każdym podręczniku zajmują cały rozdział. R poradzi sobie z prawie każdym formatem danych, a także potrafi ładować je bezpośrednio z serwera (dla przykładu pakiet `googlesheets4` pozwala ładować pliki z Google Sheets bez pobierania ich na dysk albo `QualtRics` ułatwiający importowanie plików z danymi ankietowymi z Qualtrics).
+Jeśli chcemy cokolwiek liczyć, musimy mieć na czym liczyć. R ma wiele sposobów ładowania danych, które w każdym podręczniku zajmują cały rozdział. R poradzi sobie z prawie każdym formatem danych, a także potrafi ładować je bezpośrednio z serwera (dla przykładu pakiet `googlesheets4` pozwala ładować pliki z Google Sheets bez pobierania ich na dysk albo `QualtRics` ułatwiający importowanie plików z danymi ankietowymi z Qualtrics).
 
-\[podstawy_r-23\]: Wszystkie bazy, których używam w tym tekście, są dostępne w repozytorium na GitHubie. Można wejść w [ten link](https://github.com/jakub-jedrusiak/jakub-jedrusiak.github.io/tree/main/statystyka/dane/podstawy-R), wybrać pożądany plik i albo pobrać go na własny dysk, albo zamiast ścieżki do pliku użyć linku. By uzyskać działający link, należy na koniec właściwego linku dopisać `?raw=true`. Takie linki można wklejać w komendy czytające dane zamiast ścieżek. Przykład linku, jak i tego, jak używać ich z funkcjami typu `read_csv` podaję w podrozdziale [-@sec-summarise] o grupowaniu.
+Wszystkie bazy, których używam w tym tekście, są dostępne w repozytorium na GitHubie. Można wejść w [ten link](https://github.com/jakub-jedrusiak/jakub-jedrusiak.github.io/tree/main/statystyka/dane/podstawy-R), wybrać pożądany plik i albo pobrać go na własny dysk, albo zamiast ścieżki do pliku użyć linku. By uzyskać właściwy link, należy kliknąć `raw` tuż nad treścią pliku. Takie linki można wklejać w komendy czytające dane zamiast ścieżek. Przykład linku, jak i tego, jak używać ich z funkcjami typu `read_csv` podaję w podrozdziale [-@sec-summarise] o grupowaniu.
 
 Podstawowe pakiety do ładowania danych do `readr` i `readxl` dla plików Excela. Na początek nie trzeba znać struktury funkcji ładujących dane, bo RStudio dysponuje przyjemnym graficznym narzędziem do tego celu. Jeśli w prawym dolnym oknie, w zakładce Files, klikniemy na plik zawierający dane, dostaniemy do dyspozycji opcję Import Dataset... Po jej wybraniu otworzy nam się okno z podglądem danych i kilkoma opcjami do dostosowania, m.in. czy jakichś wierszy nie pominąć albo z którego arkusza pobrać dane. W plikach .csv czasem musimy też wybrać rodzaj separatora i znaku dziesiętnego (opcja Locale). W polskich plikach z danymi separatorem jest zazwyczaj średnik, a znakiem dziesiętnym przecinek, podczas gdy w angielskich danych będą to odpowiednio przecinek i kropka. Jeśli nie ustawimy znaku dziesiętnego, R może potraktować liczby z przecinkiem jako tekst. Poza tym możemy kliknąć w każdy nagłówek kolumny i wybrać typ danych. Dane powinny być czyste, tj. kolumny liczbowe powinny zawierać same liczby. Jeśli dane nie są czyste (a zazwyczaj nie są), możemy je wyczyścić potem.
 
@@ -341,7 +379,7 @@ df %>%
 Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery, ale możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu `tidy-select`. Tutaj akurat użyłem `starts_with("H_")`, żeby powiedzieć, że ma to zrobić ze wszystkimi kolumnami, których nazwy zaczynają się od `H_`. Te same funkcje możemy wykorzystywać w funkcji `select`. Kilka innych tego typu funkcji umieściłem w tabeli.
 
 | Funkcja         |                                           Wybierz wszystkie kolumny... |
-|------------------|-----------------------------------------------------:|
+|-------------------|----------------------------------------------------:|
 | `starts_with()` |                                         których nazwy zaczynają się od |
 | `ends_with()`   |                                            których nazwy kończą się na |
 | `contains()`    |                                        których nazwy zawierają w sobie |
@@ -695,7 +733,7 @@ Tak robiliśmy to zawsze, jednak `dplyr` 1.1.0. wprowadził inny sposób grupowa
 
 ```{r}
 # załadowanie danych z sieci
-df_scream <- read_csv("https://github.com/profandyfield/discovr/blob/master/data-raw/csv_files/escape.csv?raw=true")
+df_scream <- read_csv("https://raw.githubusercontent.com/profandyfield/discovr/master/data-raw/csv_files/escape.csv")
 
 # podejrzenie, jak dane wyglądają
 glimpse(df_scream)
@@ -1063,10 +1101,10 @@ ggplot(df_diamonds, aes(carat, price, colour = cut)) +
     theme_apa()
 ```
 
-Drugi motyw nie jest szałowo popularny w społeczności, ale bardzo go lubię. Żeby zadziałał, musimy wcześniej zainstalować u siebie pakiety `grid`, `scales` i `ggthemes`. Spojrzenie w repozytorium pozwoli nam stwierdzić, że nie jest to pakiet, a po prostu zbiór plików. Wchodzimy więc w plik `ggplot_theme_Publication-2.R`, kopiujemy link i dodajemy na końcu `?raw=true`, co pozwoli R go odczytać. Następnie użyjemy komendy `source`, która pozwala nam uruchamiać z innych plików .R, jak podamy ich ścieżkę lub link. Cały kod mółgby więc wyglądać tak:
+Drugi motyw nie jest szałowo popularny w społeczności, ale bardzo go lubię. Żeby zadziałał, musimy wcześniej zainstalować u siebie pakiety `grid`, `scales` i `ggthemes`. Spojrzenie w repozytorium pozwoli nam stwierdzić, że nie jest to pakiet, a po prostu zbiór plików. Wchodzimy więc w plik `ggplot_theme_Publication-2.R`, klikamy `raw`, co pozwoli R odczytać ten plik i kopiujemy link. Następnie użyjemy komendy `source`, która pozwala nam uruchamiać z innych plików .R, jak podamy ich ścieżkę lub link. Cały kod mógłby więc wyglądać tak:
 
 ```{r}
-source("https://github.com/koundy/ggplot_theme_Publication/blob/master/ggplot_theme_Publication-2.R?raw=true")
+source("https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R")
 
 ggplot(df_diamonds, aes(carat, price, colour = cut)) +
     geom_point() +
@@ -1116,6 +1154,9 @@ ggplot(df_diamonds) +
 Powyżej wykres, który stworzyłem w `equisse`. Warto jednak zwrócić uwagę na jego niedoskonałości, takie jak brak polskich tłumaczeń typów szlifu. Pewnym wyjaśnieniem może być dla nas nazwa francuskiego słowa *equisse* -- szkic. Takie narzędzia jak `equisse` nie zwalniają nas całkowicie z umiejętności kodowania wykresów, ale pozwalają wygodnie tworzyć `szkice` naszego kodu. Ten szkic mogę pozmieniać, np. zamieniając `theme_bw` na `theme_Publication` i dodając polskie tłumaczenia.
 
 ```{r}
+#| fig-width: 8
+#| fig-height: 8
+#| out-width: 100%
 ggplot(df_diamonds) +
     aes(x = carat, y = price, colour = clarity) +
     geom_point(shape = "diamond", size = 2L) +
@@ -1175,17 +1216,46 @@ W powyższym przykładzie widać też, że `lm`, i podobnie wiele innych obiekt�
 summary(lm_price)
 ```
 
-Ten widok już jest możliwy do zinterpretowania. Jeśli wiemy co nieco o regresjach, możemy z niego odczytać, że oba predyktory są istotne statystycznie, podobnie jak statystyka *F*, a także że wyjaśniliśmy 87% wariancji. Nie jest to jednak najlepszy format wyświetlania wyników.
+Ten widok już jest możliwy do zinterpretowania. Jeśli wiemy co nieco o regresjach, możemy z niego odczytać, że oba predyktory są istotne statystycznie, podobnie jak statystyka $F$, a także że wyjaśniliśmy 87% wariancji. Nie jest to jednak najlepszy format wyświetlania wyników.
 
 > Pozostała część już wkrótce.
 
 ## Czyste wyniki, czyli pakiet `broom` {#sec-broom}
 
-### `glance` {#tidy}
+Dlaczego nie jest to dobry format? Bo jest niejednolity i chaotyczny. Nie tylko w widocznej postaci, ale też pod maską, co przeszkadza nam, kiedy chcemy wejść głębiej z programowaniem albo pisać automatyczne raporty. Niestandardowe wykresy również mogą być problemem. Odpowiedzią na te problemy stał się pakiet `broom`, który należy do świata `tidyverse`, ale nie jest ładowany z pakietem `tidyverse`, więc trzeba załadować go ręcznie. Rdzeniem tego pakietu jest specjalny słownik, standard tworzenia modeli, w którym kolumny zawierające określone informacje muszą nazywać się w określony sposób. Kolumny, bo wyczyszczony model ma zawsze postać `tibble`. Dla przykładu kolumna z wartością $p$ zawsze musi nazywać się `p.value`, a kolumna z wartością statystyki `estimate`. Wymusza to spójność i zapewnia przewidywalność obiektów zawierających modele. Wiele współczesnych pakietów do modelowania od razu dostosowuje swoje modele do wymogów czystych danych.
 
-### `tidy` {#glance}
+`broom` nie jest jednak tylko standardem -- to także pakiet zawierający trzy funkcje *czyszczące* modele. Co więcej zawsze są to te same trzy funkcje, które zawsze przyjmują tak samo nazywające się argumenty. Ta spójność i zapewnienie spójności to najlepsze, co daje nam `broom`. Omówmy sobie teraz te trzy funkcje i zobaczmy je w akcji.
 
-### `augment` {#augment}
+### `glance` {#sec-glance}
+
+Pierwszą funkcją czyszczącą jest `glance` (nie mylić z `glimpse`). Służy ona do tworzenia czystych opisów samego modelu w pojedynczym wierszu. Będą to takie rzeczy jak statystyka $F$ czy $R^2$. Jak każda funkcja `broom`, jako pierwszy argument przyjmuje ona nasz model.
+
+```{r}
+#| warning: false
+
+library("broom")
+
+glance(lm_price)
+```
+
+Widzimy tutaj ogólne podsumowanie skuteczności naszego modelu z całą serią statystyk. Co ciekawe, mamy też takie statystyki jak AIC i BIC, których `summary` nie wyświetla. W ten sposób `broom` nie tylko czyści nasz model, ale także dostarcza nam nowych informacji.
+
+### `tidy` {#sec-tidy}
+
+Funkcja `tidy` wyświetla nam najważniejsze elementy modelu. Dla wszelkich regresji będą to przede wszystkim współczynniki regresji, choć dokładna zawartość wynikowej tabeli naturalnie zależy od tego, jaki model czyściliśmy. Zobaczmy to.
+
+```{r}
+tidy(lm_price)
+```
+Widzimy więc, że oba współczynniki (`estimate`) są istotne statystycznie, z czego długość działki kielicha ma współczynnik dodatni, a szerokość ujemny.
+
+### `augment` {#sec-augment}
+
+Ostania funkcja czyszcząca nie do końca czyści. Pozwala ona dodać do oryginalnej bazy danych informacje zaczerpnięte z modelu, m.in. jaką wartość przewiduje model, jaka jest wartość resztkowa (*residual*) zwykła i standaryzowana, jaki jest dystans Cooka i *hat value* itd. Dokładne możliwości funkcji `augment` zależą od rodzaju modelu. Są to informacje użyteczne, kiedy chcemy zidentyfikować outliery. Wszystkie dodane kolumny mają nazwy zaczynające się kropką.
+
+```{r}
+augment(lm_price)
+```
 
 ## Swiss Army Knife w R, czyli `rstatix` {#sec-rstatix}
 
