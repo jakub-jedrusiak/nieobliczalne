@@ -4,6 +4,10 @@ number-sections: true
 
 # Podstawy programowania w R {#podstawy-programowania-w-r}
 
+W kilku miejscach w dalszej części wrzucam informacje, jak daną rzecz omawianą teoretycznie można zrobić w R. **Absolutnie nie jest to konieczne do zrozumienia statystyki!** Jest to tylko jedna z możliwości, jak można opisaną dalej teorię przekuć w praktykę. O R można myśleć jako o programie do robienia statystyki. Podobnie jak SPSS, Statistica, Stata czy (oparte na R, darmowe i otwartoźródłowe) jamovi. Jeśli jednak Czytelnik widział kiedyś program statystyczny, spodziewać się będzie ekranu podobnego do Excela, gdzie na górnej belce wybiera się testy statystyczne, jakie chce się przeprowadzić. Praca w R tak nie wygląda. Największa wada i zaleta R polega na tym, że jest on jednocześnie językiem programowania. A to daje bardzo ciekawe możliwości, o których niżej. Także praca w R wygląda tak, że w specjalnym języku piszemy komputerowi, co ma zrobić, potem uruchamiamy te instrukcje i gotowe.
+
+W tym miejscu spróbuję krótko opisać, jak zacząć pracę z R. Nie mam ambicji zrobić pełnego wprowadzenia, bo wyszedłby z tego osobny podręcznik. Mam ambicje dać jakikolwiek zarys fundamentu, który pozwoli Czytelnikowi wyczyścić mało brudne dane i zrobić proste testy. Jeśli ktoś po przeczytaniu tego stwierdzi „Może warto się zagłębić", to znajdzie mnóstwo materiałów, które mu na to pozwolą. Ze swojej strony mogę polecić podręcznik „Język R. Kompletny zestaw narzędzi dla analityków danych" Wickhama i Grolemunda [-@wickham2020], interaktywne kursy na DataCamp, a pomocy w rozwiązaniu konkretnych problemów zawsze można szukać na StackOverflow.
+
 ```{r}
 #| label: setup
 #| include: false
@@ -41,10 +45,6 @@ knitr::knit_hooks$set(
   error = colourise_chunk("error")
 )
 ```
-
-W kilku miejscach w dalszej części wrzucam informacje, jak daną rzecz omawianą teoretycznie można zrobić w R. **Absolutnie nie jest to konieczne do zrozumienia statystyki!** Jest to tylko jedna z możliwości, jak można opisaną dalej teorię przekuć w praktykę. O R można myśleć jako o programie do robienia statystyki. Podobnie jak SPSS, Statistica, Stata czy (oparte na R, darmowe i otwartoźródłowe) jamovi. Jeśli jednak Czytelnik widział kiedyś program statystyczny, spodziewać się będzie ekranu podobnego do Excela, gdzie na górnej belce wybiera się testy statystyczne, jakie chce się przeprowadzić. Praca w R tak nie wygląda. Największa wada i zaleta R polega na tym, że jest on jednocześnie językiem programowania. A to daje bardzo ciekawe możliwości, o których niżej. Także praca w R wygląda tak, że w specjalnym języku piszemy komputerowi, co ma zrobić, potem uruchamiamy te instrukcje i gotowe.
-
-W tym miejscu spróbuję krótko opisać, jak zacząć pracę z R. Nie mam ambicji zrobić pełnego wprowadzenia, bo wyszedłby z tego osobny podręcznik. Mam ambicje dać jakikolwiek zarys fundamentu, który pozwoli Czytelnikowi wyczyścić mało brudne dane i zrobić proste testy. Jeśli ktoś po przeczytaniu tego stwierdzi „Może warto się zagłębić", to znajdzie mnóstwo materiałów, które mu na to pozwolą. Ze swojej strony mogę polecić podręcznik „Język R. Kompletny zestaw narzędzi dla analityków danych" Wickhama i Grolemunda, interaktywne kursy na DataCamp, a pomocy w rozwiązaniu konkretnych problemów zawsze można szukać na StackOverflow.
 
 # 10 powodów dla których warto uczyć się R {#sec-reasons}
 
@@ -279,7 +279,7 @@ Ostatecznie zostaje operator logiczny. Dlaczego piszę `==` zamiast `=`? W progr
 | !=           |            nie równa się             |                `Płeć != "Kobieta"` |
 | \> (\>=)     |  większe niż<br>(większe lub równe)  |                        `Wiek > 40` |
 | \< (\<=)     | mniejsze niż<br>(mniejsze lub równe) |                        `Wiek < 40` |
-| \|           |                 lub                  |           `Wiek < 18 \| Wiek > 60` |
+| \|           |                 lub                  |            `Wiek < 18 | Wiek > 60` |
 | &            |                  i                   |  `Płeć == "Mężczyzna" & Wiek > 40` |
 | %in%         |        zawiera się w zbiorze         |   `Płeć %in% c("Kobieta", "Inna")` |
 | !            |             zaprzeczenie             | `! Płeć %in% c("Kobieta", "Inna")` |
@@ -379,7 +379,7 @@ df %>%
 Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery, ale możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu `tidy-select`. Tutaj akurat użyłem `starts_with("H_")`, żeby powiedzieć, że ma to zrobić ze wszystkimi kolumnami, których nazwy zaczynają się od `H_`. Te same funkcje możemy wykorzystywać w funkcji `select`. Kilka innych tego typu funkcji umieściłem w tabeli.
 
 | Funkcja         |                                           Wybierz wszystkie kolumny... |
-|--------------------|---------------------------------------------------:|
+|------------------------|----------------------------------------------:|
 | `starts_with()` |                                         których nazwy zaczynają się od |
 | `ends_with()`   |                                            których nazwy kończą się na |
 | `contains()`    |                                        których nazwy zawierają w sobie |
@@ -428,7 +428,7 @@ df %>%
     mutate(
         wiek = parse_number(wiek),
         across(H_1:H_10, parse_number),
-        H_5 = 7 - H_5
+        H_5 = 7 - H_5,
         H_7 = 7 - H_7
     )
 ```
@@ -1218,8 +1218,6 @@ summary(lm_price)
 
 Ten widok już jest możliwy do zinterpretowania. Jeśli wiemy co nieco o regresjach, możemy z niego odczytać, że oba predyktory są istotne statystycznie, podobnie jak statystyka $F$, a także że wyjaśniliśmy 87% wariancji. Nie jest to jednak najlepszy format wyświetlania wyników.
 
-> Pozostała część już wkrótce.
-
 ## Czyste wyniki, czyli pakiet `broom` {#sec-broom}
 
 Dlaczego nie jest to dobry format? Bo jest niejednolity i chaotyczny. Nie tylko w widocznej postaci, ale też pod maską, co przeszkadza nam, kiedy chcemy wejść głębiej z programowaniem albo pisać automatyczne raporty. Niestandardowe wykresy również mogą być problemem. Odpowiedzią na te problemy stał się pakiet `broom`, który należy do świata `tidyverse`, ale nie jest ładowany z pakietem `tidyverse`, więc trzeba załadować go ręcznie. Rdzeniem tego pakietu jest specjalny słownik, standard tworzenia modeli, w którym kolumny zawierające określone informacje muszą nazywać się w określony sposób. Kolumny, bo wyczyszczony model ma zawsze postać `tibble`. Dla przykładu kolumna z wartością $p$ zawsze musi nazywać się `p.value`, a kolumna z wartością statystyki `estimate`. Wymusza to spójność i zapewnia przewidywalność obiektów zawierających modele. Wiele współczesnych pakietów do modelowania od razu dostosowuje swoje modele do wymogów czystych danych.
@@ -1264,6 +1262,8 @@ Niezwykłe możliwości i giętkość pakietu `rstatix` były już w tym tekści
 
 R posiada dużą bibliotekę domyślnych funkcji do testów statystycznych, takich jak `t.test` czy `cor.test`. I one liczą dobrze, ale w wielu przypadkach są niewygodne. Nie ma się co dziwić, to są stare funkcje, swoją historią sięgające roku 2000, czyli początków R. Nie było wtedy `dplyr`, RStudio, potoków i całego dobrodziejstwa, które sprawia, że współczesny kod R średnio przypomina klasyczny kod, którego tu nie omawiam, ale który ciągle działa i buduje fundamenty tego języka. Dlatego właśnie wyniki tych testów są niewystandaryzowane, wymagają one niewygodnego wskazywania kolumn jako wektorów[^podstawy_r-30] i mają argument `data` na drugim miejscu, przez co potoki zawsze wymagają, by używać z nimi kropki.
 
+[^podstawy_r-30]: Na przykład klasyczna funkcja `t.test` do wykonania przykładu, który za moment podaję w `rstatix`, wymaga takiej składni: `t.test(df_scream$screams, df_scream$songwriter)`. Opcja z formułą też jest możliwa, ale argument `data` jest tam na drugim miejscu.
+
 `rstatix` jest odpowiedzią na te problemy. Poza tym, że dodaje mnóstwo przyjaznych funkcji od siebie, to uwspółcześnia stare funkcje, naprawiając w nich wszystko, co złe, m.in. poprawiając pracę z potokami. Dodatkowo wykorzystuje sprytną nomenklaturę, która ułatwia uczenie się -- jeśli w klasycznym R funkcja nazywa się `t.test`, to w `rstatix` nazywa się `t_test`, `cor.test` zmienia się w `cor_test` i tak dalej. Jest to zgodne z ogólnym trendem `tidyverse`, żeby te nowe, współczesne funkcje zawsze były pisane snake_case (więcej o formatowaniu kodu w podrozdziale [-@sec-formatting]). Większość funkcji pozwala też na wykonywanie wielu testów jednocześnie i radzi sobie ze zgrupowanymi danymi.
 
 ```{r}
@@ -1293,21 +1293,83 @@ diamonds %>%
     eta_squared()
 ```
 
-Dodatkowo `rstatix` dostarcza nam wygodą funkcję `add_significance`, która do obiektu z modelem zgodnym z `broom` dodaje kolumnę z gwiazdkami istotności wartości $p$. Domyślne ustawienia są takie same jak dla funkcji `cor_mark_significance`[^podstawy_r-27] i również można je modyfikować (por. [-@sec-cor_mat]).
+Dodatkowo `rstatix` dostarcza nam wygodą funkcję `add_significance`, która do obiektu z modelem zgodnym z `broom` dodaje kolumnę z gwiazdkami istotności wartości $p$. Domyślne ustawienia są takie same jak dla funkcji `cor_mark_significance`[^podstawy_r-31] i również można je modyfikować (por. [-@sec-cor_mat]).
+
+[^podstawy_r-31]: $* < 0,05$; $** < 0,01$; $*** < 0,001$.
 
 ```{r}
 lm_price %>%
     tidy() %>%
     add_significance()
 ```
+
 Nie są to wszystkie funkcje, które oferuje `rstatix` i zachęcam do zerknięcia do [repozytorium `rstatix` na GitHubie](https://github.com/kassambara/rstatix), gdzie autor umieścił długą listę funkcji ze streszczeniem ich działania.
 
 # Formatowanie kodu {#sec-formatting}
 
-## `lintr` {#lintr}
+Ostatnia rzecz, którą chciałbym napisać w tym tekście, dotyczy formatowania kodu. Powiedzmy sobie szczerze -- czytanie kodu jest trudne, choć `tidyverse` już i tak to mocno ułatwia. Gdy piszemy kod, powinniśmy mieć w głowie, że ktoś go kiedyś będzie czytał, gdzie tym ktosiem możemy być nawet przyszli my. Budzi to potrzebę, żeby kod wyglądał dobrze, przestrzegał pewnych standardów, aby był zrozumiały i spójny. Poza tym istnieje seria dobrych praktyk, które zwiększają czytelność kodu. Kod jest giętki przyjmie wiele rzeczy i nawet brzydki będzie działał. Dla przykładu, jeśli tam, gdzie powinno być `TRUE` napiszemy `1`, to kod i tak zadziała, bo głęboko pod maską `TRUE` to takie fancy `1`, ale nie powinniśmy tego robić. Jest to szczególnie ważne, kiedy piszemy kod z kimś. Jeśli nie mamy jednolitych standardów, chociażby wewnętrznych, to nagle może się okazać, że kod działa, ale potrafi być niespójny nawet w obrębie pojedynczego pliku.
+
+```{r}
+set.seed(123)
+(rep(round(runif(5,1,10),0),times=2,each=3)->My.own_NUMBERS)
+```
+
+Powyższy kod działa, czyli spełnia swoją funkcję, ale wygląda paskudnie. Sprawia to, że jeśli się nie wie, co ten kod robi, to jest to ciężko rozszyfrować. Jednak wszystko staje się prostsze, jeśli napiszemy go w sposób czystszy.
+
+```{r}
+set.seed(123)
+
+(my_own_numbers <- runif(5, min = 1, max = 10) %>% # wylosuj 5 liczb między 1 a 10
+    round(0) %>% # zaokrąglij do całości
+    rep(times = 2, each = 3)) # każdą powtórz 3 razy, a całość 2 razy
+```
+
+Kod ten od razu jest czytelniejszy, milszy dla oka, mimo że efekt jego działania jest identyczny. Sądzę, że łatwiej jest od razu nasiąkać dobrymi praktykami i standardami, od samego początku nauki, niż potem rugować złe przyzwyczajenia. A skąd mamy wiedzieć, jakie to są „dobre praktyki"? Cóż, standardy wewnętrzne to jedna sprawa, ale takie standardy trzeba ustalać w każdym zespole od nowa. Na szczęście istnieje pewna baza, fundament, standard który -- według mnie -- powinna znać każda osoba programująca w R, czyli standard `tidyverse`. Jeśli znamy te standardy, możemy je potraktować jako bazę dla standardów wewnętrznych. Nie umówiliśmy się, jak powinien wyglądać ten kod? To napiszę zgodnie ze standardem. Jeśli z powodu osobistej preferencji odchodzimy od standardów, robimy to wtedy świadomie. Poradnik formatowania kodu zgodnie z `tidyverse` znajdziemy [tutaj](https://style.tidyverse.org).
+
+Pamiętanie o wszystkich standardach podczas pisania kodu jest trudne, zwłaszcza na początku. Na szczęście mamy narzędzia, które nam w tym pomogą.
 
 ## `styler` {#styler}
 
+Pierwszy z tych narzędzi to `styler`, który sam poprawia wiele aspektów kodu, w tym wiele oczywistych błędów. Instalujemy go jak każdy inny pakiet (`install.packages("styler")`). Po zainstalowaniu menu Addins wzbogaca się o kilka opcji, z których najważniejsza to *style active file*[^podstawy_r-32]. Podczas pracy uruchamiam to co jakiś czas i zazwyczaj znajdują się jakieś przeoczenia.
+
+[^podstawy_r-32]: To samo możemy uzyskać używając komendy `styler::style_file("ścieżka/do/pliku")`.
+
+## `lintr` {#lintr}
+
+`styler` nie poprawia wszystkich błędów, bo byłoby to zbyt destrukcyjne. Na szczęście `lintr` może nam je wszystkie wypomnieć. Dla każdego naszego projektu powinniśmy raz uruchomić komendę `lintr::use_lintr(type = "tidyverse")`. Spowoduje to wytworzenie w folderze pliku `.lintr`. Zawiera on konfigurację `lintr` dla danego projektu. Za jego pomocą będziemy mogli tę konfigurację również zmieniać.
+
+Zmiana dokonuje się przez wpisanie do pliku `.lintr`[^podstawy_r-33] odpowiednich opcji. Szczegóły omawia dokumentacja (`vignette("lintr")`), ale na pewno chciałbym wskazać jedną, której zmiana jest wręcz konieczna. Domyślnie `lintr` uznaje za za długie linie linie powyżej 80 znaków. To jest strasznie mało! Ja zazwyczaj ustawiam ten limit to na 120-150 znaków. Domyślna zawartość pliku `.lintr` wygląda tak:
+
+[^podstawy_r-33]: Nazwa tego pliku zaczyna się od kropki, co oznacza, że jest on ukryty. Aby wyświetlić ukryte pliki można użyć skrótu klawiszowego Ctrl+H lub przeszukać opcje eksploratora.
+
+```{r}
+#| eval: false
+linters: linters_with_defaults()
+encoding: "UTF-8"
+```
+
+By zmienić limit znaków należy przekształcić go w ten sposób:
+
+```{r}
+#| eval: false
+linters: linters_with_defaults(
+    line_length_linter(120)
+)
+encoding: "UTF-8"
+```
+
+Gdzie 120 to nowy limit znaków. W podobny sposób możemy zmienić wymagany styl nazywania obiektów. Standardem `tidyverse` jest snake_case, czyli nazywanie małymi literami, oddzielając słowa podkreślnikiem. Poza tym wyróżniamy jeszcze camelCase, czyli każde słowo składowe wielką literą poza pierwszym, PascalCase, czyli każde słowo wielką literą (choć czasem *Pascal case* też nazywa się *camel case*), kebab-case, czyli oddzielanie słów myślnikiem i dot.notation, czyli oddzielanie słów kropką, żeby wymienić do bardziej znane. Żaden ze stylów nie jest zły, tylko jak już się zdecydujemy na jeden, powinniśmy się go trzymać.
+
+Oba te pakiety, `lintr` i `styler`, są bardzo użyteczne, jednak ostatecznie nie zastępują ludzkiej decyzji. Nie wystarczy więc tylko mieć te pakiety, trzeba też -- choć pobieżnie -- znać same standardy.
+
 # Posłowie {#sec-ending}
+
+W ten sposób kończymy to przydługie wprowadzenie do R. Wielu rzeczy tutaj nie omówiłem, np. elementów klasycznego R takich jak wybór pojedynczej kolumny jako wektora (np. `df$wyksztalcenie`), czy w ogóle wektorów. Nie poznaliśmy klasycznych sposobów selekcji danych jak np. `df[df$wyksztalcenie == "Wyższe", 1:10]`. Nie powiedzieliśmy nic o listach ani pętlach, czyli tym kawałku R, który umożliwia automatyzację. Nie liznęliśmy nawet Quarto, czyli standardu do łączenia R z pisaniem raportów, w którym zresztą piszę ten tekst. Części rzeczy nie omówiłem, bo na początek da się je skutecznie zastąpić nowszymi i bardziej czytelnymi funkcjami `tidyverse`. Część natomiast bywa bardzo przydatna, ale jest po prostu, według mnie, zbyt zaawansowana jak na pierwszy raz.
+
+Tym samym zachęcam do dalszej nauki! Jeśli opanowaliście elementy zawarte w tym tekście, macie solidny fundament, by zrozumieć takie książki jak polecana przeze mnie na wstępie publikacja „Język R. Kompletny zestaw narzędzi dla analityków danych" [@wickham2020]. Zaznaczam tylko, że ten tekst jest od tej książki nowszy, więc czasem pojawią się rozbieżności. W kilku miejscach wspominałem, że to, co opisuję, to nowinka, ale co do wielu rzeczy już nawet nie pamiętam, że były kiedyś nowe. Zawsze jednak pierwszym, podstawowym źródłem powinna być zawsze aktualna dokumentacja, a dopiero potem StackOverflow.
+
+Jeśli czytasz to teraz, oznacza to, że ten tekst to praca w toku. Za każdą informację zwrotną będę wdzięczny. Jeśli coś było niejasne, jeśli coś powinienem wyjaśnić szerzej albo prościej, jeśli czegoś mocno zabrakło, to można (trzeba!) do mnie pisać: [315695\@uwr.edu.pl](mailto:315695@uwr.edu.pl).
+
+Z tego miejsca pozostaje mi życzyć jak najmniej błędów. Ostatnie przesłanie jest jednak takie, że błędy będą się pojawiać. W dużych ilościach. Debugowanie potrafi zajmować mnóstwo czasu, zwłaszcza na początku drogi. Nie trzeba się jednak bać ani frustrować, trzeba czytać komunikaty o błędach i w razie czego wyszukiwać je w Google. Po pewnym czasie tych błędów będzie coraz mniej, podobnie jak zawahań i potrzeby sięgania po pomoc poza dokumentację. Choć pewnie nigdy nie znikną całkiem.
 
 # Bibliografia {#sec-bibliography}
