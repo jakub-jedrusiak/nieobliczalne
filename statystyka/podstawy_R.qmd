@@ -2,7 +2,7 @@
 number-sections: true
 ---
 
-# Podstawy programowania w R {#podstawy-programowania-w-r}
+# Podstawy programowania w R {#sec-intro .unnumbered}
 
 W kilku miejscach w dalszej części wrzucam informacje, jak daną rzecz omawianą teoretycznie można zrobić w R. **Absolutnie nie jest to konieczne do zrozumienia statystyki!** Jest to tylko jedna z możliwości, jak można opisaną dalej teorię przekuć w praktykę. O R można myśleć jako o programie do robienia statystyki. Podobnie jak SPSS, Statistica, Stata czy (oparte na R, darmowe i otwartoźródłowe) jamovi. Jeśli jednak Czytelnik widział kiedyś program statystyczny, spodziewać się będzie ekranu podobnego do Excela, gdzie na górnej belce wybiera się testy statystyczne, jakie chce się przeprowadzić. Praca w R tak nie wygląda. Największa wada i zaleta R polega na tym, że jest on jednocześnie językiem programowania. A to daje bardzo ciekawe możliwości, o których niżej. Także praca w R wygląda tak, że w specjalnym języku piszemy komputerowi, co ma zrobić, potem uruchamiamy te instrukcje i gotowe.
 
@@ -69,6 +69,8 @@ Dla niektórych ludzi perspektywa uczenia się języka programowania tylko po to
 <!-- -->
 
 6.  Wykresy. Wspominałem o tym wyżej, ale wykresy są warte osobnego punktu. Możliwości Excela są ograniczone. Dla przykładu wykres poniżej prezentuje wyniki badania nt. tego, jak wygląda homofobia u mężczyzn, którym się powie, że są niemęscy. W badaniu mierzyliśmy dodatkowo zmienną psychologiczną o nazwie normatywna męskość, czyli niejako stopień przywiązania do reguł, co *prawdziwy mężczyzna* powinien, a czego nie powinien. Wykres jest dość skomplikowany. Zawiera trzy zmienne dychotomiczne, co daje łącznie 8 kolumn w grupach po 4 i 2. Nie powiem, że zrobić taki wykres jest łatwo, bo dobre opanowanie `ggplot2` trochę zajmuje, ale gdy już opanujemy, co jest do opanowania, to hulaj dusza. Nawet najbardziej skomplikowane wykresy stają się możliwe. Gdy połączyć to z możliwościami dawanymi przez programistyczną warstwę R, nagle łatwe staje się wytworzenie serii pasujących do siebie stylem wykresów o tych samych wymiarach. Pozwala to uzyskać pełną spójność bez ręcznego poprawiania szczególików.
+
+![Homofobia u mężczyzn o zagrożonej i niezagrożonej męskości, w zależności od tego, jak wysoką mieli tzw. normatywną męskość. Gdy dodać to tego jeszcze podział na dwa rodzaje homofobii, robią się z tego trzy podziały i osiem różnych kolumn ze wspólnymi osiami, legendą i kolorami. Zrobienie tego w Excelu, o ile w ogóle możliwe, byłoby bardzo trudne.](./ilustracje/homofobia){#fig-homofobia}
 
 <!-- -->
 
@@ -1334,11 +1336,15 @@ Pamiętanie o wszystkich standardach podczas pisania kodu jest trudne, zwłaszcz
 
 Pierwszy z tych narzędzi to `styler`, który sam poprawia wiele aspektów kodu, w tym wiele oczywistych błędów. Instalujemy go jak każdy inny pakiet (`install.packages("styler")`). Po zainstalowaniu menu Addins wzbogaca się o kilka opcji, z których najważniejsza to *style active file*[^podstawy_r-32]. Podczas pracy uruchamiam to co jakiś czas i zazwyczaj znajdują się jakieś przeoczenia.
 
+![Przykład wykorzystania `styler`](./ilustracje/styler_gif.gif){#fig-styler}
+
 [^podstawy_r-32]: To samo możemy uzyskać używając komendy `styler::style_file("ścieżka/do/pliku")`.
 
 ## `lintr` {#lintr}
 
 `styler` nie poprawia wszystkich błędów, bo byłoby to zbyt destrukcyjne. Na szczęście `lintr` może nam je wszystkie wypomnieć. Dla każdego naszego projektu powinniśmy raz uruchomić komendę `lintr::use_lintr(type = "tidyverse")`. Spowoduje to wytworzenie w folderze pliku `.lintr`. Zawiera on konfigurację `lintr` dla danego projektu. Za jego pomocą będziemy mogli tę konfigurację również zmieniać.
+
+![Przykład wykorzystania `lintr`](./ilustracje/lintr_gif.gif){#fig-lintr}
 
 Zmiana dokonuje się przez wpisanie do pliku `.lintr`[^podstawy_r-33] odpowiednich opcji. Szczegóły omawia dokumentacja (`vignette("lintr")`), ale na pewno chciałbym wskazać jedną, której zmiana jest wręcz konieczna. Domyślnie `lintr` uznaje za za długie linie linie powyżej 80 znaków. To jest strasznie mało! Ja zazwyczaj ustawiam ten limit to na 120-150 znaków. Domyślna zawartość pliku `.lintr` wygląda tak:
 
@@ -1373,5 +1379,3 @@ Tym samym zachęcam do dalszej nauki! Jeśli opanowaliście elementy zawarte w t
 Jeśli czytasz to teraz, oznacza to, że ten tekst to praca w toku. Za każdą informację zwrotną będę wdzięczny. Jeśli coś było niejasne, jeśli coś powinienem wyjaśnić szerzej albo prościej, jeśli czegoś mocno zabrakło, to można (trzeba!) do mnie pisać: [315695\@uwr.edu.pl](mailto:315695@uwr.edu.pl).
 
 Z tego miejsca pozostaje mi życzyć jak najmniej błędów. Ostatnie przesłanie jest jednak takie, że błędy będą się pojawiać. W dużych ilościach. Debugowanie potrafi zajmować mnóstwo czasu, zwłaszcza na początku drogi. Nie trzeba się jednak bać ani frustrować, trzeba czytać komunikaty o błędach i w razie czego wyszukiwać je w Google. Po pewnym czasie tych błędów będzie coraz mniej, podobnie jak zawahań i potrzeby sięgania po pomoc poza dokumentację. Choć pewnie nigdy nie znikną całkiem.
-
-# Bibliografia {#sec-bibliography}
