@@ -356,6 +356,12 @@ div.csl-indent {
 <ol start="6" type="1">
 <li>Wykresy. Wspominałem o tym wyżej, ale wykresy są warte osobnego punktu. Możliwości Excela są ograniczone. Dla przykładu wykres poniżej prezentuje wyniki badania nt. tego, jak wygląda homofobia u mężczyzn, którym się powie, że są niemęscy. W badaniu mierzyliśmy dodatkowo zmienną psychologiczną o nazwie normatywna męskość, czyli niejako stopień przywiązania do reguł, co <em>prawdziwy mężczyzna</em> powinien, a czego nie powinien. Wykres jest dość skomplikowany. Zawiera trzy zmienne dychotomiczne, co daje łącznie 8 kolumn w grupach po 4 i 2. Nie powiem, że zrobić taki wykres jest łatwo, bo dobre opanowanie <code>ggplot2</code> trochę zajmuje, ale gdy już opanujemy, co jest do opanowania, to hulaj dusza. Nawet najbardziej skomplikowane wykresy stają się możliwe. Gdy połączyć to z możliwościami dawanymi przez programistyczną warstwę R, nagle łatwe staje się wytworzenie serii pasujących do siebie stylem wykresów o tych samych wymiarach. Pozwala to uzyskać pełną spójność bez ręcznego poprawiania szczególików.</li>
 </ol>
+<div id="fig-homofobia" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="./ilustracje/homofobia.svg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;1: Homofobia u mężczyzn o zagrożonej i niezagrożonej męskości, w zależności od tego, jak wysoką mieli tzw. normatywną męskość. Gdy dodać to tego jeszcze podział na dwa rodzaje homofobii, robią się z tego trzy podziały i osiem różnych kolumn ze wspólnymi osiami, legendą i kolorami. Zrobienie tego w Excelu, o ile w ogóle możliwe, byłoby bardzo trudne.</figcaption><p></p>
+</figure>
+</div>
 <!-- -->
 <ol start="7" type="1">
 <li><p>Analizy można napisać niezależnie od procesu zbierania danych. Na III roku studiów miałem projekt studencki, w którym musieliśmy zrobić prosty eksperyment w PsychoPy, przeanalizować dane i zaprezentować wyniki. Termin był krótki, także ostatnie dane większość grup zdążyła zebrać dopiero na dzień przed terminem, w tym moja. Oznaczało to, że osoby robiące analizę statystyczną musiały siedzieć do późna, żeby wyrobić się z prezentacją. Ale że już wtedy umiałem co nieco R, to napisałem całą analizę kilka dni wcześniej, kiedy akurat miałem wolny wieczór. Kiedy zebraliśmy ostatnie dane, wystarczyło kliknąć „Run” i gotowe – wykresy, testy, w mgnieniu oka policzone dla całego zestawu danych (wyczyszczonych! jak wspominałem wyżej, w PsychoPy czyszczenie danych bywa żmudne).</p></li>
@@ -1909,10 +1915,22 @@ div.csl-indent {
 <section id="styler" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="styler"><span class="header-section-number">10.1</span> <code>styler</code></h2>
 <p>Pierwszy z tych narzędzi to <code>styler</code>, który sam poprawia wiele aspektów kodu, w tym wiele oczywistych błędów. Instalujemy go jak każdy inny pakiet (<code>install.packages("styler")</code>). Po zainstalowaniu menu Addins wzbogaca się o kilka opcji, z których najważniejsza to <em>style active file</em><a href="#fn32" class="footnote-ref" id="fnref32" role="doc-noteref"><sup>32</sup></a>. Podczas pracy uruchamiam to co jakiś czas i zazwyczaj znajdują się jakieś przeoczenia.</p>
+<div id="fig-styler" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="&quot;https://raw.githubusercontent.com/lorenzwalthert/some_raw_data/master/styler_0.1.gif&quot;" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;2: Przykład wykorzystania <code>styler</code></figcaption><p></p>
+</figure>
+</div>
 </section>
 <section id="lintr" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="lintr"><span class="header-section-number">10.2</span> <code>lintr</code></h2>
 <p><code>styler</code> nie poprawia wszystkich błędów, bo byłoby to zbyt destrukcyjne. Na szczęście <code>lintr</code> może nam je wszystkie wypomnieć. Dla każdego naszego projektu powinniśmy raz uruchomić komendę <code>lintr::use_lintr(type = "tidyverse")</code>. Spowoduje to wytworzenie w folderze pliku <code>.lintr</code>. Zawiera on konfigurację <code>lintr</code> dla danego projektu. Za jego pomocą będziemy mogli tę konfigurację również zmieniać.</p>
+<div id="fig-lintr" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="./ilustracje/lintr_gif.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;3: Przykład wykorzystania <code>lintr</code></figcaption><p></p>
+</figure>
+</div>
 <p>Zmiana dokonuje się przez wpisanie do pliku <code>.lintr</code><a href="#fn33" class="footnote-ref" id="fnref33" role="doc-noteref"><sup>33</sup></a> odpowiednich opcji. Szczegóły omawia dokumentacja (<code>vignette("lintr")</code>), ale na pewno chciałbym wskazać jedną, której zmiana jest wręcz konieczna. Domyślnie <code>lintr</code> uznaje za za długie linie linie powyżej 80 znaków. To jest strasznie mało! Ja zazwyczaj ustawiam ten limit to na 120-150 znaków. Domyślna zawartość pliku <code>.lintr</code> wygląda tak:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>linters<span class="sc">:</span> <span class="fu">linters_with_defaults</span>()</span>
