@@ -1,12 +1,14 @@
 ---
 number-sections: true
+date: now
+date-format: "[Zaktualizowano:] D MMMM YYYY, H:mm:ss"
 ---
 
 # Podstawy programowania w R {#sec-intro .unnumbered}
 
-W kilku miejscach w dalszej części wrzucam informacje, jak daną rzecz omawianą teoretycznie można zrobić w R. **Absolutnie nie jest to konieczne do zrozumienia statystyki!** Jest to tylko jedna z możliwości, jak można opisaną dalej teorię przekuć w praktykę. O R można myśleć jako o programie do robienia statystyki. Podobnie jak SPSS, Statistica, Stata czy (oparte na R, darmowe i otwartoźródłowe) jamovi. Jeśli jednak Czytelnik widział kiedyś program statystyczny, spodziewać się będzie ekranu podobnego do Excela, gdzie na górnej belce wybiera się testy statystyczne, jakie chce się przeprowadzić. Praca w R tak nie wygląda. Największa wada i zaleta R polega na tym, że jest on jednocześnie językiem programowania. A to daje bardzo ciekawe możliwości, o których niżej. Także praca w R wygląda tak, że w specjalnym języku piszemy komputerowi, co ma zrobić, potem uruchamiamy te instrukcje i gotowe.
+W kilku miejscach w dalszej części wrzucam informacje, jak to, co omawiamy teoretycznie, można zrobić w R. **Absolutnie nie jest to konieczne do zrozumienia statystyki!** Jest to tylko jedna z możliwości, jak można opisaną dalej teorię przekuć w praktykę. O R można myśleć jako o programie do robienia statystyki, podobnie jak SPSS, Statistica, Stata czy (oparte na R, darmowe i otwartoźródłowe) jamovi. Jeśli jednak Czytelnik widział kiedyś program statystyczny, spodziewać się będzie ekranu podobnego do Excela, gdzie na górnej belce wybiera się testy statystyczne, jakie chce się przeprowadzić. Praca w R tak nie wygląda. Największa wada i zaleta R polega na tym, że jest on jednocześnie językiem programowania. A to daje bardzo ciekawe możliwości, o których niżej. Także praca w R wygląda tak, że w specjalnym języku piszemy komputerowi, co ma zrobić, potem uruchamiamy te instrukcje i gotowe.
 
-W tym miejscu spróbuję krótko opisać, jak zacząć pracę z R. Nie mam ambicji zrobić pełnego wprowadzenia, bo wyszedłby z tego osobny podręcznik. Mam ambicje dać jakikolwiek zarys fundamentu, który pozwoli Czytelnikowi wyczyścić mało brudne dane i zrobić proste testy. Jeśli ktoś po przeczytaniu tego stwierdzi „Może warto się zagłębić", to znajdzie mnóstwo materiałów, które mu na to pozwolą. Ze swojej strony mogę polecić podręcznik „Język R. Kompletny zestaw narzędzi dla analityków danych" Wickhama i Grolemunda [-@wickham2020], interaktywne kursy na DataCamp, a pomocy w rozwiązaniu konkretnych problemów zawsze można szukać na StackOverflow.
+W tym miejscu spróbuję opisać, jak zacząć pracę z R. Nie mam ambicji zrobić pełnego wprowadzenia, bo wyszedłby z tego osobny podręcznik. Mam ambicje dać jakikolwiek fundament, który pozwoli Czytelnikowi wyczyścić dane i zrobić podstawowe testy. Jeśli po przeczytaniu tego tekstu ktoś stwierdzi „Może warto się zagłębić", to znajdzie mnóstwo materiałów, które mu na to pozwolą. Ze swojej strony mogę polecić podręcznik „Język R. Kompletny zestaw narzędzi dla analityków danych" Wickhama i Grolemunda [-@wickham2020], interaktywne kursy na DataCamp, a pomocy w rozwiązaniu konkretnych problemów zawsze można szukać na StackOverflow.
 
 ```{r}
 #| label: setup
@@ -48,39 +50,39 @@ knitr::knit_hooks$set(
 
 # 10 powodów dla których warto uczyć się R {#sec-reasons}
 
-Dla niektórych ludzi perspektywa uczenia się języka programowania tylko po to, żeby móc robić testy statystyczne, wydaje się być stratą czasu. Albo budzi lęk. Po co poświęcać tyle czasu i energii dla czegoś, co możemy zrobić poprzez klikanie w obrazki w jamovi? Powodów jest wiele i kilka pozwolę sobie wymienić.
+Dla niektórych ludzi perspektywa uczenia się języka programowania tylko po to, żeby móc robić testy statystyczne, wydaje się być stratą czasu. Może też budzić. Po co poświęcać tyle energii dla czegoś, co możemy zrobić poprzez klikanie w obrazki w jamovi? Powodów jest wiele i kilka pozwolę sobie wymienić.
 
-1.  Można zrobić wszystko. Absolutnie wszystko. Nie ma sensu pytać „czy da się to zrobić?", w R pytamy „jak to zrobić?". Wyobraźmy sobie, że chcemy zastosować jakiś test i nagle odkrywamy, że nie ma go w naszym programie statystycznym. Jeżeli jest nim coś w rodzaju Statistici, to możemy co najwyżej napisać do deweloperów z nadzieją, że dołożą. W R prawdopodobnie istnieje już pakiet, który interesujący nas test zawiera. A jeśli nie, to jeśli mamy wzór matematyczny, to wklepanie go w R to nic trudnego.
+1.  Można zrobić wszystko. Absolutnie wszystko. Nie ma sensu pytać „czy da się to zrobić?", w R pytamy „jak to zrobić?". Wyobraźmy sobie, że chcemy zastosować jakiś test i nagle odkrywamy, że nie ma go w naszym programie statystycznym. Jeżeli pracujemy w czymś w rodzaju Statistici, to możemy co najwyżej napisać do deweloperów z nadzieją, że dołożą nasz test w kolejnej aktualizacji, gdzieś za rok. W R prawdopodobnie istnieje już pakiet, który interesujący nas test zawiera. A jeśli nie, to jeśli mamy wzór matematyczny, to wklepanie go w R to nic trudnego.
 
-2.  R to darmowe, otwartoźródłowe oprogramowanie (tzw. FOSS). Wszystkie pakiety, których używam dalej, nie kosztują nic. Dla porównania najpopularniejszy program statystyczny na świecie, SPSS [^podstawy_r-1] w podstawowej wersji w chwili pisania tego tekstu kosztuje od 99 dolarów miesięcznie za osobę. I to nawet nie jest wersja dająca wszystkie możliwości. W R da się policzyć właściwie wszystko to, co w SPSS, korzysta się ze wszystkich innych zalet języka programowania (patrz niżej), a to wszystko za okrągłe 0 dolarów miesięcznie za osobę.
+2.  R to darmowe, otwartoźródłowe oprogramowanie (tzw. FOSS). Wszystkie pakiety, których używam dalej, nie kosztują nic. Dla porównania najpopularniejszy program statystyczny na świecie, SPSS [^podstawy_r-1], w podstawowej wersji w chwili pisania tego tekstu kosztuje minimum 99 dolarów miesięcznie za osobę. I to nawet nie jest wersja dająca wszystkie możliwości. W R da się policzyć właściwie wszystko to, co w SPSS, korzysta się ze wszystkich innych zalet języka programowania (patrz niżej), a to wszystko za okrągłe 0 dolarów miesięcznie za osobę.
 
 [^podstawy_r-1]: Drugim najpopularniejszym jest R.
 
 <!-- -->
 
-3.  R to język programowania. Pozwala to na szybką automatyzację dużej liczby zadań i radzenia sobie z nieprzewidzianymi okolicznościami. Dla przykładu program do prowadzenia eksperymentów PsychoPy generuje dane w dość pogmatwanych arkuszach kalkulacyjnych, które trzeba dość mocno wyczyścić przed analizą. Problem jest jednak taki, że wyniki każdej osoby badanej zapisują się w osobnych plikach. Jeśli przebadaliśmy 150 osób, mamy 150 plików do wyczyszczenia. Jeśli piszemy analizę w R, to wystarczy wyczyścić jeden plik, a potem dopisać linijkę czy dwie, żeby R tak samo wyczyścił pozostałe 149 plików. Bardzo cenię sobie też możliwość łatwego wygenerowania nazw dla kolumn typu MMPI_001, MMPI_002, ..., MMPI_567. Wpisywanie tego ręcznie to nuda i marnowanie mnóstwa czasu, a w R to jedna linijka kodu.
+3.  R to język programowania. Pozwala to na szybką automatyzację dużej liczby zadań i radzenie sobie z nieprzewidzianymi okolicznościami. Dla przykładu program do prowadzenia eksperymentów psychologicznych PsychoPy generuje dane w dość pogmatwanych arkuszach kalkulacyjnych, które trzeba dość mocno wyczyścić przed analizą. Problem jest jednak taki, że wyniki każdej osoby badanej zapisują się w osobnych plikach. Jeśli przebadaliśmy 150 osób, mamy 150 plików do wyczyszczenia. Jeśli piszemy analizę w R, to wystarczy wyczyścić jeden plik, a potem dopisać linijkę czy dwie, żeby R tak samo wyczyścił pozostałe 149 plików. Bardzo cenię sobie też możliwość łatwego wygenerowania nazw dla kolumn typu MMPI_001, MMPI_002, ..., MMPI_567. Wpisywanie tego ręcznie to nuda i marnowanie czasu, a w R to jedna linijka kodu.
 
-4.  Analizy są modyfikowalne i wielorazowego użytku. Co mam na myśli? Załóżmy, że zrobiliśmy całą analizę i nagle się orientujemy, że nie usunęliśmy z bazy kilku wierszy, które przez przypadek wytworzyliśmy, jak bawiliśmy się kwestionariuszem, zanim go upubliczniliśmy. Albo prowadzący przy sprawdzaniu prosi, żeby zmodyfikować nieco analizę, bo chce wyniki kwestionariuszy wyrażone jako średnia, a nie suma. Jeśli korzystamy ze zwykłego oprogramowania, w obu przypadkach musimy wyklikiwać analizy od początku. Jeśli nasza analiza jest w R, to mamy ją całą zapisaną przed oczami. Możemy zmienić coś na samym jej początku, kliknąć jeden guzik i gotowe. Jeszcze lepiej -- ta analiza siedzi na naszym komputerze, póki jej nie usuniemy, więc jeśli kiedyś trzeba by było wykonać podobne zadanie, to wystarczy prosta operacja kopiuj-wklej.
+4.  Analizy są modyfikowalne i wielorazowego użytku. Co mam na myśli? Załóżmy, że zrobiliśmy całą analizę i nagle się orientujemy, że nie usunęliśmy z bazy kilku wierszy, które wytworzyliśmy podczas testów. Albo prowadzący przy sprawdzaniu prosi, żeby zmodyfikować nieco analizę, bo chce wyniki kwestionariuszy wyrażone jako średnia, a nie suma. Jeśli korzystamy ze zwykłego oprogramowania, w obu przypadkach musimy wyklikiwać analizy od początku. Jeśli nasza analiza jest w R, to mamy ją całą zapisaną przed oczami. Możemy zmienić coś na samym jej początku, kliknąć jeden guzik i gotowe. Jeszcze lepiej -- ta analiza siedzi na naszym komputerze, póki jej nie usuniemy. Jeśli kiedyś trzeba by było wykonać podobne zadanie, to wystarczy prosta operacja kopiuj-wklej.
 
-5.  R to kompletny zestaw narzędzi dla analityków danych, jak głosi tytuł polecanej na wstępie książki. Nie są to słowa rzucone na wiatr. Korzystając np. z jamovi, zazwyczaj wcześniej czyścimy dane w Excelu. Jeśli potrzebujemy dane zmodyfikować, np. połączyć dwie bazy albo zmienić format szeroki na długi[^podstawy_r-2], to również w Excelu. A to się ciężko robi w Excelu, bo albo robimy to ręcznie, albo musimy nauczyć się Power Query. Potem robimy analizę, ładne wykresy (często wracamy się do Excela w tym celu) i piszemy raport w Wordzie. W R da się zrobić to wszystko. Niezwykle potężne i giętkie czyszczenie danych (za które uwielbiam R) z `tidyverse`, testy statystyczne, ładne wykresy w `ggplot2`, a na końcu nawet raport w Quarto (dawniej RMarkdown). Możemy nie wychodzić z R i często tak będziemy robić.
+5.  R to kompletny zestaw narzędzi dla analityków danych, jak głosi tytuł polecanej na wstępie książki. Nie są to słowa rzucone na wiatr. Korzystając np. z jamovi, zazwyczaj wcześniej czyścimy dane w Excelu. Jeśli potrzebujemy dane zmodyfikować, np. połączyć dwie bazy albo zmienić format szeroki na długi[^podstawy_r-2], to również musimy sięgnąć do Excela. A Excel to nie jest program do czyszczenia danych, wiele rzeczy musimy wykonywać ręcznie albo musimy nauczyć się Power Query. Potem robimy analizę w programie statystycznym, ładne wykresy (znwou w Excelu) i piszemy raport w Wordzie. W R da się zrobić to wszystko. Mamy do dyspozycji potężne i giętkie czyszczenie danych (za które uwielbiam R) z `dplyr`, testy statystyczne np. z `rstatix`, ładne wykresy w `ggplot2`, a na końcu nawet raport w Quarto (dawniej RMarkdown). Możemy nie wychodzić z R i wykonać całą pracę od początku, do końca.
 
-[^podstawy_r-2]: To trudno sobie wyobrazić, łatwiej zobaczyć na obrazkach. Chodzi o to, czy mamy klasyczną wyczyszczoną bazę, w której jedna osoba badana to jeden wiersz, a każda kolumna to jeden pomiar (np. odpowiedź na pytanie). Czasem chcemy zamiast 11 kolumn (ID osoby badanej + 10 odpowiedzi na pytania) mieć tylko 3 kolumny (ID osoby badanej, numer pytania, odpowiedź). Wtedy każda osoba badana zajmuje 10 wierszy, ale każdy wiersz ma odpowiedź na tylko jedno pytanie. To potrafi być potrzebne do niektórych testów, grupowania danych itp. To jest technikalium, to nie jest statystyka *per se*, ale czasem trzeba to ogarniać, żeby rzeczywiście zrobić analizę. Poświęciłem temu cały podrozdział [-@sec-pivot].
+[^podstawy_r-2]: To trudno sobie wyobrazić, łatwiej zobaczyć na obrazkach. Poświęciłem temu cały podrozdział [-@sec-pivot].
 
 <!-- -->
 
-6.  Wykresy. Wspominałem o tym wyżej, ale wykresy są warte osobnego punktu. Możliwości Excela są ograniczone. Dla przykładu wykres poniżej prezentuje wyniki badania nt. tego, jak wygląda homofobia u mężczyzn, którym się powie, że są niemęscy. W badaniu mierzyliśmy dodatkowo zmienną psychologiczną o nazwie normatywna męskość, czyli niejako stopień przywiązania do reguł, co *prawdziwy mężczyzna* powinien, a czego nie powinien. Wykres jest dość skomplikowany. Zawiera trzy zmienne dychotomiczne, co daje łącznie 8 kolumn w grupach po 4 i 2. Nie powiem, że zrobić taki wykres jest łatwo, bo dobre opanowanie `ggplot2` trochę zajmuje, ale gdy już opanujemy, co jest do opanowania, to hulaj dusza. Nawet najbardziej skomplikowane wykresy stają się możliwe. Gdy połączyć to z możliwościami dawanymi przez programistyczną warstwę R, nagle łatwe staje się wytworzenie serii pasujących do siebie stylem wykresów o tych samych wymiarach. Pozwala to uzyskać pełną spójność bez ręcznego poprawiania szczególików.
+6.  Wykresy. Wspominałem o tym wyżej, ale wykresy są warte osobnego punktu. Możliwości Excela w tym zakresie są ograniczone. Dla przykładu wykres poniżej prezentuje wyniki pewnego badania w którym mierzono homofobię u ludzi różniących się obecnością manipulacji i poziomem cechy psychologicznej zwanej normatywną męskością. Wykres jest dość skomplikowany. Zawiera trzy zmienne dychotomiczne, co daje łącznie 8 kolumn w grupach po 4 i 2 na wspólnych osiach. Nie powiem, że zrobić taki wykres jest łatwo, bo dobre opanowanie `ggplot2` trochę zajmuje, ale gdy już opanujemy, co jest do opanowania, to hulaj dusza. Nawet najbardziej skomplikowane wykresy stają się możliwe. Gdy połączyć to z możliwościami dawanymi przez programistyczną warstwę R, łatwe staje się wytworzenie serii pasujących do siebie stylem wykresów o tych samych wymiarach. Pozwala to uzyskać pełną spójność bez ręcznego poprawiania szczególików.
 
 ![Homofobia u mężczyzn o zagrożonej i niezagrożonej męskości, w zależności od tego, jak wysoką mieli tzw. normatywną męskość. Gdy dodać to tego jeszcze podział na dwa rodzaje homofobii, robią się z tego trzy podziały i osiem różnych kolumn ze wspólnymi osiami, legendą i kolorami. Zrobienie tego w Excelu, o ile w ogóle możliwe, byłoby bardzo trudne.](./ilustracje/homofobia){#fig-homofobia}
 
 <!-- -->
 
-7.  Analizy można napisać niezależnie od procesu zbierania danych. Na III roku studiów miałem projekt studencki, w którym musieliśmy zrobić prosty eksperyment w PsychoPy, przeanalizować dane i zaprezentować wyniki. Termin był krótki, także ostatnie dane większość grup zdążyła zebrać dopiero na dzień przed terminem, w tym moja. Oznaczało to, że osoby robiące analizę statystyczną musiały siedzieć do późna, żeby wyrobić się z prezentacją. Ale że już wtedy umiałem co nieco R, to napisałem całą analizę kilka dni wcześniej, kiedy akurat miałem wolny wieczór. Kiedy zebraliśmy ostatnie dane, wystarczyło kliknąć „Run" i gotowe -- wykresy, testy, w mgnieniu oka policzone dla całego zestawu danych (wyczyszczonych! jak wspominałem wyżej, w PsychoPy czyszczenie danych bywa żmudne).
+7.  Analizy można napisać niezależnie od procesu zbierania danych. Na III roku studiów miałem projekt studencki, w którym musieliśmy zrobić prosty eksperyment w PsychoPy, przeanalizować dane i zaprezentować wyniki. Termin był krótki, także ostatnie dane większość grup zdążyła zebrać dopiero na dzień przed terminem, w tym moja. Oznaczało to, że osoby robiące analizę statystyczną musiały siedzieć do późna, żeby zdążyć na czas. Ale że już wtedy umiałem co nieco R, to napisałem całą analizę kilka dni wcześniej, kiedy akurat miałem wolny wieczór. Kiedy zebraliśmy ostatnie dane, wystarczyło kliknąć „Run" i gotowe -- wykresy, testy, w mgnieniu oka policzone dla całego zestawu danych (wyczyszczonych! jak wspominałem wyżej, w PsychoPy czyszczenie danych bywa żmudne).
 
-8.  R jest zgodny z filozofią Open Science. O ruchu Open Science można mówić bardzo długo, ale ogólnie jest to ruch dążący do otwartego dostępu do raportów naukowych (za darmo), surowych danych i dokładnych opisów analiz statystycznych. Jeśli naukowiec załącza do swojego artykułu surową bazę danych i skrypt w R, inni naukowcy mogą sprawdzić, czy tamten nie manipulował danymi, nie stosował podejrzanych praktyk oraz czy po ludzku się gdzieś nie pomylił. Poza tym każdy może powtórzyć jego analizę i sprawdzić, czy rzeczywiście wychodzi, jak naukowiec zaraportował.
+8.  R jest zgodny z filozofią Open Science. O ruchu Open Science można mówić bardzo długo, ale ogólnie dąży on do otwartego dostępu do raportów naukowych (za darmo), surowych danych i dokładnych opisów analiz statystycznych. Jeśli naukowiec załącza do swojego artykułu surową bazę danych i skrypt w R, inni naukowcy mogą sprawdzić, czy tamten nie manipulował danymi, nie stosował podejrzanych praktyk oraz czy po ludzku się gdzieś nie pomylił. Poza tym każdy może powtórzyć jego analizę i sprawdzić, czy rzeczywiście wychodzi, jak naukowiec zaraportował. Utrudnia to nadużycia, które -- niestety -- czasami w nauce się zdarzają.
 
-9.  R jest świetnym środowiskiem do współpracy. Wiele osób może pracować nad jedną analizą statystyczną podobnie jak teraz pracujemy nad prezentacjami czy plikami w Wordzie -- online. Współpracownicy mogą czytać swój kod, uzupełniać się nawzajem, wprowadzać poprawki i dzielić się pracą nawet w obrębie pojedynczych czynności do wykonania. W programach, w których analizy wyklikujemy, jest to znacznie trudniejsze. Gdy zaś mamy kod przed oczami, widzimy wyraźnie, co współpracownik robi i jak mu pomóc.
+9.  R jest świetnym środowiskiem do współpracy. Wiele osób może pracować nad jedną analizą statystyczną, podobnie jak teraz pracujemy nad prezentacjami czy plikami w Wordzie -- online. Współpracownicy mogą czytać swój kod, uzupełniać się nawzajem, wprowadzać poprawki i dzielić się pracą nawet w obrębie pojedynczych czynności do wykonania. W programach, w których analizy wyklikujemy, jest to znacznie trudniejsze. Gdy mamy kod przed oczami, widzimy wyraźnie, co współpracownik robi i jak mu pomóc.
 
-10. R wymaga, by wiedzieć, co się robi. Niektórzy mogą to potraktować jako wadę, ale ja sądzę, że to wielka zaleta. Jeśli chcę nauczyć się statystyki, żeby sprawnie zrobić analizy do swojej pracy magisterskiej i rozumieć analizy z artykułów naukowych, to muszę wiedzieć, co robię. Z R ciężko jest nauczyć się, w co klikać, a potem po prostu robić to za każdym razem tak samo. Jest to swego rodzaju wyzwanie, ale cenne.
+10. R wymaga, by wiedzieć, co się robi. Niektórzy mogą to potraktować jako wadę, ale ja sądzę, że to wielka zaleta. Jeśli chcę nauczyć się statystyki, żeby sprawnie zrobić analizy do swojej pracy magisterskiej i rozumieć analizy z artykułów naukowych, to muszę wiedzieć, co robię. Z R ciężko jest nauczyć się na pamięć, w co klikać, a potem po prostu robić to za każdym razem tak samo. Jest to swego rodzaju wyzwanie, ale cenne.
 
 # Przygotowanie {#sec-preparation}
 
@@ -88,9 +90,9 @@ Dla niektórych ludzi perspektywa uczenia się języka programowania tylko po to
 
 [^podstawy_r-3]: Jeśli korzystasz z jakiejś dystrybucji linuxa, R możesz zainstalować z oficjalnych repozytoriów. Pakiet zazwyczaj nazywa się `r-base`. W Ubuntu wystarczy użyć komendy `sudo apt install r-base`.
 
-Druga sprawa to IDE, czyli coś, w czym będziemy pisać nasze skrypty. Ale jak to? R nie wystarczy? Technicznie wystarczy, ale R to program działający z wiersza poleceń. To jest to czarne okienko, gdzie wpisujemy polecenia ręcznie. Większość z nas będzie chciała skorzystać z czegoś bardziej przystępnego niż goły wiesz poleceń. Standardem jest tu program o nazwie RStudio[^podstawy_r-4]. Możemy go pobrać ze strony [posit.co](https://posit.co) w wersji Desktop. Z tym raczej nie będzie już problemu.
+Druga sprawa to IDE, czyli coś, w czym będziemy pisać nasze skrypty. Ale jak to? R nie wystarczy? Technicznie wystarczy, ale R to program działający z wiersza poleceń. To jest to czarne okienko, gdzie wpisujemy komendy ręcznie. Większość z nas będzie chciała skorzystać z czegoś bardziej przystępnego niż goły wiesz poleceń. Standardem jest tu program o nazwie RStudio[^podstawy_r-4]. Możemy go pobrać ze strony [posit.co](https://posit.co) w wersji Desktop. Z tym raczej nie będzie już problemu.
 
-[^podstawy_r-4]: W R da się programować też w innych IDE, np. w Visual Studio Code. Niemniej na sam początek lepiej przylgnąć do standardu RStudio, który pomoże nam nabrać najlepszych praktyk i nauczyć się, z czym się R je.
+[^podstawy_r-4]: W R da się programować też w innych IDE, np. w Visual Studio Code. Niemniej na sam początek lepiej przylgnąć do standardu RStudio, który pomoże nam nabrać najlepszych praktyk i nauczyć się, z czym R się je.
 
 Gdy zainstalujemy i uruchomimy RStudio, naszym oczom ukaże się biały ekran, który na razie nie ma sensu, ale go nabierze. Przed rozpoczęciem pracy warto jest zajrzeć w ustawienia (Tools → Global options...), gdzie możemy zmienić kilka rzeczy. W zakładce Appearance możemy ustawić sobie ciemny tryb[^podstawy_r-5] i poczuć się jak programista. W zakładce Spelling możemy wybrać polski słownik do sprawdzania pisowni. Na ten moment tyle zmian powinno wystarczyć.
 
@@ -100,78 +102,83 @@ Gdy zainstalujemy i uruchomimy RStudio, naszym oczom ukaże się biały ekran, k
 
 ## Konsola, zmienne i matematyka {#sec-console}
 
-Ekran RStudio składa się z trzech okienek. Duże okienko po lewej i dwa mniejsze po prawej. Skierujmy naszą uwagę na okienko po lewej, czyli konsolę. Wita nas ona ciepłą informacją, że R jest zainstalowany i znakiem zachęty `>` zachęca nas do wydawania jej poleceń. Konsola R to miejsce, w którym możemy mówić R, żeby coś dla nas liczył. Można to potraktować jako super kalkulator. Spróbuj -- wpisz w konsolę `2+3*5`, zatwierdź enterem i zwróć uwagę, że R stosuje poprawną kolejność wykonywania działań. Spacje nie mają znaczenia, także możemy wpisać również bardziej estetyczną wersję `2 + 3 * 5`. Nie wiem po co, ale można.
+Ekran RStudio składa się z trzech okienek. Duże okienko po lewej i dwa mniejsze po prawej. Skierujmy naszą uwagę na okienko po lewej, czyli konsolę. Wita nas ona ciepłą informacją, że R jest zainstalowany. Znakiem zachęty `>` zachęca nas do wydawania jej poleceń. Konsola R to miejsce, w którym możemy mówić R, żeby coś dla nas liczył. Można to potraktować jako super-kalkulator. Spróbuj -- wpisz w konsolę `2+3*5`, zatwierdź enterem i zwróć uwagę, że R stosuje poprawną kolejność wykonywania działań. Spacje nie mają znaczenia, także możemy wpisać również bardziej estetyczną wersję `2 + 3 * 5`. Nie wiem po co, skoro to tylko obliczenie na szybko, ale można.
 
-Wynik takiego działania nigdzie się nie zapisuje, tylko wyświetla się w konsoli. Jeśli chcemy zapisać nasz wynik, możemy to zrobić stosując znaczek `<-`[^podstawy_r-6]. Przydatnym skrótem jest tu w RStudio jest alt+-, który od razu wstawia nam tę strzałeczkę. Wyjaśnijmy to na przykładzie.
+Wynik takiego działania nigdzie się nie zapisuje, tylko wyświetla się w konsoli. Jeśli chcemy zapisać nasz wynik, możemy to zrobić stosując znaczek `<-`[^podstawy_r-6]. Przydatnym skrótem jest tu w RStudio jest Alt+-, który od razu wstawia nam tę strzałeczkę. Wyjaśnijmy to na przykładzie.
 
-[^podstawy_r-6]: Jeśli znasz jakiś inny język programowania, możesz zapytać, dlaczego nie używamy `=`. Operator `=` też zadziała, ale za dobrą praktykę w R uznawane jest stosowanie `<-` do przypisywania obiektów do zmiennych, a `=` do ustalania wartości argumentów.
+[^podstawy_r-6]: Jeśli znasz jakiś inny język programowania, możesz zapytać, dlaczego nie używamy `=`. Operator `=` też zadziała, ale za dobrą praktykę w R uznawane jest stosowanie `<-` do przypisywania obiektów, a `=` do ustalania wartości argumentów.
 
 ```{r}
 #| eval: false
 wynik <- 2 + 3 * 5
+
 a <- wynik * 3^3
 ```
 
-Powyżej zapisałem dwa polecenia, które do konsoli powinniśmy wpisać jedno po drugim i każde z nich zatwierdzić enterem. Pierwsze polecenie mówi coś takiego -- policz `2 + 3 * 5` i zapisz to w zmiennej `wynik`. Po zatwierdzeniu tego polecenia możemy zauważyć, że wynik działania nam się nie wyświetlił, za to w prawym górnym okienku pojawiło się słowo `wynik` i obok wartość `17`. Od tego momentu możemy używać słowa `wynik` zamiast 17. Spróbuj wpisać w konsolę samo słowo `wynik` i zatwierdzić enterem. Konsola informuje nas, że w zmiennej `wynik` kryje się liczba 17. Jeśli teraz wpiszesz np. `wynik * 2`, to konsola zwróci to samo, co zwróciłaby po wpisaniu `17 * 2`. Co więc robi drugie polecenie? Możemy je odczytać jako „W zmiennej o nazwie `a` zapisz wynik mnożenia `wynik` i 3 do potęgi 3". Operator `^` to właśnie potęgowanie. Jeśli wpiszemy w konsolę `a`, naszym oczom ukaże się wynik 459.
+Powyżej zapisałem dwa polecenia, które do konsoli powinniśmy wpisać jedno po drugim i każde z nich zatwierdzić enterem. Pierwsze polecenie mówi konsoli -- policz `2 + 3 * 5` i zapisz to w zmiennej `wynik`. Po zatwierdzeniu tego polecenia możemy zauważyć, że wynik działania nam się nie wyświetlił. Za to w prawym górnym okienku pojawiło się słowo `wynik` i obok wartość `17`. Od tego momentu możemy używać słowa `wynik` zamiast liczby 17. Spróbuj wpisać w konsolę samo słowo `wynik` i zatwierdzić enterem. Wyskoczy 17. Jeśli teraz wpiszesz np. `wynik * 2`, to konsola zwróci to samo, co zwróciłaby po wpisaniu `17 * 2`, czyli 34. Co więc robi drugie polecenie z przyładu? Możemy je odczytać jako „W zmiennej o nazwie `a` zapisz (`a <-`) wynik mnożenia zmiennej `wynik` i 3 do potęgi 3 (`wynik * 3^3`)". Operator `^` oznacza potęgowanie. Jeśli potem wpiszemy w konsolę `a`, naszym oczom ukaże się 459, czyli $17 \times 3^3$.
 
 Jak się potem okaże, w zmiennych możemy zapisywać dużo więcej, niż tylko wyniki prostych działań matematycznych. W identyczny sposób do odpowiednich zmiennych trafią wyniki testów statystycznych albo całe bazy danych. Ale o tym dalej.
 
 ## Funkcje {#sec-functions}
 
-Tym, co robi robotę w R (jak i w każdym innym języku programowania) są funkcje. Funkcja to taka maszynka, do której coś wrzucamy, ona nam to przekształca i wywala coś innego. Tak jak w matematyce. Podobnie jak w matematyce, funkcje zapisujemy konwencją `f(x)`, czyli `nazwa(co_wrzucam_do_funkcji)`. Dla przykładu funkcja `seq` pozwala nam wytwarzać sekwencje liczb. Musimy do tej funkcji wrzucić od jakiej liczby chcemy zacząć, na jakiej chcemy skończyć i jaki chcemy mieć krok. Dla przykładu:
+Tym, co robi robotę w R (jak i w każdym innym języku programowania) są funkcje. Funkcje to maszyny, do których wrzucamy jakiś obiekt (np. liczbę), funkcja nam to przekształca i wyrzuca z siebie coś innego. Tak samo jak funkcje w matematyce. Skojarzenie jest słuszne, bo funkcje w programowaniu zapisujemy konwencją `f(x)`, czyli `nazwa(co_wrzucam_do_funkcji)`. Dla przykładu funkcja o nazwie `seq` pozwala nam wytwarzać regularne sekwencje liczb, np. od 1 do 10 co 2. Musimy do tej funkcji wrzucić (1) od jakiej liczby chcemy zacząć, (2) na jakiej chcemy skończyć i (3) jaki chcemy mieć krok. Dla przykładu:
 
 ```{r}
 seq(5, 62, 3)
 ```
 
-To, co wrzucamy do funkcji, nazywamy argumentami. Funkcja `seq` wie, że ma zacząć od 5 i skończyć na 62, a nie zacząć od 62 i skończyć na 5, bo ma pod maską zapisane, w jakiej kolejności będzie dostawać te liczby. Takie argumenty nazywamy pozycyjnymi -- funkcja wie, co to jest, na podstawie pozycji. W R każdy argument możemy też nazwać. Dla przykładu wiemy, że funkcja `seq` oczekuje argumentów `from`, `to` i `by`. Możemy więc wprost powiedzieć funkcji, że oto dajemy jej `from`, `to` i `by`.
+To, co wrzucamy do funkcji, nazywamy argumentami. Tutaj były nimi liczby. Funkcja `seq` wie, że ma zacząć od 5 i skończyć na 62, a nie zacząć od 62 i skończyć na 5, bo ma pod maską zapisane, w jakiej kolejności będzie dostawać te liczby. Takie argumenty nazywamy pozycyjnymi -- funkcja wie, co to jest i co ma z tym zrobić, na podstawie pozycji. W R każdy argument możemy też jednak nazwać. Dla przykładu wiemy, że argumenty funkcji `seq` nazywają się `from`, `to` i `by`. Możemy więc wprost powiedzieć funkcji, że oto dajemy jej `from`, `to` i `by`.
 
 ```{r}
 seq(from = 5, to = 62, by = 3)
+
 seq(to = 62, by = 3, from = 5) # jeśli nazywamy argumenty, kolejność nie ma znaczenia
 ```
 
-Tego typu argumenty nazywamy kluczowymi (*keyword*). W praktyce wykorzystuje się mieszankę jednego i drugiego typu argumentów. Nazywanie argumentów zwiększa czytelność kodu, ale czasem pozycja jest wystarczająco jasna. Dla przykładu mogę napisać `sqrt(x = 9)`, żeby wyciągnąć pierwiastek kwadratowy (*square root*) z 9, ale czy zapis `sqrt(9)` jest jakkolwiek mniej jasny?
+Tego typu argumenty nazywamy kluczowymi (*keyword*) albo nazwanymi (*named*). W praktyce wykorzystuje się mieszankę jednego i drugiego typu argumentów. Nazywanie argumentów zwiększa czytelność kodu, ale czasem pozycja jest wystarczająco jasna. Dla przykładu mogę napisać `sqrt(x = 9)`, żeby wyciągnąć pierwiastek kwadratowy (*square root*) z 9, ale czy zapis `sqrt(9)` jest jakkolwiek mniej jasny?
 
-Czasami też używamy argumentów kluczowych, żeby przestawić jakieś ustawienia domyślne albo odblokować nowe możliwości. Dla przykładu funkcja `seq` dysponuje dodatkowym argumentem `length.out`. Jeśli ustawimy `length.out`, możemy ustalić długość naszego wyniku zamiast punktu końcowego albo kroku.
+Czasami też używamy argumentów kluczowych, żeby zmienić jakieś ustawienia domyślne albo odblokować nowe możliwości. Dla przykładu funkcja `seq` dysponuje dodatkowym argumentem `length.out`. Jeśli ustawimy `length.out`, możemy ustalić liczbę elementów w naszym wyniku zamiast punktu końcowego albo kroku.
 
 ```{r}
 seq(5, by = 3, length.out = 10) # daj mi 10 kolejnych liczb zaczynając od 5 i co 3
+
 seq(1, 100, length.out = 10) # podaj 10 liczb między 1 a 100
 ```
 
 ## Dokumentacja {#sec-docs}
 
-Różne funkcje przyjmują różne argumenty. Podobnie jak nie powiemy piekarzowi, żeby stosował białą fugę do chleba, tak samo nie wrzucimy do funkcji `seq` słów zamiast liczb. Tak jak musimy wiedzieć, że piekarz zajmuje się pieczywem, tak samo musimy znać funkcje, których używamy. W poprzednim podrozdziale wiedzieliśmy, co można wrzucić do funkcji `seq` i jak nazywają się jej argumenty, bo to napisałem. Tak samo podałem ot tak, że argument funkcji `sqrt` nazywa się `x`. Skąd mam to jednak wiedzieć?
+Różne funkcje przyjmują różne argumenty. Podobnie jak nie powiemy piekarzowi, żeby stosował białą fugę do naszego chleba, tak samo do funkcji `seq` nie wrzucimy słów zamiast liczb. Tak jak musimy wiedzieć, że piekarz zajmuje się pieczywem, tak samo musimy znać funkcje, których używamy. W poprzednim podrozdziale wiedzieliśmy, co można wrzucić do funkcji `seq` i jak nazywają się jej argumenty, bo to napisałem. Tak samo podałem ot tak, że argument funkcji `sqrt` nazywa się `x`. Skąd mam to jednak wiedzieć?
 
-Nie bez powodu mówimy o *językach programowania* -- wiele funkcji nauczymy się na pamięć i będziemy po prostu wiedzieć, jak z nich korzystać. Jednak znacznie częściej, w wielu przypadkach też dla funkcji, które znamy, będziemy korzystać z dokumentacji. R dysponuje świetną dokumentacją dla każdej funkcji[^podstawy_r-7]. Zawiera ona opis, co dana funkcja robi, jakie argumenty przyjmuje, a często nawet tło teoretyczne jej działania. Żeby dostać się do dokumentacji danej funkcji, wywołujemy ją **w konsoli** ze znakiem zapytania, np. `?seq`. Powoduje to, że w okienku *Help* po prawej wyświetla nam się pełna dokumentacja tej funkcji. Nie trzeba więc sięgać do Google, żeby uzyskać odpowiedź na podstawowe problemy. O ile wiemy, jakiej funkcji chcemy użyć. Zachęcam do częstego sięgania do dokumentacji. To absolutnie podstawowe narzędzie w programowaniu czegokolwiek.
+Nie bez powodu mówimy o *językach* programowania. Wiele funkcji nauczymy się na pamięć i będziemy po prostu wiedzieć, jak z nich korzystać. Jednak znacznie częściej (w wielu przypadkach też dla funkcji, które znamy) będziemy korzystać z dokumentacji. R dysponuje świetną dokumentacją dla każdej funkcji[^podstawy_r-7]. Zawiera ona opis, co dana funkcja robi, jakie argumenty przyjmuje, a często nawet tło teoretyczne jej działania. Żeby dostać się do dokumentacji danej funkcji, wywołujemy ją w konsoli ze znakiem zapytania, np. `?seq`. Powoduje to, że w okienku Help po prawej wyświetla nam się pełna dokumentacja tej funkcji. Nie trzeba więc sięgać do Google, żeby uzyskać odpowiedź na podstawowe problemy. O ile wiemy, jakiej funkcji chcemy użyć. Także zachęcam do częstego sięgania do dokumentacji. To absolutnie podstawowe narzędzie w programowaniu czegokolwiek.
 
-[^podstawy_r-7]: Z założenia. Struktura dokumentacji jest bardzo dobra, a każda funkcja w pakietach CRAN musi być udokumentowana. Zdarzało mi się jednak mieć problem ze zrozumieniem, o co chodzi autorom funkcji, co ma być czym. Jak to w życiu bywa, niektórzy tłumaczą lepiej, a inni piszą treść tego przypisu.
+[^podstawy_r-7]: Z założenia. Struktura dokumentacji jest bardzo dobra, a każda funkcja w pakietach CRAN musi być udokumentowana. Zdarzało mi się jednak mieć problem ze zrozumieniem, o co chodzi autorom funkcji w danych opisach. Jak to w życiu bywa, niektórzy tłumaczą lepiej, a inni piszą treść tego rozdziału.
 
-Świetnym źródłem informacji o funkcjach, pozwalającym również znaleźć odpowiednią funkcję do naszego celu, są ściągi (*cheat sheets*). Pakiety `tidyverse` mają nawet swoje oficjalne ściągi, które na początku swojej nauki R wydrukowałem i zalaminowałem. Polecam je gorąco, zwłaszcza do pakietów `dplyr`, `ggplot2` i `stringr`. Można je znaleźć bezpośrednio w RStudio wybierając Help → Cheat sheets → Browse all cheat sheets albo na stronie Posit, czyli firmy, która wypuszcza RStudio. Jak przejdziemy dalej, do części praktycznej, polecam, żeby mieć te ściągi już przygotowane, tuż obok.
+Świetnym źródłem informacji o funkcjach, pozwalającym również znaleźć odpowiednią funkcję do realizacji naszego celu, są ściągi (*cheat sheets*). Pakiety `tidyverse` mają nawet swoje oficjalne ściągi, które na początku swojej nauki R wydrukowałem i zalaminowałem. Polecam je gorąco, zwłaszcza do pakietów `dplyr`, `ggplot2` i `stringr`. Można je znaleźć bezpośrednio w RStudio wybierając Help → Cheat sheets → Browse all cheat sheets albo [na stronie Posit](https://posit.co/resources/cheatsheets/), czyli firmy, która wypuszcza RStudio. Jak przejdziemy dalej, do części praktycznej, polecam, żeby mieć te ściągi już przygotowane, wydrukowane lub w .pdf.
 
 ## Skrypty {#sec-scripts}
 
-Wpisaliśmy w konsolę już sporo rzeczy i historię naszych komend możemy zobaczyć przechodząc do odpowiedniej zakładki w prawym górnym okienku. Jednak wyjście z programu może nam skutecznie skasować tę historię. Jeśli mamy całą sporą analizę statystyczną, która składa się z 200 linijek kodu, to chcielibyśmy mieć jakiś sposób na zapisanie tego na przyszłość, żeby nie musieć za każdym razem wklepywać tego kodu z pamięci. Zaopatrujemy się więc w gruby zeszyt w linie i wszystkie komendy piszemy również tam. Żarcik. Do przechowywania kodu służą specjalne pliki zwane skryptami. Tak jak mamy pliki .pdf, .txt, .docx, tak w plikach .R zapisujemy kod R.
+Wpisaliśmy w konsolę już sporo rzeczy. Historię naszych komend możemy zobaczyć przechodząc do odpowiedniej zakładki w prawym górnym okienku. Jednak wyjście z programu może nam skutecznie skasować tę historię. Jeśli mamy całą sporą analizę statystyczną, która składa się z 200 linijek kodu, to chcielibyśmy mieć jakiś sposób na zapisanie tego na przyszłość, żeby nie musieć za każdym razem wklepywać tego kodu z pamięci. Zaopatrujemy się więc w gruby zeszyt w linie i wszystkie komendy piszemy również tam. Żarcik. Do przechowywania kodu służą specjalne pliki zwane skryptami. Tak jak mamy pliki .pdf, .txt, .docx, tak w plikach .R zapisujemy kod R.
 
-Najprościej wytworzyć nowy skrypt klikając w biały kwadracik z plusem w lewym górnym rogu RStudio. Spowoduje to otworzenie listy rzeczy, które możemy wytworzyć. Nas w tej chwili interesuje `R Script`. Gdy utworzymy nasz skrypt, otworzy się on nad konsolą. Warto od razu zapisać go na dysku skrótem Ctrl+S (lub File → Save). Warto się upewnić, że zapisywany plik rzeczywiście kończy się rozszerzeniem .R.
+Najprościej stworzyć nowy skrypt klikając w biały kwadracik z plusem w lewym górnym rogu RStudio. Spowoduje to otworzenie listy rzeczy, które możemy wytworzyć. Nas w tej chwili interesuje `R Script`. Gdy utworzymy nasz skrypt, otworzy się on nad konsolą. Warto od razu zapisać go na dysku skrótem Ctrl+S (lub File → Save). Warto się upewnić, że zapisywany plik rzeczywiście kończy się rozszerzeniem .R.
 
-Na razie nasz skrypt jest pusty, ale możemy w nim pisać dowolne polecenia tak samo, jak napisalibyśmy w konsoli. Różnica jest taka, że nie są one od razu wykonywane. Skrypt to tekst. Jeśli chcemy wykonać jakieś polecenie ze skryptu, to albo kopiujemy je do konsoli, albo umieszczamy na nim kursor i klikamy ctrl+enter. Możemy też myszką zaznaczyć większy fragment kodu i kliknąć Ctrl+Enter, żeby go wykonać. Jeśli chcielibyśmy wykonać cały nasz skrypt, to zaznaczamy cały kod (Ctrl+A) i ponownie używamy Ctrl+Enter. Ewentualnie możemy skorzystać ze skrótu Ctrl+Shift+S[^podstawy_r-8].
+Na razie nasz skrypt jest pusty, ale możemy w nim pisać dowolne polecenia tak samo, jak napisalibyśmy w konsoli. Różnica jest taka, że nie są one od razu wykonywane. Skrypt to tekst. Jeśli chcemy wykonać jakieś polecenie ze skryptu, to albo kopiujemy je do konsoli, albo umieszczamy na nim kursor i klikamy Ctrl+Enter. Możemy też myszką zaznaczyć większy fragment kodu i kliknąć Ctrl+Enter. Jeśli chcielibyśmy wykonać cały nasz skrypt, to zaznaczamy cały kod (Ctrl+A) i ponownie używamy Ctrl+Enter. Ewentualnie możemy skorzystać ze skrótu Ctrl+Shift+S[^podstawy_r-8].
 
 [^podstawy_r-8]: Piszę o wielu skrótach klawiszowych, bo umiejętność pisania kodu bez odrywania rąk od klawiatury znacząco przyspiesza pracę. Jednocześnie wiele z tych rzeczy da się wyklikać myszką. Zachęcam jednak, żeby próbować uczyć się skrótów. Listę wszystkich skrótów w RStudio znajdziemy w menu Tools → Keyboard Shortcuts Help (albo pod skrótem Alt+Shift+K).
 
-To jest najważniejsza różnica między skryptem a konsolą -- cokolwiek wpisane w konsolę jest wykonywane natychmiast i znika. Z konsoli korzystamy, kiedy chcemy zrobić jakieś jednorazowe operacje albo coś sobie przetestować. W skrypt wpisujemy to, co chcemy zachować. Ewentualnie szkic. Gdy ludzie przechodzą nagle z konsoli do skryptu, bardzo często zaczynają wpisywać w swój skrypt różne śmieci, które wcześniej wpisaliby w konsolę. Konsola nie zniknęła, ciągle jest do naszej dyspozycji. Skrypt w swojej ostatecznej postaci powinien jednak działać tak, że jak go uruchomimy, to cały przeleci bez błędów. No, przynajmniej do tego dążymy. Czyli konsola do testów, skrypt do prawdziwego kodu.
+To jest najważniejsza różnica między skryptem a konsolą -- cokolwiek wpisane w konsolę jest wykonywane natychmiast i znika. Z konsoli korzystamy, kiedy chcemy zrobić jakieś jednorazowe operacje albo coś sobie przetestować. W skrypt wpisujemy to, co chcemy zachować. Ewentualnie szkic, który potem będziemy naprawiać. Gdy ludzie przechodzą nagle z konsoli do skryptu, bardzo często zaczynają wpisywać w swój skrypt różne śmieci, które wcześniej wpisaliby w konsolę. Konsola nie zniknęła, ciągle jest do naszej dyspozycji. Skrypt w swojej ostatecznej postaci powinien jednak działać tak, że jak go uruchomimy, to cały przeleci bez błędów. No, przynajmniej do tego dążymy. Czyli konsola do testów, skrypt do prawdziwego kodu.
 
 ## Komentarze {#sec-comments}
 
-Jeśli chcielibyśmy zrobić w skrypcie jakąś notatkę dla siebie, która nie jest kodem używamy znaczka `#`. Jest to tzw. komentarz. Możemy na przykład napisać:
+Jeśli chcielibyśmy zrobić w skrypcie jakąś notatkę, która nie jest kodem, używamy znaczka `#`. Jest to tzw. komentarz. Możemy na przykład napisać:
 
 ```{r}
 #| eval: false
 print("Hello world!") # czuję się programistą
 ```
 
-Jeśli wykonamy taką linijkę, konsola zignoruje wszystko po znaku `#`. Pozwala to nam zostawiać sobie notatki w rodzaju `# hipoteza 1` albo `# nie wiem, czemu to działa, ale działa`. Komentowanie kodu może nam (i naszym współpracownikom) ułatwić zrozumienie, o co nam chodziło, gdy to pisaliśmy. Jeśli chcemy zaopatrzyć nasz kod w nagłówki, konwencja mówi, żeby formatować je tak:
+Jeśli wykonamy taką linijkę, konsola zignoruje wszystko po znaku `#`. Pozwala to nam zostawiać sobie notatki w rodzaju `# hipoteza 1` albo `# nie wiem, czemu to działa, ale działa`. Komentowanie kodu może nam (i naszym współpracownikom) ułatwić zrozumienie, o co nam chodziło, gdy to pisaliśmy.
+
+Jeśli chcemy zaopatrzyć nasz kod w nagłówki, żeby podzielić go na sekcje, konwencja mówi, żeby formatować je tak:
 
 ```{r}
 # Przygotowanie ----
@@ -185,23 +192,23 @@ Jeśli wykonamy taką linijkę, konsola zignoruje wszystko po znaku `#`. Pozwala
 # kod ładujący biblioteki
 ```
 
-Każdy znaczek `#` to niższy poziom nagłówka, czyli wytworzyłem sekcję `Przygotowanie`, a w niej dwie podsekcje `Ładowanie danych` i `Ładowanie bibliotek`. Takich poziomów nagłówków możemy mieć ile chcemy. Nagłówek tym się różni od zwykłego komentarza, że po nim występują cztery myślniki `----` lub inne znaki. Tak sformatowane nagłówki wyświetlają się w bocznym panelu RStudio i pozwalają się lepiej ogarnąć w długim kodzie. Panel *outline* możemy rozwinąć skrótem Ctrl+Shift+O albo klikając skrajną prawą ikonkę nad edytorem skryptu (poziome kreski na prawo od guzika `Source`).
+Każdy znaczek `#` to niższy poziom nagłówka, czyli wytworzyłem sekcję `Przygotowanie`, a w niej dwie podsekcje `Ładowanie danych` i `Ładowanie bibliotek`. Takich poziomów nagłówków możemy mieć, ile chcemy. Nagłówek tym się różni od zwykłego komentarza, że zapisujemy po nim cztery myślniki `----` lub inne znaki. Tak sformatowane nagłówki wyświetlają się w bocznym panelu *outline* w RStudio i pozwalają się lepiej ogarnąć i poruszać w długim kodzie. Panel *outline* możemy rozwinąć skrótem Ctrl+Shift+O albo klikając skrajną prawą ikonkę nad edytorem skryptu (poziome kreski na prawo od guzika `Source`).
 
 ## Projekty {#sec-projects}
 
-Zazwyczaj projekt badawczy składa się z wielu plików. Nie jest to tylko kod R, ale też chociażby pliki z danymi i inne. Zazwyczaj trzymamy to wszystko w jednym folderze, o ile utrzymujemy jakikolwiek porządek w plikach. Możemy też mieć całe studia luzem na pulpicie, nie oceniam. RStudio pomaga nam w zarządzaniu takimi grupami plików poprzez projekty. Projekty w RStudio robią kilka rzeczy, m.in. pozwalają ustawić niestandardowe opcje (np. zmienić język słownika na angielski tylko dla tego jednego projektu), zapamiętać otwarte okna i ich układ, ale przede wszystkim pomagają nam lokalizować pliki znajdujące się w tym samym folderze[^podstawy_r-9]. Zawsze, kiedy planujemy zachować jakiś zbiór powiązanych plików na dłużej, warto jest wytworzyć projekt.
+Zazwyczaj projekt badawczy składa się z wielu plików. Nie jest to tylko kod R, ale też chociażby pliki z danymi, instrukcje do metod badawczych itd. Zazwyczaj trzymamy to wszystko w jednym folderze. O ile utrzymujemy jakikolwiek porządek w plikach. Możemy też mieć całe studia luzem na pulpicie, nie oceniam. RStudio pomaga nam w zarządzaniu takimi grupami plików poprzez projekty. Projekty w RStudio robią kilka rzeczy, m.in. pozwalają ustawić niestandardowe opcje (np. zmienić język słownika na angielski tylko dla tego jednego projektu), zapamiętać otwarte okna i ich układ, ale przede wszystkim pomagają nam lokalizować pliki znajdujące się w tym samym folderze[^podstawy_r-9]. Zawsze, kiedy planujemy zachować jakiś zbiór powiązanych plików na dłużej, warto jest wytworzyć projekt.
 
-[^podstawy_r-9]: Ustawiają katalog roboczy (*working directory*), dzięki czemu, kiedy musimy powiedzieć, gdzie jest, powiedzmy, plik z danymi, możemy napisać `"./dane/dane.xlsx"`. `./` oznacza "w tym folderze", `/dane/` oznacza "w podfolderze dane", a `/dane.xlsx` oznacza "w pliku `dane.xlsx`". Możemy to też zrobić ręcznie funkcją `setwd`.
+[^podstawy_r-9]: Ustawiają katalog roboczy (*working directory*), dzięki czemu, kiedy musimy powiedzieć, gdzie jest, powiedzmy, plik z danymi, możemy napisać `"./dane/dane.xlsx"`. `./` oznacza "w tym folderze", `/dane/` oznacza "w podfolderze dane", a `/dane.xlsx` oznacza "w pliku `dane.xlsx`". Możemy to też zrobić ręcznie funkcją `setwd`. 
 
-Projekty tworzymy i otwieramy przez guzik w prawym górnym rogu. Rozwijane menu pozwana nam wytworzyć nowy projekt, a wyskakujące okienko pyta, czy wytworzyć go w już istniejącym folderze, stworzyć nowy folder, czy może pobrać repozytorium Git. Jeśli wybraliśmy nowy folder, mamy kilka typów projektów do wyboru, ale w większości przypadków wybieramy po prostu `New Project`. Okienko pozwala nam nadać projektowi nazwę, wybrać jego lokalizację, a także wytworzyć puste repozytorium Git[^podstawy_r-10]. RStudio wytworzy nam w ten sposób plik .Rproj organizujący nasz projekt.
+Projekty tworzymy i otwieramy przez guzik w prawym górnym rogu. Rozwijane menu pozwana nam stworzyć nowy projekt, a wyskakujące okienko pyta, czy wytworzyć go w już istniejącym folderze, stworzyć nowy folder, czy może pobrać repozytorium Git. Jeśli wybraliśmy nowy folder, mamy kilka typów projektów do wyboru, ale w większości przypadków wybieramy po prostu `New Project`. Okienko pozwala nam nadać projektowi nazwę, wybrać jego lokalizację, a także wytworzyć puste repozytorium Git[^podstawy_r-10]. RStudio wytworzy nam w ten sposób plik .Rproj organizujący nasz projekt.
 
-[^podstawy_r-10]: Jeśli nie wiesz o co chodzi, nie przejmuj się. To duży temat i nie jest to coś, bez czego nie da się żyć.
+[^podstawy_r-10]: Jeśli nie wiesz o co chodzi, nie przejmuj się. To duży temat i nie jest to coś, bez czego nie da się żyć. W skrócie to system do monitorowania historii zmian w plikach i współpracy nad kodem.
 
 ## Pakiety {#sec-libs}
 
-Pakiety (*packages* lub *libraries*) to pewnie dodatki do R, które rozszerzają jego możliwości. Dla przykładu -- R w swojej podstawowej wersji nie ma funkcji liczącej skośność. Nie jest to jednak żaden problem, bo możemy R rozszerzyć np. o pakiet o nazwie `e1071` albo `moments`. Oba te pakiety dodają nam do R możliwość szybkiego i prostego policzenia skośności. Pakiety -- w olbrzymiej większości -- są darmowe.
+Pakiety (*packages* lub *libraries*) to niejako dodatki do R, które rozszerzają jego możliwości. Dla przykładu -- R w swojej podstawowej wersji nie ma funkcji liczącej skośność. Nie jest to jednak żaden problem, bo możemy R rozszerzyć np. o pakiet o nazwie `e1071` albo `moments`. Oba te pakiety dodają nam do R możliwość szybkiego i prostego policzenia skośności. Pakiety -- w olbrzymiej większości -- są darmowe.
 
-Absolutnie podstawowym pakietem, czy właściwie zbiorem pakietów, jest `tidyverse`. `Tidyverse` usprawnia R właściwie we wszystkim, co w podstawowej wersji jest niewygodne -- `readr` (*czyt.* rider) pozwala łatwo ładować dane, `dplyr` (*czyt.* diplajer) niesamowicie usprawnia czyszczenie danych, `lubridate` i `stringr` (*czyt.* stringer) to podstawowe narzędzie do pracy z datami i z tekstem[^podstawy_r-11], nie mówiąc już o `ggplot2`, czyli najpotężniejszym narzędziu do tworzenia wykresów. Na szczęście nie musimy wszystkich tych pakietów przywoływać z osobna, bo możemy załadować je wszystkie naraz, ładując jeden zbiorczy pakiet `tidyverse`. Współcześnie `tidyverse` to podstawowy sposób programowania w R. Pakiety ładujemy za pomocą funkcji `library`, do której wrzucamy nazwę pakietu w cudzysłowie. Nasz skrypt zaczniemy więc od takiej instrukcji:
+Absolutnie podstawowym pakietem, czy właściwie zbiorem pakietów, jest `tidyverse`. `tidyverse` usprawnia R właściwie we wszystkim, co w podstawowej wersji jest niewygodne -- `readr` (*czyt.* rider) pozwala łatwo ładować dane, `dplyr` (*czyt.* diplajer) niesamowicie usprawnia czyszczenie danych, `lubridate` i `stringr` (*czyt.* stringer) to podstawowe narzędzie do pracy odpowiednio z datami i z tekstem[^podstawy_r-11], nie mówiąc już o `ggplot2`, czyli najpotężniejszym narzędziu do tworzenia wykresów. Współcześnie `tidyverse` to podstawowy sposób programowania w R. Na szczęście nie musimy wszystkich tych pakietów przywoływać z osobna, bo możemy załadować je wszystkie naraz, ładując jeden zbiorczy pakiet `tidyverse`. Pakiety ładujemy za pomocą funkcji `library`, do której wrzucamy nazwę pakietu w cudzysłowie. Nasz skrypt zaczniemy więc od takiej instrukcji:
 
 [^podstawy_r-11]: Ciągi znaków tekstowych w informatyce określamy mianem *string*, stąd `stringr`.
 
@@ -210,7 +217,7 @@ Absolutnie podstawowym pakietem, czy właściwie zbiorem pakietów, jest `tidyve
 library("tidyverse")
 ```
 
-Jeśli robimy to po raz pierwszy, to po wykonaniu skryptu konsola wyrzuci nam błąd `Błąd w poleceniu 'library("tidyverse")':nie ma pakietu o nazwie ‘tidyverse’`. Wynika to z faktu, że instrukcja `library` tylko ładuje pakiet, ale przed załadowaniem trzeba go pobrać i zainstalować. Na szczęście robimy to tylko raz, zawsze później wystarczy samo `library`. Dlatego też nie będziemy wpisywać komendy instalującej pakiet do skryptu, tylko bezpośrednio do konsoli. Nie chcemy w końcu, żeby pakiet `tidyverse` instalował się za każdym razem, kiedy będziemy uruchamiać skrypt. Będzie to niemiłosiernie spowalniało skrypt i wymuszało dostęp do Internetu. Dlatego też do konsoli wpisujemy:
+Jeśli robimy to po raz pierwszy, to po wykonaniu polecenia konsola wyrzuci nam błąd `Błąd w poleceniu 'library("tidyverse")':nie ma pakietu o nazwie ‘tidyverse’`. Wynika to z faktu, że instrukcja `library` tylko ładuje pakiet, ale nie pobiera ich wcześniej. Na szczęście robimy to tylko raz. Zawsze później wystarczy samo `library`. Dlatego też nie będziemy wpisywać komendy instalującej pakiet do skryptu, tylko bezpośrednio do konsoli. Nie chcemy w końcu, żeby pakiet `tidyverse` instalował się za każdym razem, kiedy będziemy uruchamiać skrypt. Będzie to niemiłosiernie spowalniało skrypt i wymuszało dostęp do Internetu. Dlatego też **do konsoli** wpisujemy:
 
 ```{r}
 #| eval: false
@@ -219,7 +226,7 @@ install.packages("tidyverse")
 
 Innym sposobem instalowania pakietów jest skierowanie się w prawe dolne okienko w RStudio, przejście do zakładki Packages, kliknięcie guzika Install, wpisanie nazwy pakietu w wyskakującym okienku (już bez cudzysłowu) i zatwierdzenie guzikiem Install.
 
-Gdy zainstalujemy już pakiet `tidyverse` -- dowolną z metod -- ponownie próbujemy go załadować, tym razem, mam nadzieję, już bez błędu. Konsola poinformuje nas wtedy co dokładnie załadowała.
+Gdy zainstalujemy już pakiet `tidyverse` -- dowolną z metod -- ponownie próbujemy go załadować, tym razem już bez błędu. Konsola poinformuje nas wtedy co dokładnie załadowała.
 
 ```{r}
 library("tidyverse")
@@ -227,11 +234,11 @@ library("tidyverse")
 
 # Ładowanie danych z `readr` {#sec-loading}
 
-Jeśli chcemy cokolwiek liczyć, musimy mieć na czym liczyć. R ma wiele sposobów ładowania danych, które w każdym podręczniku zajmują cały rozdział. R poradzi sobie z prawie każdym formatem danych, a także potrafi ładować je bezpośrednio z serwera (dla przykładu pakiet `googlesheets4` pozwala ładować pliki z Google Sheets bez pobierania ich na dysk albo `QualtRics` ułatwiający importowanie plików z danymi ankietowymi z Qualtrics).
+Jeśli chcemy cokolwiek liczyć, musimy mieć na czym liczyć. R ma wiele sposobów ładowania danych, które w każdym podręczniku zajmują cały rozdział. R poradzi sobie z prawie każdym formatem danych, a także potrafi ładować je bezpośrednio z serwerów (dla przykładu pakiet `googlesheets4` pozwala ładować pliki z Google Sheets bez pobierania ich na dysk albo `QualtRics` ułatwiający importowanie plików z danymi ankietowymi z Qualtrics).
 
-Wszystkie bazy, których używam w tym tekście, są dostępne w repozytorium na GitHubie. Można wejść w [ten link](https://github.com/jakub-jedrusiak/jakub-jedrusiak.github.io/tree/main/statystyka/dane/podstawy-R), wybrać pożądany plik i albo pobrać go na własny dysk, albo zamiast ścieżki do pliku użyć linku. By uzyskać właściwy link, należy kliknąć `raw` tuż nad treścią pliku. Takie linki można wklejać w komendy czytające dane zamiast ścieżek. Przykład linku, jak i tego, jak używać ich z funkcjami typu `read_csv` podaję w podrozdziale [-@sec-summarise] o grupowaniu.
+Wszystkie bazy, których używam w tym tekście, są dostępne w repozytorium na GitHubie. Można wejść w [ten link](https://github.com/jakub-jedrusiak/jakub-jedrusiak.github.io/tree/main/statystyka/dane/podstawy-R), wybrać pożądany plik i albo pobrać go na własny dysk, albo zamiast ścieżki do pliku użyć linku w cudzysłowie. By uzyskać właściwy link, należy kliknąć `raw` tuż nad treścią pliku. Takie linki można wklejać w komendy czytające dane zamiast ścieżek. Przykład linku, jak i tego, jak używać ich z funkcjami typu `read_csv` podaję w podrozdziale [-@sec-summarise] o grupowaniu.
 
-Podstawowe pakiety do ładowania danych do `readr` i `readxl` dla plików Excela. Na początek nie trzeba znać struktury funkcji ładujących dane, bo RStudio dysponuje przyjemnym graficznym narzędziem do tego celu. Jeśli w prawym dolnym oknie, w zakładce Files, klikniemy na plik zawierający dane, dostaniemy do dyspozycji opcję Import Dataset... Po jej wybraniu otworzy nam się okno z podglądem danych i kilkoma opcjami do dostosowania, m.in. czy jakichś wierszy nie pominąć albo z którego arkusza pobrać dane. W plikach .csv czasem musimy też wybrać rodzaj separatora i znaku dziesiętnego (opcja Locale). W polskich plikach z danymi separatorem jest zazwyczaj średnik, a znakiem dziesiętnym przecinek, podczas gdy w angielskich danych będą to odpowiednio przecinek i kropka. Jeśli nie ustawimy znaku dziesiętnego, R może potraktować liczby z przecinkiem jako tekst. Poza tym możemy kliknąć w każdy nagłówek kolumny i wybrać typ danych. Dane powinny być czyste, tj. kolumny liczbowe powinny zawierać same liczby. Jeśli dane nie są czyste (a zazwyczaj nie są), możemy je wyczyścić potem.
+Podstawowe pakiety do ładowania danych do `readr` i `readxl` dla plików Excela. Na początek nie trzeba znać skłądni funkcji ładujących dane, bo RStudio dysponuje przyjemnym graficznym narzędziem do ładowania danych. Jeśli w prawym dolnym oknie, w zakładce Files, klikniemy na plik zawierający dane, dostaniemy do dyspozycji opcję Import Dataset... Po jej wybraniu otworzy nam się okno z podglądem danych i kilkoma opcjami do dostosowania, m.in. czy jakichś wierszy nie pominąć albo z którego arkusza pobrać dane. W plikach .csv czasem musimy też wybrać rodzaj separatora i znaku dziesiętnego (opcja Locale). W polskich plikach z danymi separatorem jest zazwyczaj średnik, a znakiem dziesiętnym przecinek (125 421,55), podczas gdy w angielskich danych będą to odpowiednio przecinek i kropka (125,421.55). Jeśli nie ustawimy znaku dziesiętnego, R może potraktować liczby z przecinkiem jako tekst. Poza tym możemy kliknąć w każdy nagłówek kolumny i wybrać typ danych, ale to niebezpieczna opcja, lepiej tego nie robić. Dane powinny być czyste, tj. kolumny liczbowe powinny zawierać same liczby. Jeśli dane nie są czyste (a zazwyczaj nie są), możemy je wyczyścić potem.
 
 Możemy kliknąć Import, by dopełnić dzieła, ale jeśli tworzymy skrypt, będzie nas interesowała komenda, jaką RStudio dla nas przygotowało w czarnym okienku w prawym dolnym rogu. W pierwszej linijce RStudio proponuje załadowanie odpowiedniego pakietu. Warto to wpisać na początku skryptu, w miejscu, gdzie załadowaliśmy `tidyverse`. Jeśli proponowanym pakietem jest `readr`, nie musimy ładować go oddzielnie, bo ładując pakiet `tidyverse` załadowaliśmy od razu `readr`. Druga linijka do właściwe ładowanie danych. Widzimy znaną nam już składnię `nazwa <-`. Nasze dane potrzebują jakiejś nazwy, za pomocą której będziemy się do niej odnosić. Może być to `df`, `dane`, `warunek_kontrolny` czy cokolwiek innego. Za strzałką mamy funkcję odczytującą dane. Najpewniej będzie to `read_csv()` albo `read_excel()`. Do tych funkcji wrzucamy jako pierwszy argument lokalizację naszego pliku z danymi w cudzysłowie ('pojedynczym' lub "podwójnym"). Ponieważ nam komendę przygotowało RStudio, możemy ją po prostu skopiować i wkleić do naszego skryptu, zmieniając tylko nazwę zmiennej. Co robią poszczególne argumenty, możemy sprawdzić w dokumentacji. Jeśli dane ładuje `readr`, wykonanie takiej komendy spowoduje ukazanie się informacji zwrotnej -- jakie kolumny załadowano i jaki mają typ. Dla przykładu:
 
@@ -239,7 +246,7 @@ Możemy kliknąć Import, by dopełnić dzieła, ale jeśli tworzymy skrypt, bę
 df <- read_csv("dane/podstawy-R/complex_database.csv")
 ```
 
-Już widzę, że nic mi się nie zgadza, z 18 kolumn 17 zostało rozpoznane jako kolumny tekstowe (`chr`), a tylko kolumna ID jako liczby (`dbl`). Za chwilę będziemy to czyścić. Żeby wyświetlić nasze dane, mogę wpisać w konsolę nazwę, pod którą je zapisałem. Nasza baza pojawiła się też w okienku w prawym górnym rogu. Kliknięcie na nią tam spowoduje wyświetlenie jej w oddzielnej karcie. Warto zauważyć, że nie możemy jej tam edytować.
+Już widzę, że nic mi się nie zgadza. Z 18 kolumn 17 zostało rozpoznane jako kolumny tekstowe (`chr`), a tylko kolumna ID jako liczby (`dbl`). Za chwilę będziemy to czyścić. Żeby wyświetlić nasze dane, mogę wpisać w konsolę nazwę, pod którą je zapisałem. Nasza baza pojawiła się też w okienku w prawym górnym rogu. Kliknięcie na nią tam spowoduje wyświetlenie jej w oddzielnej karcie. Warto zauważyć, że nie możemy jej tam edytować.
 
 ```{r}
 df
@@ -247,19 +254,19 @@ df
 
 # Data wrangling {#sec-wrangling}
 
-Tutaj zaczyna się zabawa. *Data wrangling* to zbiorcze określenie na wszystkie te zdarzenia, kiedy musimy zmienić formę naszych danych, na przykład wziąć tylko niektóre kolumny, odfiltrować jakieś przypadki (np. wybrać tylko osoby z grupy kontrolnej), całkiem zmienić formę danych (np. z szerokiej na długą), dodać nowe zmienne czy przypadki (np. zsumować wyniki kwestionariusza), zmodyfikować kolumny (np. odwrócić punktację w jakiejś pozycji kwestionariusza) itp. itd. Tak naprawdę to, a nie samo wykonywanie testów statystycznych, zajmuje najwięcej czasu i powoduje najwięcej problemów. Jak więc się za to zabrać?
+Tutaj zaczyna się zabawa. *Data wrangling* to zbiorcze określenie na wszystkie te działania, kiedy zmieniamy formę naszych danych. Na przykład musimy wziąć tylko niektóre kolumny, odfiltrować jakieś przypadki (np. wybrać tylko osoby z grupy kontrolnej), całkiem zmienić formę danych (np. z szerokiej na długą), dodać nowe zmienne czy przypadki (np. zsumować wyniki kwestionariusza), zmodyfikować kolumny (np. odwrócić punktację w jakiejś pozycji kwestionariusza) itp. itd. Tak naprawdę to to, a nie samo wykonywanie testów statystycznych, zajmuje najwięcej czasu i powoduje najwięcej problemów. Jak więc się za to zabrać?
 
-Zarówno tutaj, jak i później, nie będę wchodził w to, *dlaczego* to działa jak działa. Większość poradników R opisuje, jak wykonać pewne operacje w podstawowym R, a następnie jak to robi się współcześnie, czyli wykorzystując pakiet `tidyverse`. O ile znajomość podstawowego R jest niezbędna do wykonywania bardziej skomplikowanych operacji i przydaje się, gdy coś nie działa i trzeba to jakoś naprawić, to tutaj jednak skupię się na podstawach, a współcześnie podstawy to `tidyverse`.
+Zarówno tutaj, jak i później, nie będę wchodził w to, *dlaczego* coś działa jak działa. Większość poradników R opisuje, jak wykonać pewne operacje w podstawowym R, a następnie jak to robi się współcześnie, czyli wykorzystując pakiet `tidyverse`. O ile znajomość podstawowego R jest niezbędna do wykonywania bardziej skomplikowanych operacji i przydaje się, gdy coś nie działa i trzeba to jakoś naprawić, to tutaj jednak skupię się na tym, jak to się robi rzeczywiście, a współcześnie podstawy to `tidyverse`.
 
 ## Wybieranie kolumn i wierszy {#sec-choosing}
 
-Bardzo często będziemy potrzebowali tylko określonych kolumn albo tylko określonych przypadków. Przeglądając nasze dane zauważamy, że składają się w dużej części z niepotrzebnych kolumn, jakie wygenerował dla nas program do ankiet. Kolumny takie jak godziny wypełniania są nam niepotrzebne do analizy. Nasze dane to fragment bazy danych z badania, w którym mówiliśmy mężczyznom, że są mało męscy i patrzyliśmy, jak to wpłynie na nich homofobię. Badaliśmy więc wyłącznie mężczyzn, a mimo to ankietę próbowało też wypełnić kilka kobiet i osób o innej płci. Ponieważ ankieta nie dopuściła ich nawet do metryczki, widzimy w ich przypadkach wartości `NA`, co w R oznacza „brak danych".
+Bardzo często będziemy potrzebowali tylko określonych kolumn albo tylko określonych wierszy. Przeglądając nasze dane zauważamy, że składają się w dużej części z niepotrzebnych kolumn, jakie wygenerował dla nas program do ankiet. Kolumny takie jak godziny wypełniania są nam niepotrzebne do analizy. Co więcej nasze dane to fragment bazy danych z badania, w którym mówiliśmy mężczyznom, że są mało męscy i patrzyliśmy, jak to wpłynie na nich homofobię. Badaliśmy więc wyłącznie mężczyzn, a mimo to ankietę próbowało też wypełnić kilka kobiet i osób o innej płci. Ponieważ ankieta nie dopuściła ich nawet do metryczki, widzimy w ich przypadkach wartości `NA`, co w R oznacza „brak danych".
 
 ### Filtrowanie wierszy z `dplyr::filter` {#sec-filter}
 
-Zacznijmy od tego, że w naszej bazie zostawimy tylko mężczyzn. Wszystkie komendy poniżej wpisuję w konsoli, dla testów. Jeśli wpisujemy komendy modyfikujące dane w konsolę, to nie zapisujemy zmian, tylko sprawdzamy, co się stanie, jak tak zrobimy. Dopiero na koniec podam, jak nasze zmiany rzeczywiście zapisać. Jak więc odfiltrować nie-mężczyzn? Robimy to za pomocą komendy `filter()`[^podstawy_r-12]. `Tidyverse` opiera się o intuicyjnie brzmiące czasowniki takie jak `filter`, `select`, `group_by`, `summarise` itd. Komenda `filter` przyjmuje naszą bazę i jakieś warunki, np. płeć męska. W naszym wypadku będzie to wyglądać tak:
+Zacznijmy od tego, że w naszej bazie zostawimy tylko mężczyzn. Wszystkie komendy poniżej wpisuję w konsoli, dla testów. Jeśli wpisujemy komendy modyfikujące dane i nie dodamy specjalnej instrukcji zapisującej, to nie zapisujemy zmian, więc możemy bezpiecznie sprawdzić, co się stanie, jak rzeczywiście to zrobimy. Dopiero na koniec podam, jak nasze zmiany rzeczywiście zapisać. Zachęcam do tego, żeby kolejne kroki pisać samodzielnie (może być w skrypcie) i potem wykonywać, żeby widzieć wszystkie pośrednie kroki. Jak więc odfiltrować nie-mężczyzn? Robimy to za pomocą komendy `filter()`[^podstawy_r-12]. `tidyverse` opiera się o intuicyjnie brzmiące czasowniki takie jak `filter`, `select`, `group_by`, `summarise` itd. Komenda `filter` przyjmuje naszą bazę i jakieś warunki, np. płeć męska. W naszym wypadku będzie to wyglądać tak:
 
-[^podstawy_r-12]: `filter` wybiera wiersze spełniające jakiś warunek. Jeśli chcemy wybrać wiersze na podstawie ich pozycji (np. pierwsze 10 wierszy), użyjemy funkcji `slice`.
+[^podstawy_r-12]: `filter` wybiera wiersze spełniające jakiś warunek. Jeśli chcemy wybrać wiersze na podstawie ich pozycji (np. wiersze od 1. do 10.), użyjemy funkcji `slice`.
 
 ```{r}
 #| eval: false
@@ -267,9 +274,9 @@ df %>%
     filter(Płeć == "Mężczyzna")
 ```
 
-Dobra, co to jest `%>%`? Nie było o tym mowy. Owszem, nie było, ale to bardzo wygodna rzecz. Nazywa się *pipe* (czasem tłumaczone jako *potok*). Mówi mniej więcej „wrzuć to do tego". W naszym przykładzie `df %>% filter()` oznacza „wrzuć bazę danych `df` do funkcji `filter`", czyli dokładnie to samo, co `filter(df)`[^podstawy_r-13]. Po co więc w ogóle bawić się w potoki? Bo pozwalają nam wygodnie łączyć komendy w ciągi, jak zobaczymy za chwilę. Do wstawiania potoków służy nam wygodny skrót klawiszowy Ctrl+Shift+M, który jest chyba najczęściej stosowanym skrótem przy pisaniu dowolnego programu. Druga kwestia to podział na linijki. Rozbiłem tę komendę na dwie linijki dla czytelności, ale spokojnie mógłbym zapisać to w jednej linijce. Warto jednak pisać kod tak, żeby dało się go potem łatwo czytać. RStudio podpowiada nam też wcięcia, żebyśmy widzieli, że te linijki tworzą jedną całość. Potem opiszę, jak wygodnie formatować kod.
+Dobra, co to jest `%>%`? Nie było o tym mowy. Owszem, nie było, ale to bardzo wygodna rzecz. Nazywa się *pipe* (tłumaczone jako *potok*, bo *rura* nieładnie brzmi). Mówi mniej więcej „wrzuć to do tego". W naszym przykładzie `df %>% filter()` oznacza „wrzuć bazę danych `df` do funkcji `filter`", czyli dokładnie to samo, co `filter(df)`. Po co więc w ogóle bawić się w potoki? Bo pozwalają nam wygodnie łączyć komendy w ciągi, jak zobaczymy za chwilę. Do wstawiania potoków służy nam wygodny skrót klawiszowy Ctrl+Shift+M, który jest chyba najczęściej stosowanym skrótem przy pisaniu dowolnego programu.
 
-[^podstawy_r-13]: $* < 0,05$; $** < 0,01$; $*** < 0,001$.
+Druga kwestia to podział na linijki. Rozbiłem tę komendę na dwie linijki dla czytelności, ale spokojnie mógłbym zapisać to w jednej linijce. Warto jednak pisać kod tak, żeby dało się go potem łatwo czytać. RStudio podpowiada nam też wcięcia, żebyśmy widzieli, że te linijki tworzą jedną całość. W podrozdziale [-@sec-formatting] powiem więcej o formatowaniu kodu.
 
 Ta komenda oznacza „weź zmienną `df`, wrzuć ją do komendy `filter` i zostaw tylko te przypadki, w których w kolumnie `Płeć` jest wartość `"Mężczyzna"`." Nazwy kolumn piszemy bez cudzysłowu, ale jeśli wartość komórki to tekst, to zawsze piszemy go w cudzysłowie. Inaczej R pomyśli, że podajemy mu jakąś zmienną, z której ma dopiero odczytać, co ma być w kolumnie `Płeć`. Nam chodzi o dosłowny tekst `"Mężczyzna"`.
 
@@ -290,7 +297,7 @@ Ostatecznie zostaje operator logiczny. Dlaczego piszę `==` zamiast `=`? W progr
 
 ### Wybieranie kolumn z `dplyr::select` {#sec-select}
 
-Odfiltrowaliśmy więc nie-mężczyzn. Kolejny problem to cała seria niepotrzebnych kolumn. Godziny, adres, zgoda etyczna (która była obowiązkowa i wszyscy się zgodzili) i płeć (już jednakowa dla wszystkich) są nam do niczego niepotrzebne. Do wybierania, jakie kolumny zostawić, służy funkcja `select()`. Wrzucamy do niej nazwy albo numery kolumn, które chcemy zostawić w bazie. Rozszerzmy więc naszą poprzednią instrukcję o dodatkową komendę za pomocą potoku.
+Odfiltrowaliśmy więc nie-mężczyzn. Kolejny problem to cała seria niepotrzebnych kolumn. Godziny, adres, zgoda etyczna (która była obowiązkowa, więc cała zawiera identyczne wartości) i płeć (już jednakowa dla wszystkich) są nam do niczego niepotrzebne. Do wybierania, jakie kolumny zostawić, służy funkcja `select()`. Wrzucamy do niej nazwy albo numery kolumn, które chcemy zostawić w bazie. Rozszerzmy więc naszą poprzednią instrukcję o dodatkową komendę za pomocą potoku.
 
 ```{r}
 #| eval: false
@@ -299,9 +306,11 @@ df %>%
     select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18)
 ```
 
-Po pierwsze zauważmy, że wystarczyło dodać potok i kolejną komendę. Teraz cała nasza instrukcja oznacza „Weź `df`, odfiltruj mężczyzn i potem wybierz kolumny `Id` `Wiek (ukończony w latach)`, `Wykształcenie` oraz kolumny od 9. do 18.". Do tego więc służą potoki -- pozwalają naraz wykonać całą serię modyfikacji tego samego obiektu. Wypada tu wyjaśnić dwie sprawy. Po pierwsze kolumna z wiekiem zawiera w nazwie spacje. Jeśli nazwa kolumny zawiera niestandardowe znaki, trzeba ją otoczyć znakami \` (*pol.* grawis, *ang.* *backtick*), który znajduje się na klawiaturze tuż pod Esc. Druga rzecz to `9:18`, co znaczy „liczby od 9 do 18" i jest wygodnym, skrótowym zapisem `seq(9, 18)`.
+Po pierwsze zauważmy, że wystarczyło dodać potok i kolejną komendę. Teraz cała nasza instrukcja oznacza „Weź `df`, odfiltruj mężczyzn i potem wybierz kolumny `Id`, `Wiek (ukończony w latach)`, `Wykształcenie` oraz kolumny od 9. do 18.". Do tego więc służą potoki -- pozwalają naraz wykonać całą serię modyfikacji tego samego obiektu.
 
-Ewentualnie możemy chcieć powiedzieć, żeby zostawić wszystkie kolumny *poza* jakąś kolumną. Jeśli chcemy wykluczyć 2 kolumny z 200, to lepiej wskazać te 2 do wywalenia niż pozostałe 198 do zachowania. Możemy to zrobić dodając przed kolumną `-`. Możemy ustawić minus zarówno przed nazwą kolumny lub zakresem, ale warto zauważyć, że zakres pozycji trzeba wziąć w nawias. Inaczej R pomyśli, że chodzi nam np. o kolumny od -2 do 5. Gdzie nie jest to głupie, kolumna -2 oznacza „druga od końca".
+Wypada tu wyjaśnić dwie sprawy. Po pierwsze kolumna z wiekiem zawiera w nazwie spacje. Jeśli nazwa kolumny zawiera niestandardowe znaki, trzeba ją otoczyć znakami \` (*pol.* grawis, *ang.* *backtick*), który znajduje się na klawiaturze tuż pod Esc. Druga rzecz to `9:18`, co znaczy „liczby od 9 do 18" i jest wygodnym, skrótowym zapisem `seq(9, 18)`.
+
+Ewentualnie możemy chcieć powiedzieć, żeby zostawić wszystkie kolumny *poza* jakąś kolumną. Jeśli chcemy wykluczyć 2 kolumny z 200, to lepiej wskazać te 2 do wywalenia niż pozostałe 198 do zachowania. Możemy to zrobić z użyciem znaku `-`, który wstawiamy przed kolumną. Możemy ustawić minus zarówno przed nazwą kolumny, jak i zakresem kolumn. Warto jednak zauważyć, że zakres pozycji trzeba wziąć w nawias. Inaczej zapis `-2:5` R zinterpretuje jako „kolumny od -2 do 5”. Nie jest to głupie, bo „kolumna -2” oznacza „druga od końca".
 
 ```{r}
 #| eval: false
@@ -312,9 +321,11 @@ df %>%
 
 ## Zmiana nazw kolumn z `dplyr::rename` i `purrr::set_names` {#sec-rename}
 
-Co zrobić, jeśli chcemy w naszej bazie coś pozmieniać? Zacznijmy może od zmiany nazw kolumn, żeby łatwiej nam się pisało dalsze komendy. Do tego służą komendy `rename` z pakietu `dplyr` i `set_names` z pakietu `purrr`[^podstawy_r-14]. `rename` służy do zmiany nazw pojedynczych kolumn i przyjmuje argumenty w postaci `rename("nowa_nazwa" = "stara nazwa")`. Za jednym zamachem możemy zmienić ile nazw chcemy. Jeśli chcemy zmienić wszystkie nazwy, wygodniejsza jest funkcja `set_names` do której **po kolei** wrzucamy nowe nazwy, których potrzebujemy. Znowu -- nazwy to dosłowne ciągi znaków, więc zawsze piszemy je w cudzysłowie.
+Z selekcji istniejących infromacji przejdźmy do dodawania nowych. Zacznijmy może od zmiany nazw kolumn, żeby łatwiej nam się pisało dalsze komendy. Do tego służą funkcje `rename` z pakietu `dplyr` i `set_names` z pakietu `purrr`[^podstawy_r-13]. `rename` służy do zmiany nazw raczej pojedynczych kolumn i przyjmuje argumenty w postaci `rename("nowa_nazwa" = "stara nazwa")`. Za jednym zamachem możemy zmienić ile nazw chcemy, jeśli jednak chcemy zmienić wszystkie nazwy, wygodniejsza jest funkcja `set_names`. Wrzucamy do niej **po kolei** same nowe nazwy. Znowu -- nazwy to dosłowne ciągi znaków[^podstawy_r-14], więc zawsze piszemy je w cudzysłowie.
 
-[^podstawy_r-14]: Zdążyłem zauważyć, że różne funkcje `set_names` występują w różnych pakietach i wiele razy zdarzyło mi się szukać, dlaczego mój kod nie działa, jak wszystko jest dobrze. Okazywało się potem, że R bierze `set_names` nie z `purrr`, tylko np. z `magrittr`, a to są zupełnie inne funkcje. Jeśli R napotyka w dwóch różnych pakietach funkcje o takich samych nazwach, domyślnie wybiera tę załadowaną **później**. Jeśli więc najpierw załadowałem `tidyverse` a potem `magrittr`, to gdy piszę `set_names` R wybiera wersję z `magrittr`. Na szczęście możemy wprost powiedzieć R, z którego pakietu ma brać daną funkcję, używając jej pełnej nazwy `purrr::set_names`. Warto też wiedzieć, że używając takiego zapisu nie musimy ładować całego pakietu, żeby użyć funkcji z danego pakietu, której np. używamy tylko raz w całym kodzie. Osobiście, dla spokoju ducha, akurat `set_names` zawsze zapisuję `purrr::set_names`. Zbyt dużo czasu straciłem na szukanie tego błędu.
+[^podstawy_r-13]: Zdążyłem zauważyć, że różne pakiety posiadają swoje własne funkcje o nazwie `set_names`. Wiele razy zdarzyło mi się szukać, dlaczego mój kod nie działa, jak wszystko jest dobrze. Okazywało się potem, że R bierze `set_names` nie z `purrr`, tylko np. z `magrittr`, który też zawiera funkcję o takiej nazwie, ale kompletnie innym działaniu. Jeśli R napotyka w dwóch różnych pakietach funkcje o takich samych nazwach, domyślnie wybiera tę załadowaną **później**. Mówimy, że *przesłania* ona (*masks*) poprzenią. Jeśli więc najpierw załadowałem `tidyverse`, a potem `magrittr`, to gdy piszę `set_names` R wybiera wersję „z wierzchu”, czyli z `magrittr`. Na szczęście możemy wprost powiedzieć R, z którego pakietu ma brać daną funkcję, używając jej pełnej nazwy, np. `purrr::set_names`. Zawsze jest to `nazwa_pakietu::funkcja`. Takich pełnych nazw używam też w nagłówkach. Warto wiedzieć, że używając takiego zapisu nie musimy ładować całego pakietu, żeby użyć funkcji z danego pakietu, której np. używamy tylko raz w całym kodzie. Osobiście, dla spokoju ducha, akurat `set_names` zawsze zapisuję `purrr::set_names`. Zbyt dużo czasu straciłem na szukanie tego błędu.
+
+[^podstawy_r-14]: Chyba że nie jest to dosłowny ciąg znaków, tylko jakaś zmienna albo funkcja. Jeśli wcześniej zapisaliśmy `name <- "wiek"`, to możemy w `set_names` wpisać `name` bez cudzysłowu, ale wtedy nowa kolumna będzie się nazywała `"wiek"`. Przykład z użyciem funkcji *generującej* ciągi znaków poniżej.
 
 ```{r}
 #| eval: false
@@ -324,21 +335,21 @@ df %>%
     set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_"))
 ```
 
-Co znowu namieszałem? Czemu znowu coś utrudniam? Cóż, żeby ułatwić. o ile kolejne nazwy `"id"`, `"wiek"` i `"wyksztalcenie"` rozumieją się same przez się, to do czego służy tutaj funkcja `paste`? Jeśli zerkniemy w bazę danych, zauważymy, że kolejne 10 kolumn to to samo pytanie „Takie widoki w przestrzeni publicznej są normalne". Odpowiedź na to pytanie (znajdujące się pod obrazkiem neutralnym lub przedstawiającym parę jednopłciową) traktowaliśmy jako wskaźnik homofobii. Jest bardzo częste, że czyszcząc dane z badania mamy serię odpowiedzi z jednego kwestionariusza. Zazwyczaj wszystkie te pytania nazywamy według jednej konwencji np. wszystkie odpowiedzi z kwestionariusza TIPI nazywamy `TIPI_1`, `TIPI_2`, `TIPI_3` itd. Ale po co pisać te etykiety ręcznie, skoro możemy je wygenerować? Do tego służy funkcja `paste`.
+Co znowu namieszałem? Czemu znowu coś utrudniam? Cóż, żeby ułatwić. O ile kolejne nazwy `"id"`, `"wiek"` i `"wyksztalcenie"` rozumieją się same przez się, to do czego służy tutaj funkcja `paste`? Jeśli zerkniemy w bazę danych, zauważymy, że kolejne 10 kolumn to to samo pytanie „Takie widoki w przestrzeni publicznej są normalne". Odpowiedź na to pytanie (znajdujące się pod obrazkiem neutralnym lub przedstawiającym parę jednopłciową) traktowaliśmy jako wskaźnik homofobii. Jest bardzo częste, że czyszcząc dane z badania mamy serię odpowiedzi z jednego kwestionariusza. Zazwyczaj wszystkie te pytania nazywamy według jednej konwencji np. wszystkie odpowiedzi z kwestionariusza TIPI nazywamy `TIPI_1`, `TIPI_2`, `TIPI_3` itd. Ale po co pisać te etykiety ręcznie, skoro możemy je wygenerować? Do tego służy funkcja `paste`. Jeśli widzimy jakąś funkcję zagnieżdżoną w innej funkcji, a nie wiemy, jaką funkcję tam spełnia, można spróbować samą tę wewnętrzną funkcję wpisać w konsolę i zobaczyć, co robi.
 
 ```{r}
 paste("H", 1:10, sep = "_")
 ```
 
-Jak widzimy, `paste` wygenerowało nam 10 kolejnych etykiet łącząc `"H"` i liczby od 1 do 10. Argument `sep = "_"` mówi, żeby między kolejnymi kawałkami wstawiać podkreślnik. Do `paste` możemy wrzucić dowolną liczbę znaków do połączenia. Jeśli nie chcemy żadnego separatora, możemy ustawić `sep = ""`, czyli pusty ciąg znaków w separatorze albo możemy użyć bliźniaczej funkcji `paste0`, która nie ma separatora.
+Jak widzimy, `paste` wygenerowało nam 10 kolejnych etykiet łącząc `"H"` i liczby od 1 do 10. Argument `sep = "_"` mówi, żeby między kolejnymi kawałkami wstawiać podkreślnik. Do `paste` możemy wrzucić dowolną liczbę znaków do połączenia. Jeśli nie chcemy żadnego separatora, możemy ustawić `sep = ""`, czyli pusty ciąg znaków w separatorze albo możemy użyć bliźniaczej funkcji `paste0`, która nie ma separatora. Użycie tej funkcji wewnątrz `set_names` jest równoważne temu, jakbym napisał te etykietki ręcznie. To jest siła programowania, że dosłowne dane możemy zastępować zmiennymi albo funkcjami, które nam te dane wygenerują. To pozwana nam na przykład zastosować to samo czyszczenie do 100 różnych plików. Wystarczy, że zamiast nazwy danego pliku wszędzie wrzucimy zmienną, a potem będziemy tylko wrzucać do tej zmiennej nazwy kolejnych plików.
 
-Co ciekawe, zmieniać nazwy możemy też za pomocą funkcji `select`, ale wyłącznie pojedynczo. Składnia jest taka sama, jak `rename`, ale `select` zmienia też kolejność kolum, a w wynikowej tabeli zostają tylko wskazane kolumny, więc trzeba uważać. Jednak do małych tabel, gdzie nie jest problemem wypisać wszystkie kolumny, można spokojnie za jednym zamachem kolumny wybrać i nazwać.
+Co ciekawe, zmieniać nazwy możemy też za pomocą funkcji `select`, ale wyłącznie pojedynczo, nie można wtedy użyć czegoś w stylu `9:18`. Składnia jest taka sama, jak `rename`, ale `select` zmienia też kolejność kolumn i skład wynikowej tabelu, więc trzeba uważać. Jednak do małych tabel, gdzie nie jest problemem wypisać wszystkie kolumny, można spokojnie za jednym zamachem kolumny wybrać i nazwać.
 
 ## Zmiana wartości komórek z `dplyr::mutate` i `readr::parse_number` {#sec-values}
 
-Jak widzimy, odpowiedzi na pytania z homofobią zawierają nie tylko liczby, ale też tekst z legendą. My jednak chcemy zostawić same liczby. Jeśli spojrzymy na kolumnę z wiekiem, możemy zauważyć, że jest to również jest kolumna tekstowa. Dziwne, przecież wiek to (tylko) liczba. Przejrzenie danych pozwala stwierdzić, że respondent o id 50 w pytaniu o wiek wpisał „18 (2021)". Nieważne, jak się będziemy przed tym bronić, co dopiszemy do pytania o wiek, zawsze znajdzie się ktoś, kto zrobi w nim elaborat. Ten jeden respondent sprawił, że cała kolumna nie jest traktowana jako kolumna liczbowa, ale jako tekst. Odpowiedź na oba te problemy jest taka sama -- `mutate` i `parse_number`.
+Jak widzimy, odpowiedzi na pytania z homofobią zawierają nie tylko liczby, ale też tekst z wyjaśnieniem tych liczb na skali. My jednak chcemy zostawić same liczby, żeby móc na nich liczyć. Podobny problem mamy z kolumną z wiekiem, gdzie możemy zauważyć, że jest to kolumna tekstowa. Dziwne, w końcu wiek to (tylko) liczba. Przejrzenie danych pozwala stwierdzić, że respondent o id 50 w pytaniu o wiek wpisał „18 (2021)". Nieważne, jak się będziemy przed tym bronić, co dopiszemy do pytania o wiek, jak bardzo wprost będziemy błagać, żeby wpisywać tam tylko liczby, zawsze znajdzie się ktoś, kto zrobi w nim elaborat. Ten jeden respondent sprawił, że cała ta kolumna została zinterpretowana jako kolumna tekstowa, a nie liczbowa. Odpowiedź na oba te problemy jest taka sama -- `mutate` i `parse_number`.
 
-Funkcja `mutate` to ogólna funkcja, za pomocą której modyfikujemy kolumny albo dodajemy nowe. Jej składnia wygląda następująco:
+Funkcja `mutate` to ogólna funkcja, za pomocą której modyfikujemy kolumny albo dodajemy nowe. Będziemy ją wykorzystywać bardzo często, za każdym razem, gdy baza danych będzie wymagała poprawek lub dodatkowych obliczeń. Jej składnia wygląda następująco:
 
 ```{r}
 #| eval: false
@@ -349,9 +360,9 @@ zmienna_z_danymi %>%
     )
 ```
 
-`mutate` w pewnym sensie zawsze tworzy nową kolumnę. Jeśli nowa kolumna ma taką samą nazwę, jak stara, to zastępuje starą. W naszym przykładzie chcemy do całej kolumny `wiek` zastosować funkcję `parse_number`, która pozbywa się wszystkiego poza pierwszą napotkaną liczbą[^podstawy_r-15]. Taka instrukcja będzie wyglądała następująco:
+`mutate` służy do tworzenia nowych kolumn. Możemy ją jednak wykorzystywać do modyfikowania kolumn już istniejących, bo jeśli nowa kolumna ma taką samą nazwę, jak stara, to nowa zastępuje starą. W naszym przykładzie chcemy do kolumny `wiek` zastosować funkcję `parse_number`, która pozbywa się z komórek wszystkiego, poza pierwszą napotkaną liczbą[^podstawy_r-15]. Taka instrukcja będzie wyglądała następująco:
 
-[^podstawy_r-15]: Jej zachowanie możemy modyfikować, np. mówiąc jej, że w liczbach typu `128 242,78` spację ma traktować jako rozdzielacz dużych liczb, a przecinek jako operator dziesiętny (w krajach anglosaskich tę funkcję pełni zazwyczaj kropka). Inaczej `parse_number("128 242,78")` zwróci nam pierwszą napotkaną liczbę, czyli 128. Szczegóły można znaleźć w dokumentacji, ale w takim wypadku powinniśmy użyć `parse_number("128 242,78", locale = locale(grouping_mark = " ", decimal_mark = ","))`.
+[^podstawy_r-15]: Jej zachowanie możemy modyfikować, np. mówiąc jej, że w liczbach typu `128 242,78` spację ma traktować jako rozdzielacz dużych liczb, a przecinek jako operator dziesiętny (w krajach anglosaskich tę funkcję pełni zazwyczaj kropka). Inaczej `parse_number("128 242,78")` zwróci nam pierwszą napotkaną liczbę, czyli 128. Szczegóły można znaleźć w dokumentacji, ale w takim wypadku powinniśmy użyć `parse_number("128 242,78", locale = locale(grouping_mark = " ", decimal_mark = ","))`. Jeśli nasz respondent najpierw wpisał rok, a potem wiek, trzeba będzie się bawić niestandardowo, np. funkcją `case_when` lub `case_match` z podrozdziału [-@sec-casewhen].
 
 ```{r}
 #| eval: false
@@ -366,7 +377,7 @@ df %>%
 
 ### Przekształcanie wielu kolumn jednocześnie z `dplyr::across` {#sec-across}
 
-Po wykonaniu tej funkcji widzimy, że cała kolumna jest już numeryczna. To samo możemy zrobić dla pytań z homofobią. Moglibyśmy, oczywiście, zapisać `H_1 = parse_number(H_1), H_2 = parse_number(H_2)` itd., ale po co się męczyć? Na początku roku 2020 dostaliśmy cudowną funkcję pomocniczą `across`, która przydaje nam się w takich dokładnie wypadkach, czyli gdy chcemy zmodyfikować serię kolumn w taki sam sposób. Jak jej używać?
+Po wykonaniu tej funkcji widzimy, że cała kolumna jest już numeryczna. To samo możemy zrobić dla pytań z homofobią. Moglibyśmy, oczywiście, zapisać `H_1 = parse_number(H_1), H_2 = parse_number(H_2)` itd., ale po co się męczyć? Na początku roku 2020 dostaliśmy cudowną funkcję pomocniczą `across`, która przydaje nam się w takich dokładnie wypadkach, gdy chcemy w taki sam sposób zmodyfikować więcej niż jedną kolumnę, bez zbędnego przepisywania tego samego. Jak jej używać?
 
 ```{r}
 #| eval: false
@@ -380,7 +391,7 @@ df %>%
     )
 ```
 
-Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery, ale możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu `tidy-select`. Tutaj akurat użyłem `starts_with("H_")`, żeby powiedzieć, że ma to zrobić ze wszystkimi kolumnami, których nazwy zaczynają się od `H_`. Te same funkcje możemy wykorzystywać w funkcji `select`. Kilka innych tego typu funkcji umieściłem w tabeli.
+Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery. Gdy używam zestaw, mam na myśli, że trzeba je wpakować w funkcję `c()` (od *concatenate*), np. `c(1, 8, 10:16)`. Możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu `tidy-select`. Tutaj akurat użyłem `starts_with("H_")`, żeby powiedzieć `across`, że chodzi mi o wszystkie kolumny, których nazwy zaczynają się od `H_`. Te same funkcje możemy wykorzystywać w funkcji `select` przy wybieraniu kolumn (por. @sec-select). Kilka innych tego typu funkcji umieściłem w tabeli.
 
 | Funkcja         |                                           Wybierz wszystkie kolumny... |
 |------------------------|----------------------------------------------:|
@@ -396,11 +407,13 @@ Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je w
 
 : Funkcje pomocnicze do `select` i `across`.
 
-[^podstawy_r-16]: Wyrażenia regularne (*Regular expressions* w skrócie *RegEx*) to wielki temat, a liźnięcie go polecam każdemu, czy programuje, czy nie. Pozwalają one na wyszukiwanie regularnych wzorców w tekście, np. `"H_\d+"` oznacza „"H\_" a potem jedna lub więcej liczba". Można je wykorzystywać np. w LibreOffice czy Google Docs (Word zrobił własny system, bo przecież czemu wdrażać światowe standardy, jak można zrobić coś tylko dla tego jednego programu?). Wiele razy oszczędzały mi godzin mechanicznej pracy. Obfita instrukcja znajduje się w ściądze do `stringr`.
+[^podstawy_r-16]: Wyrażenia regularne (*Regular expressions* w skrócie *RegEx*) to wielki temat, a liźnięcie go polecam każdemu, czy programuje, czy nie. Pozwalają one na wyszukiwanie regularnych wzorców w tekście, np. `"H_\d+"` oznacza „"H\_" a potem jakakolwiek liczba (`\d`), jedna lub więcej (`+`)". Można je wykorzystywać np. w LibreOffice czy Google Docs (Word zrobił własny system, bo przecież czemu wdrażać światowe standardy, jak można zrobić coś tylko dla tego jednego programu?). Wiele razy oszczędzały mi godzin mechanicznej pracy, gdy trzeba było, powiedzmy, dopisać coś na początku każdej linijki z tekstem. Obfita instrukcja do wyrażeń regularnych znajduje się w ściądze do `stringr`.
 
-Drugim argumentem, jaki przyjmuje `across` jest nazwa funkcji, którą chcemy zastosować. Co ważne, musi to być jej nazwa **bez nawiasów**. Jest to częsty błąd i subtelna różnica, polegająca na tym, że jeśli nie używamy nawiasów, podajemy `across` samą funkcję, a jeśli damy nawiasy, to wrzucamy w ten sposób do `across` *wynik działania* tej funkcji. Spowodowałoby to, że w tym wypadku dostalibyśmy błąd, że funkcja `parse_number()` nie dostała wymaganych argumentów. Jeśli chcielibyśmy dorzucić do `parse_number` jakieś argumenty (jak `locale`[^podstawy_r-17]), możemy to zrobić po przecinku. Szczegóły, jak zwykle, znajdziemy w dokumentacji funkcji `across`.
+Drugim argumentem, jaki przyjmuje `across`, jest nazwa funkcji, którą chcemy zastosować. Co ważne, musi to być jej nazwa **bez nawiasów**. Jest to częsty błąd, sam wiele razy się łapałem na tym, że odruchowo dodawałem do funkcji nawiasy. Wynika to z subtelnej różnicy, polegającej na tym, że jeśli nie używamy nawiasów, podajemy `across` samą funkcję, obiekt, który ją zawiera, a jeśli damy nawiasy, to wrzucamy w ten sposób do `across` *wynik działania* tej funkcji. Spowodowałoby to, że w tym wypadku dostalibyśmy błąd, że funkcja `parse_number()` nie dostała wymaganych argumentów. Jeśli chcielibyśmy dorzucić do `parse_number` jakieś argumenty (jak `locale`[^podstawy_r-17]), możemy to zrobić po przecinku[^podstawy_r-34]. Szczegóły, jak zwykle, znajdziemy w dokumentacji funkcji `across`.
 
 [^podstawy_r-17]: Jej zachowanie możemy modyfikować, np. mówiąc jej, że w liczbach typu `128 242,78` spację ma traktować jako rozdzielacz dużych liczb, a przecinek jako operator dziesiętny (w krajach anglosaskich tę funkcję pełni zazwyczaj kropka). Inaczej `parse_number("128 242,78")` zwróci nam pierwszą napotkaną liczbę, czyli 128. Szczegóły można znaleźć w dokumentacji, ale w takim wypadku powinniśmy użyć `parse_number("128 242,78", locale = locale(grouping_mark = " ", decimal_mark = ","))`.
+
+[^podstawy_r-34]: Choć dokumentacja `dplyr` zaleca, by jednak używać w takich sytuacjach funkcji anonimowych, które opisuję w podrozdziale [-@sec-lambda].
 
 ### Odwracanie punktacji {#sec-recode}
 
@@ -421,7 +434,7 @@ df %>%
     )
 ```
 
-Niektórzy lubią tworzyć nowe kolumny na odwróconą punktację, my jednak po prostu zastąpiliśmy oryginalną kolumnę `H_5`. Jeśli chcemy odwrócić wiele kolumn, możemy użyć `across`. Załóżmy, że `H_7` też ma odwróconą punktację. W takim wypadku nasz kod mógłby wyglądać tak:
+Niektórzy lubią tworzyć nowe kolumny na odwróconą punktację, my jednak po prostu zastąpiliśmy oryginalną kolumnę `H_5`. Zawsze można jednak użyć innej nazwy, np. `H_5_odwr =`. Jeśli chcemy odwrócić wiele kolumn, możemy użyć `across`. Załóżmy, że `H_7` też ma odwróconą punktację. W takim wypadku nasz kod mógłby wyglądać tak:
 
 ```{r}
 #| eval: false
@@ -437,7 +450,7 @@ df %>%
     )
 ```
 
-Albo z użyciem `across`:
+Jeśli mamy wielki kwestionariusz i nie chce nam się 100 razy pisać tego samego, możemy użyć `across`:
 
 ```{r}
 #| eval: false
@@ -452,11 +465,11 @@ df %>%
     )
 ```
 
-Pierwszym argumentem jest zestaw kolumn, dlatego nazwy kolumn opakowałem w `c()`. Jest to podstawowa funkcja, która zbiera kilka rzeczy w jeden zestaw. `select` czy `filter` nie potrzebowały, żeby robić takie zestawy, ale wiele funkcji (zwłaszcza spoza `tidyverse`) tego wymaga. Co z drugim argumentem, czyli funkcją? Tutaj wchodzimy głębiej w programistyczne meandry i można, oczywiście, zostać przy wersji bez `across`. Odważnych zapraszam do świata funkcji anonimowych.
+Pierwszym argumentem jest zestaw kolumn, dlatego nazwy kolumn opakowałem w `c()`. `select` czy `filter` nie potrzebowały, żeby robić takie zestawy, ale wiele funkcji (zwłaszcza spoza `tidyverse`) tego wymaga. Co z drugim argumentem, czyli funkcją? Tutaj wchodzimy głębiej w programistyczne meandry. Można, oczywiście, zostać przy wersji bez `across`, ale odważnych zapraszam do świata funkcji anonimowych.
 
 ### Własne funkcje {#sec-customfunctions}
 
-Drugi argument w `across` to funkcja, jakiej `across` ma użyć do przekształcenia kolumn. Niestety nie ma funkcji, która odejmowałaby od 7. Żeby sobie z tym poradzić, musimy albo taką funkcję wcześniej zadeklarować, albo użyć tzw. funkcji anonimowej (zwanej też *lambda*). Pierwsza opcja jest łatwa do zrozumienia, ale wymaga sporo pisania jak na coś, czego użyjemy tylko raz. Tworzenie własnych funkcji w R jest dość łatwe. Nasza funkcja mogłaby wyglądać tak:
+Drugi argument w `across` to funkcja, jakiej `across` ma użyć do przekształcenia kolumn. Niestety nie ma funkcji, która odejmowałaby od 7. Żeby sobie z tym poradzić, musimy albo taką funkcję wcześniej samodzielnie napisać, albo użyć tzw. funkcji anonimowej (zwanej też *lambda*). Pierwsza opcja jest łatwa do zrozumienia, ale wymaga sporo pisania jak na coś, czego użyjemy tylko raz. Tworzenie własnych funkcji w R jest dość łatwe. Nasza funkcja mogłaby wyglądać tak:
 
 ```{r}
 odejmij_od_7 <- function(wynik) {
@@ -464,7 +477,7 @@ odejmij_od_7 <- function(wynik) {
 }
 ```
 
-Pierwsza rzecz to nazwa. Obrazowo nazwałem naszą funkcję `odejmij_od_7`. Dalej następuje słowo kluczowe `function` i w nawiasie argumenty naszej funkcji. Do naszej funkcji wrzucamy wynik osoby badanej, więc nasz argument nazwałem obrazowo `wynik`. Jeśli chcemy, dla czytelności, rozbić funkcję na kilka linijek otwieramy teraz nawiasy klamrowe i w nich opisujemy, co funkcja ma robić. Nic nie stoi na przeszkodzie, żeby opisać to wszystko w jednej linijce `function(wynik) 7 - wynik`. Po wykonaniu nasza funkcja rzeczywiście działa, co możemy sprawdzić używając jej w konsoli.
+Pierwsza rzecz to nazwa. Obrazowo nazwałem naszą funkcję `odejmij_od_7`. Dalej następuje słowo kluczowe `function` i w nawiasie argumenty naszej funkcji. My wrzucamy do funkcji wynik osoby badanej, więc nasz argument nazwałem obrazowo `wynik`. Pewnie w rzeczywistej sytuacji użyłbym `x`, bo nazwa funkcji jest wystarczająco sugerująca. Jeśli chcemy, dla czytelności, rozbić funkcję na kilka linijek, otwieramy nawiasy klamrowe i w nich opisujemy, co funkcja ma robić. Nic nie stoi na przeszkodzie, żeby opisać to wszystko w jednej linijce: `function(wynik) 7 - wynik`. Po wykonaniu powyższego kodu nasza funkcja rzeczywiście działa, co możemy sprawdzić używając jej w konsoli.
 
 ```{r}
 odejmij_od_7(3)
@@ -484,7 +497,7 @@ odejmij_od(3, 7)
 odejmij_od(2, od_czego = 4)
 ```
 
-Bardziej ogólna funkcja wymaga podania drugiego argumentu, tzn. od czego trzeba odjąć wynik. Jak widać, ta funkcja też działa i przyjmuje argumenty pozycyjne lub nazwane. Jednej albo drugiej funkcji po zadeklarowaniu możemy użyć w `across`.
+Bardziej ogólna funkcja wymaga podania drugiego argumentu, tzn. od czego trzeba odjąć `wynik`. Jak widać, ta funkcja też działa i przyjmuje argumenty pozycyjne lub nazwane. Obu funkcji, po zadeklarowaniu, możemy użyć w `across`.
 
 ```{r}
 #| eval: false
@@ -499,6 +512,8 @@ df %>%
     )
 ```
 
+Tutaj nam się to nie przyda, ale nic nie stoi na przeszkodzie, żeby wewnątrz funkcji używać innych funkcji i wielokrotnie używane serie komend przerabiać na pojedynczą komendę. Hadley Wickham wykorzystuje zasadę, że jeśli kopiujesz kod więcej niż dwa razy, to znaczy, że trzeba zrobić z niego funkcję.
+
 #### Funkcje anonimowe {#sec-lambda}
 
 Jeśli funkcja jest prosta i używamy jej tylko raz, często nie chcemy zaśmiecać sobie kodu jej definicją. Wtedy z pomocą przychodzą nam funkcje anonimowe (zwane też funkcjami *lambda*). Anonimowe, bo nie mają swojej nazwy. Podstawowy sposób ich używania to zadeklarowanie ich od razu w miejscu użycia.
@@ -510,15 +525,29 @@ across(c(H_5, H_7), function(wynik) 7 - wynik)
 
 Zamiast nazwy funkcji użyliśmy tutaj od razu jej definicji. Funkcja jest w pełni sprawna i różni się od `odejmij_od_7` tylko tym, że nie ma nazwy.
 
-Inny, jeszcze bardziej zwięzły, sposób używania funkcji anonimowych dodaje pakiet `purrr` wchodzący w skład `tidyverse`. Polega on na użyciu znaczka `~` (*czyt.* tylda). Nasza funkcja `odejmij_od_7` ma w tej konwencji postać `~ 7 - .x`. Poprzez `.x` oznacza się to, co do funkcji wrzucamy, czyli to, co w `odejmij_od_7` oznaczyliśmy jako `wynik`. Takie coś możemy zapisać w miejscu funkcji w `across`, co zrobiłem na początku.
+Inny, jeszcze bardziej zwięzły, sposób używania funkcji anonimowych dodaje pakiet `purrr` wchodzący w skład `tidyverse`. Polega on na użyciu znaczka `~` (*czyt.* tylda). Nasza funkcja `odejmij_od_7` ma w tej konwencji postać `~ 7 - .x`. Poprzez `.x` zawsze oznacza się w takich funkcjach to, co do funkcji wrzucamy, czyli to, co w `odejmij_od_7` oznaczaliśmy jako `wynik`. Takie coś możemy zapisać w miejscu funkcji w `across`, co zrobiłem na początku, jak chciałem wzbudzić ciekawość.
+
+Jak wspomniałem w jednym z przypisów, dokumentacja `dplyr` od niedawna sugeruje, że jeśli funkcja potrzebuje jakichś dodatkowych argumentów, to żeby używać funkcji anonimowej, zamiast wpisywać arguemnty po przecinku. Co prawda wpisywanie po przecinku działa, ale moglibyśmy chcieć na wszelki wypadek dostosować się do nowych standardów. W takim wypadku moglibyśmy zmodyfikować przykład z poprzedniego podrozdziału, gdzie używaliśmy funkcji `odejmij_od` i dodatkowego arguemntu `od_czego`.
+
+```{r}
+#| eval: false
+
+# źle, choć jeszcze działa
+across(c(H_5, H_7), odejmij_od, od_czego = 7)
+
+# dobrze
+across(c(H_5, H_7), ~ odejmij_od(.x, od_czego = 7))
+```
 
 ## Nowe kolumny {#sec-newcols}
 
-Jak wspomniałem, funkcja `mutate` nie tylko pozwala na modyfikowanie istniejących kolumn, ale też na tworzenie nowych. Zazwyczaj robimy to w dwóch przypadkach -- gdy chcemy zagregować dane z wierszy, np. zsumować wyniki kwestionariusza albo gdy chcemy podzielić naszą bazę na kategorie, np. „młodzi", „w średnim wieku", „seniorzy". Omówmy to po kolei.
+Jak wspomniałem, funkcja `mutate` nie tylko pozwala na modyfikowanie istniejących kolumn, ale też na tworzenie nowych. Zazwyczaj robimy to w dwóch przypadkach -- gdy chcemy zagregować dane z wierszy, np. zsumować wyniki z danego kwestionariusza albo gdy chcemy podzielić naszą bazę na kategorie, np. „młodzi", „w średnim wieku", „seniorzy". Omówmy to po kolei.
 
 ### Agregowanie danych z wierszy z `dplyr::pick` {#sec-pick}
 
-Załóżmy, że homofobię będziemy liczyć poprzez dodanie `H_1` + `H_2` + `H_3` itd. Czasami będziemy chcieli robić sumy, czasami policzyć średnią. W kwestionariuszach zazwyczaj liczymy sumy, ale dla czasów reakcji często będziemy chcieli policzyć średnią. Jak więc dodać taką sumującą kolumnę w R? Mamy dwa sposoby. Pierwszy to wprost opisanie, co dodajemy, wewnątrz `mutate`.
+Załóżmy, że homofobię będziemy liczyć poprzez dodanie `H_1` + `H_2` + `H_3` itd. Czasami będziemy chcieli robić sumy, czasami policzyć średnią[^rowwise]. W kwestionariuszach zazwyczaj liczymy sumy, ale np. dla czasów reakcji zazwyczaj będziemy chcieli policzyć średnią. Jak więc dodać taką kolumnę z sumami w R? Mamy dwa sposoby. Pierwszy to wprost opisanie, co dodajemy, wewnątrz `mutate`.
+
+[^rowwise]: Jakiekolwiek inne operacje na wierszach są możliwe i wymagają użycia funkcji `rowwise()`. Ponieważ robi się to rzadko, a jest to dość zaawansowane zagadnienie, nie opisuję tego tutaj, a odsyłam zainteresowanych do dokumentacji.
 
 ```{r}
 #| eval: false
@@ -534,9 +563,9 @@ df %>%
     )
 ```
 
-Jak można się domyślić, istnieje sposób niewymagający tyle pisania, które w skomplikowanych bazach i długich kwestionariuszach naprawdę może być długotrwałe i uciążliwe. `tidyverse` ratuje nas tutaj funkcją `pick`[^podstawy_r-18], a standardowy R dokłada funkcję `rowSums` (i `rowMeans`). Wystarczy, że do funkcji `rowSums` wrzucimy, które kolumny chcemy zsumować, wskazując je właśnie za pomocą `pick` i funkcji pomocniczych.
+Jak można się domyślić, istnieje sposób niewymagający tyle pisania, które w skomplikowanych bazach i długich kwestionariuszach naprawdę może być długotrwałe i uciążliwe. `tidyverse` ratuje nas tutaj funkcją `pick`[^podstawy_r-18], a bazowy R dokłada funkcję `rowSums` (i `rowMeans`). Wystarczy, że do funkcji `rowSums` wrzucimy, które kolumny chcemy zsumować, wskazując je właśnie za pomocą `pick` i ewentualnie funkcji pomocniczych, tak jak robiliśmy w `select` (por. [-@sec-select]) i `across` (por. [-@sec-across]).
 
-[^podstawy_r-18]: W chwili kiedy to piszę, czyli luty 2023 r., `pick` jest świeżynką, wprowadzoną do `dplyr` w wersji 1.1.0 na koniec stycznia 2023 r. Jeśli Twój R jej nie znajduje, warto zaktualizować pakiety, albo guzikami w RStudio, albo funkcją `devtools::update_packages()`. Jeśli nie ma takiej możliwości, w miejsce `pick` można użyć `across`.
+[^podstawy_r-18]: W chwili kiedy to piszę, `pick` jest świeżynką, wprowadzoną do `dplyr` w wersji 1.1.0 na koniec stycznia 2023 r. Jeśli Twój R jej nie znajduje, warto zaktualizować pakiety, albo guzikami w RStudio, albo funkcją `devtools::update_packages()`. Jeśli nie ma takiej możliwości, w miejsce `pick` można użyć `across`.
 
 ```{r}
 #| eval: false
@@ -554,7 +583,7 @@ df %>%
 
 ### Kategoryzowanie przypadków i przekodowywanie z `dplyr::case_when` {#sec-casewhen}
 
-Czasem zdarza się, że chcemy podzielić dane ilościowe (np. wiek, wzrost, szczęście mierzone kwestionariuszowo) na kategorie (młodzi vs nie-aż-tak-młodzi, wysocy vs niscy, szczęśliwi vs nieszczęśliwi). Zdarza się też, że osoba tworząca ankietę nie buła na tyle przewidująca, żeby w odpowiedziach na pozycję kwestionariuszową do „zdecydowanie się zgadzam" dodać 6, więc nie możemy po prostu użyć `parse_number`. I w jednym, i w drugim wypadku musimy stworzyć wartości na podstawie innych wartości, np. wzrost poniżej 160 cm zamienić na „niski" albo tekst „zdecydowanie się nie zgadzam" zamienić na 1. Do takich celów służy niezwykle przydatna funkcja `case_when` z pakietu `dplyr`. Załóżmy, że chcemy podzielić mężczyzn w naszej bazie na trzy kategorie wykształcenia -- podstawowe, ponadpodstawowe i wyższe. Oznacza to, że osoby z wykształceniem średnim i zawodowym musimy wrzucić do jednego worka. W tym celu rozszerzymy naszą instrukcję o kolejną komendę. Funkcja `case_when` ma dość prostą składnię.
+Czasem zdarza się, że chcemy podzielić dane ilościowe (np. wiek, wzrost, szczęście mierzone kwestionariuszowo) na kategorie (młodzi vs nie-aż-tak-młodzi, wysocy vs niscy, szczęśliwi vs nieszczęśliwi). Zdarza się też, że osoba tworząca ankietę nie była na tyle przewidująca, żeby w odpowiedziach do „zdecydowanie się zgadzam" dodać 6, więc nie możemy po prostu użyć `parse_number`. I w jednym, i w drugim wypadku musimy stworzyć wartości na podstawie innych wartości, np. wzrost poniżej 160 cm zamienić na „niski" albo tekst „zdecydowanie się nie zgadzam" zamienić na 1. Do takich celów służy niezwykle przydatna funkcja `case_when` z pakietu `dplyr`. Załóżmy, że chcemy podzielić mężczyzn w naszej bazie na trzy kategorie wykształcenia -- podstawowe, ponadpodstawowe i wyższe. Oznacza to, że osoby z wykształceniem średnim i zawodowym musimy wrzucić do jednego worka. W tym celu rozszerzymy naszą instrukcję o kolejną komendę. Funkcja `case_when` ma dość prostą składnię.
 
 ```{r}
 #| eval: false
@@ -566,7 +595,7 @@ case_when(
 )
 ```
 
-Funkcja po kolei sprawdza warunki. Jeśli natrafi na jakiś spełniony warunek zatrzyma się i da taką wartość, jaką temu warunkowi przypisaliśmy. Warunek jest logiczny, czyli może to być cokolwiek od `wyksztalcenie == "Średnie"` po `wzrost <= 160`. Należy pamiętać, że jeśli wartość wynikowa ma być tekstem, musimy napisać ją w cudzysłowie, jak każdy dosłowny tekst. `.default = wartosc` może nam służyć do ustalania, co ma być, jeśli żaden z powyższych warunków się nie sprawdzi[^podstawy_r-19]. Jeśli chodzi o przykład z wykształceniem, moglibyśmy rozwiązać go tak:
+Funkcja po kolei sprawdza warunki. Jeśli natrafi na jakiś spełniony warunek, zatrzyma się i da taką wartość, jaką temu warunkowi przypisaliśmy. Warunek jest logiczny, czyli może to być cokolwiek od `wyksztalcenie == "Średnie"` po `wzrost <= 160`. Należy pamiętać, że jeśli wartość wynikowa ma być tekstem, musimy napisać ją w cudzysłowie, jak każdy dosłowny tekst. `.default = wartosc` może nam służyć do ustalania, co ma być, jeśli żaden z powyższych warunków się nie sprawdzi[^podstawy_r-19]. Jeśli chodzi o przykład z wykształceniem, moglibyśmy rozwiązać go tak:
 
 [^podstawy_r-19]: W starszych tekstach (z mojej perspektywy starszych niż 3 tygodnie) można zamiast argumentu `.default` spotkać konstrukcję typu `TRUE ~ wyksztalcenie`. Aktualnie ona jeszcze działa, ale powoli będzie wycofywana. Lepiej jest przestawiać się na `.default`.
 
@@ -589,9 +618,9 @@ df %>%
     )
 ```
 
-W tym wypadku `case_when`, idąc wiersz po wierszu, sprawdza, czy w kolumnie `wyksztalcenie` nie znajduje się wartość `"Średnie"`. Jeśli tak, to w tworzonej właśnie kolumnie `wyksztalcenie_grupa` wstawia wartość `"Ponadpodstawowe"` i przechodzi do kolejnego. Jeśli wykształcenie nie jest średnie, to sprawdza, czy jest zawodowe i w razie czego również wstawia `"Ponadpodstawowe"`. Jeśli nie jest ani średnie, ani zawodowe, to wstawia to, co akurat jest w kolumnie `wyksztalcenie`, czyli dla osób z wykształceniem podstawowym wstawia `"Podstawowe"`, a dla osób z wykształceniem wyższym `"Wyższe"`[^podstawy_r-20]. W ten sposób z 4 kategorii wykształcenia zrobiły nam się 3. W podobny sposób przekodowywalibyśmy klucz w ankiecie na liczby, np. pisząc `H_1 == "Zdecydowanie się zgadzam" ~ 6`.
+W tym wypadku `case_when`, idąc wiersz po wierszu, sprawdza, czy w kolumnie `wyksztalcenie` nie znajduje się wartość `"Średnie"`. Jeśli tak, to w tworzonej właśnie kolumnie `wyksztalcenie_grupa` wstawia wartość `"Ponadpodstawowe"` i przechodzi do kolejnego wiersza. Jeśli wykształcenie nie jest średnie, to sprawdza, czy jest zawodowe i w razie czego również wstawia `"Ponadpodstawowe"`. Jeśli nie jest ani średnie, ani zawodowe, to wstawia to, co akurat jest w kolumnie `wyksztalcenie`, czyli dla osób z wykształceniem podstawowym wstawia `"Podstawowe"`, a dla osób z wykształceniem wyższym `"Wyższe"`[^podstawy_r-20]. W ten sposób z 4 kategorii wykształcenia zrobiły nam się 3. W podobny sposób przekodowywalibyśmy klucz w ankiecie na liczby, np. pisząc `H_1 == "Zdecydowanie się zgadzam" ~ 6`. Możemy ułatwić sobie to przekodowywanie za pomocą `questionr`, który opisuję w podrozdziale [-@sec-questionr].
 
-[^podstawy_r-20]: Warto zauważyć, że zapisane tu warunki moglibyśmy uprościć do postaci `wyksztalcenie == "Średnie" | wyksztalcenie == "Podstawowe"` albo jeszcze bardziej `wyksztalcenie %in% c("Średnie", "Podstawowe")`. Warto też zerknąć w nową siostrę `case_when`, tj. `case_match`, która również mogłaby nam tutaj pomóc. Szczegóły, oczywiście, w dokumentacji.
+[^podstawy_r-20]: Warto zauważyć, że zapisane tu warunki moglibyśmy uprościć do postaci `wyksztalcenie == "Średnie" | wyksztalcenie == "Podstawowe"` albo jeszcze bardziej `wyksztalcenie %in% c("Średnie", "Podstawowe")`. Warto też zerknąć w nową siostrzaną funkcję `case_when`, tj. `case_match`, która również mogłaby nam tutaj pomóc. Szczegóły, oczywiście, w dokumentacji.
 
 ## Sortowanie i kolejność kolumn {#sortowanie-i-kolejność-kolumn}
 
@@ -599,11 +628,11 @@ Wychodzimy już z potężnej funkcji `mutate` i możemy czyścić dalej. Ostatni
 
 ### Sortowanie z `dplyr::arrange` {#sec-arrange}
 
-Za sortowanie w `tidyverse` odpowiada funkcja `arrange`. Domyślnie sortuje ona rosnąco, więc jeśli chcemy sortowanie malejące, użyjemy pomocniczej funkcji `desc` (od *descending*). Załóżmy, że chcemy posortować nasze dane najpierw według wykształcenia (od najwyższego, do najniższego), a w obrębie wykształcenia według wieku (od najmłodszych do najstarszych). W pierwszym odruchu chcielibyśmy wpisać `arrange(desc(wyksztalcenie), wiek)`. Jest to dobry odruch, jednak jeśli to zrobimy zorientujemy się, że najwyższym z wykształceń jest wykształcenie zawodowe. Dzieje się tak dlatego, że w tej chwili wykształcenie to zwykły tekst, a więc jest sortowany alfabetycznie, nie według naszego klucza. Żeby to zmienić, musimy poznać nowy rodzaj danych.
+Za sortowanie w `tidyverse` odpowiada funkcja `arrange`. Domyślnie sortuje ona rosnąco, więc jeśli chcemy zastosować sortowanie malejące, użyjemy pomocniczej funkcji `desc` (od *descending*). Załóżmy, że chcemy posortować nasze dane najpierw według wykształcenia (od najwyższego, do najniższego), a w obrębie wykształcenia według wieku (od najmłodszych do najstarszych). W pierwszym odruchu chcielibyśmy wpisać `arrange(desc(wyksztalcenie), wiek)`. Jest to dobry odruch, jednak jeśli to zrobimy, zorientujemy się, że najwyższym z wykształceń jest wykształcenie zawodowe. Dzieje się tak dlatego, że w tej chwili wykształcenie to zwykły tekst, a więc jest sortowany alfabetycznie, nie według naszego klucza. Żeby to zmienić, musimy poznać nowy rodzaj danych.
 
 #### Factors {#sec-factor}
 
-Czynniki (*factors*) to rodzaj danych, za pomocą których przechowujemy tekst, który ma tylko kilka możliwych wartości albo te wartości mają jakąś kolejność, którą chcemy wziąć pod uwagę. Jeśli mamy etykiety takie jak wykształcenie, czy grupa kontrolna/eksperymentalna, to powinniśmy je przechowywać właśnie w tej postaci. Danymi tego typu w `tidyverse` zarządza pakiet `forcats`. Żeby zmienić wykształcenie z tekstu na factor, dopiszemy jedną linijkę do naszego `mutate` i od razu posortujemy.
+Czynniki (*factors*) to rodzaj danych, za pomocą których przechowujemy tekst, który ma tylko kilka możliwych wartości albo gdy te wartości mają jakąś kolejność, którą chcemy wziąć pod uwagę. Jeśli mamy etykiety takie jak wykształcenie, czy grupa kontrolna/eksperymentalna, to powinniśmy je przechowywać właśnie w tej postaci. Danymi tego typu w `tidyverse` zajmuje się pakiet `forcats`. Żeby zmienić wykształcenie z czystego tekstu na czynnik, dopiszemy jedną linijkę do naszego `mutate` i od razu posortujemy.
 
 ```{r}
 #| eval: false
@@ -632,11 +661,11 @@ df %>%
 
 Komendę `factor` dla czytelności rozbiłem tutaj na trzy linijki, ale -- oczywiście -- można ją całą zapisać w jednej. Po pierwsze wskazałem, że na factor przerobiona ma być kolumna `wyksztalcenie`. Po drugie wskazałem, jakie wykształcenie może mieć wartości, zbierając je w jeden zestaw funkcją `c` i wrzucając do argumentu `levels`. Na koniec poinformowałem R, że w kolejność jest tutaj ważna, dopisując `ordered = TRUE`. Jeśli tak przerobione dane posortujemy, zobaczymy, że baza rzeczywiście zaczyna się od wykształcenia wyższego.
 
-##### `Questionr` {#sec-questionr}
+##### `questionr` {#sec-questionr}
 
-Przy okazji czynników chciałbym wspomnieć o pierwszym dodatku (*addins*) do RStudio, jaki może nam się przydać. Dodatki to przyjmują różną formę, ale tutaj omówię dwa, które są graficznymi narzędziami pomagającymi pisać nam kod. Można mieć do nich mieszany stosunek, ale póki umiemy też napisać kod ręcznie (lub chociaż wiemy, jak skorzystać z dokumentacji), to mogą być dużą pomocą. Zwłaszcza na początku przygody z R. Pierwszym takim dodatkiem jest `Questionr`, który pozwala nam stworzyć komendy związane z czynnikami (i kategoryzować dane ilościowe, co ręcznie zrobimy w podrozdziale [-@sec-casewhen]).
+Przy okazji czynników chciałbym wspomnieć o pierwszym dodatku (*addin*) do RStudio, jaki może nam się przydać. Dodatki przyjmują różną formę, ale tutaj omówię dwa, które są graficznymi narzędziami pomagającymi nam pisać kod. Można mieć do nich mieszany stosunek, ale póki umiemy też napisać kod ręcznie (lub chociaż wiemy, jak skorzystać z dokumentacji), to mogą być dużą pomocą, zwłaszcza na początku przygody z R. Pierwszym takim dodatkiem jest `questionr`, który pozwala nam stworzyć komendy związane z czynnikami (i kategoryzować dane ilościowe, co ręcznie robiliśmy w podrozdziale [-@sec-casewhen]).
 
-`Questionr` instalujemy jak każdy inny pakiet (`install.packages("questionr")`). Od tego momentu (lub po zresetowaniu RStudio) w menu `addins` na górnej belce znajdziemy trzy nowe opcje. Ta interesująca nas to Level ordering. Na początku zobaczymy okienko, w którym możemy wybrać kilka rzeczy. W jakiej zmiennej chcemy zmienić kolejność, w jakiej kolumnie i z jakiego pakietu wziąć funkcję do zmiany kolejności (domyślnie jest to `fct_relevel` z `forcats`). W drugiej zakładce możemy graficznie ustawić taką kolejność, jaką chcemy. W ostatniej zakładce otrzymujemy gotowy kod. `Questionr` nie robi nic samodzielnie, ten kod trzeba jeszcze wkleić w skrypt. Z jednym kruczkiem. Nam chodzi o samą komendę `fct_relevel`, bez pierwszej linijki, która służy do zapisania zmian. Ponieważ my tworzymy `mutate`, to wystarczy, że skopiujemy nasze gotowe `fct_relevel()` do funkcji `mutate`, dopisując nazwę kolumny i pierwszy argument. Może być to użyteczne, jeśli mamy dużo czynników lub dużo poziomów w czynniku. Ostatecznie nasza komenda `mutate` z użyciem `questionr` wyglądałaby tak:
+`questionr` instalujemy jak każdy inny pakiet (`install.packages("questionr")`). Od tego momentu (lub po zresetowaniu RStudio) w menu Addins na górnej belce znajdziemy trzy nowe opcje. Ta interesująca nas to Level ordering. Na początku zobaczymy okienko, w którym możemy wybrać kilka rzeczy. W jakiej zmiennej chcemy zmienić kolejność, w jakiej kolumnie i z jakiego pakietu wziąć funkcję do zmiany kolejności (domyślnie jest to `fct_relevel` z `forcats`). W drugiej zakładce możemy graficznie ustawić taką kolejność, jaką chcemy. W ostatniej zakładce otrzymujemy gotowy kod. `Questionr` nie robi nic samodzielnie, ten kod trzeba jeszcze wkleić w skrypt. Z jednym kruczkiem. Nam chodzi o samą komendę `fct_relevel`, bez pierwszej linijki, która służy do zapisania zmian. Ponieważ my tworzymy `mutate`, to wystarczy, że skopiujemy nasze gotowe `fct_relevel()` do funkcji `mutate`, dopisując nazwę kolumny i pierwszy argument. Może być to użyteczne, jeśli mamy dużo czynników lub dużo poziomów w czynniku. Ostatecznie nasza komenda `mutate` z użyciem `questionr` wyglądałaby tak:
 
 ```{r}
 #| eval: false
@@ -657,9 +686,11 @@ mutate(
 )
 ```
 
+![Przykład użycia `questionr`](./ilustracje/questionr_gif.gif){#fig-questionr}
+
 ### Kolejność kolumn z `dplyr::relocate` {#sec-relocate}
 
-Możemy chcieć mieć nasze kolumny w określonej kolejności. Są zasadniczo dwa sposoby zmieniania kolejności kolumn. Jest funkcja `relocate`, która służy raczej przestawianiu pojedynczych kolumn lub ich niewielkiej liczby. Jeśli chcemy od nowa określić kolejność kolumn, możemy wykorzystać w tym celu znaną nam już funkcję `select`. Załóżmy, że chcielibyśmy przestawić kolumnę `H_suma` przed kolumny z cząstkowymi wynikami.
+Możemy chcieć mieć nasze kolumny w określonej kolejności. Są zasadniczo dwa sposoby zmieniania kolejności kolumn. Jest funkcja `relocate`, która służy raczej przestawianiu pojedynczych kolumn lub ich niewielkiej liczby. Jeśli chcemy od nowa określić kolejność kolumn, możemy wykorzystać w tym celu znaną nam już funkcję `select` (por. [-@sec-select]). Załóżmy, że chcielibyśmy przestawić kolumnę `H_suma` przed kolumny z cząstkowymi wynikami.
 
 ```{r}
 #| eval: false
@@ -672,11 +703,11 @@ df %>%
     select(id, wiek, wyksztalcenie, H_suma, everything())
 ```
 
-Jeśli przestawiamy kolumny z użyciem `relocate`, powinniśmy ustawić argument `.before` albo `.after`. Oba wymagają nazwy kolumny przed którą lub po której chcemy przenieść naszą kolumnę. Jeśli nie ustawimy żadnego, nasze kolumny zostaną przeniesione na początek tabeli. Jeśli używamy `select` musimy wpisać kolejność naszych kolumn ręcznie. Ciekawe może być użycie przeze mnie `everything()`. W tym kontekście znaczy ono „i cała reszta".
+Jeśli przestawiamy kolumny z użyciem `relocate`, powinniśmy ustawić argument `.before` albo `.after`. Oba wymagają nazwy kolumny przed którą lub po której chcemy mieć naszą kolumnę. Jeśli nie ustawimy żadnego, nasze kolumny zostaną przeniesione na początek tabeli. Jeśli używamy `select`, musimy wpisać kolejność naszych kolumn ręcznie. Zastanawiające może być użycie przeze mnie `everything()`. W tym kontekście znaczy ono „i potem cała reszta".
 
 ## Zapisywanie zmian z `<-` {#sec-save}
 
-W ten sposób uzyskaliśmy cały kod czyszczący. Mamy ów kod zapisany w naszym skrypcie, jeśli go uruchomimy, to widzimy, że działa. Jednak jeśli w konsolę wpiszemy `df`, naszym oczom ciągle ukazuje się stara, brzydka baza. Jak więc zmienić nasze `df` na wyczyszczoną wersję? Tak jak zawsze przypisujemy wartości w R -- operatorem `<-`. Nasz kod na zmianę brudnej bazy w czystą ostatecznie przyjmie postać:
+W ten sposób uzyskaliśmy cały kod czyszczący. Mamy ów kod zapisany w naszym skrypcie. Jeśli go uruchomimy, to widzimy, że działa. Jednak jeśli w konsolę wpiszemy samo `df`, naszym oczom ciągle ukazuje się stara, brzydka baza. Jak więc zmienić nasze `df` na wyczyszczoną wersję? Tak jak zawsze przypisujemy wartości w R -- operatorem `<-`. Nasz kod na zmianę brudnej bazy w czystą ostatecznie przyjmie postać:
 
 ```{r}
 df <- df %>%
@@ -703,19 +734,19 @@ df <- df %>%
     relocate(H_suma, .before = H_1)
 ```
 
-Kod ten możemy uruchomić dla dowolnej ilości danych, w dowolnym momencie. Jest wielokrotnego użytku i spokojnie możemy go wykorzystać, kiedy baza się rozrośnie. Nie musimy go wtedy pisać od nowa, wystarczy, że go uruchomimy. Co więcej, mogę wpaść jeszcze na jakiś pomysł i dopisać linijkę na samym początku, nie musząc całej reszty robić od nowa. Sprawmy sobie tę przyjemność i zerknijmy na naszą wyczyszczoną bazę.
+Kod ten możemy uruchomić dla dowolnej ilości danych, w dowolnym momencie. Jest wielokrotnego użytku i spokojnie możemy go wykorzystać, kiedy baza się rozrośnie. Nie musimy go wtedy pisać od nowa, a wystarczy, że go uruchomimy. Co więcej, mogę wpaść jeszcze na jakiś pomysł i dopisać linijkę na samym początku, nie musząc całej reszty robić od nowa. Sprawmy sobie tę przyjemność i zerknijmy na naszą wyczyszczoną bazę.
 
 ```{r}
 df
 ```
 
-Po zapisaniu zmiennej `df`, tracimy naszą starą zmienną. Tym samym, jeśli uruchomilibyśmy nasz kod jeszcze raz, ale już na nowej zmiennej `df`, wyskoczy nam błąd. W końcu nowa zmienna nie ma tych samych kolumn, co stara zmienna. Co więcej, takiej operacji nie da się cofnąć. Jeśli chcemy dostać swoją starą, brudną bazę, musimy ponownie załadować ją z pliku. To prowadzi nas do ważnego wniosku co do pisania skryptów -- powinniśmy pisać je tak, żeby dało się z nich odtworzyć wszystko, co robiliśmy od samego początku[^podstawy_r-21]. Dzięki temu, jeśli chcemy się wycofać, zaznaczamy i wykonujemy cały kod przed interesującym nas momentem. Brak skrótu Ctrl+Z jest jedną z ważniejszych różnic w analizie w programach typu SPSS czy Statistica a w językach programowania typu R czy Python. Wbrew pozorom, idzie się przyzwyczaić. Ta sama właściwość pozwala na zachowanie przejrzystości w nauce -- pokaż mi swój kod, a będę wiedział bardzo dokładnie, jak prowadziłeś(-aś) swoją analizę.
+Po zapisaniu zmiennej `df`, tracimy naszą starą zmienną. Tym samym, jeśli uruchomilibyśmy nasz kod jeszcze raz, ale już na nowej zmiennej `df`, wyskoczy nam błąd. W końcu nowa zmienna nie ma tych samych kolumn, co stara zmienna. Co więcej, takiej operacji przypisania nie da się w prosty sposób cofnąć. Jeśli chcemy dostać swoją starą, brudną bazę, musimy ponownie załadować ją z pliku. To prowadzi nas do ważnego wniosku co do pisania skryptów -- powinniśmy pisać je tak, żeby dało się z nich odtworzyć wszystko, co robiliśmy od samego początku[^podstawy_r-21]. Dzięki temu, jeśli chcemy się z czegoś wycofać, zaznaczamy i wykonujemy cały kod przed interesującym nas momentem. Brak skrótu Ctrl+Z jest jedną z ważniejszych różnic między analizą w programach typu SPSS czy Statistica a analizą w językach programowania typu R czy Python. Wbrew pozorom idzie się przyzwyczaić. Ta sama właściwość pozwala na zachowanie przejrzystości w nauce -- pokaż mi swój kod, a będę wiedział bardzo dokładnie, jak prowadziłeś(-aś) swoją analizę.
 
-[^podstawy_r-21]: Dlatego ja zazwyczaj wstępną bazę ładuję do zmiennej typu `df_raw`, i ją przekształcam, zaś do zmiennej `df` zapisuję już wyczyszczoną bazę. Swój kod czyszczący zaczynam więc od `df <- df_raw %>%`. Dzięki temu zawsze mogę na szybko zerknąć do niewyczyszczonej bazy, jakbym czegoś z niej potrzebował.
+[^podstawy_r-21]: Dlatego ja zazwyczaj wstępną bazę ładuję do zmiennej typu `df_raw`, zaś do zmiennej `df` zapisuję już wyczyszczoną bazę. Swój kod czyszczący zaczynam więc od `df <- df_raw %>%`. Dzięki temu zawsze mogę na szybko zerknąć do niewyczyszczonej bazy, jakbym czegoś z niej potrzebował.
 
 ## Grupowanie (`dplyr::group_by`) i agregowanie (`dplyr::summarise`) {#sec-summarise}
 
-Gdy mamy już bazę, zazwyczaj chcemy policzyć pewne statystyki dla grup badanych, np. dla osób różniących się wykształceniem, płcią czy jakąś manipulacją. Chcemy na przykład poznać średnią homofobię osób o różnym wykształceniu, sprawdzić liczność naszych podgrup czy policzyć inne zbiorcze statystyki. Możemy, oczywiście, odfiltrować najpierw osoby o wykształceniu podstawowym, policzyć dla nich, potem osoby o wykształceniu średnim itd. Są jednak prostsze sposoby, a obejmują one użycie `group_by` i `summarise`[^podstawy_r-22]. Te dwie funkcje zazwyczaj idą ze sobą w parze i zgrupowane dane od razu trafiają do `summarise`. Poniżej przykład.
+Gdy mamy już bazę, zazwyczaj chcemy policzyć pewne statystyki dla podgrup osób badanych, np. dla osób różniących się wykształceniem, płcią czy jakąś manipulacją. Chcemy na przykład poznać średnią homofobię osób o różnym wykształceniu, sprawdzić liczność naszych podgrup czy policzyć inne zbiorcze statystyki. Możemy, oczywiście, odfiltrować najpierw osoby o wykształceniu podstawowym, policzyć dla nich, potem osoby o wykształceniu średnim itd. Są jednak prostsze sposoby, a obejmują one użycie `group_by` i `summarise`[^podstawy_r-22]. Te dwie funkcje zazwyczaj idą ze sobą w parze i zgrupowane dane od razu trafiają do `summarise`. Poniżej przykład.
 
 [^podstawy_r-22]: `tidyverse` dopuszcza zarówno pisownię brytyjską `summarise` jak i amerykańską `summarize`. Podobnie w przypadku innych rozbieżności. Dokumentacja wskazuje jednak, że pisownia brytyjska jest preferowana. Też ją preferuję.
 
@@ -731,9 +762,9 @@ df %>%
     )
 ```
 
-Jak widzimy, dostaliśmy tabelkę z wykształceniem i wskazanymi statystykami. Funkcja `n` zliczyła nam przypadki osób z poszczególnym wykształceniem, `mean` policzyła średnią, `sd` odchylenie standardowe, a `median` medianę. `V` to tzw. współczynnik zmienności. Co to jest, nie jest teraz szczególnie ważne. Policzyłem to tutaj, żeby pokazać, że w obliczeniach możemy też wpisywać niestandardowe operacje (jak dzielenie) bez żadnych strasznych funkcji anonimowych, a także że możemy wziąć wartości z innych kolumn jako argumenty do naszych przekształceń. Tutaj `V` to odchylenie standardowe średniej homofobii (`H_SD`) podzielone przez samą średnią (`H_M`). Każdą kolumnę mogliśmy nazwać wedle życzenia. Grupować możemy na podstawie wielu zmiennych. Jak dowiemy się w podrozdziale o eksploracji danych, istnieją funkcje, które najpopularniejsze zastawy danych eksploracyjnych liczą za nas.
+Jak widzimy, dostaliśmy tabelkę z wykształceniem i wskazanymi statystykami. Funkcja `n` zliczyła nam przypadki osób z poszczególnym wykształceniem, `mean` policzyła średnią, `sd` odchylenie standardowe, a `median` medianę. `V` to tzw. współczynnik zmienności. Co to jest, nie jest teraz szczególnie ważne. Policzyłem to tutaj, żeby pokazać, że w obliczeniach możemy też wpisywać niestandardowe operacje (jak dzielenie) bez żadnych strasznych funkcji anonimowych, a także że możemy wziąć wartości z innych kolumn jako argumenty do naszych przekształceń. Tutaj `V` to odchylenie standardowe średniej homofobii (`H_SD`) podzielone przez samą średnią (`H_M`). Każdą kolumnę mogliśmy nazwać wedle życzenia. Jak dowiemy się w podrozdziale [-@sec-get_summary_stats], istnieją funkcje, które najpopularniejsze zastawy statystyk opisowych liczą za nas.
 
-Tak robiliśmy to zawsze, jednak `dplyr` 1.1.0. wprowadził inny sposób grupowania. Jeśli nie chcemy zapisywać grup w naszej bazie danych na później (czyli w większości przypadków), nie musimy w ogóle używać funkcji `group_by`. Zamiast tego `summarise` dostał argument `.by`, za pomocą którego możemy wskazać grupy jednorazowo, tylko na potrzeby tego jednego podsumowania. Więcej na temat argumentu `.by` można znaleźć w dokumentacji. Poniżej przykład z innego zbioru danych, w którym pojawia się liczba krzyków w piosence w zależności od typu piosenki i jej autora [@field2012].
+Tak robiliśmy to zawsze, jednak `dplyr` 1.1.0. wprowadził inny sposób grupowania. Jeśli nie chcemy zapisywać grup w naszej bazie danych na później (czyli w większości przypadków), nie musimy w ogóle używać funkcji `group_by`. Zamiast tego `summarise` dostał argument `.by`, za pomocą którego możemy wskazać grupy jednorazowo, tylko na potrzeby tego jednego podsumowania. Więcej na temat argumentu `.by` można znaleźć w dokumentacji. Poniżej przykład z innego zbioru danych, w którym pojawia się średnia liczba krzyków w piosence, w zależności od typu piosenki i jej autora [@field2012]. Przy okazji pokazuję też, że można grupować na podstawie wielu zmiennych naraz.
 
 ```{r}
 # załadowanie danych z sieci
@@ -778,9 +809,9 @@ df_long %>%
     head(n = 10)
 ```
 
-Zacznę od skomentowania samych danych, a potem wyjaśnię funkcję. Dane w formacie długim mają oddzielną kolumnę na numer pytania i odpowiedź. Pięć kolumn z odpowiedziami na pytania zmieniliśmy w dwie. Powoduje to jednak, że każda osoba badana ma pięć wierszy -- w każdym odpowiedź na tylko jedno pytanie. Najpierw następuje 5 wierszy osoby z id 1, potem 5 wierszy osoby z id 2 itd. Widać więc dlaczego formaty te nazywają się szeroki i długi. Szeroki ma wiele kolumn, mało wierszy (1 na osobę), długi mało kolumn, wiele wierszy (1 na każde pytanie).
+Zacznę od skomentowania samych danych, a potem wyjaśnię funkcję. Dane w formacie długim mają oddzielne kolumny na numer pytania i odpowiedź. Pięć kolumn z odpowiedziami na pytania z formatu szerokiego zmieniliśmy w dwie. Powoduje to jednak, że każda osoba badana ma teraz pięć wierszy -- w każdym odpowiedź na tylko jedno pytanie. Najpierw następuje 5 wierszy osoby z id 1, potem 5 wierszy osoby z id 2 itd. Widać więc dlaczego formaty te nazywają się szeroki i długi. Szeroki ma wiele kolumn, a mało wierszy (1 na osobę), długi mało kolumn, a wiele wierszy (1 na każde pytanie).
 
-Po co nam taki format? Zawiera te same informacje, co format długi, a trudniej się to czyta. Po pierwsze umożliwia nam to policzenie niektórych rzeczy, których nie policzylibyśmy z formatu szerokiego. Dla przykładu, teraz mogę grupować dane według pytań, żeby sprawdzić, czy na każde pytanie badani odpowiadają podobnie. Jeśli moja skala jest dobra i każde pytanie rzeczywiście mierzy to samo, to odpowiedzi na wszystkie pytania powinny być podobne. Być może zrobiłem jakieś kontrowersyjne pytanie, na które wszyscy odpowiadają nisko, mimo że nie różnią się, w tym przykładzie, poziomem homofobii. Mogę więc, na oko, sprawdzić rzetelność pozycji testowych[^podstawy_r-23]. Formatu długiego wymagają też niektóre testy statystyczne.
+Po co nam taki format? Zawiera te same informacje, co format szeroki, a trudniej się to czyta. Po pierwsze umożliwia nam to policzenie niektórych rzeczy, których nie policzylibyśmy z formatu szerokiego. Dla przykładu teraz mogę grupować dane według pytań, żeby sprawdzić, czy na każde pytanie badani odpowiadają podobnie. Jeśli moja skala jest dobra i każde pytanie rzeczywiście mierzy to samo, to odpowiedzi na wszystkie pytania powinny być podobne. Być może zrobiłem jakieś kontrowersyjne pytanie, na które wszyscy odpowiadają nisko, mimo że nie różnią się, w tym przykładzie, rzeczywistym poziomem homofobii. Mogę więc, na oko, sprawdzić rzetelność pozycji testowych[^podstawy_r-23]. Formatu długiego wymagają też niektóre testy statystyczne.
 
 [^podstawy_r-23]: Oczywiście psychometria dysponuje lepszymi wskaźnikami rzetelności testów niż proste średnie odpowiedzi. Fakt pozostaje faktem jednak, że grupować dane po pytaniach można tylko wtedy, gdy są w jednej kolumnie.
 
@@ -793,9 +824,9 @@ df_long %>%
     )
 ```
 
-Nawet częściej niż do grupowania po pytaniach, wykorzystujemy format długi do wykresów. Jak się przekonamy dalej, w gramatyce graficznej (*the grammar of graphics*) do jednego obiektu na wykresie możemy przypisać tylko jedną kolumnę. Jeśli więc chcemy zrobić wykres słupkowy np. wyników *przed* i *po*, to do osi X przypiszemy kolumnę z etykietami, a do osi Y kolumnę z wynikami. Nie da się więc sensownie zrobić wykresu, jeśli wyniki *przed* i *po* mamy w osobnych kolumnach.
+Nawet częściej, niż do grupowania po pytaniach, wykorzystujemy format długi do wykresów. Jak się przekonamy dalej (w podrozdziale [-@sec-ggplot]), w gramatyce grafik (*The Grammar of Graphics*) do jednego obiektu na wykresie możemy przypisać tylko jedną kolumnę. Jeśli więc chcemy zrobić wykres słupkowy np. wyników *przed* i *po*, to do osi X przypiszemy kolumnę z etykietami, a do osi Y kolumnę z wynikami. Nie da się więc sensownie zrobić wykresu, jeśli wyniki *przed* i *po* mamy w osobnych kolumnach.
 
-Omówmy więc funkcję, której użyłem do zmiany formatu. Kiedyś robiło się to skomplikowanymi funkcjami `melt` i `cast`, które często można znaleźć w innych językach programowania. Dziś w R mamy, na szczęście, intuicyjne funkcje `pivot_wider` i `pivot_longer`. Tej pierwszej używamy zmieniając format na szeroki, tą drugą zmieniamy format na długi. Na przykładzie powyżej można stwierdzić, że `pivot_longer` przyjmuje trzy argumenty. Pierwszy to zbiór kolumn, do jakich chcemy tę funkcję zastosować. Można tu skorzystać z funkcji pomocniczych typu `starts_with()` albo `everything()`. Kolejne dwa argumenty funkcji `pivot_longer` to `names_to` i `values_to`. Są to nazwy kolumn, do których mają trafić, jak nazwa wskazuje, nazwy i wartości kolumn. W naszym przykładzie etykiety `H_1`, `H_2` itd. trafiły do kolumny `pytanie`, zaś same odpowiedzi na te pytania do kolumny `ocena`.
+Omówmy więc funkcję, której użyłem do zmiany formatu. Kiedyś robiło się to skomplikowanymi funkcjami `melt` i `cast`, które często można znaleźć w innych językach programowania. Dziś w R, na szczęście, mamy intuicyjne funkcje `pivot_wider` i `pivot_longer`. Tej pierwszej używamy zmieniając format na szeroki, tą drugą zmieniamy format na długi. Na przykładzie powyżej można stwierdzić, że `pivot_longer` przyjmuje trzy argumenty. Pierwszy to zbiór kolumn, do jakich chcemy tę funkcję zastosować, jakie chcemy zwinąć. Można tu skorzystać z funkcji pomocniczych typu `starts_with()` czy `everything()`. Kolejne dwa argumenty funkcji `pivot_longer` to `names_to` i `values_to`. Są to nazwy kolumn, do których mają trafić, jak nazwa wskazuje, nazwy i wartości z naszych obecnych kolumn. W naszym przykładzie etykiety `H_1`, `H_2` itd. trafiły do kolumny `pytanie`, zaś same odpowiedzi na te pytania do kolumny `ocena`.
 
 ```{r}
 #| eval: false
@@ -803,13 +834,13 @@ df_long %>%
     pivot_wider(names_from = "pytanie", values_from = "ocena")
 ```
 
-`pivot_wider` ma prostszą składnię, ponieważ nie trzeba w niej wskazywać zakresu kolumn do rozwinięcia, a jedynie w jakiej kolumnie znajdują się nazwy kolumn, a w jakiej jej wartości. Robimy to odpowiednio argumentami `names_from` i `values_from`. Jeśli jakiejś wartości nie ma w formacie długim (np. gdy osoba z numerem 4 nie odpowiedziała na pytanie 2, to w formacie długim może nie być wiersza `4 H_2`), to `pivot_wider` automatycznie wstawi w tę komórkę `NA`[^podstawy_r-24]. Zdarza się, że funkcji tej musimy użyć dlatego, że niektóre programy generują dane w formacie długim.
+`pivot_wider` ma prostszą składnię, ponieważ nie trzeba w niej wskazywać zakresu kolumn do rozwinięcia, a jedynie gdzie znajdują się nazwy kolumn, a gdzie ich wartości. Robimy to odpowiednio argumentami `names_from` i `values_from`. Jeśli jakiejś wartości nie ma w formacie długim (np. gdy osoba z numerem 4 nie odpowiedziała na pytanie 2, to w formacie długim może nie być wiersza `4 H_2`), to `pivot_wider` automatycznie wstawi w tę komórkę `NA`[^podstawy_r-24]. Zdarza się, że funkcji tej musimy użyć dlatego, że niektóre programy generują dane w formacie długim.
 
 [^podstawy_r-24]: To zachowanie można zmodyfikować argumentem `values_fill`. Szczegóły można znaleźć w dokumentacji. Swoją drogą to jest piękne w R, jak bardzo jest on giętki. Funkcje mają domyślne zachowania, ale jeśli użytkownik w swojej szczególnej sytuacji potrzebuje czegoś innego, to zawsze może to ustawić. Ta uniwersalność jest sama w sobie dobrym powodem, żeby uczyć się programowania.
 
 ## Retesty czyli złączenia (*joins*) {#sec-join}
 
-Złączenia (*joins*) to, jak nazwa wskazuje, metoda łączenia dwóch baz danych. Jest to jedna z podstawowych operacji na bazach danych, znana co najmniej od lat 70. i instrukcji `JOIN` w SQL. Jest to także jedna z operacji niedostępnych w Excelu bez Power Query. W praktyce badawczej może być ona konieczna, gdy mamy badanie wieloczęściowe, w którym musimy stosować wiele baz danych (np. jedną tworzą pomiary z eyetrackera, drugą wyniki w ankiecie, a trzecią test szybkości reakcji). Zdarza się to również często w prostych badaniach ankietowych, kiedy po jakimś czasie musimy wykonać retest. W obu tych przypadkach lądujemy z dwiema (lub więcej) bazami, które -- miejmy nadzieję -- mają jaką wspólną kolumnę, identyfikator osoby badanej, taki sam w każdej z trzech baz[^podstawy_r-25].
+Złączenia (*joins*) to, jak nazwa wskazuje, metoda łączenia dwóch baz danych. Jest to jedna z podstawowych operacji na bazach danych, znana co najmniej od lat 70. i instrukcji `JOIN` w SQL. Jest to także jedna z operacji niedostępnych w Excelu bez Power Query. W praktyce badawczej może być ona konieczna, gdy mamy badanie wieloczęściowe, w którym musimy stosować wiele baz danych (np. jedną tworzą pomiary z eyetrackera, drugą wyniki w ankiecie, a trzecią test szybkości reakcji). Często zarza się to też w prostych badaniach ankietowych, w których po jakimś czasie musimy wykonać retest. W obu tych przypadkach lądujemy z dwiema (lub więcej) bazami, które -- miejmy nadzieję -- mają jaką wspólną kolumnę, identyfikator osoby badanej, taki sam w każdej z trzech baz[^podstawy_r-25].
 
 [^podstawy_r-25]: Czasami możemy też wykorzystać inną informację o osobie badanej jako identyfikator. Brałem udział w badaniach, w których osoba badana wypełniała ankietę i w tym samym czasie była nagrywana. Potem łączyłem informacje z nagrania z informacjami z ankiety na podstawie czasu wypełniania ankiety i czasu nagrywania. Jak widać, wszystko jest możliwe, choć domyślne złączenia z `dplyr`, w chwili pisania tego tekstu, nie pozwalają na pełną giętkość. Wtedy użyłem złączeń z pakietu `fuzzyjoin`.
 
@@ -824,9 +855,9 @@ db_test
 db_retest
 ```
 
-Pierwsza rzecz, która może zwrócić naszą uwagę, to znacznie mniejsza liczba osób badanych przy reteście. Jest to naturalne, jako że wiele osób, mimo wcześniejszych deklaracji nie wypełnia naszego testu po raz drugi. Widzimy też, że każdy wiersz posiada jakiegoś rodzaju kolumnę z unikatowym identyfikatorem osoby badanej. W języku relacyjnych baz danych takie unikatowe kolumny określa się jako `PRIMARY KEY`. W bazie danych z pierwszego testu kolumna ta nosi nazwę `ID`, a w bazie danych z retestu nazywa się ona `Subject`. Od razu wychodzi na jaw, że identyfikatory są spreparowane, bo nikt się nie pomylił, nie robił dopisków ani nie zdecydował się z jakiegoś powodu NaGlE pIsAć TaK.
+Pierwsza rzecz, która może zwrócić naszą uwagę, to znacznie mniejsza liczba osób badanych przy reteście. Jest to naturalne, jako że wiele osób, mimo wcześniejszych deklaracji, nie wypełnia naszego testu po raz drugi. Widzimy też, że każdy wiersz posiada jakiegoś rodzaju kolumnę z unikatowym identyfikatorem osoby badanej. W języku relacyjnych baz danych takie unikatowe kolumny określa się jako `PRIMARY KEY`. W bazie danych z pierwszego testu kolumna ta nosi nazwę `ID`, a w bazie danych z retestu nazywa się ona `Subject`. Od razu wychodzi na jaw, że identyfikatory są spreparowane, bo nikt się nie pomylił, nie robił dopisków ani nie zdecydował się z jakiegoś powodu NaGlE pIsAć TaK. Moja praktyczna porada jest taka, żeby przed łączeniem baz danych zastosować na kolumnach z id funkcje `str_to_lower` i `str_trim`, które odpowiednio zmienią pisownię na same małe litery i usuną ewentualne spacje na początku i na końcu id. Ewentualnie można wykorzystać `str_replace_all` do usunięcia wszystkich spacji. Resztę identyfikatorów można poprawić ręcznie funkcją `case_when` (patrz [-@sec-casewhen]).
 
-Żeby połączyć te bazy, musimy najpierw zdecydować, jak chcemy to zrobić. Możemy albo przyłączyć wyniki z retestu do bazy z testem, albo przyłączyć wyniki z testu do bazy z retestem. Jest to o tyle istotne, że jeśli przyłączymy retest do testu, to będziemy mieli puste wartości u tych osób, które nie wypełniły retestu. Jeśli zrobimy odwrotnie, to z założenia każda osoba, która wypełniła retest, wcześniej wypełniła test, a więc figuruje w pierwotnej bazie. W praktyce bywa różnie. Na przykład ludzie kłamią, że wypełnili test, a jak dostaną link do retestu, to myślą, że w takim razie chociaż to wypełnią. Tak czy inaczej, ta decyzja determinuje typ złączenia, jaki wybierzemy. Najbardziej powszechnym typem jest `LEFT JOIN`, który do każdego wiersza jednej bazy (pisanej jako pierwszej, czyli po lewej) przypisuje pasujący wiersz drugiej bazy (pisanej jako drugiej, czyli po prawej). Jeśli jakiś wiersz w lewej bazie nie ma odpowiednika w prawej bazie, otrzymujemy puste wartości. Jeśli jakiś wiersz w bazie po prawej nie został przypisany do żadnego wiersza po lewej, nie jesteśmy o tym informowani. Więcej o różnych typach złączeń (np. pozwalających uzyskać wszystkie możliwe kombinacje wierszy) można przeczytać i zobaczyć na obrazkach [na przykład tutaj](https://dataschool.com/how-to-teach-people-sql/sql-join-types-explained-visually/).
+Żeby połączyć nasze bazy, musimy najpierw zdecydować, jak chcemy to zrobić. Możemy albo przyłączyć wyniki z retestu do bazy z testem, albo przyłączyć wyniki z testu do bazy z retestem. Jest to o tyle istotne, że jeśli przyłączymy retest do testu, to będziemy mieli puste wartości u tych osób, które nie wypełniły retestu. Jeśli zrobimy odwrotnie, to z założenia każda osoba, która wypełniła retest, wcześniej wypełniła test, a więc figuruje w pierwotnej bazie. W praktyce bywa różnie. Na przykład ludzie kłamią, że wypełnili test, a jak dostaną link do retestu, to myślą, że w takim razie chociaż to wypełnią. Tak czy inaczej, ta decyzja determinuje typ złączenia, jaki wybierzemy. Najbardziej powszechnym typem jest `LEFT JOIN`, który do każdego wiersza jednej bazy (pisanej jako pierwszej, czyli po lewej) przypisuje pasujący wiersz drugiej bazy (pisanej jako drugiej, czyli po prawej). Jeśli jakiś wiersz w lewej bazie nie ma odpowiednika w prawej bazie, otrzymujemy puste wartości. Jeśli jakiś wiersz w bazie po prawej nie został przypisany do żadnego wiersza po lewej, nie jesteśmy o tym informowani. Więcej o różnych typach złączeń (np. pozwalających uzyskać wszystkie możliwe kombinacje wierszy) można przeczytać i zobaczyć na obrazkach [na przykład tutaj](https://dataschool.com/how-to-teach-people-sql/sql-join-types-explained-visually/).
 
 Ja przyłączę retest do bazy z wynikami pierwszego testu. Widzę jednak dwa problemy, które będę musiał rozwiązać. Po pierwsze, kolumna z identyfikatorem osoby badanej nazywa się inaczej w obu bazach. Po drugie, kolumny `KTR_O` i `KTR_W` nazywają się tak samo w obu bazach. Będę więc musiał wskazać R, na podstawie jakich kolumn ma dokonać złączenia, a także jak ma nazwać kolumny w gotowej bazie, żebym wiedział, które wyniki dotyczą pierwszego testu, a które retestu.
 
@@ -841,9 +872,9 @@ db_joined <- db_test %>%
 db_joined
 ```
 
-Pierwszy problem rozwiązałem za pomocą argumentu `by`. Od wersji `dplyr` 1.1.0 przyjmuje on inną funkcję o nazwie `join_by`. W jej nawiasach precyzujemy, na podstawie jakich kolumn należy dokonać złączenia. Identyczne kolumny łączymy znakiem `==`. Drugi problem rozwiązałem dodając w argumencie `suffix` przyrostki do nazw kolumn. Zawsze zapisuje się je jako zestaw, czyli wewnątrz `c()` i zawsze najpierw jest w cudzysłowie przyrostek lewej bazy (u nas `db_test`), a potem przyrostek prawej bazy (u nas `db_retest`). Ja chciałem, by kolumny pierwotnej bazy nie miały przyrostka, więc za przyrostek dałem pusty ciąg znaków (czyli po prostu nic w cudzysłowie), zaś do kolumn bazy z retestem dodałem przyrostek `"_retest"`. Efekt widać na obrazku -- 5 kolumn i puste wartości u osób, które nie wypełniły retestu.
+Pierwszy problem rozwiązałem za pomocą argumentu `by`. Od wersji `dplyr` 1.1.0 przyjmuje on inną funkcję o nazwie `join_by`. W jej nawiasach precyzujemy, na podstawie jakich kolumn należy dokonać złączenia. Identyczne kolumny łączymy znakiem `==`. Drugi problem rozwiązałem dodając w argumencie `suffix` przyrostki do nazw kolumn. Zawsze zapisuje się je jako zestaw, czyli wewnątrz `c()` i zawsze najpierw jest w cudzysłowie przyrostek lewej bazy (u nas `db_test`), a potem przyrostek prawej bazy (u nas `db_retest`). Ja chciałem, by kolumny pierwotnej bazy nie miały przyrostka, więc za przyrostek dałem pusty ciąg znaków (czyli po prostu nic w cudzysłowie), zaś do kolumn bazy z retestem dodałem przyrostek `"_retest"`. Efekt widać na wydruku z konsoli -- 5 kolumn i puste wartości u osób, które nie wypełniły retestu.
 
-Jak widać złączenia to zaskakująco szeroki temat, który daje duże możliwości. Omówiona tu funkcja `left_join` jest najczęściej stosowana, ale warto zerknąć do dokumentacji i w tutoriale, żeby chociaż dowiedzieć się, co możemy za pomocą złączeń zrobić.
+Złączenia to zaskakująco szeroki temat, który daje duże możliwości. Omówiona tu funkcja `left_join` jest najczęściej stosowana, ale warto zerknąć do dokumentacji i w tutoriale, żeby chociaż dowiedzieć się, co możemy za pomocą złączeń zrobić.
 
 # Eksploracja danych {#sec-exploration}
 
@@ -917,17 +948,18 @@ Dane możemy eksplorować ręcznie za pomocą funkcji `group_by` i `summarise`, 
 
 <!-- W krótkich instrukcjach takie coś jest nawet czytelne. Warto pamiętać, że potoki nie są obowiązkowe, można równie dobrze zagnieżdżać funkcje. Cierpi na tym tylko czytelność kodu. Druga opcja, to wprost powiedzenie potokowi, gdzie ma wrzucić naszą bazę danych. Do tego właśnie służy `.`. Zapis `data = .` mówi potokowi „halo halo, proszę nie wrzucać bazy do pierwszego argumentu, tylko o tu, gdzie pokazałem(-am) kropką". Ostatecznie oba przykłady z tego podrozdziału są równoważne. -->
 
-## Statystyki opisowe z `rstatix::get_summary_stats` {#statystyki-opisowe-z-rstatixget_summary_stats}
+## Statystyki opisowe z `rstatix::get_summary_stats` {#sec-get_summary_stats}
 
 <!-- Muszę się do czegoś przyznać. Przez lata wykorzystywałem `describe` i `describeBy` do statystyk opisowych, ale... są lepsze alternatywy. Chciałem jednak wykorzystać te funkcje jako praktyczny pretekst to pokazania różnic między `data.frame` i `tibble`, używania kropki z potokami i ogólnie jak sobie radzić, jak nowszych alternatyw nie ma. Jednak do liczenia statystyk opisowych takie alternatywy są. I przychodzą do nas z `rstatix`. Jest to świetny, nowoczesny pakiet, który szerzej omówimy w podrozdziale [-@sec-rstatix]. -->
 
-Do liczenia statystyk opisowych w `rstatix` wykorzystujemy funkcję `get_summary_stats`. Dobrze współpracuje ona z `tidyverse`, potokami i funkcją `group_by`. Ma też bardzo prostą składnię. Jedyne, co musimy zrobić, to wrzucić do naszej funkcji naszą bazę danych, a otrzymamy rozległą tabelę ze statystykami opisowymi dla wszystkich zmiennych. Szczegóły, wyjaśnienia i ewentualne możliwości modyfikacji poszczególnych statystyk znajdują się w dokumentacji. Jeśli do podstawowych statystych chcielibyśmy doliczyć coś niestandardowego, zawsze możemy użyć `mutate`.
+Do liczenia statystyk opisowych w `rstatix` wykorzystujemy funkcję `get_summary_stats`. Dobrze współpracuje ona z `tidyverse`, potokami i funkcją `group_by`. Ma też bardzo prostą składnię. Jedyne, co musimy zrobić, to wrzucić do naszej funkcji naszą bazę danych, a otrzymamy rozległą tabelę ze statystykami opisowymi dla wszystkich zmiennych. Szczegóły, wyjaśnienia i ewentualne możliwości modyfikacji poszczególnych statystyk znajdują się w dokumentacji. Jeśli do podstawowych statystych chcielibyśmy doliczyć coś niestandardowego, jak współczynnik zmienności z podrozdziału [-@sec-summarise], zawsze możemy na gotowej tabeli ze statystykami opisowymi użyć użyć `mutate`.
 
 ```{r}
 #| warning: false
 library("rstatix")
 
-get_summary_stats(df)
+get_summary_stats(df) %>%
+    mutate(v = sd / mean) # dodaję współczynnik zmienności
 ```
 
 Jeśli chcemy otrzymać statysyki opisowe dla zgrupowanych danych, czyli np. osobno dla każdego poziomu wykształcenia, wystarczy, że przed użyciem funkcji `get_summary_stats` zgrupujemy dane funkcją `group_by`. W chwili, kiedy to piszę, funkcje `rstatix` nie posiadają argumentu `.by`. Jako przykład wykorzystam bazę `df_scream` z podrozdziału [-@sec-summarise].
@@ -938,9 +970,9 @@ df_scream %>%
     get_summary_stats()
 ```
 
-## Tabele liczności z `rstatix::freq_table` {#tabele-liczności-z-rstatixfreq_table}
+## Tabele liczności z `rstatix::freq_table` {#sec-freq_table}
 
-Dla danych kategorialnych (np. płeć, wykształcenie, klasa) nie liczymy statystyk opisowych, a tabele liczności. Chcemy na przykład wiedzieć, ile w naszej bazie mamy osób z wykształceniem wyższym, ile ze średnim itd. W podrozdziale [-@sec-summarise] pokazałem, jak to zrobić ręcznie funkcjami `summarise` i `n`. Pakiet `rstatix` ma dla nas gotową funkcję `freq_table` właśnie do tego celu. Wymaga ona jedynie podania, które kolumny z naszej tabeli ująć. Robimy to tak samo, jak zrobilibyśmy w funkcji `select` (patrz [-@sec-select]) czy `across` (patrz [-@sec-across]).
+Dla danych kategorialnych (np. płeć, wykształcenie, klasa) nie liczymy statystyk opisowych, a tabele liczności. Chcemy na przykład wiedzieć, ile w naszej bazie mamy osób z wykształceniem wyższym, ile ze średnim itd. W podrozdziale [-@sec-summarise] pokazałem, jak to zrobić ręcznie funkcjami `summarise` i `n`. Pakiet `rstatix` ma dla nas gotową funkcję `freq_table` właśnie do tego celu. Wymaga ona jedynie podania, które kolumny z naszej tabeli zliczyć. Robimy to tak samo, jak zrobilibyśmy w funkcji `select` (patrz [-@sec-select]) czy `across` (patrz [-@sec-across]).
 
 ```{r}
 freq_table(df, wyksztalcenie)
@@ -958,7 +990,7 @@ Użycie, jak widać, jest bardzo proste. Jedyna dodatkowa informacja, jaką spre
 
 Można zwrócić uwagę na to, że powyższa komenda wyświetliła nam macierz korelacji, pomimo że normalnie musiałbym jeszcze wywołać samą zmienną `korelacje`, do której ją zapisałem. Tak to robiliśmy wcześniej. Wykorzystałem tutaj wygodą sztuczkę -- jeśli weźmie się całe przypisanie w nawiasy, R potraktuje to jako „przypisz i wyświetl".
 
-Korelacje mają jednak swoją istotność, którą możemy tu oznaczyć. Jeśli policzyliśmy już macierz korelacji, możemy ją wrzucić do funkcji `cor_get_pval`. Ewentualnie możemy samą bazę wrzucić do funkcji `cor_pmat`. Efekt jest ostatecznie ten sam.
+Korelacje mają swoją istotność, którą możemy chcieć poznać. Jeśli policzyliśmy już macierz korelacji, możemy ją wrzucić do funkcji `cor_get_pval`. Ewentualnie możemy samą bazę wrzucić do funkcji `cor_pmat`. Efekt jest ostatecznie ten sam.
 
 ```{r}
 #| label: cor_pmat
@@ -973,35 +1005,35 @@ identical(korelacje_p_1, korelacje_p_2)
 korelacje_p_1
 ```
 
-Funkcja `identical` informuje nas, że obiekty stworzone obiema funkcjami rzeczywiście są identyczne. Powstała nam macierz istotności korelacji. Może być mylące, że korelacje wyświetlają się w notacji naukowej, co jest wygodnym sposobem oznaczania bardzo małych lub bardzo dużych liczb. Zasada jest tu prosta: $1,22e-4 = 1,22 \times 10^{-4} = 0,000122$. Jeśli jednak chcemy dostać tę macierz w przyjaźniejszej formie, możemy użyć funkcji `cor_mark_significant`[^podstawy_r-26], do której wrzucamy macierz korelacji (nie macierz istotności).
+Funkcja `identical` informuje nas, że obiekty stworzone obiema funkcjami rzeczywiście są identyczne. Powstała nam macierz istotności korelacji. Może być mylące, że korelacje wyświetlają się w notacji naukowej, co jest wygodnym sposobem oznaczania bardzo małych lub bardzo dużych liczb. Zasada jest tu prosta: $1,22e-4 = 1,22 \times 10^{-4} = 0,000122$. Jeśli jednak chcemy dostać tę informację w przyjaźniejszej formie, możemy użyć funkcji `cor_mark_significant`[^podstawy_r-26], do której wrzucamy macierz korelacji (nie macierz istotności).
 
-[^podstawy_r-26]: Ewentualnie można zaokrąglić kolumny z korelacjami do 3 lub 4 miejsc po przecinku z użyciem funkcji `mutate` i `round` albo też wyłączając notację naukową komendą `format`; można napisać na przykład `korelacje_p_1 %>% mutate(across(where(is.numeric), ~ format(.x, scientific = FALSE)))`. Tylko to naprawdę dziwnie wygląda.
+[^podstawy_r-26]: Ewentualnie można zaokrąglić kolumny z korelacjami do 3 lub 4 miejsc po przecinku z użyciem funkcji `mutate` i `round` albo też wyłączając notację naukową komendą `format`; można napisać na przykład `korelacje_p_1 %>% mutate(across(where(is.numeric), ~ format(.x, scientific = FALSE)))`. Tylko taka macierz naprawdę dziwnie wygląda.
 
 ```{r}
 cor_mark_significant(korelacje)
 ```
 
-Otrzymujemy naszą macierz korelacji wzbogaconą o gwiazdki. Domyślnie mamy standardowy układ[^podstawy_r-27] z dodatkiem \*\*\*\* oznaczającym mniej niż 0,0001. Gwiazdki możemy dostosowywać, a szczegóły znajdują się w dokumentacji.
+Otrzymujemy naszą macierz korelacji wzbogaconą o gwiazdki. Domyślnie są to zwykłe swiazdki[^podstawy_r-27] z dodatkiem \*\*\*\* oznaczającym mniej niż 0,0001. Gwiazdki możemy dostosowywać, a szczegóły znajdują się w dokumentacji.
 
-[^podstawy_r-27]: $* < 0,05$; $** < 0,01$; $*** < 0,001$.
+[^podstawy_r-27]: $*$ – $p < 0,05$; $**$ – $p < 0,01$; $***$ – $p < 0,001$.
 
 # Wykresy z `ggplot2` {#sec-ggplot}
 
-Wykresy to wielki temat i o samym pakiecie, za pomocą którego będziemy je wykonywać, `ggplot2`, powstawały osobne książki. Naturalnie więc ja pokażę tylko tyle, ile jest konieczne, żeby zacząć. Zwłaszcza, że nie lubię robić wykresów. Na matematyce najbardziej lubiłem algebrę, funkcje, ciągi, rachunek pochodnych, ale planimetria, a tym bardziej stereometria, to mój słaby punkt. Tym bardziej dziwi mnie zawsze jak spotykam ludzi, którzy lubią to robić. Zwłaszcza pozdrawiam Wiktorię J., która mówiła mi kiedyś, że szczególnie lubi się babrać z `ggplot2`. Szacuneczek.
+Wykresy to wielki temat i o samym pakiecie `ggplot2`, za pomocą którego będziemy je wykonywać, powstawały całe książki i strony internetowe. Naturalnie więc tutaj pokażę tylko tyle, ile jest konieczne, żeby zacząć. Zwłaszcza, że nie lubię robić wykresów. Na matematyce najbardziej lubiłem algebrę, funkcje, ciągi, rachunek pochodnych, ale planimetria, a tym bardziej stereometria, to mój słaby punkt. Tym bardziej dziwi mnie zawsze jak spotykam ludzi, którzy lubią to robić. Zwłaszcza pozdrawiam Wiktorię J., która mówiła mi kiedyś, że szczególnie lubi się babrać z `ggplot2`. Szacuneczek.
 
-Nie zmienia to jednak faktu, że wykresy to przepotężne narzędzia poznawcze. Dane w postaci liczb w tabelach za wiele nam nie mówią, aż nie naniesiemy ich na rysunek. Na rysunkach widzimy trendy, rozkłady, outliery i mnóstwo innych rzeczy, które dopiero wykres ujawni. Wykresy pojawiają się w prawie każdej pracy naukowej, więc zdolność efektywnego ich wytwarzania i dostosowywania do wymogów (np. APA) jest podstawową umiejętnością analityka. Na szczęście nie musimy ruszać się z R.
+Nie zmienia to jednak faktu, że wykresy to przepotężne narzędzia poznawcze. Dane w postaci liczb w tabelach za wiele nam nie mówią, aż nie naniesiemy ich na rysunek. Na rysunkach widzimy trendy, rozkłady, outliery i mnóstwo innych rzeczy, które dopiero wykres ujawni. Wykresy pojawiają się w prawie każdej pracy naukowej, więc zdolność efektywnego ich wytwarzania i dostosowywania do wymogów (np. APA) jest podstawową umiejętnością analityka. Na szczęście nie musimy w tym celu ruszać się z R.
 
-Fundamentem teoretycznym, na którym zbudowany jest `ggplot2` jest idea *The Grammar of Graphics*, którą Leland Wilkinson [-@wilkinson_grammar_2005] opisał na 700 stronach (sic!) swojej książki o tym tytule. Tak jak mówiłem, wykresy to duży temat. Nam wystarczą jednak podstawowe idee, a absolutnym fundamentem jest stwierdzenie, że właściwie każdy wykres składa się z trzech elementów, które możemy wyobrazić sobie jako warstwy -- danych, jakiegoś układu współrzędnych i jakiegoś obiektu, który Wilkinson nazywa *geom*, czyli wizualna reprezentacja danych. Takimi obiektami są na przykład punkty na wykresie punktowym, słupki histogramu, linia trendu itd. Dodatkowo obiekt *geom* ma pewne właściwości wizualne, takie jak kolor, wielkość, czy przede wszystkim lokalizacja na osiach X i y. Nazywamy te właściwości estetykami, a wiązanie ich z danymi -- mapowaniem. Teraz może się to wydawać skomplikowane, ale wdrażanie tych idei w praktyce w `ggplot2` nie jest wcale trudne. Jak już raz się to załapie, to nagle takie narzędzia jak wykresy w Excelu zaczną się wydawać wybrakowane i chaotyczne.
+Fundamentem teoretycznym, na którym zbudowany jest `ggplot2`, jest idea *The Grammar of Graphics*, którą Leland Wilkinson [-@wilkinson_grammar_2005] opisał na 700 stronach (sic!) swojej książki o tym tytule. Tak jak mówiłem, wykresy to duży temat. Nam wystarczą jednak podstawowe idee, a absolutnym fundamentem jest stwierdzenie, że właściwie każdy wykres składa się z trzech elementów, które możemy wyobrazić sobie jako warstwy -- danych, jakiegoś układu współrzędnych i jakiegoś obiektu, który Wilkinson nazywa *geom*, czyli wizualna reprezentacja danych. Takimi obiektami są na przykład punkty na wykresie punktowym, słupki histogramu, linia trendu itd. Dodatkowo mamy pewne właściwości wizualne, takie jak kolor, wielkość, czy przede wszystkim lokalizacja na osiach X i Y. Nazywamy te właściwości atrybutami albo estetykami (różnica niżej), a wiązanie ich z danymi -- mapowaniem. Teraz może się to wydawać skomplikowane, ale wdrażanie tych idei w praktyce w `ggplot2` nie jest wcale trudne. Jak już raz się to załapie, to nagle takie narzędzia jak wykresy w Excelu zaczną się wydawać wybrakowane i chaotyczne.
 
 ## Mapowanie estetyk (`aes`) {#sec-aes}
 
-Przejdźmy więc do praktyki. Pakietu `ggplot2` nie musimy ładować osobno, bo wchodzi w skład, a jakże, `tidyverse`. Żeby zacząć tworzyć wykres, musimy zacząć od wywołania funkcji `ggplot()` (ważne -- nie `ggplot2`, `ggplot2` to nazwa pakietu, funkcja to `ggplot`). W jej obrębie wskazujemy na zbiór danych, na którym chcemy pracować i dokonujemy *mapowania estetyk*, czyli mówimy naszej funkcji jakie kolumny mają przełożyć się na jakie elementy wizualne. Wykorzystajmy sobie tutaj jeden z klasycznych zbiorów danych o nazwie `diamonds`, który powinien stać się dostępny po załadowaniu `ggplot2`. Zerknijmy na niego.
+Przejdźmy więc do praktyki. Pakietu `ggplot2` nie musimy ładować osobno, bo wchodzi w skład, a jakże, `tidyverse`. Żeby zacząć tworzyć wykres, musimy zacząć od wywołania funkcji `ggplot()` (ważne -- nie `ggplot2`, `ggplot2` to nazwa pakietu, funkcja to `ggplot`). W jej obrębie wskazujemy na zbiór danych, na którym chcemy pracować i dokonujemy *mapowania estetyk*, czyli mówimy naszej funkcji, jakie kolumny mają przełożyć się na jakie elementy wizualne. Wykorzystajmy sobie tutaj jeden z klasycznych zbiorów danych o nazwie `diamonds`, który automatycznie powinien stać się dostępny po załadowaniu `ggplot2`. Zerknijmy na niego.
 
 ```{r}
 glimpse(diamonds)
 ```
 
-`diamonds` to zbiór różnych danych na temat 53940 diamentów. Szczegółowe dane na jego temat można uzyskać wpisując w konsoli `?diamonds`. Ponieważ jest to gigantyczny zbiór, wybierzmy sobie losowo 100 diamentów za pomocą funkcji `slice_sample`. Użyję jeszcze funkcji `set.seed`, żeby wyniki losowania były za każdym razem takie same. Nie jest ona obowiązkowa, ale użycie jej sprawi że wykresy wyjdą identyczne jak moje.
+`diamonds` to zbiór różnych danych na temat 53 940 brylantów. Szczegółowe dane na jego temat można uzyskać wpisując w konsoli `?diamonds`. Ponieważ jest to gigantyczny zbiór, wybierzmy sobie losowo 100 diamentów za pomocą funkcji `slice_sample`. Użyję jeszcze funkcji `set.seed`, żeby wyniki losowania były za każdym razem takie same. Nie jest ona obowiązkowa, ale użycie jej sprawi że Twoje wykresy bedą identyczne jak moje.
 
 ```{r}
 set.seed(123)
@@ -1009,7 +1041,7 @@ set.seed(123)
 df_diamonds <- slice_sample(diamonds, n = 100)
 ```
 
-Znacznie lepiej. Zrobimy sobie prosty wykres ceny diamentu od jego masy w karatach. Pierwsza rzecz, którą musimy wykonać, to mapowanie kolumn `carat` i `price` do osi X i y. Estetyki mapujemy wrzucając je do funkcji `aes` -- najpierw x, potem y.
+Znacznie lepiej. Zrobimy sobie prosty wykres ceny diamentu od jego masy w karatach. Pierwsza rzecz, którą musimy wykonać, to mapowanie kolumn `carat` i `price` do osi X i Y. Estetyki mapujemy wrzucając je do funkcji `aes` -- najpierw X, potem Y.
 
 ```{r}
 ggplot(df_diamonds, aes(carat, price))
@@ -1017,13 +1049,13 @@ ggplot(df_diamonds, aes(carat, price))
 
 Jak widzimy, powstał nam pusty wykres. To jest właśnie układ współrzędnych, o którym mówiłem wcześniej.
 
-Poza estetykami X i Y mamy do dyspozycji mnóstwo innych estetyk, m.in. *colour*, *fill*, *alpha* (przeźroczystość), *size*, *linetype*, *shape*. Estetyki mają jedną wspólną cechę -- są powiązane z jakimiś danymi. Jeśli stwierdzę, że wszystkie moje punkty mają być czerwone, to nie będzie to estetyka, tylko *atrybut*. O estetyce będę mógł mówić wtedy, gdy kolor będzie zależał np. od przejrzystości diamentu. To rozróżnienie, że atrybuty to stałe właściwości wyglądu, a estetyki to związek wyglądu z danymi, jest o tyle ważne, że nieco inaczej się je definiuje, jak zobaczymy za chwilę.
+Poza estetykami X i Y mamy do dyspozycji mnóstwo innych estetyk, m.in. *colour*, *fill*, *alpha* (przeźroczystość), *size*, *linewidth*, *linetype*, *shape*. Estetyki mają jedną wspólną cechę -- są powiązane z jakimiś danymi. Jeśli stwierdzę, że wszystkie moje punkty mają być czerwone, to nie będzie to estetyka, tylko *atrybut*. O estetyce będę mógł mówić wtedy, gdy kolor będzie zależał np. od przejrzystości diamentu. To rozróżnienie, że atrybuty to stałe właściwości wyglądu, a estetyki to związek wyglądu z danymi, jest o tyle ważne, że nieco inaczej się je definiuje, jak zobaczymy za chwilę.
 
 ## Obiekty `geom_*` {#sec-geom}
 
-Pusty układ współrzędnych to jeszcze nie wykres. Musimy jeszcze dodać jakiegoś rodzaju *geom*. W naszym przypadku będą to punkty, gdzie każdy punkt będzie reprezentował inny brylant. Ściąga do `ggplot2` zawiera świetną rozpiskę, jakie można stworzyć wykresy, w zależności od typu zmiennych, jakimi dysponujemy.
+Pusty układ współrzędnych to jeszcze nie wykres. Musimy jeszcze dodać jakiegoś rodzaju *geom*. W naszym przypadku będą to punkty, gdzie każdy punkt będzie reprezentował inny brylant. Ściąga do `ggplot2` zawiera świetną rozpiskę, jakie można stworzyć wykresy, w zależności od typu zmiennych, jakimi dysponujemy. Może się ona przydać nawet wtedy, gdy robimy wykresy w innym programie.
 
-Do tworzenia wykresów punktowych mamy dwa rodzaje obiektów *geom* -- `geom_point` i `geom_jitter`. `geom_point` to typowy wykres punktowy. `geom_jitter` przydaje się wtedy, kiedy mamy wiele danych o tych samych współrzędnych, np. wiele brylantów o masie dokładnie 0,2 karata i cenie dokładnie \$ 300. W takim wypadku wszystkie te punkty nałożyłyby się na siebie, ukryły jeden pod drugim i wydawałoby się, że mamy mniej danych, niż w rzeczywistości mamy. `geom_jitter` rozwiązuje ten problem odrobinkę przesuwając każdy punkt w losowym kierunku. Odrobinę tracimy wtedy na dokładności, ale widzimy wszystkie nasze dane. Żeby do naszego wykresu dołożyć kolejne elementy, używamy znaku `+`.
+Do tworzenia wykresów punktowych mamy dwa rodzaje obiektów *geom* -- `geom_point` i `geom_jitter`. `geom_point` to typowy wykres punktowy. `geom_jitter` przydaje się wtedy, kiedy mamy wiele danych o tych samych współrzędnych, np. wiele brylantów o masie dokładnie 0,2 karata i cenie dokładnie \$ 300. W takim wypadku wszystkie te punkty nałożyłyby się na siebie, ukryły jeden pod drugim i wydawałoby się, że mamy mniej danych, niż w rzeczywistości mamy. `geom_jitter` rozwiązuje ten problem odrobinkę przesuwając każdy punkt w losowym kierunku. Lekko tracimy wtedy na dokładności, ale widzimy wszystkie nasze dane. Żeby do naszego wykresu dołożyć kolejne elementy, używamy znaku `+`.
 
 ```{r}
 ggplot(df_diamonds, aes(carat, price)) +
@@ -1038,7 +1070,7 @@ ggplot(df_diamonds, aes(carat, price)) +
     geom_smooth(method = "lm")
 ```
 
-Szare pole wokół niebieskiej linii to przedział ufności. Możemy go wyłączyć ustawiając `se = FALSE`. Przy tej okazji powiedzmy sobie jeszcze raz o estetykach i atrybutach. Mogę chcieć, żeby kolor mojego punktu zależał od jakości wyszlifowania brylantu z kolumny `cut`. Ponieważ jest to związek wyglądu z danymi, to jest to estetyka i ustawiam ją wewnątrz `aes`. mogę to `aes` wrzucić albo do funkcji `ggplot`, jak robiłem wcześniej, albo też do funkcji `geom_point`. Zwyczajowo argumenty X i Y w `aes` są nienazwane, ale wszystkie inne już tak. Mogę też zmienić kolor linii trendu z niebieskiego na czarny i zrobić ją trochę cieńszą. Jest to zmiana wyglądu, ale arbitralna, bez związku z danymi. Jest to więc atrybut i ustawiam go poza `aes`, wewnątrz funkcji, której ten atrybut dotyczy. Zobaczmy to.
+Szare pole wokół niebieskiej linii to przedział ufności. Możemy go wyłączyć ustawiając `se = FALSE`. Przy tej okazji powiedzmy sobie jeszcze raz o estetykach i atrybutach. Mogę chcieć, żeby kolor mojego punktu zależał od jakości wyszlifowania brylantu z kolumny `cut`. Ponieważ jest to związek wyglądu z danymi, to jest to estetyka i ustawiam ją wewnątrz `aes`. Mogę to `aes` wrzucić albo do funkcji `ggplot`, jak robiłem wcześniej, albo też do funkcji `geom_point`, bo to jej mapowanie dotyczy. Zwyczajowo argumenty X i Y w `aes` mogą być nienazwane, ale wszystkie inne już powinny. Mogę też zmienić kolor linii trendu z niebieskiego na czarny i zrobić ją trochę cieńszą. Jest to zmiana wyglądu, ale arbitralna, bez związku z danymi. Jest to więc atrybut i ustawiam go poza `aes`, wewnątrz funkcji, której ten atrybut dotyczy. Zobaczmy to.
 
 ```{r}
 ggplot(df_diamonds, aes(carat, price, colour = cut)) +
@@ -1048,7 +1080,7 @@ ggplot(df_diamonds, aes(carat, price, colour = cut)) +
 
 ## Tytuły osi i wykresu (`labs`) {#sec-labs}
 
-Kolejną rzeczą, którą moglibyśmy chcieć zmienić, są tytuły osi. Możemy też dodać tytuł do samego wykresu. Najwygodniej jest to zrobić dodając do wykresy kolejny element, `labs`, w którym dopiszemy nasze tytuły.
+Kolejną rzeczą, którą moglibyśmy chcieć zmienić, są tytuły osi. Możemy też dodać tytuł do samego wykresu. Najwygodniej jest to zrobić dodając kolejny element, `labs`, w którym dopiszemy nasze tytuły.
 
 ```{r}
 ggplot(df_diamonds, aes(carat, price, colour = cut)) +
@@ -1063,7 +1095,7 @@ ggplot(df_diamonds, aes(carat, price, colour = cut)) +
 
 ```
 
-Jeśli chcemy zmienić etykiety wartości z legendy, mamy dwie opcje -- albo przekodujemy te etykiety bezpośrednio w bazie danych, chociażby zaprzęgając do pracy `questionr` (zob. [-@sec-questionr]), albo używając jednej z funkcji `scale_*_discrete` i jej argumentu `labels`, gdzie zamiast gwiazdki piszemy nazwę naszej estetyki. Szlif naszych diamentów jest zmapowany do estetyki `colour`, więc użyjemy funkcji `scale_colour_discrete`.
+Jeśli chcemy zmienić etykiety wartości z legendy, mamy dwie opcje -- albo przekodujemy te etykiety bezpośrednio w bazie danych, chociażby zaprzęgając do pracy `questionr` (zob. [-@sec-questionr]), albo użyjemy jednej z funkcji `scale_*_discrete` i jej argumentu `labels`, gdzie zamiast gwiazdki piszemy nazwę naszej estetyki. Szlif naszych diamentów jest zmapowany do estetyki `colour`, więc użyjemy funkcji `scale_colour_discrete`.
 
 ```{r}
 ggplot(df_diamonds, aes(carat, price, colour = cut)) +
@@ -1080,9 +1112,9 @@ ggplot(df_diamonds, aes(carat, price, colour = cut)) +
 
 ## Wygląd wykresów (`theme_*`) {#sec-theme}
 
-Wykres ma wszystkie elementy na miejscu, ale nie oszukujmy się, nie jest to dzieło sztuki. Żeby poprawić wygląd naszego wykresu, sięgniemy po dwa narzędzia. Po pierwsze ustalimy jego ogólny styl za pomocą jednego z motywów (*theme*), a potem poprawimy szczegóły z użyciem dodatku do RStudio `esquisse`.
+Wykres ma wszystkie elementy na miejscu, ale nie oszukujmy się, nie jest to dzieło sztuki. Żeby poprawić wygląd naszego wykresu, sięgniemy po dwa narzędzia. Po pierwsze ustalimy jego ogólny styl za pomocą jednego z motywów (*themes*), a potem poprawimy szczegóły z użyciem dodatku do RStudio `esquisse`.
 
-Ogólny styl wykresu ustala się za pomocą elementów zaczynających się słówkiem `theme_`. `ggplot2` ma wbudowane osiem takich motywów, które można przejrzeć [tutaj](https://ggplot2.tidyverse.org/reference/ggtheme.html). W Internecie roi się jednak od niestandardowych motywów, które mogą zaczarować nasze wykresy. Kluczowym ich źródłem może być pakiet `ggthemes`, z motywy z którego można zobaczyć [tutaj](https://github.com/jrnold/ggthemes). Ja jednak chciałem pokazać dwa inne -- `theme_apa` z pakietu `papaja` i `theme_Publication` z repozytorium na GitHubie [koundy/ggplot_theme_Publication](https://github.com/koundy/ggplot_theme_Publication).
+Ogólny styl wykresu ustala się za pomocą elementów zaczynających się słówkiem `theme_`. `ggplot2` ma wbudowane osiem takich motywów, które można przejrzeć [tutaj](https://ggplot2.tidyverse.org/reference/ggtheme.html). W Internecie roi się jednak od niestandardowych motywów, które mogą zaczarować nasze wykresy. Kluczowym ich źródłem może być pakiet `ggthemes`, motywy z którego można zobaczyć [tutaj](https://github.com/jrnold/ggthemes). Ja jednak chciałem pokazać dwa inne -- `theme_apa` z pakietu `papaja` i `theme_Publication` z repozytorium na GitHubie [koundy/ggplot_theme_Publication](https://github.com/koundy/ggplot_theme_Publication).
 
 `papaja` to skrótowiec od *Preparing APA Journal Articles* i jest to rozległy pakiet pomagający pisać artykuły zgodne ze standardami Amerykańskiego Towarzystwa Psychologicznego (APA). Z tych standardów korzystają nie tylko psychologowie, ale też wiele czasopism z zakresu nauk przyrodniczych. Daje nam on dostęp m.in. do motywu `theme_apa` dostosowującego wykres do standardów APA.
 
@@ -1105,7 +1137,7 @@ ggplot(df_diamonds, aes(carat, price, colour = cut)) +
     theme_apa()
 ```
 
-Drugi motyw nie jest szałowo popularny w społeczności, ale bardzo go lubię. Żeby zadziałał, musimy wcześniej zainstalować u siebie pakiety `grid`, `scales` i `ggthemes`. Spojrzenie w repozytorium pozwoli nam stwierdzić, że nie jest to pakiet, a po prostu zbiór plików. Wchodzimy więc w plik `ggplot_theme_Publication-2.R`, klikamy `raw`, co pozwoli R odczytać ten plik i kopiujemy link. Następnie użyjemy komendy `source`, która pozwala nam uruchamiać z innych plików .R, jak podamy ich ścieżkę lub link. Cały kod mógłby więc wyglądać tak:
+Drugi motyw nie jest szałowo popularny w społeczności, ale bardzo go lubię. Żeby zadziałał, musimy wcześniej zainstalować u siebie pakiety `grid`, `scales` i `ggthemes`. Spojrzenie w repozytorium pozwoli nam stwierdzić, że nie jest to pakiet, a po prostu zbiór plików. Wchodzimy więc w plik `ggplot_theme_Publication-2.R`, klikamy `raw` i kopiujemy link. Następnie użyjemy komendy `source`, która pozwala nam uruchamiać kod z innych plików .R w naszym skrypcie, jak podamy ich ścieżkę lub link do nich. Cały kod mógłby więc wyglądać tak:
 
 ```{r}
 source("https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R")
@@ -1129,7 +1161,7 @@ ggplot(df_diamonds, aes(carat, price, colour = cut)) +
 
 Wykres w takiej formie można już uznać za zadowalający. Ale co jeśli chcemy poprawić jakieś szczegóły? Na przykład dostosować kolory? Są na to odpowiednie funkcje, ale jeśli mam być szczery, jest ich na tyle dużo, a w tutorialach tak bardzo przeplatają się stare i nowe metody, że bez gruntownego wyszkolenia (którego na przykład ja nie posiadam) bardzo łatwo jest się zgubić i bez zrozumienia kopiować kod znaleziony w Internecie. Na szczęście istnieje pewne narzędzie, które może nam w tej sytuacji pomóc. Nazywa się `esquisse` i jest dodatkiem do RStudio.
 
-Instalujemy `esquisse` jak każdy inny pakiet (`install.packages("esquisse")`). Po zainstalowaniu, jeśli jest taka potrzeba, można spróbować zmienić język na polski komendą `set_i18n("pl")`[^podstawy_r-28]. Po zainstalowaniu pakietu, w menu Addins na górnej belce powinniśmy uzyskać dostęp do opcji *ggplot2 builder*[^podstawy_r-29], które jest narzędziem do interaktywnego konstruowania wykresów. Pozwala na stworzenie kodu w wygodnym, graficznym interfejsie. Po wygenerowaniu możemy skopiować gotowy kod do skryptu.
+Instalujemy `esquisse` jak każdy inny pakiet (`install.packages("esquisse")`). Po zainstalowaniu, jeśli jest taka potrzeba, można spróbować zmienić język na polski komendą `set_i18n("pl")`[^podstawy_r-28]. Po zainstalowaniu pakietu, w menu Addins na górnej belce, powinniśmy uzyskać dostęp do opcji *ggplot2 builder*[^podstawy_r-29], które jest narzędziem do interaktywnego konstruowania wykresów. Pozwala na stworzenie kodu w wygodnym, graficznym interfejsie. Polecam zapoznać się z tym interfejsem, ale nie będę go omawiał, ponieważ jest dość intiucyjny. Po wygenerowaniu naszego wykresu możemy skopiować gotowy kod do skryptu.
 
 [^podstawy_r-28]: Piszę „spróbować", bo gdy to piszę polskie tłumaczenie znajduje się w wersji rozwojowej. Wersje stabilne pakietów znajdują się w CRAN i to one się pobierają, gdy piszemy komendę `install.packages()`. Jednak wiele pakietów ma też swoje wersje rozwojowe, które szybciej dostają nowe funkcje, ale bywają niestabilne. Można je pobrać poleceniem `install_github` z pakietu `devtools`, do którego wrzucamy nazwę repozytorium. Na przykład wersję rozwojową `esquisse` można zainstalować komendą `devtools::install_github("dreamRs/esquisse")`. Takie pakiety można potem aktualizować komendą `devtools::update_packages()`.
 
@@ -1155,7 +1187,7 @@ ggplot(df_diamonds) +
     facet_wrap(vars(cut))
 ```
 
-Powyżej wykres, który stworzyłem w `equisse`. Warto jednak zwrócić uwagę na jego niedoskonałości, takie jak brak polskich tłumaczeń typów szlifu. Pewnym wyjaśnieniem może być dla nas nazwa francuskiego słowa *equisse* -- szkic. Takie narzędzia jak `equisse` nie zwalniają nas całkowicie z umiejętności kodowania wykresów, ale pozwalają wygodnie tworzyć `szkice` naszego kodu. Ten szkic mogę pozmieniać, np. zamieniając `theme_bw` na `theme_Publication` i dodając polskie tłumaczenia.
+Powyżej wykres, który stworzyłem w `equisse`. Warto jednak zwrócić uwagę na jego niedoskonałości, takie jak brak polskich tłumaczeń typów szlifu. Pewnym wyjaśnieniem może być dla nas nazwa francuskiego słowa *equisse* -- szkic. Takie narzędzia jak `equisse` nie zwalniają nas całkowicie z umiejętności kodowania wykresów, ale pozwalają wygodnie tworzyć *szkice* naszego kodu. Ten szkic mogę pozmieniać, np. zamieniając `theme_bw` na `theme_Publication` i dodając polskie tłumaczenia. Nieco inaczej, niż wcześniej, bo `facet_wrap` nie jest estetyką, więc sposób dodawania do niego niestandardowych etykiet znalazłem w dokumentacji.
 
 ```{r}
 #| fig-width: 8
@@ -1190,15 +1222,15 @@ ggplot(df_diamonds) +
     )
 ```
 
-Wykresy to olbrzymi temat, który tutaj tylko liznęliśmy z wierzchu. Sądzę jednak, że ta wiedza wystarczy, żeby -- z pomocą dokumentacji i Google -- być w stanie powoli rozbudowywać swoje umiejętności z zakresu `ggplot2`.
+Wykresy to olbrzymi temat, który tutaj tylko liznęliśmy z wierzchu. Sądzę jednak, że ta wiedza wystarczy, żeby -- z pomocą dokumentacji i Google -- być w stanie powoli rozbudowywać swoje umiejętności z zakresu `ggplot2`. Zwłaszcza, że tworzenie dobrych wykresów do trudna sztuka, co skutecznie udowadnia plebiscyt na najgorszy wykres roku organizowany przez dr. Przemysława Biecka na [jego stronie](http://smarterpoland.pl/index.php/2021/12/plebiscyt-na-najgorszy-wykres-roku-2021/). W tym miejscu mogę polecić jego książkę „Wykresy od kuchni”, [dostępną za darmo](https://betaandbit.github.io/Wykresy/) i okraszoną kodem R, który posłużył do wygenerowania jego wykresów.
 
 # Modele statystyczne {#sec-tests}
 
-Największą trudnością nie jest tworzenie modeli statystycznych, tylko wiedza kiedy zrobić jaki test i jak je interpretować. Stąd też nie będę się tutaj rozwodził nad samymi testami, a omówię raczej ogólną specyfikę wykonywania testów statystycznych w R i ich wyświetlania. Szczegóły co do tego, jak wykonywać konkretne testy, znajdują się w dokumentacji funkcji, zaś informacje jakimi funkcjami robić jakie testy są w innych miejscach, z których kilka polecę.
+Największą trudnością nie jest tworzenie modeli statystycznych, tylko wiedza kiedy zrobić jaki test i jak je interpretować. Stąd też nie będę się tutaj rozwodził nad samymi testami, a omówię raczej ogólną specyfikę wykonywania testów statystycznych w R i wyświetlania ich wyników. Szczegóły co do tego, jak wykonywać konkretne testy, znajdują się w dokumentacji ich funkcji.
 
-Modele statystyczne w R można ogólnie podzielić na te, które wykonuje się wprowadzając formuły i na te, w których wskazuje się kolumny. Fundamentalnym przykładem pierwszego typu jest funkcja do wykonywania regresji liniowej `lm`. Drugi typ omówię w podrozdziale [-@sec-rstatix].
+Modele statystyczne w R można ogólnie podzielić na te, które wykonuje się wprowadzając formuły i na te, w których wskazuje się kolumny. Fundamentalnym przykładem pierwszego typu jest funkcja do wykonywania regresji liniowej `lm`. Drugi typ reprezentuje np. test korelacji Pearsona `cor.test`.
 
-Funkcja `lm` to prototyp modeli regresyjnych. W identyczny sposób wykonujemy w R inne podstawowe modele takie jak ANOVA (`aov`). W sposób bardzo podobny wykonujemy w `rstatix` test t, więc nie tylko w regresji używamy formuł. Także co to jest ta formuła? To szczególny typ wskazywania kolumn z użyciem znaku `~` (tylda). Jeśli chcielibyśmy wykonać regresję, w której sprawdzalibyśmy związek długości płatków irysa długością i szerokością jego działek kielicha (słynna baza danych `iris`, dostępna automatycznie w R), zrobilibyśmy coś takiego:
+Funkcja `lm` to prototyp modeli regresyjnych. W identyczny sposób, formułami, wykonujemy w R inne podstawowe modele takie jak ANOVA (`aov`). Funkcja wykonująca test t-Studenta również potrafi obsługiwać formuły. Także co to jest ta formuła? To szczególny typ wskazywania kolumn z użyciem znaku `~` (*czyt.* tylda). Jeśli chcielibyśmy wykonać regresję, w której sprawdzalibyśmy związek długości płatków irysa długością i szerokością jego działek kielicha (słynna, stara baza danych `iris`, dostępna automatycznie w R), zrobilibyśmy coś takiego:
 
 ```{r}
 # zerkamy w bazę
@@ -1212,19 +1244,19 @@ lm_price <- iris %>%
 lm_price
 ```
 
-Obiekty tego typu zawsze potrzebują otrzymać argument `data`. Dlaczego jednak zapisałem `data = .`? Problem polega na użyciu potoków. Standardowo potok `%>%` wrzuca rzeczy do pierwszego argumentu. Wiele funkcji, tak jak `lm`, nie przyjmuje bazy danych w pierwszym argumencie. Często nawet nie w drugim, więc najlepiej wprost go nazwać. Omawiany w podrozdziale [-@sec-rstatix] pakiet `rstatix` za pierwszy cel postawił sobie nawet przerobienie testów statystycznych tak, żeby lepiej współpracowały z potokami. Jak więc poradzić sobie w takiej sytuacji? Jedna opcja, to całkiem zrezygnować z potoków i zapisać `data = iris`. Tak też jest dobrze, ale co jeśli potrzebujemy użyć potoku? Na przykład przed stworzeniem modelu wykonujemy serię przekształceń danych? Warto pamiętać, że potoki nie są obowiązkowe, można równie dobrze zagnieżdżać funkcje, Cierpi na tym tylko czytelność kodu. Druga opcja, to wprost powiedzenie potokowi, gdzie ma wrzucić naszą bazę danych. Do tego właśnie służy `.`. Zapis `data = .` mówi potokowi „halo halo, proszę nie wrzucać bazy do pierwszego argumentu, tylko o tu, gdzie pokazałem(-am) kropką".
+Obiekty tego typu zawsze wymagają argumentu `data`. Dlaczego jednak zapisałem `data = .`? Problem polega tutaj na użyciu potoków. Standardowo potok `%>%` wrzuca rzeczy do pierwszego argumentu. Wiele funkcji, tak jak `lm`, nie przyjmuje bazy danych w pierwszym argumencie. Często nawet nie w drugim, więc najlepiej wprost go nazwać. Omawiany w podrozdziale [-@sec-rstatix] pakiet `rstatix` za pierwszy cel postawił sobie nawet przerobienie testów statystycznych tak, żeby lepiej współpracowały z potokami. Jak więc poradzić sobie w takiej sytuacji? Jedna opcja, to całkiem zrezygnować z potoków i zapisać `data = iris`. Tak też jest dobrze, ale co jeśli potrzebujemy użyć potoku? Na przykład przed stworzeniem modelu wykonujemy serię przekształceń danych? Warto pamiętać, że potoki nie są obowiązkowe, można równie dobrze zagnieżdżać funkcje, Cierpi na tym tylko czytelność kodu. Druga opcja, to wprost powiedzenie potokowi, gdzie ma wrzucić naszą bazę danych. Do tego właśnie służy `.`. Zapis `data = .` mówi potokowi „halo halo, proszę nie wrzucać bazy do pierwszego argumentu, tylko o tu, gdzie pokazałem(-am) kropką".
 
-W powyższym przykładzie widać też, że `lm`, i podobnie wiele innych obiektów modeli, nie daje nam domyślnie sensownego podsumowania modelu. Wiele modeli wymaga od nas, byśmy wrzucili je do funkcji `summary` (nie mylić z `summarise`) żeby powiedziały nam coś sensownego.
+W powyższym przykładzie widać też, że `lm`, podobnie jak wiele innych obiektów modeli, nie daje nam domyślnie sensownego podsumowania. Wiele modeli wymaga od nas, byśmy wrzucili je do funkcji `summary` (nie mylić z `summarise`) żeby powiedziały nam coś, co da się zrozumieć.
 
 ```{r}
 summary(lm_price)
 ```
 
-Ten widok już jest możliwy do zinterpretowania. Jeśli wiemy co nieco o regresjach, możemy z niego odczytać, że oba predyktory są istotne statystycznie, podobnie jak statystyka $F$, a także że wyjaśniliśmy 87% wariancji. Nie jest to jednak najlepszy format wyświetlania wyników.
+Ten widok już jest możliwy do zinterpretowania. Jeśli wiemy co nieco o regresjach, możemy z niego odczytać, że oba predyktory są istotne statystycznie, podobnie jak statystyka $F$, a także że wyjaśniliśmy $R^2 = 87\%$ wariancji. Nie jest to jednak najlepszy format wyświetlania wyników.
 
 ## Czyste wyniki, czyli pakiet `broom` {#sec-broom}
 
-Dlaczego nie jest to dobry format? Bo jest niejednolity i chaotyczny. Nie tylko w widocznej postaci, ale też pod maską, co przeszkadza nam, kiedy chcemy wejść głębiej z programowaniem albo pisać automatyczne raporty. Niestandardowe wykresy również mogą być problemem. Odpowiedzią na te problemy stał się pakiet `broom`, który należy do świata `tidyverse`, ale nie jest ładowany z pakietem `tidyverse`, więc trzeba załadować go ręcznie. Rdzeniem tego pakietu jest specjalny słownik, standard tworzenia modeli, w którym kolumny zawierające określone informacje muszą nazywać się w określony sposób. Kolumny, bo wyczyszczony model ma zawsze postać `tibble`. Dla przykładu kolumna z wartością $p$ zawsze musi nazywać się `p.value`, a kolumna z wartością statystyki `estimate`. Wymusza to spójność i zapewnia przewidywalność obiektów zawierających modele. Wiele współczesnych pakietów do modelowania od razu dostosowuje swoje modele do wymogów czystych danych.
+Dlaczego nie jest to dobry format? Bo jest niejednolity i chaotyczny. Nie tylko w widocznej postaci, ale też pod maską, co przeszkadza nam, kiedy chcemy wejść głębiej z programowaniem albo pisać automatyczne raporty. Niestandardowe wykresy również mogą być wtedy problemem. Odpowiedzią na te problemy stał się pakiet `broom`. Należy on do świata `tidyverse`, ale nie jest ładowany z pakietem `tidyverse`, więc trzeba załadować go ręcznie. Rdzeniem tego pakietu jest specjalny słownik, standard tworzenia modeli, w którym kolumny zawierające określone informacje muszą nazywać się w określony sposób. Kolumny, bo wyczyszczony model ma zawsze postać tabeli. Dla przykładu kolumna z wartością $p$ zawsze musi nazywać się `p.value`, a kolumna z wartością współczynnika -- `estimate`. Wymusza to spójność i zapewnia przewidywalność obiektów zawierających modele. Wiele współczesnych pakietów do modelowania od razu dostosowuje swoje modele do wymogów czystych danych.
 
 `broom` nie jest jednak tylko standardem -- to także pakiet zawierający trzy funkcje *czyszczące* modele. Co więcej zawsze są to te same trzy funkcje, które zawsze przyjmują tak samo nazywające się argumenty. Ta spójność i zapewnienie spójności to najlepsze, co daje nam `broom`. Omówmy sobie teraz te trzy funkcje i zobaczmy je w akcji.
 
@@ -1240,7 +1272,7 @@ library("broom")
 glance(lm_price)
 ```
 
-Widzimy tutaj ogólne podsumowanie skuteczności naszego modelu z całą serią statystyk. Co ciekawe, mamy też takie statystyki jak AIC i BIC, których `summary` nie wyświetla. W ten sposób `broom` nie tylko czyści nasz model, ale także dostarcza nam nowych informacji.
+Widzimy tutaj ogólne podsumowanie skuteczności naszego modelu z całą serią statystyk. Co ciekawe mamy też takie statystyki jak AIC i BIC, których `summary` nie wyświetla. W ten sposób `broom` nie tylko czyści nasz model, ale także dostarcza nam nowych informacji.
 
 ### `tidy` {#sec-tidy}
 
@@ -1254,7 +1286,7 @@ Widzimy więc, że oba współczynniki (`estimate`) są istotne statystycznie, z
 
 ### `augment` {#sec-augment}
 
-Ostania funkcja czyszcząca nie do końca czyści. Pozwala ona dodać do oryginalnej bazy danych informacje zaczerpnięte z modelu, m.in. jaką wartość przewiduje model, jaka jest wartość resztkowa (*residual*) zwykła i standaryzowana, jaki jest dystans Cooka i *hat value* itd. Dokładne możliwości funkcji `augment` zależą od rodzaju modelu. Są to informacje użyteczne, kiedy chcemy zidentyfikować outliery. Wszystkie dodane kolumny mają nazwy zaczynające się kropką.
+Ostania funkcja czyszcząca nie do końca cokolwiek czyści. Pozwala ona na dodanie do oryginalnej bazy danych informacji zaczerpniętych z modelu, m.in. jaką wartość przewiduje model dla tego przypadku, jaka jest wartość resztkowa (*residual*), zwykła i standaryzowana, jaki jest dystans Cooka i *hat value* itd. Dokładne możliwości funkcji `augment` zależą od rodzaju modelu. Są to informacje użyteczne chociażby kiedy chcemy zidentyfikować outliery. Wszystkie dodane kolumny mają nazwy zaczynające się kropką.
 
 ```{r}
 augment(lm_price)
@@ -1264,20 +1296,20 @@ augment(lm_price)
 
 Niezwykłe możliwości i giętkość pakietu `rstatix` były już w tym tekście wychwalane i pokazywane. Tutaj jednak chciałbym powiedzieć o głównej zawartości `rstatix` czy funkcjach wykonujących testy statystyczne.
 
-R posiada dużą bibliotekę domyślnych funkcji do testów statystycznych, takich jak `t.test` czy `cor.test`. I one liczą dobrze, ale w wielu przypadkach są niewygodne. Nie ma się co dziwić, to są stare funkcje, swoją historią sięgające roku 2000, czyli początków R. Nie było wtedy `dplyr`, RStudio, potoków i całego dobrodziejstwa, które sprawia, że współczesny kod R średnio przypomina klasyczny kod, którego tu nie omawiam, ale który ciągle działa i buduje fundamenty tego języka. Dlatego właśnie wyniki tych testów są niewystandaryzowane, wymagają one niewygodnego wskazywania kolumn jako wektorów[^podstawy_r-30] i mają argument `data` na drugim miejscu, przez co potoki zawsze wymagają, by używać z nimi kropki.
+R posiada dużą bibliotekę domyślnych funkcji do testów statystycznych, takich jak `t.test` czy `cor.test`. I one liczą dobrze, ale w wielu przypadkach są niewygodne. Nie ma się co dziwić, to są stare funkcje, swoją historią sięgające roku 2000, czyli początków R. Nie było wtedy `dplyr`, RStudio, potoków i całego dobrodziejstwa, które sprawia, że współczesny kod R średnio przypomina klasyczny kod, którego tu nie omawiam, ale który ciągle działa i buduje fundamenty tego języka. Dlatego właśnie wyniki tych testów są niewystandaryzowane, wymagają one niewygodnego wskazywania kolumn jako wektorów[^podstawy_r-30] i mają argument `data` na drugim miejscu, przez co potoki zawsze wymagają używania `.`.
 
-[^podstawy_r-30]: Na przykład klasyczna funkcja `t.test` do wykonania przykładu, który za moment podaję w `rstatix`, wymaga takiej składni: `t.test(df_scream$screams, df_scream$songwriter)`. Opcja z formułą też jest możliwa, ale argument `data` jest tam na drugim miejscu.
+[^podstawy_r-30]: Na przykład klasyczna funkcja `t.test` do wykonania przykładu, który za moment podaję, wymaga takiej składni: `t.test(df_scream$screams, df_scream$songwriter)`. Opcja z formułą też jest możliwa, ale argument `data` jest tam na drugim miejscu.
 
-`rstatix` jest odpowiedzią na te problemy. Poza tym, że dodaje mnóstwo przyjaznych funkcji od siebie, to uwspółcześnia stare funkcje, naprawiając w nich wszystko, co złe, m.in. poprawiając pracę z potokami. Dodatkowo wykorzystuje sprytną nomenklaturę, która ułatwia uczenie się -- jeśli w klasycznym R funkcja nazywa się `t.test`, to w `rstatix` nazywa się `t_test`, `cor.test` zmienia się w `cor_test` i tak dalej. Jest to zgodne z ogólnym trendem `tidyverse`, żeby te nowe, współczesne funkcje zawsze były pisane snake_case (więcej o formatowaniu kodu w podrozdziale [-@sec-formatting]). Większość funkcji pozwala też na wykonywanie wielu testów jednocześnie i radzi sobie ze zgrupowanymi danymi.
+`rstatix` jest odpowiedzią na te problemy. Poza tym, że dodaje mnóstwo przyjaznych funkcji od siebie, to uwspółcześnia stare funkcje, naprawiając w nich wszystko, co złe, m.in. poprawiając pracę z potokami. Dodatkowo wykorzystuje sprytną nomenklaturę, która ułatwia uczenie się -- jeśli w klasycznym R funkcja nazywa się `t.test`, to w `rstatix` nazywa się `t_test`, `cor.test` zmienia się w `cor_test` i tak dalej. Jest to zgodne z ogólnym standarem `tidyverse`, żeby współczesne funkcje zawsze były pisane snake_case (więcej o formatowaniu kodu w podrozdziale [-@sec-formatting]). Większość funkcji pozwala też na wykonywanie wielu testów jednocześnie i radzi sobie ze zgrupowanymi danymi.
 
 ```{r}
-# Test korelacji Pearsona
+# test korelacji Pearsona
 cor_test(diamonds, price, carat)
 
-# Test t-Studenta
+# test t-Studenta
 t_test(df_scream, screams ~ songwriter)
 
-# Test korelacji na zgrupowanych danych
+# test korelacji na zgrupowanych danych
 iris %>%
     group_by(Species) %>%
     cor_test(Sepal.Length, Sepal.Width)
@@ -1285,10 +1317,10 @@ iris %>%
 # ANOVA
 anova_test(diamonds, price ~ cut + color + clarity)
 
-# Testy post-hoc
+# testy post-hoc
 tukey_hsd(diamonds, price ~ cut + color + clarity)
 
-# Wielkość efektu d Cohena
+# wielkość efektu d Cohena
 cohens_d(df_scream, screams ~ songwriter)
 
 # wielkość efektu eta^2
@@ -1299,7 +1331,7 @@ diamonds %>%
 
 Dodatkowo `rstatix` dostarcza nam wygodą funkcję `add_significance`, która do obiektu z modelem zgodnym z `broom` dodaje kolumnę z gwiazdkami istotności wartości $p$. Domyślne ustawienia są takie same jak dla funkcji `cor_mark_significance`[^podstawy_r-31] i również można je modyfikować (por. [-@sec-cor_mat]).
 
-[^podstawy_r-31]: $* < 0,05$; $** < 0,01$; $*** < 0,001$.
+[^podstawy_r-31]: $*$ – $p < 0,05$; $**$ – $p < 0,01$; $***$ – $p < 0,001$.
 
 ```{r}
 lm_price %>%
@@ -1307,11 +1339,11 @@ lm_price %>%
     add_significance()
 ```
 
-Nie są to wszystkie funkcje, które oferuje `rstatix` i zachęcam do zerknięcia do [repozytorium `rstatix` na GitHubie](https://github.com/kassambara/rstatix), gdzie autor umieścił długą listę funkcji ze streszczeniem ich działania.
+Nie są to wszystkie funkcje, które oferuje `rstatix` i zachęcam do zerknięcia do [repozytorium `rstatix` na GitHubie](https://github.com/kassambara/rstatix), gdzie autor umieścił długą listę dostępnych funkcji ze streszczeniem ich działania.
 
 # Formatowanie kodu {#sec-formatting}
 
-Ostatnia rzecz, którą chciałbym napisać w tym tekście, dotyczy formatowania kodu. Powiedzmy sobie szczerze -- czytanie kodu jest trudne, choć `tidyverse` już i tak to mocno ułatwia. Gdy piszemy kod, powinniśmy mieć w głowie, że ktoś go kiedyś będzie czytał, gdzie tym ktosiem możemy być nawet przyszli my. Budzi to potrzebę, żeby kod wyglądał dobrze, przestrzegał pewnych standardów, aby był zrozumiały i spójny. Poza tym istnieje seria dobrych praktyk, które zwiększają czytelność kodu. Kod jest giętki przyjmie wiele rzeczy i nawet brzydki będzie działał. Dla przykładu, jeśli tam, gdzie powinno być `TRUE` napiszemy `1`, to kod i tak zadziała, bo głęboko pod maską `TRUE` to takie fancy `1`, ale nie powinniśmy tego robić. Jest to szczególnie ważne, kiedy piszemy kod z kimś. Jeśli nie mamy jednolitych standardów, chociażby wewnętrznych, to nagle może się okazać, że kod działa, ale potrafi być niespójny nawet w obrębie pojedynczego pliku.
+Ostatnia rzecz, którą chciałbym napisać w tym tekście, dotyczy formatowania kodu. Powiedzmy sobie szczerze -- czytanie kodu jest trudne, choć `tidyverse` już i tak to mocno ułatwia. Gdy piszemy kod, powinniśmy mieć w głowie, że ktoś go kiedyś będzie czytał, gdzie tym ktosiem możemy być nawet przyszli my. Budzi to potrzebę, żeby kod wyglądał dobrze, przestrzegał pewnych standardów, aby był zrozumiały i spójny. Poza tym istnieje seria dobrych praktyk, które między innymi zwiększają czytelność kodu. Kod jest (lub bywa) giętki przyjmie wiele rzeczy i nawet brzydki będzie działał. Dla przykładu, jeśli tam, gdzie powinno być `TRUE` napiszemy `1`, to kod i tak zadziała, bo głęboko pod maską `TRUE` to takie fancy `1`, ale nie powinniśmy tego robić. Jest to szczególnie ważne, kiedy piszemy kod z kimś. Jeśli nie mamy jednolitych standardów, chociażby wewnętrznych, to nagle może się okazać, że kod działa, ale potrafi być niespójny nawet w obrębie pojedynczego pliku.
 
 ```{r}
 set.seed(123)
@@ -1342,11 +1374,11 @@ Pierwszy z tych narzędzi to `styler`, który sam poprawia wiele aspektów kodu,
 
 ## `lintr` {#lintr}
 
-`styler` nie poprawia wszystkich błędów, bo byłoby to zbyt destrukcyjne. Na szczęście `lintr` może nam je wszystkie wypomnieć. Dla każdego naszego projektu powinniśmy raz uruchomić komendę `lintr::use_lintr(type = "tidyverse")`. Spowoduje to wytworzenie w folderze pliku `.lintr`. Zawiera on konfigurację `lintr` dla danego projektu. Za jego pomocą będziemy mogli tę konfigurację również zmieniać.
+`styler` nie poprawia wszystkich błędów, bo byłoby to zbyt destrukcyjne. Na szczęście `lintr` może nam większość z nich wypomnieć. Dla każdego naszego projektu powinniśmy raz uruchomić komendę `lintr::use_lintr(type = "tidyverse")`. Spowoduje to wytworzenie w folderze pliku o nazwie `.lintr`. Zawiera on konfigurację `lintr` dla danego projektu. Za jego pomocą będziemy mogli tę konfigurację również zmieniać.
 
 ![Przykład wykorzystania `lintr`](./ilustracje/lintr_gif.gif){#fig-lintr}
 
-Zmiana dokonuje się przez wpisanie do pliku `.lintr`[^podstawy_r-33] odpowiednich opcji. Szczegóły omawia dokumentacja (`vignette("lintr")`), ale na pewno chciałbym wskazać jedną, której zmiana jest wręcz konieczna. Domyślnie `lintr` uznaje za za długie linie linie powyżej 80 znaków. To jest strasznie mało! Ja zazwyczaj ustawiam ten limit to na 120-150 znaków. Domyślna zawartość pliku `.lintr` wygląda tak:
+Zmiana dokonuje się przez wpisanie do pliku `.lintr`[^podstawy_r-33] odpowiednich opcji. Szczegóły omawia dokumentacja (`vignette("lintr")`), ale na pewno chciałbym wskazać jedną, której zmiana jest wręcz konieczna. Domyślnie `lintr` uznaje za za długie linie powyżej 80 znaków. To jest strasznie mało! Ja zazwyczaj ustawiam ten limit to na 120-150 znaków. Zmodyfikujmy to. Domyślna zawartość pliku `.lintr` wygląda tak:
 
 [^podstawy_r-33]: Nazwa tego pliku zaczyna się od kropki, co oznacza, że jest on ukryty. Aby wyświetlić ukryte pliki można użyć skrótu klawiszowego Ctrl+H lub przeszukać opcje eksploratora.
 
@@ -1356,7 +1388,7 @@ linters: linters_with_defaults()
 encoding: "UTF-8"
 ```
 
-By zmienić limit znaków należy przekształcić go w ten sposób:
+By zmienić limit znaków, należy przekształcić go w ten sposób:
 
 ```{r}
 #| eval: false
@@ -1366,16 +1398,16 @@ linters: linters_with_defaults(
 encoding: "UTF-8"
 ```
 
-Gdzie 120 to nowy limit znaków. W podobny sposób możemy zmienić wymagany styl nazywania obiektów. Standardem `tidyverse` jest snake_case, czyli nazywanie małymi literami, oddzielając słowa podkreślnikiem. Poza tym wyróżniamy jeszcze camelCase, czyli każde słowo składowe wielką literą poza pierwszym, PascalCase, czyli każde słowo wielką literą (choć czasem *Pascal case* też nazywa się *camel case*), kebab-case, czyli oddzielanie słów myślnikiem i dot.notation, czyli oddzielanie słów kropką, żeby wymienić do bardziej znane. Żaden ze stylów nie jest zły, tylko jak już się zdecydujemy na jeden, powinniśmy się go trzymać.
+Gdzie 120 to nowy limit znaków. W podobny sposób możemy zmienić wymagany styl nazywania obiektów. Standardem `tidyverse` jest snake_case, czyli nazywanie małymi literami, oddzielając słowa podkreślnikiem. Poza tym wyróżniamy jeszcze camelCase, czyli każde słowo składowe wielką literą poza pierwszym, PascalCase, czyli każde słowo wielką literą (choć czasem *Pascal case* też nazywa się *camel case* lub *upper camel case*), kebab-case, czyli oddzielanie słów myślnikiem i dot.notation, czyli oddzielanie słów kropką, żeby wymienić te bardziej znane. Żaden ze stylów nie jest zły, jednal jak już się zdecydujemy na jeden, powinniśmy się go trzymać.
 
 Oba te pakiety, `lintr` i `styler`, są bardzo użyteczne, jednak ostatecznie nie zastępują ludzkiej decyzji. Nie wystarczy więc tylko mieć te pakiety, trzeba też -- choć pobieżnie -- znać same standardy.
 
 # Posłowie {#sec-ending}
 
-W ten sposób kończymy to przydługie wprowadzenie do R. Wielu rzeczy tutaj nie omówiłem, np. elementów klasycznego R takich jak wybór pojedynczej kolumny jako wektora (np. `df$wyksztalcenie`), czy w ogóle wektorów. Nie poznaliśmy klasycznych sposobów selekcji danych jak np. `df[df$wyksztalcenie == "Wyższe", 1:10]`. Nie powiedzieliśmy nic o listach ani pętlach, czyli tym kawałku R, który umożliwia automatyzację. Nie liznęliśmy nawet Quarto, czyli standardu do łączenia R z pisaniem raportów, w którym zresztą piszę ten tekst. Części rzeczy nie omówiłem, bo na początek da się je skutecznie zastąpić nowszymi i bardziej czytelnymi funkcjami `tidyverse`. Część natomiast bywa bardzo przydatna, ale jest po prostu, według mnie, zbyt zaawansowana jak na pierwszy raz.
+W ten sposób kończymy to przydługie wprowadzenie do R. Wielu rzeczy tutaj nie omówiłem, np. elementów klasycznego R, takich jak wybór pojedynczej kolumny jako wektora (np. `df$wyksztalcenie`), czy w ogóle wektorów. Nie poznaliśmy klasycznych sposobów selekcji danych, jak np. `df[df$wyksztalcenie == "Wyższe", 1:10]`. Nie powiedzieliśmy nic o listach ani pętlach, czyli tym kawałku R, który umożliwia automatyzację. Nie liznęliśmy nawet Quarto, czyli standardu do łączenia R z pisaniem raportów, w którym zresztą piszę ten tekst. Części rzeczy nie omówiłem, bo na początek da się je skutecznie zastąpić nowszymi i bardziej czytelnymi funkcjami `tidyverse`. Część natomiast bywa bardzo przydatna, ale jest po prostu, według mnie, zbyt zaawansowana jak na pierwszy kontakt z językiem.
 
 Tym samym zachęcam do dalszej nauki! Jeśli opanowaliście elementy zawarte w tym tekście, macie solidny fundament, by zrozumieć takie książki jak polecana przeze mnie na wstępie publikacja „Język R. Kompletny zestaw narzędzi dla analityków danych" [@wickham2020]. Zaznaczam tylko, że ten tekst jest od tej książki nowszy, więc czasem pojawią się rozbieżności. W kilku miejscach wspominałem, że to, co opisuję, to nowinka, ale co do wielu rzeczy już nawet nie pamiętam, że były kiedyś nowe. Zawsze jednak pierwszym, podstawowym źródłem powinna być zawsze aktualna dokumentacja, a dopiero potem StackOverflow.
 
-Jeśli czytasz to teraz, oznacza to, że ten tekst to praca w toku. Za każdą informację zwrotną będę wdzięczny. Jeśli coś było niejasne, jeśli coś powinienem wyjaśnić szerzej albo prościej, jeśli czegoś mocno zabrakło, to można (trzeba!) do mnie pisać: [315695\@uwr.edu.pl](mailto:315695@uwr.edu.pl).
+Jeśli czytasz to teraz, oznacza to, że ten tekst to praca w toku. Za każdą informację zwrotną będę wdzięczny. Jeśli coś było niejasne, jeśli coś powinienem wyjaśnić szerzej albo prościej, jeśli czegoś mocno zabrakło, to można (trzeba!) do mnie pisać na [315695\@uwr.edu.pl](mailto:315695@uwr.edu.pl).
 
-Z tego miejsca pozostaje mi życzyć jak najmniej błędów. Ostatnie przesłanie jest jednak takie, że błędy będą się pojawiać. W dużych ilościach. Debugowanie potrafi zajmować mnóstwo czasu, zwłaszcza na początku drogi. Nie trzeba się jednak bać ani frustrować, trzeba czytać komunikaty o błędach i w razie czego wyszukiwać je w Google. Po pewnym czasie tych błędów będzie coraz mniej, podobnie jak zawahań i potrzeby sięgania po pomoc poza dokumentację. Choć pewnie nigdy nie znikną całkiem.
+Z tego miejsca pozostaje mi życzyć jak najmniej błędów. Ostatnie przesłanie jest jednak takie, że błędy będą się pojawiać. W dużych ilościach. Debugowanie potrafi zajmować mnóstwo czasu, zwłaszcza na początku drogi. Nie trzeba się jednak bać ani frustrować, trzeba czytać komunikaty o błędach i w razie czego wyszukiwać je w Google, a w ostateczności pytać na StackOverflow. Po pewnym czasie tych błędów będzie coraz mniej, podobnie jak zawahań i potrzeby sięgania po pomoc poza dokumentację. Choć pewnie nigdy nie znikną one całkiem.
