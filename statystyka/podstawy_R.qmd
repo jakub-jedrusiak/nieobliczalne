@@ -246,6 +246,8 @@ Możemy kliknąć Import, by dopełnić dzieła, ale jeśli tworzymy skrypt, bę
 df <- read_csv("dane/podstawy-R/complex_database.csv")
 ```
 
+![Przykład wykorzystania narzędzia do importu danych.](./ilustracje/readr_gif.gif){#fig-readr}
+
 Już widzę, że nic mi się nie zgadza. Z 18 kolumn 17 zostało rozpoznane jako kolumny tekstowe (`chr`), a tylko kolumna ID jako liczby (`dbl`). Za chwilę będziemy to czyścić. Żeby wyświetlić nasze dane, mogę wpisać w konsolę nazwę, pod którą je zapisałem. Nasza baza pojawiła się też w okienku w prawym górnym rogu. Kliknięcie na nią tam spowoduje wyświetlenie jej w oddzielnej karcie. Warto zauważyć, że nie możemy jej tam edytować.
 
 ```{r}
@@ -1411,3 +1413,126 @@ Tym samym zachęcam do dalszej nauki! Jeśli opanowaliście elementy zawarte w t
 Jeśli czytasz to teraz, oznacza to, że ten tekst to praca w toku. Za każdą informację zwrotną będę wdzięczny. Jeśli coś było niejasne, jeśli coś powinienem wyjaśnić szerzej albo prościej, jeśli czegoś mocno zabrakło, to można (trzeba!) do mnie pisać na [315695\@uwr.edu.pl](mailto:315695@uwr.edu.pl).
 
 Z tego miejsca pozostaje mi życzyć jak najmniej błędów. Ostatnie przesłanie jest jednak takie, że błędy będą się pojawiać. W dużych ilościach. Debugowanie potrafi zajmować mnóstwo czasu, zwłaszcza na początku drogi. Nie trzeba się jednak bać ani frustrować, trzeba czytać komunikaty o błędach i w razie czego wyszukiwać je w Google, a w ostateczności pytać na StackOverflow. Po pewnym czasie tych błędów będzie coraz mniej, podobnie jak zawahań i potrzeby sięgania po pomoc poza dokumentację. Choć pewnie nigdy nie znikną one całkiem.
+
+```{r}
+#| label: full-code
+#| eval: false
+#| code-fold: true
+#| code-summary: "Pokaż całość kodu z analizy"
+ 
+# Przygotowanie ----
+
+## Ładowanie bibliotek ----
+
+library("tidyverse")
+library("broom")
+library("rstatix")
+
+source("https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R") # motyw do wykresów
+
+## Ładowanie danych ----
+
+df_raw <- read_csv("https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/complex_database.csv")
+
+df_KTR_test <- read_csv("https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/join-test.csv")
+
+df_KTR_retest <- read_csv("[./dane/podstawy-R/join-retest.csv](https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/join-retest.csv)")
+
+# Data wrangling ----
+
+## Czyszczenie ----
+
+df <- df_raw %>%
+    filter(Płeć == "Mężczyzna") %>%
+    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
+    set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
+    mutate(
+        wiek = parse_number(wiek),
+        across(H_1:H_10, parse_number),
+        across(c(H_5, H_7), ~ 7 - .x),
+        H_suma = rowSums(pick(H_1:H_10)),
+        wyksztalcenie_grupa = case_when(
+            wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
+            wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
+            .default = wyksztalcenie
+        ),
+        wyksztalcenie = factor(
+            wyksztalcenie,
+            levels = c("Podstawowe", "Zawodowe", "Średnie", "Wyższe"),
+            ordered = TRUE
+            )
+    ) %>%
+    arrange(desc(wyksztalcenie), wiek) %>%
+    relocate(H_suma, .before = H_1)
+
+## Dołączanie retestu ----
+
+df_KTR <- df_KTR_test %>%
+    left_join(
+        df_KTR_retest,
+        by = join_by(ID == Subject),
+        suffix = c("", "_retest")
+    )
+
+# Analiza ----
+
+## Eksploracja ----
+
+descr <- df %>%
+    get_summary_stats() %>%
+    mutate(v = sd / mean)
+
+descr_wyksztalcenie <- df %>%
+    group_by(wyksztalcenie) %>%
+    get_summary_stats()
+
+freq_wyksztalcenie <- freq_table(df, wyksztalcenie)
+
+corr_matrix <- df_KTR %>%
+    cor_mat(-ID) %>%
+    cor_mark_significant()
+
+## Wykresy ----
+
+plot_price <- diamonds %>%
+    slice_sample(100) %>%
+    ggplot() +
+        aes(x = carat, y = price, colour = clarity) +
+        geom_point(shape = "diamond", size = 2L) +
+        scale_color_brewer(palette = "YlOrRd", direction = 1) +
+        labs(
+            x = "Masa [karaty]",
+            y = "Cena [$]",
+            title = "Cena diamentów od ich masy według szlifu",
+            caption = "Źródło danych: ggplot2",
+            color = "Przejrzystość"
+        ) +
+        theme_Publication() +
+        theme(
+            legend.position = "bottom",
+            plot.title = element_text(face = "bold")
+        ) +
+        facet_wrap(
+            vars(cut),
+            labeller = labeller(cut = c(
+                "Fair" = "Zadowalający",
+                "Good" = "Dobry",
+                "Very Good" = "Bardzo dobry",
+                "Premium" = "Premium",
+                "Ideal" = "Idealny"
+                )
+            )
+        )
+
+## Testy statystyczne ----
+
+cor_price_carat <- cor_test(diamonds, price, carat)
+
+anova_diamons <- anova_test(diamonds, price ~ cut + color + clarity)
+
+tukey_hsd(diamonds, price ~ cut + color + clarity) # post-hoc
+
+eta_diamonds <- diamonds %>%
+    aov(price ~ cut + color + clarity, .) %>%
+    eta_squared()
+```
