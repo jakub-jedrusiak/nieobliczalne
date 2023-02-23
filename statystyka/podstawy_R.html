@@ -517,6 +517,12 @@ div.csl-indent {
 </span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
+<div id="fig-readr" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="./ilustracje/readr_gif.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;2: Przykład wykorzystania narzędzia do importu danych.</figcaption><p></p>
+</figure>
+</div>
 <p>Już widzę, że nic mi się nie zgadza. Z 18 kolumn 17 zostało rozpoznane jako kolumny tekstowe (<code>chr</code>), a tylko kolumna ID jako liczby (<code>dbl</code>). Za chwilę będziemy to czyścić. Żeby wyświetlić nasze dane, mogę wpisać w konsolę nazwę, pod którą je zapisałem. Nasza baza pojawiła się też w okienku w prawym górnym rogu. Kliknięcie na nią tam spowoduje wyświetlenie jej w oddzielnej karcie. Warto zauważyć, że nie możemy jej tam edytować.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -982,7 +988,7 @@ div.csl-indent {
 <div id="fig-questionr" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="./ilustracje/questionr_gif.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;2: Przykład użycia <code>questionr</code></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;3: Przykład użycia <code>questionr</code></figcaption><p></p>
 </figure>
 </div>
 </section>
@@ -1939,7 +1945,7 @@ div.csl-indent {
 <div id="fig-styler" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="./ilustracje/styler_gif.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;3: Przykład wykorzystania <code>styler</code></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;4: Przykład wykorzystania <code>styler</code></figcaption><p></p>
 </figure>
 </div>
 </section>
@@ -1949,7 +1955,7 @@ div.csl-indent {
 <div id="fig-lintr" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="./ilustracje/lintr_gif.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;4: Przykład wykorzystania <code>lintr</code></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;5: Przykład wykorzystania <code>lintr</code></figcaption><p></p>
 </figure>
 </div>
 <p>Zmiana dokonuje się przez wpisanie do pliku <code>.lintr</code><a href="#fn35" class="footnote-ref" id="fnref35" role="doc-noteref"><sup>35</sup></a> odpowiednich opcji. Szczegóły omawia dokumentacja (<code>vignette("lintr")</code>), ale na pewno chciałbym wskazać jedną, której zmiana jest wręcz konieczna. Domyślnie <code>lintr</code> uznaje za za długie linie powyżej 80 znaków. To jest strasznie mało! Ja zazwyczaj ustawiam ten limit to na 120-150 znaków. Zmodyfikujmy to. Domyślna zawartość pliku <code>.lintr</code> wygląda tak:</p>
@@ -1974,6 +1980,126 @@ div.csl-indent {
 <p>Tym samym zachęcam do dalszej nauki! Jeśli opanowaliście elementy zawarte w tym tekście, macie solidny fundament, by zrozumieć takie książki jak polecana przeze mnie na wstępie publikacja „Język R. Kompletny zestaw narzędzi dla analityków danych” <span class="citation" data-cites="wickham2020">(<a href="#ref-wickham2020" role="doc-biblioref">Wickham &amp; Grolemund, 2020</a>)</span>. Zaznaczam tylko, że ten tekst jest od tej książki nowszy, więc czasem pojawią się rozbieżności. W kilku miejscach wspominałem, że to, co opisuję, to nowinka, ale co do wielu rzeczy już nawet nie pamiętam, że były kiedyś nowe. Zawsze jednak pierwszym, podstawowym źródłem powinna być zawsze aktualna dokumentacja, a dopiero potem StackOverflow.</p>
 <p>Jeśli czytasz to teraz, oznacza to, że ten tekst to praca w toku. Za każdą informację zwrotną będę wdzięczny. Jeśli coś było niejasne, jeśli coś powinienem wyjaśnić szerzej albo prościej, jeśli czegoś mocno zabrakło, to można (trzeba!) do mnie pisać na <a href="mailto:315695@uwr.edu.pl">315695@uwr.edu.pl</a>.</p>
 <p>Z tego miejsca pozostaje mi życzyć jak najmniej błędów. Ostatnie przesłanie jest jednak takie, że błędy będą się pojawiać. W dużych ilościach. Debugowanie potrafi zajmować mnóstwo czasu, zwłaszcza na początku drogi. Nie trzeba się jednak bać ani frustrować, trzeba czytać komunikaty o błędach i w razie czego wyszukiwać je w Google, a w ostateczności pytać na StackOverflow. Po pewnym czasie tych błędów będzie coraz mniej, podobnie jak zawahań i potrzeby sięgania po pomoc poza dokumentację. Choć pewnie nigdy nie znikną one całkiem.</p>
+<div class="cell">
+<details>
+<summary>Pokaż całość kodu z analizy</summary>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Przygotowanie ----</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Ładowanie bibliotek ----</span></span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"broom"</span>)</span>
+<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rstatix"</span>)</span>
+<span id="cb89-8"><a href="#cb89-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-9"><a href="#cb89-9" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R"</span>) <span class="co"># motyw do wykresów</span></span>
+<span id="cb89-10"><a href="#cb89-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-11"><a href="#cb89-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Ładowanie danych ----</span></span>
+<span id="cb89-12"><a href="#cb89-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-13"><a href="#cb89-13" aria-hidden="true" tabindex="-1"></a>df_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/complex_database.csv"</span>)</span>
+<span id="cb89-14"><a href="#cb89-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-15"><a href="#cb89-15" aria-hidden="true" tabindex="-1"></a>df_KTR_test <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/join-test.csv"</span>)</span>
+<span id="cb89-16"><a href="#cb89-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-17"><a href="#cb89-17" aria-hidden="true" tabindex="-1"></a>df_KTR_retest <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"[./dane/podstawy-R/join-retest.csv](https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/join-retest.csv)"</span>)</span>
+<span id="cb89-18"><a href="#cb89-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-19"><a href="#cb89-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Data wrangling ----</span></span>
+<span id="cb89-20"><a href="#cb89-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-21"><a href="#cb89-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Czyszczenie ----</span></span>
+<span id="cb89-22"><a href="#cb89-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-23"><a href="#cb89-23" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df_raw <span class="sc">%&gt;%</span></span>
+<span id="cb89-24"><a href="#cb89-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb89-25"><a href="#cb89-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb89-26"><a href="#cb89-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb89-27"><a href="#cb89-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb89-28"><a href="#cb89-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb89-29"><a href="#cb89-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
+<span id="cb89-30"><a href="#cb89-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), <span class="sc">~</span> <span class="dv">7</span> <span class="sc">-</span> .x),</span>
+<span id="cb89-31"><a href="#cb89-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_suma =</span> <span class="fu">rowSums</span>(<span class="fu">pick</span>(H_1<span class="sc">:</span>H_10)),</span>
+<span id="cb89-32"><a href="#cb89-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie_grupa =</span> <span class="fu">case_when</span>(</span>
+<span id="cb89-33"><a href="#cb89-33" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Średnie"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
+<span id="cb89-34"><a href="#cb89-34" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Zawodowe"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
+<span id="cb89-35"><a href="#cb89-35" aria-hidden="true" tabindex="-1"></a>            <span class="at">.default =</span> wyksztalcenie</span>
+<span id="cb89-36"><a href="#cb89-36" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb89-37"><a href="#cb89-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie =</span> <span class="fu">factor</span>(</span>
+<span id="cb89-38"><a href="#cb89-38" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie,</span>
+<span id="cb89-39"><a href="#cb89-39" aria-hidden="true" tabindex="-1"></a>            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Podstawowe"</span>, <span class="st">"Zawodowe"</span>, <span class="st">"Średnie"</span>, <span class="st">"Wyższe"</span>),</span>
+<span id="cb89-40"><a href="#cb89-40" aria-hidden="true" tabindex="-1"></a>            <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb89-41"><a href="#cb89-41" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb89-42"><a href="#cb89-42" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb89-43"><a href="#cb89-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(wyksztalcenie), wiek) <span class="sc">%&gt;%</span></span>
+<span id="cb89-44"><a href="#cb89-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(H_suma, <span class="at">.before =</span> H_1)</span>
+<span id="cb89-45"><a href="#cb89-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-46"><a href="#cb89-46" aria-hidden="true" tabindex="-1"></a><span class="do">## Dołączanie retestu ----</span></span>
+<span id="cb89-47"><a href="#cb89-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-48"><a href="#cb89-48" aria-hidden="true" tabindex="-1"></a>df_KTR <span class="ot">&lt;-</span> df_KTR_test <span class="sc">%&gt;%</span></span>
+<span id="cb89-49"><a href="#cb89-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
+<span id="cb89-50"><a href="#cb89-50" aria-hidden="true" tabindex="-1"></a>        df_KTR_retest,</span>
+<span id="cb89-51"><a href="#cb89-51" aria-hidden="true" tabindex="-1"></a>        <span class="at">by =</span> <span class="fu">join_by</span>(ID <span class="sc">==</span> Subject),</span>
+<span id="cb89-52"><a href="#cb89-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"_retest"</span>)</span>
+<span id="cb89-53"><a href="#cb89-53" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb89-54"><a href="#cb89-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-55"><a href="#cb89-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Analiza ----</span></span>
+<span id="cb89-56"><a href="#cb89-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-57"><a href="#cb89-57" aria-hidden="true" tabindex="-1"></a><span class="do">## Eksploracja ----</span></span>
+<span id="cb89-58"><a href="#cb89-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-59"><a href="#cb89-59" aria-hidden="true" tabindex="-1"></a>descr <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb89-60"><a href="#cb89-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_summary_stats</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb89-61"><a href="#cb89-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">v =</span> sd <span class="sc">/</span> mean)</span>
+<span id="cb89-62"><a href="#cb89-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-63"><a href="#cb89-63" aria-hidden="true" tabindex="-1"></a>descr_wyksztalcenie <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb89-64"><a href="#cb89-64" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(wyksztalcenie) <span class="sc">%&gt;%</span></span>
+<span id="cb89-65"><a href="#cb89-65" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_summary_stats</span>()</span>
+<span id="cb89-66"><a href="#cb89-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-67"><a href="#cb89-67" aria-hidden="true" tabindex="-1"></a>freq_wyksztalcenie <span class="ot">&lt;-</span> <span class="fu">freq_table</span>(df, wyksztalcenie)</span>
+<span id="cb89-68"><a href="#cb89-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-69"><a href="#cb89-69" aria-hidden="true" tabindex="-1"></a>corr_matrix <span class="ot">&lt;-</span> df_KTR <span class="sc">%&gt;%</span></span>
+<span id="cb89-70"><a href="#cb89-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cor_mat</span>(<span class="sc">-</span>ID) <span class="sc">%&gt;%</span></span>
+<span id="cb89-71"><a href="#cb89-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cor_mark_significant</span>()</span>
+<span id="cb89-72"><a href="#cb89-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-73"><a href="#cb89-73" aria-hidden="true" tabindex="-1"></a><span class="do">## Wykresy ----</span></span>
+<span id="cb89-74"><a href="#cb89-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-75"><a href="#cb89-75" aria-hidden="true" tabindex="-1"></a>plot_price <span class="ot">&lt;-</span> diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb89-76"><a href="#cb89-76" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_sample</span>(<span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb89-77"><a href="#cb89-77" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb89-78"><a href="#cb89-78" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price, <span class="at">colour =</span> clarity) <span class="sc">+</span></span>
+<span id="cb89-79"><a href="#cb89-79" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="st">"diamond"</span>, <span class="at">size =</span> 2L) <span class="sc">+</span></span>
+<span id="cb89-80"><a href="#cb89-80" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"YlOrRd"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb89-81"><a href="#cb89-81" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(</span>
+<span id="cb89-82"><a href="#cb89-82" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> <span class="st">"Masa [karaty]"</span>,</span>
+<span id="cb89-83"><a href="#cb89-83" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> <span class="st">"Cena [$]"</span>,</span>
+<span id="cb89-84"><a href="#cb89-84" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Cena diamentów od ich masy według szlifu"</span>,</span>
+<span id="cb89-85"><a href="#cb89-85" aria-hidden="true" tabindex="-1"></a>            <span class="at">caption =</span> <span class="st">"Źródło danych: ggplot2"</span>,</span>
+<span id="cb89-86"><a href="#cb89-86" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"Przejrzystość"</span></span>
+<span id="cb89-87"><a href="#cb89-87" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span></span>
+<span id="cb89-88"><a href="#cb89-88" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_Publication</span>() <span class="sc">+</span></span>
+<span id="cb89-89"><a href="#cb89-89" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(</span>
+<span id="cb89-90"><a href="#cb89-90" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb89-91"><a href="#cb89-91" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>)</span>
+<span id="cb89-92"><a href="#cb89-92" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span></span>
+<span id="cb89-93"><a href="#cb89-93" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_wrap</span>(</span>
+<span id="cb89-94"><a href="#cb89-94" aria-hidden="true" tabindex="-1"></a>            <span class="fu">vars</span>(cut),</span>
+<span id="cb89-95"><a href="#cb89-95" aria-hidden="true" tabindex="-1"></a>            <span class="at">labeller =</span> <span class="fu">labeller</span>(<span class="at">cut =</span> <span class="fu">c</span>(</span>
+<span id="cb89-96"><a href="#cb89-96" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Fair"</span> <span class="ot">=</span> <span class="st">"Zadowalający"</span>,</span>
+<span id="cb89-97"><a href="#cb89-97" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Good"</span> <span class="ot">=</span> <span class="st">"Dobry"</span>,</span>
+<span id="cb89-98"><a href="#cb89-98" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Very Good"</span> <span class="ot">=</span> <span class="st">"Bardzo dobry"</span>,</span>
+<span id="cb89-99"><a href="#cb89-99" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Premium"</span> <span class="ot">=</span> <span class="st">"Premium"</span>,</span>
+<span id="cb89-100"><a href="#cb89-100" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Ideal"</span> <span class="ot">=</span> <span class="st">"Idealny"</span></span>
+<span id="cb89-101"><a href="#cb89-101" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb89-102"><a href="#cb89-102" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb89-103"><a href="#cb89-103" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb89-104"><a href="#cb89-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-105"><a href="#cb89-105" aria-hidden="true" tabindex="-1"></a><span class="do">## Testy statystyczne ----</span></span>
+<span id="cb89-106"><a href="#cb89-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-107"><a href="#cb89-107" aria-hidden="true" tabindex="-1"></a>cor_price_carat <span class="ot">&lt;-</span> <span class="fu">cor_test</span>(diamonds, price, carat)</span>
+<span id="cb89-108"><a href="#cb89-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-109"><a href="#cb89-109" aria-hidden="true" tabindex="-1"></a>anova_diamons <span class="ot">&lt;-</span> <span class="fu">anova_test</span>(diamonds, price <span class="sc">~</span> cut <span class="sc">+</span> color <span class="sc">+</span> clarity)</span>
+<span id="cb89-110"><a href="#cb89-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-111"><a href="#cb89-111" aria-hidden="true" tabindex="-1"></a><span class="fu">tukey_hsd</span>(diamonds, price <span class="sc">~</span> cut <span class="sc">+</span> color <span class="sc">+</span> clarity) <span class="co"># post-hoc</span></span>
+<span id="cb89-112"><a href="#cb89-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-113"><a href="#cb89-113" aria-hidden="true" tabindex="-1"></a>eta_diamonds <span class="ot">&lt;-</span> diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb89-114"><a href="#cb89-114" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aov</span>(price <span class="sc">~</span> cut <span class="sc">+</span> color <span class="sc">+</span> clarity, .) <span class="sc">%&gt;%</span></span>
+<span id="cb89-115"><a href="#cb89-115" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eta_squared</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 
 
