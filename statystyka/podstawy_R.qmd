@@ -463,7 +463,7 @@ df %>%
     mutate(
         wiek = parse_number(wiek),
         across(H_1:H_10, parse_number),
-        across(c(H_5, H_7), ~ 7 - .x)
+        across(c(H_5, H_7), \(x) {7 - x})
     )
 ```
 
@@ -527,7 +527,9 @@ across(c(H_5, H_7), function(wynik) 7 - wynik)
 
 Zamiast nazwy funkcji użyliśmy tutaj od razu jej definicji. Funkcja jest w pełni sprawna i różni się od `odejmij_od_7` tylko tym, że nie ma nazwy.
 
-Inny, jeszcze bardziej zwięzły, sposób używania funkcji anonimowych dodaje pakiet `purrr` wchodzący w skład `tidyverse`. Polega on na użyciu znaczka `~` (*czyt.* tylda). Nasza funkcja `odejmij_od_7` ma w tej konwencji postać `~ 7 - .x`. Poprzez `.x` zawsze oznacza się w takich funkcjach to, co do funkcji wrzucamy, czyli to, co w `odejmij_od_7` oznaczaliśmy jako `wynik`. Takie coś możemy zapisać w miejscu funkcji w `across`, co zrobiłem na początku, jak chciałem wzbudzić ciekawość.
+Inny, jeszcze bardziej zwięzły, sposób używania funkcji anonimowych wprowadza R w wersji 4.1.0. Polega on na zapisaniu naszej funkcji w nawiasach klamrowych. Dla przykładu odemowanie od 7 zapiszemy jako `{7 - x}`. Dlaczego akurat `x` a nie np. `y` albo `wynik`, jak robiliśmy wcześniej? Bo to ustaliłem pisząc **przed** naszą anonimową funkcją `\(x)`. Zamiast `x` mógłbym swoją zmienną zapisać w dowolny sposób. Takie coś w całości, czyli `\(x) {7 - x}`[^purrr], możemy zapisać w miejscu funkcji w `across`, co zrobiłem na początku, jak chciałem wzbudzić ciekawość.
+
+[^purrr]: Inny sposób dodaje pakiet `purrr` wchodzący w skład `tidyverse`. Polega on na użyciu znaczka `~` (*czyt.* tylda). Nasza funkcja `odejmij_od_7` ma w tej konwencji postać `~ 7 - .x`. Poprzez `.x` zawsze oznacza się w takich funkcjach to, co do funkcji wrzucamy, czyli to, co w `odejmij_od_7` oznaczaliśmy jako `wynik`. Jest to starszy sposób skracania funkcji anonimowych, więc można go spostkać w różnych miejscach, jeszcze z czasów, zanim skrócony zapis znalazł się natywnie w R.
 
 Jak wspomniałem w jednym z przypisów, dokumentacja `dplyr` od niedawna sugeruje, że jeśli funkcja potrzebuje jakichś dodatkowych argumentów, to żeby używać funkcji anonimowej, zamiast wpisywać arguemnty po przecinku. Co prawda wpisywanie po przecinku działa, ale moglibyśmy chcieć na wszelki wypadek dostosować się do nowych standardów. W takim wypadku moglibyśmy zmodyfikować przykład z poprzedniego podrozdziału, gdzie używaliśmy funkcji `odejmij_od` i dodatkowego arguemntu `od_czego`.
 
@@ -538,7 +540,7 @@ Jak wspomniałem w jednym z przypisów, dokumentacja `dplyr` od niedawna sugeruj
 across(c(H_5, H_7), odejmij_od, od_czego = 7)
 
 # dobrze
-across(c(H_5, H_7), ~ odejmij_od(.x, od_czego = 7))
+across(c(H_5, H_7), \(x) {odejmij_od(x, od_czego = 7)})
 ```
 
 ## Nowe kolumny {#sec-newcols}
