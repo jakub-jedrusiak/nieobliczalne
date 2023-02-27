@@ -7,11 +7,13 @@
 knitr::opts_chunk$set(echo = FALSE, fig.align = "center", warning = FALSE, message = FALSE)
 pacman::p_load(tidyverse, knitr, kableExtra, broom, papaja, jedrusiakr)
 source("https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R", echo = FALSE)
-sp_tib <- read_delim("./dane/procent-wariancji/spider_anxiety.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE) %>% mutate(Si = anxiety-mean(.$anxiety))
+sp_tib <- read_delim("./dane/procent-wariancji/spider_anxiety.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE) %>%
+  mutate(Si = anxiety - mean(.$anxiety))
 
 sp_lm <- lm(anxiety ~ spider_size, data = sp_tib)
 
-sp_tib2 <- rbind(sp_tib, c(9, 7.5, 0, NA)) %>% mutate(Si = anxiety - mean(.$anxiety))
+sp_tib2 <- rbind(sp_tib, c(9, 7.5, 0, NA)) %>%
+  mutate(Si = anxiety - mean(.$anxiety))
 
 sp_lm2 <- lm(anxiety ~ spider_size, data = sp_tib2)
 ```
@@ -59,7 +61,7 @@ sp_tib %>% ggplot(aes(x = spider_size, y = anxiety)) +
   theme_Publication()
 ```
 
-Widzimy więc wyraźnie, że im większy pająk, tym większy lęk wywołuje. Ale z tym wnioskiem wybiegliśmy sporo w przyszłość. Zazwyczaj w pierwszym odruchu robimy coś znacznie prostszego -- liczymy średnią. Średni niepokój wyniósł tutaj dokładnie 9,875. Szybkie spojrzenie w tabelę pozwala nam stwierdzić, że żaden badany takiego wyniku niepokoju nie uzyskał i niezbyt nas to dziwi. W końcu to tylko średnia, żaden prawdziwy wynik nie musi mieć dokładnie średniej wartości. Jak w znienawidzonym przez statystyków kawale o średniej liczbie nóg na spacerze z psem. Rozumiemy więc, że średnia tylko w pewnym przybliżeniu oddaje cały zbiór danych, a konkretne wartości mogą się od średniej mniej lub bardziej odchylać. Te odchylenia możemy nanieść na wykres.
+Widzimy więc wyraźnie, że im większy pająk, tym większy lęk wywołuje. Ale z tym wnioskiem wybiegliśmy sporo w przyszłość. Zazwyczaj w pierwszym odruchu robimy coś znacznie prostszego -- liczymy średnią. Średni niepokój wyniósł tutaj dokładnie 10. Szybkie spojrzenie w tabelę pozwala nam stwierdzić, że żaden badany takiego wyniku niepokoju nie uzyskał i niezbyt nas to dziwi. W końcu to tylko średnia, żaden prawdziwy wynik nie musi mieć dokładnie średniej wartości. Jak w znienawidzonym przez statystyków kawale o średniej liczbie nóg na spacerze z psem. Rozumiemy więc, że średnia tylko w pewnym przybliżeniu oddaje cały zbiór danych, a konkretne wartości mogą się od średniej mniej lub bardziej odchylać. Te odchylenia możemy nanieść na wykres.
 
 ```{r}
 #| label: fig-scatter-anxiety-mean
@@ -74,7 +76,7 @@ sp_tib %>% ggplot(aes(x = spider_size, y = anxiety)) +
   theme_Publication()
 ```
 
-Przerywane linie pokazują nam odchylenie każdego punktu od średniej (*residual*). Dla przykładu pierwszy punkt ma wartość niepokoju 2, więc jego odchylenie to $2 - 9,875 = -7,875$. Dlaczego na minusie? Bo pierwszy punkt jest **poniżej** średniej, więc żeby przejść od średniej do wartości tego konkretnego punktu musimy wykonać **odejmowanie**. Inny przykład -- ostatni punkt ma wartość niepokoju 15, więc jego odchylenie od średniej wynosi $15 - 9,875 = 5,125$. Tutaj odchylenie jest już dodatnie, co ma sens, bo ostatni punkt jest **powyżej** średniej, więc żeby przesunąć się od wartości średniej do wartości tego punktu musimy **dodawać**. Jak widać, żeby policzyć odchylenie, wystarczy od wartości punktu odjąć średnią. Można zapisać to matematycznie:
+Przerywane linie pokazują nam odchylenie każdego punktu od średniej (*residual*). Dla przykładu pierwszy punkt ma wartość niepokoju 2, więc jego odchylenie to $2 - 10 = -8$. Dlaczego na minusie? Bo pierwszy punkt jest **poniżej** średniej, więc żeby przejść od średniej do wartości tego konkretnego punktu musimy wykonać **odejmowanie**. Inny przykład -- ostatni punkt ma wartość niepokoju 15, więc jego odchylenie od średniej wynosi $15 - 10 = 5$. Tutaj odchylenie jest już dodatnie, co ma sens, bo ostatni punkt jest **powyżej** średniej, więc żeby przesunąć się od wartości średniej do wartości tego punktu musimy **dodawać**. Jak widać, żeby policzyć odchylenie, wystarczy od wartości punktu odjąć średnią. Można zapisać to matematycznie:
 
 $$
 S_i = x_i - \bar x
@@ -86,14 +88,14 @@ $$ gdzie $S_i$ to odchylenie, $x_i$ to wartość konkretnego punktu, a $\bar x$ 
 
 sp_tib %>%
   select(2:3) %>%
-  mutate(Si = paste0(anxiety, " - 9,875 ", apa_num_pl(anxiety-9.875))) %>% 
+  mutate(Si = paste0(anxiety, " - 10 ", apa_num_pl(anxiety-10))) %>% 
   kbl(booktabs = TRUE, col.names = c("wielkość pająka", "niepokój", "Si"), escape = FALSE) %>%
   kable_styling(latex_options = c("striped", "HOLD_position"))
 ```
 
 Średnia jest więc pewnym **modelem**, czyli służy nam jako uproszczony opis danych. Ponieważ modele są uproszczone, zawsze zawierają w sobie jakiś błąd. tym wypadku błędem jest po prostu odchylenie, które właśnie policzyliśmy.
 
-Jakby ktoś zapytał mnie, jak duży niepokój wywołują pająki i uparł się, żeby podać mu jedną liczbę, to podałbym właśnie średnią. Dlaczego? Średnie mają tę niezwykłą właściwość, że starają się być tak bardzo na środku, tak blisko każdego punktu, jak to możliwe. Innymi słowy zwykła średnia daje nam mniejsze odchylenia niż jakakolwiek inna pojedyncza liczba. Dla przykładu, jakbyśmy stwierdzili sobie, że nie chcemy brać za model takiej brzydkiej liczby jak 9,875, a chcemy wziąć, powiedzmy, 15, to nagle okazałoby się, że odchylenia nam wzrosły. Obrazowo mówiąc, przerywane kreski na wykresie zrobiłyby się dłuższe.
+Jakby ktoś zapytał mnie, jak duży niepokój wywołują pająki i uparł się, żeby podać mu jedną liczbę, to podałbym właśnie średnią. Dlaczego? Średnie mają tę niezwykłą właściwość, że starają się być tak bardzo na środku, tak blisko każdego punktu, jak to możliwe. Innymi słowy zwykła średnia daje nam mniejsze odchylenia niż jakakolwiek inna pojedyncza liczba. Dla przykładu, jakbyśmy stwierdzili sobie, że nie chcemy brać za model takiej brzydkiej liczby jak 10, a chcemy wziąć, powiedzmy, 15, to nagle okazałoby się, że odchylenia nam wzrosły. Obrazowo mówiąc, przerywane kreski na wykresie zrobiłyby się dłuższe.
 
 Średnia gwarantuje mi, że pomylę się tak mało, jak to tylko możliwe, czyli że sumarycznie przerywane kreski na wykresie będą tak krótkie, jak się da. Średnia jest więc modelem niedoskonałym (bo ma błąd), ale lepszym niż jakakolwiek inna pojedyncza liczba (bo ma najmniejszy błąd).
 
@@ -175,7 +177,7 @@ sp_tib %>% ggplot(aes(x = spider_size, y = anxiety)) +
 
 Od razu lepiej. Od początku chcieliśmy móc powiedzieć, że im większy pająk, tym większy niepokój, a teraz mamy tego dowód. W końcu ta linia ewidentnie pasuje do danych lepiej -- na pierwszy rzut oka widać, że odchylenia są mniejsze. No właśnie! Dzięki łamaniu sobie głowy nad odchyleniami od średniej zyskaliśmy sposób na stwierdzenie, czy jakiś model jest lepszy od średniej, czy nie -- wystarczy sprawdzić, czy odchylenia zrobiły się istotnie mniejsze.
 
-Spróbujmy więc zrobić dla tych nowych odchyleń to samo, co zrobiliśmy dla odchyleń od średniej. Ponieważ samo wyznaczanie wartości tych odchyleń wymaga bardziej złożonych obliczeń ze wzoru na prostą, po prostu je podam (bo policzył je za mnie program statystyczny). Powiem tylko, że procedura jest identyczna, jak w przypadku liczenia $SS_T$, ale licząc odchylenia zamiast wartości średniej (która poprzednio była naszym modelem) odejmujemy wartość, którą przewiduje nasz nowy, lepszy model, a którą w tabeli oznaczyłem jako $x_M$. Podnosimy więc wartości odchyleń (oznaczone w tabeli $S_R$) do kwadratu, sumujemy i wychodzi nam w zaokrągleniu $SS_R = 32,726$. $SS_R$ oznacza *residual sum of squares* i w gruncie rzeczy mówi nam o tych odchyleniach, które ciągle są, które nie zniknęły, mimo że nowy model jest lepszy.
+Spróbujmy więc zrobić dla tych nowych odchyleń to samo, co zrobiliśmy dla odchyleń od średniej. Ponieważ samo wyznaczanie wartości tych odchyleń wymaga bardziej złożonych obliczeń ze wzoru na prostą, po prostu je podam (bo policzył je za mnie program statystyczny). Powiem tylko, że procedura jest identyczna, jak w przypadku liczenia $SS_T$, ale licząc odchylenia zamiast wartości średniej (która poprzednio była naszym modelem) odejmujemy wartość, którą przewiduje nasz nowy, lepszy model, a którą w tabeli oznaczyłem jako $x_M$. Podnosimy więc wartości odchyleń (oznaczone w tabeli $S_R$) do kwadratu, sumujemy i wychodzi nam w zaokrągleniu $SS_R = 29,98$. $SS_R$ oznacza *residual sum of squares* i w gruncie rzeczy mówi nam o tych odchyleniach, które ciągle są, które nie zniknęły, mimo że nowy model jest lepszy.
 
 ```{r}
 #| label: tbl-lm-resid
@@ -200,15 +202,15 @@ Możemy w pewnym sensie mówić o wariancji wokół średniej i wariancji wokó�
     R^2 = \frac{\frac{SS_M}{N-1}}{\frac{SS_T}{N-1}} = \frac{SS_M}{\cancel{N-1}} \times \frac{\cancel{N-1}}{SS_T} = \frac{SS_M}{SS_T}
     $$
 
-Możemy więc spojrzeć na to w ten sposób -- na początku mieliśmy 190,875 jednostek wariancji, a teraz, po dopasowaniu nowego modelu, mamy ich tylko 32,726. Dla wygody zaokrąglijmy te liczby do całości. Także cała różnica, $191 - 33 = 158$, gdzieś nam wyparowała. Ta wariancja była, a teraz nagle jej nie ma. O takiej wariancji możemy powiedzieć, że została *wyjaśniona* i możemy ją oznaczyć $SS_M$ od *model sum of squares*. Czyli stworzyliśmy nowy model, który pozwala nam przewidywać niepokój z wielkości pająka i w ten sposób wyjaśniliśmy jakąś część wariancji. Jaką? Coż, wystarczy to przeliczyć na procenty. Cała wariancja[^procent-wariancji-7] wynosiła191 jednostek, a wariacja wyjaśniona wyniosła158 jednostek. Odsetek wariancji, który udało nam się wyjaśnić, oznaczamy $R^2$ i możemy go wyrazić w procentach[^procent-wariancji-8].
+Możemy więc spojrzeć na to w ten sposób -- na początku mieliśmy 190,875 jednostek wariancji, a teraz, po dopasowaniu nowego modelu, mamy ich tylko 29,98. Dla wygody zaokrąglijmy te liczby do całości. Także cała różnica, $191 - 30 = 161$, gdzieś nam wyparowała. Ta wariancja była, a teraz nagle jej nie ma. O takiej wariancji możemy powiedzieć, że została *wyjaśniona* i możemy ją oznaczyć $SS_M$ od *model sum of squares*. Czyli stworzyliśmy nowy model, który pozwala nam przewidywać niepokój z wielkości pająka i w ten sposób wyjaśniliśmy jakąś część wariancji. Jaką? Coż, wystarczy to przeliczyć na procenty. Cała wariancja[^procent-wariancji-7] wynosiła 191 jednostek, a wariacja wyjaśniona wyniosła 161 jednostek. Odsetek wariancji, który udało nam się wyjaśnić, oznaczamy $R^2$ i możemy go wyrazić w procentach[^procent-wariancji-8].
 
 [^procent-wariancji-7]: Powtórzę -- cała wariancja to znaczy wariancja wokół średniej, bo średnia to najprostszy model, jaki da się dopasować do danych.
 
 [^procent-wariancji-8]: Ale, oczywiście, nie musimy. Ja osobiście nie lubię notacji z procentami, wolę pisać ułamki dziesiętne i w razie czego czytać je jak procenty. Ale to kwestia gustu.
 
 $$
-R^2 = \frac{158}{191}\times 100\% = 82,7\%
-$$Możemy więc powiedzieć, że wielkość pająka (bo nowy model przewiduje niepokój na podstawie wielkości pająka) wyjaśnia 82,7% wariancji niepokoju. Ludzie ciągle różnią się niepokojem w reagowaniu na pająki, ale odchylenia od nowego modelu są znacznie mniejsze. Ogólny wzór na $R^2$ wygląda więc tak[^procent-wariancji-9]:
+R^2 = \frac{161}{191}\times 100\% = 84,3\%
+$$Możemy więc powiedzieć, że wielkość pająka (bo nowy model przewiduje niepokój na podstawie wielkości pająka) wyjaśnia 84,3% wariancji niepokoju. Ludzie ciągle różnią się niepokojem w reagowaniu na pająki, ale odchylenia od nowego modelu są znacznie mniejsze. Ogólny wzór na $R^2$ wygląda więc tak[^procent-wariancji-9]:
 
 [^procent-wariancji-9]: Tak naprawdę $SS_M$ da się policzyć bezpośrednio, bez liczenia $SS_T$ i $SS_R$, co pokazuję w *postscriptum*.
 
@@ -234,7 +236,7 @@ sp_tib2 %>%
   theme_Publication()
 ```
 
-Jak widzimy model się trochę pozmieniał. $R^2$ spadło dramatycznie, bo w tym drugim modelu wyniosło zaledwie 21,9%. Ale pojawienie się tego nowego, odważnego badanego nie zmieniło wyników pozostałych.
+Jak widzimy model się trochę pozmieniał. $R^2$ spadło dramatycznie, bo w tym drugim modelu wyniosło zaledwie 23,4%. Ale pojawienie się tego nowego, odważnego badanego nie zmieniło wyników pozostałych.
 
 Tak samo jest z odziedziczalnością. Odziedziczalność mówi nam, jaką część różnic w populacji da się wyjaśnić czynnikami genetycznymi, ale nawet bardzo wysoka odziedziczalność nie mówi nam, jakie są biologiczne, genetyczne granice ludzkich możliwości rozwoju. Jeśli pojawi się zdeterminowana jednostka, to może ona wstrząsnąć naszym modelem albo, co ciekawsze, nie zrobić żadnej różnicy w modelu (jeśli próba byłaby odpowiednio duża)[^procent-wariancji-10]. W takim wypadku model ciągle byłby bardzo adekwatny, wyjaśniałby bardzo dużo wariancji, a jednocześnie nie wykluczał istnienia jednostek, które całkowicie do niego nie przystają.
 
@@ -258,9 +260,9 @@ Przypominam -- $SS_M$ i $SS_R$ to **sumy** kwadratów, tak jakbyśmy tylko zsumo
 
 Tylko pojawia się trudne pytanie -- ile stopni swobody mają nasze $SS_M$ i $SS_R$? Już odpowiadam. Liczba stopni swobody dla $SS_M$ to liczba zmiennych niezależnych (w przykładzie z pająkami to 1, bo lęk przewidujemy tylko na podstawie wielkości pająka). Liczba stopni swobody dla $SS_R$ to liczba obserwacji -- liczba zmiennych niezależnych -- 1 (w naszym przypadku $8-1-1 = 6$). I to trzeba po prostu wziąć na wiarę.
 
-Także bierzemy nasze sumy kwadratów i robimy z nich średnie. $MS_M = \frac{158,15}{1} = 158,15$ oraz $MS_R = \frac{32,73}{6} = 5,45$. Mając średnie możemy policzyć wartość naszej statystyki $F = \frac{158,15}{5,45} \approx 29$. Czad. Tylko co z tego?
+Także bierzemy nasze sumy kwadratów i robimy z nich średnie. $MS_M = \frac{160,895}{1} = 160,895$ oraz $MS_R = \frac{29,98}{6} = 5$. Mając średnie możemy policzyć wartość naszej statystyki $F = \frac{160,895}{5} \approx 32$. Czad. Tylko co z tego?
 
-Ta liczba, 29, informuje nas, że ilość wariancji wyjaśnionej przez model jest *29 razy większa* niż ilość wariancji niewyjaśnionej. Czyli że model więcej wyjaśnia niż nie wyjaśnia, bo wyjaśnia średnio 158,15 jednostek wariancji, a nie wyjaśnia średnio 5,45 jednostek wariacji. Dobry model ma co najmniej $F > 1$, bo -- jak się zastanowić -- wtedy właśnie więcej wyjaśnia, bo nie wyjaśnia[^procent-wariancji-11]. Licznik jest większy niż mianownik. $SS_M > SS_R$. Jakby wyszło nam, że $F = 0,25$, to znaczyłoby to, że model jest fatalny, bo ma więcej (4 razy więcej!) błędu niż racji. W skrócie mówiąc -- im większe $F$, tym lepiej, a $F > 1$ to absolutne minimum.
+Ta liczba, 32, informuje nas, że ilość wariancji wyjaśnionej przez model jest *32 razy większa* niż ilość wariancji niewyjaśnionej. Czyli że model więcej wyjaśnia niż nie wyjaśnia, bo wyjaśnia średnio 160,895 jednostek wariancji, a nie wyjaśnia średnio 5 jednostek wariacji. Dobry model ma co najmniej $F > 1$, bo -- jak się zastanowić -- wtedy właśnie więcej wyjaśnia, bo nie wyjaśnia[^procent-wariancji-11]. Licznik jest większy niż mianownik. $SS_M > SS_R$. Jakby wyszło nam, że $F = 0,25$, to znaczyłoby to, że model jest fatalny, bo ma więcej (4 razy więcej!) błędu niż racji. W skrócie mówiąc -- im większe $F$, tym lepiej, a $F > 1$ to absolutne minimum.
 
 [^procent-wariancji-11]: Tak naprawdę potrzeba nam sporo więcej niż 1, żeby uznać model na wiarygodny. Statystyka $F$ musi *istotnie* odchylać się od 1. Musimy mieć co najmniej 95% pewności, że $F$ jest większe od 1. Ale prawdopodobieństwo trudno się liczy, zależy od liczby obserwacji i w ogóle bez sensu się tym zajmować, bo program statystyczny nam to pokaże.
 
@@ -292,7 +294,7 @@ Można to przetestować za pomocą danych z tabeli niżej. $x_M$ to wartość pr
 sp_lm %>%
   augment() %>% 
   select(2,1,3) %>%
-  mutate(across(where(is.numeric), round, 2), SM = paste0(apa_num_pl(.fitted, digits = 2, add_equals = FALSE), " - 9,875 ", apa_num_pl(.fitted-9.875, digits = 2)), across(3:4, apa_num, digits = 2, decimal.mark = ",")) %>% 
+  mutate(across(where(is.numeric), round, 2), SM = paste0(apa_num_pl(.fitted, digits = 2, add_equals = FALSE), " - 10 ", apa_num_pl(.fitted-10, digits = 2)), across(3:4, apa_num, digits = 2, decimal.mark = ",")) %>% 
   kbl(booktabs = TRUE, col.names = c("wielkość pająka", "niepokój", "xM", "SM"), escape = FALSE) %>%
   kable_styling(latex_options = c("striped", "HOLD_position"))
 ```
