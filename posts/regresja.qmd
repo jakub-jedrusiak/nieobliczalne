@@ -3,6 +3,7 @@ title: "Regresja, matka wszystkich analiz"
 description: "W Dhammapadzie czytamy „Nad tysiąc zbędnych słów jest jedno trafne słowo, które słysząc, osiąga się spokój\" (Dhp. 100, tłum. Piotr Jagodziński). Sądzę, że słowem, które Budda miał na myśli, była regresja. Freudowsko regresja może nam się kojarzyć jako cofanie się w rozwoju. Rzeczywiście samo słowo możemy przetłumaczyć jako „krok do tyłu\" i jak raz można powiedzieć, że to dobrze, że się cofamy."
 categories:
     - Statystyka
+image: ./headers/regresja.jpg
 draft: true
 ---
 
