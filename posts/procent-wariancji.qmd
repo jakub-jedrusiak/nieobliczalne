@@ -4,7 +4,8 @@ description: "Co to znaczy, że geny wyjaśniają 90% wariancji wzrostu? Że z m
 date: "2022-05-19"
 image: ./headers/procent-wariancji.jpg
 freeze: true
-category: statystyka
+categories:
+  - Statystyka
 ---
 
 ```{r}
