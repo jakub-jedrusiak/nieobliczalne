@@ -1,16 +1,13 @@
 ---
-title: "Jakub Jędrusiak"
-image: profile.jpg
-about:
-  template: jolla
-  links:
-    - icon: github
-      text: Github
-      href: https://github.com/jakub-jedrusiak/
-    - text: ResearchGate
-      href: https://www.researchgate.net/profile/Jakub_Jedrusiak
-    - text: ORCID
-      href: https://orcid.org/0000-0002-6481-8210
+title: "Jakub Jędrusiak -- blog okołostatystyczny"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: true
+  filter-ui: true
+page-layout: full
+title-block-banner: true
 ---
 
-Student psychologii Uniwersytetu Wrocławskiego. Strona pogądowa do gromadzenia materiałów. Aktualnie niewiele się tu dzieje.
