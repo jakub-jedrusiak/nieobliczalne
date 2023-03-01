@@ -1,0 +1,11 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/podstawy_R.html",
+      "/posts/kombinatoryka.html",
+      "/posts/p-value.html",
+      "/posts/procent-wariancji.html"
+    ]
+  }
+]

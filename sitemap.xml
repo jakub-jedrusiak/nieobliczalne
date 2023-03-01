@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jakub-jedrusiak.github.io/publications.html</loc>
-    <lastmod>2023-03-01T11:09:10.676Z</lastmod>
-  </url>
-  <url>
     <loc>https://jakub-jedrusiak.github.io/index.html</loc>
-    <lastmod>2023-03-01T11:09:11.050Z</lastmod>
+    <lastmod>2023-03-01T20:57:27.193Z</lastmod>
   </url>
   <url>
-    <loc>https://jakub-jedrusiak.github.io/statystyka/procent-wariancji.html</loc>
-    <lastmod>2023-03-01T11:09:20.746Z</lastmod>
+    <loc>https://jakub-jedrusiak.github.io/about.html</loc>
+    <lastmod>2023-03-01T20:57:27.643Z</lastmod>
   </url>
   <url>
-    <loc>https://jakub-jedrusiak.github.io/statystyka/podstawy_R.html</loc>
-    <lastmod>2023-03-01T11:09:37.273Z</lastmod>
+    <loc>https://jakub-jedrusiak.github.io/posts/procent-wariancji.html</loc>
+    <lastmod>2023-03-01T20:57:28.716Z</lastmod>
   </url>
   <url>
-    <loc>https://jakub-jedrusiak.github.io/matematyka/kombinatoryka.html</loc>
-    <lastmod>2023-03-01T11:09:43.003Z</lastmod>
+    <loc>https://jakub-jedrusiak.github.io/posts/kombinatoryka.html</loc>
+    <lastmod>2023-03-01T20:57:29.993Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jakub-jedrusiak.github.io/posts/p-value.html</loc>
+    <lastmod>2023-03-01T20:57:31.246Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jakub-jedrusiak.github.io/posts/podstawy_R.html</loc>
+    <lastmod>2023-03-01T20:57:47.460Z</lastmod>
   </url>
 </urlset>

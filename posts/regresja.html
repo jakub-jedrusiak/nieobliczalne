@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jakub Jędrusiak">
+<meta name="description" content="W Dhammapadzie czytamy „Nad tysiąc zbędnych słów jest jedno trafne słowo, które słysząc, osiąga się spokój” (Dhp. 100, tłum. Piotr Jagodziński). Sądzę, że słowem, które Budda miał na myśli, była regresja. Freudowsko regresja może nam się kojarzyć jako cofanie się w rozwoju. Rzeczywiście samo słowo możemy przetłumaczyć jako „krok do tyłu” i jak raz można powiedzieć, że to dobrze, że się cofamy.">
 
-<title>Jakub Jędrusiak - Jakub Jędrusiak – blog okołostatystyczny</title>
+<title>Jakub Jędrusiak - Regresja, matka wszystkich analiz</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -62,39 +62,9 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Zatwierdź"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -104,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Jakub Jędrusiak</span>
     </a>
   </div>
@@ -114,11 +84,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page">
+    <a class="nav-link" href="../index.html">
  <span class="menu-text">Strona główna</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html">
+    <a class="nav-link" href="../about.html">
  <span class="menu-text">O mnie</span></a>
   </li>  
 </ul>
@@ -131,192 +101,49 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Jakub Jędrusiak – blog okołostatystyczny</h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Kategorie</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Wszystkie <span class="quarto-category-count">(4)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statystyka">statystyka <span class="quarto-category-count">(1)</span></div></div></div>
-<!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
-
-
-
-
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="Sortuj według" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Sortuj według</option>
-       <option value="index" data-direction="asc">Domyślnie</option>
-         <option value="listing-title" data-direction="asc">
-          Tytuł
-        </option>
-         <option value="listing-date-sort" data-direction="asc">
-          Data - Od najstarszych
-        </option>
-         <option value="listing-date-sort" data-direction="desc">
-          Data - Od najnowszych
-        </option>
-         <option value="listing-author" data-direction="asc">
-          Autor
-        </option>
-     </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
     </div>
-</div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="statystyka,R" data-listing-date-sort="1676934000000" data-listing-file-modified-sort="1677703492404" data-listing-reading-time-sort="108.23">
-<div class="thumbnail">
-<p><a href="./posts/podstawy_R.html"> <img src="./posts/headers/podstawy_R.png" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/podstawy_R.html">
-<h3 class="no-anchor listing-title">
-Podstawy programowania w R
-</h3>
-<div class="listing-subtitle">
+<!-- main -->
+<main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Regresja, matka wszystkich analiz</h1>
 </div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('statystyka'); return false;">
-statystyka
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-</div>
-<a href="./posts/podstawy_R.html">
-<div class="listing-description">
-<p>Pisanie analiz statystycznych w R jest coraz bardziej powszechne. Nie bez powodu. W R da się zrobić wszystko, jest darmowe i pozwala na automatyzację. Jak zacząć uczyć się R? Odpowiadam na to w tym tekście.</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/podstawy_R.html">
-<div class="listing-date">
-21 lut 2023
-</div>
-<div class="listing-author">
-Jakub Jędrusiak
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1676588400000" data-listing-file-modified-sort="1677703448894" data-listing-reading-time-sort="7.105">
-<div class="thumbnail">
-<p><a href="./posts/kombinatoryka.html"> <img src="./posts/headers/kombinatoryka.jpg" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/kombinatoryka.html">
-<h3 class="no-anchor listing-title">
-Kombinatoryka
-</h3>
-<div class="listing-subtitle">
 
+<div>
+  <div class="description">
+    W Dhammapadzie czytamy „Nad tysiąc zbędnych słów jest jedno trafne słowo, które słysząc, osiąga się spokój” (Dhp. 100, tłum. Piotr Jagodziński). Sądzę, że słowem, które Budda miał na myśli, była regresja. Freudowsko regresja może nam się kojarzyć jako cofanie się w rozwoju. Rzeczywiście samo słowo możemy przetłumaczyć jako „krok do tyłu” i jak raz można powiedzieć, że to dobrze, że się cofamy.
+  </div>
 </div>
-<div class="listing-description">
-<p>Ile wykonano uścisków dłoni w pomieszczeniu, w którym jest 100 osób? Omawiam tutaj trzy podstawowe pojęcia kombinatoryki – wariacje, kombinacje i permutacje.</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/kombinatoryka.html">
-<div class="listing-date">
-17 lut 2023
-</div>
-<div class="listing-author">
-Jakub Jędrusiak
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1663711200000" data-listing-file-modified-sort="1677704146946" data-listing-reading-time-sort="27.75">
-<div class="thumbnail">
-<p><a href="./posts/p-value.html"> <img src="./posts/headers/p-value.jpg" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/p-value.html">
-<h3 class="no-anchor listing-title">
-Testy statystyczne i wartość <em>p</em>
-</h3>
-<div class="listing-subtitle">
 
-</div>
-<div class="listing-description">
-<p>Czymże jest prawda? Czy czegokolwiek możemy być pewni? Nie lubimy się pakować w takie pytania, bo łatwo dojść do odpowiedzi „nie”, a wtedy tracimy grunt pod nogami. Część z nas zgodzi się, że <em>tak naprawdę</em> niczego nie możemy być pewni. W końcu zawsze może się okazać, że żyjemy w Matrixie, a wtedy żadne dowody nie mają znaczenia. Ale jednak pewnych rzeczy jesteśmy bardziej pewni niż innych.</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/p-value.html">
-<div class="listing-date">
-21 wrz 2022
-</div>
-<div class="listing-author">
-Jakub Jędrusiak
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1652911200000" data-listing-file-modified-sort="1677703922460" data-listing-reading-time-sort="22.575">
-<div class="thumbnail">
-<p><a href="./posts/procent-wariancji.html"> <img src="./posts/headers/procent-wariancji.jpg" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/procent-wariancji.html">
-<h3 class="no-anchor listing-title">
-Wyjaśnianie wariancji i test <em>F</em>
-</h3>
-<div class="listing-subtitle">
 
-</div>
-<div class="listing-description">
-<p>Co to znaczy, że geny wyjaśniają 90% wariancji wzrostu? Że z moich 170 cm wzrostu 153 cm zawdzięczam genom, a pozostałe 17 cm środowisku? Czym w ogóle jest wariancja? Odpowiem na to pytanie, jak i wprowadzę pojęcie modelu i jego testowania.</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/procent-wariancji.html">
-<div class="listing-date">
-19 maj 2022
-</div>
-<div class="listing-author">
-Jakub Jędrusiak
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-Brak pasujących
-</div>
-</div></main> <!-- /main -->
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jakub Jędrusiak </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Prawie wszystko w statystyce jest odmianą regresji. Funkcjonuje ona jako osobna analiza, ale logika, która za nią stoi, jest uniwersalna. Na przykład testy <em>t</em>, używane jako przykład w rozdziale <strong>?@sec-p-value</strong>. można przedstawić jako rodzaj regresji. Bardziej złożona analiza wariancji (ANOVA) to też logika regresji zastosowana do pewnych szczególnych przypadków. Jeśli dobrze zrozumie się regresję, statystyka staje się znacznie przyjaźniejszym miejscem.</p>
+<p>Żeby jednak dobrze zrozumieć regresję, trzeba mieć pewne podstawy. Dużą część z tych podstaw rozpisałem w rozdziale <strong>?@sec-procent-wariancji</strong>. Zakładam więc, że osoba czytająca wie, co to jest wariancja, reszty, odchylenie standardowe i potrafi zinterpretować wyniki testu <em>F</em>. Jeśli nie, dobrze odświeżyć sobie rozdział <strong>?@sec-procent-wariancji</strong> przed tym rozdziałem.</p>
+
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
