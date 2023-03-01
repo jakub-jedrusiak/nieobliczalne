@@ -1,7 +1,11 @@
 ---
 title: "Kombinatoryka"
-format: html
-editor: visual
+description: "Ile wykonano uścisków dłoni w pomieszczeniu, w którym jest 100 osób? Omawiam tutaj trzy podstawowe pojęcia kombinatoryki -- wariacje, kombinacje i permutacje."
+date: "2023-02-17"
+image: ./headers/kombinatoryka.jpg
+category: matematyka
+freeze: true
+editor: source
 ---
 
 ```{python}
@@ -88,7 +92,7 @@ Czyli wariacji po 3 elementy jest w naszym przykładzie 3 razy więcej, niż war
 
 # Kombinacje
 
-Możemy zwrócić uwagę, że tabela powyżej ma ściśle określoną strukturę. W pierwszym wierszu wszystkie podzbiory składają się z literek A, B i C ułożonych na różne sposoby. Można więc powiedzieć, że podzbiory w każdym wierszu są dla siebie *permutacjami*, bo składają się z tych samych elementów, różnią się tylko kolejnością. Każda kolumna zawiera unikalne zestawy literek. Widzimy więc, że ze zbioru 5 literek możemy wybrać 10 różnych zestawów literek, a w każdym z tych zestawów można ułożyć literki na 6 sposobów, co daje łącznie 60 wariacji. Wariacje możemy więc uzyskać tak, że weźmiemy wszyskie unikalne mniejsze zestawy literek, a potem rozpiszemy permutacje każdego z tych zestawów. Takie unikalne zestawy literek, bez zwracania uwagi na ich kolejność, to *kombinacje*. W tabeli każdy wiersz to pełny zestaw kombinacji. Wynika nam z tego inny wzór na liczbę wariacji:
+Możemy zwrócić uwagę, że tabela powyżej ma ściśle określoną strukturę. W pierwszym wierszu wszystkie podzbiory składają się z literek A, B i C ułożonych na różne sposoby. Można więc powiedzieć, że podzbiory w każdym wierszu są dla siebie *permutacjami*, bo składają się z tych samych elementów, różnią się tylko kolejnością. Każda kolumna zawiera unikalne zestawy literek. Widzimy więc, że ze zbioru 5 literek możemy wybrać 10 różnych zestawów literek, a w każdym z tych zestawów można ułożyć literki na 6 sposobów, co daje łącznie 60 wariacji. Wariacje możemy więc uzyskać tak, że weźmiemy wszystkie unikalne mniejsze zestawy literek, a potem rozpiszemy permutacje każdego z tych zestawów. Takie unikalne zestawy literek, bez zwracania uwagi na ich kolejność, to *kombinacje*. W tabeli każdy wiersz to pełny zestaw kombinacji. Wynika nam z tego inny wzór na liczbę wariacji:
 
 $$
 V^k_n = C^k_n \times P_k
@@ -142,7 +146,7 @@ $$
 \bar{V}^k_n = n^k
 $$
 
-Wzór na kombinacje z porwtórzeniami podaję raczej *pro forma*, bo rzadko jest używany.
+Wzór na kombinacje z powtórzeniami podaję raczej *pro forma*, bo rzadko jest używany.
 
 $$
 \bar{C}^k_n = \binom{k+n-1}{k} = \frac{(k+n-1)!}{k!(n-1)!}
@@ -152,12 +156,12 @@ $$
 
 Permutacje to zmiany kolejności, kombinacje to unikalne podzbiory. Jeśli zaczniemy robić permutacje unikalnych podzbiorów, wyjdą nam wariacje. Albo patrząc inaczej – permutacje to wariacje $V^n_n$. Permutacje i wariacje możemy liczyć kreskami i silnią. Liczbę kombinacji uzyskamy dzieląc liczbę wariacji po *k* elementów przez liczbę permutacji *k*. Powstały wzór oznacza się symbolem Newtona $\binom{n}{k}$. Pomocny może okazać się poniższy schemat.
 
-<!-- ![](./images/kombinatoryka-flowchart.svg){fig-align="center"} -->
+<!-- ![](./ilustracje/kombinatoryka-flowchart.svg){fig-align="center"} -->
 
 ```{mermaid}
 %%| fig-responsive: true
 %%| fig-width: 80%
-%%| echo: true
+%%| echo: fenced
 %%| code-fold: true
 %%| code-summary: "Pokaż kod"
 flowchart TD

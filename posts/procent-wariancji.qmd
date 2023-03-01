@@ -1,4 +1,11 @@
-# Wyjaśnianie wariancji i test *F* {#sec-procent-wariancji}
+---
+title: "Wyjaśnianie wariancji i test *F*"
+description: "Co to znaczy, że geny wyjaśniają 90% wariancji wzrostu? Że z moich 170 cm wzrostu 153 cm zawdzięczam genom, a pozostałe 17 cm środowisku? Czym w ogóle jest wariancja? Odpowiem na to pytanie, jak i wprowadzę pojęcie modelu i jego testowania."
+date: "2022-05-19"
+image: ./headers/procent-wariancji.jpg
+freeze: true
+category: statystyka
+---
 
 ```{r}
 #| label: setup

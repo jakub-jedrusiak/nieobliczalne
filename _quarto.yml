@@ -7,15 +7,8 @@ website:
     left:
       - href: index.qmd
         text: Strona główna
-      - href: publications.qmd
-        text: Publikacje
-  sidebar:
-    style: "docked"
-    search: true
-    tools:
-      - icon: github
-        href: https://github.com/jakub-jedrusiak
-    contents: auto
+      - href: about.qmd
+        text: O mnie
 
 format:
   html:
