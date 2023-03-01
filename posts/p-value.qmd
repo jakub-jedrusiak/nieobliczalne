@@ -4,7 +4,8 @@ description: "Czymże jest prawda? Czy czegokolwiek możemy być pewni? Nie lubi
 date: "2022-09-21"
 image: ./headers/p-value.jpg
 freeze: true
-category: statystyka
+categories:
+  - Statystyka
 ---
 
 ```{r}
