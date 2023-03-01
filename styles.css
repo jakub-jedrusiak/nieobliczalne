@@ -1,1 +1,4 @@
 /* css styles */
+.header-section-number::after {
+  content: ".";
+}
