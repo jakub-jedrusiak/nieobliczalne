@@ -200,7 +200,7 @@ Zazwyczaj projekt badawczy składa się z wielu plików. Nie jest to tylko kod R
 
 [^podstawy_r-9]: Ustawiają katalog roboczy (*working directory*), dzięki czemu, kiedy musimy powiedzieć, gdzie jest, powiedzmy, plik z danymi, możemy napisać `"./dane/dane.xlsx"`. `./` oznacza "w tym folderze", `/dane/` oznacza "w podfolderze dane", a `/dane.xlsx` oznacza "w pliku `dane.xlsx`". Możemy to też zrobić ręcznie funkcją `setwd`. 
 
-Projekty tworzymy i otwieramy przez guzik w prawym górnym rogu. Rozwijane menu pozwana nam stworzyć nowy projekt, a wyskakujące okienko pyta, czy wytworzyć go w już istniejącym folderze, stworzyć nowy folder, czy może pobrać repozytorium Git. Jeśli wybraliśmy nowy folder, mamy kilka typów projektów do wyboru, ale w większości przypadków wybieramy po prostu `New Project`. Okienko pozwala nam nadać projektowi nazwę, wybrać jego lokalizację, a także wytworzyć puste repozytorium Git[^podstawy_r-10]. RStudio wytworzy nam w ten sposób plik .Rproj organizujący nasz projekt.
+Projekty tworzymy i otwieramy przez guzik w prawym górnym rogu. Rozwijane menu pozwala nam stworzyć nowy projekt, a wyskakujące okienko pyta, czy wytworzyć go w już istniejącym folderze, stworzyć nowy folder, czy może pobrać repozytorium Git. Jeśli wybraliśmy nowy folder, mamy kilka typów projektów do wyboru, ale w większości przypadków wybieramy po prostu `New Project`. Okienko pozwala nam nadać projektowi nazwę, wybrać jego lokalizację, a także wytworzyć puste repozytorium Git[^podstawy_r-10]. RStudio wytworzy nam w ten sposób plik .Rproj organizujący nasz projekt.
 
 [^podstawy_r-10]: Jeśli nie wiesz o co chodzi, nie przejmuj się. To duży temat i nie jest to coś, bez czego nie da się żyć. W skrócie to system do monitorowania historii zmian w plikach i współpracy nad kodem.
 
@@ -238,7 +238,7 @@ Jeśli chcemy cokolwiek liczyć, musimy mieć na czym liczyć. R ma wiele sposob
 
 Wszystkie bazy, których używam w tym tekście, są dostępne w repozytorium na GitHubie. Można wejść w [ten link](https://github.com/jakub-jedrusiak/jakub-jedrusiak.github.io/tree/main/statystyka/dane/podstawy-R), wybrać pożądany plik i albo pobrać go na własny dysk, albo zamiast ścieżki do pliku użyć linku w cudzysłowie. By uzyskać właściwy link, należy kliknąć `raw` tuż nad treścią pliku. Takie linki można wklejać w komendy czytające dane zamiast ścieżek. Przykład linku, jak i tego, jak używać ich z funkcjami typu `read_csv` podaję w podrozdziale [-@sec-summarise] o grupowaniu.
 
-Podstawowe pakiety do ładowania danych do `readr` i `readxl` dla plików Excela. Na początek nie trzeba znać skłądni funkcji ładujących dane, bo RStudio dysponuje przyjemnym graficznym narzędziem do ładowania danych. Jeśli w prawym dolnym oknie, w zakładce Files, klikniemy na plik zawierający dane, dostaniemy do dyspozycji opcję Import Dataset... Po jej wybraniu otworzy nam się okno z podglądem danych i kilkoma opcjami do dostosowania, m.in. czy jakichś wierszy nie pominąć albo z którego arkusza pobrać dane. W plikach .csv czasem musimy też wybrać rodzaj separatora i znaku dziesiętnego (opcja Locale). W polskich plikach z danymi separatorem jest zazwyczaj średnik, a znakiem dziesiętnym przecinek (125 421,55), podczas gdy w angielskich danych będą to odpowiednio przecinek i kropka (125,421.55). Jeśli nie ustawimy znaku dziesiętnego, R może potraktować liczby z przecinkiem jako tekst. Poza tym możemy kliknąć w każdy nagłówek kolumny i wybrać typ danych, ale to niebezpieczna opcja, lepiej tego nie robić. Dane powinny być czyste, tj. kolumny liczbowe powinny zawierać same liczby. Jeśli dane nie są czyste (a zazwyczaj nie są), możemy je wyczyścić potem.
+Podstawowe pakiety do ładowania danych do `readr` i `readxl` dla plików Excela. Na początek nie trzeba znać składni funkcji ładujących dane, bo RStudio dysponuje przyjemnym graficznym narzędziem do ładowania danych. Jeśli w prawym dolnym oknie, w zakładce Files, klikniemy na plik zawierający dane, dostaniemy do dyspozycji opcję Import Dataset... Po jej wybraniu otworzy nam się okno z podglądem danych i kilkoma opcjami do dostosowania, m.in. czy jakichś wierszy nie pominąć albo z którego arkusza pobrać dane. W plikach .csv czasem musimy też wybrać rodzaj separatora i znaku dziesiętnego (opcja Locale). W polskich plikach z danymi separatorem jest zazwyczaj średnik, a znakiem dziesiętnym przecinek (125 421,55), podczas gdy w angielskich danych będą to odpowiednio przecinek i kropka (125,421.55). Jeśli nie ustawimy znaku dziesiętnego, R może potraktować liczby z przecinkiem jako tekst. Poza tym możemy kliknąć w każdy nagłówek kolumny i wybrać typ danych, ale to niebezpieczna opcja, lepiej tego nie robić. Dane powinny być czyste, tj. kolumny liczbowe powinny zawierać same liczby. Jeśli dane nie są czyste (a zazwyczaj nie są), możemy je wyczyścić potem.
 
 Możemy kliknąć Import, by dopełnić dzieła, ale jeśli tworzymy skrypt, będzie nas interesowała komenda, jaką RStudio dla nas przygotowało w czarnym okienku w prawym dolnym rogu. W pierwszej linijce RStudio proponuje załadowanie odpowiedniego pakietu. Warto to wpisać na początku skryptu, w miejscu, gdzie załadowaliśmy `tidyverse`. Jeśli proponowanym pakietem jest `readr`, nie musimy ładować go oddzielnie, bo ładując pakiet `tidyverse` załadowaliśmy od razu `readr`. Druga linijka do właściwe ładowanie danych. Widzimy znaną nam już składnię `nazwa <-`. Nasze dane potrzebują jakiejś nazwy, za pomocą której będziemy się do niej odnosić. Może być to `df`, `dane`, `warunek_kontrolny` czy cokolwiek innego. Za strzałką mamy funkcję odczytującą dane. Najpewniej będzie to `read_csv()` albo `read_excel()`. Do tych funkcji wrzucamy jako pierwszy argument lokalizację naszego pliku z danymi w cudzysłowie ('pojedynczym' lub "podwójnym"). Ponieważ nam komendę przygotowało RStudio, możemy ją po prostu skopiować i wkleić do naszego skryptu, zmieniając tylko nazwę zmiennej. Co robią poszczególne argumenty, możemy sprawdzić w dokumentacji. Jeśli dane ładuje `readr`, wykonanie takiej komendy spowoduje ukazanie się informacji zwrotnej -- jakie kolumny załadowano i jaki mają typ. Dla przykładu:
 
@@ -262,7 +262,7 @@ Zarówno tutaj, jak i później, nie będę wchodził w to, *dlaczego* coś dzia
 
 ## Wybieranie kolumn i wierszy {#sec-choosing}
 
-Bardzo często będziemy potrzebowali tylko określonych kolumn albo tylko określonych wierszy. Przeglądając nasze dane zauważamy, że składają się w dużej części z niepotrzebnych kolumn, jakie wygenerował dla nas program do ankiet. Kolumny takie jak godziny wypełniania są nam niepotrzebne do analizy. Co więcej nasze dane to fragment bazy danych z badania, w którym mówiliśmy mężczyznom, że są mało męscy i patrzyliśmy, jak to wpłynie na nich homofobię. Badaliśmy więc wyłącznie mężczyzn, a mimo to ankietę próbowało też wypełnić kilka kobiet i osób o innej płci. Ponieważ ankieta nie dopuściła ich nawet do metryczki, widzimy w ich przypadkach wartości `NA`, co w R oznacza „brak danych".
+Bardzo często będziemy potrzebowali tylko określonych kolumn albo tylko określonych wierszy. Przeglądając nasze dane zauważamy, że składają się w dużej części z niepotrzebnych kolumn, jakie wygenerował dla nas program do ankiet. Kolumny takie jak godziny wypełniania są nam niepotrzebne do analizy. Co więcej nasze dane to fragment bazy danych z badania, w którym mówiliśmy mężczyznom, że są mało męscy. Potem patrzyliśmy, jak to wpłynie na nich homofobię. Badaliśmy więc wyłącznie mężczyzn, a mimo to ankietę próbowało też wypełnić kilka kobiet i osób o innej płci. Ponieważ ankieta nie dopuściła ich nawet do metryczki, widzimy w ich przypadkach wartości `NA`, co w R oznacza „brak danych".
 
 ### Filtrowanie wierszy z `dplyr::filter` {#sec-filter}
 
@@ -343,9 +343,9 @@ Co znowu namieszałem? Czemu znowu coś utrudniam? Cóż, żeby ułatwić. O ile
 paste("H", 1:10, sep = "_")
 ```
 
-Jak widzimy, `paste` wygenerowało nam 10 kolejnych etykiet łącząc `"H"` i liczby od 1 do 10. Argument `sep = "_"` mówi, żeby między kolejnymi kawałkami wstawiać podkreślnik. Do `paste` możemy wrzucić dowolną liczbę znaków do połączenia. Jeśli nie chcemy żadnego separatora, możemy ustawić `sep = ""`, czyli pusty ciąg znaków w separatorze albo możemy użyć bliźniaczej funkcji `paste0`, która nie ma separatora. Użycie tej funkcji wewnątrz `set_names` jest równoważne temu, jakbym napisał te etykietki ręcznie. To jest siła programowania, że dosłowne dane możemy zastępować zmiennymi albo funkcjami, które nam te dane wygenerują. To pozwana nam na przykład zastosować to samo czyszczenie do 100 różnych plików. Wystarczy, że zamiast nazwy danego pliku wszędzie wrzucimy zmienną, a potem będziemy tylko wrzucać do tej zmiennej nazwy kolejnych plików.
+Jak widzimy, `paste` wygenerowało nam 10 kolejnych etykiet łącząc `"H"` i liczby od 1 do 10. Argument `sep = "_"` mówi, żeby między kolejnymi kawałkami wstawiać podkreślnik. Do `paste` możemy wrzucić dowolną liczbę znaków do połączenia. Jeśli nie chcemy żadnego separatora, możemy ustawić `sep = ""`, czyli pusty ciąg znaków w separatorze albo możemy użyć bliźniaczej funkcji `paste0`, która nie ma separatora. Użycie tej funkcji wewnątrz `set_names` jest równoważne temu, jakbym napisał te etykietki ręcznie. To jest siła programowania, że dosłowne dane możemy zastępować zmiennymi albo funkcjami, które nam te dane wygenerują. To pozwala nam na przykład zastosować to samo czyszczenie do 100 różnych plików. Wystarczy, że zamiast nazwy danego pliku wszędzie wrzucimy zmienną, a potem będziemy tylko wrzucać do tej zmiennej nazwy kolejnych plików.
 
-Co ciekawe, zmieniać nazwy możemy też za pomocą funkcji `select`, ale wyłącznie pojedynczo, nie można wtedy użyć czegoś w stylu `9:18`. Składnia jest taka sama, jak `rename`, ale `select` zmienia też kolejność kolumn i skład wynikowej tabelu, więc trzeba uważać. Jednak do małych tabel, gdzie nie jest problemem wypisać wszystkie kolumny, można spokojnie za jednym zamachem kolumny wybrać i nazwać.
+Co ciekawe, zmieniać nazwy możemy też za pomocą funkcji `select`, ale wyłącznie pojedynczo, nie można wtedy użyć czegoś w stylu `9:18`. Składnia jest taka sama, jak `rename`, ale `select` zmienia też kolejność kolumn i skład wynikowej tabeli, więc trzeba uważać. Jednak do małych tabel, gdzie nie jest problemem wypisać wszystkie kolumny, można spokojnie za jednym zamachem kolumny wybrać i nazwać.
 
 ## Zmiana wartości komórek z `dplyr::mutate` i `readr::parse_number` {#sec-values}
 
@@ -744,13 +744,15 @@ Kod ten możemy uruchomić dla dowolnej ilości danych, w dowolnym momencie. Jes
 df
 ```
 
-Po zapisaniu zmiennej `df`, tracimy naszą starą zmienną. Tym samym, jeśli uruchomilibyśmy nasz kod jeszcze raz, ale już na nowej zmiennej `df`, wyskoczy nam błąd. W końcu nowa zmienna nie ma tych samych kolumn, co stara zmienna. Co więcej, takiej operacji przypisania nie da się w prosty sposób cofnąć. Jeśli chcemy dostać swoją starą, brudną bazę, musimy ponownie załadować ją z pliku. To prowadzi nas do ważnego wniosku co do pisania skryptów -- powinniśmy pisać je tak, żeby dało się z nich odtworzyć wszystko, co robiliśmy od samego początku[^podstawy_r-21]. Dzięki temu, jeśli chcemy się z czegoś wycofać, zaznaczamy i wykonujemy cały kod przed interesującym nas momentem. Brak skrótu Ctrl+Z jest jedną z ważniejszych różnic między analizą w programach typu SPSS czy Statistica a analizą w językach programowania typu R czy Python. Wbrew pozorom idzie się przyzwyczaić. Ta sama właściwość pozwala na zachowanie przejrzystości w nauce -- pokaż mi swój kod, a będę wiedział bardzo dokładnie, jak prowadziłeś(-aś) swoją analizę.
+Po zapisaniu zmiennej `df`, tracimy naszą starą bazę danych, która była w niej zapisana. To jest tak, jakbyśmy kopiowali plik do folderu, w którym znajduje się już plik o takiej samej nazwie. Operator `<-` *nadpisuje* starą zmienną.
+
+Tym samym, jeśli uruchomilibyśmy nasz kod jeszcze raz, ale już na nowej zmiennej `df`, wyskoczy nam błąd. W końcu nowa zmienna nie ma tych samych kolumn, co stara zmienna. Co więcej, takiej operacji przypisania nie da się w prosty sposób cofnąć. Jeśli chcemy dostać swoją starą, brudną bazę, musimy ponownie załadować ją z pliku. To prowadzi nas do ważnego wniosku co do pisania skryptów -- powinniśmy pisać je tak, żeby dało się z nich odtworzyć wszystko, co robiliśmy od samego początku[^podstawy_r-21]. Dzięki temu, jeśli chcemy się z czegoś wycofać, zaznaczamy i wykonujemy cały kod przed interesującym nas momentem. Brak skrótu Ctrl+Z jest jedną z ważniejszych różnic między analizą w programach typu SPSS czy Statistica a analizą w językach programowania typu R czy Python. Wbrew pozorom idzie się przyzwyczaić. Ta sama właściwość pozwala na zachowanie przejrzystości w nauce -- pokaż mi swój kod, a będę wiedział bardzo dokładnie, jak prowadziłeś(-aś) swoją analizę.
 
 [^podstawy_r-21]: Dlatego ja zazwyczaj wstępną bazę ładuję do zmiennej typu `df_raw`, zaś do zmiennej `df` zapisuję już wyczyszczoną bazę. Swój kod czyszczący zaczynam więc od `df <- df_raw %>%`. Dzięki temu zawsze mogę na szybko zerknąć do niewyczyszczonej bazy, jakbym czegoś z niej potrzebował.
 
 ## Grupowanie (`dplyr::group_by`) i agregowanie (`dplyr::summarise`) {#sec-summarise}
 
-Gdy mamy już bazę, zazwyczaj chcemy policzyć pewne statystyki dla podgrup osób badanych, np. dla osób różniących się wykształceniem, płcią czy jakąś manipulacją. Chcemy na przykład poznać średnią homofobię osób o różnym wykształceniu, sprawdzić liczność naszych podgrup czy policzyć inne zbiorcze statystyki. Możemy, oczywiście, odfiltrować najpierw osoby o wykształceniu podstawowym, policzyć dla nich, potem osoby o wykształceniu średnim itd. Są jednak prostsze sposoby, a obejmują one użycie `group_by` i `summarise`[^podstawy_r-22]. Te dwie funkcje zazwyczaj idą ze sobą w parze i zgrupowane dane od razu trafiają do `summarise`. Poniżej przykład.
+Gdy mamy już bazę, zazwyczaj chcemy policzyć pewne statystyki dla podgrup osób badanych, np. dla osób różniących się wykształceniem, płcią czy jakąś manipulacją. Chcemy na przykład poznać średnią homofobię osób o różnym wykształceniu, sprawdzić liczebność naszych podgrup czy policzyć inne zbiorcze statystyki. Możemy, oczywiście, odfiltrować najpierw osoby o wykształceniu podstawowym, policzyć dla nich, potem osoby o wykształceniu średnim itd. Są jednak prostsze sposoby, a obejmują one użycie `group_by` i `summarise`[^podstawy_r-22]. Te dwie funkcje zazwyczaj idą ze sobą w parze i zgrupowane dane od razu trafiają do `summarise`. Poniżej przykład.
 
 [^podstawy_r-22]: `tidyverse` dopuszcza zarówno pisownię brytyjską `summarise` jak i amerykańską `summarize`. Podobnie w przypadku innych rozbieżności. Dokumentacja wskazuje jednak, że pisownia brytyjska jest preferowana. Też ją preferuję.
 
@@ -844,11 +846,11 @@ df_long %>%
 
 ## Retesty czyli złączenia (*joins*) {#sec-join}
 
-Złączenia (*joins*) to, jak nazwa wskazuje, metoda łączenia dwóch baz danych. Jest to jedna z podstawowych operacji na bazach danych, znana co najmniej od lat 70. i instrukcji `JOIN` w SQL. Jest to także jedna z operacji niedostępnych w Excelu bez Power Query. W praktyce badawczej może być ona konieczna, gdy mamy badanie wieloczęściowe, w którym musimy stosować wiele baz danych (np. jedną tworzą pomiary z eyetrackera, drugą wyniki w ankiecie, a trzecią test szybkości reakcji). Często zarza się to też w prostych badaniach ankietowych, w których po jakimś czasie musimy wykonać retest. W obu tych przypadkach lądujemy z dwiema (lub więcej) bazami, które -- miejmy nadzieję -- mają jaką wspólną kolumnę, identyfikator osoby badanej, taki sam w każdej z trzech baz[^podstawy_r-25].
+Złączenia (*joins*) to, jak nazwa wskazuje, metoda łączenia dwóch baz danych. Jest to jedna z podstawowych operacji na bazach danych, znana co najmniej od lat 70. i instrukcji `JOIN` w SQL. Jest to także jedna z operacji niedostępnych w Excelu bez Power Query. W praktyce badawczej może być ona konieczna, gdy mamy badanie wieloczęściowe, w którym musimy stosować wiele baz danych (np. jedną tworzą pomiary z eyetrackera, drugą wyniki w ankiecie, a trzecią test szybkości reakcji). Często zdarza się to też w prostych badaniach ankietowych, w których po jakimś czasie musimy wykonać retest. W obu tych przypadkach lądujemy z dwiema (lub więcej) bazami, które -- miejmy nadzieję -- mają jakąś wspólną kolumnę, identyfikator osoby badanej, taki sam w każdej z trzech baz[^podstawy_r-25].
 
 [^podstawy_r-25]: Czasami możemy też wykorzystać inną informację o osobie badanej jako identyfikator. Brałem udział w badaniach, w których osoba badana wypełniała ankietę i w tym samym czasie była nagrywana. Potem łączyłem informacje z nagrania z informacjami z ankiety na podstawie czasu wypełniania ankiety i czasu nagrywania. Jak widać, wszystko jest możliwe, choć domyślne złączenia z `dplyr`, w chwili pisania tego tekstu, nie pozwalają na pełną giętkość. Wtedy użyłem złączeń z pakietu `fuzzyjoin`.
 
-Jak więc takie bazy połączyć? Wykorzystajmy tutaj dwie bazy zawierające test i retest, zrobione podczas walidacji kwestionariusza o nazwie KTR. Składał się on z dwóch skal oznaczonych tutaj literkami O i W. Standardową procedurą przy projektowaniu kwestionariusza jest powtórzenie pomiaru po jakimś czasie, żeby sprawdzić, na ile wyniki są stabilne. My taką procedurę wykonaliśmy, przez co dysponujemy dwoma oddzielnymi bazami. Zerknijmy na nie.
+Jak więc takie bazy połączyć? Wykorzystajmy tutaj dwie bazy zawierające test i retest, zrobione podczas walidacji kwestionariusza o nazwie KTR. Składał się on z dwóch skal oznaczonych tutaj literkami O i W. Standardową procedurą przy projektowaniu kwestionariusza jest powtórzenie pomiaru po jakimś czasie, żeby sprawdzić, na ile wyniki są stabilne. My taką procedurę wykonaliśmy, przez co dysponujemy dwiema oddzielnymi bazami. Zerknijmy na nie.
 
 ```{r}
 db_test <- read_csv("./dane/podstawy-R/join-test.csv", show_col_types = FALSE)
@@ -1094,7 +1096,7 @@ ggplot(df_diamonds, aes(carat, price, colour = cut)) +
         x = "Masa [karaty]",
         y = "Cena [$]",
         colour = "Szlif",
-        title = "Cena brylantu z zależności od masy"
+        title = "Cena brylantu w zależności od masy"
     )
 
 ```
@@ -1109,7 +1111,7 @@ ggplot(df_diamonds, aes(carat, price, colour = cut)) +
         x = "Masa [karaty]",
         y = "Cena [$]",
         colour = "Szlif",
-        title = "Cena brylantu z zależności od masy"
+        title = "Cena brylantu w zależności od masy"
     ) +
     scale_colour_discrete(labels = c("Zadowalający", "Dobry", "Bardzo dobry", "Premium", "Idealny"))
 ```
@@ -1133,7 +1135,7 @@ ggplot(df_diamonds, aes(carat, price, colour = cut)) +
         x = "Masa [karaty]",
         y = "Cena [$]",
         colour = "Szlif",
-        title = "Cena brylantu z zależności od masy"
+        title = "Cena brylantu w zależności od masy"
     ) +
     scale_colour_discrete(
         labels = c("Zadowalający", "Dobry", "Bardzo dobry", "Premium", "Idealny")
@@ -1153,7 +1155,7 @@ ggplot(df_diamonds, aes(carat, price, colour = cut)) +
         x = "Masa [karaty]",
         y = "Cena [$]",
         colour = "Szlif",
-        title = "Cena brylantu z zależności od masy"
+        title = "Cena brylantu w zależności od masy"
     ) +
     scale_colour_discrete(
         labels = c("Zadowalający", "Dobry", "Bardzo dobry", "Premium", "Idealny"),
@@ -1248,7 +1250,7 @@ lm_price <- iris %>%
 lm_price
 ```
 
-Obiekty tego typu zawsze wymagają argumentu `data`. Dlaczego jednak zapisałem `data = .`? Problem polega tutaj na użyciu potoków. Standardowo potok `%>%` wrzuca rzeczy do pierwszego argumentu. Wiele funkcji, tak jak `lm`, nie przyjmuje bazy danych w pierwszym argumencie. Często nawet nie w drugim, więc najlepiej wprost go nazwać. Omawiany w podrozdziale [-@sec-rstatix] pakiet `rstatix` za pierwszy cel postawił sobie nawet przerobienie testów statystycznych tak, żeby lepiej współpracowały z potokami. Jak więc poradzić sobie w takiej sytuacji? Jedna opcja, to całkiem zrezygnować z potoków i zapisać `data = iris`. Tak też jest dobrze, ale co jeśli potrzebujemy użyć potoku? Na przykład przed stworzeniem modelu wykonujemy serię przekształceń danych? Warto pamiętać, że potoki nie są obowiązkowe, można równie dobrze zagnieżdżać funkcje, Cierpi na tym tylko czytelność kodu. Druga opcja, to wprost powiedzenie potokowi, gdzie ma wrzucić naszą bazę danych. Do tego właśnie służy `.`. Zapis `data = .` mówi potokowi „halo halo, proszę nie wrzucać bazy do pierwszego argumentu, tylko o tu, gdzie pokazałem(-am) kropką".
+Obiekty tego typu zawsze wymagają argumentu `data`. Dlaczego jednak zapisałem `data = .`? Problem polega tutaj na użyciu potoków. Standardowo potok `%>%` wrzuca rzeczy do pierwszego argumentu. Wiele funkcji, tak jak `lm`, nie przyjmuje bazy danych w pierwszym argumencie. Często nawet nie w drugim, więc najlepiej wprost go nazwać. Omawiany w podrozdziale [-@sec-rstatix] pakiet `rstatix` za pierwszy cel postawił sobie nawet przerobienie testów statystycznych tak, żeby lepiej współpracowały z potokami. Jak więc poradzić sobie w takiej sytuacji? Jedna opcja, to całkiem zrezygnować z potoków i zapisać `data = iris`. Tak też jest dobrze, ale co jeśli potrzebujemy użyć potoku? Na przykład przed stworzeniem modelu wykonujemy serię przekształceń danych? Warto pamiętać, że potoki nie są obowiązkowe, można równie dobrze zagnieżdżać funkcje. Cierpi na tym tylko czytelność kodu. Druga opcja, to wprost powiedzenie potokowi, gdzie ma wrzucić naszą bazę danych. Do tego właśnie służy `.`. Zapis `data = .` mówi potokowi „halo halo, proszę nie wrzucać bazy do pierwszego argumentu, tylko o tu, gdzie pokazałem(-am) kropką".
 
 W powyższym przykładzie widać też, że `lm`, podobnie jak wiele innych obiektów modeli, nie daje nam domyślnie sensownego podsumowania. Wiele modeli wymaga od nas, byśmy wrzucili je do funkcji `summary` (nie mylić z `summarise`) żeby powiedziały nam coś, co da się zrozumieć.
 
@@ -1410,9 +1412,9 @@ Oba te pakiety, `lintr` i `styler`, są bardzo użyteczne, jednak ostatecznie ni
 
 W ten sposób kończymy to przydługie wprowadzenie do R. Wielu rzeczy tutaj nie omówiłem, np. elementów klasycznego R, takich jak wybór pojedynczej kolumny jako wektora (np. `df$wyksztalcenie`), czy w ogóle wektorów. Nie poznaliśmy klasycznych sposobów selekcji danych, jak np. `df[df$wyksztalcenie == "Wyższe", 1:10]`. Nie powiedzieliśmy nic o listach ani pętlach, czyli tym kawałku R, który umożliwia automatyzację. Nie liznęliśmy nawet Quarto, czyli standardu do łączenia R z pisaniem raportów, w którym zresztą piszę ten tekst. Części rzeczy nie omówiłem, bo na początek da się je skutecznie zastąpić nowszymi i bardziej czytelnymi funkcjami `tidyverse`. Część natomiast bywa bardzo przydatna, ale jest po prostu, według mnie, zbyt zaawansowana jak na pierwszy kontakt z językiem.
 
-Tym samym zachęcam do dalszej nauki! Jeśli opanowaliście elementy zawarte w tym tekście, macie solidny fundament, by zrozumieć takie książki jak polecana przeze mnie na wstępie publikacja „Język R. Kompletny zestaw narzędzi dla analityków danych" [@wickham2020]. Zaznaczam tylko, że ten tekst jest od tej książki nowszy, więc czasem pojawią się rozbieżności. W kilku miejscach wspominałem, że to, co opisuję, to nowinka, ale co do wielu rzeczy już nawet nie pamiętam, że były kiedyś nowe. Zawsze jednak pierwszym, podstawowym źródłem powinna być zawsze aktualna dokumentacja, a dopiero potem StackOverflow.
+Tym samym zachęcam do dalszej nauki! Jeśli opanowaliście elementy zawarte w tym tekście, macie solidny fundament, by zrozumieć takie książki jak polecana przeze mnie na wstępie publikacja „Język R. Kompletny zestaw narzędzi dla analityków danych" [@wickham2020]. Zaznaczam tylko, że ten tekst jest od tej książki nowszy, więc czasem pojawią się rozbieżności. W kilku miejscach wspominałem, że to, co opisuję, to nowinka, ale co do wielu rzeczy już nawet nie pamiętam, że były kiedyś nowe. Zawsze jednak pierwszym, podstawowym źródłem powinna być dokumentacja (zawsze aktualna), a dopiero potem StackOverflow.
 
-Jeśli czytasz to teraz, oznacza to, że ten tekst to praca w toku. Za każdą informację zwrotną będę wdzięczny. Jeśli coś było niejasne, jeśli coś powinienem wyjaśnić szerzej albo prościej, jeśli czegoś mocno zabrakło, to można (trzeba!) do mnie pisać na [315695\@uwr.edu.pl](mailto:315695@uwr.edu.pl).
+Jeśli czytasz to teraz, oznacza to, że ten tekst to praca w toku. Za każdą informację zwrotną będę wdzięczny. Jeśli coś było niejasne, jeśli coś powinienem wyjaśnić szerzej albo prościej, jeśli czegoś mocno zabrakło, to można (trzeba!) do mnie pisać na [kuba23031999@gmail.com](mailto:kuba23031999@gmail.com).
 
 Z tego miejsca pozostaje mi życzyć jak najmniej błędów. Ostatnie przesłanie jest jednak takie, że błędy będą się pojawiać. W dużych ilościach. Debugowanie potrafi zajmować mnóstwo czasu, zwłaszcza na początku drogi. Nie trzeba się jednak bać ani frustrować, trzeba czytać komunikaty o błędach i w razie czego wyszukiwać je w Google, a w ostateczności pytać na StackOverflow. Po pewnym czasie tych błędów będzie coraz mniej, podobnie jak zawahań i potrzeby sięgania po pomoc poza dokumentację. Choć pewnie nigdy nie znikną one całkiem.
 
