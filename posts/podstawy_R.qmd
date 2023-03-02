@@ -1498,13 +1498,35 @@ df %>%
 
 Zazwyczaj robimy to ręcznie, ale mamy też użyteczne narzędzie służące właśnie wyświetleniu kolejnych kroków ciągu potoków. Jest to dodatek do RStudio `ViewPipeSteps`. Po zainstalowaniu możemy wykorzystać to narzędzie zaznaczając swój ciąg i wybierając odpowiednią opcję z menu Addins. Otworzy to w kolejnych kartach (albo wydrukuje konsoli) kolejne kroki ciągu funkcji połączonych potokami. Często pozwala to na zidentyfikowanie kroku, w którym pojawia się błąd.
 
-> Dalsza część już wkrótce...
+### Metoda gumowej kaczuszki
 
-### Metoda gumowej kaczki
+To zabrzmi jak żart, ale to nie jest żart. Naprawdę istnieje metoda debugowania znana jako metoda gumowej kaczuszki. Ma nawet swoją [stronę na Wikipedii](https://en.wikipedia.org/wiki/Rubber_duck_debugging). W pierwszym kroku potrzebujemy gumowej kaczuszki. Przy braku kaczuszki możemy skorzystać z innych obiektów nieożywionych. Jeśli czujemy się wyjątkowo okrutni, możemy skorzystać z żywych osób[^love]. Następnie tłumaczymy owej kaczuszce nasz kod, linijka po linijce. Na głos. Tłumaczenie tego na głos pozwoli zauważyć błędy logiczne, które zauważyć jest trudno przy zwykłym czytaniu kodu. Przypomina to metodę Feynmana, którą szerzej opisuję [tutaj](https://jakub-jedrusiak.edu.pl/posts/uczenie-sie.html). Jest to podstawowa metoda debugowania, która pomaga również nabyć nawyki myślowe, dzięki którym będziemy z czasem popełniać mniej błędów.
+
+[^love]: Należy się upwenić, że te osoby kochają nas wystarczająco, żeby być gotowymi na to poświęcenie.
 
 ### Interaktywny debuger
 
+> Już wkrótce...
+
 ## Rozwiązywanie problemu
+
+Czasami rozwiązanie problemu wprost wynika z diagnozy. Jeśli popełniliśmy błąd taki, że zamiast `<` napisaliśmy `>`, to rozwiązaniem tego problemu jest po prostu zmiana znaku. Jeśli usunęliśmy kolumnę z wiekiem, to musimy ją dodać. Rozwiązanie jest logiczną konsekwencją źródła problemu. Jednak czasem musimy nieco wiedzieć, żeby problem rozwiązać. Najważniejszym źródłem rozwiązań jest doświadczenie. Na początku drogi będziemy się często frustrować potykając się o różne głupotki. Jeśli mamy szczęście mieć nauczyciela, pomoże on znaleźć rozwiązanie i szybciej nabyć doświadczenia, pożyczając własne doświadczenie. Dlatego też to, co na początku będzie powodowało problemy, potem stanie się oczywistą częścią języka. Co jednak zrobić, gdy nie mamy jeszcze doświadczenia z danym problemem?
+
+Pierwszym i podstawowym źródłem jest dokumentacja. Doświadczenie podpowiada mi, że być może `install.packages(ViewPipeSteps)` nie zadziałało, bo potrzeba gdzieś cudzysłowia, ale skąd mam to wiedzieć? Oczywiście wpisując w konsolę `?install.packages`. Tam, przy opisie argumentów, znajdę informację, że pierwszy argument, `pkgs`, powinien mieć postać „character vector of the names of packages”. Oznacza to, że nazwy muszą być w cudzysłowie. Jeśli mamy problem z informatycznym żargonem (do którego przyzwyczaimy się z czasem), na samym dole dokumentacji zawsze znajdziemy **przykłady**. Dokumentacja jest więc pierwszą rzeczą, którą powinniśmy sprawdzić, pracując z nową funkcją albo funkcją powodującą problemy.
+
+Drugim istotnym źródłem informacji jest Internet, a konkretniej zazwyczaj StackOverflow. Jest fo swego rodzaju forum informatyczne, gdzie ludzie zadają pytania i czasem otrzymują odpowiedzi. Jeśli wyszukamy treść naszego błędu w Google (inteligentnie pomijając takie rzeczy jak nazwy naszych zmiennych) powinniśmy znaleźć pytanie kogoś, kto miał podobny problem. Jeśli nie (co czasem się zdarza), to sami możemy zadać na StackOverflow pytanie.
+
+W naszym pytaniu powinniśmy zawrzeć przykład kodu, jaki trzeba wykonać, żeby uzyskać nasz problem. Nazywa się to *minimal reproducible example* z naciskiem na *minimal* -- nie wrzucamy dużych fragmentów naszej analizy, ale najlepiej piszemy nowy przykład, który pozwala uzyskać ten sam błąd. Praktyczna porada jest taka, że można wykorzystać jedną z kilku wbudowanych w R baz danych:
+ 
+* `iris` -- długości płatków i działek kielicha trzech odmian irysów.
+* `mtcars` -- parametry techniczne 32 samochodów.
+* `ToothGrowth` -- dane z eksperymentu o związku witaminy C z długością zębów kawii domowych (3 dawki, 2 sposoby podawania, dobre do ANOVY wieloczynnikowej).
+* `PlantGrowth` -- masa wysuszonych roślin z warunków kontrolnego i eksperymentalnego (typowa baza do testów t).
+* `USArrests` -- dane statystyczne o zbrodniach popełnianych w każdym stanie USA w 1973 r.
+
+Każda z tych baz dancyh ma swoją stronę w dokumentacji wyjaśniającą szczegóły. Warto znać chciażby dwie pierwsze bazy. Wykorzystywanie ich w przykładach jest o tyle dobre, że każdy, kto ma R, automatycznie ma dostęp do tych baz.
+
+Czytanie StackOverflow jest zdobywaniem pewnego doświadczenia. Każdy rozwiązany problem to kolejny poznawczy egzemplarz do kolekcji. Im więcej takich mamy, tym trudniej nas zagiąć. Nie oznacza to, że bugi nie będą się pojawiać, ale to, że z pamięci będziemy wiedzieć -- lub się domyślać -- jak sprawnie je rozwiązać.
 
 # Posłowie {#sec-ending}
 
