@@ -22,12 +22,11 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging-indent div.csl-entry {
+.hanging div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -41,7 +40,8 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}</style>
+}
+</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -132,16 +132,16 @@ div.csl-indent {
     <h2 id="toc-title">Na tej stronie</h2>
    
   <ul>
-  <li><a href="#problemy-z-próbkowaniem" id="toc-problemy-z-próbkowaniem" class="nav-link active" data-scroll-target="#problemy-z-próbkowaniem"><span class="header-section-number">1</span> Problemy z próbkowaniem</a></li>
-  <li><a href="#jak-łatwo-wychodzą-przypadkowe-różnice" id="toc-jak-łatwo-wychodzą-przypadkowe-różnice" class="nav-link" data-scroll-target="#jak-łatwo-wychodzą-przypadkowe-różnice"><span class="header-section-number">2</span> Jak łatwo wychodzą przypadkowe różnice?</a></li>
-  <li><a href="#istotność-statystyczna" id="toc-istotność-statystyczna" class="nav-link" data-scroll-target="#istotność-statystyczna"><span class="header-section-number">3</span> Istotność statystyczna</a></li>
-  <li><a href="#logika-testów-statystycznych" id="toc-logika-testów-statystycznych" class="nav-link" data-scroll-target="#logika-testów-statystycznych"><span class="header-section-number">4</span> Logika testów statystycznych</a></li>
-  <li><a href="#wielkość-próbki" id="toc-wielkość-próbki" class="nav-link" data-scroll-target="#wielkość-próbki"><span class="header-section-number">5</span> Wielkość próbki</a>
+  <li><a href="#problemy-z-próbkowaniem" id="toc-problemy-z-próbkowaniem" class="nav-link active" data-scroll-target="#problemy-z-próbkowaniem"><span class="toc-section-number">1</span>  Problemy z próbkowaniem</a></li>
+  <li><a href="#jak-łatwo-wychodzą-przypadkowe-różnice" id="toc-jak-łatwo-wychodzą-przypadkowe-różnice" class="nav-link" data-scroll-target="#jak-łatwo-wychodzą-przypadkowe-różnice"><span class="toc-section-number">2</span>  Jak łatwo wychodzą przypadkowe różnice?</a></li>
+  <li><a href="#istotność-statystyczna" id="toc-istotność-statystyczna" class="nav-link" data-scroll-target="#istotność-statystyczna"><span class="toc-section-number">3</span>  Istotność statystyczna</a></li>
+  <li><a href="#logika-testów-statystycznych" id="toc-logika-testów-statystycznych" class="nav-link" data-scroll-target="#logika-testów-statystycznych"><span class="toc-section-number">4</span>  Logika testów statystycznych</a></li>
+  <li><a href="#wielkość-próbki" id="toc-wielkość-próbki" class="nav-link" data-scroll-target="#wielkość-próbki"><span class="toc-section-number">5</span>  Wielkość próbki</a>
   <ul class="collapse">
-  <li><a href="#dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty" id="toc-dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty" class="nav-link" data-scroll-target="#dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty"><span class="header-section-number">5.1</span> Dlaczego większe próbki pozwalają wykryć mniejsze efekty?</a></li>
+  <li><a href="#dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty" id="toc-dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty" class="nav-link" data-scroll-target="#dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty"><span class="toc-section-number">5.1</span>  Dlaczego większe próbki pozwalają wykryć mniejsze efekty?</a></li>
   </ul></li>
-  <li><a href="#wielkość-efektu-a-istotność-statystyczna" id="toc-wielkość-efektu-a-istotność-statystyczna" class="nav-link" data-scroll-target="#wielkość-efektu-a-istotność-statystyczna"><span class="header-section-number">6</span> Wielkość efektu a istotność statystyczna</a></li>
-  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">7</span> Podsumowanie</a></li>
+  <li><a href="#wielkość-efektu-a-istotność-statystyczna" id="toc-wielkość-efektu-a-istotność-statystyczna" class="nav-link" data-scroll-target="#wielkość-efektu-a-istotność-statystyczna"><span class="toc-section-number">6</span>  Wielkość efektu a istotność statystyczna</a></li>
+  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="toc-section-number">7</span>  Podsumowanie</a></li>
   </ul>
 </nav>
     </div>
@@ -253,10 +253,12 @@ div.csl-indent {
 <p>Zaczynamy zauważać, że wyniki za każdym razem były trochę inne, ale zawsze lądowały w pobliżu 100. Innymi słowy średnie bliskie 100 pojawiały się często, a średnie dalekie od 100 pojawiały się rzadko. Nie mamy na przykład ani jednego wyniku mniejszego niż 95, a w zakresie 99-101 mieści się 47% wszystkich uzyskanych średnich. Możemy zrobić nawet wykres, jak często pojawiały się jakie średnie.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<figure id="fig-iq-means-histogram" class="figure">
-<img src="p-value_files/figure-html/fig-iq-means-histogram-1.png" class="img-fluid figure-img" data-fig-align="center" width="672" alt="Im wyższy słupek, tym średnia z tego zakresu pojawiała się częściej w naszym zbiorze 1000 średnich. Jak widać, średnie koncentrują się dookoła wyniku 100 IQ.">
-<figcaption aria-hidden="true" class="figure-caption">Im wyższy słupek, tym średnia z tego zakresu pojawiała się częściej w naszym zbiorze 1000 średnich. Jak widać, średnie koncentrują się dookoła wyniku 100 IQ.</figcaption>
+<div id="fig-iq-means-histogram" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="p-value_files/figure-html/fig-iq-means-histogram-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;1: Im wyższy słupek, tym średnia z tego zakresu pojawiała się częściej w naszym zbiorze 1000 średnich. Jak widać, średnie koncentrują się dookoła wyniku 100 IQ.</figcaption><p></p>
 </figure>
+</div>
 </div>
 </div>
 <p>Wpadamy więc na pomysł – skoro średnie koncentrują się dookoła wyniku 100, to może prawdziwa średnia inteligencja w populacji wynosi właśnie 100? To jest bardzo rozsądne założenie. Zwłaszcza, że jeśli policzymy jedną, zbiorczą średnią dla 100 000 naszych badanych, to rzeczywiście wychodzi 100.</p>
@@ -264,7 +266,7 @@ div.csl-indent {
 </section>
 <section id="jak-łatwo-wychodzą-przypadkowe-różnice" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="jak-łatwo-wychodzą-przypadkowe-różnice"><span class="header-section-number">2</span> Jak łatwo wychodzą przypadkowe różnice?</h2>
-<p>I teraz robi się ciekawie. To jest skomplikowane, warto tutaj zwolnić. Jeśli to się zrozumie, to zrozumie się całą wielką logikę testów statystycznych. Spróbujmy więc nieco się zagłębić. Jesteśmy w końcu w pięknej, abstrakcyjnej sytuacji, gdzie mamy do swojej dyspozycji 1000 średnich z różnych próbek. Na rysunku <strong>?@fig-iq-means-histogram</strong>. widzimy, że większość naszych średnich mieści się mniej więcej w granicach 98-102. Uzyskać przez przypadek średnią 105 byłoby bardzo trudno. Uzyskać średnią 115 jest praktycznie niemożliwe. Ale już średnią 101 przez przypadek uzyskać jest bardzo łatwo.</p>
+<p>I teraz robi się ciekawie. To jest skomplikowane, warto tutaj zwolnić. Jeśli to się zrozumie, to zrozumie się całą wielką logikę testów statystycznych. Spróbujmy więc nieco się zagłębić. Jesteśmy w końcu w pięknej, abstrakcyjnej sytuacji, gdzie mamy do swojej dyspozycji 1000 średnich z różnych próbek. Na rysunku <a href="#fig-iq-means-histogram">1</a>. widzimy, że większość naszych średnich mieści się mniej więcej w granicach 98-102. Uzyskać przez przypadek średnią 105 byłoby bardzo trudno. Uzyskać średnią 115 jest praktycznie niemożliwe. Ale już średnią 101 przez przypadek uzyskać jest bardzo łatwo.</p>
 <p>Możemy to ugryźć od innej strony. Jestem w końcu szalonym, bogatym dyktatorem dużego państwa, więc znowu robię olbrzymie badania i powtarzam nasz pierwotny eksperyment 1000 razy. Czyli losuję 1000 próbek po 100 mężczyzn, 1000 próbek po 100 kobiet, mierzę inteligencję i liczę różnicę. Efektem jest zbiór danych, którego fragment znajdziemy w tabeli <a href="#tbl-iq-diffs">2</a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -349,10 +351,12 @@ div.csl-indent {
 <p>Podstawą do różnicy była tu średnia inteligencja kobiet, więc ujemna różnica oznacza, że mężczyźni okazali się mniej inteligentni, zaś dodatnia, że bardziej. Tak jak w przypadku tabeli <a href="#tbl-iq-means">1</a>., niektóre różnice są większe, niektóre mniejsze, ale ich rozkład nie jest przypadkowy. Wrzućmy nasze różnice na wykres.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<figure id="fig-iq-diffs-histogram" class="figure">
-<img src="p-value_files/figure-html/fig-iq-diffs-histogram-1.png" class="img-fluid figure-img" data-fig-align="center" width="672" alt="Różnice w średnich bywały większe lub mniejsze, ale oscylowały wokół zera.">
-<figcaption aria-hidden="true" class="figure-caption">Różnice w średnich bywały większe lub mniejsze, ale oscylowały wokół zera.</figcaption>
+<div id="fig-iq-diffs-histogram" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="p-value_files/figure-html/fig-iq-diffs-histogram-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;2: Różnice w średnich bywały większe lub mniejsze, ale oscylowały wokół zera.</figcaption><p></p>
 </figure>
+</div>
 </div>
 </div>
 <p>Jak widzimy, różnice oscylują wokół zera. Skoro w większości eksperymentów różnica wyniosła zero albo prawie zero, to najprawdopodobniej to jest właśnie odpowiedź – prawdziwa różnica wynosi właśnie zero! Ale pomimo tego łatwo jest losowo uzyskać różnicę rzędu 1 punktu. Trudniej jest uzyskać różnicę rzędu 5 punktów. Przypadkowa różnica rzędu 10 punktów jest prawie niemożliwa do uzyskania.</p>
@@ -415,16 +419,18 @@ mean of x mean of y
 <section id="wielkość-próbki" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="wielkość-próbki"><span class="header-section-number">5</span> Wielkość próbki</h2>
 <p>Z może nieco przydługich rozważań powyżej wyłonił nam się jasny obraz – duże różnice możemy wykryć, a małe nie, bo jak różnica jest mała, to zawsze jest ryzyko, że powstała przypadkiem. Ale na wielkość różnicy nie możemy wpływać. Ona jest jaka jest. A co jeśli się uprę i będę chciał wykryć małą różnicę? Czy jest coś, na co mogę wpłynąć, a co pozwoli mi wykrywać nawet te mniejsze różnice tak, żeby były istotne statystycznie? Owszem. Spoilerem był tytuł podrozdziału, ale można wykrywać mniejsze różnice, gdy zbierze się większą próbę.</p>
-<p>Zobaczmy to na przykładzie. Pokazywałem wcześniej (na rysunku <strong>?@fig-iq-means-histogram</strong>) wyniki symulacji, gdzie braliśmy 100 osób, liczyliśmy ich średnią inteligencję. Powtórzyliśmy to 1000 razy i patrzyliśmy, jak często pojawiają się dane średnie. Teraz zrobimy to samo, ale każda pojedyncza próbka będzie składała się z 1000 osób.</p>
+<p>Zobaczmy to na przykładzie. Pokazywałem wcześniej (na rysunku <a href="#fig-iq-means-histogram">1</a>) wyniki symulacji, gdzie braliśmy 100 osób, liczyliśmy ich średnią inteligencję. Powtórzyliśmy to 1000 razy i patrzyliśmy, jak często pojawiają się dane średnie. Teraz zrobimy to samo, ale każda pojedyncza próbka będzie składała się z 1000 osób.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<figure id="fig-iq-stderr-histogram" class="figure">
-<img src="p-value_files/figure-html/fig-iq-stderr-histogram-1.png" class="img-fluid figure-img" data-fig-align="center" width="672" alt="Jak często pojawiały się dane średnie, gdy w jednym rzucie badaliśmy 100 osób (mała próba) albo 1000 osób (duża próba).">
-<figcaption aria-hidden="true" class="figure-caption">Jak często pojawiały się dane średnie, gdy w jednym rzucie badaliśmy 100 osób (mała próba) albo 1000 osób (duża próba).</figcaption>
+<div id="fig-iq-stderr-histogram" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="p-value_files/figure-html/fig-iq-stderr-histogram-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Rysunek&nbsp;3: Jak często pojawiały się dane średnie, gdy w jednym rzucie badaliśmy 100 osób (mała próba) albo 1000 osób (duża próba).</figcaption><p></p>
 </figure>
 </div>
 </div>
-<p>Na rysunku <strong>?@fig-iq-stderr-histogram</strong> widzimy, co się dzieje, kiedy liczebność próby zwiększa się. Kiedy próba była mała, wyniki koncentrowały się wokół prawdziwej średniej, czyli wartości 100, ale miały całkiem spory rozstrzał – ok. 95-105. Większość wyników plasowała się wtedy w zakresie<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> od 98,5 do 101,5. Gdy próbka była duża, wyniki ciągle koncentrowały się wokół 100, ale były znacznie mniej rozproszone. Całkowity rozstęp to ok. 98-102, a większość wyników mieści się w zakresie 99,5-100,5.</p>
+</div>
+<p>Na rysunku <a href="#fig-iq-stderr-histogram">3</a> widzimy, co się dzieje, kiedy liczebność próby zwiększa się. Kiedy próba była mała, wyniki koncentrowały się wokół prawdziwej średniej, czyli wartości 100, ale miały całkiem spory rozstrzał – ok. 95-105. Większość wyników plasowała się wtedy w zakresie<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> od 98,5 do 101,5. Gdy próbka była duża, wyniki ciągle koncentrowały się wokół 100, ale były znacznie mniej rozproszone. Całkowity rozstęp to ok. 98-102, a większość wyników mieści się w zakresie 99,5-100,5.</p>
 <p>Ma to sens, jak się dłużej zastanowić. Na czuja da się stwierdzić, że średnia z 1000 osób będzie bardziej adekwatna, niż średnia ze 100 osób. A „bardziej adekwatna” oznacza w tym wypadku „bliższa prawdziwej średniej całej populacji” czyli „bliżej 100”. Dlatego właśnie ten rozkład jest bardziej zbity – bo każda pojedyncza średnia, która go buduje, jest bardziej adekwatna.</p>
 <p>Można powiedzieć – no tak, ale co to zmienia? Zmienia to tyle, że teraz co innego jest małą, a co innego dużą różnicą. Przy małych próbach wyniki oddalone o 1 lub więcej punktów od prawdziwej średniej zdarzały się dość często, bo w 53,3% przypadków. W takim razie można powiedzieć, że 1 punkt oddalenia to dość mało, często się zdarza przez przypadek. Ale jak próba jest duża, to takie samo oddalenie możemy już uznać za duże, bo pojawiło się tylko w 3,4% przypadków.</p>
 <p>Przekładając to na logikę wartości <span class="math inline">\(p\)</span> – różnice, które bardzo łatwo uzyskać w małych próbach, nagle stają się trudne do uzyskania, gdy próba jest duża. Jeśli zbadaliśmy po 100 kobiet i mężczyzn i wyszła nam różnica 2 punktów IQ, to nie zrobi to na nas większego wrażenia, bo taka różnica może być przypadkowa. Ale jeśli różnica 2 punkty wychodzi przy próbce po 1000 osób, to wtedy mamy już więcej zaufania, że ta różnica istnieje naprawdę.</p>
@@ -432,10 +438,10 @@ mean of x mean of y
 <section id="dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty" class="level3" data-number="5.1">
 <h3 data-number="5.1" class="anchored" data-anchor-id="dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty"><span class="header-section-number">5.1</span> Dlaczego większe próbki pozwalają wykryć mniejsze efekty?</h3>
 <p>Ta część jest zupełnie nieobowiązkowa. Spokojnie da się dobrze rozumieć testy statystyczne po prostu wiedząc, <em>że</em> większe próbki pozwalają wykryć mniejsze efekty, bez wchodzenia w szczegóły <em>dlaczego</em> tak się dzieje. Ale poświęcę chwilę, żeby to drugie też wyjaśnić. Kilka kolejnych akapitów będzie też bardziej techniczne i można spokojnie je pominąć i przejść do podrozdziału o wielkości efektu.</p>
-<p>Pod rysunkiem <strong>?@fig-iq-stderr-histogram</strong>. pisałem o tym, że większość wyników mieści się w jakimśtam zakresie dookoła średniej. Ten zakres, w którym zawiera się większość wyników, nazywamy <strong>odchyleniem standardowym</strong> i więcej na jego temat piszę w rozdziale <strong>?@sec-procent-wariancji</strong>.</p>
-<p>Bardzo szczególne jest odchylenie standardowe rozkładów takich, jak te z rysunku <strong>?@fig-iq-stderr-histogram</strong>. Przypomnijmy, co to są za rozkłady. Pokazują one, jak często możemy wylosować jaką średnią. Środkiem tego rozkładu jest prawdziwa średnia całej populacji, a średnie dookoła to losowe odchylenia od tej prawdziwej średniej. Takie rozkłady nazywamy <strong>rozkładami próbkowania</strong> i niosą one bardzo ważną informację – jakie różnice są duże, a jakie są małe. Odchylenia standardowe takich rozkładów nazywamy <strong>błędem standardowym</strong>. Błąd standardowy mówi nam, jakie średnie będą nam często wychodzić przez przypadek, a jakie rzadko.</p>
+<p>Pod rysunkiem <a href="#fig-iq-stderr-histogram">3</a>. pisałem o tym, że większość wyników mieści się w jakimśtam zakresie dookoła średniej. Ten zakres, w którym zawiera się większość wyników, nazywamy <strong>odchyleniem standardowym</strong> i więcej na jego temat piszę w rozdziale <strong>?@sec-procent-wariancji</strong>.</p>
+<p>Bardzo szczególne jest odchylenie standardowe rozkładów takich, jak te z rysunku <a href="#fig-iq-stderr-histogram">3</a>. Przypomnijmy, co to są za rozkłady. Pokazują one, jak często możemy wylosować jaką średnią. Środkiem tego rozkładu jest prawdziwa średnia całej populacji, a średnie dookoła to losowe odchylenia od tej prawdziwej średniej. Takie rozkłady nazywamy <strong>rozkładami próbkowania</strong> i niosą one bardzo ważną informację – jakie różnice są duże, a jakie są małe. Odchylenia standardowe takich rozkładów nazywamy <strong>błędem standardowym</strong>. Błąd standardowy mówi nam, jakie średnie będą nam często wychodzić przez przypadek, a jakie rzadko.</p>
 <p>Jeśli wartości są w obrębie ok. 2 błędów standardowych, czyli tam, gdzie 95% wszystkich wyników, to uznajemy, że różnice są w sumie małe, <em>nieistotne statystycznie</em>. To, że to są 2 odchylenia standardowe<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> to konkret, którego nie mówiłem wcześniej, ale który wynika z faktu, że przyjmujemy <span class="math inline">\(\alpha = 0,05\)</span> (por. podrozdział <em>Istotność statystyczna</em>). Innymi słowy wyniki oddalone o mniej niż 2 odchylenia standardowe uzyskać jest łatwo (więcej niż 5% szans), a wyniki oddalone o więcej niż 2 odchylenia standardowe uzyskać jest trudno (mniej niż 5% szans).</p>
-<p>Żeby przerobić to na konkretnym przykładzie, zerknijmy jeszcze raz na rozkłady z rysunku <strong>?@fig-iq-stderr-histogram</strong>. Odchylenie standardowe rozkładu z małymi próbkami wynosi<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> ok. 1,5, zaś średnia wynosi 100. Oznacza to, że często (w ok. 95% przypadków) będą nam się losowały średnie z zakresu 97-103. Jeśli jakaś grupa, np. członkowie Mensy, będzie miała średnią spoza tego zakresu, to da nam dowód na to, że średnia inteligencja tej grupy naprawdę jest inna niż średnia ogółu społeczeństwa. Odchylenie standardowe rozkładu z większymi próbami jest mniejsze, bo wynosi zaledwie ok. 0,5 (widać na rysunku, że rozkład jest węższy, więc trzeba węższych widełek, żeby objąć większość wyników). Oznacza to, że spodziewamy się wyników w zakresie 99-101 punktów IQ, a wyniki spoza tego zakresu uznajemy za nieprzypadkowe. Średni wynik 102 łatwo jest uzyskać, kiedy zbadamy tylko 100 osób, ale trudno, kiedy zbadamy ich 1000.</p>
+<p>Żeby przerobić to na konkretnym przykładzie, zerknijmy jeszcze raz na rozkłady z rysunku <a href="#fig-iq-stderr-histogram">3</a>. Odchylenie standardowe rozkładu z małymi próbkami wynosi<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> ok. 1,5, zaś średnia wynosi 100. Oznacza to, że często (w ok. 95% przypadków) będą nam się losowały średnie z zakresu 97-103. Jeśli jakaś grupa, np. członkowie Mensy, będzie miała średnią spoza tego zakresu, to da nam dowód na to, że średnia inteligencja tej grupy naprawdę jest inna niż średnia ogółu społeczeństwa. Odchylenie standardowe rozkładu z większymi próbami jest mniejsze, bo wynosi zaledwie ok. 0,5 (widać na rysunku, że rozkład jest węższy, więc trzeba węższych widełek, żeby objąć większość wyników). Oznacza to, że spodziewamy się wyników w zakresie 99-101 punktów IQ, a wyniki spoza tego zakresu uznajemy za nieprzypadkowe. Średni wynik 102 łatwo jest uzyskać, kiedy zbadamy tylko 100 osób, ale trudno, kiedy zbadamy ich 1000.</p>
 <p>Widzimy więc, że im większa próbka, tym błąd standardowy mniejszy. Przypomnijmy, że mniejszy błąd standardowy oznacza, że łatwiej nam wykryć mniejsze efekty, bo zakres wyników podejrzanych o bycie przypadkowymi (średnia ± 2 błędy standardowe) jest węższy. Możemy to sobie wyobrazić tak, że gdy policja robi dokładniejsze sprawdzenie podejrzanych, to winę części z nich mogą wykluczyć. Grono podejrzanych zmniejsza się i łatwiej jest odróżnić prawego obywatela od przestępcy.</p>
 <p>Czy potrzebujemy jednak Badań Szalonego Dyktatora™, żeby znać błąd standardowy? W końcu musimy wiedzieć, jaka jest prawdziwa średnia i zobaczyć, jak często pojawiają się jakie średnie próbek, żeby sprawdzić odchylenie standardowe tego rozkładu. Na szczęście, tak jak wcześniej odkryliśmy dla testów <em>t</em>-Studenta, istnieje zaskakująco prosty sposób na oszacowanie wielkości błędu standardowego na podstawie jednej próbki, bez pobierania 1000 próbek po 100 osób. Wzór ten wynika z czegoś, co nazywa się <strong>centralnym twierdzeniem granicznym</strong> i wygląda następująco:</p>
 <p><span class="math display">\[
@@ -470,17 +476,17 @@ SE=\frac{SD}{\sqrt{n}}
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
-<div id="ref-bem2011" class="csl-entry" role="listitem">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-bem2011" class="csl-entry" role="doc-biblioentry">
 Bem, D. J. (2011). Feeling the future: Experimental evidence for anomalous retroactive influences on cognition and affect. <em>Journal of Personality and Social Psychology</em>, <em>100</em>, 407–425. <a href="https://doi.org/10.1037/a0021524">https://doi.org/10.1037/a0021524</a>
 </div>
-<div id="ref-butcher2018" class="csl-entry" role="listitem">
+<div id="ref-butcher2018" class="csl-entry" role="doc-biblioentry">
 Butcher, J. N. M. S., &amp; Hooley, J. M. (2018). <em>Psychologia zaburze<span>ń</span></em>. Sopot: Gda<span>ń</span>skie Wydawnictwo Psychologiczne.
 </div>
-<div id="ref-engber2017" class="csl-entry" role="listitem">
+<div id="ref-engber2017" class="csl-entry" role="doc-biblioentry">
 Engber, D. (2017). Daryl Bem proved ESP is real: Which means science is broken. <em>Slate, May</em>, <em>17</em>.
 </div>
-<div id="ref-wilkes2017" class="csl-entry" role="listitem">
+<div id="ref-wilkes2017" class="csl-entry" role="doc-biblioentry">
 Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>... i sam sobie wymy<span>ś</span>l matematyk<span>ę</span></em>. Warszawa: Prószy<span>ń</span>ski Media.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
