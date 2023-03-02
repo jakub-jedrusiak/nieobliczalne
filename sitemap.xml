@@ -2,26 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jakub-jedrusiak.github.io/index.html</loc>
-    <lastmod>2023-03-01T21:19:25.476Z</lastmod>
+    <lastmod>2023-03-02T00:14:57.292Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/about.html</loc>
-    <lastmod>2023-03-01T21:19:25.949Z</lastmod>
+    <lastmod>2023-03-02T00:14:57.689Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/posts/procent-wariancji.html</loc>
-    <lastmod>2023-03-01T21:19:27.032Z</lastmod>
+    <lastmod>2023-03-02T00:14:58.576Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/posts/kombinatoryka.html</loc>
-    <lastmod>2023-03-01T21:19:28.492Z</lastmod>
+    <lastmod>2023-03-02T00:15:00.356Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/posts/p-value.html</loc>
-    <lastmod>2023-03-01T21:19:29.802Z</lastmod>
+    <lastmod>2023-03-02T00:15:01.946Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jakub-jedrusiak.github.io/posts/uczenie-sie.html</loc>
+    <lastmod>2023-03-02T00:15:03.239Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/posts/podstawy_R.html</loc>
-    <lastmod>2023-03-01T21:19:47.022Z</lastmod>
+    <lastmod>2023-03-02T00:15:22.276Z</lastmod>
   </url>
 </urlset>
