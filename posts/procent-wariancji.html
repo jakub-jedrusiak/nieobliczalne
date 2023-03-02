@@ -22,11 +22,12 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -40,8 +41,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -132,11 +132,11 @@ div.csl-indent {
     <h2 id="toc-title">Na tej stronie</h2>
    
   <ul>
-  <li><a href="#średnia-jako-model" id="toc-średnia-jako-model" class="nav-link active" data-scroll-target="#średnia-jako-model"><span class="toc-section-number">1</span>  Średnia jako model</a></li>
-  <li><a href="#wariancja" id="toc-wariancja" class="nav-link" data-scroll-target="#wariancja"><span class="toc-section-number">2</span>  Wariancja</a></li>
-  <li><a href="#średnia-to-nie-wszystko" id="toc-średnia-to-nie-wszystko" class="nav-link" data-scroll-target="#średnia-to-nie-wszystko"><span class="toc-section-number">3</span>  Średnia to nie wszystko</a></li>
-  <li><a href="#test-f" id="toc-test-f" class="nav-link" data-scroll-target="#test-f"><span class="toc-section-number">4</span>  Test <em>F</em></a></li>
-  <li><a href="#postscriptum-jak-szybciej-liczyć-ssm" id="toc-postscriptum-jak-szybciej-liczyć-ssm" class="nav-link" data-scroll-target="#postscriptum-jak-szybciej-liczyć-ssm"><span class="toc-section-number">5</span>  <em>Postscriptum</em> – jak szybciej liczyć <em>SS<sub>M</sub></em></a></li>
+  <li><a href="#średnia-jako-model" id="toc-średnia-jako-model" class="nav-link active" data-scroll-target="#średnia-jako-model"><span class="header-section-number">1</span> Średnia jako model</a></li>
+  <li><a href="#wariancja" id="toc-wariancja" class="nav-link" data-scroll-target="#wariancja"><span class="header-section-number">2</span> Wariancja</a></li>
+  <li><a href="#średnia-to-nie-wszystko" id="toc-średnia-to-nie-wszystko" class="nav-link" data-scroll-target="#średnia-to-nie-wszystko"><span class="header-section-number">3</span> Średnia to nie wszystko</a></li>
+  <li><a href="#test-f" id="toc-test-f" class="nav-link" data-scroll-target="#test-f"><span class="header-section-number">4</span> Test <em>F</em></a></li>
+  <li><a href="#postscriptum-jak-szybciej-liczyć-ssm" id="toc-postscriptum-jak-szybciej-liczyć-ssm" class="nav-link" data-scroll-target="#postscriptum-jak-szybciej-liczyć-ssm"><span class="header-section-number">5</span> <em>Postscriptum</em> – jak szybciej liczyć <em>SS<sub>M</sub></em></a></li>
   </ul>
 </nav>
     </div>
@@ -249,23 +249,19 @@ div.csl-indent {
 <p>Dla takich danych możemy policzyć całkiem sporo rzeczy. Łatwiej jest jednak zrozumieć dane, jak się je rzeczywiście widzi. Spróbujmy więc stworzyć wykres. Chcielibyśmy wiedzieć, jaki jest związek wielkości pająka z niepokojem, jaki wywołuje<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza, tyle że na wykresie.</figcaption><p></p>
+<figure id="fig-scatter-anxiety" class="figure">
+<img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-1.png" class="img-fluid figure-img" style="width:85.0%" data-fig-align="center" alt="Wielkość pająka i niepokój, jaki wzbudza, tyle że na wykresie.">
+<figcaption aria-hidden="true" class="figure-caption">Wielkość pająka i niepokój, jaki wzbudza, tyle że na wykresie.</figcaption>
 </figure>
-</div>
 </div>
 </div>
 <p>Widzimy więc wyraźnie, że im większy pająk, tym większy lęk wywołuje. Ale z tym wnioskiem wybiegliśmy sporo w przyszłość. Zazwyczaj w pierwszym odruchu robimy coś znacznie prostszego – liczymy średnią. Średni niepokój wyniósł tutaj dokładnie 10. Szybkie spojrzenie w tabelę pozwala nam stwierdzić, że żaden badany takiego wyniku niepokoju nie uzyskał i niezbyt nas to dziwi. W końcu to tylko średnia, żaden prawdziwy wynik nie musi mieć dokładnie średniej wartości. Jak w znienawidzonym przez statystyków kawale o średniej liczbie nóg na spacerze z psem. Rozumiemy więc, że średnia tylko w pewnym przybliżeniu oddaje cały zbiór danych, a konkretne wartości mogą się od średniej mniej lub bardziej odchylać. Te odchylenia możemy nanieść na wykres.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-mean" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-mean-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;2: Średnia to rodzaj modelu, czyli narzędzia do przewidywania danych. Żaden z naszych pająków nie wywoływał średniego niepokoju, każdy punkt ma większe lub mniejsze odchylenie od średniej.</figcaption><p></p>
+<figure id="fig-scatter-anxiety-mean" class="figure">
+<img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-mean-1.png" class="img-fluid figure-img" style="width:85.0%" data-fig-align="center" alt="Średnia to rodzaj modelu, czyli narzędzia do przewidywania danych. Żaden z naszych pająków nie wywoływał średniego niepokoju, każdy punkt ma większe lub mniejsze odchylenie od średniej.">
+<figcaption aria-hidden="true" class="figure-caption">Średnia to rodzaj modelu, czyli narzędzia do przewidywania danych. Żaden z naszych pająków nie wywoływał średniego niepokoju, każdy punkt ma większe lub mniejsze odchylenie od średniej.</figcaption>
 </figure>
-</div>
 </div>
 </div>
 <p>Przerywane linie pokazują nam odchylenie każdego punktu od średniej (<em>residual</em>). Dla przykładu pierwszy punkt ma wartość niepokoju 2, więc jego odchylenie to <span class="math inline">\(2 - 10 = -8\)</span>. Dlaczego na minusie? Bo pierwszy punkt jest <strong>poniżej</strong> średniej, więc żeby przejść od średniej do wartości tego konkretnego punktu musimy wykonać <strong>odejmowanie</strong>. Inny przykład – ostatni punkt ma wartość niepokoju 15, więc jego odchylenie od średniej wynosi <span class="math inline">\(15 - 10 = 5\)</span>. Tutaj odchylenie jest już dodatnie, co ma sens, bo ostatni punkt jest <strong>powyżej</strong> średniej, więc żeby przesunąć się od wartości średniej do wartości tego punktu musimy <strong>dodawać</strong>. Jak widać, żeby policzyć odchylenie, wystarczy od wartości punktu odjąć średnią. Można zapisać to matematycznie:</p>
@@ -336,12 +332,10 @@ S_i = x_i - \bar x
 <p>Średnia gwarantuje mi, że pomylę się tak mało, jak to tylko możliwe, czyli że sumarycznie przerywane kreski na wykresie będą tak krótkie, jak się da. Średnia jest więc modelem niedoskonałym (bo ma błąd), ale lepszym niż jakakolwiek inna pojedyncza liczba (bo ma najmniejszy błąd).</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-15" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-15-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;3: Modelem mogłaby być dowolna liczba, jeśli się uprzeć, ale żadna pojedyncza liczba nie będzie miała tak małych odchyleń, jak średnia.</figcaption><p></p>
+<figure id="fig-scatter-anxiety-15" class="figure">
+<img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-15-1.png" class="img-fluid figure-img" style="width:85.0%" data-fig-align="center" alt="Modelem mogłaby być dowolna liczba, jeśli się uprzeć, ale żadna pojedyncza liczba nie będzie miała tak małych odchyleń, jak średnia.">
+<figcaption aria-hidden="true" class="figure-caption">Modelem mogłaby być dowolna liczba, jeśli się uprzeć, ale żadna pojedyncza liczba nie będzie miała tak małych odchyleń, jak średnia.</figcaption>
 </figure>
-</div>
 </div>
 </div>
 </section>
@@ -377,12 +371,10 @@ SS_T = \sum_{i=1}^N S_i^2 = \sum_{i=1}^N (x_i - \bar x)^2
 <p>Wiemy już bardzo dokładnie czym jest wariancja i jaki ma związek ze średnią. Ale nie oszukujmy się, jesteśmy w stanie wymyślić lepsze modele niż średnia. Od samego początku korci nas, żeby na wykresie niepokoju od wielkości pająka narysować piękną, skośną, rosnącą linię, która będzie zależała nie tylko od wartości niepokoju, ale również od wielkości pająka. Przecież od razu widać, że pasowałaby do naszych danych znacznie bardziej.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-lm" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-lm-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;4: Linia rosnąca sugeruje nam, że im większy pająk, tym większy niepokój wywołuje. Na pierwszy rzut oka widać, że odchylenia są mniejsze, niż przy średniej.</figcaption><p></p>
+<figure id="fig-scatter-anxiety-lm" class="figure">
+<img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-lm-1.png" class="img-fluid figure-img" style="width:85.0%" data-fig-align="center" alt="Linia rosnąca sugeruje nam, że im większy pająk, tym większy niepokój wywołuje. Na pierwszy rzut oka widać, że odchylenia są mniejsze, niż przy średniej.">
+<figcaption aria-hidden="true" class="figure-caption">Linia rosnąca sugeruje nam, że im większy pająk, tym większy niepokój wywołuje. Na pierwszy rzut oka widać, że odchylenia są mniejsze, niż przy średniej.</figcaption>
 </figure>
-</div>
 </div>
 </div>
 <p>Od razu lepiej. Od początku chcieliśmy móc powiedzieć, że im większy pająk, tym większy niepokój, a teraz mamy tego dowód. W końcu ta linia ewidentnie pasuje do danych lepiej – na pierwszy rzut oka widać, że odchylenia są mniejsze. No właśnie! Dzięki łamaniu sobie głowy nad odchyleniami od średniej zyskaliśmy sposób na stwierdzenie, czy jakiś model jest lepszy od średniej, czy nie – wystarczy sprawdzić, czy odchylenia zrobiły się istotnie mniejsze.</p>
@@ -467,12 +459,10 @@ R^2 = \frac{SS_M}{SS_T} = \frac{SS_T - SS_R}{SS_T}
 <p>Możemy wyobrazić sobie, że pojawia nam się nowa osoba badana, która pająków nie boi się w ogóle, co pokazałem na wykresie. Jak to wpływa na nasz model?</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-lm2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-lm2-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;5: Nowa osoba badana, która nie boi się pająków wcale, nie przystaje do naszego modelu. Może to sugerować, że nasz model jest adekwatny tylko dla pewnej grupy osób (czyli możemy stworzyć bardziej złożony model, który weźmie to pod uwagę) albo że odważny badany kłamie (i powinien zostać wykluczony z bazy).</figcaption><p></p>
+<figure id="fig-scatter-anxiety-lm2" class="figure">
+<img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-lm2-1.png" class="img-fluid figure-img" style="width:85.0%" data-fig-align="center" alt="Nowa osoba badana, która nie boi się pająków wcale, nie przystaje do naszego modelu. Może to sugerować, że nasz model jest adekwatny tylko dla pewnej grupy osób (czyli możemy stworzyć bardziej złożony model, który weźmie to pod uwagę) albo że odważny badany kłamie (i powinien zostać wykluczony z bazy).">
+<figcaption aria-hidden="true" class="figure-caption">Nowa osoba badana, która nie boi się pająków wcale, nie przystaje do naszego modelu. Może to sugerować, że nasz model jest adekwatny tylko dla pewnej grupy osób (czyli możemy stworzyć bardziej złożony model, który weźmie to pod uwagę) albo że odważny badany kłamie (i powinien zostać wykluczony z bazy).</figcaption>
 </figure>
-</div>
 </div>
 </div>
 <p>Jak widzimy model się trochę pozmieniał. <span class="math inline">\(R^2\)</span> spadło dramatycznie, bo w tym drugim modelu wyniosło zaledwie 23,4%. Ale pojawienie się tego nowego, odważnego badanego nie zmieniło wyników pozostałych.</p>
@@ -497,12 +487,10 @@ F = \frac{MS_M}{MS_R}
 <p>Można zauważyć ciekawą rzecz związaną z obliczaniem <span class="math inline">\(SS_M\)</span>. Jak się okazuje, <span class="math inline">\(SS_M\)</span> da się policzyć bez liczenia <span class="math inline">\(SS_T\)</span> i <span class="math inline">\(SS_R\)</span>. <span class="math inline">\(SS_M\)</span> uzyskujemy, jeśli zignorujemy obserwacje i zsumujemy kwadraty różnic między średnią a nowym modelem. Zaznaczyłem te różnice na poniższym wykresie przerywanymi liniami.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-ssm" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-ssm-1.png" class="img-fluid figure-img" style="width:85.0%"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;6: <span class="math inline">\(SS_M\)</span> można szybciej policzyć za pomocą odchyleń modelu od średniej, czyli kresek między średnią wartościami przewidywanymi przez nasz nowy model.</figcaption><p></p>
+<figure id="fig-scatter-anxiety-ssm" class="figure">
+<img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-ssm-1.png" class="img-fluid figure-img" style="width:85.0%" data-fig-align="center" alt="SS_M można szybciej policzyć za pomocą odchyleń modelu od średniej, czyli kresek między średnią wartościami przewidywanymi przez nasz nowy model.">
+<figcaption aria-hidden="true" class="figure-caption"><span class="math inline">\(SS_M\)</span> można szybciej policzyć za pomocą odchyleń modelu od średniej, czyli kresek między średnią wartościami przewidywanymi przez nasz nowy model.</figcaption>
 </figure>
-</div>
 </div>
 </div>
 <p>Można to przetestować za pomocą danych z tabeli niżej. <span class="math inline">\(x_M\)</span> to wartość przewidywana przez model, a <span class="math inline">\(S_M\)</span> to różnica między modelem a średnim niepokojem. Podniesienie wartości <span class="math inline">\(S_M\)</span> do kwadratu i zsumowanie ich daje w wyniku nasze <span class="math inline">\(SS_M\)</span>.</p>
@@ -581,11 +569,11 @@ F = \frac{MS_M}{MS_R}
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
-<div id="ref-field2012" class="csl-entry" role="doc-biblioentry">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-field2012" class="csl-entry" role="listitem">
 Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
 </div>
-<div id="ref-plomin2001" class="csl-entry" role="doc-biblioentry">
+<div id="ref-plomin2001" class="csl-entry" role="listitem">
 Plomin, R., DeFries, J., McClearn, G., &amp; McGuffin, P. (2001). <em>Genetyka zachowania</em>. Warszawa: Wydawnictwo Naukowe PWN.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>

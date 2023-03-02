@@ -22,6 +22,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -85,11 +86,12 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -103,8 +105,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -192,88 +193,88 @@ div.csl-indent {
     <h2 id="toc-title">Na tej stronie</h2>
    
   <ul>
-  <li><a href="#sec-reasons" id="toc-sec-reasons" class="nav-link active" data-scroll-target="#sec-reasons"><span class="toc-section-number">1</span>  10 powodów dla których warto uczyć się R</a></li>
-  <li><a href="#sec-preparation" id="toc-sec-preparation" class="nav-link" data-scroll-target="#sec-preparation"><span class="toc-section-number">2</span>  Przygotowanie</a></li>
-  <li><a href="#sec-env" id="toc-sec-env" class="nav-link" data-scroll-target="#sec-env"><span class="toc-section-number">3</span>  Środowisko R i RStudio</a>
+  <li><a href="#sec-reasons" id="toc-sec-reasons" class="nav-link active" data-scroll-target="#sec-reasons"><span class="header-section-number">1</span> 10 powodów dla których warto uczyć się R</a></li>
+  <li><a href="#sec-preparation" id="toc-sec-preparation" class="nav-link" data-scroll-target="#sec-preparation"><span class="header-section-number">2</span> Przygotowanie</a></li>
+  <li><a href="#sec-env" id="toc-sec-env" class="nav-link" data-scroll-target="#sec-env"><span class="header-section-number">3</span> Środowisko R i RStudio</a>
   <ul class="collapse">
-  <li><a href="#sec-console" id="toc-sec-console" class="nav-link" data-scroll-target="#sec-console"><span class="toc-section-number">3.1</span>  Konsola, zmienne i matematyka</a></li>
-  <li><a href="#sec-functions" id="toc-sec-functions" class="nav-link" data-scroll-target="#sec-functions"><span class="toc-section-number">3.2</span>  Funkcje</a></li>
-  <li><a href="#sec-docs" id="toc-sec-docs" class="nav-link" data-scroll-target="#sec-docs"><span class="toc-section-number">3.3</span>  Dokumentacja</a></li>
-  <li><a href="#sec-scripts" id="toc-sec-scripts" class="nav-link" data-scroll-target="#sec-scripts"><span class="toc-section-number">3.4</span>  Skrypty</a></li>
-  <li><a href="#sec-comments" id="toc-sec-comments" class="nav-link" data-scroll-target="#sec-comments"><span class="toc-section-number">3.5</span>  Komentarze</a></li>
-  <li><a href="#sec-projects" id="toc-sec-projects" class="nav-link" data-scroll-target="#sec-projects"><span class="toc-section-number">3.6</span>  Projekty</a></li>
-  <li><a href="#sec-libs" id="toc-sec-libs" class="nav-link" data-scroll-target="#sec-libs"><span class="toc-section-number">3.7</span>  Pakiety</a></li>
+  <li><a href="#sec-console" id="toc-sec-console" class="nav-link" data-scroll-target="#sec-console"><span class="header-section-number">3.1</span> Konsola, zmienne i matematyka</a></li>
+  <li><a href="#sec-functions" id="toc-sec-functions" class="nav-link" data-scroll-target="#sec-functions"><span class="header-section-number">3.2</span> Funkcje</a></li>
+  <li><a href="#sec-docs" id="toc-sec-docs" class="nav-link" data-scroll-target="#sec-docs"><span class="header-section-number">3.3</span> Dokumentacja</a></li>
+  <li><a href="#sec-scripts" id="toc-sec-scripts" class="nav-link" data-scroll-target="#sec-scripts"><span class="header-section-number">3.4</span> Skrypty</a></li>
+  <li><a href="#sec-comments" id="toc-sec-comments" class="nav-link" data-scroll-target="#sec-comments"><span class="header-section-number">3.5</span> Komentarze</a></li>
+  <li><a href="#sec-projects" id="toc-sec-projects" class="nav-link" data-scroll-target="#sec-projects"><span class="header-section-number">3.6</span> Projekty</a></li>
+  <li><a href="#sec-libs" id="toc-sec-libs" class="nav-link" data-scroll-target="#sec-libs"><span class="header-section-number">3.7</span> Pakiety</a></li>
   </ul></li>
-  <li><a href="#sec-loading" id="toc-sec-loading" class="nav-link" data-scroll-target="#sec-loading"><span class="toc-section-number">4</span>  Ładowanie danych z <code>readr</code></a></li>
-  <li><a href="#sec-wrangling" id="toc-sec-wrangling" class="nav-link" data-scroll-target="#sec-wrangling"><span class="toc-section-number">5</span>  Data wrangling</a>
+  <li><a href="#sec-loading" id="toc-sec-loading" class="nav-link" data-scroll-target="#sec-loading"><span class="header-section-number">4</span> Ładowanie danych z <code>readr</code></a></li>
+  <li><a href="#sec-wrangling" id="toc-sec-wrangling" class="nav-link" data-scroll-target="#sec-wrangling"><span class="header-section-number">5</span> Data wrangling</a>
   <ul class="collapse">
-  <li><a href="#sec-choosing" id="toc-sec-choosing" class="nav-link" data-scroll-target="#sec-choosing"><span class="toc-section-number">5.1</span>  Wybieranie kolumn i wierszy</a>
+  <li><a href="#sec-choosing" id="toc-sec-choosing" class="nav-link" data-scroll-target="#sec-choosing"><span class="header-section-number">5.1</span> Wybieranie kolumn i wierszy</a>
   <ul class="collapse">
-  <li><a href="#sec-filter" id="toc-sec-filter" class="nav-link" data-scroll-target="#sec-filter"><span class="toc-section-number">5.1.1</span>  Filtrowanie wierszy z <code>dplyr::filter</code></a></li>
-  <li><a href="#sec-select" id="toc-sec-select" class="nav-link" data-scroll-target="#sec-select"><span class="toc-section-number">5.1.2</span>  Wybieranie kolumn z <code>dplyr::select</code></a></li>
+  <li><a href="#sec-filter" id="toc-sec-filter" class="nav-link" data-scroll-target="#sec-filter"><span class="header-section-number">5.1.1</span> Filtrowanie wierszy z <code>dplyr::filter</code></a></li>
+  <li><a href="#sec-select" id="toc-sec-select" class="nav-link" data-scroll-target="#sec-select"><span class="header-section-number">5.1.2</span> Wybieranie kolumn z <code>dplyr::select</code></a></li>
   </ul></li>
-  <li><a href="#sec-rename" id="toc-sec-rename" class="nav-link" data-scroll-target="#sec-rename"><span class="toc-section-number">5.2</span>  Zmiana nazw kolumn z <code>dplyr::rename</code> i <code>purrr::set_names</code></a></li>
-  <li><a href="#sec-values" id="toc-sec-values" class="nav-link" data-scroll-target="#sec-values"><span class="toc-section-number">5.3</span>  Zmiana wartości komórek z <code>dplyr::mutate</code> i <code>readr::parse_number</code></a>
+  <li><a href="#sec-rename" id="toc-sec-rename" class="nav-link" data-scroll-target="#sec-rename"><span class="header-section-number">5.2</span> Zmiana nazw kolumn z <code>dplyr::rename</code> i <code>purrr::set_names</code></a></li>
+  <li><a href="#sec-values" id="toc-sec-values" class="nav-link" data-scroll-target="#sec-values"><span class="header-section-number">5.3</span> Zmiana wartości komórek z <code>dplyr::mutate</code> i <code>readr::parse_number</code></a>
   <ul class="collapse">
-  <li><a href="#sec-across" id="toc-sec-across" class="nav-link" data-scroll-target="#sec-across"><span class="toc-section-number">5.3.1</span>  Przekształcanie wielu kolumn jednocześnie z <code>dplyr::across</code></a></li>
-  <li><a href="#sec-recode" id="toc-sec-recode" class="nav-link" data-scroll-target="#sec-recode"><span class="toc-section-number">5.3.2</span>  Odwracanie punktacji</a></li>
-  <li><a href="#sec-customfunctions" id="toc-sec-customfunctions" class="nav-link" data-scroll-target="#sec-customfunctions"><span class="toc-section-number">5.3.3</span>  Własne funkcje</a></li>
+  <li><a href="#sec-across" id="toc-sec-across" class="nav-link" data-scroll-target="#sec-across"><span class="header-section-number">5.3.1</span> Przekształcanie wielu kolumn jednocześnie z <code>dplyr::across</code></a></li>
+  <li><a href="#sec-recode" id="toc-sec-recode" class="nav-link" data-scroll-target="#sec-recode"><span class="header-section-number">5.3.2</span> Odwracanie punktacji</a></li>
+  <li><a href="#sec-customfunctions" id="toc-sec-customfunctions" class="nav-link" data-scroll-target="#sec-customfunctions"><span class="header-section-number">5.3.3</span> Własne funkcje</a></li>
   </ul></li>
-  <li><a href="#sec-newcols" id="toc-sec-newcols" class="nav-link" data-scroll-target="#sec-newcols"><span class="toc-section-number">5.4</span>  Nowe kolumny</a>
+  <li><a href="#sec-newcols" id="toc-sec-newcols" class="nav-link" data-scroll-target="#sec-newcols"><span class="header-section-number">5.4</span> Nowe kolumny</a>
   <ul class="collapse">
-  <li><a href="#sec-pick" id="toc-sec-pick" class="nav-link" data-scroll-target="#sec-pick"><span class="toc-section-number">5.4.1</span>  Agregowanie danych z wierszy z <code>dplyr::pick</code></a></li>
-  <li><a href="#sec-casewhen" id="toc-sec-casewhen" class="nav-link" data-scroll-target="#sec-casewhen"><span class="toc-section-number">5.4.2</span>  Kategoryzowanie przypadków i przekodowywanie z <code>dplyr::case_when</code></a></li>
+  <li><a href="#sec-pick" id="toc-sec-pick" class="nav-link" data-scroll-target="#sec-pick"><span class="header-section-number">5.4.1</span> Agregowanie danych z wierszy z <code>dplyr::pick</code></a></li>
+  <li><a href="#sec-casewhen" id="toc-sec-casewhen" class="nav-link" data-scroll-target="#sec-casewhen"><span class="header-section-number">5.4.2</span> Kategoryzowanie przypadków i przekodowywanie z <code>dplyr::case_when</code></a></li>
   </ul></li>
-  <li><a href="#sortowanie-i-kolejność-kolumn" id="toc-sortowanie-i-kolejność-kolumn" class="nav-link" data-scroll-target="#sortowanie-i-kolejność-kolumn"><span class="toc-section-number">5.5</span>  Sortowanie i kolejność kolumn</a>
+  <li><a href="#sortowanie-i-kolejność-kolumn" id="toc-sortowanie-i-kolejność-kolumn" class="nav-link" data-scroll-target="#sortowanie-i-kolejność-kolumn"><span class="header-section-number">5.5</span> Sortowanie i kolejność kolumn</a>
   <ul class="collapse">
-  <li><a href="#sec-arrange" id="toc-sec-arrange" class="nav-link" data-scroll-target="#sec-arrange"><span class="toc-section-number">5.5.1</span>  Sortowanie z <code>dplyr::arrange</code></a></li>
-  <li><a href="#sec-relocate" id="toc-sec-relocate" class="nav-link" data-scroll-target="#sec-relocate"><span class="toc-section-number">5.5.2</span>  Kolejność kolumn z <code>dplyr::relocate</code></a></li>
+  <li><a href="#sec-arrange" id="toc-sec-arrange" class="nav-link" data-scroll-target="#sec-arrange"><span class="header-section-number">5.5.1</span> Sortowanie z <code>dplyr::arrange</code></a></li>
+  <li><a href="#sec-relocate" id="toc-sec-relocate" class="nav-link" data-scroll-target="#sec-relocate"><span class="header-section-number">5.5.2</span> Kolejność kolumn z <code>dplyr::relocate</code></a></li>
   </ul></li>
-  <li><a href="#sec-save" id="toc-sec-save" class="nav-link" data-scroll-target="#sec-save"><span class="toc-section-number">5.6</span>  Zapisywanie zmian z <code>&lt;-</code></a></li>
-  <li><a href="#sec-summarise" id="toc-sec-summarise" class="nav-link" data-scroll-target="#sec-summarise"><span class="toc-section-number">5.7</span>  Grupowanie (<code>dplyr::group_by</code>) i agregowanie (<code>dplyr::summarise</code>)</a></li>
-  <li><a href="#sec-pivot" id="toc-sec-pivot" class="nav-link" data-scroll-target="#sec-pivot"><span class="toc-section-number">5.8</span>  Format długi i szeroki z <code>tidyr::pivot_*</code></a></li>
-  <li><a href="#sec-join" id="toc-sec-join" class="nav-link" data-scroll-target="#sec-join"><span class="toc-section-number">5.9</span>  Retesty czyli złączenia (<em>joins</em>)</a></li>
+  <li><a href="#sec-save" id="toc-sec-save" class="nav-link" data-scroll-target="#sec-save"><span class="header-section-number">5.6</span> Zapisywanie zmian z <code>&lt;-</code></a></li>
+  <li><a href="#sec-summarise" id="toc-sec-summarise" class="nav-link" data-scroll-target="#sec-summarise"><span class="header-section-number">5.7</span> Grupowanie (<code>dplyr::group_by</code>) i agregowanie (<code>dplyr::summarise</code>)</a></li>
+  <li><a href="#sec-pivot" id="toc-sec-pivot" class="nav-link" data-scroll-target="#sec-pivot"><span class="header-section-number">5.8</span> Format długi i szeroki z <code>tidyr::pivot_*</code></a></li>
+  <li><a href="#sec-join" id="toc-sec-join" class="nav-link" data-scroll-target="#sec-join"><span class="header-section-number">5.9</span> Retesty czyli złączenia (<em>joins</em>)</a></li>
   </ul></li>
-  <li><a href="#sec-exploration" id="toc-sec-exploration" class="nav-link" data-scroll-target="#sec-exploration"><span class="toc-section-number">6</span>  Eksploracja danych</a>
+  <li><a href="#sec-exploration" id="toc-sec-exploration" class="nav-link" data-scroll-target="#sec-exploration"><span class="header-section-number">6</span> Eksploracja danych</a>
   <ul class="collapse">
-  <li><a href="#sec-get_summary_stats" id="toc-sec-get_summary_stats" class="nav-link" data-scroll-target="#sec-get_summary_stats"><span class="toc-section-number">6.1</span>  Statystyki opisowe z <code>rstatix::get_summary_stats</code></a></li>
-  <li><a href="#sec-freq_table" id="toc-sec-freq_table" class="nav-link" data-scroll-target="#sec-freq_table"><span class="toc-section-number">6.2</span>  Tabele liczności z <code>rstatix::freq_table</code></a></li>
-  <li><a href="#sec-cor_mat" id="toc-sec-cor_mat" class="nav-link" data-scroll-target="#sec-cor_mat"><span class="toc-section-number">6.3</span>  Macierze korelacji i ich istotność z <code>rstatix::cor_mat</code></a></li>
+  <li><a href="#sec-get_summary_stats" id="toc-sec-get_summary_stats" class="nav-link" data-scroll-target="#sec-get_summary_stats"><span class="header-section-number">6.1</span> Statystyki opisowe z <code>rstatix::get_summary_stats</code></a></li>
+  <li><a href="#sec-freq_table" id="toc-sec-freq_table" class="nav-link" data-scroll-target="#sec-freq_table"><span class="header-section-number">6.2</span> Tabele liczności z <code>rstatix::freq_table</code></a></li>
+  <li><a href="#sec-cor_mat" id="toc-sec-cor_mat" class="nav-link" data-scroll-target="#sec-cor_mat"><span class="header-section-number">6.3</span> Macierze korelacji i ich istotność z <code>rstatix::cor_mat</code></a></li>
   </ul></li>
-  <li><a href="#sec-ggplot" id="toc-sec-ggplot" class="nav-link" data-scroll-target="#sec-ggplot"><span class="toc-section-number">7</span>  Wykresy z <code>ggplot2</code></a>
+  <li><a href="#sec-ggplot" id="toc-sec-ggplot" class="nav-link" data-scroll-target="#sec-ggplot"><span class="header-section-number">7</span> Wykresy z <code>ggplot2</code></a>
   <ul class="collapse">
-  <li><a href="#sec-aes" id="toc-sec-aes" class="nav-link" data-scroll-target="#sec-aes"><span class="toc-section-number">7.1</span>  Mapowanie estetyk (<code>aes</code>)</a></li>
-  <li><a href="#sec-geom" id="toc-sec-geom" class="nav-link" data-scroll-target="#sec-geom"><span class="toc-section-number">7.2</span>  Obiekty <code>geom_*</code></a></li>
-  <li><a href="#sec-labs" id="toc-sec-labs" class="nav-link" data-scroll-target="#sec-labs"><span class="toc-section-number">7.3</span>  Tytuły osi i wykresu (<code>labs</code>)</a></li>
-  <li><a href="#sec-theme" id="toc-sec-theme" class="nav-link" data-scroll-target="#sec-theme"><span class="toc-section-number">7.4</span>  Wygląd wykresów (<code>theme_*</code>)</a></li>
-  <li><a href="#sec-esquisse" id="toc-sec-esquisse" class="nav-link" data-scroll-target="#sec-esquisse"><span class="toc-section-number">7.5</span>  <code>esquisse</code></a></li>
+  <li><a href="#sec-aes" id="toc-sec-aes" class="nav-link" data-scroll-target="#sec-aes"><span class="header-section-number">7.1</span> Mapowanie estetyk (<code>aes</code>)</a></li>
+  <li><a href="#sec-geom" id="toc-sec-geom" class="nav-link" data-scroll-target="#sec-geom"><span class="header-section-number">7.2</span> Obiekty <code>geom_*</code></a></li>
+  <li><a href="#sec-labs" id="toc-sec-labs" class="nav-link" data-scroll-target="#sec-labs"><span class="header-section-number">7.3</span> Tytuły osi i wykresu (<code>labs</code>)</a></li>
+  <li><a href="#sec-theme" id="toc-sec-theme" class="nav-link" data-scroll-target="#sec-theme"><span class="header-section-number">7.4</span> Wygląd wykresów (<code>theme_*</code>)</a></li>
+  <li><a href="#sec-esquisse" id="toc-sec-esquisse" class="nav-link" data-scroll-target="#sec-esquisse"><span class="header-section-number">7.5</span> <code>esquisse</code></a></li>
   </ul></li>
-  <li><a href="#sec-tests" id="toc-sec-tests" class="nav-link" data-scroll-target="#sec-tests"><span class="toc-section-number">8</span>  Modele statystyczne</a>
+  <li><a href="#sec-tests" id="toc-sec-tests" class="nav-link" data-scroll-target="#sec-tests"><span class="header-section-number">8</span> Modele statystyczne</a>
   <ul class="collapse">
-  <li><a href="#sec-broom" id="toc-sec-broom" class="nav-link" data-scroll-target="#sec-broom"><span class="toc-section-number">8.1</span>  Czyste wyniki, czyli pakiet <code>broom</code></a>
+  <li><a href="#sec-broom" id="toc-sec-broom" class="nav-link" data-scroll-target="#sec-broom"><span class="header-section-number">8.1</span> Czyste wyniki, czyli pakiet <code>broom</code></a>
   <ul class="collapse">
-  <li><a href="#sec-glance" id="toc-sec-glance" class="nav-link" data-scroll-target="#sec-glance"><span class="toc-section-number">8.1.1</span>  <code>glance</code></a></li>
-  <li><a href="#sec-tidy" id="toc-sec-tidy" class="nav-link" data-scroll-target="#sec-tidy"><span class="toc-section-number">8.1.2</span>  <code>tidy</code></a></li>
-  <li><a href="#sec-augment" id="toc-sec-augment" class="nav-link" data-scroll-target="#sec-augment"><span class="toc-section-number">8.1.3</span>  <code>augment</code></a></li>
+  <li><a href="#sec-glance" id="toc-sec-glance" class="nav-link" data-scroll-target="#sec-glance"><span class="header-section-number">8.1.1</span> <code>glance</code></a></li>
+  <li><a href="#sec-tidy" id="toc-sec-tidy" class="nav-link" data-scroll-target="#sec-tidy"><span class="header-section-number">8.1.2</span> <code>tidy</code></a></li>
+  <li><a href="#sec-augment" id="toc-sec-augment" class="nav-link" data-scroll-target="#sec-augment"><span class="header-section-number">8.1.3</span> <code>augment</code></a></li>
   </ul></li>
-  <li><a href="#sec-rstatix" id="toc-sec-rstatix" class="nav-link" data-scroll-target="#sec-rstatix"><span class="toc-section-number">8.2</span>  Swiss Army Knife w R, czyli <code>rstatix</code></a></li>
+  <li><a href="#sec-rstatix" id="toc-sec-rstatix" class="nav-link" data-scroll-target="#sec-rstatix"><span class="header-section-number">8.2</span> Swiss Army Knife w R, czyli <code>rstatix</code></a></li>
   </ul></li>
-  <li><a href="#sec-formatting" id="toc-sec-formatting" class="nav-link" data-scroll-target="#sec-formatting"><span class="toc-section-number">9</span>  Formatowanie kodu</a>
+  <li><a href="#sec-formatting" id="toc-sec-formatting" class="nav-link" data-scroll-target="#sec-formatting"><span class="header-section-number">9</span> Formatowanie kodu</a>
   <ul class="collapse">
-  <li><a href="#styler" id="toc-styler" class="nav-link" data-scroll-target="#styler"><span class="toc-section-number">9.1</span>  <code>styler</code></a></li>
-  <li><a href="#lintr" id="toc-lintr" class="nav-link" data-scroll-target="#lintr"><span class="toc-section-number">9.2</span>  <code>lintr</code></a></li>
+  <li><a href="#styler" id="toc-styler" class="nav-link" data-scroll-target="#styler"><span class="header-section-number">9.1</span> <code>styler</code></a></li>
+  <li><a href="#lintr" id="toc-lintr" class="nav-link" data-scroll-target="#lintr"><span class="header-section-number">9.2</span> <code>lintr</code></a></li>
   </ul></li>
-  <li><a href="#sec-debug" id="toc-sec-debug" class="nav-link" data-scroll-target="#sec-debug"><span class="toc-section-number">10</span>  Debugowanie</a>
+  <li><a href="#sec-debug" id="toc-sec-debug" class="nav-link" data-scroll-target="#sec-debug"><span class="header-section-number">10</span> Debugowanie</a>
   <ul class="collapse">
-  <li><a href="#sec-diag" id="toc-sec-diag" class="nav-link" data-scroll-target="#sec-diag"><span class="toc-section-number">10.1</span>  Diagnoza</a>
+  <li><a href="#sec-diag" id="toc-sec-diag" class="nav-link" data-scroll-target="#sec-diag"><span class="header-section-number">10.1</span> Diagnoza</a>
   <ul class="collapse">
-  <li><a href="#viewpipesteps" id="toc-viewpipesteps" class="nav-link" data-scroll-target="#viewpipesteps"><span class="toc-section-number">10.1.1</span>  <code>ViewPipeSteps</code></a></li>
-  <li><a href="#metoda-gumowej-kaczki" id="toc-metoda-gumowej-kaczki" class="nav-link" data-scroll-target="#metoda-gumowej-kaczki"><span class="toc-section-number">10.1.2</span>  Metoda gumowej kaczki</a></li>
-  <li><a href="#interaktywny-debuger" id="toc-interaktywny-debuger" class="nav-link" data-scroll-target="#interaktywny-debuger"><span class="toc-section-number">10.1.3</span>  Interaktywny debuger</a></li>
+  <li><a href="#viewpipesteps" id="toc-viewpipesteps" class="nav-link" data-scroll-target="#viewpipesteps"><span class="header-section-number">10.1.1</span> <code>ViewPipeSteps</code></a></li>
+  <li><a href="#metoda-gumowej-kaczuszki" id="toc-metoda-gumowej-kaczuszki" class="nav-link" data-scroll-target="#metoda-gumowej-kaczuszki"><span class="header-section-number">10.1.2</span> Metoda gumowej kaczuszki</a></li>
+  <li><a href="#interaktywny-debuger" id="toc-interaktywny-debuger" class="nav-link" data-scroll-target="#interaktywny-debuger"><span class="header-section-number">10.1.3</span> Interaktywny debuger</a></li>
   </ul></li>
-  <li><a href="#rozwiązywanie-problemu" id="toc-rozwiązywanie-problemu" class="nav-link" data-scroll-target="#rozwiązywanie-problemu"><span class="toc-section-number">10.2</span>  Rozwiązywanie problemu</a></li>
+  <li><a href="#rozwiązywanie-problemu" id="toc-rozwiązywanie-problemu" class="nav-link" data-scroll-target="#rozwiązywanie-problemu"><span class="header-section-number">10.2</span> Rozwiązywanie problemu</a></li>
   </ul></li>
-  <li><a href="#sec-ending" id="toc-sec-ending" class="nav-link" data-scroll-target="#sec-ending"><span class="toc-section-number">11</span>  Posłowie</a></li>
+  <li><a href="#sec-ending" id="toc-sec-ending" class="nav-link" data-scroll-target="#sec-ending"><span class="header-section-number">11</span> Posłowie</a></li>
   </ul>
 </nav>
     </div>
@@ -343,12 +344,11 @@ div.csl-indent {
 <ol start="6" type="1">
 <li>Wykresy. Wspominałem o tym wyżej, ale wykresy są warte osobnego punktu. Możliwości Excela w tym zakresie są ograniczone. Dla przykładu wykres poniżej prezentuje wyniki pewnego badania w którym mierzono homofobię u ludzi różniących się obecnością manipulacji i poziomem cechy psychologicznej zwanej normatywną męskością. Wykres jest dość skomplikowany. Zawiera trzy zmienne dychotomiczne, co daje łącznie 8 kolumn w grupach po 4 i 2 na wspólnych osiach. Nie powiem, że zrobić taki wykres jest łatwo, bo dobre opanowanie <code>ggplot2</code> trochę zajmuje, ale gdy już opanujemy, co jest do opanowania, to hulaj dusza. Nawet najbardziej skomplikowane wykresy stają się możliwe. Gdy połączyć to z możliwościami dawanymi przez programistyczną warstwę R, łatwe staje się wytworzenie serii pasujących do siebie stylem wykresów o tych samych wymiarach. Pozwala to uzyskać pełną spójność bez ręcznego poprawiania szczególików.</li>
 </ol>
-<div id="fig-homofobia" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="./ilustracje/homofobia.svg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;1: Homofobia u mężczyzn o zagrożonej i niezagrożonej męskości, w zależności od tego, jak wysoką mieli tzw. normatywną męskość. Gdy dodać to tego jeszcze podział na dwa rodzaje homofobii, robią się z tego trzy podziały i osiem różnych kolumn ze wspólnymi osiami, legendą i kolorami. Zrobienie tego w Excelu, o ile w ogóle możliwe, byłoby bardzo trudne.</figcaption><p></p>
+<figure id="fig-homofobia" class="figure">
+<img src="./ilustracje/homofobia.svg" class="img-fluid figure-img" alt="Homofobia u mężczyzn o zagrożonej i niezagrożonej męskości, w zależności od tego, jak wysoką mieli tzw. normatywną męskość. Gdy dodać to tego jeszcze podział na dwa rodzaje homofobii, robią się z tego trzy podziały i osiem różnych kolumn ze wspólnymi osiami, legendą i kolorami. Zrobienie tego w Excelu, o ile w ogóle możliwe, byłoby bardzo trudne.">
+<p><strong>?(caption)</strong></p>
+<figcaption class="figure-caption">Homofobia u mężczyzn o zagrożonej i niezagrożonej męskości, w zależności od tego, jak wysoką mieli tzw. normatywną męskość. Gdy dodać to tego jeszcze podział na dwa rodzaje homofobii, robią się z tego trzy podziały i osiem różnych kolumn ze wspólnymi osiami, legendą i kolorami. Zrobienie tego w Excelu, o ile w ogóle możliwe, byłoby bardzo trudne.</figcaption>
 </figure>
-</div>
 <!-- -->
 <ol start="7" type="1">
 <li><p>Analizy można napisać niezależnie od procesu zbierania danych. Na III roku studiów miałem projekt studencki, w którym musieliśmy zrobić prosty eksperyment w PsychoPy, przeanalizować dane i zaprezentować wyniki. Termin był krótki, także ostatnie dane większość grup zdążyła zebrać dopiero na dzień przed terminem, w tym moja. Oznaczało to, że osoby robiące analizę statystyczną musiały siedzieć do późna, żeby zdążyć na czas. Ale że już wtedy umiałem co nieco R, to napisałem całą analizę kilka dni wcześniej, kiedy akurat miałem wolny wieczór. Kiedy zebraliśmy ostatnie dane, wystarczyło kliknąć „Run” i gotowe – wykresy, testy, w mgnieniu oka policzone dla całego zestawu danych (wyczyszczonych! jak wspominałem wyżej, w PsychoPy czyszczenie danych bywa żmudne).</p></li>
@@ -505,12 +505,11 @@ div.csl-indent {
 </span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<div id="fig-readr" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="./ilustracje/readr_gif.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;2: Przykład wykorzystania narzędzia do importu danych.</figcaption><p></p>
+<figure id="fig-readr" class="figure">
+<img src="./ilustracje/readr_gif.gif" class="img-fluid figure-img" alt="Przykład wykorzystania narzędzia do importu danych.">
+<p><strong>?(caption)</strong></p>
+<figcaption class="figure-caption">Przykład wykorzystania narzędzia do importu danych.</figcaption>
 </figure>
-</div>
 <p>Już widzę, że nic mi się nie zgadza. Z 18 kolumn 17 zostało rozpoznane jako kolumny tekstowe (<code>chr</code>), a tylko kolumna ID jako liczby (<code>dbl</code>). Za chwilę będziemy to czyścić. Żeby wyświetlić nasze dane, mogę wpisać w konsolę nazwę, pod którą je zapisałem. Nasza baza pojawiła się też w okienku w prawym górnym rogu. Kliknięcie na nią tam spowoduje wyświetlenie jej w oddzielnej karcie. Warto zauważyć, że nie możemy jej tam edytować.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -973,12 +972,11 @@ div.csl-indent {
 <span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fig-questionr" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="./ilustracje/questionr_gif.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;3: Przykład użycia <code>questionr</code></figcaption><p></p>
+<figure id="fig-questionr" class="figure">
+<img src="./ilustracje/questionr_gif.gif" class="img-fluid figure-img" alt="Przykład użycia questionr">
+<p><strong>?(caption)</strong></p>
+<figcaption class="figure-caption">Przykład użycia <code>questionr</code></figcaption>
 </figure>
-</div>
 </section>
 </section>
 </section>
@@ -1931,22 +1929,20 @@ div.csl-indent {
 <section id="styler" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="styler"><span class="header-section-number">9.1</span> <code>styler</code></h2>
 <p>Pierwszy z tych narzędzi to <code>styler</code>, który sam poprawia wiele aspektów kodu, w tym wiele oczywistych błędów. Instalujemy go jak każdy inny pakiet (<code>install.packages("styler")</code>). Po zainstalowaniu menu Addins wzbogaca się o kilka opcji, z których najważniejsza to <em>style active file</em><a href="#fn35" class="footnote-ref" id="fnref35" role="doc-noteref"><sup>35</sup></a>. Podczas pracy uruchamiam to co jakiś czas i zazwyczaj znajdują się jakieś przeoczenia.</p>
-<div id="fig-styler" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="./ilustracje/styler_gif.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;4: Przykład wykorzystania <code>styler</code></figcaption><p></p>
+<figure id="fig-styler" class="figure">
+<img src="./ilustracje/styler_gif.gif" class="img-fluid figure-img" alt="Przykład wykorzystania styler">
+<p><strong>?(caption)</strong></p>
+<figcaption class="figure-caption">Przykład wykorzystania <code>styler</code></figcaption>
 </figure>
-</div>
 </section>
 <section id="lintr" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="lintr"><span class="header-section-number">9.2</span> <code>lintr</code></h2>
 <p><code>styler</code> nie poprawia wszystkich błędów, bo byłoby to zbyt destrukcyjne. Na szczęście <code>lintr</code> może nam większość z nich wypomnieć. Dla każdego naszego projektu powinniśmy raz uruchomić komendę <code>lintr::use_lintr(type = "tidyverse")</code>. Spowoduje to wytworzenie w folderze pliku o nazwie <code>.lintr</code>. Zawiera on konfigurację <code>lintr</code> dla danego projektu. Za jego pomocą będziemy mogli tę konfigurację również zmieniać.</p>
-<div id="fig-lintr" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="./ilustracje/lintr_gif.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Rysunek&nbsp;5: Przykład wykorzystania <code>lintr</code></figcaption><p></p>
+<figure id="fig-lintr" class="figure">
+<img src="./ilustracje/lintr_gif.gif" class="img-fluid figure-img" alt="Przykład wykorzystania lintr">
+<p><strong>?(caption)</strong></p>
+<figcaption class="figure-caption">Przykład wykorzystania <code>lintr</code></figcaption>
 </figure>
-</div>
 <p>Zmiana dokonuje się przez wpisanie do pliku <code>.lintr</code><a href="#fn36" class="footnote-ref" id="fnref36" role="doc-noteref"><sup>36</sup></a> odpowiednich opcji. Szczegóły omawia dokumentacja (<code>vignette("lintr")</code>), ale na pewno chciałbym wskazać jedną, której zmiana jest wręcz konieczna. Domyślnie <code>lintr</code> uznaje za za długie linie powyżej 80 znaków. To jest strasznie mało! Ja zazwyczaj ustawiam ten limit to na 120-150 znaków. Zmodyfikujmy to. Domyślna zawartość pliku <code>.lintr</code> wygląda tak:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>linters<span class="sc">:</span> <span class="fu">linters_with_defaults</span>()</span>
@@ -2076,19 +2072,33 @@ div.csl-indent {
 <span id="cb95-11"><a href="#cb95-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(wiek <span class="sc">&gt;</span> <span class="dv">40</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Zazwyczaj robimy to ręcznie, ale mamy też użyteczne narzędzie służące właśnie wyświetleniu kolejnych kroków ciągu potoków. Jest to dodatek do RStudio <code>ViewPipeSteps</code>. Po zainstalowaniu możemy wykorzystać to narzędzie zaznaczając swój ciąg i wybierając odpowiednią opcję z menu Addins. Otworzy to w kolejnych kartach (albo wydrukuje konsoli) kolejne kroki ciągu funkcji połączonych potokami. Często pozwala to na zidentyfikowanie kroku, w którym pojawia się błąd.</p>
-<blockquote class="blockquote">
-<p>Dalsza część już wkrótce…</p>
-</blockquote>
 </section>
-<section id="metoda-gumowej-kaczki" class="level3" data-number="10.1.2">
-<h3 data-number="10.1.2" class="anchored" data-anchor-id="metoda-gumowej-kaczki"><span class="header-section-number">10.1.2</span> Metoda gumowej kaczki</h3>
+<section id="metoda-gumowej-kaczuszki" class="level3" data-number="10.1.2">
+<h3 data-number="10.1.2" class="anchored" data-anchor-id="metoda-gumowej-kaczuszki"><span class="header-section-number">10.1.2</span> Metoda gumowej kaczuszki</h3>
+<p>To zabrzmi jak żart, ale to nie jest żart. Naprawdę istnieje metoda debugowania znana jako metoda gumowej kaczuszki. Ma nawet swoją <a href="https://en.wikipedia.org/wiki/Rubber_duck_debugging">stronę na Wikipedii</a>. W pierwszym kroku potrzebujemy gumowej kaczuszki. Przy braku kaczuszki możemy skorzystać z innych obiektów nieożywionych. Jeśli czujemy się wyjątkowo okrutni, możemy skorzystać z żywych osób<a href="#fn38" class="footnote-ref" id="fnref38" role="doc-noteref"><sup>38</sup></a>. Następnie tłumaczymy owej kaczuszce nasz kod, linijka po linijce. Na głos. Tłumaczenie tego na głos pozwoli zauważyć błędy logiczne, które zauważyć jest trudno przy zwykłym czytaniu kodu. Przypomina to metodę Feynmana, którą szerzej opisuję <a href="https://jakub-jedrusiak.edu.pl/posts/uczenie-sie.html">tutaj</a>. Jest to podstawowa metoda debugowania, która pomaga również nabyć nawyki myślowe, dzięki którym będziemy z czasem popełniać mniej błędów.</p>
 </section>
 <section id="interaktywny-debuger" class="level3" data-number="10.1.3">
 <h3 data-number="10.1.3" class="anchored" data-anchor-id="interaktywny-debuger"><span class="header-section-number">10.1.3</span> Interaktywny debuger</h3>
+<blockquote class="blockquote">
+<p>Już wkrótce…</p>
+</blockquote>
 </section>
 </section>
 <section id="rozwiązywanie-problemu" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="rozwiązywanie-problemu"><span class="header-section-number">10.2</span> Rozwiązywanie problemu</h2>
+<p>Czasami rozwiązanie problemu wprost wynika z diagnozy. Jeśli popełniliśmy błąd taki, że zamiast <code>&lt;</code> napisaliśmy <code>&gt;</code>, to rozwiązaniem tego problemu jest po prostu zmiana znaku. Jeśli usunęliśmy kolumnę z wiekiem, to musimy ją dodać. Rozwiązanie jest logiczną konsekwencją źródła problemu. Jednak czasem musimy nieco wiedzieć, żeby problem rozwiązać. Najważniejszym źródłem rozwiązań jest doświadczenie. Na początku drogi będziemy się często frustrować potykając się o różne głupotki. Jeśli mamy szczęście mieć nauczyciela, pomoże on znaleźć rozwiązanie i szybciej nabyć doświadczenia, pożyczając własne doświadczenie. Dlatego też to, co na początku będzie powodowało problemy, potem stanie się oczywistą częścią języka. Co jednak zrobić, gdy nie mamy jeszcze doświadczenia z danym problemem?</p>
+<p>Pierwszym i podstawowym źródłem jest dokumentacja. Doświadczenie podpowiada mi, że być może <code>install.packages(ViewPipeSteps)</code> nie zadziałało, bo potrzeba gdzieś cudzysłowia, ale skąd mam to wiedzieć? Oczywiście wpisując w konsolę <code>?install.packages</code>. Tam, przy opisie argumentów, znajdę informację, że pierwszy argument, <code>pkgs</code>, powinien mieć postać „character vector of the names of packages”. Oznacza to, że nazwy muszą być w cudzysłowie. Jeśli mamy problem z informatycznym żargonem (do którego przyzwyczaimy się z czasem), na samym dole dokumentacji zawsze znajdziemy <strong>przykłady</strong>. Dokumentacja jest więc pierwszą rzeczą, którą powinniśmy sprawdzić, pracując z nową funkcją albo funkcją powodującą problemy.</p>
+<p>Drugim istotnym źródłem informacji jest Internet, a konkretniej zazwyczaj StackOverflow. Jest fo swego rodzaju forum informatyczne, gdzie ludzie zadają pytania i czasem otrzymują odpowiedzi. Jeśli wyszukamy treść naszego błędu w Google (inteligentnie pomijając takie rzeczy jak nazwy naszych zmiennych) powinniśmy znaleźć pytanie kogoś, kto miał podobny problem. Jeśli nie (co czasem się zdarza), to sami możemy zadać na StackOverflow pytanie.</p>
+<p>W naszym pytaniu powinniśmy zawrzeć przykład kodu, jaki trzeba wykonać, żeby uzyskać nasz problem. Nazywa się to <em>minimal reproducible example</em> z naciskiem na <em>minimal</em> – nie wrzucamy dużych fragmentów naszej analizy, ale najlepiej piszemy nowy przykład, który pozwala uzyskać ten sam błąd. Praktyczna porada jest taka, że można wykorzystać jedną z kilku wbudowanych w R baz danych:</p>
+<ul>
+<li><code>iris</code> – długości płatków i działek kielicha trzech odmian irysów.</li>
+<li><code>mtcars</code> – parametry techniczne 32 samochodów.</li>
+<li><code>ToothGrowth</code> – dane z eksperymentu o związku witaminy C z długością zębów kawii domowych (3 dawki, 2 sposoby podawania, dobre do ANOVY wieloczynnikowej).</li>
+<li><code>PlantGrowth</code> – masa wysuszonych roślin z warunków kontrolnego i eksperymentalnego (typowa baza do testów t).</li>
+<li><code>USArrests</code> – dane statystyczne o zbrodniach popełnianych w każdym stanie USA w 1973 r.</li>
+</ul>
+<p>Każda z tych baz dancyh ma swoją stronę w dokumentacji wyjaśniającą szczegóły. Warto znać chciażby dwie pierwsze bazy. Wykorzystywanie ich w przykładach jest o tyle dobre, że każdy, kto ma R, automatycznie ma dostęp do tych baz.</p>
+<p>Czytanie StackOverflow jest zdobywaniem pewnego doświadczenia. Każdy rozwiązany problem to kolejny poznawczy egzemplarz do kolekcji. Im więcej takich mamy, tym trudniej nas zagiąć. Nie oznacza to, że bugi nie będą się pojawiać, ale to, że z pamięci będziemy wiedzieć – lub się domyślać – jak sprawnie je rozwiązać.</p>
 </section>
 </section>
 <section id="sec-ending" class="level1" data-number="11">
@@ -2222,14 +2232,14 @@ div.csl-indent {
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
-<div id="ref-field2012" class="csl-entry" role="doc-biblioentry">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-field2012" class="csl-entry" role="listitem">
 Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
 </div>
-<div id="ref-wickham2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-wickham2020" class="csl-entry" role="listitem">
 Wickham, H., &amp; Grolemund, G. (2020). <em>J<span>ę</span>zyk R: kompletny zestaw narz<span>ę</span>dzi dla analityków danych</em>. Gliwice: Wydawnictwo Helion.
 </div>
-<div id="ref-wilkinson_grammar_2005" class="csl-entry" role="doc-biblioentry">
+<div id="ref-wilkinson_grammar_2005" class="csl-entry" role="listitem">
 Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>. New York: Springer-Verlag. <a href="https://doi.org/10.1007/0-387-28695-0">https://doi.org/10.1007/0-387-28695-0</a>
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
@@ -2272,6 +2282,7 @@ Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>
 <li id="fn35"><p>To samo możemy uzyskać używając komendy <code>styler::style_file("ścieżka/do/pliku")</code>.<a href="#fnref35" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn36"><p>Nazwa tego pliku zaczyna się od kropki, co oznacza, że jest on ukryty. Aby wyświetlić ukryte pliki można użyć skrótu klawiszowego Ctrl+H lub przeszukać opcje eksploratora.<a href="#fnref36" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn37"><p>Scratch to bardzo przyjemne, darmowe, rysunkowo-blokowe narzędzie do ćwiczenia programowania stworzone przez naukowców z MIT. Nie jest ono specyficzne dla żadnego języka, ale może być dobrym wprowadzeniem do programowania w ogóle. Nie wymaga pisania kodu, a opiera się w całości na przeciąganiu myszką bloczków. Dzięki temu można oswoić się z różnymi ideami w programowaniu, takimi jak funkcje, zmienne itd., bez zaprzątania głowy składnią konkretnego języka.<a href="#fnref37" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn38"><p>Należy się upwenić, że te osoby kochają nas wystarczająco, żeby być gotowymi na to poświęcenie.<a href="#fnref38" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
