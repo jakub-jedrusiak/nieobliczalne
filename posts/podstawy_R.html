@@ -263,7 +263,17 @@ div.csl-indent {
   <li><a href="#styler" id="toc-styler" class="nav-link" data-scroll-target="#styler"><span class="toc-section-number">9.1</span>  <code>styler</code></a></li>
   <li><a href="#lintr" id="toc-lintr" class="nav-link" data-scroll-target="#lintr"><span class="toc-section-number">9.2</span>  <code>lintr</code></a></li>
   </ul></li>
-  <li><a href="#sec-ending" id="toc-sec-ending" class="nav-link" data-scroll-target="#sec-ending"><span class="toc-section-number">10</span>  Posłowie</a></li>
+  <li><a href="#sec-debug" id="toc-sec-debug" class="nav-link" data-scroll-target="#sec-debug"><span class="toc-section-number">10</span>  Debugowanie</a>
+  <ul class="collapse">
+  <li><a href="#sec-diag" id="toc-sec-diag" class="nav-link" data-scroll-target="#sec-diag"><span class="toc-section-number">10.1</span>  Diagnoza</a>
+  <ul class="collapse">
+  <li><a href="#viewpipesteps" id="toc-viewpipesteps" class="nav-link" data-scroll-target="#viewpipesteps"><span class="toc-section-number">10.1.1</span>  <code>ViewPipeSteps</code></a></li>
+  <li><a href="#metoda-gumowej-kaczki" id="toc-metoda-gumowej-kaczki" class="nav-link" data-scroll-target="#metoda-gumowej-kaczki"><span class="toc-section-number">10.1.2</span>  Metoda gumowej kaczki</a></li>
+  <li><a href="#interaktywny-debuger" id="toc-interaktywny-debuger" class="nav-link" data-scroll-target="#interaktywny-debuger"><span class="toc-section-number">10.1.3</span>  Interaktywny debuger</a></li>
+  </ul></li>
+  <li><a href="#rozwiązywanie-problemu" id="toc-rozwiązywanie-problemu" class="nav-link" data-scroll-target="#rozwiązywanie-problemu"><span class="toc-section-number">10.2</span>  Rozwiązywanie problemu</a></li>
+  </ul></li>
+  <li><a href="#sec-ending" id="toc-sec-ending" class="nav-link" data-scroll-target="#sec-ending"><span class="toc-section-number">11</span>  Posłowie</a></li>
   </ul>
 </nav>
     </div>
@@ -1953,130 +1963,257 @@ div.csl-indent {
 <p>Oba te pakiety, <code>lintr</code> i <code>styler</code>, są bardzo użyteczne, jednak ostatecznie nie zastępują ludzkiej decyzji. Nie wystarczy więc tylko mieć te pakiety, trzeba też – choć pobieżnie – znać same standardy.</p>
 </section>
 </section>
-<section id="sec-ending" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Posłowie</h1>
+<section id="sec-debug" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Debugowanie</h1>
+<p>W założeniu powyższe podrozdziały mają być wystarczającym wprowadzeniem, żeby zacząć pisać analizy w R. Jednak przeczytanie i przećwiczenie tego materiału nie oznacza, że będzie się to robić bezbłędnie. Specyfika programowania w ogóle, niezależnie czy jest to R, Python, C czy nawet Scratch<a href="#fn37" class="footnote-ref" id="fnref37" role="doc-noteref"><sup>37</sup></a>, polega na tym, że czasem popełniamy błędy i z tego wynikają problemy, które musimy naprawić. W żargonie taki błąd określilibyśmy angielskim mianem <em>bug</em>, zaś proces usuwania takich błędów <em>debugowaniem</em>.</p>
+<p>Debugowanie to czynność, na której będziemy spędzać sporo czasu, zwłaszcza na początku. Im więcej doświadczenia z językiem, tym mniej się bugów generuje, ale <strong>nigdy nie będziemy pisać bezbłędnie</strong>. Popełnianie błędów nie świadczy, że ktoś źle rozumie język. Doświadczenie sprawia tylko, że piszemy bardziej skomplikowany kod i popełniamy bardziej wysublimowane błędy. Ba! Proste błędy też popełniamy, ale w ramach doświaczenia mamy często już wypracowane sposoby, by sobie z konkretnymi błędami radzić. Będziemy pamiętali, jak poradziliśmy sobie z podobnym problemem ostatnim razem. Czasem nawet specjalnie piszmey błędny kod, żeby sprawdzić, co się stanie. Na każdym etapie możemy sprawdzić, czy kod działa, nie musząc czekać, aż będziemy pewni, że napisaliśmy to dobrze. <strong>Nie bójmy się popełniać błędów!</strong></p>
+<section id="sec-diag" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="sec-diag"><span class="header-section-number">10.1</span> Diagnoza</h2>
+<p>Możemy roboczo podzielić bugi na dwa rodzaje – takie, które nie pozwalają na wykonanie kodu i takie, przy których kod się wykonuje, ale efekt nie jest taki, jak chcemy, żeby był. Pierwszy rodzaj błędu jest o tyle prosty w zauważeniu, że konsola zacznie na nas krzyczeć na czerwono informatycznym żargonem, jeśli taki błąd popełnimy. Do tej kategorii wpadną wszystkie literówki, błędy składniowe, niewłaściwy typ argumentu itd. Druga kategoria błędów jest bardziej podstępna, bo możemy je zawuażyć 100 linijek od miejsca, w którym rzeczywiście zrobiliśmy coś nie tak. A potem musimy szukać.</p>
+<p>Proces debugowania zawsze zaczyna się od zauważenia błędu i dzieje się to zazwyczaj w konsoli. Na niektóre błędy (np. niektóre literówki) zostaną nam pokazane już przez edytor kodu, ale zazwyczaj dopiero wykonanie jakiegoś kodu pozwoli nam zauważyć, że jest on błędny. Zobaczmy sobie przykład, gdzie będziemy chcieli zainstalować pakiet <code>ViewPipeSteps</code>, który przyda nam się potem.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(ViewPipeSteps)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> Error in install.packages(ViewPipeSteps): nie znaleziono obiektu 'ViewPipeSteps'
+</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+</div>
+<p>Jeśli uruchominy ten kod, otrzymamy błąd. Komunikatów o błędach nie należy się bać, bo są bezcennym źródłem informacji na temat tego, co się dzieje. Konsola stara się poinformować nas gdzie popełniliśmy błąd i jakiego rodzaju jest to błąd. Tutaj otrzymaliśmy komunikat <code>object 'ViewPipeSteps' not found</code>. Widzimy więc, że komenda szuka zmiennej o nazwie <code>ViewPipeSteps</code> i jej nie znajduje. Wtedy możemy się zorientować, że my rzeczywiście nie mamy takiej zmiennej, bo to w ogóle nie ma być zmienna, tylko <em>nazwa</em> pakietu do zainstalowania. A jak nazwa, to dosłowny ciąg znaków. A więc powinniśmy napisać tak:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ViewPipeSteps"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ale wpadłem na to, bo już mi się to przydarzyło. To, swoją drogą, częsty błąd, branie w cudzysłów rzeczy, które nie powinny być w cudzysłowie albo odwrotnie, brak cudzysłowia, gdy powinien być on obecny. O tym, jak wpaść na rozwiązanie, piszę więcej niżej. Tutaj jednak warto zwrócić uwagę na sam komunikat błędu.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selcet</span>(H_1<span class="sc">:</span>H_3)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> Error in selcet(., H_1:H_3): nie udało się znaleźć funkcji 'selcet'
+</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+</div>
+<p>Powyższa komenda zwraca błąd <code>could not find function "selcet"</code>, co może zdarzyć się w dwóch sytuacjach – nie załadowaliśmy pakietu, w którym ta funkcja się znajduje, albo zrobiliśmy literówkę. Tutaj uważne przeczytanie wskazuje na tę drugą ewentualność, zamieniłem literki miejscami.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_suma =</span> <span class="fu">sum</span>(<span class="fu">pick</span>(H_1<span class="sc">:</span>H_10)),</span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">.after =</span> id</span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 45 × 15</span>
+<span style="color: #555555;">#&gt;</span>       <span style="font-weight: bold;">id</span>  <span style="font-weight: bold;">wiek</span> <span style="font-weight: bold;">wyksztal…¹</span> <span style="font-weight: bold;">H_suma</span>   <span style="font-weight: bold;">H_1</span>   <span style="font-weight: bold;">H_2</span>   <span style="font-weight: bold;">H_3</span>   <span style="font-weight: bold;">H_4</span>   <span style="font-weight: bold;">H_5</span>   <span style="font-weight: bold;">H_6</span>   <span style="font-weight: bold;">H_7</span>   <span style="font-weight: bold;">H_8</span>
+<span style="color: #555555;">#&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;ord&gt;</span>       <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 1</span>    54    21 Wyższe       <span style="text-decoration: underline;">1</span>93<span style="color: #555555;">2</span>     5     5     5     5     2     5     2     5
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 2</span>    33    22 Wyższe       <span style="text-decoration: underline;">1</span>93<span style="color: #555555;">2</span>     5     5     4     5     2     5     2     5
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 3</span>    30    23 Wyższe       <span style="text-decoration: underline;">1</span>93<span style="color: #555555;">2</span>     6     5     5     5     2     5     3     5
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 4</span>    49    23 Wyższe       <span style="text-decoration: underline;">1</span>93<span style="color: #555555;">2</span>     6     6     6     6     1     6     1     6
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 5</span>    31    24 Wyższe       <span style="text-decoration: underline;">1</span>93<span style="color: #555555;">2</span>     3     4     4     4     3     4     4     4
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 6</span>    38    25 Wyższe       <span style="text-decoration: underline;">1</span>93<span style="color: #555555;">2</span>     5     5     5     5     2     5     2     5
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 7</span>    46    25 Wyższe       <span style="text-decoration: underline;">1</span>93<span style="color: #555555;">2</span>     5     5     1     5     2     1     3     5
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 8</span>    43    26 Wyższe       <span style="text-decoration: underline;">1</span>93<span style="color: #555555;">2</span>     6     6     6     6     1     6     1     6
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 9</span>    35    29 Wyższe       <span style="text-decoration: underline;">1</span>93<span style="color: #555555;">2</span>     6     6     6     6     1     6     1     6
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">10</span>     2    52 Wyższe       <span style="text-decoration: underline;">1</span>93<span style="color: #555555;">2</span>     5     5     5     5     2     5     2     5
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># … with 35 more rows, 3 more variables: </span><span style="color: #555555; font-weight: bold;">H_9</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">H_10</span><span style="color: #555555;"> &lt;dbl&gt;,</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">wyksztalcenie_grupa</span><span style="color: #555555;"> &lt;chr&gt;, and abbreviated variable name ¹​wyksztalcenie</span>
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+</div>
+<p>Powyższy przykład na nas nie krzyczy, wykonuje się, jednak nie działa tak, jak byśmy chcieli. Celem tego kodu było uzyskanie sumy kolumn od H1 do H10 dla każdej osoby badanej, jak robiliśmy w podrozdziale <a href="#sec-pick">5.4.1</a>. Jednak kod nie działa tak, jak byśmy chcieli. W każdej komórce kolumny <code>H_suma</code> znajduje się ta sama wartość. Zaskakująco duża. Wynika to z tego, że R domyślnie myśli kolumnami, nie wierszami. Gdy więc każemy mu sumować kolumny od <code>H1</code> do <code>H10</code>, to sumuje <em>całe</em> kolumny i w każdą komórkę wrzuca tę sumę. Jeśli chcemy policzyć sumę dla każdego wiersza z osobna, to musimy albo użyć funkcji <code>rowSums</code> zamiast zwykłego <code>sum</code>, albo wcześniej przepuścić przez funkcję <code>rowwise()</code>, czego nie robiliśmy wcześniej.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_suma =</span> <span class="fu">sum</span>(<span class="fu">pick</span>(H_1<span class="sc">:</span>H_10)),</span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">.after =</span> id</span>
+<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 45 × 15</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># Rowwise: </span>
+<span style="color: #555555;">#&gt;</span>       <span style="font-weight: bold;">id</span>  <span style="font-weight: bold;">wiek</span> <span style="font-weight: bold;">wyksztal…¹</span> <span style="font-weight: bold;">H_suma</span>   <span style="font-weight: bold;">H_1</span>   <span style="font-weight: bold;">H_2</span>   <span style="font-weight: bold;">H_3</span>   <span style="font-weight: bold;">H_4</span>   <span style="font-weight: bold;">H_5</span>   <span style="font-weight: bold;">H_6</span>   <span style="font-weight: bold;">H_7</span>   <span style="font-weight: bold;">H_8</span>
+<span style="color: #555555;">#&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;ord&gt;</span>       <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 1</span>    54    21 Wyższe         44     5     5     5     5     2     5     2     5
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 2</span>    33    22 Wyższe         43     5     5     4     5     2     5     2     5
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 3</span>    30    23 Wyższe         45     6     5     5     5     2     5     3     5
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 4</span>    49    23 Wyższe         45     6     6     6     6     1     6     1     6
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 5</span>    31    24 Wyższe         39     3     4     4     4     3     4     4     4
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 6</span>    38    25 Wyższe         44     5     5     5     5     2     5     2     5
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 7</span>    46    25 Wyższe         33     5     5     1     5     2     1     3     5
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 8</span>    43    26 Wyższe         45     6     6     6     6     1     6     1     6
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 9</span>    35    29 Wyższe         50     6     6     6     6     1     6     1     6
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">10</span>     2    52 Wyższe         44     5     5     5     5     2     5     2     5
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># … with 35 more rows, 3 more variables: </span><span style="color: #555555; font-weight: bold;">H_9</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">H_10</span><span style="color: #555555;"> &lt;dbl&gt;,</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">wyksztalcenie_grupa</span><span style="color: #555555;"> &lt;chr&gt;, and abbreviated variable name ¹​wyksztalcenie</span>
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+</div>
+<p>Ostatecznie orientujemy się, że gdzieś w naszym kodzie jest błąd i musimy go rozwiązać. Musimy jednak wiedzieć dokładnie jaka funkcja ten błąd powoduje. Jeśli jest to błąd uniemożliwiający wykonanie kodu, konsola postara się nas poinformować, gdzie ten błąd się znajduje. Gorzej w przypadku drugiej kategorii błędów. Tutaj musimy mocniej się postarać. Czytanie kodu to podstawowa metoda, ale mamy też narzędzia, które mogą nam w tym pomóc.</p>
+<section id="viewpipesteps" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="viewpipesteps"><span class="header-section-number">10.1.1</span> <code>ViewPipeSteps</code></h3>
+<p>Gdy piszemy całą serię funkcji połączonych potokami, możemy mieć problem ze zidentyfikowaniem, gdzie popełniliśmy błąd. Może się okazać, że w rzeczywistości błąd popełniliśmy kilka linijek wyżej, a nie w funkcji, która ten błąd zwraca. Spójrzmy na uproszczony przykład.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, H_1<span class="sc">:</span>H_10) <span class="sc">%&gt;%</span></span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(wiek <span class="sc">&gt;</span> <span class="dv">40</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in `filter()`:</span><span style="color: #BB0000;">
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">ℹ</span><span style="color: #BB0000;"> In argument: `wiek &gt; 40`.
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BB0000; font-weight: bold;">Caused by error:</span><span style="color: #BB0000;">
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00;">!</span><span style="color: #BB0000;"> nie znaleziono obiektu 'wiek'
+</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
+</div>
+</div>
+<p>Błąd zwraca nam tutaj funkcja <code>filter</code>, jednak błąd popełniliśmy w funkcji <code>select</code> – nie możemy odfiltrować osób w wieku powyżej 40 roku życia, jeśli w naszej bazie nie ma już kolumny <code>wiek</code>. Tutaj możemy to szybko zauważyć, ale w dłuższych ciągach potoków może nie być to takie oczywiste. Zazwyczaj zacznaczamy wtedy kolejne kroki i patrzymy jak nasza baza się zmienia.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Najpierw uruchamiamy to</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Potem to</span></span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, H_1<span class="sc">:</span>H_10)</span>
+<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Na koniec to</span></span>
+<span id="cb95-9"><a href="#cb95-9" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb95-10"><a href="#cb95-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, H_1<span class="sc">:</span>H_10) <span class="sc">%&gt;%</span></span>
+<span id="cb95-11"><a href="#cb95-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(wiek <span class="sc">&gt;</span> <span class="dv">40</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Zazwyczaj robimy to ręcznie, ale mamy też użyteczne narzędzie służące właśnie wyświetleniu kolejnych kroków ciągu potoków. Jest to dodatek do RStudio <code>ViewPipeSteps</code>. Po zainstalowaniu możemy wykorzystać to narzędzie zaznaczając swój ciąg i wybierając odpowiednią opcję z menu Addins. Otworzy to w kolejnych kartach (albo wydrukuje konsoli) kolejne kroki ciągu funkcji połączonych potokami. Często pozwala to na zidentyfikowanie kroku, w którym pojawia się błąd.</p>
+<blockquote class="blockquote">
+<p>Dalsza część już wkrótce…</p>
+</blockquote>
+</section>
+<section id="metoda-gumowej-kaczki" class="level3" data-number="10.1.2">
+<h3 data-number="10.1.2" class="anchored" data-anchor-id="metoda-gumowej-kaczki"><span class="header-section-number">10.1.2</span> Metoda gumowej kaczki</h3>
+</section>
+<section id="interaktywny-debuger" class="level3" data-number="10.1.3">
+<h3 data-number="10.1.3" class="anchored" data-anchor-id="interaktywny-debuger"><span class="header-section-number">10.1.3</span> Interaktywny debuger</h3>
+</section>
+</section>
+<section id="rozwiązywanie-problemu" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="rozwiązywanie-problemu"><span class="header-section-number">10.2</span> Rozwiązywanie problemu</h2>
+</section>
+</section>
+<section id="sec-ending" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Posłowie</h1>
 <p>W ten sposób kończymy to przydługie wprowadzenie do R. Wielu rzeczy tutaj nie omówiłem, np. elementów klasycznego R, takich jak wybór pojedynczej kolumny jako wektora (np. <code>df$wyksztalcenie</code>), czy w ogóle wektorów. Nie poznaliśmy klasycznych sposobów selekcji danych, jak np. <code>df[df$wyksztalcenie == "Wyższe", 1:10]</code>. Nie powiedzieliśmy nic o listach ani pętlach, czyli tym kawałku R, który umożliwia automatyzację. Nie liznęliśmy nawet Quarto, czyli standardu do łączenia R z pisaniem raportów, w którym zresztą piszę ten tekst. Części rzeczy nie omówiłem, bo na początek da się je skutecznie zastąpić nowszymi i bardziej czytelnymi funkcjami <code>tidyverse</code>. Część natomiast bywa bardzo przydatna, ale jest po prostu, według mnie, zbyt zaawansowana jak na pierwszy kontakt z językiem.</p>
 <p>Tym samym zachęcam do dalszej nauki! Jeśli opanowaliście elementy zawarte w tym tekście, macie solidny fundament, by zrozumieć takie książki jak polecana przeze mnie na wstępie publikacja „Język R. Kompletny zestaw narzędzi dla analityków danych” <span class="citation" data-cites="wickham2020">(<a href="#ref-wickham2020" role="doc-biblioref">Wickham &amp; Grolemund, 2020</a>)</span>. Zaznaczam tylko, że ten tekst jest od tej książki nowszy, więc czasem pojawią się rozbieżności. W kilku miejscach wspominałem, że to, co opisuję, to nowinka, ale co do wielu rzeczy już nawet nie pamiętam, że były kiedyś nowe. Zawsze jednak pierwszym, podstawowym źródłem powinna być dokumentacja (zawsze aktualna), a dopiero potem StackOverflow.</p>
 <p>Jeśli czytasz to teraz, oznacza to, że ten tekst to praca w toku. Za każdą informację zwrotną będę wdzięczny. Jeśli coś było niejasne, jeśli coś powinienem wyjaśnić szerzej albo prościej, jeśli czegoś mocno zabrakło, to można (trzeba!) do mnie pisać na <a href="mailto:kuba23031999@gmail.com">kuba23031999@gmail.com</a>.</p>
-<p>Z tego miejsca pozostaje mi życzyć jak najmniej błędów. Ostatnie przesłanie jest jednak takie, że błędy będą się pojawiać. W dużych ilościach. Debugowanie potrafi zajmować mnóstwo czasu, zwłaszcza na początku drogi. Nie trzeba się jednak bać ani frustrować, trzeba czytać komunikaty o błędach i w razie czego wyszukiwać je w Google, a w ostateczności pytać na StackOverflow. Po pewnym czasie tych błędów będzie coraz mniej, podobnie jak zawahań i potrzeby sięgania po pomoc poza dokumentację. Choć pewnie nigdy nie znikną one całkiem.</p>
 <div class="cell">
 <details>
 <summary>Pokaż całość kodu z analizy</summary>
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Przygotowanie ----</span></span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Ładowanie bibliotek ----</span></span>
-<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"broom"</span>)</span>
-<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rstatix"</span>)</span>
-<span id="cb89-8"><a href="#cb89-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-9"><a href="#cb89-9" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R"</span>) <span class="co"># motyw do wykresów</span></span>
-<span id="cb89-10"><a href="#cb89-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-11"><a href="#cb89-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Ładowanie danych ----</span></span>
-<span id="cb89-12"><a href="#cb89-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-13"><a href="#cb89-13" aria-hidden="true" tabindex="-1"></a>df_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/complex_database.csv"</span>)</span>
-<span id="cb89-14"><a href="#cb89-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-15"><a href="#cb89-15" aria-hidden="true" tabindex="-1"></a>df_KTR_test <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/join-test.csv"</span>)</span>
-<span id="cb89-16"><a href="#cb89-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-17"><a href="#cb89-17" aria-hidden="true" tabindex="-1"></a>df_KTR_retest <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"[./dane/podstawy-R/join-retest.csv](https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/join-retest.csv)"</span>)</span>
-<span id="cb89-18"><a href="#cb89-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-19"><a href="#cb89-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Data wrangling ----</span></span>
-<span id="cb89-20"><a href="#cb89-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-21"><a href="#cb89-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Czyszczenie ----</span></span>
-<span id="cb89-22"><a href="#cb89-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-23"><a href="#cb89-23" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df_raw <span class="sc">%&gt;%</span></span>
-<span id="cb89-24"><a href="#cb89-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb89-25"><a href="#cb89-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb89-26"><a href="#cb89-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb89-27"><a href="#cb89-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb89-28"><a href="#cb89-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
-<span id="cb89-29"><a href="#cb89-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
-<span id="cb89-30"><a href="#cb89-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), <span class="sc">~</span> <span class="dv">7</span> <span class="sc">-</span> .x),</span>
-<span id="cb89-31"><a href="#cb89-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_suma =</span> <span class="fu">rowSums</span>(<span class="fu">pick</span>(H_1<span class="sc">:</span>H_10)),</span>
-<span id="cb89-32"><a href="#cb89-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie_grupa =</span> <span class="fu">case_when</span>(</span>
-<span id="cb89-33"><a href="#cb89-33" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Średnie"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
-<span id="cb89-34"><a href="#cb89-34" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Zawodowe"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
-<span id="cb89-35"><a href="#cb89-35" aria-hidden="true" tabindex="-1"></a>            <span class="at">.default =</span> wyksztalcenie</span>
-<span id="cb89-36"><a href="#cb89-36" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb89-37"><a href="#cb89-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie =</span> <span class="fu">factor</span>(</span>
-<span id="cb89-38"><a href="#cb89-38" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie,</span>
-<span id="cb89-39"><a href="#cb89-39" aria-hidden="true" tabindex="-1"></a>            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Podstawowe"</span>, <span class="st">"Zawodowe"</span>, <span class="st">"Średnie"</span>, <span class="st">"Wyższe"</span>),</span>
-<span id="cb89-40"><a href="#cb89-40" aria-hidden="true" tabindex="-1"></a>            <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
-<span id="cb89-41"><a href="#cb89-41" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb89-42"><a href="#cb89-42" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb89-43"><a href="#cb89-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(wyksztalcenie), wiek) <span class="sc">%&gt;%</span></span>
-<span id="cb89-44"><a href="#cb89-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(H_suma, <span class="at">.before =</span> H_1)</span>
-<span id="cb89-45"><a href="#cb89-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-46"><a href="#cb89-46" aria-hidden="true" tabindex="-1"></a><span class="do">## Dołączanie retestu ----</span></span>
-<span id="cb89-47"><a href="#cb89-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-48"><a href="#cb89-48" aria-hidden="true" tabindex="-1"></a>df_KTR <span class="ot">&lt;-</span> df_KTR_test <span class="sc">%&gt;%</span></span>
-<span id="cb89-49"><a href="#cb89-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
-<span id="cb89-50"><a href="#cb89-50" aria-hidden="true" tabindex="-1"></a>        df_KTR_retest,</span>
-<span id="cb89-51"><a href="#cb89-51" aria-hidden="true" tabindex="-1"></a>        <span class="at">by =</span> <span class="fu">join_by</span>(ID <span class="sc">==</span> Subject),</span>
-<span id="cb89-52"><a href="#cb89-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"_retest"</span>)</span>
-<span id="cb89-53"><a href="#cb89-53" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb89-54"><a href="#cb89-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-55"><a href="#cb89-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Analiza ----</span></span>
-<span id="cb89-56"><a href="#cb89-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-57"><a href="#cb89-57" aria-hidden="true" tabindex="-1"></a><span class="do">## Eksploracja ----</span></span>
-<span id="cb89-58"><a href="#cb89-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-59"><a href="#cb89-59" aria-hidden="true" tabindex="-1"></a>descr <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb89-60"><a href="#cb89-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_summary_stats</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb89-61"><a href="#cb89-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">v =</span> sd <span class="sc">/</span> mean)</span>
-<span id="cb89-62"><a href="#cb89-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-63"><a href="#cb89-63" aria-hidden="true" tabindex="-1"></a>descr_wyksztalcenie <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb89-64"><a href="#cb89-64" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(wyksztalcenie) <span class="sc">%&gt;%</span></span>
-<span id="cb89-65"><a href="#cb89-65" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_summary_stats</span>()</span>
-<span id="cb89-66"><a href="#cb89-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-67"><a href="#cb89-67" aria-hidden="true" tabindex="-1"></a>freq_wyksztalcenie <span class="ot">&lt;-</span> <span class="fu">freq_table</span>(df, wyksztalcenie)</span>
-<span id="cb89-68"><a href="#cb89-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-69"><a href="#cb89-69" aria-hidden="true" tabindex="-1"></a>corr_matrix <span class="ot">&lt;-</span> df_KTR <span class="sc">%&gt;%</span></span>
-<span id="cb89-70"><a href="#cb89-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cor_mat</span>(<span class="sc">-</span>ID) <span class="sc">%&gt;%</span></span>
-<span id="cb89-71"><a href="#cb89-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cor_mark_significant</span>()</span>
-<span id="cb89-72"><a href="#cb89-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-73"><a href="#cb89-73" aria-hidden="true" tabindex="-1"></a><span class="do">## Wykresy ----</span></span>
-<span id="cb89-74"><a href="#cb89-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-75"><a href="#cb89-75" aria-hidden="true" tabindex="-1"></a>plot_price <span class="ot">&lt;-</span> diamonds <span class="sc">%&gt;%</span></span>
-<span id="cb89-76"><a href="#cb89-76" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_sample</span>(<span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb89-77"><a href="#cb89-77" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb89-78"><a href="#cb89-78" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price, <span class="at">colour =</span> clarity) <span class="sc">+</span></span>
-<span id="cb89-79"><a href="#cb89-79" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="st">"diamond"</span>, <span class="at">size =</span> 2L) <span class="sc">+</span></span>
-<span id="cb89-80"><a href="#cb89-80" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"YlOrRd"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb89-81"><a href="#cb89-81" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(</span>
-<span id="cb89-82"><a href="#cb89-82" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> <span class="st">"Masa [karaty]"</span>,</span>
-<span id="cb89-83"><a href="#cb89-83" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> <span class="st">"Cena [$]"</span>,</span>
-<span id="cb89-84"><a href="#cb89-84" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Cena diamentów od ich masy według szlifu"</span>,</span>
-<span id="cb89-85"><a href="#cb89-85" aria-hidden="true" tabindex="-1"></a>            <span class="at">caption =</span> <span class="st">"Źródło danych: ggplot2"</span>,</span>
-<span id="cb89-86"><a href="#cb89-86" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"Przejrzystość"</span></span>
-<span id="cb89-87"><a href="#cb89-87" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span></span>
-<span id="cb89-88"><a href="#cb89-88" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_Publication</span>() <span class="sc">+</span></span>
-<span id="cb89-89"><a href="#cb89-89" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(</span>
-<span id="cb89-90"><a href="#cb89-90" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb89-91"><a href="#cb89-91" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>)</span>
-<span id="cb89-92"><a href="#cb89-92" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span></span>
-<span id="cb89-93"><a href="#cb89-93" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_wrap</span>(</span>
-<span id="cb89-94"><a href="#cb89-94" aria-hidden="true" tabindex="-1"></a>            <span class="fu">vars</span>(cut),</span>
-<span id="cb89-95"><a href="#cb89-95" aria-hidden="true" tabindex="-1"></a>            <span class="at">labeller =</span> <span class="fu">labeller</span>(<span class="at">cut =</span> <span class="fu">c</span>(</span>
-<span id="cb89-96"><a href="#cb89-96" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Fair"</span> <span class="ot">=</span> <span class="st">"Zadowalający"</span>,</span>
-<span id="cb89-97"><a href="#cb89-97" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Good"</span> <span class="ot">=</span> <span class="st">"Dobry"</span>,</span>
-<span id="cb89-98"><a href="#cb89-98" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Very Good"</span> <span class="ot">=</span> <span class="st">"Bardzo dobry"</span>,</span>
-<span id="cb89-99"><a href="#cb89-99" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Premium"</span> <span class="ot">=</span> <span class="st">"Premium"</span>,</span>
-<span id="cb89-100"><a href="#cb89-100" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Ideal"</span> <span class="ot">=</span> <span class="st">"Idealny"</span></span>
-<span id="cb89-101"><a href="#cb89-101" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb89-102"><a href="#cb89-102" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb89-103"><a href="#cb89-103" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb89-104"><a href="#cb89-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-105"><a href="#cb89-105" aria-hidden="true" tabindex="-1"></a><span class="do">## Testy statystyczne ----</span></span>
-<span id="cb89-106"><a href="#cb89-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-107"><a href="#cb89-107" aria-hidden="true" tabindex="-1"></a>cor_price_carat <span class="ot">&lt;-</span> <span class="fu">cor_test</span>(diamonds, price, carat)</span>
-<span id="cb89-108"><a href="#cb89-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-109"><a href="#cb89-109" aria-hidden="true" tabindex="-1"></a>anova_diamons <span class="ot">&lt;-</span> <span class="fu">anova_test</span>(diamonds, price <span class="sc">~</span> cut <span class="sc">+</span> color <span class="sc">+</span> clarity)</span>
-<span id="cb89-110"><a href="#cb89-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-111"><a href="#cb89-111" aria-hidden="true" tabindex="-1"></a><span class="fu">tukey_hsd</span>(diamonds, price <span class="sc">~</span> cut <span class="sc">+</span> color <span class="sc">+</span> clarity) <span class="co"># post-hoc</span></span>
-<span id="cb89-112"><a href="#cb89-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-113"><a href="#cb89-113" aria-hidden="true" tabindex="-1"></a>eta_diamonds <span class="ot">&lt;-</span> diamonds <span class="sc">%&gt;%</span></span>
-<span id="cb89-114"><a href="#cb89-114" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aov</span>(price <span class="sc">~</span> cut <span class="sc">+</span> color <span class="sc">+</span> clarity, .) <span class="sc">%&gt;%</span></span>
-<span id="cb89-115"><a href="#cb89-115" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eta_squared</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Przygotowanie ----</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Ładowanie bibliotek ----</span></span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"broom"</span>)</span>
+<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rstatix"</span>)</span>
+<span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-9"><a href="#cb96-9" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R"</span>) <span class="co"># motyw do wykresów</span></span>
+<span id="cb96-10"><a href="#cb96-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-11"><a href="#cb96-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Ładowanie danych ----</span></span>
+<span id="cb96-12"><a href="#cb96-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-13"><a href="#cb96-13" aria-hidden="true" tabindex="-1"></a>df_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/complex_database.csv"</span>)</span>
+<span id="cb96-14"><a href="#cb96-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-15"><a href="#cb96-15" aria-hidden="true" tabindex="-1"></a>df_KTR_test <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/join-test.csv"</span>)</span>
+<span id="cb96-16"><a href="#cb96-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-17"><a href="#cb96-17" aria-hidden="true" tabindex="-1"></a>df_KTR_retest <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"[./dane/podstawy-R/join-retest.csv](https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/join-retest.csv)"</span>)</span>
+<span id="cb96-18"><a href="#cb96-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-19"><a href="#cb96-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Data wrangling ----</span></span>
+<span id="cb96-20"><a href="#cb96-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-21"><a href="#cb96-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Czyszczenie ----</span></span>
+<span id="cb96-22"><a href="#cb96-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-23"><a href="#cb96-23" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df_raw <span class="sc">%&gt;%</span></span>
+<span id="cb96-24"><a href="#cb96-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb96-25"><a href="#cb96-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ID, <span class="st">`</span><span class="at">Wiek (ukończony w latach)</span><span class="st">`</span>, Wykształcenie, <span class="dv">9</span><span class="sc">:</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb96-26"><a href="#cb96-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"wiek"</span>, <span class="st">"wyksztalcenie"</span>, <span class="fu">paste</span>(<span class="st">"H"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb96-27"><a href="#cb96-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb96-28"><a href="#cb96-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb96-29"><a href="#cb96-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(H_1<span class="sc">:</span>H_10, parse_number),</span>
+<span id="cb96-30"><a href="#cb96-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">c</span>(H_5, H_7), <span class="sc">~</span> <span class="dv">7</span> <span class="sc">-</span> .x),</span>
+<span id="cb96-31"><a href="#cb96-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_suma =</span> <span class="fu">rowSums</span>(<span class="fu">pick</span>(H_1<span class="sc">:</span>H_10)),</span>
+<span id="cb96-32"><a href="#cb96-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie_grupa =</span> <span class="fu">case_when</span>(</span>
+<span id="cb96-33"><a href="#cb96-33" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Średnie"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
+<span id="cb96-34"><a href="#cb96-34" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie <span class="sc">==</span> <span class="st">"Zawodowe"</span> <span class="sc">~</span> <span class="st">"Ponadpodstawowe"</span>,</span>
+<span id="cb96-35"><a href="#cb96-35" aria-hidden="true" tabindex="-1"></a>            <span class="at">.default =</span> wyksztalcenie</span>
+<span id="cb96-36"><a href="#cb96-36" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb96-37"><a href="#cb96-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">wyksztalcenie =</span> <span class="fu">factor</span>(</span>
+<span id="cb96-38"><a href="#cb96-38" aria-hidden="true" tabindex="-1"></a>            wyksztalcenie,</span>
+<span id="cb96-39"><a href="#cb96-39" aria-hidden="true" tabindex="-1"></a>            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Podstawowe"</span>, <span class="st">"Zawodowe"</span>, <span class="st">"Średnie"</span>, <span class="st">"Wyższe"</span>),</span>
+<span id="cb96-40"><a href="#cb96-40" aria-hidden="true" tabindex="-1"></a>            <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb96-41"><a href="#cb96-41" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb96-42"><a href="#cb96-42" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb96-43"><a href="#cb96-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(wyksztalcenie), wiek) <span class="sc">%&gt;%</span></span>
+<span id="cb96-44"><a href="#cb96-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(H_suma, <span class="at">.before =</span> H_1)</span>
+<span id="cb96-45"><a href="#cb96-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-46"><a href="#cb96-46" aria-hidden="true" tabindex="-1"></a><span class="do">## Dołączanie retestu ----</span></span>
+<span id="cb96-47"><a href="#cb96-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-48"><a href="#cb96-48" aria-hidden="true" tabindex="-1"></a>df_KTR <span class="ot">&lt;-</span> df_KTR_test <span class="sc">%&gt;%</span></span>
+<span id="cb96-49"><a href="#cb96-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
+<span id="cb96-50"><a href="#cb96-50" aria-hidden="true" tabindex="-1"></a>        df_KTR_retest,</span>
+<span id="cb96-51"><a href="#cb96-51" aria-hidden="true" tabindex="-1"></a>        <span class="at">by =</span> <span class="fu">join_by</span>(ID <span class="sc">==</span> Subject),</span>
+<span id="cb96-52"><a href="#cb96-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"_retest"</span>)</span>
+<span id="cb96-53"><a href="#cb96-53" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb96-54"><a href="#cb96-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-55"><a href="#cb96-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Analiza ----</span></span>
+<span id="cb96-56"><a href="#cb96-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-57"><a href="#cb96-57" aria-hidden="true" tabindex="-1"></a><span class="do">## Eksploracja ----</span></span>
+<span id="cb96-58"><a href="#cb96-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-59"><a href="#cb96-59" aria-hidden="true" tabindex="-1"></a>descr <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb96-60"><a href="#cb96-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_summary_stats</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb96-61"><a href="#cb96-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">v =</span> sd <span class="sc">/</span> mean)</span>
+<span id="cb96-62"><a href="#cb96-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-63"><a href="#cb96-63" aria-hidden="true" tabindex="-1"></a>descr_wyksztalcenie <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb96-64"><a href="#cb96-64" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(wyksztalcenie) <span class="sc">%&gt;%</span></span>
+<span id="cb96-65"><a href="#cb96-65" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_summary_stats</span>()</span>
+<span id="cb96-66"><a href="#cb96-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-67"><a href="#cb96-67" aria-hidden="true" tabindex="-1"></a>freq_wyksztalcenie <span class="ot">&lt;-</span> <span class="fu">freq_table</span>(df, wyksztalcenie)</span>
+<span id="cb96-68"><a href="#cb96-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-69"><a href="#cb96-69" aria-hidden="true" tabindex="-1"></a>corr_matrix <span class="ot">&lt;-</span> df_KTR <span class="sc">%&gt;%</span></span>
+<span id="cb96-70"><a href="#cb96-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cor_mat</span>(<span class="sc">-</span>ID) <span class="sc">%&gt;%</span></span>
+<span id="cb96-71"><a href="#cb96-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cor_mark_significant</span>()</span>
+<span id="cb96-72"><a href="#cb96-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-73"><a href="#cb96-73" aria-hidden="true" tabindex="-1"></a><span class="do">## Wykresy ----</span></span>
+<span id="cb96-74"><a href="#cb96-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-75"><a href="#cb96-75" aria-hidden="true" tabindex="-1"></a>plot_price <span class="ot">&lt;-</span> diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb96-76"><a href="#cb96-76" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_sample</span>(<span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb96-77"><a href="#cb96-77" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb96-78"><a href="#cb96-78" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price, <span class="at">colour =</span> clarity) <span class="sc">+</span></span>
+<span id="cb96-79"><a href="#cb96-79" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="st">"diamond"</span>, <span class="at">size =</span> 2L) <span class="sc">+</span></span>
+<span id="cb96-80"><a href="#cb96-80" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"YlOrRd"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb96-81"><a href="#cb96-81" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(</span>
+<span id="cb96-82"><a href="#cb96-82" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> <span class="st">"Masa [karaty]"</span>,</span>
+<span id="cb96-83"><a href="#cb96-83" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> <span class="st">"Cena [$]"</span>,</span>
+<span id="cb96-84"><a href="#cb96-84" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Cena diamentów od ich masy według szlifu"</span>,</span>
+<span id="cb96-85"><a href="#cb96-85" aria-hidden="true" tabindex="-1"></a>            <span class="at">caption =</span> <span class="st">"Źródło danych: ggplot2"</span>,</span>
+<span id="cb96-86"><a href="#cb96-86" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"Przejrzystość"</span></span>
+<span id="cb96-87"><a href="#cb96-87" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span></span>
+<span id="cb96-88"><a href="#cb96-88" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_Publication</span>() <span class="sc">+</span></span>
+<span id="cb96-89"><a href="#cb96-89" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(</span>
+<span id="cb96-90"><a href="#cb96-90" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb96-91"><a href="#cb96-91" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>)</span>
+<span id="cb96-92"><a href="#cb96-92" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span></span>
+<span id="cb96-93"><a href="#cb96-93" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_wrap</span>(</span>
+<span id="cb96-94"><a href="#cb96-94" aria-hidden="true" tabindex="-1"></a>            <span class="fu">vars</span>(cut),</span>
+<span id="cb96-95"><a href="#cb96-95" aria-hidden="true" tabindex="-1"></a>            <span class="at">labeller =</span> <span class="fu">labeller</span>(<span class="at">cut =</span> <span class="fu">c</span>(</span>
+<span id="cb96-96"><a href="#cb96-96" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Fair"</span> <span class="ot">=</span> <span class="st">"Zadowalający"</span>,</span>
+<span id="cb96-97"><a href="#cb96-97" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Good"</span> <span class="ot">=</span> <span class="st">"Dobry"</span>,</span>
+<span id="cb96-98"><a href="#cb96-98" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Very Good"</span> <span class="ot">=</span> <span class="st">"Bardzo dobry"</span>,</span>
+<span id="cb96-99"><a href="#cb96-99" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Premium"</span> <span class="ot">=</span> <span class="st">"Premium"</span>,</span>
+<span id="cb96-100"><a href="#cb96-100" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Ideal"</span> <span class="ot">=</span> <span class="st">"Idealny"</span></span>
+<span id="cb96-101"><a href="#cb96-101" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb96-102"><a href="#cb96-102" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb96-103"><a href="#cb96-103" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb96-104"><a href="#cb96-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-105"><a href="#cb96-105" aria-hidden="true" tabindex="-1"></a><span class="do">## Testy statystyczne ----</span></span>
+<span id="cb96-106"><a href="#cb96-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-107"><a href="#cb96-107" aria-hidden="true" tabindex="-1"></a>cor_price_carat <span class="ot">&lt;-</span> <span class="fu">cor_test</span>(diamonds, price, carat)</span>
+<span id="cb96-108"><a href="#cb96-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-109"><a href="#cb96-109" aria-hidden="true" tabindex="-1"></a>anova_diamons <span class="ot">&lt;-</span> <span class="fu">anova_test</span>(diamonds, price <span class="sc">~</span> cut <span class="sc">+</span> color <span class="sc">+</span> clarity)</span>
+<span id="cb96-110"><a href="#cb96-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-111"><a href="#cb96-111" aria-hidden="true" tabindex="-1"></a><span class="fu">tukey_hsd</span>(diamonds, price <span class="sc">~</span> cut <span class="sc">+</span> color <span class="sc">+</span> clarity) <span class="co"># post-hoc</span></span>
+<span id="cb96-112"><a href="#cb96-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-113"><a href="#cb96-113" aria-hidden="true" tabindex="-1"></a>eta_diamonds <span class="ot">&lt;-</span> diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb96-114"><a href="#cb96-114" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aov</span>(price <span class="sc">~</span> cut <span class="sc">+</span> color <span class="sc">+</span> clarity, .) <span class="sc">%&gt;%</span></span>
+<span id="cb96-115"><a href="#cb96-115" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eta_squared</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
@@ -2134,6 +2271,7 @@ Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>
 <li id="fn34"><p><span class="math inline">\(*\)</span> – <span class="math inline">\(p &lt; 0,05\)</span>; <span class="math inline">\(**\)</span> – <span class="math inline">\(p &lt; 0,01\)</span>; <span class="math inline">\(***\)</span> – <span class="math inline">\(p &lt; 0,001\)</span>.<a href="#fnref34" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn35"><p>To samo możemy uzyskać używając komendy <code>styler::style_file("ścieżka/do/pliku")</code>.<a href="#fnref35" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn36"><p>Nazwa tego pliku zaczyna się od kropki, co oznacza, że jest on ukryty. Aby wyświetlić ukryte pliki można użyć skrótu klawiszowego Ctrl+H lub przeszukać opcje eksploratora.<a href="#fnref36" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn37"><p>Scratch to bardzo przyjemne, darmowe, rysunkowo-blokowe narzędzie do ćwiczenia programowania stworzone przez naukowców z MIT. Nie jest ono specyficzne dla żadnego języka, ale może być dobrym wprowadzeniem do programowania w ogóle. Nie wymaga pisania kodu, a opiera się w całości na przeciąganiu myszką bloczków. Dzięki temu można oswoić się z różnymi ideami w programowaniu, takimi jak funkcje, zmienne itd., bez zaprzątania głowy składnią konkretnego języka.<a href="#fnref37" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
