@@ -9,6 +9,11 @@ website:
         text: Strona główna
       - href: about.qmd
         text: O mnie
+  google-analytics: "G-FKTMH2V23V"
+  cookie-consent:
+    type: express
+    style: headline
+    lang: pl
 
 format:
   html:
@@ -19,6 +24,8 @@ format:
     toc: true
     lang: pl
     default-image-extension: svg
+    include-in-header:
+        - adsense.html
 
 bibliography: ./bibliografia/references.bib
 csl: ./bibliografia/apa-6th-edition.csl
