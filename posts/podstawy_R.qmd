@@ -2,8 +2,9 @@
 title: "Podstawy programowania w R"
 description: "Pisanie analiz statystycznych w R jest coraz bardziej powszechne. Nie bez powodu. W R da się zrobić wszystko, jest darmowe i pozwala na automatyzację. Jak zacząć uczyć się R? Odpowiadam na to w tym tekście."
 date: "2023-02-21"
-date-modified: "2023-03-01"
+date-modified: "2023-03-02"
 image: ./headers/podstawy_R.jpg
+freeze: true
 categories:
     - Statystyka
     - R
@@ -1504,10 +1505,6 @@ To zabrzmi jak żart, ale to nie jest żart. Naprawdę istnieje metoda debugowan
 
 [^love]: Należy się upwenić, że te osoby kochają nas wystarczająco, żeby być gotowymi na to poświęcenie.
 
-### Interaktywny debuger
-
-> Już wkrótce...
-
 ## Rozwiązywanie problemu
 
 Czasami rozwiązanie problemu wprost wynika z diagnozy. Jeśli popełniliśmy błąd taki, że zamiast `<` napisaliśmy `>`, to rozwiązaniem tego problemu jest po prostu zmiana znaku. Jeśli usunęliśmy kolumnę z wiekiem, to musimy ją dodać. Rozwiązanie jest logiczną konsekwencją źródła problemu. Jednak czasem musimy nieco wiedzieć, żeby problem rozwiązać. Najważniejszym źródłem rozwiązań jest doświadczenie. Na początku drogi będziemy się często frustrować potykając się o różne głupotki. Jeśli mamy szczęście mieć nauczyciela, pomoże on znaleźć rozwiązanie i szybciej nabyć doświadczenia, pożyczając własne doświadczenie. Dlatego też to, co na początku będzie powodowało problemy, potem stanie się oczywistą częścią języka. Co jednak zrobić, gdy nie mamy jeszcze doświadczenia z danym problemem?
@@ -1524,7 +1521,7 @@ W naszym pytaniu powinniśmy zawrzeć przykład kodu, jaki trzeba wykonać, żeb
 * `PlantGrowth` -- masa wysuszonych roślin z warunków kontrolnego i eksperymentalnego (typowa baza do testów t).
 * `USArrests` -- dane statystyczne o zbrodniach popełnianych w każdym stanie USA w 1973 r.
 
-Każda z tych baz dancyh ma swoją stronę w dokumentacji wyjaśniającą szczegóły. Warto znać chciażby dwie pierwsze bazy. Wykorzystywanie ich w przykładach jest o tyle dobre, że każdy, kto ma R, automatycznie ma dostęp do tych baz.
+Każda z tych baz dancyh ma swoją stronę w dokumentacji wyjaśniającą szczegóły. Warto znać chciażby dwie pierwsze bazy. Wykorzystywanie ich w przykładach jest o tyle dobre, że każdy, kto ma R, automatycznie ma dostęp do tych baz. Więcej szczegółow na temat pisania pytań na StackOverflow można znaleźć na [ich stronie](https://stackoverflow.com/help/how-to-ask).
 
 Czytanie StackOverflow jest zdobywaniem pewnego doświadczenia. Każdy rozwiązany problem to kolejny poznawczy egzemplarz do kolekcji. Im więcej takich mamy, tym trudniej nas zagiąć. Nie oznacza to, że bugi nie będą się pojawiać, ale to, że z pamięci będziemy wiedzieć -- lub się domyślać -- jak sprawnie je rozwiązać.
 
