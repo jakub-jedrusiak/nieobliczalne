@@ -3,7 +3,7 @@ title: "Podstawy programowania w R"
 description: "Pisanie analiz statystycznych w R jest coraz bardziej powszechne. Nie bez powodu. W R da się zrobić wszystko, jest darmowe i pozwala na automatyzację. Jak zacząć uczyć się R? Odpowiadam na to w tym tekście."
 date: "2023-02-21"
 date-modified: "2023-03-02"
-image: ./headers/podstawy_R.jpg
+image: ./headers/podstawy_R.webp
 freeze: true
 categories:
     - Statystyka

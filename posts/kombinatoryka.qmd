@@ -2,7 +2,7 @@
 title: "Kombinatoryka"
 description: "Ile wykonano uścisków dłoni w pomieszczeniu, w którym jest 100 osób? Omawiam tutaj trzy podstawowe pojęcia kombinatoryki -- wariacje, kombinacje i permutacje."
 date: "2023-02-17"
-image: ./headers/kombinatoryka.jpg
+image: ./headers/kombinatoryka.webp
 categories:
     - Matematyka
 freeze: true
