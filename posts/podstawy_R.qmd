@@ -1411,6 +1411,101 @@ Gdzie 120 to nowy limit znaków. W podobny sposób możemy zmienić wymagany sty
 
 Oba te pakiety, `lintr` i `styler`, są bardzo użyteczne, jednak ostatecznie nie zastępują ludzkiej decyzji. Nie wystarczy więc tylko mieć te pakiety, trzeba też -- choć pobieżnie -- znać same standardy.
 
+# Debugowanie {#sec-debug}
+
+W założeniu powyższe podrozdziały mają być wystarczającym wprowadzeniem, żeby zacząć pisać analizy w R. Jednak przeczytanie i przećwiczenie tego materiału nie oznacza, że będzie się to robić bezbłędnie. Specyfika programowania w ogóle, niezależnie czy jest to R, Python, C czy nawet Scratch[^scratch], polega na tym, że czasem popełniamy błędy i z tego wynikają problemy, które musimy naprawić. W żargonie taki błąd określilibyśmy angielskim mianem *bug*, zaś proces usuwania takich błędów *debugowaniem*.
+
+[^scratch]: Scratch to bardzo przyjemne, darmowe, rysunkowo-blokowe narzędzie do ćwiczenia programowania stworzone przez naukowców z MIT. Nie jest ono specyficzne dla żadnego języka, ale może być dobrym wprowadzeniem do programowania w ogóle. Nie wymaga pisania kodu, a opiera się w całości na przeciąganiu myszką bloczków. Dzięki temu można oswoić się z różnymi ideami w programowaniu, takimi jak funkcje, zmienne itd., bez zaprzątania głowy składnią konkretnego języka.
+
+Debugowanie to czynność, na której będziemy spędzać sporo czasu, zwłaszcza na początku. Im więcej doświadczenia z językiem, tym mniej się bugów generuje, ale **nigdy nie będziemy pisać bezbłędnie**. Popełnianie błędów nie świadczy, że ktoś źle rozumie język. Doświadczenie sprawia tylko, że piszemy bardziej skomplikowany kod i popełniamy bardziej wysublimowane błędy. Ba! Proste błędy też popełniamy, ale w ramach doświaczenia mamy często już wypracowane sposoby, by sobie z konkretnymi błędami radzić. Będziemy pamiętali, jak poradziliśmy sobie z podobnym problemem ostatnim razem. Czasem nawet specjalnie piszmey błędny kod, żeby sprawdzić, co się stanie. Na każdym etapie możemy sprawdzić, czy kod działa, nie musząc czekać, aż będziemy pewni, że napisaliśmy to dobrze. **Nie bójmy się popełniać błędów!**
+
+## Diagnoza {#sec-diag}
+
+Możemy roboczo podzielić bugi na dwa rodzaje -- takie, które nie pozwalają na wykonanie kodu i takie, przy których kod się wykonuje, ale efekt nie jest taki, jak chcemy, żeby był. Pierwszy rodzaj błędu jest o tyle prosty w zauważeniu, że konsola zacznie na nas krzyczeć na czerwono informatycznym żargonem, jeśli taki błąd popełnimy. Do tej kategorii wpadną wszystkie literówki, błędy składniowe, niewłaściwy typ argumentu itd. Druga kategoria błędów jest bardziej podstępna, bo możemy je zawuażyć 100 linijek od miejsca, w którym rzeczywiście zrobiliśmy coś nie tak. A potem musimy szukać.
+
+Proces debugowania zawsze zaczyna się od zauważenia błędu i dzieje się to zazwyczaj w konsoli. Na niektóre błędy (np. niektóre literówki) zostaną nam pokazane już przez edytor kodu, ale zazwyczaj dopiero wykonanie jakiegoś kodu pozwoli nam zauważyć, że jest on błędny. Zobaczmy sobie przykład, gdzie będziemy chcieli zainstalować pakiet `ViewPipeSteps`, który przyda nam się potem.
+
+```{r}
+#| error: true
+install.packages(ViewPipeSteps)
+```
+
+Jeśli uruchominy ten kod, otrzymamy błąd. Komunikatów o błędach nie należy się bać, bo są bezcennym źródłem informacji na temat tego, co się dzieje. Konsola stara się poinformować nas gdzie popełniliśmy błąd i jakiego rodzaju jest to błąd. Tutaj otrzymaliśmy komunikat `object 'ViewPipeSteps' not found`. Widzimy więc, że komenda szuka zmiennej o nazwie `ViewPipeSteps` i jej nie znajduje. Wtedy możemy się zorientować, że my rzeczywiście nie mamy takiej zmiennej, bo to w ogóle nie ma być zmienna, tylko *nazwa* pakietu do zainstalowania. A jak nazwa, to dosłowny ciąg znaków. A więc powinniśmy napisać tak:
+
+```{r}
+#| eval: false
+install.packages("ViewPipeSteps")
+```
+
+Ale wpadłem na to, bo już mi się to przydarzyło. To, swoją drogą, częsty błąd, branie w cudzysłów rzeczy, które nie powinny być w cudzysłowie albo odwrotnie, brak cudzysłowia, gdy powinien być on obecny. O tym, jak wpaść na rozwiązanie, piszę więcej niżej. Tutaj jednak warto zwrócić uwagę na sam komunikat błędu.
+
+```{r}
+#| error: true
+df %>%
+    selcet(H_1:H_3)
+```
+
+Powyższa komenda zwraca błąd `could not find function "selcet"`, co może zdarzyć się w dwóch sytuacjach -- nie załadowaliśmy pakietu, w którym ta funkcja się znajduje, albo zrobiliśmy literówkę. Tutaj uważne przeczytanie wskazuje na tę drugą ewentualność, zamieniłem literki miejscami.
+
+```{r}
+df %>%
+    mutate(
+        H_suma = sum(pick(H_1:H_10)),
+        .after = id
+    )
+```
+
+Powyższy przykład na nas nie krzyczy, wykonuje się, jednak nie działa tak, jak byśmy chcieli. Celem tego kodu było uzyskanie sumy kolumn od H1 do H10 dla każdej osoby badanej, jak robiliśmy w podrozdziale [-@sec-pick]. Jednak kod nie działa tak, jak byśmy chcieli. W każdej komórce kolumny `H_suma` znajduje się ta sama wartość. Zaskakująco duża. Wynika to z tego, że R domyślnie myśli kolumnami, nie wierszami. Gdy więc każemy mu sumować kolumny od `H1` do `H10`, to sumuje *całe* kolumny i w każdą komórkę wrzuca tę sumę. Jeśli chcemy policzyć sumę dla każdego wiersza z osobna, to musimy albo użyć funkcji `rowSums` zamiast zwykłego `sum`, albo wcześniej przepuścić przez funkcję `rowwise()`, czego nie robiliśmy wcześniej.
+
+```{r}
+df %>%
+    rowwise() %>%
+    mutate(
+        H_suma = sum(pick(H_1:H_10)),
+        .after = id
+    )
+```
+
+Ostatecznie orientujemy się, że gdzieś w naszym kodzie jest błąd i musimy go rozwiązać. Musimy jednak wiedzieć dokładnie jaka funkcja ten błąd powoduje. Jeśli jest to błąd uniemożliwiający wykonanie kodu, konsola postara się nas poinformować, gdzie ten błąd się znajduje. Gorzej w przypadku drugiej kategorii błędów. Tutaj musimy mocniej się postarać. Czytanie kodu to podstawowa metoda, ale mamy też narzędzia, które mogą nam w tym pomóc.
+
+### `ViewPipeSteps`
+
+Gdy piszemy całą serię funkcji połączonych potokami, możemy mieć problem ze zidentyfikowaniem, gdzie popełniliśmy błąd. Może się okazać, że w rzeczywistości błąd popełniliśmy kilka linijek wyżej, a nie w funkcji, która ten błąd zwraca. Spójrzmy na uproszczony przykład.
+
+```{r}
+#| error: true
+df %>%
+    select(id, H_1:H_10) %>%
+    filter(wiek > 40)
+```
+
+Błąd zwraca nam tutaj funkcja `filter`, jednak błąd popełniliśmy w funkcji `select` -- nie możemy odfiltrować osób w wieku powyżej 40 roku życia, jeśli w naszej bazie nie ma już kolumny `wiek`. Tutaj możemy to szybko zauważyć, ale w dłuższych ciągach potoków może nie być to takie oczywiste. Zazwyczaj zacznaczamy wtedy kolejne kroki i patrzymy jak nasza baza się zmienia.
+
+```{r}
+#| eval: false
+# Najpierw uruchamiamy to
+df
+
+# Potem to
+df %>%
+    select(id, H_1:H_10)
+
+# Na koniec to
+df %>%
+    select(id, H_1:H_10) %>%
+    filter(wiek > 40)
+```
+
+Zazwyczaj robimy to ręcznie, ale mamy też użyteczne narzędzie służące właśnie wyświetleniu kolejnych kroków ciągu potoków. Jest to dodatek do RStudio `ViewPipeSteps`. Po zainstalowaniu możemy wykorzystać to narzędzie zaznaczając swój ciąg i wybierając odpowiednią opcję z menu Addins. Otworzy to w kolejnych kartach (albo wydrukuje konsoli) kolejne kroki ciągu funkcji połączonych potokami. Często pozwala to na zidentyfikowanie kroku, w którym pojawia się błąd.
+
+> Dalsza część już wkrótce...
+
+### Metoda gumowej kaczki
+
+### Interaktywny debuger
+
+## Rozwiązywanie problemu
+
 # Posłowie {#sec-ending}
 
 W ten sposób kończymy to przydługie wprowadzenie do R. Wielu rzeczy tutaj nie omówiłem, np. elementów klasycznego R, takich jak wybór pojedynczej kolumny jako wektora (np. `df$wyksztalcenie`), czy w ogóle wektorów. Nie poznaliśmy klasycznych sposobów selekcji danych, jak np. `df[df$wyksztalcenie == "Wyższe", 1:10]`. Nie powiedzieliśmy nic o listach ani pętlach, czyli tym kawałku R, który umożliwia automatyzację. Nie liznęliśmy nawet Quarto, czyli standardu do łączenia R z pisaniem raportów, w którym zresztą piszę ten tekst. Części rzeczy nie omówiłem, bo na początek da się je skutecznie zastąpić nowszymi i bardziej czytelnymi funkcjami `tidyverse`. Część natomiast bywa bardzo przydatna, ale jest po prostu, według mnie, zbyt zaawansowana jak na pierwszy kontakt z językiem.
@@ -1418,8 +1513,6 @@ W ten sposób kończymy to przydługie wprowadzenie do R. Wielu rzeczy tutaj nie
 Tym samym zachęcam do dalszej nauki! Jeśli opanowaliście elementy zawarte w tym tekście, macie solidny fundament, by zrozumieć takie książki jak polecana przeze mnie na wstępie publikacja „Język R. Kompletny zestaw narzędzi dla analityków danych" [@wickham2020]. Zaznaczam tylko, że ten tekst jest od tej książki nowszy, więc czasem pojawią się rozbieżności. W kilku miejscach wspominałem, że to, co opisuję, to nowinka, ale co do wielu rzeczy już nawet nie pamiętam, że były kiedyś nowe. Zawsze jednak pierwszym, podstawowym źródłem powinna być dokumentacja (zawsze aktualna), a dopiero potem StackOverflow.
 
 Jeśli czytasz to teraz, oznacza to, że ten tekst to praca w toku. Za każdą informację zwrotną będę wdzięczny. Jeśli coś było niejasne, jeśli coś powinienem wyjaśnić szerzej albo prościej, jeśli czegoś mocno zabrakło, to można (trzeba!) do mnie pisać na [kuba23031999@gmail.com](mailto:kuba23031999@gmail.com).
-
-Z tego miejsca pozostaje mi życzyć jak najmniej błędów. Ostatnie przesłanie jest jednak takie, że błędy będą się pojawiać. W dużych ilościach. Debugowanie potrafi zajmować mnóstwo czasu, zwłaszcza na początku drogi. Nie trzeba się jednak bać ani frustrować, trzeba czytać komunikaty o błędach i w razie czego wyszukiwać je w Google, a w ostateczności pytać na StackOverflow. Po pewnym czasie tych błędów będzie coraz mniej, podobnie jak zawahań i potrzeby sięgania po pomoc poza dokumentację. Choć pewnie nigdy nie znikną one całkiem.
 
 ```{r}
 #| label: full-code
