@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-99.9.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jakub Jędrusiak">
 <meta name="description" content="Czymże jest prawda? Czy czegokolwiek możemy być pewni? Nie lubimy się pakować w takie pytania, bo łatwo dojść do odpowiedzi „nie”, a wtedy tracimy grunt pod nogami. Część z nas zgodzi się, że tak naprawdę niczego nie możemy być pewni. W końcu zawsze może się okazać, że żyjemy w Matrixie, a wtedy żadne dowody nie mają znaczenia. Ale jednak pewnych rzeczy jesteśmy bardziej pewni niż innych.">
 
-<title>Jakub Jędrusiak - Testy statystyczne i wartość p</title>
+<title>Nieobliczalne - Testy statystyczne i wartość p</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,14 +19,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -40,8 +41,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -97,10 +97,10 @@ gtag('config', 'G-FKTMH2V23V', { 'anonymize_ip': true});
 document.addEventListener('DOMContentLoaded', function () {
 cookieconsent.run({
   "notice_banner_type":"headline",
-  "consent_type":"implied",
+  "consent_type":"express",
   "palette":"light",
   "language":"en",
-  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "page_load_consent_levels":["strictly-necessary"],
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
@@ -126,27 +126,27 @@ cookieconsent.run({
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Jakub Jędrusiak</span>
+    <span class="navbar-title">Nieobliczalne</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Szukaj"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Przełącz nawigację" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html">
+    <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">Strona główna</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html">
+    <a class="nav-link" href="../about.html" rel="" target="">
  <span class="menu-text">O mnie</span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools ms-auto">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -160,16 +160,16 @@ cookieconsent.run({
     <h2 id="toc-title">Na tej stronie</h2>
    
   <ul>
-  <li><a href="#problemy-z-próbkowaniem" id="toc-problemy-z-próbkowaniem" class="nav-link active" data-scroll-target="#problemy-z-próbkowaniem"><span class="toc-section-number">1</span>  Problemy z próbkowaniem</a></li>
-  <li><a href="#jak-łatwo-wychodzą-przypadkowe-różnice" id="toc-jak-łatwo-wychodzą-przypadkowe-różnice" class="nav-link" data-scroll-target="#jak-łatwo-wychodzą-przypadkowe-różnice"><span class="toc-section-number">2</span>  Jak łatwo wychodzą przypadkowe różnice?</a></li>
-  <li><a href="#istotność-statystyczna" id="toc-istotność-statystyczna" class="nav-link" data-scroll-target="#istotność-statystyczna"><span class="toc-section-number">3</span>  Istotność statystyczna</a></li>
-  <li><a href="#logika-testów-statystycznych" id="toc-logika-testów-statystycznych" class="nav-link" data-scroll-target="#logika-testów-statystycznych"><span class="toc-section-number">4</span>  Logika testów statystycznych</a></li>
-  <li><a href="#wielkość-próbki" id="toc-wielkość-próbki" class="nav-link" data-scroll-target="#wielkość-próbki"><span class="toc-section-number">5</span>  Wielkość próbki</a>
+  <li><a href="#problemy-z-próbkowaniem" id="toc-problemy-z-próbkowaniem" class="nav-link active" data-scroll-target="#problemy-z-próbkowaniem"><span class="header-section-number">1</span> Problemy z próbkowaniem</a></li>
+  <li><a href="#jak-łatwo-wychodzą-przypadkowe-różnice" id="toc-jak-łatwo-wychodzą-przypadkowe-różnice" class="nav-link" data-scroll-target="#jak-łatwo-wychodzą-przypadkowe-różnice"><span class="header-section-number">2</span> Jak łatwo wychodzą przypadkowe różnice?</a></li>
+  <li><a href="#istotność-statystyczna" id="toc-istotność-statystyczna" class="nav-link" data-scroll-target="#istotność-statystyczna"><span class="header-section-number">3</span> Istotność statystyczna</a></li>
+  <li><a href="#logika-testów-statystycznych" id="toc-logika-testów-statystycznych" class="nav-link" data-scroll-target="#logika-testów-statystycznych"><span class="header-section-number">4</span> Logika testów statystycznych</a></li>
+  <li><a href="#wielkość-próbki" id="toc-wielkość-próbki" class="nav-link" data-scroll-target="#wielkość-próbki"><span class="header-section-number">5</span> Wielkość próbki</a>
   <ul class="collapse">
-  <li><a href="#dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty" id="toc-dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty" class="nav-link" data-scroll-target="#dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty"><span class="toc-section-number">5.1</span>  Dlaczego większe próbki pozwalają wykryć mniejsze efekty?</a></li>
+  <li><a href="#dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty" id="toc-dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty" class="nav-link" data-scroll-target="#dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty"><span class="header-section-number">5.1</span> Dlaczego większe próbki pozwalają wykryć mniejsze efekty?</a></li>
   </ul></li>
-  <li><a href="#wielkość-efektu-a-istotność-statystyczna" id="toc-wielkość-efektu-a-istotność-statystyczna" class="nav-link" data-scroll-target="#wielkość-efektu-a-istotność-statystyczna"><span class="toc-section-number">6</span>  Wielkość efektu a istotność statystyczna</a></li>
-  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="toc-section-number">7</span>  Podsumowanie</a></li>
+  <li><a href="#wielkość-efektu-a-istotność-statystyczna" id="toc-wielkość-efektu-a-istotność-statystyczna" class="nav-link" data-scroll-target="#wielkość-efektu-a-istotność-statystyczna"><span class="header-section-number">6</span> Wielkość efektu a istotność statystyczna</a></li>
+  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">7</span> Podsumowanie</a></li>
   </ul>
 </nav>
     </div>
@@ -223,59 +223,60 @@ cookieconsent.run({
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="tbl-iq-means" class="anchored">
-
-<table class="table" style="margin-left: auto; margin-right: auto;"><caption>Tabela&nbsp;1:  Średnie wyniki IQ są zawsze trochę inne, ale rzadko są dalekie od 100. </caption>
- <thead>
-  <tr>
-   <th style="text-align:right;"> lp </th>
-   <th style="text-align:right;"> IQ </th>
-  </tr>
- </thead>
+<table class="table table-sm table-striped" data-quarto-postprocess="true">
+<caption>Tabela&nbsp;1: Średnie wyniki IQ są zawsze trochę inne, ale rzadko są dalekie od 100.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">lp</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">IQ</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 98.77 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 99.78 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 97.06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 103.18 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 101.92 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 99.63 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 98.33 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 100.49 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 99.89 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 98.66 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">98.77</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">99.78</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">97.06</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">103.18</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">101.92</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">99.63</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">98.33</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">100.49</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">99.89</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">98.66</td>
+</tr>
 </tbody>
 </table>
-
 </div>
+
+
 </div>
 </div>
 <p>Zaczynamy zauważać, że wyniki za każdym razem były trochę inne, ale zawsze lądowały w pobliżu 100. Innymi słowy średnie bliskie 100 pojawiały się często, a średnie dalekie od 100 pojawiały się rzadko. Nie mamy na przykład ani jednego wyniku mniejszego niż 95, a w zakresie 99-101 mieści się 47% wszystkich uzyskanych średnich. Możemy zrobić nawet wykres, jak często pojawiały się jakie średnie.</p>
@@ -299,81 +300,82 @@ cookieconsent.run({
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="tbl-iq-diffs" class="anchored">
-
-<table class="table" style="margin-left: auto; margin-right: auto;"><caption>Tabela&nbsp;2:  Możemy wiele razy powtórzyć nasz eksperyment, a różnice za każdym razem będą inne. </caption>
- <thead>
-  <tr>
-   <th style="text-align:right;"> lp </th>
-   <th style="text-align:right;"> IQ kobiet </th>
-   <th style="text-align:right;"> IQ mężczyzn </th>
-   <th style="text-align:right;"> różnica </th>
-  </tr>
- </thead>
+<table class="table table-sm table-striped" data-quarto-postprocess="true">
+<caption>Tabela&nbsp;2: Możemy wiele razy powtórzyć nasz eksperyment, a różnice za każdym razem będą inne.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">lp</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">IQ kobiet</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">IQ mężczyzn</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">różnica</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 100.49 </td>
-   <td style="text-align:right;"> 98.83 </td>
-   <td style="text-align:right;"> 1.66 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 97.89 </td>
-   <td style="text-align:right;"> 99.14 </td>
-   <td style="text-align:right;"> -1.25 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 99.89 </td>
-   <td style="text-align:right;"> 101.26 </td>
-   <td style="text-align:right;"> -1.37 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 99.87 </td>
-   <td style="text-align:right;"> 100.14 </td>
-   <td style="text-align:right;"> -0.27 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 102.91 </td>
-   <td style="text-align:right;"> 98.65 </td>
-   <td style="text-align:right;"> 4.26 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 101.43 </td>
-   <td style="text-align:right;"> 101.82 </td>
-   <td style="text-align:right;"> -0.39 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 103.46 </td>
-   <td style="text-align:right;"> 101.24 </td>
-   <td style="text-align:right;"> 2.22 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 100.30 </td>
-   <td style="text-align:right;"> 101.45 </td>
-   <td style="text-align:right;"> -1.15 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 99.98 </td>
-   <td style="text-align:right;"> 99.17 </td>
-   <td style="text-align:right;"> 0.81 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 99.00 </td>
-   <td style="text-align:right;"> 100.54 </td>
-   <td style="text-align:right;"> -1.54 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">100.49</td>
+<td style="text-align: right;">98.83</td>
+<td style="text-align: right;">1.66</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">97.89</td>
+<td style="text-align: right;">99.14</td>
+<td style="text-align: right;">-1.25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">99.89</td>
+<td style="text-align: right;">101.26</td>
+<td style="text-align: right;">-1.37</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">99.87</td>
+<td style="text-align: right;">100.14</td>
+<td style="text-align: right;">-0.27</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">102.91</td>
+<td style="text-align: right;">98.65</td>
+<td style="text-align: right;">4.26</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">101.43</td>
+<td style="text-align: right;">101.82</td>
+<td style="text-align: right;">-0.39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">103.46</td>
+<td style="text-align: right;">101.24</td>
+<td style="text-align: right;">2.22</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">100.30</td>
+<td style="text-align: right;">101.45</td>
+<td style="text-align: right;">-1.15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">99.98</td>
+<td style="text-align: right;">99.17</td>
+<td style="text-align: right;">0.81</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">99.00</td>
+<td style="text-align: right;">100.54</td>
+<td style="text-align: right;">-1.54</td>
+</tr>
 </tbody>
 </table>
-
 </div>
+
+
 </div>
 </div>
 <p>Podstawą do różnicy była tu średnia inteligencja kobiet, więc ujemna różnica oznacza, że mężczyźni okazali się mniej inteligentni, zaś dodatnia, że bardziej. Tak jak w przypadku tabeli <a href="#tbl-iq-means">1</a>., niektóre różnice są większe, niektóre mniejsze, ale ich rozkład nie jest przypadkowy. Wrzućmy nasze różnice na wykres.</p>
@@ -504,17 +506,17 @@ SE=\frac{SD}{\sqrt{n}}
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
-<div id="ref-bem2011" class="csl-entry" role="doc-biblioentry">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-bem2011" class="csl-entry" role="listitem">
 Bem, D. J. (2011). Feeling the future: Experimental evidence for anomalous retroactive influences on cognition and affect. <em>Journal of Personality and Social Psychology</em>, <em>100</em>, 407–425. <a href="https://doi.org/10.1037/a0021524">https://doi.org/10.1037/a0021524</a>
 </div>
-<div id="ref-butcher2018" class="csl-entry" role="doc-biblioentry">
+<div id="ref-butcher2018" class="csl-entry" role="listitem">
 Butcher, J. N. M. S., &amp; Hooley, J. M. (2018). <em>Psychologia zaburze<span>ń</span></em>. Sopot: Gda<span>ń</span>skie Wydawnictwo Psychologiczne.
 </div>
-<div id="ref-engber2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-engber2017" class="csl-entry" role="listitem">
 Engber, D. (2017). Daryl Bem proved ESP is real: Which means science is broken. <em>Slate, May</em>, <em>17</em>.
 </div>
-<div id="ref-wilkes2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-wilkes2017" class="csl-entry" role="listitem">
 Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>... i sam sobie wymy<span>ś</span>l matematyk<span>ę</span></em>. Warszawa: Prószy<span>ń</span>ski Media.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
@@ -683,9 +685,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -750,6 +766,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -792,7 +894,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

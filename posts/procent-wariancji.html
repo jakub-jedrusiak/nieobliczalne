@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-99.9.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jakub Jędrusiak">
 <meta name="description" content="Co to znaczy, że geny wyjaśniają 90% wariancji wzrostu? Że z moich 170 cm wzrostu 153 cm zawdzięczam genom, a pozostałe 17 cm środowisku? Czym w ogóle jest wariancja? Odpowiem na to pytanie, jak i wprowadzę pojęcie modelu i jego testowania.">
 
-<title>Jakub Jędrusiak - Wyjaśnianie wariancji i test F</title>
+<title>Nieobliczalne - Wyjaśnianie wariancji i test F</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,14 +19,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -40,8 +41,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -97,10 +97,10 @@ gtag('config', 'G-FKTMH2V23V', { 'anonymize_ip': true});
 document.addEventListener('DOMContentLoaded', function () {
 cookieconsent.run({
   "notice_banner_type":"headline",
-  "consent_type":"implied",
+  "consent_type":"express",
   "palette":"light",
   "language":"en",
-  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "page_load_consent_levels":["strictly-necessary"],
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
@@ -126,27 +126,27 @@ cookieconsent.run({
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Jakub Jędrusiak</span>
+    <span class="navbar-title">Nieobliczalne</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Szukaj"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Przełącz nawigację" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html">
+    <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">Strona główna</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html">
+    <a class="nav-link" href="../about.html" rel="" target="">
  <span class="menu-text">O mnie</span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools ms-auto">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -160,11 +160,11 @@ cookieconsent.run({
     <h2 id="toc-title">Na tej stronie</h2>
    
   <ul>
-  <li><a href="#średnia-jako-model" id="toc-średnia-jako-model" class="nav-link active" data-scroll-target="#średnia-jako-model"><span class="toc-section-number">1</span>  Średnia jako model</a></li>
-  <li><a href="#wariancja" id="toc-wariancja" class="nav-link" data-scroll-target="#wariancja"><span class="toc-section-number">2</span>  Wariancja</a></li>
-  <li><a href="#średnia-to-nie-wszystko" id="toc-średnia-to-nie-wszystko" class="nav-link" data-scroll-target="#średnia-to-nie-wszystko"><span class="toc-section-number">3</span>  Średnia to nie wszystko</a></li>
-  <li><a href="#test-f" id="toc-test-f" class="nav-link" data-scroll-target="#test-f"><span class="toc-section-number">4</span>  Test <em>F</em></a></li>
-  <li><a href="#postscriptum-jak-szybciej-liczyć-ssm" id="toc-postscriptum-jak-szybciej-liczyć-ssm" class="nav-link" data-scroll-target="#postscriptum-jak-szybciej-liczyć-ssm"><span class="toc-section-number">5</span>  <em>Postscriptum</em> – jak szybciej liczyć <em>SS<sub>M</sub></em></a></li>
+  <li><a href="#średnia-jako-model" id="toc-średnia-jako-model" class="nav-link active" data-scroll-target="#średnia-jako-model"><span class="header-section-number">1</span> Średnia jako model</a></li>
+  <li><a href="#wariancja" id="toc-wariancja" class="nav-link" data-scroll-target="#wariancja"><span class="header-section-number">2</span> Wariancja</a></li>
+  <li><a href="#średnia-to-nie-wszystko" id="toc-średnia-to-nie-wszystko" class="nav-link" data-scroll-target="#średnia-to-nie-wszystko"><span class="header-section-number">3</span> Średnia to nie wszystko</a></li>
+  <li><a href="#test-f" id="toc-test-f" class="nav-link" data-scroll-target="#test-f"><span class="header-section-number">4</span> Test <em>F</em></a></li>
+  <li><a href="#postscriptum-jak-szybciej-liczyć-ssm" id="toc-postscriptum-jak-szybciej-liczyć-ssm" class="nav-link" data-scroll-target="#postscriptum-jak-szybciej-liczyć-ssm"><span class="header-section-number">5</span> <em>Postscriptum</em> – jak szybciej liczyć <em>SS<sub>M</sub></em></a></li>
   </ul>
 </nav>
     </div>
@@ -227,51 +227,52 @@ cookieconsent.run({
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="tbl-spiders" class="anchored">
-
-<table class="table" style="margin-left: auto; margin-right: auto;"><caption>Tabela&nbsp;1:  Wielkość pająka i niepokój, jaki wzbudza. </caption>
- <thead>
-  <tr>
-   <th style="text-align:right;"> wielkość pająka </th>
-   <th style="text-align:right;"> niepokój </th>
-  </tr>
- </thead>
+<table class="table table-sm table-striped" data-quarto-postprocess="true">
+<caption>Tabela&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">niepokój</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 8 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 5 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 8 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 12 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 11 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 18 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 16 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">16</td>
+</tr>
 </tbody>
 </table>
-
 </div>
+
+
 </div>
 </div>
 <p>Dla takich danych możemy policzyć całkiem sporo rzeczy. Łatwiej jest jednak zrozumieć dane, jak się je rzeczywiście widzi. Spróbujmy więc stworzyć wykres. Chcielibyśmy wiedzieć, jaki jest związek wielkości pająka z niepokojem, jaki wywołuje<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
@@ -303,60 +304,61 @@ S_i = x_i - \bar x
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="tbl-spider-residual" class="anchored">
-
-<table class="table" style="margin-left: auto; margin-right: auto;"><caption>Tabela&nbsp;2:  Każdy punkt ma swoje odchylenie od średniej, które możemy policzyć. Dodatnie odchylenia oznaczają, że wartość jest wyższa od średniej, a ujemne, że jest niższa. </caption>
- <thead>
-  <tr>
-   <th style="text-align:right;"> wielkość pająka </th>
-   <th style="text-align:right;"> niepokój </th>
-   <th style="text-align:left;"> Si </th>
-  </tr>
- </thead>
+<table class="table table-sm table-striped" data-quarto-postprocess="true">
+<caption>Tabela&nbsp;2: Każdy punkt ma swoje odchylenie od średniej, które możemy policzyć. Dodatnie odchylenia oznaczają, że wartość jest wyższa od średniej, a ujemne, że jest niższa.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">niepokój</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Si</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:left;"> 2 - 10 = -8 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:left;"> 8 - 10 = -2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:left;"> 5 - 10 = -5 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:left;"> 8 - 10 = -2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 12 </td>
-   <td style="text-align:left;"> 12 - 10 = 2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:left;"> 11 - 10 = 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:left;"> 18 - 10 = 8 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:left;"> 16 - 10 = 6 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">2 - 10 = -8</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">8 - 10 = -2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">5 - 10 = -5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">8 - 10 = -2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">12 - 10 = 2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">11 - 10 = 1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">18 - 10 = 8</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">16 - 10 = 6</td>
+</tr>
 </tbody>
 </table>
-
 </div>
+
+
 </div>
 </div>
 <p>Średnia jest więc pewnym <strong>modelem</strong>, czyli służy nam jako uproszczony opis danych. Ponieważ modele są uproszczone, zawsze zawierają w sobie jakiś błąd. tym wypadku błędem jest po prostu odchylenie, które właśnie policzyliśmy.</p>
@@ -418,69 +420,70 @@ SS_T = \sum_{i=1}^N S_i^2 = \sum_{i=1}^N (x_i - \bar x)^2
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="tbl-lm-resid" class="anchored">
-
-<table class="table" style="margin-left: auto; margin-right: auto;"><caption>Tabela&nbsp;3:  Nowy model magicznie przewiduje niepokój z wielkości pająka (xM), ale nie robi tego doskonale. Tak jak dla średniej, możemy policzyć, jak wartość prawdziwa odchyla się od tej z modelu. </caption>
- <thead>
-  <tr>
-   <th style="text-align:right;"> wielkość pająka </th>
-   <th style="text-align:right;"> niepokój </th>
-   <th style="text-align:left;"> xM </th>
-   <th style="text-align:left;"> SR </th>
-  </tr>
- </thead>
+<table class="table table-sm table-striped" data-quarto-postprocess="true">
+<caption>Tabela&nbsp;3: Nowy model magicznie przewiduje niepokój z wielkości pająka (xM), ale nie robi tego doskonale. Tak jak dla średniej, możemy policzyć, jak wartość prawdziwa odchyla się od tej z modelu.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">niepokój</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">xM</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">SR</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:left;"> 2,92 </td>
-   <td style="text-align:left;"> -0,92 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:left;"> 4,94 </td>
-   <td style="text-align:left;"> 3,06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:left;"> 6,96 </td>
-   <td style="text-align:left;"> -1,96 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:left;"> 8,99 </td>
-   <td style="text-align:left;"> -0,99 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 12 </td>
-   <td style="text-align:left;"> 11,01 </td>
-   <td style="text-align:left;"> 0,99 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:left;"> 13,04 </td>
-   <td style="text-align:left;"> -2,04 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:left;"> 15,06 </td>
-   <td style="text-align:left;"> 2,94 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:left;"> 17,08 </td>
-   <td style="text-align:left;"> -1,08 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">2,92</td>
+<td style="text-align: left;">-0,92</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">4,94</td>
+<td style="text-align: left;">3,06</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">6,96</td>
+<td style="text-align: left;">-1,96</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">8,99</td>
+<td style="text-align: left;">-0,99</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">11,01</td>
+<td style="text-align: left;">0,99</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">13,04</td>
+<td style="text-align: left;">-2,04</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">15,06</td>
+<td style="text-align: left;">2,94</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">17,08</td>
+<td style="text-align: left;">-1,08</td>
+</tr>
 </tbody>
 </table>
-
 </div>
+
+
 </div>
 </div>
 <p>Możemy w pewnym sensie mówić o wariancji wokół średniej i wariancji wokół modelu<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Wariancja, niezależnie wokół czego, to suma kwadratów podzielona przez <span class="math inline">\(N-1\)</span>, więc naturalnie musielibyśmy teraz <span class="math inline">\(SS_T\)</span> i <span class="math inline">\(SS_R\)</span> podzielić przez <span class="math inline">\(N-1\)</span>. Jednak to, co chcę pokazać dalej, będzie łatwiejsze do zrozumienia, jeśli będziemy się posługiwać surowymi sumami kwadratów. Możemy więc zignorować dzielenie przez <span class="math inline">\(N-1\)</span>. Jeśli ktoś mi nie ufa, to może robić to, co za moment zrobię, ale wcześniej podzielić nasze sumy kwadratów przez <span class="math inline">\(N-1\)</span> i gwarantuję, że wyjdzie mu to samo<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p>
@@ -537,69 +540,70 @@ F = \frac{MS_M}{MS_R}
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="tbl-lm-ssm" class="anchored">
-
-<table class="table" style="margin-left: auto; margin-right: auto;"><caption>Tabela&nbsp;4:  Podstawą do policzenia SSM mogą być odchylenia modelu od średniej SM. Trzeba je policzyć dla każdego punktu, podnieść do kwadratu i dodać. </caption>
- <thead>
-  <tr>
-   <th style="text-align:right;"> wielkość pająka </th>
-   <th style="text-align:right;"> niepokój </th>
-   <th style="text-align:left;"> xM </th>
-   <th style="text-align:left;"> SM </th>
-  </tr>
- </thead>
+<table class="table table-sm table-striped" data-quarto-postprocess="true">
+<caption>Tabela&nbsp;4: Podstawą do policzenia SSM mogą być odchylenia modelu od średniej SM. Trzeba je policzyć dla każdego punktu, podnieść do kwadratu i dodać.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">niepokój</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">xM</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">SM</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:left;"> 2,92 </td>
-   <td style="text-align:left;"> 2,92 - 10 = -7,08 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:left;"> 4,94 </td>
-   <td style="text-align:left;"> 4,94 - 10 = -5,06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:left;"> 6,96 </td>
-   <td style="text-align:left;"> 6,96 - 10 = -3,04 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:left;"> 8,99 </td>
-   <td style="text-align:left;"> 8,99 - 10 = -1,01 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 12 </td>
-   <td style="text-align:left;"> 11,01 </td>
-   <td style="text-align:left;"> 11,01 - 10 = 1,01 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:left;"> 13,04 </td>
-   <td style="text-align:left;"> 13,04 - 10 = 3,04 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:left;"> 15,06 </td>
-   <td style="text-align:left;"> 15,06 - 10 = 5,06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:left;"> 17,08 </td>
-   <td style="text-align:left;"> 17,08 - 10 = 7,08 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">2,92</td>
+<td style="text-align: left;">2,92 - 10 = -7,08</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">4,94</td>
+<td style="text-align: left;">4,94 - 10 = -5,06</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">6,96</td>
+<td style="text-align: left;">6,96 - 10 = -3,04</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">8,99</td>
+<td style="text-align: left;">8,99 - 10 = -1,01</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">11,01</td>
+<td style="text-align: left;">11,01 - 10 = 1,01</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">13,04</td>
+<td style="text-align: left;">13,04 - 10 = 3,04</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">15,06</td>
+<td style="text-align: left;">15,06 - 10 = 5,06</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">17,08</td>
+<td style="text-align: left;">17,08 - 10 = 7,08</td>
+</tr>
 </tbody>
 </table>
-
 </div>
+
+
 </div>
 </div>
 <p>Jest to jeszcze jeden sposób myślenia o <span class="math inline">\(SS_M\)</span>, który może pojawić się w niektórych opracowaniach. Zgłębienie tego może dać nam nowy sposób myślenia o wariancji wyjaśnianej, ale nie jest konieczne, bo ostatecznie liczy nam to komputer. Rozumienie tego, jak działa <span class="math inline">\(SS_M\)</span> według poprzedniego sposobu (wariancja, która zniknęła, jak zmieniliśmy model ze średniej na jakiś inny) to i tak dużo i powinno wystarczyć.</p>
@@ -609,11 +613,11 @@ F = \frac{MS_M}{MS_R}
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
-<div id="ref-field2012" class="csl-entry" role="doc-biblioentry">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-field2012" class="csl-entry" role="listitem">
 Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
 </div>
-<div id="ref-plomin2001" class="csl-entry" role="doc-biblioentry">
+<div id="ref-plomin2001" class="csl-entry" role="listitem">
 Plomin, R., DeFries, J., McClearn, G., &amp; McGuffin, P. (2001). <em>Genetyka zachowania</em>. Warszawa: Wydawnictwo Naukowe PWN.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
@@ -777,9 +781,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -844,6 +862,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -886,7 +990,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 
