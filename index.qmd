@@ -1,5 +1,5 @@
 ---
-title: "Jakub Jędrusiak -- blog okołostatystyczny"
+title: "Nieobliczalne -- blog okołostatystyczny"
 listing:
   contents: posts
   sort: "date desc"
