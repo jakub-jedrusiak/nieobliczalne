@@ -2,6 +2,6 @@ author: "Jakub Jędrusiak"
 number-sections: true
 editor: source
 comments:
-  utterances:
+  giscus:
     repo: jakub-jedrusiak/nieobliczalne
-    theme: github-dark
+    theme: dark
