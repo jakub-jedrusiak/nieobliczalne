@@ -22,7 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -86,12 +85,11 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging-indent div.csl-entry {
+.hanging div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -105,7 +103,8 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}</style>
+}
+</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -221,18 +220,18 @@ cookieconsent.run({
     <h2 id="toc-title">Na tej stronie</h2>
    
   <ul>
-  <li><a href="#automatyzacja-w-czyszczeniu-danych" id="toc-automatyzacja-w-czyszczeniu-danych" class="nav-link active" data-scroll-target="#automatyzacja-w-czyszczeniu-danych"><span class="header-section-number">1</span> Automatyzacja w czyszczeniu danych</a></li>
-  <li><a href="#listy" id="toc-listy" class="nav-link" data-scroll-target="#listy"><span class="header-section-number">2</span> Listy</a>
+  <li><a href="#automatyzacja-w-czyszczeniu-danych" id="toc-automatyzacja-w-czyszczeniu-danych" class="nav-link active" data-scroll-target="#automatyzacja-w-czyszczeniu-danych"><span class="toc-section-number">1</span>  Automatyzacja w czyszczeniu danych</a></li>
+  <li><a href="#listy" id="toc-listy" class="nav-link" data-scroll-target="#listy"><span class="toc-section-number">2</span>  Listy</a>
   <ul class="collapse">
-  <li><a href="#masowe-ładowanie-danych-z-list.files" id="toc-masowe-ładowanie-danych-z-list.files" class="nav-link" data-scroll-target="#masowe-ładowanie-danych-z-list.files"><span class="header-section-number">2.1</span> Masowe ładowanie danych z <code>list.files</code></a></li>
-  <li><a href="#masowe-czyszczenie-z-map-lub-apply" id="toc-masowe-czyszczenie-z-map-lub-apply" class="nav-link" data-scroll-target="#masowe-czyszczenie-z-map-lub-apply"><span class="header-section-number">2.2</span> Masowe czyszczenie z <code>map</code> lub <code>apply</code></a></li>
+  <li><a href="#masowe-ładowanie-danych-z-list.files" id="toc-masowe-ładowanie-danych-z-list.files" class="nav-link" data-scroll-target="#masowe-ładowanie-danych-z-list.files"><span class="toc-section-number">2.1</span>  Masowe ładowanie danych z <code>list.files</code></a></li>
+  <li><a href="#masowe-czyszczenie-z-map-lub-apply" id="toc-masowe-czyszczenie-z-map-lub-apply" class="nav-link" data-scroll-target="#masowe-czyszczenie-z-map-lub-apply"><span class="toc-section-number">2.2</span>  Masowe czyszczenie z <code>map</code> lub <code>apply</code></a></li>
   </ul></li>
-  <li><a href="#pętle" id="toc-pętle" class="nav-link" data-scroll-target="#pętle"><span class="header-section-number">3</span> Pętle</a>
+  <li><a href="#pętle" id="toc-pętle" class="nav-link" data-scroll-target="#pętle"><span class="toc-section-number">3</span>  Pętle</a>
   <ul class="collapse">
-  <li><a href="#pętle-for" id="toc-pętle-for" class="nav-link" data-scroll-target="#pętle-for"><span class="header-section-number">3.1</span> Pętle <code>for</code></a></li>
-  <li><a href="#pętle-while" id="toc-pętle-while" class="nav-link" data-scroll-target="#pętle-while"><span class="header-section-number">3.2</span> Pętle <code>while</code></a></li>
+  <li><a href="#pętle-for" id="toc-pętle-for" class="nav-link" data-scroll-target="#pętle-for"><span class="toc-section-number">3.1</span>  Pętle <code>for</code></a></li>
+  <li><a href="#pętle-while" id="toc-pętle-while" class="nav-link" data-scroll-target="#pętle-while"><span class="toc-section-number">3.2</span>  Pętle <code>while</code></a></li>
   </ul></li>
-  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">4</span> Podsumowanie</a></li>
+  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="toc-section-number">4</span>  Podsumowanie</a></li>
   </ul>
 </nav>
     </div>
@@ -594,8 +593,8 @@ cookieconsent.run({
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
-<div id="ref-kowal_predictors_2022" class="csl-entry" role="listitem">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-kowal_predictors_2022" class="csl-entry" role="doc-biblioentry">
 Kowal, M., Sorokowski, P., Pisanski, K., Valentova, J. V., Varella, M. A. C., Frederick, D. A., … Zumárraga-Espinosa, M. (2022). Predictors of enhancing human physical attractiveness: <span>Data</span> from 93 countries. <em>Evolution and Human Behavior</em>, <em>43</em>(6), 455–474. <a href="https://doi.org/10.1016/j.evolhumbehav.2022.08.003">https://doi.org/10.1016/j.evolhumbehav.2022.08.003</a>
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
