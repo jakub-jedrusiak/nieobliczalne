@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-99.9.9">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,10 +19,9 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -49,19 +48,48 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging-indent div.csl-entry {
+.hanging div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -75,7 +103,8 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}</style>
+}
+</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -160,24 +189,24 @@ cookieconsent.run({
     <span class="navbar-title">Nieobliczalne</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Szukaj"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Przełącz nawigację" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html" rel="" target="">
+    <a class="nav-link" href="../index.html">
  <span class="menu-text">Strona główna</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html" rel="" target="">
+    <a class="nav-link" href="../about.html">
  <span class="menu-text">O mnie</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
-</div>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -191,87 +220,87 @@ cookieconsent.run({
     <h2 id="toc-title">Na tej stronie</h2>
    
   <ul>
-  <li><a href="#sec-reasons" id="toc-sec-reasons" class="nav-link active" data-scroll-target="#sec-reasons"><span class="header-section-number">1</span> 10 powodów dla których warto uczyć się R</a></li>
-  <li><a href="#sec-preparation" id="toc-sec-preparation" class="nav-link" data-scroll-target="#sec-preparation"><span class="header-section-number">2</span> Przygotowanie</a></li>
-  <li><a href="#sec-env" id="toc-sec-env" class="nav-link" data-scroll-target="#sec-env"><span class="header-section-number">3</span> Środowisko R i RStudio</a>
+  <li><a href="#sec-reasons" id="toc-sec-reasons" class="nav-link active" data-scroll-target="#sec-reasons"><span class="toc-section-number">1</span>  10 powodów dla których warto uczyć się R</a></li>
+  <li><a href="#sec-preparation" id="toc-sec-preparation" class="nav-link" data-scroll-target="#sec-preparation"><span class="toc-section-number">2</span>  Przygotowanie</a></li>
+  <li><a href="#sec-env" id="toc-sec-env" class="nav-link" data-scroll-target="#sec-env"><span class="toc-section-number">3</span>  Środowisko R i RStudio</a>
   <ul class="collapse">
-  <li><a href="#sec-console" id="toc-sec-console" class="nav-link" data-scroll-target="#sec-console"><span class="header-section-number">3.1</span> Konsola, zmienne i matematyka</a></li>
-  <li><a href="#sec-functions" id="toc-sec-functions" class="nav-link" data-scroll-target="#sec-functions"><span class="header-section-number">3.2</span> Funkcje</a></li>
-  <li><a href="#sec-docs" id="toc-sec-docs" class="nav-link" data-scroll-target="#sec-docs"><span class="header-section-number">3.3</span> Dokumentacja</a></li>
-  <li><a href="#sec-scripts" id="toc-sec-scripts" class="nav-link" data-scroll-target="#sec-scripts"><span class="header-section-number">3.4</span> Skrypty</a></li>
-  <li><a href="#sec-comments" id="toc-sec-comments" class="nav-link" data-scroll-target="#sec-comments"><span class="header-section-number">3.5</span> Komentarze</a></li>
-  <li><a href="#sec-projects" id="toc-sec-projects" class="nav-link" data-scroll-target="#sec-projects"><span class="header-section-number">3.6</span> Projekty</a></li>
-  <li><a href="#sec-libs" id="toc-sec-libs" class="nav-link" data-scroll-target="#sec-libs"><span class="header-section-number">3.7</span> Pakiety</a></li>
+  <li><a href="#sec-console" id="toc-sec-console" class="nav-link" data-scroll-target="#sec-console"><span class="toc-section-number">3.1</span>  Konsola, zmienne i matematyka</a></li>
+  <li><a href="#sec-functions" id="toc-sec-functions" class="nav-link" data-scroll-target="#sec-functions"><span class="toc-section-number">3.2</span>  Funkcje</a></li>
+  <li><a href="#sec-docs" id="toc-sec-docs" class="nav-link" data-scroll-target="#sec-docs"><span class="toc-section-number">3.3</span>  Dokumentacja</a></li>
+  <li><a href="#sec-scripts" id="toc-sec-scripts" class="nav-link" data-scroll-target="#sec-scripts"><span class="toc-section-number">3.4</span>  Skrypty</a></li>
+  <li><a href="#sec-comments" id="toc-sec-comments" class="nav-link" data-scroll-target="#sec-comments"><span class="toc-section-number">3.5</span>  Komentarze</a></li>
+  <li><a href="#sec-projects" id="toc-sec-projects" class="nav-link" data-scroll-target="#sec-projects"><span class="toc-section-number">3.6</span>  Projekty</a></li>
+  <li><a href="#sec-libs" id="toc-sec-libs" class="nav-link" data-scroll-target="#sec-libs"><span class="toc-section-number">3.7</span>  Pakiety</a></li>
   </ul></li>
-  <li><a href="#sec-loading" id="toc-sec-loading" class="nav-link" data-scroll-target="#sec-loading"><span class="header-section-number">4</span> Ładowanie danych z <code>readr</code></a></li>
-  <li><a href="#sec-wrangling" id="toc-sec-wrangling" class="nav-link" data-scroll-target="#sec-wrangling"><span class="header-section-number">5</span> Data wrangling</a>
+  <li><a href="#sec-loading" id="toc-sec-loading" class="nav-link" data-scroll-target="#sec-loading"><span class="toc-section-number">4</span>  Ładowanie danych z <code>readr</code></a></li>
+  <li><a href="#sec-wrangling" id="toc-sec-wrangling" class="nav-link" data-scroll-target="#sec-wrangling"><span class="toc-section-number">5</span>  Data wrangling</a>
   <ul class="collapse">
-  <li><a href="#sec-choosing" id="toc-sec-choosing" class="nav-link" data-scroll-target="#sec-choosing"><span class="header-section-number">5.1</span> Wybieranie kolumn i wierszy</a>
+  <li><a href="#sec-choosing" id="toc-sec-choosing" class="nav-link" data-scroll-target="#sec-choosing"><span class="toc-section-number">5.1</span>  Wybieranie kolumn i wierszy</a>
   <ul class="collapse">
-  <li><a href="#sec-filter" id="toc-sec-filter" class="nav-link" data-scroll-target="#sec-filter"><span class="header-section-number">5.1.1</span> Filtrowanie wierszy z <code>dplyr::filter</code></a></li>
-  <li><a href="#sec-select" id="toc-sec-select" class="nav-link" data-scroll-target="#sec-select"><span class="header-section-number">5.1.2</span> Wybieranie kolumn z <code>dplyr::select</code></a></li>
+  <li><a href="#sec-filter" id="toc-sec-filter" class="nav-link" data-scroll-target="#sec-filter"><span class="toc-section-number">5.1.1</span>  Filtrowanie wierszy z <code>dplyr::filter</code></a></li>
+  <li><a href="#sec-select" id="toc-sec-select" class="nav-link" data-scroll-target="#sec-select"><span class="toc-section-number">5.1.2</span>  Wybieranie kolumn z <code>dplyr::select</code></a></li>
   </ul></li>
-  <li><a href="#sec-rename" id="toc-sec-rename" class="nav-link" data-scroll-target="#sec-rename"><span class="header-section-number">5.2</span> Zmiana nazw kolumn z <code>dplyr::rename</code> i <code>purrr::set_names</code></a></li>
-  <li><a href="#sec-values" id="toc-sec-values" class="nav-link" data-scroll-target="#sec-values"><span class="header-section-number">5.3</span> Zmiana wartości komórek z <code>dplyr::mutate</code> i <code>readr::parse_number</code></a>
+  <li><a href="#sec-rename" id="toc-sec-rename" class="nav-link" data-scroll-target="#sec-rename"><span class="toc-section-number">5.2</span>  Zmiana nazw kolumn z <code>dplyr::rename</code> i <code>purrr::set_names</code></a></li>
+  <li><a href="#sec-values" id="toc-sec-values" class="nav-link" data-scroll-target="#sec-values"><span class="toc-section-number">5.3</span>  Zmiana wartości komórek z <code>dplyr::mutate</code> i <code>readr::parse_number</code></a>
   <ul class="collapse">
-  <li><a href="#sec-across" id="toc-sec-across" class="nav-link" data-scroll-target="#sec-across"><span class="header-section-number">5.3.1</span> Przekształcanie wielu kolumn jednocześnie z <code>dplyr::across</code></a></li>
-  <li><a href="#sec-recode" id="toc-sec-recode" class="nav-link" data-scroll-target="#sec-recode"><span class="header-section-number">5.3.2</span> Odwracanie punktacji</a></li>
-  <li><a href="#sec-customfunctions" id="toc-sec-customfunctions" class="nav-link" data-scroll-target="#sec-customfunctions"><span class="header-section-number">5.3.3</span> Własne funkcje</a></li>
+  <li><a href="#sec-across" id="toc-sec-across" class="nav-link" data-scroll-target="#sec-across"><span class="toc-section-number">5.3.1</span>  Przekształcanie wielu kolumn jednocześnie z <code>dplyr::across</code></a></li>
+  <li><a href="#sec-recode" id="toc-sec-recode" class="nav-link" data-scroll-target="#sec-recode"><span class="toc-section-number">5.3.2</span>  Odwracanie punktacji</a></li>
+  <li><a href="#sec-customfunctions" id="toc-sec-customfunctions" class="nav-link" data-scroll-target="#sec-customfunctions"><span class="toc-section-number">5.3.3</span>  Własne funkcje</a></li>
   </ul></li>
-  <li><a href="#sec-newcols" id="toc-sec-newcols" class="nav-link" data-scroll-target="#sec-newcols"><span class="header-section-number">5.4</span> Nowe kolumny</a>
+  <li><a href="#sec-newcols" id="toc-sec-newcols" class="nav-link" data-scroll-target="#sec-newcols"><span class="toc-section-number">5.4</span>  Nowe kolumny</a>
   <ul class="collapse">
-  <li><a href="#sec-pick" id="toc-sec-pick" class="nav-link" data-scroll-target="#sec-pick"><span class="header-section-number">5.4.1</span> Agregowanie danych z wierszy z <code>dplyr::pick</code></a></li>
-  <li><a href="#sec-casewhen" id="toc-sec-casewhen" class="nav-link" data-scroll-target="#sec-casewhen"><span class="header-section-number">5.4.2</span> Kategoryzowanie przypadków i przekodowywanie z <code>dplyr::case_when</code></a></li>
+  <li><a href="#sec-pick" id="toc-sec-pick" class="nav-link" data-scroll-target="#sec-pick"><span class="toc-section-number">5.4.1</span>  Agregowanie danych z wierszy z <code>dplyr::pick</code></a></li>
+  <li><a href="#sec-casewhen" id="toc-sec-casewhen" class="nav-link" data-scroll-target="#sec-casewhen"><span class="toc-section-number">5.4.2</span>  Kategoryzowanie przypadków i przekodowywanie z <code>dplyr::case_when</code></a></li>
   </ul></li>
-  <li><a href="#sortowanie-i-kolejność-kolumn" id="toc-sortowanie-i-kolejność-kolumn" class="nav-link" data-scroll-target="#sortowanie-i-kolejność-kolumn"><span class="header-section-number">5.5</span> Sortowanie i kolejność kolumn</a>
+  <li><a href="#sortowanie-i-kolejność-kolumn" id="toc-sortowanie-i-kolejność-kolumn" class="nav-link" data-scroll-target="#sortowanie-i-kolejność-kolumn"><span class="toc-section-number">5.5</span>  Sortowanie i kolejność kolumn</a>
   <ul class="collapse">
-  <li><a href="#sec-arrange" id="toc-sec-arrange" class="nav-link" data-scroll-target="#sec-arrange"><span class="header-section-number">5.5.1</span> Sortowanie z <code>dplyr::arrange</code></a></li>
-  <li><a href="#sec-relocate" id="toc-sec-relocate" class="nav-link" data-scroll-target="#sec-relocate"><span class="header-section-number">5.5.2</span> Kolejność kolumn z <code>dplyr::relocate</code></a></li>
+  <li><a href="#sec-arrange" id="toc-sec-arrange" class="nav-link" data-scroll-target="#sec-arrange"><span class="toc-section-number">5.5.1</span>  Sortowanie z <code>dplyr::arrange</code></a></li>
+  <li><a href="#sec-relocate" id="toc-sec-relocate" class="nav-link" data-scroll-target="#sec-relocate"><span class="toc-section-number">5.5.2</span>  Kolejność kolumn z <code>dplyr::relocate</code></a></li>
   </ul></li>
-  <li><a href="#sec-save" id="toc-sec-save" class="nav-link" data-scroll-target="#sec-save"><span class="header-section-number">5.6</span> Zapisywanie zmian z <code>&lt;-</code></a></li>
-  <li><a href="#sec-summarise" id="toc-sec-summarise" class="nav-link" data-scroll-target="#sec-summarise"><span class="header-section-number">5.7</span> Grupowanie (<code>dplyr::group_by</code>) i agregowanie (<code>dplyr::summarise</code>)</a></li>
-  <li><a href="#sec-pivot" id="toc-sec-pivot" class="nav-link" data-scroll-target="#sec-pivot"><span class="header-section-number">5.8</span> Format długi i szeroki z <code>tidyr::pivot_*</code></a></li>
-  <li><a href="#sec-join" id="toc-sec-join" class="nav-link" data-scroll-target="#sec-join"><span class="header-section-number">5.9</span> Retesty czyli złączenia (<em>joins</em>)</a></li>
+  <li><a href="#sec-save" id="toc-sec-save" class="nav-link" data-scroll-target="#sec-save"><span class="toc-section-number">5.6</span>  Zapisywanie zmian z <code>&lt;-</code></a></li>
+  <li><a href="#sec-summarise" id="toc-sec-summarise" class="nav-link" data-scroll-target="#sec-summarise"><span class="toc-section-number">5.7</span>  Grupowanie (<code>dplyr::group_by</code>) i agregowanie (<code>dplyr::summarise</code>)</a></li>
+  <li><a href="#sec-pivot" id="toc-sec-pivot" class="nav-link" data-scroll-target="#sec-pivot"><span class="toc-section-number">5.8</span>  Format długi i szeroki z <code>tidyr::pivot_*</code></a></li>
+  <li><a href="#sec-join" id="toc-sec-join" class="nav-link" data-scroll-target="#sec-join"><span class="toc-section-number">5.9</span>  Retesty czyli złączenia (<em>joins</em>)</a></li>
   </ul></li>
-  <li><a href="#sec-exploration" id="toc-sec-exploration" class="nav-link" data-scroll-target="#sec-exploration"><span class="header-section-number">6</span> Eksploracja danych</a>
+  <li><a href="#sec-exploration" id="toc-sec-exploration" class="nav-link" data-scroll-target="#sec-exploration"><span class="toc-section-number">6</span>  Eksploracja danych</a>
   <ul class="collapse">
-  <li><a href="#sec-get_summary_stats" id="toc-sec-get_summary_stats" class="nav-link" data-scroll-target="#sec-get_summary_stats"><span class="header-section-number">6.1</span> Statystyki opisowe z <code>rstatix::get_summary_stats</code></a></li>
-  <li><a href="#sec-freq_table" id="toc-sec-freq_table" class="nav-link" data-scroll-target="#sec-freq_table"><span class="header-section-number">6.2</span> Tabele liczności z <code>rstatix::freq_table</code></a></li>
-  <li><a href="#sec-cor_mat" id="toc-sec-cor_mat" class="nav-link" data-scroll-target="#sec-cor_mat"><span class="header-section-number">6.3</span> Macierze korelacji i ich istotność z <code>rstatix::cor_mat</code></a></li>
+  <li><a href="#sec-get_summary_stats" id="toc-sec-get_summary_stats" class="nav-link" data-scroll-target="#sec-get_summary_stats"><span class="toc-section-number">6.1</span>  Statystyki opisowe z <code>rstatix::get_summary_stats</code></a></li>
+  <li><a href="#sec-freq_table" id="toc-sec-freq_table" class="nav-link" data-scroll-target="#sec-freq_table"><span class="toc-section-number">6.2</span>  Tabele liczności z <code>rstatix::freq_table</code></a></li>
+  <li><a href="#sec-cor_mat" id="toc-sec-cor_mat" class="nav-link" data-scroll-target="#sec-cor_mat"><span class="toc-section-number">6.3</span>  Macierze korelacji i ich istotność z <code>rstatix::cor_mat</code></a></li>
   </ul></li>
-  <li><a href="#sec-ggplot" id="toc-sec-ggplot" class="nav-link" data-scroll-target="#sec-ggplot"><span class="header-section-number">7</span> Wykresy z <code>ggplot2</code></a>
+  <li><a href="#sec-ggplot" id="toc-sec-ggplot" class="nav-link" data-scroll-target="#sec-ggplot"><span class="toc-section-number">7</span>  Wykresy z <code>ggplot2</code></a>
   <ul class="collapse">
-  <li><a href="#sec-aes" id="toc-sec-aes" class="nav-link" data-scroll-target="#sec-aes"><span class="header-section-number">7.1</span> Mapowanie estetyk (<code>aes</code>)</a></li>
-  <li><a href="#sec-geom" id="toc-sec-geom" class="nav-link" data-scroll-target="#sec-geom"><span class="header-section-number">7.2</span> Obiekty <code>geom_*</code></a></li>
-  <li><a href="#sec-labs" id="toc-sec-labs" class="nav-link" data-scroll-target="#sec-labs"><span class="header-section-number">7.3</span> Tytuły osi i wykresu (<code>labs</code>)</a></li>
-  <li><a href="#sec-theme" id="toc-sec-theme" class="nav-link" data-scroll-target="#sec-theme"><span class="header-section-number">7.4</span> Wygląd wykresów (<code>theme_*</code>)</a></li>
-  <li><a href="#sec-esquisse" id="toc-sec-esquisse" class="nav-link" data-scroll-target="#sec-esquisse"><span class="header-section-number">7.5</span> <code>esquisse</code></a></li>
+  <li><a href="#sec-aes" id="toc-sec-aes" class="nav-link" data-scroll-target="#sec-aes"><span class="toc-section-number">7.1</span>  Mapowanie estetyk (<code>aes</code>)</a></li>
+  <li><a href="#sec-geom" id="toc-sec-geom" class="nav-link" data-scroll-target="#sec-geom"><span class="toc-section-number">7.2</span>  Obiekty <code>geom_*</code></a></li>
+  <li><a href="#sec-labs" id="toc-sec-labs" class="nav-link" data-scroll-target="#sec-labs"><span class="toc-section-number">7.3</span>  Tytuły osi i wykresu (<code>labs</code>)</a></li>
+  <li><a href="#sec-theme" id="toc-sec-theme" class="nav-link" data-scroll-target="#sec-theme"><span class="toc-section-number">7.4</span>  Wygląd wykresów (<code>theme_*</code>)</a></li>
+  <li><a href="#sec-esquisse" id="toc-sec-esquisse" class="nav-link" data-scroll-target="#sec-esquisse"><span class="toc-section-number">7.5</span>  <code>esquisse</code></a></li>
   </ul></li>
-  <li><a href="#sec-tests" id="toc-sec-tests" class="nav-link" data-scroll-target="#sec-tests"><span class="header-section-number">8</span> Modele statystyczne</a>
+  <li><a href="#sec-tests" id="toc-sec-tests" class="nav-link" data-scroll-target="#sec-tests"><span class="toc-section-number">8</span>  Modele statystyczne</a>
   <ul class="collapse">
-  <li><a href="#sec-broom" id="toc-sec-broom" class="nav-link" data-scroll-target="#sec-broom"><span class="header-section-number">8.1</span> Czyste wyniki, czyli pakiet <code>broom</code></a>
+  <li><a href="#sec-broom" id="toc-sec-broom" class="nav-link" data-scroll-target="#sec-broom"><span class="toc-section-number">8.1</span>  Czyste wyniki, czyli pakiet <code>broom</code></a>
   <ul class="collapse">
-  <li><a href="#sec-glance" id="toc-sec-glance" class="nav-link" data-scroll-target="#sec-glance"><span class="header-section-number">8.1.1</span> <code>glance</code></a></li>
-  <li><a href="#sec-tidy" id="toc-sec-tidy" class="nav-link" data-scroll-target="#sec-tidy"><span class="header-section-number">8.1.2</span> <code>tidy</code></a></li>
-  <li><a href="#sec-augment" id="toc-sec-augment" class="nav-link" data-scroll-target="#sec-augment"><span class="header-section-number">8.1.3</span> <code>augment</code></a></li>
+  <li><a href="#sec-glance" id="toc-sec-glance" class="nav-link" data-scroll-target="#sec-glance"><span class="toc-section-number">8.1.1</span>  <code>glance</code></a></li>
+  <li><a href="#sec-tidy" id="toc-sec-tidy" class="nav-link" data-scroll-target="#sec-tidy"><span class="toc-section-number">8.1.2</span>  <code>tidy</code></a></li>
+  <li><a href="#sec-augment" id="toc-sec-augment" class="nav-link" data-scroll-target="#sec-augment"><span class="toc-section-number">8.1.3</span>  <code>augment</code></a></li>
   </ul></li>
-  <li><a href="#sec-rstatix" id="toc-sec-rstatix" class="nav-link" data-scroll-target="#sec-rstatix"><span class="header-section-number">8.2</span> Swiss Army Knife w R, czyli <code>rstatix</code></a></li>
+  <li><a href="#sec-rstatix" id="toc-sec-rstatix" class="nav-link" data-scroll-target="#sec-rstatix"><span class="toc-section-number">8.2</span>  Swiss Army Knife w R, czyli <code>rstatix</code></a></li>
   </ul></li>
-  <li><a href="#sec-formatting" id="toc-sec-formatting" class="nav-link" data-scroll-target="#sec-formatting"><span class="header-section-number">9</span> Formatowanie kodu</a>
+  <li><a href="#sec-formatting" id="toc-sec-formatting" class="nav-link" data-scroll-target="#sec-formatting"><span class="toc-section-number">9</span>  Formatowanie kodu</a>
   <ul class="collapse">
-  <li><a href="#styler" id="toc-styler" class="nav-link" data-scroll-target="#styler"><span class="header-section-number">9.1</span> <code>styler</code></a></li>
-  <li><a href="#lintr" id="toc-lintr" class="nav-link" data-scroll-target="#lintr"><span class="header-section-number">9.2</span> <code>lintr</code></a></li>
+  <li><a href="#styler" id="toc-styler" class="nav-link" data-scroll-target="#styler"><span class="toc-section-number">9.1</span>  <code>styler</code></a></li>
+  <li><a href="#lintr" id="toc-lintr" class="nav-link" data-scroll-target="#lintr"><span class="toc-section-number">9.2</span>  <code>lintr</code></a></li>
   </ul></li>
-  <li><a href="#sec-debug" id="toc-sec-debug" class="nav-link" data-scroll-target="#sec-debug"><span class="header-section-number">10</span> Debugowanie</a>
+  <li><a href="#sec-debug" id="toc-sec-debug" class="nav-link" data-scroll-target="#sec-debug"><span class="toc-section-number">10</span>  Debugowanie</a>
   <ul class="collapse">
-  <li><a href="#sec-diag" id="toc-sec-diag" class="nav-link" data-scroll-target="#sec-diag"><span class="header-section-number">10.1</span> Diagnoza</a>
+  <li><a href="#sec-diag" id="toc-sec-diag" class="nav-link" data-scroll-target="#sec-diag"><span class="toc-section-number">10.1</span>  Diagnoza</a>
   <ul class="collapse">
-  <li><a href="#viewpipesteps" id="toc-viewpipesteps" class="nav-link" data-scroll-target="#viewpipesteps"><span class="header-section-number">10.1.1</span> <code>ViewPipeSteps</code></a></li>
-  <li><a href="#metoda-gumowej-kaczuszki" id="toc-metoda-gumowej-kaczuszki" class="nav-link" data-scroll-target="#metoda-gumowej-kaczuszki"><span class="header-section-number">10.1.2</span> Metoda gumowej kaczuszki</a></li>
+  <li><a href="#viewpipesteps" id="toc-viewpipesteps" class="nav-link" data-scroll-target="#viewpipesteps"><span class="toc-section-number">10.1.1</span>  <code>ViewPipeSteps</code></a></li>
+  <li><a href="#metoda-gumowej-kaczuszki" id="toc-metoda-gumowej-kaczuszki" class="nav-link" data-scroll-target="#metoda-gumowej-kaczuszki"><span class="toc-section-number">10.1.2</span>  Metoda gumowej kaczuszki</a></li>
   </ul></li>
-  <li><a href="#rozwiązywanie-problemu" id="toc-rozwiązywanie-problemu" class="nav-link" data-scroll-target="#rozwiązywanie-problemu"><span class="header-section-number">10.2</span> Rozwiązywanie problemu</a></li>
+  <li><a href="#rozwiązywanie-problemu" id="toc-rozwiązywanie-problemu" class="nav-link" data-scroll-target="#rozwiązywanie-problemu"><span class="toc-section-number">10.2</span>  Rozwiązywanie problemu</a></li>
   </ul></li>
-  <li><a href="#sec-ending" id="toc-sec-ending" class="nav-link" data-scroll-target="#sec-ending"><span class="header-section-number">11</span> Posłowie</a></li>
+  <li><a href="#sec-ending" id="toc-sec-ending" class="nav-link" data-scroll-target="#sec-ending"><span class="toc-section-number">11</span>  Posłowie</a></li>
   </ul>
 </nav>
     </div>
@@ -2228,14 +2257,14 @@ cookieconsent.run({
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
-<div id="ref-field2012" class="csl-entry" role="listitem">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-field2012" class="csl-entry" role="doc-biblioentry">
 Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
 </div>
-<div id="ref-wickham2020" class="csl-entry" role="listitem">
+<div id="ref-wickham2020" class="csl-entry" role="doc-biblioentry">
 Wickham, H., &amp; Grolemund, G. (2020). <em>J<span>ę</span>zyk R: kompletny zestaw narz<span>ę</span>dzi dla analityków danych</em>. Gliwice: Wydawnictwo Helion.
 </div>
-<div id="ref-wilkinson_grammar_2005" class="csl-entry" role="listitem">
+<div id="ref-wilkinson_grammar_2005" class="csl-entry" role="doc-biblioentry">
 Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>. New York: Springer-Verlag. <a href="https://doi.org/10.1007/0-387-28695-0">https://doi.org/10.1007/0-387-28695-0</a>
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
@@ -2423,23 +2452,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
+    target: function(trigger) {
+      return trigger.previousElementSibling;
     }
   });
   clipboard.on('success', function(e) {
@@ -2504,92 +2519,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -2632,13 +2561,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
-      &nbsp;
-    </div>   
-    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
-    <div class="nav-footer-right">
-      &nbsp;
-    </div>
+      <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
   </div>
 </footer>
 
