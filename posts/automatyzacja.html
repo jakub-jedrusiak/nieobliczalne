@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-99.9.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jakub Jędrusiak">
+<meta name="description" content="Automatyzacja to jedna z najpotężniejszych zalet R, której nie mają programy statystyczne oparte na interfejsie graficznym. Jeśli chcemy zrobić jakąś czynność wiele razy tak samo lub prawie tak samo, możemy wykorzystać siłę programowania i zrobić to setki razy kilkoma linijkami. Postaram się to tutaj pokazać.">
+
+<title>Nieobliczalne - Listy, pętle i automatyzacja w R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Brak wyników",
+    "search-matching-documents-text": "dopasowane dokumenty",
+    "search-copy-link-title": "Kopiuj link do wyszukiwania",
+    "search-hide-matches-text": "Ukryj dodatkowe dopasowania",
+    "search-more-match-text": "więcej dopasowań w tym dokumencie",
+    "search-more-matches-text": "więcej dopasowań w tym dokumencie",
+    "search-clear-button-title": "Wyczyść",
+    "search-detached-cancel-button-title": "Anuluj",
+    "search-submit-button-title": "Zatwierdź"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-FKTMH2V23V"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-FKTMH2V23V', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"headline",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  });
+});
+</script> 
+  
+<script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3239011499449859" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Nieobliczalne</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Szukaj"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Przełącz nawigację" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Strona główna</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html" rel="" target="">
+ <span class="menu-text">O mnie</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Na tej stronie</h2>
+   
+  <ul>
+  <li><a href="#automatyzacja-w-czyszczeniu-danych" id="toc-automatyzacja-w-czyszczeniu-danych" class="nav-link active" data-scroll-target="#automatyzacja-w-czyszczeniu-danych"><span class="header-section-number">1</span> Automatyzacja w czyszczeniu danych</a></li>
+  <li><a href="#listy" id="toc-listy" class="nav-link" data-scroll-target="#listy"><span class="header-section-number">2</span> Listy</a>
+  <ul class="collapse">
+  <li><a href="#masowe-ładowanie-danych-z-list.files" id="toc-masowe-ładowanie-danych-z-list.files" class="nav-link" data-scroll-target="#masowe-ładowanie-danych-z-list.files"><span class="header-section-number">2.1</span> Masowe ładowanie danych z <code>list.files</code></a></li>
+  <li><a href="#masowe-czyszczenie-z-map-lub-apply" id="toc-masowe-czyszczenie-z-map-lub-apply" class="nav-link" data-scroll-target="#masowe-czyszczenie-z-map-lub-apply"><span class="header-section-number">2.2</span> Masowe czyszczenie z <code>map</code> lub <code>apply</code></a></li>
+  </ul></li>
+  <li><a href="#pętle" id="toc-pętle" class="nav-link" data-scroll-target="#pętle"><span class="header-section-number">3</span> Pętle</a>
+  <ul class="collapse">
+  <li><a href="#pętle-for" id="toc-pętle-for" class="nav-link" data-scroll-target="#pętle-for"><span class="header-section-number">3.1</span> Pętle <code>for</code></a></li>
+  <li><a href="#pętle-while" id="toc-pętle-while" class="nav-link" data-scroll-target="#pętle-while"><span class="header-section-number">3.2</span> Pętle <code>while</code></a></li>
+  </ul></li>
+  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">4</span> Podsumowanie</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Listy, pętle i automatyzacja w R</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Automatyzacja to jedna z najpotężniejszych zalet R, której nie mają programy statystyczne oparte na interfejsie graficznym. Jeśli chcemy zrobić jakąś czynność wiele razy tak samo lub prawie tak samo, możemy wykorzystać siłę programowania i zrobić to setki razy kilkoma linijkami. Postaram się to tutaj pokazać.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jakub Jędrusiak </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Opublikowano</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">8 marca 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Nie znoszę mechanicznej pracy. Jestem jedną z tych osób, które wolą spędzić 30 minut na automatyzacji czegoś, co ręcznie zrobiłbym w 15 minut. Ale ma to swoje zalety. Po pierwsze poświęciłem na to tyle czasu, że teraz jestem w stanie wiele rzeczy zautomatyzować dość szybko. Tym doświadczeniem chcę się też podzielić. Po drugie jeśli praca manualna wielokrotnie się powtarza, netto oszczędzam czas, mimo że na początku muszę zainwestować tego czasu więcej. Raz zautomatyzowana czynność jest wielokrotnego użytku. Po trzecie jeśli automatyzujemy, to tyle samo zajmuje wyczyszczenie 1 pliku i 100 plików zajmuje tyle samo czasu. Jeśli liczymy, to 100 plików to 100 razy więcej czasu. Po czwarte – mam ciekawsze rzeczy do roboty niż wypisywanie kolejnych liczb. Automatyzacja mnie chociaż nie nudzi, a mogę poświęcić swoje zasoby na opracowywanie, planowanie czy interpretacja.</p>
+<section id="automatyzacja-w-czyszczeniu-danych" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Automatyzacja w czyszczeniu danych</h1>
+<p>Weźmy sobie za przykład następującą sytuację – wykonaliśmy eksperyment w programie PsychoPy i zbadaliśmy 35 osób. Nasz eksperyment dotyczył tego, na ile osoby będą w stanie zapamiętać historyjkę opowiadaną im w prawej słuchawce, jeśli w lewej słuchawce będzie im puszczany rozpraszacz. Mamy przy okazji dwa warunki, łatwy i trudny, w zależności od tego, jak intensywnie zachodziło rozpraszanie. Ze względu na specyfikę PsychoPy, otrzymaliśmy 35 osobnych plików z wynikami<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Spojrzenie w przykładowy plik pozwala stwierdzić, że jest to kompletny chaos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.0     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.1     ✔ tibble    3.2.0
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"./dane/automatyzacja/BD_eksperyment_latwy_2021_Apr_24_1631.csv"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+Rows: 12 Columns: 19
+── Column specification
+──────────────────────────────────────────────────────── Delimiter: "," chr
+(13): form.itemText, form.type, form.response, form.rt, form_2.itemText,... dbl
+(5): form.index, form_2.index, form_2.rt, zakonczenie_instrukcja.starte... lgl
+(1): ...19
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+Specify the column types or set `show_col_types = FALSE` to quiet this message.
+• `` -&gt; `...19`</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 19
+   form.index form.ite…¹ form.…² form.…³ form.rt form_…⁴ form_…⁵ form_…⁶ form_…⁷
+        &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+ 1          1 Jaka jest… choice  kobieta 3.0891…      NA &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 2          2 Jaki jest… free t… 17      None         NA &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 3          3 Czy wyraz… choice  tak     10.844…      NA &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+ 4         NA &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;          1 Czy na… choice  tak    
+ 5         NA &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;          2 Czy wr… choice  nie    
+ 6         NA &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;          3 Czy po… choice  tak    
+ 7         NA &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;          4 Czy na… choice  tak    
+ 8         NA &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;          5 Czy na… choice  tak    
+ 9         NA &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;          6 Czy na… choice  nie    
+10         NA &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;          7 Czy uw… choice  nie    
+11         NA &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;          8 Czy na… choice  tak    
+12         NA &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;         NA &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;   
+# … with 10 more variables: form_2.rt &lt;dbl&gt;,
+#   zakonczenie_instrukcja.started &lt;dbl&gt;, zakonczenie_instrukcja.stopped &lt;chr&gt;,
+#   participant &lt;chr&gt;, session &lt;chr&gt;, date &lt;chr&gt;, expName &lt;chr&gt;,
+#   psychopyVersion &lt;chr&gt;, frameRate &lt;dbl&gt;, ...19 &lt;lgl&gt;, and abbreviated
+#   variable names ¹​form.itemText, ²​form.type, ³​form.response, ⁴​form_2.index,
+#   ⁵​form_2.itemText, ⁶​form_2.type, ⁷​form_2.response</code></pre>
+</div>
+</div>
+<p>Pierwsze 3 wiersze zawierają informacje metryczkowe. Kolejnych 8 zawiera odpowiedzi na pytania, ale w innych kolumnach. Wiersz 12. nie zawiera żadnych użytecznych informacji, bo tylko czas, jaki osoba badana spędziła na czytaniu ostatniej instrukcji. Co więcej, identyfikatorem osoby badanej były inicjały, więc w wielu przypadkach mamy powtórzenia (np. dwie osoby o inicjałach MK). Zasadniczo jest tu wiele niedociągnięć co do projektu bazy i nie ma się co dziwić – dane nie są spreparowane, to projekt studencki. Cenne doświadczenie, które pokazuje, czego w przyszłości unikać.</p>
+<p>Trzeba się trochę nagłowić, żeby takie dane wyczyścić. Pewnym ułatwieniem jest, że wszystkie te pliki mają identyczną strukturę. Ja wykorzystałem tutaj taki kod:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>baza_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./dane/automatyzacja/BD_eksperyment_latwy_2021_Apr_24_1631.csv"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+Rows: 12 Columns: 19
+── Column specification
+──────────────────────────────────────────────────────── Delimiter: "," chr
+(13): form.itemText, form.type, form.response, form.rt, form_2.itemText,... dbl
+(5): form.index, form_2.index, form_2.rt, zakonczenie_instrukcja.starte... lgl
+(1): ...19
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+Specify the column types or set `show_col_types = FALSE` to quiet this message.
+• `` -&gt; `...19`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># najpierw sama metryczka</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>metryczka <span class="ot">&lt;-</span> baza_raw <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># wybierz wiersze z samej metryczki</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(participant, expName, <span class="dv">2</span>, <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="co"># wybierz kolumny z id, pytaniem i odpowiedzią</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> form.itemText, <span class="at">values_from =</span> form.response) <span class="sc">%&gt;%</span> <span class="co"># format długi</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"warunek"</span>, <span class="st">"plec"</span>, <span class="st">"wiek"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">warunek =</span> <span class="fu">str_remove</span>(warunek, <span class="st">"eksperyment_"</span>) <span class="co"># zostaw samo łatwy albo trudny</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># potem same odpowiedzi na pytania</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>pytania <span class="ot">&lt;-</span> baza_raw <span class="sc">%&gt;%</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">11</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(form_2.itemText, form_2.response) <span class="sc">%&gt;%</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">form_2.response =</span> <span class="fu">case_match</span>( <span class="co"># tak i nie na 1 i 0</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        form_2.response,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tak"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"nie"</span> <span class="sc">~</span> <span class="dv">0</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> form_2.itemText, <span class="at">values_from =</span> form_2.response) <span class="sc">%&gt;%</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="fu">paste0</span>(<span class="st">"pyt_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>))</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># na koniec łączę</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>baza <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(metryczka, pytania) <span class="sc">%&gt;%</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">id =</span> stringi<span class="sc">::</span><span class="fu">stri_rand_strings</span>(<span class="dv">1</span>, <span class="dv">5</span>) <span class="co"># zamień id na losowe znaki</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>baza</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  id    warunek plec     wiek pyt_1 pyt_2 pyt_3 pyt_4 pyt_5 pyt_6 pyt_7 pyt_8
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 QIL7I latwy   kobieta    17     1     0     1     1     1     0     0     1</code></pre>
+</div>
+</div>
+<p>Z ciekawszych rzeczy wykorzystuję tutaj funkcję <code>stri_rand_strings</code> z pakietu <code>stringi</code>, żeby zmienić ID osoby badanej. ID nie musi tutaj nic znaczyć, ma być po prostu unikalne. A z tym mamy tutaj problem, bo się wcześniej nie umówiliśmy na żaden sensowny sposób kodowania osób badanych. Dlatego na tym etapie mogę zastąpić inicjały losowym ciągiem 5 znaków, zapewniając sobie, że w ostatecznej bazie identyfikatory będą unikalne. Jest to też sposób na anonimizację bazy danych.</p>
+<p>Uzyskaliśmy w ten sposób jeden wyczyszczony wiersz. Jeszcze tylko 34. I jak mamy to zrobić? Mamy ten sam kod skopiować jeszcze 34 razy? A co jeśli mam 1000 osób? A co jeśli jestem Martą Kowal<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> i mam do przeanalizowania (ponad) 93 158 osób <span class="citation" data-cites="kowal_predictors_2022">(<a href="#ref-kowal_predictors_2022" role="doc-biblioref">Kowal i in., 2022</a>)</span>? Kopiowanie kodu nigdy nie jest dobrą drogą. Jeśli często kopiujemy kod, powinniśmy zrobić z niego funkcję. Jeśli tę samą funkcję chcemy zastosować do wielu obiektów, powinniśmy użyć list albo pętli.</p>
+</section>
+<section id="listy" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Listy</h1>
+<p>Podstawową metodą automatyzacji we wszystkich językach programowania są pętle. W R też one występują, można z nich korzystać i omówię je, jednak pętle w R nie są najlepszą metodą. Są one mało wydajne. Jeśli chcemy coś wykonać wielokrotnie, najlepszą drogą – o ile to możliwe – są listy. Lista to szczególny typ danych w R, którego największą zaletą jest to, że może przechowywać inne formy danych. Innymi słowy możemy szybko zrobić <em>listę</em> naszych surowych baz danych, które chcemy potem wyczyścić. Co ważniejsze, możemy potem do każdego elementu listy zastosować jakąś funkcję.</p>
+<p>Listę tworzymy przede wszystkim przez komendę <code>list</code>. Możemy do niej wrzucić rzeczy, które chcemy przerobić na listę. Dla przykładu zróbmy listę z dwóch wbudowanych baz danych – <code>iris</code> i <code>mpg</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>bazy_danych <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(iris), <span class="co"># tibble dla lepszego drukowania w konsoli</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(mpg)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>bazy_danych</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+# A tibble: 150 × 5
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+ 1          5.1         3.5          1.4         0.2 setosa 
+ 2          4.9         3            1.4         0.2 setosa 
+ 3          4.7         3.2          1.3         0.2 setosa 
+ 4          4.6         3.1          1.5         0.2 setosa 
+ 5          5           3.6          1.4         0.2 setosa 
+ 6          5.4         3.9          1.7         0.4 setosa 
+ 7          4.6         3.4          1.4         0.3 setosa 
+ 8          5           3.4          1.5         0.2 setosa 
+ 9          4.4         2.9          1.4         0.2 setosa 
+10          4.9         3.1          1.5         0.1 setosa 
+# … with 140 more rows
+
+[[2]]
+# A tibble: 234 × 11
+   manufacturer model      displ  year   cyl trans drv     cty   hwy fl    class
+   &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+ 1 audi         a4           1.8  1999     4 auto… f        18    29 p     comp…
+ 2 audi         a4           1.8  1999     4 manu… f        21    29 p     comp…
+ 3 audi         a4           2    2008     4 manu… f        20    31 p     comp…
+ 4 audi         a4           2    2008     4 auto… f        21    30 p     comp…
+ 5 audi         a4           2.8  1999     6 auto… f        16    26 p     comp…
+ 6 audi         a4           2.8  1999     6 manu… f        18    26 p     comp…
+ 7 audi         a4           3.1  2008     6 auto… f        18    27 p     comp…
+ 8 audi         a4 quattro   1.8  1999     4 manu… 4        18    26 p     comp…
+ 9 audi         a4 quattro   1.8  1999     4 auto… 4        16    25 p     comp…
+10 audi         a4 quattro   2    2008     4 manu… 4        20    28 p     comp…
+# … with 224 more rows</code></pre>
+</div>
+</div>
+<p>Gdy wywołamy naszą listę w konsoli, zobaczymy, że wyświetlają nam się dwie bazy danych, w takiej kolejności, w jakiej je wprowadziliśmy. Oczywiście w liście zmieści się dużo więcej elementów niż dwa. Jeśli chcemy dostać tylko jeden element, używamy składni <code>nazwa_listy[[indeks]]</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, czyli na przykład <code>bazy_danych[[1]]</code>. W tym wypadku spowoduje to wyciągnięcie samej tylko bazy <code>iris</code>. Co ciekawe, listy mogą zawierać też inne listy<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, ale nie będziemy wchodzić w to tak głęboko. Możemy też wywołać <code>bazy_danych[1]</code>, ale taki zapis powoduje subtelną różnicę – efektem jest jednoelementowa lista, zaś składnia z podwójnymi nawiasami wyciąga sam 1. element (w naszym przypadku bazę&nbsp;danych <code>iris</code>, czyli obiekt tibble). Na początku nie trzeba tego jakoś głęboko rozumieć, wystarczy na wiarę&nbsp;przyjąć, że potrzebne są dwa nawiasy kwadratowe.</p>
+<section id="masowe-ładowanie-danych-z-list.files" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="masowe-ładowanie-danych-z-list.files"><span class="header-section-number">2.1</span> Masowe ładowanie danych z <code>list.files</code></h2>
+<p>Komenda <code>list</code> jest fajna, o ile mamy dane już załadowane. My mamy 35 plików w folderze, które dopiero musimy załadować. Możemy je jednak załadować wszystkie jednocześnie, od razu do listy. Wykorzystamy w tym celu funkcję <code>list.files</code> (lub zamiennie <code>dir</code>, to dwie nazwy tej samej funkcji). Zwraca ona listę plików znajdujących się we wskazanym folderze. Domyślnie zwraca ona same nazwy, więc jeśli chcemy całe ścieżki (a chcemy, jeśli dane są w innym folderze, niż główny), to musimy dołożyć argument <code>full.names = TRUE</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bazy_lista <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"./dane/automatyzacja"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Jeśli wyświetlimy teraz <code>bazy_lista</code> zobaczymy listę naszych plików z ich względnymi ścieżkami. Lista plików to jednak nie są jeszcze załadowane bazy. Ale można je wykorzystać do załadowania baz! Spójrzmy na przykładową ścieżkę.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>bazy_lista[<span class="dv">1</span>]</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "./dane/automatyzacja/AC_eksperyment_trudny_2021_Apr_22_2124.csv"</code></pre>
+</div>
+</div>
+<p>To jest dokładnie to, co wrzucilibyśmy do funkcji <code>read_csv</code> chcąc rzeczywiście załadować nasze dane. Jeśli więc weźmiemy naszą listę ścieżek<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> i powiemy R „każdą z tych ścieżek wrzuć po kolei do <code>read_csv</code>”, to będziemy mieli nasze bazy załadowane. Żeby zastosować jakąś funkcję osobno do każdego elementu listy<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, użyjemy jednej z funkcji z rodziny <code>apply</code> (<code>apply</code>, <code>sapply</code>, <code>lapply</code> lub <code>tapply</code>) albo ich odpowiednika z <code>tidyverse</code>, czyli <code>map</code> z pakietu <code>purrr</code>. Choć <code>apply</code> jest powszechniejsze<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, my użyjemy tutaj bardziej intuicyjnego w obsłudze <code>map</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>bazy_lista <span class="ot">&lt;-</span> <span class="fu">map</span>(bazy_lista, read_csv, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">name_repair =</span> <span class="st">"unique_quiet"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>map</code> przyjmuje, w podstawowej wersji, dwa argumenty. Pierwszym jest obiekt, do którego chcemy zastosować naszą funkcję, a drugim sama funkcja. Podobnie jak w <code>across</code> (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across">tutaj</a>) chodzi nam o obiekt zawierający funkcję, a nie o efekt jej działania, dlatego <strong>po nazwie funkcji nie dajemy nawiasów</strong>. To bardzo częsty błąd. Jeśli chodzi o samo <code>read_csv</code> dodałem tutaj <code>show_col_types = FALSE</code> i <code>name_repair = "unique_quiet"</code>, żeby nasza konsola nie została zalana milionem informacji o aktualnie wczytywanej bazie.</p>
+<p>Efektem działania tej funkcji jest lista baz danych. Już nie ścieżek, a załadowanych baz. Skoro mamy je załadowane, możemy je wyczyścić.</p>
+</section>
+<section id="masowe-czyszczenie-z-map-lub-apply" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="masowe-czyszczenie-z-map-lub-apply"><span class="header-section-number">2.2</span> Masowe czyszczenie z <code>map</code> lub <code>apply</code></h2>
+<p>Skoro poznaliśmy już funkcję <code>map</code>, wyczyszczenie naszych baz nie powinno stanowić problemu. Mamy listę baz. Ten sam zestaw funkcji czyszczących musimy zastosować do każdej bazy z listy. Żeby zastosować funkcję do każdego elementu używamy właśnie <code>map</code> lub <code>apply</code>. Problem polega jednak na tym, że nie mamy pojedynczej funkcji czyszczącej, a cały wielki zestaw tych funkcji. W rzeczywistości nie jest to żaden problem, bo jak dowiedzieliśmy się <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-customfunctions">tutaj</a>, możemy nasz zestaw przerobić na pojedynczą funkcję.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>wyczysc <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    metryczka <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># wybierz wiersze z samej metryczki</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(participant, expName, <span class="dv">2</span>, <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="co"># wybierz kolumny z id, pytaniem i odpowiedzią</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> form.itemText, <span class="at">values_from =</span> form.response) <span class="sc">%&gt;%</span> <span class="co"># format długi</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"warunek"</span>, <span class="st">"plec"</span>, <span class="st">"wiek"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">warunek =</span> <span class="fu">str_remove</span>(warunek, <span class="st">"eksperyment_"</span>) <span class="co"># zostaw samo łatwy albo trudny</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    pytania <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">11</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(form_2.itemText, form_2.response) <span class="sc">%&gt;%</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">form_2.response =</span> <span class="fu">case_match</span>( <span class="co"># tak i nie na 1 i 0</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>            form_2.response,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">"tak"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"nie"</span> <span class="sc">~</span> <span class="dv">0</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> form_2.itemText, <span class="at">values_from =</span> form_2.response) <span class="sc">%&gt;%</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">set_names</span>(<span class="fu">paste0</span>(<span class="st">"pyt_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>))</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_cols</span>(metryczka, pytania) <span class="sc">%&gt;%</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> stringi<span class="sc">::</span><span class="fu">stri_rand_strings</span>(<span class="dv">1</span>, <span class="dv">5</span>) <span class="co"># zamień id na losowe znaki</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Uzyskałem w ten sposób funkcję <code>wyczysc</code>, która wykonuje wszystkie nasze przekształcenia. Warto zwrócić uwagę, że bazę danych nazwałem <code>df</code> i zrobiłem z niej argument naszej funkcji, a także ostatni blok nie ma przypisania do zmiennej <code>baza</code>. Wynika to z tego, że domyślnie funkcje w R zwracają ostatnią rzecz, którą zrobią, czyli tutaj połączoną bazę. Jeśli zapisałbym ostateczną bazę do zmiennej <code>baza</code>, musiałbym w ostatniej linijce dopisać samo <code>baza</code> albo <code>return(baza)</code>, jako że to jest to, co funkcja ma nam ostatecznie dać – wyczyszczoną bazę.</p>
+<p>Użyjmy teraz naszej nowej funkcji <code>wyczysc</code> do wyczyszczenia naszych plików.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">map</span>(bazy_lista, wyczysc)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Efektem działania tej funkcji jest lista wyczyszczonych baz, z których każda ma tylko jeden wiersz (bo tak zrobiliśmy nasze czyszczenie). Jednak do analizy statystycznej nie jest potrzebna lista, tylko pojedyncza baza. Połączmy więc naszą listę w pojedynczą bazę za pomocą funkcji <code>bind_rows</code>. Możemy ją wywołać na nowopowstałej zmiennej <code>bazy</code> albo już wcześniej dodać ją potokiem do mapowania.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tak jest dobrze</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">map</span>(bazy_lista, wyczysc)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(bazy)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># tak też jest dobrze</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">map</span>(bazy_lista, wyczysc) <span class="sc">%&gt;%</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>()</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>bazy</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 35 × 12
+   id    warunek plec       wiek pyt_1 pyt_2 pyt_3 pyt_4 pyt_5 pyt_6 pyt_7 pyt_8
+   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 xtb23 trudny  kobieta      20     0     1     1     0     1     0     0     1
+ 2 mLLeh latwy   kobieta      21     1     1     1     1     1     0     0     1
+ 3 gcnjc latwy   mezczyzna    24     1     1     0     1     1     1     0     0
+ 4 qW6X4 latwy   kobieta      17     1     0     1     1     1     0     0     1
+ 5 jpp7s trudny  mezczyzna    17     0     0     1     1     1     1     1     1
+ 6 gH6xO latwy   mezczyzna    23     1     0     1     1     1     1     0     1
+ 7 JTsLx trudny  kobieta      17     1     0     1     1     1     0     0     1
+ 8 oiK2i trudny  kobieta      17     0     1     1     1     1     0     0     0
+ 9 l6FPl latwy   mezczyzna    20     0     0     1     1     1     1     0     0
+10 lodVt latwy   kobieta      20     1     1     0     1     0     1     1     0
+# … with 25 more rows</code></pre>
+</div>
+</div>
+<p>Ostatecznie uzyskujemy piękną, czystą i pojedynczą bazę danych, na której możemy wykonywać analizy.</p>
+</section>
+</section>
+<section id="pętle" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Pętle</h1>
+<p>Pętle to w wielu językach programowania podstawowa metoda automatyzacji. Pozwalają nam wykonać tę samą operację wiele, wiele razy, za każdym razem coś zmieniając. W R ich za bardzo nie używamy. W sensie można, ale ponieważ R to język typowo przeznaczony do analizy statystycznej. Nie jest to język ogólnego przeznaczenia, dlatego rzadko musimy robić w nim rzeczy, których nie możemy zrobić listami i <code>map</code>. Dlatego ta druga opcja jest preferowana w R i R jest zoptymalizowane pod listy, zaś pętle działają, ale ich efektywność przy dużej ilości plików pozostawia wiele do życzenia. Jednak czasami może się przydać. Co więcej, czasami da się coś zrobić listą, ale łatwiej to <em>zrozumieć</em>, gdy używamy pętli. Na sam początek pętle mogą być przyjemniejsze w odbiorze dla niewprawionego programisty (albo właśnie wprawionego, który zna pętle z innych języków). Istnieją dwa rodzaje pętli – <code>for</code> i <code>while</code>.</p>
+<section id="pętle-for" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="pętle-for"><span class="header-section-number">3.1</span> Pętle <code>for</code></h2>
+<p>Pętla <code>for</code> służy do wykonania danej czynności określoną liczbę razy albo dla określonych rzeczy. Tutaj przykład wykorzystania tej pętli do wykonania czynności, którą robiliśmy wcześniej, czyli ładowania baz danych na podstawie listy plików.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bazy_lista <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"./dane/automatyzacja"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">list</span>() <span class="co"># pusta lista na przyszłość</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">35</span>) {</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    bazy[[i]] <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(bazy_lista[[i]], <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">name_repair =</span> <span class="st">"unique_quiet"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Zapis ten jest bardziej programistyczny i korzysta z klasycznego R. To, co tutaj robimy, to tworzymy pustą listę <code>bazy</code>. Następnie pętla <code>for</code> wykona to, co zapisaliśmy w jej klamrach, za każdym razem zamieniając <code>i</code> na kolejną liczbę. Czyli najpierw wczyta bazę ze ścieżki <code>bazy_lista[[1]]</code>, potem <code>bazy_lista[[2]]</code> i tak dalej aż do <code>bazy_lista[[35]]</code>. Wczytane bazy zapisze do listy <code>bazy</code> na stosownym miejscu. <code>1:35</code> moglibyśmy zamienić na <code>1:length(bazy_lista)</code>, żeby nie zapisywać na sztywno <code>35</code>, a podstawić tam naszą liczbę plików (czyli długość zmiennej <code>bazy_lista</code>).</p>
+<p>Moglibyśmy też użyć nieco innej składni.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bazy_lista <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"./dane/automatyzacja"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">list</span>() <span class="co"># pusta lista na przyszłość</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> bazy_lista) {</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    bazy <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        bazy,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">list</span>(<span class="fu">read_csv</span>(i, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">name_repair =</span> <span class="st">"unique_quiet"</span>))</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Nie jest to najlepszy, najbardziej wydajny kod z dobrze zaplanowaną pamięcią, ale nie chcę wchodzić w bardziej zaawansowane koncepcje jak rezerwowanie miejsca w pamięci przed uruchomieniem pętli. Ta składnia działa nieco inaczej, bo <code>i</code> nie jest tutaj liczbą, tylko kolejnymi ścieżkami do naszych plików i to one lądują w <code>read_csv</code>. Wczytaną bazę dołączam do listy baz za pomocą <code>c</code>. Co ważne, nasza nowa baza też musi mieć format listy, dlatego całe <code>read_csv</code> opakowałem w <code>list</code>.</p>
+<p>Jak widać, takie rozwiązanie wymaga podejścia do R od bardziej programistycznej strony. Tak jak jednak wspominałem, w rzeczywistości rzadko jest to potrzebne, bo możemy używać funkcji <code>apply</code> lub <code>map</code>.</p>
+</section>
+<section id="pętle-while" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="pętle-while"><span class="header-section-number">3.2</span> Pętle <code>while</code></h2>
+<p>Pętle <code>while</code> wykonują jakieś polecenie tak długo, dopóki spełniony jest warunek, który jej podamy. Musimy być jednak ostrożni, bo jeśli ten warunek nie zostaje osiągnięty (bo np. źle go zaplanowaliśmy), to pętla będzie działała w nieskończoność, nierzadko zapychając pamięć komputera. Pętla <code>while</code>, choć wykorzystywana nawet rzadziej niż pętla <code>for</code>, przydała mi się w celach testowo-dydaktycznych, bo wykorzystywałem ją do znalezienia zbioru losowych liczb o określonych parametrach statystycznych. Żeby podać przykład:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>liczby <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">101</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="fu">mean</span>(liczby) <span class="sc">!=</span> <span class="dv">105</span>) {</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    liczby <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">101</span>, <span class="at">sd =</span> <span class="dv">15</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>()</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ten kod wykorzystałem do znalezienia zestawu 100 losowych liczb z rozkładu normalnego IQ (<span class="math inline">\(M = 100\)</span>, <span class="math inline">\(SD = 15\)</span>), których średnia będzie wynosiła dokładnie 101. Wykorzystałem to <a href="https://nieobliczalne.pl/posts/p-value.html">w tekście o wartości <span class="math inline">\(p\)</span></a> do znalezienia ładnej próbki, której średnia nie będzie wynosiła dokładnie tyle, ile średnia z populacji. Funkcja <code>rnorm</code> losuje liczby z rozkładu normalnego o podanych parametrach 5, <code>round</code> zaokrągla je do całości. Pętla <code>while</code> mówi tutaj „Sprawdź, czy średnia wylosowanych liczb nie równa się 105. Jeśli nie, to wylosuj ponownie.” albo inaczej „Powtarzaj losowanie dopóki średnia liczb nie będzie się równała 101”.</p>
+</section>
+</section>
+<section id="podsumowanie" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Podsumowanie</h1>
+<ol type="1">
+<li>R daje nam duże możliwości automatyzacji powtarzalnych czynności.</li>
+<li>Podstawową metodą automatyzacji w R są listy.</li>
+<li>Funkcja <code>map</code> (<code>apply</code>) stosuje daną funkcję do każdego elementu listy.</li>
+<li>W R istnieją pętle, ale lepiej ich unikać.</li>
+<li>Pętla <code>for</code> powtarza zestaw funkcji określoną liczbę razy albo dla wszystkich wartości zbioru.</li>
+<li>Pętla <code>while</code> powtarza zestaw funkcji tak długo, jak spełniony jest podany jest warunek.</li>
+</ol>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-kowal_predictors_2022" class="csl-entry" role="listitem">
+Kowal, M., Sorokowski, P., Pisanski, K., Valentova, J. V., Varella, M. A. C., Frederick, D. A., … Zumárraga-Espinosa, M. (2022). Predictors of enhancing human physical attractiveness: <span>Data</span> from 93 countries. <em>Evolution and Human Behavior</em>, <em>43</em>(6), 455–474. <a href="https://doi.org/10.1016/j.evolhumbehav.2022.08.003">https://doi.org/10.1016/j.evolhumbehav.2022.08.003</a>
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
+<ol>
+<li id="fn1"><p>Bazy najlepiej pobrać na swój dysk z <a href="https://github.com/jakub-jedrusiak/nieobliczalne/tree/main/posts/dane/automatyzacja">repozytorium</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Którą serdecznie pozdrawiam.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>W R indeksowanie zaczyna się od 1, a nie od 0 jak w C czy w pythonie. Takie indeksy są bardziej intuicyjne dla osób bez wprawy informatycznej.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Wtedy pojedyncze elementy wydobywalibyśmy składnią typu <code>lista[2][5]</code>, co oznacza 5. element listy z indeksem 2.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Tak, wiem, że to nie jest lista, tylko wektor. Nie chcę tutaj dodatkowo gmatwać wprowadzając pojęcie wektora. Skutek jest jednak ten sam, nawet jeśli <code>list.files</code> rzeczywiście wyrzucałoby listę, dalej zrobilibyśmy dokładnie to samo.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Lub wektora.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Funkcja niżej mogłaby być zapisana równie dobrze jako <code>lapply(bazy_lista, read_csv, show_col_types = FALSE, name_repair = "unique_quiet")</code>, ale <code>map</code>, a głównie jej pochodne, mają bardziej przejrzystą i konsekwentną konwencję nazywania.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Skopiowano!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Skopiowano!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

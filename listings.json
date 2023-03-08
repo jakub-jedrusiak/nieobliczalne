@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/automatyzacja.html",
       "/posts/podstawy_R.html",
       "/posts/kombinatoryka.html",
       "/posts/p-value.html",

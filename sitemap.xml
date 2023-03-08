@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jakub-jedrusiak.github.io/about.html</loc>
-    <lastmod>2023-03-08T12:58:22.716Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jakub-jedrusiak.github.io/index.html</loc>
-    <lastmod>2023-03-08T12:58:26.046Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jakub-jedrusiak.github.io/posts/kombinatoryka.html</loc>
-    <lastmod>2023-03-08T12:58:29.248Z</lastmod>
-  </url>
-  <url>
     <loc>https://jakub-jedrusiak.github.io/posts/p-value.html</loc>
-    <lastmod>2023-03-08T12:58:32.263Z</lastmod>
+    <lastmod>2023-03-08T21:25:28.430Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/posts/podstawy_R.html</loc>
-    <lastmod>2023-03-08T12:58:42.377Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jakub-jedrusiak.github.io/posts/procent-wariancji.html</loc>
-    <lastmod>2023-03-08T12:58:45.174Z</lastmod>
+    <lastmod>2023-03-08T21:25:32.636Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/posts/uczenie-sie.html</loc>
-    <lastmod>2023-03-08T12:58:49.200Z</lastmod>
+    <lastmod>2023-03-08T21:25:33.830Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jakub-jedrusiak.github.io/posts/automatyzacja.html</loc>
+    <lastmod>2023-03-08T21:25:38.780Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jakub-jedrusiak.github.io/posts/kombinatoryka.html</loc>
+    <lastmod>2023-03-08T21:25:39.446Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jakub-jedrusiak.github.io/posts/procent-wariancji.html</loc>
+    <lastmod>2023-03-08T21:25:40.356Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jakub-jedrusiak.github.io/about.html</loc>
+    <lastmod>2023-03-08T21:25:40.616Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jakub-jedrusiak.github.io/index.html</loc>
+    <lastmod>2023-03-08T21:25:41.036Z</lastmod>
   </url>
 </urlset>

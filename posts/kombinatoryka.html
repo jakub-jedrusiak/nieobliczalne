@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-99.9.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,9 +19,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -48,43 +49,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -176,24 +147,24 @@ cookieconsent.run({
     <span class="navbar-title">Nieobliczalne</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Szukaj"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Przełącz nawigację" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html">
+    <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">Strona główna</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html">
+    <a class="nav-link" href="../about.html" rel="" target="">
  <span class="menu-text">O mnie</span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools ms-auto">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -207,11 +178,11 @@ cookieconsent.run({
     <h2 id="toc-title">Na tej stronie</h2>
    
   <ul>
-  <li><a href="#permutacje" id="toc-permutacje" class="nav-link active" data-scroll-target="#permutacje"><span class="toc-section-number">1</span>  Permutacje</a></li>
-  <li><a href="#wariacje" id="toc-wariacje" class="nav-link" data-scroll-target="#wariacje"><span class="toc-section-number">2</span>  Wariacje</a></li>
-  <li><a href="#kombinacje" id="toc-kombinacje" class="nav-link" data-scroll-target="#kombinacje"><span class="toc-section-number">3</span>  Kombinacje</a></li>
-  <li><a href="#powtórzenia" id="toc-powtórzenia" class="nav-link" data-scroll-target="#powtórzenia"><span class="toc-section-number">4</span>  Powtórzenia</a></li>
-  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="toc-section-number">5</span>  Podsumowanie</a></li>
+  <li><a href="#permutacje" id="toc-permutacje" class="nav-link active" data-scroll-target="#permutacje"><span class="header-section-number">1</span> Permutacje</a></li>
+  <li><a href="#wariacje" id="toc-wariacje" class="nav-link" data-scroll-target="#wariacje"><span class="header-section-number">2</span> Wariacje</a></li>
+  <li><a href="#kombinacje" id="toc-kombinacje" class="nav-link" data-scroll-target="#kombinacje"><span class="header-section-number">3</span> Kombinacje</a></li>
+  <li><a href="#powtórzenia" id="toc-powtórzenia" class="nav-link" data-scroll-target="#powtórzenia"><span class="header-section-number">4</span> Powtórzenia</a></li>
+  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">5</span> Podsumowanie</a></li>
   </ul>
 </nav>
     </div>
@@ -286,111 +257,112 @@ cookieconsent.run({
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(itertools.permutations(Z))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>0</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>A</td>
-      <td>B</td>
-      <td>C</td>
-      <td>D</td>
-      <td>E</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>A</td>
-      <td>B</td>
-      <td>C</td>
-      <td>E</td>
-      <td>D</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>A</td>
-      <td>B</td>
-      <td>D</td>
-      <td>C</td>
-      <td>E</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>A</td>
-      <td>B</td>
-      <td>D</td>
-      <td>E</td>
-      <td>C</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>A</td>
-      <td>B</td>
-      <td>E</td>
-      <td>C</td>
-      <td>D</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>115</th>
-      <td>E</td>
-      <td>D</td>
-      <td>A</td>
-      <td>C</td>
-      <td>B</td>
-    </tr>
-    <tr>
-      <th>116</th>
-      <td>E</td>
-      <td>D</td>
-      <td>B</td>
-      <td>A</td>
-      <td>C</td>
-    </tr>
-    <tr>
-      <th>117</th>
-      <td>E</td>
-      <td>D</td>
-      <td>B</td>
-      <td>C</td>
-      <td>A</td>
-    </tr>
-    <tr>
-      <th>118</th>
-      <td>E</td>
-      <td>D</td>
-      <td>C</td>
-      <td>A</td>
-      <td>B</td>
-    </tr>
-    <tr>
-      <th>119</th>
-      <td>E</td>
-      <td>D</td>
-      <td>C</td>
-      <td>B</td>
-      <td>A</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">0</th>
+<th data-quarto-table-cell-role="th">1</th>
+<th data-quarto-table-cell-role="th">2</th>
+<th data-quarto-table-cell-role="th">3</th>
+<th data-quarto-table-cell-role="th">4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>A</td>
+<td>B</td>
+<td>C</td>
+<td>D</td>
+<td>E</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>A</td>
+<td>B</td>
+<td>C</td>
+<td>E</td>
+<td>D</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>A</td>
+<td>B</td>
+<td>D</td>
+<td>C</td>
+<td>E</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>A</td>
+<td>B</td>
+<td>D</td>
+<td>E</td>
+<td>C</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>A</td>
+<td>B</td>
+<td>E</td>
+<td>C</td>
+<td>D</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">115</td>
+<td>E</td>
+<td>D</td>
+<td>A</td>
+<td>C</td>
+<td>B</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">116</td>
+<td>E</td>
+<td>D</td>
+<td>B</td>
+<td>A</td>
+<td>C</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">117</td>
+<td>E</td>
+<td>D</td>
+<td>B</td>
+<td>C</td>
+<td>A</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">118</td>
+<td>E</td>
+<td>D</td>
+<td>C</td>
+<td>A</td>
+<td>B</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">119</td>
+<td>E</td>
+<td>D</td>
+<td>C</td>
+<td>B</td>
+<td>A</td>
+</tr>
+</tbody>
 </table>
+
 <p>120 rows × 5 columns</p>
 </div>
 </div>
@@ -406,70 +378,71 @@ P_n = n!
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>variations(Z, <span class="dv">2</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>1</th>
-      <th>2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>(A, B)</td>
-      <td>(B, A)</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>(A, C)</td>
-      <td>(C, A)</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>(A, D)</td>
-      <td>(D, A)</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>(A, E)</td>
-      <td>(E, A)</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>(B, C)</td>
-      <td>(C, B)</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>(B, D)</td>
-      <td>(D, B)</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>(B, E)</td>
-      <td>(E, B)</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>(C, D)</td>
-      <td>(D, C)</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>(C, E)</td>
-      <td>(E, C)</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>(D, E)</td>
-      <td>(E, D)</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">1</th>
+<th data-quarto-table-cell-role="th">2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>(A, B)</td>
+<td>(B, A)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>(A, C)</td>
+<td>(C, A)</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>(A, D)</td>
+<td>(D, A)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4</td>
+<td>(A, E)</td>
+<td>(E, A)</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5</td>
+<td>(B, C)</td>
+<td>(C, B)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">6</td>
+<td>(B, D)</td>
+<td>(D, B)</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">7</td>
+<td>(B, E)</td>
+<td>(E, B)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">8</td>
+<td>(C, D)</td>
+<td>(D, C)</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">9</td>
+<td>(C, E)</td>
+<td>(E, C)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">10</td>
+<td>(D, E)</td>
+<td>(E, D)</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -485,114 +458,115 @@ V^k_n = \frac{n!}{(n-k)!}
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>variations(Z, <span class="dv">3</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
-      <th>5</th>
-      <th>6</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>(A, B, C)</td>
-      <td>(A, C, B)</td>
-      <td>(B, A, C)</td>
-      <td>(B, C, A)</td>
-      <td>(C, A, B)</td>
-      <td>(C, B, A)</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>(A, B, D)</td>
-      <td>(A, D, B)</td>
-      <td>(B, A, D)</td>
-      <td>(B, D, A)</td>
-      <td>(D, A, B)</td>
-      <td>(D, B, A)</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>(A, B, E)</td>
-      <td>(A, E, B)</td>
-      <td>(B, A, E)</td>
-      <td>(B, E, A)</td>
-      <td>(E, A, B)</td>
-      <td>(E, B, A)</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>(A, C, D)</td>
-      <td>(A, D, C)</td>
-      <td>(C, A, D)</td>
-      <td>(C, D, A)</td>
-      <td>(D, A, C)</td>
-      <td>(D, C, A)</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>(A, C, E)</td>
-      <td>(A, E, C)</td>
-      <td>(C, A, E)</td>
-      <td>(C, E, A)</td>
-      <td>(E, A, C)</td>
-      <td>(E, C, A)</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>(A, D, E)</td>
-      <td>(A, E, D)</td>
-      <td>(D, A, E)</td>
-      <td>(D, E, A)</td>
-      <td>(E, A, D)</td>
-      <td>(E, D, A)</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>(B, C, D)</td>
-      <td>(B, D, C)</td>
-      <td>(C, B, D)</td>
-      <td>(C, D, B)</td>
-      <td>(D, B, C)</td>
-      <td>(D, C, B)</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>(B, C, E)</td>
-      <td>(B, E, C)</td>
-      <td>(C, B, E)</td>
-      <td>(C, E, B)</td>
-      <td>(E, B, C)</td>
-      <td>(E, C, B)</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>(B, D, E)</td>
-      <td>(B, E, D)</td>
-      <td>(D, B, E)</td>
-      <td>(D, E, B)</td>
-      <td>(E, B, D)</td>
-      <td>(E, D, B)</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>(C, D, E)</td>
-      <td>(C, E, D)</td>
-      <td>(D, C, E)</td>
-      <td>(D, E, C)</td>
-      <td>(E, C, D)</td>
-      <td>(E, D, C)</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">1</th>
+<th data-quarto-table-cell-role="th">2</th>
+<th data-quarto-table-cell-role="th">3</th>
+<th data-quarto-table-cell-role="th">4</th>
+<th data-quarto-table-cell-role="th">5</th>
+<th data-quarto-table-cell-role="th">6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>(A, B, C)</td>
+<td>(A, C, B)</td>
+<td>(B, A, C)</td>
+<td>(B, C, A)</td>
+<td>(C, A, B)</td>
+<td>(C, B, A)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>(A, B, D)</td>
+<td>(A, D, B)</td>
+<td>(B, A, D)</td>
+<td>(B, D, A)</td>
+<td>(D, A, B)</td>
+<td>(D, B, A)</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>(A, B, E)</td>
+<td>(A, E, B)</td>
+<td>(B, A, E)</td>
+<td>(B, E, A)</td>
+<td>(E, A, B)</td>
+<td>(E, B, A)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4</td>
+<td>(A, C, D)</td>
+<td>(A, D, C)</td>
+<td>(C, A, D)</td>
+<td>(C, D, A)</td>
+<td>(D, A, C)</td>
+<td>(D, C, A)</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5</td>
+<td>(A, C, E)</td>
+<td>(A, E, C)</td>
+<td>(C, A, E)</td>
+<td>(C, E, A)</td>
+<td>(E, A, C)</td>
+<td>(E, C, A)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">6</td>
+<td>(A, D, E)</td>
+<td>(A, E, D)</td>
+<td>(D, A, E)</td>
+<td>(D, E, A)</td>
+<td>(E, A, D)</td>
+<td>(E, D, A)</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">7</td>
+<td>(B, C, D)</td>
+<td>(B, D, C)</td>
+<td>(C, B, D)</td>
+<td>(C, D, B)</td>
+<td>(D, B, C)</td>
+<td>(D, C, B)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">8</td>
+<td>(B, C, E)</td>
+<td>(B, E, C)</td>
+<td>(C, B, E)</td>
+<td>(C, E, B)</td>
+<td>(E, B, C)</td>
+<td>(E, C, B)</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">9</td>
+<td>(B, D, E)</td>
+<td>(B, E, D)</td>
+<td>(D, B, E)</td>
+<td>(D, E, B)</td>
+<td>(E, B, D)</td>
+<td>(E, D, B)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">10</td>
+<td>(C, D, E)</td>
+<td>(C, E, D)</td>
+<td>(D, C, E)</td>
+<td>(D, E, C)</td>
+<td>(E, C, D)</td>
+<td>(E, D, C)</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -659,6 +633,8 @@ C^k_n = \frac{\frac{n!}{(n-k)!}}{k!} = \frac{n!}{k!(n-k)!} = \binom{n}{k}
 <p>Permutacje to zmiany kolejności, kombinacje to unikalne podzbiory. Jeśli zaczniemy robić permutacje unikalnych podzbiorów, wyjdą nam wariacje. Albo patrząc inaczej – permutacje to wariacje <span class="math inline">\(V^n_n\)</span>. Permutacje i wariacje możemy liczyć kreskami i silnią. Liczbę kombinacji uzyskamy dzieląc liczbę wariacji po <em>k</em> elementów przez liczbę permutacji <em>k</em>. Powstały wzór oznacza się symbolem Newtona <span class="math inline">\(\binom{n}{k}\)</span>. Pomocny może okazać się poniższy schemat.</p>
 <!-- ![](./ilustracje/kombinatoryka-flowchart.svg){fig-align="center"} -->
 <div class="cell" data-fig-responsive="true" data-fig-width="80%">
+<details>
+<summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{mermaid}</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>%%| fig<span class="ot">-r</span>esponsive: true</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>%%| fig<span class="ot">-w</span>idth: <span class="dv">80</span>%</span>
@@ -678,11 +654,12 @@ C^k_n = \frac{\frac{n!}{(n-k)!}}{k!} = \frac{n!}{k!(n-k)!} = \binom{n}{k}
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        V_calosc --&gt;|Nie| V_powtorzenia{Czy elementy mogą się powtarzać?}</span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        V_powtorzenia --&gt;|Tak| V_powtorzenia_koniec(wariacja z powtórzeniami)</span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        V_powtorzenia --&gt;|Nie| V_koniec(wariacja bez powrótrzeń)</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="ot">```</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display" data-code-fold="true">
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
 <div>
-<p>
-</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-1">flowchart TD
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
     START(START) --&gt; zbior
     zbior[/Mam zbiór, z którym chcę coś zrobić/] --&gt;
     kolejnosc{Czy kolejność ma znaczenie?}
@@ -697,10 +674,7 @@ C^k_n = \frac{\frac{n!}{(n-k)!}}{k!} = \frac{n!}{k!(n-k)!} = \binom{n}{k}
         V_powtorzenia --&gt;|Tak| V_powtorzenia_koniec(wariacja z powtórzeniami)
         V_powtorzenia --&gt;|Nie| V_koniec(wariacja bez powrótrzeń)
 </pre>
-<div id="mermaid-tooltip-1" class="mermaidTooltip">
-
 </div>
-<p></p>
 </div>
 </div>
 </div>
@@ -851,9 +825,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -918,6 +906,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -960,7 +1034,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 
