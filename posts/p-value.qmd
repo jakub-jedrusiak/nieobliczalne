@@ -286,3 +286,5 @@ To rodzi pytanie dotyczące udowadniania nieistnienia. Wydaje się, że nie da s
 4.  Wartość $p$ zależy od dwóch rzeczy -- wielkości efektu i wielkości próby. Na wielkość efektu nie mamy wpływu, ale możemy wykrywać mniejsze efekty zwiększając liczebność próby.
 
 5.  To, że coś jest istotne statystycznie znaczy tylko tyle, że prawdopodobnie istnieje naprawdę. Wartość $p$ nie mówi nam, czy efekt jest duży, czy mały, ani czy ma praktyczne znaczenie.
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licencja Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Ten utwór jest dostępny na <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">licencji Creative Commons Uznanie autorstwa-Użycie niekomercyjne-Na tych samych warunkach 4.0 Międzynarodowe</a>.
