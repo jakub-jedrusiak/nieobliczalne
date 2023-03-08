@@ -7,6 +7,44 @@ categories:
     - R
 ---
 
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(tibble)
+set.seed(1014)
+
+options(crayon.enabled = TRUE)
+options(pillar.bold = TRUE, pillar.subtle_num = TRUE)
+
+knitr::opts_chunk$set(collapse = TRUE, comment = pillar::style_subtle("#>"))
+
+colourise_chunk <- function(type) {
+  function(x, options) {
+    lines <- x
+    if (type != "output") {
+      lines <- crayon::red(lines)
+    }
+    paste0(
+      '<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode">',
+      paste0(
+        fansi::sgr_to_html(htmltools::htmlEscape(lines)),
+        collapse = "\n"
+      ),
+      "</code></pre></div>"
+    )
+  }
+}
+
+knitr::knit_hooks$set(
+  output = colourise_chunk("output"),
+  message = colourise_chunk("message"),
+  warning = colourise_chunk("warning"),
+  error = colourise_chunk("error")
+)
+```
+
 Nie znoszę mechanicznej pracy. Jestem jedną z tych osób, które wolą spędzić 30 minut na automatyzacji czegoś, co ręcznie zrobiłbym w 15 minut. Ale ma to swoje zalety. Po pierwsze poświęciłem na to tyle czasu, że teraz jestem w stanie wiele rzeczy zautomatyzować dość szybko. Tym doświadczeniem chcę się też podzielić. Po drugie jeśli praca manualna wielokrotnie się powtarza, netto oszczędzam czas, mimo że na początku muszę zainwestować tego czasu więcej. Raz zautomatyzowana czynność jest wielokrotnego użytku. Po trzecie jeśli automatyzujemy, to tyle samo zajmuje wyczyszczenie 1 pliku i 100 plików zajmuje tyle samo czasu. Jeśli liczymy, to 100 plików to 100 razy więcej czasu. Po czwarte -- mam ciekawsze rzeczy do roboty niż wypisywanie kolejnych liczb. Automatyzacja mnie chociaż nie nudzi, a mogę poświęcić swoje zasoby na opracowywanie, planowanie czy interpretacja.
 
 # Automatyzacja w czyszczeniu danych
