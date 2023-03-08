@@ -1,0 +1,69 @@
+---
+title: "Listy, pętle i automatyzacja w R"
+description: "Automatyzacja to jedna z najpotężniejszych zalet R, której nie mają programy statystyczne oparte na interfejsie graficznym. Jeśli chcemy zrobić jakąś czynność wiele razy tak samo lub prawie tak samo, możemy wykorzystać siłę programowania i zrobić to setki razy kilkoma linijkami. Postaram się to tutaj pokazać."
+image: ./headers/automatyzacja.webp
+categories:
+    - R
+draft: true
+---
+
+Nie znoszę mechanicznej pracy. Jestem jedną z tych osób, które wolą spędzić 30 minut na automatyzacji czegoś, co ręcznie zrobiłbym w 15 minut. Ale ma to swoje zalety. Po pierwsze poświęciłem na to tyle czasu, że teraz jestem w stanie wiele rzeczy zautomatyzować dość szybko. Tym doświadczeniem chcę się też podzielić. Po drugie jeśli praca manualna wielokrotnie się powtarza, netto oszczędzam czas, mimo że na początku muszę zainwestować tego czasu więcej. Raz zautomatyzowana czynność jest wielokrotnego użytku. Po trzecie jeśli automatyzujemy, to tyle samo zajmuje wyczyszczenie 1 pliku i 100 plików zajmuje tyle samo czasu. Jeśli liczymy, to 100 plików to 100 razy więcej czasu. Po czwarte -- mam ciekawsze rzeczy do roboty niż wypisywanie kolejnych liczb. Automatyzacja mnie chociaż nie nudzi, a mogę poświęcić swoje zasoby na opracowywanie, planowanie czy interpretacja.
+
+# Automatyzacja w czyszczeniu danych
+
+Weźmy sobie za przykład następującą sytuację -- wykonaliśmy eksperyment w programie PsychoPy i zbadaliśmy 35 osób. Nasz eksperyment dotyczył tego, na ile osoby będą w stanie zapamiętać historyjkę opowiadaną im w prawej słuchawce, jeśli w lewej słuchawce będzie im puszczany rozpraszacz. Mamy przy okazji dwa warunki, łatwy i trudny, w zależności od tego, jak intensywnie zachodziło rozpraszanie. Ze względu na specyfikę PsychoPy, otrzymaliśmy 35 osobnych plików z wynikami. Spojrzenie w przykładowy plik pozwala stwierdzić, że jest to kompletny chaos.
+
+```{r}
+library(tidyverse, quiet = TRUE)
+
+read_csv("./dane/automatyzacja/BD_eksperyment_latwy_2021_Apr_24_1631.csv")
+```
+
+Pierwsze 3 wiersze zawierają informacje metryczkowe. Kolejnych 8 zawiera odpowiedzi na pytania, ale w innych kolumnach. Wiersz 12. nie zawiera żanych użytecznych informacji, bo tylko czas, jaki osoba badana spędziła na czytaniu ostatniej instrukcji. Co więcej, identyfikatorem osoby badanej były inicjały, więc w wielu przypadkach mamy powtórzenia (np. dwie osoby o inicjałach MK). Zasadniczo jest tu wiele niedociągnięć co do projektu bazy i nie ma się co dziwić -- dane nie są spreparowane, to projekt studencki. Cenne doświadczenie, które pokazuje, czego w przyszłości unikać.
+
+Trzeba się trochę nagłowić, żeby takie dane wyczyścić. Pewnym ułatwieniem jest, że wszystkie te pliki mają identyczną strukturę. Ja wykorzystałem tutaj taki kod:
+
+```{r}
+baza_raw <- read_csv("./dane/automatyzacja/BD_eksperyment_latwy_2021_Apr_24_1631.csv")
+
+# najpierw sama metryczka
+metryczka <- baza_raw %>%
+    slice(1:2) %>% # wybierz wiersze z samej metryczki
+    select(participant, expName, 2, 4) %>% # wybierz kolumny z id, pytaniem i odpowiedzią
+    pivot_wider(names_from = form.itemText, values_from = form.response) %>% # format długi
+    set_names("id", "warunek", "plec", "wiek") %>%
+    mutate(wiek = parse_number(wiek))
+
+# potem same odpowiedzi na pytania
+pytania <- baza_raw %>%
+    slice(4:11) %>%
+    select(form_2.itemText, form_2.response) %>%
+    mutate(
+        form_2.response = case_match( # tak i nie na 1 i 0
+        form_2.response,
+        "tak" ~ 1,
+        "nie" ~ 0
+        )
+    ) %>%
+    pivot_wider(names_from = form_2.itemText, values_from = form_2.response) %>%
+    set_names(paste0("pyt_", 1:8))
+
+# na koniec łączę
+baza <- bind_cols(metryczka, pytania) %>% # kilka przekształceń
+    mutate(
+        warunek = str_remove(warunek, "eksperyment_"), # zostaw samo łatwy albo trudny
+        id = stringi::stri_rand_strings(1, 5) # zamień id na losowe znaki
+    )
+
+baza
+```
+
+Z ciekawszych rzeczy wykorzystuję tutaj funkcję `stri_rand_strings` z pakietu `stringi`, żeby zmienić ID osoby badanej. ID nie musi tutaj nic znaczyć, ma być po prostu unikalne. A z tym mamy tutaj problem, bo się wcześniej nie umówiliśmy na żaden sensowny sposób kodowania osób badanych. Dlatego na tym etapie mogę zastąpić inicjały losowym ciągiem 5 znaków, zapewniając sobie, że w ostatecznej bazie identyfikatory będą unikalne. Jest to też sposób na anonimizację bazy danych.
+
+Uzyskaliśmy w ten sposób jeden wyczyszczony wiersz. Jeszcze tylko 34. I jak mamy to zrobić? Mamy ten sam kod skopiować jeszcze 34 razy? A co jeśli mam 1000 osób? A co jeśli jestem Martą Kowal i mam do preanalizowania (ponad) 93 158 osób [@kowal_predictors_2022]? Kopiowanie kodu nigdy nie jest dobrą drogą. Jeśli często kopiujemu kod, powinniśmy zrobić z niego funkcję. Jeśli tę samą funkcję chcemy zastosować do wielu obiektów, powinniśmy użyć list albo pętli.
+
+# Listy
+
+Podstawową metodą automatyzacji we wszystkich językach programowania są pętle. W R też one występują, można z nich korzystać i omówię je, jednak pętle w R nie są najlepszą metodą. Są one mało wydajne. Jeśli chcemy coś wykonać wielokrotnie, najlepszą drogą -- o ile to możliwe -- są listy. Lista to szczególny typ danych w R, którego największą zaletą jest to, że może przechowywać inne formy danych.
+
+# Pętle

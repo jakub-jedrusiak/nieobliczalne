@@ -1,0 +1,13 @@
+form.index,form.itemText,form.type,form.response,form.rt,form_2.index,form_2.itemText,form_2.type,form_2.response,form_2.rt,zakonczenie_instrukcja.started,zakonczenie_instrukcja.stopped,participant,session,date,expName,psychopyVersion,frameRate
+1,Jaka jest twoja plec?,choice,mezczyzna,None,,,,,,,,KK_02,1,2021_Apr_23_2136,eksperyment_trudny,2021.1.2,60.04758169555182
+2,Jaki jest twoj wiek?,free text,16,None,,,,,,,,KK_02,1,2021_Apr_23_2136,eksperyment_trudny,2021.1.2,60.04758169555182
+3,Czy wyrazasz zgode na udzial w badaniu?,choice,tak,None,,,,,,,,KK_02,1,2021_Apr_23_2136,eksperyment_trudny,2021.1.2,60.04758169555182
+,,,,,1,Czy narrator był w lutym w Paryżu?,choice,tak,43.51155620004283,,,KK_02,1,2021_Apr_23_2136,eksperyment_trudny,2021.1.2,60.04758169555182
+,,,,,2,Czy wrócił w czerwcu?,choice,tak,47.242816300014965,,,KK_02,1,2021_Apr_23_2136,eksperyment_trudny,2021.1.2,60.04758169555182
+,,,,,3,Czy pocztówka pochodząca od Gunnara była z Paryża?,choice,nie,50.967003700032365,,,KK_02,1,2021_Apr_23_2136,eksperyment_trudny,2021.1.2,60.04758169555182
+,,,,,4,"Czy narrator sądzi, że Francuska poczta działa fatalnie?",choice,tak,57.14302460005274,,,KK_02,1,2021_Apr_23_2136,eksperyment_trudny,2021.1.2,60.04758169555182
+,,,,,5,Czy narrator był poirytowany znikającą korespondencją?,choice,tak,29.873411900014617,,,KK_02,1,2021_Apr_23_2136,eksperyment_trudny,2021.1.2,60.04758169555182
+,,,,,6,"Czy narrator twierdzi, że jego sztuka jest daleka od premiery?",choice,nie,32.29468859999906,,,KK_02,1,2021_Apr_23_2136,eksperyment_trudny,2021.1.2,60.04758169555182
+,,,,,7,"Czy uważa, że wersja angielska spektaklu jest najlepsza?",choice,tak,32.18268219998572,,,KK_02,1,2021_Apr_23_2136,eksperyment_trudny,2021.1.2,60.04758169555182
+,,,,,8,Czy narrator był na konferencji teatralnej we Wiedniu?,choice,tak,37.32244139997056,,,KK_02,1,2021_Apr_23_2136,eksperyment_trudny,2021.1.2,60.04758169555182
+,,,,,,,,,,359.63896929996554,None,,,,,,
