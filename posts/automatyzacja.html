@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.340">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,9 +19,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -48,48 +49,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -103,8 +75,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -173,6 +144,7 @@ cookieconsent.run({
   
 <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3239011499449859" crossorigin="anonymous"></script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
@@ -189,24 +161,24 @@ cookieconsent.run({
     <span class="navbar-title">Nieobliczalne</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Szukaj"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Przełącz nawigację" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html">
+    <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">Strona główna</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html">
+    <a class="nav-link" href="../about.html" rel="" target="">
  <span class="menu-text">O mnie</span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools ms-auto">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -220,18 +192,18 @@ cookieconsent.run({
     <h2 id="toc-title">Na tej stronie</h2>
    
   <ul>
-  <li><a href="#automatyzacja-w-czyszczeniu-danych" id="toc-automatyzacja-w-czyszczeniu-danych" class="nav-link active" data-scroll-target="#automatyzacja-w-czyszczeniu-danych"><span class="toc-section-number">1</span>  Automatyzacja w czyszczeniu danych</a></li>
-  <li><a href="#listy" id="toc-listy" class="nav-link" data-scroll-target="#listy"><span class="toc-section-number">2</span>  Listy</a>
+  <li><a href="#automatyzacja-w-czyszczeniu-danych" id="toc-automatyzacja-w-czyszczeniu-danych" class="nav-link active" data-scroll-target="#automatyzacja-w-czyszczeniu-danych"><span class="header-section-number">1</span> Automatyzacja w czyszczeniu danych</a></li>
+  <li><a href="#listy" id="toc-listy" class="nav-link" data-scroll-target="#listy"><span class="header-section-number">2</span> Listy</a>
   <ul class="collapse">
-  <li><a href="#masowe-ładowanie-danych-z-list.files" id="toc-masowe-ładowanie-danych-z-list.files" class="nav-link" data-scroll-target="#masowe-ładowanie-danych-z-list.files"><span class="toc-section-number">2.1</span>  Masowe ładowanie danych z <code>list.files</code></a></li>
-  <li><a href="#masowe-czyszczenie-z-map-lub-apply" id="toc-masowe-czyszczenie-z-map-lub-apply" class="nav-link" data-scroll-target="#masowe-czyszczenie-z-map-lub-apply"><span class="toc-section-number">2.2</span>  Masowe czyszczenie z <code>map</code> lub <code>apply</code></a></li>
+  <li><a href="#masowe-ładowanie-danych-z-list.files" id="toc-masowe-ładowanie-danych-z-list.files" class="nav-link" data-scroll-target="#masowe-ładowanie-danych-z-list.files"><span class="header-section-number">2.1</span> Masowe ładowanie danych z <code>list.files</code></a></li>
+  <li><a href="#masowe-czyszczenie-z-map-lub-apply" id="toc-masowe-czyszczenie-z-map-lub-apply" class="nav-link" data-scroll-target="#masowe-czyszczenie-z-map-lub-apply"><span class="header-section-number">2.2</span> Masowe czyszczenie z <code>map</code> lub <code>apply</code></a></li>
   </ul></li>
-  <li><a href="#pętle" id="toc-pętle" class="nav-link" data-scroll-target="#pętle"><span class="toc-section-number">3</span>  Pętle</a>
+  <li><a href="#pętle" id="toc-pętle" class="nav-link" data-scroll-target="#pętle"><span class="header-section-number">3</span> Pętle</a>
   <ul class="collapse">
-  <li><a href="#pętle-for" id="toc-pętle-for" class="nav-link" data-scroll-target="#pętle-for"><span class="toc-section-number">3.1</span>  Pętle <code>for</code></a></li>
-  <li><a href="#pętle-while" id="toc-pętle-while" class="nav-link" data-scroll-target="#pętle-while"><span class="toc-section-number">3.2</span>  Pętle <code>while</code></a></li>
+  <li><a href="#pętle-for" id="toc-pętle-for" class="nav-link" data-scroll-target="#pętle-for"><span class="header-section-number">3.1</span> Pętle <code>for</code></a></li>
+  <li><a href="#pętle-while" id="toc-pętle-while" class="nav-link" data-scroll-target="#pętle-while"><span class="header-section-number">3.2</span> Pętle <code>while</code></a></li>
   </ul></li>
-  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="toc-section-number">4</span>  Podsumowanie</a></li>
+  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">4</span> Podsumowanie</a></li>
   </ul>
 </nav>
     </div>
@@ -283,9 +255,9 @@ cookieconsent.run({
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> ── </span><span style="color: #BB0000; font-weight: bold;">Attaching core tidyverse packages</span><span style="color: #BB0000;"> ──────────────────────── tidyverse 2.0.0 ──
-</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">dplyr    </span><span style="color: #BB0000;"> 1.1.0     </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">purrr    </span><span style="color: #BB0000;"> 1.0.1
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">dplyr    </span><span style="color: #BB0000;"> 1.1.2     </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">purrr    </span><span style="color: #BB0000;"> 1.0.1
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">forcats  </span><span style="color: #BB0000;"> 1.0.0     </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">readr    </span><span style="color: #BB0000;"> 2.1.4
-</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ggplot2  </span><span style="color: #BB0000;"> 3.4.1     </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">stringr  </span><span style="color: #BB0000;"> 1.5.0
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ggplot2  </span><span style="color: #BB0000;"> 3.4.2     </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">stringr  </span><span style="color: #BB0000;"> 1.5.0
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">lubridate</span><span style="color: #BB0000;"> 1.9.2     </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">tidyr    </span><span style="color: #BB0000;"> 1.3.0
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> ── </span><span style="color: #BB0000; font-weight: bold;">Conflicts</span><span style="color: #BB0000;"> ────────────────────────────────────────── tidyverse_conflicts() ──
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> ✖ </span><span style="color: #0000BB;">dplyr</span><span style="color: #BB0000;">::</span><span style="color: #00BB00;">filter()</span><span style="color: #BB0000;"> masks </span><span style="color: #0000BB;">stats</span><span style="color: #BB0000;">::filter()
@@ -310,26 +282,25 @@ cookieconsent.run({
 </div>
 <div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 12 × 19</span>
-<span style="color: #555555;">#&gt;</span>    <span style="font-weight: bold;">form.index</span> <span style="font-weight: bold;">form.ite…¹</span> <span style="font-weight: bold;">form.…²</span> <span style="font-weight: bold;">form.…³</span> <span style="font-weight: bold;">form.rt</span> <span style="font-weight: bold;">form_…⁴</span> <span style="font-weight: bold;">form_…⁵</span> <span style="font-weight: bold;">form_…⁶</span> <span style="font-weight: bold;">form_…⁷</span>
-<span style="color: #555555;">#&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>  
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 1</span>          1 Jaka jest… choice  kobieta 3.0891…      <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 2</span>          2 Jaki jest… free t… 17      None         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 3</span>          3 Czy wyraz… choice  tak     10.844…      <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 4</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>            1 Czy na… choice  tak    
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 5</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>            2 Czy wr… choice  nie    
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 6</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>            3 Czy po… choice  tak    
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 7</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>            4 Czy na… choice  tak    
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 8</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>            5 Czy na… choice  tak    
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 9</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>            6 Czy na… choice  nie    
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">10</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>            7 Czy uw… choice  nie    
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">11</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>            8 Czy na… choice  tak    
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">12</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># … with 10 more variables: </span><span style="color: #555555; font-weight: bold;">form_2.rt</span><span style="color: #555555;"> &lt;dbl&gt;,</span>
+<span style="color: #555555;">#&gt;</span>    <span style="font-weight: bold;">form.index</span> <span style="font-weight: bold;">form.itemText</span>         <span style="font-weight: bold;">form.type</span> <span style="font-weight: bold;">form.response</span> <span style="font-weight: bold;">form.rt</span> <span style="font-weight: bold;">form_2.index</span>
+<span style="color: #555555;">#&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 1</span>          1 Jaka jest twoja plec? choice    kobieta       3.0891…           <span style="color: #BB0000;">NA</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 2</span>          2 Jaki jest twoj wiek?  free text 17            None              <span style="color: #BB0000;">NA</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 3</span>          3 Czy wyrazasz zgode n… choice    tak           10.844…           <span style="color: #BB0000;">NA</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 4</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>                    <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                 1
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 5</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>                    <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                 2
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 6</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>                    <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                 3
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 7</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>                    <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                 4
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 8</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>                    <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                 5
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 9</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>                    <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                 6
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">10</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>                    <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                 7
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">11</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>                    <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                 8
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">12</span>         <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>                    <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># ℹ 13 more variables: </span><span style="color: #555555; font-weight: bold;">form_2.itemText</span><span style="color: #555555;"> &lt;chr&gt;, </span><span style="color: #555555; font-weight: bold;">form_2.type</span><span style="color: #555555;"> &lt;chr&gt;,</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">form_2.response</span><span style="color: #555555;"> &lt;chr&gt;, </span><span style="color: #555555; font-weight: bold;">form_2.rt</span><span style="color: #555555;"> &lt;dbl&gt;,</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">zakonczenie_instrukcja.started</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">zakonczenie_instrukcja.stopped</span><span style="color: #555555;"> &lt;chr&gt;,</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">participant</span><span style="color: #555555;"> &lt;chr&gt;, </span><span style="color: #555555; font-weight: bold;">session</span><span style="color: #555555;"> &lt;chr&gt;, </span><span style="color: #555555; font-weight: bold;">date</span><span style="color: #555555;"> &lt;chr&gt;, </span><span style="color: #555555; font-weight: bold;">expName</span><span style="color: #555555;"> &lt;chr&gt;,</span>
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">psychopyVersion</span><span style="color: #555555;"> &lt;chr&gt;, </span><span style="color: #555555; font-weight: bold;">frameRate</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">...19</span><span style="color: #555555;"> &lt;lgl&gt;, and abbreviated</span>
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   variable names ¹​form.itemText, ²​form.type, ³​form.response, ⁴​form_2.index,</span>
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   ⁵​form_2.itemText, ⁶​form_2.type, ⁷​form_2.response</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">psychopyVersion</span><span style="color: #555555;"> &lt;chr&gt;, </span><span style="color: #555555; font-weight: bold;">frameRate</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">...19</span><span style="color: #555555;"> &lt;lgl&gt;</span>
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
@@ -420,7 +391,7 @@ cookieconsent.run({
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 8</span>          5           3.4          1.5         <span style="color: #555555;">0.</span>2 setosa 
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 9</span>          4.4         2.9          1.4         <span style="color: #555555;">0.</span>2 setosa 
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">10</span>          4.9         3.1          1.5         <span style="color: #555555;">0.</span>1 setosa 
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># … with 140 more rows</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># ℹ 140 more rows</span>
 <span style="color: #555555;">#&gt;</span> 
 <span style="color: #555555;">#&gt;</span> [[2]]
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 234 × 11</span>
@@ -436,7 +407,7 @@ cookieconsent.run({
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 8</span> audi         a4 quattro   1.8  <span style="text-decoration: underline;">1</span>99<span style="color: #555555;">9</span>     4 manu… 4        18    26 p     comp…
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 9</span> audi         a4 quattro   1.8  <span style="text-decoration: underline;">1</span>99<span style="color: #555555;">9</span>     4 auto… 4        16    25 p     comp…
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">10</span> audi         a4 quattro   2    <span style="text-decoration: underline;">2</span>00<span style="color: #555555;">8</span>     4 manu… 4        20    28 p     comp…
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># … with 224 more rows</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># ℹ 224 more rows</span>
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
@@ -526,7 +497,7 @@ cookieconsent.run({
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 8</span> YDejs trudny  kobieta      17     <span style="color: #555555;">0</span>     1     1     1     1     <span style="color: #555555;">0</span>     <span style="color: #555555;">0</span>     <span style="color: #555555;">0</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 9</span> Ntqj2 latwy   mezczyzna    20     <span style="color: #555555;">0</span>     <span style="color: #555555;">0</span>     1     1     1     1     <span style="color: #555555;">0</span>     <span style="color: #555555;">0</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">10</span> KkuCT latwy   kobieta      20     1     1     <span style="color: #555555;">0</span>     1     <span style="color: #555555;">0</span>     1     1     <span style="color: #555555;">0</span>
-<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># … with 25 more rows</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># ℹ 25 more rows</span>
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
@@ -593,8 +564,8 @@ cookieconsent.run({
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
-<div id="ref-kowal_predictors_2022" class="csl-entry" role="doc-biblioentry">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-kowal_predictors_2022" class="csl-entry" role="listitem">
 Kowal, M., Sorokowski, P., Pisanski, K., Valentova, J. V., Varella, M. A. C., Frederick, D. A., … Zumárraga-Espinosa, M. (2022). Predictors of enhancing human physical attractiveness: <span>Data</span> from 93 countries. <em>Evolution and Human Behavior</em>, <em>43</em>(6), 455–474. <a href="https://doi.org/10.1016/j.evolhumbehav.2022.08.003">https://doi.org/10.1016/j.evolhumbehav.2022.08.003</a>
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
@@ -751,9 +722,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -818,6 +803,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -862,7 +933,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 
