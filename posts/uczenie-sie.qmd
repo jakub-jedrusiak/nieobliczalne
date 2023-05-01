@@ -59,7 +59,7 @@ Ponadto, wymieniają oni dwa rodzaje powtarzania – utrzymujące i opracowując
 
 Dobrym sposobem opracowywania informacji jest tworzenie analogii [@halpern_analogies_1990]. Łączą to, co już uczeń wie lub potrafi sobie wyobrazić z informacjami nowymi i abstrakcyjnymi. Za przykład możemy przywołać porównanie elektronów na powłokach elektronowych do piłeczki na schodach. Tak jak piłeczka może wylądować na pierwszym, drugim, trzecim schodku, tak nigdy nie zatrzyma się pomiędzy schodkami. Tak samo elektron może mieć różną energię, ale zawsze będzie na jakiejś powłoce, nigdy pomiędzy [na podstawie: @campbell_biologia_2016]. Tworzenie analogii pomaga także rozwijać zdolności twórczego myślenia [@szmidt_abc_2019].
 
-![Analogia -- przykład opracowywania informacji (© OpenStax na licencji CC BY 4.0)](./ilustracje/uczenie-sie/rysunek-1.png){#fig-analogia}
+![Analogia -- przykład opracowywania informacji (© OpenStax na licencji CC BY 4.0)](./ilustracje/uczenie-sie/rysunek-1.jpg){#fig-analogia}
 
 ## Przepisywanie jako metoda prowadzenia notatek
 
