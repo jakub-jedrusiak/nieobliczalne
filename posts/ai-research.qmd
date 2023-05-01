@@ -14,7 +14,7 @@ Załóżmy, że zauważyliśmy któregoś ranka, że lepiej się czujemy, jeśli
 
 Wyszukujemy więc coś w rodzaju „morning sunlight mood" I nagle się okazuje, że znalezione artykuły nie mówią o tym, czego chcemy się dowiedzieć. Jeśli w ogóle mówią o świetle słonecznym i nastroju, to w chorobie dwubiegunowej, którą większość ludzi nie jest dotknięta. Większość artykułów jest też bardzo stara. Musimy więc przeformułować nasze zapytanie, może zawęzić zakres dat i szukać dalej. W końcu znajdziemy interesujący nas artykuł i śledząc cytowania (w tej pracy, ale też artykuły cytujące znaleziony przez nas artykuł) możemy dotrzeć do bogactwa literatury na ten temat. Tak to się robiło do tej pory.
 
-# ChatGPT
+# [ChatGPT](https://chat.openai.com/)
 
 Nagle na scenę wchodzi ChatGPT. Mamy do swojej dyspozycji potężne narzędzie, które zna wszystkie artykuły naukowe XXI wieku. Może jak mu zadamy odpowiednie pytanie, to sam nam podsunie artykuły? Nie zaszkodzi spróbować! Jeśli to zadziała, nagle nasza praca może stać się po wielokroć prostsza.
 
@@ -26,13 +26,11 @@ Na fali popularności AI powstało mnóstwo narzędzi o różnym, szerszym lub w
 
 [^1]: Zapytany o przepisywanie AI Rabbi odpowiada:
 
-    > Thank you for your question. In Judaism, the act of transcribing text can be a valuable learning method. The Talmud teaches that "one who teaches Torah to his neighbor's son is considered as if he gave birth to him" (Sanhedrin 19b). This means that the act of transmitting knowledge is highly valued in Jewish tradition.
+    > According to Torah sources, there is no direct mention of morning sunlight improving mood. However, there are teachings that emphasize the importance of starting the day with positive thoughts and actions. The Talmud states that one should wake up with a joyful heart and begin the day with gratitude and praise to God. Additionally, the Shulchan Aruch, a code of Jewish law, recommends reciting morning blessings upon waking up, which express gratitude for the gift of life and the ability to perform daily tasks.
     >
-    > Transcribing text can be a form of active learning, which can help to reinforce the material being studied. The act of writing or typing out the information can help to solidify it in one's memory. Additionally, the act of transcribing can help to identify areas where further study may be needed.
-    >
-    > However, it is important to note that transcribing text should not be the only method of learning. It is important to engage with the material in a variety of ways, such as through discussion, reflection, and application. Additionally, it is important to ensure that the material being transcribed is accurate and reliable, and that it is being studied in the context of a broader understanding of Jewish tradition and values.
+    > While there may not be a direct correlation between morning sunlight and mood, starting the day with positive thoughts and actions can certainly contribute to a more positive outlook and overall well-being. It is also important to note that exposure to natural light, including sunlight, has been shown to have a positive impact on mood and energy levels, so it is possible that morning sunlight could have a beneficial effect in this regard.
 
-    Trzeba przyznać, że jest to bardzo sensowna odpowiedź.
+    Trzeba przyznać, że jest to sensowna odpowiedź.
 
 ![](ilustracje/ai-research/Consensus-example.png)
 
