@@ -5,7 +5,7 @@ description: "W świecie Diuny komputery były zakazane (po wielkim buncie maszy
 image: ./headers/ai-research.webp
 date: "2023-04-29"
 categories:
-    - nauka
+    - Nauka
 ---
 
 Jeśli jesteśmy studentami, naukowcami, popularyzatorami, musimy często przedzierać się przez morze publikacji naukowych. Zazwyczaj w tym celu korzystamy z Google Scholar, który szuka słów kluczowych w tytułach i abstraktach. Dobranie słów kluczowych tak, żeby uzyskać to i tylko to, czego potrzebujemy, to sztuka sama w sobie.
