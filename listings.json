@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/metaprogramowanie.html",
       "/posts/ai-research.html",
       "/posts/automatyzacja.html",
       "/posts/podstawy_R.html",

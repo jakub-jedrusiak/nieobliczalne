@@ -2,38 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jakub-jedrusiak.github.io/nieobliczalne/posts/p-value.html</loc>
-    <lastmod>2023-05-01T11:36:44.793Z</lastmod>
+    <lastmod>2023-05-05T21:48:40.957Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/nieobliczalne/posts/podstawy_R.html</loc>
-    <lastmod>2023-05-01T11:36:49.193Z</lastmod>
+    <lastmod>2023-05-05T21:48:45.407Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/nieobliczalne/posts/uczenie-sie.html</loc>
-    <lastmod>2023-05-01T11:36:50.876Z</lastmod>
+    <lastmod>2023-05-05T21:48:47.107Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jakub-jedrusiak.github.io/nieobliczalne/posts/metaprogramowanie.html</loc>
+    <lastmod>2023-05-05T21:48:51.987Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/nieobliczalne/posts/automatyzacja.html</loc>
-    <lastmod>2023-05-01T11:36:56.086Z</lastmod>
+    <lastmod>2023-05-05T21:48:57.060Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/nieobliczalne/posts/kombinatoryka.html</loc>
-    <lastmod>2023-05-01T11:36:57.976Z</lastmod>
+    <lastmod>2023-05-05T21:48:58.237Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/nieobliczalne/posts/ai-research.html</loc>
-    <lastmod>2023-05-01T11:36:58.940Z</lastmod>
+    <lastmod>2023-05-05T21:48:59.180Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/nieobliczalne/posts/procent-wariancji.html</loc>
-    <lastmod>2023-05-01T11:37:00.420Z</lastmod>
+    <lastmod>2023-05-05T21:49:00.687Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/nieobliczalne/about.html</loc>
-    <lastmod>2023-05-01T11:37:00.663Z</lastmod>
+    <lastmod>2023-05-05T21:49:00.933Z</lastmod>
   </url>
   <url>
     <loc>https://jakub-jedrusiak.github.io/nieobliczalne/index.html</loc>
-    <lastmod>2023-05-01T11:37:01.296Z</lastmod>
+    <lastmod>2023-05-05T21:49:01.650Z</lastmod>
   </url>
 </urlset>
