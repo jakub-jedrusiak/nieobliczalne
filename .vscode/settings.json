@@ -12,12 +12,21 @@
         "jakas",
         "jesli",
         "kolumne",
+        "lapply",
+        "latwy",
+        "rownames",
+        "sapply",
         "setwd",
+        "stri",
         "stworzyc",
+        "tapply",
         "wartosc",
         "wyksztalcenie"
     ],
     "cSpell.words": [
-        "summarise"
+        "metryczkowe",
+        "summarise",
+        "webp",
+        "wyczysc"
     ]
 }
