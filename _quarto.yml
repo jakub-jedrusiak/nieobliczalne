@@ -18,7 +18,7 @@ website:
 format:
   html:
     theme:
-      light: cosmo
+      light: flatly
       dark: darkly
     css: styles.css
     toc: true
@@ -27,6 +27,11 @@ format:
     include-in-header:
         - adsense.html
 
+execute:
+  freeze: auto
+
 bibliography: ./bibliografia/references.bib
 csl: ./bibliografia/apa-6th-edition.csl
 
+resources:
+  - CNAME
