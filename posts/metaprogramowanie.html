@@ -177,7 +177,7 @@ cookieconsent.run({
   <li><a href="#tidy-eval-ciąg-dalszy" id="toc-tidy-eval-ciąg-dalszy" class="nav-link" data-scroll-target="#tidy-eval-ciąg-dalszy"><span class="header-section-number">4</span> Tidy Eval (ciąg dalszy)</a></li>
   <li><a href="#niejednoznaczność-i" id="toc-niejednoznaczność-i" class="nav-link" data-scroll-target="#niejednoznaczność-i"><span class="header-section-number">5</span> Niejednoznaczność i <code>{{ }}</code></a></li>
   <li><a href="#quoting-i-unquoting" id="toc-quoting-i-unquoting" class="nav-link" data-scroll-target="#quoting-i-unquoting"><span class="header-section-number">6</span> <em>Quoting</em> i <em>unquoting</em></a></li>
-  <li><a href="#expr-quo-i-sym" id="toc-expr-quo-i-sym" class="nav-link" data-scroll-target="#expr-quo-i-sym"><span class="header-section-number">7</span> <code>expr()</code>, <code>quo()</code> i <code>sym()</code></a></li>
+  <li><a href="#expr-i-quo" id="toc-expr-i-quo" class="nav-link" data-scroll-target="#expr-i-quo"><span class="header-section-number">7</span> <code>expr()</code> i <code>quo()</code></a></li>
   <li><a href="#enquo-quos-i-enquos-oraz-pokrewne" id="toc-enquo-quos-i-enquos-oraz-pokrewne" class="nav-link" data-scroll-target="#enquo-quos-i-enquos-oraz-pokrewne"><span class="header-section-number">8</span> <code>enquo()</code>, <code>quos()</code> i <code>enquos()</code> oraz pokrewne</a></li>
   <li><a href="#i" id="toc-i" class="nav-link" data-scroll-target="#i"><span class="header-section-number">9</span> <code>!!</code> i <code>!!!</code></a></li>
   <li><a href="#parsing-i-deparsing" id="toc-parsing-i-deparsing" class="nav-link" data-scroll-target="#parsing-i-deparsing"><span class="header-section-number">10</span> <em>Parsing</em> i <em>deparsing</em></a></li>
@@ -485,8 +485,8 @@ cookieconsent.run({
 <p>To, co w poprzednim akapicie zrobiliśmy za pomocą <code>{{ }}</code> tak naprawdę składa się z dwóch kroków. Po pierwsze musieliśmy powiedzieć R, żeby nie rozpakowywał tego pudełka sam. Po drugie musimy powiedzieć funkcji <code>group_by()</code>, żeby ona to pudełko rozpakowała. Zaklejanie pudełka tak, żeby R nie mogło go odpakować nazywa się <em>quoting</em> (branie w cudzysłów). Funkcje typu <code>select()</code>, <code>filter()</code>, <code>group_by()</code>, <code>summarise()</code>, <code>across()</code> itd., czyli takie które stosują <em>quoting</em>, a które wcześniej nazywałem funkcjami z Tidy Eval, bardziej formalnie nazywają się <em>quoting functions</em>. Polecenie dla <em>quoting function</em>, by odpakowała tak zaklejone pudełko, nazywa się <em>unquoting</em>. Mówiąc bardziej formalnie – <em>quoting</em> to przyjmowanie kodu bez jego wykonywania, zatrzymywanie go. <em>Unquoting</em> to wykonywanie wcześniej zatrzymanego kodu.</p>
 <p>Obie te czynności wykonujemy jednocześnie wygodnym operatorem <code>{{ }}</code>, ale możemy (a czasem musimy) wykonać je też osobno. Dlatego też teraz omówimy sobie serię funkcji za pomocą których możemy wykonać <em>quoting</em>, a następnie <em>unquoting</em>. Wykorzystamy sobie tutaj funkcje wdrażane przez niewielki acz przepotężny pakiet <code>rlang</code> należący do rodziny tidyverse. Base-R też potrafi te rzeczy robić, ale <code>rlang</code> nie dość, że jest standardem, to jeszcze jest łatwiejszy do zrozumienia.</p>
 </section>
-<section id="expr-quo-i-sym" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> <code>expr()</code>, <code>quo()</code> i <code>sym()</code></h1>
+<section id="expr-i-quo" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> <code>expr()</code> i <code>quo()</code></h1>
 <p>Najbardziej bazową funkcją wykonującą <em>quoting</em> jest funkcja <code>expr()</code>. Jeśli wrzucamy do niej jakieś wyrażenie, zwraca ona nam to wyrażenie w „rozbrojonej” (w naszej metaforze zaklejonej taśmą) formie.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="dv">5</span> <span class="sc">+</span> <span class="dv">3</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -603,7 +603,7 @@ cookieconsent.run({
 <span style="color: #555555;">#&gt;</span> [1] "quo(x):"
 <span style="color: #555555;">#&gt;</span> <span style="font-weight: bold;">&lt;quosure&gt;</span>
 <span style="color: #555555;">#&gt;</span> expr: <span style="color: #0000BB;">^x</span>
-<span style="color: #555555;">#&gt;</span> env:  <span style="color: #0000BB;">0x5650e1332fa8</span>
+<span style="color: #555555;">#&gt;</span> env:  <span style="color: #0000BB;">0x55d85e883c70</span>
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
