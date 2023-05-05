@@ -28,5 +28,8 @@
         "summarise",
         "webp",
         "wyczysc"
+    ],
+    "cSpell.enableFiletypes": [
+        "mermaid"
     ]
 }

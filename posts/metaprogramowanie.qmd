@@ -5,8 +5,7 @@ description: "Piękno pakietu `tidyverse` polega na tym, że zupełnie zmienia s
 date: "2023-05-05"
 image: "./headers/metaprogramowanie.webp"
 caregories:
-    - R
-freeze: true
+  - R
 ---
 
 # Przykład motywacyjny {#przykład-motywacyjny}
@@ -270,7 +269,7 @@ To, co w poprzednim akapicie zrobiliśmy za pomocą `{{ }}` tak naprawdę skład
 
 Obie te czynności wykonujemy jednocześnie wygodnym operatorem `{{ }}`, ale możemy (a czasem musimy) wykonać je też osobno. Dlatego też teraz omówimy sobie serię funkcji za pomocą których możemy wykonać *quoting*, a następnie *unquoting*. Wykorzystamy sobie tutaj funkcje wdrażane przez niewielki acz przepotężny pakiet `rlang` należący do rodziny tidyverse. Base-R też potrafi te rzeczy robić, ale `rlang` nie dość, że jest standardem, to jeszcze jest łatwiejszy do zrozumienia.
 
-# `expr()`, `quo()` i `sym()` {#expr-quo-i-sym}
+# `expr()` i `quo()` {#expr-i-quo}
 
 Najbardziej bazową funkcją wykonującą *quoting* jest funkcja `expr()`. Jeśli wrzucamy do niej jakieś wyrażenie, zwraca ona nam to wyrażenie w „rozbrojonej" (w naszej metaforze zaklejonej taśmą) formie.
 
