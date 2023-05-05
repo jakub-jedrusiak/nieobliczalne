@@ -256,7 +256,7 @@ cookieconsent.run({
 <p>Ciekawsze rzeczy to:</p>
 <ol type="1">
 <li><code>\(x) sum(!is.na(x))</code> – sama funkcja <code>is.na()</code> zwraca <code>TRUE</code> lub <code>FALSE</code> w zależności od tego, czy dana wartość jest brakująca. Pod maską <code>TRUE</code> to 1, a <code>FALSE</code> to 0, więc jeśli zsumujemy wynik działania <code>is.na()</code>, to dostaniemy liczbę <code>TRUE</code>. Ponieważ <code>is.na()</code> zwraca <code>TRUE</code>, jeśli dane <strong>są</strong> brakujące, to sumując <code>is.na()</code> dostałbym liczbę <code>NA</code>. Dlatego zaprzeczam <code>is.na()</code> operatorem <code>!</code> (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Cz%C4%99%C5%9B%C4%87%20operator%C3%B3w%20logicznych%20dost%C4%99pnych%20w%20R.">tutaj</a>).</li>
-<li>Skośność i kurtoza – to są jedyne funkcje, które stosuję tutaj jak w mordę&nbsp;strzelił, bez kombinowania, więc podaję je <strong>bez nawiasów</strong>. Jak wspominałem <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Co%20wa%C5%BCne%2C%20musi%20to%20by%C4%87%20jej%20nazwa%20bez%20nawias%C3%B3w.">tutaj</a>, gdy nie ma nawiasów, wskazujemy na samą funkcję, a z nawiasami na to, co funkcja z siebie wywala.</li>
+<li>Skośność i kurtoza – to są jedyne funkcje, które stosuję tutaj jak w mordę strzelił, bez kombinowania, więc podaję je <strong>bez nawiasów</strong>. Jak wspominałem <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Co%20wa%C5%BCne%2C%20musi%20to%20by%C4%87%20jej%20nazwa%20bez%20nawias%C3%B3w.">tutaj</a>, gdy nie ma nawiasów, wskazujemy na samą funkcję, a z nawiasami na to, co funkcja z siebie wywala.</li>
 <li><code>`NA`</code> – słowo <code>NA</code> ma w R swoje znaczenie. Takich słów normalnie nie możemy używać jako nazw kolumn. Zazwyczaj. Jeśli bardzo chcemy, możemy ująć taką niesyntaktyczną<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> nazwę w <em>backticki</em> (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-select">tutaj</a>).</li>
 </ol>
 <p>Taka funkcja powinna działać. Jeśli uruchomimy ją w konsoli na konkretnym przykładzie, to zadziała.</p>
@@ -276,25 +276,27 @@ cookieconsent.run({
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      )</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 13
-  Species    Sepal.Length_N Sepal.Length_M Sepal.Length_SD Sepal.Length_A
-  &lt;fct&gt;               &lt;int&gt;          &lt;dbl&gt;           &lt;dbl&gt;          &lt;dbl&gt;
-1 setosa                 50           5.01           0.352          0.120
-2 versicolor             50           5.94           0.516          0.105
-3 virginica              50           6.59           0.636          0.118
-# ℹ 8 more variables: Sepal.Length_K &lt;dbl&gt;, Sepal.Length_NA &lt;int&gt;,
-#   Sepal.Width_N &lt;int&gt;, Sepal.Width_M &lt;dbl&gt;, Sepal.Width_SD &lt;dbl&gt;,
-#   Sepal.Width_A &lt;dbl&gt;, Sepal.Width_K &lt;dbl&gt;, Sepal.Width_NA &lt;int&gt;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 3 × 13</span>
+<span style="color: #555555;">#&gt;</span>   <span style="font-weight: bold;">Species</span>    <span style="font-weight: bold;">Sepal.Length_N</span> <span style="font-weight: bold;">Sepal.Length_M</span> <span style="font-weight: bold;">Sepal.Length_SD</span> <span style="font-weight: bold;">Sepal.Length_A</span>
+<span style="color: #555555;">#&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>               <span style="color: #555555; font-style: italic;">&lt;int&gt;</span>          <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">1</span> setosa                 50           5.01           <span style="color: #555555;">0.</span>352          <span style="color: #555555;">0.</span>120
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">2</span> versicolor             50           5.94           <span style="color: #555555;">0.</span>516          <span style="color: #555555;">0.</span>105
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">3</span> virginica              50           6.59           <span style="color: #555555;">0.</span>636          <span style="color: #555555;">0.</span>118
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># ℹ 8 more variables: </span><span style="color: #555555; font-weight: bold;">Sepal.Length_K</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Length_NA</span><span style="color: #555555;"> &lt;int&gt;,</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">Sepal.Width_N</span><span style="color: #555555;"> &lt;int&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Width_M</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Width_SD</span><span style="color: #555555;"> &lt;dbl&gt;,</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">Sepal.Width_A</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Width_K</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Width_NA</span><span style="color: #555555;"> &lt;int&gt;</span>
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>Nie jest to może najładniejsza tabela, ale jest. Spróbujmy jednak to samo wywołać za pomocą naszej funkcji, która przecież niby robi to samo.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">opisowe</span>(iris, Species, Sepal.Length, Sepal.Width)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `group_by()`:
-! Must group by variables found in `.data`.
-✖ Column `group` is not found.</code></pre>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">opisowe</span>(iris, Species, Sepal.Length, Sepal.Width)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in `group_by()`:</span><span style="color: #BB0000;">
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00;">!</span><span style="color: #BB0000;"> Must group by variables found in `.data`.
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> ✖ Column `group` is not found.
+</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>Ups. Nie działa. Ale czemu? Błąd mówi, że <code>group_by()</code> nie znalazło kolumny o nazwie <code>group</code>. I bardzo słusznie, że nie znalazło, bo nie ma takiej kolumny w <code>iris</code>. Ale w ogóle nie miało jej szukać! Miało szukać kolumny <code>Species</code>, którą podaliśmy jako argument? Dlaczego <code>group_by()</code> szuka kolumny <code>group</code>?</p>
@@ -305,159 +307,59 @@ cookieconsent.run({
 <p>Jednocześnie nie jest to coś, co większość useRów musi rozumieć. Taka potrzeba pojawia się zazwyczaj głęboko, późno, gdy chcemy usprawnić nasz kod własnymi funkcjami<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> albo musimy napisać jakiś pakiet. Zazwyczaj pierwszy raz, kiedy chcemy napisać funkcję robiącą wykres w <code>ggplot2</code> i się blokujemy. Wtedy znajdujemy na StackOverflow informację, że trzeba nazwy kolumn wziąć w podwójne klamry (np. <code>{{column}}</code>) i tyle nam wystarczy, nie musimy zajmować się tym głębiej. Do czasu, kiedy jednak musimy.</p>
 <p>Skąd więc biorą się problemy takie jak w przykładzie? To jest cena, którą płacimy za wygodne pisanie kodu. W klasycznym R, gdy chcemy coś policzyć, musimy wykorzystywać pełne nazwy kolumn. Podobnie gdy coś filtrujemy.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>iris[iris<span class="sc">$</span>Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>, <span class="fu">c</span>(<span class="st">"Species"</span>, <span class="st">"Sepal.Length"</span>)] <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 118 × 2
-   Species Sepal.Length
-   &lt;fct&gt;          &lt;dbl&gt;
- 1 setosa           5.1
- 2 setosa           5.4
- 3 setosa           5.4
- 4 setosa           5.8
- 5 setosa           5.7
- 6 setosa           5.4
- 7 setosa           5.1
- 8 setosa           5.7
- 9 setosa           5.1
-10 setosa           5.4
-# ℹ 108 more rows</code></pre>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>iris[iris<span class="sc">$</span>Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>, <span class="fu">c</span>(<span class="st">"Species"</span>, <span class="st">"Sepal.Length"</span>)] <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 118 × 2</span>
+<span style="color: #555555;">#&gt;</span>    <span style="font-weight: bold;">Species</span> <span style="font-weight: bold;">Sepal.Length</span>
+<span style="color: #555555;">#&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 1</span> setosa           5.1
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 2</span> setosa           5.4
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 3</span> setosa           5.4
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 4</span> setosa           5.8
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 5</span> setosa           5.7
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 6</span> setosa           5.4
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 7</span> setosa           5.1
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 8</span> setosa           5.7
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 9</span> setosa           5.1
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">10</span> setosa           5.4
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># ℹ 108 more rows</span>
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>Powyższa funkcja filtruje wiersze, w których <code>Sepal.Length</code> jest większe niż 5 oraz wybiera tylko kolumny <code>Species</code> i <code>Sepal.Length</code>. Zapis ten jest zwięzły, ale niewygodny w pisaniu i jeszcze trudniejszy w czytaniu. Całość przekonwertowałem jeszcze na <code>tibble</code>, żeby się ładniej wyświetlało. Dokładnie ten sam efekt uzyskamy pisząc:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Species, Sepal.Length) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       Species Sepal.Length
-1       setosa          5.1
-2       setosa          5.4
-3       setosa          5.4
-4       setosa          5.8
-5       setosa          5.7
-6       setosa          5.4
-7       setosa          5.1
-8       setosa          5.7
-9       setosa          5.1
-10      setosa          5.4
-11      setosa          5.1
-12      setosa          5.1
-13      setosa          5.2
-14      setosa          5.2
-15      setosa          5.4
-16      setosa          5.2
-17      setosa          5.5
-18      setosa          5.5
-19      setosa          5.1
-20      setosa          5.1
-21      setosa          5.1
-22      setosa          5.3
-23  versicolor          7.0
-24  versicolor          6.4
-25  versicolor          6.9
-26  versicolor          5.5
-27  versicolor          6.5
-28  versicolor          5.7
-29  versicolor          6.3
-30  versicolor          6.6
-31  versicolor          5.2
-32  versicolor          5.9
-33  versicolor          6.0
-34  versicolor          6.1
-35  versicolor          5.6
-36  versicolor          6.7
-37  versicolor          5.6
-38  versicolor          5.8
-39  versicolor          6.2
-40  versicolor          5.6
-41  versicolor          5.9
-42  versicolor          6.1
-43  versicolor          6.3
-44  versicolor          6.1
-45  versicolor          6.4
-46  versicolor          6.6
-47  versicolor          6.8
-48  versicolor          6.7
-49  versicolor          6.0
-50  versicolor          5.7
-51  versicolor          5.5
-52  versicolor          5.5
-53  versicolor          5.8
-54  versicolor          6.0
-55  versicolor          5.4
-56  versicolor          6.0
-57  versicolor          6.7
-58  versicolor          6.3
-59  versicolor          5.6
-60  versicolor          5.5
-61  versicolor          5.5
-62  versicolor          6.1
-63  versicolor          5.8
-64  versicolor          5.6
-65  versicolor          5.7
-66  versicolor          5.7
-67  versicolor          6.2
-68  versicolor          5.1
-69  versicolor          5.7
-70   virginica          6.3
-71   virginica          5.8
-72   virginica          7.1
-73   virginica          6.3
-74   virginica          6.5
-75   virginica          7.6
-76   virginica          7.3
-77   virginica          6.7
-78   virginica          7.2
-79   virginica          6.5
-80   virginica          6.4
-81   virginica          6.8
-82   virginica          5.7
-83   virginica          5.8
-84   virginica          6.4
-85   virginica          6.5
-86   virginica          7.7
-87   virginica          7.7
-88   virginica          6.0
-89   virginica          6.9
-90   virginica          5.6
-91   virginica          7.7
-92   virginica          6.3
-93   virginica          6.7
-94   virginica          7.2
-95   virginica          6.2
-96   virginica          6.1
-97   virginica          6.4
-98   virginica          7.2
-99   virginica          7.4
-100  virginica          7.9
-101  virginica          6.4
-102  virginica          6.3
-103  virginica          6.1
-104  virginica          7.7
-105  virginica          6.3
-106  virginica          6.4
-107  virginica          6.0
-108  virginica          6.9
-109  virginica          6.7
-110  virginica          6.9
-111  virginica          5.8
-112  virginica          6.8
-113  virginica          6.7
-114  virginica          6.7
-115  virginica          6.3
-116  virginica          6.5
-117  virginica          6.2
-118  virginica          5.9</code></pre>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Species, Sepal.Length) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 118 × 2</span>
+<span style="color: #555555;">#&gt;</span>    <span style="font-weight: bold;">Species</span> <span style="font-weight: bold;">Sepal.Length</span>
+<span style="color: #555555;">#&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 1</span> setosa           5.1
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 2</span> setosa           5.4
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 3</span> setosa           5.4
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 4</span> setosa           5.8
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 5</span> setosa           5.7
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 6</span> setosa           5.4
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 7</span> setosa           5.1
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 8</span> setosa           5.7
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 9</span> setosa           5.1
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">10</span> setosa           5.4
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># ℹ 108 more rows</span>
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>I to da się czytać! Wszystko jest jasne, ładne i wygodne w pisaniu. Dlatego uwielbiam tidyverse i uważam, że to od tidyverse należy zaczynać naukę R. Klasyczny R jest bardzo informatyczny, nieznośny w czytaniu i pisaniu i trudno się go uczyć, zwłaszcza jako pierwszego kontaktu z programowaniem.</p>
 <p>Zauważmy jednak pewien szczegół w tym zapisie. Nazwy kolumn są tutaj zapisane tak, jak wszystkie inne obiekty. Nie są to dosłowne ciągi znaków, nie są to pojedyncze kolumny (<code>iris$Species</code>), to są po prostu nazwy. Nie jest to typowe zachowanie w R. Jeśli zrobimy coś takiego:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 36</code></pre>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] 36
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>…to R widząc wewnątrz <code>sum()</code> coś, co wygląda jak obiekt, próbuje ten obiekt znaleźć i wstawić do funkcji. Dzięki temu efekt jest ten sam, co w przypadku zapisu <code>sum(1:8)</code>. Możemy sobie wyobrazić, że wstawiając do funkcji <code>x</code> dajemy R pudełeczko, w którym zamknięte są liczby od 1 do 8. Gdy R ma policzyć sumę, naturalnie otwiera to pudełeczko, wyciąga te liczby i sumuje.</p>
@@ -466,28 +368,31 @@ cookieconsent.run({
 <h1 data-number="3"><span class="header-section-number">3</span> <em>Lazy evaluation</em></h1>
 <p>Co ciekawe otwiera to pudełeczko dopiero wtedy, gdy już koniecznie musi, bo każemy mu coś z tym zrobić.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>oszukujemy <span class="ot">&lt;-</span> <span class="cf">function</span>(liczba, niecny_fortel) {</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(liczba <span class="sc">+</span> <span class="dv">3</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (liczba <span class="sc">&gt;</span> <span class="dv">10</span>) {</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(niecny_fortel)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>jakas_liczba <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">oszukujemy</span>(jakas_liczba, to_nie_istnieje)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 8</code></pre>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>oszukujemy <span class="ot">&lt;-</span> <span class="cf">function</span>(liczba, niecny_fortel) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(liczba <span class="sc">+</span> <span class="dv">3</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (liczba <span class="sc">&gt;</span> <span class="dv">10</span>) {</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(niecny_fortel)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>jakas_liczba <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">oszukujemy</span>(jakas_liczba, to_nie_istnieje)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] 8
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>Po zdefiniowaniu funkcji daliśmy R dwa pudełeczka. Jedno z etykietą <code>jakas_liczba</code>, drugie z etykietą <code>niecny_fortel</code>. Wydaliśmy polecenie wykonania naszej instrukcji z tymi dwoma pudełeczkami. Po pierwsze R miał w konsoli wydrukować zawartość pierwszego pudełeczka powiększoną o 3, co też zrobił. Żeby to zrobić, musiał to pierwsze pudełeczko otworzyć i znalazł tam 5, w związku z czym wydrukował 8. Następnie przeszedł do instrukcji warunkowej. Sprawdził czy podana przez nas liczba (tj. 5) jest większa niż 10. Że nie jest, to zignorował całkowicie, co było w klamrach. Zwróćmy uwagę, że funkcja zakończyła pracę bez błędu. Dlaczego miałby pojawić się błąd? Bo zmienna <code>to_nie_istnieje</code>, bez zaskoczenia, nie istnieje. Używając naszej metafory, daliśmy R puste pudełeczko. Ale R się nie zorientował, bo w ogóle nie musiał tego pudełeczka otwierać. Co się stanie, jeśli otworzy?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oszukujemy</span>(<span class="dv">12</span>, to_nie_istnieje)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 15</code></pre>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oszukujemy</span>(<span class="dv">12</span>, to_nie_istnieje)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] 15
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in print(niecny_fortel): nie znaleziono obiektu 'to_nie_istnieje'</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> Error in print(niecny_fortel): nie znaleziono obiektu 'to_nie_istnieje'
+</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>Tym razem podaliśmy liczbę 12. Ponieważ 12 jest większe niż 10, R odczytał polecenie, że ma zawartość drugiego pudełka wydrukować w konsoli. Otworzył więc to pudełko, zorientował się, że jest puste i wtedy dopiero zaczął krzyczeć. Ta właściwość R, że otwiera pudełka dopiero wtedy, gdy są potrzebne, określana jest jako <em>lazy evaluation</em>. Za moment pokażę, jak możemy to wykorzystać.</p>
@@ -502,70 +407,74 @@ cookieconsent.run({
 <h1 data-number="5"><span class="header-section-number">5</span> Niejednoznaczność i <code>{{ }}</code></h1>
 <p>Nie wchodźmy na ten moment w szczegóły, <em>a propos</em> tego, jak działają funkcje tidyverse. Przyjmijmy na ten moment, że potrafią one traktować coś, co inne funkcje uznałyby za obiekt, jako nazwę kolumny. To rodzi nam potencjał do pewnej niejednoznaczności. Kiedy piszemy <code>iris$Sepal.Length</code>, to może jest to niewygodne, ale nie ma wątpliwości, o co nam chodzi. Niejednoznaczność pojawiła się po raz pierwszy, gdy w naszej funkcji <code>opisowe</code> zapisaliśmy <code>group_by(group)</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="co"># tutaj funkcja wariuje</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">across</span>(</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        ...,</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">.fns =</span> <span class="fu">list</span>(</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">N =</span> \(x) <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)),</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">M =</span> \(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">SD =</span> \(x) <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">A =</span> agricolae<span class="sc">::</span>skewness,</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">K =</span> agricolae<span class="sc">::</span>kurtosis,</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>          <span class="st">`</span><span class="at">NA</span><span class="st">`</span> <span class="ot">=</span> \(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x))</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="co"># tutaj funkcja wariuje</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">across</span>(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        ...,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">.fns =</span> <span class="fu">list</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">N =</span> \(x) <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">M =</span> \(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">SD =</span> \(x) <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">A =</span> agricolae<span class="sc">::</span>skewness,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">K =</span> agricolae<span class="sc">::</span>kurtosis,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>          <span class="st">`</span><span class="at">NA</span><span class="st">`</span> <span class="ot">=</span> \(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x))</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Gdy zapisaliśmy tę instrukcję, nasza funkcja zwariowała, bo poszła następującą logiką: muszę w bazie danych <code>iris</code> znaleźć kolumnę <code>group</code>. Normalnie zadziałałoby to świetnie. W końcu dokładnie o to nam chodzi, gdy piszemy na przykład <code>iris %&gt;% group_by(Species)</code> – w bazie danych <code>iris</code> pogrupuj po kolumnie <code>Species</code>. Tym razem nie chodzi nam jednak o kolumnę <code>group</code> a właśnie o obiekt <code>group</code> i to, co w sobie zawiera – nazwę kolumny <code>Species</code>.</p>
 <p>Rozszerzmy trochę naszą metaforę z pudełkami. Gdy wywołujemy funkcję, tak naprawdę mamy dwa pudełka. Lepiej to widać, jak zapiszemy naszą funkcję tak:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Przypadek 1.</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="at">x =</span> <span class="dv">100</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Przypadek 1.</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="at">x =</span> <span class="dv">100</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] 2
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Przypadek 2.</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>liczba <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="at">x =</span> liczba)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Przypadek 2.</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>liczba <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="at">x =</span> liczba)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] 2
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>Efekt działania obu tych wywołań jest taki sam – jest nim logarytm dziesiętny ze 100, czyli 2. W pierwszym wypadku wpakowaliśmy 100 do funkcji bezpośrednio. Innymi słowy do pudełka z napisem <code>x</code> wpakowaliśmy liczbę 100. <code>x</code> To nazwa (jedynego) argumentu funkcji <code>log10()</code>. W drugim przypadku wpakowaliśmy liczbę 100 do pudełka z napisem <code>liczba</code> i dopiero to pudełko chcemy włożyć do pudełka <code>x</code>. Ale R nie lubi matrioszek. R nie włoży pudełka do pudełka. Zanim R włoży coś do pudełka <code>x</code>, to to rozpakuje. Do samego końca. To jest standardowy mechanizm ewaluacji – rozpakuj do końca, aż nie dostaniesz czegoś konkretnego. Jeśli pudełko <code>liczba</code> byłoby puste, R miałby problem.</p>
 <p>Funkcje korzystające z Tidy Eval działają trochę inaczej. Gdy R przynosi im pudełko <code>x</code>, wyciąga z niego pudełko <code>liczba</code> i mówi “O, drugie pudełko. Czekaj, rozpakuję ci to”, na co taka funkcja <code>group_by()</code> odpowiada “Nie, spoko, poradzę sobie”. Dlatego R podaje jej samo pudełko <code>liczba</code>. Funkcja <code>group_by()</code> bierze to pudełko, czyta etykietę i wie, że ma szukać w bazie danych kolumny, co się nazywa “liczba”. Skąd wie, to pomińmy na teraz. Można więc powiedzieć, że standardowa ewaluacja to “rozpakowuj do końca”, a Tidy Eval to “nie rozpakowuj”.</p>
 <p>Problem pojawia się wtedy, gdy piszemy własną funkcję, gdzie chcemy wykorzystać funkcję z Tidy Eval. Gdy w naszej funkcji <code>opisowe</code> wywołujemy <code>group_by(group)</code>, to <code>group_by()</code> posłusznie nie rozpakowuje <code>group</code>, tylko szuka <code>group</code> w bazie danych. Chcemy więc powiedzieć funkcji <code>group_by()</code> “Nie, nie. To rozpakuj, to jest argument.”. Właśnie to uzyskamy za pomocą operatora <code>{{ }}</code> (czytane <em>curly curly</em>). <code>group_by()</code> będzie wiedziało, że to jest do rozpakowania. Dokonajmy więc pierwszej modyfikacji naszej funkcji <code>opisowe</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{ group }}) <span class="sc">%&gt;%</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">across</span>(</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        ...,</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">.fns =</span> <span class="fu">list</span>(</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">N =</span> \(x) <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)),</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">M =</span> \(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">SD =</span> \(x) <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">A =</span> agricolae<span class="sc">::</span>skewness,</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">K =</span> agricolae<span class="sc">::</span>kurtosis,</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>          <span class="st">`</span><span class="at">NA</span><span class="st">`</span> <span class="ot">=</span> \(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x))</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="fu">opisowe</span>(iris, Species, Sepal.Width, Sepal.Length)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `summarise()`:
-ℹ In argument: `across(...)`.
-ℹ In group 1: `Species = setosa`.
-Caused by error in `across()`:
-! Can't compute column `Sepal.Width_N`.
-Caused by error in `withCallingHandlers()`:
-! nie znaleziono obiektu 'Sepal.Length'</code></pre>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{ group }}) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">across</span>(</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        ...,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">.fns =</span> <span class="fu">list</span>(</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">N =</span> \(x) <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)),</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">M =</span> \(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">SD =</span> \(x) <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">A =</span> agricolae<span class="sc">::</span>skewness,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">K =</span> agricolae<span class="sc">::</span>kurtosis,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>          <span class="st">`</span><span class="at">NA</span><span class="st">`</span> <span class="ot">=</span> \(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x))</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="fu">opisowe</span>(iris, Species, Sepal.Width, Sepal.Length)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in `summarise()`:</span><span style="color: #BB0000;">
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">ℹ</span><span style="color: #BB0000;"> In argument: `across(...)`.
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">ℹ</span><span style="color: #BB0000;"> In group 1: `Species = setosa`.
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BB0000; font-weight: bold;">Caused by error in `across()`:</span><span style="color: #BB0000;">
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00;">!</span><span style="color: #BB0000;"> Can't compute column `Sepal.Width_N`.
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BB0000; font-weight: bold;">Caused by error in `withCallingHandlers()`:</span><span style="color: #BB0000;">
+</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00;">!</span><span style="color: #BB0000;"> nie znaleziono obiektu 'Sepal.Length'
+</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>Może i ciągle nie działa, ale dostaliśmy inny błąd! To naprawdę jest powód do radości, jak się robi cokolwiek związanego z komputerami.</p>
@@ -580,53 +489,57 @@ Caused by error in `withCallingHandlers()`:
 <h1 data-number="7"><span class="header-section-number">7</span> <code>expr()</code>, <code>quo()</code> i <code>sym()</code></h1>
 <p>Najbardziej bazową funkcją wykonującą <em>quoting</em> jest funkcja <code>expr()</code>. Jeśli wrzucamy do niej jakieś wyrażenie, zwraca ona nam to wyrażenie w „rozbrojonej” (w naszej metaforze zaklejonej taśmą) formie.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="dv">5</span> <span class="sc">+</span> <span class="dv">3</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>5 + 3</code></pre>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="dv">5</span> <span class="sc">+</span> <span class="dv">3</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> 5 + 3
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(jakis_argument <span class="sc">+</span> <span class="dv">3</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>jakis_argument + 3</code></pre>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(jakis_argument <span class="sc">+</span> <span class="dv">3</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> jakis_argument + 3
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>Pierwsze wywołanie zwraca nam dosłowne <code>5 + 3</code>, a nie <code>8</code> ponieważ <code>expr()</code> zatrzymuje wykonywanie dodawania. To wyrażenie jest teraz <em>quoted</em> i żeby dostać 8, musimy je wywołać ręcznie. Zwróćmy uwagę, że drugie wyrażenie też się wykonuje i zwraca dosłownie <code>jakis_argument + 3</code> mimo, że takiej zmiennej nie ma przypisanej. Dzieje się tak dlatego, że odpakowanie pudełka z napisem <code>jakis_argument</code> również zostało zatrzymane.</p>
 <p>Drugą funkcją wykonującą <em>quoting</em> jest <code>quo()</code>. Co ciekawe, nie jest to skrót od <em>quoting</em> a od <em>quosure</em> czyli <em>quoted closure</em>. Od <code>expr()</code> różni się tym, że poza wyrażeniem zapisuje też jego <strong>środowisko</strong> (<em>environment</em>). Środowisko to zbiór zmiennych, w otoczeniu których wykonywana jest funkcja. Innymi słowy to w środowisku zapisywana jest informacja, że <code>x = 5</code>, gdy robimy <code>x &lt;- 5</code> i to ze środowiska ten <code>x</code> jest brany, kiedy trzeba potem trzeba znaleźć jego wartość. Można to sobie wyobrazić jako różne półki, na których stoją pudełka ze zmiennymi. Dla zobrazowania zagadka.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>razy_argument <span class="ot">&lt;-</span> <span class="cf">function</span>(argument) {</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">*</span> argument</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">razy_argument</span>(<span class="dv">2</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>razy_argument <span class="ot">&lt;-</span> <span class="cf">function</span>(argument) {</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">*</span> argument</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">razy_argument</span>(<span class="dv">2</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Jaki będzie wynik działania tej funkcji? <code>10</code> czy <code>200</code>? Pytanie brzmi, co nasza funkcja potraktuje jako <code>x</code> – 5 czy 200? Jest to pytanie o tzw. <em>scope</em> czy też zasięg funkcji, ale można na to spojrzeć też jak na pytanie o środowisko. Z której półki funkcja weźmie pudełko z napisem <code>x</code>? Odpowiedź brzmi – z najbliższej. W tym wypadku najbliższa półka to środowisko samej funkcji, czyli <code>x = 100</code>, a więc wynik to <code>200</code>. Zachęcam do zastanowienia się, co będzie wynikiem <code>razy_argument(x)</code>? Odpowiedź można sprawdzić w swojej konsoli.</p>
 <p>Obiekt typu <em>quosure</em> zapisuje więc nie tylko wyrażenie, ale też informację, w jakim środowisku zostało to wyrażenie zatrzymane. Załóżmy, że stworzyliśmy takie wyrażenie w środowisku globalnym.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>nasz_quosure <span class="ot">&lt;-</span> <span class="fu">quo</span>(<span class="fu">sum</span>(x))</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>nasz_quosure</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;quosure&gt;
-expr: ^sum(x)
-env:  global</code></pre>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>nasz_quosure <span class="ot">&lt;-</span> <span class="fu">quo</span>(<span class="fu">sum</span>(x))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>nasz_quosure</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="font-weight: bold;">&lt;quosure&gt;</span>
+<span style="color: #555555;">#&gt;</span> expr: ^sum(x)
+<span style="color: #555555;">#&gt;</span> env:  global
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>Widzimy, że poza samym wyrażeniem <code>sum(x)</code> <em>quosure</em> zawiera też informację o środowisku. Jeśli teraz wykonamy to wyrażenie (o tym jak wykonywać będzie później), to R weźmie <code>x</code> zawsze z półki <code>global</code>, a nie z najbliższej.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>quosure_z_x <span class="ot">&lt;-</span> <span class="fu">quo</span>(x)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>dodaj_dwa <span class="ot">&lt;-</span> <span class="cf">function</span>(liczba) {</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval_tidy</span>(quosure_z_x) <span class="sc">+</span> <span class="dv">2</span> <span class="co"># ewaluacja quosure ręcznie</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="fu">dodaj_dwa</span>(<span class="dv">10</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 7</code></pre>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>quosure_z_x <span class="ot">&lt;-</span> <span class="fu">quo</span>(x)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>dodaj_dwa <span class="ot">&lt;-</span> <span class="cf">function</span>(liczba) {</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval_tidy</span>(quosure_z_x) <span class="sc">+</span> <span class="dv">2</span> <span class="co"># ewaluacja quosure ręcznie</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">dodaj_dwa</span>(<span class="dv">10</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] 7
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 </section>
@@ -634,61 +547,64 @@ env:  global</code></pre>
 <h1 data-number="8"><span class="header-section-number">8</span> <code>enquo()</code>, <code>quos()</code> i <code>enquos()</code> oraz pokrewne</h1>
 <p>Obie te funkcje posiadają swoje funkcje pokrewne. Funkcja z przedrostkiem <em>en-</em> służy do zatrzymywania argumentów funkcji. Dlatego częściej będziemy wykorzystywać <code>enquo()</code> i <code>enexpr()</code> niż <code>quo()</code> i <code>expr()</code>. Funkcja <code>enquo()</code> nie jest tak drastyczna w zatrzymywaniu. Funkcja <code>quo()</code> zatrzymuje kod natychmiast, a funkcja <code>enquo()</code> raz chociaż wyjmuje coś z pudełka. Zobaczmy to na praktycznym przykładzie.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_quo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    kolumna <span class="ot">&lt;-</span> <span class="fu">quo</span>(col)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">!!</span>kolumna) <span class="co"># wykrzykniki wykonują, nie przejmuj się</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wybierz_z_quo</span>(iris, Species) <span class="sc">%&gt;%</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in env_get(env, name, default = missing_arg(), inherit = TRUE): nie znaleziono obiektu 'Species'</code></pre>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_quo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    kolumna <span class="ot">&lt;-</span> <span class="fu">quo</span>(col)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">!!</span>kolumna) <span class="co"># wykrzykniki wykonują, nie przejmuj się</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wybierz_z_quo</span>(iris, Species) <span class="sc">%&gt;%</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> Error in env_get(env, name, default = missing_arg(), inherit = TRUE): nie znaleziono obiektu 'Species'
+</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>Gdy próbujemy wykonać <code>quo(col)</code>, próbuje się ono wykonać do końca, czyli dostajemy to samo, jakbyśmy napisali po prostu <code>select(df, col)</code>. Efekt, który chcemy uzyskać, uzyskamy z funkcją <code>enquo()</code> która służy konkretnie do chwytania argumentów.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    kolumna <span class="ot">&lt;-</span> <span class="fu">enquo</span>(col)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">!!</span>kolumna) <span class="co"># wykrzykniki wykonują, nie przejmuj się</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wybierz_z_enquo</span>(iris, Species) <span class="sc">%&gt;%</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Species
-1  setosa
-2  setosa
-3  setosa
-4  setosa
-5  setosa
-6  setosa</code></pre>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    kolumna <span class="ot">&lt;-</span> <span class="fu">enquo</span>(col)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">!!</span>kolumna) <span class="co"># wykrzykniki wykonują, nie przejmuj się</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wybierz_z_enquo</span>(iris, Species) <span class="sc">%&gt;%</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span>   Species
+<span style="color: #555555;">#&gt;</span> 1  setosa
+<span style="color: #555555;">#&gt;</span> 2  setosa
+<span style="color: #555555;">#&gt;</span> 3  setosa
+<span style="color: #555555;">#&gt;</span> 4  setosa
+<span style="color: #555555;">#&gt;</span> 5  setosa
+<span style="color: #555555;">#&gt;</span> 6  setosa
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>Jak widzimy, tym razem kod się wykonał. Funkcja <code>quo()</code> zatrzymuje więc otwieranie pudełek w danym momencie, ale gdy każe jej się je otwierać, będzie otwierała do końca. Funkcja <code>enquo()</code>, gdy wykonana, otworzy tylko to, co jest w tym pudełku schowane i nie otwierając dalej przekaże zawartość <code>select()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>quo_vs_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    x_quo <span class="ot">&lt;-</span> <span class="fu">quo</span>(x)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    x_enquo <span class="ot">&lt;-</span> <span class="fu">enquo</span>(x)</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"enquo(x):"</span>)</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(x_enquo)</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"quo(x):"</span>)</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(x_quo)</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="fu">quo_vs_enquo</span>(argument)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "enquo(x):"
-&lt;quosure&gt;
-expr: ^argument
-env:  global
-[1] "quo(x):"
-&lt;quosure&gt;
-expr: ^x
-env:  0x5638a366eb60</code></pre>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>quo_vs_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    x_quo <span class="ot">&lt;-</span> <span class="fu">quo</span>(x)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    x_enquo <span class="ot">&lt;-</span> <span class="fu">enquo</span>(x)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"enquo(x):"</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(x_enquo)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"quo(x):"</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(x_quo)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="fu">quo_vs_enquo</span>(argument)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] "enquo(x):"
+<span style="color: #555555;">#&gt;</span> <span style="font-weight: bold;">&lt;quosure&gt;</span>
+<span style="color: #555555;">#&gt;</span> expr: ^argument
+<span style="color: #555555;">#&gt;</span> env:  global
+<span style="color: #555555;">#&gt;</span> [1] "quo(x):"
+<span style="color: #555555;">#&gt;</span> <span style="font-weight: bold;">&lt;quosure&gt;</span>
+<span style="color: #555555;">#&gt;</span> expr: <span style="color: #0000BB;">^x</span>
+<span style="color: #555555;">#&gt;</span> env:  <span style="color: #0000BB;">0x555aa3e32eb0</span>
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>Jak widzimy, <code>enquo()</code> zatrzymało to co chcemy, czyli <code>argument</code>, a szybkie w zatrzymywaniu <code>quo()</code> zatrzymało samo <code>x</code>. Dodatkowo <code>enquo()</code> wiedziało, że chodzi o argument ze środowiska <code>global</code>, a <code>quo()</code> zatrzymało <code>x</code> w środowisku funkcji. Mówiąc krótko – jeśli chcemy zatrzymać argument funkcji, zawsze używajmy <code>enquo()</code> albo <code>enexpr()</code> (lepiej <code>enquo()</code>).</p>
@@ -699,96 +615,100 @@ env:  0x5638a366eb60</code></pre>
 <h1 data-number="9"><span class="header-section-number">9</span> <code>!!</code> i <code>!!!</code></h1>
 <p>Wbrew pozorom tytuł tego podrozdziału to nie próba odwzorowania emocji czytającego, tylko rzeczywiście wykorzystywane operatory. Wiemy już, jak ręcznie zaklejać pudełka tak, żeby R ich sam nie otwierał w złym momencie. Teraz musimy wiedzieć, jak kazać mu je otworzyć, kiedy potrzebujemy. Podstawowym operatorem mówiącym „otwórz” jest <code>!!</code> czytane <em>bang-bang</em><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. Możemy więc wcześniej zaklejone pudełko otworzyć strzelając do niego.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    kolumna <span class="ot">&lt;-</span> <span class="fu">enquo</span>(col)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">!!</span>kolumna) <span class="co"># wykrzykniki wykonują, teraz się przejmuj</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wybierz_z_enquo</span>(iris, Species) <span class="sc">%&gt;%</span></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Species
-1  setosa
-2  setosa
-3  setosa
-4  setosa
-5  setosa
-6  setosa</code></pre>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    kolumna <span class="ot">&lt;-</span> <span class="fu">enquo</span>(col)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">!!</span>kolumna) <span class="co"># wykrzykniki wykonują, teraz się przejmuj</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wybierz_z_enquo</span>(iris, Species) <span class="sc">%&gt;%</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span>   Species
+<span style="color: #555555;">#&gt;</span> 1  setosa
+<span style="color: #555555;">#&gt;</span> 2  setosa
+<span style="color: #555555;">#&gt;</span> 3  setosa
+<span style="color: #555555;">#&gt;</span> 4  setosa
+<span style="color: #555555;">#&gt;</span> 5  setosa
+<span style="color: #555555;">#&gt;</span> 6  setosa
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>Co ciekawe, równie dobrze moglibyśmy zapisać:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">!!</span><span class="fu">enquo</span>(col))</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wybierz_z_enquo</span>(iris, Species) <span class="sc">%&gt;%</span></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Species
-1  setosa
-2  setosa
-3  setosa
-4  setosa
-5  setosa
-6  setosa</code></pre>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">!!</span><span class="fu">enquo</span>(col))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wybierz_z_enquo</span>(iris, Species) <span class="sc">%&gt;%</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span>   Species
+<span style="color: #555555;">#&gt;</span> 1  setosa
+<span style="color: #555555;">#&gt;</span> 2  setosa
+<span style="color: #555555;">#&gt;</span> 3  setosa
+<span style="color: #555555;">#&gt;</span> 4  setosa
+<span style="color: #555555;">#&gt;</span> 5  setosa
+<span style="color: #555555;">#&gt;</span> 6  setosa
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>…czyli za jednym zamachem (hehe) zatrzymać otwierające pudełka R i otworzyć to pudełko już na pewno wewnątrz <code>select()</code>. Zwróćmy uwagę, że to jest dokładnie to, co robił operator <code>{{ }}</code>, który w gruncie rzeczy jest wygodniejszym zapisem <code>!!enquo()</code>.</p>
 <p>Poza zwykłym <em>bang-bang</em> <code>!!</code> mamy też <em>bang-bang-bang</em> <code>!!!</code> i to nawet nie jest żart. Przypomnij sobie funkcję <code>enquos()</code>, która zatrzymywała wiele argumentów naraz w postaci listy. Jeśli coś takiego spróbujemy odpakować, to dostaniemy listę. Często zaś nie chcemy dostać listy, tylko samą jej zawartość po kolei. Innymi słowy chcę dostać <code>select(iris, Sepal.Width, Sepal.Length)</code>, a nie <code>select(iris, list(Sepal.Width, Sepal.Length))</code>. Do tego służy właśnie <code>!!!</code>, który bierze listę zatrzymanych wyrażeń, tnie ją na pojedyncze pudełka i każde z nich otwiera. Tym samym to jest dokładnie to, co przyda nam się do załatwienia argumentu <code>...</code> w naszej funkcji <code>opisowe</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  kolumny_do_policzenia <span class="ot">&lt;-</span> <span class="fu">enquos</span>(...)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{ group }}) <span class="sc">%&gt;%</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">across</span>(</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="sc">!!!</span>kolumny_do_policzenia),</span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">.fns =</span> <span class="fu">list</span>(</span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">N =</span> \(x) <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)),</span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">M =</span> \(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">SD =</span> \(x) <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">A =</span> agricolae<span class="sc">::</span>skewness,</span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">K =</span> agricolae<span class="sc">::</span>kurtosis,</span>
-<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>          <span class="st">`</span><span class="at">NA</span><span class="st">`</span> <span class="ot">=</span> \(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x))</span>
-<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a><span class="fu">opisowe</span>(iris, Species, Sepal.Width, Sepal.Length)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 13
-  Species Sepal.Width_N Sepal.Width_M Sepal.Width_SD Sepal.Width_A Sepal.Width_K
-  &lt;fct&gt;           &lt;int&gt;         &lt;dbl&gt;          &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
-1 setosa             50          3.43          0.379        0.0412         0.955
-2 versic…            50          2.77          0.314       -0.363         -0.366
-3 virgin…            50          2.97          0.322        0.366          0.706
-# ℹ 7 more variables: Sepal.Width_NA &lt;int&gt;, Sepal.Length_N &lt;int&gt;,
-#   Sepal.Length_M &lt;dbl&gt;, Sepal.Length_SD &lt;dbl&gt;, Sepal.Length_A &lt;dbl&gt;,
-#   Sepal.Length_K &lt;dbl&gt;, Sepal.Length_NA &lt;int&gt;</code></pre>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  kolumny_do_policzenia <span class="ot">&lt;-</span> <span class="fu">enquos</span>(...)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{ group }}) <span class="sc">%&gt;%</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">across</span>(</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="sc">!!!</span>kolumny_do_policzenia),</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">.fns =</span> <span class="fu">list</span>(</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">N =</span> \(x) <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)),</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">M =</span> \(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">SD =</span> \(x) <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">A =</span> agricolae<span class="sc">::</span>skewness,</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">K =</span> agricolae<span class="sc">::</span>kurtosis,</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>          <span class="st">`</span><span class="at">NA</span><span class="st">`</span> <span class="ot">=</span> \(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x))</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="fu">opisowe</span>(iris, Species, Sepal.Width, Sepal.Length)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 3 × 13</span>
+<span style="color: #555555;">#&gt;</span>   <span style="font-weight: bold;">Species</span> <span style="font-weight: bold;">Sepal.Width_N</span> <span style="font-weight: bold;">Sepal.Width_M</span> <span style="font-weight: bold;">Sepal.Width_SD</span> <span style="font-weight: bold;">Sepal.Width_A</span> <span style="font-weight: bold;">Sepal.Width_K</span>
+<span style="color: #555555;">#&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #555555; font-style: italic;">&lt;int&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">1</span> setosa             50          3.43          <span style="color: #555555;">0.</span>379        <span style="color: #555555;">0.0</span>41<span style="text-decoration: underline;">2</span>         <span style="color: #555555;">0.</span>955
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">2</span> versic…            50          2.77          <span style="color: #555555;">0.</span>314       -<span style="color: #555555;">0.</span><span style="color: #BB0000;">363</span>         -<span style="color: #555555;">0.</span><span style="color: #BB0000;">366</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">3</span> virgin…            50          2.97          <span style="color: #555555;">0.</span>322        <span style="color: #555555;">0.</span>366          <span style="color: #555555;">0.</span>706
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># ℹ 7 more variables: </span><span style="color: #555555; font-weight: bold;">Sepal.Width_NA</span><span style="color: #555555;"> &lt;int&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Length_N</span><span style="color: #555555;"> &lt;int&gt;,</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">Sepal.Length_M</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Length_SD</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Length_A</span><span style="color: #555555;"> &lt;dbl&gt;,</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">Sepal.Length_K</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Length_NA</span><span style="color: #555555;"> &lt;int&gt;</span>
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>W tym wypadku nasze <code>kolumny_do_policzenia</code> pojawiają się wewnątrz <code>across()</code>, więc musiałem użyć <code>c()</code> (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Gdy%20u%C5%BCywam%20zestaw%2C%20mam%20na%20my%C5%9Bli%2C%20%C5%BCe%20trzeba%20je%20wpakowa%C4%87%20w%20funkcj%C4%99%20c()%20(od%20concatenate)%2C%20np.%20c(1%2C%208%2C%2010%3A16).">tutaj</a>). Inny przykład, bardziej typowy wyglądałby tak:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>srednia_z_kolumny <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col, ...) {</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    grupy <span class="ot">&lt;-</span> <span class="fu">enquos</span>(...)</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(<span class="sc">!!!</span>grupy) <span class="sc">%&gt;%</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">M =</span> <span class="fu">mean</span>({{ col }}))</span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="fu">srednia_z_kolumny</span>(iris, Sepal.Length, Species)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  Species        M
-  &lt;fct&gt;      &lt;dbl&gt;
-1 setosa      5.01
-2 versicolor  5.94
-3 virginica   6.59</code></pre>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>srednia_z_kolumny <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col, ...) {</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    grupy <span class="ot">&lt;-</span> <span class="fu">enquos</span>(...)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(<span class="sc">!!!</span>grupy) <span class="sc">%&gt;%</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">M =</span> <span class="fu">mean</span>({{ col }}))</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">srednia_z_kolumny</span>(iris, Sepal.Length, Species)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 3 × 2</span>
+<span style="color: #555555;">#&gt;</span>   <span style="font-weight: bold;">Species</span>        <span style="font-weight: bold;">M</span>
+<span style="color: #555555;">#&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">1</span> setosa      5.01
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">2</span> versicolor  5.94
+<span style="color: #555555;">#&gt;</span> <span style="color: #555555;">3</span> virginica   6.59
+</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
 <p>W tym wypadku używamy <code>enquos()</code>, żeby zatrzymać listę kolumn, po których będziemy grupować, a następnie rozpakowujemy ją już wewnątrz funkcji <code>group_by()</code>. <code>...</code> zawiera wiele rzeczy, więc używam <code>enquos()</code> i <code>!!!</code> zamiast <code>enquo()</code> i <code>!!</code>. Ponieważ w <code>group_by()</code> wypisuję grupy po prostu po przecinku, to nie muszę nic dokładać.</p>
@@ -798,34 +718,37 @@ env:  0x5638a366eb60</code></pre>
 <h1 data-number="10"><span class="header-section-number">10</span> <em>Parsing</em> i <em>deparsing</em></h1>
 <p>Ostatnie operacje, które tutaj omówię, to <em>parsing</em> i <em>deparsing</em>. Czasami chcemy zmienić naszą, powiedzmy, nazwę kolumny w surowy tekst. Dla przykładu, piszemy funkcję generującą wykres i chcemy wykorzystać jakoś nazwę kolumny, żeby podpisać osie. Załóżmy, że chcemy zamienić wcześniej kropki na spacje, więc domyślne opcje zwracane przez <code>ggplot2</code> nie są wystarczające. Musimy mieć więc dostęp do nazwy kolumny, którą użytkownik podał jako argument, ale nazwy jako tekst. Dokonać tego mogą nawet trzy funkcje – <code>as_label()</code>, <code>as_name()</code> i <code>expr_text()</code>. Różnią się pewnymi technikaliami, którymi nie ma co zaprzątać sobie głowy na początkowym etapie. Jako pewien skrót mogę powiedzieć – najlepiej jest użyć <code>as_label()</code>, a jeśli będzie potrzeba, to można zacząć ogarniać użycie innych funkcji. Obie te funkcje przyjmują obiekty typu <code>expr</code> albo <code>quo</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>wykresik <span class="ot">&lt;-</span> <span class="cf">function</span>(df, X, Y) {</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    X <span class="ot">&lt;-</span> <span class="fu">enquo</span>(X)</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    Y <span class="ot">&lt;-</span> <span class="fu">enquo</span>(Y)</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>    nazwa_X <span class="ot">&lt;-</span> <span class="fu">as_label</span>(X) <span class="sc">%&gt;%</span></span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">str_replace_all</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">" "</span>) <span class="co"># dosłowne kropki ("\\.") zamień na spacje</span></span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>    nazwa_Y <span class="ot">&lt;-</span> <span class="fu">as_label</span>(Y) <span class="sc">%&gt;%</span></span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">str_replace_all</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">" "</span>)</span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>    nazwa_df <span class="ot">&lt;-</span> <span class="fu">as_label</span>(<span class="fu">enquo</span>(df))</span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>    tytul <span class="ot">&lt;-</span> <span class="fu">paste0</span>(nazwa_X, <span class="st">"-"</span>, nazwa_Y, <span class="st">" in "</span>, nazwa_df, <span class="st">" database"</span>)</span>
-<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="sc">!!</span>X, <span class="sc">!!</span>Y)) <span class="sc">+</span> <span class="co">#</span></span>
-<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
-<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> tytul, <span class="at">x =</span> nazwa_X, <span class="at">y =</span> nazwa_Y) <span class="sc">+</span></span>
-<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_Publication</span>() <span class="co"># koundy/ggplot_theme_Publication na GitHubie</span></span>
-<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a><span class="fu">wykresik</span>(iris, Sepal.Width, Sepal.Length)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>wykresik <span class="ot">&lt;-</span> <span class="cf">function</span>(df, X, Y) {</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    X <span class="ot">&lt;-</span> <span class="fu">enquo</span>(X)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    Y <span class="ot">&lt;-</span> <span class="fu">enquo</span>(Y)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    nazwa_X <span class="ot">&lt;-</span> <span class="fu">as_label</span>(X) <span class="sc">%&gt;%</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">str_replace_all</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">" "</span>) <span class="co"># dosłowne kropki ("\\.") zamień na spacje</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    nazwa_Y <span class="ot">&lt;-</span> <span class="fu">as_label</span>(Y) <span class="sc">%&gt;%</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">str_replace_all</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">" "</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    nazwa_df <span class="ot">&lt;-</span> <span class="fu">as_label</span>(<span class="fu">enquo</span>(df))</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    tytul <span class="ot">&lt;-</span> <span class="fu">paste0</span>(nazwa_X, <span class="st">"-"</span>, nazwa_Y, <span class="st">" in "</span>, nazwa_df, <span class="st">" database"</span>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="sc">!!</span>X, <span class="sc">!!</span>Y)) <span class="sc">+</span> <span class="co">#</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> tytul, <span class="at">x =</span> nazwa_X, <span class="at">y =</span> nazwa_Y) <span class="sc">+</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_Publication</span>() <span class="co"># koundy/ggplot_theme_Publication na GitHubie</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="fu">wykresik</span>(iris, Sepal.Width, Sepal.Length)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> `geom_smooth()` using formula = 'y ~ x'
+</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="metaprogramowanie_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wykresik</span>(USArrests, UrbanPop, Murder)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wykresik</span>(USArrests, UrbanPop, Murder)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> `geom_smooth()` using formula = 'y ~ x'
+</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="metaprogramowanie_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid" width="672"></p>
@@ -839,56 +762,56 @@ env:  0x5638a366eb60</code></pre>
 <section id="wywoływanie-funkcji-z-zatrzymanymi-argumentami" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="wywoływanie-funkcji-z-zatrzymanymi-argumentami"><span class="header-section-number">11.1</span> Wywoływanie funkcji z zatrzymanymi argumentami</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>mtscr_model <span class="ot">&lt;-</span> <span class="cf">function</span>(df, id_column, item_column, score_column) {</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  id_column <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">ensym</span>(id_column)</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  item_column <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">ensym</span>(item_column)</span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  score_column <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">ensym</span>(score_column)</span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">mtscr_prepare</span>( <span class="co"># `mtscr_prepare` wykorzystuje Tidy Eval!</span></span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>    df,</span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!!</span>id_column,</span>
-<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!!</span>item_column,</span>
-<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!!</span>score_column,</span>
-<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">minimal =</span> <span class="cn">TRUE</span></span>
-<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mtscr_model <span class="ot">&lt;-</span> <span class="cf">function</span>(df, id_column, item_column, score_column) {</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  id_column <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">ensym</span>(id_column)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  item_column <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">ensym</span>(item_column)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  score_column <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">ensym</span>(score_column)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">mtscr_prepare</span>( <span class="co"># `mtscr_prepare` wykorzystuje Tidy Eval!</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    df,</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!!</span>id_column,</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!!</span>item_column,</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!!</span>score_column,</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">minimal =</span> <span class="cn">TRUE</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Użyłem tu <code>ensym()</code>, ale spokojnie mogłoby być <code>enquo()</code>. Funkcja wywołuje inną funkcję z pakietu, żeby przygotować dane do modelowania. Wszystkie nazwy kolumn na początku „rozbrajam” i ponownie „uzbrajam” już wewnątrz <code>mtscr_prepare()</code>. Jeśli byłby to tylko ten fragment kodu, mógłbym użyć operatora <code>{{ }}</code>, ale potem potrzebowałem wersji ręcznie „rozbrojonej”.</p>
 </section>
 <section id="formuły-z-nazw-kolumn" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="formuły-z-nazw-kolumn"><span class="header-section-number">11.2</span> Formuły z nazw kolumn</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>formulas[[i]] <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">as.formula</span>(</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">".z_score ~ -1 + "</span>,</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    rlang<span class="sc">::</span><span class="fu">as_name</span>(item_column),</span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">" + "</span>,</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>    rlang<span class="sc">::</span><span class="fu">as_name</span>(item_column),</span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">":.ordering_0 + (.ordering_0 | "</span>,</span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>    rlang<span class="sc">::</span><span class="fu">as_name</span>(id_column),</span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">")"</span></span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>formulas[[i]] <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">as.formula</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">".z_score ~ -1 + "</span>,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    rlang<span class="sc">::</span><span class="fu">as_name</span>(item_column),</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">" + "</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    rlang<span class="sc">::</span><span class="fu">as_name</span>(item_column),</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">":.ordering_0 + (.ordering_0 | "</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    rlang<span class="sc">::</span><span class="fu">as_name</span>(id_column),</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">")"</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Tutaj wykorzystuję <code>as_name()</code>, żeby połączyć nazwy kolumn w jedną formułę potrzebną potem do modelu. Równie dobrze mógłbym użyć <code>as_label()</code>. Wyniki zapisuję na liście <code>formulas</code>.</p>
 </section>
 <section id="warunkowa-lista-argumentów-do-summarise" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="warunkowa-lista-argumentów-do-summarise"><span class="header-section-number">11.3</span> Warunkowa lista argumentów do <code>summarise()</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>args <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">"all_max"</span> <span class="sc">%in%</span> model_type) {</span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  args[[<span class="st">".all_max"</span>]] <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">parse_expr</span>(<span class="st">"max(.all_max)"</span>)</span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">"all_top2"</span> <span class="sc">%in%</span> model_type) {</span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  args[[<span class="st">".all_top2"</span>]] <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">parse_expr</span>(<span class="st">"max(.all_top2)"</span>)</span>
-<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
-<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!!!</span>args,</span>
-<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> dplyr<span class="sc">::</span><span class="fu">all_of</span>(groups)</span>
-<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>args <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">"all_max"</span> <span class="sc">%in%</span> model_type) {</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  args[[<span class="st">".all_max"</span>]] <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">parse_expr</span>(<span class="st">"max(.all_max)"</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">"all_top2"</span> <span class="sc">%in%</span> model_type) {</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  args[[<span class="st">".all_top2"</span>]] <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">parse_expr</span>(<span class="st">"max(.all_top2)"</span>)</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!!!</span>args,</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> dplyr<span class="sc">::</span><span class="fu">all_of</span>(groups)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Z tego jestem zadowolony. To fragment funkcji, która daje różne instrukcje do <code>summarise()</code> w zależności od tego, czy w argumencie <code>model_type</code> jest <code>"all_max"</code>, <code>"all_top2"</code> czy <code>c("all_max", "all_top2")</code>. Kolejne instrukcje zapisuję na liście <code>args</code>, którą potem otwieram operatorem <code>!!!</code> (bo to lista). Używam tutaj też <code>parse_expr()</code>, ale to z przyczyn technicznych związanych z pakietami<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> raczej, niż z programowaniem. Mógłbym użyć też <code>expr(max(.all_max))</code>. Na pewno nie używam tutaj <code>enexpr()</code>, bo to nie są argumenty, tylko nazwy kolumn zapisane na sztywno.</p>
 </section>
@@ -920,7 +843,7 @@ env:  0x5638a366eb60</code></pre>
 <li id="fn3"><p>Bo każde jedno zagadnienie języka R najgłębiej opisuje Hadley Wickham. Zresztą jest to człowiek odpowiedzialny za pół tidyverse. Jeśli jest jakieś nazwisko ze świata R, które useR powinien znać, to jest to właśnie Hadley Wickham.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Swoją drogą, jeśli dotarliście na swojej drodze do punktu, w którym zaczynacie pisać własne funkcje i używacie ich często, to polecam oszczędzić sobie frustracji na przyszłość i od razu zorganizować te funkcje w postaci pakietu. Nie mówię, żeby go od razu wypuszczać w świat, choćby na GitHubie, ale sama struktura i dokumentacja znacząco ułatwiają życie w przyszłości. Planuję napisać na ten temat trochę więcej w przyszłości, ale podstawowym źródłem informacji w tym zakresie jest książka – a jakże – Hadleya Wickhama <a href="https://r-pkgs.org/"><em>R Packages</em></a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Ewentualnie, jeśli chcemy trzymać się klasycznego R, możemy użyć dziś już nieco zapomnianej funkcji <code>with()</code>, która każe R najpierw wejść do pudła <code>iris</code> i operować tym, co tam w tym pudle znajdzie. Mówiąc językiem, który wyjaśnię później, zmuszamy R do zmiany <em>środowiska</em>. Przykład wykorzystania <code>with()</code>:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(iris, iris[Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>,])</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(iris, iris[Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>,])</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></li>
 <li id="fn6"><p>…<em>my baby shot me down</em>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>CRAN nie lubi, jak używa się obiektów, które nie mają globalnych definicji, dlatego krzyczał na mnie, że nie ma czegoś takiego jak <code>.all_top2</code>. Ja wiedziałem, że jest w bazie danych, kod działał, bo to potem trafiało do <code>summarise()</code>, ale CRAN ma swoje zasady. Dlatego podałem to jako string, który jest przerabiany na wyrażenie (<em>parsing</em>).<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
