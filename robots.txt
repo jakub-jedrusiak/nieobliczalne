@@ -1,1 +1,1 @@
-Sitemap: https://jakub-jedrusiak.github.io/nieobliczalne/sitemap.xml
+Sitemap: https://nieobliczalne.pl/sitemap.xml
