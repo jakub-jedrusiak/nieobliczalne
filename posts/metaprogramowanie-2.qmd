@@ -1,0 +1,47 @@
+---
+draft: true
+---
+
+
+
+Rozszerzmy trochę naszą metaforę z pudełkami. Gdy wywołujemy funkcję, tak naprawdę mamy dwa pudełka. Lepiej to widać, jak zapiszemy naszą funkcję tak:
+
+```{r}
+# Przypadek 1.
+log10(x = 100)
+
+# Przypadek 2.
+liczba <- 100
+log10(x = liczba)
+```
+
+Efekt działania obu tych wywołań jest taki sam -- jest nim logarytm dziesiętny ze 100, czyli 2. W pierwszym wypadku wpakowaliśmy 100 do funkcji bezpośrednio. Innymi słowy do pudełka z napisem `x` wpakowaliśmy liczbę 100. `x` To nazwa (jedynego) argumentu funkcji `log10()`. W drugim przypadku wpakowaliśmy liczbę 100 do pudełka z napisem `liczba` i dopiero to pudełko chcemy włożyć do pudełka `x`. Ale R nie lubi matrioszek. R nie włoży pudełka do pudełka. Zanim R włoży coś do pudełka `x`, to to rozpakuje. Do samego końca. To jest standardowy mechanizm ewaluacji -- rozpakuj do końca, aż nie dostaniesz czegoś konkretnego. Jeśli pudełko `liczba` byłoby puste, R miałby problem.
+
+Funkcje korzystające z Tidy Eval działają trochę inaczej. Gdy R przynosi im pudełko `x`, wyciąga z niego pudełko `liczba` i mówi "O, drugie pudełko. Czekaj, rozpakuję ci to", na co taka funkcja `group_by()` odpowiada "Nie, spoko, poradzę sobie". Dlatego R podaje jej samo pudełko `liczba`. Funkcja `group_by()` bierze to pudełko, czyta etykietę i wie, że ma szukać w bazie danych kolumny, co się nazywa "liczba". Skąd wie, to pomińmy na teraz. Można więc powiedzieć, że standardowa ewaluacja to "rozpakowuj do końca", a Tidy Eval to "nie rozpakowuj".
+
+Problem pojawia się wtedy, gdy piszemy własną funkcję, gdzie chcemy wykorzystać funkcję z Tidy Eval. Gdy w naszej funkcji `opisowe` wywołujemy `group_by(group)`, to `group_by()` posłusznie nie rozpakowuje `group`, tylko szuka `group` w bazie danych. Chcemy więc powiedzieć funkcji `group_by()` "Nie, nie. To rozpakuj, to jest argument.". Właśnie to uzyskamy za pomocą operatora `{{ }}` (czytane *curly curly*). `group_by()` będzie wiedziało, że to jest do rozpakowania. Dokonajmy więc pierwszej modyfikacji naszej funkcji `opisowe`.
+
+```{r}
+opisowe <- function(df, group, ...) {
+    df %>%
+        group_by({{ group }}) %>%
+        summarise(
+            across(
+                ...,
+                .fns = list(
+                    # to do
+                )
+            )
+        )
+}
+
+opisowe(iris, Species, Sepal.Width, Sepal.Length)
+```
+
+Może i ciągle nie działa, ale dostalśmy inny błąd! To naprawdę jest powód do radości, jak się robi cokolwiek związanego z komputerami.
+
+Jeśli chodzi o formatowanie, to mogę to zapisać jako `{{group}}` albo `{{ group }}`. Zazwyczaj nie stawiamy spacji po nawiasach, ale operator `{{ }}` jest wyjątkiem. Obie formy zadziałają, ale żeby podkeślić szczególne działanie tego operatora [*The tidyverse style guide*](https://style.tidyverse.org/syntax.html?q={{#embracing) zaleca, by stawiać te spacje.
+
+# *Quoting* i *unquoting*
+
+To, co w popezednim akapicie zrobiliśmy za pomocą `{{ }}` tak naprawdę składa się z dwóch kroków. Po pierwsze musieliśmy powiedzieć R, żeby nie rozpakowywał tego pudełka sam. Po drugie musimy powiedzieć funkcji `group_by()`, żeby ona to pudełko rozpakowała. Zaklejanie pudełka tak, żeby R nie mogło go odpakować nazywa się *quoting* (branie w cudzysłów). Funkcje typu `select()`, `filter()`, `group_by()`, `summarise()`, `across()` itd., czyli takie które stosują *quoting*, a które wcześniej nazywałem funkcjami z Tidy Eval, bardziej formalnie nazywają się *quoting functions*. Polecenie dla *quoting function*, by odpakowała tak zaklejone pudełko, nazywa się *unquoting*.
