@@ -1,0 +1,229 @@
+---
+title: "Metaprogramowanie w R"
+subtitle: "Dlaczego moja funkcja nie działa?"
+description: "Piękno pakietu `tidyverse` polega na tym, że zupełnie zmienia sposób w jaki wpisujemy nazwy kolumn do funkcji. Możemy po prostu wpisywać te nazwy do funkcji, bez głębszego zastanawiania się. To zupełnie inaczej, niż w większości języków programowania. To tzw. Tidy Evaluation (Tidy Eval) ułatwia pisanie zwykłego kodu, ale zaskakująco utrudnia pisanie własnych funkcji."
+date: ""
+image: "./headers/metaprogramowanie.webp"
+caregories:
+    - R
+draft: true
+---
+
+# Przykład motywacyjny
+
+Wyobraźmy sobie, że chcemy napisać własną funkcję, która będzie za nas odwalać jakąś głupią robotę. Możemy na przykład mieć jakiś skomplikowany proces modelowania, który zawsze wygląda podobnie. Prostszy przykład -- załóżmy, że zawsze liczymy dokładnie taki sam zestaw statystyk opisowych i chcemy mieć już funkcję na przyszłość, która policzy je nam sama. Dokładnie tak zrobiłem, jak na III roku psychologii miałem kolokwium ze statystyki. Zapiszmy więc taką funkcję.
+
+```{r}
+#| label: Setup
+#| include: false
+#| echo: false
+library(tidyverse)
+```
+
+```{r}
+opisowe <- function(df, group, ...) {
+  df %>%
+    group_by(group) %>%
+    summarise(
+      across(
+        ..., # wybrane kolumny
+        .fns = list(
+          N = \(x) sum(!is.na(x)), # liczba niepustych
+          M = \(x) mean(x, na.rm = TRUE), # średnia
+          SD = \(x) sd(x, na.rm = TRUE), # odchylenie standardowe
+          A = agricolae::skewness, # skośność
+          K = agricolae::kurtosis, # kurtoza
+          `NA` = \(x) sum(is.na(x)) # liczba brakujących
+        )
+      )
+    )
+}
+```
+
+Przejdźmy sobie przez tę funkcję krok po kroku. Po pierwsze dałem jej 3 argumenty -- `df`, `group` i tajemnicze `…`. `df` To baza danych, `group` to kolumna, po której chcemy agregować dane (patrz [tutaj](https://nieobliczalne.pl/posts/podstawy_R.html#sec-summarise)). Ostatni argument to tzw. *ellipsis* czyli wielokropek i czasem spotykamy go w dokumentacji, np. w funkcji `select()`. W wielokropku chodzi o to, że mogę tam wsadzić dowolną liczbę rzeczy, np. dowolnie wiele nazw kolumn. W naszym wypadku będziemy wrzucać tam nazwy kolumn, dla których chcemy liczyć nasze statystyki. Nie wiemy, czy będzie to jedna kolumna, 10 kolumn, czy wyrażenie `tidyselect` (np. `starts_with("H")`) więc używamy wielokropka.
+
+Bazę danych grupujemy i wrzucamy do funkcji agregującej `summarise()`. Ponieważ chcemy wykonać wiele razy ten sam zestaw obliczeń na wielu kolumnach, korzystamy z `across()` (patrz [tutaj](https://nieobliczalne.pl/posts/podstawy_R.html#sec-across)). Dalej `across()` przyjmuje listę funkcji, które chcemy zastosować. Listę, czyli wszystkie komendy zamykam w `list()`[^1]. Większość funkcji podaję jako funkcje anonimowe (patrz [tutaj](https://nieobliczalne.pl/posts/podstawy_R.html#sec-lambda)), bo albo muszę podać dodatkowe argumenty, albo to funkcje kombinowane, np. `\(x) sum(!is.na(x))`.
+
+[^1]: Czasami będziemy musieli wykorzystać `lst()`. Będą to przypadki, w których np. najpierw policzymy liczbę wszystkich przypadków w bazie (`N = n`), potem liczbę braków danych (`` `NA` = is.na ``), a na koniec chcemy policzyć procent brakujących (`` p_NA = `NA` / N ``). Chcemy więc wykorzystać nowo stworzone kolumny do stworzenia kolejnej. Zwykłe `list()` tego nie uciągnie i musimy użyć `lst()` z pakietu `tibble`.
+
+Ciekawsze rzeczy to:
+
+1.  `\(x) sum(!is.na(x))` -- sama funkcja `is.na()` zwraca `TRUE` lub `FALSE` w zależności od tego, czy dana wartość jest brakująca. Pod maską `TRUE` to 1, a `FALSE` to 0, więc jeśli zsumujemy wynik działania `is.na()`, to dostaniemy liczbę `TRUE`. Ponieważ `is.na()` zwraca `TRUE`, jeśli dane **są** brakujące, to sumując `is.na()` dostałbym liczbę `NA`. Dlatego zaprzeczam `is.na()` operatorem `!` (patrz [tutaj](https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Cz%C4%99%C5%9B%C4%87%20operator%C3%B3w%20logicznych%20dost%C4%99pnych%20w%20R.)).
+2.  Skośność i kurtoza -- to są jedyne funkcje, które stosuję tutaj jak w mordę strzelił, bez kombinowania, więc podaję je **bez nawiasów**. Jak wspominałem [tutaj](https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Co%20wa%C5%BCne%2C%20musi%20to%20by%C4%87%20jej%20nazwa%20bez%20nawias%C3%B3w.), gdy nie ma nawiasów, wskazujemy na samą funkcję, a z nawiasami na to, co funkcja z siebie wywala.
+3.  `` `NA` `` -- słowo `NA` ma w R swoje znaczenie. Takich słów normalnie nie możemy używać jako nazw kolumn. Zazwyczaj. Jeśli bardzo chcemy, możemy ująć taką niesyntaktyczną[^2] nazwę w *backticki* (patrz [tutaj](https://nieobliczalne.pl/posts/podstawy_R.html#sec-select)).
+
+[^2]: Inne przykłady nazw niesyntaktycznych to `if`, `for`, `while`, `NULL`, nazwy zaczynające się liczbą, nazwy ze spacjami.
+
+Taka funkcja powinna działać. Jeśli uruchomimy ją w konsoli na konkretnym przykładzie, to zadziała.
+
+```{r}
+iris %>%
+  group_by(Species) %>%
+  summarise(
+    across(
+      c(Sepal.Length, Sepal.Width), # wybrane kolumny
+      .fns = list(
+        N = \(x) sum(!is.na(x)), # liczba niepustych
+        M = \(x) mean(x, na.rm = TRUE), # średnia
+        SD = \(x) sd(x, na.rm = TRUE), # odchylenie standardowe
+        A = agricolae::skewness, # skośność
+        K = agricolae::kurtosis, # kurtoza
+        `NA` = \(x) sum(is.na(x)) # liczba brakujących
+      )
+    )
+  )
+```
+
+Nie jest to może najładniejsza tabela, ale jest. Spróbujmy jednak to samo wywołać za pomocą naszej funkcji, która przecież niby robi to samo.
+
+```{r}
+#| error: true
+opisowe(iris, Species, Sepal.Length, Sepal.Width)
+```
+
+Ups. Nie działa. Ale czemu? Błąd mówi, że `group_by()` nie znalazło kolumny o nazwie `group`. I bardzo słusznie, że nie znalazło, bo nie ma takiej kolumny w `iris`. Ale w ogóle nie miało jej szukać! Miało szukać kolumny `Species`, którą podaliśmy jako argument? Dlaczego `group_by()` szuka kolumny `group`?
+
+# Tidy Eval
+
+To, co teraz opowiem, jest uznawane za bardzo zaawansowaną część języka R. Najgłębiej opisuje te zagadnienia Hadley Wickham[^3] w książce [*Advanced R*](https://adv-r.hadley.nz/). Sam bardzo długo próbowałem to zrozumieć, aż w końcu udało mi się niedawno, podczas pisania pakietu [`mtscr`](https://github.com/jakub-jedrusiak/mtscr). Gdy wreszcie to zrozumiałem, to uznałem, że nie jest to aż takie trudne, tylko opisane jak dla informatyków, matematyków, inżynierów, a nie jak dla psychologów, socjologów, ekonomistów czy całej reszty ludzkości. Dokładnie ten sam problem mam ze statystyką w ogóle.
+
+[^3]: Bo każde jedno zagadnienie języka R najgłębiej opisuje Hadley Wickham. Zresztą jest to człowiek odpowiedzialny za pół tidyverse. Jeśli jest jakieś nazwisko ze świata R, które useR powinien znać, to jest to właśnie Hadley Wickham.
+
+Jednocześnie nie jest to coś, co większość useRów musi rozumieć. Taka potrzeba pojawia się zazwyczaj głęboko, późno, gdy chcemy usprawnić nasz kod własnymi funkcjami[^4] albo musimy napisać jakiś pakiet. Zazwyczaj pierwszy raz, kiedy chcemy napisać funkcję robiącą wykres w `ggplot2` i się blokujemy. Wtedy znajdujemy na StackOverflow informację, że trzeba nazwy kolumn wziąć w podwójne klamry (np. `{{column}}`) i tyle nam wystarczy, nie musimy zajmować się tym głębiej. Do czasu, kiedy jednak musimy.
+
+[^4]: Swoją drogą, jeśli dotarliście na swojej drodze do punktu, w którym zaczynacie pisać własne funkcje i używacie ich często, to polecam oszczędzić sobie frustracji na przyszłość i od razu zorganizować te funkcje w postaci pakietu. Nie mówię, żeby go od razu wypuszczać w świat, choćby na GitHubie, ale sama struktura i dokumentacja znacząco ułatwiają życie w przyszłości. Planuję napisać na ten temat trochę więcej w przyszłości, ale podstawowym źródłem informacji w tym zakresie jest książka -- a jakże -- Hadleya Wickhama [*R Packages*](https://r-pkgs.org/).
+
+Skąd więc biorą się problemy takie jak w przykładzie? To jest cena, którą płacimy za wygodne pisanie kodu. W klasycznym R, gdy chcemy coś policzyć, musimy wykorzystywać pełne nazwy kolumn. Podobnie gdy coś filtrujemy.
+
+```{r}
+
+iris[iris$Sepal.Length > 5, c("Species", "Sepal.Length")] %>%
+    as_tibble()
+```
+
+Powyższa funkcja filtruje wiersze, w których `Sepal.Length` jest większe niż 5 oraz wybiera tylko kolumny `Species` i `Sepal.Length`. Zapis ten jest zwięzły, ale niewygodny w pisaniu i jeszcze trudniejszy w czytaniu. Całość przekonwertowałem jeszcze na `tibble`, żeby się ładniej wyświetlało. Dokładnie ten sam efekt uzyskamy pisząc:
+
+```{r}
+iris %>%
+    select(Species, Sepal.Length) %>%
+    filter(Sepal.Length > 5)
+```
+
+I to da się czytać! Wszystko jest jasne, ładne i wygodne w pisaniu. Dlatego uwielbiam tidyverse i uważam, że to od tidyverse należy zaczynać naukę R. Klasyczny R jest bardzo informatyczny, nieznośny w czytaniu i pisaniu i trudno się go uczyć, zwłaszcza jako pierwszego kontaktu z programowaniem.
+
+Zauważmy jednak pewien szczegół w tym zapisie. Nazwy kolumn są tutaj zapisane tak, jak wszystkie inne obiekty. Nie są to dosłowne ciągi znaków, nie są to pojedyncze kolumny (`iris$Species`), to są po prostu nazwy. Nie jest to typowe zachowanie w R. Jeśli zrobimy coś takiego:
+
+```{r}
+x <- 1:8
+sum(x)
+```
+
+...to R widząc wewnątrz `sum()` coś, co wygląda jak obiekt, próbuje ten obiekt znaleźć i wstawić do funkcji. Dzięki temu efekt jest ten sam, co w przypadku zapisu `sum(1:8)`. Możemy sobie wyobrazić, że wstawiając do funkcji `x` dajemy R pudełeczko, w którym zamknięte są liczby od 1 do 8. Gdy R ma policzyć sumę, naturalnie otwiera to pudełeczko, wyciąga te liczby i sumuje.
+
+# *Lazy evaluation*
+
+Co ciekawe otwiera to pudełeczko dopiero wtedy, gdy już koniecznie musi, bo każemy mu coś z tym zrobić.
+
+```{r}
+oszukujemy <- function(liczba, niecny_fortel) {
+    print(liczba + 3)
+    if (liczba > 10) {
+        print(niecny_fortel)
+    }
+}
+
+jakas_liczba <- 5
+
+oszukujemy(jakas_liczba, to_nie_istnieje)
+```
+
+Po zdefiniowaniu funkcji daliśmy R dwa pudełeczka. Jedno z etykietą `jakas_liczba`, drugie z etykietą `niecny_fortel`. Wydaliśmy polecenie wykonania naszej instrukcji z tymi dwoma pudełeczkami. Po pierwsze R miał w konsoli wydrukować zawartość pierwszego pudełeczka powiększoną o 3, co też zrobił. Żeby to zrobić, musiał to pierwsze pudełeczko otworzyć i znalazł tam 5, w związku z czym wydrukował 8. Następnie przeszedł do instrukcji warunkowej. Sprawdził czy podana przez nas liczba (tj. 5) jest większa niż 10. Że nie jest, to zignorował całkowicie, co było w klamrach. Zwróćmy uwagę, że funkcja zakończyła pracę bez błędu. Dlaczego miałby pojawić się błąd? Bo zmienna `to_nie_istnieje`, bez zaskoczenia, nie istnieje. Używając naszej metafory, daliśmy R puste pudełeczko. Ale R się nie zorientował, bo w ogóle nie musiał tego pudełeczka otwierać. Co się stanie, jeśli otworzy?
+
+```{r}
+#| error: true
+oszukujemy(12, to_nie_istnieje)
+```
+
+Tym razem podaliśmy liczbę 12. Ponieważ 12 jest większe niż 10, R odczytał polecenie, że ma zawartość drugiego pudełka wydrukować w konsoli. Otworzył więc to pudełko, zorientował się, że jest puste i wtedy dopiero zaczął krzyczeć. Ta właściwość R, że otwiera pudełka dopiero wtedy, gdy są potrzebne, określana jest jako *lazy evaluation*. Za moment pokażę, jak możemy to wykorzystać.
+
+# Tidy Eval (ciąg dalszy)
+
+Ten standardowy porządek do góry nogami wywraca tidyverse. Zwróćmy uwagę znów na przykład z wybieraniem kolumn i filtrowaniem. Podaliśmy R jakieś pudełka, które w gruncie rzeczy są puste. W naszym środowisku nie ma takiego obiektu jak `Sepal.Length`. Owszem jest taka kolumna w ramce danych `iris`, ale ramka danych sama w sobie jest niejako pudłem. Jeśli chcemy powiedzieć R „Przynieś mi pudełko `Sepal.Length` z pudła `iris` normalnie powinniśmy zapisać `iris$Sepal.Length`[^5]. A jednak funkcje takie jak `filter()` czy `select()` w jakiś sposób same ogarniają, że podajemy im nazwy kolumn, a nie obiekty i że mają tych kolumn szukać wewnątrz `iris`.
+
+[^5]: Ewentualnie, jeśli chcemy trzymać się klasycznego R, możemy użyć dziś już nieco zapomnianej funkcji `with()`, która każe R najpierw wejść do pudła `iris` i operować tym, co tam w tym pudle znajdzie. Mówiąc językiem, który wyjaśnię później, zmuszamy R do zmiany *środowiska*. Przykład wykorzystania `with()`:
+
+    ``` r
+    with(iris, iris[Sepal.Length > 5,])
+    ```
+
+To nasze otwieranie pudełek nazywa się w informatyce *evaluation* i dokładnie oznacza znajdowanie wartości jakiegoś wyrażenia (np. że wyrażenie `jakas_liczba` ma wartość 5 albo że wyrażenie `sum(1:3` ma wartość 6). Ta niestandardowa ewaluacja, którą wykorzystują pakiety wchodzące w skład tidyverse i którą niemo uznajemy za standard we współczesnym kodowaniu w R, nazywa się *Tidy Evaluation* albo w skrócie *Tidy Eval*. Pisanie funkcji tak, żeby potrafiły korzystać z Tidy Eval oraz wywoływanie funkcji w sytuacjach, gdy Tidy Eval wywołuje problemy, będzie tematem tego wpisu.
+
+Istota Tidy Eval polega na tym, że możemy powiedzieć R dwie rzeczy -- „nie otwieraj tego pudełka teraz\" oraz „teraz możesz otworzyć to pudełko\". Możemy więc dokładnie sterować, kiedy R dokona ewaluacji danego wyrażenia. Nie wydaje się to bardzo znaczące, ale naprawdę jest.
+
+# Niejednoznaczność i `{{}}`
+
+Nie wchodźmy na ten moment w szczegóły, a propos tego, jak działają funkcje tidyverse. Przyjmijmy na ten moment, że potrafią one traktować coś, co inne funkcje uznałyby za obiekt, jako nazwę kolumny. To rodzi nam potencjał do pewnej niejednoznaczności. Kiedy piszemy `iris$Sepal.Length`, to może jest to niewygodne, ale nie ma wątpliwości, o co nam chodzi. Niejednoznaczność pojawiła się po raz pierwszy, gdy w naszej funkcji `opisowe` zapisaliśmy `group_by(group)`
+
+```{r}
+opisowe <- function(df, group, ...) {
+  df %>%
+    group_by(group) %>% # tutaj funkcja wariuje
+    summarise(
+      across(
+        ...,
+        .fns = list(
+          N = \(x) sum(!is.na(x)),
+          M = \(x) mean(x, na.rm = TRUE),
+          SD = \(x) sd(x, na.rm = TRUE),
+          A = agricolae::skewness,
+          K = agricolae::kurtosis,
+          `NA` = \(x) sum(is.na(x))
+        )
+      )
+    )
+}
+```
+
+Gdy zapisaliśmy tę instrukcję, nasza funkcja zwariowała, bo poszła następującą logiką: muszę w bazie danych `iris` znaleźć kolumnę `group`. Normalnie zadziałałoby to świetnie. W końcu dokładnie o to nam chodzi, gdy piszemy na przykład `iris %>% group_by(Species)` -- w bazie danych `iris` pogrupuj po kolumnie `Species`. Tym razem nie chodzi nam jednak o kolumnę `group` a właśnie o obiekt `group` i to, co w sobie zawiera -- nazwę kolumny `Species`.
+
+Rozszerzmy trochę naszą metaforę z pudełkami. Gdy wywołujemy funkcję, tak naprawdę mamy dwa pudełka. Lepiej to widać, jak zapiszemy naszą funkcję tak:
+
+```{r}
+# Przypadek 1.
+log10(x = 100)
+
+# Przypadek 2.
+liczba <- 100
+log10(x = liczba)
+```
+
+Efekt działania obu tych wywołań jest taki sam -- jest nim logarytm dziesiętny ze 100, czyli 2. W pierwszym wypadku wpakowaliśmy 100 do funkcji bezpośrednio. Innymi słowy do pudełka z napisem `x` wpakowaliśmy liczbę 100. `x` To nazwa (jedynego) argumentu funkcji `log10()`. W drugim przypadku wpakowaliśmy liczbę 100 do pudełka z napisem `liczba` i dopiero to pudełko chcemy włożyć do pudełka `x`. Ale R nie lubi matrioszek. R nie włoży pudełka do pudełka. Zanim R włoży coś do pudełka `x`, to to rozpakuje. Do samego końca. To jest standardowy mechanizm ewaluacji -- rozpakuj do końca, aż nie dostaniesz czegoś konkretnego. Jeśli pudełko `liczba` byłoby puste, R miałby problem.
+
+Funkcje korzystające z Tidy Eval działają trochę inaczej. Gdy R przynosi im pudełko `x`, wyciąga z niego pudełko `liczba` i mówi "O, drugie pudełko. Czekaj, rozpakuję ci to", na co taka funkcja `group_by()` odpowiada "Nie, spoko, poradzę sobie". Dlatego R podaje jej samo pudełko `liczba`. Funkcja `group_by()` bierze to pudełko, czyta etykietę i wie, że ma szukać w bazie danych kolumny, co się nazywa "liczba". Skąd wie, to pomińmy na teraz. Można więc powiedzieć, że standardowa ewaluacja to "rozpakowuj do końca", a Tidy Eval to "nie rozpakowuj".
+
+Problem pojawia się wtedy, gdy piszemy własną funkcję, gdzie chcemy wykorzystać funkcję z Tidy Eval. Gdy w naszej funkcji `opisowe` wywołujemy `group_by(group)`, to `group_by()` posłusznie nie rozpakowuje `group`, tylko szuka `group` w bazie danych. Chcemy więc powiedzieć funkcji `group_by()` "Nie, nie. To rozpakuj, to jest argument.". Właśnie to uzyskamy za pomocą operatora `{{ }}` (czytane *curly curly*). `group_by()` będzie wiedziało, że to jest do rozpakowania. Dokonajmy więc pierwszej modyfikacji naszej funkcji `opisowe`.
+
+```{r}
+opisowe <- function(df, group, ...) {
+    df %>%
+        group_by({{ group }}) %>%
+        summarise(
+            across(
+                ...,
+                .fns = list(
+                    # to do
+                )
+            )
+        )
+}
+
+opisowe(iris, Species, Sepal.Width, Sepal.Length)
+```
+
+Może i ciągle nie działa, ale dostalśmy inny błąd! To naprawdę jest powód do radości, jak się robi cokolwiek związanego z komputerami.
+
+Jeśli chodzi o formatowanie, to mogę to zapisać jako `{{group}}` albo `{{ group }}`. Zazwyczaj nie stawiamy spacji po nawiasach, ale operator `{{ }}` jest wyjątkiem. Obie formy zadziałają, ale żeby podkeślić szczególne działanie tego operatora [*The tidyverse style guide*](https://style.tidyverse.org/syntax.html?q={{#embracing) zaleca, by stawiać te spacje.
+
+# *Quoting* i *unquoting*
+
+To, co w popezednim akapicie zrobiliśmy za pomocą `{{ }}` tak naprawdę składa się z dwóch kroków. Po pierwsze musieliśmy powiedzieć R, żeby nie rozpakowywał tego pudełka sam. Po drugie musimy powiedzieć funkcji `group_by()`, żeby ona to pudełko rozpakowała. Zaklejanie pudełka tak, żeby R nie mogło go odpakować nazywa się *quoting* (branie w cudzysłów). Funkcje typu `select()`, `filter()`, `group_by()`, `summarise()`, `across()` itd., czyli takie które stosują *quoting*, a które wcześniej nazywałem funkcjami z Tidy Eval, bardziej formalnie nazywają się *quoting functions*. Polecenie dla *quoting function*, by odpakowała tak zaklejone pudełko, nazywa się *unquoting*.
