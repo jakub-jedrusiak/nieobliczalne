@@ -1,15 +1,15 @@
 ---
 title: "Metaprogramowanie w R"
 subtitle: "Dlaczego moja funkcja nie działa?"
-description: "Piękno pakietu `tidyverse` polega na tym, że zupełnie zmienia sposób w jaki wpisujemy nazwy kolumn do funkcji. Możemy po prostu wpisywać te nazwy do funkcji, bez głębszego zastanawiania się. To zupełnie inaczej, niż w większości języków programowania. To tzw. Tidy Evaluation (Tidy Eval) ułatwia pisanie zwykłego kodu, ale zaskakująco utrudnia pisanie własnych funkcji."
-date: ""
+description: "Piękno pakietu `tidyverse` polega na tym, że zupełnie zmienia sposób w jaki wpisujemy nazwy kolumn do funkcji – bez głębszego zastanawiania się. To zupełnie inaczej, niż w większości języków programowania. To tzw. Tidy Evaluation (Tidy Eval) ułatwia pisanie zwykłego kodu, ale zaskakująco utrudnia pisanie własnych funkcji."
+date: "2023-05-05"
 image: "./headers/metaprogramowanie.webp"
 caregories:
     - R
-draft: true
+freeze: true
 ---
 
-# Przykład motywacyjny
+# Przykład motywacyjny {#przykład-motywacyjny}
 
 Wyobraźmy sobie, że chcemy napisać własną funkcję, która będzie za nas odwalać jakąś głupią robotę. Możemy na przykład mieć jakiś skomplikowany proces modelowania, który zawsze wygląda podobnie. Prostszy przykład -- załóżmy, że zawsze liczymy dokładnie taki sam zestaw statystyk opisowych i chcemy mieć już funkcję na przyszłość, która policzy je nam sama. Dokładnie tak zrobiłem, jak na III roku psychologii miałem kolokwium ze statystyki. Zapiszmy więc taką funkcję.
 
@@ -17,7 +17,40 @@ Wyobraźmy sobie, że chcemy napisać własną funkcję, która będzie za nas o
 #| label: Setup
 #| include: false
 #| echo: false
+library(rlang)
 library(tidyverse)
+source("https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R")
+
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+
+options(crayon.enabled = TRUE)
+options(pillar.bold = TRUE, pillar.subtle_num = TRUE)
+
+knitr::opts_chunk$set(collapse = TRUE, comment = pillar::style_subtle("#>"))
+
+colourise_chunk <- function(type) {
+  function(x, options) {
+    lines <- x
+    if (type != "output") {
+      lines <- crayon::red(lines)
+    }
+    paste0(
+      '<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode">',
+      paste0(
+        fansi::sgr_to_html(htmltools::htmlEscape(lines)),
+        collapse = "\n"
+      ),
+      "</code></pre></div>"
+    )
+  }
+}
+
+knitr::knit_hooks$set(
+  output = colourise_chunk("output"),
+  message = colourise_chunk("message"),
+  warning = colourise_chunk("warning"),
+  error = colourise_chunk("error")
+)
 ```
 
 ```{r}
@@ -49,7 +82,7 @@ Bazę danych grupujemy i wrzucamy do funkcji agregującej `summarise()`. Poniewa
 Ciekawsze rzeczy to:
 
 1.  `\(x) sum(!is.na(x))` -- sama funkcja `is.na()` zwraca `TRUE` lub `FALSE` w zależności od tego, czy dana wartość jest brakująca. Pod maską `TRUE` to 1, a `FALSE` to 0, więc jeśli zsumujemy wynik działania `is.na()`, to dostaniemy liczbę `TRUE`. Ponieważ `is.na()` zwraca `TRUE`, jeśli dane **są** brakujące, to sumując `is.na()` dostałbym liczbę `NA`. Dlatego zaprzeczam `is.na()` operatorem `!` (patrz [tutaj](https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Cz%C4%99%C5%9B%C4%87%20operator%C3%B3w%20logicznych%20dost%C4%99pnych%20w%20R.)).
-2.  Skośność i kurtoza -- to są jedyne funkcje, które stosuję tutaj jak w mordę strzelił, bez kombinowania, więc podaję je **bez nawiasów**. Jak wspominałem [tutaj](https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Co%20wa%C5%BCne%2C%20musi%20to%20by%C4%87%20jej%20nazwa%20bez%20nawias%C3%B3w.), gdy nie ma nawiasów, wskazujemy na samą funkcję, a z nawiasami na to, co funkcja z siebie wywala.
+2.  Skośność i kurtoza -- to są jedyne funkcje, które stosuję tutaj jak w mordę strzelił, bez kombinowania, więc podaję je **bez nawiasów**. Jak wspominałem [tutaj](https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Co%20wa%C5%BCne%2C%20musi%20to%20by%C4%87%20jej%20nazwa%20bez%20nawias%C3%B3w.), gdy nie ma nawiasów, wskazujemy na samą funkcję, a z nawiasami na to, co funkcja z siebie wywala.
 3.  `` `NA` `` -- słowo `NA` ma w R swoje znaczenie. Takich słów normalnie nie możemy używać jako nazw kolumn. Zazwyczaj. Jeśli bardzo chcemy, możemy ująć taką niesyntaktyczną[^2] nazwę w *backticki* (patrz [tutaj](https://nieobliczalne.pl/posts/podstawy_R.html#sec-select)).
 
 [^2]: Inne przykłady nazw niesyntaktycznych to `if`, `for`, `while`, `NULL`, nazwy zaczynające się liczbą, nazwy ze spacjami.
@@ -83,7 +116,7 @@ opisowe(iris, Species, Sepal.Length, Sepal.Width)
 
 Ups. Nie działa. Ale czemu? Błąd mówi, że `group_by()` nie znalazło kolumny o nazwie `group`. I bardzo słusznie, że nie znalazło, bo nie ma takiej kolumny w `iris`. Ale w ogóle nie miało jej szukać! Miało szukać kolumny `Species`, którą podaliśmy jako argument? Dlaczego `group_by()` szuka kolumny `group`?
 
-# Tidy Eval
+# Tidy Eval {#tidy-eval}
 
 To, co teraz opowiem, jest uznawane za bardzo zaawansowaną część języka R. Najgłębiej opisuje te zagadnienia Hadley Wickham[^3] w książce [*Advanced R*](https://adv-r.hadley.nz/). Sam bardzo długo próbowałem to zrozumieć, aż w końcu udało mi się niedawno, podczas pisania pakietu [`mtscr`](https://github.com/jakub-jedrusiak/mtscr). Gdy wreszcie to zrozumiałem, to uznałem, że nie jest to aż takie trudne, tylko opisane jak dla informatyków, matematyków, inżynierów, a nie jak dla psychologów, socjologów, ekonomistów czy całej reszty ludzkości. Dokładnie ten sam problem mam ze statystyką w ogóle.
 
@@ -105,6 +138,7 @@ Powyższa funkcja filtruje wiersze, w których `Sepal.Length` jest większe niż
 
 ```{r}
 iris %>%
+    as_tibble() %>%
     select(Species, Sepal.Length) %>%
     filter(Sepal.Length > 5)
 ```
@@ -120,7 +154,7 @@ sum(x)
 
 ...to R widząc wewnątrz `sum()` coś, co wygląda jak obiekt, próbuje ten obiekt znaleźć i wstawić do funkcji. Dzięki temu efekt jest ten sam, co w przypadku zapisu `sum(1:8)`. Możemy sobie wyobrazić, że wstawiając do funkcji `x` dajemy R pudełeczko, w którym zamknięte są liczby od 1 do 8. Gdy R ma policzyć sumę, naturalnie otwiera to pudełeczko, wyciąga te liczby i sumuje.
 
-# *Lazy evaluation*
+# *Lazy evaluation* {#lazy-evaluation}
 
 Co ciekawe otwiera to pudełeczko dopiero wtedy, gdy już koniecznie musi, bo każemy mu coś z tym zrobić.
 
@@ -137,7 +171,7 @@ jakas_liczba <- 5
 oszukujemy(jakas_liczba, to_nie_istnieje)
 ```
 
-Po zdefiniowaniu funkcji daliśmy R dwa pudełeczka. Jedno z etykietą `jakas_liczba`, drugie z etykietą `niecny_fortel`. Wydaliśmy polecenie wykonania naszej instrukcji z tymi dwoma pudełeczkami. Po pierwsze R miał w konsoli wydrukować zawartość pierwszego pudełeczka powiększoną o 3, co też zrobił. Żeby to zrobić, musiał to pierwsze pudełeczko otworzyć i znalazł tam 5, w związku z czym wydrukował 8. Następnie przeszedł do instrukcji warunkowej. Sprawdził czy podana przez nas liczba (tj. 5) jest większa niż 10. Że nie jest, to zignorował całkowicie, co było w klamrach. Zwróćmy uwagę, że funkcja zakończyła pracę bez błędu. Dlaczego miałby pojawić się błąd? Bo zmienna `to_nie_istnieje`, bez zaskoczenia, nie istnieje. Używając naszej metafory, daliśmy R puste pudełeczko. Ale R się nie zorientował, bo w ogóle nie musiał tego pudełeczka otwierać. Co się stanie, jeśli otworzy?
+Po zdefiniowaniu funkcji daliśmy R dwa pudełeczka. Jedno z etykietą `jakas_liczba`, drugie z etykietą `niecny_fortel`. Wydaliśmy polecenie wykonania naszej instrukcji z tymi dwoma pudełeczkami. Po pierwsze R miał w konsoli wydrukować zawartość pierwszego pudełeczka powiększoną o 3, co też zrobił. Żeby to zrobić, musiał to pierwsze pudełeczko otworzyć i znalazł tam 5, w związku z czym wydrukował 8. Następnie przeszedł do instrukcji warunkowej. Sprawdził czy podana przez nas liczba (tj. 5) jest większa niż 10. Że nie jest, to zignorował całkowicie, co było w klamrach. Zwróćmy uwagę, że funkcja zakończyła pracę bez błędu. Dlaczego miałby pojawić się błąd? Bo zmienna `to_nie_istnieje`, bez zaskoczenia, nie istnieje. Używając naszej metafory, daliśmy R puste pudełeczko. Ale R się nie zorientował, bo w ogóle nie musiał tego pudełeczka otwierać. Co się stanie, jeśli otworzy?
 
 ```{r}
 #| error: true
@@ -146,7 +180,7 @@ oszukujemy(12, to_nie_istnieje)
 
 Tym razem podaliśmy liczbę 12. Ponieważ 12 jest większe niż 10, R odczytał polecenie, że ma zawartość drugiego pudełka wydrukować w konsoli. Otworzył więc to pudełko, zorientował się, że jest puste i wtedy dopiero zaczął krzyczeć. Ta właściwość R, że otwiera pudełka dopiero wtedy, gdy są potrzebne, określana jest jako *lazy evaluation*. Za moment pokażę, jak możemy to wykorzystać.
 
-# Tidy Eval (ciąg dalszy)
+# Tidy Eval (ciąg dalszy) {#tidy-eval-ciąg-dalszy}
 
 Ten standardowy porządek do góry nogami wywraca tidyverse. Zwróćmy uwagę znów na przykład z wybieraniem kolumn i filtrowaniem. Podaliśmy R jakieś pudełka, które w gruncie rzeczy są puste. W naszym środowisku nie ma takiego obiektu jak `Sepal.Length`. Owszem jest taka kolumna w ramce danych `iris`, ale ramka danych sama w sobie jest niejako pudłem. Jeśli chcemy powiedzieć R „Przynieś mi pudełko `Sepal.Length` z pudła `iris` normalnie powinniśmy zapisać `iris$Sepal.Length`[^5]. A jednak funkcje takie jak `filter()` czy `select()` w jakiś sposób same ogarniają, że podajemy im nazwy kolumn, a nie obiekty i że mają tych kolumn szukać wewnątrz `iris`.
 
@@ -158,11 +192,11 @@ Ten standardowy porządek do góry nogami wywraca tidyverse. Zwróćmy uwagę zn
 
 To nasze otwieranie pudełek nazywa się w informatyce *evaluation* i dokładnie oznacza znajdowanie wartości jakiegoś wyrażenia (np. że wyrażenie `jakas_liczba` ma wartość 5 albo że wyrażenie `sum(1:3` ma wartość 6). Ta niestandardowa ewaluacja, którą wykorzystują pakiety wchodzące w skład tidyverse i którą niemo uznajemy za standard we współczesnym kodowaniu w R, nazywa się *Tidy Evaluation* albo w skrócie *Tidy Eval*. Pisanie funkcji tak, żeby potrafiły korzystać z Tidy Eval oraz wywoływanie funkcji w sytuacjach, gdy Tidy Eval wywołuje problemy, będzie tematem tego wpisu.
 
-Istota Tidy Eval polega na tym, że możemy powiedzieć R dwie rzeczy -- „nie otwieraj tego pudełka teraz\" oraz „teraz możesz otworzyć to pudełko\". Możemy więc dokładnie sterować, kiedy R dokona ewaluacji danego wyrażenia. Nie wydaje się to bardzo znaczące, ale naprawdę jest.
+Istota Tidy Eval polega na tym, że możemy powiedzieć R dwie rzeczy -- „nie otwieraj tego pudełka teraz" oraz „teraz możesz otworzyć to pudełko". Możemy więc dokładnie sterować, kiedy R dokona ewaluacji danego wyrażenia. Nie wydaje się to bardzo znaczące, ale naprawdę jest.
 
-# Niejednoznaczność i `{{}}`
+# Niejednoznaczność i `{{ }}` {#niejednoznaczność-i}
 
-Nie wchodźmy na ten moment w szczegóły, a propos tego, jak działają funkcje tidyverse. Przyjmijmy na ten moment, że potrafią one traktować coś, co inne funkcje uznałyby za obiekt, jako nazwę kolumny. To rodzi nam potencjał do pewnej niejednoznaczności. Kiedy piszemy `iris$Sepal.Length`, to może jest to niewygodne, ale nie ma wątpliwości, o co nam chodzi. Niejednoznaczność pojawiła się po raz pierwszy, gdy w naszej funkcji `opisowe` zapisaliśmy `group_by(group)`
+Nie wchodźmy na ten moment w szczegóły, *a propos* tego, jak działają funkcje tidyverse. Przyjmijmy na ten moment, że potrafią one traktować coś, co inne funkcje uznałyby za obiekt, jako nazwę kolumny. To rodzi nam potencjał do pewnej niejednoznaczności. Kiedy piszemy `iris$Sepal.Length`, to może jest to niewygodne, ale nie ma wątpliwości, o co nam chodzi. Niejednoznaczność pojawiła się po raz pierwszy, gdy w naszej funkcji `opisowe` zapisaliśmy `group_by(group)`
 
 ```{r}
 opisowe <- function(df, group, ...) {
@@ -204,26 +238,324 @@ Funkcje korzystające z Tidy Eval działają trochę inaczej. Gdy R przynosi im 
 Problem pojawia się wtedy, gdy piszemy własną funkcję, gdzie chcemy wykorzystać funkcję z Tidy Eval. Gdy w naszej funkcji `opisowe` wywołujemy `group_by(group)`, to `group_by()` posłusznie nie rozpakowuje `group`, tylko szuka `group` w bazie danych. Chcemy więc powiedzieć funkcji `group_by()` "Nie, nie. To rozpakuj, to jest argument.". Właśnie to uzyskamy za pomocą operatora `{{ }}` (czytane *curly curly*). `group_by()` będzie wiedziało, że to jest do rozpakowania. Dokonajmy więc pierwszej modyfikacji naszej funkcji `opisowe`.
 
 ```{r}
+#| error: true
 opisowe <- function(df, group, ...) {
-    df %>%
-        group_by({{ group }}) %>%
-        summarise(
-            across(
-                ...,
-                .fns = list(
-                    # to do
-                )
-            )
+  df %>%
+    group_by({{ group }}) %>%
+    summarise(
+      across(
+        ...,
+        .fns = list(
+          N = \(x) sum(!is.na(x)),
+          M = \(x) mean(x, na.rm = TRUE),
+          SD = \(x) sd(x, na.rm = TRUE),
+          A = agricolae::skewness,
+          K = agricolae::kurtosis,
+          `NA` = \(x) sum(is.na(x))
         )
+      )
+    )
 }
 
 opisowe(iris, Species, Sepal.Width, Sepal.Length)
 ```
 
-Może i ciągle nie działa, ale dostalśmy inny błąd! To naprawdę jest powód do radości, jak się robi cokolwiek związanego z komputerami.
+Może i ciągle nie działa, ale dostaliśmy inny błąd! To naprawdę jest powód do radości, jak się robi cokolwiek związanego z komputerami.
 
-Jeśli chodzi o formatowanie, to mogę to zapisać jako `{{group}}` albo `{{ group }}`. Zazwyczaj nie stawiamy spacji po nawiasach, ale operator `{{ }}` jest wyjątkiem. Obie formy zadziałają, ale żeby podkeślić szczególne działanie tego operatora [*The tidyverse style guide*](https://style.tidyverse.org/syntax.html?q={{#embracing) zaleca, by stawiać te spacje.
+Jeśli chodzi o formatowanie, to mogę to zapisać jako `{{group}}` albo `{{ group }}`. Zazwyczaj nie stawiamy spacji po nawiasach, ale operator `{{ }}` jest wyjątkiem. Obie formy zadziałają, ale żeby podkreślić szczególne działanie tego operatora [*The tidyverse style guide*](https://style.tidyverse.org/syntax.html?q=%7B%7B#embracing) zaleca, by stawiać te spacje.
 
-# *Quoting* i *unquoting*
+# *Quoting* i *unquoting* {#quoting-i-unquoting}
 
-To, co w popezednim akapicie zrobiliśmy za pomocą `{{ }}` tak naprawdę składa się z dwóch kroków. Po pierwsze musieliśmy powiedzieć R, żeby nie rozpakowywał tego pudełka sam. Po drugie musimy powiedzieć funkcji `group_by()`, żeby ona to pudełko rozpakowała. Zaklejanie pudełka tak, żeby R nie mogło go odpakować nazywa się *quoting* (branie w cudzysłów). Funkcje typu `select()`, `filter()`, `group_by()`, `summarise()`, `across()` itd., czyli takie które stosują *quoting*, a które wcześniej nazywałem funkcjami z Tidy Eval, bardziej formalnie nazywają się *quoting functions*. Polecenie dla *quoting function*, by odpakowała tak zaklejone pudełko, nazywa się *unquoting*.
+To, co w poprzednim akapicie zrobiliśmy za pomocą `{{ }}` tak naprawdę składa się z dwóch kroków. Po pierwsze musieliśmy powiedzieć R, żeby nie rozpakowywał tego pudełka sam. Po drugie musimy powiedzieć funkcji `group_by()`, żeby ona to pudełko rozpakowała. Zaklejanie pudełka tak, żeby R nie mogło go odpakować nazywa się *quoting* (branie w cudzysłów). Funkcje typu `select()`, `filter()`, `group_by()`, `summarise()`, `across()` itd., czyli takie które stosują *quoting*, a które wcześniej nazywałem funkcjami z Tidy Eval, bardziej formalnie nazywają się *quoting functions*. Polecenie dla *quoting function*, by odpakowała tak zaklejone pudełko, nazywa się *unquoting*. Mówiąc bardziej formalnie -- *quoting* to przyjmowanie kodu bez jego wykonywania, zatrzymywanie go. *Unquoting* to wykonywanie wcześniej zatrzymanego kodu.
+
+Obie te czynności wykonujemy jednocześnie wygodnym operatorem `{{ }}`, ale możemy (a czasem musimy) wykonać je też osobno. Dlatego też teraz omówimy sobie serię funkcji za pomocą których możemy wykonać *quoting*, a następnie *unquoting*. Wykorzystamy sobie tutaj funkcje wdrażane przez niewielki acz przepotężny pakiet `rlang` należący do rodziny tidyverse. Base-R też potrafi te rzeczy robić, ale `rlang` nie dość, że jest standardem, to jeszcze jest łatwiejszy do zrozumienia.
+
+# `expr()`, `quo()` i `sym()` {#expr-quo-i-sym}
+
+Najbardziej bazową funkcją wykonującą *quoting* jest funkcja `expr()`. Jeśli wrzucamy do niej jakieś wyrażenie, zwraca ona nam to wyrażenie w „rozbrojonej" (w naszej metaforze zaklejonej taśmą) formie.
+
+```{r}
+expr(5 + 3)
+expr(jakis_argument + 3)
+```
+
+Pierwsze wywołanie zwraca nam dosłowne `5 + 3`, a nie `8` ponieważ `expr()` zatrzymuje wykonywanie dodawania. To wyrażenie jest teraz *quoted* i żeby dostać 8, musimy je wywołać ręcznie. Zwróćmy uwagę, że drugie wyrażenie też się wykonuje i zwraca dosłownie `jakis_argument + 3` mimo, że takiej zmiennej nie ma przypisanej. Dzieje się tak dlatego, że odpakowanie pudełka z napisem `jakis_argument` również zostało zatrzymane.
+
+Drugą funkcją wykonującą *quoting* jest `quo()`. Co ciekawe, nie jest to skrót od *quoting* a od *quosure* czyli *quoted closure*. Od `expr()` różni się tym, że poza wyrażeniem zapisuje też jego **środowisko** (*environment*). Środowisko to zbiór zmiennych, w otoczeniu których wykonywana jest funkcja. Innymi słowy to w środowisku zapisywana jest informacja, że `x = 5`, gdy robimy `x <- 5` i to ze środowiska ten `x` jest brany, kiedy trzeba potem trzeba znaleźć jego wartość. Można to sobie wyobrazić jako różne półki, na których stoją pudełka ze zmiennymi. Dla zobrazowania zagadka.
+
+```{r}
+#| eval: false
+x <- 5
+
+razy_argument <- function(argument) {
+    x <- 100
+    x * argument
+}
+
+razy_argument(2)
+```
+
+Jaki będzie wynik działania tej funkcji? `10` czy `200`? Pytanie brzmi, co nasza funkcja potraktuje jako `x` -- 5 czy 200? Jest to pytanie o tzw. *scope* czy też zasięg funkcji, ale można na to spojrzeć też jak na pytanie o środowisko. Z której półki funkcja weźmie pudełko z napisem `x`? Odpowiedź brzmi -- z najbliższej. W tym wypadku najbliższa półka to środowisko samej funkcji, czyli `x = 100`, a więc wynik to `200`. Zachęcam do zastanowienia się, co będzie wynikiem `razy_argument(x)`? Odpowiedź można sprawdzić w swojej konsoli.
+
+Obiekt typu *quosure* zapisuje więc nie tylko wyrażenie, ale też informację, w jakim środowisku zostało to wyrażenie zatrzymane. Załóżmy, że stworzyliśmy takie wyrażenie w środowisku globalnym.
+
+```{r}
+nasz_quosure <- quo(sum(x))
+
+nasz_quosure
+```
+
+Widzimy, że poza samym wyrażeniem `sum(x)` *quosure* zawiera też informację o środowisku. Jeśli teraz wykonamy to wyrażenie (o tym jak wykonywać będzie później), to R weźmie `x` zawsze z półki `global`, a nie z najbliższej.
+
+```{r}
+quosure_z_x <- quo(x)
+
+x <- 5
+
+dodaj_dwa <- function(liczba) {
+    x <- 100
+    eval_tidy(quosure_z_x) + 2 # ewaluacja quosure ręcznie
+}
+
+dodaj_dwa(10)
+```
+
+# `enquo()`, `quos()` i `enquos()` oraz pokrewne {#enquo-quos-i-enquos-oraz-pokrewne}
+
+Obie te funkcje posiadają swoje funkcje pokrewne. Funkcja z przedrostkiem *en-* służy do zatrzymywania argumentów funkcji. Dlatego częściej będziemy wykorzystywać `enquo()` i `enexpr()` niż `quo()` i `expr()`. Funkcja `enquo()` nie jest tak drastyczna w zatrzymywaniu. Funkcja `quo()` zatrzymuje kod natychmiast, a funkcja `enquo()` raz chociaż wyjmuje coś z pudełka. Zobaczmy to na praktycznym przykładzie.
+
+```{r}
+#| error: true
+wybierz_z_quo <- function(df, col) {
+    kolumna <- quo(col)
+    df %>%
+        select(!!kolumna) # wykrzykniki wykonują, nie przejmuj się
+}
+
+wybierz_z_quo(iris, Species) %>%
+    head()
+```
+
+Gdy próbujemy wykonać `quo(col)`, próbuje się ono wykonać do końca, czyli dostajemy to samo, jakbyśmy napisali po prostu `select(df, col)`. Efekt, który chcemy uzyskać, uzyskamy z funkcją `enquo()` która służy konkretnie do chwytania argumentów.
+
+```{r}
+wybierz_z_enquo <- function(df, col) {
+    kolumna <- enquo(col)
+    df %>%
+        select(!!kolumna) # wykrzykniki wykonują, nie przejmuj się
+}
+
+wybierz_z_enquo(iris, Species) %>%
+    head()
+```
+
+Jak widzimy, tym razem kod się wykonał. Funkcja `quo()` zatrzymuje więc otwieranie pudełek w danym momencie, ale gdy każe jej się je otwierać, będzie otwierała do końca. Funkcja `enquo()`, gdy wykonana, otworzy tylko to, co jest w tym pudełku schowane i nie otwierając dalej przekaże zawartość `select()`.
+
+```{r}
+#| error: true
+quo_vs_enquo <- function(x) {
+    x_quo <- quo(x)
+    x_enquo <- enquo(x)
+    
+    print("enquo(x):")
+    print(x_enquo)
+    
+    print("quo(x):")
+    print(x_quo)
+}
+
+quo_vs_enquo(argument)
+```
+
+Jak widzimy, `enquo()` zatrzymało to co chcemy, czyli `argument`, a szybkie w zatrzymywaniu `quo()` zatrzymało samo `x`. Dodatkowo `enquo()` wiedziało, że chodzi o argument ze środowiska `global`, a `quo()` zatrzymało `x` w środowisku funkcji. Mówiąc krótko -- jeśli chcemy zatrzymać argument funkcji, zawsze używajmy `enquo()` albo `enexpr()` (lepiej `enquo()`).
+
+Drugą pokrewną funkcję otrzymamy dodają do `quo()` lub `expr()` przyrostek *-s*. Otrzymane w ten sposób funkcje `quos()` i `exprs()` tym się różnią od swoich korzeni, że mogą zatrzymywać wiele pudełek naraz i przechowywać je w postaci listy. Przydaje się to przede wszystkim, gdy mamy jako argument wielokropek `...`, w którym z definicji może być wiele rzeczy.
+
+Obie pochodne można połączyć uzyskując w ten sposób `enquos()` i `enexprs()` służące do zatrzymywania wielu (*-s*) argumentów (*en-*) za jednym zamachem.
+
+# `!!` i `!!!` {#i}
+
+Wbrew pozorom tytuł tego podrozdziału to nie próba odwzorowania emocji czytającego, tylko rzeczywiście wykorzystywane operatory. Wiemy już, jak ręcznie zaklejać pudełka tak, żeby R ich sam nie otwierał w złym momencie. Teraz musimy wiedzieć, jak kazać mu je otworzyć, kiedy potrzebujemy. Podstawowym operatorem mówiącym „otwórz" jest `!!` czytane *bang-bang*[^6]. Możemy więc wcześniej zaklejone pudełko otworzyć strzelając do niego.
+
+[^6]: ...*my baby shot me down*.
+
+```{r}
+wybierz_z_enquo <- function(df, col) {
+    kolumna <- enquo(col)
+    df %>%
+        select(!!kolumna) # wykrzykniki wykonują, teraz się przejmuj
+}
+
+wybierz_z_enquo(iris, Species) %>%
+    head()
+```
+
+Co ciekawe, równie dobrze moglibyśmy zapisać:
+
+```{r}
+wybierz_z_enquo <- function(df, col) {
+    df %>%
+        select(!!enquo(col))
+}
+
+wybierz_z_enquo(iris, Species) %>%
+    head()
+```
+
+...czyli za jednym zamachem (hehe) zatrzymać otwierające pudełka R i otworzyć to pudełko już na pewno wewnątrz `select()`. Zwróćmy uwagę, że to jest dokładnie to, co robił operator `{{ }}`, który w gruncie rzeczy jest wygodniejszym zapisem `!!enquo()`.
+
+Poza zwykłym *bang-bang* `!!` mamy też *bang-bang-bang* `!!!` i to nawet nie jest żart. Przypomnij sobie funkcję `enquos()`, która zatrzymywała wiele argumentów naraz w postaci listy. Jeśli coś takiego spróbujemy odpakować, to dostaniemy listę. Często zaś nie chcemy dostać listy, tylko samą jej zawartość po kolei. Innymi słowy chcę dostać `select(iris, Sepal.Width, Sepal.Length)`, a nie `select(iris, list(Sepal.Width, Sepal.Length))`. Do tego służy właśnie `!!!`, który bierze listę zatrzymanych wyrażeń, tnie ją na pojedyncze pudełka i każde z nich otwiera. Tym samym to jest dokładnie to, co przyda nam się do załatwienia argumentu `...` w naszej funkcji `opisowe`.
+
+```{r}
+opisowe <- function(df, group, ...) {
+  kolumny_do_policzenia <- enquos(...)
+
+  df %>%
+    group_by({{ group }}) %>%
+    summarise(
+      across(
+        c(!!!kolumny_do_policzenia),
+        .fns = list(
+          N = \(x) sum(!is.na(x)),
+          M = \(x) mean(x, na.rm = TRUE),
+          SD = \(x) sd(x, na.rm = TRUE),
+          A = agricolae::skewness,
+          K = agricolae::kurtosis,
+          `NA` = \(x) sum(is.na(x))
+        )
+      )
+    )
+}
+
+opisowe(iris, Species, Sepal.Width, Sepal.Length)
+```
+
+W tym wypadku nasze `kolumny_do_policzenia` pojawiają się wewnątrz `across()`, więc musiałem użyć `c()` (patrz [tutaj](https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Gdy%20u%C5%BCywam%20zestaw%2C%20mam%20na%20my%C5%9Bli%2C%20%C5%BCe%20trzeba%20je%20wpakowa%C4%87%20w%20funkcj%C4%99%20c()%20(od%20concatenate)%2C%20np.%20c(1%2C%208%2C%2010%3A16).)). Inny przykład, bardziej typowy wyglądałby tak:
+
+```{r}
+srednia_z_kolumny <- function(df, col, ...) {
+    grupy <- enquos(...)
+    df %>%
+        group_by(!!!grupy) %>%
+        summarise(M = mean({{ col }}))
+}
+
+srednia_z_kolumny(iris, Sepal.Length, Species)
+```
+
+W tym wypadku używamy `enquos()`, żeby zatrzymać listę kolumn, po których będziemy grupować, a następnie rozpakowujemy ją już wewnątrz funkcji `group_by()`. `...` zawiera wiele rzeczy, więc używam `enquos()` i `!!!` zamiast `enquo()` i `!!`. Ponieważ w `group_by()` wypisuję grupy po prostu po przecinku, to nie muszę nic dokładać.
+
+Co ważne, operatory `!!` i `!!!` działają tylko w funkcjach, które same z siebie wykorzystują Tidy Eval. Jeśli naprawdę i absolutnie jest konieczność, żeby wykonać *unquoting* w innej funkcji, to warto się upewnić, czy string nie zadziała i użyć `as_label()`. Funkcje bez Tidy Eval i tak nie potrafią operować na suchych nazwach kolumn, więc i tak by wyrzuciły błąd, że obiektu nie znaleziono. Jeśli jednak konieczność z jakiegoś powodu nie ustępuje, najpewniej rozwiązaniem jest tutaj funkcja `eval_tidy()`.
+
+# *Parsing* i *deparsing* {#parsing-i-deparsing}
+
+Ostatnie operacje, które tutaj omówię, to *parsing* i *deparsing*. Czasami chcemy zmienić naszą, powiedzmy, nazwę kolumny w surowy tekst. Dla przykładu, piszemy funkcję generującą wykres i chcemy wykorzystać jakoś nazwę kolumny, żeby podpisać osie. Załóżmy, że chcemy zamienić wcześniej kropki na spacje, więc domyślne opcje zwracane przez `ggplot2` nie są wystarczające. Musimy mieć więc dostęp do nazwy kolumny, którą użytkownik podał jako argument, ale nazwy jako tekst. Dokonać tego mogą nawet trzy funkcje -- `as_label()`, `as_name()` i `expr_text()`. Różnią się pewnymi technikaliami, którymi nie ma co zaprzątać sobie głowy na początkowym etapie. Jako pewien skrót mogę powiedzieć -- najlepiej jest użyć `as_label()`, a jeśli będzie potrzeba, to można zacząć ogarniać użycie innych funkcji. Obie te funkcje przyjmują obiekty typu `expr` albo `quo`.
+
+```{r}
+wykresik <- function(df, X, Y) {
+    X <- enquo(X)
+    Y <- enquo(Y)
+    
+    nazwa_X <- as_label(X) %>%
+        str_replace_all("\\.", " ") # dosłowne kropki ("\\.") zamień na spacje
+    nazwa_Y <- as_label(Y) %>%
+        str_replace_all("\\.", " ")
+    nazwa_df <- as_label(enquo(df))
+    tytul <- paste0(nazwa_X, "-", nazwa_Y, " in ", nazwa_df, " database")
+    
+    ggplot(df, aes(!!X, !!Y)) + #
+        geom_jitter() +
+        geom_smooth(method = "lm", se = FALSE) +
+        labs(title = tytul, x = nazwa_X, y = nazwa_Y) +
+        theme_Publication() # koundy/ggplot_theme_Publication na GitHubie
+}
+
+wykresik(iris, Sepal.Width, Sepal.Length)
+
+wykresik(USArrests, UrbanPop, Murder)
+```
+
+Ta czynność, którą tutaj wykonałem, nazywa się *deparsing*. Skoro istnieje *deparsing*, to pewnie istnieje też *parsing*. Rzeczywiście, istnieje i jest to czynność odwrotna -- dostajemy dosłowny ciąg znaków typu `"sum(x)"` i przekształcamy go w prawdziwe wywołanie `sum(x)`. W zależności od tego, co chcemy otrzymać, możemy użyć funkcji `parse_expr()` lub `parse_quo()`.
+
+# Kilka przykładów z życia {#kilka-przykładów-z-życia}
+
+Kiedy się tego uczyłem, brakowało mi rzeczywistych przykładów, choćby były trudne. Także tutaj podrzucam kilka ze swojego pakietu [`mtscr`](https://github.com/jakub-jedrusiak/mtscr).
+
+## Wywoływanie funkcji z zatrzymanymi argumentami {#wywoływanie-funkcji-z-zatrzymanymi-argumentami}
+
+```{r}
+#| eval: false
+mtscr_model <- function(df, id_column, item_column, score_column) {
+  id_column <- rlang::ensym(id_column)
+  item_column <- rlang::ensym(item_column)
+  score_column <- rlang::ensym(score_column)
+
+  df <- mtscr_prepare( # `mtscr_prepare` wykorzystuje Tidy Eval!
+    df,
+    !!id_column,
+    !!item_column,
+    !!score_column,
+    minimal = TRUE
+  )
+}
+```
+
+Użyłem tu `ensym()`, ale spokojnie mogłoby być `enquo()`. Funkcja wywołuje inną funkcję z pakietu, żeby przygotować dane do modelowania. Wszystkie nazwy kolumn na początku „rozbrajam" i ponownie „uzbrajam" już wewnątrz `mtscr_prepare()`. Jeśli byłby to tylko ten fragment kodu, mógłbym użyć operatora `{{ }}`, ale potem potrzebowałem wersji ręcznie „rozbrojonej".
+
+## Formuły z nazw kolumn {#formuły-z-nazw-kolumn}
+
+```{r}
+#| eval: false
+formulas[[i]] <- stats::as.formula(
+  paste0(
+    ".z_score ~ -1 + ",
+    rlang::as_name(item_column),
+    " + ",
+    rlang::as_name(item_column),
+    ":.ordering_0 + (.ordering_0 | ",
+    rlang::as_name(id_column),
+    ")"
+  )
+)
+```
+
+Tutaj wykorzystuję `as_name()`, żeby połączyć nazwy kolumn w jedną formułę potrzebną potem do modelu. Równie dobrze mógłbym użyć `as_label()`. Wyniki zapisuję na liście `formulas`.
+
+## Warunkowa lista argumentów do `summarise()` {#warunkowa-lista-argumentów-do-summarise}
+
+```{r}
+#| eval: false
+args <- list()
+if ("all_max" %in% model_type) {
+  args[[".all_max"]] <- rlang::parse_expr("max(.all_max)")
+}
+
+if ("all_top2" %in% model_type) {
+  args[[".all_top2"]] <- rlang::parse_expr("max(.all_top2)")
+}
+
+df <- df |>
+  dplyr::summarise(
+    !!!args,
+    .by = dplyr::all_of(groups)
+  )
+```
+
+Z tego jestem zadowolony. To fragment funkcji, która daje różne instrukcje do `summarise()` w zależności od tego, czy w argumencie `model_type` jest `"all_max"`, `"all_top2"` czy `c("all_max", "all_top2")`. Kolejne instrukcje zapisuję na liście `args`, którą potem otwieram operatorem `!!!` (bo to lista). Używam tutaj też `parse_expr()`, ale to z przyczyn technicznych związanych z pakietami[^7] raczej, niż z programowaniem. Mógłbym użyć też `expr(max(.all_max))`. Na pewno nie używam tutaj `enexpr()`, bo to nie są argumenty, tylko nazwy kolumn zapisane na sztywno.
+
+[^7]: CRAN nie lubi, jak używa się obiektów, które nie mają globalnych definicji, dlatego krzyczał na mnie, że nie ma czegoś takiego jak `.all_top2`. Ja wiedziałem, że jest w bazie danych, kod działał, bo to potem trafiało do `summarise()`, ale CRAN ma swoje zasady. Dlatego podałem to jako string, który jest przerabiany na wyrażenie (*parsing*).
+
+# Podsumowanie {#podsumowanie}
+
+**To nie jest łatwe.** Nie trzeba się martwić, jak się tego nie rozumie przy pierwszym kontakcie. Ja miałem bardzo dużo podejść, zanim w końcu to zrozumiałem, a i tak nie jestem specjalistą, znacznie więcej nie wiem, niż wiem. Zaskakująco pomocną rzeczą jest *cheat sheet* z `rlang`. Mam wrażenie, że wytłumaczył mi te rzeczy lepiej, niż poradniki, ale może to być kwestia tego, że zrozumiałem *cheat sheet*, bo czytałem poradniki. Tak czy inaczej warto sobie wydrukować go [stąd](https://github.com/rstudio/cheatsheets/blob/main/tidyeval.pdf). Jednocześnie najnowsza wersja jest z 2018 r. i trochę zdążyło się zmienić w międzyczasie. Dlatego nie znajdziemy tam przede wszystkim operatora `{{ }}`, który pojawił się dopiero w połowie 2019 r. i stał się standardem. Wielu rzeczy też tutaj nie omówiłem (chociażby operatora `:=`), ale mam nadzieję, że ten wstęp wystarczy, żeby wejście w naukę tych tematów było gładsze.
+
+Zbierając to wszystko do kupy:
+
+1.  Jeśli wrzucamy do funkcji typu `select()` nazwę zmiennej, odruchowo bierze ją ona za nazwę kolumny, której często nie znajduje.
+2.  Podstawowym sposobem dania funkcji znać, że to nie kolumna, a zmienna do odpakowania jest `{{ }}`.
+3.  `{{ }}` robi dwie rzeczy -- *quoting*, żeby powstrzymać R przed odpakowywaniem nazwy kolumny poza funkcją typu `select()` i *unquoting*, żeby dać funkcji typu `select()` znać, że to nie kolumna, tylko ma to odpakować.
+4.  Obie te czynności można wykonać osobno -- *quoting* przede wszystkim funkcją `enquo()`, *unquoting* przede wszystkim operatorem `!!`.
+5.  `quo()` służy do zatrzymywania zwykłych wyrażeń, `enquo()` do zatrzymywania argumentów, `quos()` do zatrzymywania wielu rzeczy naraz, a `enquos()` do zatrzymywania wielu argumentów naraz.
+6.  `!!` odpakowuje pojedyncze wyrażenia, a `!!!` odpakowuje listy wyrażeń. Argument `...` wymaga `enquos()` i `!!!`.
+7.  Można zmienić wyrażenie w string funkcją `as_label()` albo string w wyrażenie funkcją `parse_expr()`.
+8.  Pakietem do rozwiązywania problemów opisanych w tekście jest `rlang`, a fundamentalnym źródłem informacji [rozdziały 17-21. w książce *Advanced R*](https://adv-r.hadley.nz/metaprogramming.html) Hadleya Wickhama.
