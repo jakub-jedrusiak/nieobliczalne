@@ -3,14 +3,6 @@
   content: ".";
 }
 
-@font-face {
-  font-family: 'Cascadia Code';
-  font-style: normal;
-  font-weight: 400;
-  src: url('CascadiaCode.ttf') format('truetype');
-  font-display: fallback;
-}
-
 .sourceCode,
 code {
   font-family: "Cascadia Code", sans-serif;
