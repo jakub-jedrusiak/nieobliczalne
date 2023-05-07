@@ -189,7 +189,7 @@ Ten standardowy porządek do góry nogami wywraca tidyverse. Zwróćmy uwagę zn
     with(iris, iris[Sepal.Length > 5,])
     ```
 
-To nasze otwieranie pudełek nazywa się w informatyce *evaluation* i dokładnie oznacza znajdowanie wartości jakiegoś wyrażenia (np. że wyrażenie `jakas_liczba` ma wartość 5 albo że wyrażenie `sum(1:3` ma wartość 6). Ta niestandardowa ewaluacja, którą wykorzystują pakiety wchodzące w skład tidyverse i którą niemo uznajemy za standard we współczesnym kodowaniu w R, nazywa się *Tidy Evaluation* albo w skrócie *Tidy Eval*. Pisanie funkcji tak, żeby potrafiły korzystać z Tidy Eval oraz wywoływanie funkcji w sytuacjach, gdy Tidy Eval wywołuje problemy, będzie tematem tego wpisu.
+To nasze otwieranie pudełek nazywa się w informatyce *evaluation* i dokładnie oznacza znajdowanie wartości jakiegoś wyrażenia (np. że wyrażenie `jakas_liczba` ma wartość 5 albo że wyrażenie `sum(1:3)` ma wartość 6). Ta niestandardowa ewaluacja, którą wykorzystują pakiety wchodzące w skład tidyverse i którą niemo uznajemy za standard we współczesnym kodowaniu w R, nazywa się *Tidy Evaluation* albo w skrócie *Tidy Eval*. Pisanie funkcji tak, żeby potrafiły korzystać z Tidy Eval oraz wywoływanie funkcji w sytuacjach, gdy Tidy Eval wywołuje problemy, będzie tematem tego wpisu.
 
 Istota Tidy Eval polega na tym, że możemy powiedzieć R dwie rzeczy -- „nie otwieraj tego pudełka teraz" oraz „teraz możesz otworzyć to pudełko". Możemy więc dokładnie sterować, kiedy R dokona ewaluacji danego wyrażenia. Nie wydaje się to bardzo znaczące, ale naprawdę jest.
 
