@@ -2,3 +2,11 @@
 .header-section-number::after {
   content: ".";
 }
+
+.sourceCode {
+    font-variant-ligatures: none;
+}
+
+.title, .subtitle, .listing-subtitle, h1, h2, h3, h4, h5, h6 {
+    font-family: "Raleway";
+}
