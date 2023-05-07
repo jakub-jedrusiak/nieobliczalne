@@ -20,12 +20,19 @@ format:
     theme:
       light: flatly
       dark: darkly
-    css: styles.css
+    mainfont: "Open Sans"
+    monofont: "Cascadia Code"
+    date-format: long
     toc: true
     lang: pl
     default-image-extension: svg
+    css: styles.css
     include-in-header:
         - adsense.html
+    header-includes: |
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/cascadia-code">
 
 execute:
   freeze: auto
@@ -35,3 +42,4 @@ csl: ./bibliografia/apa-6th-edition.csl
 
 resources:
   - CNAME
+  - CaskaydiaCoveNerdFont-Regular.ttf

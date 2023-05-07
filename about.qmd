@@ -17,4 +17,17 @@ notice: |
 
 Student psychologii Uniwersytetu Wrocławskiego. Zainteresowany psychologią procesów poznawczych i wnioskowaniem statystycznym, w tym wykorzystaniem R i pythona w nauce. Zwolennik Open Science.
 
-# Publikacje
+# Publikacje {#publikacje}
+
+::: {#refs}
+:::
+
+# Fonty {#fonty}
+
+Fonty użyte na tej stronie:
+
+Tekst główny -- [Open Sans]{style="font-family: \"Open Sans\";"}
+
+Nagłówki -- [Raleway]{style="font-family: \"Raleway\";"}
+
+Kod -- [Cascadia Code]{style="font-family: \"Cascadia Code\";"}

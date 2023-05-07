@@ -2,3 +2,26 @@
 .header-section-number::after {
   content: ".";
 }
+
+.sourceCode,
+code {
+  font-family: "Cascadia Code", sans-serif;
+  font-variant-ligatures: none;
+}
+
+.navbar,
+.title,
+.subtitle,
+.listing-subtitle,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Raleway", sans-serif;
+}
+
+.navbar-title {
+  font-weight: bold;
+}
