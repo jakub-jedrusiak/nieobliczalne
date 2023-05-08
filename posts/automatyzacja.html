@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jakub Jędrusiak">
-<meta name="description" content="Automatyzacja to jedna z najpotężniejszych zalet R, której nie mają programy statystyczne oparte na interfejsie graficznym. Jeśli chcemy zrobić jakąś czynność wiele razy tak samo lub prawie tak samo, możemy wykorzystać siłę programowania i zrobić to setki razy kilkoma linijkami. Postaram się to tutaj pokazać.">
+<meta name="description" content="Automatyzacja to jedna z najpotężniejszych zalet R, której nie mają programy statystyczne oparte na interfejsie graficznym. Jeśli chcemy zrobić jakąś czynność wiele razy tak samo lub prawie tak samo, możemy wykorzystać siłę programowania i zrobić to setki razy używając ledwie kilku linijek. Podstawowym sposobem automatyzacji w R – czym różni się od wielu innych języków programowania – są listy, czyli zbiory obiektów.">
 
 <title>Nieobliczalne - Listy, pętle i automatyzacja w R</title>
 <style>
@@ -223,7 +223,7 @@ cookieconsent.run({
 
 <div>
   <div class="description">
-    Automatyzacja to jedna z najpotężniejszych zalet R, której nie mają programy statystyczne oparte na interfejsie graficznym. Jeśli chcemy zrobić jakąś czynność wiele razy tak samo lub prawie tak samo, możemy wykorzystać siłę programowania i zrobić to setki razy kilkoma linijkami. Postaram się to tutaj pokazać.
+    Automatyzacja to jedna z najpotężniejszych zalet R, której nie mają programy statystyczne oparte na interfejsie graficznym. Jeśli chcemy zrobić jakąś czynność wiele razy tak samo lub prawie tak samo, możemy wykorzystać siłę programowania i zrobić to setki razy używając ledwie kilku linijek. Podstawowym sposobem automatyzacji w R – czym różni się od wielu innych języków programowania – są listy, czyli zbiory obiektów.
   </div>
 </div>
 
@@ -250,7 +250,7 @@ cookieconsent.run({
 
 </header>
 
-<p>Nie znoszę mechanicznej pracy. Jestem jedną z tych osób, które wolą spędzić 30 minut na automatyzacji czegoś, co ręcznie zrobiłbym w 15 minut. Ale ma to swoje zalety. Po pierwsze poświęciłem na to tyle czasu, że teraz jestem w stanie wiele rzeczy zautomatyzować dość szybko. Tym doświadczeniem chcę się też podzielić. Po drugie jeśli praca manualna wielokrotnie się powtarza, netto oszczędzam czas, mimo że na początku muszę zainwestować tego czasu więcej. Raz zautomatyzowana czynność jest wielokrotnego użytku. Po trzecie jeśli automatyzujemy, to tyle samo zajmuje wyczyszczenie 1 pliku i 100 plików zajmuje tyle samo czasu. Jeśli liczymy, to 100 plików to 100 razy więcej czasu. Po czwarte – mam ciekawsze rzeczy do roboty niż wypisywanie kolejnych liczb. Automatyzacja mnie chociaż nie nudzi, a mogę poświęcić swoje zasoby na opracowywanie, planowanie czy interpretacja.</p>
+<p>Nie znoszę mechanicznej pracy. Jestem jedną z tych osób, które wolą spędzić 30 minut na automatyzacji czegoś, co ręcznie zrobiłbym w 15 minut. Ale ma to swoje zalety. Po pierwsze, poświęciłem na to tyle czasu, że teraz jestem w stanie wiele rzeczy zautomatyzować dość szybko. Tym doświadczeniem chcę się też podzielić. Po drugie, jeśli praca manualna wielokrotnie się powtarza, netto oszczędzam czas, mimo że na początku muszę zainwestować tego czasu więcej. Raz zautomatyzowana czynność już zautomatyzowana całkowicie, ile razy byśmy jej nie wykorzystali. Po trzecie, jeśli automatyzujemy, to tyle samo czasu zajmuje wyczyszczenie 1 pliku i 100 plików. Jeśli czyścimy ręcznie, to 100 plików przekłada się&nbsp;na 100 razy więcej (zmarnowanego) czasu. Po czwarte – mam ciekawsze rzeczy do roboty niż wypisywanie kolejnych liczb. Automatyzacja mnie chociaż nie nudzi, zawsze uczę się czegoś nowego (<a href="https://youtu.be/wf4o6rYaPCI">jak prezydent</a>) i mogę w ten sposób wykorzystać swoje zasoby po prostu lepiej.</p>
 <section id="automatyzacja-w-czyszczeniu-danych" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Automatyzacja w czyszczeniu danych</h1>
 <p>Weźmy sobie za przykład następującą sytuację – wykonaliśmy eksperyment w programie PsychoPy i zbadaliśmy 35 osób. Nasz eksperyment dotyczył tego, na ile osoby będą w stanie zapamiętać historyjkę opowiadaną im w prawej słuchawce, jeśli w lewej słuchawce będzie im puszczany rozpraszacz. Mamy przy okazji dwa warunki, łatwy i trudny, w zależności od tego, jak intensywnie zachodziło rozpraszanie. Ze względu na specyfikę PsychoPy, otrzymaliśmy 35 osobnych plików z wynikami<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Spojrzenie w przykładowy plik pozwala stwierdzić, że jest to kompletny chaos.</p>
