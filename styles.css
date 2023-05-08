@@ -3,9 +3,19 @@
   content: ".";
 }
 
+@font-face {
+  font-family: "CaskaydiaCove NF";
+  src: url("https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/CascadiaCode/Regular/CaskaydiaCoveNerdFont-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "CaskaydiaCove NF";
+  src: url("https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/CascadiaCode/Regular/CaskaydiaCoveNerdFont-Italic.ttf") format("truetype");
+  font-style: italic;
+}
+
 .sourceCode,
 code {
-  font-family: "Cascadia Code", sans-serif;
+  font-family: "CaskaydiaCove NF", sans-serif;
   font-variant-ligatures: none;
 }
 
