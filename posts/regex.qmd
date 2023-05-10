@@ -1,0 +1,11 @@
+---
+title: "*Znajdź i zastąp* to narzędzie ostateczne"
+subtitle: "Oszczędzanie czasu z wyrażeniami regularnymi"
+description: "Jest jedno narzędzie, które nie ma szerokiej publiczności poza światem technicznym, a pozwala oszczędzić naprawdę dużo czasu. Z pełną powagą uważam że powinno być to nauczane w szkole, razem z obsługą programów do pisania. Z pełną odpowiedzialnością twierdzę, że przyda się to każdemu, kto cokolwiek pisze na komputerze, nieważne, czy to profesor, księgowa czy zwykły Kowalski. Mowa tutaj o wyrażeniach regularnych (*Regualr Expressions*, RegEx), które przybliżam w tym tekście."
+image: ./headers/regex.webp
+categories:
+    - Narzędzia
+draft: true
+---
+
+Wyrażenia regularne to specjalny szyfr czy kod służący sprawnemu znajdowaniu framgentów o określonej strukturze w istniejącym tekście. Jeśli chcesz przeczytać o generowaniu całkiem nowego tekstu, sprawdź [ten](https://nieobliczalne.pl/posts/powtarzalny-tekst.html) wpis.

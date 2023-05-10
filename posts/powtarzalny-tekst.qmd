@@ -1,0 +1,32 @@
+---
+title: "Nie pisz (prawie) tego samego 100 razy"
+subtitle: "Automatyzacja powtarzalnego tekstu za pomocą pythona"
+description: "Wspominałem już, że nie znoszę mechanicznej pracy. A królową wśród prac mechanicznych jest pisanie wiele razy tego samego tekstu, który różni się tylko w szczegółach. Zdarza się to non-stop. Jednocześnie jest to ten rodzaj pracy, który można niskim kosztem zautomatyzować. W tym wpisie postaram się pokazać, jak można uniknąć góry bezsensownej pracy za pomocą prostych pętli i funkcji `print()` w pythonie."
+image: ./headers/powtarzalny-tekst.webp
+categories:
+    - Python
+    - Nauka
+    - Narzędzia
+draft: true
+---
+
+W tym tekście opisuję generowanie nowego tesktu o określonej strukturze. W planach mam jeszcze tekst o wyrażeniach regularnych (RegEx), które pozwalają wyszukiwać określone rzeczy w istniejącym już tekście. Łącznie to bardzo proste, a jednocześnie bardzo potężne narzędzia, które pozwalają szybko i niskim kosztem odjąć bardzo dużo bezsensownej, mechanicznej pracy każdemu. Nie tylko naukowcom czy studentom, każdemu to się może przydać.
+
+To, co tutaj opiszę, pierwszy raz poważnie wykorzystałem, gdy pomagałem swojej siostrze w pracy. Miała ona wydłużyć plik, w którym zapisywane były teksty, jakie mają pojawić się w live'ie tego dnia (siostra pracuje przy kanale na YouTube). Plik ten miał prostą strukturę.
+
+```         
+data:11.05.2023
+
+I
+
+II
+
+III
+
+```
+
+Gdy całość się kończyła, osoba odpowiedzialna dopisywała tę strukturę na ileś dni do produ i tak co jakiś czas. Jednocześnie jest to ten rodzaj pracy, którego nie znoszę i który jest łatwy do zautomatyzowania. Dzieje się tak z kilku powodów, z których najważniejszy jest ten -- plik miał **przewidywalną, z góry określoną strukturę**. Miał konkretne stałe elementy i konkretne elementy zmienne. Tym elementem była data, a data też zmienia się w sposób przewidywalny[^1]. To razem pozwala nam dość łatwo stworzyć wzór, który mówi mniej więcej „dla każdej daty zrób mi taką strukturę”. W ten sposób wygenerowałem dla siostry plik dla rok do przodu. Powiedziała w pracy, że miała trochę czasu, do dopisała więcej. Podobno się zdziwili.
+
+[^1]: Ciekawostką może być tutaj wczesny kalendarz hebrajski. Kalendarz hebrajski jest księżycowy, ma 12 miesięcy, ale w latach przestępnych dodawany jest 13. miesiąc -- adar szeni. Takich lat przestępnych musi przypaść 7 w ciągu 19 lat. Obecnie jest to skodyfikowane (por. cykl Metona), ale początkowo nie wiadomo było, które konkretnie lata w cyklu mają być przestępne i było to *ad hoc* ustalane przez społeczność żydowską. Także lata przestępne pojawiały się znienacka i data wcale nie zmieniała się w przewidywalny sposób. Miało to poważne konsekwencje dla daty Wielkanocy, bo zanim został ustalony stabilny wzór (Wielkanocy, nie lat przestępnych w kalendarzu żydowskim, to nadeszło później), nigdy nie wiadomo było, kiedy wypadnie 14 nisan, czyli rocznica śmierci Jezusa według kalendarza żydowskiego.
+
+Ta cecha, tzn. przewidywalność jakiegoś tekstu, pozwala nam zaprogramować ten tekst. Nieważne, czy tym tekstem są oznaczenia kolumn (`MMPI_1`, `MMPI_2`, …, `MMPI_567`), czy złożone zagnieżdżone struktury np. pytań i odpowiedzi w ankiecie, **jeśli jest to przewidywalne, da się to zautomatyzować**.
