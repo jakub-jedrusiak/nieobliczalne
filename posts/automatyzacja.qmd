@@ -1,6 +1,6 @@
 ---
 title: "Listy, pętle i automatyzacja w R"
-description: "Automatyzacja to jedna z najpotężniejszych zalet R, której nie mają programy statystyczne oparte na interfejsie graficznym. Jeśli chcemy zrobić jakąś czynność wiele razy tak samo lub prawie tak samo, możemy wykorzystać siłę programowania i zrobić to setki razy kilkoma linijkami. Postaram się to tutaj pokazać."
+description: "Automatyzacja to jedna z najpotężniejszych zalet R, której nie mają programy statystyczne oparte na interfejsie graficznym. Jeśli chcemy zrobić jakąś czynność wiele razy tak samo lub prawie tak samo, możemy wykorzystać siłę programowania i zrobić to setki razy używając ledwie kilku linijek. Podstawowym sposobem automatyzacji w R -- czym różni się od wielu innych języków programowania -- są listy, czyli zbiory obiektów."
 image: ./headers/automatyzacja.webp
 date: "2023-03-08"
 categories:
@@ -45,7 +45,7 @@ knitr::knit_hooks$set(
 )
 ```
 
-Nie znoszę mechanicznej pracy. Jestem jedną z tych osób, które wolą spędzić 30 minut na automatyzacji czegoś, co ręcznie zrobiłbym w 15 minut. Ale ma to swoje zalety. Po pierwsze poświęciłem na to tyle czasu, że teraz jestem w stanie wiele rzeczy zautomatyzować dość szybko. Tym doświadczeniem chcę się też podzielić. Po drugie jeśli praca manualna wielokrotnie się powtarza, netto oszczędzam czas, mimo że na początku muszę zainwestować tego czasu więcej. Raz zautomatyzowana czynność jest wielokrotnego użytku. Po trzecie jeśli automatyzujemy, to tyle samo zajmuje wyczyszczenie 1 pliku i 100 plików zajmuje tyle samo czasu. Jeśli liczymy, to 100 plików to 100 razy więcej czasu. Po czwarte -- mam ciekawsze rzeczy do roboty niż wypisywanie kolejnych liczb. Automatyzacja mnie chociaż nie nudzi, a mogę poświęcić swoje zasoby na opracowywanie, planowanie czy interpretacja.
+Nie znoszę mechanicznej pracy. Jestem jedną z tych osób, które wolą spędzić 30 minut na automatyzacji czegoś, co ręcznie zrobiłbym w 15 minut. Ale ma to swoje zalety. Po pierwsze, poświęciłem na to tyle czasu, że teraz jestem w stanie wiele rzeczy zautomatyzować dość szybko. Tym doświadczeniem chcę się też podzielić. Po drugie, jeśli praca manualna wielokrotnie się powtarza, netto oszczędzam czas, mimo że na początku muszę zainwestować tego czasu więcej. Raz zautomatyzowana czynność już zautomatyzowana całkowicie, ile razy byśmy jej nie wykorzystali. Po trzecie, jeśli automatyzujemy, to tyle samo czasu zajmuje wyczyszczenie 1 pliku i 100 plików. Jeśli czyścimy ręcznie, to 100 plików przekłada się na 100 razy więcej (zmarnowanego) czasu. Po czwarte -- mam ciekawsze rzeczy do roboty niż wypisywanie kolejnych liczb. Automatyzacja mnie chociaż nie nudzi, zawsze uczę się czegoś nowego ([jak prezydent](https://youtu.be/wf4o6rYaPCI)) i mogę w ten sposób wykorzystać swoje zasoby po prostu lepiej.
 
 # Automatyzacja w czyszczeniu danych
 
@@ -190,7 +190,9 @@ wyczysc <- function(df) {
 }
 ```
 
-Uzyskałem w ten sposób funkcję `wyczysc`, która wykonuje wszystkie nasze przekształcenia. Warto zwrócić uwagę, że bazę danych nazwałem `df` i zrobiłem z niej argument naszej funkcji, a także ostatni blok nie ma przypisania do zmiennej `baza`. Wynika to z tego, że domyślnie funkcje w R zwracają ostatnią rzecz, którą zrobią, czyli tutaj połączoną bazę. Jeśli zapisałbym ostateczną bazę do zmiennej `baza`, musiałbym w ostatniej linijce dopisać samo `baza` albo `return(baza)`, jako że to jest to, co funkcja ma nam ostatecznie dać -- wyczyszczoną bazę.
+Uzyskałem w ten sposób funkcję `wyczysc()`, która wykonuje wszystkie nasze przekształcenia. Warto zwrócić uwagę, że bazę danych nazwałem `df` i zrobiłem z niej argument naszej funkcji, a także ostatni blok nie ma przypisania do zmiennej `baza`. Wynika to z tego, że domyślnie funkcje w R zwracają ostatnią rzecz, którą zrobią, czyli tutaj połączoną bazę. Jeśli zapisałbym ostateczną bazę do zmiennej `baza`, musiałbym w ostatniej linijce dopisać samo `baza` albo `return(baza)`, jako że to jest to, co funkcja ma nam ostatecznie dać -- wyczyszczoną bazę.
+
+Przy tej okazji ostrzegam, że używanie **nazw kolumn** jako argumentów takich własnych funkcji może spowodować niespodziewane problemy. Jeśli stworzymy argument `nazwa_kolumny`, to funkcje typu `select()` nie wiedzą, że chodzi nam o argument `nazwa_kolumny`, a nie o kolumnę o nazwie `nazwa_kolumny`. Więcej o tym piszę [tutaj](https://nieobliczalne.pl/posts/metaprogramowanie.html), ale *ad hoc* można sobie z tym poradzić pisząc nazwę argumentu w podwójnych nawiasach klamrowych, np. `{{ nazwa_kolumny }}`.
 
 Użyjmy teraz naszej nowej funkcji `wyczysc` do wyczyszczenia naszych plików.
 
