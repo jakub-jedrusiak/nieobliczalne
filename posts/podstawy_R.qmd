@@ -547,6 +547,10 @@ across(c(H_5, H_7), odejmij_od, od_czego = 7)
 across(c(H_5, H_7), \(x) {odejmij_od(x, od_czego = 7)})
 ```
 
+#### Problem z Tidy Evaluation
+
+Używanie **nazw kolumn** jako argumentów takich własnych funkcji może spowodować niespodziewane problemy. Załóżmy, że stworzymy funkcję `normalizacja_kolumny(baza, nazwa_kolumny)`. Jeśli potem korzystamy z funkcji typu `select()`, to nie wiedzą one, że chodzi nam o argument `nazwa_kolumny`, a nie o kolumnę o nazwie `nazwa_kolumny`. W związku z tym wypuszczą błąd, że takiej kolumny w bazie danych nie ma (chyba że jest, ale wtedy konsekwencje mogą być jeszcze bardziej niespodziewane). Więcej o tym piszę w bardziej zaawansowanym tekście [tutaj](https://nieobliczalne.pl/posts/metaprogramowanie.html), ale *ad hoc* można sobie z tym poradzić pisząc nazwy argumentów w takich funkcjach w podwójnych nawiasach klamrowych, np. `select({{ nazwa_kolumny }})`.
+
 ## Nowe kolumny {#sec-newcols}
 
 Jak wspomniałem, funkcja `mutate` nie tylko pozwala na modyfikowanie istniejących kolumn, ale też na tworzenie nowych. Zazwyczaj robimy to w dwóch przypadkach -- gdy chcemy zagregować dane z wierszy, np. zsumować wyniki z danego kwestionariusza albo gdy chcemy podzielić naszą bazę na kategorie, np. „młodzi", „w średnim wieku", „seniorzy". Omówmy to po kolei.
