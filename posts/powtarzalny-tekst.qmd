@@ -22,11 +22,92 @@ I
 II
 
 III
-
 ```
 
-Gdy całość się kończyła, osoba odpowiedzialna dopisywała tę strukturę na ileś dni do produ i tak co jakiś czas. Jednocześnie jest to ten rodzaj pracy, którego nie znoszę i który jest łatwy do zautomatyzowania. Dzieje się tak z kilku powodów, z których najważniejszy jest ten -- plik miał **przewidywalną, z góry określoną strukturę**. Miał konkretne stałe elementy i konkretne elementy zmienne. Tym elementem była data, a data też zmienia się w sposób przewidywalny[^1]. To razem pozwala nam dość łatwo stworzyć wzór, który mówi mniej więcej „dla każdej daty zrób mi taką strukturę”. W ten sposób wygenerowałem dla siostry plik dla rok do przodu. Powiedziała w pracy, że miała trochę czasu, do dopisała więcej. Podobno się zdziwili.
+Gdy całość się kończyła, osoba odpowiedzialna dopisywała tę strukturę na ileś dni do produ i tak co jakiś czas. Jednocześnie jest to ten rodzaj pracy, którego nie znoszę i który jest łatwy do zautomatyzowania. Dzieje się tak z kilku powodów, z których najważniejszy jest ten -- plik miał **przewidywalną, z góry określoną strukturę**. Miał konkretne stałe elementy i konkretne elementy zmienne. Tym elementem była data, a data też zmienia się w sposób przewidywalny[^1]. To razem pozwala nam dość łatwo stworzyć wzór, który mówi mniej więcej „dla każdej daty zrób mi taką strukturę". W ten sposób wygenerowałem dla siostry plik dla rok do przodu. Powiedziała w pracy, że miała trochę czasu, do dopisała więcej. Podobno się zdziwili.
 
 [^1]: Ciekawostką może być tutaj wczesny kalendarz hebrajski. Kalendarz hebrajski jest księżycowy, ma 12 miesięcy, ale w latach przestępnych dodawany jest 13. miesiąc -- adar szeni. Takich lat przestępnych musi przypaść 7 w ciągu 19 lat. Obecnie jest to skodyfikowane (por. cykl Metona), ale początkowo nie wiadomo było, które konkretnie lata w cyklu mają być przestępne i było to *ad hoc* ustalane przez społeczność żydowską. Także lata przestępne pojawiały się znienacka i data wcale nie zmieniała się w przewidywalny sposób. Miało to poważne konsekwencje dla daty Wielkanocy, bo zanim został ustalony stabilny wzór (Wielkanocy, nie lat przestępnych w kalendarzu żydowskim, to nadeszło później), nigdy nie wiadomo było, kiedy wypadnie 14 nisan, czyli rocznica śmierci Jezusa według kalendarza żydowskiego.
 
-Ta cecha, tzn. przewidywalność jakiegoś tekstu, pozwala nam zaprogramować ten tekst. Nieważne, czy tym tekstem są oznaczenia kolumn (`MMPI_1`, `MMPI_2`, …, `MMPI_567`), czy złożone zagnieżdżone struktury np. pytań i odpowiedzi w ankiecie, **jeśli jest to przewidywalne, da się to zautomatyzować**.
+Ta cecha, tzn. przewidywalność jakiegoś tekstu, pozwala nam zaprogramować ten tekst. Nieważne, czy tym tekstem są oznaczenia kolumn (`MMPI_1`, `MMPI_2`, ..., `MMPI_567`), czy złożone zagnieżdżone struktury np. pytań i odpowiedzi w ankiecie, **jeśli jest to przewidywalne, da się to zautomatyzować**.
+
+# Python
+
+W tym tekście wykorzystamy sobie język programowania python. Jednocześnie tego typu praca z tekstem jest tak podstawowa, że można ją wykonać w prawie każdym języku programowania, w tym w R za pomocą `paste()` czy `paste0()`. Specjalistą od pythona nie jestem, moim pierwszym językiem programowania jest R. Tutaj wykorzystuję pythona, bo to język ogólnego przeznaczenia.
+
+Żeby móc robić cokolwiek w pythonie, musimy zainstalować sobie interpreter pythona [stąd](https://www.python.org/). Koniecznie zaznaczcie w trakcie instalacji, żeby **dodać pythona do PATH**. Teoretycznie tyle wystarczy, ale żeby uprzyjemnić proces pisania, może być fajnie przygotować sobie jakieś IDE, np. [Visual Studio Code](https://code.visualstudio.com/) albo chociaż porządny edytor tekstu w stylu [Notepad++](https://notepad-plus-plus.org/).
+
+Gdy to zrobimy, możemy dotrzeć do pythona na kilka sposobów. Podstawowy to wejście w terminal (w Windowsie PowerShell albo wiersz polecenia) i wpisanie tam `python`. Gdy potwierdzimy enterem, dostaniemy konsolę pythona, gdzie możemy wpisywać komendy. Drugi sposób, przez IDE, to stworzenie pliku z rozszerzeniem .py i tam zapisywanie komend. Drugi sposób przyda się, gdy chcemy sobie komendy zachować na przyszłość albo piszemy coś bardziej skomplikowanego, na wiele linijek.
+
+![Konsola pythona w PowerShell](ilustracje/powtarzalny-tekst/python-powershell.png)
+
+![Konsola pythona w konsoli w Linuxie](ilustracje/powtarzalny-tekst/python-w-konsoli.png)
+
+# `print()` i *f-strings*
+
+Teraz możemy pisać nasz kod w pythonie. Tradycyjnie w programowaniu pierwszym, co się pisze, jest program, który zwraca tekst „Hello world!”. W pythonie robimy to funkcją `print()`.
+
+```{python}
+print("Hello world!")
+```
+
+Funkcja `print()` jest wystarczająca, żebyśmy uzyskali to, co chcemy dziś uzyskać. Wbrew pozorom, jeśli połączymy to z pętlami, będzie ona potrafiła całkiem sporo. Do tej funkcji wrzucimy tekst, który chcemy wyrzucić w konsoli. Jeśli potrzebujemy, możemy też dorzucić argument `end`, który mówi, co dać na koniec danego ciągu znaków. Domyślnie jest to nowa linia, którą w informatyce zapisujemy zazwyczaj `\n`. Nie robimy rzeczywistej nowej linii. Możemy na przykład zmienić jedną pustą linię na dwie, trzy. Możemy też zamienić nową linię na spację, ale po co, to wyjaśnię później.
+
+```{python}
+print("Hello world!", end = "\n\n\n")
+```
+
+Ważną funkcją pythona, która więcej sensu nabierze później, kiedy przejdziemy do pętli, są *f-strings*. Jest to sposób, jak wrzucić wartość jakiejś *zmiennej* do naszego ciągu znaków. Co to znaczy? Jak powiedziałem wyżej, nasz teskt, który chcemy wygenerować, zawiera elementy stałe i elementy zmienne. Tym elementem zmiennym może być na przykład liczba. Jak połączyć elementy stałe ze zmiennymi? Właśnie za pomocą *f-string*. Zmienne definiujemy w pythonie za pomocą znaku `=`.
+
+```{python}
+i = 23
+
+print(f"MMPI_{i}")
+```
+
+W kodzie powyżej najpierw przypisuję wartość 23 do zmeinnej `i` (zmienne mogę nazywać jak chcę). Jeśli piszę to w konsoli, to najpierw wpisuję `i = 23`, klikam enter i dopiero potem odpowiednią funkcję `print()`. Potem do funkcji `print()` wrzucam tekst `"MMPI_{i}"`. Python wie, że zamiast `{i}` musi podstawić prawdziwą wartość zmiennej `i`, czyli w tym wypadku 23. Żeby to jednak wiedział, musimy przed samym ciągiem znaków dodać literkę `f`, jak *format*. Dlatego właśnie napisałem `f"MMPI_{i}"` i dlatego nazywa się to *f-string*. Jeśli chcielibyśmy w naszym tekście dodać dosłowne nawiasy klamrowe, np. uzyskać „{MMPI_23}”, takie nawiasy klamrowe piszemy podwójnie -- `{{` w *f-string* zmieni się w dosłowne `{`.
+
+```{python}
+i = 23
+
+print(f"{{MMPI_{i}}}")
+```
+
+Zawartość zmiennej `i` możemy w nawiasach klamrowych też modyfikować.
+
+```{python}
+i = 23
+
+print(f"MMPI_{i + 2}")
+```
+
+# Pętle
+
+Pętle to w językach programowania sposób, żeby wiele razy zrobić to samo albo prawie to samo. W każdym języku programowania znajdziemy dwa rodzaje pętli -- `for` i `while`.
+
+## Pętla `for`
+
+Pętla `for` jest najprostszym rodzajem pętli i tym, z czego będziemy stale korzystać. Omówmy sobie ją na przykładzie generowania nazw kolumn.
+
+```{python}
+for i in range(1,11):
+    print(f"MMPI_{i}")
+```
+
+`i` jest nazwą dla zmiennej, która po kolei przyjmie wartości od 1 do 10. Najpierw wszystko, co znajduje się w pętli, wykona się tak, jakby `i` miało wartość 1. Potem wykona się to znowu, ale z `i = 2` itd. Dlaczego jednak napisałem `range(1, 11)` a nie `range(1, 10)`? Python działa tutaj specyficznie. Normalnie w informatyce liczy się od 0. Dlatego jeśli napiszę tylko jedną liczbę, czyli `range(10)`, to dostanę 10 elementów, czyli od 0 do 9. Jeśli chcę zacząć od 1, to muszę więc jako drugą liczbę podać 11. Koniec skali nie wlicza się, więc jeśli w pythonie chcę liczby od 1 do 10, to muszę napisać `range(1, 11)`.
+
+## Pętla `while`
+
+Pętla `while` to bardziej generyczny, podstawowy, prosty przejaw pętli `for`. Większość pętli `while` da się napisać w formie pętli `for`, dlatego nie będę się nad tym jakoś szczególnie rozwodził, ale warto wiedzieć, że coś takiego istnieje. Napiszmy przykład z poprzedniej sekcji w postaci pętli `while`.
+
+```{python}
+i = 1
+while i <= 10:
+    print(f"MMPI_{i}")
+    i += 1 # ewentualnie i = i + 1
+```
+
+W pętli `while` potrzebujemy jakiejś wcześniej określonej zmiennej, w tym wypadku `i`. Pierwszą rzeczą, którą `while` robi jest sprawdzenie, czy warunek jest prawdziwy. Prawdą jest, że 1 jest mniejsze lub równe 10, więc `while` puszcza wszystko, co znajduje się w środku. Instrukcja `print()` jest identyczna. Kolejna linijka może wydawać się nieco tajemnicza. Służy ona powiększeniu `i` o 1. Matematycznie zapis `i = i + 1` może wydawać się dziwny, ale trzeba pamiętać, że `=` nie oznacza tutaj porównania (to się robi poprzez `==`), tylko przypisanie. Można więc to przeczytać „Niech `i` przyjmie wartość równą **aktualnej** wartości `i` plus jeden”. W skrócie możemy to zapisać jako `i += 1`. Po co to robimy? Bo w następnym kroku pętla `while` znów sprawdzi, czy warunek jest prawdziwy. Teraz `i = 2`, a 2 to ciągle mniej niż 10, więc pętla wykona się znów, aż do momentu, w którym `i` nie przyjmie wartości 11. Jeśli nie umieściłbym w kodzie linijki `i = i + 1`, warunek `i <= 10` byłby **zawsze** prawdziwy i pętla działałaby wiecznie. Czy raczej do wyczerpania pamięci.
+
+# Generowanie tekstu
+
+Weźmy sobie na warsztat bardziej złożony przykład.
