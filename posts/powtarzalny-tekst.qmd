@@ -44,7 +44,7 @@ Gdy to zrobimy, możemy dotrzeć do pythona na kilka sposobów. Podstawowy to we
 
 # `print()` i *f-strings*
 
-Teraz możemy pisać nasz kod w pythonie. Tradycyjnie w programowaniu pierwszym, co się pisze, jest program, który zwraca tekst „Hello world!”. W pythonie robimy to funkcją `print()`.
+Teraz możemy pisać nasz kod w pythonie. Tradycyjnie w programowaniu pierwszym, co się pisze, jest program, który zwraca tekst „Hello world!". W pythonie robimy to funkcją `print()`.
 
 ```{python}
 print("Hello world!")
@@ -53,7 +53,7 @@ print("Hello world!")
 Funkcja `print()` jest wystarczająca, żebyśmy uzyskali to, co chcemy dziś uzyskać. Wbrew pozorom, jeśli połączymy to z pętlami, będzie ona potrafiła całkiem sporo. Do tej funkcji wrzucimy tekst, który chcemy wyrzucić w konsoli. Jeśli potrzebujemy, możemy też dorzucić argument `end`, który mówi, co dać na koniec danego ciągu znaków. Domyślnie jest to nowa linia, którą w informatyce zapisujemy zazwyczaj `\n`. Nie robimy rzeczywistej nowej linii. Możemy na przykład zmienić jedną pustą linię na dwie, trzy. Możemy też zamienić nową linię na spację, ale po co, to wyjaśnię później.
 
 ```{python}
-print("Hello world!", end = "\n\n\n")
+print("Hello world!", end="\n\n\n")
 ```
 
 Ważną funkcją pythona, która więcej sensu nabierze później, kiedy przejdziemy do pętli, są *f-strings*. Jest to sposób, jak wrzucić wartość jakiejś *zmiennej* do naszego ciągu znaków. Co to znaczy? Jak powiedziałem wyżej, nasz teskt, który chcemy wygenerować, zawiera elementy stałe i elementy zmienne. Tym elementem zmiennym może być na przykład liczba. Jak połączyć elementy stałe ze zmiennymi? Właśnie za pomocą *f-string*. Zmienne definiujemy w pythonie za pomocą znaku `=`.
@@ -64,7 +64,7 @@ i = 23
 print(f"MMPI_{i}")
 ```
 
-W kodzie powyżej najpierw przypisuję wartość 23 do zmeinnej `i` (zmienne mogę nazywać jak chcę). Jeśli piszę to w konsoli, to najpierw wpisuję `i = 23`, klikam enter i dopiero potem odpowiednią funkcję `print()`. Potem do funkcji `print()` wrzucam tekst `"MMPI_{i}"`. Python wie, że zamiast `{i}` musi podstawić prawdziwą wartość zmiennej `i`, czyli w tym wypadku 23. Żeby to jednak wiedział, musimy przed samym ciągiem znaków dodać literkę `f`, jak *format*. Dlatego właśnie napisałem `f"MMPI_{i}"` i dlatego nazywa się to *f-string*. Jeśli chcielibyśmy w naszym tekście dodać dosłowne nawiasy klamrowe, np. uzyskać „{MMPI_23}”, takie nawiasy klamrowe piszemy podwójnie -- `{{` w *f-string* zmieni się w dosłowne `{`.
+W kodzie powyżej najpierw przypisuję wartość 23 do zmeinnej `i` (zmienne mogę nazywać jak chcę). Jeśli piszę to w konsoli, to najpierw wpisuję `i = 23`, klikam enter i dopiero potem odpowiednią funkcję `print()`. Potem do funkcji `print()` wrzucam tekst `"MMPI_{i}"`. Python wie, że zamiast `{i}` musi podstawić prawdziwą wartość zmiennej `i`, czyli w tym wypadku 23. Żeby to jednak wiedział, musimy przed samym ciągiem znaków dodać literkę `f`, jak *format*. Dlatego właśnie napisałem `f"MMPI_{i}"` i dlatego nazywa się to *f-string*. Jeśli chcielibyśmy w naszym tekście dodać dosłowne nawiasy klamrowe, np. uzyskać „{MMPI_23}", takie nawiasy klamrowe piszemy podwójnie -- `{{` w *f-string* zmieni się w dosłowne `{`.
 
 ```{python}
 i = 23
@@ -89,7 +89,7 @@ Pętle to w językach programowania sposób, żeby wiele razy zrobić to samo al
 Pętla `for` jest najprostszym rodzajem pętli i tym, z czego będziemy stale korzystać. Omówmy sobie ją na przykładzie generowania nazw kolumn.
 
 ```{python}
-for i in range(1,11):
+for i in range(1, 11):
     print(f"MMPI_{i}")
 ```
 
@@ -103,11 +103,94 @@ Pętla `while` to bardziej generyczny, podstawowy, prosty przejaw pętli `for`. 
 i = 1
 while i <= 10:
     print(f"MMPI_{i}")
-    i += 1 # ewentualnie i = i + 1
+    i += 1  # ewentualnie i = i + 1
 ```
 
-W pętli `while` potrzebujemy jakiejś wcześniej określonej zmiennej, w tym wypadku `i`. Pierwszą rzeczą, którą `while` robi jest sprawdzenie, czy warunek jest prawdziwy. Prawdą jest, że 1 jest mniejsze lub równe 10, więc `while` puszcza wszystko, co znajduje się w środku. Instrukcja `print()` jest identyczna. Kolejna linijka może wydawać się nieco tajemnicza. Służy ona powiększeniu `i` o 1. Matematycznie zapis `i = i + 1` może wydawać się dziwny, ale trzeba pamiętać, że `=` nie oznacza tutaj porównania (to się robi poprzez `==`), tylko przypisanie. Można więc to przeczytać „Niech `i` przyjmie wartość równą **aktualnej** wartości `i` plus jeden”. W skrócie możemy to zapisać jako `i += 1`. Po co to robimy? Bo w następnym kroku pętla `while` znów sprawdzi, czy warunek jest prawdziwy. Teraz `i = 2`, a 2 to ciągle mniej niż 10, więc pętla wykona się znów, aż do momentu, w którym `i` nie przyjmie wartości 11. Jeśli nie umieściłbym w kodzie linijki `i = i + 1`, warunek `i <= 10` byłby **zawsze** prawdziwy i pętla działałaby wiecznie. Czy raczej do wyczerpania pamięci.
+W pętli `while` potrzebujemy jakiejś wcześniej określonej zmiennej, w tym wypadku `i`. Pierwszą rzeczą, którą `while` robi jest sprawdzenie, czy warunek jest prawdziwy. Prawdą jest, że 1 jest mniejsze lub równe 10, więc `while` puszcza wszystko, co znajduje się w środku. Instrukcja `print()` jest identyczna. Kolejna linijka może wydawać się nieco tajemnicza. Służy ona powiększeniu `i` o 1. Matematycznie zapis `i = i + 1` może wydawać się dziwny, ale trzeba pamiętać, że `=` nie oznacza tutaj porównania (to się robi poprzez `==`), tylko przypisanie. Można więc to przeczytać „Niech `i` przyjmie wartość równą **aktualnej** wartości `i` plus jeden". W skrócie możemy to zapisać jako `i += 1`. Po co to robimy? Bo w następnym kroku pętla `while` znów sprawdzi, czy warunek jest prawdziwy. Teraz `i = 2`, a 2 to ciągle mniej niż 10, więc pętla wykona się znów, aż do momentu, w którym `i` nie przyjmie wartości 11. Jeśli nie umieściłbym w kodzie linijki `i = i + 1`, warunek `i <= 10` byłby **zawsze** prawdziwy i pętla działałaby wiecznie. Czy raczej do wyczerpania pamięci.
 
 # Generowanie tekstu
 
-Weźmy sobie na warsztat bardziej złożony przykład.
+Weźmy sobie na warsztat bardziej złożony przykład. Niedawno musiałem generować bardzo skomplikowany tekst, który stał się częścią ankiety w [PsyToolKit](https://www.psytoolkit.org/). Jest to świetne narzędzie do prowadzenia ankiet i eksperymentów, głównie psychologicznych. Jego największą zaletą według mnie jest to, że zarówno ankiety, jak i eksperymenty poza *easy mode* mogą być pisane w postaci zwykłego tekstu. Pozwala to na olbrzymią giętkość, jaką zapewniają języki programowania, ale także daje duże możliwości automatyzacji. O PsyToolKit na pewno jeszcze w przyszłości napiszę więcej.
+
+## Ankieta w PsyToolKit
+
+Pokażę teraz, jak sprawnie przerobić kwestionariusz na ankietę w PsyToolKit. Najsprawniej będzie, co prawda, użyć programiku [PsyToolKit Questionnaire Formatter](https://github.com/jakub-jedrusiak/Psytoolkit-Questionnaire-Formatter), który napisałem opierając się na tym, co w tym wpisie opisuję. Zobaczmy to jednak od kuchni, żeby w razie czego móc to zastosować do własnych specyficznych celów.
+
+Załóżmy, że chcielibyśmy wykorzystać w naszym badaniu kwestionariusz samooceny Rosenberga (1965). Struktura pytania w PsyToolKit wygląda tak:
+
+```{YAML}
+l: RSES_1
+t: radio
+q: I feel that I am a person of worth, at least on an equal plane with others.
+- Strongly Agree
+- Agree
+- Disagree
+- Strongly Disagree
+```
+
+Po pierwsze mamy `l`, czyli *label*. Posłuży nam to jako wewnętrzna „nazwa" pozycji testowej i nagłówek kolumny w bazie danych. Dalej mamy `t`, czyli *type*, gdzie `radio` oznacza pytanie jednokrotnego wyboru. Inne typy znajdziemy w [dokumentacji](https://www.psytoolkit.org/doc3.4.4/online-survey-syntax.html#questiontypes). Następnie mamy `q`, czyli *question*, właściwa treść pozycji testowej i pod spodem odpowiedzi od myślników. Możemy tu dodawać inne rzeczy, ale gwoli przykładu załóżmy, że tyle nam wystarczy.
+
+Po pierwsze zidentyfikujmy co jest stałe i co się zmienia. Tutaj zmieniają się dwie rzeczy -- treść pozycji testowej i numerek przy `RSES`. Cała reszta jest identyczna dla każdej pozycji testowej. Skoro musimy mieć w naszych pytaniach treść pozycji testowej, musimy nasz kwestionarusz wkleić do skryptu. Zapiszemy go jako listę.
+
+```{python}
+RSES = [
+    "I feel that I am a person of worth, at least on an equal plane with others.",
+    "I feel that I have a number of good qualities.",
+    "All in all, I am inclined to feel that I am a failure.",
+    "I am able to do things as well as most other people.",
+    "I feel I do not have much to be proud of.",
+    "I take a positive attitude toward myself.",
+    "On the whole, I am satisfied with myself.",
+    "I wish I could have more respect for myself.",
+    "I certainly feel useless at times.",
+    "At times I think I am no good at all."
+]
+```
+
+Cała lista jest nawiasach kwadratowych, każdy item w cudzysłowie, zaś itemy rozdzielone przecinkami. Teraz możemy powiedzieć pythonowi, żeby zrobił całą serię takich pytań w stylu PsyToolKit, ale zaraz za `q` za każdym razem wstawił jedną z pozycji testowych.
+
+```{python}
+for item in RSES:
+    print("l: RSES_1")
+    print("t: radio")
+    print(f"q: {item}")
+    print("- Strongly Agree\n- Agree\n- Disagree\n- Strongly Disagree")
+    print() # pusta linijka
+```
+
+Jak widzimy, nasza zmienna w pętli (1) nie musi nazywać się `i`, (2) nie musi być liczbą. Możemy równie dobrze wykonać pętlę za każdym razem przypisując do zmiennej kolejną wartość z listy. Możemy każdą linijkę pisać w osobnej komendzie `print()` lub też zapisać to wszystko w jednym, zaznaczając nowe linijki za pomocą `\n`, jak to zrobiłem w przypadku odpowiedzi.
+
+Nasz wynik ma jednak jeden problem -- każde pytanie nazywa się `RSES_1`. Liczba ta musi się zmieniać. Tym razem jest to problem, bo `item` nie jest tutaj liczbą, tylko treścią pytania. Z pomocą przychodzi nam jednak funkcja `enumerate()`. Pozwala ona przerobić listę na tzw. krotki (ang. *touples*, tutaj *2-touples* czyli dwukrotki). Każda taka dwukrotka zawiera dwie rzeczy -- numer pozycji (licząc od 0) oraz samą pozycję. Numer jest pierwszy, więc dostaniemy się do niego pisząc `item[0]`, a jeśli chcemy dostać samą pozycję, zapiszemy `item[1]`. Całość wyglądałaby więc tak:
+
+```{python}
+for item in enumerate(RSES):
+    print(f"l: RSES_{item[0] + 1}")
+    print("t: radio")
+    print(f"q: {item[1]}")
+    print("- Strongly Agree\n- Agree\n- Disagree\n- Strongly Disagree")
+    print() # pusta linijka
+```
+
+Zwróćmy uwagę, że w pierwszym `print()` napisałem `item[0] + 1`. `item[0]` to numer, ale czemu `+ 1`? Bo liczenie w informatyce zaczyna się od 0, więc jeśli chcę mieć numerację od 1 do 10 zamiast od 0 do 9, to muszę do każdego numeru dodać 1.
+
+## Zapisywanie do pliku
+
+Wynik działania takiej funkcji możemy od razu zapisać do pliku za pomocą specjalnego operatora `>` w PowerShell[^2]. Da się to zrobić nie wychodząc z pythona, ale to niepotrzebnie skomplikowane. Możemy też po prostu skopiować z konsoli. Jeśli ktoś rzadko z niej korzysta, to ostrzegam, że zamiast Ctrl+C i Ctrl+V w konsoli używamy Ctrl+Shift+C i Ctrl+Shift+V. Głównie dlatego, że Ctrl+C w domyśle przerywa aktualnie wykonywane zadanie. Jak jednak wykorzystać `>`? W PowerShell (nie w konsoli pythona! w zwykłym PowerShell) wpisujemy coś takiego:
+
+[^2]: Sam korzystam z linuksa (*I use arch, BTW*), ale nie łudzę się -- większość osób, które to czytają, to windowsiarze. W linuksie operator `>` działa identycznie.
+
+```
+python "C:\ścieżka\do\skryptu.py" > "C:\ścieżka\do\pliku.txt"
+```
+
+Jako podpowiedź mogę podrzucić, że Windows 11 pozwala kopiować ścieżki po kliknięciu na plik prawym przyciskiem myszy. W Windowsie 10 też możemy sobie w ten sposób ułatwić życie, tylko klikając prawy przycisk myszy musimy przytrzymać shift. Ostateczna komenda mogłaby więc wyglądać tak:
+
+```
+python "C:\Users\Jakub\Desktop\RSES.py" > "C:\Users\Jakub\Desktop\RSES.txt"
+```
+
+Powoduje to zapisanie tego, co normalnie skrypt wydrukowałby w konsoli, w pliku RSES.txt na pulpice. Oczywiście jeśli Twoja nazwa użytkownika to Jakub. Najlepiej jest tutaj przygotować własne ścieżki.
+
+## Daty
+
+Wróćmy do pierwotnego przykładu z plikiem mojej siostry. Jest to przykład o tyle specyficzny, że zmiennym elementem jest tam data. Daty zmieniają się przewidywalnie, ale potrzebują specjalnych funkcji, które ogarną takie rzeczy jak to, że różne miesiące mają różną liczbę dni, istnieją lata przestępne itd. Wtedy użyłem funkcji `date` w linuksie, która sama z siebie pozwala na robienie takich rzeczy, ale że większość osób (niestety) nie korzysta z linuksa, zaadaptuję to rozwiązanie do pythona. Z góry przepraszam, jeśli nie jest to najbardziej elegancka implementacja.
