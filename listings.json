@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/powtarzalny-tekst.html",
       "/posts/metaprogramowanie.html",
       "/posts/ai-research.html",
       "/posts/automatyzacja.html",
