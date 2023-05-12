@@ -15,8 +15,7 @@ W tym tekście opisuję generowanie nowego tesktu o określonej strukturze. W pl
 To, co tutaj opiszę, pierwszy raz poważnie wykorzystałem, gdy pomagałem swojej siostrze w pracy. Miała ona wydłużyć plik, w którym zapisywane były teksty, jakie mają pojawić się w live'ie tego dnia (siostra pracuje przy kanale na YouTube). Plik ten miał prostą strukturę.
 
 ```         
-data:11.05.2023
-
+Data:11.05.2023
 I
 
 II
@@ -179,13 +178,13 @@ Wynik działania takiej funkcji możemy od razu zapisać do pliku za pomocą spe
 
 [^2]: Sam korzystam z linuksa (*I use arch, BTW*), ale nie łudzę się -- większość osób, które to czytają, to windowsiarze. W linuksie operator `>` działa identycznie.
 
-```
+```         
 python "C:\ścieżka\do\skryptu.py" > "C:\ścieżka\do\pliku.txt"
 ```
 
 Jako podpowiedź mogę podrzucić, że Windows 11 pozwala kopiować ścieżki po kliknięciu na plik prawym przyciskiem myszy. W Windowsie 10 też możemy sobie w ten sposób ułatwić życie, tylko klikając prawy przycisk myszy musimy przytrzymać shift. Ostateczna komenda mogłaby więc wyglądać tak:
 
-```
+```         
 python "C:\Users\Jakub\Desktop\RSES.py" > "C:\Users\Jakub\Desktop\RSES.txt"
 ```
 
@@ -194,3 +193,88 @@ Powoduje to zapisanie tego, co normalnie skrypt wydrukowałby w konsoli, w pliku
 ## Daty
 
 Wróćmy do pierwotnego przykładu z plikiem mojej siostry. Jest to przykład o tyle specyficzny, że zmiennym elementem jest tam data. Daty zmieniają się przewidywalnie, ale potrzebują specjalnych funkcji, które ogarną takie rzeczy jak to, że różne miesiące mają różną liczbę dni, istnieją lata przestępne itd. Wtedy użyłem funkcji `date` w linuksie, która sama z siebie pozwala na robienie takich rzeczy, ale że większość osób (niestety) nie korzysta z linuksa, zaadaptuję to rozwiązanie do pythona. Z góry przepraszam, jeśli nie jest to najbardziej elegancka implementacja.
+
+Żeby operować na datach, musimy na szczycie skryptu (lub najpierw w konsoli) zapisać:
+
+```{python}
+import datetime
+```
+
+Załaduje to pakiet `datetime` pozwalający operować na datach.
+
+Przypomnijmy strukturę pliku, który chcemy stworzyć:
+
+```         
+Data:11.05.2023
+I
+
+II
+
+III
+```
+
+Po pierwsze, musimy ustalć, od jakiej daty chcemy zacząć. Możemy wykorzystać dzisiaj wpisując `datetime.date.today()`. Możemy też wybrać datę początkową arbitralnie, wpisując `datetime.date(2023, 5, 11)`. Data jest w formacie ISO 8601, czyli rok, miesiąc, dzień.
+
+Po drugie będziemy musieli dodawać do naszej daty dni. Robimy to funkcją `datetime.timedelta(days = 1)`. W tej formie dodajemy 1 dzień.
+
+Po trzecie nasza data musi być w określonym formacie, w tym wypadku DD.MM.RRRR. Domyślnie daty wyświetlają się w formacie ISO 8601, czyli RRRR-MM-DD. Formatować daty można metodą (szczególny rodzaj funkcji) `strftime`. Jak to rzeczywiście zastosować, najlepiej będzie pokazać w przykładzie. Do samej metody wrzucamy format, w jakim datę chcemy uzyskać. Wykorzystamy tutaj kody, których listę możemy znaleźć [tutaj](https://www.w3schools.com/python/gloss_python_date_format_codes.asp). Nasz format zakodujemy jako `"%d.%m.%Y"`.
+
+Zbierając to wszystko do kupy, uzyskujemy coś takiego:
+
+```{python}
+import datetime
+
+start_date = datetime.date(2023, 5, 11)
+
+for i in range(7):
+    date = start_date + datetime.timedelta(days = i)
+    date_formatted = date.strftime("%d.%m.%Y")
+    print(f"Data:{date_formatted}")
+    print("I\n\nII\n\nIII\n\n")
+```
+
+Wykorzystałem tutaj kilka zmiennych, które nazwałem `start_date`, `date` i `date_formatted`. Nazwy zmiennych mogą być jakiekolwiek. Wybrałem takie, żeby to było czytelne. Jak to w programowaniu, możemy to napisać na parę sposobów. Dla przykładu tutaj datę już sformatowaną zapisałem w osobnej zmiennej, ale mógłbym też napisać:
+
+```{python}
+import datetime
+
+start_date = datetime.date(2023, 5, 11)
+
+for i in range(7):
+    date = start_date + datetime.timedelta(days = i)
+    print(f"Data:{date.strftime("%d.%m.%Y")}")
+    print("I\n\nII\n\nIII\n\n")
+```
+
+albo
+
+```{python}
+import datetime
+
+for i in range(7):
+    date = datetime.date(2023, 5, 11) + datetime.timedelta(days = i)
+    print(f"Data:{date.strftime("%d.%m.%Y")}")
+    print("I\n\nII\n\nIII\n\n")
+```
+
+...i to też zadziała. Zależy co uznamy za bardziej czytelne. Pamiętamy przy tym, że domyślnie `range(7)` naturalnie generuje liczby od 0 do 6, więc na początku `timedelta()` dodaje 0 dni, potem 1 dzień i aż do 6 dni. Uzyskujemy więc tydzień. Siła automatyzacji polega na tym, że mając te 4 linijki kodu, taki sam nakład pracy potrzebny do zrobienia takiej rozpiski dla tygodnia, miesiąca czy 30 lat.
+
+# Podsumowanie
+
+Opanowanie automatyzacji wymaga sporo praktyki i początkowo zajmować więcej czasu, niż wykonanie jakiejś pracy ręcznie. Jednak z doświadczeniem przychodzi efektywność. Jednak już opanowanie podstaw sprawia, że często możemy oszczędzić sobie wielu, wielu godzin pracy. Podsumujmy to.
+
+1.  Możemy automatyzować generowanie tekstu, w którym jakaś część podlega przewidywalnym zmianom.
+
+2.  Za wyświetlanie tekstu odpowiada funkcja `print()`.
+
+3.  Za powtarzanie elementów oraz zmiany zmiennych elementów odpowiada pętla `for`.
+
+4.  Możemy podstawić do ciągu znaków wartości zmiennych za pomocą *f-strings*, np. `f"MMPI_{i}"`.
+
+5.  Ciągi liczb do pętli generujemy funkcją `range()`, przy czym domyślnie liczy ona od 0.
+
+6.  Daty to szczególne wartości, którymi zawiadują funkcje z pakietu `datetime`.
+
+7.  Zmienne z datami tworzymy za pomocą `date()`, różnice w datach liczymy przez `timedelta()` oraz możemy formatować daty poprzez metodę `strftime()`.
+
+8.  Wyniki działania takich skryptów zapisujemy do plików operatorem `>`.
