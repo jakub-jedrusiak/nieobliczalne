@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.36">
+<meta name="generator" content="quarto-1.4.54">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -258,8 +258,8 @@ cookieconsent.run({
 <p>Bazę danych grupujemy i wrzucamy do funkcji agregującej <code>summarise()</code>. Ponieważ chcemy wykonać wiele razy ten sam zestaw obliczeń na wielu kolumnach, korzystamy z <code>across()</code> (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across">tutaj</a>). Dalej <code>across()</code> przyjmuje listę funkcji, które chcemy zastosować. Listę, czyli wszystkie komendy zamykam w <code>list()</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Większość funkcji podaję jako funkcje anonimowe (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-lambda">tutaj</a>), bo albo muszę podać dodatkowe argumenty, albo to funkcje kombinowane, np. <code>\(x) sum(!is.na(x))</code>.</p>
 <p>Ciekawsze rzeczy to:</p>
 <ol type="1">
-<li><code>\(x) sum(!is.na(x))</code> – sama funkcja <code>is.na()</code> zwraca <code>TRUE</code> lub <code>FALSE</code> w zależności od tego, czy dana wartość jest brakująca. Pod maską <code>TRUE</code> to 1, a <code>FALSE</code> to 0, więc jeśli zsumujemy wynik działania <code>is.na()</code>, to dostaniemy liczbę <code>TRUE</code>. Ponieważ <code>is.na()</code> zwraca <code>TRUE</code>, jeśli dane <strong>są</strong> brakujące, to sumując <code>is.na()</code> dostałbym liczbę <code>NA</code>. Dlatego zaprzeczam <code>is.na()</code> operatorem <code>!</code> (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Cz%C4%99%C5%9B%C4%87%20operator%C3%B3w%20logicznych%20dost%C4%99pnych%20w%20R.">tutaj</a>).</li>
-<li>Skośność i kurtoza – to są jedyne funkcje, które stosuję tutaj jak w mordę strzelił, bez kombinowania, więc podaję je <strong>bez nawiasów</strong>. Jak wspominałem <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Co%20wa%C5%BCne%2C%20musi%20to%20by%C4%87%20jej%20nazwa%20bez%20nawias%C3%B3w.">tutaj</a>, gdy nie ma nawiasów, wskazujemy na samą funkcję, a z nawiasami na to, co funkcja z siebie wywala.</li>
+<li><code>\(x) sum(!is.na(x))</code> – sama funkcja <code>is.na()</code> zwraca <code>TRUE</code> lub <code>FALSE</code> w zależności od tego, czy dana wartość jest brakująca. Pod maską <code>TRUE</code> to 1, a <code>FALSE</code> to 0, więc jeśli zsumujemy wynik działania <code>is.na()</code>, to dostaniemy liczbę <code>TRUE</code>. Ponieważ <code>is.na()</code> zwraca <code>TRUE</code>, jeśli dane <strong>są</strong> brakujące, to sumując <code>is.na()</code> dostałbym liczbę <code>NA</code>. Dlatego zaprzeczam <code>is.na()</code> operatorem <code>!</code> (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Część operatorów logicznych dostępnych w R.">tutaj</a>).</li>
+<li>Skośność i kurtoza – to są jedyne funkcje, które stosuję tutaj jak w mordę strzelił, bez kombinowania, więc podaję je <strong>bez nawiasów</strong>. Jak wspominałem <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Co ważne, musi to być jej nazwa bez nawiasów.">tutaj</a>, gdy nie ma nawiasów, wskazujemy na samą funkcję, a z nawiasami na to, co funkcja z siebie wywala.</li>
 <li><code>`NA`</code> – słowo <code>NA</code> ma w R swoje znaczenie. Takich słów normalnie nie możemy używać jako nazw kolumn. Zazwyczaj. Jeśli bardzo chcemy, możemy ująć taką niesyntaktyczną<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> nazwę w <em>backticki</em> (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-select">tutaj</a>).</li>
 </ol>
 <p>Taka funkcja powinna działać. Jeśli uruchomimy ją w konsoli na konkretnym przykładzie, to zadziała.</p>
@@ -481,7 +481,7 @@ cookieconsent.run({
 </div>
 </div>
 <p>Może i ciągle nie działa, ale dostaliśmy inny błąd! To naprawdę jest powód do radości, jak się robi cokolwiek związanego z komputerami.</p>
-<p>Jeśli chodzi o formatowanie, to mogę to zapisać jako <code>{{group}}</code> albo <code>{{ group }}</code>. Zazwyczaj nie stawiamy spacji po nawiasach, ale operator <code>{{ }}</code> jest wyjątkiem. Obie formy zadziałają, ale żeby podkreślić szczególne działanie tego operatora <a href="https://style.tidyverse.org/syntax.html?q=%7B%7B#embracing"><em>The tidyverse style guide</em></a> zaleca, by stawiać te spacje.</p>
+<p>Jeśli chodzi o formatowanie, to mogę to zapisać jako <code>{{group}}</code> albo <code>{{ group }}</code>. Zazwyczaj nie stawiamy spacji po nawiasach, ale operator <code>{{ }}</code> jest wyjątkiem. Obie formy zadziałają, ale żeby podkreślić szczególne działanie tego operatora <a href="https://style.tidyverse.org/syntax.html?q={{#embracing"><em>The tidyverse style guide</em></a> zaleca, by stawiać te spacje.</p>
 </section>
 <section id="quoting-i-unquoting" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> <em>Quoting</em> i <em>unquoting</em></h1>
@@ -694,7 +694,7 @@ cookieconsent.run({
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<p>W tym wypadku nasze <code>kolumny_do_policzenia</code> pojawiają się wewnątrz <code>across()</code>, więc musiałem użyć <code>c()</code> (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Gdy%20u%C5%BCywam%20zestaw%2C%20mam%20na%20my%C5%9Bli%2C%20%C5%BCe%20trzeba%20je%20wpakowa%C4%87%20w%20funkcj%C4%99%20c()%20(od%20concatenate)%2C%20np.%20c(1%2C%208%2C%2010%3A16).">tutaj</a>). Inny przykład, bardziej typowy wyglądałby tak:</p>
+<p>W tym wypadku nasze <code>kolumny_do_policzenia</code> pojawiają się wewnątrz <code>across()</code>, więc musiałem użyć <code>c()</code> (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Gdy używam zestaw, mam na myśli, że trzeba je wpakować w funkcję c() (od concatenate), np. c(1, 8, 10:16).">tutaj</a>). Inny przykład, bardziej typowy wyglądałby tak:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>srednia_z_kolumny <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col, ...) {</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    grupy <span class="ot">&lt;-</span> <span class="fu">enquos</span>(...)</span>
@@ -1112,19 +1112,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (id.startsWith('sec-')) {
-        // Special case sections, only their first couple elements
-        const container = document.createElement("div");
-        if (note.children.length > 2) {
-          for (let i = 0; i < 2; i++) {
-            container.appendChild(note.children[i].cloneNode(true));
+      if (note !== null) {
+        if (id.startsWith('sec-')) {
+          // Special case sections, only their first couple elements
+          const container = document.createElement("div");
+          if (note.children && note.children.length > 2) {
+            for (let i = 0; i < 2; i++) {
+              container.appendChild(note.children[i].cloneNode(true));
+            }
+            return container.innerHTML
+          } else {
+            return note.innerHTML;
           }
-          return container.innerHTML
         } else {
           return note.innerHTML;
         }
       } else {
-        return note.innerHTML;
+        return "";
       }
     });
   }

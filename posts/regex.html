@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.36">
+<meta name="generator" content="quarto-1.4.54">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -173,7 +173,9 @@ cookieconsent.run({
 
 </header>
 
-<p>Wyrażenia regularne to specjalny szyfr czy kod służący sprawnemu znajdowaniu framgentów o określonej strukturze w istniejącym tekście. Jeśli chcesz przeczytać o generowaniu całkiem nowego tekstu, sprawdź <a href="https://nieobliczalne.pl/posts/powtarzalny-tekst.html">ten</a> wpis.</p>
+<p>Wyrażenia regularne to specjalny szyfr czy kod służący sprawnemu znajdowaniu fragmentów o określonej strukturze w istniejącym tekście. Jeśli chcesz przeczytać o generowaniu całkiem nowego tekstu, sprawdź <a href="https://nieobliczalne.pl/posts/powtarzalny-tekst.html">ten</a> wpis.</p>
+<p>Ile razy zdarzyło Wam się mieć tekst w tym stylu:</p>
+<p>```</p>
 
 
 
@@ -438,19 +440,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (id.startsWith('sec-')) {
-        // Special case sections, only their first couple elements
-        const container = document.createElement("div");
-        if (note.children.length > 2) {
-          for (let i = 0; i < 2; i++) {
-            container.appendChild(note.children[i].cloneNode(true));
+      if (note !== null) {
+        if (id.startsWith('sec-')) {
+          // Special case sections, only their first couple elements
+          const container = document.createElement("div");
+          if (note.children && note.children.length > 2) {
+            for (let i = 0; i < 2; i++) {
+              container.appendChild(note.children[i].cloneNode(true));
+            }
+            return container.innerHTML
+          } else {
+            return note.innerHTML;
           }
-          return container.innerHTML
         } else {
           return note.innerHTML;
         }
       } else {
-        return note.innerHTML;
+        return "";
       }
     });
   }
