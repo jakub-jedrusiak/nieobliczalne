@@ -242,13 +242,13 @@ I
 II
 
 III</code></pre>
-<p>Gdy całość się kończyła, osoba odpowiedzialna dopisywała tę strukturę na ileś dni do przodu i tak co jakiś czas. Jednocześnie jest to ten rodzaj pracy, którego nie znoszę i który jest łatwy do zautomatyzowania. Dzieje się tak z kilku powodów, z których najważniejszy jest ten – plik miał <strong>przewidywalną, z góry określoną strukturę</strong>. Miał konkretne stałe elementy i konkretne elementy zmienne. Tutaj elementem zmiennym była data, która zmienia się w sposób przewidywalny<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Mamy więc określony wzór, schemat, który tylko musimy wypełnić datami. W ten sposób wygenerowałem dla siostry plik dla rok do przodu. Powiedziała w pracy, że miała trochę czasu, to dopisała więcej. Podobno się zdziwili.</p>
-<p>Ta cecha, tzn. przewidywalność jakiegoś tekstu, pozwala nam zautomatyzować jego pisanie. Nieważne, czy tym tekstem są oznaczenia kolumn (<code>MMPI_1</code>, <code>MMPI_2</code>, …, <code>MMPI_567</code>), czy złożone zagnieżdżone struktury np. pytań i odpowiedzi w ankiecie, <strong>jeśli jest to przewidywalne, da się&nbsp;to zautomatyzować</strong>.</p>
+<p>Gdy całość się kończyła, osoba odpowiedzialna dopisywała tę strukturę na ileś dni do przodu i tak co jakiś czas. Jest to ten rodzaj pracy, którego nie znoszę i który jest łatwy do zautomatyzowania. Można to zrobić z kilku powodów, z których najważniejszy jest ten – plik miał <strong>przewidywalną, z góry określoną strukturę</strong>. Miał konkretne stałe elementy i konkretne elementy zmienne. Tutaj elementem zmiennym była data, która zmienia się w sposób przewidywalny<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Mamy więc określony wzór, schemat, który tylko musimy wypełnić datami. To też zrobiłem i w ten sposób wygenerowałem dla siostry plik dla rok do przodu. Powiedziała w pracy, że miała trochę czasu, to dopisała więcej. Podobno się zdziwili.</p>
+<p>Ta cecha, tzn. przewidywalność jakiegoś tekstu, pozwala nam zautomatyzować jego pisanie. Nieważne, czy tym tekstem są oznaczenia kolumn (<code>MMPI_1</code>, <code>MMPI_2</code>, …, <code>MMPI_567</code>), czy złożone zagnieżdżone struktury np. pytań i odpowiedzi w ankiecie, <strong>jeśli tekst jest przewidywalny, da się&nbsp;go wygenerować</strong>.</p>
 <section id="python" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Python</h1>
-<p>W tym tekście wykorzystamy sobie język programowania python. Jednocześnie tego typu praca z tekstem jest tak podstawowa, że można ją wykonać w prawie każdym języku programowania, w tym w R za pomocą <code>paste()</code> czy <code>paste0()</code>. Specjalistą od pythona nie jestem, moim pierwszym językiem programowania jest R, ale tutaj wykorzystuję pythona, bo to język ogólnego przeznaczenia.</p>
-<p>Żeby móc robić cokolwiek w pythonie, musimy zainstalować sobie interpreter pythona <a href="https://www.python.org/">stąd</a>. Koniecznie zaznaczcie w trakcie instalacji, żeby <strong>dodać pythona do PATH</strong>. Teoretycznie tyle wystarczy, ale żeby uprzyjemnić proces pisania, fajnie jest przygotować sobie jakieś&nbsp;IDE, np. <a href="https://code.visualstudio.com/">Visual Studio Code</a> albo chociaż porządny edytor tekstu w stylu <a href="https://notepad-plus-plus.org/">Notepad++</a>.</p>
-<p>Gdy to zrobimy, możemy dotrzeć do pythona na kilka sposobów. Podstawowy to wejście w terminal (w Windowsie PowerShell albo wiersz polecenia) i wpisanie tam <code>python</code>. Gdy potwierdzimy enterem, dostaniemy konsolę pythona, gdzie możemy wpisywać komendy. Drugi sposób, przez IDE, to stworzenie pliku z rozszerzeniem .py i tam zapisywanie komend. Drugi sposób przyda się, gdy chcemy sobie komendy zachować na przyszłość albo piszemy coś bardziej skomplikowanego, na wiele linijek. IDE często mają specjalny guzik do uruchomienia takiego kodu. Możemy też w wierszu polecenia wpisać <code>python C:\ścieżka\do\pliku.py</code>, np. <code>python "C:\Users\Jakub\Desktop\RSES.py"</code>.</p>
+<p>W tym tekście wykorzystamy sobie język programowania o nazwie python. Tego typu praca z tekstem jest tak podstawowa, że można ją wykonać w prawie każdym języku programowania (w tym w R za pomocą <code>paste()</code> czy <code>paste0()</code>), ale tutaj wykorzystamy pythona, bo to chyba najpopularniejszy język programowania w ogóle, drugi najpopularniejszy w statystyce, a przy tym jest to język ogólnego przeznaczenia. A także ma nazwę od Monty’ego Pythona, więc wiadomo, że warto. Specjalistą od pythona nie jestem, moim pierwszym językiem programowania jest R, ale co tam, żyje się raz.</p>
+<p>Żeby móc robić cokolwiek w pythonie, musimy zainstalować sobie interpreter <a href="https://www.python.org/">stąd</a>. Interpreter to coś w rodzaju programu, który potrafi czytać i wykonywać kod w danym języku. Można powiedzieć w pewnym uproszczeniu, że instalujemy sobie pythona. Koniecznie zaznaczcie w trakcie instalacji, żeby <strong>dodać pythona do PATH</strong>. Teoretycznie tyle wystarczy, ale żeby uprzyjemnić proces pisania, fajnie jest przygotować sobie jakieś&nbsp;IDE (program do programowania), np. <a href="https://code.visualstudio.com/">Visual Studio Code</a> albo chociaż porządny edytor tekstu w stylu <a href="https://notepad-plus-plus.org/">Notepad++</a>.</p>
+<p>Gdy to zrobimy, możemy dotrzeć do pythona na kilka sposobów. Podstawowy to wejście w terminal (w Windowsie PowerShell albo wiersz polecenia) i wpisanie tam <code>python</code>. Gdy potwierdzimy enterem, dostaniemy konsolę pythona, gdzie możemy wpisywać komendy. Drugi sposób, przez IDE, to stworzenie pliku z rozszerzeniem .py (np. „skrypt.py” albo „znowu_dają_mi_bezsensowna_robote.py”) zapisywanie w nim naszych komend. Drugi sposób przyda się, gdy chcemy sobie komendy zachować na przyszłość albo piszemy coś bardziej skomplikowanego, na wiele linijek. IDE często mają specjalny guzik do uruchomienia takiego kodu<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Możemy też w wierszu polecenia wpisać <code>python C:\ścieżka\do\pliku.py</code>, np. <code>python "C:\Users\Jakub\Desktop\RSES.py"</code>. Ważne – w „suchym" wierszu polecenia, nie w konsoli pythona.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="ilustracje/powtarzalny-tekst/python-powershell.png" class="img-fluid figure-img"></p>
@@ -264,24 +264,26 @@ III</code></pre>
 </section>
 <section id="print-i-f-strings" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> <code>print()</code> i <em>f-strings</em></h1>
-<p>Teraz możemy pisać nasz kod w pythonie. Tradycyjnie w programowaniu pierwszym, co się pisze, jest program, który zwraca tekst „Hello world!”. W pythonie robimy to funkcją <code>print()</code>.</p>
-<div id="344eab62" class="cell" data-execution_count="1">
+<p>Teraz możemy pisać nasz kod w pythonie. Będę zakładał, że piszemy nasz kod w pliku, ale równie dobrze można to pisać na szybko w konsoli. Często tak robię, jak mam do wygenerowania prostą zbitkę i nie chce mi się&nbsp;tworzyć na to specjalnie pliku. W takim wypadku każdą linijkę kodu wpisujemy w konsolę osobno i osobno zatwierdzamy enterem. Zazwyczja pierwszym, co się pisze, gdy zaczyna się uczyć nowego języka, jest program, który wyświetla tekst „Hello world!“. W pythonie robimy to funkcją <code>print()</code>.</p>
+<div id="78b2c610" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Hello world!</code></pre>
 </div>
 </div>
-<p>Funkcja <code>print()</code> w większości wystarczy, żebyśmy uzyskali to, co chcemy dziś uzyskać. Wbrew pozorom, jeśli połączymy to z pętlami, będzie ona potrafiła całkiem sporo. Do tej funkcji wrzucimy tekst, który chcemy, żeby pojawił się w konsoli. Jeśli potrzebujemy, możemy też dorzucić argument <code>end</code>, który mówi, co funkcja ma dać na koniec danego ciągu znaków. Domyślnie jest to nowa linia, którą w informatyce zapisujemy zazwyczaj <code>\n</code>. Nie robimy rzeczywistej nowej linii. Możemy więc na przykład zmienić jedną pustą linię na dwie, trzy. Możemy też zamienić nową linię na spację, ale po co, to wyjaśnię&nbsp;później.</p>
-<div id="be5252e2" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>, end<span class="op">=</span><span class="st">"</span><span class="ch">\n\n\n</span><span class="st">"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Funkcja <code>print()</code> w większości wystarczy, żebyśmy uzyskali to, co chcemy dziś uzyskać. Wbrew pozorom, jeśli połączymy ją z pętlami, będzie ona potrafiła całkiem sporo. Funkcje w programowaniu zazwyczaj mają po sobie nawiasy, do których wrzucamy różne rzeczy, z którymi funkcja ma coś zrobić. Tak tutaj wrzucamy w te nawiasy tekst, który funkcja ma pokazać w konsoli. Dosłowny tekst zawsze piszemy w cudzysłowie.</p>
+<p>Jeśli potrzebujemy, możemy po przecinku dorzucić argument <code>end</code>, który mówi, co funkcja ma dodać na koniec danego ciągu znaków. Domyślnie jest to nowa linia, którą w informatyce zapisujemy zazwyczaj <code>\n</code>. Nie robimy rzeczywistej nowej linii! Na przykład możemy zmienić jedną pustą linię na dwie, trzy. Możemy też zamienić nową linię na spację, ale po co, to wyjaśnię&nbsp;później. Możemy też wymyślić coś całkiem szalonego, jeśli mamy taką potrzebę.</p>
+<div id="adf59401" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>, end<span class="op">=</span><span class="st">"</span><span class="ch">\n\n</span><span class="st">-----</span><span class="ch">\n\n</span><span class="st">"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Hello world!
 
+-----
 </code></pre>
 </div>
 </div>
-<p>Ważną funkcją pythona, która więcej sensu nabierze później, kiedy przejdziemy do pętli, są tzw. <em>f-strings</em>. Jest to sposób, jak wrzucić wartość jakiejś <em>zmiennej</em> do naszego ciągu znaków. Co to znaczy? Jak powiedziałem wyżej, nasz tekst, który chcemy wygenerować, zawiera elementy stałe i elementy zmienne. Tym elementem zmiennym może być na przykład liczba. Jak połączyć elementy stałe ze zmiennymi? Właśnie za pomocą <em>f-string</em>. Zmienne definiujemy w pythonie za pomocą znaku <code>=</code>.</p>
-<div id="d540f294" class="cell" data-execution_count="3">
+<p>Nabierze to więcej sensu, kiedy dojdziemy do pętli i będziemy wyświetlać wiele tekstów, jeden pod drugim. Podobnie więcej sensu nabierze coś, co omówimy teraz, czyli tzw. <em>f-strings</em>. W informatyce słowem <em>string</em> oznacza się dosłowny ciąg znaków. <em>f-strings</em> to sposób, jak do naszego ciągu znaków wrzucić wartość jakiejś <em>zmiennej</em>. Co to znaczy? Jak powiedziałem wyżej, tekst, który chcemy wygenerować, zawiera elementy stałe i elementy zmienne. Elementem zmiennym może być na przykład liczba. Jak połączyć elementy stałe ze zmiennymi? Właśnie za pomocą <em>f-string</em>. Zmienne definiujemy w pythonie za pomocą znaku <code>=</code>.</p>
+<div id="db103e1a" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">23</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MMPI_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -289,8 +291,8 @@ III</code></pre>
 <pre><code>MMPI_23</code></pre>
 </div>
 </div>
-<p>W kodzie powyżej najpierw przypisuję wartość 23 do zmiennej <code>i</code> (zmienne mogę&nbsp;nazywać jak chcę). Jeśli piszę to w konsoli, to najpierw wpisuję <code>i = 23</code>, klikam enter i dopiero potem odpowiednią funkcję <code>print()</code>. Następnie do funkcji <code>print()</code> wrzucam tekst <code>"MMPI_{i}"</code>. Python wie, że zamiast <code>{i}</code> musi podstawić prawdziwą wartość zmiennej <code>i</code>, czyli w tym wypadku 23. Żeby to jednak wiedział, musimy przed samym ciągiem znaków dodać literkę <code>f</code>, jak <em>format</em>. Dlatego właśnie napisałem <code>f"MMPI_{i}"</code> i dlatego nazywa się to <em>f-string</em>. Jeśli chcielibyśmy w naszym tekście dodać dosłowne nawiasy klamrowe, np. uzyskać „{MMPI_23}“, takie nawiasy klamrowe piszemy podwójnie – <code>{{</code> w <em>f-string</em> zmieni się&nbsp;w dosłowny znak <code>{</code>.</p>
-<div id="d001fb67" class="cell" data-execution_count="4">
+<p>W kodzie powyżej najpierw przypisuję wartość 23 do zmiennej <code>i</code> (zmienne mogę&nbsp;nazywać jak chcę). Dzięki temu, od tego momentu, gdy napiszę <code>i</code>, python zrozumie to jako 23. Można spróbować tego w konsoli. Jeśli po zadeklarowaniu zmiennej wpiszemy w konsolę <code>i</code> i zatwierdzimy, zobaczymy liczbę 23. Jeśli piszę to w konsoli, a nie w pliku, to najpierw wpisuję <code>i = 23</code>, klikam enter i dopiero potem odpowiednią funkcję <code>print()</code>. Następnie do funkcji <code>print()</code> wrzucam tekst <code>"MMPI_{i}"</code>. Python wie, że zamiast <code>{i}</code> musi podstawić prawdziwą wartość zmiennej <code>i</code>, czyli w tym wypadku 23. Żeby to jednak wiedział, musimy przed samym ciągiem znaków dodać literkę <code>f</code>, jak <em>format</em>. Dlatego właśnie napisałem <code>f"MMPI_{i}"</code> i dlatego nazywa się to <em>f-string</em>. Jeśli chcielibyśmy w naszym tekście dodać dosłowne nawiasy klamrowe, np. uzyskać „{MMPI_23}“, takie nawiasy klamrowe piszemy podwójnie – <code>{{</code> w <em>f-string</em> zmieni się&nbsp;w dosłowny znak <code>{</code>.</p>
+<div id="5a33cb4d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">23</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">{{</span><span class="ss">MMPI_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ch">}}</span><span class="ss">"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -299,22 +301,26 @@ III</code></pre>
 </div>
 </div>
 <p>Zawartość zmiennej <code>i</code> możemy w nawiasach klamrowych też modyfikować.</p>
-<div id="03274521" class="cell" data-execution_count="5">
+<div id="70e6d438" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">23</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MMPI_</span><span class="sc">{</span>i <span class="op">+</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MMPI_</span><span class="sc">{</span>i <span class="op">+</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>zawod <span class="op">=</span> <span class="st">"skrybą"</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Jak to jest być </span><span class="sc">{</span>zawod<span class="sc">.</span>upper()<span class="sc">}</span><span class="ss">?"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>MMPI_25</code></pre>
+<pre><code>MMPI_25
+Jak to jest być SKRYBĄ?</code></pre>
 </div>
 </div>
 </section>
 <section id="pętle" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Pętle</h1>
-<p>Pętle to w językach programowania sposób, żeby wiele razy zrobić to samo albo prawie to samo. W każdym języku programowania znajdziemy dwa rodzaje pętli – <code>for</code> i <code>while</code>.</p>
+<p>Pętle to w językach programowania sposób, żeby wiele razy zrobić to samo albo prawie to samo. W (prawie) każdym języku programowania znajdziemy dwa rodzaje pętli – <code>for</code> i <code>while</code>.</p>
 <section id="pętla-for" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="pętla-for"><span class="header-section-number">3.1</span> Pętla <code>for</code></h2>
 <p>Pętla <code>for</code> jest najprostszym rodzajem pętli i tym, z czego będziemy stale korzystać. Omówmy sobie ją na przykładzie generowania nazw kolumn.</p>
-<div id="c8358695" class="cell" data-execution_count="6">
+<div id="ba647a33" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"MMPI_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -330,24 +336,27 @@ MMPI_9
 MMPI_10</code></pre>
 </div>
 </div>
-<p><code>i</code> jest nazwą dla zmiennej, która po kolei przyjmie wartości od 1 do 10. Najpierw wszystko, co znajduje się w pętli, wykona się tak, jakby <code>i</code> miało wartość 1. Potem wykona się to znowu, ale z <code>i = 2</code> itd. Dlaczego jednak napisałem <code>range(1, 11)</code> a nie <code>range(1, 10)</code>? Python działa tutaj specyficznie. Normalnie w informatyce liczy się&nbsp;od 0. Dlatego jeśli napiszę tylko jedną liczbę, czyli <code>range(10)</code>, to dostanę 10 elementów, czyli od 0 do 9. Jeśli chcę zacząć od 1, to muszę więc jako drugą liczbę podać 11. Koniec skali nie wlicza się do zakresu, więc jeśli w pythonie chcę liczby od 1 do 10, to muszę napisać <code>range(1, 11)</code>.</p>
-<p>Tak jak wspomniałem, domyślnie <code>print()</code> wyrzuca do konsoli to, co tej funkcji podaliśmy, dodając na koniec nową linię. Możemy jednak chcieć, żeby nasze elementy pojawiły się po przecinku albo oddzielone spacjami i wtedy możemy zmienić argument <code>end</code>.</p>
-<div id="3d6e80b4" class="cell" data-execution_count="7">
+<p><code>i</code> jest nazwą dla zmiennej, która po kolei przyjmie wartości od 1 do 10. Najpierw wszystko, co znajduje się w pętli, wykona się tak, jakby <code>i</code> miało wartość 1. Potem wykona się to znowu, ale z <code>i = 2</code> itd. To jest podstawowy sposób działania zmiennej <code>for</code>. Potem mamy słowo <code>in</code>, a za nim zbiór wartości, które <code>i</code> ma po kolei przyjmować. W tym wypadku tym zbiorem jest funkcja <code>range()</code>, która sama generuje nam liczby od 1 do 10.</p>
+<p>Dlaczego jednak napisałem <code>range(1, 11)</code> a nie <code>range(1, 10)</code>? Python działa tutaj specyficznie. Wynika to z faktu, że w informatyce liczy się od 0, nie od 1. Jeśli do funkcji <code>range()</code> wrzucę tylko jedną liczbę, czyli na przykład <code>range(10)</code>, to dostanę 10 elementów. Ponieważ jednak pierwszy element to 0, to będą to liczby od 0 do 9. Mogę podać dwie liczby, żeby powiedzieć funkcji <code>range()</code>, od czego ma zacząć, ale wtedy muszę mieć w głowie, że skoro <code>range(0, 10)</code> oznacza 10 liczb od 0 do 9, to liczby od 1 do 10 muszę zapisać jako <code>range(1, 11)</code>. Innymi słowy koniec skali nie wlicza się do zakresu.</p>
+<p>Jeśli piszemy to w konsoli, a nie w pliku, możemy zapisać taką pętlę w jednej linijce – <code>for i in range(1, 11): print(f"MMPI_{i}")</code>. Możemy też zapisać samo <code>for i in range(1, 11):</code> (nie zapominając o dwukropku) i potwierdzić enterem. W obu wypadkach wyświetli nam się w konsoli wielokropek i będziemy mogli dopisywać kolejne komendy z pętli. Gdy będziemy usatysfakcjonowani, klikamy enter po raz kolejny, a pętla wykonuje się.</p>
+<p>Tak jak wspomniałem, domyślnie <code>print()</code> wyrzuca do konsoli to, co tej funkcji podaliśmy, dodając na koniec nową linię. Możemy jednak chcieć, żeby nasze elementy pojawiły się po przecinku albo oddzielone spacjami (albo jedno i drugie) i wtedy możemy zmienić argument <code>end</code>.</p>
+<div id="c4583200" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>):</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"MMPI_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>, end <span class="op">=</span> <span class="st">", "</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>MMPI_1, MMPI_2, MMPI_3, MMPI_4, MMPI_5, MMPI_6, MMPI_7, MMPI_8, MMPI_9, MMPI_10, </code></pre>
 </div>
 </div>
+<p>Co prawda po ostatnim elemencie też dostajemy przecinek i spację, ale to już możemy usunąć ręcznie. W pythonie też da się to zaprogramować, ale nie chcę za bardzo gmatwać.</p>
 </section>
 <section id="pętla-while" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="pętla-while"><span class="header-section-number">3.2</span> Pętla <code>while</code></h2>
-<p>Pętla <code>while</code> to bardziej generyczny, podstawowy, prosty przejaw pętli <code>for</code>. Większość pętli <code>while</code> da się napisać w formie pętli <code>for</code>, dlatego nie będę się nad tym jakoś szczególnie rozwodził, ale warto wiedzieć, że coś takiego istnieje. Napiszmy przykład z poprzedniej sekcji w postaci pętli <code>while</code>.</p>
-<div id="e5cb2e62" class="cell" data-execution_count="8">
+<p>Pętla <code>while</code> to bardziej podstawowy, prosty rodzaj pętli. Większość pętli <code>while</code> da się napisać w formie pętli <code>for</code>, dlatego nie będę się nad tym jakoś szczególnie rozwodził, ale warto wiedzieć, że coś takiego istnieje. Napiszmy przykład z poprzedniej sekcji w postaci pętli <code>while</code>.</p>
+<div id="ff894d58" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> i <span class="op">&lt;=</span> <span class="dv">10</span>:</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"MMPI_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    i <span class="op">+=</span> <span class="dv">1</span>  <span class="co"># ewentualnie i = i + 1</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span>  <span class="co"># ewentualnie i += 1</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>MMPI_1
 MMPI_2
@@ -361,16 +370,16 @@ MMPI_9
 MMPI_10</code></pre>
 </div>
 </div>
-<p>W pętli <code>while</code> potrzebujemy jakiejś wcześniej określonej zmiennej, w tym wypadku <code>i</code>. Pierwszą rzeczą, którą <code>while</code> robi, jest sprawdzenie, czy warunek jest prawdziwy. Prawdą jest, że 1 jest mniejsze lub równe 10, więc <code>while</code> puszcza wszystko, co znajduje się w środku pętli. Instrukcja <code>print()</code> jest identyczna. Kolejna linijka może wydawać się&nbsp;nieco tajemnicza. Służy ona powiększeniu <code>i</code> o 1. Matematycznie zapis <code>i = i + 1</code> może wydawać się&nbsp;dziwny, ale trzeba pamiętać, że <code>=</code> nie oznacza tutaj porównania (to się&nbsp;robi poprzez <code>==</code>), tylko przypisanie. Można więc to przeczytać „Niech <code>i</code> przyjmie wartość równą <strong>aktualnej</strong> wartości <code>i</code> plus jeden”. W skrócie możemy to zapisać jako <code>i += 1</code>. Po co to robimy? Bo w następnym kroku pętla <code>while</code> znów sprawdzi, czy warunek jest prawdziwy. Teraz <code>i = 2</code>, a 2 to ciągle mniej niż 10, więc pętla wykona się znów, aż do momentu, w którym <code>i</code> nie przyjmie wartości 11. Jeśli nie umieściłbym w kodzie linijki <code>i = i + 1</code>, warunek <code>i &lt;= 10</code> byłby <strong>zawsze</strong> prawdziwy i pętla działałaby wiecznie. Czy raczej do wyczerpania pamięci.</p>
+<p>W pętli <code>while</code> potrzebujemy jakiejś wcześniej określonej zmiennej, w tym wypadku <code>i</code>. Pierwszą rzeczą, którą <code>while</code> robi, jest sprawdzenie, czy warunek jest prawdziwy. Prawdą jest, że 1 jest mniejsze lub równe 10, więc <code>while</code> puszcza wszystko, co znajduje się w środku pętli. Instrukcja <code>print()</code> jest identyczna. Kolejna linijka może wydawać się nieco tajemnicza. Służy ona powiększeniu <code>i</code> o 1. Matematycznie zapis <code>i = i + 1</code> może wydawać się&nbsp;dziwny, ale trzeba pamiętać, że <code>=</code> nie oznacza tutaj porównania (to się robi poprzez <code>==</code>), tylko przypisanie. Można więc tę komendę przeczytać „Niech <code>i</code> przyjmie wartość równą <strong>aktualnej</strong> wartości <code>i</code> plus jeden”. W skrócie możemy to zapisać jako <code>i += 1</code>. Po co to robimy? Bo w następnym kroku pętla <code>while</code> znów sprawdzi, czy warunek jest prawdziwy. Teraz <code>i = 2</code>, a 2 to ciągle mniej niż 10, więc pętla wykona się znów. Tak będzie robić aż do momentu, w którym warunek nie będzie prawdziwy, a wiec w tym wypadku aż <code>i</code> nie przyjmie wartości 11. Jeśli nie umieściłbym w kodzie linijki <code>i = i + 1</code>, warunek <code>i &lt;= 10</code> byłby <strong>zawsze</strong> prawdziwy i pętla działałaby wiecznie. Czy raczej do wyczerpania pamięci.</p>
 </section>
 </section>
 <section id="generowanie-tekstu" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Generowanie tekstu</h1>
-<p>Weźmy sobie na warsztat bardziej złożony przykład. Niedawno musiałem generować bardzo skomplikowany tekst, który stał się częścią ankiety w <a href="https://www.psytoolkit.org/">PsyToolKit</a>. Jest to świetne narzędzie do prowadzenia ankiet i eksperymentów, głównie psychologicznych. Jego największą zaletą – według mnie – jest to, że zarówno ankiety, jak i eksperymenty (poza <em>easy mode</em>) mogą być pisane w postaci zwykłego tekstu. Pozwala to na olbrzymią giętkość, jaką zapewniają języki programowania, ale także daje duże możliwości automatyzacji. O PsyToolKit na pewno jeszcze w przyszłości napiszę.</p>
+<p>Weźmy sobie na warsztat bardziej złożony przykład. Niedawno musiałem generować bardzo skomplikowany tekst, który stał się częścią ankiety w <a href="https://www.psytoolkit.org/">PsyToolKit</a>. Jest to świetne narzędzie do prowadzenia ankiet i eksperymentów, głównie psychologicznych. Jego największą zaletą – według mnie – jest to, że zarówno ankiety, jak i eksperymenty mogą być pisane w postaci zwykłego tekstu<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Pozwala to na olbrzymią giętkość, jaką zapewniają języki programowania, ale także daje duże możliwości automatyzacji. O PsyToolKit na pewno jeszcze w przyszłości napiszę.</p>
 <section id="ankieta-w-psytoolkit" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="ankieta-w-psytoolkit"><span class="header-section-number">4.1</span> Ankieta w PsyToolKit</h2>
-<p>Pokażę teraz, jak sprawnie przerobić kwestionariusz na ankietę w PsyToolKit. Najsprawniej będzie, co prawda, użyć programiku <a href="https://github.com/jakub-jedrusiak/Psytoolkit-Questionnaire-Formatter">PsyToolKit Questionnaire Formatter</a>, który napisałem opierając się na tym, co w tym wpisie opisuję. Zobaczmy to jednak od kuchni, żeby w razie czego móc to zastosować do własnych specyficznych celów.</p>
-<p>Załóżmy, że chcielibyśmy wykorzystać w naszym badaniu kwestionariusz samooceny Rosenberga (1965). Struktura pytania w PsyToolKit wygląda tak:</p>
+<p>Pokażę teraz, jak sprawnie przerobić kwestionariusz na ankietę w PsyToolKit. Najsprawniej byłoby, co prawda, użyć programiku <a href="https://github.com/jakub-jedrusiak/Psytoolkit-Questionnaire-Formatter">PsyToolKit Questionnaire Formatter</a>, który opiera się na tym, co tutaj opisuję. Poznajmy ten mechanizm od kuchni, żeby w razie czego móc go dopasować do własnych, specyficznych celów, niekoniecznie związanych w ogóle z PsyToolKit.</p>
+<p>Załóżmy, że chcielibyśmy wykorzystać w naszym badaniu kwestionariusz samooceny Rosenberga (1965). Musimy go w takim razie zapisać tak, jak PsyToolKit każe nam formatować pytania do ankiety. Struktura pytania w PsyToolKit wygląda tak:</p>
 <pre class="{YAML}"><code>l: RSES_1
 t: radio
 q: I feel that I am a person of worth, at least on an equal plane with others.
@@ -378,9 +387,10 @@ q: I feel that I am a person of worth, at least on an equal plane with others.
 - Agree
 - Disagree
 - Strongly Disagree</code></pre>
-<p>Po pierwsze mamy <code>l</code>, czyli <em>label</em>. Posłuży nam to jako wewnętrzna „nazwa” pozycji testowej i nagłówek kolumny w bazie danych. Dalej mamy <code>t</code>, czyli <em>type</em>, gdzie <code>radio</code> oznacza pytanie jednokrotnego wyboru. Inne typy znajdziemy w <a href="https://www.psytoolkit.org/doc3.4.4/online-survey-syntax.html#questiontypes">dokumentacji</a>. Następnie mamy <code>q</code>, czyli <em>question</em>, właściwa treść pozycji testowej i pod spodem odpowiedzi od myślników. Możemy tu dodawać inne rzeczy, ale dla celów przykładu przykładu załóżmy, że tyle nam wystarczy.</p>
-<p>Po pierwsze zidentyfikujmy, co jest stałe i co się zmienia. Tutaj zmieniają się dwie rzeczy – treść pozycji testowej i numerek przy <code>RSES</code>. Cała reszta jest identyczna dla każdej pozycji testowej. Skoro musimy mieć w naszych pytaniach treść pozycji testowej, musimy nasz kwestionariusz wkleić do skryptu. Zapiszemy go jako listę.</p>
-<div id="28951574" class="cell" data-execution_count="9">
+<p>Po pierwsze mamy <code>l</code>, czyli <em>label</em>. Posłuży nam to jako wewnętrzna „nazwa” pozycji testowej i nagłówek kolumny w bazie danych. Dalej mamy <code>t</code>, czyli <em>type</em>, gdzie <code>radio</code> oznacza pytanie jednokrotnego wyboru. Inne typy znajdziemy w <a href="https://www.psytoolkit.org/doc3.4.4/online-survey-syntax.html#questiontypes">dokumentacji</a>. Następnie mamy <code>q</code>, czyli <em>question</em>, właściwa treść pozycji testowej i pod nią odpowiedzi wypisane od myślników. Możemy tu dodawać inne rzeczy (np. <code>o: random</code>, żeby kolejność odpowiedzi była losowa), ale załóżmy, że na ten moment tyle nam wystarczy.</p>
+<p>Po pierwsze spróbujmy zidentyfikować, co w naszym schemacie jest stałe i co się zmienia. Tutaj zmieniają się dwie rzeczy – treść pozycji testowej i numerek przy <code>RSES</code>. Cała reszta jest identyczna dla każdej pozycji testowej.</p>
+<p>Skoro musimy mieć w naszych pytaniach treść pozycji testowej, musimy nasz kwestionariusz wkleić do skryptu. Zapiszemy go w postaci listy.</p>
+<div id="6ac59321" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>RSES <span class="op">=</span> [</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I feel that I am a person of worth, at least on an equal plane with others."</span>,</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I feel that I have a number of good qualities."</span>,</span>
@@ -394,8 +404,8 @@ q: I feel that I am a person of worth, at least on an equal plane with others.
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"At times I think I am no good at all."</span></span>
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Cała lista jest nawiasach kwadratowych, każdy item jest w cudzysłowie, zaś itemy rozdzielone są przecinkami. Teraz możemy powiedzieć pythonowi, żeby zrobił całą serię takich pytań w stylu PsyToolKit, ale zaraz za <code>q</code> za każdym razem wstawił jedną z pozycji testowych.</p>
-<div id="2413400b" class="cell" data-execution_count="10">
+<p>Cała lista jest nawiasach kwadratowych, każdy item jest w cudzysłowie, zaś itemy rozdzielone są przecinkami. Całą listę zapisałem do zmiennej o nazwie <code>RSES</code>. Teraz możemy powiedzieć pythonowi, żeby zrobił całą serię pytań w stylu PsyToolKit, gdzie po <code>q</code> za każdym razem wstawi jedną z pozycji testowych.</p>
+<div id="0ca55952" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> RSES:</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"l: RSES_1"</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"t: radio"</span>)</span>
@@ -485,9 +495,9 @@ q: At times I think I am no good at all.
 </code></pre>
 </div>
 </div>
-<p>Jak widzimy, nasza zmienna w pętli (1) nie musi nazywać się <code>i</code>, (2) nie musi być liczbą. Możemy równie dobrze wykonać pętlę za każdym razem przypisując do zmiennej kolejną wartość z listy. Możemy każdą linijkę pisać w osobnej komendzie <code>print()</code> lub też zapisać to wszystko w jednej komendzie, zaznaczając nowe linijki za pomocą <code>\n</code>, jak to zrobiłem w przypadku odpowiedzi.</p>
-<p>Nasz wynik ma jednak problem – każde pytanie nazywa się <code>RSES_1</code>. Liczba po <code>RSES_</code> musi się zmieniać. Tym razem jest to trudniejsze niż wcześniej, bo <code>item</code> nie jest tutaj liczbą, tylko treścią pytania. Z pomocą przychodzi nam jednak funkcja <code>enumerate()</code>. Pozwala ona przerobić listę na tzw. krotki (ang. <em>tuples</em>, tutaj <em>2-tuples</em> czyli dwukrotki). Każda taka dwukrotka zawiera dwie rzeczy – numer pozycji (licząc od 0) oraz samą pozycję. Numer jest pierwszy, więc dostaniemy się&nbsp;do niego pisząc <code>item[0]</code>, a jeśli chcemy dostać samą pozycję, zapiszemy <code>item[1]</code>. Całość wyglądałaby więc tak:</p>
-<div id="98e0abbb" class="cell" data-execution_count="11">
+<p>Jak widzimy, nasza zmienna w pętli (1) nie musi nazywać się <code>i</code> oraz (2) nie musi być liczbą. Jak widzimy, możemy wykonać pętlę za każdym razem przypisując do zmiennej kolejny tekst z listy. Każdą linijkę możemy zapisać w osobnej komendzie <code>print()</code> lub też całość wpisać w jedną komendę, zaznaczając nowe linijki za pomocą <code>\n</code>. Tak zrobiłem w przedostatniej linijce.</p>
+<p>Nasz wynik ma jednak problem – każde pytanie nazywa się <code>RSES_1</code>. Liczba po <code>RSES_</code> musi się zmieniać. Tym razem jest to trudniejsze niż wcześniej, bo <code>item</code> nie jest tutaj liczbą, tylko treścią pytania, więc nie możemy zapisać <code>RSES_{item}</code>. Z pomocą przychodzi nam jednak funkcja <code>enumerate()</code>. Pozwala ona przerobić listę na tzw. krotki (ang. <em>tuples</em>, tutaj <em>2-tuples</em> czyli dwukrotki). Każda taka dwukrotka zawiera numer pozycji na liście (licząc od 0) oraz samą pozycję. Numer jest pierwszy, więc dostaniemy się&nbsp;do niego pisząc <code>item[0]</code>. Jeśli chcemy dostać treść pozycji testowej, zapiszemy <code>item[1]</code>. Całość wyglądałaby więc tak:</p>
+<div id="341f3d02" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> <span class="bu">enumerate</span>(RSES):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"l: RSES_</span><span class="sc">{</span>item[<span class="dv">0</span>] <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"t: radio"</span>)</span>
@@ -577,24 +587,24 @@ q: At times I think I am no good at all.
 </code></pre>
 </div>
 </div>
-<p>Zwróćmy uwagę, że w pierwszym <code>print()</code> napisałem <code>item[0] + 1</code>. <code>item[0]</code> to numer pozycji testowej, ale czemu <code>+ 1</code>? Bo liczenie w informatyce zaczyna się od 0, więc jeśli chcę mieć numerację od 1 do 10 zamiast od 0 do 9, to muszę do każdego numeru dodać 1.</p>
+<p>Zwróćmy uwagę, że w pierwszym <code>print()</code> napisałem <code>item[0] + 1</code>. <code>item[0]</code> to numer pozycji testowej, ale czemu <code>+ 1</code>? Bo liczenie w informatyce zaczyna się od 0 (co ciągle powoduje problemy u całej reszty ludzkości), więc jeśli chcę mieć numerację od 1 do 10 zamiast od 0 do 9, to do każdego numeru muszę dodać 1.</p>
 </section>
 <section id="zapisywanie-do-pliku" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="zapisywanie-do-pliku"><span class="header-section-number">4.2</span> Zapisywanie do pliku</h2>
-<p>Wynik działania takiej funkcji możemy od razu zapisać do pliku tekstowego za pomocą specjalnego operatora <code>&gt;</code> w PowerShell<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Da się to zrobić nie wychodząc z pythona, ale to niepotrzebnie skomplikowane. Druga opcja to po prostu skopiować wygenerowany tekst z konsoli. Jeśli ktoś rzadko z niej korzysta, to ostrzegam, że zamiast Ctrl+C i Ctrl+V w konsoli używamy Ctrl+Shift+C i Ctrl+Shift+V. Głównie dlatego, że Ctrl+C w domyśle przerywa aktualnie wykonywane zadanie. Ten sposób może jednak nie być odpowiedni, jeśli tekst jest długi, bo wtedy konsola może go uciąć. Jak więc wykorzystać <code>&gt;</code>? W PowerShell (nie w konsoli pythona! w zwykłym PowerShell) wpisujemy coś takiego:</p>
+<p>Wynik działania takiej funkcji możemy od razu zapisać do pliku tekstowego za pomocą specjalnego operatora <code>&gt;</code> w PowerShell<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Da się to zrobić nie wychodząc z pythona, ale to niepotrzebnie skomplikowane. Druga opcja to po prostu skopiować wygenerowany tekst z konsoli. Jeśli ktoś rzadko z niej korzysta, to ostrzegam, że do kopiowania i wklejania zamiast Ctrl+C i Ctrl+V w konsoli używamy Ctrl+Shift+C i Ctrl+Shift+V. Głównie dlatego, że Ctrl+C ma tam inną funkcję – przerywa aktualnie wykonywane zadanie. Ten sposób może jednak nie być odpowiedni, jeśli tekst jest długi, bo wtedy konsola może zjeść nam kilka (lub bardzo dużo) linijek. Jak więc wykorzystać <code>&gt;</code>? W PowerShell (nie w konsoli pythona! w zwykłym, gołym PowerShell) wpisujemy coś takiego:</p>
 <pre><code>python "C:\ścieżka\do\skryptu.py" &gt; "C:\ścieżka\do\pliku.txt"</code></pre>
 <p>Jako podpowiedź mogę podrzucić, że Windows 11 pozwala kopiować ścieżki po kliknięciu na plik prawym przyciskiem myszy. W Windowsie 10 też możemy sobie w ten sposób ułatwić życie, tylko klikając prawy przycisk myszy musimy jeszcze przytrzymać shift. Ostateczna komenda mogłaby więc wyglądać tak:</p>
 <pre><code>python "C:\Users\Jakub\Desktop\RSES.py" &gt; "C:\Users\Jakub\Desktop\RSES.txt"</code></pre>
-<p>Powoduje to zapisanie tego, co normalnie skrypt wydrukowałby w konsoli, w pliku RSES.txt na pulpicie. Oczywiście jeśli Twoja nazwa użytkownika to Jakub. Najlepiej jest tutaj przygotować własne ścieżki.</p>
+<p>Powoduje to zapisanie tego, co normalnie skrypt wydrukowałby w konsoli, w pliku <code>RSES.txt</code> na pulpicie. Rozszerzenie <code>.txt</code> jest konieczne. Oczywiście jeśli Twoja nazwa użytkownika to Jakub. Niestety wpisywanie własnych ścieżek jest konieczne.</p>
 </section>
 <section id="daty" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="daty"><span class="header-section-number">4.3</span> Daty</h2>
-<p>Wróćmy do pierwotnego przykładu z plikiem mojej siostry. Jest to przykład o tyle specyficzny, że zmiennym elementem jest tam data. Daty zmieniają się przewidywalne, ale potrzebują specjalnych funkcji, które ogarną takie rzeczy jak to, że różne miesiące mają różną liczbę dni, istnieją lata przestępne itd. Wtedy użyłem funkcji <code>date</code> w linuksie, która sama z siebie pozwala na robienie takich rzeczy, ale że większość osób (niestety) nie korzysta z linuksa, zaadaptuję to rozwiązanie do pythona. Z góry przepraszam, jeśli nie jest to najbardziej elegancka implementacja.</p>
+<p>Wróćmy do pierwotnego przykładu z plikiem mojej siostry. Jest to przykład o tyle specyficzny, że zmiennym elementem jest tam data. Daty zmieniają się przewidywalne, ale potrzebują specjalnych funkcji, które ogarną takie rzeczy jak to, że różne miesiące mają różną liczbę dni, istnieją lata przestępne itd. Kiedy rzeczywiście miałem ten problem, użyłem funkcji <code>date</code> w Linuksie, która sama z siebie pozwala na robienie takich rzeczy. Większość osób (niestety) nie korzysta z linuksa, dlatego na potrzeby tego wpisu zaadaptuję to rozwiązanie do pythona. Albo chociaż spróbuję.</p>
 <p>Żeby operować na datach, musimy na szczycie skryptu (lub najpierw w konsoli) zapisać:</p>
-<div id="c4da43ff" class="cell" data-execution_count="12">
+<div id="d1c2acd6" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Załaduje to pakiet <code>datetime</code> pozwalający operować na datach.</p>
+<p>Załaduje to pakiet <code>datetime</code> pozwalający operować na datach. Robimy to tylko raz na daną sesję, czyli jak raz załadujemy ten pakiet, możemy z niego korzystać dopóty, dopóki nie wyjdziemy z pythona. Jeśli chcemy dostać się do funkcji z pakietu <code>datetime</code>, musimy zapisać je z „przedrostkiem" <code>datetime.</code>, jak zobaczymy za chwilę.</p>
 <p>Przypomnijmy strukturę pliku, który chcemy stworzyć:</p>
 <pre><code>Data:11.05.2023
 I
@@ -602,11 +612,11 @@ I
 II
 
 III</code></pre>
-<p>Po pierwsze musimy ustalić, od jakiej daty chcemy zacząć. Możemy wykorzystać dzisiejszą datę wpisując <code>datetime.date.today()</code>. Możemy też wybrać datę początkową arbitralnie, wpisując coś w rodzaju <code>datetime.date(2023, 5, 11)</code>. Data jest w kolejności ISO 8601, czyli rok, miesiąc, dzień.</p>
-<p>Po drugie będziemy musieli dodawać do naszej daty dni. Robimy to funkcją <code>datetime.timedelta(days = 1)</code>. W tej formie do naszej daty dodamy jeden dzień.</p>
-<p>Po trzecie nasza data musi być w określonym formacie, w tym wypadku DD.MM.RRRR. Domyślnie daty wyświetlają się w formacie ISO 8601, czyli RRRR-MM-DD. Formatować daty można metodą (szczególny rodzaj funkcji) <code>strftime</code>. Jak to rzeczywiście zastosować, najlepiej będzie widać w przykładzie. Do samej metody wrzucamy format, w jakim datę chcemy uzyskać. Wykorzystamy tutaj specjalne kody, których listę możemy znaleźć <a href="https://www.w3schools.com/python/gloss_python_date_format_codes.asp">tutaj</a>. Nasz format zakodujemy jako <code>"%d.%m.%Y"</code>.</p>
-<p>Zbierając to wszystko do kupy, uzyskujemy coś takiego:</p>
-<div id="0d6955e9" class="cell" data-execution_count="13">
+<p>Po pierwsze musimy ustalić, od jakiej daty chcemy zacząć. Możemy wykorzystać dzisiejszą datę wpisując <code>datetime.date.today()</code>. Możemy też wybrać datę początkową arbitralnie, używając czegoś w rodzaju <code>datetime.date(2023, 5, 11)</code>. Data jest w kolejności ISO 8601, czyli rok, miesiąc, dzień.</p>
+<p>Po drugie będziemy musieli dodawać do naszej daty dni. Robimy to funkcją <code>datetime.timedelta(days = 1)</code>. W tej formie do naszej daty dodamy jeden dzień. Takie coś rzeczywiście do daty dodajemy, czyli piszemy na przykład <code>datetime.date(2023, 5, 11) + datetime.timedelta(days = 1)</code>. Wynikiem będzie tutaj 12 maja 2023 roku.</p>
+<p>Po trzecie nasza data musi być w określonym formacie, w tym wypadku DD.MM.RRRR. Domyślnie daty wyświetlają się w formacie ISO 8601, czyli RRRR-MM-DD. Formatować daty można metodą <code>strftime()</code>. Metody to szczególny rodzaj funkcji, który wykorzystujemy tak, że doklejamy je po kropce do nazwy naszego obiektu np. z datą. Najlepiej będzie to widać w przykładzie. Do samej metody wrzucamy zakodowany format, w jakim datę chcemy uzyskać. Wykorzystamy tutaj specjalne kody, których listę możemy znaleźć <a href="https://www.w3schools.com/python/gloss_python_date_format_codes.asp">tutaj</a>. Potrzebny nam format zakodujemy jako <code>"%d.%m.%Y"</code>.</p>
+<p>Zbierając to wszystko do kupy uzyskujemy coś takiego:</p>
+<div id="011e411c" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>start_date <span class="op">=</span> datetime.date(<span class="dv">2023</span>, <span class="dv">5</span>, <span class="dv">11</span>)</span>
@@ -676,7 +686,7 @@ III
 </div>
 </div>
 <p>Wykorzystałem tutaj kilka zmiennych, które nazwałem <code>start_date</code>, <code>date</code> i <code>date_formatted</code>. Nazwy zmiennych mogą być jakiekolwiek. Wybrałem takie, żeby to było czytelne. Jak to w programowaniu, możemy to napisać na parę sposobów. Dla przykładu tutaj datę już sformatowaną zapisałem w osobnej zmiennej, ale mógłbym też napisać:</p>
-<div id="85067013" class="cell" data-execution_count="14">
+<div id="b3eb2628" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>start_date <span class="op">=</span> datetime.date(<span class="dv">2023</span>, <span class="dv">5</span>, <span class="dv">11</span>)</span>
@@ -686,8 +696,8 @@ III
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Data:</span><span class="sc">{</span>date<span class="sc">.</span>strftime(<span class="st">'</span><span class="sc">%d</span><span class="st">.%m.%Y'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"I</span><span class="ch">\n\n</span><span class="st">II</span><span class="ch">\n\n</span><span class="st">III</span><span class="ch">\n\n</span><span class="st">"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>albo</p>
-<div id="e7aed564" class="cell" data-execution_count="15">
+<p>…albo w ogóle wszystko zapisać już wewnątrz pętli:</p>
+<div id="b385aff3" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">7</span>):</span>
@@ -695,21 +705,21 @@ III
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Data:</span><span class="sc">{</span>date<span class="sc">.</span>strftime(<span class="st">'</span><span class="sc">%d</span><span class="st">.%m.%Y'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"I</span><span class="ch">\n\n</span><span class="st">II</span><span class="ch">\n\n</span><span class="st">III</span><span class="ch">\n\n</span><span class="st">"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>…i to też zadziała. Zależy co uznamy za bardziej czytelne. Zwróćmy uwagę, że piszemy <code>days = i</code>, a nie <code>days = {i}</code>. Nawiasy kwadratowe potrzebne są tylko w <em>f-strings</em>. Pamiętamy jeszcze, że domyślnie <code>range(7)</code> generuje liczby od 0 do 6, więc na początku <code>timedelta()</code> dodaje 0 dni, potem 1 dzień, 2 dni i aż do 6 dni. Uzyskujemy więc tydzień. Siła automatyzacji polega na tym, że mając te 4 linijki kodu, taki sam nakład pracy potrzebny jest do zrobienia takiej rozpiski dla tygodnia, miesiąca czy 30 lat<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<p>…i to też zadziała. Zależy co uznajemy za bardziej czytelne. Zwróćmy uwagę, że piszemy <code>days = i</code>, a nie <code>days = {i}</code>. Nawiasy klamrowe potrzebne są tylko w <em>f-strings</em>. Pamiętamy jeszcze, że domyślnie <code>range(7)</code> generuje liczby od 0 do 6, więc na początku <code>timedelta()</code> dodaje 0 dni, potem 1 dzień, 2 dni i aż do 6 dni. Tym razem jest to nam na rękę, bo dzięki temu pierwszą datą jest wybrana przez nas data, a nie dzień później. Uzyskujemy więc tydzień rozpiski. Siła automatyzacji polega na tym, że mając te 4 linijki kodu, taki sam nakład pracy potrzebny jest do zrobienia takiej rozpiski dla tygodnia, miesiąca czy 30 lat<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
 </section>
 </section>
 <section id="podsumowanie" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Podsumowanie</h1>
-<p>Opanowanie automatyzacji wymaga sporo praktyki i początkowo może zajmować więcej czasu, niż wykonanie jakiejś pracy ręcznie. Jednak z doświadczeniem przychodzi efektywność. Już opanowanie podstaw sprawia, że często możemy oszczędzić sobie wielu, wielu godzin pracy, a jeśli poświęcimy na to trochę więcej, możemy wydłużyć sobie życie o naprawdę dużo wolnego. Podsumujmy to.</p>
+<p>Opanowanie automatyzacji wymaga sporo praktyki i początkowo może zajmować więcej czasu, niż wykonanie jakiejś pracy ręcznie. Jednak z doświadczeniem przychodzi efektywność. Już opanowanie podstaw sprawia, że często możemy oszczędzić sobie wielu, wielu godzin pracy, a jeśli poświęcimy na to trochę więcej, możemy wydłużyć sobie życie o naprawdę sporo wolnego. Podsumujmy to, czego się dziś nauczyliśmy.</p>
 <ol type="1">
 <li><p>Możemy automatyzować generowanie tekstu, w którym jakaś część podlega przewidywalnym zmianom.</p></li>
 <li><p>Za wyświetlanie tekstu odpowiada funkcja <code>print()</code>.</p></li>
-<li><p>Za powtarzanie elementów oraz zmiany zmiennych elementów odpowiada pętla <code>for</code>.</p></li>
+<li><p>Możemy powtórzyć jakiś tekst określoną liczbę razy i zaplanować ewentualne zmiany w tym tekście za pomocą pętli <code>for</code>.</p></li>
 <li><p>Możemy podstawić do ciągu znaków wartości zmiennych za pomocą <em>f-strings</em>, np. <code>f"MMPI_{i}"</code>.</p></li>
-<li><p>Ciągi liczb do pętli generujemy funkcją <code>range()</code>, przy czym domyślnie liczy ona od 0.</p></li>
+<li><p>Ciągi liczb do pętli generujemy funkcją <code>range()</code>, przy czym domyślnie liczy ona od 0. Możemy do niej wrzucić jedną liczbę albo koniec i początek ciągu, który chcemy uzyskać. Koniec domyślnie nie wlicza się do ciągu.</p></li>
 <li><p>Daty to szczególne wartości, którymi zawiadują funkcje z pakietu <code>datetime</code>.</p></li>
-<li><p>Zmienne z datami tworzymy za pomocą <code>date()</code>, różnice w datach liczymy przez <code>timedelta()</code>, a także możemy formatować daty poprzez metodę <code>strftime()</code>.</p></li>
-<li><p>Wyniki działania takich skryptów zapisujemy do plików operatorem <code>&gt;</code>.</p></li>
+<li><p>Zmienne z datami tworzymy za pomocą <code>date()</code>, różnice w datach liczymy za pośrednictwem <code>timedelta()</code>, a także możemy formatować daty poprzez metodę <code>strftime()</code>.</p></li>
+<li><p>Wyniki działania takich skryptów zapisujemy do plików operatorem <code>&gt;</code>. Robimy to w konsoli systemowej (np. PowerShell), a nie w konsoli pythona.</p></li>
 </ol>
 
 
@@ -718,8 +728,10 @@ III
 <hr>
 <ol>
 <li id="fn1"><p>Ciekawostką może być tutaj wczesny kalendarz hebrajski. Kalendarz hebrajski jest księżycowy, ma 12 miesięcy, ale w latach przestępnych dodawany jest 13. miesiąc – adar szeni. Takich lat przestępnych musi przypaść 7 w ciągu 19 lat. Obecnie jest to skodyfikowane (zob. cykl Metona), ale początkowo nie wiadomo było, które konkretnie lata w cyklu mają być przestępne i było to <em>ad hoc</em> ustalane przez społeczność żydowską. Tym samym lata przestępne pojawiały się znienacka i data wcale nie zmieniała się w przewidywalny sposób. Miało to poważne konsekwencje dla daty Wielkanocy, bo zanim został ustalony stabilny wzór (Wielkanocy, nie lat przestępnych w kalendarzu żydowskim, to nadeszło później), nigdy nie wiadomo było, kiedy wypadnie 14 nisan, czyli rocznica śmierci Jezusa według kalendarza żydowskiego.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Sam korzystam z linuksa (<em>I use arch, BTW</em>), ale nie łudzę się – większość osób, które to czytają, to windowsiarze. W linuksie operator <code>&gt;</code> działa identycznie.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Sprawdziłem, taki skrypt generuje u mnie 30 lat rozpiski w 47 milisekund (!), a gotowy plik ma 310 kB.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Instrukcję, jak uruchamiać takie pliki bezpośrednio w Notepad++, znajdziemy np. <a href="https://www.delftstack.com/howto/python/notepad  -run-python/">tutaj</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Jest też <em>easy mode</em>, który przypomina generatory na stronach typu Formularze Google.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Sam korzystam z linuksa (<em>I use arch, BTW</em>), ale nie łudzę się – większość osób, które to czytają, to windowsiarze. W linuksie operator <code>&gt;</code> działa identycznie.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Sprawdziłem, taki skrypt generuje u mnie 30 lat rozpiski w 47 milisekund (!), a gotowy plik ma 310 kB.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </aside>
 
