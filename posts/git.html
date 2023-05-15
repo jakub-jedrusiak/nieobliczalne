@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.60">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jakub Jędrusiak">
+<meta name="description" content="Przestawienie się z programu typu SPSS na R daje nam wiele korzyści, w tym umożliwia łatwe wspólne pisanie analiz statystycznych. W końcu kod to tekst. Skoro możemy w Google Docs wspólnie tworzyć dokumenty, to czemu nie mielibyśmy wspólnie pisać analizy statystycznej? Do współpracy przy kodzie nie wykorzystujemy jednak nie Google Docs, ale specjalny protokół znany jako Git.">
+
+<title>Nieobliczalne - Jak wspólnie pisać analizę statystyczną?</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Brak wyników",
+    "search-matching-documents-text": "dopasowane dokumenty",
+    "search-copy-link-title": "Kopiuj link do wyszukiwania",
+    "search-hide-matches-text": "Ukryj dodatkowe dopasowania",
+    "search-more-match-text": "więcej dopasowań w tym dokumencie",
+    "search-more-matches-text": "więcej dopasowań w tym dokumencie",
+    "search-clear-button-title": "Wyczyść",
+    "search-detached-cancel-button-title": "Anuluj",
+    "search-submit-button-title": "Zatwierdź"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-FKTMH2V23V"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-FKTMH2V23V', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"headline",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  });
+});
+</script> 
+  
+<script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3239011499449859" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/cascadia-code">
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Nieobliczalne</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Szukaj"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Przełącz nawigację" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Strona główna</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html" rel="" target="">
+ <span class="menu-text">O mnie</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Na tej stronie</h2>
+   
+  <ul>
+  <li><a href="#systemy-kontroli-wersji" id="toc-systemy-kontroli-wersji" class="nav-link active" data-scroll-target="#systemy-kontroli-wersji"><span class="header-section-number">1</span> Systemy kontroli wersji</a></li>
+  <li><a href="#przygotowanie" id="toc-przygotowanie" class="nav-link" data-scroll-target="#przygotowanie"><span class="header-section-number">2</span> Przygotowanie</a>
+  <ul class="collapse">
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git"><span class="header-section-number">2.1</span> Git</a></li>
+  <li><a href="#github-i-github-cli" id="toc-github-i-github-cli" class="nav-link" data-scroll-target="#github-i-github-cli"><span class="header-section-number">2.2</span> GitHub i GitHub CLI</a></li>
+  <li><a href="#github-desktop-i-gitkraken" id="toc-github-desktop-i-gitkraken" class="nav-link" data-scroll-target="#github-desktop-i-gitkraken"><span class="header-section-number">2.3</span> GitHub Desktop i GitKraken</a></li>
+  </ul></li>
+  <li><a href="#podstawowe-pojęcia" id="toc-podstawowe-pojęcia" class="nav-link" data-scroll-target="#podstawowe-pojęcia"><span class="header-section-number">3</span> Podstawowe pojęcia</a></li>
+  <li><a href="#pliki-specjalne" id="toc-pliki-specjalne" class="nav-link" data-scroll-target="#pliki-specjalne"><span class="header-section-number">4</span> Pliki specjalne</a>
+  <ul class="collapse">
+  <li><a href="#gitignore" id="toc-gitignore" class="nav-link" data-scroll-target="#gitignore"><span class="header-section-number">4.1</span> <code>.gitignore</code></a></li>
+  <li><a href="#readme.md" id="toc-readme.md" class="nav-link" data-scroll-target="#readme.md"><span class="header-section-number">4.2</span> <code>README.md</code></a></li>
+  </ul></li>
+  <li><a href="#github-flow-gałęzie-forks-i-pull-requests" id="toc-github-flow-gałęzie-forks-i-pull-requests" class="nav-link" data-scroll-target="#github-flow-gałęzie-forks-i-pull-requests"><span class="header-section-number">5</span> GitHub Flow, gałęzie, <em>forks</em> i <em>pull requests</em></a></li>
+  <li><a href="#rozwiązywanie-konfliktów" id="toc-rozwiązywanie-konfliktów" class="nav-link" data-scroll-target="#rozwiązywanie-konfliktów"><span class="header-section-number">6</span> Rozwiązywanie konfliktów</a></li>
+  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">7</span> Podsumowanie</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Jak wspólnie pisać analizę statystyczną?</h1>
+<p class="subtitle lead">Git, GitHub i integracja z RStudio</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Narzędzia</div>
+    <div class="quarto-category">R</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Przestawienie się z programu typu SPSS na R daje nam wiele korzyści, w tym umożliwia łatwe wspólne pisanie analiz statystycznych. W końcu kod to tekst. Skoro możemy w Google Docs wspólnie tworzyć dokumenty, to czemu nie mielibyśmy wspólnie pisać analizy statystycznej? Do współpracy przy kodzie nie wykorzystujemy jednak nie Google Docs, ale specjalny protokół znany jako Git.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jakub Jędrusiak </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Opublikowano</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">15 maja 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Kiedyś (a niekiedy do dziś) wspólne pisanie dokumentów czy prezentacji polegało na wysyłaniu sobie serii załączników mailem. Gdy zespół liczył więcej niż 2 osoby, kolejne wersje danego pliku szybko stawały się trudne do śledzenia. Podobnie gdy pisaliśmy coś na więcej niż jednym komputerze. Mam kolegę, który tak wysłał nie tę wersję pracy zaliczeniowej do prowadzącej. Nie znalazł zrozumienia. Te problemy w większości odeszły w niepamięć, gdy nastała era chmury i współpracy online. Znacznie wcześniej powstawały jednak inne rozwiązania – systemy kontroli wersji, spośród których praktyczny monopol zdobyło otwartoźródłowe dzieło Linusa Torvaldsa (twórcy Linuksa) o nazwie Git.</p>
+<section id="systemy-kontroli-wersji" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Systemy kontroli wersji</h1>
+<p>Systemy kontroli wersji najogólniej polegają na tym, że śledzą zmiany w plikach. Jeśli dopisaliśmy akapit do naszego pliku i zatwierdziliśmy tę zmianę, system kontroli wersji będzie wiedział kto i kiedy ten konkretny akapit dopisał. Jeśli kilku użytkowników wprowadziło zmiany, które ze sobą nie konfliktują, system kontroli wersji potrafi takie zmienione pliki połączyć w jeden. Możemy dzięki temu prześledzić historię danego pliku, a także upewnić się, że wszyscy pracują na najnowszej wersji.</p>
+<p>Jednocześnie jest to zrobione w sposób dostosowany do pisania kodu. Gdy piszemy kod, wprowadzamy jakieś zmiany, testujemy, zazwyczaj nie działa, poprawiamy i powtarzamy aż nie zadziała. Jeśli mielibyśmy jeden wspólny plik, jak w Google Docs, nasze testy skutecznie uniemożliwiłyby wszystkim innym korzystanie z kodu. Dlatego właśnie Git wymaga od nas, żeby zmiany w kodzie zatwierdzać i dopiero wtedy możemy udostępnić je innym. Dzięki temu tworzy się balans między współpracą i niewchodzeniem sobie w paradę.</p>
+<p>Powstaje nam więc stabilny workflow – wprowadź poprawki w kodzie, przetestuj, zatwierdź, opublikuj. Jak to zrobić w praktyce?</p>
+</section>
+<section id="przygotowanie" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Przygotowanie</h1>
+<p>Przygotowanie do korzystania z Gita może wyglądać bardzo różnie. Tutaj zaproponuję serię programów, które, mam nadzieję, uczynią ten proces jak najbardziej bezbolesnym. Postaram się też do minimum ograniczyć potrzebę korzystania z konsoli.</p>
+<section id="git" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="git"><span class="header-section-number">2.1</span> Git</h2>
+<p>Żeby móc korzystać z dobrodziejstw Gita, musimy go sobie najpierw zainstalować. Chyba że korzystamy z którejś dystrybucji Linuksa, wtedy mamy Git od początku. Nic dziwnego, Git pierwotnie powstał po to, żeby cała społeczność mogła dołożyć cegiełkę do <a href="https://github.com/torvalds/linux">jądra Linuksa</a>. Jeśli korzystamy z Windowsa, możemy pobrać podstawowy pakiet <a href="https://git-scm.com/">stąd</a>.</p>
+<p>Gdy Git zostanie zainstalowany, musimy dokonać podstawowej konfiguracji, do której <strong>my wykorzystamy GitHub CLI</strong> i zrobimy ją w kolejnym podrozdziale. Jeśli jednak nie chcemy korzystać z jakiegoś powodu z GitHub CLI, możemy się skonfigurować lokalnie. W tym celu otwieramy konsolę (PowerShell lub wiersz polecenia w Windowsie) i wpisujemy tam dwie komendy, jedną po drugiej. <strong>Nie polecam tego robić, jeśli nie ma się powodu.</strong> Pierwsza komenda przypisze do lokalnego Gita nasz email:</p>
+<pre class="{bash}"><code>git config --global user.email "adres@email.com"</code></pre>
+<p>Oczywiście za adres@email.com podstawiamy nasz własny adres. Powinien to być ten sam adres, <strong>którego potem użyjemy do założenia konta na GitHubie</strong>. Komendę zatwierdzamy enterem. Jeśli konsola nie znajduje polecenia <code>git</code>, trzeba sprawdzić, czy na pewno zainstalowaliśmy Git oraz zrestartować komputer. Druga komenda ustawia nazwę użytkownika.</p>
+<pre class="{bash}"><code>git config --global user.name "nazwa-uzytkownika"</code></pre>
+<p>Ponownie, powinna być to taka sama nazwa użytkownika, jaką będziemy mieć na GitHubie. W razie czego zawsze można ją zmienić tą samą komendą.</p>
+</section>
+<section id="github-i-github-cli" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="github-i-github-cli"><span class="header-section-number">2.2</span> GitHub i GitHub CLI</h2>
+<p>Git to protokół działający lokalnie. Innymi słowy nasz własny Git jest w naszym własnym folderze i inni ludzie nie mają do niego dostępu. To jest OK, jeśli chcemy robić kontrolę wersji do własnego użytku. Jeśli jednak chcemy współpracować z innymi albo mieć dostęp do naszego kodu na różnych komputerach, potrzebujemy jakiegoś rodzaju usługi internetowej, z którą każdy może się połączyć, żeby mieć stały dostęp do aktualnej wersji. Podstawowym <em>de facto</em> hostingiem tego typu jest <a href="https://github.com/">GitHub</a>. To jest więc dobry moment, żeby wejść na GitHuba i założyć tam konto.</p>
+<p>Szybkie wtrącenie, które może nam ułatwić życie w późniejszej konfiguracji RStudio. Warto jest w tym momencie wejść w ustawienia RStudio, tam w zakładkę Git/SVN i sprawdzić, czy RStudio podaje jakąś ścieżkę dla SSH key. Jeśli nie, klikamy „Create SSH key” i zatwierdzamy. Nie musimy wpisywać hasła.</p>
+<p>GitHub dysponuje też wersją konsolową, GitHub CLI, która pozwoli nam bezboleśnie połączyć naszego lokalnego Gita z kontem na GitHubie. GitHub CLI pobieramy <a href="https://cli.github.com/">stąd</a>. Po zainstalowaniu (i ewentualnym restarcie komputera) możemy dokonać konfiguracji. W tym celu otwieramy konsolę (PowerShell lub wiersz polecenia w Windowsie) i wpisujemy tam:</p>
+<pre class="{bash}"><code>gh auth login</code></pre>
+<p>Po zatwierdzeniu komendy enterem powinien uruchomić się kreator, który bezboleśnie przeprowadzi nas przez proces logowania. Najpierw wybieramy, że chcemy się się logować do zwykłego GitHub.com. Przesuwamy się strzałkami, zatwierdzamy enterem. Następnie musimy wybrać protokół. Na ogół łatwiejszy do ogarnięcia jest HTTPS, jednak na potrzeby RStudio lepiej jest wybrać SSH. Jeśli wytworzyliśmy wcześniej klucz SSH w RStudio, GitHub CLI zapyta nas teraz, czy wysłać ów klucz na serwer. Tak, to jest dokładnie to, co chcemy zrobić. Następnie klucz tytułujemy jak chcemy (lub klikamy enter, jeśli odpowiada nam tytuł <em>GitHub CLI</em>). Dalej wybieramy logowanie za pomocą przeglądarki. W tym momencie wyświetli nam się ośmioznakowy kod, który powinniśmy skopiować. Jeśli chcesz użyć skrótu klawiaturowego, <strong>nie używaj Ctrl+C</strong>, bo wyłączysz GitHub CLI. Użyj Ctrl+Shift+C. Możesz też użyć myszki. Po kliknięciu enter otworzy nam się okno przeglądarki, gdzie wklejamy wcześniej skopiowany kod i zatwierdzamy.</p>
+<p>W ten sposób dokonaliśmy konfiguracji GitHub CLI. Pozostaje nam jeszcze połączyć GitHub CLI z naszym lokalnym Gitem za pomocą prostej komendy:</p>
+<pre class="{bash}"><code>gh auth git-setup</code></pre>
+</section>
+<section id="github-desktop-i-gitkraken" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="github-desktop-i-gitkraken"><span class="header-section-number">2.3</span> GitHub Desktop i GitKraken</h2>
+<p>Domyślnie Git jest narzędziem konsolowym. Dla większości świeżych użytkowników jest to nie do przejścia. Sam widok okna terminala może wywoływać obfite pocenie, przyspieszenie akcji serca i wyrzut kortyzolu do krwi. Na szczęście istnieją przynajmniej dwa narzędzia, które mogą nam oszczędzić męki uczenia się poleceń&nbsp;konsolowych.</p>
+<p>Pierwsze z nich to <a href="https://desktop.github.com/">GitHub Desktop</a>, który jest intuicyjnym programem pozwalającym nam na szybkie zarządzanie Gitem i synchronizację z GitHubem. Jest to narzędzie darmowe i <a href="https://github.com/desktop/desktop">otwartoźródłowe</a>. Pozwala nam nie tylko zatwierdzać, wysyłać i odbierać zmiany, ale także możemy za jego pomocą zarządzać <em>pull requests</em> (więcej o tym później).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ilustracje/git/GitHub-Desktop.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">GitHub Desktop</figcaption>
+</figure>
+</div>
+<p>Druga możliwość to <a href="https://www.gitkraken.com/">GitKraken</a>. Potężne narzędzie do zarządzania Gitem z wieloma zaawansowanymi możliwościami jak wyświetlanie wykresów commitów i modyfikacje na miejscu. Niestety GitKraken to w wielu funkcjach program płatny, ale dostępny za darmo dla studentów i pracowników naukowych w ramach <a href="https://education.github.com/discount">GitHub Education</a>. Nie jest to jedyna korzyść płynąca z tego programu (inne to np. GitHub Copilot), także polecam się zainteresować. Wiele funkcji jest też dostępnych, jeśli nasze repozytorium jest publiczne.</p>
+<p><img src="ilustracje/git/GitKraken.png" class="img-fluid"></p>
+<p>Możemy wybrać dowolne z tych narzędzi, bo funkcjonalność mają podobną. Jeśli jednak mamy statuts studenta albo pracownika naukowego, polecam GitKraken o tyle, że pozwala dość łatwo rozwiązać specyficzne problemy. Tak czy inaczej, będą to dla nas raczej dodatkowe narzędzia, jeśli planujemy korzystać z Gita głównie do wspólnego pisania kodu R w RStudio, ponieważ RStudio ma już wbudowaną podstawową integrację z Gitem.</p>
+</section>
+</section>
+<section id="podstawowe-pojęcia" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Podstawowe pojęcia</h1>
+<p>Gdy tworzymy projekt w RStudio, możemy zaznaczyć, żeby jednocześnie stworzyć <strong>repozytorium</strong> Git. Repozytorium to w pewnym sensie folder, w którym zgromadzony jest nasz kod. Co odróżnia zwykły folder z kodem od repozytorium Git? Głównie ukryty folder <code>.git</code>, który śledzi zmiany, jakie wprowadzamy w plikach. Jeśli nie zainicjowaliśmy repozytorium od razu, przy tworzeniu projektu, to żaden problem. Możemy to też zrobić później, wybierając opcję stworzenia repozytorium w naszym programie do zarządzania Gitem. Jeśli jest to repozytorium z kodem R, warto po utworzeniu repozytorium jednorazowo użyć w R komendy <code>usethis::git_vaccinate()</code>. Sprawi ona, że Git będzie ignorował pliki, których nie powinniśmy wysyłać na serwer ze względów głównie bezpieczeństwa.</p>
+<p>Jeśli w RStudio otworzymy projekt, który ma założone repozytorium Git, zobaczymy w prawym górnym okienku zakładkę Git. W niej znajdziemy wylistowane pliki, które zmieniliśmy lub dodaliśmy od ostatniego razu. Możemy te pliki zaznaczyć, żeby przygotować zmiany do zatwierdzenia. Taki zatwierdzony zestaw zmian nazywa się <strong><em>commit</em></strong> i jest to też guzik, za pomocą którego ostatecznie dokonamy zatwierdzenia. Taki commit obowiązkowo musi zostać opatrzony skrótową wiadomością z opisem, co zmieniliśmy. Pierwsza linijka to informacja w kilku słowach, ale poniżej możemy dopisać więcej informacji. To samo możemy też zrobić z poziomu wybranego przez nas menedżera Gita.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ilustracje/git/GIt-in-RStudio.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Okienko Git w RStudio</figcaption>
+</figure>
+</div>
+<p>Jak często robić commity? Albo raczej – ile musimy napisać kodu, żeby zrobić z tego commit? To już zależy od nas. Możemy z każdej działającej poprawki robić osobny commit, a możemy robić jeden wielki commit co jakiś czas. Lepiej jednak robić je częściej niż rzadziej. Częste commity mają tę zaletę, że jeśli pojawiłaby się potrzeba wycofania jakichś zmian, to musimy wycofywać całe commity. Tym samym jeśli mamy wielkie commity, możemy dużo stracić. Ostatecznie powinna nam przyświecać zasada, że jedna rzecz to jeden commit. Od nas jednak zależy, co uznamy za „rzecz”.</p>
+<p>Domyślnie commity zapisują się tylko na naszym dysku twardym. Jeśli chcemy wysłać je na GitHuba możemy użyć guzika <strong><em>push</em></strong> w RStudio albo w menedżerze Gita. Żeby ta opcja była dostępna, musimy najpierw opublikować nasze repozytorium, co łatwo zrobić z poziomu GitHub Desktop czy GitKraken.</p>
+<p>Przeciwieństwem <em>push</em> jest <strong><em>pull</em></strong>. <em>Pull</em> służy do pobrania zmian, które wcześniej my albo ktoś inny wysłaliśmy na serwer. Warto jest to robić często, przed rozpoczęciem pracy. <em>Pull</em> wymaga, żebyśmy już mieli repozytorium na dysku. Jeśli chcemy pobrać całe repozytorium, musimy je <strong><em>sklonować</em></strong>. Klonowanie najłatwiej wykonać z poziomu menedżera. W ten sam sposób możemy odwrócić cały proces i najpierw stworzyć repozytorium na github.com, a potem sklonować je na własny dysk.</p>
+<p>Podstawowy workflow jest więc następujący:</p>
+<ol type="1">
+<li><p><em>Pull</em>.</p></li>
+<li><p>Piszemy kod i testujemy.</p></li>
+<li><p><em>Commit</em>.</p></li>
+<li><p><em>Push</em>.</p></li>
+</ol>
+</section>
+<section id="pliki-specjalne" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Pliki specjalne</h1>
+<p>Repozytoria na GitHubie często mają kilka plików specjalnych, z których najważniejsze to <code>README.md</code> i <code>.gitignore</code>. Omówmy sobie oba.</p>
+<section id="gitignore" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="gitignore"><span class="header-section-number">4.1</span> <code>.gitignore</code></h2>
+<p>Plik <code>.gitignore</code> to informacja dla Git, żeby pewne konkretne pliki albo rodzaje plików (np. wszystkie pliki .csv) ignorował. Innymi słowy, żeby nie krzyczał nam, że wykrywa taki plik i trzeba go śledzić. Podstawowe rodzaje plików, które w projektach R powinny zostać zignorowane, dodaje wspomniana już komenda <code>usethis::git_vaccinate()</code>. Jeśli tworzyliśmy repozytorium za pomocą RStudio, stosowny plik <code>.gitignore</code> powinien się już znajdować w repozytorium. Programy do zarządzania Gitem również potrafią nam przygotować taki roboczy plik podczas tworzenia repozytorium.</p>
+<p>Uwaga! Domyślnie pliki i foldery z nazwami zaczynającymi się kropką są <strong>ukryte</strong>. Możemy odkrywać ukryte pliki skrótem klawiszowym Ctrl+H albo za pomocą menu Widok w Windows Explorer.</p>
+<p>Plik <code>.gitignore</code> możemy otworzyć w dowolnym edytorze tekstu. Możemy też w RStudio użyć komendy <code>usethis::edit_git_ignore()</code>, która nam ten plik otworzy. Możemy dopisać tam nazwy lub ścieżki plików, które Git ma ignorować. Możemy też dopisać <code>*.csv</code>, żeby zignorować wszystkie pliki .csv. Gwiazdka <code>*</code> oznacza dowolne znaki. Możemy również dodawać pojedyncze pliki w R za pomocą komendy <code>usethis::use_git_ignore()</code>.</p>
+</section>
+<section id="readme.md" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="readme.md"><span class="header-section-number">4.2</span> <code>README.md</code></h2>
+<p>Plik README to jest to, co wyświetla się, jak na GitHubie wejdziemy na stronę repozytorium. Możemy tam zapisywać podstawowe informacje dla odbiorców naszego repozytorium. Sam plik korzysta z formatowania GitHub Markdown, którego opis znajdziemy <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">tutaj</a>. Jeśli piszemy analizę w R, warto użyć komendy <code>usethis::use_readme_md()</code>, żeby taki wzorcowy przykładowy plik wytworzyć.</p>
+<p>Dla kodu w R warto rozważyć, czy nie przerzucić się na plik <code>README.Rmd</code> wytwarzany przez <code>usethis::use_readme_rmd()</code>. Pozwala on do pliku README dorzucać np. bloki kodu R. Dla publicznego kodu to szczególnie cenne, bo możemy pokazać przykładowe działanie naszych funkcji. Wtedy edytujemy plik <code>README.Rmd</code> zamiast <code>Readme.md</code>, zaś przed samym wypchnięciem używamy funkcji <code>devtools::build_readme()</code>. Generuje to aktualną wersję z rozszerzeniem .md, którą GitHub potrafi odczytać. Więcej o składni w plikach R Markdown przeczytamy <a href="https://rmarkdown.rstudio.com/lesson-1.html">tutaj</a>. Obecnie standard R Markdown jest systematycznie zastępowany przez <a href="https://quarto.org/">Quarto</a>, ale w chwili, gdy to piszę, <code>usethis</code> <a href="https://github.com/r-lib/usethis/issues/1671">nie planuje go wdrażać</a>. O możliwości korzystania z <code>README.Rmd</code> więcej napiszę we wpisie o pakietach. Kiedy już powstanie.</p>
+</section>
+</section>
+<section id="github-flow-gałęzie-forks-i-pull-requests" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> GitHub Flow, gałęzie, <em>forks</em> i <em>pull requests</em></h1>
+<p>Na tym, co podałem wyżej, można jechać bardzo długo. By jednak dopełnić obrazu podstaw Git (bo Git może znacznie więcej, to naprawdę tylko liźnięcie powierzchni), musimy omówić sobie jeszcze trzy terminy.</p>
+<p>Możemy stworzyć całe oddzielne wersje naszego programu, które mogą rozwijać się niezależnie. Noszą one nazwę <strong>gałęzi</strong> (<em>branches</em>). Po co nam coś takiego? Typowe zastosowanie to utrzymywanie na głównej gałęzi (zazwyczaj nazwanej <em>main</em> albo <em>master</em>) stabilnej wersji naszego programu, zaś rozwijanie go na oddzielnej gałęzi (zazwyczaj nazwanej <em>dev</em>). Dzięki temu użytkownicy cały czas mają dostęp do takiej wersji programu, która na pewno działa, zaś my możemy się bawić w środowisku, które z definicji może być niestabilne.</p>
+<p>Między gałęziami możemy przeskakiwać za pomocą menedżera Gita albo bezpośrednio w RStudio. Tuż koło znaczka odświeżania znajdziemy wybierak gałęzi. Różowy guzik tuż obok pozwala nam wytworzyć nową gałąź. Takie nowe gałęzie również wymagają publikacji.</p>
+<p>Gdy przychodzi czas, możemy nowości z gałęzi rozwojowej połączyć z gałęzią główną (<strong><em>merge</em></strong>) i w ten sposób np. wydać nową wersję naszego programu. W przypadku analiz statystycznych nie jest to tak bardzo użyteczne, ponieważ analiza statystyczna zazwyczaj jest do użytku wewnętrznego, więc nie potrzebujemy oddzielać wersji stabilnej od niestabilnej. Ponadto to zazwyczaj względnie prosty skrypt. Użyteczność gałęzi ujawnia się jednak w inny sposób, jeśli korzystamy w naszej pracy z <a href="https://docs.github.com/en/get-started/quickstart/github-flow">GitHub Flow</a>, czyli wizji tego, jak używać Gita, którą proponuje nam GitHub.</p>
+<p>Zgodnie z GitHub Flow, osobną gałąź powinniśmy wytworzyć na <strong>każde zadanie do wykonania</strong>. Jest to pierwszy krok każdych zmian w kodzie. W warunkach analiz statystycznych, możemy wytwarzać takie gałęzie jak <code>czyszczenie-danych</code>, <code>statystyki-opisowe</code> czy <code>modelowanie</code>. Po pierwsze pozwala to na uniknięcie problemu, o którym mówiłem na początku – możemy przypadkiem zepsuć kod, a wtedy zepsujemy go dla wszystkich. Osobna gałąź sprawia, że główny kod jest bezpieczny. Drugi powód jest jednak znacznie ciekawszy.</p>
+<p>Gdy już wykonamy swoją pracę na oddzielnej gałęzi, musimy scalić ją z główną gałęzią. Robimy to przez otwarcie <strong><em>pull request</em></strong> (widziałem kiedyś rozkazująco brzmiące polskie tłumaczenie „żądanie ściągnięcia”). Pull request to niejako wpis na „forum”, gdzie proponujemy nasz kod. Zazwyczaj opisujemy tam, co też zmieniliśmy w kodzie i dlaczego warto to scalić. Teraz nasz współpracownik (albo właściciel repozytorium) może <strong>przejrzeć nasze zmiany, dodać sugestie, skomentować nawet konkretne linijki w kodzie</strong>, a na koniec wystawić recenzję przyjmującą, odrzucającą bądź neutralną. W zależności od ustawień repozytorium taka recenzja może być konieczna, ale mogą to też dyktować wewnętrzne zasady (kodeks honorowy). Jeśli wszystko jest ok, można jednym kliknięciem scalić naszą roboczą gałąź z gałęzią główną (albo z gałęzią <em>dev</em>, a dopiero, jak się trochę tych zmian nazbiera, scalić <em>dev</em> z gałęzią główną).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ilustracje/git/pull-request.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Przykładowa rozmowa o fragmencie kodu w ramach pull request</figcaption>
+</figure>
+</div>
+<p>Gdy dyskusje między współpracownikami zakończą się, a gałąź zostanie scalona, można ją spokojnie usunąć. Więcej o pracy z użyciem GitHub Flow można przeczytać <a href="https://docs.github.com/en/get-started/quickstart/github-flow">tutaj</a>.</p>
+<p>Bardzo podobny schemat występuje, jeśli chcemy wprowadzić zmiany w cudzym kodzie. Cała filozofia Open Source polega na tym, że każdy może coś dopisać do programu. Nie oznacza to jednak, że właściciel danego repozytorium nie ma nad nim żadnej kontroli. Kontrolę zapewniają mu właśnie pull requests, które tylko on(a) może scalić z główną gałęzią. Na przykład każdy może poprawić moje literówki, jeśli jakieś tu znajdzie, zmieniając odpowiednie fragmenty w pliku .qmd w <a href="https://github.com/jakub-jedrusiak/nieobliczalne">repozytorium tej strony</a>. Jednak nie możemy zmieniać treści cudzych plików tak po prostu. Najpierw musimy wytworzyć własną kopię danego repozytorium, czyli <strong><em>fork</em></strong>. Możemy to zrobić jednym kliknięciem odpowiedniego przycisku na GitHubie. Do naszej kopii mamy pełny dostęp, także możemy robić commity. Gdy taki commit zatwierdzimy i wejdziemy stronę naszego forku na github.com (lub w menedżerze Gita), zostanie nam zaproponowane, żeby otworzyć pull request z naszymi zmianami. Gdy nasz pull request zostanie scalony, cały fork możemy skasować, jeśli nie planujemy dalszych zmian.</p>
+<p>GitHub Flow to dobry standard, ale nadmiernie skomplikowany, jeśli nasze repozytorium jest małe, prywatne i/lub jednoosobowe. W takich repozytoriach możemy chcieć scalać nasze zmiany od razu z główną gałęzią, która często jest jedyna. Podobnie pilne zmiany, łatki bezpieczeństwa czy wręcz przeciwnie, minimalne zmiany, na które po prostu nie warto tworzyć nowej gałęzi.</p>
+</section>
+<section id="rozwiązywanie-konfliktów" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Rozwiązywanie konfliktów</h1>
+<p>Przy scalaniu może się okazać, że nie jest ono możliwe. Na przykład dwie osoby zmieniły tę samą linijkę kodu (powiedzmy, że dodali biblioteki) i teraz Git nie wie, co z tym zrobić. Na ten moment GitHub nie jest taki mądry, żeby proponować sposoby scalenia konfliktujących plików<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, także sami musimy zdecydować, czy zachować linijkę z jednej wersji, z drugiej wersji albo też ręcznie połączyć je w jedną.</p>
+<p>GitHub sam nas poinformuje, że konflikt jest, w których jest linijkach, a także da nam możliwość ten konflikt rozwiązać. Jak to zrobić? Kasujemy wszystkie linijki, do których GitHub dodał <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> lub <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> i zapisujemy taką wersję kodu, jaką chcemy, żeby znalazła się w ostatecznej wersji. Na koniec klikamy „Mark as resolved” na górze edytora.</p>
+<p>W przypadku pojawienia się konfliktów łatwiej jest rozwiązywać je za pomocą menedżera Gita niż na GitHubie.</p>
+</section>
+<section id="podsumowanie" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Podsumowanie</h1>
+<p>Git to złożony temat, który tutaj tylko liznęliśmy. Mam jednak nadzieję, że takie liźnięcie wystarczy, by dostrzec zalety Gita, ogólną zasadę działania oraz być w stanie w podstawowy chociaż sposób ten standard wykorzystać. Głębszą wiedzę można zdobyć – standardowo – na StackOverflow, YouTube, a jeśli chcemy sięgnąć głębiej w meandry Gita, możemy przeczytać dostępną za darmo i w większości przetłumaczoną na język polski książkę <a href="https://git-scm.com/book/pl/v2">Pro Git</a>. Podsumujmy!</p>
+<ol type="1">
+<li><p>Git to system kontroli wersji, stworzony specjalnie do współpracy przy pisaniu kodu.</p></li>
+<li><p>Podstawowym sposobem używania Gita jest <a href="https://docs.github.com/en/get-started/quickstart/github-flow">GitHub Flow</a>.</p></li>
+<li><p>Najpierw tworzymy <strong>gałąź</strong>, na której chcemy napisać kod spełniający określony cel.</p></li>
+<li><p>Piszemy zmiany w kodzie, które potem zatwierdzamy jako <strong>commits</strong>.</p></li>
+<li><p>Commits wysyłamy na serwer za pomocą <strong><em>push</em></strong> i pobieramy z serwera za pomocą <strong><em>pull</em></strong>.</p></li>
+<li><p>Gdy dokończymy dzieła, otwieramy <strong>pull request</strong>.</p></li>
+<li><p>Jeśli wszystko jest OK, robimy <strong>merge</strong>.</p></li>
+<li><p>W małych albo prywatnych repozytoriach zazwyczaj nie potrzebujemy wielu gałęzi ani pull requests. Szybkie i ważne poprawki też możemy od razu wrzucać na główną gałąź.</p></li>
+</ol>
+
+
+</section>
+<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Jestem przekonany, że to kwestia czasu, patrząc na to, jak już teraz działa GitHub Copilot i jak zapowiada się GitHub Copilot X. Być może, gdy to czytasz, konflikty potrafią się już rozwiązywać same.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Skopiowano!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Skopiowano!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, function() {
+      let href = xref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note !== null) {
+        if (id.startsWith('sec-')) {
+          // Special case sections, only their first couple elements
+          const container = document.createElement("div");
+          if (note.children && note.children.length > 2) {
+            for (let i = 0; i < 2; i++) {
+              container.appendChild(note.children[i].cloneNode(true));
+            }
+            return container.innerHTML
+          } else {
+            return note.innerHTML;
+          }
+        } else {
+          return note.innerHTML;
+        }
+      } else {
+        return "";
+      }
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="jakub-jedrusiak/nieobliczalne" data-repo-id="R_kgDOHBIy6A" data-category="General" data-category-id="DIC_kwDOHBIy6M4CUvlw" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="dark">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
