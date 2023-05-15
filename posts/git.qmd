@@ -1,0 +1,36 @@
+---
+title: "Jak wspólnie pisać analizę statystyczną?"
+subtitle: "Git, GitHub i integracja z RStudio"
+description: "Przestawienie się z programu typu SPSS na R daje nam wiele korzyści, w tym umożliwia łatwe wspólne pisanie analiz statystycznych. W końcu kod to tekst, skoro możemy w Google Docs wspólnie tworzyć dokumenty, to czemu nie mielibyśmy wspólnie pisać analizy statystycznej? Do współpracy przy kodzie nie wykorzystujemy jednak Google Docs, ale specjalny protokół znany jako Git."
+image: ./headers/git.webp
+categories:
+    - Narzędzia
+    - R
+draft: true
+---
+
+Kiedyś (a niekiedy do dziś) wspólne pisanie dokumentów czy prezentacji polegało na wysyłaniu sobie serii załączników mailem. Gdy zespół liczył więcej niż 2 osoby, szybko kolejne wersje danego pliku stawały się trudne do śledzenia. Podobnie gdy pisaliśmy coś na więcej niż jednym komputerze. Te problemy w większości odeszły w niepamięć, gdy nastała era chmury i współpracy online. Znacznie wcześniej powstawały jednak inne rozwiązania tego problemu -- systemy kontroli wersji, spośród których monopol na rynku zdobyło otwartoźródłowe dzieło Linusa Torvaldsa (twórcy Linuksa) o nazwie Git.
+
+# Systemy kontroli wersji
+
+Systemy kontroli wersji najogólniej polegają na tym, że śledzą zmiany w plikach. Jeśli dopisaliśmy akapit do naszego pliku i zatwierdziliśmy tę zmianę, system kontroli wersji będzie wiedział kto i kiedy wprowadził daną zmianę. Jeśli kilku użytkowników wprowadziło zmiany, które ze sobą nie konfliktują, system kontroli wersji potrafi takie zmienione pliki połączyć w jeden. Możemy dzięki temu prześledzić historię danego pliku, a także upewnić się, że wszyscy pracują na najnowszej wersji.
+
+Jednocześnie jest to zrobione w sposób dostosowany do pisania kodu. Gdy piszemy kod, zazwyczaj wprowadzamy jakieś zmiany, testujemy, zazwyczaj nie działa, poprawiamy i tak aż nie zadziała. Jeśli mielibyśmy jeden wspólny plik, jak w Google Docs, nasze testy skutecznie uniemożliwiłyby wszystkim innym korzystanie z naszego kodu. Dlatego właśnie Git wymaga od nas, żeby zmiany w kodzie zatwierdzać i dopiero wtedy możemy udostępnić je innym. Dzięki temu tworzy się balans między współpracą i niewchodzeniem sobie w paradę.
+
+Powstaje nam więc stabilny workflow – wprowadź poprawki w kodzie, przetestuj, zatwierdź, opublikuj. Jak to zrobić w praktyce?
+
+# Przygotowanie
+
+Przygotowanie do korzystania z Gita może wyglądać bardzo różnie. Tutaj zaproponuję serię programów, które, mam nadzieję, uczynią ten proces jak najbardziej bezbolesnym. Postaram się też do minimum ograniczyć potrzebę korzystania z konsoli.
+
+## Git
+
+Żeby móc korzystać z dobrodziejstw Gita, musimy go sobie najpierw zainstalować. Chyba że korzystamy z dystrybucji Linuksa, wtedy mamy Git od początku. Nic dziwnego, Git powstał po to, żeby cała społeczność mogła dołożyć cegiełkę do [jądra Linuksa](https://github.com/torvalds/linux). Jeśli korzystamy z Windowsa, możemy pobrać podstawowy pakiet [stąd](https://git-scm.com/).
+
+## GitHub i GitHub CLI
+
+Git to protokół działający lokalnie. Innymi słowy nasz własny Git jest w naszym własnym folderze i inni ludzie nie mają do niego dostępu.
+
+## GitHub Desktop i GitKraken
+
+Domyślnie Git jest narzędziem konsolowym. Dla większości świeżych użytkowników jest to nie do przejścia. Sam widok okna terminala może wywoływać obfite pocenie, przyspieszenie akcji serca i wyrzut kortyzolu do krwi. Na szczęście istnieją przynajmniej dwa narzędzia, które mogą nam oszczędzić męki uczenia się poleceń konsolowych. Pierwsze z nich to [GitHub Desktop](https://desktop.github.com/), który jest intuicyjnym programem pozwalającym nam na szybkie zarządzanie Gitem i synchronizację z GitHubem. Jest to narzędzie darmowe i [otwartoźródłowe](https://github.com/desktop/desktop).
