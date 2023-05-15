@@ -69,7 +69,7 @@ Pierwsze z nich to [GitHub Desktop](https://desktop.github.com/), który jest in
 
 ![](ilustracje/git/GitHub-Desktop.png)
 
-Druga możliwość to [GitKraken](https://www.gitkraken.com/). Potężne narzędzie do zarządzania Gitem z wieloma zaawansowanymi możliwościami jak wyświetlanie wykresów commitów i modyfikacje na miejscu. Niestety GitKraken to program płatny, ale dostępny za darmo dla studentów i pracowników naukowych w ramach [GitHub Education](https://education.github.com/discount). Nie jest to jedyna korzyść płynąca z tego programu (inne to np. GitHub Copilot), także polecam się zainteresować.
+Druga możliwość to [GitKraken](https://www.gitkraken.com/). Potężne narzędzie do zarządzania Gitem z wieloma zaawansowanymi możliwościami jak wyświetlanie wykresów commitów i modyfikacje na miejscu. Niestety GitKraken w wielu funkcjach to program płatny, ale dostępny za darmo dla studentów i pracowników naukowych w ramach [GitHub Education](https://education.github.com/discount). Nie jest to jedyna korzyść płynąca z tego programu (inne to np. GitHub Copilot), także polecam się zainteresować. Większość funkcji jest jednak dostępna za darmo dla publicznych repozytoriów.
 
 ![](ilustracje/git/GitKraken.png)
 
@@ -127,7 +127,7 @@ Gdy przychodzi czas, możemy połączyć nasze gałęzie i w ten sposób np. wyd
 
 Zgodnie z GitHub Flow, osobną gałąź powinniśmy wytworzyć na **każde zadanie do wykonania**. W warunkach analiz statystycznych, możemy wytwarzać takie gałęzie jak `czyszczenie-danych`, `statystyki-opisowe` czy `modelowanie`. Po pierwsze pozwala to na uniknięcie problemu, o którym mówiłem na początku -- możemy przypadkiem zepsuć kod, a wtedy zepsujemy go dla wszystkich. Osobna gałąź sprawia, że główny kod jest bezpieczny. Drugi powód jest jednak znacznie ciekawszy.
 
-Gdy już wykonamy swoją pracę na oddzielnej gałęzi, musimy scalić ją z główną gałęzią. Robimy to przez otwarcie ***pull request*** (widziałem kiedyś rozkazująco brzmiące polskie tłumaczenie „żądanie ściągnięcia\"). Pull request to niejako wpis na „forum\", gdzie proponujemy nasz kod. Zazwyczaj opisujemy tam, co też zmieniliśmy w kodzie i dlaczego warto to scalić. Teraz nasz współpracownik może **przejrzeć nasze zmiany, dodać sugestie, skomentować nawet konkretne linijki w kodzie**, a na koniec wystawić recenzję. W zależności od ustawień repozytorium taka recenzja może być konieczna, ale mogą to też dyktować wewnętrzne zasady (kodeks honorowy). Jeśli wszystko jest ok, można jednym kliknięciem scalić naszą roboczą gałąź z gałęzią główną (albo *dev*, a dopiero, jak się trochę tych zmian nazbiera, scalić *dev* z gałęzią główną).
+Gdy już wykonamy swoją pracę na oddzielnej gałęzi, musimy scalić ją (***merge***) z główną gałęzią. Robimy to przez otwarcie ***pull request*** (widziałem kiedyś rozkazująco brzmiące polskie tłumaczenie „żądanie ściągnięcia\"). Pull request to niejako wpis na „forum\", gdzie proponujemy nasz kod. Zazwyczaj opisujemy tam, co też zmieniliśmy w kodzie i dlaczego warto to scalić. Teraz nasz współpracownik może **przejrzeć nasze zmiany, dodać sugestie, skomentować nawet konkretne linijki w kodzie**, a na koniec wystawić recenzję. W zależności od ustawień repozytorium taka recenzja może być konieczna, ale mogą to też dyktować wewnętrzne zasady (kodeks honorowy). Jeśli wszystko jest ok, można jednym kliknięciem scalić naszą roboczą gałąź z gałęzią główną (albo *dev*, a dopiero, jak się trochę tych zmian nazbiera, scalić *dev* z gałęzią główną).
 
 ![Przykładowa rozmowa o fragmencie kodu w ramach pull request](ilustracje/git/pull-request.png)
 
@@ -135,12 +135,34 @@ Gdy dyskusje między współpracownikami zakończą się, a gałąź zostanie sc
 
 Bardzo podobny schemat występuje, jeśli chcemy wprowadzić zmiany w cudzym kodzie. Cała filozofia Open Source polega na tym, że każdy może coś dopisać do programu. Nie oznacza to jednak, że właściciel danego repozytorium nie ma nad tym żadnej kontroli. Kontrolę zapewniają mu właśnie pull requests, które tylko on(a) może scalić z główną gałęzią. Na przykład każdy może poprawić moje literówki, jeśli jakieś tu znajdzie, zmieniając odpowiednie fragmenty w pliku .qmd w [repozytorium tej strony](https://github.com/jakub-jedrusiak/nieobliczalne). Jednak nie możemy zmieniać treści cudzych plików tak po prostu. Najpierw musimy wytworzyć własną kopię danego repozytorium, czyli ***fork***. Możemy to zrobić jednym kliknięciem na GitHubie. Do naszej kopii mamy pełny dostęp, także możemy robić commity. Gdy taki commit zrobimy i wejdziemy na nasze repozytorium na github.com, zostanie nam zaproponowane, żeby otworzyć pull request. Cały fork możemy potem skasować.
 
+GitHub Flow to dobry standard, ale nadmiernie skomplikowany, jeśli nasze repozytorium jest małe, prywatne i/lub jednoosobowe. W takich repozytoriach możemy chcieć scalać nasze zmiany od razu z główną gałęzią, która często jest jedyna. Tak samo pilne zmiany, łatki bezpieczeństwa czy wręcz przeciwnie, minimalne zmiany, na które po prostu nie warto tworzyć nowej gałęzi.
+
 # Rozwiązywanie konfliktów
 
 Przy scalaniu może się okazać, że scalenie nie jest możliwe. Na przykład dwie osoby zmieniły tę samą linijkę kodu (powiedzmy, że dodali biblioteki) i teraz Git nie wie, co z tym zrobić. Na ten moment GitHub nie jest taki mądry, żeby proponować sposoby scalenia konfliktujących plików[^1], także sami musimy zdecydować, czy zachować linijkę z jednej wersji, z drugiej wersji albo też ręcznie połączyć je w jedną.
 
 [^1]: Jestem przekonany, że to kwestia czasu, patrząc na to, jak już teraz działa GitHub Copilot i jak zapowiada się GitHub Copilot X. Być może, gdy to czytasz, konflikty potrafią się już rozwiązywać same.
 
-GitHub sam nas poinformuje, że konflikt jest, w których on jest linijkach, a także da nam możliwość ten konflikt rozwiązać. Jak to zrobić? Kasujemy wszystkie linijki, do których GitHub dodał `<<<<<<<`, `=======` lub `>>>>>>>` i zapisujemy taką wersję kodu, jaka chcemy, żeby znalazła się w ostatecznej wersji.
+GitHub sam nas poinformuje, że konflikt jest, w których on jest linijkach, a także da nam możliwość ten konflikt rozwiązać. Jak to zrobić? Kasujemy wszystkie linijki, do których GitHub dodał `<<<<<<<`, `=======` lub `>>>>>>>` i zapisujemy taką wersję kodu, jaka chcemy, żeby znalazła się w ostatecznej wersji. Na koniec klikamy "Mark as resolved" na górze.
+
+W przypadku pojawenia się konfliktów łatwiej jest rozwiązywać je za pomocą menedżera Gita niż na GitHubie.
 
 # Podsumowanie
+
+Git to złożony temat, kóry tutaj tylko liznęliśmy. Mam jednak nadzieję, że takie liźnięcie wystarczy, by dostrzec zalety Gita, ogólną zasadę działania oraz być w stanie w podstawowy chociaż sposób wykorzystać. Głębszą wiedzę można, standardowo na StackOverflow, YouTube, a jeśli chcemy sięgnąć głębiej w meandry Gita, możemy przeczytać dostępną za darmo i w większości przetłumaczoną na polski książkę [Pro Git](https://git-scm.com/book/pl/v2). Podsumujmy!
+
+1. Git to system kontroli wersji, stworzony specjalnie do współpracy przy pisaniu kodu.
+
+2. Podstawowym sposobem używania Gita jest [GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow).
+
+3. Najpierw tworzymy **gałąź**, na której chcemy napisać kod, spełniający określony cel.
+
+4. Piszemy zmiany w kodzie, które potem zatwierdzamy jako **commits**.
+
+5. Commits wysyłamy na serwer za pomocą ***push*** i pobieramy z serwera za pomocą ***pull***.
+
+6. Gdy dokończymy dzieła, otwieramy **pull request**.
+
+7. Jeśli wsztystko jest OK, robimy **merge**.
+
+8. W małych albo prywatnych repozytoriach nie potrzbujemy wielu gałęzi ani pull requests. Szybkie i ważne poprawki też możemy od razu wrzucać na główną gałąź.
