@@ -1,0 +1,10 @@
+---
+title: "PsyToolKit"
+subtitle: "Darmowe narzędzie do eksperymentów online"
+description: ""
+image: ./headers/psytoolkit.webp
+categories:
+    - Narzędzia
+    - Nauka
+draft: true
+---
