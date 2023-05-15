@@ -81,6 +81,8 @@ Gdy tworzymy projekt w RStudio, możemy zaznaczyć, żeby jednocześnie stworzy�
 
 Jeśli w RStudio otworzymy projekt z repozytorium Git, zobaczymy w prawym górnym okienku zakładkę Git. W niej pliki, które zmieniliśmy lub dodaliśmy od ostatniego razu. Możemy te pliki zaznaczyć, żeby zatwierdzić wprowadzone zmiany. Taki zatwierdzony zestaw zmian nazywa się ***commit***. Taki commit obowiązkowo musi zostać opatrzony skrótową wiadomością z opisem, co zmieniliśmy. Pierwsza linijka to skrótowa informacja w kilku słowach, ale możemy też dodać więcej informacji po zostawieniu wolnej linijki. To samo możemy też zrobić z poziomu wybranego przez nas menedżera Gita.
 
+![Okienko Git w RStudio](ilustracje/git/GIt-in-RStudio.png)
+
 Jak często robić commity? To już zależy od nas. Możemy z każdej działającej poprawki robić osobny commit, a możemy robić jeden wielki commit co jakiś czas. Najlepiej jednak robić je częściej niż rzadziej. Częste commity mają tę zaletę, że w razie czego możemy wycofać jakieś commity. W razie takiej potrzeby, częstsze commity to mniej korzystnego kodu zostaje utracone. Ostatecznie powinna nam przyświecać zasada, że jedna rzecz to jeden commit. Od nas jednak zależy, co uznamy za rzecz.
 
 Domyślnie commity zapisują się tylko na naszym dysku twardym. Jeśli chcemy wysłać je na GitHuba możemy użyć guzika ***push*** w RStudio albo w menedżerze Gita. Żeby ta opcja była dostępna, musimy najpierw opublikować nasze repozytorium, co łatwo zrobić z poziomu GitHub Desktop czy GitKraken.
@@ -89,13 +91,13 @@ Przeciwieństwem *push* jest ***pull***. *Pull* służy do pobrania zmian, któr
 
 Podstawowy workflow jest więc następujący:
 
-1. *Pull*.
+1.  *Pull*.
 
-2. Piszemy kod i testujemy.
+2.  Piszemy kod i testujemy.
 
-3. *Commit*.
+3.  *Commit*.
 
-4. *Push*.
+4.  *Push*.
 
 # Pliki specjalne
 
@@ -109,4 +111,36 @@ Możemy otworzyć ten plik w dowolnym edytorze tekstu. Możemy też w RStudio u�
 
 ## `README.md`
 
-Plik README to jest to, co wyświietla się, jak na GitHubie wejdziemy na stronę repozytorium. Możemy tam zapisywać podstawowe informacje dla odbiorców naszego repozytorium. Sam plik korzysta z formatowania GitHub Markdown, którego opis znajdziemy [tutaj](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax). Jeśli piszemy analizę w R, warto użyć komendy `usethis::use_readme_md()`, żeby taki wzorcowy przykładowy plik wytworzyć. Dla kodu w R warto rozważyć, czy nie przerzucić się na plik README.Rmd wytwarzany przez `usethis::use_readme_rmd()`. Pozwala on do pliku README dorzucać np. bloki kodu R. Dla publicznego kodu to szczególnie cenne, bo możemy pokazać przykładowe działanie naszych funkcji. Wtedy edytujemy plik README.Rmd, zaś przed samym wypchnięciem używamy funkcji `devtools::build_readme()`, żeby przerobić go na README.md. Wtedy korzystamy ze składni R Markdown.
+Plik README to jest to, co wyświietla się, jak na GitHubie wejdziemy na stronę repozytorium. Możemy tam zapisywać podstawowe informacje dla odbiorców naszego repozytorium. Sam plik korzysta z formatowania GitHub Markdown, którego opis znajdziemy [tutaj](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax). Jeśli piszemy analizę w R, warto użyć komendy `usethis::use_readme_md()`, żeby taki wzorcowy przykładowy plik wytworzyć.
+
+Dla kodu w R warto rozważyć, czy nie przerzucić się na plik README.Rmd wytwarzany przez `usethis::use_readme_rmd()`. Pozwala on do pliku README dorzucać np. bloki kodu R. Dla publicznego kodu to szczególnie cenne, bo możemy pokazać przykładowe działanie naszych funkcji. Wtedy edytujemy plik README.Rmd, zaś przed samym wypchnięciem używamy funkcji `devtools::build_readme()`, żeby przerobić go na README.md. Więcej o składni w plikach R Markdown przeczytamy [tutaj](https://rmarkdown.rstudio.com/lesson-1.html). Obecnie standard R Markdown jest systematycznie zastępowany przez [Quarto](https://quarto.org/), ale w chwili, gdy to piszę, `usethis` [nie planuje go wdrażać](https://github.com/r-lib/usethis/issues/1671). Więcej o tym napiszę, gdy będę pisał o pisaniu pakietów w R.
+
+# GitHub Flow, gałęzie, *forks* i *pull requests*
+
+Na tym, co podałem wyżej, można jechać bardzo długo. By jednak dopełnić obrazu podstaw Git (bo Git może znacznie więcej, to naprawdę tylko liźnięcie powierzchnii), musimy omówić sobie jeszcze trzy terminy.
+
+Poza tym, że nasz program może stopniowo się rozwijać, możemy stworzyć całe oddzielne wersje naszego programu, które mogą rozwijać się niezależnie. Noszą one nazwę **gałęzi** (*branches*). Po co nam coś takiego? Typowe zastosowanie to utrzymywanie na głównej gałęzi (zazwyczaj nazwanej *main* albo *master*) stabilnej wersji naszego programu, zaś rozwijanie go na oddzielnej gałęzi (zazwyczaj nazwanej *dev*). Dzięki temu użytkownicy cały czas mają dostęp do programu, który na pewno działa, zaś my możemy się bawić w środowisku, które może być niestabilne.
+
+Gałęzie możemy zmieniać za pomocą menedżera Gita albo bezpośrednio w RStudio. Tuż koło znaczka odświeżania znajdziemy wybierak gałęzi. Różowy guzik tuż obok pozwala nam wytworzyć nową gałąź.
+
+Gdy przychodzi czas, możemy połączyć nasze gałęzie i w ten sposób np. wydać nową wersję naszego programu. W przypadku analiz statystycznych nie jest to tak bardzo użyteczne, ponieważ analiza statystyczna zazwyczaj jest do użytku wewnętrznego, więc nie potrzebujemy oddzielać wersji stabilnej od niestabilnej. Ponadto to zazwyczaj względnie prosty skrypt. Użyteczność gałęzi ujawnia się jednak w inny sposób, jeśli korzystamy w naszej pracy z [GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow), czyli wizji tego, jak używać Gita, jaką proponuje nam GitHub.
+
+Zgodnie z GitHub Flow, osobną gałąź powinniśmy wytworzyć na **każde zadanie do wykonania**. W warunkach analiz statystycznych, możemy wytwarzać takie gałęzie jak `czyszczenie-danych`, `statystyki-opisowe` czy `modelowanie`. Po pierwsze pozwala to na uniknięcie problemu, o którym mówiłem na początku -- możemy przypadkiem zepsuć kod, a wtedy zepsujemy go dla wszystkich. Osobna gałąź sprawia, że główny kod jest bezpieczny. Drugi powód jest jednak znacznie ciekawszy.
+
+Gdy już wykonamy swoją pracę na oddzielnej gałęzi, musimy scalić ją z główną gałęzią. Robimy to przez otwarcie ***pull request*** (widziałem kiedyś rozkazująco brzmiące polskie tłumaczenie „żądanie ściągnięcia\"). Pull request to niejako wpis na „forum\", gdzie proponujemy nasz kod. Zazwyczaj opisujemy tam, co też zmieniliśmy w kodzie i dlaczego warto to scalić. Teraz nasz współpracownik może **przejrzeć nasze zmiany, dodać sugestie, skomentować nawet konkretne linijki w kodzie**, a na koniec wystawić recenzję. W zależności od ustawień repozytorium taka recenzja może być konieczna, ale mogą to też dyktować wewnętrzne zasady (kodeks honorowy). Jeśli wszystko jest ok, można jednym kliknięciem scalić naszą roboczą gałąź z gałęzią główną (albo *dev*, a dopiero, jak się trochę tych zmian nazbiera, scalić *dev* z gałęzią główną).
+
+![Przykładowa rozmowa o fragmencie kodu w ramach pull request](ilustracje/git/pull-request.png)
+
+Gdy dyskusje między współpracownikami zakończą się, a gałąź zostanie scalona, można ją spokojnie usunąć. Więcej o pracy z użyciem GitHub Flow można przeczytać [tutaj](https://docs.github.com/en/get-started/quickstart/github-flow).
+
+Bardzo podobny schemat występuje, jeśli chcemy wprowadzić zmiany w cudzym kodzie. Cała filozofia Open Source polega na tym, że każdy może coś dopisać do programu. Nie oznacza to jednak, że właściciel danego repozytorium nie ma nad tym żadnej kontroli. Kontrolę zapewniają mu właśnie pull requests, które tylko on(a) może scalić z główną gałęzią. Na przykład każdy może poprawić moje literówki, jeśli jakieś tu znajdzie, zmieniając odpowiednie fragmenty w pliku .qmd w [repozytorium tej strony](https://github.com/jakub-jedrusiak/nieobliczalne). Jednak nie możemy zmieniać treści cudzych plików tak po prostu. Najpierw musimy wytworzyć własną kopię danego repozytorium, czyli ***fork***. Możemy to zrobić jednym kliknięciem na GitHubie. Do naszej kopii mamy pełny dostęp, także możemy robić commity. Gdy taki commit zrobimy i wejdziemy na nasze repozytorium na github.com, zostanie nam zaproponowane, żeby otworzyć pull request. Cały fork możemy potem skasować.
+
+# Rozwiązywanie konfliktów
+
+Przy scalaniu może się okazać, że scalenie nie jest możliwe. Na przykład dwie osoby zmieniły tę samą linijkę kodu (powiedzmy, że dodali biblioteki) i teraz Git nie wie, co z tym zrobić. Na ten moment GitHub nie jest taki mądry, żeby proponować sposoby scalenia konfliktujących plików[^1], także sami musimy zdecydować, czy zachować linijkę z jednej wersji, z drugiej wersji albo też ręcznie połączyć je w jedną.
+
+[^1]: Jestem przekonany, że to kwestia czasu, patrząc na to, jak już teraz działa GitHub Copilot i jak zapowiada się GitHub Copilot X. Być może, gdy to czytasz, konflikty potrafią się już rozwiązywać same.
+
+GitHub sam nas poinformuje, że konflikt jest, w których on jest linijkach, a także da nam możliwość ten konflikt rozwiązać. Jak to zrobić? Kasujemy wszystkie linijki, do których GitHub dodał `<<<<<<<`, `=======` lub `>>>>>>>` i zapisujemy taką wersję kodu, jaka chcemy, żeby znalazła się w ostatecznej wersji.
+
+# Podsumowanie
