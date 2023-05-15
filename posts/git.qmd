@@ -69,6 +69,44 @@ Pierwsze z nich to [GitHub Desktop](https://desktop.github.com/), który jest in
 
 ![](ilustracje/git/GitHub-Desktop.png)
 
-Druga możliwość to GitKraken. Potężne narzędzie do zarządzania Gitem z wieloma zaawansowanymi możliwościami jak wyświetlanie wykresów commitów i modyfikacje na miejscu. Niestety GitKraken to program płatny, ale dostępny za darmo dla studentów i pracowników naukowych w ramach [GitHub Education](https://education.github.com/discount). Nie jest to jedyna korzyść płynąca z tego programu (inne to np. GitHub Copilot), także polecam się zainteresować.
+Druga możliwość to [GitKraken](https://www.gitkraken.com/). Potężne narzędzie do zarządzania Gitem z wieloma zaawansowanymi możliwościami jak wyświetlanie wykresów commitów i modyfikacje na miejscu. Niestety GitKraken to program płatny, ale dostępny za darmo dla studentów i pracowników naukowych w ramach [GitHub Education](https://education.github.com/discount). Nie jest to jedyna korzyść płynąca z tego programu (inne to np. GitHub Copilot), także polecam się zainteresować.
 
 ![](ilustracje/git/GitKraken.png)
+
+Możemy wybrać dowolne z tych narzędzi, bo funkcjonalność mają podobną. Jeśli jednak mamy statuts studenta albo pracownika naukowego, polecam GitKraken o tyle, że pozwala dość łatwo rozwiązać specyficzne problemy. Tak czy inaczej, będą to dla nas dodatkowe narzędzia, jeśli planujemy korzystać z Gita głównie do wspólnego pisania kodu R w RStudio, ponieważ RStudio samo w sobie ma wbudowaną integrację z Gitem.
+
+# Podstawowe pojęcia
+
+Gdy tworzymy projekt w RStudio, możemy zaznaczyć, żeby jednocześnie stworzyć **repozytorium** Git. Repozytorium to w pewnym sensie folder, w którym zgromadzony jest nasz kod. Co odróżnia zwykły folder z kodem od repozytorium Git? Głównie ukryty folder `.git`, który śledzi zmiany, jakie wprowadzamy w plikach. Jeśli nie zainicjowaliśmy od razu, żaden problem, możemy to zrobić później, wybierając opcję stworzenia repozytorium w naszym programie do zarządzania Gitem. Jeśli jest to repozytorium z kodem R, warto po utworzeniu repozytorium jednorazowo użyć w R komendy `usethis::git_vaccinate()`. Sprawi ona, że Git będzie ignorował pliki, których nie powinniśmy zapisywać w repozytorium.
+
+Jeśli w RStudio otworzymy projekt z repozytorium Git, zobaczymy w prawym górnym okienku zakładkę Git. W niej pliki, które zmieniliśmy lub dodaliśmy od ostatniego razu. Możemy te pliki zaznaczyć, żeby zatwierdzić wprowadzone zmiany. Taki zatwierdzony zestaw zmian nazywa się ***commit***. Taki commit obowiązkowo musi zostać opatrzony skrótową wiadomością z opisem, co zmieniliśmy. Pierwsza linijka to skrótowa informacja w kilku słowach, ale możemy też dodać więcej informacji po zostawieniu wolnej linijki. To samo możemy też zrobić z poziomu wybranego przez nas menedżera Gita.
+
+Jak często robić commity? To już zależy od nas. Możemy z każdej działającej poprawki robić osobny commit, a możemy robić jeden wielki commit co jakiś czas. Najlepiej jednak robić je częściej niż rzadziej. Częste commity mają tę zaletę, że w razie czego możemy wycofać jakieś commity. W razie takiej potrzeby, częstsze commity to mniej korzystnego kodu zostaje utracone. Ostatecznie powinna nam przyświecać zasada, że jedna rzecz to jeden commit. Od nas jednak zależy, co uznamy za rzecz.
+
+Domyślnie commity zapisują się tylko na naszym dysku twardym. Jeśli chcemy wysłać je na GitHuba możemy użyć guzika ***push*** w RStudio albo w menedżerze Gita. Żeby ta opcja była dostępna, musimy najpierw opublikować nasze repozytorium, co łatwo zrobić z poziomu GitHub Desktop czy GitKraken.
+
+Przeciwieństwem *push* jest ***pull***. *Pull* służy do pobrania zmian, które wcześniej my albo ktoś inny wysłaliśmy na serwer. Warto jest to robić często, przed rozpoczęciem pracy. *Pull* wymaga, żebyśmy już mieli repozytorium na dysku. Jeśli chcemy pobrać całe repozytorium, musimy je ***sklonować***. Klonowanie najłatwiej wykonać z poziomu menedżera.
+
+Podstawowy workflow jest więc następujący:
+
+1. *Pull*.
+
+2. Piszemy kod i testujemy.
+
+3. *Commit*.
+
+4. *Push*.
+
+# Pliki specjalne
+
+Repozytoria na GitHubie często mają kilka plików specjalnych, z których najważniejsze to `README.md` i `.gitignore`. Omówmy sobie oba.
+
+## `.gitignore`
+
+Plik `.gitignore` to informacja dla Git, żeby pewne konkretne pliki albo rodzaje plików (np. wszystkie pliki .csv) ignorował. Innymi słowy, żeby nie krzyczał nam, że wykrywa taki plik, trzeba go śledzić. Podstawowe rodzaje plików dla R dodaje wspomniana już komenda `usethis::git_vaccinate()` albo RStudio, jeśli tworzyliśmy repozytorium za jego pomocą. Menedżery biblografii potrafią nam również przygotować taki roboczy plik podczas tworzenia repozytorium.
+
+Możemy otworzyć ten plik w dowolnym edytorze tekstu. Możemy też w RStudio użyć komendy `usethis::edit_git_ignore()`, która nam ten plik otworzy. Możemy dopisać tam nazwy lub ścieżki plików, które Git ma ignorować. Możemy też dopisać `*.csv`, żeby zignorować wszystkie pliki .csv. Gwiazdka `*` oznacza dowolne znaki. Możemy również dodawać pojedyncze pliki w R za pomocą komendy `usethis::use_git_ignore()`.
+
+## `README.md`
+
+Plik README to jest to, co wyświietla się, jak na GitHubie wejdziemy na stronę repozytorium. Możemy tam zapisywać podstawowe informacje dla odbiorców naszego repozytorium. Sam plik korzysta z formatowania GitHub Markdown, którego opis znajdziemy [tutaj](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax). Jeśli piszemy analizę w R, warto użyć komendy `usethis::use_readme_md()`, żeby taki wzorcowy przykładowy plik wytworzyć. Dla kodu w R warto rozważyć, czy nie przerzucić się na plik README.Rmd wytwarzany przez `usethis::use_readme_rmd()`. Pozwala on do pliku README dorzucać np. bloki kodu R. Dla publicznego kodu to szczególnie cenne, bo możemy pokazać przykładowe działanie naszych funkcji. Wtedy edytujemy plik README.Rmd, zaś przed samym wypchnięciem używamy funkcji `devtools::build_readme()`, żeby przerobić go na README.md. Wtedy korzystamy ze składni R Markdown.
