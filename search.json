@@ -609,6 +609,13 @@
     "text": "Student psychologii Uniwersytetu Wrocławskiego. Zainteresowany psychologią procesów poznawczych i wnioskowaniem statystycznym, w tym wykorzystaniem R i pythona w nauce. Zwolennik Open Science.\n\nPublikacje\n\n\nBurzyński, E. (2020). Czarny Zeszyt. Codzienność (J. Jędrusiak & D. Wójcik, Red.). Oleśnica: Stowarzyszenie Evviva l’arte. Pobrano z https://s-el.pl/wp-content/uploads/2020/10/Czarny-zeszyt.pdf\n\n\nJędrusiak, J. (2021). Twórczość i perspektywy na aktywność twórczą w medycynie. W M. M. Nowak (Red.), Sztuka w medycynie (s. 11–22). Poznań: Wydawnictwo Kontekst. Pobrano z https://www.researchgate.net/publication/357701421_Sztuka_w_medycynie\n\n\n\n\nFonty\nFonty użyte na tej stronie:\nTekst główny – Open Sans\nNagłówki – Raleway\nKod – Cascadia Code"
   },
   {
+    "objectID": "toc.html",
+    "href": "toc.html",
+    "title": "Spis treści",
+    "section": "",
+    "text": "Tutaj znajduje się lista tekstów z tego bloga, posegregowane tematycznie. Statystykę i naukę R najlepiej czytać po kolei, przydatne narzędzia i psychologia to bardziej niezależne teksty. Niektóre teksry mogą znaleźć się na kilku listach.\n\nStatystyka\n\nWariancja – co to jest wariancja, jak się ją wyjaśnia i co to jest model.\nTesty statystyczne i wartość p – jak działają testy statystyczne, co to jest p i jak je interpretować.\nKombinatoryka – krótkie omówienie podstawowych terminów kombinatoryki, może być wprowadzeniem do prawdopodobieństwa.\n\n\n\nNauka R\n\nPodstawy R – wszystko, czego potrzeba, żeby zacząć z pisaniem analiz w R.\nListy i automatyzacja – wykonywanie zadań masowo, z wykorzystaniem list.\nWspółpraca w analizach z Git – jak pisać analizy statystyczne razem, wykorzystując GitHub i narzędzia z RStudio.\nMetaprogramowanie – zaawansowany tekst o Tidy Eval, odpowiada na problemy związane z pisaniem własnych funkcji.\n\n\n\nPrzydatne narzędzia\n\nGenerowanie tekstu – jak generować powtarzalny tekst automatycznie, zamiast pisać tego ręcznie.\nGit – jak korzystać z Gita do współpracy nad kodem.\nNarzędzia AI do szukania artykułów – nowoczesne wyszukiwarki i podsumowywarki artykułów naukowych oparte o sztuczną inteligencję.\n\n\n\nPsychologia\n\nPamięć w służbie ucznia – artykulik pokonferencyjny o różnych metodach uczenia się i ich znaczeniu w systemie edukacji."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Nieobliczalne – blog okołostatystyczny",

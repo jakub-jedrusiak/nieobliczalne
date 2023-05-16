@@ -154,6 +154,10 @@ cookieconsent.run({
  <span class="menu-text">Strona główna</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../toc.html" rel="" target="">
+ <span class="menu-text">Spis treści</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../about.html" rel="" target="">
  <span class="menu-text">O mnie</span></a>
   </li>  
@@ -192,7 +196,7 @@ cookieconsent.run({
   </ul></li>
   <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">12</span> Podsumowanie</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/metaprogramowanie.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -254,13 +258,13 @@ cookieconsent.run({
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Przejdźmy sobie przez tę funkcję krok po kroku. Po pierwsze dałem jej 3 argumenty – <code>df</code>, <code>group</code> i tajemnicze <code>…</code>. <code>df</code> To baza danych, <code>group</code> to kolumna, po której chcemy agregować dane (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-summarise">tutaj</a>). Ostatni argument to tzw. <em>ellipsis</em> czyli wielokropek i czasem spotykamy go w dokumentacji, np. w funkcji <code>select()</code>. W wielokropku chodzi o to, że mogę tam wsadzić dowolną liczbę rzeczy, np. dowolnie wiele nazw kolumn. W naszym wypadku będziemy wrzucać tam nazwy kolumn, dla których chcemy liczyć nasze statystyki. Nie wiemy, czy będzie to jedna kolumna, 10 kolumn, czy wyrażenie <code>tidyselect</code> (np. <code>starts_with("H")</code>) więc używamy wielokropka.</p>
-<p>Bazę danych grupujemy i wrzucamy do funkcji agregującej <code>summarise()</code>. Ponieważ chcemy wykonać wiele razy ten sam zestaw obliczeń na wielu kolumnach, korzystamy z <code>across()</code> (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across">tutaj</a>). Dalej <code>across()</code> przyjmuje listę funkcji, które chcemy zastosować. Listę, czyli wszystkie komendy zamykam w <code>list()</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Większość funkcji podaję jako funkcje anonimowe (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-lambda">tutaj</a>), bo albo muszę podać dodatkowe argumenty, albo to funkcje kombinowane, np. <code>\(x) sum(!is.na(x))</code>.</p>
+<p>Przejdźmy sobie przez tę funkcję krok po kroku. Po pierwsze dałem jej 3 argumenty – <code>df</code>, <code>group</code> i tajemnicze <code>…</code>. <code>df</code> To baza danych, <code>group</code> to kolumna, po której chcemy agregować dane (patrz <a href="../posts/podstawy_R.html#sec-summarise">tutaj</a>). Ostatni argument to tzw. <em>ellipsis</em> czyli wielokropek i czasem spotykamy go w dokumentacji, np. w funkcji <code>select()</code>. W wielokropku chodzi o to, że mogę tam wsadzić dowolną liczbę rzeczy, np. dowolnie wiele nazw kolumn. W naszym wypadku będziemy wrzucać tam nazwy kolumn, dla których chcemy liczyć nasze statystyki. Nie wiemy, czy będzie to jedna kolumna, 10 kolumn, czy wyrażenie <code>tidyselect</code> (np. <code>starts_with("H")</code>) więc używamy wielokropka.</p>
+<p>Bazę danych grupujemy i wrzucamy do funkcji agregującej <code>summarise()</code>. Ponieważ chcemy wykonać wiele razy ten sam zestaw obliczeń na wielu kolumnach, korzystamy z <code>across()</code> (patrz <a href="../posts/podstawy_R.html#sec-across">tutaj</a>). Dalej <code>across()</code> przyjmuje listę funkcji, które chcemy zastosować. Listę, czyli wszystkie komendy zamykam w <code>list()</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Większość funkcji podaję jako funkcje anonimowe (patrz <a href="../posts/podstawy_R.html#sec-lambda">tutaj</a>), bo albo muszę podać dodatkowe argumenty, albo to funkcje kombinowane, np. <code>\(x) sum(!is.na(x))</code>.</p>
 <p>Ciekawsze rzeczy to:</p>
 <ol type="1">
-<li><code>\(x) sum(!is.na(x))</code> – sama funkcja <code>is.na()</code> zwraca <code>TRUE</code> lub <code>FALSE</code> w zależności od tego, czy dana wartość jest brakująca. Pod maską <code>TRUE</code> to 1, a <code>FALSE</code> to 0, więc jeśli zsumujemy wynik działania <code>is.na()</code>, to dostaniemy liczbę <code>TRUE</code>. Ponieważ <code>is.na()</code> zwraca <code>TRUE</code>, jeśli dane <strong>są</strong> brakujące, to sumując <code>is.na()</code> dostałbym liczbę <code>NA</code>. Dlatego zaprzeczam <code>is.na()</code> operatorem <code>!</code> (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Część operatorów logicznych dostępnych w R.">tutaj</a>).</li>
-<li>Skośność i kurtoza – to są jedyne funkcje, które stosuję tutaj jak w mordę strzelił, bez kombinowania, więc podaję je <strong>bez nawiasów</strong>. Jak wspominałem <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Co ważne, musi to być jej nazwa bez nawiasów.">tutaj</a>, gdy nie ma nawiasów, wskazujemy na samą funkcję, a z nawiasami na to, co funkcja z siebie wywala.</li>
-<li><code>`NA`</code> – słowo <code>NA</code> ma w R swoje znaczenie. Takich słów normalnie nie możemy używać jako nazw kolumn. Zazwyczaj. Jeśli bardzo chcemy, możemy ująć taką niesyntaktyczną<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> nazwę w <em>backticki</em> (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-select">tutaj</a>).</li>
+<li><code>\(x) sum(!is.na(x))</code> – sama funkcja <code>is.na()</code> zwraca <code>TRUE</code> lub <code>FALSE</code> w zależności od tego, czy dana wartość jest brakująca. Pod maską <code>TRUE</code> to 1, a <code>FALSE</code> to 0, więc jeśli zsumujemy wynik działania <code>is.na()</code>, to dostaniemy liczbę <code>TRUE</code>. Ponieważ <code>is.na()</code> zwraca <code>TRUE</code>, jeśli dane <strong>są</strong> brakujące, to sumując <code>is.na()</code> dostałbym liczbę <code>NA</code>. Dlatego zaprzeczam <code>is.na()</code> operatorem <code>!</code> (patrz <a href="../posts/podstawy_R.html#sec-across">tutaj</a>).</li>
+<li>Skośność i kurtoza – to są jedyne funkcje, które stosuję tutaj jak w mordę strzelił, bez kombinowania, więc podaję je <strong>bez nawiasów</strong>. Jak wspominałem <a href="../posts/podstawy_R.html#sec-across">tutaj</a>, gdy nie ma nawiasów, wskazujemy na samą funkcję, a z nawiasami na to, co funkcja z siebie wywala.</li>
+<li><code>`NA`</code> – słowo <code>NA</code> ma w R swoje znaczenie. Takich słów normalnie nie możemy używać jako nazw kolumn. Zazwyczaj. Jeśli bardzo chcemy, możemy ująć taką niesyntaktyczną<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> nazwę w <em>backticki</em> (patrz <a href="../posts/podstawy_R.html#sec-select">tutaj</a>).</li>
 </ol>
 <p>Taka funkcja powinna działać. Jeśli uruchomimy ją w konsoli na konkretnym przykładzie, to zadziała.</p>
 <div class="cell">
@@ -606,7 +610,7 @@ cookieconsent.run({
 <span style="color: #555555;">#&gt;</span> [1] "quo(x):"
 <span style="color: #555555;">#&gt;</span> <span style="font-weight: bold;">&lt;quosure&gt;</span>
 <span style="color: #555555;">#&gt;</span> expr: <span style="color: #0000BB;">^x</span>
-<span style="color: #555555;">#&gt;</span> env:  <span style="color: #0000BB;">0x5593dc608430</span>
+<span style="color: #555555;">#&gt;</span> env:  <span style="color: #0000BB;">0x5616a982c310</span>
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
@@ -694,7 +698,7 @@ cookieconsent.run({
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<p>W tym wypadku nasze <code>kolumny_do_policzenia</code> pojawiają się wewnątrz <code>across()</code>, więc musiałem użyć <code>c()</code> (patrz <a href="https://nieobliczalne.pl/posts/podstawy_R.html#sec-across:~:text=Gdy używam zestaw, mam na myśli, że trzeba je wpakować w funkcję c() (od concatenate), np. c(1, 8, 10:16).">tutaj</a>). Inny przykład, bardziej typowy wyglądałby tak:</p>
+<p>W tym wypadku nasze <code>kolumny_do_policzenia</code> pojawiają się wewnątrz <code>across()</code>, więc musiałem użyć <code>c()</code> (patrz <a href="../posts/podstawy_R.html#sec-across">tutaj</a>). Inny przykład, bardziej typowy wyglądałby tak:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>srednia_z_kolumny <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col, ...) {</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    grupy <span class="ot">&lt;-</span> <span class="fu">enquos</span>(...)</span>
