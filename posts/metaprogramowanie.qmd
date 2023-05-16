@@ -72,17 +72,17 @@ opisowe <- function(df, group, ...) {
 }
 ```
 
-Przejdźmy sobie przez tę funkcję krok po kroku. Po pierwsze dałem jej 3 argumenty -- `df`, `group` i tajemnicze `…`. `df` To baza danych, `group` to kolumna, po której chcemy agregować dane (patrz [tutaj](podstawy_R.qmd#sec-summarise)). Ostatni argument to tzw. *ellipsis* czyli wielokropek i czasem spotykamy go w dokumentacji, np. w funkcji `select()`. W wielokropku chodzi o to, że mogę tam wsadzić dowolną liczbę rzeczy, np. dowolnie wiele nazw kolumn. W naszym wypadku będziemy wrzucać tam nazwy kolumn, dla których chcemy liczyć nasze statystyki. Nie wiemy, czy będzie to jedna kolumna, 10 kolumn, czy wyrażenie `tidyselect` (np. `starts_with("H")`) więc używamy wielokropka.
+Przejdźmy sobie przez tę funkcję krok po kroku. Po pierwsze dałem jej 3 argumenty -- `df`, `group` i tajemnicze `…`. `df` To baza danych, `group` to kolumna, po której chcemy agregować dane (patrz [tutaj](./posts/podstawy_R.qmd#sec-summarise)). Ostatni argument to tzw. *ellipsis* czyli wielokropek i czasem spotykamy go w dokumentacji, np. w funkcji `select()`. W wielokropku chodzi o to, że mogę tam wsadzić dowolną liczbę rzeczy, np. dowolnie wiele nazw kolumn. W naszym wypadku będziemy wrzucać tam nazwy kolumn, dla których chcemy liczyć nasze statystyki. Nie wiemy, czy będzie to jedna kolumna, 10 kolumn, czy wyrażenie `tidyselect` (np. `starts_with("H")`) więc używamy wielokropka.
 
-Bazę danych grupujemy i wrzucamy do funkcji agregującej `summarise()`. Ponieważ chcemy wykonać wiele razy ten sam zestaw obliczeń na wielu kolumnach, korzystamy z `across()` (patrz [tutaj](podstawy_R.qmd#sec-across)). Dalej `across()` przyjmuje listę funkcji, które chcemy zastosować. Listę, czyli wszystkie komendy zamykam w `list()`[^1]. Większość funkcji podaję jako funkcje anonimowe (patrz [tutaj](podstawy_R.qmd#sec-lambda)), bo albo muszę podać dodatkowe argumenty, albo to funkcje kombinowane, np. `\(x) sum(!is.na(x))`.
+Bazę danych grupujemy i wrzucamy do funkcji agregującej `summarise()`. Ponieważ chcemy wykonać wiele razy ten sam zestaw obliczeń na wielu kolumnach, korzystamy z `across()` (patrz [tutaj](./posts/podstawy_R.qmd#sec-across)). Dalej `across()` przyjmuje listę funkcji, które chcemy zastosować. Listę, czyli wszystkie komendy zamykam w `list()`[^1]. Większość funkcji podaję jako funkcje anonimowe (patrz [tutaj](./posts/podstawy_R.qmd#sec-lambda)), bo albo muszę podać dodatkowe argumenty, albo to funkcje kombinowane, np. `\(x) sum(!is.na(x))`.
 
 [^1]: Czasami będziemy musieli wykorzystać `lst()`. Będą to przypadki, w których np. najpierw policzymy liczbę wszystkich przypadków w bazie (`N = n`), potem liczbę braków danych (`` `NA` = is.na ``), a na koniec chcemy policzyć procent brakujących (`` p_NA = `NA` / N ``). Chcemy więc wykorzystać nowo stworzone kolumny do stworzenia kolejnej. Zwykłe `list()` tego nie uciągnie i musimy użyć `lst()` z pakietu `tibble`.
 
 Ciekawsze rzeczy to:
 
-1.  `\(x) sum(!is.na(x))` -- sama funkcja `is.na()` zwraca `TRUE` lub `FALSE` w zależności od tego, czy dana wartość jest brakująca. Pod maską `TRUE` to 1, a `FALSE` to 0, więc jeśli zsumujemy wynik działania `is.na()`, to dostaniemy liczbę `TRUE`. Ponieważ `is.na()` zwraca `TRUE`, jeśli dane **są** brakujące, to sumując `is.na()` dostałbym liczbę `NA`. Dlatego zaprzeczam `is.na()` operatorem `!` (patrz [tutaj](podstawy_R.qmd#sec-across)).
-2.  Skośność i kurtoza -- to są jedyne funkcje, które stosuję tutaj jak w mordę strzelił, bez kombinowania, więc podaję je **bez nawiasów**. Jak wspominałem [tutaj](podstawy_R.qmd#sec-across), gdy nie ma nawiasów, wskazujemy na samą funkcję, a z nawiasami na to, co funkcja z siebie wywala.
-3.  `` `NA` `` -- słowo `NA` ma w R swoje znaczenie. Takich słów normalnie nie możemy używać jako nazw kolumn. Zazwyczaj. Jeśli bardzo chcemy, możemy ująć taką niesyntaktyczną[^2] nazwę w *backticki* (patrz [tutaj](podstawy_R.qmd#sec-select)).
+1.  `\(x) sum(!is.na(x))` -- sama funkcja `is.na()` zwraca `TRUE` lub `FALSE` w zależności od tego, czy dana wartość jest brakująca. Pod maską `TRUE` to 1, a `FALSE` to 0, więc jeśli zsumujemy wynik działania `is.na()`, to dostaniemy liczbę `TRUE`. Ponieważ `is.na()` zwraca `TRUE`, jeśli dane **są** brakujące, to sumując `is.na()` dostałbym liczbę `NA`. Dlatego zaprzeczam `is.na()` operatorem `!` (patrz [tutaj](./posts/podstawy_R.qmd#sec-across)).
+2.  Skośność i kurtoza -- to są jedyne funkcje, które stosuję tutaj jak w mordę strzelił, bez kombinowania, więc podaję je **bez nawiasów**. Jak wspominałem [tutaj](./posts/podstawy_R.qmd#sec-across), gdy nie ma nawiasów, wskazujemy na samą funkcję, a z nawiasami na to, co funkcja z siebie wywala.
+3.  `` `NA` `` -- słowo `NA` ma w R swoje znaczenie. Takich słów normalnie nie możemy używać jako nazw kolumn. Zazwyczaj. Jeśli bardzo chcemy, możemy ująć taką niesyntaktyczną[^2] nazwę w *backticki* (patrz [tutaj](./posts/podstawy_R.qmd#sec-select)).
 
 [^2]: Inne przykłady nazw niesyntaktycznych to `if`, `for`, `while`, `NULL`, nazwy zaczynające się liczbą, nazwy ze spacjami.
 
@@ -429,7 +429,7 @@ opisowe <- function(df, group, ...) {
 opisowe(iris, Species, Sepal.Width, Sepal.Length)
 ```
 
-W tym wypadku nasze `kolumny_do_policzenia` pojawiają się wewnątrz `across()`, więc musiałem użyć `c()` (patrz [tutaj](podstawy_R.qmd#sec-across)). Inny przykład, bardziej typowy wyglądałby tak:
+W tym wypadku nasze `kolumny_do_policzenia` pojawiają się wewnątrz `across()`, więc musiałem użyć `c()` (patrz [tutaj](./posts/podstawy_R.qmd#sec-across)). Inny przykład, bardziej typowy wyglądałby tak:
 
 ```{r}
 srednia_z_kolumny <- function(df, col, ...) {

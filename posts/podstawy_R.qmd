@@ -206,7 +206,7 @@ Zazwyczaj projekt badawczy składa się z wielu plików. Nie jest to tylko kod R
 
 Projekty tworzymy i otwieramy przez guzik w prawym górnym rogu. Rozwijane menu pozwala nam stworzyć nowy projekt, a wyskakujące okienko pyta, czy wytworzyć go w już istniejącym folderze, stworzyć nowy folder, czy może pobrać repozytorium Git. Jeśli wybraliśmy nowy folder, mamy kilka typów projektów do wyboru, ale w większości przypadków wybieramy po prostu `New Project`. Okienko pozwala nam nadać projektowi nazwę, wybrać jego lokalizację, a także wytworzyć puste repozytorium Git[^podstawy_r-10]. RStudio wytworzy nam w ten sposób plik .Rproj organizujący nasz projekt.
 
-[^podstawy_r-10]: Jeśli nie wiesz o co chodzi, nie przejmuj się. To duży temat i nie jest to coś, bez czego nie da się żyć. W skrócie to system do monitorowania historii zmian w plikach i współpracy nad kodem. Więcej o tym piszę [tutaj](git.qmd).
+[^podstawy_r-10]: Jeśli nie wiesz o co chodzi, nie przejmuj się. To duży temat i nie jest to coś, bez czego nie da się żyć. W skrócie to system do monitorowania historii zmian w plikach i współpracy nad kodem. Więcej o tym piszę [tutaj](./posts/git.qmd).
 
 ## Pakiety {#sec-libs}
 
@@ -549,7 +549,7 @@ across(c(H_5, H_7), \(x) {odejmij_od(x, od_czego = 7)})
 
 #### Problem z Tidy Evaluation
 
-Używanie **nazw kolumn** jako argumentów takich własnych funkcji może spowodować niespodziewane problemy. Załóżmy, że stworzymy funkcję `normalizacja_kolumny(baza, nazwa_kolumny)`. Jeśli potem korzystamy z funkcji typu `select()`, to nie wiedzą one, że chodzi nam o argument `nazwa_kolumny`, a nie o kolumnę o nazwie `nazwa_kolumny`. W związku z tym wypuszczą błąd, że takiej kolumny w bazie danych nie ma (chyba że jest, ale wtedy konsekwencje mogą być jeszcze bardziej niespodziewane). Więcej o tym piszę w bardziej zaawansowanym tekście [tutaj](metaprogramowanie.qmd), ale *ad hoc* można sobie z tym poradzić pisząc nazwy argumentów w takich funkcjach w podwójnych nawiasach klamrowych, np. `select({{ nazwa_kolumny }})`.
+Używanie **nazw kolumn** jako argumentów takich własnych funkcji może spowodować niespodziewane problemy. Załóżmy, że stworzymy funkcję `normalizacja_kolumny(baza, nazwa_kolumny)`. Jeśli potem korzystamy z funkcji typu `select()`, to nie wiedzą one, że chodzi nam o argument `nazwa_kolumny`, a nie o kolumnę o nazwie `nazwa_kolumny`. W związku z tym wypuszczą błąd, że takiej kolumny w bazie danych nie ma (chyba że jest, ale wtedy konsekwencje mogą być jeszcze bardziej niespodziewane). Więcej o tym piszę w bardziej zaawansowanym tekście [tutaj](./posts/metaprogramowanie.qmd), ale *ad hoc* można sobie z tym poradzić pisząc nazwy argumentów w takich funkcjach w podwójnych nawiasach klamrowych, np. `select({{ nazwa_kolumny }})`.
 
 ## Nowe kolumny {#sec-newcols}
 

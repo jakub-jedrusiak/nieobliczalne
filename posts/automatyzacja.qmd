@@ -150,13 +150,13 @@ To jest dokładnie to, co wrzucilibyśmy do funkcji `read_csv` chcąc rzeczywiś
 bazy_lista <- map(bazy_lista, read_csv, show_col_types = FALSE, name_repair = "unique_quiet")
 ```
 
-`map` przyjmuje, w podstawowej wersji, dwa argumenty. Pierwszym jest obiekt, do którego chcemy zastosować naszą funkcję, a drugim sama funkcja. Podobnie jak w `across` (patrz [tutaj](podstawy_R.qmd#sec-across)) chodzi nam o obiekt zawierający funkcję, a nie o efekt jej działania, dlatego **po nazwie funkcji nie dajemy nawiasów**. To bardzo częsty błąd. Jeśli chodzi o samo `read_csv` dodałem tutaj `show_col_types = FALSE` i `name_repair = "unique_quiet"`, żeby nasza konsola nie została zalana milionem informacji o aktualnie wczytywanej bazie.
+`map` przyjmuje, w podstawowej wersji, dwa argumenty. Pierwszym jest obiekt, do którego chcemy zastosować naszą funkcję, a drugim sama funkcja. Podobnie jak w `across` (patrz [tutaj](./posts/./posts/podstawy_R.qmd#sec-across)) chodzi nam o obiekt zawierający funkcję, a nie o efekt jej działania, dlatego **po nazwie funkcji nie dajemy nawiasów**. To bardzo częsty błąd. Jeśli chodzi o samo `read_csv` dodałem tutaj `show_col_types = FALSE` i `name_repair = "unique_quiet"`, żeby nasza konsola nie została zalana milionem informacji o aktualnie wczytywanej bazie.
 
 Efektem działania tej funkcji jest lista baz danych. Już nie ścieżek, a załadowanych baz. Skoro mamy je załadowane, możemy je wyczyścić.
 
 ## Masowe czyszczenie z `map` lub `apply`
 
-Skoro poznaliśmy już funkcję `map`, wyczyszczenie naszych baz nie powinno stanowić problemu. Mamy listę baz. Ten sam zestaw funkcji czyszczących musimy zastosować do każdej bazy z listy. Żeby zastosować funkcję do każdego elementu używamy właśnie `map` lub `apply`. Problem polega jednak na tym, że nie mamy pojedynczej funkcji czyszczącej, a cały wielki zestaw tych funkcji. W rzeczywistości nie jest to żaden problem, bo jak dowiedzieliśmy się [tutaj](podstawy_R.qmd#sec-customfunctions), możemy nasz zestaw przerobić na pojedynczą funkcję.
+Skoro poznaliśmy już funkcję `map`, wyczyszczenie naszych baz nie powinno stanowić problemu. Mamy listę baz. Ten sam zestaw funkcji czyszczących musimy zastosować do każdej bazy z listy. Żeby zastosować funkcję do każdego elementu używamy właśnie `map` lub `apply`. Problem polega jednak na tym, że nie mamy pojedynczej funkcji czyszczącej, a cały wielki zestaw tych funkcji. W rzeczywistości nie jest to żaden problem, bo jak dowiedzieliśmy się [tutaj](./posts/podstawy_R.qmd#sec-customfunctions), możemy nasz zestaw przerobić na pojedynczą funkcję.
 
 ```{r}
 wyczysc <- function(df) {
@@ -192,7 +192,7 @@ wyczysc <- function(df) {
 
 Uzyskałem w ten sposób funkcję `wyczysc()`, która wykonuje wszystkie nasze przekształcenia. Warto zwrócić uwagę, że bazę danych nazwałem `df` i zrobiłem z niej argument naszej funkcji, a także ostatni blok nie ma przypisania do zmiennej `baza`. Wynika to z tego, że domyślnie funkcje w R zwracają ostatnią rzecz, którą zrobią, czyli tutaj połączoną bazę. Jeśli zapisałbym ostateczną bazę do zmiennej `baza`, musiałbym w ostatniej linijce dopisać samo `baza` albo `return(baza)`, jako że to jest to, co funkcja ma nam ostatecznie dać -- wyczyszczoną bazę.
 
-Przy tej okazji ostrzegam, że używanie **nazw kolumn** jako argumentów takich własnych funkcji może spowodować niespodziewane problemy. Jeśli stworzymy argument `nazwa_kolumny`, to funkcje typu `select()` nie wiedzą, że chodzi nam o argument `nazwa_kolumny`, a nie o kolumnę o nazwie `nazwa_kolumny`. Więcej o tym piszę [tutaj](metaprogramowanie.qmd), ale *ad hoc* można sobie z tym poradzić pisząc nazwę argumentu w podwójnych nawiasach klamrowych, np. `{{ nazwa_kolumny }}`.
+Przy tej okazji ostrzegam, że używanie **nazw kolumn** jako argumentów takich własnych funkcji może spowodować niespodziewane problemy. Jeśli stworzymy argument `nazwa_kolumny`, to funkcje typu `select()` nie wiedzą, że chodzi nam o argument `nazwa_kolumny`, a nie o kolumnę o nazwie `nazwa_kolumny`. Więcej o tym piszę [tutaj](./posts/metaprogramowanie.qmd), ale *ad hoc* można sobie z tym poradzić pisząc nazwę argumentu w podwójnych nawiasach klamrowych, np. `{{ nazwa_kolumny }}`.
 
 Użyjmy teraz naszej nowej funkcji `wyczysc` do wyczyszczenia naszych plików.
 
@@ -267,7 +267,7 @@ while (mean(liczby) != 105) {
 }
 ```
 
-Ten kod wykorzystałem do znalezienia zestawu 100 losowych liczb z rozkładu normalnego IQ ($M = 100$, $SD = 15$), których średnia będzie wynosiła dokładnie 101. Wykorzystałem to [w tekście o wartości $p$](p-value.qmd) do znalezienia ładnej próbki, której średnia nie będzie wynosiła dokładnie tyle, ile średnia z populacji. Funkcja `rnorm` losuje liczby z rozkładu normalnego o podanych parametrach 5, `round` zaokrągla je do całości. Pętla `while` mówi tutaj „Sprawdź, czy średnia wylosowanych liczb nie równa się 105. Jeśli nie, to wylosuj ponownie.” albo inaczej „Powtarzaj losowanie dopóki średnia liczb nie będzie się równała 101”.
+Ten kod wykorzystałem do znalezienia zestawu 100 losowych liczb z rozkładu normalnego IQ ($M = 100$, $SD = 15$), których średnia będzie wynosiła dokładnie 101. Wykorzystałem to [w tekście o wartości $p$](./posts/./posts/p-value.qmd) do znalezienia ładnej próbki, której średnia nie będzie wynosiła dokładnie tyle, ile średnia z populacji. Funkcja `rnorm` losuje liczby z rozkładu normalnego o podanych parametrach 5, `round` zaokrągla je do całości. Pętla `while` mówi tutaj „Sprawdź, czy średnia wylosowanych liczb nie równa się 105. Jeśli nie, to wylosuj ponownie.” albo inaczej „Powtarzaj losowanie dopóki średnia liczb nie będzie się równała 101”.
 
 # Podsumowanie
 

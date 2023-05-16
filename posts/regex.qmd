@@ -8,7 +8,7 @@ categories:
 draft: true
 ---
 
-Wyrażenia regularne to specjalny szyfr czy kod służący sprawnemu znajdowaniu fragmentów o określonej strukturze w istniejącym tekście. Jeśli chcesz przeczytać o generowaniu całkiem nowego tekstu, sprawdź [ten](powtarzalny-tekst.qmd) wpis.
+Wyrażenia regularne to specjalny szyfr czy kod służący sprawnemu znajdowaniu fragmentów o określonej strukturze w istniejącym tekście. Jeśli chcesz przeczytać o generowaniu całkiem nowego tekstu, sprawdź [ten](./posts/powtarzalny-tekst.qmd) wpis.
 
 Jak wiele razy dawałem wyraz w swoich wpisach – nie znoszę mechanicznej pracy. To pożeracz czasu, który nic nie wnosi do naszego życia, a zabiera je kawałkami. Zwłaszcza irytujące są te zadania, co do których czujemy, że jest to dokładnie to samo za każdym razem. Intuicyjnie nawet możemy czuć, że muszą istnieć sposoby, żeby tę pracę wykonać automatycznie. Weźmy sobie taki przykład.
 
