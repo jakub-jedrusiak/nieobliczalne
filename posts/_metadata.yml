@@ -1,4 +1,5 @@
 author: "Jakub Jędrusiak"
+freeze: auto
 number-sections: true
 editor: source
 comments:

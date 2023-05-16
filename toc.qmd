@@ -3,7 +3,7 @@ title: "Spis treści"
 subtitle: "Kolekcje wpisów"
 ---
 
-Tutaj znajduje się lista tekstów z tego bloga, posegregowane tematycznie. Statystykę i naukę R najlepiej czytać po kolei, przydatne narzędzia i psychologia to bardziej niezależne teksty. Niektóre teksry mogą znaleźć się na kilku listach.
+Tutaj znajduje się lista tekstów z tego bloga, posegregowane tematycznie. Statystykę i naukę R najlepiej czytać po kolei, przydatne narzędzia i psychologia to bardziej niezależne teksty. Niektóre teksty mogą znaleźć się na kilku listach.
 
 # Statystyka
 
