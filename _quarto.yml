@@ -7,9 +7,13 @@ website:
     left:
       - href: index.qmd
         text: Strona główna
+      - href: toc.qmd
+        text: Spis treści
       - href: about.qmd
         text: O mnie
   google-analytics: "G-FKTMH2V23V"
+  repo-url: "https://github.com/jakub-jedrusiak/nieobliczalne"
+  repo-actions: [edit, issue]
   cookie-consent:
     type: express
     style: headline
