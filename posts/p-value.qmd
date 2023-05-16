@@ -229,7 +229,7 @@ Jako ciekawostkę mogę jeszcze dorzucić, że jeśli spodziewamy się, jak duż
 
 Ta część jest zupełnie nieobowiązkowa. Spokojnie da się dobrze rozumieć testy statystyczne po prostu wiedząc, *że* większe próbki pozwalają wykryć mniejsze efekty, bez wchodzenia w szczegóły *dlaczego* tak się dzieje. Ale poświęcę chwilę, żeby to drugie też wyjaśnić. Kilka kolejnych akapitów będzie też bardziej techniczne i można spokojnie je pominąć i przejść do podrozdziału o wielkości efektu.
 
-Pod rysunkiem [-@fig-iq-stderr-histogram]. pisałem o tym, że większość wyników mieści się w jakimśtam zakresie dookoła średniej. Ten zakres, w którym zawiera się większość wyników, nazywamy **odchyleniem standardowym** i więcej na jego temat piszę w rozdziale [-@sec-procent-wariancji].
+Pod rysunkiem [-@fig-iq-stderr-histogram]. pisałem o tym, że większość wyników mieści się w jakimśtam zakresie dookoła średniej. Ten zakres, w którym zawiera się większość wyników, nazywamy **odchyleniem standardowym** i więcej na jego temat piszę [w tym wpisie](./posts/procent-wariancji.qmd).
 
 Bardzo szczególne jest odchylenie standardowe rozkładów takich, jak te z rysunku [-@fig-iq-stderr-histogram]. Przypomnijmy, co to są za rozkłady. Pokazują one, jak często możemy wylosować jaką średnią. Środkiem tego rozkładu jest prawdziwa średnia całej populacji, a średnie dookoła to losowe odchylenia od tej prawdziwej średniej. Takie rozkłady nazywamy **rozkładami próbkowania** i niosą one bardzo ważną informację -- jakie różnice są duże, a jakie są małe. Odchylenia standardowe takich rozkładów nazywamy **błędem standardowym**. Błąd standardowy mówi nam, jakie średnie będą nam często wychodzić przez przypadek, a jakie rzadko.
 
@@ -239,7 +239,7 @@ Jeśli wartości są w obrębie ok. 2 błędów standardowych, czyli tam, gdzie 
 
 Żeby przerobić to na konkretnym przykładzie, zerknijmy jeszcze raz na rozkłady z rysunku [-@fig-iq-stderr-histogram]. Odchylenie standardowe rozkładu z małymi próbkami wynosi[^p-value-12] ok. 1,5, zaś średnia wynosi 100. Oznacza to, że często (w ok. 95% przypadków) będą nam się losowały średnie z zakresu 97-103. Jeśli jakaś grupa, np. członkowie Mensy, będzie miała średnią spoza tego zakresu, to da nam dowód na to, że średnia inteligencja tej grupy naprawdę jest inna niż średnia ogółu społeczeństwa. Odchylenie standardowe rozkładu z większymi próbami jest mniejsze, bo wynosi zaledwie ok. 0,5 (widać na rysunku, że rozkład jest węższy, więc trzeba węższych widełek, żeby objąć większość wyników). Oznacza to, że spodziewamy się wyników w zakresie 99-101 punktów IQ, a wyniki spoza tego zakresu uznajemy za nieprzypadkowe. Średni wynik 102 łatwo jest uzyskać, kiedy zbadamy tylko 100 osób, ale trudno, kiedy zbadamy ich 1000.
 
-[^p-value-12]: Ponownie, liczenie odchylenia standardowego omawiam dokładnie w rozdziale [-@sec-procent-wariancji].
+[^p-value-12]: Ponownie, liczenie odchylenia standardowego omawiam dokładnie [w tym wpisie](./posts/procent-wariancji.qmd).
 
 Widzimy więc, że im większa próbka, tym błąd standardowy mniejszy. Przypomnijmy, że mniejszy błąd standardowy oznacza, że łatwiej nam wykryć mniejsze efekty, bo zakres wyników podejrzanych o bycie przypadkowymi (średnia ± 2 błędy standardowe) jest węższy. Możemy to sobie wyobrazić tak, że gdy policja robi dokładniejsze sprawdzenie podejrzanych, to winę części z nich mogą wykluczyć. Grono podejrzanych zmniejsza się i łatwiej jest odróżnić prawego obywatela od przestępcy.
 
