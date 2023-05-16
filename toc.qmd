@@ -1,0 +1,36 @@
+---
+title: "Spis treści"
+subtitle: "Kolekcje wpisów"
+---
+
+Tutaj znajduje się lista tekstów z tego bloga, posegregowane tematycznie. Statystykę i naukę R najlepiej czytać po kolei, przydatne narzędzia i psychologia to bardziej niezależne teksty. Niektóre teksry mogą znaleźć się na kilku listach.
+
+# Statystyka
+
+1. [Wariancja](procent-wariancji.qmd) -- co to jest wariancja, jak się ją wyjaśnia i co to jest model.
+
+2. [Testy statystyczne i wartość *p*](p-value.qmd) -- jak działają testy statystyczne, co to jest *p* i jak je interpretować.
+
+3. [Kombinatoryka](kombinatoryka.qmd) -- krótkie omówienie podstawowych terminów kombinatoryki, może być wprowadzeniem do prawdopodobieństwa.
+
+# Nauka R
+
+1. [Podstawy R](podstawy_R.qmd) -- wszystko, czego potrzeba, żeby zacząć z pisaniem analiz w R.
+
+2. [Listy i automatyzacja](automatyzacja.qmd) -- wykonywanie zadań masowo, z wykorzystaniem list.
+
+3. [Współpraca w analizach z Git](git.qmd) -- jak pisać analizy statystyczne razem, wykorzystując GitHub i narzędzia z RStudio.
+
+4. [Metaprogramowanie](metaprogramowanie.qmd) -- zaawansowany tekst o Tidy Eval, odpowiada na problemy związane z pisaniem własnych funkcji.
+
+# Przydatne narzędzia
+
+1. [Generowanie tekstu](powtarzalny-tekst.qmd) -- jak generować powtarzalny tekst automatycznie, zamiast pisać tego ręcznie.
+
+2. [Git](git.qmd) -- jak korzystać z Gita do współpracy nad kodem.
+
+3. [Narzędzia AI do szukania artykułów](ai-research.qmd) -- nowoczesne wyszukiwarki i podsumowywarki artykułów naukowych oparte o sztuczną inteligencję.
+
+# Psychologia
+
+1. [Pamięć w służbie ucznia](uczenie-sie.qmd) -- artykulik pokonferencyjny o różnych metodach uczenia się i ich znaczeniu w systemie edukacji.
