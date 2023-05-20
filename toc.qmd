@@ -7,30 +7,32 @@ Tutaj znajduje się lista tekstów z tego bloga, posegregowane tematycznie. Stat
 
 # Statystyka
 
-1. [Wariancja](./posts/procent-wariancji.qmd) -- co to jest wariancja, jak się ją wyjaśnia i co to jest model.
+1.  [Wariancja](./posts/procent-wariancji.qmd) -- co to jest wariancja, jak się ją wyjaśnia i co to jest model.
 
-2. [Testy statystyczne i wartość *p*](./posts/p-value.qmd) -- jak działają testy statystyczne, co to jest *p* i jak je interpretować.
+2.  [Testy statystyczne i wartość *p*](./posts/p-value.qmd) -- jak działają testy statystyczne, co to jest *p* i jak je interpretować.
 
-3. [Kombinatoryka](./posts/kombinatoryka.qmd) -- krótkie omówienie podstawowych terminów kombinatoryki, może być wprowadzeniem do prawdopodobieństwa.
+3.  [Kombinatoryka](./posts/kombinatoryka.qmd) -- krótkie omówienie podstawowych terminów kombinatoryki, może być wprowadzeniem do prawdopodobieństwa.
 
 # Nauka R
 
-1. [Podstawy R](./posts/podstawy_R.qmd) -- wszystko, czego potrzeba, żeby zacząć z pisaniem analiz w R.
+1.  [Podstawy R](./posts/podstawy_R.qmd) -- wszystko, czego potrzeba, żeby zacząć z pisaniem analiz w R.
 
-2. [Listy i automatyzacja](./posts/automatyzacja.qmd) -- wykonywanie zadań masowo, z wykorzystaniem list.
+2.  [Listy i automatyzacja](./posts/automatyzacja.qmd) -- wykonywanie zadań masowo, z wykorzystaniem list.
 
-3. [Współpraca w analizach z Git](./posts/git.qmd) -- jak pisać analizy statystyczne razem, wykorzystując GitHub i narzędzia z RStudio.
+3.  [Współpraca w analizach z Git](./posts/git.qmd) -- jak pisać analizy statystyczne razem, wykorzystując GitHub i narzędzia z RStudio.
 
-4. [Metaprogramowanie](./posts/metaprogramowanie.qmd) -- zaawansowany tekst o Tidy Eval, odpowiada na problemy związane z pisaniem własnych funkcji.
+4.  [Metaprogramowanie](./posts/metaprogramowanie.qmd) -- zaawansowany tekst o Tidy Eval, odpowiada na problemy związane z pisaniem własnych funkcji.
 
 # Przydatne narzędzia
 
-1. [Generowanie tekstu](./posts/powtarzalny-tekst.qmd) -- jak generować powtarzalny tekst automatycznie, zamiast pisać tego ręcznie.
+1.  [Generowanie tekstu](./posts/powtarzalny-tekst.qmd) -- jak generować powtarzalny tekst automatycznie, zamiast pisać tego ręcznie.
 
-2. [Git](./posts/git.qmd) -- jak korzystać z Gita do współpracy nad kodem.
+2.  [Wyrażenia regularne](./posts/regex.qmd) -- jak wyszukiwać i zmieniać elementy istniejącego tekstu.
 
-3. [Narzędzia AI do szukania artykułów](./posts/ai-research.qmd) -- nowoczesne wyszukiwarki i podsumowywarki artykułów naukowych oparte o sztuczną inteligencję.
+3.  [Git](./posts/git.qmd) -- jak korzystać z Gita do współpracy nad kodem.
+
+4.  [Narzędzia AI do szukania artykułów](./posts/ai-research.qmd) -- nowoczesne wyszukiwarki i podsumowywarki artykułów naukowych oparte o sztuczną inteligencję.
 
 # Psychologia
 
-1. [Pamięć w służbie ucznia](./posts/uczenie-sie.qmd) -- artykulik pokonferencyjny o różnych metodach uczenia się i ich znaczeniu w systemie edukacji.
+1.  [Pamięć w służbie ucznia](./posts/uczenie-sie.qmd) -- artykulik pokonferencyjny o różnych metodach uczenia się i ich znaczeniu w systemie edukacji.

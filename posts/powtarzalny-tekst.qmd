@@ -11,7 +11,7 @@ categories:
 freeze: auto
 ---
 
-W tym tekście opisuję generowanie nowego tekstu o określonej strukturze. W planach mam jeszcze tekst o wyrażeniach regularnych (RegEx), które pozwalają wyszukiwać i zmieniać określone rzeczy w istniejącym już tekście. Łącznie to bardzo proste, a jednocześnie bardzo potężne narzędzia, które pozwalają szybko i niskim kosztem odjąć dużo bezsensownej, mechanicznej pracy każdemu. Nie tylko naukowcom czy studentom, ale każdemu, kto pisze tekst na komputerze.
+W tym tekście opisuję generowanie nowego tekstu o określonej strukturze. Do wyszukiwania i zmieniania określone rzeczy w *istniejącym* już tekście służą wyrażenia regularne (RegEx), o których piszę w [tym](./posts/regex.qmd) tekście. Łącznie to bardzo proste, a jednocześnie bardzo potężne narzędzia, które pozwalają szybko i niskim kosztem odjąć dużo bezsensownej, mechanicznej pracy każdemu. Nie tylko naukowcom czy studentom, ale każdemu, kto pisze tekst na komputerze.
 
 To, co tutaj opiszę, pierwszy raz poważnie wykorzystałem, gdy pomagałem swojej siostrze w pracy. Miała ona wydłużyć plik, w którym zapisywane były teksty, jakie mają pojawić się w live'ie tego dnia (siostra pracuje przy kanale na YouTube). Plik ten miał prostą strukturę.
 
