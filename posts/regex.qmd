@@ -10,6 +10,182 @@ draft: true
 
 Wyrażenia regularne to specjalny szyfr czy kod służący sprawnemu znajdowaniu fragmentów o określonej strukturze w istniejącym tekście. Jeśli chcesz przeczytać o generowaniu całkiem nowego tekstu, sprawdź [ten](./posts/powtarzalny-tekst.qmd) wpis.
 
-Jak wiele razy dawałem wyraz w swoich wpisach – nie znoszę mechanicznej pracy. To pożeracz czasu, który nic nie wnosi do naszego życia, a zabiera je kawałkami. Zwłaszcza irytujące są te zadania, co do których czujemy, że jest to dokładnie to samo za każdym razem. Intuicyjnie nawet możemy czuć, że muszą istnieć sposoby, żeby tę pracę wykonać automatycznie. Weźmy sobie taki przykład.
+Jak wiele razy dawałem wyraz w swoich wpisach -- nie znoszę mechanicznej pracy. To pożeracz czasu, który nic nie wnosi do naszego życia, a zabiera je kawałkami. Zwłaszcza irytujące są te zadania, co do których czujemy, że jest to dokładnie to samo za każdym razem. Intuicyjnie nawet możemy czuć, że muszą istnieć sposoby, żeby tę pracę wykonać automatycznie.
+
+# Możliwości
+
+Zwlekam strasznie z napisaniem tego tekstu, bo ciężko jest znaleźć tutaj uniwersalny przykład zastosowania w praktyce. Wszystkie wydają się bardzo konkretne, wąskie i takie w istocie są, ale trochę o to w nich chodzi -- żeby zastosować je konkretnie do własnych potrzeb. Weźmy więc na warsztat taki przykład. Ostatnio poprawiałem linki do innych wpisów na tym blogu. Wcześniej używałem linków do stron, które wyglądały tak:
+
+```         
+Więcej można przeczytać w tekście o [podstawach R](https://nieobliczalne.pl/posts/podstawy_R.html).
+```
+
+Jak doczytałem potem, mogłem użyć lepszej składni, która idzie tak:
+
+```         
+Więcej można przeczytać w tekście o [podstawach R](./posts/podstawy_R.qmd).
+```
+
+Ma ona kilka zalet, m.in. to, że jakbym kiedykolwiek zmienił domenę, to nie muszę poprawiać wszystkich linków ręcznie. Zdecydowałem się więc poprawić starą konwencję na nową. Poprawianie linków we wszystkich wpisach to jednak dużo mechanicznej pracy, której nie lubię. Narzędziem, które mogłoby się tutaj przydać, jest zwykłe znajdź i zmień (*find & replace*). Możemy zwrócić uwagę, że wystarczy, abym `https://nieobliczalne.pl` zamienił na kropkę, a końcowe `html` na `qmd`. Nie mogę jednak tego zrobić na raty, bo wtedy zamienię też `html` z innych linków na `qmd`. I tutaj właśnie przychodzą w sukurs wyrażenia regularne.
+
+Wyrażenia regularne pozwalają mi zakodować swoje potrzeby. Potrzebuję wyszukać wszystkie słowa zapisane wielką literą? Nie ma problemu. Potrzebuję zamienić w długim kodzie wyrażenia typu `{AUT.15}` na `{AUT_15}`, gdzie zamiast 15 są inne liczby? Spoko. Chcę masowo zmienić spacje po jednoliterowych myślnikach na twarde spacje? Jasne. Potrzebuję dodać spacje do wszystkich numerów telefonów w tekście? Da się zrobić. Chcę wyszukać dane słowo we wszystkich formach (paczka, paczki, paczce itd.)? Potrzymaj mi herbatę. O ile nasz tekst ma **określoną strukturę**, możemy go wyszukać i w razie potrzeby zmodyfikować.
+
+# Gdzie korzystać?
+
+Zanim dojdziemy do tego, *jak* stosować wyrażenia regularne, powiedzmy sobie, *gdzie* możemy je stosować. Po pierwsze ma je wiele edytorów tekstu ([Notepad++](https://notepad-plus-plus.org/), [Kate](https://kate-editor.org/) i inne), ale niewiele pakietów biurowych. Możemy je znaleźć w Google Docs i LibreOffice. Microsoft Office ma własny, beznadziejny system [„znaków wieloznacznych"](https://support.microsoft.com/pl-pl/office/przyk%C5%82ady-znak%C3%B3w-wieloznacznych-939e153f-bd30-47e4-a763-61897c87b3f4) (*wildcards*), tak jakby nie mogli zastosować ogólnoświatowego standardu. Każde IDE programistyczne, wliczając RStudio i VS Code, dają możliwość używania RegEx. W programowaniu przydają się one szczególnie. Mamy też wiele wygodnych stron, na których możemy testować (i wykorzystywać) wyrażenia regularne, a które podpowiedzą nam różne popularne znaki lub zbiory i wyjaśnią, co robi to, co napisaliśmy. Kluczowe przykłady to [RegEx101](https://regex101.com/) i [RegExr](https://regexr.com/). Z nich polecam korzystać zwłaszcza na początku.
+
+W ramach samego języka programowania również możemy często korzystać z wyrażeń regularnych. W R obsługuje je głównie pakiet **`stringr`**, zaś w pythonie odpowiada za nie biblioteka **`re`**. Pozwolą one np. na masową modyfikację ciągów znaków w bazach danych.
+
+# Zbiory i *lub*
+
+Załóżmy, że chcemy znaleźć różne formy słowa „statystyka". Odmieniając to słowo przez przypadki otrzymujemy ten sam rdzeń *statysty-* i końcówki *-ka*, *ki*, *-ce* itd. Zostańmy przy liczbie pojedynczej. Za przykład wykorzystajmy sobie tekst:
+
+```         
+Statystyka to nauka, która zajmuje się zbieraniem, analizą i interpretacją danych liczbowych. Jej podstawowym celem jest odkrywanie regularności i wzorców w zjawiskach społecznych, ekonomicznych, naukowych i innych dziedzinach. W statystyce można zastosować wiele różnych metod, takich jak testy hipotez, analiza regresji, czy wykorzystanie rozkładów prawdopodobieństwa. Bez statystyki trudno byłoby dokonać rzetelnych prognoz czy wykazać zależności między zjawiskami. Dlatego statystykę można lubić lub nie, ale ciągle jest ona ważna. Statystyko! Dziękujemy ci!
+```
+
+Wyrażenia regularne pozwalają nam powiedzieć „wszystko, co ma rdzeń *statystyk-* i dane końcówki". W tym wypadku wykorzystamy operator *lub* zapisywany jako `|` (klawisz tuż pod backspace, klikany z shiftem) oraz nawiasy kwadratowe, które tworzą zbiory (*character sets*).
+
+```{regex}
+[Ss]tatysty(ka|ki|ce|kę|ką|ko)
+```
+
+[![Wszystkie przykłady wykorzystują RegEx101](ilustracje/regex/or.png)](https://regex101.com/r/kUE7Db/1)
+
+Rozbijmy ten przykład na czynniki pierwsze. Po pierwsze mamy `[Ss]`. Nawiasy kwadratowe oznaczają, że wyrażenie ma wyszukiwać jeden ze znaków wewnątrz nich. W tym wypadku dopasuje zarówno duże i małe S. Mogę tam też zapisywać przedziały typu `[0-9]` albo `[A-Za-z]`. Możemy też powiedzieć „wszystko poza znakami ze zbioru", co zrobimy pisząc `^`, np. `[^0-9]` dopasuje wszystko, co *nie jest* cyfrą.
+
+Dalej mamy zwykłą część słowa i nawiasy. RegEx domyślnie ignoruje nawiasy (tj. nie wyszukuje ich). Służą one jako znaki specjalne do tworzenia grup, o których więcej później. Wewnątrz nawiasu wypisałem końcówki, które mają być dopasowane. Każdą końcówkę rozdzieliłem pionową kreską, co oznacza „albo to, albo to, albo to...".
+
+Jeśli chcielibyśmy wyszukać rzeczywiste nawiasy albo kreskę „\|", musimy poprzedzić je lewym ukośnikiem `\`. Ta czynność nazywa się *escaping* i wymagają tego wszystkie znaki specjalne, na czele z nawiasami, kropką i samym lewym ukośnikiem, który wyszukujemy pisząc `\\`.
+
+Poprzedni przykład mógłbym napisać nieco zwięźlej jako `[Ss]tatysty[kc][aieęąo]`. Technicznie wtedy dopasujemy też takie twory jak „statystycą" albo „statystyke", ale to zazwyczaj nie jest problem, bo ich w tekście raczej nie ma. Tutaj pojawia się jednak dość ważny wniosek -- wyrażenia regularne dość **łatwo się pisze i fatalnie się czyta**.
+
+Jako ciekawostkę mogę podać, że pisząc to wyrażenie regularne odmieniłem słowo „statystyka” przez przypadki w [Kate](https://kate-editor.org/), potem wyrażeniami regularnymi usunąłem „statysty-”, zastąpiłem znak nowej linii (`\n`) pionową kreską (`|`), na koniec wziąłem to w nawiasy. Tak było łatwiej, niż pisać te końcówki ręcznie. Ale ja jestem uczulony na pracę mechaniczną bardziej niż reszta społeczeństwa i robiłem to już tyle razy, że nawet o tym nie myślę. Tak jest mi szybciej, ale nie każdy potrzebuje robić taki rzeczy automatycznie.
+
+# Znaki specjalne i kotwice
+
+RegEx dysponuje całą serią znaków specjalnych typu „dowolna liczba" (`\d`), „dowolna litera" (`\w`), „dowolny znak odstępu" (`\s`, głównie spacja, ale też np. tabulator albo twarde spacje) itd. Najpotężniejszym znakiem tego typu jest kropka (`.`). Oznacza ona po prostu „dowolny znak". Dokładny spis tych znaków specjalnych może różnić się w zależności od wersji (*flavour*) RegEx, jaką dany program czy język implementuje. Są to wygodne skróty dla zapisów typu `[0-9]`. Każdy z nich ma też wersję zanegowaną w postaci wielkiej litery, np. `\D` dopasuje wszystko, co *nie jest* liczbą. Do tego dochodzą nam znaki niewidoczne typu nowa linijka (`\n`) albo tabulator (`\t`).
+
+Do tego RegEx implementuje nam kotwice, czyli oznaczenia pozycji. Mówiąc konkretnie, `^` oznacza początek linijki (akapitu), a `$` oznacza koniec akapitu.
+
+Weźmy sobie za przykład tekst skopiowany z Worda, w którym mamy pozostałości po listach, które chcemy usunąć. Chodzi nam o linijki, które są na początku linijki, potem jest liczba, kropka i spacja.
+
+```         
+1. Wariancja – co to jest wariancja, jak się ją wyjaśnia i co to jest model.
+
+2. Testy statystyczne i wartość *p* – jak działają testy statystyczne, co to jest *p* i jak je interpretować.
+
+3. Kombinatoryka – krótkie omówienie podstawowych terminów kombinatoryki, może być 1. wprowadzeniem do prawdopodobieństwa.
+```
+
+Odpowiednie wyrażenie regularne mogłoby brzmieć `^\d\.`. Zwróćmy uwagę na spację po kropce.
+
+[![](ilustracje/regex/anchors.png)](https://regex101.com/r/WVPWt4/1)
+
+Zwróćmy uwagę na kilka rzeczy. Po pierwsze, nie to wyrażenie nie dopasowało liczby w treści 3. punktu, dzięki temu, że dodaliśmy `^`. Liczby, które nie są na początku linijki nie są dopasowywane. Po drugie, musiałem przed kropką dodać ukośnik. Wynika to z faktu, że kropka to znak specjalny i jeśli chcemy wyszukać dosłowną kropkę, musimy wykorzystać lewy ukośnik.
+
+# Powtarzanie
+
+Najbardziej (według mnie) użyteczne operatory, jakie oferuje RegEx, to operatory powtarzania. Jest to seria operatorów mogących powiedzieć „jeden lub więcej cyfr" albo „zero lub więcej liter". Możemy wykorzystać je np. do znalezienia wszystkich tekstów wewnątrz nawiasów albo wszystkich słów zaczynających się wielką literą. Spróbujmy zrobić to drugie.
+
+```         
+Teoretycznie tyle wystarczy, ale żeby uprzyjemnić proces pisania, fajnie jest przygotować sobie jakieś IDE (program do programowania), np. Visual Studio Code albo chociaż porządny edytor tekstu w stylu Notepad++.
+```
+
+```         
+[A-Z]\w+
+```
+
+[![](ilustracje/regex/repeat.png)](https://regex101.com/r/uzD28P/1)
+
+Znak `+` oznacza tutaj „jeden lub więcej", a więc `\w+` oznacza „jedna litera lub więcej". Operatorów podobnych do `+` jest więcej i możemy je zobaczyć w tabelce.
+
+| Operator | Znaczenie                  |
+|----------|----------------------------|
+| `?`      | zero lub jedno wystąpienie |
+| `*`      | zero lub więcej wystąpień  |
+| `+`      | jeden lub więcej wystąpień |
+| `{n}`    | dokładnie *n* wystąpień    |
+| `{n,}`   | *n* lub więcej wystąpień   |
+| `{n,m}`  | między *n* a *m* wystąpień |
+
+Z użyciem tych operatorów może się wiązać problem chciwości (*greedy*). Załóżmy, że chcemy wyszukać wszystko w nawiasach.
+
+```         
+Dlaczego jednak napisałem range(1, 11) a nie range(1, 10)? Python działa tutaj specyficznie. Wynika to z faktu, że w informatyce liczy się od 0, nie od 1. Jeśli do funkcji range() wrzucę tylko jedną liczbę, czyli na przykład range(10), to dostanę 10 elementów. Ponieważ jednak pierwszy element to 0, to będą to liczby od 0 do 9. Mogę podać dwie liczby, żeby powiedzieć funkcji range(), od czego ma zacząć, ale wtedy muszę mieć w głowie, że skoro range(0, 10) oznacza 10 liczb od 0 do 9, to liczby od 1 do 10 muszę zapisać jako range(1, 11). Innymi słowy koniec skali nie wlicza się do zakresu.
+```
+
+```         
+\(.+\)
+```
+
+[![](ilustracje/regex/greedy_1.png)](https://regex101.com/r/kDdEiE/1)
+
+W naszym wyrażeniu regularnym wykorzystałem nawiasy (z lewym ukośnikiem, bo nawiasy to znak specjalny) oraz sekwencję `.+` oznaczającą „jeden dowolny znak lub więcej". Domyślnie jednak `+` jest chciwy (*greedy*) i wyszuka **najdłuższe możliwe sekwencje**. Oznacza to, że zaznaczył wszystko między pierwszym nawiasem otwierającym i ostatnim nawiasem zamykającym. W końcu nawiasy zamykające łapią się do kategorii dowolnych znaków. Żeby temu przeciwdziałać, zamiast `.+` możemy użyć `.+?`.
+
+[![](ilustracje/regex/greedy_2.png)](https://regex101.com/r/kDdEiE/2)
+
+Jest już lepiej! Problem jednak powodują w tym wypadku puste nawiasy. Nasze wyrażenie regularne wymaga, by między nawiasami coś było. Także robi tak, żeby takie sekwencje znaleźć. Rozwiązania widzę tutaj dwa. Po pierwsze można wykorzystać *lookarounds*, żeby pustych nawiasów nie dopasowywać. Pozwolą one też dopasować tekst *wewnątrz* nawiasów bez samych nawiasów. Nie chcę jednak wchodzić tak głęboko, dlatego zainteresowanych odsyłam [tutaj](https://www.rexegg.com/regex-lookarounds.html). Po drugie możemy umożliwić dopasowywanie też pustych nawiasów zastępując operator „jeden lub więcej" (`+`) operatorem „zero lub więcej" (`*`). Pamiętamy jednak o chciwości tych operatorów i dodajemy jeszcze `?`.
+
+[![](ilustracje/regex/greedy_3.png)](https://regex101.com/r/kDdEiE/3)
+
+# Grupy i zastępowanie
+
+Zazwyczaj po to wyszukujemy tekst, żeby zastąpić go innym. Jak to jednak zrobić, jeśli mamy takie fragmenty tekstu jak `.+`? Nie mogę wpisać w pole z tekstem, który mam zastąpić `.+`, bo dostanę dosłowną kropkę i plus. Załóżmy, że w poprzednim przykładzie chcemy zamienić nawiasy okrągłe w kwadratowe. Jak to zrobić? Za pomocą grup.
+
+[![](ilustracje/regex/groups_1.png)](https://regex101.com/r/q6PCek/1)
+
+Jak to zrobiłem? Najpierw w wyszukiwaniu zmieniłem sekwencję `\(.*?\)` w `\((.*?)\)`. Innymi słowy otoczyłem `.*?` dodatkową parą nawiasów. Rzeczy w nawiasach to grupy. Grupy po to są nam potrzebne, żebyśmy mogli je potem wykorzystywać do zastępowania[^1]. Zwróćmy uwagę na tekst w drugim polu, gdzie wpisałem `[$1]`. Oznacza to „tekst z pierwszej grupy w nawiasach kwadratowych". Czyli bierzemy wnętrze naszego nawiasu (grupę 1.) i otaczamy je nawiasami kwadratowymi. Nawiasy okrągłe nie są częścią grupy, więc nie pojawiają się w tekście po zmianie. Odwołania do grup mogą wyglądać różnie w różnych wersjach RegEx. W tym wypadku użyłem `$1`, ale np. RegEx w VS Code wymaga zapisu `\1`.
+
+[^1]: Ewentualnie możemy ich użyć do stosowania operatorów do całych grup, np. `(foo)+` dopasuje jedno lub więcej całe słowo „foo\". Bez nawiasu `+` odnosiłby się tylko do litery „o\".
+
+Możemy więc wreszcie rozwiązać problem z początku tego wpisu. Przypomnijmy -- chcemy linki zamienić na ścieżki do plików .qmd.
+
+```         
+Więcej można przeczytać w tekście o [podstawach R](https://nieobliczalne.pl/posts/podstawy_R.html).
+```
+
+Rozwiązaniem, którego ja użyłem, było:
+
+```         
+]\(.+(posts\/.+)\.html\)
+```
+
+Tekstem zastępującym było:
+
+```         
+](./$1.qmd)
+```
+
+[![](ilustracje/regex/main_problem.png)](https://regex101.com/r/Ub7uVB/1)
+
+Zaczynam zamykającym nawiasem kwadratowym, bo hiperlinki w markdown są formatowane jako `[tekst](link)`. Dalej otwieram dosłowny nawias okrągły i w nim dowolny tekst. Mogłem napisać dokładny link, bo to o ten i żaden inny tekst mi chodzi, ale nie chciało mi się pisać. Zabezpieczyłem się przed złymi dopasowaniami słowem „posts”. Po nim znajduje się prawy ukośnik i dowolne znaki. `posts/.+` jest też grupą, dlatego jest w nawiasach. Całość jest zakończona końcówką `.html` i nawiasem zamykającym. Całość zastępuję swoją grupą poprzedzoną tekstem `./`[^2] i zakończoną rozszerzeniem `.qmd`. Całość otaczam odpowiednimi nawiasami.
+
+[^2]: Warto zauważyć, że w polu, w którym wpisujemy tekst, którym zastępujemy nasze dopasowania, nie musimy już *escape'ować* znaków specjalnych. Tam już wszystkie znaki są dosłowne.
+
+
+# Perfekcjonizm i zapamiętywanie
+
+Czy mogłem zrobić to lepiej? Oczywiście! Tylko po co? Te sekwencje muszą być **użytkowe**. Nie musimy się starać, żeby były odporne na błędy i działały w każdym wypadku. To są rzeczy, które pisze się szybko, wykorzystuje i kasuje. Nie muszą być idealne, **muszą być szybkie i działać tu i teraz, w tym konkretnym przypadku**. W końcu po to uczymy się wyrażeń regularnych, żeby oszczędzić sobie pracy, a nie jej przysporzyć. Jeśli robimy coś często i chcemy to zachować na przyszłość, to może wtedy warto się bawić w szlifowanie. W większości przypadków piszemy wyrażenia regularne **na jeden raz** i warto o tym pamiętać.
+
+Informacji jest dużo, ale na szczęście nie musimy tego wszystkiego znać na pamięć, żeby z tego korzystać. Możemy się wspierać różnymi dostępnymi w sieci materiałami, które przypomną nam, jak się coś robiło. Kluczowe jest, by wiedzieć, że coś da się zrobić. Chyba najlepszym materiałem, z którego korzystam praktycznie zawsze, jak chcę napisać wyrażenie regularne, jest *cheat sheet* do pakietu `stringr`, który możemy znaleźć [tutaj](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf). Mam go w szufladzie od biurka położone tak, że jest to pierwsze, co widzę, jak ją otworzę. Jeśli zapomnę, jak było „zero albo więcej” albo chcę zrobić coś bardziej skomplikowanego, to patrzę do szuflady i już pamiętam. Rzeczy, których używam często, zdążyłem zapamiętać, a resztę czytam ze ściągi.
+
+# Podsumowanie
 
 Na koniec mogę polecić dwa źródła informacji o wyrażeniach regularnych. Pierwsza to strona [RexEgg](https://www.rexegg.com/), która zawiera mnóstwo wpisów uszeregowanych w tutoriale od podstaw do czarnego pasa. Druga to książka [*Wyrażenia regularne*](https://helion.pl/ksiazki/wyrazenia-regularne-jeffrey-e-f-friedl,wyrare.htm#format/d) autorstwa Jeffreya Friedla, wydana nakładem Wydawnictwa Helion. Oba źródła są pełne informacji, sztuczek i gotowych rozwiązań, za pomocą których różne czary można czynić w tekście.
+
+1. Wyrażenia regularne (*regular expressions*, RegEx) potrafią dopasować regularne struktury w tekście.
+
+2. Nawiasy kwadratowe dopasowują dowolny znak zapisany w tych nawiasach, np. `[tk]` dopasuje s**t**a**t**ys**t**y**k**a. `[^tk]` dopasuje **s**t**a**t**ys**t**y**k**a**.
+
+3. `^` to początek linijki, `$` to koniec linijki.
+
+4. Istnieje cała seria znaków wieloznacznych, z których najważniejsze to `\w` (dowolna litera), `\d` (dowolna cyfra), `\s` (dowolny znak typu spacja), `.` (dowolny znak) i `\n` (znak nowej linii, „enter”).
+
+5. Operatory ilości pozwalają powiedzieć, że dany znak pojawia się więcej niż raz -- `*` (zero lub więcej), `+` (jeden lub więcej), `?` (zero lub jeden). Domyślnie te operatory są *chciwe*, a żeby to zmienić dodajemy znak zapytania -- `*?` i `+?`.
+
+6. Grupy bierzemy w nawiasy. Potem możemy wykorzystywać te grupy w zastępowaniu, pisząc `$1` lub `\1` w zależności od systemu.
+
+7. Wyrażenia regularne to coś, co piszemy na szybko, na już, żeby działało tu i teraz, a niekoniecznie, żeby działało zawsze.
+
+8. Dobrą ściągą jest [*cheat sheet* do pakietu `stringr`](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf).
