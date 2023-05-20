@@ -146,7 +146,30 @@ cookieconsent.run({
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Na tej stronie</h2>
+   
+  <ul>
+  <li><a href="#systemy-kontroli-wersji" id="toc-systemy-kontroli-wersji" class="nav-link active" data-scroll-target="#systemy-kontroli-wersji"><span class="header-section-number">1</span> Systemy kontroli wersji</a></li>
+  <li><a href="#przygotowanie" id="toc-przygotowanie" class="nav-link" data-scroll-target="#przygotowanie"><span class="header-section-number">2</span> Przygotowanie</a>
+  <ul class="collapse">
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git"><span class="header-section-number">2.1</span> Git</a></li>
+  <li><a href="#github-i-github-cli" id="toc-github-i-github-cli" class="nav-link" data-scroll-target="#github-i-github-cli"><span class="header-section-number">2.2</span> GitHub i GitHub CLI</a></li>
+  <li><a href="#github-desktop-i-gitkraken" id="toc-github-desktop-i-gitkraken" class="nav-link" data-scroll-target="#github-desktop-i-gitkraken"><span class="header-section-number">2.3</span> GitHub Desktop i GitKraken</a></li>
+  </ul></li>
+  <li><a href="#podstawowe-pojęcia" id="toc-podstawowe-pojęcia" class="nav-link" data-scroll-target="#podstawowe-pojęcia"><span class="header-section-number">3</span> Podstawowe pojęcia</a></li>
+  <li><a href="#pliki-specjalne" id="toc-pliki-specjalne" class="nav-link" data-scroll-target="#pliki-specjalne"><span class="header-section-number">4</span> Pliki specjalne</a>
+  <ul class="collapse">
+  <li><a href="#gitignore" id="toc-gitignore" class="nav-link" data-scroll-target="#gitignore"><span class="header-section-number">4.1</span> <code>.gitignore</code></a></li>
+  <li><a href="#readme.md" id="toc-readme.md" class="nav-link" data-scroll-target="#readme.md"><span class="header-section-number">4.2</span> <code>README.md</code></a></li>
+  </ul></li>
+  <li><a href="#github-flow-gałęzie-forks-i-pull-requests" id="toc-github-flow-gałęzie-forks-i-pull-requests" class="nav-link" data-scroll-target="#github-flow-gałęzie-forks-i-pull-requests"><span class="header-section-number">5</span> GitHub Flow, gałęzie, <em>forks</em> i <em>pull requests</em></a></li>
+  <li><a href="#rozwiązywanie-konfliktów" id="toc-rozwiązywanie-konfliktów" class="nav-link" data-scroll-target="#rozwiązywanie-konfliktów"><span class="header-section-number">6</span> Rozwiązywanie konfliktów</a></li>
+  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">7</span> Podsumowanie</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/git.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
+    <div class="quarto-margin-footer"><div class="margin-footer-item">
 <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
     <style type="text/css">
     /* LOADER */
@@ -1027,30 +1050,7 @@ cookieconsent.run({
             fetch("https://assets.mailerlite.com/jsonp/447540/forms/88727515642725476/track-view")
         </script>
 
-</div></div>
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Na tej stronie</h2>
-   
-  <ul>
-  <li><a href="#systemy-kontroli-wersji" id="toc-systemy-kontroli-wersji" class="nav-link active" data-scroll-target="#systemy-kontroli-wersji"><span class="header-section-number">1</span> Systemy kontroli wersji</a></li>
-  <li><a href="#przygotowanie" id="toc-przygotowanie" class="nav-link" data-scroll-target="#przygotowanie"><span class="header-section-number">2</span> Przygotowanie</a>
-  <ul class="collapse">
-  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git"><span class="header-section-number">2.1</span> Git</a></li>
-  <li><a href="#github-i-github-cli" id="toc-github-i-github-cli" class="nav-link" data-scroll-target="#github-i-github-cli"><span class="header-section-number">2.2</span> GitHub i GitHub CLI</a></li>
-  <li><a href="#github-desktop-i-gitkraken" id="toc-github-desktop-i-gitkraken" class="nav-link" data-scroll-target="#github-desktop-i-gitkraken"><span class="header-section-number">2.3</span> GitHub Desktop i GitKraken</a></li>
-  </ul></li>
-  <li><a href="#podstawowe-pojęcia" id="toc-podstawowe-pojęcia" class="nav-link" data-scroll-target="#podstawowe-pojęcia"><span class="header-section-number">3</span> Podstawowe pojęcia</a></li>
-  <li><a href="#pliki-specjalne" id="toc-pliki-specjalne" class="nav-link" data-scroll-target="#pliki-specjalne"><span class="header-section-number">4</span> Pliki specjalne</a>
-  <ul class="collapse">
-  <li><a href="#gitignore" id="toc-gitignore" class="nav-link" data-scroll-target="#gitignore"><span class="header-section-number">4.1</span> <code>.gitignore</code></a></li>
-  <li><a href="#readme.md" id="toc-readme.md" class="nav-link" data-scroll-target="#readme.md"><span class="header-section-number">4.2</span> <code>README.md</code></a></li>
-  </ul></li>
-  <li><a href="#github-flow-gałęzie-forks-i-pull-requests" id="toc-github-flow-gałęzie-forks-i-pull-requests" class="nav-link" data-scroll-target="#github-flow-gałęzie-forks-i-pull-requests"><span class="header-section-number">5</span> GitHub Flow, gałęzie, <em>forks</em> i <em>pull requests</em></a></li>
-  <li><a href="#rozwiązywanie-konfliktów" id="toc-rozwiązywanie-konfliktów" class="nav-link" data-scroll-target="#rozwiązywanie-konfliktów"><span class="header-section-number">6</span> Rozwiązywanie konfliktów</a></li>
-  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">7</span> Podsumowanie</a></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/git.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
-    </div>
+</div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 

@@ -169,7 +169,24 @@ cookieconsent.run({
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Na tej stronie</h2>
+   
+  <ul>
+  <li><a href="#problemy-z-próbkowaniem" id="toc-problemy-z-próbkowaniem" class="nav-link active" data-scroll-target="#problemy-z-próbkowaniem"><span class="header-section-number">1</span> Problemy z próbkowaniem</a></li>
+  <li><a href="#jak-łatwo-wychodzą-przypadkowe-różnice" id="toc-jak-łatwo-wychodzą-przypadkowe-różnice" class="nav-link" data-scroll-target="#jak-łatwo-wychodzą-przypadkowe-różnice"><span class="header-section-number">2</span> Jak łatwo wychodzą przypadkowe różnice?</a></li>
+  <li><a href="#istotność-statystyczna" id="toc-istotność-statystyczna" class="nav-link" data-scroll-target="#istotność-statystyczna"><span class="header-section-number">3</span> Istotność statystyczna</a></li>
+  <li><a href="#logika-testów-statystycznych" id="toc-logika-testów-statystycznych" class="nav-link" data-scroll-target="#logika-testów-statystycznych"><span class="header-section-number">4</span> Logika testów statystycznych</a></li>
+  <li><a href="#wielkość-próbki" id="toc-wielkość-próbki" class="nav-link" data-scroll-target="#wielkość-próbki"><span class="header-section-number">5</span> Wielkość próbki</a>
+  <ul class="collapse">
+  <li><a href="#dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty" id="toc-dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty" class="nav-link" data-scroll-target="#dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty"><span class="header-section-number">5.1</span> Dlaczego większe próbki pozwalają wykryć mniejsze efekty?</a></li>
+  </ul></li>
+  <li><a href="#wielkość-efektu-a-istotność-statystyczna" id="toc-wielkość-efektu-a-istotność-statystyczna" class="nav-link" data-scroll-target="#wielkość-efektu-a-istotność-statystyczna"><span class="header-section-number">6</span> Wielkość efektu a istotność statystyczna</a></li>
+  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">7</span> Podsumowanie</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/p-value.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
+    <div class="quarto-margin-footer"><div class="margin-footer-item">
 <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
     <style type="text/css">
     /* LOADER */
@@ -1050,24 +1067,7 @@ cookieconsent.run({
             fetch("https://assets.mailerlite.com/jsonp/447540/forms/88727515642725476/track-view")
         </script>
 
-</div></div>
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Na tej stronie</h2>
-   
-  <ul>
-  <li><a href="#problemy-z-próbkowaniem" id="toc-problemy-z-próbkowaniem" class="nav-link active" data-scroll-target="#problemy-z-próbkowaniem"><span class="header-section-number">1</span> Problemy z próbkowaniem</a></li>
-  <li><a href="#jak-łatwo-wychodzą-przypadkowe-różnice" id="toc-jak-łatwo-wychodzą-przypadkowe-różnice" class="nav-link" data-scroll-target="#jak-łatwo-wychodzą-przypadkowe-różnice"><span class="header-section-number">2</span> Jak łatwo wychodzą przypadkowe różnice?</a></li>
-  <li><a href="#istotność-statystyczna" id="toc-istotność-statystyczna" class="nav-link" data-scroll-target="#istotność-statystyczna"><span class="header-section-number">3</span> Istotność statystyczna</a></li>
-  <li><a href="#logika-testów-statystycznych" id="toc-logika-testów-statystycznych" class="nav-link" data-scroll-target="#logika-testów-statystycznych"><span class="header-section-number">4</span> Logika testów statystycznych</a></li>
-  <li><a href="#wielkość-próbki" id="toc-wielkość-próbki" class="nav-link" data-scroll-target="#wielkość-próbki"><span class="header-section-number">5</span> Wielkość próbki</a>
-  <ul class="collapse">
-  <li><a href="#dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty" id="toc-dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty" class="nav-link" data-scroll-target="#dlaczego-większe-próbki-pozwalają-wykryć-mniejsze-efekty"><span class="header-section-number">5.1</span> Dlaczego większe próbki pozwalają wykryć mniejsze efekty?</a></li>
-  </ul></li>
-  <li><a href="#wielkość-efektu-a-istotność-statystyczna" id="toc-wielkość-efektu-a-istotność-statystyczna" class="nav-link" data-scroll-target="#wielkość-efektu-a-istotność-statystyczna"><span class="header-section-number">6</span> Wielkość efektu a istotność statystyczna</a></li>
-  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">7</span> Podsumowanie</a></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/p-value.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
-    </div>
+</div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 

@@ -180,7 +180,31 @@ cookieconsent.run({
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Na tej stronie</h2>
+   
+  <ul>
+  <li><a href="#przykład-motywacyjny" id="toc-przykład-motywacyjny" class="nav-link active" data-scroll-target="#przykład-motywacyjny"><span class="header-section-number">1</span> Przykład motywacyjny</a></li>
+  <li><a href="#tidy-eval" id="toc-tidy-eval" class="nav-link" data-scroll-target="#tidy-eval"><span class="header-section-number">2</span> Tidy Eval</a></li>
+  <li><a href="#lazy-evaluation" id="toc-lazy-evaluation" class="nav-link" data-scroll-target="#lazy-evaluation"><span class="header-section-number">3</span> <em>Lazy evaluation</em></a></li>
+  <li><a href="#tidy-eval-ciąg-dalszy" id="toc-tidy-eval-ciąg-dalszy" class="nav-link" data-scroll-target="#tidy-eval-ciąg-dalszy"><span class="header-section-number">4</span> Tidy Eval (ciąg dalszy)</a></li>
+  <li><a href="#niejednoznaczność-i" id="toc-niejednoznaczność-i" class="nav-link" data-scroll-target="#niejednoznaczność-i"><span class="header-section-number">5</span> Niejednoznaczność i <code>{{ }}</code></a></li>
+  <li><a href="#quoting-i-unquoting" id="toc-quoting-i-unquoting" class="nav-link" data-scroll-target="#quoting-i-unquoting"><span class="header-section-number">6</span> <em>Quoting</em> i <em>unquoting</em></a></li>
+  <li><a href="#expr-i-quo" id="toc-expr-i-quo" class="nav-link" data-scroll-target="#expr-i-quo"><span class="header-section-number">7</span> <code>expr()</code> i <code>quo()</code></a></li>
+  <li><a href="#enquo-quos-i-enquos-oraz-pokrewne" id="toc-enquo-quos-i-enquos-oraz-pokrewne" class="nav-link" data-scroll-target="#enquo-quos-i-enquos-oraz-pokrewne"><span class="header-section-number">8</span> <code>enquo()</code>, <code>quos()</code> i <code>enquos()</code> oraz pokrewne</a></li>
+  <li><a href="#i" id="toc-i" class="nav-link" data-scroll-target="#i"><span class="header-section-number">9</span> <code>!!</code> i <code>!!!</code></a></li>
+  <li><a href="#parsing-i-deparsing" id="toc-parsing-i-deparsing" class="nav-link" data-scroll-target="#parsing-i-deparsing"><span class="header-section-number">10</span> <em>Parsing</em> i <em>deparsing</em></a></li>
+  <li><a href="#kilka-przykładów-z-życia" id="toc-kilka-przykładów-z-życia" class="nav-link" data-scroll-target="#kilka-przykładów-z-życia"><span class="header-section-number">11</span> Kilka przykładów z życia</a>
+  <ul class="collapse">
+  <li><a href="#wywoływanie-funkcji-z-zatrzymanymi-argumentami" id="toc-wywoływanie-funkcji-z-zatrzymanymi-argumentami" class="nav-link" data-scroll-target="#wywoływanie-funkcji-z-zatrzymanymi-argumentami"><span class="header-section-number">11.1</span> Wywoływanie funkcji z zatrzymanymi argumentami</a></li>
+  <li><a href="#formuły-z-nazw-kolumn" id="toc-formuły-z-nazw-kolumn" class="nav-link" data-scroll-target="#formuły-z-nazw-kolumn"><span class="header-section-number">11.2</span> Formuły z nazw kolumn</a></li>
+  <li><a href="#warunkowa-lista-argumentów-do-summarise" id="toc-warunkowa-lista-argumentów-do-summarise" class="nav-link" data-scroll-target="#warunkowa-lista-argumentów-do-summarise"><span class="header-section-number">11.3</span> Warunkowa lista argumentów do <code>summarise()</code></a></li>
+  </ul></li>
+  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">12</span> Podsumowanie</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/metaprogramowanie.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
+    <div class="quarto-margin-footer"><div class="margin-footer-item">
 <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
     <style type="text/css">
     /* LOADER */
@@ -1061,31 +1085,7 @@ cookieconsent.run({
             fetch("https://assets.mailerlite.com/jsonp/447540/forms/88727515642725476/track-view")
         </script>
 
-</div></div>
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Na tej stronie</h2>
-   
-  <ul>
-  <li><a href="#przykład-motywacyjny" id="toc-przykład-motywacyjny" class="nav-link active" data-scroll-target="#przykład-motywacyjny"><span class="header-section-number">1</span> Przykład motywacyjny</a></li>
-  <li><a href="#tidy-eval" id="toc-tidy-eval" class="nav-link" data-scroll-target="#tidy-eval"><span class="header-section-number">2</span> Tidy Eval</a></li>
-  <li><a href="#lazy-evaluation" id="toc-lazy-evaluation" class="nav-link" data-scroll-target="#lazy-evaluation"><span class="header-section-number">3</span> <em>Lazy evaluation</em></a></li>
-  <li><a href="#tidy-eval-ciąg-dalszy" id="toc-tidy-eval-ciąg-dalszy" class="nav-link" data-scroll-target="#tidy-eval-ciąg-dalszy"><span class="header-section-number">4</span> Tidy Eval (ciąg dalszy)</a></li>
-  <li><a href="#niejednoznaczność-i" id="toc-niejednoznaczność-i" class="nav-link" data-scroll-target="#niejednoznaczność-i"><span class="header-section-number">5</span> Niejednoznaczność i <code>{{ }}</code></a></li>
-  <li><a href="#quoting-i-unquoting" id="toc-quoting-i-unquoting" class="nav-link" data-scroll-target="#quoting-i-unquoting"><span class="header-section-number">6</span> <em>Quoting</em> i <em>unquoting</em></a></li>
-  <li><a href="#expr-i-quo" id="toc-expr-i-quo" class="nav-link" data-scroll-target="#expr-i-quo"><span class="header-section-number">7</span> <code>expr()</code> i <code>quo()</code></a></li>
-  <li><a href="#enquo-quos-i-enquos-oraz-pokrewne" id="toc-enquo-quos-i-enquos-oraz-pokrewne" class="nav-link" data-scroll-target="#enquo-quos-i-enquos-oraz-pokrewne"><span class="header-section-number">8</span> <code>enquo()</code>, <code>quos()</code> i <code>enquos()</code> oraz pokrewne</a></li>
-  <li><a href="#i" id="toc-i" class="nav-link" data-scroll-target="#i"><span class="header-section-number">9</span> <code>!!</code> i <code>!!!</code></a></li>
-  <li><a href="#parsing-i-deparsing" id="toc-parsing-i-deparsing" class="nav-link" data-scroll-target="#parsing-i-deparsing"><span class="header-section-number">10</span> <em>Parsing</em> i <em>deparsing</em></a></li>
-  <li><a href="#kilka-przykładów-z-życia" id="toc-kilka-przykładów-z-życia" class="nav-link" data-scroll-target="#kilka-przykładów-z-życia"><span class="header-section-number">11</span> Kilka przykładów z życia</a>
-  <ul class="collapse">
-  <li><a href="#wywoływanie-funkcji-z-zatrzymanymi-argumentami" id="toc-wywoływanie-funkcji-z-zatrzymanymi-argumentami" class="nav-link" data-scroll-target="#wywoływanie-funkcji-z-zatrzymanymi-argumentami"><span class="header-section-number">11.1</span> Wywoływanie funkcji z zatrzymanymi argumentami</a></li>
-  <li><a href="#formuły-z-nazw-kolumn" id="toc-formuły-z-nazw-kolumn" class="nav-link" data-scroll-target="#formuły-z-nazw-kolumn"><span class="header-section-number">11.2</span> Formuły z nazw kolumn</a></li>
-  <li><a href="#warunkowa-lista-argumentów-do-summarise" id="toc-warunkowa-lista-argumentów-do-summarise" class="nav-link" data-scroll-target="#warunkowa-lista-argumentów-do-summarise"><span class="header-section-number">11.3</span> Warunkowa lista argumentów do <code>summarise()</code></a></li>
-  </ul></li>
-  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">12</span> Podsumowanie</a></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/metaprogramowanie.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
-    </div>
+</div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
