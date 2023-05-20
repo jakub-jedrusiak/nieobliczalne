@@ -2,54 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nieobliczalne.pl/posts/p-value.html</loc>
-    <lastmod>2023-05-16T15:25:20.203Z</lastmod>
+    <lastmod>2023-05-20T20:00:55.190Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/podstawy_R.html</loc>
-    <lastmod>2023-05-16T15:25:23.363Z</lastmod>
+    <lastmod>2023-05-20T20:00:58.137Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/uczenie-sie.html</loc>
-    <lastmod>2023-05-16T15:25:24.726Z</lastmod>
+    <lastmod>2023-05-20T20:00:59.337Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/powtarzalny-tekst.html</loc>
-    <lastmod>2023-05-16T15:25:26.376Z</lastmod>
+    <lastmod>2023-05-20T20:01:02.657Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/metaprogramowanie.html</loc>
-    <lastmod>2023-05-16T15:25:29.906Z</lastmod>
+    <lastmod>2023-05-20T20:01:06.877Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/automatyzacja.html</loc>
-    <lastmod>2023-05-16T15:25:31.096Z</lastmod>
+    <lastmod>2023-05-20T20:01:07.967Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/regex.html</loc>
+    <lastmod>2023-05-20T20:01:08.934Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/kombinatoryka.html</loc>
-    <lastmod>2023-05-16T15:25:32.799Z</lastmod>
+    <lastmod>2023-05-20T20:01:09.874Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/ai-research.html</loc>
-    <lastmod>2023-05-16T15:25:34.056Z</lastmod>
+    <lastmod>2023-05-20T20:01:10.767Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/git.html</loc>
-    <lastmod>2023-05-16T15:25:36.196Z</lastmod>
+    <lastmod>2023-05-20T20:01:11.857Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/procent-wariancji.html</loc>
-    <lastmod>2023-05-16T15:25:37.439Z</lastmod>
+    <lastmod>2023-05-20T20:01:12.961Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/about.html</loc>
-    <lastmod>2023-05-16T15:25:37.739Z</lastmod>
+    <lastmod>2023-05-20T20:01:13.194Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/toc.html</loc>
-    <lastmod>2023-05-16T15:25:37.979Z</lastmod>
+    <lastmod>2023-05-20T20:01:13.401Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/index.html</loc>
-    <lastmod>2023-05-16T15:25:38.486Z</lastmod>
+    <lastmod>2023-05-20T20:01:13.788Z</lastmod>
   </url>
 </urlset>
