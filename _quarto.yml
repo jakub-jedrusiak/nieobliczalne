@@ -11,6 +11,9 @@ website:
         text: Spis treści
       - href: about.qmd
         text: O mnie
+    right: 
+      - icon: rss
+        href: index.xml
   google-analytics: "G-FKTMH2V23V"
   repo-url: "https://github.com/jakub-jedrusiak/nieobliczalne"
   repo-actions: [edit, issue]
