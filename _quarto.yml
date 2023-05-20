@@ -14,7 +14,7 @@ website:
     right: 
       - icon: rss
         href: index.xml
-  margin-header: subscribe.html
+  margin-footer: subscribe.html
   google-analytics: "G-FKTMH2V23V"
   repo-url: "https://github.com/jakub-jedrusiak/nieobliczalne"
   repo-actions: [edit, issue]
