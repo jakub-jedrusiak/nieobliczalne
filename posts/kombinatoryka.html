@@ -249,7 +249,7 @@ cookieconsent.run({
 </details>
 </div>
 <p>Kombinatoryka to część matematyki zajmująca się modyfikacjami zbiorów. Weźmy sobie zbiór 5 pierwszych liter alfabetu i nazwijmy go Z jak zbiór. Zacznę od skomplikowanie brzmiącego wstępu, a potem wyjaśnię to na przykładach.</p>
-<div class="cell" data-execution_count="2">
+<div id="da56fd35" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> [<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span>]</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Z tym zbiorem mogę zrobić kilka rzeczy. Mogę go zacząć rozbijać na mniejsze zbiory. Mogę zacząć przestawiać w nim elementy. Mogę najpierw rozbić go na mniejsze zbiory, a potem przestawiać elementy w tych małych zbiorach. Każda z tych akcji ma swoją własną nazwę. Jeżeli mówię, że:</p>
@@ -262,7 +262,7 @@ cookieconsent.run({
 <section id="permutacje" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Permutacje</h1>
 <p>Omówmy to na przykładzie naszego zbioru liter od A do E. Permutacja tego zbioru będzie wyglądała tak:</p>
-<div class="cell" data-execution_count="3">
+<div id="b43332ce" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(itertools.permutations(Z))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
@@ -383,7 +383,7 @@ P_n = n!
 <section id="wariacje" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Wariacje</h1>
 <p>Ciekawie zaczyna się robić, gdy przed zmianą kolejności chcemy jeszcze rozbić nasz zbiór na mniejsze zbiory. Dla przykładu możemy sobie wyobrazić, że chcemy z naszego zbioru 5 liter wybrać wszystkie możliwe zbiory po 2 litery, np. AB, AC, AD itd. Mamy do dyspozycji mniej miejsca, niż liter w zbiorze. Liczenie czegoś takiego jest analogiczne. Na pierwszym miejscu może pojawić się 1 z 5 liter, na drugim tylko 1 z 4: <span class="math inline">\(V^2_5 = 5 \times 4 = 20\)</span>. Powinno więc istnieć 20 takich zbiorów. Wypiszmy je wszystkie.</p>
-<div class="cell" data-execution_count="4">
+<div id="9d1d158a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>variations(Z, <span class="dv">2</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
@@ -463,7 +463,7 @@ V^2_5 = 5 \times 4 = \frac{5 \times 4 \times 3 \times 2 \times 1}{3 \times 2 \ti
 V^k_n = \frac{n!}{(n-k)!}
 \]</span></p>
 <p>Spróbujmy wypisać wariacje naszego zbioru po 3 elementy.</p>
-<div class="cell" data-execution_count="5">
+<div id="800fa1f7" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>variations(Z, <span class="dv">3</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
@@ -686,6 +686,7 @@ C^k_n = \frac{\frac{n!}{(n-k)!}}{k!} = \frac{n!}{k!(n-k)!} = \binom{n}{k}
 </div>
 </div>
 </div>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licencja Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a><br>Ten utwór jest dostępny na <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">licencji Creative Commons Uznanie autorstwa-Użycie niekomercyjne-Na tych samych warunkach 4.0 Międzynarodowe</a>.</p>
 
 
 </section>
