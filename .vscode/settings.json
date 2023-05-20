@@ -30,6 +30,8 @@
         "wyczysc"
     ],
     "cSpell.enableFiletypes": [
-        "mermaid"
-    ]
+        "mermaid",
+        "quarto"
+    ],
+    "cSpell.diagnosticLevel": "Hint"
 }
