@@ -3,6 +3,8 @@ title: "Znajdź i zmień to narzędzie ostateczne"
 subtitle: "Oszczędzanie czasu z wyrażeniami regularnymi"
 description: "Jest takie narzędzie, które nie ma szerokiej publiczności poza światem technicznym, a pozwala oszczędzić naprawdę dużo czasu. Całkowicie poważnie twierdzę że powinno ono być nauczane w szkole, razem z obsługą programów do pisania. Sądzę, że przyda się ono każdemu, kto cokolwiek pisze na komputerze, nieważne, czy jest to profesor, księgowa czy zwykły Kowalski. Mowa tutaj o wyrażeniach regularnych (*Regular Expressions*, RegEx), które przybliżam w tym tekście."
 image: ./headers/regex.webp
+twitter-card:
+    image: "/headers/regex.webp"
 date: "2023-05-20"
 categories:
     - Narzędzia

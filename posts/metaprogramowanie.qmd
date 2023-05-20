@@ -4,6 +4,8 @@ subtitle: "Dlaczego moja funkcja nie działa?"
 description: "Piękno pakietu `tidyverse` polega na tym, że zupełnie zmienia sposób w jaki wpisujemy nazwy kolumn do funkcji – bez głębszego zastanawiania się. To zupełnie inaczej, niż w większości języków programowania. To tzw. Tidy Evaluation (Tidy Eval) ułatwia pisanie zwykłego kodu, ale zaskakująco utrudnia pisanie własnych funkcji."
 date: "2023-05-05"
 image: "./headers/metaprogramowanie.webp"
+twitter-card:
+    image: "/headers/metaprogramowanie.webp"
 caregories:
   - R
 ---

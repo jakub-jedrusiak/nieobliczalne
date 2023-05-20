@@ -4,6 +4,8 @@ subtitle: "Potencjał technik uczenia się w edukacji"
 description: "Przy coraz powszechniej obserwowanym zjawisku wypalenia szkolnego pośród uczniów, a także niskiej długoterminowej skuteczności ogólnie stosowanych technik uczenia się, pojawia się potrzeba nabycia przez uczniów nowych, skuteczniejszych sposobów zdobywania wiedzy. Jest to szczególnie ważne, biorąc pod uwagę wysokie rozpowszechnienie fałszywych informacji na temat uczenia się. Artykuł redefiniuje pojęcie technik uczenia się odróżniając je od mnemotechnik, podaje ogólne prawidłowości rządzące zapamiętywaniem, a także omawia trzy konkretne techniki – pałac pamięci, metodę Feynmana i fiszki elektroniczne z wykorzystaniem otwartego programu Anki."
 date: "2020-02-07"
 image: ./headers/uczenie-sie.webp
+twitter-card:
+    image: "/headers/uczenie-sie.webp"
 bibliography: ../bibliografia/uczenie-sie.bib
 categories:
     - Psychologia

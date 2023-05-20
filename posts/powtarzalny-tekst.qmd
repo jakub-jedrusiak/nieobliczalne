@@ -4,6 +4,8 @@ subtitle: "Automatyzacja powtarzalnego tekstu za pomocą pythona"
 description: "Wspominałem już, że nie znoszę mechanicznej pracy. A królową wśród prac mechanicznych jest pisanie wiele razy prawie tego samego tekstu, który różni się tylko w szczegółach. Zdarza się to non-stop. Jednocześnie jest to ten rodzaj pracy, który można niskim kosztem zautomatyzować. W tym wpisie postaram się pokazać, jak można uniknąć góry bezsensownej pracy za pomocą prostych pętli i funkcji `print()` w pythonie."
 date: "2023-05-12"
 image: ./headers/powtarzalny-tekst.webp
+twitter-card:
+    image: "/headers/powtarzalny-tekst.webp"
 categories:
     - Python
     - Nauka

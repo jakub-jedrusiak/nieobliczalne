@@ -3,6 +3,8 @@ title: "Jakim rodzajem pizzy jestem?"
 subtitle: "Podstawowe założenia psychometrii"
 description: ""
 image: ./headers/psychometria.webp
+twitter-card:
+    image: "/headers/psychometria.webp"
 categories:
     - Psychologia
 draft: true

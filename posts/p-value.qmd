@@ -3,6 +3,8 @@ title: "Testy statystyczne i wartość *p*"
 description: "Czymże jest prawda? Czy czegokolwiek możemy być pewni? Nie lubimy się pakować w takie pytania, bo łatwo dojść do odpowiedzi „nie\", a wtedy tracimy grunt pod nogami. Część z nas zgodzi się, że *tak naprawdę* niczego nie możemy być pewni. W końcu zawsze może się okazać, że żyjemy w Matrixie, a wtedy żadne dowody nie mają znaczenia. Ale jednak pewnych rzeczy jesteśmy bardziej pewni niż innych."
 date: "2022-09-21"
 image: ./headers/p-value.webp
+twitter-card:
+    image: "/headers/p-value.webp"
 freeze: true
 categories:
   - Statystyka
