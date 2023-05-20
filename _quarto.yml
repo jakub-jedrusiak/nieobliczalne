@@ -3,6 +3,7 @@ project:
 
 website:
   title: "Nieobliczalne"
+  site-url: "https://nieobliczalne.pl"
   navbar:
     left:
       - href: index.qmd
