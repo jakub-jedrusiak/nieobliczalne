@@ -29,8 +29,8 @@ website:
 format:
   html:
     theme:
-      light: flatly
-      dark: darkly
+      light: [flatly, light.scss]
+      dark: [darkly, dark.scss]
     mainfont: "Open Sans"
     monofont: "Cascadia Code"
     date-format: long
