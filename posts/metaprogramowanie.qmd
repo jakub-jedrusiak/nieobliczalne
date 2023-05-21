@@ -6,6 +6,7 @@ date: "2023-05-05"
 image: "./headers/metaprogramowanie.webp"
 twitter-card:
     image: "/headers/metaprogramowanie.webp"
+freeze: true
 caregories:
   - R
 ---
