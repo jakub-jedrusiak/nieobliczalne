@@ -10,6 +10,8 @@ website:
         text: Strona główna
       - href: toc.qmd
         text: Spis treści
+      - href: newsletter.qmd
+        text: Subskrybuj
       - href: about.qmd
         text: O mnie
     right: 
