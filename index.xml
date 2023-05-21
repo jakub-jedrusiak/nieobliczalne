@@ -2233,7 +2233,7 @@ font-style: inherit;">quo_vs_enquo</span>(argument)</span></code></pre></div>
 <span style="color: #555555;">#&gt;</span> [1] "quo(x):"
 <span style="color: #555555;">#&gt;</span> <span style="font-weight: bold;">&lt;quosure&gt;</span>
 <span style="color: #555555;">#&gt;</span> expr: <span style="color: #0000BB;">^x</span>
-<span style="color: #555555;">#&gt;</span> env:  <span style="color: #0000BB;">0x5556779946c0</span>
+<span style="color: #555555;">#&gt;</span> env:  <span style="color: #0000BB;">0x5632e93edc20</span>
 </code></pre>
 </div>
 </div>
