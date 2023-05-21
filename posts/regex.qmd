@@ -48,7 +48,13 @@ Wyrażenia regularne pozwalają nam powiedzieć „wszystko, co ma rdzeń *staty
 
 > \[Ss\]tatysty(ka\|ki\|ce\|kę\|ką\|ko)
 
+::: {.light-mode}
 [![Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej.](ilustracje/regex/or.png)](https://regex101.com/r/kUE7Db/1)
+:::
+
+::: {.dark-mode}
+[![Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej.](ilustracje/regex/or_dark.png)](https://regex101.com/r/kUE7Db/1)
+:::
 
 Rozbijmy ten przykład na czynniki pierwsze. Po pierwsze mamy `[Ss]`. Nawiasy kwadratowe oznaczają, że wyrażenie ma wyszukiwać jeden ze znaków wewnątrz nich. W tym wypadku dopasuje zarówno duże, jak i małe S. Mogę tam też zapisywać przedziały typu `[0-9]` albo `[A-Za-z]`. Możemy też powiedzieć „wszystko poza znakami ze zbioru", co zrobimy pisząc `^`, np. `[^0-9]` dopasuje wszystko, co *nie jest* cyfrą.
 
@@ -78,7 +84,13 @@ Weźmy sobie za przykład tekst skopiowany z Worda, w którym mamy pozostałośc
 
 Odpowiednie wyrażenie regularne mogłoby brzmieć `^\d\.`. Po kropce jest tam spacja, którą silnik uporczywie mi usuwa, dlatego na stronie jej nie widać.
 
+::: {.light-mode}
 [![](ilustracje/regex/anchors.png)](https://regex101.com/r/WVPWt4/1)
+:::
+
+::: {.dark-mode}
+[![](ilustracje/regex/anchors_dark.png)](https://regex101.com/r/WVPWt4/1)
+:::
 
 Zwróćmy uwagę na kilka rzeczy. Po pierwsze, to wyrażenie nie dopasowało liczby „1." w treści 3. punktu. Wynika to z tego, że dodaliśmy `^` na początku wyrażenia. Liczby, które nie są na początku linijki nie są przez to dopasowywane. Po drugie, musiałem przed kropką dodać ukośnik. Wynika to z faktu, że kropka to znak specjalny (oznacza dowolny znak) i jeśli chcemy wyszukać dosłowną kropkę, musimy wykorzystać lewy ukośnik.
 
@@ -90,7 +102,13 @@ Najbardziej (według mnie) użyteczne operatory, jakie oferuje RegEx, to operato
 
 > \[A-Z\]\\w+
 
+::: {.light-mode}
 [![](ilustracje/regex/repeat.png)](https://regex101.com/r/uzD28P/1)
+:::
+
+::: {.dark-mode}
+[![](ilustracje/regex/repeat_dark.png)](https://regex101.com/r/uzD28P/1)
+:::
 
 Znak `+` oznacza tutaj „jeden lub więcej", a więc `\w+` oznacza „jedna litera lub więcej". Operatorów podobnych do `+` jest więcej i możemy je zobaczyć w tabelce.
 
@@ -111,23 +129,47 @@ Z użyciem tych operatorów może się wiązać problem chciwości (*greedyness*
 
 > \\(.+\\)
 
+::: {.light-mode}
 [![](ilustracje/regex/greedy_1.png)](https://regex101.com/r/kDdEiE/1)
+:::
+
+::: {.dark-mode}
+[![](ilustracje/regex/greedy_1_dark.png)](https://regex101.com/r/kDdEiE/1)
+:::
 
 Dziwne. Czemu takie długie wyszło? W naszym wyrażeniu regularnym wykorzystałem nawiasy (z lewym ukośnikiem, bo nawiasy to znak specjalny) oraz sekwencję `.+` oznaczającą „jeden dowolny znak lub więcej". Domyślnie jednak `+` jest chciwy (*greedy*) i wyszuka **najdłuższe możliwe sekwencje**. Oznacza to, że zaznaczył wszystko między pierwszym nawiasem otwierającym i ostatnim nawiasem zamykającym. W końcu nawiasy zamykające łapią się do kategorii dowolnych znaków. Żeby temu przeciwdziałać, zamiast `.+` możemy użyć `.+?`.
 
+::: {.light-mode}
 [![](ilustracje/regex/greedy_2.png)](https://regex101.com/r/kDdEiE/2)
+:::
+
+::: {.dark-mode}
+[![](ilustracje/regex/greedy_2_dark.png)](https://regex101.com/r/kDdEiE/2)
+:::
 
 Jest już lepiej! Problem jednak powodują w tym wypadku puste nawiasy. Nasze wyrażenie regularne wymaga, by między nawiasami coś było. Takie właśnie sekwencje znajduje w przypadku zapisu `()`. Nawias zamykający jest po prosu kolejnym znakiem, czyli łapie się jako `.`, a dopasowanie kończy dopiero kolejny nawias zamykający.
 
 Rozwiązania widzę tutaj dwa. Po pierwsze można wykorzystać *lookarounds*, żeby pustych nawiasów nie dopasowywać. Pozwolą one też dopasować tekst *wewnątrz* nawiasów bez samych nawiasów. Nie chcę jednak wchodzić tak głęboko, dlatego zainteresowanych odsyłam [tutaj](https://www.rexegg.com/regex-lookarounds.html). Po drugie możemy umożliwić dopasowywanie też pustych nawiasów zastępując operator „jeden lub więcej" (`+`) operatorem „zero lub więcej" (`*`). Pamiętajmy jednak o chciwości tych operatorów i dodajmy jeszcze `?`.
 
+::: {.light-mode}
 [![](ilustracje/regex/greedy_3.png)](https://regex101.com/r/kDdEiE/3)
+:::
+
+::: {.dark-mode}
+[![](ilustracje/regex/greedy_3_dark.png)](https://regex101.com/r/kDdEiE/3)
+:::
 
 # Grupy i zastępowanie
 
 Zazwyczaj po to wyszukujemy tekst, żeby zastąpić go innym. Jak to jednak zrobić, jeśli mamy takie fragmenty tekstu jak `.+`? Nie mogę wpisać w pole z tekstem do podstawienia `.+`, bo dostanę dosłowną kropkę i plus. Program musi dokładnie wiedzieć, co w dane miejsce wstawić. Załóżmy, że w poprzednim przykładzie chcemy zamienić nawiasy okrągłe na kwadratowe. Jak to zrobić? Za pomocą grup.
 
+::: {.light-mode}
 [![](ilustracje/regex/groups_1.png)](https://regex101.com/r/q6PCek/1)
+:::
+
+::: {.dark-mode}
+[![](ilustracje/regex/groups_1_dark.png)](https://regex101.com/r/q6PCek/1)
+:::
 
 Jak to zrobiłem? Najpierw w wyszukiwaniu zmieniłem sekwencję `\(.*?\)` w `\((.*?)\)`. Innymi słowy otoczyłem `.*?` dodatkową parą nawiasów. Na screenie zaznaczone są na zielono. Znaki w nawiasach tworzą grupy. Grupy po to są nam potrzebne, żebyśmy mogli je potem wykorzystywać do zastępowania tekstu[^2]. Zwróćmy uwagę na tekst w drugim polu, gdzie wpisałem `[$1]`. Oznacza to „tekst z pierwszej grupy (`$1`) w nawiasach kwadratowych". Czyli bierzemy wnętrze naszego pierwotnego nawiasu (grupę 1.) i otaczamy je nawiasami kwadratowymi. Nawiasy okrągłe nie są częścią grupy, więc nie pojawiają się w tekście po zmianie.
 
@@ -149,7 +191,13 @@ Tekstem zastępującym było:
 
 > \](./\$1.qmd)
 
+::: {.light-mode}
 [![](ilustracje/regex/main_problem.png)](https://regex101.com/r/Ub7uVB/1)
+:::
+
+::: {.dark-mode}
+[![](ilustracje/regex/main_problem_dark.png)](https://regex101.com/r/Ub7uVB/1)
+:::
 
 Zaczynam zamykającym nawiasem kwadratowym, bo hiperlinki w markdown są formatowane jako `[tekst](link)`. Dalej otwieram dosłowny nawias okrągły i w nim dowolny tekst. Mogłem napisać dokładny link, bo to o ten i żaden inny tekst mi chodzi, ale nie chciało mi się pisać. Zabezpieczyłem się przed złymi dopasowaniami słowem „posts". Po nim znajduje się prawy ukośnik i dowolne znaki, czyli wewnętrzna nazwa danego wpisu. `posts/.+` jest też grupą, dlatego jest w nawiasach. Wyrażenie zakończone jest rozszerzeniem `.html` i nawiasem zamykającym. Całość zastępuję swoją grupą `posts/nazwa_wpisu` poprzedzoną tekstem `./`[^3] i zakończoną rozszerzeniem `.qmd`. Całość otaczam odpowiednimi nawiasami.
 
@@ -167,7 +215,7 @@ Na koniec mogę polecić dwa źródła informacji o wyrażeniach regularnych. Pi
 
 1.  Wyrażenia regularne (*regular expressions*, RegEx) pozwalają znajdować i modyfikować regularne struktury w tekście.
 
-2.  Nawiasy kwadratowe dopasowują dowolny znak zapisany w tych nawiasach, np. `[tk]` dopasuje s<span style="background-color:#D1FFBD">**t**</span>a<span style="background-color:#D1FFBD">**t**</span>ys<span style="background-color:#D1FFBD">**t**</span>y<span style="background-color:#D1FFBD">**k**</span>a. `[^tk]` dopasuje odwrotność, czyli <span style="background-color:#D1FFBD">**s**</span>t<span style="background-color:#D1FFBD">**a**</span>t<span style="background-color:#D1FFBD">**ys**</span>t<span style="background-color:#D1FFBD">**y**</span>k<span style="background-color:#D1FFBD">**a**</span>.
+2.  Nawiasy kwadratowe dopasowują dowolny znak zapisany w tych nawiasach, np. `[tk]` dopasuje s<span class="regex_match">t</span>a<span class="regex_match">t</span>ys<span class="regex_match">t</span>y<span class="regex_match">k</span>a. `[^tk]` dopasuje odwrotność, czyli <span class="regex_match">s</span>t<span class="regex_match">a</span>t<span class="regex_match">ys</span>t<span class="regex_match">y</span>k<span class="regex_match">a</span>.
 
 3.  `^` to początek linijki, `$` to koniec linijki.
 
