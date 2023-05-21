@@ -25,3 +25,7 @@ h6 {
 .navbar-title {
   font-weight: bold;
 }
+
+.margin-sidebar {
+  overflow: clip;
+}
