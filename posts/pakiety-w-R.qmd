@@ -1,6 +1,6 @@
 ---
 title: "Tworzenie pakietów w R"
-description: "Po co pisać własne pakiety w R? Widzę dwa powody. Po pierwsze możemy mieć pewną kolekcję funkcji, których często używamy w różnych analizach. Możemy je w pewnym momencie chcieć zebrać w jedno miejsce. Po drugie możemy chcieć się podzielić naszym kodem. W obu przypadkach pakiet jest lepszą opcją niż pliki ze skryptami."
+description: "Po co pisać własne pakiety w R? Widzę dwa powody. Po pierwsze możemy mieć pewną kolekcję funkcji, których często używamy w różnych analizach. Możemy je w pewnym momencie chcieć zebrać w jedno miejsce. Po drugie możemy chcieć się podzielić naszym kodem. W obu przypadkach pakiet jest lepszą, bardziej uporządkowaną i łatwiejszą w używaniu opcją niż pliki ze skryptami."
 image: ./headers/pakiety-w-R.webp
 twitter-card:
     image: "/headers/pakiety-w-R.webp"
@@ -8,3 +8,414 @@ categories:
     - R
 draft: true
 ---
+
+```{r}
+#| include: false
+library(rlang)
+```
+
+Pakiety to nic innego jak zbiory funkcji. Od zwykłych plików .R z funkcjami różnią się tym, że mają określoną strukturę, dzięki której można je potem zainstalować i szybko wykorzystywać. Pewnie pierwszym skojarzeniem z pisaniem pakietów jest udostępnianie ich w CRAN. Owszem, można to zrobić, ale można mieć też prywatne pakiety trzymane na GitHubie. Nie musimy zaraz wszystkiego robić na tip-top, żeby każdy na świecie wygodnie korzystał z naszych trzech funkcji.
+
+# Przygotowanie
+
+Do tworzenia pakietów wykorzystujemy inne pakiety. Najważniejszym z nich jest `devtools`, który ciągnie za sobą cały szereg innych pakietów typu `roxygen2`, `usethis` czy `testthat`. Możesz nawet mieć już zainstalowane `devtools`, bo to w jego skład wchodzi funkcja `install_github()`, dzięki której instalujemy pakiety z GitHuba[^1]. Jeśli nie masz jeszcze zainstalowanego pakietu `devtools`, zainstaluj go teraz.
+
+[^1]: Funkcje `install_*()` zapewnia też mniejszy pakiet `remotes`, który jest praktycznie wycinkiem z `devtools`. Jeśli mamy `devtools`, nie potrzebujemy `remotes`.
+
+```{r}
+#| eval: false
+install.packages("devtools")
+```
+
+W tym tekście będę używał pełnych nazw funkcji, np. `usethis::use_readme_md()`. Jeśli jednak na początku pracy załadujesz `devtools`, nie musisz później podawać nazw pakietów.
+
+Najprostszym sposobem na utworzenie zrębu pakietu R jest wykorzystanie menu do tworzenia projektów w RStudio. Podczas tworzenia projektu możemy wybrać jego typ i nas interesuje *R package*. W wygodnym kreatorze wpisujemy nazwę pakietu. Warto też zaznaczyć, że chcemy mieć do tego repozytorium Git. Jeśli zabieramy się za tworzenie pakietu, powinniśmy umieć choć w podstawowym stopniu korzystać z Gita. Jeśli nie znasz Gita, zachęcam do przeczytania [tego posta](./posts/git.qmd).
+
+![](ilustracje/pakiety-w-R/RStudio-wizard.png)
+
+# Struktura pakietu {#sec-structure}
+
+Stworzony przez nas zręb pakietu już ma określoną strukturę. W folderze z pakietem znajdziemy serię szczególnych plików i folderów, która potem będzie się wzbogacać. Obecnie są to:
+
+-   `.gitignore` -- plik repozytorium mówiący, co Git ma ignorować (więcej o tym w [tekście o Git](./posts/git.qmd)).
+
+-   `.Rbuildignore` -- plik, w którym podajemy niestandardowe pliki z folderu z pakietem; jest to ważne, bo R-CMD-check (o którym później) będzie na nas krzyczał, jeśli znajdzie niestandardowe pliki.
+
+-   `DESCRIPTION` -- metadane naszego pakietu, przede wszystkim nazwa, wersja, autorzy i wymagane inne pakiety.
+
+-   `man` -- folder z plikami .Rd z dokumentacją naszych funkcji; nie edytujemy ich ręcznie.
+
+-   `NAMESPACE` -- plik z przestrzenią nazw naszego pakietu; nie edytujemy go ręcznie.
+
+-   `R` -- folder, do którego wrzucamy pliki .R z naszymi funkcjami; najważniejsza część naszego pakietu.
+
+Do tego jeszcze znajdziemy tam plik z projektem RStudio. W miarę budowania naszego pakietu, nasz folder będzie się zaludniał nowymi plikami i folderami.
+
+Już teraz warto jest uruchomić kilka komend z pakietu `usethis`, które ułatwią nam robotę w przyszłości. Są to funkcje, których zazwyczaj używamy tylko raz.
+
+Po pierwsze musimy przygotować nasz pakiet do używania `roxygen2`, czyli specjalnego standardu generującego dokumentację naszych funkcji, żebyśmy nie musieli ręcznie babrać się z plikami .Rd. Zaczynamy więc od **usunięcia pliku `NAMESPACE`**. Dlaczego? Bo nasz plik ma stworzyć `roxygen2`, a nie RStudio. Następnie używamy komendy `roxygen2::roxygenise()`. Doda ona do pliku `DESCRIPTION` informację o używanej wersji `roxygen2` oraz stworzy nowy plik `NAMESPACE`. Następnie używamy komendy `usethis::use_roxygen_md()`[^2]. Pozwoli ona używać nam wygodnej składni markdown w dokumentacji, np. \*\***bold**\*\* wygeneruje nam pogrubiony tekst.
+
+[^2]: Jeśli już wcześniej stworzyłeś(-aś) jakieś pliki z funkcjami i je udokumentowałeś(-aś), to użyj teraz `roxygen2md::roxygen2md()`, by przerobić je na nowy standard. Jeśli tworzysz pakiet po kolei zgodnie z tym wpisem, nie ma takiej potrzeby.
+
+# `DESCRIPTION`
+
+Plik `DESCRIPTION`, jak już wspomniałem, to opis naszego pakietu. Jeśli otworzymy go teraz, zobaczymy przygotowany wcześniej szkielet. Możemy teraz uzupełnić tytuł, wersję i opis. Jeśli opis zajmie więcej niż linijkę, kolejne linijki powinny zaczynać się wcięciem 4 spacji.
+
+## Autorzy
+
+Jeśli chodzi o autorów pakietu, podajemy ich w dość specyficzny sposób. Najpierw jednak kasujemy całą linijkę `Maintainer`. To stary standard, którego lepiej unikać. Spójrzmy na przykład.
+
+```{r}
+#| eval: false
+Authors@R: person(
+      "Jakub", "Jędrusiak",
+      email = "kuba23031999@gmail.com",
+      role = c("aut", "cre"),
+      comment = c(
+        ORCID = "0000-0002-6481-8210",
+        affiliation = "University of Wrocław"
+        )
+      )
+```
+
+Po pierwsze `Author` zmieniamy na `Authors@R` i to niezależnie od liczby autorów. Jeśli autor jest jeden, podajemy go za pomocą funkcji `person()`. Podstawowe informacje to imię w pierwszym argumencie[^3], nazwisko w drugim. Tych argumentów nie musimy nazywać. Dalej mamy inne informacje, które już nazwać warto. `email` jaki jest, każdy widzi. `role` to opis funkcji osoby w tworzeniu pakietu. Używamy tutaj kodów opisanych w dokumentacji funkcji `person()`. Kilka podstawowych kodów ról wymieniam w tabeli poniżej. Jak widać w przykładzie, każda osoba może mieć więcej niż jedną rolę. Dalej mamy `comment`, który zawsze podajemy w postaci nazwanego wektora. Podstawowym, co możemy tam wrzucić, jest numer ORCiD oraz afiliacja.
+
+[^3]: Jeśli chcemy podać dwa imiona, podajemy je jako wektor, np. `c("Paweł", "Przemysław")`.
+
+| Kod     | Funkcja            | Opis                                                                                                 |
+|---------|--------------------|------------------------------------------------------------------------------------------------------|
+| `"aut"` | *Author*           | Pełny autor, wszystkie osoby, które powinny pojawić się w cytowaniu powinny mieć przypisaną tę rolę. |
+| `"cre"` | *Creator*          | Osoba odpowiedzialna za dbanie o kod w pakiecie, *maintainer*.                                       |
+| `"ctb"` | *Contributor*      | Osoby, które wniosły wkład w pakiet, ale nie powinny pojawiać się w cytowaniu.                       |
+| `"cph"` | *Copyright holder* | Osoba lub instytucja posiadająca prawa autorskie do pakietu.                                         |
+
+Jeśli autorów jest więcej niż jeden, podajemy ich w postaci wektora. Poniżej przykład.
+
+```{r}
+#| eval: false
+Authors@R: c(
+    person(
+      "Boris", "Forthmann",
+      email = "boris.forthmann@uni-muenster.de",
+      role = "aut",
+      comment = c(
+        ORCID = "0000-0001-9755-7304",
+        affiliation = "University of Münster"
+      )
+    ),
+    person(
+      "Maciej", "Karwowski",
+      email = "maciej.karwowski@uwr.edu.pl",
+      role = "aut",
+      comment = c(
+        ORCID = "0000-0001-6974-1673",
+        affiliation = "University of Wrocław"
+      )
+    ),
+    person(
+      c("Roger", "E."), "Beaty",
+      email = "rebeaty@psu.edu",
+      role = "aut",
+      comment = c(
+        ORCID = "0000-0001-6114-5973",
+        affiliation = "Pennsylvania State University"
+        )
+      ),
+    person(
+      "Jakub", "Jędrusiak",
+      email = "kuba23031999@gmail.com",
+      role = c("aut", "cre"),
+      comment = c(
+        ORCID = "0000-0002-6481-8210",
+        affiliation = "University of Wrocław"
+        )
+      )
+    )
+```
+
+## `CITATION`
+
+Jeśli chcemy, by nasz pakiet był cytowany w jakiś konkretny sposób, możemy wprost go wskazać w pliku `CITATION`. Wytwarzamy go po uzupełnieniu koniecznych informacji w pliku `DESCRIPTION` za pomocą komendy `usethis::use_citation()`. Sam plik siedzi w folderze `inst`. Umieszczamy w nim informacje o cytowaniu w formacie BibTeX (każdy generator potrafi taką wytworzyć), a jeśli chcemy, to także wersję tekstową. Decyduje to o sposobie, w jaki wyświetla się wynik funkcji `citation()`. Poniżej przykładowy plik `CITATION`.
+
+```{r}
+#| eval: false
+citHeader("To cite mtscr in publications use:")
+
+citEntry(
+  entry    = "Manual",
+  title    = "Multidimensional Top Scoring for Creativity Research",
+  author   = "Boris Forthmann, Maciej Karwowski, Roger E. Beaty, Jakub Jędrusiak",
+  year     = "2023",
+  url      = "https://github.com/jakub-jedrusiak/mtscr",
+  textVersion = paste(
+"Forthmann, B., Karwowski, M., Beaty, R. E., Jędrusiak, J. (2023). Multidimensional Top Scoring for Creativity Research. Retrieved from: https://github.com/jakub-jedrusiak/mtscr"
+  )
+)
+```
+
+## Licencja
+
+Licencji nie dodajemy do pakietu ręcznie. Używamy tutaj odpowiedniej funkcji z pakietu `usethis`, np. dla licencji MIT będzie to `usethis::use_mit_license()`, a dla GPL v.3 `usethis::use_gpl3_license()`. Pełną listę dostępnych licencji można znaleźć [tutaj](https://usethis.r-lib.org/reference/licenses.html). Jaką licencję wybrać? Najprościej mówiąc, MIT to *de facto* pójście we w pełni wolny kod. Taki kod może np. stać się częścią płatnego programu, ale prawa autorskie ciągle obowiązują. GPL natomiast wymusza, by programy oparte na naszym kodzie też były licencjonowane pod GPL, czyli by zawsze były darmowe. Większość pakietów R (ok. 70%) korzysta z licencji GPL.
+
+## Zależności {#sec-dependencies}
+
+Najperwniej nie będziemy pisać całego naszego kodu w podstawowym R, a raczej będziemy wykorzystywać inne pakiety. Żeby dodać jakiś pakiet jako zależność, używamy np. `usethis::use_package("rlang", "dplyr")`. Nie należy nigdy podawać `tidyverse` jako zależności, a raczej konkretne pakiety typu `dplyr` czy `stringr`. Możemy przy tym wymusić wykorzystanie minimalnej wersji danego pakietu argumentem `min_version`, np. pisząc `usethis::use_package("dplyr", min_version = "1.1.0")`. Jeśli zerkniemy w plik `DESCRIPTION` po uruchomieniu takiej komendy, zobaczymy, że dodane pakiety znalazły się w sekcji `Imports`. Tak powinno być. Istnieją jednak inne możliwe sekcje. Jeśli dodajemy pakiet, który nie jest potrzebny do działania naszych funkcji, ale na przykład potrzebujemy go do uruchomienia przykładów (bo chociażby wykorzystujemy w nich dane `diamonds` z pakietu `ggplot2`, podczas gdy nie wykorzystujemy samego `ggplot2` w naszych funkcjach), dodajemy go w sekcji `Suggests`. Robimy to pisząc na przykład `usethis::use_package("ggplot2", type = "Suggests")`.
+
+Istnieje seria zależności, które posiada większość pakietów i które mają swoje własne funkcje w pakiecie `usethis`. Wymieńmy sobie te najważniejsze:
+
+1.  `usethis::use_pipe()` -- dodaje obsługę potoków `%>%` z pakietu `magrittr`.
+
+2.  `usethis::use_tibble()` -- dodaje obsługę `tibble` jako formy, w której nasze funkcje zwracają dane.
+
+3.  `usethis::use_tidy_dependencies()` -- standardowe zależności typu `rlang`, `cli` czy `glue`. Według mnie powinno się uruchamiać zawsze.
+
+4.  `usethis::use_tidy_eval()` -- podstawowe pakiety do [Tidy Eval](./posts/metaprogramowanie.qmd). Według mnie powinno się uruchamiać zawsze.
+
+5.  `usethis::use_lifecycle()` -- dodaje zależność od pakietu `lifecycle`, w którym możemy oznaczyć nasze funkcje jako eksperymentalne albo wycofane.
+
+Dodatkowo większość pakietów posiada wprost wskazaną zależność od samego R. Taka zależność musi być w sekcji `Depends` i musi posiadać minimalną wersję co najmniej 3.5.0[^5]. W praktyce najlepiej jest podawać minimalną wersję 4.1.0, bo w tej wersji dodano natywny potok `|>`, a już w ogóle najlepiej nie cofać się przed 4.2.0, kiedy potoki wzbogacono o `_`, czyli informację, gdzie ma się znaleźć dany argument, jeśli nie na pierwszym miejscu (odpowiednik `.` w `magrittr`). 
+
+[^5]: Jest to wymagane, jeśli wykorzystujemy pliki z danymi. Technicznie można dać niższą wersję, ale nie polecam.
+
+# `README`
+
+Każde repozytorium powinno mieć plik README, czyli opis, który wyświetli się na stronie pakietu na GitHubie. Gdy tworzymy pakiet R, mamy dwie możliwości, jakiego rodzaju plik README wytworzymy.
+
+1. `README.md` -- opcja klasyczna, wytwarza zwykły plik markdown.
+
+2. `README.rmd` -- opcja fajniejsza, wytwarza plik .Rmd, w którym możemy dorzucać przykładowy kod w R razem z jego efektami.
+
+Pierwsza opcja wymaha użycia komendy `usethis::use_readme_md()`. Wytworzy ona zwykły plik .md, który możemy wypełnić korzystając z [instrukcji na GitHubie](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax). Jeśli chcemy zyskać dostęp do możliwości oferowanych przez RMarkdown, używamy `usethis::use_readme_rmd()`. Wytworzy to plik .Rmd, w którym możemy pokazać, na co stać nasz pakiet. Dokładny opis składni znajdziemy [tutaj](https://rmarkdown.rstudio.com/), zaś poniżej przykład.
+
+```` {.code-overflow-wrap}
+The main function is `mtscr_scores()` which can return a df with scores for each participant, each item or each participant-item combination. Scores come from two models – `all_max` and `all_top2`. A value for a participant is the maximum value predicted by the model for that participant.
+
+```{{r}}
+library("mtscr")
+data("mtscr_creativity", package = "mtscr")
+```
+````
+::: {.light-mode}
+![Efekt działania kodu RMarkdown z ramki na GitHubie.](ilustracje/pakiety-w-R/Rmarkdown.png)
+:::
+
+::: {.dark-mode}
+![Efekt działania kodu RMarkdown z ramki na GitHubie.](ilustracje/pakiety-w-R/Rmarkdown_dark.png)
+:::
+
+Jeśli zdecydujemy się na tę opcję, zawsze edytujemy plik `README.Rmd`. GitHub nie potrafi go jednak odczytać, dlatego przed wysłaniem naszych plików na serwer musimy przekonwertować plik `README.Rmd` do pliku `README.md`. Robimy to prostą komendą `devtools::build_readme()`. Komenda `usethis::use_readme_rmd()` dodatkowo dodaje specjalną przypominajkę, która nie pozwala nam zrobić commitu, jeśli zmienialiśmy plik `README.Rmd`, a go nie wyeksportowaliśmy.
+
+Na marginesie dodam, że RMarkdown jest powoli zastępowany przez bliźniaczy standard [Quarto](https://quarto.org/), ale w chwili, gdy to piszę, `usethis` [nie planuje go wdrażać](https://github.com/r-lib/usethis/issues/1671).
+
+## Odznaki
+
+Bardzo często w repozytoriach znajdziemy odznaki. Są to elementy informacyjno-ozdobne, które mówią coś o naszym pakiecie, np. że przechodzi testy, że jest w CRAN albo ile razy w miesiącu ktoś go pobiera. Ciekawe odznaki obejmują:
+
+1. Odznakę `R-CMD-check`, o której piszę w podrozdziale [-@sec-GitHubActions].
+
+1. Odznakę `lifecycle`, którą możemy poinformować, że nasz pakiet jako całość jest eksperymentalny, stabilny lub wycofany. Możemy ją dodać wykorzystując komendę `usethis::use_lifecycle_badge("stable")`. Argument wybieramy jaki chcemy.
+
+2. Odznakę CRAN, która informuje, jaka wersja naszego pakietu dostępna jest w CRAN. Jeśli pakiet nie jest dostępny, to odznaka też może o tym poinformować. Dodajemy ją komendą `usethis::use_cran_badge()`.
+
+::: {.light-mode}
+![Kilka odznak w nagłówku pliku README na GitHubie.](ilustracje/pakiety-w-R/badges.png)
+:::
+
+::: {.dark-mode}
+![Kilka odznak w nagłówku pliku README na GitHubie.](ilustracje/pakiety-w-R/badges_dark.png)
+:::
+
+To nie jest obowiązkowa część pakietu, odznaki, ale piszę o tym, bo lubię takie ładne pierdółki. Inne odznaki znajdziemy na [shields.io](https://shields.io/), albo w R wykorzystując pakiet [`badger`](https://github.com/GuangchuangYu/badger).
+
+# GitHub
+
+Zazwyczaj swoje pakiety chcemy trzymać na GitHubie[^4], żeby łatwo je instalować. Żeby podłączyć się do GitHuba, musimy użyć po kolei dwóch komend.
+
+[^4]: Jeśli nie wiesz, czym jest GitHub i po co go używać, przeczytaj [ten wpis](./posts/git.qmd).
+
+```{r}
+#| eval: false
+usethis::use_git()
+usethis::use_github(private = TRUE)
+```
+
+Pierwsza dostosuje nasze repozytorium do ogólnych standardów. Druga podłączy nas do GitHuba, wytwarzając nowe repozytorium. Jeśli chcemy, by było prywatne, ustawiamy `private = TRUE`.
+
+## R-CMD-check na GitHubie {#sec-GitHubActions}
+
+Kolejną polecaną przeze mnie czynnością, która powinna zostać wykonana w każdym repozytorium, jest uruchomienie tej komendy:
+
+```{r}
+#| eval: false
+usethis::use_github_action_check_standard()
+```
+
+Dodaje ona kilka rzeczy. Po pierwsze sprawia ona, że po każdym naszym commicie GitHub wykonuje zestaw podstawowych testów zwanych R-CMD-check, o których więcej napiszę dalej. W drugiej kolejności dodaje ona odznakę R-CMD-check do naszego pliku README, żebyśmy mogli błyszczeć przechodzeniem testów.
+
+# Pliki z funkcjami
+
+Przyszedł czas dodać jakieś rzeczywiste funkcje. Pisanie funkcji stanowiących część pakietu jest prawie identyczne jak pisanie zwyczajnych funkcji. Jak podam dalej, możemy chcieć postarać się bardziej i np. zabezpieczyć nasze funkcje przed błędami, ale znowu -- nie musimy. Podstawowe pułapki przy pisaniu własnych funkcji obejmują użeranie się z Tidy Eval, o którym piszę [tutaj](./posts/metaprogramowanie.qmd).
+
+Żeby dodać jakieś funkcje do swojego pakietu, użyj funkcji `usethis::use_r()`[^6], gdzie jako argument podasz nazwę pliku z funkcją. W większości przypadków będzie to nazwa samej funkcji. Możemy też zawrzeć kilka funkcji w jednym pliku, ale powinny być to bardzo blisko związane funkcje. Na tyle blisko związane, żeby mogły dzielić jedną stronę w dokumentacji. Przykładem takich funkcji może być na przykład rodzina `devtools::install_*()` albo `usethis::use_*_license()`. Wszystkie funkcje z tych zestawów są prawie identyczne, więc mogą być zgromadzone w jednym pliku.
+
+[^6]: Możesz też ręcznie wytworzyć odpowiedni plik .R w folderze `R`.
+
+Niezależnie jednak, czy robimy mały pakiecik do użytku własnego, czy może coś, co chcemy ostatecznie umieścić w CRAN, warto swoje funkcje udokumentować. Dokumentacja w R jest cudowna, łatwa w obsłudze i zawsze dostępna. Potraktuj swoją dokumentację jako ustrukturyzowane notatki, dzięki którym nie zapomnisz, na czym polegały Twoje funkcje i jak ich używać.
+
+## Specyficzne wymogi R-CMD-check
+
+Załóżmy, że napisaliśmy już własną funkcję, która liczy podstawowy zestaw statystyk opisowych i zwraca je w ulubionej przez nas formie. Na szczęście napisałem już taką funkcję w [tekście o metaprogramowaniu](./posts/metaprogramowanie.qmd).
+
+```{r}
+#| eval: false
+opisowe <- function(df, group, ...) {
+  kolumny_do_policzenia <- enquos(...)
+
+  df %>%
+    group_by({{ group }}) %>%
+    summarise(
+      across(
+        c(!!!kolumny_do_policzenia),
+        .fns = list(
+          N = \(x) sum(!is.na(x)),
+          M = \(x) mean(x, na.rm = TRUE),
+          SD = \(x) sd(x, na.rm = TRUE),
+          A = agricolae::skewness,
+          K = agricolae::kurtosis,
+          `NA` = \(x) sum(is.na(x))
+        )
+      )
+    )
+}
+```
+
+Ponieważ jest to pakiet, musimy trochę dopasować naszą funkcję, jeśli nie chcemy, żeby R-CMD-check później na nas krzyczał. Jeśli nas to nie obchodzi, możemy to pominąć, ale lepiej jest od razu nabierać dobrych nawyków.
+
+1. Funkcje powinny być w postaci pełnych nazw, czyli np. `dplyr::group_by()`. Pakiety, z których pochodzą te funkcje, powinny być dodane jako zależności (por. podrozdział [-@sec-dependencies]). Jeśli użyliśmy `usethis::use_tidy_eval()` (por. podrozdział [-@sec-dependencies]), to funkcje z pakietu `rlang` są ładowane z automatu i nie potrzebują pełnych nazw.
+
+2. Jeśli w funkcjach typu `mutate()` wykorzystujemy kolumny istniejące w bazie, np. `mutate(iris, milimeters = Sepal.Length * 10)`, R-CMD-check będzie krzyczał, że `Sepal.Length` nie ma globalnej definicji. W takim wypadku używamy wyrażenia `.data` z `rlang` i piszemy `dplyr::mutate(iris, milimeters = .data$Sepal.Length * 10)`.
+
+3. Jeśli w funkcjach wybierających kolumny, typu `select()`, piszemy nazwy kolumn, to podajemy je w cudzysłowie. Powód jest taki, jak wyżej, brak globalnej definicji, ale `.data` nie nadaje się do `tidyselect`. Dla przykładu zamiast `select(iris, Sepal.Width, Sepal.Length)` napiszemy `dplyr::select(iris, "Sepal.Width", "Sepal.Length")`.
+
+4. Na ogół lepiej używać natywnego potoku `|>` niż `%>%`. Jeśli chcemy używać potoku z `magrittr` używamy wcześniej `usethis::use_pipe()`.
+
+Poprawiona funkcja mogłaby więc wyglądać tak:
+
+```{r}
+opisowe <- function(df, group, ...) {
+  kolumny_do_policzenia <- enquos(...)
+
+  df |>
+    dplyr::group_by({{ group }}) |>
+    dplyr::summarise(
+      dplyr::across(
+        c(!!!kolumny_do_policzenia),
+        .fns = list(
+          N = \(x) sum(!is.na(x)),
+          M = \(x) mean(x, na.rm = TRUE),
+          SD = \(x) stats::sd(x, na.rm = TRUE),
+          A = agricolae::skewness,
+          K = agricolae::kurtosis,
+          `NA` = \(x) sum(is.na(x))
+        )
+      )
+    )
+}
+```
+
+## Dokumentowanie z `roxygen2`
+
+Gdy mamy już naszą funkcję napisaną, przyszedł czas ją udokumentować. Robimy to specjalnym szkieletem dodawanym przez pakiet `roxygen2`. Możemy albo napisać go od podstaw, albo najechać kursorem na naszą funkcję i w RStudio wejść w menu Code → Insert Roxygen Skeleton (skrót klawiaturowy Ctrl+Alt+Shift+R). Taki szkielet szkieletu uzupełniamy ręcznie. Pokażmy to sobie na przykładzie.
+
+```{r}
+#' Statystyki opisowe
+#'
+#' Funkcja licząca podstawowe statystyki opisowe: liczność, średnią, SD,
+#' skośność, kurtozę i liczbę braków danych.
+#'
+#' @param df ramka danych z kolumnami do policzenia.
+#' @param group kolumna do grupowania.
+#' @param ... nazwy kolumn, dla których mają być policzone statystyki.
+#'
+#' @return ramka danych z kolumnami `N`, `M`, `SD`, `A`, `K` i `NA`. Oryginalne nazwy
+#'     kolumn w formie przedrostka.
+#' @export
+#'
+#' @examples
+#' opisowe(iris, Species, Sepal.Width, Sepal.Length)
+```
+
+Pierwsze, co zwraca uwagę, to fakt, że napisałem to po polsku. Owszem, można, ale jeśli chcemy udostępniać nasz kod na zewnątrz, lepiej dokumentować funkcje po angielsku.
+
+Ten podstawowy opis zawiera kilka rzeczy:
+
+1. Na samej górze tytuł funkcji, który lapidarnie ale konkretnie opisuje przeznaczenie funkcji.
+
+2. Dalej opis działania funkcji. Również powinien być krótki i konkretny. Jeśli potrzebujemy więcej niż jednego akapitu, musimy jawnie napisać `@description`. W innym wypadku wystarczy zejść linijkę poniżej tytułu.
+
+3. Następnie mamy trzy tagi `@param`, gdzie każdy opisuje kolejny argument, jaki funkcja przyjmuje. Warto tutaj opisać postać, w jakiej argument musi zostać podany.
+
+4. Tag `@return` opisuje, co funkcja zwraca.
+
+5. Tag `@export` nie zawiera żadnych informacji. Umieszcza się go w tych funkcjach, do których użytkownik powinien mieć dostęp.
+
+6. Na samym końcu mamy `@examples`, czyli przykłady użycia funkcji. Przykłady są obowiązkowe i obowiązkowo muszą zadziałać. Jeśli jakiś przykład specjalnie zwraca błąd, należy go umieścić w klamrze `\dontrun{}`, np. `\dontrun{opisowe(iris)}`.
+
+Do tych podstawowych tagów możemy dodać m.in. także sekcje `@details` czy `@seealso`. Nasz kod generuje podstawową stronę w dokumentacji.
+
+::: {.light-mode}
+![Dokumentacja funkcji `opisowe()`.](ilustracje/pakiety-w-R/dokumentacja.png)
+:::
+
+::: {.dark-mode}
+![Dokumentacja funkcji `opisowe()`.](ilustracje/pakiety-w-R/dokumentacja_dark.png)
+:::
+
+Żeby rzeczywiście przerobić szkielety `roxygen2` na pliki dokumentacji, należy uruchomić komendę `devtools::document()`. Pod koniec opiszę wszystkie podstawowe komendy, które warto uruchamiać przed każdym wypchnięciem do GitHuba.
+
+Na widać teź, że mogę używać formatowania markdown. Jest to jednak możliwe tylko wtedy, gdy wcześniej użyłem `usethis::use_roxygen_md()`, o czym wspominałem w podrozdziale [-@sec-structure].
+
+## Dokumentacja całego pakietu
+
+Możemy dodać ogólną stronę w dokumentacji dotyczącą naszego pakietu jako całości. Wykonuje się to w specjalnym pliku .R, który można dodać funkcją `usethis::use_package_doc()`. Jeśli jednak użyłeś(-aś) wcześniej funkcji `usethis::use_tidy_dependencies()`, to wymusiła ona na Tobie wytworzenie takiego pliku. Jeśli to zrobiłeś(-aś), to znajdziesz w folderze `R` plik typu `packagename-package.R`, gdzie możesz napisać dokumentację standardowo, jak w każdym innym pliku .R.
+
+## Dokumentacja plików z danymi
+
+Jeśli załączamy w naszym pakiecie dane (o czym więcej w podrodziale [-@sec-datafiles]), to je również powinniśmy udokumentować. Tworzymy w tym celu specjalny plik `data.R` w folderze `R`, w którym opisujemy wszystkie nasze pliki z danymi. Pod szkieletem `roxygen2` umieszczamy nazwę naszego pliku w cudzysłowie. Poniżej skrócony przykład.
+
+```{r}
+#| eval: false
+#' Creativity assessment through semantic distance dataset
+#'
+#' A dataset from Forthmann, Karwowski & Beaty ([2023](https://doi.org/10.1037/aca0000571)) paper.
+#' It contains a set of responses in Alternative Uses Task for different items with their
+#' semantic distance assessment.
+#'
+#' @return a [tibble][tibble::tibble-package]
+#' @format ## `mtscr_creativity`
+#' A `tibble` with 4585 rows and 10 columns:
+#' \describe{
+#'   \item{id}{patricipants' unique identification number}
+#'   \item{response}{response in AUT}
+#'   \item{item}{item for which alternative uses were searched for}
+#' }
+#'
+#' @source <https://osf.io/7rgsp/>
+"mtscr_creativity"
+```
+
+Specyficzne tagi to `@format`, w którym opisujemy każdą kolumnę i `@source`, w którym podajemy źródło naszych danych.
+
+# Załączanie danych {#sec-datafiles}
+
+# R-CMD-check
+
+# Sprawdzanie wejścia i informacje o błędach
+
+# Testy z `testthat`
+
+# *Code coverage* z `codecov`
+
+# Bonus: załączanie apki w Shiny
+
+# Podsumowanie
