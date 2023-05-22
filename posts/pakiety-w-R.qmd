@@ -262,7 +262,7 @@ Przyszedł czas dodać jakieś rzeczywiste funkcje. Pisanie funkcji stanowiącyc
 
 Niezależnie jednak, czy robimy mały pakiecik do użytku własnego, czy może coś, co chcemy ostatecznie umieścić w CRAN, warto swoje funkcje udokumentować. Dokumentacja w R jest cudowna, łatwa w obsłudze i zawsze dostępna. Potraktuj swoją dokumentację jako ustrukturyzowane notatki, dzięki którym nie zapomnisz, na czym polegały Twoje funkcje i jak ich używać.
 
-## Specyficzne wymogi R-CMD-check
+## Specyficzne wymogi CRAN i R-CMD-check
 
 Załóżmy, że napisaliśmy już własną funkcję, która liczy podstawowy zestaw statystyk opisowych i zwraca je w ulubionej przez nas formie. Na szczęście napisałem już taką funkcję w [tekście o metaprogramowaniu](./posts/metaprogramowanie.qmd).
 
@@ -410,9 +410,34 @@ Specyficzne tagi to `@format`, w którym opisujemy każdą kolumnę i `@source`,
 
 # R-CMD-check
 
+Jeśli piszemy pakiet, zazwyczaj chcemy, żeby działał. Nie mogę być pewny, ale to chyba rozsądne założenie. Do sprawdzenia, czy nie występują podstawowe problemy z naszym kodem, czy czegoś nie zepsuliśmy, nie dopilnowaliśmy. Zestaw podstawowych czynności jest zautomatyzowany i nazywa się R-CMD-check. Muszą go przejść wszystkie pakiety obecne w CRAN. Jeśli wykonaliśmy instrukcję z podrozdziału [-@sec-GitHubActions], wykona go również GitHub i pokaże na odznace.
+
+Po pierwsze R-CMD-check sprawdzi, czy cały kod spełnia wymogi, czy wszystkie obiekty w kodzie mają globalne definicje, czy wszystkie przykłady wykonują się bez błędu, czy każda funkcja ma wszystkie niezbędne elementy dokumentacji, czy wszystkie używane pakiety zostały dodane jako zależności. Po drugie wykonane zostaną wszystkie testy, które opisuję w podrozdziale [-@sec-tests]. Po trzecie, zostanie sprawdzona struktura repozytorium, czy nic się nie zepsuło, czy nie mamy jakichś plików, które nie powinny tam być. Do tego cała seria mniejszych lub większych rzeczy, które R może nam wytknąć jako błędy, ostrzeżenia lub informacje. Warto informacje wypluwane przez R-CMD-check przeczytać, bo są bardzo konkretne. Błędów być nie może, ostrzeżeń lepiej, żeby nie było, rzeczy wytykane w informacjach poprawiamy, kiedy mamy czas.
+
+Żeby wykonać R-CMD-check używamy komendy `devtools::check()`. Ta komenda na wstępie odnowi nam doumentację, więc jeśli jej używamy, to nie musimy już korzystać z `devtools::document()`. Informacje o przeprowadzanych testach wyświetlają się na bieżąco, ale jeśli pojawią się jakieś uchybienia, zostaną one zbiorczo wyświetlone na koniec. Komendę `devtools::check()` dobrze jest wykonać przed każdym wypchnięciem do GitHuba, żeby nie zdziwił nas wynik wykonany już w repozytorium.
+
 # Sprawdzanie wejścia i informacje o błędach
 
-# Testy z `testthat`
+Dobre komendy są odporne, w tym znaczeniu, że zabezpieczają użytkownika przed nieprawidłowym wykorzystaniem. Jeśli osoba popełnia błąd, na przykład podaje wektor zamiast ramki danych albo wskazuje kolumny, których nie ma, powinna dostać konkretną informację zwrotną (tj. błąd). Jeśli nie zabezpieczymy naszej funkcji przed nieprawidłowym wykorzystaniem, użytkownik dostanie informacje o błędach z funkcji, z których zbudowaliśmy naszą funkcję. Czasem to dobrze, czasem to źle. Ogólnie dobrze jest zabezpieczać swoje funkcje, ale znowu -- to **nie jest konieczne, żeby pakiet działał**. To będziemy robić, jak będziemy mieli czas albo poważnie będziemy chcieli ulepszyć nasz pakiet do użytku innych. My zazwyczaj znamy nasze funkcje bardzo dobrze, więc zazwyczaj będziemy je poprawnie wykorzystywać.
+
+Zazwyczaj to zabezpieczenie dotyczy sprawdzania wejścia, czyli czy to, co użytkownik podał, spełnia wymogi naszej funkcji. Zazwyczaj robi się to na samym początku funkcji, dość prosto, bo za pomocą połączenia `if` i `stop()`. My tutaj jednak wykorzystamy ładniejsze informacje o błędach, które wdraża pakiet `cli` w połączeniu z `glue`. Oba te pakiety dodaliśmy już do zależności, jeśli wykorzystaliśmy `usethis::use_tidy_dependencies()`. Rodzina funkcji, które nam się tu przydadzą, to `cli::cli_abort()`, `cli::cli_warn()` lub `cli::cli_inform()`.
+
+## Typ argumentu
+
+Zazwyczaj najpierw sprawdzamy, czy obiekt podany przez użytkownika jako argument ma odpowiedni typ. Na przykład jeśli naszym pierwszym argumentem jest ramka danych `df`, możemy chcieć upewnić się, czy to rzeczywiście jest ramka danych.
+
+```{r}
+if (!is.data.frame(df)) {
+    cli::cli_abort(
+        c(
+            "{.arg df} must be a data frame.",
+            "x" = "{.var {rlang::expr_text(substitute(df))}} is {.obj_type_friendly {df}}"
+        )
+    )
+}
+```
+
+# Testy z `testthat` {#sec-tests}
 
 # *Code coverage* z `codecov`
 
