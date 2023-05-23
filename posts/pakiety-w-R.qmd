@@ -10,8 +10,10 @@ draft: true
 ---
 
 ```{r}
+#| label: setup
 #| include: false
 library(rlang)
+library(cli)
 ```
 
 Pakiety to nic innego jak zbiory funkcji. Od zwykłych plików .R z funkcjami różnią się tym, że mają określoną strukturę, dzięki której można je potem zainstalować i szybko wykorzystywać. Pewnie pierwszym skojarzeniem z pisaniem pakietów jest udostępnianie ich w CRAN. Owszem, można to zrobić, ale można mieć też prywatne pakiety trzymane na GitHubie. Nie musimy zaraz wszystkiego robić na tip-top, żeby każdy na świecie wygodnie korzystał z naszych trzech funkcji.
@@ -67,6 +69,7 @@ Jeśli chodzi o autorów pakietu, podajemy ich w dość specyficzny sposób. Naj
 
 ```{r}
 #| eval: false
+#| filename: DESCRIPTION
 Authors@R: person(
       "Jakub", "Jędrusiak",
       email = "kuba23031999@gmail.com",
@@ -93,6 +96,7 @@ Jeśli autorów jest więcej niż jeden, podajemy ich w postaci wektora. Poniże
 
 ```{r}
 #| eval: false
+#| filename: DESCRIPTION
 Authors@R: c(
     person(
       "Boris", "Forthmann",
@@ -139,6 +143,7 @@ Jeśli chcemy, by nasz pakiet był cytowany w jakiś konkretny sposób, możemy 
 
 ```{r}
 #| eval: false
+#| filename: CITATION
 citHeader("To cite mtscr in publications use:")
 
 citEntry(
@@ -268,6 +273,7 @@ Załóżmy, że napisaliśmy już własną funkcję, która liczy podstawowy zes
 
 ```{r}
 #| eval: false
+#| filename: opisowe.R
 opisowe <- function(df, group, ...) {
   kolumny_do_policzenia <- enquos(...)
 
@@ -302,6 +308,7 @@ Ponieważ jest to pakiet, musimy trochę dopasować naszą funkcję, jeśli nie 
 Poprawiona funkcja mogłaby więc wyglądać tak:
 
 ```{r}
+#| filename: opisowe.R
 opisowe <- function(df, group, ...) {
   kolumny_do_policzenia <- enquos(...)
 
@@ -328,6 +335,7 @@ opisowe <- function(df, group, ...) {
 Gdy mamy już naszą funkcję napisaną, przyszedł czas ją udokumentować. Robimy to specjalnym szkieletem dodawanym przez pakiet `roxygen2`. Możemy albo napisać go od podstaw, albo najechać kursorem na naszą funkcję i w RStudio wejść w menu Code → Insert Roxygen Skeleton (skrót klawiaturowy Ctrl+Alt+Shift+R). Taki szkielet szkieletu uzupełniamy ręcznie. Pokażmy to sobie na przykładzie.
 
 ```{r}
+#| filename: opisowe.R
 #' Statystyki opisowe
 #'
 #' Funkcja licząca podstawowe statystyki opisowe: liczność, średnią, SD,
@@ -379,12 +387,40 @@ Na widać teź, że mogę używać formatowania markdown. Jest to jednak możliw
 
 Możemy dodać ogólną stronę w dokumentacji dotyczącą naszego pakietu jako całości. Wykonuje się to w specjalnym pliku .R, który można dodać funkcją `usethis::use_package_doc()`. Jeśli jednak użyłeś(-aś) wcześniej funkcji `usethis::use_tidy_dependencies()`, to wymusiła ona na Tobie wytworzenie takiego pliku. Jeśli to zrobiłeś(-aś), to znajdziesz w folderze `R` plik typu `packagename-package.R`, gdzie możesz napisać dokumentację standardowo, jak w każdym innym pliku .R.
 
-## Dokumentacja plików z danymi
+# Załączanie danych {#sec-datafiles}
 
-Jeśli załączamy w naszym pakiecie dane (o czym więcej w podrodziale [-@sec-datafiles]), to je również powinniśmy udokumentować. Tworzymy w tym celu specjalny plik `data.R` w folderze `R`, w którym opisujemy wszystkie nasze pliki z danymi. Pod szkieletem `roxygen2` umieszczamy nazwę naszego pliku w cudzysłowie. Poniżej skrócony przykład.
+Czasami chcemy załączyć do naszego pakietu dane. Mogą być one wartością samą w sobie, mogą służyć do ilustracji działania reszty naszego pakietu. Niezależnie od celu, pliki z danymi trzeba załączać w odpowiedni sposób, a także je dokumentować.
+
+## Surowe dane w `data-raw`
+
+Na początku potrzebujemy surowego pliku z danymi, np. w formacie .csv. Wrzucamy go do folderu `data-raw`, który tworzymy w głównym folderze naszego pakietu. Następnie tworzymy skrypt czyszczący. Najłatwiej wytworzyć go funkcją `usethis::use_data_raw()`, która za pierwszy argument przyjmuje nazwę, którą chcemy naszej bazie danych nadać. Mogłoby to być coś w stylu `usethis::use_data_raw("iris")`. Spowoduje to wytworzenie w folderze `data-raw` skryptu `iris.R`, który w tym momencie powinien nam się otworzyć. Zawiera on tylko komentarz i jedną komendę `usethis::use_data()`. Nad tą komendą piszemy skrypt, który ładuje i czyści nasze surowe dane do takiej formy, którą chcemy załączyć w pakiecie. Gotowe dane zapisujemy do zmiennej o wybranej wcześniej nazwie. I to wystarczy. Podczas instalacji naszego pakietu zostaną załadowane też dane, do których dostęp możemy uzyskać za pomocą komendy, która w pełnej wersji ma postać `data("diamonds", package = "ggplot2")`. Poniżej przykład gotowego skryptu ładującego.
 
 ```{r}
 #| eval: false
+#| filename: mtscr_creativity.R
+mtscr_creativity <- readr::read_csv("data-raw/study2.csv") |>
+  dplyr::select(-response_nofill, -item_nofill) |>
+  dplyr::filter(
+    item %in% c(
+      "belt", "brick", "broom",
+      "bucket", "candle", "clock",
+      "comb", "knife", "lamp",
+      "pencil", "pillow",
+      "purse", "sock"
+    ),
+    any(is.na(SemDis_MEAN))
+  )
+
+usethis::use_data(mtscr_creativity, overwrite = TRUE)
+```
+
+## Dokumentacja plików z danymi
+
+Jeśli załączamy w naszym pakiecie dane, to je również powinniśmy udokumentować. Tworzymy w tym celu specjalny plik `data.R` w folderze `R`, w którym opisujemy wszystkie nasze pliki z danymi. Pod szkieletem `roxygen2` umieszczamy nazwę naszego pliku w cudzysłowie. Poniżej skrócony przykład.
+
+```{r}
+#| eval: false
+#| filename: data.R
 #' Creativity assessment through semantic distance dataset
 #'
 #' A dataset from Forthmann, Karwowski & Beaty ([2023](https://doi.org/10.1037/aca0000571)) paper.
@@ -393,7 +429,7 @@ Jeśli załączamy w naszym pakiecie dane (o czym więcej w podrodziale [-@sec-d
 #'
 #' @return a [tibble][tibble::tibble-package]
 #' @format ## `mtscr_creativity`
-#' A `tibble` with 4585 rows and 10 columns:
+#' A `tibble` with 4585 rows and 3 columns:
 #' \describe{
 #'   \item{id}{patricipants' unique identification number}
 #'   \item{response}{response in AUT}
@@ -404,9 +440,7 @@ Jeśli załączamy w naszym pakiecie dane (o czym więcej w podrodziale [-@sec-d
 "mtscr_creativity"
 ```
 
-Specyficzne tagi to `@format`, w którym opisujemy każdą kolumnę i `@source`, w którym podajemy źródło naszych danych.
-
-# Załączanie danych {#sec-datafiles}
+Specyficzne tagi to `@format`, w którym opisujemy **każdą kolumnę** i `@source`, w którym podajemy źródło naszych danych.
 
 # R-CMD-check
 
@@ -417,6 +451,8 @@ Po pierwsze R-CMD-check sprawdzi, czy cały kod spełnia wymogi, czy wszystkie o
 Żeby wykonać R-CMD-check używamy komendy `devtools::check()`. Ta komenda na wstępie odnowi nam doumentację, więc jeśli jej używamy, to nie musimy już korzystać z `devtools::document()`. Informacje o przeprowadzanych testach wyświetlają się na bieżąco, ale jeśli pojawią się jakieś uchybienia, zostaną one zbiorczo wyświetlone na koniec. Komendę `devtools::check()` dobrze jest wykonać przed każdym wypchnięciem do GitHuba, żeby nie zdziwił nas wynik wykonany już w repozytorium.
 
 # Sprawdzanie wejścia i informacje o błędach
+
+Ten podrozdział i wszystkie kolejne, **nie są niezbędne**, żeby pakiet działał i był użyteczny. Są to rzeczy, które warto wiedzieć, ale przydadzą się przede wszystkim w pakietach dużych i/lub udostępnianych szerokiej publiczności. Małe pakiety albo użytkowane w wąskim gronie zazwyczaj nie potrzebują szerokiej kontroli wejścia czy złożonych informacji o błędach. Jedyne, nad czym bym się zastanowił, czy nie wprowadzać od początku, to testy z podrozdziału [-@sec-tests].
 
 Dobre komendy są odporne, w tym znaczeniu, że zabezpieczają użytkownika przed nieprawidłowym wykorzystaniem. Jeśli osoba popełnia błąd, na przykład podaje wektor zamiast ramki danych albo wskazuje kolumny, których nie ma, powinna dostać konkretną informację zwrotną (tj. błąd). Jeśli nie zabezpieczymy naszej funkcji przed nieprawidłowym wykorzystaniem, użytkownik dostanie informacje o błędach z funkcji, z których zbudowaliśmy naszą funkcję. Czasem to dobrze, czasem to źle. Ogólnie dobrze jest zabezpieczać swoje funkcje, ale znowu -- to **nie jest konieczne, żeby pakiet działał**. To będziemy robić, jak będziemy mieli czas albo poważnie będziemy chcieli ulepszyć nasz pakiet do użytku innych. My zazwyczaj znamy nasze funkcje bardzo dobrze, więc zazwyczaj będziemy je poprawnie wykorzystywać.
 
@@ -469,14 +505,272 @@ cli::cli_bullets(
 
 ## Formatowanie z `glue`
 
-Poza punktorami możemy dodatkowo formatować tekst korzystając ze składni dostarczanej przez `glue`. `cli` obsługuje ją automatycznie. Wszystkie szczegóły znajdziemy na [tej](https://cli.r-lib.org/reference/inline-markup.html) stronie dokumentacji. Ja omówię tutaj same podstawy.
+Poza punktorami możemy dodatkowo formatować tekst korzystając ze składni dostarczanej przez `glue`. `cli` obsługuje ją automatycznie. Wszystkie szczegóły oraz jak to wygląda rzeczywiście znajdziemy na [tej](https://cli.r-lib.org/reference/inline-markup.html) stronie dokumentacji. Ja omówię tutaj same podstawy. Jeśli chodzi o to, jak formatować, ja się często odwołuję do `tidyverse`. Próbuję wywołać podobny błąd np. w funkcji `dplyr::select()` i patrzę, jak oni taki błąd podają.
 
-Tekst, który chcemy sformatować, bierzemy w nawiasy klamrowe. W nawiasie zaczynamy od określenia, w jaki sposób chcemy dany tekst sformatować.
+Tekst, który chcemy sformatować, bierzemy w nawiasy klamrowe. W nawiasie zaczynamy od określenia, w jaki sposób chcemy dany tekst sformatować. Poniżej zestaw możliwych formatów.
+
+```{r}
+#| eval: false
+cli_li("Tekst {.emph Kursywą}.")
+cli_li("{.strong Pogrubiony} tekst.")
+cli_li("Fragment kodu: {.code sum(a) / length(a)}.")
+cli_li("Nazwa pakietu: {.pkg cli}.")
+cli_li("Nazwa funkcji: {.fn cli_text}.")
+cli_li("Klawisz: wciśnij {.kbd spację}.")
+cli_li("Nazwa lub ścieżka pliku: {.file /usr/bin/env}.")
+cli_li("Adres mailowy: {.email marylala@marylarodowicz.pl}.")
+cli_li("Adres WWW: {.url https://example.com}.")
+cli_li("Zmienna środowiskowa: {.envvar R_LIBS}.")
+cli_li("Typ obiektu: `mtcars` is {.obj_type_friendly {mtcars}}")
+```
+
+Jeśli chcemy, możemy wykonywać też operacje w nawiasach klamrowych. Zazwyczaj będziemy wtedy zagnieżdżać jedne nawiasy w drugich. Najlepiej pokazać to na przykładzie.
+
+```{r}
+cli_warn("Złamano {.strong {sum(365, 248)}} postanowień. Ostrzegam cię.")
+```
+
+Wewnątrz klamry z pogrubieniem dołożyłem drugą klamrę, w której umieściłem funkcję sumującą. Umieszczenie funkcji w klamrze sprawiło, że w ostrzeżeniu pojawia nam się wynik, 613. Nie jest to zbyt użytkowy przykład, ale dobrze jest wiedzieć, że tak się da. W kolejnym przykładzie zobaczymy, jak można tego użyć do dostosowywania informacji zwrotnych pod użytkownika.
+
+## Obecność kolumn w bazie
+
+Poza sprawdzeniem typu argumentu, możemy chcieć się upewnić, że kolumny wskazane przez użytkownika rzeczywiście są w bazie. Pomocna będzie tutaj funkcja `rlang::has_name()`, która sprawdza, czy w bazie obiekt o danej nazwie. Jeśli tak, wyrzuca `TRUE`, a jeśli nie, wyrzuca `FALSE`. Niestety `has_name()` wymaga nazwy kolumny w postaci string, dlatego musimy pobawić się trochę z Tidy Eval. Jeśli nie wiesz, jak to robić, odsyłam do [tego](./posts/metaprogramowanie.qmd) tekstu.
+
+```{r}
+#| error: true
+col_check <- function(df, id_column) {
+    id_column <- enquo(id_column)
+
+    if (!rlang::has_name(df, rlang::as_name(id_column))) {
+        cli::cli_abort(
+            c(
+                "All columns must exist in the data.",
+                "x" = "Column {.var {rlang::as_name(id_column)}} does not exist.",
+                "i" = "Check the spelling."
+            )
+        )
+    }
+}
+
+col_check(iris, Sepal.Density)
+```
+
+W powyższym przykładzie widzimy też, do czego może nam się przydać zagnieżdżanie nawiasów klamrowych. Tutaj wykorzystuję je do zawarcia nazwy nieistniejącej kolumny w komunikacie o błędzie.
 
 # Testy z `testthat` {#sec-tests}
 
+Testy automatyczne to bardzo szeroki temat. Idea, która za nimi stoi, jest mniej więcej taka -- jest wiele rzeczy, które mogą pójść źle, które można zepsuć, a nikomu się nie chce po każdych zmianach w kodzie sprawdzać, czy jakiś drobny aspekt przez to nie ucierpiał. W tym celu piszemy specjalne skrypty, które za nas sprawdzą, czy wszystko działa, jak powinno. W R testy piszemy z użyciem pakietu `testthat`. By móc z niego korzystać, uruchamiamy komendę `usethat::use_testthat()`.
+
+## Struktura testów
+
+Wszystkie testy znajdują się w folderze `tests`, w podfolderze `testthat`. Możemy je wytwarzać ręcznie, ale zazwyczaj będziemy wykorzystywać komendę `usethis::use_test()`. W domyśle jeden plik z funkcjami powinien mieć odpowiadający mu plik z testami. W RStudio komenda `usethis::use_test()` nie potrzebuje żadnych argumentów -- domyślnie tworzy plik z testami dla aktualnie otwartego skryptu.
+
+Nowo utworzony plik zawiera przykładowy test, który możemy spokojnie usunąć. Żeby napisać własny test wykorzystamy przede wszystkim komendę `test_that()` oraz komendy z rodziny `expect_*()`. Komenda `test_that()` przyjmuje dwie rzeczy -- opis, co test robi (jako string) oraz komendy składające się na test zapisane w nawiasach klamrowych. Warto zauważyć, że nie musimy pisać `testthat::test_that()`. Cały pakiet jest dostępny od chwili użycia `usethat::use_testthat()`.
+
+```{r}
+#| eval: false
+test_that("Jakiś element działa jak należy", {
+    # Tutaj komendy składające się na test
+})
+```
+
+W nawiasach klamrowych możemy zapomnieć, że jesteśmy wewnątrz funkcji i pisać kod normalnie. Możemy na przykład tworzyć przykładowe zbiory danych, na których będziemy wykonywać testy. Najważniejsze są jednak funkcje z rodziny `expect_*()`, za pomocą których mówimy, czego oczekujemy od danej funkcji. Rodzina ta jest szeroka, bo i funkcje są różne. W ramach jednej funkcji `test_that()` możemy użyć kilku tego typu komend, ale staramy się utrzymać porządek, żeby każda funkcja `test_that()` testowała coś konkretnego. Poniżej wymieniam kilka najważniejszych funkcji `expect_*()`, a bardziej rozszerzoną ich listę można znaleźć [tutaj](https://testthat.r-lib.org/reference/).
+
+1. `expect_identical()` i `expect_equal()` -- czy zadane wartości są takie same? Można ustawić tolerancję błędu.
+
+2. `expect_length()` -- czy obiekt ma określoną długość?
+
+3. `expect_names()` -- czy nazwy kolumn (wartości) są takie, jakie mają być? Pozwala zignorować kolejność i wielkość liter.
+
+5. `expect_match()` -- czy w wektorze tekstowym jest tekst odpowiadający [wyrażeniu regularnemu](./posts/regex.qmd)?
+
+4. `expect_type()` -- czy obiekt jest określonego typu?
+
+6. `expect_error()`, `expect_warning()` i `expect_message()` -- jak nazwa wskazuje; czy dany kod generuje błąd/ostrzeżenie/informację? Pozwala też sprawdzać treść komunikatów za pomocą [wyrażeń regularnych](./posts/regex.qmd).
+
+7. `expect_true()` i `expect_false()` -- najbardziej uniwersalne funkcje sprawdzające. Jednocześnie lepiej zastąpić je innymi, jeśli jest możliwość, żeby wyniki testów były bardziej czytelne.
+
+## Przykładowe testy
+
+Załóżmy, że chcemy napisać testy do naszej funkcji `opisowe()`. Przypomnijmy jej definicję.
+
+```{r}
+#| filename: opisowe.R
+opisowe <- function(df, group, ...) {
+    # check if df is a dataframe
+    if (!is.data.frame(df)) {
+        cli::cli_abort(
+            c(
+                "{.arg df} must be a data frame.",
+                "x" = "Provided {.arg df} is {.obj_type_friendly {df}}"
+            )
+        )
+    }
+
+    kolumny_do_policzenia <- enquos(...)
+
+    df %>%
+        group_by({{ group }}) %>%
+        summarise(
+            across(
+                c(!!!kolumny_do_policzenia),
+                .fns = list(
+                    N = \(x) sum(!is.na(x)),
+                    M = \(x) mean(x, na.rm = TRUE),
+                    SD = \(x) sd(x, na.rm = TRUE),
+                    A = agricolae::skewness,
+                    K = agricolae::kurtosis,
+                    `NA` = \(x) sum(is.na(x))
+                )
+            )
+        )
+}
+```
+
+Dorzuciłem tutaj sprawdzenie, czy `df` jest ramką danych. Jakie testy moglibyśmy napisać dla tej funkcji? Poniżej kilka przykładów.
+
+```{r}
+#| eval: false
+#| filename: test-opisowe.R
+# create a test data frame with normally distributed data
+set.seed(123)
+df <- data.frame(
+    group = rep(c("A", "B"), each = 50),
+    x = rnorm(100, mean = 0, sd = 1),
+    y = rnorm(100, mean = 5, sd = 2)
+)
+
+# test if function returns a data frame
+test_that("opisowe returns a data frame", {
+    expect_s3_class(opisowe(df, group, x, y), "data.frame")
+})
+
+# test if function calculates summary statistics correctly
+test_that("opisowe calculates summary statistics correctly", {
+    result <- opisowe(df, group, x, y)
+    ## N
+    expect_equal(result$group, c("A", "B"))
+    expect_equal(result$x_N, c(50, 50))
+    expect_equal(result$y_N, c(50, 50))
+    ## M
+    expect_equal(result$x_M, c(0.0344, 0.1464), tolerance = 0.001)
+    expect_equal(result$y_M, c(4.4921, 5.0776), tolerance = 0.001)
+    ## SD
+    expect_equal(result$x_SD, c(0.9258, 0.9054), tolerance = 0.001)
+    expect_equal(result$y_SD, c(1.9786, 1.8619), tolerance = 0.001)
+    ## A
+    expect_equal(result$x_A, c(0.1729, -0.0462), tolerance = 0.001)
+    expect_equal(result$y_A, c(0.4376, 1.0372), tolerance = 0.001)
+    ## K
+    expect_equal(result$x_K, c(-0.3366, 0.3234), tolerance = 0.001)
+    expect_equal(result$y_K, c(-0.1718, 1.8702), tolerance = 0.001)
+    ## NA
+    expect_equal(result$x_NA, c(0, 0))
+    expect_equal(result$y_NA, c(0, 0))
+})
+
+# test if function throws an error when df is not a data frame
+test_that("opisowe throws an error when df is not a data frame", {
+    expect_error(opisowe(list(), group, x, y))
+})
+
+```
+
+Po pierwsze stworzyłem tutaj bazę danych, na której będziemy liczyć. Po drugie stworzyłem trzy zestawy testów. Pierwszy sprawdza, czy wynik to ramka danych. Drugi sprawdza, czy statystyki wyglądają, jak mają wyglądać. Ostatni sprawdza, czy funkcja wyrzuca błąd, gdy `df` będzie czymś innym, niż baza danych.
+
+Gdy taki plik zapiszemy, testy są już uzbrojone. Możemy je wykonać używając komendy `devtools::test_active_file()`. Wszystkie testy zostaną też wykonane podczas `devtools::check()`.
+
+## Co i jak testować?
+
+Hot take, którego nie ma jeszcze w podręcznikach -- sztuczna inteligencja jest świetna w pisaniu testów. Nie ma się co oszukiwać, pisanie testów jest upierdliwe, ale na szczęście Chat GPT może to sprawnie zrobić za nas. Od Chatu GPT lepszy jest GitHub Copilot X, do którego dostęp studenci i pracownicy naukowi mają [za darmo](https://education.github.com/discount).
+
+Testy jest dobrze pisać, bo czasem możemy przegapić, że coś zepsuliśmy. Jeśli zabezpieczyliśmy się testami, `devtools::check()` nakrzyczy na nas, że testy nie wychodzą. Nakrzyczy na nas też, jeśli nie wyjdą przykłady, ale przykład musi tylko zadziałać. Że będzie zwracał bzdury, tego już bez testów nie wykryjemy.
+
+Sztuka polega na tym, żeby pisać testy tak, żeby nie trzeba było ich zmieniać za każdym jednym razem, jak będziemy coś zmieniać w funkcji. Zbyt duże struktury testów mogą sprawić, że kod będzie bardzo trudny do utrzymania. Trzeba więc znaleźć jakiś punkt pośredni i nie dać się zwariować. Testy mają nam **oszczędzić pracy, a nie dołożyć**.
+
 # *Code coverage* z `codecov`
+
+Z testami wiąże się pojęcie *code coverage*. Jest to wskaźnik, który mówi o tym, jaki procent kodu jest przetestowany. Nie oznacza to, czy sprawdziliśmy wszystkie sytuacje, w których w kodzie może zadziać się coś źle, ale czy każda linia kodu została wykonana w testach chociaż raz. A więc, czy na bardzo podstawowym poziomie działa, czyli czy wykonuje się bez błędu.
+
+## Sprawdzanie *code coverage*
+
+*Code coverage* możemy bardzo łatwo sprawdzić zarówno dla pojedynczego pliku, jak i dla całego pakietu. Robią to odpowiednio funkcje `devtools::test_coverage_active_file()` i `devtools::test_coverage()`. Raport z takiego sprawdzenia zawiera ogólny *code coverage*, w podziale na pliki oraz informację, jakie linijki zostały, a jakie nie zostały przetestowane.
+
+![Wynik `devtools::test_coverage()`.](ilustracje/pakiety-w-R/covr.png)
+
+## Automatyczne raportowanie
+
+Istnieje cała seria narzędzi do automatycznego raportowania *code coverage*. Bardzo często repozytoria chwalą się wielkością tego wskaźnika. Jeśli pakiet jest dobrze testowany, to może znaczyć, że jest porządnie zrobiony albo chociaż z należytą dbałością.
+
+Narzędziem, które tutaj omówię i które ma dobrą integrację z R, jest `codecov`. Żeby podłączyć swoje repozytorium do `codecov` musimy założyć odpowiednie konto i uruchomić dwie komendy.
+
+Jeśli chodzi o konto, wchodzimy na [codecov.io](https://codecov.io/), zakładamy konto i upoważniamy Codecov do dostępu do naszego konta GitHub. Naszym oczom powinna ukazać się lista wszystkich naszych repozytorów, do której wkrótce wrócimy.
+
+```{r}
+#| eval: false
+usethis::use_coverage("codecov")
+usethis::use_github_action("test-coverage")
+```
+
+Przygotuje to nasze repozytorium, ale nie w sposób idealny. W momencie, w którym to piszę, trzeba wprowadzić serię poprawek, żeby wszystko szło, jak powinno.
+
+1. Na stronie [codecov.io](https://codecov.io/) wchodzimy w nasze repozytorium i kopiujemy token, który się tam wyświetla. Musimy go wskazać w naszym repozytorium jako sekret. Robimy to w ustawieniach repozytorium, ale szczęśliwie Codecov podpowiada nam link bezpośrednio do ustawień. Nazwa sekretu to `CODECOV_TOKEN`, a jego wartość to sam ten kod, który skopiowaliśmy.
+
+2. Jeśli chcemy, możemy upoważnić [apkę Codecov na GitHubie](https://github.com/apps/codecov). Zamieszcza ona automatyczne raporty o *code coverage* przy pull requestach.
+
+3. Plik `.github/workflows/test-coverage.yaml` modyfikujemy w taki sposób, żeby góra tego pliku wyglądała tak, jak niżej. Nie usuwamy innych zmiennych środowiskowych, tylko dopisujemy `CODECOV_TOKEN`.
+
+```{YAML}
+#| eval: false
+jobs:
+  test-coverage:
+    runs-on: ubuntu-latest
+    env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+```
+
+4. Jeśli repozytorium jest prywatne, na końcu zmieniamy naszą formułę tak, żeby wyglądała jak niżej.
+
+```{YAML}
+#| eval: false
+- name: Upload coverage reports to Codecov
+  uses: codecov/codecov-action@v3
+  with:
+    token: ${{ secrets.CODECOV_TOKEN }}
+```
+
+5. Odznaka dodawana przez `usethis` nie działa. Na [codecov.io](https://codecov.io/), po wejściu w nasze repozytorium (już po jego uruchomieniu), w ustawieniach, w sekcji „Badges & Graphs” znajdziemy poprawny link, którym zastępujemy ten dodany przez `usethis` w `README.Rmd`.
+
+Po wykonaniu tych czynności, raporty *code coverage* staną się jawne, będziemy mogli się nimi chwalić na głównej stronie naszego repozytorium, a także będą wykonywane automatycznie przez GitHub za każdym razem, gdy wypchniemy nowy commit.
 
 # Bonus: załączanie apki w Shiny
 
+Nie wiem, ile osób będzie tego potrzebować, ale że ciężko mi było to znaleźć, to się podzielę. Jak załączyć do naszego pakietu apkę napisaną w Shiny? Miałem ten problem, gdy chciałem dołączyć GUI do pakietu `mtscr`, które napisałem właśnie w Shiny.
+
+1. W folderze `inst` tworzymy podfolder o wybranej przez nas nazwie. Jako przykład wybiorę podfolder `GUI`.
+
+2. Do podfolderu wrzucamy naszą apkę w Shiny, ale główny plik koniecznie nazywamy `app.R`.
+
+3. W głównym pakiecie tworzymy funkcję uruchamiającą. Przykład niżej. Zamiast `"GUI"` piszemy nazwę naszego podfolderu, a zamiast `"mtscr"` nazwę naszego pakietu. Przykładowa funkcja sprawdza tylko, czy apka znajduje się tam, gdzie powinna. Funkcja `system.file` zwraca ścieżkę do pakietu, a w tym wypadku do konretnego komponentu tego pakietu -- apki w Shiny.
+
+```{r}
+#| eval: false
+#| filename: mtscr_app.R
+mtscr_app <- function() {
+    app_dir <- system.file("GUI", package = "mtscr")
+    if (app_dir == "") {
+        cli::cli_abort(
+            c(
+                "The app not found.",
+                "i" = "Try reinstalling the {.pkg mtscr} package with {.run devtools::intall_github(\"jakub-jedrusiak/mtscr\")"
+            )
+        )
+    }
+    shiny::runApp(app_dir, display.mode = "normal")
+}
+```
+
+Użytkownik może teraz bez problemu uruchomić naszą apkę w Shiny poprzez funkcję uruchamiającą.
+
 # Podsumowanie
+
