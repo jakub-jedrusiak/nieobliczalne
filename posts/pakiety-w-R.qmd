@@ -427,15 +427,51 @@ Zazwyczaj to zabezpieczenie dotyczy sprawdzania wejścia, czyli czy to, co użyt
 Zazwyczaj najpierw sprawdzamy, czy obiekt podany przez użytkownika jako argument ma odpowiedni typ. Na przykład jeśli naszym pierwszym argumentem jest ramka danych `df`, możemy chcieć upewnić się, czy to rzeczywiście jest ramka danych.
 
 ```{r}
-if (!is.data.frame(df)) {
-    cli::cli_abort(
-        c(
-            "{.arg df} must be a data frame.",
-            "x" = "{.var {rlang::expr_text(substitute(df))}} is {.obj_type_friendly {df}}"
+#| error: true
+winda_do_nieba <- 2 + 1 # coś, co nie jest ramką danych
+
+input_check <- function(df) {
+    if (!is.data.frame(df)) {
+        cli::cli_abort(
+            c(
+                "{.arg df} must be a data frame.",
+                "x" = "Provided {.arg df} is {.obj_type_friendly {df}}"
+            )
         )
-    )
+    }
 }
+
+input_check(winda_do_nieba)
 ```
+
+Klamra `if` sprawdza, czy `df` *nie jest* ramką danych. Jeśli nie jest, uruchamiana jest funkcja `cli_abort()`. Zatrzymuje ona wykonywanie kodu i pokazuje w konsoli błąd w estetycznej formie.
+
+Jak używać tej funkcji? Ma ona całkiem sporo możliwości. Najprostszą rzeczą, którą może przyjąć, jest sam komunikat z błędem. Może to być zwykły tekst. Mamy też dodatkowe możliwości formatowania, o których jednak później. Komunikat jest opatrzony ikonką, która zależy od tego, czy chcemy wyrzucić błąd, ostrzeżenie czy informację.
+
+## Punktory
+
+Możemy jednak dokładać kolejne komunikaty i kolejne ikonki. W takim wypadku do funkcji `cli_abort()` wrzucamy wektor komunikatów. Pierwszy komunikat jest nienazwany, zaś w kolejnych wprost wskazujemy, jakie chcemy punktory. Cała lista dostępna jest w [dokumentacji `cli::cli_bullet()`](https://cli.r-lib.org/reference/cli_bullets.html). Dostępne w chwili, gdy to piszę, pokazuję niżej.
+
+```{r}
+cli::cli_bullets(
+    c(
+        "bez wcięcia",
+        " " = "wcięcie",
+        "*" = "punktor",
+        ">" = "strzałka",
+        "v" = "sukces",
+        "x" = "zagrożenie",
+        "!" = "ostrzeżenie",
+        "i" = "informacja"
+    )
+)
+```
+
+## Formatowanie z `glue`
+
+Poza punktorami możemy dodatkowo formatować tekst korzystając ze składni dostarczanej przez `glue`. `cli` obsługuje ją automatycznie. Wszystkie szczegóły znajdziemy na [tej](https://cli.r-lib.org/reference/inline-markup.html) stronie dokumentacji. Ja omówię tutaj same podstawy.
+
+Tekst, który chcemy sformatować, bierzemy w nawiasy klamrowe. W nawiasie zaczynamy od określenia, w jaki sposób chcemy dany tekst sformatować.
 
 # Testy z `testthat` {#sec-tests}
 
