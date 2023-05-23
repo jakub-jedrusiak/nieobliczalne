@@ -178,7 +178,7 @@ Istnieje seria zależności, które posiada większość pakietów i które maj�
 
 5.  `usethis::use_lifecycle()` -- dodaje zależność od pakietu `lifecycle`, w którym możemy oznaczyć nasze funkcje jako eksperymentalne albo wycofane.
 
-Dodatkowo większość pakietów posiada wprost wskazaną zależność od samego R. Taka zależność musi być w sekcji `Depends` i musi posiadać minimalną wersję co najmniej 3.5.0[^5]. W praktyce najlepiej jest podawać minimalną wersję 4.1.0, bo w tej wersji dodano natywny potok `|>`, a już w ogóle najlepiej nie cofać się przed 4.2.0, kiedy potoki wzbogacono o `_`, czyli informację, gdzie ma się znaleźć dany argument, jeśli nie na pierwszym miejscu (odpowiednik `.` w `magrittr`). 
+Dodatkowo większość pakietów posiada wprost wskazaną zależność od samego R. Taka zależność musi być w sekcji `Depends` i musi posiadać minimalną wersję co najmniej 3.5.0[^5]. W praktyce najlepiej jest podawać minimalną wersję 4.1.0, bo w tej wersji dodano natywny potok `|>`, a już w ogóle najlepiej nie cofać się przed 4.2.0, kiedy potoki wzbogacono o `_`, czyli informację, gdzie ma się znaleźć dany argument, jeśli nie na pierwszym miejscu (odpowiednik `.` w `magrittr`). Można to wykonać funckją `usethis::use_package("R", type = "Depends", min_version = "4.2.0")`.
 
 [^5]: Jest to wymagane, jeśli wykorzystujemy pliki z danymi. Technicznie można dać niższą wersję, ale nie polecam.
 
@@ -741,7 +741,7 @@ jobs:
 
 5. Odznaka dodawana przez `usethis` nie działa. Na [codecov.io](https://codecov.io/), po wejściu w nasze repozytorium (już po jego uruchomieniu), w ustawieniach, w sekcji „Badges & Graphs” znajdziemy poprawny link, którym zastępujemy ten dodany przez `usethis` w `README.Rmd`.
 
-Po wykonaniu tych czynności, raporty *code coverage* staną się jawne, będziemy mogli się nimi chwalić na głównej stronie naszego repozytorium, a także będą wykonywane automatycznie przez GitHub za każdym razem, gdy wypchniemy nowy commit.
+Zestaw określony wyżej może się dość szybko zdezaktualizować, dotarłem do niego na zasadzie prób i błędów. Najbardziej newralgiczne są punkty 3. i 4., które mają za zadanie dać Codecov znać, jaki jest token, który dodaliśmy wcześniej do sekretów repozytorium. Po wykonaniu tych czynności, raporty *code coverage* staną się jawne, będziemy mogli się nimi chwalić na głównej stronie naszego repozytorium, a także będą wykonywane automatycznie przez GitHub za każdym razem, gdy wypchniemy nowy commit.
 
 # Bonus: załączanie apki w Shiny
 
@@ -774,3 +774,105 @@ Użytkownik może teraz bez problemu uruchomić naszą apkę w Shiny poprzez fun
 
 # Podsumowanie
 
+Docieramy wreszcie do końca tego przydługiego tekstu. Jak zwykle, tylko liznęliśmy temat po powierzchnii, ale mam nadzieję, że było to wystarczające liźnięcie, żeby poczuć smak budowania pakietów. Przede wszystkim liczę na to, że wystarczy to, by móc dalej samodzielnie zdobywać wiedzę w już konkretnych zakresach. Podstawowe źródła to, jak zwykle, dokumentacja i książka Hadleya Wickhama. Tym razem tą książką jest [R Packages](https://r-pkgs.org/) i jest tam większość tego, co można znaleźć w tym tekście, tylko znacznie, znacznie pogłębione.
+
+Oprócz podsumowania w punktach wydaje mi się, że korzystne będzie zebranie wszystkich podstawowych komend w zestawy tematyczne. Zestawy ułożyłem chronologicznie, to znaczy w takiej kolejności, w jakiej będziemy budować nasz pakiet.
+
+## Zakładanie repozytorium
+
+```{r}
+#| eval: false
+roxygen2::roxygenise() # dodaj roxygen2, najpeirw usuń NAMESPACE
+usethis::use_roxygen_md() # obsługa markdown w roxygen2
+usethis::use_gpl3_license() # licencja GPL v. 3
+usethis::use_package("R", type = "Depends", min_version = "4.2.0") # dodaj zależność od R
+usethis::use_tidy_dependencies() # podstawowe zależności tidyverse
+usethis::use_tidy_eval() # narzędzia do Tidy Eval
+usethis::use_tibble() # dodaj tibble
+usethis::use_pipe() # dodaj potoki z magrittr %>%
+usethis::use_lifecycle() # dodaj oznaczniki lifecycle
+usethis::use_readme_rmd() # dodaj README.Rmd
+```
+
+## Podłączanie GitHuba
+
+```{r}
+#| eval: false
+usethis::use_git() # popraw/załóż pliki repozytorium git
+usethis::use_github(private = TRUE) # załóż repozytorium prywatne na GitHubie
+usethis::use_github_action_check_standard() # dodaj automatyczne R-CMD-check
+```
+
+## Mniejsze opcje
+
+```{r}
+#| eval: false
+usethis::use_package_doc() # dokumentacja całego pakietu
+usethis::use_cran_badge() # odznaka CRAN
+usethis::use_lifecycle_badge("experimental") # odznaka lifecycle experimental
+usethis::use_citation() # dodaj plik CITATION
+```
+
+## Testy
+
+```{r}
+#| eval: false
+usethat::use_testthat() # dodaj testthat
+usethis::use_coverage("codecov") # dodaj codecov
+usethis::use_github_action("test-coverage") # dodaj automatyczne raporty codecov
+```
+
+## Używanie na co dzień
+
+```{r}
+#| eval: false
+usethis::use_r("nazwa_funkcji") # stwórz plik z funkcjami
+usethis::use_test() # dodaj plik z testami
+usethis::use_data_raw("nazwa bazy") # stwórz plik z danymi
+```
+
+## Konserwacja
+
+```{r}
+#| eval: false
+devtools::document() # zaktualizuj dokumentację
+devtools::load_all() # załaduj pakiet
+devtools::check() # zrób R-CMD-check
+devtools::test_coverage() # sprawdź code coverage
+devtools::build_readme() # zaktualizuj README.md
+styler:::style_active_pkg() # formatuj wszystkie pliki w pakiecie
+```
+
+## Błędy
+
+```{r}
+#| eval: false
+cli::cli_abort("Treść błędu") # błąd
+cli::cli_warn("Treść ostrzeżenia") # ostrzeżenie
+cli::cli_inform("Treść infromacji") # informacja
+```
+
+## Przed każdym wypchnięciem
+
+```{r}
+#| eval: false
+devtools::check() # zrób R-CMD-check
+devtools::test_coverage() # sprawdź code coverage
+devtools::build_readme() # zaktualizuj README.md
+```
+
+## Inne rzeczy do wykonania
+
+1. Uzupełnij ręcznie plik `DESCRIPTION`. Pamiętaj o tym, by autorów wskazywać funkcją.
+
+2. Uzupełnij plik `CITATION`, jeśli z niego korzystasz.
+
+3. Napisz porządny plik `README`.
+
+4. Pamiętaj o pisaniu pełnych nazw funkcji i używaniu `.data` do nazw kolumn bez cudzysłowu.
+
+5. Każdą funkcję dokumentuj szkieletem `roxygen2`. Nie zapomnij o tagu `@export`.
+
+6. Jeśli dodajesz pliki z danymi, pamiętaj, żeby je udokumentować w pliku `data.R`. Opisz wszystkie kolumny za pomocą `@format`.
+
+7. Jeśli masz czas i chęć, zabezpieczaj funkcje przed nieprawidłowym wykorzystaniem. Przede wszystkim sprawdzaj typy argumentów oraz czy kolumny istnieją w bazie. Pamiętaj, że możesz formatować komunikaty o błędach.
