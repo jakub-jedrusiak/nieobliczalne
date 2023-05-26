@@ -3,7 +3,7 @@ title: "Listy, pętle i automatyzacja w R"
 description: "Automatyzacja to jedna z najpotężniejszych zalet R, której nie mają programy statystyczne oparte na interfejsie graficznym. Jeśli chcemy zrobić jakąś czynność wiele razy tak samo lub prawie tak samo, możemy wykorzystać siłę programowania i zrobić to setki razy używając ledwie kilku linijek. Podstawowym sposobem automatyzacji w R -- czym różni się od wielu innych języków programowania -- są listy, czyli zbiory obiektów."
 image: ./headers/automatyzacja.webp
 twitter-card:
-    image: "/headers/automatyzacja.webp"
+    image: "/headers/automatyzacja.jpeg"
 date: "2023-03-08"
 categories:
     - R

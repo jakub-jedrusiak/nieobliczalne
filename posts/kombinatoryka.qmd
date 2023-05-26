@@ -4,7 +4,7 @@ description: "Ile wykonano uścisków dłoni w pomieszczeniu, w którym jest 100
 date: "2023-02-17"
 image: ./headers/kombinatoryka.webp
 twitter-card:
-    image: "/headers/kombinatoryka.webp"
+    image: "/headers/kombinatoryka.jpeg"
 categories:
     - Matematyka
 freeze: true

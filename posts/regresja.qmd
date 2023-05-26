@@ -5,7 +5,7 @@ categories:
     - Statystyka
 image: ./headers/regresja.webp
 twitter-card:
-    image: "/headers/regresja.webp"
+    image: "/headers/regresja.jpeg"
 draft: true
 ---
 

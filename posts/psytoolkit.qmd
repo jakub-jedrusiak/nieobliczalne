@@ -4,7 +4,7 @@ subtitle: "Darmowe narzędzie do eksperymentów online"
 description: "Badania naukowe często prowadzi się na Formularzach Google albo Microsoft Forms. Możliwości tych platform są ograniczone. Jak mamy pieniądze, to skorzystamy z Qualtrics. Istnieje jednak darmowe narzędzie, napisane specjalnie po to, żeby prowadzić w nim badania naukowe. Nie tylko pozwala ono na tworzenie ankiet, ale też zadań typu test Stroopa."
 image: ./headers/psytoolkit.webp
 twitter-card:
-    image: "/headers/psytoolkit.webp"
+    image: "/headers/psytoolkit.jpeg"
 date: ""
 categories:
     - Narzędzia
