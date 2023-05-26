@@ -10,7 +10,2310 @@
 <atom:link href="https://nieobliczalne.pl/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.78</generator>
-<lastBuildDate>Fri, 19 May 2023 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 25 May 2023 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Tworzenie pakietów w R</title>
+  <dc:creator>Jakub Jędrusiak</dc:creator>
+  <link>https://nieobliczalne.pl/posts/pakiety-w-R.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>Pakiety to nic innego jak zbiory funkcji. Od zwykłych plików .R z funkcjami różnią się tym, że mają określoną strukturę, dzięki której można je potem zainstalować i szybko zacząć wykorzystywać. Pewnie pierwszym skojarzeniem z pisaniem pakietów jest udostępnianie ich całej społeczności przez CRAN. Owszem, można to zrobić, ale można mieć też prywatne pakiety trzymane na GitHubie. Wtedy taki pakiet może być chałupniczy, niepełny, nieelegancki, ale i tak jest lepszą drogą, niż luźne pliki z definicjami funkcji. Dzięki temu nie musimy od razu wszystkiego zrobić na tip-top, żeby każdy na świecie wygodnie korzystał z naszych trzech funkcji. Naszym celem jest w końcu <strong>oszczędzenie sobie pracy, nie dołożenie</strong>.</p>
+<section id="przygotowanie" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Przygotowanie</h1>
+<p>Do tworzenia pakietów wykorzystujemy inne pakiety. Najważniejszym z nich jest <code>devtools</code>, który ciągnie za sobą cały szereg innych pakietów typu <code>roxygen2</code>, <code>usethis</code> czy <code>testthat</code>. Możesz nawet mieć już zainstalowane <code>devtools</code>, bo to w jego skład wchodzi funkcja <code>install_github()</code>, dzięki której instalujemy pakiety z GitHuba<sup>1</sup>. Jeśli nie masz jeszcze zainstalowanego pakietu <code>devtools</code>, zainstaluj go teraz.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install.packages</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"devtools"</span>)</span></code></pre></div>
+</div>
+<p>W tym tekście będę używał pełnych nazw funkcji, np. <code>usethis::use_readme_md()</code>. Jeśli jednak na początku pracy załadujesz <code>devtools</code>, nie musisz później podawać nazw pakietów.</p>
+<p>Najprostszym sposobem na utworzenie zrębu pakietu R jest wykorzystanie menu do tworzenia projektów w RStudio. Podczas tworzenia projektu możemy wybrać jego typ i nas interesuje <em>R package</em>. W wygodnym kreatorze wpisujemy nazwę pakietu. Warto też zaznaczyć, że chcemy mieć do tego repozytorium Git. Jeśli zabieramy się za tworzenie pakietu, powinniśmy umieć choć w podstawowym stopniu korzystać z Gita. Jeśli nie znasz Gita, zachęcam do przeczytania <a href="./posts/git.qmd">tego posta</a>.</p>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/pakiety-w-R/RStudio-wizard.png" class="img-fluid"></p>
+</section>
+<section id="sec-structure" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Struktura pakietu</h1>
+<p>Stworzony przez nas szkielet pakietu już ma określoną strukturę. W wybranym wcześniej folderze znajdziemy serię szczególnych plików i folderów, która potem będzie się rozrastać. Obecnie są to:</p>
+<ul>
+<li><p><code>.gitignore</code> – plik repozytorium mówiący, co Git ma ignorować (więcej o tym w <a href="./posts/git.qmd">tekście o Git</a>).</p></li>
+<li><p><code>.Rbuildignore</code> – plik, w którym podajemy niestandardowe pliki, które z jakiegoś powodu znajdują się w folderze z naszym pakietem; jest to ważne, bo R-CMD-check (o którym więcej w podrozdziale 8) będzie na nas krzyczał, jeśli znajdzie niestandardowe pliki w nietypowych miejscach.</p></li>
+<li><p><code>DESCRIPTION</code> – metadane naszego pakietu, przede wszystkim nazwa, wersja, autorzy i pakiety, których nasz pakiet wymaga do działania.</p></li>
+<li><p><code>man</code> – folder z plikami .Rd z dokumentacją naszych funkcji; nie edytujemy ich ręcznie.</p></li>
+<li><p><code>NAMESPACE</code> – plik z przestrzenią nazw naszego pakietu; nie edytujemy go ręcznie.</p></li>
+<li><p><code>R</code> – folder, do którego wrzucamy pliki .R z naszymi funkcjami; najważniejsza część naszego pakietu.</p></li>
+</ul>
+<p>Do tego jeszcze znajdziemy tam plik z projektem RStudio. W miarę budowania naszego pakietu, nasz folder będzie się zaludniał nowymi plikami i podfolderami.</p>
+<p>Już teraz warto jest uruchomić kilka komend z pakietu <code>usethis</code>, które ułatwią nam robotę w przyszłości. Są to funkcje, których zazwyczaj używamy tylko raz, one wykonują swoją robotę (coś tworzą, coś dopisują) i zapominamy o ich istnieniu, aż nie musimy stworzyć kolejnego pakietu.</p>
+<p>Po pierwsze musimy przygotować nasz pakiet do używania <code>roxygen2</code>, czyli specjalnego standardu generującego dokumentację naszych funkcji. Dzięki niemu nie musimy ręcznie babrać się z plikami .Rd. Zaczynamy więc od <strong>usunięcia pliku <code>NAMESPACE</code></strong>, który wytworzyło RStudio. Dlaczego? Bo nasz plik <code>NAMESPACE</code> ma stworzyć <code>roxygen2</code>, a nie RStudio. Po usunięciu używamy komendy <code>roxygen2::roxygenise()</code>. Doda ona do pliku <code>DESCRIPTION</code> informację o używanej wersji <code>roxygen2</code> oraz stworzy nowy, piękny, prawie pusty plik <code>NAMESPACE</code>. Następnie używamy komendy <code>usethis::use_roxygen_md()</code><sup>2</sup>. Pozwoli ona używać nam wygodnej składni markdown w dokumentacji, np. **<strong>bold</strong>** wygeneruje nam pogrubiony tekst. Więcej o podstawach markdown przeczytamy na przykład <a href="https://quarto.org/docs/authoring/markdown-basics.html">tutaj</a>.</p>
+</section>
+<section id="description" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> <code>DESCRIPTION</code></h1>
+<p>Plik <code>DESCRIPTION</code>, jak już wspomniałem, to opis naszego pakietu. Jeśli otworzymy go teraz, zobaczymy przygotowany wcześniej szkielet. Możemy w nim uzupełnić tytuł, wersję i opis pakietu. Jeśli opis zajmie więcej niż linijkę, kolejne linijki powinny zaczynać się wcięciem wielkości 4 spacji.</p>
+<section id="autorzy" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="autorzy"><span class="header-section-number">3.1</span> Autorzy</h2>
+<p>Jeśli chodzi o autorów pakietu, podajemy ich w dość specyficzny sposób. Najpierw jednak kasujemy całą linijkę <code>Maintainer</code>. To część starego standardu, dziś osobę odpowiedzialną za kod podajemy w polu autorów. Samych autorów podamy za pomocą funkcji <code>person()</code>. Pokażmy to sobie na przykładzie.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>DESCRIPTION</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">Authors<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">@</span>R<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">person</span>(</span>
+<span id="cb2-2">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Jakub"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Jędrusiak"</span>,</span>
+<span id="cb2-3">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">email =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"kuba23031999@gmail.com"</span>,</span>
+<span id="cb2-4">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">role =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"aut"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cre"</span>),</span>
+<span id="cb2-5">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">comment =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb2-6">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ORCID =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"0000-0002-6481-8210"</span>,</span>
+<span id="cb2-7">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">affiliation =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"University of Wrocław"</span></span>
+<span id="cb2-8">        )</span>
+<span id="cb2-9">      )</span></code></pre></div>
+</div>
+</div>
+<p>Po pierwsze znacznik <code>Author</code> zmieniamy na <code>Authors@R</code> i to niezależnie od liczby autorów. Jeśli autor jest jeden, podajemy go za pomocą funkcji <code>person()</code>. Podstawowe informacje to imię w pierwszym argumencie<sup>3</sup>, nazwisko w drugim. Tych argumentów nie musimy nazywać. Dalej mamy inne informacje, które już nazwać warto. <code>email</code> jaki jest, każdy widzi. <code>role</code> to opis funkcji osoby w tworzeniu pakietu. Używamy tutaj kodów opisanych w dokumentacji funkcji <code>person()</code>. Kilka podstawowych kodów ról wymieniam w tabeli poniżej. Jak widać w przykładzie, każda osoba może mieć więcej niż jedną rolę. Kolejnym polem jest <code>comment</code>, który <em>zawsze</em> podajemy w postaci nazwanego wektora. Podstawowymi informacjami, które możemy tutaj umieścić, są numer ORCiD oraz afiliacja.</p>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 66%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kod</th>
+<th>Funkcja</th>
+<th>Opis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"aut"</code></td>
+<td><em>Author</em></td>
+<td>Pełny autor; wszystkie osoby, które pojawiają się w cytowaniu, powinny mieć przypisaną tę rolę.</td>
+</tr>
+<tr class="even">
+<td><code>"cre"</code></td>
+<td><em>Creator</em></td>
+<td>Osoba odpowiedzialna za dbanie o kod w pakiecie (<em>maintainer</em>).</td>
+</tr>
+<tr class="odd">
+<td><code>"ctb"</code></td>
+<td><em>Contributor</em></td>
+<td>Osoby, które wniosły jakiś istotny wkład w pakiet, ale za mały, by pojawiać się w cytowaniu.</td>
+</tr>
+<tr class="even">
+<td><code>"cph"</code></td>
+<td><em>Copyright holder</em></td>
+<td>Osoba lub instytucja posiadająca prawa autorskie do pakietu.</td>
+</tr>
+</tbody>
+</table>
+<p>Jeśli autorów jest więcej niż jeden, podajemy ich w postaci wektora osób. Poniżej przykład.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>DESCRIPTION</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">Authors<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">@</span>R<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb3-2">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">person</span>(</span>
+<span id="cb3-3">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Boris"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Forthmann"</span>,</span>
+<span id="cb3-4">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">email =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"boris.forthmann@uni-muenster.de"</span>,</span>
+<span id="cb3-5">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">role =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"aut"</span>,</span>
+<span id="cb3-6">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">comment =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb3-7">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ORCID =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"0000-0001-9755-7304"</span>,</span>
+<span id="cb3-8">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">affiliation =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"University of Münster"</span></span>
+<span id="cb3-9">      )</span>
+<span id="cb3-10">    ),</span>
+<span id="cb3-11">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">person</span>(</span>
+<span id="cb3-12">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Maciej"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Karwowski"</span>,</span>
+<span id="cb3-13">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">email =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"maciej.karwowski@uwr.edu.pl"</span>,</span>
+<span id="cb3-14">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">role =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"aut"</span>,</span>
+<span id="cb3-15">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">comment =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb3-16">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ORCID =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"0000-0001-6974-1673"</span>,</span>
+<span id="cb3-17">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">affiliation =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"University of Wrocław"</span></span>
+<span id="cb3-18">      )</span>
+<span id="cb3-19">    ),</span>
+<span id="cb3-20">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">person</span>(</span>
+<span id="cb3-21">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Roger"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"E."</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Beaty"</span>,</span>
+<span id="cb3-22">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">email =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rebeaty@psu.edu"</span>,</span>
+<span id="cb3-23">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">role =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"aut"</span>,</span>
+<span id="cb3-24">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">comment =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb3-25">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ORCID =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"0000-0001-6114-5973"</span>,</span>
+<span id="cb3-26">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">affiliation =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Pennsylvania State University"</span></span>
+<span id="cb3-27">        )</span>
+<span id="cb3-28">      ),</span>
+<span id="cb3-29">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">person</span>(</span>
+<span id="cb3-30">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Jakub"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Jędrusiak"</span>,</span>
+<span id="cb3-31">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">email =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"kuba23031999@gmail.com"</span>,</span>
+<span id="cb3-32">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">role =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"aut"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cre"</span>),</span>
+<span id="cb3-33">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">comment =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb3-34">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ORCID =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"0000-0002-6481-8210"</span>,</span>
+<span id="cb3-35">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">affiliation =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"University of Wrocław"</span></span>
+<span id="cb3-36">        )</span>
+<span id="cb3-37">      )</span>
+<span id="cb3-38">    )</span></code></pre></div>
+</div>
+</div>
+</section>
+<section id="citation" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="citation"><span class="header-section-number">3.2</span> <code>CITATION</code></h2>
+<p>Jeśli chcemy, by nasz pakiet był cytowany w jakiś konkretny sposób, możemy wprost go wskazać w pliku <code>CITATION</code>. Wytwarzamy go już po uzupełnieniu koniecznych informacji w pliku <code>DESCRIPTION</code> za pomocą komendy <code>usethis::use_citation()</code>. Sam plik siedzi sobie w folderze <code>inst</code>. Umieszczamy w nim informacje o cytowaniu w formacie BibTeX (każdy generator potrafi taką wytworzyć), a jeśli chcemy, to także wersję tekstową. Decyduje to o sposobie, w jaki wyświetla się wynik funkcji <code>citation()</code>. Poniżej przykładowy plik <code>CITATION</code> i jego efekt.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>CITATION</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">citHeader</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"To cite mtscr in publications use:"</span>)</span>
+<span id="cb4-2"></span>
+<span id="cb4-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">citEntry</span>(</span>
+<span id="cb4-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">entry    =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Manual"</span>,</span>
+<span id="cb4-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title    =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Multidimensional Top Scoring for Creativity Research"</span>,</span>
+<span id="cb4-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">author   =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Boris Forthmann, Maciej Karwowski, Roger E. Beaty, Jakub Jędrusiak"</span>,</span>
+<span id="cb4-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">year     =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2023"</span>,</span>
+<span id="cb4-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">url      =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://github.com/jakub-jedrusiak/mtscr"</span>,</span>
+<span id="cb4-9">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">textVersion =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(</span>
+<span id="cb4-10"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Forthmann, B., Karwowski, M., Beaty, R. E., Jędrusiak, J. (2023). Multidimensional Top Scoring for Creativity Research. Retrieved from: https://github.com/jakub-jedrusiak/mtscr"</span></span>
+<span id="cb4-11">  )</span>
+<span id="cb4-12">)</span></code></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">citation</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mtscr"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>To cite mtscr in publications use:
+
+  Forthmann, B., Karwowski, M., Beaty, R. E., Jędrusiak, J. (2023).
+  Multidimensional Top Scoring for Creativity Research. Retrieved from:
+  https://github.com/jakub-jedrusiak/mtscr
+
+Wpis BibTex dla użytkowników LaTeX to
+
+  @Manual{,
+    title = {Multidimensional Top Scoring for Creativity Research},
+    author = {Boris Forthmann and Maciej Karwowski and Roger E. Beaty and Jakub Jędrusiak},
+    year = {2023},
+    url = {https://github.com/jakub-jedrusiak/mtscr},
+  }</code></pre>
+</div>
+</div>
+</section>
+<section id="licencja" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="licencja"><span class="header-section-number">3.3</span> Licencja</h2>
+<p>Swój kod warto wprost licencjonować, ale licencji nie dodajemy do pakietu ręcznie. Używamy tutaj odpowiedniej funkcji z pakietu <code>usethis</code>, np. dla licencji MIT będzie to <code>usethis::use_mit_license()</code>, a dla GPL v.3 <code>usethis::use_gpl3_license()</code>. Pełną listę dostępnych licencji można znaleźć <a href="https://usethis.r-lib.org/reference/licenses.html">tutaj</a>. Jaką licencję wybrać? Najprościej mówiąc, MIT to <em>de facto</em> pójście we w pełni wolny kod. Taki kod może np. stać się częścią płatnego programu, ale nasze prawa autorskie w stosunku do niego ciągle obowiązują. GPL natomiast wymusza, by programy oparte na naszym kodzie też były licencjonowane pod GPL, czyli by zawsze były darmowe. Większość pakietów R (ok. 70%) korzysta z licencji GPL.</p>
+</section>
+<section id="sec-dependencies" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="sec-dependencies"><span class="header-section-number">3.4</span> Zależności</h2>
+<p>Najpewniej nie będziemy pisać całego naszego kodu w podstawowym R, a raczej będziemy wykorzystywać w nim inne pakiety. Żeby dodać jakiś pakiet jako zależność, używamy np. <code>usethis::use_package("rlang", "dplyr")</code>. Nie należy nigdy podawać <code>tidyverse</code> jako zależności, a raczej konkretne pakiety typu <code>dplyr</code> czy <code>stringr</code>. Do tego możemy wymusić wykorzystanie konkretnej minimalnej wersji danego pakietu argumentem <code>min_version</code>, np. pisząc <code>usethis::use_package("dplyr", min_version = "1.1.0")</code>.</p>
+<p>Jeśli zerkniemy w plik <code>DESCRIPTION</code> po uruchomieniu takiej komendy, zobaczymy, że dodane pakiety znalazły się w sekcji <code>Imports</code>. Tak powinno być. Istnieją jednak inne możliwe sekcje. Jeśli dodajemy pakiet, który nie jest potrzebny do działania naszych funkcji, ale na przykład potrzebujemy go do uruchomienia przykładów (bo chociażby wykorzystujemy w nich dane <code>diamonds</code> z pakietu <code>ggplot2</code>, podczas gdy nie wykorzystujemy samego <code>ggplot2</code> w naszych funkcjach), dodajemy go w sekcji <code>Suggests</code>. Robimy to pisząc na przykład <code>usethis::use_package("ggplot2", type = "Suggests")</code>.</p>
+<p>Istnieje seria zależności, które posiada większość pakietów i które można łatwo dodać poprzez specjalne funkcje z pakietu <code>usethis</code>. Wymieńmy sobie te najważniejsze:</p>
+<ol type="1">
+<li><p><code>usethis::use_pipe()</code> – dodaje obsługę potoków <code>%&gt;%</code> z pakietu <code>magrittr</code>.</p></li>
+<li><p><code>usethis::use_tibble()</code> – dodaje obsługę <code>tibble</code> jako formy, w której nasze funkcje zwracają dane.</p></li>
+<li><p><code>usethis::use_tidy_dependencies()</code> – standardowe zależności typu <code>rlang</code>, <code>cli</code> czy <code>glue</code>. Według mnie powinno się uruchamiać zawsze.</p></li>
+<li><p><code>usethis::use_tidy_eval()</code> – podstawowe pakiety do <a href="./posts/metaprogramowanie.qmd">Tidy Eval</a>. Według mnie powinno się&nbsp;uruchamiać zawsze.</p></li>
+<li><p><code>usethis::use_lifecycle()</code> – dodaje zależność od pakietu <code>lifecycle</code>, dzięki któremu możemy oznaczyć nasze funkcje jako eksperymentalne albo wycofane. Więcej informacji <a href="https://lifecycle.r-lib.org/index.html">tutaj</a>.</p></li>
+</ol>
+<p>Dodatkowo większość pakietów posiada wprost wskazaną zależność od samego R. Taka zależność musi pojawić się w sekcji <code>Depends</code> (zamiast standardowego <code>Imports</code>) i musi uwzględniać minimalną wersję co najmniej 3.5.0<sup>4</sup>. W praktyce najlepiej jest podawać minimalną wersję 4.1.0, bo w tej wersji dodano natywny potok <code>|&gt;</code>, a już w ogóle najlepiej nie cofać się przed 4.2.0, kiedy potoki wzbogacono o <code>_</code>, czyli informację, gdzie ma się znaleźć dany argument, jeśli nie na pierwszym miejscu (odpowiednik <code>.</code> w <code>magrittr</code>). Można to wykonać funkcją <code>usethis::use_package("R", type = "Depends", min_version = "4.2.0")</code>. Zwrócę tutaj uwagę, że trzecia liczba w zależności od R <strong>musi być zero</strong>. Nie można podać na przykład zależności z minimalną wersją&nbsp;<code>4.2.2</code>.</p>
+</section>
+</section>
+<section id="readme" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> <code>README</code></h1>
+<p>Każde repozytorium powinno mieć plik README, czyli opis, który wyświetli się na stronie pakietu na GitHubie. Gdy tworzymy pakiet R, mamy dwie możliwości, jakiego rodzaju plik README wytworzymy.</p>
+<ol type="1">
+<li><p><code>README.md</code> – opcja klasyczna, wytwarza zwykły plik markdown.</p></li>
+<li><p><code>README.Rmd</code> – opcja fajniejsza, wytwarza plik .Rmd, w którym możemy dorzucać przykładowy kod w R razem z jego efektami.</p></li>
+</ol>
+<p>Pierwsza opcja wymaga użycia komendy <code>usethis::use_readme_md()</code>. Wytworzy ona zwykły plik .md, który możemy wypełnić korzystając z <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">instrukcji na GitHubie</a>. Jeśli chcemy zyskać dostęp do możliwości oferowanych przez RMarkdown, używamy <code>usethis::use_readme_rmd()</code>. Wytworzy to plik .Rmd, w którym możemy pokazać, na co stać nasz pakiet. Dokładny opis składni znajdziemy <a href="https://rmarkdown.rstudio.com/">tutaj</a>, zaś poniżej przykład.</p>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode markdown code-overflow-wrap code-with-copy"><code class="sourceCode markdown"><span id="cb7-1">The main function is <span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">`mtscr_scores()`</span> which can return a df with scores for each participant, each item or each participant-item combination. Scores come from two models – <span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">`all_max`</span> and <span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">`all_top2`</span>. A value for a participant is the maximum value predicted by the model for that participant.</span>
+<span id="cb7-2"></span>
+<span id="cb7-3"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">```{r}</span></span>
+<span id="cb7-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mtscr"</span>)</span>
+<span id="cb7-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mtscr_creativity"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">package =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mtscr"</span>)</span>
+<span id="cb7-6"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">```</span></span></code></pre></div>
+<div class="light-mode">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/pakiety-w-R/Rmarkdown.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Efekt działania kodu RMarkdown z ramki na GitHubie.</figcaption>
+</figure>
+</div>
+</div>
+<div class="dark-mode">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/pakiety-w-R/Rmarkdown_dark.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Efekt działania kodu RMarkdown z ramki na GitHubie.</figcaption>
+</figure>
+</div>
+</div>
+<p>Jeśli zdecydujemy się na tę opcję, zawsze edytujemy plik <code>README.Rmd</code>, a nie <code>README.md</code>. GitHub nie potrafi go jednak odczytać, dlatego przed wysłaniem naszych plików na serwer musimy przekonwertować plik <code>README.Rmd</code> do pliku <code>README.md</code>. Robimy to prostą komendą <code>devtools::build_readme()</code>. Komenda <code>usethis::use_readme_rmd()</code> dodatkowo dodaje specjalną przypominajkę, która nie pozwala nam zrobić commitu, jeśli zmienialiśmy plik <code>README.Rmd</code>, a go nie wyeksportowaliśmy.</p>
+<p>Na marginesie dodam, że RMarkdown jest powoli zastępowany przez bliźniaczy standard <a href="https://quarto.org/">Quarto</a>, ale w chwili, gdy to piszę, <code>usethis</code> <a href="https://github.com/r-lib/usethis/issues/1671">nie planuje go wdrażać</a>.</p>
+<section id="odznaki" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="odznaki"><span class="header-section-number">4.1</span> Odznaki</h2>
+<p>Bardzo często w repozytoriach znajdziemy odznaki. Są to elementy informacyjno-ozdobne, które mówią coś o naszym pakiecie, np. że przechodzi testy, że jest w CRAN albo ile razy w miesiącu ktoś go pobiera. Ciekawe odznaki obejmują:</p>
+<ol type="1">
+<li><p>Odznakę <code>R-CMD-check</code>, o której piszę w podrozdziale 5.1.</p></li>
+<li><p>Odznakę <code>lifecycle</code>, którą możemy poinformować, że nasz pakiet jako całość jest eksperymentalny, stabilny lub wycofany. Możemy ją dodać wykorzystując komendę <code>usethis::use_lifecycle_badge("stable")</code>. Argument wybieramy jaki chcemy, zgodnie z listą dostępną <a href="https://lifecycle.r-lib.org/articles/stages.html">tutaj</a>.</p></li>
+<li><p>Odznakę CRAN, która informuje, jaka wersja naszego pakietu dostępna jest w CRAN. Jeśli pakiet nie jest dostępny, to odznaka też może o tym poinformować. Dodajemy ją komendą <code>usethis::use_cran_badge()</code>.</p></li>
+</ol>
+<div class="light-mode">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/pakiety-w-R/badges.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Kilka odznak w nagłówku pliku README na GitHubie.</figcaption>
+</figure>
+</div>
+</div>
+<div class="dark-mode">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/pakiety-w-R/badges_dark.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Kilka odznak w nagłówku pliku README na GitHubie.</figcaption>
+</figure>
+</div>
+</div>
+<p>Odznaki nie są obowiązkową częścią pakietu, ale piszę o nich, bo lubię takie ładne pierdółki. Inne przykłady odznak znajdziemy na <a href="https://shields.io/">shields.io</a>, albo wykorzystując pakiet <a href="https://github.com/GuangchuangYu/badger"><code>badger</code></a>.</p>
+</section>
+</section>
+<section id="github" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> GitHub</h1>
+<p>Zazwyczaj swoje pakiety chcemy trzymać na GitHubie<sup>5</sup>, żeby łatwo je instalować. Żeby podłączyć nasze repozytorium do GitHuba, musimy użyć po kolei dwóch komend.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_git</span>()</span>
+<span id="cb8-2">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_github</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">private =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
+</div>
+<p>Pierwsza dostosuje nasze repozytorium do ogólnych dobrych standardów. Druga podłączy nas do GitHuba, wytwarzając nowe repozytorium. Jeśli chcemy, by było prywatne, ustawiamy <code>private = TRUE</code>.</p>
+<section id="sec-GitHubActions" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-GitHubActions"><span class="header-section-number">5.1</span> R-CMD-check na GitHubie</h2>
+<p>Kolejną polecaną przeze mnie czynnością, która (według mnie) powinna zostać wykonana w każdym repozytorium, jest uruchomienie tej komendy:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_github_action_check_standard</span>()</span></code></pre></div>
+</div>
+<p>Dodaje ona kilka rzeczy. Po pierwsze sprawia ona, że po każdym naszym commicie GitHub wykonuje zestaw podstawowych testów zwanych R-CMD-check, o których więcej piszę w podrozdziale Sekcja&nbsp;8. W drugiej kolejności dodaje ona odznakę R-CMD-check do naszego pliku <code>README</code>, żebyśmy mogli błyszczeć przechodzeniem testów.</p>
+</section>
+</section>
+<section id="pliki-z-funkcjami" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Pliki z funkcjami</h1>
+<p>Przyszedł czas dodać jakieś rzeczywiste funkcje. Pisanie funkcji stanowiących część pakietu jest prawie identyczne jak pisanie zwyczajnych funkcji. Jak podam dalej, możemy chcieć postarać się bardziej i np. zabezpieczyć nasze funkcje przed błędami, ale znowu – nie musimy. Podstawowe pułapki przy pisaniu własnych funkcji w ogóle (nie tylko w pakietach) obejmują użeranie się z Tidy Eval, o którym piszę <a href="./posts/metaprogramowanie.qmd">tutaj</a>.</p>
+<p>Żeby dodać jakieś funkcje do swojego pakietu, używamy funkcji <code>usethis::use_r()</code><sup>6</sup>, gdzie jako argument podajemy nazwę pliku z funkcją. W większości przypadków będzie to nazwa samej funkcji, np. jeśli chcemy stworzyć funkcję do liczenia statystyk opisowych, moglibyśmy napisać <code>usethis::use_r("opisowe")</code>. Możemy też zawrzeć kilka funkcji w jednym pliku, ale powinny być to bardzo blisko związane funkcje. Na tyle blisko związane, żeby mogły dzielić jedną stronę w dokumentacji. Przykładem takich funkcji może być na przykład rodzina <code>devtools::install_*()</code> albo <code>usethis::use_*_license()</code>. Wszystkie funkcje z tych zestawów są prawie identyczne, więc mogą być zgromadzone w jednym pliku.</p>
+<p>Niezależnie jednak, czy robimy mały pakiecik do użytku własnego, czy może coś, co chcemy ostatecznie umieścić w CRAN, warto swoje funkcje udokumentować. Dokumentacja w R jest cudowna, łatwa w obsłudze i zawsze dostępna. Potraktuj swoją dokumentację jako ustrukturyzowane notatki, dzięki którym nie zapomnisz, na czym polegały Twoje funkcje i jak ich używać.</p>
+<section id="sec-cran-checks" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-cran-checks"><span class="header-section-number">6.1</span> Specyficzne wymogi CRAN i R-CMD-check</h2>
+<p>Załóżmy, że napisaliśmy już własną funkcję, która liczy podstawowy zestaw statystyk opisowych i zwraca je w ulubionej przez nas formie. Wykorzystam tutaj funkcję z <a href="./posts/metaprogramowanie.qmd">tekstu o metaprogramowaniu</a>. Definicję zapisuję w pliku <code>opisowe.R</code>, jaki wytworzyłem w poprzednim akapicie w folderze <code>R</code>.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>opisowe.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">opisowe <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(df, group, ...) {</span>
+<span id="cb10-2">  kolumny_do_policzenia <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">enquos</span>(...)</span>
+<span id="cb10-3"></span>
+<span id="cb10-4">  df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb10-5">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>({{ group }}) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb10-6">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(</span>
+<span id="cb10-7">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">across</span>(</span>
+<span id="cb10-8">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!!!</span>kolumny_do_policzenia),</span>
+<span id="cb10-9">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.fns =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb10-10">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">N =</span> \(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(x)),</span>
+<span id="cb10-11">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">M =</span> \(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>),</span>
+<span id="cb10-12">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SD =</span> \(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>),</span>
+<span id="cb10-13">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">A =</span> agricolae<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span>skewness,</span>
+<span id="cb10-14">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">K =</span> agricolae<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span>kurtosis,</span>
+<span id="cb10-15">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">NA</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> \(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(x))</span>
+<span id="cb10-16">        )</span>
+<span id="cb10-17">      )</span>
+<span id="cb10-18">    )</span>
+<span id="cb10-19">}</span></code></pre></div>
+</div>
+</div>
+<p>Ponieważ jest to pakiet, musimy trochę przepisać naszą funkcję, jeśli nie chcemy, żeby R-CMD-check później na nas krzyczał. Jeśli nas to nie obchodzi, możemy to pominąć, ale lepiej jest od razu nabierać dobrych nawyków. Takie dopasowywanie funkcji dotyczy zazwyczaj tylko kilku rzeczy, z których najważniejsza to globalne definicje obiektów. R musi wiedzieć dokładnie, czym są pokazywane mu obiekty, żeby się nie buntował, niezależnie od tego, czy tym obiektem jest funkcja, czy baza danych.</p>
+<ol type="1">
+<li><p>Funkcje powinny być zapisane w postaci pełnych nazw, czyli np. <code>dplyr::group_by()</code>. Pakiety, z których pochodzą te funkcje, powinny być dodane jako zależności (por. podrozdział 3.4). Jeśli użyliśmy <code>usethis::use_tidy_eval()</code> (por. podrozdział 3.4), to funkcje z pakietu <code>rlang</code> są ładowane z automatu i nie potrzebują pełnych nazw.</p></li>
+<li><p>Jeśli w funkcjach typu <code>mutate()</code> wykorzystujemy nazwy kolumn bez cudzysłowu, np. <code>mutate(iris, millimeters = Sepal.Length * 10)</code>, R-CMD-check będzie krzyczał, że <code>Sepal.Length</code> nie ma globalnej definicji. W takim wypadku używamy wyrażenia <code>.data</code> z <code>rlang</code> i piszemy <code>dplyr::mutate(iris, millimeters = .data$Sepal.Length * 10)</code>.</p></li>
+<li><p>Jeśli w funkcjach wybierających kolumny (przede wszystkim <code>select()</code>) piszemy nazwy kolumn, to podajemy je w cudzysłowie. Powód jest taki, jak wyżej, brak globalnej definicji, ale <code>.data</code> nie nadaje się do <code>tidyselect</code>. Dla przykładu zamiast <code>select(iris, Sepal.Width, Sepal.Length)</code> powinniśmy napisać <code>dplyr::select(iris, "Sepal.Width", "Sepal.Length")</code>.</p></li>
+<li><p>Na ogół lepiej używać natywnego potoku <code>|&gt;</code> niż <code>%&gt;%</code>. Jeśli chcemy używać potoku z <code>magrittr</code> używamy wcześniej <code>usethis::use_pipe()</code>. Natywny potok oszczędza nam dodatkowej zależności.</p></li>
+</ol>
+<p>Poprawiona funkcja mogłaby więc wyglądać tak:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>opisowe.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">opisowe <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(df, group, ...) {</span>
+<span id="cb11-2">  kolumny_do_policzenia <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">enquos</span>(...)</span>
+<span id="cb11-3"></span>
+<span id="cb11-4">  df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb11-5">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>({{ group }}) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb11-6">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(</span>
+<span id="cb11-7">      dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">across</span>(</span>
+<span id="cb11-8">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!!!</span>kolumny_do_policzenia),</span>
+<span id="cb11-9">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.fns =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb11-10">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">N =</span> \(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(x)),</span>
+<span id="cb11-11">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">M =</span> \(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>),</span>
+<span id="cb11-12">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SD =</span> \(x) stats<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>),</span>
+<span id="cb11-13">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">A =</span> agricolae<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span>skewness,</span>
+<span id="cb11-14">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">K =</span> agricolae<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span>kurtosis,</span>
+<span id="cb11-15">          <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">NA</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> \(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(x))</span>
+<span id="cb11-16">        )</span>
+<span id="cb11-17">      )</span>
+<span id="cb11-18">    )</span>
+<span id="cb11-19">}</span></code></pre></div>
+</div>
+</div>
+</section>
+<section id="dokumentowanie-z-roxygen2" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="dokumentowanie-z-roxygen2"><span class="header-section-number">6.2</span> Dokumentowanie z <code>roxygen2</code></h2>
+<p>Gdy mamy już naszą funkcję napisaną, przyszedł czas ją udokumentować. Niezależnie, czy robimy mały pakiecik do użytku własnego, czy może coś, co chcemy ostatecznie umieścić w CRAN, warto tego nie zaniedbywać. Dokumentacja w R jest cudowna, łatwa w obsłudze i zawsze dostępna. Potraktuj swoją dokumentację jako ustrukturyzowane notatki, dzięki którym nie zapomnisz, na czym polegały Twoje funkcje i jak ich używać. Tworzymy ją za pomocą specjalnego szkieletu obsługiwanego przez pakiet <code>roxygen2</code>. Możemy albo napisać taki szkielet od podstaw, albo wejść kursorem tesktowym do naszej funkcji i w RStudio z menu Code wybrać Insert Roxygen Skeleton (skrót klawiaturowy Ctrl+Alt+Shift+R). Taki szkielet szkieletu uzupełniamy ręcznie. Pokażmy to sobie na przykładzie.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>opisowe.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' Statystyki opisowe</span></span>
+<span id="cb12-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'</span></span>
+<span id="cb12-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' Funkcja licząca podstawowe statystyki opisowe: liczność, średnią, SD,</span></span>
+<span id="cb12-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' skośność, kurtozę i liczbę braków danych.</span></span>
+<span id="cb12-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'</span></span>
+<span id="cb12-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @param df ramka danych z kolumnami do policzenia.</span></span>
+<span id="cb12-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @param group kolumna do grupowania.</span></span>
+<span id="cb12-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @param ... nazwy kolumn, dla których mają być policzone statystyki.</span></span>
+<span id="cb12-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'</span></span>
+<span id="cb12-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @return ramka danych z kolumnami `N`, `M`, `SD`, `A`, `K` i `NA`. Oryginalne nazwy</span></span>
+<span id="cb12-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'     kolumn w formie przedrostka.</span></span>
+<span id="cb12-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @export</span></span>
+<span id="cb12-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'</span></span>
+<span id="cb12-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @examples</span></span>
+<span id="cb12-15"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' opisowe(iris, Species, Sepal.Width, Sepal.Length)</span></span></code></pre></div>
+</div>
+</div>
+<p>Pierwszym, co zwraca uwagę, jest fakt, że napisałem to po polsku. Owszem, można, ale jeśli chcemy udostępniać nasz kod na zewnątrz, lepiej dokumentować pakiet po angielsku.</p>
+<p>Ten podstawowy opis funkcji zawiera kilka rzeczy:</p>
+<ol type="1">
+<li><p>Na samej górze znajduje się tytuł funkcji, który lapidarnie ale konkretnie opisuje jej przeznaczenie.</p></li>
+<li><p>Dalej opis działania funkcji. Również powinien być krótki i konkretny. Jeśli potrzebujemy więcej niż jednego akapitu, musimy jawnie napisać <code>@description</code>. W innym wypadku wystarczy zejść linijkę poniżej tytułu, tak jak pokazałem w przykładzie.</p></li>
+<li><p>Następnie mamy trzy tagi <code>@param</code>, z których każdy opisuje kolejny argument, jaki funkcja przyjmuje. Warto tutaj opisać postać, w jakiej argument musi zostać podany, np. <em>logical</em> albo <em>dataframe</em>.</p></li>
+<li><p>Tag <code>@return</code> opisuje, co funkcja zwraca. W tym wypadku jest to opis stworzonej ramki danych ze statystykami opisowymi.</p></li>
+<li><p>Tag <code>@export</code> nie zawiera żadnych informacji. Umieszcza się go w tych funkcjach, do których użytkownik powinien mieć dostęp.</p></li>
+<li><p>Na samym końcu mamy <code>@examples</code>, czyli przykłady użycia funkcji. Przykłady są obowiązkowe i obowiązkowo muszą zadziałać. Jeśli jakiś przykład specjalnie zwraca błąd (możemy w końcu chcieć pokazać, jak naszej funkcji <em>nie</em> używać), należy go umieścić w klamrze <code>\dontrun{}</code>, np. <code>\dontrun{opisowe(iris)}</code>.</p></li>
+</ol>
+<p>Do wymienionych wyżej podstawowych tagów możemy dodać także m.in. sekcje <code>@details</code> czy <code>@seealso</code>. Poniżej przykład strony w dokumentacji generowanej przez podstawowe tagi.</p>
+<div class="light-mode">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/pakiety-w-R/dokumentacja.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Dokumentacja funkcji <code>opisowe()</code>.</figcaption>
+</figure>
+</div>
+</div>
+<div class="dark-mode">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/pakiety-w-R/dokumentacja_dark.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Dokumentacja funkcji <code>opisowe()</code>.</figcaption>
+</figure>
+</div>
+</div>
+<p>Żeby przerobić szkielety <code>roxygen2</code> na rzeczywiste pliki dokumentacji (czyli pliki .Rd w folderze .man), należy uruchomić komendę <code>devtools::document()</code>. Tutaj zaczynają się ujawniać komendy, których warto używać często, a już zwłaszcza przed wysłaniem aktualizacji na GitHuba. Zbieram je wszystkie na końcu, w podsumowaniu.</p>
+<p>W przykładzie widać teź, że mogę używać w swoich szkieletach formatowania markdown. Jest to jednak możliwe tylko, jeśli wcześniej użyłem <code>usethis::use_roxygen_md()</code>, o czym pisałem w podrozdziale 2.</p>
+</section>
+<section id="dokumentacja-całego-pakietu" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="dokumentacja-całego-pakietu"><span class="header-section-number">6.3</span> Dokumentacja całego pakietu</h2>
+<p>Możemy dodać ogólną stronę w dokumentacji dotyczącą naszego pakietu jako całości. Wykonuje się to w specjalnym pliku .R, który można dodać funkcją <code>usethis::use_package_doc()</code>. Jeśli jednak użyłeś(-aś) wcześniej funkcji <code>usethis::use_tidy_dependencies()</code>, to wymusiła ona na Tobie wytworzenie takiego pliku. Niezależnie od wybranej drogi, po uruchomieniu jednej z tych komend znajdziesz w folderze <code>R</code> plik o nazwie typu typu <code>packagename-package.R</code>, gdzie możesz napisać dokumentację pakietu standardowo, jak w każdym innym pliku .R.</p>
+</section>
+</section>
+<section id="sec-datafiles" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Załączanie danych</h1>
+<p>Czasami chcemy załączyć do naszego pakietu dane. Mogą być one wartością samą w sobie (jak np. w pakiecie <code>datasets</code>), mogą służyć do ilustracji działania reszty naszego pakietu. Niezależnie od celu, pliki z danymi trzeba załączać w odpowiedni sposób, a także je dokumentować.</p>
+<section id="surowe-dane-w-data-raw" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="surowe-dane-w-data-raw"><span class="header-section-number">7.1</span> Surowe dane w <code>data-raw</code></h2>
+<p>Na początku potrzebujemy surowego pliku z danymi, np. w formacie .csv. Wrzucamy go do folderu <code>data-raw</code>, który tworzymy w głównym folderze naszego pakietu. Następnie tworzymy skrypt czyszczący. Najłatwiej wytworzyć go funkcją <code>usethis::use_data_raw()</code>, która za pierwszy argument przyjmuje nazwę, którą chcemy naszej bazie danych nadać. Mogłoby to być coś w stylu <code>usethis::use_data_raw("iris")</code>. Spowoduje to wytworzenie w folderze <code>data-raw</code> skryptu <code>iris.R</code>, który w tym momencie powinien nam się otworzyć w RStudio. Zawiera on tylko komentarz i jedną komendę <code>usethis::use_data()</code>. Powyżej tej komendy piszemy skrypt, który ładuje i czyści nasze surowe dane do takiej formy, którą chcemy załączyć w pakiecie. Gotowe dane zapisujemy do zmiennej o wybranej wcześniej nazwie. I to wystarczy. Podczas instalacji naszego pakietu zostaną załadowane też dane. Dostęp do nich możemy uzyskać za pomocą komendy, która w pełnej wersji ma postać <code>data("diamonds", package = "ggplot2")</code>. Poniżej przykład gotowego skryptu ładującego.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>mtscr_creativity.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">mtscr_creativity <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> readr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_csv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"data-raw/study2.csv"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb13-2">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>response_nofill, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>item_nofill) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb13-3">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(</span>
+<span id="cb13-4">    item <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb13-5">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"belt"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"brick"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"broom"</span>,</span>
+<span id="cb13-6">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bucket"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"candle"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clock"</span>,</span>
+<span id="cb13-7">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"comb"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"knife"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lamp"</span>,</span>
+<span id="cb13-8">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"pencil"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"pillow"</span>,</span>
+<span id="cb13-9">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"purse"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sock"</span></span>
+<span id="cb13-10">    ),</span>
+<span id="cb13-11">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">any</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(SemDis_MEAN))</span>
+<span id="cb13-12">  )</span>
+<span id="cb13-13"></span>
+<span id="cb13-14">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_data</span>(mtscr_creativity, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">overwrite =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div>
+</div>
+</div>
+</section>
+<section id="dokumentacja-plików-z-danymi" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="dokumentacja-plików-z-danymi"><span class="header-section-number">7.2</span> Dokumentacja plików z danymi</h2>
+<p>Jeśli załączamy w naszym pakiecie dane, to je również powinniśmy udokumentować. Tworzymy w tym celu specjalny plik <code>data.R</code> w folderze <code>R</code>, w którym opisujemy wszystkie nasze pliki z danymi. Pod szkieletem <code>roxygen2</code> umieszczamy nazwę naszej bazy danych w cudzysłowie. Poniżej skrócony przykład.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>data.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' Creativity assessment through semantic distance dataset</span></span>
+<span id="cb14-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'</span></span>
+<span id="cb14-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' A dataset from Forthmann, Karwowski &amp; Beaty ([2023](https://doi.org/10.1037/aca0000571)) paper.</span></span>
+<span id="cb14-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' It contains a set of responses in Alternative Uses Task for different items with their</span></span>
+<span id="cb14-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' semantic distance assessment.</span></span>
+<span id="cb14-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'</span></span>
+<span id="cb14-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @return a [tibble][tibble::tibble-package]</span></span>
+<span id="cb14-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @format ## `mtscr_creativity`</span></span>
+<span id="cb14-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' A `tibble` with 4585 rows and 3 columns:</span></span>
+<span id="cb14-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' \describe{</span></span>
+<span id="cb14-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'   \item{id}{patricipants' unique identification number}</span></span>
+<span id="cb14-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'   \item{response}{response in AUT}</span></span>
+<span id="cb14-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'   \item{item}{item for which alternative uses were searched for}</span></span>
+<span id="cb14-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' }</span></span>
+<span id="cb14-15"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#'</span></span>
+<span id="cb14-16"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#' @source &lt;https://osf.io/7rgsp/&gt;</span></span>
+<span id="cb14-17"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mtscr_creativity"</span></span></code></pre></div>
+</div>
+</div>
+<p>Specyficzne tagi to <code>@format</code>, w którym opisujemy <strong>każdą kolumnę</strong> i <code>@source</code>, w którym podajemy źródło naszych danych. <code>\describe{}</code> to sposób na dodanie do dokumentacji listy.</p>
+</section>
+</section>
+<section id="sec-r-cmd-check" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> R-CMD-check</h1>
+<p>Jeśli piszemy pakiet, zazwyczaj chcemy, żeby działał. Nie mogę być pewny, ale to chyba rozsądne założenie. Zazwyczaj pierwszym krokiem jest ręczne sprawdzenie, czy wszystko działa, jak byśmy się tego spodziewali. Żeby uzyskać dostęp do swoich funkcji tu i teraz, używamy komendy <code>devtools::load_all()</code>.</p>
+<p>Zestaw podstawowych czynności w kierunku sprawdzenia, czy nie występują podstawowe problemy z naszym kodem, czy czegoś nie zepsuliśmy, nie dopilnowaliśmy, jest zautomatyzowany i nazywa się R-CMD-check. Muszą go przejść wszystkie pakiety obecne w CRAN. Jeśli wykonaliśmy instrukcję z podrozdziału 5.1, po każdym commicie wykona go również GitHub i wynik pokaże na odznace.</p>
+<p>Po pierwsze R-CMD-check sprawdzi, czy cały kod spełnia standardy, czyli czy wszystkie obiekty w kodzie mają globalne definicje (por. podrozdział 6.1), czy wszystkie przykłady wykonują się bez błędu, czy każda funkcja ma wszystkie niezbędne elementy dokumentacji, czy wszystkie używane pakiety zostały dodane jako zależności. Po drugie wykonane zostaną wszystkie testy, które opisuję w podrozdziale 10. Po trzecie, zostanie sprawdzona struktura repozytorium, czy nic się nie zepsuło, czy nie mamy jakichś plików, które nie powinny tam być. Do tego cała seria mniejszych lub większych rzeczy, które R może nam wytknąć jako błędy, ostrzeżenia lub informacje. Warto informacje wypluwane przez R-CMD-check przeczytać, bo są bardzo konkretne. Błędów być nie może, ostrzeżeń lepiej, żeby nie było, rzeczy wytykane w informacjach poprawiamy, kiedy mamy czas (albo gdy chcemy wysłać pakiet do CRAN).</p>
+<p>Żeby wykonać R-CMD-check używamy komendy <code>devtools::check()</code>. Ta komenda na wstępie odnowi nam doumentację, więc jeśli jej używamy, to nie musimy już korzystać z <code>devtools::document()</code>. Informacje o przeprowadzanych testach wyświetlają się na bieżąco, ale jeśli pojawią się jakieś uchybienia, zostaną one zbiorczo wyświetlone na koniec. Komendę <code>devtools::check()</code> dobrze jest wykonać przed każdym wypchnięciem do GitHuba, żeby nie zdziwił nas wynik wykonany już w repozytorium.</p>
+</section>
+<section id="sprawdzanie-wejścia-i-informacje-o-błędach" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Sprawdzanie wejścia i informacje o błędach</h1>
+<p>Ten podrozdział i wszystkie kolejne, <strong>nie są niezbędne</strong>, żeby pakiet działał i był użyteczny. Są to rzeczy, które warto wiedzieć, ale przydadzą się przede wszystkim w pakietach dużych i/lub udostępnianych szerokiej publiczności. Małe pakiety albo użytkowane w wąskim gronie zazwyczaj nie potrzebują szerokiej kontroli wejścia czy złożonych informacji o błędach. Jedyne, nad czym bym się zastanowił, czy nie wprowadzać od początku, to testy z podrozdziału 10.</p>
+<p>Dobre komendy są odporne, w tym znaczeniu, że zabezpieczają użytkownika przed nieprawidłowym wykorzystaniem. Debiloodporne, chciałoby się powiedzieć. Jeśli osoba popełnia błąd, na przykład podaje wektor zamiast ramki danych albo wskazuje kolumny, których nie ma, powinna dostać konkretną informację zwrotną (tj. błąd). Jeśli nie zabezpieczymy naszej funkcji przed nieprawidłowym wykorzystaniem, użytkownik dostanie informacje o błędach z funkcji, z których zbudowaliśmy naszą funkcję. Innymi słowy jeśli na przykład wykorzystujemy komendę <code>select()</code> i użytkownik pod kolumnę, która nie istnieje, zobaczy błąd wygenerowany w kolumnie <code>select()</code>. Czasem to dobrze, czasem to źle. Jeśli wykonujemy jakieś skomplikowane przekształcenia w naszej funkcji i gdzieś w środku wypłynie błąd, informacja o błędzie może po prostu nijak nie podpowiadać, co mogło ten błąd spowodować. Czasem jednak te informacje będą wystarczająco jasne, by nie musieć tworzyć ich samodzielnie.</p>
+<p>Ogólnie dobrze jest zabezpieczać swoje funkcje, ale znowu – to <strong>nie jest konieczne, żeby pakiet działał</strong>. To będziemy robić, jak będziemy mieli czas albo poważnie będziemy chcieli ulepszyć nasz pakiet do użytku innych. My zazwyczaj znamy nasze funkcje bardzo dobrze, więc zazwyczaj będziemy je poprawnie wykorzystywać.</p>
+<p>Zazwyczaj to zabezpieczenie dotyczy sprawdzania wejścia, czyli czy to, co użytkownik podał, spełnia wymogi naszej funkcji. Zazwyczaj robi się to na samym początku, dość prosto, bo za pomocą połączenia <code>if</code> i <code>stop()</code>. My tutaj jednak wykorzystamy ładniejsze informacje o błędach, które wdraża pakiet <code>cli</code> w połączeniu z <code>glue</code>. Oba te pakiety dodaliśmy już do zależności, jeśli wykorzystaliśmy <code>usethis::use_tidy_dependencies()</code>. Rodzina funkcji, które nam się tu przydadzą, to <code>cli::cli_abort()</code>, <code>cli::cli_warn()</code> lub <code>cli::cli_inform()</code>.</p>
+<section id="typ-argumentu" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="typ-argumentu"><span class="header-section-number">9.1</span> Typ argumentu</h2>
+<p>Zazwyczaj najpierw sprawdzamy, czy obiekt podany przez użytkownika jako argument ma odpowiedni typ. Na przykład jeśli naszym pierwszym argumentem jest ramka danych <code>df</code>, możemy chcieć upewnić się, czy to rzeczywiście jest ramka danych.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1">winda_do_nieba <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># coś, co nie jest ramką danych</span></span>
+<span id="cb15-2"></span>
+<span id="cb15-3">input_check <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(df) {</span>
+<span id="cb15-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.data.frame</span>(df)) {</span>
+<span id="cb15-5">        cli<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_abort</span>(</span>
+<span id="cb15-6">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb15-7">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"{.arg df} must be a data frame."</span>,</span>
+<span id="cb15-8">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"x"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Provided {.arg df} is {.obj_type_friendly {df}}"</span></span>
+<span id="cb15-9">            )</span>
+<span id="cb15-10">        )</span>
+<span id="cb15-11">    }</span>
+<span id="cb15-12">}</span>
+<span id="cb15-13"></span>
+<span id="cb15-14"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">input_check</span>(winda_do_nieba)</span></code></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `input_check()`:
+! `df` must be a data frame.
+✖ Provided `df` is a number</code></pre>
+</div>
+</div>
+<p>Klamra <code>if</code> sprawdza, czy <code>df</code> <em>nie jest</em> ramką danych (zwróćmy uwagę na wykrzyknik <code>!</code>). Jeśli nie jest, uruchamiana jest funkcja <code>cli_abort()</code>. Zatrzymuje ona wykonywanie kodu i pokazuje w konsoli błąd w estetycznej formie.</p>
+<p>Jak używać tej funkcji? Ma ona całkiem sporo możliwości. Najprostszą rzeczą, którą może przyjąć, jest sam komunikat z błędem. Może to być zwykły tekst. Mamy też dodatkowe możliwości formatowania, o których jednak później. Komunikat jest opatrzony ikonką, która zależy od tego, czy chcemy wyrzucić błąd, ostrzeżenie czy informację.</p>
+</section>
+<section id="punktory" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="punktory"><span class="header-section-number">9.2</span> Punktory</h2>
+<p>Możemy jednak dokładać kolejne komunikaty i kolejne ikonki. W takim wypadku do funkcji <code>cli_abort()</code> wrzucamy wektor komunikatów. Pierwszy komunikat jest nienazwany, zaś w kolejnych wprost wskazujemy, jakie chcemy punktory. Cała lista dostępna jest w <a href="https://cli.r-lib.org/reference/cli_bullets.html">dokumentacji <code>cli::cli_bullet()</code></a>. Dostępne w chwili, gdy to piszę, pokazuję niżej.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">cli<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_bullets</span>(</span>
+<span id="cb17-2">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb17-3">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bez wcięcia"</span>,</span>
+<span id="cb17-4">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" "</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"wcięcie"</span>,</span>
+<span id="cb17-5">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"*"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"punktor"</span>,</span>
+<span id="cb17-6">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"&gt;"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"strzałka"</span>,</span>
+<span id="cb17-7">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"v"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sukces"</span>,</span>
+<span id="cb17-8">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"x"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"zagrożenie"</span>,</span>
+<span id="cb17-9">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"!"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ostrzeżenie"</span>,</span>
+<span id="cb17-10">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"i"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"informacja"</span></span>
+<span id="cb17-11">    )</span>
+<span id="cb17-12">)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>bez wcięcia</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  wcięcie</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>• punktor</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>→ strzałka</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ sukces</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✖ zagrożenie</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>! ostrzeżenie</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ informacja</code></pre>
+</div>
+</div>
+</section>
+<section id="formatowanie-z-glue" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="formatowanie-z-glue"><span class="header-section-number">9.3</span> Formatowanie z <code>glue</code></h2>
+<p>Poza punktorami możemy dodatkowo formatować tekst korzystając ze składni dostarczanej przez <code>glue</code>. <code>cli</code> obsługuje ją automatycznie. Wszystkie szczegóły oraz jak to wygląda rzeczywiście w konsoli znajdziemy na <a href="https://cli.r-lib.org/reference/inline-markup.html">tej</a> stronie dokumentacji. Ja omówię tutaj same podstawy. Jeśli chodzi o to, jak formatować, jak to powinno wyglądać, osobiście często sprawdzam w <code>tidyverse</code>. Próbuję&nbsp;wywołać podobny błąd np. w funkcji <code>dplyr::select()</code> i patrzę, co mi wyskakuje. Traktuję to jako wzorzec, podpowiedź.</p>
+<p>Tekst, który chcemy sformatować, bierzemy w nawiasy klamrowe. W nawiasie zaczynamy od określenia, w jaki sposób chcemy dany tekst sformatować. Poniżej lista możliwych formatów.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_li</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Tekst {.emph kursywą}."</span>)</span>
+<span id="cb26-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_li</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"{.strong Pogrubiony} tekst."</span>)</span>
+<span id="cb26-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_li</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Fragment kodu: {.code sum(a) / length(a)}."</span>)</span>
+<span id="cb26-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_li</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Nazwa pakietu: {.pkg cli}."</span>)</span>
+<span id="cb26-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_li</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Nazwa funkcji: {.fn cli_text}."</span>)</span>
+<span id="cb26-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_li</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Klawisz: wciśnij {.kbd spację}."</span>)</span>
+<span id="cb26-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_li</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Nazwa lub ścieżka pliku: {.file /usr/bin/env}."</span>)</span>
+<span id="cb26-8"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_li</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Adres mailowy: {.email marylala@marylarodowicz.pl}."</span>)</span>
+<span id="cb26-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_li</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Adres WWW: {.url https://example.com}."</span>)</span>
+<span id="cb26-10"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_li</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Zmienna środowiskowa: {.envvar R_LIBS}."</span>)</span>
+<span id="cb26-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_li</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Typ obiektu: `mtcars` is {.obj_type_friendly {mtcars}}"</span>)</span></code></pre></div>
+</div>
+<p>Jeśli chcemy, możemy wykonywać też operacje w nawiasach klamrowych. Zazwyczaj będziemy wtedy zagnieżdżać jedne nawiasy w drugich. Najlepiej pokazać to na przykładzie.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_warn</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Złamano {.strong {sum(365, 248)}} postanowień. Ostrzegam cię."</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Złamano 613 postanowień. Ostrzegam cię.</code></pre>
+</div>
+</div>
+<p>Wewnątrz klamry z pogrubieniem dołożyłem drugą klamrę, w której umieściłem funkcję sumującą. Umieszczenie funkcji w klamrze sprawiło, że w ostrzeżeniu pojawia nam się wynik, 613, a nie tekst <code>sum(365, 248)</code>. Nie jest to zbyt użytkowy przykład, ale dobrze jest wiedzieć, że tak się da. W kolejnym przykładzie zobaczymy, jak można tego użyć do dostosowywania informacji zwrotnych pod użytkownika.</p>
+</section>
+<section id="obecność-kolumn-w-bazie" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="obecność-kolumn-w-bazie"><span class="header-section-number">9.4</span> Obecność kolumn w bazie</h2>
+<p>Poza sprawdzeniem typu argumentu, możemy chcieć się upewnić, że kolumny wskazane przez użytkownika rzeczywiście są obecne w bazie. Pomocna będzie tutaj funkcja <code>rlang::has_name()</code>, która dokładnie to sprawdza. Jeśli obiekt istnieje, <code>has_name()</code> wyrzuca <code>TRUE</code>, a jeśli nie, wyrzuca <code>FALSE</code>. Niestety <code>has_name()</code> wymaga nazwy kolumny w postaci string, dlatego musimy pobawić się trochę z Tidy Eval. Jeśli nie wiesz, jak to robić, odsyłam do <a href="./posts/metaprogramowanie.qmd">tego</a> tekstu.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1">col_check <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(df, id_column) {</span>
+<span id="cb29-2">    id_column <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">enquo</span>(id_column)</span>
+<span id="cb29-3"></span>
+<span id="cb29-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span>rlang<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">has_name</span>(df, rlang<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as_name</span>(id_column))) {</span>
+<span id="cb29-5">        cli<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_abort</span>(</span>
+<span id="cb29-6">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb29-7">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"All columns must exist in the data."</span>,</span>
+<span id="cb29-8">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"x"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Column {.var {rlang::as_name(id_column)}} does not exist."</span>,</span>
+<span id="cb29-9">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"i"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Check the spelling."</span></span>
+<span id="cb29-10">            )</span>
+<span id="cb29-11">        )</span>
+<span id="cb29-12">    }</span>
+<span id="cb29-13">}</span>
+<span id="cb29-14"></span>
+<span id="cb29-15"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">col_check</span>(iris, Sepal.Density)</span></code></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `col_check()`:
+! All columns must exist in the data.
+✖ Column `Sepal.Density` does not exist.
+ℹ Check the spelling.</code></pre>
+</div>
+</div>
+<p>W powyższym przykładzie widzimy też, do czego może nam się&nbsp;przydać zagnieżdżanie nawiasów klamrowych. Tutaj wykorzystuję je do zawarcia nazwy nieistniejącej kolumny w komunikacie o błędzie.</p>
+</section>
+</section>
+<section id="sec-tests" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Testy z <code>testthat</code></h1>
+<p>Testy automatyczne to bardzo szeroki temat. Idea, która za nimi stoi, jest mniej więcej taka – jest wiele rzeczy, które mogą pójść źle, które można zepsuć. Nikomu się nie chce po każdych zmianach w kodzie sprawdzać, czy jakiś drobny aspekt przez te zmiany nie ucierpiał. W tym celu piszemy specjalne skrypty, które za nas sprawdzą, czy wszystko działa tak, jak powinno. W R testy piszemy z użyciem pakietu <code>testthat</code>. By móc z niego korzystać, uruchamiamy w naszym repozytorium komendę <code>usethat::use_testthat()</code>.</p>
+<section id="struktura-testów" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="struktura-testów"><span class="header-section-number">10.1</span> Struktura testów</h2>
+<p>Wszystkie testy znajdują się w folderze <code>tests</code>, w podfolderze <code>testthat</code>. Możemy je wytwarzać ręcznie, ale zazwyczaj będziemy wykorzystywać komendę <code>usethis::use_test()</code>. W domyśle jeden plik z funkcjami powinien mieć odpowiadający mu plik z testami. W RStudio komenda <code>usethis::use_test()</code> nie potrzebuje żadnych argumentów – domyślnie tworzy plik z testami dla aktualnie otwartego skryptu.</p>
+<p>Nowo utworzony plik zawiera przykładowy test, który możemy spokojnie usunąć. Żeby napisać własny test wykorzystamy przede wszystkim komendę <code>test_that()</code> oraz komendy z rodziny <code>expect_*()</code>. Komenda <code>test_that()</code> przyjmuje dwie rzeczy – opis, co test robi (jako string) oraz komendy składające się na test zapisane w nawiasach klamrowych. Warto zauważyć, że nie musimy pisać <code>testthat::test_that()</code>. Cały pakiet jest dostępny od chwili użycia <code>usethat::use_testthat()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">test_that</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Jakiś element działa jak należy"</span>, {</span>
+<span id="cb31-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Tutaj komendy składające się&nbsp;na test</span></span>
+<span id="cb31-3">})</span></code></pre></div>
+</div>
+<p>W nawiasach klamrowych możemy zapomnieć, że jesteśmy wewnątrz funkcji i pisać kod normalnie. Możemy na przykład tworzyć przykładowe zbiory danych, na których będziemy wykonywać testy. Najważniejsze są jednak funkcje z rodziny <code>expect_*()</code>, za pomocą których mówimy, czego oczekujemy od danej funkcji. Rodzina ta jest szeroka, bo i funkcje do testowania są bardzo różne. W ramach jednej funkcji <code>test_that()</code> możemy użyć kilku tego typu komend, ale staramy się utrzymać porządek, żeby każda funkcja <code>test_that()</code> testowała coś konkretnego. Poniżej wymieniam kilka najważniejszych funkcji <code>expect_*()</code>, a bardziej rozszerzoną ich listę można znaleźć <a href="https://testthat.r-lib.org/reference/">tutaj</a>.</p>
+<ol type="1">
+<li><p><code>expect_identical()</code> i <code>expect_equal()</code> – czy zadane wartości są takie same? Można ustawić tolerancję błędu.</p></li>
+<li><p><code>expect_length()</code> – czy obiekt ma określoną długość?</p></li>
+<li><p><code>expect_names()</code> – czy nazwy kolumn (wartości) są takie, jakie mają być? Pozwala zignorować kolejność i wielkość liter.</p></li>
+<li><p><code>expect_match()</code> – czy w wektorze tekstowym jest tekst odpowiadający <a href="./posts/regex.qmd">wyrażeniu regularnemu</a>?</p></li>
+<li><p><code>expect_type()</code> – czy obiekt jest określonego typu?</p></li>
+<li><p><code>expect_error()</code>, <code>expect_warning()</code> i <code>expect_message()</code> – jak nazwa wskazuje; czy dany kod generuje błąd/ostrzeżenie/informację? Pozwala też sprawdzać treść komunikatów za pomocą <a href="./posts/regex.qmd">wyrażeń regularnych</a>.</p></li>
+<li><p><code>expect_true()</code> i <code>expect_false()</code> – najbardziej uniwersalne funkcje sprawdzające. Jednocześnie lepiej zastąpić je innymi, jeśli jest możliwość, żeby wyniki testów były bardziej czytelne.</p></li>
+</ol>
+</section>
+<section id="przykładowe-testy" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="przykładowe-testy"><span class="header-section-number">10.2</span> Przykładowe testy</h2>
+<p>Załóżmy, że chcemy napisać testy do naszej funkcji <code>opisowe()</code>. Przypomnijmy jej definicję.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>opisowe.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1">opisowe <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(df, group, ...) {</span>
+<span id="cb32-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># check if df is a dataframe</span></span>
+<span id="cb32-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.data.frame</span>(df)) {</span>
+<span id="cb32-4">        cli<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_abort</span>(</span>
+<span id="cb32-5">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb32-6">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"{.arg df} must be a data frame."</span>,</span>
+<span id="cb32-7">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"x"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Provided {.arg df} is {.obj_type_friendly {df}}"</span></span>
+<span id="cb32-8">            )</span>
+<span id="cb32-9">        )</span>
+<span id="cb32-10">    }</span>
+<span id="cb32-11"></span>
+<span id="cb32-12">    kolumny_do_policzenia <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">enquos</span>(...)</span>
+<span id="cb32-13"></span>
+<span id="cb32-14">    df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb32-15">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>({{ group }}) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb32-16">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(</span>
+<span id="cb32-17">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">across</span>(</span>
+<span id="cb32-18">                <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!!!</span>kolumny_do_policzenia),</span>
+<span id="cb32-19">                <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.fns =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb32-20">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">N =</span> \(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(x)),</span>
+<span id="cb32-21">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">M =</span> \(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>),</span>
+<span id="cb32-22">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SD =</span> \(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>),</span>
+<span id="cb32-23">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">A =</span> agricolae<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span>skewness,</span>
+<span id="cb32-24">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">K =</span> agricolae<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span>kurtosis,</span>
+<span id="cb32-25">                    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">NA</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> \(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(x))</span>
+<span id="cb32-26">                )</span>
+<span id="cb32-27">            )</span>
+<span id="cb32-28">        )</span>
+<span id="cb32-29">}</span></code></pre></div>
+</div>
+</div>
+<p>Dorzuciłem tutaj sprawdzenie, czy <code>df</code> jest ramką danych. Jakie testy moglibyśmy napisać dla tej funkcji? Poniżej kilka przykładów.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>test-opisowe.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># create a test data frame with normally distributed data</span></span>
+<span id="cb33-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">123</span>)</span>
+<span id="cb33-3">df <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(</span>
+<span id="cb33-4">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">group =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"B"</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">each =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>),</span>
+<span id="cb33-5">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>),</span>
+<span id="cb33-6">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb33-7">)</span>
+<span id="cb33-8"></span>
+<span id="cb33-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># test if function returns a data frame</span></span>
+<span id="cb33-10"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">test_that</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"opisowe returns a data frame"</span>, {</span>
+<span id="cb33-11">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_s3_class</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">opisowe</span>(df, group, x, y), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"data.frame"</span>)</span>
+<span id="cb33-12">})</span>
+<span id="cb33-13"></span>
+<span id="cb33-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># test if function calculates summary statistics correctly</span></span>
+<span id="cb33-15"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">test_that</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"opisowe calculates summary statistics correctly"</span>, {</span>
+<span id="cb33-16">    result <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">opisowe</span>(df, group, x, y)</span>
+<span id="cb33-17">    <span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## N</span></span>
+<span id="cb33-18">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_equal</span>(result<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>group, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"B"</span>))</span>
+<span id="cb33-19">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_equal</span>(result<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>x_N, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>))</span>
+<span id="cb33-20">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_equal</span>(result<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>y_N, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>))</span>
+<span id="cb33-21">    <span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## M</span></span>
+<span id="cb33-22">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_equal</span>(result<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>x_M, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.0344</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1464</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tolerance =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.001</span>)</span>
+<span id="cb33-23">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_equal</span>(result<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>y_M, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4.4921</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5.0776</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tolerance =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.001</span>)</span>
+<span id="cb33-24">    <span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## SD</span></span>
+<span id="cb33-25">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_equal</span>(result<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>x_SD, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9258</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9054</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tolerance =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.001</span>)</span>
+<span id="cb33-26">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_equal</span>(result<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>y_SD, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.9786</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.8619</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tolerance =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.001</span>)</span>
+<span id="cb33-27">    <span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## A</span></span>
+<span id="cb33-28">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_equal</span>(result<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>x_A, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1729</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.0462</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tolerance =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.001</span>)</span>
+<span id="cb33-29">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_equal</span>(result<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>y_A, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.4376</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0372</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tolerance =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.001</span>)</span>
+<span id="cb33-30">    <span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## K</span></span>
+<span id="cb33-31">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_equal</span>(result<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>x_K, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3366</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3234</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tolerance =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.001</span>)</span>
+<span id="cb33-32">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_equal</span>(result<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>y_K, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1718</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.8702</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tolerance =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.001</span>)</span>
+<span id="cb33-33">    <span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## NA</span></span>
+<span id="cb33-34">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_equal</span>(result<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>x_NA, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))</span>
+<span id="cb33-35">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_equal</span>(result<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>y_NA, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))</span>
+<span id="cb33-36">})</span>
+<span id="cb33-37"></span>
+<span id="cb33-38"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># test if function throws an error when df is not a data frame</span></span>
+<span id="cb33-39"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">test_that</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"opisowe throws an error when df is not a data frame"</span>, {</span>
+<span id="cb33-40">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expect_error</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">opisowe</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(), group, x, y))</span>
+<span id="cb33-41">})</span></code></pre></div>
+</div>
+</div>
+<p>Po pierwsze stworzyłem tutaj bazę&nbsp;danych, na której będziemy liczyć. Po drugie stworzyłem trzy zestawy testów. Pierwszy sprawdza, czy wynik to ramka danych. Drugi sprawdza, czy statystyki wyglądają, jak mają wyglądać, z dokładnością do 3. miejsca po przecinku. Ostatni sprawdza, czy funkcja wyrzuca błąd, gdy <code>df</code> będzie czymś innym, niż baza danych.</p>
+<p>Gdy taki plik zapiszemy, testy są już uzbrojone. Możemy je wykonać używając komendy <code>devtools::test_active_file()</code>. Wszystkie testy zostaną też wykonane podczas <code>devtools::check()</code>.</p>
+</section>
+<section id="co-i-jak-testować" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="co-i-jak-testować"><span class="header-section-number">10.3</span> Co i jak testować?</h2>
+<p>Hot take, którego nie ma jeszcze w podręcznikach – sztuczna inteligencja jest świetna w pisaniu testów. Nie ma się&nbsp;co oszukiwać, pisanie testów jest upierdliwe, ale na szczęście Chat GPT może to sprawnie zrobić za nas. Od Chatu GPT lepszy jest GitHub Copilot X, do którego dostęp studenci i pracownicy naukowi mają <a href="https://education.github.com/discount">za darmo</a>. Czasami tylko testy generowane przez AI wykorzystują wycofane już komendy, np. <code>expect_is()</code> zamiast <code>expect_type()</code>.</p>
+<p>Testy jest dobrze pisać, bo czasem możemy przegapić, że coś zepsuliśmy. Jeśli zabezpieczyliśmy się testami, <code>devtools::check()</code> nakrzyczy na nas, że coś zepsuliśmy. Nakrzyczy na nas też, jeśli nie wyjdą przykłady, ale przykład musi tylko zadziałać, a test może wymagać <em>konkretnego</em> wyjścia. Bez testów nie wykryjemy, że przykład zwraca bzdurę, bo jeśli zwraca cokolwiek, to R-CMD-check to wystarczy.</p>
+<p>Sztuka polega na tym, żeby pisać testy tak, żeby nie trzeba było ich zmieniać za każdym jednym razem, jak będziemy coś zmieniać w funkcji. Zbyt duże struktury testów mogą sprawić, że kod będzie bardzo trudny do utrzymania. Małe poprawki mogą wymusić na nas każdorazowo szerokie zmiany w testach. Trzeba więc znaleźć jakiś punkt pośredni i nie dać się zwariować. Testy mają nam <strong>oszczędzić pracy, a nie dołożyć</strong>.</p>
+</section>
+</section>
+<section id="code-coverage-z-codecov" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> <em>Code coverage</em> z <code>codecov</code></h1>
+<p>Z testami wiąże się&nbsp;pojęcie <em>code coverage</em>. Jest to wskaźnik, który mówi o tym, jaki procent kodu jest sprawdzany w testach. Nie oznacza to, czy sprawdziliśmy wszystkie sytuacje, w których w kodzie może zadziać się coś źle, ale czy każda linia kodu została wykonana w testach chociaż raz. A więc, czy na bardzo podstawowym poziomie działa, czyli czy wykonuje się bez błędu.</p>
+<section id="sprawdzanie-code-coverage" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="sprawdzanie-code-coverage"><span class="header-section-number">11.1</span> Sprawdzanie <em>code coverage</em></h2>
+<p><em>Code coverage</em> możemy bardzo łatwo sprawdzić zarówno dla pojedynczego pliku, jak i dla całego pakietu. Robią to odpowiednio funkcje <code>devtools::test_coverage_active_file()</code> i <code>devtools::test_coverage()</code>. Raport z takiego sprawdzenia zawiera ogólny <em>code coverage</em>, także w podziale na pliki oraz informację, jakie konkretne linijki zostały, a jakie nie zostały przetestowane.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/pakiety-w-R/covr.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Wynik <code>devtools::test_coverage()</code>.</figcaption>
+</figure>
+</div>
+</section>
+<section id="automatyczne-raportowanie" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="automatyczne-raportowanie"><span class="header-section-number">11.2</span> Automatyczne raportowanie</h2>
+<p>Istnieje cała seria narzędzi do automatycznego raportowania <em>code coverage</em>. Bardzo często repozytoria chwalą się wielkością tego wskaźnika na odznakach. Jeśli pakiet jest dobrze testowany, to może znaczyć, że jest porządnie zrobiony albo chociaż z należytą dbałością.</p>
+<p>Narzędziem, które tutaj omówię i które ma dobrą integrację z R, jest Codecov. Żeby podłączyć swoje repozytorium do Codecov musimy założyć odpowiednie konto i uruchomić dwie komendy. Jeśli chodzi o konto, wchodzimy na <a href="https://codecov.io/">codecov.io</a>, zakładamy konto i upoważniamy Codecov do dostępu do naszego konta GitHub. Naszym oczom powinna ukazać się lista wszystkich naszych repozytorów, do której wkrótce wrócimy. Komendy natomiast wymieniam niżej.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_coverage</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"codecov"</span>)</span>
+<span id="cb34-2">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_github_action</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"test-coverage"</span>)</span></code></pre></div>
+</div>
+<p>Przygotuje to nasze repozytorium, ale nie w sposób idealny. W momencie, w którym to piszę, trzeba wprowadzić serię poprawek i dodatkowych czynności, żeby wszystko szło, jak powinno.</p>
+<ol type="1">
+<li><p>Na stronie <a href="https://codecov.io/">codecov.io</a> wchodzimy w nasze repozytorium i kopiujemy token, który się tam wyświetla. Musimy go wskazać w naszym repozytorium jako sekret. Robimy to w ustawieniach repozytorium, ale szczęśliwie Codecov podpowiada nam link bezpośrednio do ustawień. Nazwa sekretu to <code>CODECOV_TOKEN</code>, a jego wartość to sam ten kod, który skopiowaliśmy.</p></li>
+<li><p>Jeśli chcemy, możemy upoważnić <a href="https://github.com/apps/codecov">apkę Codecov na GitHubie</a>. Zamieszcza ona automatyczne raporty o <em>code coverage</em> przy pull requestach.</p></li>
+<li><p>Plik <code>.github/workflows/test-coverage.yaml</code> modyfikujemy w taki sposób, żeby góra tego pliku wyglądała tak, jak niżej. Nie usuwamy innych zmiennych środowiskowych, tylko dopisujemy <code>CODECOV_TOKEN</code>.</p></li>
+</ol>
+<pre><code>jobs:
+  test-coverage:
+    runs-on: ubuntu-latest
+    env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}</code></pre>
+<ol start="4" type="1">
+<li>Jeśli repozytorium jest prywatne, na końcu zmieniamy naszą formułę tak, żeby wyglądała jak niżej.</li>
+</ol>
+<pre><code>- name: Upload coverage reports to Codecov
+  uses: codecov/codecov-action@v3
+  with:
+    token: ${{ secrets.CODECOV_TOKEN }}</code></pre>
+<ol start="5" type="1">
+<li>Odznaka dodawana przez <code>usethis</code> nie działa. Na <a href="https://codecov.io/">codecov.io</a>, po wejściu w nasze repozytorium (już po jego uruchomieniu), w ustawieniach, w sekcji „Badges &amp; Graphs” znajdziemy poprawny link, którym zastępujemy ten dodany przez <code>usethis</code> w <code>README.Rmd</code>.</li>
+</ol>
+<p>Zestaw określony wyżej może się dość szybko zdezaktualizować, dotarłem do niego na zasadzie prób i błędów. Najbardziej newralgiczne są punkty 3. i 4., które mają za zadanie dać Codecov znać, jaki jest token, który dodaliśmy wcześniej do sekretów repozytorium. Po wykonaniu tych czynności raporty <em>code coverage</em> staną się jawne, będziemy mogli się nimi chwalić na głównej stronie naszego repozytorium, a także będą wykonywane automatycznie przez GitHub za każdym razem, gdy wypchniemy nowy commit.</p>
+</section>
+</section>
+<section id="bonus-załączanie-apki-w-shiny" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Bonus: załączanie apki w Shiny</h1>
+<p>Nie wiem, ile osób będzie tego potrzebować, ale że ciężko mi było to znaleźć, to się podzielę. Jak załączyć do naszego pakietu apkę napisaną w Shiny? Miałem ten problem, gdy chciałem dołączyć GUI do pakietu <code>mtscr</code>, które napisałem właśnie w Shiny.</p>
+<ol type="1">
+<li><p>W folderze <code>inst</code> tworzymy podfolder o wybranej przez nas nazwie. Jako przykład wybiorę podfolder <code>GUI</code>.</p></li>
+<li><p>Do podfolderu wrzucamy naszą apkę w Shiny, ale główny plik koniecznie nazywamy <code>app.R</code>.</p></li>
+<li><p>W głównym pakiecie tworzymy funkcję uruchamiającą. Przykład niżej. Zamiast <code>"GUI"</code> piszemy nazwę naszego podfolderu, a zamiast <code>"mtscr"</code> nazwę naszego pakietu. Przykładowa funkcja sprawdza tylko, czy apka znajduje się tam, gdzie powinna. Funkcja <code>system.file</code> zwraca ścieżkę do pakietu, a w tym wypadku do konretnego komponentu tego pakietu – apki w Shiny.</p></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>mtscr_app.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1">mtscr_app <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>() {</span>
+<span id="cb37-2">    app_dir <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">system.file</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"GUI"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">package =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mtscr"</span>)</span>
+<span id="cb37-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (app_dir <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>) {</span>
+<span id="cb37-4">        cli<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_abort</span>(</span>
+<span id="cb37-5">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb37-6">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"The app not found."</span>,</span>
+<span id="cb37-7">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"i"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Try reinstalling the {.pkg mtscr} package with {.run devtools::intall_github(</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\"</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">jakub-jedrusiak/mtscr</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\"</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">)"</span></span>
+<span id="cb37-8">            )</span>
+<span id="cb37-9">        )</span>
+<span id="cb37-10">    }</span>
+<span id="cb37-11">    shiny<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">runApp</span>(app_dir, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">display.mode =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"normal"</span>)</span>
+<span id="cb37-12">}</span></code></pre></div>
+</div>
+</div>
+<p>Użytkownik może teraz bez problemu uruchomić naszą apkę w Shiny poprzez funkcję uruchamiającą. Warto też pomyśleć, czy nie zrobić z niej dodatku do RStudio. Możemy to zrobić tworząc plik <code>inst/rstudio/addins.dcf</code> i dopisując do niego coś w tym rodzaju.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>addins.dcf</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1">Name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> MTSCR GUI</span>
+<span id="cb38-2">Description<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> Runs MTSCR GUI app.</span>
+<span id="cb38-3">Binding<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> mtscr_gui <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># funkcja uruchamiająca</span></span>
+<span id="cb38-4">Interactive<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> true <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dla Shiny dajemy true</span></span></code></pre></div>
+</div>
+</div>
+<p>Od tego momentu <code>MTSCR GUI</code> będzie dostępne w menu <em>addins</em> w RStudio.</p>
+</section>
+<section id="podsumowanie" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Podsumowanie</h1>
+<p>Docieramy wreszcie do końca tego przydługiego tekstu. Jak zwykle, tylko liznęliśmy temat po powierzchni, ale mam nadzieję, że było to wystarczające liźnięcie, żeby poczuć smak budowania pakietów. Przede wszystkim liczę na to, że wystarczy to, by móc dalej samodzielnie zdobywać wiedzę w już konkretnych zakresach. Podstawowe źródła to, jak zwykle, dokumentacja i książka Hadleya Wickhama. Tym razem tą książką jest <a href="https://r-pkgs.org/">R Packages</a> i jest tam większość tego, co można znaleźć w tym tekście, tylko znacznie, znacznie pogłębione.</p>
+<p>Oprócz podsumowania w punktach wydaje mi się, że korzystne będzie zebranie wszystkich podstawowych komend w zestawy tematyczne. Zestawy ułożyłem chronologicznie, to znaczy w takiej kolejności, w jakiej będziemy budować nasz pakiet.</p>
+<section id="zakładanie-repozytorium" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="zakładanie-repozytorium"><span class="header-section-number">13.1</span> Zakładanie repozytorium</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1">roxygen2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">roxygenise</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dodaj roxygen2, najpeirw usuń NAMESPACE</span></span>
+<span id="cb39-2">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_roxygen_md</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># obsługa markdown w roxygen2</span></span>
+<span id="cb39-3">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_gpl3_license</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># licencja GPL v. 3</span></span>
+<span id="cb39-4">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_package</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"R"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Depends"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">min_version =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"4.2.0"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dodaj zależność od R</span></span>
+<span id="cb39-5">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_tidy_dependencies</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># podstawowe zależności tidyverse</span></span>
+<span id="cb39-6">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_tidy_eval</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># narzędzia do Tidy Eval</span></span>
+<span id="cb39-7">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_tibble</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dodaj tibble</span></span>
+<span id="cb39-8">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_pipe</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dodaj potoki z magrittr %&gt;%</span></span>
+<span id="cb39-9">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_lifecycle</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dodaj oznaczniki lifecycle</span></span>
+<span id="cb39-10">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_readme_rmd</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dodaj README.Rmd</span></span></code></pre></div>
+</div>
+</section>
+<section id="podłączanie-githuba" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="podłączanie-githuba"><span class="header-section-number">13.2</span> Podłączanie GitHuba</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_git</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># popraw/załóż pliki repozytorium git</span></span>
+<span id="cb40-2">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_github</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">private =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># załóż repozytorium prywatne na GitHubie</span></span>
+<span id="cb40-3">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_github_action_check_standard</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dodaj automatyczne R-CMD-check</span></span></code></pre></div>
+</div>
+</section>
+<section id="mniejsze-opcje" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="mniejsze-opcje"><span class="header-section-number">13.3</span> Mniejsze opcje</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_package_doc</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dokumentacja całego pakietu</span></span>
+<span id="cb41-2">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_cran_badge</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># odznaka CRAN</span></span>
+<span id="cb41-3">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_lifecycle_badge</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"experimental"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># odznaka lifecycle experimental</span></span>
+<span id="cb41-4">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_citation</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dodaj plik CITATION</span></span></code></pre></div>
+</div>
+</section>
+<section id="testy" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="testy"><span class="header-section-number">13.4</span> Testy</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1">devtools<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">load_all</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># załaduj pakiet, żeby testować ręcznie</span></span>
+<span id="cb42-2">usethat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_testthat</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dodaj testthat</span></span>
+<span id="cb42-3">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_coverage</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"codecov"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dodaj codecov</span></span>
+<span id="cb42-4">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_github_action</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"test-coverage"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dodaj automatyczne raporty codecov</span></span></code></pre></div>
+</div>
+</section>
+<section id="używanie-na-co-dzień" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="używanie-na-co-dzień"><span class="header-section-number">13.5</span> Używanie na co dzień</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1">devtools<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">load_all</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># załaduj pakiet, żeby testować ręcznie</span></span>
+<span id="cb43-2">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_r</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nazwa_funkcji"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># stwórz plik z funkcjami</span></span>
+<span id="cb43-3">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_test</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dodaj plik z testami</span></span>
+<span id="cb43-4">usethis<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">use_data_raw</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nazwa bazy"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># stwórz plik z danymi</span></span></code></pre></div>
+</div>
+</section>
+<section id="konserwacja" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="konserwacja"><span class="header-section-number">13.6</span> Konserwacja</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1">devtools<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">document</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># zaktualizuj dokumentację</span></span>
+<span id="cb44-2">devtools<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">load_all</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># załaduj pakiet</span></span>
+<span id="cb44-3">devtools<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">check</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># zrób R-CMD-check</span></span>
+<span id="cb44-4">devtools<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">test_coverage</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># sprawdź code coverage</span></span>
+<span id="cb44-5">devtools<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">build_readme</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># zaktualizuj README.md</span></span>
+<span id="cb44-6">styler<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">style_active_pkg</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># formatuj wszystkie pliki w pakiecie</span></span></code></pre></div>
+</div>
+</section>
+<section id="błędy" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="błędy"><span class="header-section-number">13.7</span> Błędy</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1">cli<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_abort</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Treść błędu"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># błąd</span></span>
+<span id="cb45-2">cli<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_warn</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Treść ostrzeżenia"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># ostrzeżenie</span></span>
+<span id="cb45-3">cli<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cli_inform</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Treść infromacji"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># informacja</span></span></code></pre></div>
+</div>
+</section>
+<section id="przed-każdym-wypchnięciem" class="level2" data-number="13.8">
+<h2 data-number="13.8" class="anchored" data-anchor-id="przed-każdym-wypchnięciem"><span class="header-section-number">13.8</span> Przed każdym wypchnięciem</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1">devtools<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">load_all</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># załaduj pakiet, żeby testować ręcznie</span></span>
+<span id="cb46-2">devtools<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">check</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># zrób R-CMD-check</span></span>
+<span id="cb46-3">devtools<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">test_coverage</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># sprawdź code coverage</span></span>
+<span id="cb46-4">devtools<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">build_readme</span>() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
+</div>
+</section>
+<section id="inne-rzeczy-do-wykonania" class="level2" data-number="13.9">
+<h2 data-number="13.9" class="anchored" data-anchor-id="inne-rzeczy-do-wykonania"><span class="header-section-number">13.9</span> Inne rzeczy do wykonania</h2>
+<ol type="1">
+<li><p>Uzupełnij ręcznie plik <code>DESCRIPTION</code>. Pamiętaj o tym, by autorów wskazywać funkcją.</p></li>
+<li><p>Uzupełnij plik <code>CITATION</code>, jeśli z niego korzystasz.</p></li>
+<li><p>Napisz porządny plik <code>README</code>.</p></li>
+<li><p>Pamiętaj o pisaniu pełnych nazw funkcji i używaniu <code>.data</code> do nazw kolumn bez cudzysłowu.</p></li>
+<li><p>Każdą funkcję dokumentuj szkieletem <code>roxygen2</code>. Nie zapomnij o tagu <code>@export</code>.</p></li>
+<li><p>Jeśli dodajesz pliki z danymi, pamiętaj, żeby je udokumentować w pliku <code>data.R</code>. Opisz wszystkie kolumny za pomocą <code>@format</code>.</p></li>
+<li><p>Jeśli masz czas i chęć, zabezpieczaj funkcje przed nieprawidłowym wykorzystaniem. Przede wszystkim sprawdzaj typy argumentów oraz czy kolumny istnieją w bazie. Pamiętaj, że możesz formatować komunikaty o błędach.</p></li>
+</ol>
+
+
+</section>
+</section>
+<aside id="footnotes" class="footnotes footnotes-end-of-document">
+<hr>
+<ol>
+<li id="fn1"><p>Funkcje <code>install_*()</code> zapewnia też mniejszy pakiet <code>remotes</code>, który jest praktycznie wycinkiem z <code>devtools</code>. Jeśli mamy <code>devtools</code>, nie potrzebujemy <code>remotes</code>.↩︎</p></li>
+<li id="fn2"><p>Jeśli już wcześniej stworzyłeś(-aś) jakieś pliki z funkcjami i je udokumentowałeś(-aś), to użyj teraz <code>roxygen2md::roxygen2md()</code>, by przerobić je na nowy standard. Jeśli tworzysz pakiet w kolejności, w jakiej omawiam to w tym wpisie, nie ma takiej potrzeby.↩︎</p></li>
+<li id="fn3"><p>Jeśli chcemy podać dwa imiona, podajemy je jako wektor, np. <code>c("Paweł", "Przemysław")</code>.↩︎</p></li>
+<li id="fn4"><p>Jest to wymagane, jeśli wykorzystujemy pliki z danymi. Technicznie można dać niższą wersję, ale nie polecam.↩︎</p></li>
+<li id="fn5"><p>Jeśli nie wiesz, czym jest GitHub i po co go używać, przeczytaj <a href="./posts/git.qmd">ten wpis</a>.↩︎</p></li>
+<li id="fn6"><p>Możesz też ręcznie wytworzyć odpowiedni plik .R w folderze <code>R</code>.↩︎</p></li>
+</ol>
+</aside>
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://nieobliczalne.pl/posts/pakiety-w-R.html</guid>
+  <pubDate>Thu, 25 May 2023 22:00:00 GMT</pubDate>
+  <media:content url="https://nieobliczalne.pl/posts/headers/pakiety-w-R.webp" medium="image" type="image/webp"/>
+</item>
 <item>
   <title>Znajdź i zmień to narzędzie ostateczne</title>
   <dc:creator>Jakub Jędrusiak</dc:creator>

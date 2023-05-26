@@ -1939,22 +1939,18 @@ Wpis BibTex dla użytkowników LaTeX to
 <li><p>Jeśli chcemy, możemy upoważnić <a href="https://github.com/apps/codecov">apkę Codecov na GitHubie</a>. Zamieszcza ona automatyczne raporty o <em>code coverage</em> przy pull requestach.</p></li>
 <li><p>Plik <code>.github/workflows/test-coverage.yaml</code> modyfikujemy w taki sposób, żeby góra tego pliku wyglądała tak, jak niżej. Nie usuwamy innych zmiennych środowiskowych, tylko dopisujemy <code>CODECOV_TOKEN</code>.</p></li>
 </ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">test-coverage</span><span class="kw">:</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">env</span><span class="kw">:</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">CODECOV_TOKEN</span><span class="kw">:</span><span class="at"> ${{ secrets.CODECOV_TOKEN }}</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<pre><code>jobs:
+  test-coverage:
+    runs-on: ubuntu-latest
+    env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}</code></pre>
 <ol start="4" type="1">
 <li>Jeśli repozytorium jest prywatne, na końcu zmieniamy naszą formułę tak, żeby wyglądała jak niżej.</li>
 </ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Upload coverage reports to Codecov</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> codecov/codecov-action@v3</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">token</span><span class="kw">:</span><span class="at"> ${{ secrets.CODECOV_TOKEN }}</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<pre><code>- name: Upload coverage reports to Codecov
+  uses: codecov/codecov-action@v3
+  with:
+    token: ${{ secrets.CODECOV_TOKEN }}</code></pre>
 <ol start="5" type="1">
 <li>Odznaka dodawana przez <code>usethis</code> nie działa. Na <a href="https://codecov.io/">codecov.io</a>, po wejściu w nasze repozytorium (już po jego uruchomieniu), w ustawieniach, w sekcji „Badges &amp; Graphs” znajdziemy poprawny link, którym zastępujemy ten dodany przez <code>usethis</code> w <code>README.Rmd</code>.</li>
 </ol>
