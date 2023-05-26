@@ -2,62 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nieobliczalne.pl/posts/p-value.html</loc>
-    <lastmod>2023-05-21T11:59:18.357Z</lastmod>
+    <lastmod>2023-05-26T18:12:34.778Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/podstawy_R.html</loc>
-    <lastmod>2023-05-21T11:59:21.591Z</lastmod>
+    <lastmod>2023-05-26T18:12:37.991Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/uczenie-sie.html</loc>
-    <lastmod>2023-05-21T11:59:22.981Z</lastmod>
+    <lastmod>2023-05-26T18:12:39.561Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/powtarzalny-tekst.html</loc>
-    <lastmod>2023-05-21T11:59:24.684Z</lastmod>
+    <lastmod>2023-05-26T18:12:41.475Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/pakiety-w-R.html</loc>
+    <lastmod>2023-05-26T18:12:46.888Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/metaprogramowanie.html</loc>
-    <lastmod>2023-05-21T11:59:28.351Z</lastmod>
+    <lastmod>2023-05-26T18:12:48.301Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/automatyzacja.html</loc>
-    <lastmod>2023-05-21T11:59:29.594Z</lastmod>
+    <lastmod>2023-05-26T18:12:49.438Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/regex.html</loc>
-    <lastmod>2023-05-21T11:59:30.587Z</lastmod>
+    <lastmod>2023-05-26T18:12:50.498Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/kombinatoryka.html</loc>
-    <lastmod>2023-05-21T11:59:31.614Z</lastmod>
+    <lastmod>2023-05-26T18:12:51.415Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/ai-research.html</loc>
-    <lastmod>2023-05-21T11:59:32.511Z</lastmod>
+    <lastmod>2023-05-26T18:12:52.308Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/git.html</loc>
-    <lastmod>2023-05-21T11:59:33.647Z</lastmod>
+    <lastmod>2023-05-26T18:12:53.638Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/procent-wariancji.html</loc>
-    <lastmod>2023-05-21T11:59:34.747Z</lastmod>
+    <lastmod>2023-05-26T18:12:54.895Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/newsletter.html</loc>
-    <lastmod>2023-05-21T11:59:35.001Z</lastmod>
+    <lastmod>2023-05-26T18:12:55.151Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/about.html</loc>
-    <lastmod>2023-05-21T11:59:35.244Z</lastmod>
+    <lastmod>2023-05-26T18:12:55.425Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/toc.html</loc>
-    <lastmod>2023-05-21T11:59:35.491Z</lastmod>
+    <lastmod>2023-05-26T18:12:55.721Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/index.html</loc>
-    <lastmod>2023-05-21T11:59:35.911Z</lastmod>
+    <lastmod>2023-05-26T18:12:56.208Z</lastmod>
   </url>
 </urlset>

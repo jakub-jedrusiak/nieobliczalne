@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.74">
+<meta name="generator" content="quarto-1.4.78">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jakub Jędrusiak">
-<meta name="description" content="Po co pisać własne pakiety w R? Widzę dwa powody. Po pierwsze możemy mieć pewną kolekcję funkcji, których często używamy w różnych analizach. Możemy je w pewnym momencie chcieć zebrać w jedno miejsce. Po drugie możemy chcieć się podzielić naszym kodem. W obu przypadkach pakiet jest lepszą opcją niż pliki ze skryptami.">
+<meta name="description" content="Po co pisać własne pakiety w R? Widzę dwa powody. Po pierwsze możemy mieć pewną kolekcję funkcji, których często używamy w różnych analizach. Możemy je w pewnym momencie chcieć zebrać w jedno miejsce. Po drugie możemy chcieć się podzielić naszymi funkcjami z innymi, czy to z zespołem, czy ze światem. W obu przypadkach pakiet jest lepszą, bardziej uporządkowaną i łatwiejszą w używaniu opcją niż pliki ze skryptami.">
 
 <title>Nieobliczalne - Tworzenie pakietów w R</title>
 <style>
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -97,7 +131,7 @@ cookieconsent.run({
 
 <link rel="stylesheet" href="../styles.css">
 <meta name="twitter:title" content="Nieobliczalne - Tworzenie pakietów w R">
-<meta name="twitter:description" content="Po co pisać własne pakiety w R? Widzę dwa powody. Po pierwsze możemy mieć pewną kolekcję funkcji, których często używamy w różnych analizach. Możemy je w pewnym momencie chcieć zebrać w jedno miejsce. Po drugie możemy chcieć się podzielić naszym kodem. W obu przypadkach pakiet jest lepszą opcją niż pliki ze skryptami.">
+<meta name="twitter:description" content="Po co pisać własne pakiety w R? Widzę dwa powody. Po pierwsze możemy mieć pewną kolekcję funkcji, których często używamy w różnych analizach. Możemy je w pewnym momencie chcieć zebrać w jedno miejsce. Po drugie możemy chcieć się podzielić naszymi funkcjami z innymi, czy to z zespołem, czy ze światem. W obu przypadkach pakiet jest lepszą, bardziej uporządkowaną i łatwiejszą w używaniu opcją niż pliki ze skryptami.">
 <meta name="twitter:image" content="https://nieobliczalne.pl/headers/pakiety-w-R.webp">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -155,7 +189,72 @@ cookieconsent.run({
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Na tej stronie</h2>
+   
+  <ul>
+  <li><a href="#przygotowanie" id="toc-przygotowanie" class="nav-link active" data-scroll-target="#przygotowanie"><span class="header-section-number">1</span> Przygotowanie</a></li>
+  <li><a href="#sec-structure" id="toc-sec-structure" class="nav-link" data-scroll-target="#sec-structure"><span class="header-section-number">2</span> Struktura pakietu</a></li>
+  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description"><span class="header-section-number">3</span> <code>DESCRIPTION</code></a>
+  <ul class="collapse">
+  <li><a href="#autorzy" id="toc-autorzy" class="nav-link" data-scroll-target="#autorzy"><span class="header-section-number">3.1</span> Autorzy</a></li>
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation"><span class="header-section-number">3.2</span> <code>CITATION</code></a></li>
+  <li><a href="#licencja" id="toc-licencja" class="nav-link" data-scroll-target="#licencja"><span class="header-section-number">3.3</span> Licencja</a></li>
+  <li><a href="#sec-dependencies" id="toc-sec-dependencies" class="nav-link" data-scroll-target="#sec-dependencies"><span class="header-section-number">3.4</span> Zależności</a></li>
+  </ul></li>
+  <li><a href="#readme" id="toc-readme" class="nav-link" data-scroll-target="#readme"><span class="header-section-number">4</span> <code>README</code></a>
+  <ul class="collapse">
+  <li><a href="#odznaki" id="toc-odznaki" class="nav-link" data-scroll-target="#odznaki"><span class="header-section-number">4.1</span> Odznaki</a></li>
+  </ul></li>
+  <li><a href="#github" id="toc-github" class="nav-link" data-scroll-target="#github"><span class="header-section-number">5</span> GitHub</a>
+  <ul class="collapse">
+  <li><a href="#sec-GitHubActions" id="toc-sec-GitHubActions" class="nav-link" data-scroll-target="#sec-GitHubActions"><span class="header-section-number">5.1</span> R-CMD-check na GitHubie</a></li>
+  </ul></li>
+  <li><a href="#pliki-z-funkcjami" id="toc-pliki-z-funkcjami" class="nav-link" data-scroll-target="#pliki-z-funkcjami"><span class="header-section-number">6</span> Pliki z funkcjami</a>
+  <ul class="collapse">
+  <li><a href="#sec-cran-checks" id="toc-sec-cran-checks" class="nav-link" data-scroll-target="#sec-cran-checks"><span class="header-section-number">6.1</span> Specyficzne wymogi CRAN i R-CMD-check</a></li>
+  <li><a href="#dokumentowanie-z-roxygen2" id="toc-dokumentowanie-z-roxygen2" class="nav-link" data-scroll-target="#dokumentowanie-z-roxygen2"><span class="header-section-number">6.2</span> Dokumentowanie z <code>roxygen2</code></a></li>
+  <li><a href="#dokumentacja-całego-pakietu" id="toc-dokumentacja-całego-pakietu" class="nav-link" data-scroll-target="#dokumentacja-całego-pakietu"><span class="header-section-number">6.3</span> Dokumentacja całego pakietu</a></li>
+  </ul></li>
+  <li><a href="#sec-datafiles" id="toc-sec-datafiles" class="nav-link" data-scroll-target="#sec-datafiles"><span class="header-section-number">7</span> Załączanie danych</a>
+  <ul class="collapse">
+  <li><a href="#surowe-dane-w-data-raw" id="toc-surowe-dane-w-data-raw" class="nav-link" data-scroll-target="#surowe-dane-w-data-raw"><span class="header-section-number">7.1</span> Surowe dane w <code>data-raw</code></a></li>
+  <li><a href="#dokumentacja-plików-z-danymi" id="toc-dokumentacja-plików-z-danymi" class="nav-link" data-scroll-target="#dokumentacja-plików-z-danymi"><span class="header-section-number">7.2</span> Dokumentacja plików z danymi</a></li>
+  </ul></li>
+  <li><a href="#sec-r-cmd-check" id="toc-sec-r-cmd-check" class="nav-link" data-scroll-target="#sec-r-cmd-check"><span class="header-section-number">8</span> R-CMD-check</a></li>
+  <li><a href="#sprawdzanie-wejścia-i-informacje-o-błędach" id="toc-sprawdzanie-wejścia-i-informacje-o-błędach" class="nav-link" data-scroll-target="#sprawdzanie-wejścia-i-informacje-o-błędach"><span class="header-section-number">9</span> Sprawdzanie wejścia i informacje o błędach</a>
+  <ul class="collapse">
+  <li><a href="#typ-argumentu" id="toc-typ-argumentu" class="nav-link" data-scroll-target="#typ-argumentu"><span class="header-section-number">9.1</span> Typ argumentu</a></li>
+  <li><a href="#punktory" id="toc-punktory" class="nav-link" data-scroll-target="#punktory"><span class="header-section-number">9.2</span> Punktory</a></li>
+  <li><a href="#formatowanie-z-glue" id="toc-formatowanie-z-glue" class="nav-link" data-scroll-target="#formatowanie-z-glue"><span class="header-section-number">9.3</span> Formatowanie z <code>glue</code></a></li>
+  <li><a href="#obecność-kolumn-w-bazie" id="toc-obecność-kolumn-w-bazie" class="nav-link" data-scroll-target="#obecność-kolumn-w-bazie"><span class="header-section-number">9.4</span> Obecność kolumn w bazie</a></li>
+  </ul></li>
+  <li><a href="#sec-tests" id="toc-sec-tests" class="nav-link" data-scroll-target="#sec-tests"><span class="header-section-number">10</span> Testy z <code>testthat</code></a>
+  <ul class="collapse">
+  <li><a href="#struktura-testów" id="toc-struktura-testów" class="nav-link" data-scroll-target="#struktura-testów"><span class="header-section-number">10.1</span> Struktura testów</a></li>
+  <li><a href="#przykładowe-testy" id="toc-przykładowe-testy" class="nav-link" data-scroll-target="#przykładowe-testy"><span class="header-section-number">10.2</span> Przykładowe testy</a></li>
+  <li><a href="#co-i-jak-testować" id="toc-co-i-jak-testować" class="nav-link" data-scroll-target="#co-i-jak-testować"><span class="header-section-number">10.3</span> Co i jak testować?</a></li>
+  </ul></li>
+  <li><a href="#code-coverage-z-codecov" id="toc-code-coverage-z-codecov" class="nav-link" data-scroll-target="#code-coverage-z-codecov"><span class="header-section-number">11</span> <em>Code coverage</em> z <code>codecov</code></a>
+  <ul class="collapse">
+  <li><a href="#sprawdzanie-code-coverage" id="toc-sprawdzanie-code-coverage" class="nav-link" data-scroll-target="#sprawdzanie-code-coverage"><span class="header-section-number">11.1</span> Sprawdzanie <em>code coverage</em></a></li>
+  <li><a href="#automatyczne-raportowanie" id="toc-automatyczne-raportowanie" class="nav-link" data-scroll-target="#automatyczne-raportowanie"><span class="header-section-number">11.2</span> Automatyczne raportowanie</a></li>
+  </ul></li>
+  <li><a href="#bonus-załączanie-apki-w-shiny" id="toc-bonus-załączanie-apki-w-shiny" class="nav-link" data-scroll-target="#bonus-załączanie-apki-w-shiny"><span class="header-section-number">12</span> Bonus: załączanie apki w Shiny</a></li>
+  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">13</span> Podsumowanie</a>
+  <ul class="collapse">
+  <li><a href="#zakładanie-repozytorium" id="toc-zakładanie-repozytorium" class="nav-link" data-scroll-target="#zakładanie-repozytorium"><span class="header-section-number">13.1</span> Zakładanie repozytorium</a></li>
+  <li><a href="#podłączanie-githuba" id="toc-podłączanie-githuba" class="nav-link" data-scroll-target="#podłączanie-githuba"><span class="header-section-number">13.2</span> Podłączanie GitHuba</a></li>
+  <li><a href="#mniejsze-opcje" id="toc-mniejsze-opcje" class="nav-link" data-scroll-target="#mniejsze-opcje"><span class="header-section-number">13.3</span> Mniejsze opcje</a></li>
+  <li><a href="#testy" id="toc-testy" class="nav-link" data-scroll-target="#testy"><span class="header-section-number">13.4</span> Testy</a></li>
+  <li><a href="#używanie-na-co-dzień" id="toc-używanie-na-co-dzień" class="nav-link" data-scroll-target="#używanie-na-co-dzień"><span class="header-section-number">13.5</span> Używanie na co dzień</a></li>
+  <li><a href="#konserwacja" id="toc-konserwacja" class="nav-link" data-scroll-target="#konserwacja"><span class="header-section-number">13.6</span> Konserwacja</a></li>
+  <li><a href="#błędy" id="toc-błędy" class="nav-link" data-scroll-target="#błędy"><span class="header-section-number">13.7</span> Błędy</a></li>
+  <li><a href="#przed-każdym-wypchnięciem" id="toc-przed-każdym-wypchnięciem" class="nav-link" data-scroll-target="#przed-każdym-wypchnięciem"><span class="header-section-number">13.8</span> Przed każdym wypchnięciem</a></li>
+  <li><a href="#inne-rzeczy-do-wykonania" id="toc-inne-rzeczy-do-wykonania" class="nav-link" data-scroll-target="#inne-rzeczy-do-wykonania"><span class="header-section-number">13.9</span> Inne rzeczy do wykonania</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/pakiety-w-R.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
     <div class="quarto-margin-footer"><div class="margin-footer-item">
 <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
     <style type="text/css">
@@ -1072,7 +1171,7 @@ cookieconsent.run({
 
 <div>
   <div class="description">
-    Po co pisać własne pakiety w R? Widzę dwa powody. Po pierwsze możemy mieć pewną kolekcję funkcji, których często używamy w różnych analizach. Możemy je w pewnym momencie chcieć zebrać w jedno miejsce. Po drugie możemy chcieć się podzielić naszym kodem. W obu przypadkach pakiet jest lepszą opcją niż pliki ze skryptami.
+    Po co pisać własne pakiety w R? Widzę dwa powody. Po pierwsze możemy mieć pewną kolekcję funkcji, których często używamy w różnych analizach. Możemy je w pewnym momencie chcieć zebrać w jedno miejsce. Po drugie możemy chcieć się podzielić naszymi funkcjami z innymi, czy to z zespołem, czy ze światem. W obu przypadkach pakiet jest lepszą, bardziej uporządkowaną i łatwiejszą w używaniu opcją niż pliki ze skryptami.
   </div>
 </div>
 
@@ -1086,6 +1185,12 @@ cookieconsent.run({
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Opublikowano</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">26 maja 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -1093,8 +1198,918 @@ cookieconsent.run({
 
 </header>
 
+<p>Pakiety to nic innego jak zbiory funkcji. Od zwykłych plików .R z funkcjami różnią się tym, że mają określoną strukturę, dzięki której można je potem zainstalować i szybko zacząć wykorzystywać. Pewnie pierwszym skojarzeniem z pisaniem pakietów jest udostępnianie ich całej społeczności przez CRAN. Owszem, można to zrobić, ale można mieć też prywatne pakiety trzymane na GitHubie. Wtedy taki pakiet może być chałupniczy, niepełny, nieelegancki, ale i tak jest lepszą drogą, niż luźne pliki z definicjami funkcji. Dzięki temu nie musimy od razu wszystkiego zrobić na tip-top, żeby każdy na świecie wygodnie korzystał z naszych trzech funkcji. Naszym celem jest w końcu <strong>oszczędzenie sobie pracy, nie dołożenie</strong>.</p>
+<section id="przygotowanie" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Przygotowanie</h1>
+<p>Do tworzenia pakietów wykorzystujemy inne pakiety. Najważniejszym z nich jest <code>devtools</code>, który ciągnie za sobą cały szereg innych pakietów typu <code>roxygen2</code>, <code>usethis</code> czy <code>testthat</code>. Możesz nawet mieć już zainstalowane <code>devtools</code>, bo to w jego skład wchodzi funkcja <code>install_github()</code>, dzięki której instalujemy pakiety z GitHuba<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Jeśli nie masz jeszcze zainstalowanego pakietu <code>devtools</code>, zainstaluj go teraz.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>W tym tekście będę używał pełnych nazw funkcji, np. <code>usethis::use_readme_md()</code>. Jeśli jednak na początku pracy załadujesz <code>devtools</code>, nie musisz później podawać nazw pakietów.</p>
+<p>Najprostszym sposobem na utworzenie zrębu pakietu R jest wykorzystanie menu do tworzenia projektów w RStudio. Podczas tworzenia projektu możemy wybrać jego typ i nas interesuje <em>R package</em>. W wygodnym kreatorze wpisujemy nazwę pakietu. Warto też zaznaczyć, że chcemy mieć do tego repozytorium Git. Jeśli zabieramy się za tworzenie pakietu, powinniśmy umieć choć w podstawowym stopniu korzystać z Gita. Jeśli nie znasz Gita, zachęcam do przeczytania <a href="./posts/git.qmd">tego posta</a>.</p>
+<p><img src="ilustracje/pakiety-w-R/RStudio-wizard.png" class="img-fluid"></p>
+</section>
+<section id="sec-structure" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Struktura pakietu</h1>
+<p>Stworzony przez nas szkielet pakietu już ma określoną strukturę. W wybranym wcześniej folderze znajdziemy serię szczególnych plików i folderów, która potem będzie się rozrastać. Obecnie są to:</p>
+<ul>
+<li><p><code>.gitignore</code> – plik repozytorium mówiący, co Git ma ignorować (więcej o tym w <a href="./posts/git.qmd">tekście o Git</a>).</p></li>
+<li><p><code>.Rbuildignore</code> – plik, w którym podajemy niestandardowe pliki, które z jakiegoś powodu znajdują się w folderze z naszym pakietem; jest to ważne, bo R-CMD-check (o którym więcej w podrozdziale <a href="#sec-r-cmd-check" class="quarto-xref">8</a>) będzie na nas krzyczał, jeśli znajdzie niestandardowe pliki w nietypowych miejscach.</p></li>
+<li><p><code>DESCRIPTION</code> – metadane naszego pakietu, przede wszystkim nazwa, wersja, autorzy i pakiety, których nasz pakiet wymaga do działania.</p></li>
+<li><p><code>man</code> – folder z plikami .Rd z dokumentacją naszych funkcji; nie edytujemy ich ręcznie.</p></li>
+<li><p><code>NAMESPACE</code> – plik z przestrzenią nazw naszego pakietu; nie edytujemy go ręcznie.</p></li>
+<li><p><code>R</code> – folder, do którego wrzucamy pliki .R z naszymi funkcjami; najważniejsza część naszego pakietu.</p></li>
+</ul>
+<p>Do tego jeszcze znajdziemy tam plik z projektem RStudio. W miarę budowania naszego pakietu, nasz folder będzie się zaludniał nowymi plikami i podfolderami.</p>
+<p>Już teraz warto jest uruchomić kilka komend z pakietu <code>usethis</code>, które ułatwią nam robotę w przyszłości. Są to funkcje, których zazwyczaj używamy tylko raz, one wykonują swoją robotę (coś tworzą, coś dopisują) i zapominamy o ich istnieniu, aż nie musimy stworzyć kolejnego pakietu.</p>
+<p>Po pierwsze musimy przygotować nasz pakiet do używania <code>roxygen2</code>, czyli specjalnego standardu generującego dokumentację naszych funkcji. Dzięki niemu nie musimy ręcznie babrać się z plikami .Rd. Zaczynamy więc od <strong>usunięcia pliku <code>NAMESPACE</code></strong>, który wytworzyło RStudio. Dlaczego? Bo nasz plik <code>NAMESPACE</code> ma stworzyć <code>roxygen2</code>, a nie RStudio. Po usunięciu używamy komendy <code>roxygen2::roxygenise()</code>. Doda ona do pliku <code>DESCRIPTION</code> informację o używanej wersji <code>roxygen2</code> oraz stworzy nowy, piękny, prawie pusty plik <code>NAMESPACE</code>. Następnie używamy komendy <code>usethis::use_roxygen_md()</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Pozwoli ona używać nam wygodnej składni markdown w dokumentacji, np. **<strong>bold</strong>** wygeneruje nam pogrubiony tekst. Więcej o podstawach markdown przeczytamy na przykład <a href="https://quarto.org/docs/authoring/markdown-basics.html">tutaj</a>.</p>
+</section>
+<section id="description" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> <code>DESCRIPTION</code></h1>
+<p>Plik <code>DESCRIPTION</code>, jak już wspomniałem, to opis naszego pakietu. Jeśli otworzymy go teraz, zobaczymy przygotowany wcześniej szkielet. Możemy w nim uzupełnić tytuł, wersję i opis pakietu. Jeśli opis zajmie więcej niż linijkę, kolejne linijki powinny zaczynać się wcięciem wielkości 4 spacji.</p>
+<section id="autorzy" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="autorzy"><span class="header-section-number">3.1</span> Autorzy</h2>
+<p>Jeśli chodzi o autorów pakietu, podajemy ich w dość specyficzny sposób. Najpierw jednak kasujemy całą linijkę <code>Maintainer</code>. To część starego standardu, dziś osobę odpowiedzialną za kod podajemy w polu autorów. Samych autorów podamy za pomocą funkcji <code>person()</code>. Pokażmy to sobie na przykładzie.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>DESCRIPTION</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Authors<span class="sc">@</span>R<span class="sc">:</span> <span class="fu">person</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Jakub"</span>, <span class="st">"Jędrusiak"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">email =</span> <span class="st">"kuba23031999@gmail.com"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">role =</span> <span class="fu">c</span>(<span class="st">"aut"</span>, <span class="st">"cre"</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">comment =</span> <span class="fu">c</span>(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">ORCID =</span> <span class="st">"0000-0002-6481-8210"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">affiliation =</span> <span class="st">"University of Wrocław"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Po pierwsze znacznik <code>Author</code> zmieniamy na <code>Authors@R</code> i to niezależnie od liczby autorów. Jeśli autor jest jeden, podajemy go za pomocą funkcji <code>person()</code>. Podstawowe informacje to imię w pierwszym argumencie<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, nazwisko w drugim. Tych argumentów nie musimy nazywać. Dalej mamy inne informacje, które już nazwać warto. <code>email</code> jaki jest, każdy widzi. <code>role</code> to opis funkcji osoby w tworzeniu pakietu. Używamy tutaj kodów opisanych w dokumentacji funkcji <code>person()</code>. Kilka podstawowych kodów ról wymieniam w tabeli poniżej. Jak widać w przykładzie, każda osoba może mieć więcej niż jedną rolę. Kolejnym polem jest <code>comment</code>, który <em>zawsze</em> podajemy w postaci nazwanego wektora. Podstawowymi informacjami, które możemy tutaj umieścić, są numer ORCiD oraz afiliacja.</p>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 66%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kod</th>
+<th>Funkcja</th>
+<th>Opis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"aut"</code></td>
+<td><em>Author</em></td>
+<td>Pełny autor; wszystkie osoby, które pojawiają się w cytowaniu, powinny mieć przypisaną tę rolę.</td>
+</tr>
+<tr class="even">
+<td><code>"cre"</code></td>
+<td><em>Creator</em></td>
+<td>Osoba odpowiedzialna za dbanie o kod w pakiecie (<em>maintainer</em>).</td>
+</tr>
+<tr class="odd">
+<td><code>"ctb"</code></td>
+<td><em>Contributor</em></td>
+<td>Osoby, które wniosły jakiś istotny wkład w pakiet, ale za mały, by pojawiać się w cytowaniu.</td>
+</tr>
+<tr class="even">
+<td><code>"cph"</code></td>
+<td><em>Copyright holder</em></td>
+<td>Osoba lub instytucja posiadająca prawa autorskie do pakietu.</td>
+</tr>
+</tbody>
+</table>
+<p>Jeśli autorów jest więcej niż jeden, podajemy ich w postaci wektora osób. Poniżej przykład.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>DESCRIPTION</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Authors<span class="sc">@</span>R<span class="sc">:</span> <span class="fu">c</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">person</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Boris"</span>, <span class="st">"Forthmann"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">email =</span> <span class="st">"boris.forthmann@uni-muenster.de"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">role =</span> <span class="st">"aut"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">comment =</span> <span class="fu">c</span>(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">ORCID =</span> <span class="st">"0000-0001-9755-7304"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">affiliation =</span> <span class="st">"University of Münster"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">person</span>(</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Maciej"</span>, <span class="st">"Karwowski"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">email =</span> <span class="st">"maciej.karwowski@uwr.edu.pl"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">role =</span> <span class="st">"aut"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">comment =</span> <span class="fu">c</span>(</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">ORCID =</span> <span class="st">"0000-0001-6974-1673"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">affiliation =</span> <span class="st">"University of Wrocław"</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">person</span>(</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">"Roger"</span>, <span class="st">"E."</span>), <span class="st">"Beaty"</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">email =</span> <span class="st">"rebeaty@psu.edu"</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">role =</span> <span class="st">"aut"</span>,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">comment =</span> <span class="fu">c</span>(</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">ORCID =</span> <span class="st">"0000-0001-6114-5973"</span>,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">affiliation =</span> <span class="st">"Pennsylvania State University"</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">person</span>(</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Jakub"</span>, <span class="st">"Jędrusiak"</span>,</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">email =</span> <span class="st">"kuba23031999@gmail.com"</span>,</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">role =</span> <span class="fu">c</span>(<span class="st">"aut"</span>, <span class="st">"cre"</span>),</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>      <span class="at">comment =</span> <span class="fu">c</span>(</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">ORCID =</span> <span class="st">"0000-0002-6481-8210"</span>,</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">affiliation =</span> <span class="st">"University of Wrocław"</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="citation" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="citation"><span class="header-section-number">3.2</span> <code>CITATION</code></h2>
+<p>Jeśli chcemy, by nasz pakiet był cytowany w jakiś konkretny sposób, możemy wprost go wskazać w pliku <code>CITATION</code>. Wytwarzamy go już po uzupełnieniu koniecznych informacji w pliku <code>DESCRIPTION</code> za pomocą komendy <code>usethis::use_citation()</code>. Sam plik siedzi sobie w folderze <code>inst</code>. Umieszczamy w nim informacje o cytowaniu w formacie BibTeX (każdy generator potrafi taką wytworzyć), a jeśli chcemy, to także wersję tekstową. Decyduje to o sposobie, w jaki wyświetla się wynik funkcji <code>citation()</code>. Poniżej przykładowy plik <code>CITATION</code> i jego efekt.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>CITATION</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citHeader</span>(<span class="st">"To cite mtscr in publications use:"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">citEntry</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">entry    =</span> <span class="st">"Manual"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">title    =</span> <span class="st">"Multidimensional Top Scoring for Creativity Research"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">author   =</span> <span class="st">"Boris Forthmann, Maciej Karwowski, Roger E. Beaty, Jakub Jędrusiak"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">year     =</span> <span class="st">"2023"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">url      =</span> <span class="st">"https://github.com/jakub-jedrusiak/mtscr"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">textVersion =</span> <span class="fu">paste</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">"Forthmann, B., Karwowski, M., Beaty, R. E., Jędrusiak, J. (2023). Multidimensional Top Scoring for Creativity Research. Retrieved from: https://github.com/jakub-jedrusiak/mtscr"</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">"mtscr"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>To cite mtscr in publications use:
+
+  Forthmann, B., Karwowski, M., Beaty, R. E., Jędrusiak, J. (2023).
+  Multidimensional Top Scoring for Creativity Research. Retrieved from:
+  https://github.com/jakub-jedrusiak/mtscr
+
+Wpis BibTex dla użytkowników LaTeX to
+
+  @Manual{,
+    title = {Multidimensional Top Scoring for Creativity Research},
+    author = {Boris Forthmann and Maciej Karwowski and Roger E. Beaty and Jakub Jędrusiak},
+    year = {2023},
+    url = {https://github.com/jakub-jedrusiak/mtscr},
+  }</code></pre>
+</div>
+</div>
+</section>
+<section id="licencja" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="licencja"><span class="header-section-number">3.3</span> Licencja</h2>
+<p>Swój kod warto wprost licencjonować, ale licencji nie dodajemy do pakietu ręcznie. Używamy tutaj odpowiedniej funkcji z pakietu <code>usethis</code>, np. dla licencji MIT będzie to <code>usethis::use_mit_license()</code>, a dla GPL v.3 <code>usethis::use_gpl3_license()</code>. Pełną listę dostępnych licencji można znaleźć <a href="https://usethis.r-lib.org/reference/licenses.html">tutaj</a>. Jaką licencję wybrać? Najprościej mówiąc, MIT to <em>de facto</em> pójście we w pełni wolny kod. Taki kod może np. stać się częścią płatnego programu, ale nasze prawa autorskie w stosunku do niego ciągle obowiązują. GPL natomiast wymusza, by programy oparte na naszym kodzie też były licencjonowane pod GPL, czyli by zawsze były darmowe. Większość pakietów R (ok. 70%) korzysta z licencji GPL.</p>
+</section>
+<section id="sec-dependencies" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="sec-dependencies"><span class="header-section-number">3.4</span> Zależności</h2>
+<p>Najpewniej nie będziemy pisać całego naszego kodu w podstawowym R, a raczej będziemy wykorzystywać w nim inne pakiety. Żeby dodać jakiś pakiet jako zależność, używamy np. <code>usethis::use_package("rlang", "dplyr")</code>. Nie należy nigdy podawać <code>tidyverse</code> jako zależności, a raczej konkretne pakiety typu <code>dplyr</code> czy <code>stringr</code>. Do tego możemy wymusić wykorzystanie konkretnej minimalnej wersji danego pakietu argumentem <code>min_version</code>, np. pisząc <code>usethis::use_package("dplyr", min_version = "1.1.0")</code>.</p>
+<p>Jeśli zerkniemy w plik <code>DESCRIPTION</code> po uruchomieniu takiej komendy, zobaczymy, że dodane pakiety znalazły się w sekcji <code>Imports</code>. Tak powinno być. Istnieją jednak inne możliwe sekcje. Jeśli dodajemy pakiet, który nie jest potrzebny do działania naszych funkcji, ale na przykład potrzebujemy go do uruchomienia przykładów (bo chociażby wykorzystujemy w nich dane <code>diamonds</code> z pakietu <code>ggplot2</code>, podczas gdy nie wykorzystujemy samego <code>ggplot2</code> w naszych funkcjach), dodajemy go w sekcji <code>Suggests</code>. Robimy to pisząc na przykład <code>usethis::use_package("ggplot2", type = "Suggests")</code>.</p>
+<p>Istnieje seria zależności, które posiada większość pakietów i które można łatwo dodać poprzez specjalne funkcje z pakietu <code>usethis</code>. Wymieńmy sobie te najważniejsze:</p>
+<ol type="1">
+<li><p><code>usethis::use_pipe()</code> – dodaje obsługę potoków <code>%&gt;%</code> z pakietu <code>magrittr</code>.</p></li>
+<li><p><code>usethis::use_tibble()</code> – dodaje obsługę <code>tibble</code> jako formy, w której nasze funkcje zwracają dane.</p></li>
+<li><p><code>usethis::use_tidy_dependencies()</code> – standardowe zależności typu <code>rlang</code>, <code>cli</code> czy <code>glue</code>. Według mnie powinno się uruchamiać zawsze.</p></li>
+<li><p><code>usethis::use_tidy_eval()</code> – podstawowe pakiety do <a href="./posts/metaprogramowanie.qmd">Tidy Eval</a>. Według mnie powinno się&nbsp;uruchamiać zawsze.</p></li>
+<li><p><code>usethis::use_lifecycle()</code> – dodaje zależność od pakietu <code>lifecycle</code>, dzięki któremu możemy oznaczyć nasze funkcje jako eksperymentalne albo wycofane. Więcej informacji <a href="https://lifecycle.r-lib.org/index.html">tutaj</a>.</p></li>
+</ol>
+<p>Dodatkowo większość pakietów posiada wprost wskazaną zależność od samego R. Taka zależność musi pojawić się w sekcji <code>Depends</code> (zamiast standardowego <code>Imports</code>) i musi uwzględniać minimalną wersję co najmniej 3.5.0<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. W praktyce najlepiej jest podawać minimalną wersję 4.1.0, bo w tej wersji dodano natywny potok <code>|&gt;</code>, a już w ogóle najlepiej nie cofać się przed 4.2.0, kiedy potoki wzbogacono o <code>_</code>, czyli informację, gdzie ma się znaleźć dany argument, jeśli nie na pierwszym miejscu (odpowiednik <code>.</code> w <code>magrittr</code>). Można to wykonać funkcją <code>usethis::use_package("R", type = "Depends", min_version = "4.2.0")</code>. Zwrócę tutaj uwagę, że trzecia liczba w zależności od R <strong>musi być zero</strong>. Nie można podać na przykład zależności z minimalną wersją&nbsp;<code>4.2.2</code>.</p>
+</section>
+</section>
+<section id="readme" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> <code>README</code></h1>
+<p>Każde repozytorium powinno mieć plik README, czyli opis, który wyświetli się na stronie pakietu na GitHubie. Gdy tworzymy pakiet R, mamy dwie możliwości, jakiego rodzaju plik README wytworzymy.</p>
+<ol type="1">
+<li><p><code>README.md</code> – opcja klasyczna, wytwarza zwykły plik markdown.</p></li>
+<li><p><code>README.Rmd</code> – opcja fajniejsza, wytwarza plik .Rmd, w którym możemy dorzucać przykładowy kod w R razem z jego efektami.</p></li>
+</ol>
+<p>Pierwsza opcja wymaga użycia komendy <code>usethis::use_readme_md()</code>. Wytworzy ona zwykły plik .md, który możemy wypełnić korzystając z <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">instrukcji na GitHubie</a>. Jeśli chcemy zyskać dostęp do możliwości oferowanych przez RMarkdown, używamy <code>usethis::use_readme_rmd()</code>. Wytworzy to plik .Rmd, w którym możemy pokazać, na co stać nasz pakiet. Dokładny opis składni znajdziemy <a href="https://rmarkdown.rstudio.com/">tutaj</a>, zaś poniżej przykład.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-overflow-wrap code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>The main function is <span class="in">`mtscr_scores()`</span> which can return a df with scores for each participant, each item or each participant-item combination. Scores come from two models – <span class="in">`all_max`</span> and <span class="in">`all_top2`</span>. A value for a participant is the maximum value predicted by the model for that participant.</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mtscr"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"mtscr_creativity"</span>, <span class="at">package =</span> <span class="st">"mtscr"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="light-mode">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ilustracje/pakiety-w-R/Rmarkdown.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Efekt działania kodu RMarkdown z ramki na GitHubie.</figcaption>
+</figure>
+</div>
+</div>
+<div class="dark-mode">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ilustracje/pakiety-w-R/Rmarkdown_dark.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Efekt działania kodu RMarkdown z ramki na GitHubie.</figcaption>
+</figure>
+</div>
+</div>
+<p>Jeśli zdecydujemy się na tę opcję, zawsze edytujemy plik <code>README.Rmd</code>, a nie <code>README.md</code>. GitHub nie potrafi go jednak odczytać, dlatego przed wysłaniem naszych plików na serwer musimy przekonwertować plik <code>README.Rmd</code> do pliku <code>README.md</code>. Robimy to prostą komendą <code>devtools::build_readme()</code>. Komenda <code>usethis::use_readme_rmd()</code> dodatkowo dodaje specjalną przypominajkę, która nie pozwala nam zrobić commitu, jeśli zmienialiśmy plik <code>README.Rmd</code>, a go nie wyeksportowaliśmy.</p>
+<p>Na marginesie dodam, że RMarkdown jest powoli zastępowany przez bliźniaczy standard <a href="https://quarto.org/">Quarto</a>, ale w chwili, gdy to piszę, <code>usethis</code> <a href="https://github.com/r-lib/usethis/issues/1671">nie planuje go wdrażać</a>.</p>
+<section id="odznaki" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="odznaki"><span class="header-section-number">4.1</span> Odznaki</h2>
+<p>Bardzo często w repozytoriach znajdziemy odznaki. Są to elementy informacyjno-ozdobne, które mówią coś o naszym pakiecie, np. że przechodzi testy, że jest w CRAN albo ile razy w miesiącu ktoś go pobiera. Ciekawe odznaki obejmują:</p>
+<ol type="1">
+<li><p>Odznakę <code>R-CMD-check</code>, o której piszę w podrozdziale <a href="#sec-GitHubActions" class="quarto-xref">5.1</a>.</p></li>
+<li><p>Odznakę <code>lifecycle</code>, którą możemy poinformować, że nasz pakiet jako całość jest eksperymentalny, stabilny lub wycofany. Możemy ją dodać wykorzystując komendę <code>usethis::use_lifecycle_badge("stable")</code>. Argument wybieramy jaki chcemy, zgodnie z listą dostępną <a href="https://lifecycle.r-lib.org/articles/stages.html">tutaj</a>.</p></li>
+<li><p>Odznakę CRAN, która informuje, jaka wersja naszego pakietu dostępna jest w CRAN. Jeśli pakiet nie jest dostępny, to odznaka też może o tym poinformować. Dodajemy ją komendą <code>usethis::use_cran_badge()</code>.</p></li>
+</ol>
+<div class="light-mode">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ilustracje/pakiety-w-R/badges.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Kilka odznak w nagłówku pliku README na GitHubie.</figcaption>
+</figure>
+</div>
+</div>
+<div class="dark-mode">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ilustracje/pakiety-w-R/badges_dark.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Kilka odznak w nagłówku pliku README na GitHubie.</figcaption>
+</figure>
+</div>
+</div>
+<p>Odznaki nie są obowiązkową częścią pakietu, ale piszę o nich, bo lubię takie ładne pierdółki. Inne przykłady odznak znajdziemy na <a href="https://shields.io/">shields.io</a>, albo wykorzystując pakiet <a href="https://github.com/GuangchuangYu/badger"><code>badger</code></a>.</p>
+</section>
+</section>
+<section id="github" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> GitHub</h1>
+<p>Zazwyczaj swoje pakiety chcemy trzymać na GitHubie<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, żeby łatwo je instalować. Żeby podłączyć nasze repozytorium do GitHuba, musimy użyć po kolei dwóch komend.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_git</span>()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_github</span>(<span class="at">private =</span> <span class="cn">TRUE</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Pierwsza dostosuje nasze repozytorium do ogólnych dobrych standardów. Druga podłączy nas do GitHuba, wytwarzając nowe repozytorium. Jeśli chcemy, by było prywatne, ustawiamy <code>private = TRUE</code>.</p>
+<section id="sec-GitHubActions" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-GitHubActions"><span class="header-section-number">5.1</span> R-CMD-check na GitHubie</h2>
+<p>Kolejną polecaną przeze mnie czynnością, która (według mnie) powinna zostać wykonana w każdym repozytorium, jest uruchomienie tej komendy:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_github_action_check_standard</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Dodaje ona kilka rzeczy. Po pierwsze sprawia ona, że po każdym naszym commicie GitHub wykonuje zestaw podstawowych testów zwanych R-CMD-check, o których więcej piszę w podrozdziale <a href="#sec-r-cmd-check" class="quarto-xref">Sekcja&nbsp;8</a>. W drugiej kolejności dodaje ona odznakę R-CMD-check do naszego pliku <code>README</code>, żebyśmy mogli błyszczeć przechodzeniem testów.</p>
+</section>
+</section>
+<section id="pliki-z-funkcjami" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Pliki z funkcjami</h1>
+<p>Przyszedł czas dodać jakieś rzeczywiste funkcje. Pisanie funkcji stanowiących część pakietu jest prawie identyczne jak pisanie zwyczajnych funkcji. Jak podam dalej, możemy chcieć postarać się bardziej i np. zabezpieczyć nasze funkcje przed błędami, ale znowu – nie musimy. Podstawowe pułapki przy pisaniu własnych funkcji w ogóle (nie tylko w pakietach) obejmują użeranie się z Tidy Eval, o którym piszę <a href="./posts/metaprogramowanie.qmd">tutaj</a>.</p>
+<p>Żeby dodać jakieś funkcje do swojego pakietu, używamy funkcji <code>usethis::use_r()</code><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, gdzie jako argument podajemy nazwę pliku z funkcją. W większości przypadków będzie to nazwa samej funkcji, np. jeśli chcemy stworzyć funkcję do liczenia statystyk opisowych, moglibyśmy napisać <code>usethis::use_r("opisowe")</code>. Możemy też zawrzeć kilka funkcji w jednym pliku, ale powinny być to bardzo blisko związane funkcje. Na tyle blisko związane, żeby mogły dzielić jedną stronę w dokumentacji. Przykładem takich funkcji może być na przykład rodzina <code>devtools::install_*()</code> albo <code>usethis::use_*_license()</code>. Wszystkie funkcje z tych zestawów są prawie identyczne, więc mogą być zgromadzone w jednym pliku.</p>
+<p>Niezależnie jednak, czy robimy mały pakiecik do użytku własnego, czy może coś, co chcemy ostatecznie umieścić w CRAN, warto swoje funkcje udokumentować. Dokumentacja w R jest cudowna, łatwa w obsłudze i zawsze dostępna. Potraktuj swoją dokumentację jako ustrukturyzowane notatki, dzięki którym nie zapomnisz, na czym polegały Twoje funkcje i jak ich używać.</p>
+<section id="sec-cran-checks" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-cran-checks"><span class="header-section-number">6.1</span> Specyficzne wymogi CRAN i R-CMD-check</h2>
+<p>Załóżmy, że napisaliśmy już własną funkcję, która liczy podstawowy zestaw statystyk opisowych i zwraca je w ulubionej przez nas formie. Wykorzystam tutaj funkcję z <a href="./posts/metaprogramowanie.qmd">tekstu o metaprogramowaniu</a>. Definicję zapisuję w pliku <code>opisowe.R</code>, jaki wytworzyłem w poprzednim akapicie w folderze <code>R</code>.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>opisowe.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  kolumny_do_policzenia <span class="ot">&lt;-</span> <span class="fu">enquos</span>(...)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{ group }}) <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">across</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="sc">!!!</span>kolumny_do_policzenia),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">.fns =</span> <span class="fu">list</span>(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">N =</span> \(x) <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">M =</span> \(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">SD =</span> \(x) <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">A =</span> agricolae<span class="sc">::</span>skewness,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">K =</span> agricolae<span class="sc">::</span>kurtosis,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>          <span class="st">`</span><span class="at">NA</span><span class="st">`</span> <span class="ot">=</span> \(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x))</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Ponieważ jest to pakiet, musimy trochę przepisać naszą funkcję, jeśli nie chcemy, żeby R-CMD-check później na nas krzyczał. Jeśli nas to nie obchodzi, możemy to pominąć, ale lepiej jest od razu nabierać dobrych nawyków. Takie dopasowywanie funkcji dotyczy zazwyczaj tylko kilku rzeczy, z których najważniejsza to globalne definicje obiektów. R musi wiedzieć dokładnie, czym są pokazywane mu obiekty, żeby się nie buntował, niezależnie od tego, czy tym obiektem jest funkcja, czy baza danych.</p>
+<ol type="1">
+<li><p>Funkcje powinny być zapisane w postaci pełnych nazw, czyli np. <code>dplyr::group_by()</code>. Pakiety, z których pochodzą te funkcje, powinny być dodane jako zależności (por. podrozdział <a href="#sec-dependencies" class="quarto-xref">3.4</a>). Jeśli użyliśmy <code>usethis::use_tidy_eval()</code> (por. podrozdział <a href="#sec-dependencies" class="quarto-xref">3.4</a>), to funkcje z pakietu <code>rlang</code> są ładowane z automatu i nie potrzebują pełnych nazw.</p></li>
+<li><p>Jeśli w funkcjach typu <code>mutate()</code> wykorzystujemy nazwy kolumn bez cudzysłowu, np. <code>mutate(iris, millimeters = Sepal.Length * 10)</code>, R-CMD-check będzie krzyczał, że <code>Sepal.Length</code> nie ma globalnej definicji. W takim wypadku używamy wyrażenia <code>.data</code> z <code>rlang</code> i piszemy <code>dplyr::mutate(iris, millimeters = .data$Sepal.Length * 10)</code>.</p></li>
+<li><p>Jeśli w funkcjach wybierających kolumny (przede wszystkim <code>select()</code>) piszemy nazwy kolumn, to podajemy je w cudzysłowie. Powód jest taki, jak wyżej, brak globalnej definicji, ale <code>.data</code> nie nadaje się do <code>tidyselect</code>. Dla przykładu zamiast <code>select(iris, Sepal.Width, Sepal.Length)</code> powinniśmy napisać <code>dplyr::select(iris, "Sepal.Width", "Sepal.Length")</code>.</p></li>
+<li><p>Na ogół lepiej używać natywnego potoku <code>|&gt;</code> niż <code>%&gt;%</code>. Jeśli chcemy używać potoku z <code>magrittr</code> używamy wcześniej <code>usethis::use_pipe()</code>. Natywny potok oszczędza nam dodatkowej zależności.</p></li>
+</ol>
+<p>Poprawiona funkcja mogłaby więc wyglądać tak:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>opisowe.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  kolumny_do_policzenia <span class="ot">&lt;-</span> <span class="fu">enquos</span>(...)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">|&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>({{ group }}) <span class="sc">|&gt;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">across</span>(</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="sc">!!!</span>kolumny_do_policzenia),</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">.fns =</span> <span class="fu">list</span>(</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">N =</span> \(x) <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)),</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">M =</span> \(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">SD =</span> \(x) stats<span class="sc">::</span><span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">A =</span> agricolae<span class="sc">::</span>skewness,</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">K =</span> agricolae<span class="sc">::</span>kurtosis,</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>          <span class="st">`</span><span class="at">NA</span><span class="st">`</span> <span class="ot">=</span> \(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x))</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="dokumentowanie-z-roxygen2" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="dokumentowanie-z-roxygen2"><span class="header-section-number">6.2</span> Dokumentowanie z <code>roxygen2</code></h2>
+<p>Gdy mamy już naszą funkcję napisaną, przyszedł czas ją udokumentować. Niezależnie, czy robimy mały pakiecik do użytku własnego, czy może coś, co chcemy ostatecznie umieścić w CRAN, warto tego nie zaniedbywać. Dokumentacja w R jest cudowna, łatwa w obsłudze i zawsze dostępna. Potraktuj swoją dokumentację jako ustrukturyzowane notatki, dzięki którym nie zapomnisz, na czym polegały Twoje funkcje i jak ich używać. Tworzymy ją za pomocą specjalnego szkieletu obsługiwanego przez pakiet <code>roxygen2</code>. Możemy albo napisać taki szkielet od podstaw, albo wejść kursorem tesktowym do naszej funkcji i w RStudio z menu Code wybrać Insert Roxygen Skeleton (skrót klawiaturowy Ctrl+Alt+Shift+R). Taki szkielet szkieletu uzupełniamy ręcznie. Pokażmy to sobie na przykładzie.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>opisowe.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Statystyki opisowe</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' Funkcja licząca podstawowe statystyki opisowe: liczność, średnią, SD,</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' skośność, kurtozę i liczbę braków danych.</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param df ramka danych z kolumnami do policzenia.</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param group kolumna do grupowania.</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param ... nazwy kolumn, dla których mają być policzone statystyki.</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#' @return ramka danych z kolumnami `N`, `M`, `SD`, `A`, `K` i `NA`. Oryginalne nazwy</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#'     kolumn w formie przedrostka.</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#' @export</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">#' @examples</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">#' opisowe(iris, Species, Sepal.Width, Sepal.Length)</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Pierwszym, co zwraca uwagę, jest fakt, że napisałem to po polsku. Owszem, można, ale jeśli chcemy udostępniać nasz kod na zewnątrz, lepiej dokumentować pakiet po angielsku.</p>
+<p>Ten podstawowy opis funkcji zawiera kilka rzeczy:</p>
+<ol type="1">
+<li><p>Na samej górze znajduje się tytuł funkcji, który lapidarnie ale konkretnie opisuje jej przeznaczenie.</p></li>
+<li><p>Dalej opis działania funkcji. Również powinien być krótki i konkretny. Jeśli potrzebujemy więcej niż jednego akapitu, musimy jawnie napisać <code>@description</code>. W innym wypadku wystarczy zejść linijkę poniżej tytułu, tak jak pokazałem w przykładzie.</p></li>
+<li><p>Następnie mamy trzy tagi <code>@param</code>, z których każdy opisuje kolejny argument, jaki funkcja przyjmuje. Warto tutaj opisać postać, w jakiej argument musi zostać podany, np. <em>logical</em> albo <em>dataframe</em>.</p></li>
+<li><p>Tag <code>@return</code> opisuje, co funkcja zwraca. W tym wypadku jest to opis stworzonej ramki danych ze statystykami opisowymi.</p></li>
+<li><p>Tag <code>@export</code> nie zawiera żadnych informacji. Umieszcza się go w tych funkcjach, do których użytkownik powinien mieć dostęp.</p></li>
+<li><p>Na samym końcu mamy <code>@examples</code>, czyli przykłady użycia funkcji. Przykłady są obowiązkowe i obowiązkowo muszą zadziałać. Jeśli jakiś przykład specjalnie zwraca błąd (możemy w końcu chcieć pokazać, jak naszej funkcji <em>nie</em> używać), należy go umieścić w klamrze <code>\dontrun{}</code>, np. <code>\dontrun{opisowe(iris)}</code>.</p></li>
+</ol>
+<p>Do wymienionych wyżej podstawowych tagów możemy dodać także m.in. sekcje <code>@details</code> czy <code>@seealso</code>. Poniżej przykład strony w dokumentacji generowanej przez podstawowe tagi.</p>
+<div class="light-mode">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ilustracje/pakiety-w-R/dokumentacja.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Dokumentacja funkcji <code>opisowe()</code>.</figcaption>
+</figure>
+</div>
+</div>
+<div class="dark-mode">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ilustracje/pakiety-w-R/dokumentacja_dark.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Dokumentacja funkcji <code>opisowe()</code>.</figcaption>
+</figure>
+</div>
+</div>
+<p>Żeby przerobić szkielety <code>roxygen2</code> na rzeczywiste pliki dokumentacji (czyli pliki .Rd w folderze .man), należy uruchomić komendę <code>devtools::document()</code>. Tutaj zaczynają się ujawniać komendy, których warto używać często, a już zwłaszcza przed wysłaniem aktualizacji na GitHuba. Zbieram je wszystkie na końcu, w podsumowaniu.</p>
+<p>W przykładzie widać teź, że mogę używać w swoich szkieletach formatowania markdown. Jest to jednak możliwe tylko, jeśli wcześniej użyłem <code>usethis::use_roxygen_md()</code>, o czym pisałem w podrozdziale <a href="#sec-structure" class="quarto-xref">2</a>.</p>
+</section>
+<section id="dokumentacja-całego-pakietu" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="dokumentacja-całego-pakietu"><span class="header-section-number">6.3</span> Dokumentacja całego pakietu</h2>
+<p>Możemy dodać ogólną stronę w dokumentacji dotyczącą naszego pakietu jako całości. Wykonuje się to w specjalnym pliku .R, który można dodać funkcją <code>usethis::use_package_doc()</code>. Jeśli jednak użyłeś(-aś) wcześniej funkcji <code>usethis::use_tidy_dependencies()</code>, to wymusiła ona na Tobie wytworzenie takiego pliku. Niezależnie od wybranej drogi, po uruchomieniu jednej z tych komend znajdziesz w folderze <code>R</code> plik o nazwie typu typu <code>packagename-package.R</code>, gdzie możesz napisać dokumentację pakietu standardowo, jak w każdym innym pliku .R.</p>
+</section>
+</section>
+<section id="sec-datafiles" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Załączanie danych</h1>
+<p>Czasami chcemy załączyć do naszego pakietu dane. Mogą być one wartością samą w sobie (jak np. w pakiecie <code>datasets</code>), mogą służyć do ilustracji działania reszty naszego pakietu. Niezależnie od celu, pliki z danymi trzeba załączać w odpowiedni sposób, a także je dokumentować.</p>
+<section id="surowe-dane-w-data-raw" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="surowe-dane-w-data-raw"><span class="header-section-number">7.1</span> Surowe dane w <code>data-raw</code></h2>
+<p>Na początku potrzebujemy surowego pliku z danymi, np. w formacie .csv. Wrzucamy go do folderu <code>data-raw</code>, który tworzymy w głównym folderze naszego pakietu. Następnie tworzymy skrypt czyszczący. Najłatwiej wytworzyć go funkcją <code>usethis::use_data_raw()</code>, która za pierwszy argument przyjmuje nazwę, którą chcemy naszej bazie danych nadać. Mogłoby to być coś w stylu <code>usethis::use_data_raw("iris")</code>. Spowoduje to wytworzenie w folderze <code>data-raw</code> skryptu <code>iris.R</code>, który w tym momencie powinien nam się otworzyć w RStudio. Zawiera on tylko komentarz i jedną komendę <code>usethis::use_data()</code>. Powyżej tej komendy piszemy skrypt, który ładuje i czyści nasze surowe dane do takiej formy, którą chcemy załączyć w pakiecie. Gotowe dane zapisujemy do zmiennej o wybranej wcześniej nazwie. I to wystarczy. Podczas instalacji naszego pakietu zostaną załadowane też dane. Dostęp do nich możemy uzyskać za pomocą komendy, która w pełnej wersji ma postać <code>data("diamonds", package = "ggplot2")</code>. Poniżej przykład gotowego skryptu ładującego.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>mtscr_creativity.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mtscr_creativity <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data-raw/study2.csv"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>response_nofill, <span class="sc">-</span>item_nofill) <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    item <span class="sc">%in%</span> <span class="fu">c</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">"belt"</span>, <span class="st">"brick"</span>, <span class="st">"broom"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"bucket"</span>, <span class="st">"candle"</span>, <span class="st">"clock"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"comb"</span>, <span class="st">"knife"</span>, <span class="st">"lamp"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"pencil"</span>, <span class="st">"pillow"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"purse"</span>, <span class="st">"sock"</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">any</span>(<span class="fu">is.na</span>(SemDis_MEAN))</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_data</span>(mtscr_creativity, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="dokumentacja-plików-z-danymi" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="dokumentacja-plików-z-danymi"><span class="header-section-number">7.2</span> Dokumentacja plików z danymi</h2>
+<p>Jeśli załączamy w naszym pakiecie dane, to je również powinniśmy udokumentować. Tworzymy w tym celu specjalny plik <code>data.R</code> w folderze <code>R</code>, w którym opisujemy wszystkie nasze pliki z danymi. Pod szkieletem <code>roxygen2</code> umieszczamy nazwę naszej bazy danych w cudzysłowie. Poniżej skrócony przykład.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>data.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Creativity assessment through semantic distance dataset</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' A dataset from Forthmann, Karwowski &amp; Beaty ([2023](https://doi.org/10.1037/aca0000571)) paper.</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' It contains a set of responses in Alternative Uses Task for different items with their</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' semantic distance assessment.</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#' @return a [tibble][tibble::tibble-package]</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#' @format ## `mtscr_creativity`</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#' A `tibble` with 4585 rows and 3 columns:</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#' \describe{</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#'   \item{id}{patricipants' unique identification number}</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#'   \item{response}{response in AUT}</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#'   \item{item}{item for which alternative uses were searched for}</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#' }</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#' @source &lt;https://osf.io/7rgsp/&gt;</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="st">"mtscr_creativity"</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Specyficzne tagi to <code>@format</code>, w którym opisujemy <strong>każdą kolumnę</strong> i <code>@source</code>, w którym podajemy źródło naszych danych. <code>\describe{}</code> to sposób na dodanie do dokumentacji listy.</p>
+</section>
+</section>
+<section id="sec-r-cmd-check" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> R-CMD-check</h1>
+<p>Jeśli piszemy pakiet, zazwyczaj chcemy, żeby działał. Nie mogę być pewny, ale to chyba rozsądne założenie. Zazwyczaj pierwszym krokiem jest ręczne sprawdzenie, czy wszystko działa, jak byśmy się tego spodziewali. Żeby uzyskać dostęp do swoich funkcji tu i teraz, używamy komendy <code>devtools::load_all()</code>.</p>
+<p>Zestaw podstawowych czynności w kierunku sprawdzenia, czy nie występują podstawowe problemy z naszym kodem, czy czegoś nie zepsuliśmy, nie dopilnowaliśmy, jest zautomatyzowany i nazywa się R-CMD-check. Muszą go przejść wszystkie pakiety obecne w CRAN. Jeśli wykonaliśmy instrukcję z podrozdziału <a href="#sec-GitHubActions" class="quarto-xref">5.1</a>, po każdym commicie wykona go również GitHub i wynik pokaże na odznace.</p>
+<p>Po pierwsze R-CMD-check sprawdzi, czy cały kod spełnia standardy, czyli czy wszystkie obiekty w kodzie mają globalne definicje (por. podrozdział <a href="#sec-cran-checks" class="quarto-xref">6.1</a>), czy wszystkie przykłady wykonują się bez błędu, czy każda funkcja ma wszystkie niezbędne elementy dokumentacji, czy wszystkie używane pakiety zostały dodane jako zależności. Po drugie wykonane zostaną wszystkie testy, które opisuję w podrozdziale <a href="#sec-tests" class="quarto-xref">10</a>. Po trzecie, zostanie sprawdzona struktura repozytorium, czy nic się nie zepsuło, czy nie mamy jakichś plików, które nie powinny tam być. Do tego cała seria mniejszych lub większych rzeczy, które R może nam wytknąć jako błędy, ostrzeżenia lub informacje. Warto informacje wypluwane przez R-CMD-check przeczytać, bo są bardzo konkretne. Błędów być nie może, ostrzeżeń lepiej, żeby nie było, rzeczy wytykane w informacjach poprawiamy, kiedy mamy czas (albo gdy chcemy wysłać pakiet do CRAN).</p>
+<p>Żeby wykonać R-CMD-check używamy komendy <code>devtools::check()</code>. Ta komenda na wstępie odnowi nam doumentację, więc jeśli jej używamy, to nie musimy już korzystać z <code>devtools::document()</code>. Informacje o przeprowadzanych testach wyświetlają się na bieżąco, ale jeśli pojawią się jakieś uchybienia, zostaną one zbiorczo wyświetlone na koniec. Komendę <code>devtools::check()</code> dobrze jest wykonać przed każdym wypchnięciem do GitHuba, żeby nie zdziwił nas wynik wykonany już w repozytorium.</p>
+</section>
+<section id="sprawdzanie-wejścia-i-informacje-o-błędach" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Sprawdzanie wejścia i informacje o błędach</h1>
+<p>Ten podrozdział i wszystkie kolejne, <strong>nie są niezbędne</strong>, żeby pakiet działał i był użyteczny. Są to rzeczy, które warto wiedzieć, ale przydadzą się przede wszystkim w pakietach dużych i/lub udostępnianych szerokiej publiczności. Małe pakiety albo użytkowane w wąskim gronie zazwyczaj nie potrzebują szerokiej kontroli wejścia czy złożonych informacji o błędach. Jedyne, nad czym bym się zastanowił, czy nie wprowadzać od początku, to testy z podrozdziału <a href="#sec-tests" class="quarto-xref">10</a>.</p>
+<p>Dobre komendy są odporne, w tym znaczeniu, że zabezpieczają użytkownika przed nieprawidłowym wykorzystaniem. Debiloodporne, chciałoby się powiedzieć. Jeśli osoba popełnia błąd, na przykład podaje wektor zamiast ramki danych albo wskazuje kolumny, których nie ma, powinna dostać konkretną informację zwrotną (tj. błąd). Jeśli nie zabezpieczymy naszej funkcji przed nieprawidłowym wykorzystaniem, użytkownik dostanie informacje o błędach z funkcji, z których zbudowaliśmy naszą funkcję. Innymi słowy jeśli na przykład wykorzystujemy komendę <code>select()</code> i użytkownik pod kolumnę, która nie istnieje, zobaczy błąd wygenerowany w kolumnie <code>select()</code>. Czasem to dobrze, czasem to źle. Jeśli wykonujemy jakieś skomplikowane przekształcenia w naszej funkcji i gdzieś w środku wypłynie błąd, informacja o błędzie może po prostu nijak nie podpowiadać, co mogło ten błąd spowodować. Czasem jednak te informacje będą wystarczająco jasne, by nie musieć tworzyć ich samodzielnie.</p>
+<p>Ogólnie dobrze jest zabezpieczać swoje funkcje, ale znowu – to <strong>nie jest konieczne, żeby pakiet działał</strong>. To będziemy robić, jak będziemy mieli czas albo poważnie będziemy chcieli ulepszyć nasz pakiet do użytku innych. My zazwyczaj znamy nasze funkcje bardzo dobrze, więc zazwyczaj będziemy je poprawnie wykorzystywać.</p>
+<p>Zazwyczaj to zabezpieczenie dotyczy sprawdzania wejścia, czyli czy to, co użytkownik podał, spełnia wymogi naszej funkcji. Zazwyczaj robi się to na samym początku, dość prosto, bo za pomocą połączenia <code>if</code> i <code>stop()</code>. My tutaj jednak wykorzystamy ładniejsze informacje o błędach, które wdraża pakiet <code>cli</code> w połączeniu z <code>glue</code>. Oba te pakiety dodaliśmy już do zależności, jeśli wykorzystaliśmy <code>usethis::use_tidy_dependencies()</code>. Rodzina funkcji, które nam się tu przydadzą, to <code>cli::cli_abort()</code>, <code>cli::cli_warn()</code> lub <code>cli::cli_inform()</code>.</p>
+<section id="typ-argumentu" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="typ-argumentu"><span class="header-section-number">9.1</span> Typ argumentu</h2>
+<p>Zazwyczaj najpierw sprawdzamy, czy obiekt podany przez użytkownika jako argument ma odpowiedni typ. Na przykład jeśli naszym pierwszym argumentem jest ramka danych <code>df</code>, możemy chcieć upewnić się, czy to rzeczywiście jest ramka danych.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>winda_do_nieba <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">1</span> <span class="co"># coś, co nie jest ramką danych</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>input_check <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.data.frame</span>(df)) {</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        cli<span class="sc">::</span><span class="fu">cli_abort</span>(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"{.arg df} must be a data frame."</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"x"</span> <span class="ot">=</span> <span class="st">"Provided {.arg df} is {.obj_type_friendly {df}}"</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">input_check</span>(winda_do_nieba)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `input_check()`:
+! `df` must be a data frame.
+✖ Provided `df` is a number</code></pre>
+</div>
+</div>
+<p>Klamra <code>if</code> sprawdza, czy <code>df</code> <em>nie jest</em> ramką danych (zwróćmy uwagę na wykrzyknik <code>!</code>). Jeśli nie jest, uruchamiana jest funkcja <code>cli_abort()</code>. Zatrzymuje ona wykonywanie kodu i pokazuje w konsoli błąd w estetycznej formie.</p>
+<p>Jak używać tej funkcji? Ma ona całkiem sporo możliwości. Najprostszą rzeczą, którą może przyjąć, jest sam komunikat z błędem. Może to być zwykły tekst. Mamy też dodatkowe możliwości formatowania, o których jednak później. Komunikat jest opatrzony ikonką, która zależy od tego, czy chcemy wyrzucić błąd, ostrzeżenie czy informację.</p>
+</section>
+<section id="punktory" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="punktory"><span class="header-section-number">9.2</span> Punktory</h2>
+<p>Możemy jednak dokładać kolejne komunikaty i kolejne ikonki. W takim wypadku do funkcji <code>cli_abort()</code> wrzucamy wektor komunikatów. Pierwszy komunikat jest nienazwany, zaś w kolejnych wprost wskazujemy, jakie chcemy punktory. Cała lista dostępna jest w <a href="https://cli.r-lib.org/reference/cli_bullets.html">dokumentacji <code>cli::cli_bullet()</code></a>. Dostępne w chwili, gdy to piszę, pokazuję niżej.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cli<span class="sc">::</span><span class="fu">cli_bullets</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"bez wcięcia"</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">" "</span> <span class="ot">=</span> <span class="st">"wcięcie"</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"*"</span> <span class="ot">=</span> <span class="st">"punktor"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"&gt;"</span> <span class="ot">=</span> <span class="st">"strzałka"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"v"</span> <span class="ot">=</span> <span class="st">"sukces"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"x"</span> <span class="ot">=</span> <span class="st">"zagrożenie"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"!"</span> <span class="ot">=</span> <span class="st">"ostrzeżenie"</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"i"</span> <span class="ot">=</span> <span class="st">"informacja"</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>bez wcięcia</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  wcięcie</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>• punktor</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>→ strzałka</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ sukces</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✖ zagrożenie</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>! ostrzeżenie</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ informacja</code></pre>
+</div>
+</div>
+</section>
+<section id="formatowanie-z-glue" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="formatowanie-z-glue"><span class="header-section-number">9.3</span> Formatowanie z <code>glue</code></h2>
+<p>Poza punktorami możemy dodatkowo formatować tekst korzystając ze składni dostarczanej przez <code>glue</code>. <code>cli</code> obsługuje ją automatycznie. Wszystkie szczegóły oraz jak to wygląda rzeczywiście w konsoli znajdziemy na <a href="https://cli.r-lib.org/reference/inline-markup.html">tej</a> stronie dokumentacji. Ja omówię tutaj same podstawy. Jeśli chodzi o to, jak formatować, jak to powinno wyglądać, osobiście często sprawdzam w <code>tidyverse</code>. Próbuję&nbsp;wywołać podobny błąd np. w funkcji <code>dplyr::select()</code> i patrzę, co mi wyskakuje. Traktuję to jako wzorzec, podpowiedź.</p>
+<p>Tekst, który chcemy sformatować, bierzemy w nawiasy klamrowe. W nawiasie zaczynamy od określenia, w jaki sposób chcemy dany tekst sformatować. Poniżej lista możliwych formatów.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cli_li</span>(<span class="st">"Tekst {.emph kursywą}."</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cli_li</span>(<span class="st">"{.strong Pogrubiony} tekst."</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cli_li</span>(<span class="st">"Fragment kodu: {.code sum(a) / length(a)}."</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cli_li</span>(<span class="st">"Nazwa pakietu: {.pkg cli}."</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cli_li</span>(<span class="st">"Nazwa funkcji: {.fn cli_text}."</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cli_li</span>(<span class="st">"Klawisz: wciśnij {.kbd spację}."</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cli_li</span>(<span class="st">"Nazwa lub ścieżka pliku: {.file /usr/bin/env}."</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cli_li</span>(<span class="st">"Adres mailowy: {.email marylala@marylarodowicz.pl}."</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cli_li</span>(<span class="st">"Adres WWW: {.url https://example.com}."</span>)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cli_li</span>(<span class="st">"Zmienna środowiskowa: {.envvar R_LIBS}."</span>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cli_li</span>(<span class="st">"Typ obiektu: `mtcars` is {.obj_type_friendly {mtcars}}"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Jeśli chcemy, możemy wykonywać też operacje w nawiasach klamrowych. Zazwyczaj będziemy wtedy zagnieżdżać jedne nawiasy w drugich. Najlepiej pokazać to na przykładzie.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cli_warn</span>(<span class="st">"Złamano {.strong {sum(365, 248)}} postanowień. Ostrzegam cię."</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Złamano 613 postanowień. Ostrzegam cię.</code></pre>
+</div>
+</div>
+<p>Wewnątrz klamry z pogrubieniem dołożyłem drugą klamrę, w której umieściłem funkcję sumującą. Umieszczenie funkcji w klamrze sprawiło, że w ostrzeżeniu pojawia nam się wynik, 613, a nie tekst <code>sum(365, 248)</code>. Nie jest to zbyt użytkowy przykład, ale dobrze jest wiedzieć, że tak się da. W kolejnym przykładzie zobaczymy, jak można tego użyć do dostosowywania informacji zwrotnych pod użytkownika.</p>
+</section>
+<section id="obecność-kolumn-w-bazie" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="obecność-kolumn-w-bazie"><span class="header-section-number">9.4</span> Obecność kolumn w bazie</h2>
+<p>Poza sprawdzeniem typu argumentu, możemy chcieć się upewnić, że kolumny wskazane przez użytkownika rzeczywiście są obecne w bazie. Pomocna będzie tutaj funkcja <code>rlang::has_name()</code>, która dokładnie to sprawdza. Jeśli obiekt istnieje, <code>has_name()</code> wyrzuca <code>TRUE</code>, a jeśli nie, wyrzuca <code>FALSE</code>. Niestety <code>has_name()</code> wymaga nazwy kolumny w postaci string, dlatego musimy pobawić się trochę z Tidy Eval. Jeśli nie wiesz, jak to robić, odsyłam do <a href="./posts/metaprogramowanie.qmd">tego</a> tekstu.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>col_check <span class="ot">&lt;-</span> <span class="cf">function</span>(df, id_column) {</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    id_column <span class="ot">&lt;-</span> <span class="fu">enquo</span>(id_column)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>rlang<span class="sc">::</span><span class="fu">has_name</span>(df, rlang<span class="sc">::</span><span class="fu">as_name</span>(id_column))) {</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>        cli<span class="sc">::</span><span class="fu">cli_abort</span>(</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"All columns must exist in the data."</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"x"</span> <span class="ot">=</span> <span class="st">"Column {.var {rlang::as_name(id_column)}} does not exist."</span>,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">"i"</span> <span class="ot">=</span> <span class="st">"Check the spelling."</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="fu">col_check</span>(iris, Sepal.Density)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `col_check()`:
+! All columns must exist in the data.
+✖ Column `Sepal.Density` does not exist.
+ℹ Check the spelling.</code></pre>
+</div>
+</div>
+<p>W powyższym przykładzie widzimy też, do czego może nam się&nbsp;przydać zagnieżdżanie nawiasów klamrowych. Tutaj wykorzystuję je do zawarcia nazwy nieistniejącej kolumny w komunikacie o błędzie.</p>
+</section>
+</section>
+<section id="sec-tests" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Testy z <code>testthat</code></h1>
+<p>Testy automatyczne to bardzo szeroki temat. Idea, która za nimi stoi, jest mniej więcej taka – jest wiele rzeczy, które mogą pójść źle, które można zepsuć. Nikomu się nie chce po każdych zmianach w kodzie sprawdzać, czy jakiś drobny aspekt przez te zmiany nie ucierpiał. W tym celu piszemy specjalne skrypty, które za nas sprawdzą, czy wszystko działa tak, jak powinno. W R testy piszemy z użyciem pakietu <code>testthat</code>. By móc z niego korzystać, uruchamiamy w naszym repozytorium komendę <code>usethat::use_testthat()</code>.</p>
+<section id="struktura-testów" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="struktura-testów"><span class="header-section-number">10.1</span> Struktura testów</h2>
+<p>Wszystkie testy znajdują się w folderze <code>tests</code>, w podfolderze <code>testthat</code>. Możemy je wytwarzać ręcznie, ale zazwyczaj będziemy wykorzystywać komendę <code>usethis::use_test()</code>. W domyśle jeden plik z funkcjami powinien mieć odpowiadający mu plik z testami. W RStudio komenda <code>usethis::use_test()</code> nie potrzebuje żadnych argumentów – domyślnie tworzy plik z testami dla aktualnie otwartego skryptu.</p>
+<p>Nowo utworzony plik zawiera przykładowy test, który możemy spokojnie usunąć. Żeby napisać własny test wykorzystamy przede wszystkim komendę <code>test_that()</code> oraz komendy z rodziny <code>expect_*()</code>. Komenda <code>test_that()</code> przyjmuje dwie rzeczy – opis, co test robi (jako string) oraz komendy składające się na test zapisane w nawiasach klamrowych. Warto zauważyć, że nie musimy pisać <code>testthat::test_that()</code>. Cały pakiet jest dostępny od chwili użycia <code>usethat::use_testthat()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">"Jakiś element działa jak należy"</span>, {</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Tutaj komendy składające się&nbsp;na test</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>W nawiasach klamrowych możemy zapomnieć, że jesteśmy wewnątrz funkcji i pisać kod normalnie. Możemy na przykład tworzyć przykładowe zbiory danych, na których będziemy wykonywać testy. Najważniejsze są jednak funkcje z rodziny <code>expect_*()</code>, za pomocą których mówimy, czego oczekujemy od danej funkcji. Rodzina ta jest szeroka, bo i funkcje do testowania są bardzo różne. W ramach jednej funkcji <code>test_that()</code> możemy użyć kilku tego typu komend, ale staramy się utrzymać porządek, żeby każda funkcja <code>test_that()</code> testowała coś konkretnego. Poniżej wymieniam kilka najważniejszych funkcji <code>expect_*()</code>, a bardziej rozszerzoną ich listę można znaleźć <a href="https://testthat.r-lib.org/reference/">tutaj</a>.</p>
+<ol type="1">
+<li><p><code>expect_identical()</code> i <code>expect_equal()</code> – czy zadane wartości są takie same? Można ustawić tolerancję błędu.</p></li>
+<li><p><code>expect_length()</code> – czy obiekt ma określoną długość?</p></li>
+<li><p><code>expect_names()</code> – czy nazwy kolumn (wartości) są takie, jakie mają być? Pozwala zignorować kolejność i wielkość liter.</p></li>
+<li><p><code>expect_match()</code> – czy w wektorze tekstowym jest tekst odpowiadający <a href="./posts/regex.qmd">wyrażeniu regularnemu</a>?</p></li>
+<li><p><code>expect_type()</code> – czy obiekt jest określonego typu?</p></li>
+<li><p><code>expect_error()</code>, <code>expect_warning()</code> i <code>expect_message()</code> – jak nazwa wskazuje; czy dany kod generuje błąd/ostrzeżenie/informację? Pozwala też sprawdzać treść komunikatów za pomocą <a href="./posts/regex.qmd">wyrażeń regularnych</a>.</p></li>
+<li><p><code>expect_true()</code> i <code>expect_false()</code> – najbardziej uniwersalne funkcje sprawdzające. Jednocześnie lepiej zastąpić je innymi, jeśli jest możliwość, żeby wyniki testów były bardziej czytelne.</p></li>
+</ol>
+</section>
+<section id="przykładowe-testy" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="przykładowe-testy"><span class="header-section-number">10.2</span> Przykładowe testy</h2>
+<p>Załóżmy, że chcemy napisać testy do naszej funkcji <code>opisowe()</code>. Przypomnijmy jej definicję.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>opisowe.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check if df is a dataframe</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.data.frame</span>(df)) {</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        cli<span class="sc">::</span><span class="fu">cli_abort</span>(</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">"{.arg df} must be a data frame."</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"x"</span> <span class="ot">=</span> <span class="st">"Provided {.arg df} is {.obj_type_friendly {df}}"</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    kolumny_do_policzenia <span class="ot">&lt;-</span> <span class="fu">enquos</span>(...)</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>({{ group }}) <span class="sc">%&gt;%</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>            <span class="fu">across</span>(</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(<span class="sc">!!!</span>kolumny_do_policzenia),</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="fu">list</span>(</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">N =</span> \(x) <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)),</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>                    <span class="at">M =</span> \(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>                    <span class="at">SD =</span> \(x) <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>                    <span class="at">A =</span> agricolae<span class="sc">::</span>skewness,</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>                    <span class="at">K =</span> agricolae<span class="sc">::</span>kurtosis,</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>                    <span class="st">`</span><span class="at">NA</span><span class="st">`</span> <span class="ot">=</span> \(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x))</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Dorzuciłem tutaj sprawdzenie, czy <code>df</code> jest ramką danych. Jakie testy moglibyśmy napisać dla tej funkcji? Poniżej kilka przykładów.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>test-opisowe.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a test data frame with normally distributed data</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), <span class="at">each =</span> <span class="dv">50</span>),</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co"># test if function returns a data frame</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">"opisowe returns a data frame"</span>, {</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_s3_class</span>(<span class="fu">opisowe</span>(df, group, x, y), <span class="st">"data.frame"</span>)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="co"># test if function calculates summary statistics correctly</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">"opisowe calculates summary statistics correctly"</span>, {</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    result <span class="ot">&lt;-</span> <span class="fu">opisowe</span>(df, group, x, y)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    <span class="do">## N</span></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_equal</span>(result<span class="sc">$</span>group, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>))</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_equal</span>(result<span class="sc">$</span>x_N, <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">50</span>))</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_equal</span>(result<span class="sc">$</span>y_N, <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">50</span>))</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    <span class="do">## M</span></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_equal</span>(result<span class="sc">$</span>x_M, <span class="fu">c</span>(<span class="fl">0.0344</span>, <span class="fl">0.1464</span>), <span class="at">tolerance =</span> <span class="fl">0.001</span>)</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_equal</span>(result<span class="sc">$</span>y_M, <span class="fu">c</span>(<span class="fl">4.4921</span>, <span class="fl">5.0776</span>), <span class="at">tolerance =</span> <span class="fl">0.001</span>)</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>    <span class="do">## SD</span></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_equal</span>(result<span class="sc">$</span>x_SD, <span class="fu">c</span>(<span class="fl">0.9258</span>, <span class="fl">0.9054</span>), <span class="at">tolerance =</span> <span class="fl">0.001</span>)</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_equal</span>(result<span class="sc">$</span>y_SD, <span class="fu">c</span>(<span class="fl">1.9786</span>, <span class="fl">1.8619</span>), <span class="at">tolerance =</span> <span class="fl">0.001</span>)</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>    <span class="do">## A</span></span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_equal</span>(result<span class="sc">$</span>x_A, <span class="fu">c</span>(<span class="fl">0.1729</span>, <span class="sc">-</span><span class="fl">0.0462</span>), <span class="at">tolerance =</span> <span class="fl">0.001</span>)</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_equal</span>(result<span class="sc">$</span>y_A, <span class="fu">c</span>(<span class="fl">0.4376</span>, <span class="fl">1.0372</span>), <span class="at">tolerance =</span> <span class="fl">0.001</span>)</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>    <span class="do">## K</span></span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_equal</span>(result<span class="sc">$</span>x_K, <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.3366</span>, <span class="fl">0.3234</span>), <span class="at">tolerance =</span> <span class="fl">0.001</span>)</span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_equal</span>(result<span class="sc">$</span>y_K, <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1718</span>, <span class="fl">1.8702</span>), <span class="at">tolerance =</span> <span class="fl">0.001</span>)</span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>    <span class="do">## NA</span></span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_equal</span>(result<span class="sc">$</span>x_NA, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_equal</span>(result<span class="sc">$</span>y_NA, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a><span class="co"># test if function throws an error when df is not a data frame</span></span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">"opisowe throws an error when df is not a data frame"</span>, {</span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect_error</span>(<span class="fu">opisowe</span>(<span class="fu">list</span>(), group, x, y))</span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Po pierwsze stworzyłem tutaj bazę&nbsp;danych, na której będziemy liczyć. Po drugie stworzyłem trzy zestawy testów. Pierwszy sprawdza, czy wynik to ramka danych. Drugi sprawdza, czy statystyki wyglądają, jak mają wyglądać, z dokładnością do 3. miejsca po przecinku. Ostatni sprawdza, czy funkcja wyrzuca błąd, gdy <code>df</code> będzie czymś innym, niż baza danych.</p>
+<p>Gdy taki plik zapiszemy, testy są już uzbrojone. Możemy je wykonać używając komendy <code>devtools::test_active_file()</code>. Wszystkie testy zostaną też wykonane podczas <code>devtools::check()</code>.</p>
+</section>
+<section id="co-i-jak-testować" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="co-i-jak-testować"><span class="header-section-number">10.3</span> Co i jak testować?</h2>
+<p>Hot take, którego nie ma jeszcze w podręcznikach – sztuczna inteligencja jest świetna w pisaniu testów. Nie ma się&nbsp;co oszukiwać, pisanie testów jest upierdliwe, ale na szczęście Chat GPT może to sprawnie zrobić za nas. Od Chatu GPT lepszy jest GitHub Copilot X, do którego dostęp studenci i pracownicy naukowi mają <a href="https://education.github.com/discount">za darmo</a>. Czasami tylko testy generowane przez AI wykorzystują wycofane już komendy, np. <code>expect_is()</code> zamiast <code>expect_type()</code>.</p>
+<p>Testy jest dobrze pisać, bo czasem możemy przegapić, że coś zepsuliśmy. Jeśli zabezpieczyliśmy się testami, <code>devtools::check()</code> nakrzyczy na nas, że coś zepsuliśmy. Nakrzyczy na nas też, jeśli nie wyjdą przykłady, ale przykład musi tylko zadziałać, a test może wymagać <em>konkretnego</em> wyjścia. Bez testów nie wykryjemy, że przykład zwraca bzdurę, bo jeśli zwraca cokolwiek, to R-CMD-check to wystarczy.</p>
+<p>Sztuka polega na tym, żeby pisać testy tak, żeby nie trzeba było ich zmieniać za każdym jednym razem, jak będziemy coś zmieniać w funkcji. Zbyt duże struktury testów mogą sprawić, że kod będzie bardzo trudny do utrzymania. Małe poprawki mogą wymusić na nas każdorazowo szerokie zmiany w testach. Trzeba więc znaleźć jakiś punkt pośredni i nie dać się zwariować. Testy mają nam <strong>oszczędzić pracy, a nie dołożyć</strong>.</p>
+</section>
+</section>
+<section id="code-coverage-z-codecov" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> <em>Code coverage</em> z <code>codecov</code></h1>
+<p>Z testami wiąże się&nbsp;pojęcie <em>code coverage</em>. Jest to wskaźnik, który mówi o tym, jaki procent kodu jest sprawdzany w testach. Nie oznacza to, czy sprawdziliśmy wszystkie sytuacje, w których w kodzie może zadziać się coś źle, ale czy każda linia kodu została wykonana w testach chociaż raz. A więc, czy na bardzo podstawowym poziomie działa, czyli czy wykonuje się bez błędu.</p>
+<section id="sprawdzanie-code-coverage" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="sprawdzanie-code-coverage"><span class="header-section-number">11.1</span> Sprawdzanie <em>code coverage</em></h2>
+<p><em>Code coverage</em> możemy bardzo łatwo sprawdzić zarówno dla pojedynczego pliku, jak i dla całego pakietu. Robią to odpowiednio funkcje <code>devtools::test_coverage_active_file()</code> i <code>devtools::test_coverage()</code>. Raport z takiego sprawdzenia zawiera ogólny <em>code coverage</em>, także w podziale na pliki oraz informację, jakie konkretne linijki zostały, a jakie nie zostały przetestowane.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ilustracje/pakiety-w-R/covr.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Wynik <code>devtools::test_coverage()</code>.</figcaption>
+</figure>
+</div>
+</section>
+<section id="automatyczne-raportowanie" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="automatyczne-raportowanie"><span class="header-section-number">11.2</span> Automatyczne raportowanie</h2>
+<p>Istnieje cała seria narzędzi do automatycznego raportowania <em>code coverage</em>. Bardzo często repozytoria chwalą się wielkością tego wskaźnika na odznakach. Jeśli pakiet jest dobrze testowany, to może znaczyć, że jest porządnie zrobiony albo chociaż z należytą dbałością.</p>
+<p>Narzędziem, które tutaj omówię i które ma dobrą integrację z R, jest Codecov. Żeby podłączyć swoje repozytorium do Codecov musimy założyć odpowiednie konto i uruchomić dwie komendy. Jeśli chodzi o konto, wchodzimy na <a href="https://codecov.io/">codecov.io</a>, zakładamy konto i upoważniamy Codecov do dostępu do naszego konta GitHub. Naszym oczom powinna ukazać się lista wszystkich naszych repozytorów, do której wkrótce wrócimy. Komendy natomiast wymieniam niżej.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_coverage</span>(<span class="st">"codecov"</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_github_action</span>(<span class="st">"test-coverage"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Przygotuje to nasze repozytorium, ale nie w sposób idealny. W momencie, w którym to piszę, trzeba wprowadzić serię poprawek i dodatkowych czynności, żeby wszystko szło, jak powinno.</p>
+<ol type="1">
+<li><p>Na stronie <a href="https://codecov.io/">codecov.io</a> wchodzimy w nasze repozytorium i kopiujemy token, który się tam wyświetla. Musimy go wskazać w naszym repozytorium jako sekret. Robimy to w ustawieniach repozytorium, ale szczęśliwie Codecov podpowiada nam link bezpośrednio do ustawień. Nazwa sekretu to <code>CODECOV_TOKEN</code>, a jego wartość to sam ten kod, który skopiowaliśmy.</p></li>
+<li><p>Jeśli chcemy, możemy upoważnić <a href="https://github.com/apps/codecov">apkę Codecov na GitHubie</a>. Zamieszcza ona automatyczne raporty o <em>code coverage</em> przy pull requestach.</p></li>
+<li><p>Plik <code>.github/workflows/test-coverage.yaml</code> modyfikujemy w taki sposób, żeby góra tego pliku wyglądała tak, jak niżej. Nie usuwamy innych zmiennych środowiskowych, tylko dopisujemy <code>CODECOV_TOKEN</code>.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">test-coverage</span><span class="kw">:</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">env</span><span class="kw">:</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">CODECOV_TOKEN</span><span class="kw">:</span><span class="at"> ${{ secrets.CODECOV_TOKEN }}</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="1">
+<li>Jeśli repozytorium jest prywatne, na końcu zmieniamy naszą formułę tak, żeby wyglądała jak niżej.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Upload coverage reports to Codecov</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> codecov/codecov-action@v3</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">token</span><span class="kw">:</span><span class="at"> ${{ secrets.CODECOV_TOKEN }}</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="5" type="1">
+<li>Odznaka dodawana przez <code>usethis</code> nie działa. Na <a href="https://codecov.io/">codecov.io</a>, po wejściu w nasze repozytorium (już po jego uruchomieniu), w ustawieniach, w sekcji „Badges &amp; Graphs” znajdziemy poprawny link, którym zastępujemy ten dodany przez <code>usethis</code> w <code>README.Rmd</code>.</li>
+</ol>
+<p>Zestaw określony wyżej może się dość szybko zdezaktualizować, dotarłem do niego na zasadzie prób i błędów. Najbardziej newralgiczne są punkty 3. i 4., które mają za zadanie dać Codecov znać, jaki jest token, który dodaliśmy wcześniej do sekretów repozytorium. Po wykonaniu tych czynności raporty <em>code coverage</em> staną się jawne, będziemy mogli się nimi chwalić na głównej stronie naszego repozytorium, a także będą wykonywane automatycznie przez GitHub za każdym razem, gdy wypchniemy nowy commit.</p>
+</section>
+</section>
+<section id="bonus-załączanie-apki-w-shiny" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Bonus: załączanie apki w Shiny</h1>
+<p>Nie wiem, ile osób będzie tego potrzebować, ale że ciężko mi było to znaleźć, to się podzielę. Jak załączyć do naszego pakietu apkę napisaną w Shiny? Miałem ten problem, gdy chciałem dołączyć GUI do pakietu <code>mtscr</code>, które napisałem właśnie w Shiny.</p>
+<ol type="1">
+<li><p>W folderze <code>inst</code> tworzymy podfolder o wybranej przez nas nazwie. Jako przykład wybiorę podfolder <code>GUI</code>.</p></li>
+<li><p>Do podfolderu wrzucamy naszą apkę w Shiny, ale główny plik koniecznie nazywamy <code>app.R</code>.</p></li>
+<li><p>W głównym pakiecie tworzymy funkcję uruchamiającą. Przykład niżej. Zamiast <code>"GUI"</code> piszemy nazwę naszego podfolderu, a zamiast <code>"mtscr"</code> nazwę naszego pakietu. Przykładowa funkcja sprawdza tylko, czy apka znajduje się tam, gdzie powinna. Funkcja <code>system.file</code> zwraca ścieżkę do pakietu, a w tym wypadku do konretnego komponentu tego pakietu – apki w Shiny.</p></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>mtscr_app.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mtscr_app <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    app_dir <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"GUI"</span>, <span class="at">package =</span> <span class="st">"mtscr"</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (app_dir <span class="sc">==</span> <span class="st">""</span>) {</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>        cli<span class="sc">::</span><span class="fu">cli_abort</span>(</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">"The app not found."</span>,</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"i"</span> <span class="ot">=</span> <span class="st">"Try reinstalling the {.pkg mtscr} package with {.run devtools::intall_github(</span><span class="sc">\"</span><span class="st">jakub-jedrusiak/mtscr</span><span class="sc">\"</span><span class="st">)"</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>    shiny<span class="sc">::</span><span class="fu">runApp</span>(app_dir, <span class="at">display.mode =</span> <span class="st">"normal"</span>)</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Użytkownik może teraz bez problemu uruchomić naszą apkę w Shiny poprzez funkcję uruchamiającą. Warto też pomyśleć, czy nie zrobić z niej dodatku do RStudio. Możemy to zrobić tworząc plik <code>inst/rstudio/addins.dcf</code> i dopisując do niego coś w tym rodzaju.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>addins.dcf</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>Name<span class="sc">:</span> MTSCR GUI</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>Description<span class="sc">:</span> Runs MTSCR GUI app.</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>Binding<span class="sc">:</span> mtscr_gui <span class="co"># funkcja uruchamiająca</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>Interactive<span class="sc">:</span> true <span class="co"># dla Shiny dajemy true</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Od tego momentu <code>MTSCR GUI</code> będzie dostępne w menu <em>addins</em> w RStudio.</p>
+</section>
+<section id="podsumowanie" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Podsumowanie</h1>
+<p>Docieramy wreszcie do końca tego przydługiego tekstu. Jak zwykle, tylko liznęliśmy temat po powierzchni, ale mam nadzieję, że było to wystarczające liźnięcie, żeby poczuć smak budowania pakietów. Przede wszystkim liczę na to, że wystarczy to, by móc dalej samodzielnie zdobywać wiedzę w już konkretnych zakresach. Podstawowe źródła to, jak zwykle, dokumentacja i książka Hadleya Wickhama. Tym razem tą książką jest <a href="https://r-pkgs.org/">R Packages</a> i jest tam większość tego, co można znaleźć w tym tekście, tylko znacznie, znacznie pogłębione.</p>
+<p>Oprócz podsumowania w punktach wydaje mi się, że korzystne będzie zebranie wszystkich podstawowych komend w zestawy tematyczne. Zestawy ułożyłem chronologicznie, to znaczy w takiej kolejności, w jakiej będziemy budować nasz pakiet.</p>
+<section id="zakładanie-repozytorium" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="zakładanie-repozytorium"><span class="header-section-number">13.1</span> Zakładanie repozytorium</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>roxygen2<span class="sc">::</span><span class="fu">roxygenise</span>() <span class="co"># dodaj roxygen2, najpeirw usuń NAMESPACE</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_roxygen_md</span>() <span class="co"># obsługa markdown w roxygen2</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_gpl3_license</span>() <span class="co"># licencja GPL v. 3</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_package</span>(<span class="st">"R"</span>, <span class="at">type =</span> <span class="st">"Depends"</span>, <span class="at">min_version =</span> <span class="st">"4.2.0"</span>) <span class="co"># dodaj zależność od R</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_tidy_dependencies</span>() <span class="co"># podstawowe zależności tidyverse</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_tidy_eval</span>() <span class="co"># narzędzia do Tidy Eval</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_tibble</span>() <span class="co"># dodaj tibble</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_pipe</span>() <span class="co"># dodaj potoki z magrittr %&gt;%</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_lifecycle</span>() <span class="co"># dodaj oznaczniki lifecycle</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_readme_rmd</span>() <span class="co"># dodaj README.Rmd</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="podłączanie-githuba" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="podłączanie-githuba"><span class="header-section-number">13.2</span> Podłączanie GitHuba</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_git</span>() <span class="co"># popraw/załóż pliki repozytorium git</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_github</span>(<span class="at">private =</span> <span class="cn">TRUE</span>) <span class="co"># załóż repozytorium prywatne na GitHubie</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_github_action_check_standard</span>() <span class="co"># dodaj automatyczne R-CMD-check</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="mniejsze-opcje" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="mniejsze-opcje"><span class="header-section-number">13.3</span> Mniejsze opcje</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_package_doc</span>() <span class="co"># dokumentacja całego pakietu</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_cran_badge</span>() <span class="co"># odznaka CRAN</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_lifecycle_badge</span>(<span class="st">"experimental"</span>) <span class="co"># odznaka lifecycle experimental</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_citation</span>() <span class="co"># dodaj plik CITATION</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="testy" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="testy"><span class="header-section-number">13.4</span> Testy</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">load_all</span>() <span class="co"># załaduj pakiet, żeby testować ręcznie</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>usethat<span class="sc">::</span><span class="fu">use_testthat</span>() <span class="co"># dodaj testthat</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_coverage</span>(<span class="st">"codecov"</span>) <span class="co"># dodaj codecov</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_github_action</span>(<span class="st">"test-coverage"</span>) <span class="co"># dodaj automatyczne raporty codecov</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="używanie-na-co-dzień" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="używanie-na-co-dzień"><span class="header-section-number">13.5</span> Używanie na co dzień</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">load_all</span>() <span class="co"># załaduj pakiet, żeby testować ręcznie</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_r</span>(<span class="st">"nazwa_funkcji"</span>) <span class="co"># stwórz plik z funkcjami</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_test</span>() <span class="co"># dodaj plik z testami</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_data_raw</span>(<span class="st">"nazwa bazy"</span>) <span class="co"># stwórz plik z danymi</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="konserwacja" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="konserwacja"><span class="header-section-number">13.6</span> Konserwacja</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">document</span>() <span class="co"># zaktualizuj dokumentację</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">load_all</span>() <span class="co"># załaduj pakiet</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">check</span>() <span class="co"># zrób R-CMD-check</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">test_coverage</span>() <span class="co"># sprawdź code coverage</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">build_readme</span>() <span class="co"># zaktualizuj README.md</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>styler<span class="sc">:::</span><span class="fu">style_active_pkg</span>() <span class="co"># formatuj wszystkie pliki w pakiecie</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="błędy" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="błędy"><span class="header-section-number">13.7</span> Błędy</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>cli<span class="sc">::</span><span class="fu">cli_abort</span>(<span class="st">"Treść błędu"</span>) <span class="co"># błąd</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>cli<span class="sc">::</span><span class="fu">cli_warn</span>(<span class="st">"Treść ostrzeżenia"</span>) <span class="co"># ostrzeżenie</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>cli<span class="sc">::</span><span class="fu">cli_inform</span>(<span class="st">"Treść infromacji"</span>) <span class="co"># informacja</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="przed-każdym-wypchnięciem" class="level2" data-number="13.8">
+<h2 data-number="13.8" class="anchored" data-anchor-id="przed-każdym-wypchnięciem"><span class="header-section-number">13.8</span> Przed każdym wypchnięciem</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">load_all</span>() <span class="co"># załaduj pakiet, żeby testować ręcznie</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">check</span>() <span class="co"># zrób R-CMD-check</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">test_coverage</span>() <span class="co"># sprawdź code coverage</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">build_readme</span>() <span class="co"># zaktualizuj README.md</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="inne-rzeczy-do-wykonania" class="level2" data-number="13.9">
+<h2 data-number="13.9" class="anchored" data-anchor-id="inne-rzeczy-do-wykonania"><span class="header-section-number">13.9</span> Inne rzeczy do wykonania</h2>
+<ol type="1">
+<li><p>Uzupełnij ręcznie plik <code>DESCRIPTION</code>. Pamiętaj o tym, by autorów wskazywać funkcją.</p></li>
+<li><p>Uzupełnij plik <code>CITATION</code>, jeśli z niego korzystasz.</p></li>
+<li><p>Napisz porządny plik <code>README</code>.</p></li>
+<li><p>Pamiętaj o pisaniu pełnych nazw funkcji i używaniu <code>.data</code> do nazw kolumn bez cudzysłowu.</p></li>
+<li><p>Każdą funkcję dokumentuj szkieletem <code>roxygen2</code>. Nie zapomnij o tagu <code>@export</code>.</p></li>
+<li><p>Jeśli dodajesz pliki z danymi, pamiętaj, żeby je udokumentować w pliku <code>data.R</code>. Opisz wszystkie kolumny za pomocą <code>@format</code>.</p></li>
+<li><p>Jeśli masz czas i chęć, zabezpieczaj funkcje przed nieprawidłowym wykorzystaniem. Przede wszystkim sprawdzaj typy argumentów oraz czy kolumny istnieją w bazie. Pamiętaj, że możesz formatować komunikaty o błędach.</p></li>
+</ol>
 
 
+</section>
+</section>
+<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Funkcje <code>install_*()</code> zapewnia też mniejszy pakiet <code>remotes</code>, który jest praktycznie wycinkiem z <code>devtools</code>. Jeśli mamy <code>devtools</code>, nie potrzebujemy <code>remotes</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Jeśli już wcześniej stworzyłeś(-aś) jakieś pliki z funkcjami i je udokumentowałeś(-aś), to użyj teraz <code>roxygen2md::roxygen2md()</code>, by przerobić je na nowy standard. Jeśli tworzysz pakiet w kolejności, w jakiej omawiam to w tym wpisie, nie ma takiej potrzeby.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Jeśli chcemy podać dwa imiona, podajemy je jako wektor, np. <code>c("Paweł", "Przemysław")</code>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Jest to wymagane, jeśli wykorzystujemy pliki z danymi. Technicznie można dać niższą wersję, ale nie polecam.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Jeśli nie wiesz, czym jest GitHub i po co go używać, przeczytaj <a href="./posts/git.qmd">ten wpis</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Możesz też ręcznie wytworzyć odpowiedni plik .R w folderze <code>R</code>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1512,7 +2527,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/pakiety-w-R.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
