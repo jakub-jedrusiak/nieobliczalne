@@ -132,7 +132,7 @@ cookieconsent.run({
 <link rel="stylesheet" href="../styles.css">
 <meta name="twitter:title" content="Nieobliczalne - Nie pisz (prawie) tego samego 100 razy">
 <meta name="twitter:description" content="Wspominałem już, że nie znoszę mechanicznej pracy. A królową wśród prac mechanicznych jest pisanie wiele razy prawie tego samego tekstu, który różni się tylko w szczegółach. Zdarza się to non-stop. Jednocześnie jest to ten rodzaj pracy, który można niskim kosztem zautomatyzować. W tym wpisie postaram się&nbsp;pokazać, jak można uniknąć góry bezsensownej pracy za pomocą prostych pętli i funkcji print() w pythonie.">
-<meta name="twitter:image" content="https://nieobliczalne.pl/headers/powtarzalny-tekst.webp">
+<meta name="twitter:image" content="https://nieobliczalne.pl/headers/powtarzalny-tekst.jpeg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -210,907 +210,7 @@ cookieconsent.run({
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/powtarzalny-tekst.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
     <div class="quarto-margin-footer"><div class="margin-footer-item">
-<style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
-    <style type="text/css">
-    /* LOADER */
-    .ml-form-embedSubmitLoad {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-    }
-
-    .g-recaptcha {
-    transform: scale(0.53);
-    -webkit-transform: scale(0.53);
-    transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-    height: 42px;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      border: 0;
-    }
-
-    .ml-form-embedSubmitLoad:after {
-      content: " ";
-      display: block;
-      width: 11px;
-      height: 11px;
-      margin: 1px;
-      border-radius: 50%;
-      border: 4px solid #fff;
-    border-color: #ffffff #ffffff #ffffff transparent;
-    animation: ml-form-embedSubmitLoad 1.2s linear infinite;
-    }
-    @keyframes ml-form-embedSubmitLoad {
-      0% {
-      transform: rotate(0deg);
-      }
-      100% {
-      transform: rotate(360deg);
-      }
-    }
-      #mlb2-5266475.ml-form-embedContainer {
-        box-sizing: border-box;
-        display: table;
-        margin: 0 auto;
-        position: static;
-        width: 100% !important;
-      }
-      #mlb2-5266475.ml-form-embedContainer h4,
-      #mlb2-5266475.ml-form-embedContainer p,
-      #mlb2-5266475.ml-form-embedContainer span,
-      #mlb2-5266475.ml-form-embedContainer button {
-        text-transform: none !important;
-        letter-spacing: normal !important;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper {
-        background-color: #6E6E6E;
-        
-        border-width: 0px;
-        border-color: transparent;
-        border-radius: 10px;
-        border-style: solid;
-        box-sizing: border-box;
-        display: inline-block !important;
-        margin: 0;
-        padding: 0;
-        position: relative;
-              }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper.embedPopup,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper.embedDefault { width: 200px; }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper.embedForm { max-width: 200px; width: 100%; }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-align-left { text-align: left; }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-align-center { text-align: center; }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-align-default { display: table-cell !important; vertical-align: middle !important; text-align: center !important; }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-align-right { text-align: right; }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedHeader img {
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        height: auto;
-        margin: 0 auto !important;
-        max-width: 100%;
-        width: undefinedpx;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody {
-        padding: 20px 20px 0 20px;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody.ml-form-embedBodyHorizontal {
-        padding-bottom: 0;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent {
-        text-align: left;
-        margin: 0 0 20px 0;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent h4,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent h4 {
-        color: #ffffff;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 30px;
-        font-weight: 400;
-        margin: 0 0 10px 0;
-        text-align: left;
-        word-break: break-word;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p {
-        color: #ffffff;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-        margin: 0 0 10px 0;
-        text-align: left;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ul,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ul,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol {
-        color: #ffffff;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol ol,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol ol {
-        list-style-type: lower-alpha;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol ol ol,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol ol ol {
-        list-style-type: lower-roman;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p a,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p a {
-        color: #000000;
-        text-decoration: underline;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group {
-        text-align: left!important;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group label {
-        margin-bottom: 5px;
-        color: #333333;
-        font-size: 14px;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-weight: bold; font-style: normal; text-decoration: none;;
-        display: inline-block;
-        line-height: 20px;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p:last-child,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p:last-child {
-        margin: 0;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form {
-        margin: 0;
-        width: 100%;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
-        margin: 0 0 20px 0;
-        width: 100%;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
-        float: left;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent.horozintalForm {
-        margin: 0;
-        padding: 0 0 20px 0;
-        width: 100%;
-        height: auto;
-        float: left;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow {
-        margin: 0 0 10px 0;
-        width: 100%;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-last-item {
-        margin: 0;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-formfieldHorizintal {
-        margin: 0;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input {
-        background-color: #ffffff !important;
-        color: #333333 !important;
-        border-color: #cccccc;
-        border-radius: 4px !important;
-        border-style: solid !important;
-        border-width: 1px !important;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px !important;
-        height: auto;
-        line-height: 21px !important;
-        margin-bottom: 0;
-        margin-top: 0;
-        margin-left: 0;
-        margin-right: 0;
-        padding: 10px 10px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        max-width: 100% !important;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-webkit-input-placeholder,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::-webkit-input-placeholder { color: #333333; }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-moz-placeholder,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::-moz-placeholder { color: #333333; }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-ms-input-placeholder,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input:-ms-input-placeholder { color: #333333; }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-moz-placeholder,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input:-moz-placeholder { color: #333333; }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow textarea, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow textarea {
-        background-color: #ffffff !important;
-        color: #333333 !important;
-        border-color: #cccccc;
-        border-radius: 4px !important;
-        border-style: solid !important;
-        border-width: 1px !important;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px !important;
-        height: auto;
-        line-height: 21px !important;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding: 10px 10px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        max-width: 100% !important;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
-          border-color: #cccccc!important;
-          background-color: #ffffff!important;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input.custom-control-input[type="checkbox"]{
-        box-sizing: border-box;
-        padding: 0;
-        position: absolute;
-        z-index: -1;
-        opacity: 0;
-        margin-top: 5px;
-        margin-left: -1.5rem;
-        overflow: visible;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
-        border-radius: 4px!important;
-      }
-
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox input[type=checkbox]:checked~.label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked~.custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input:checked~.custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked~.label-description::after {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::after {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox input[type=checkbox]:checked~.label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked~.label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::before  {
-          border-color: #000000!important;
-          background-color: #000000!important;
-          color: #ffffff!important;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::after {
-           top: 2px;
-           box-sizing: border-box;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
-           top: 0px!important;
-           box-sizing: border-box!important;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
-        top: 0px!important;
-           box-sizing: border-box!important;
-      }
-
-       #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::after {
-            top: 0px!important;
-            box-sizing: border-box!important;
-            position: absolute;
-            left: -1.5rem;
-            display: block;
-            width: 1rem;
-            height: 1rem;
-            content: "";
-       }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before {
-        top: 0px!important;
-        box-sizing: border-box!important;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-control-label::before {
-          position: absolute;
-          top: 4px;
-          left: -1.5rem;
-          display: block;
-          width: 16px;
-          height: 16px;
-          pointer-events: none;
-          content: "";
-          background-color: #ffffff;
-          border: #adb5bd solid 1px;
-          border-radius: 50%;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-control-label::after {
-          position: absolute;
-          top: 2px!important;
-          left: -1.5rem;
-          display: block;
-          width: 1rem;
-          height: 1rem;
-          content: "";
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
-          position: absolute;
-          top: 4px;
-          left: -1.5rem;
-          display: block;
-          width: 16px;
-          height: 16px;
-          pointer-events: none;
-          content: "";
-          background-color: #ffffff;
-          border: #adb5bd solid 1px;
-          border-radius: 50%;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after {
-          position: absolute;
-          top: 0px!important;
-          left: -1.5rem;
-          display: block;
-          width: 1rem;
-          height: 1rem;
-          content: "";
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
-          position: absolute;
-          top: 0px!important;
-          left: -1.5rem;
-          display: block;
-          width: 1rem;
-          height: 1rem;
-          content: "";
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-radio .custom-control-label::after {
-          background: no-repeat 50%/50% 50%;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-checkbox .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
-          background: no-repeat 50%/50% 50%;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-control, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-control {
-        position: relative;
-        display: block;
-        min-height: 1.5rem;
-        padding-left: 1.5rem;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-input, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input {
-          position: absolute;
-          z-index: -1;
-          opacity: 0;
-          box-sizing: border-box;
-          padding: 0;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label {
-          color: #000000;
-          font-size: 12px!important;
-          font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-          line-height: 22px;
-          margin-bottom: 0;
-          position: relative;
-          vertical-align: top;
-          font-style: normal;
-          font-weight: 700;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-select, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-select {
-        background-color: #ffffff !important;
-        color: #333333 !important;
-        border-color: #cccccc;
-        border-radius: 4px !important;
-        border-style: solid !important;
-        border-width: 1px !important;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px !important;
-        line-height: 20px !important;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding: 10px 28px 10px 12px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        max-width: 100% !important;
-        height: auto;
-        display: inline-block;
-        vertical-align: middle;
-        background: url('https://assets.mlcdn.com/ml/images/default/dropdown.svg') no-repeat right .75rem center/8px 10px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-      }
-
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow {
-        height: auto;
-        width: 100%;
-        float: left;
-      }
-      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { width: 70%; float: left; }
-      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal { width: 30%; float: left; }
-      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal.labelsOn { padding-top: 25px;  }
-      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields { box-sizing: border-box; float: left; padding-right: 10px;  }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input {
-        background-color: #ffffff;
-        color: #333333;
-        border-color: #cccccc;
-        border-radius: 4px;
-        border-style: solid;
-        border-width: 1px;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        line-height: 20px;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding: 10px 10px;
-        width: 100%;
-        box-sizing: border-box;
-        overflow-y: initial;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button {
-        background-color: #000000 !important;
-        border-color: #000000;
-        border-style: solid;
-        border-width: 1px;
-        border-radius: 4px;
-        box-shadow: none;
-        color: #ffffff !important;
-        cursor: pointer;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 14px !important;
-        font-weight: 700;
-        line-height: 20px;
-        margin: 0 !important;
-        padding: 10px !important;
-        width: 100%;
-        height: auto;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button:hover {
-        background-color: #333333 !important;
-        border-color: #333333 !important;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type="checkbox"] {
-        box-sizing: border-box;
-        padding: 0;
-        position: absolute;
-        z-index: -1;
-        opacity: 0;
-        margin-top: 5px;
-        margin-left: -1.5rem;
-        overflow: visible;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description {
-        color: #000000;
-        display: block;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        font-size: 12px;
-        text-align: left;
-        margin-bottom: 0;
-        position: relative;
-        vertical-align: top;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label {
-        font-weight: normal;
-        margin: 0;
-        padding: 0;
-        position: relative;
-        display: block;
-        min-height: 24px;
-        padding-left: 24px;
-
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label a {
-        color: #000000;
-        text-decoration: underline;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p {
-        color: #000000 !important;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
-        font-size: 12px !important;
-        font-weight: normal !important;
-        line-height: 18px !important;
-        padding: 0 !important;
-        margin: 0 5px 0 0 !important;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p:last-child {
-        margin: 0;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit {
-        margin: 0 0 20px 0;
-        float: left;
-        width: 100%;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button {
-        background-color: #000000 !important;
-        border: none !important;
-        border-radius: 4px !important;
-        box-shadow: none !important;
-        color: #ffffff !important;
-        cursor: pointer;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
-        font-size: 14px !important;
-        font-weight: 700 !important;
-        line-height: 21px !important;
-        height: auto;
-        padding: 10px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button.loading {
-        display: none;
-      }
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button:hover {
-        background-color: #333333 !important;
-      }
-      .ml-subscribe-close {
-        width: 30px;
-        height: 30px;
-        background: url('https://assets.mlcdn.com/ml/images/default/modal_close.png') no-repeat;
-        background-size: 30px;
-        cursor: pointer;
-        margin-top: -10px;
-        margin-right: -10px;
-        position: absolute;
-        top: 0;
-        right: 0;
-      }
-      .ml-error input, .ml-error textarea, .ml-error select {
-        border-color: red!important;
-      }
-
-      .ml-error .custom-checkbox-radio-list {
-        border: 1px solid red !important;
-        border-radius: 10px;
-        padding: 10px;
-      }
-
-      .ml-error .label-description,
-      .ml-error .label-description p,
-      .ml-error .label-description p a,
-      .ml-error label:first-child {
-        color: #ff0000 !important;
-      }
-
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow.ml-error .label-description p,
-      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow.ml-error .label-description p:first-letter {
-        color: #ff0000 !important;
-      }
-            @media only screen and (max-width: 200px){
-
-        .ml-form-embedWrapper.embedDefault, .ml-form-embedWrapper.embedPopup { width: 100%!important; }
-        .ml-form-formContent.horozintalForm { float: left!important; }
-        .ml-form-formContent.horozintalForm .ml-form-horizontalRow { height: auto!important; width: 100%!important; float: left!important; }
-        .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { width: 100%!important; }
-        .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal > div { padding-right: 0px!important; padding-bottom: 10px; }
-        .ml-form-formContent.horozintalForm .ml-button-horizontal { width: 100%!important; }
-        .ml-form-formContent.horozintalForm .ml-button-horizontal.labelsOn { padding-top: 0px!important; }
-
-      }
-    </style>
-
-    
-  
-    
-    
-
-    
-    
-
-    
-    
-
-    
-
-      
-        
-        
-      
-
-      
-        
-        
-      
-
-      
-
-            
-            
-            
-            
-            
-            
-      
-
-      
-
-      
-        
-        
-         
-        
-        
-      
-
-        
-        
-        
-        
-        
-        
-      
-
-       
-
-        
-        
-        
-        
-        
-        
-        
-       
-
-
-      
-        
-        
-        
-        
-  
-
-
-
-  
-        
-        
-        
-      
-
-
-      
-    
-    
-    
-    
-    
-  
-
-  
-        
-        
-        
-        
-        
-      
-
-      
-        
-        
-        
-        
-        
-      
-
-      
-        
-        
-        
-        
-        
-      
-
-       
-
-        
-        
-        
-        
-       
-
-       
-        
-        
-        
-        
-      
-
-      
-        
-        
-        
-        
-        
-        
-        
-       
-
-    
-
-    
-
-
-      
-
-
-      
-
-      
-      
-
-      
-
-      
-
-
-
-
-
-    
-
-      
-    <div id="mlb2-5266475" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-5266475">
-      <div class="ml-form-align-center ">
-        <div class="ml-form-embedWrapper embedForm">
-
-          
-          
-
-          <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
-
-            <div class="ml-form-embedContent" style=" ">
-              
-                <h4>Bądź na bieżąco</h4>
-                <p>Otrzymuj maila, gdy pojawią się nowe wpisy</p>
-              
-            </div>
-
-            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/447540/forms/88779935637833443/subscribe" data-code="" method="post" target="_blank">
-              <div class="ml-form-formContent">
-                
-
-                  
-                  <div class="ml-form-fieldRow ml-last-item">
-                    <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
-
-                      
-
-
-                      <!-- input -->
-                      <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Email" autocomplete="email">
-                      <!-- /input -->
-
-                      <!-- textarea -->
-                      
-                      <!-- /textarea -->
-
-                      <!-- select -->
-                      
-                      <!-- /select -->
-
-                      <!-- checkboxes -->
-            
-            <!-- /checkboxes -->
-
-                      <!-- radio -->
-                      
-                      <!-- /radio -->
-
-                      <!-- countries -->
-                      
-                      <!-- /countries -->
-
-
-
-
-
-                    </div>
-                  </div>
-                
-              </div>
-
-              
-
-              <!-- Privacy policy -->
-              
-              <!-- /Privacy policy -->
-
-              
-
-              
-
-              
-
-
-
-<div class="ml-form-recaptcha ml-validate-required" style="float: left;">
-                <style type="text/css">
-  .ml-form-recaptcha {
-    margin-bottom: 20px;
-  }
-
-  .ml-form-recaptcha.ml-error iframe {
-    border: solid 1px #ff0000;
-  }
-
-  @media screen and (max-width: 480px) {
-    .ml-form-recaptcha {
-      width: 220px!important
-    }
-    .g-recaptcha {
-      transform: scale(0.78);
-      -webkit-transform: scale(0.78);
-      transform-origin: 0 0;
-      -webkit-transform-origin: 0 0;
-    }
-  }
-</style>
-  <script src="https://www.google.com/recaptcha/api.js"></script>
-  <div class="g-recaptcha" data-sitekey="6Lf1KHQUAAAAAFNKEX1hdSWCS3mRMv4FlFaNslaD"></div>
-</div>
-
-
-              
-              <input type="hidden" name="ml-submit" value="1">
-
-              <div class="ml-form-embedSubmit">
-                
-                  <button type="submit" class="primary">Subskrybuj</button>
-                
-                <button disabled="disabled" style="display: none;" type="button" class="loading">
-                  <div class="ml-form-embedSubmitLoad"></div>
-                  <span class="sr-only">Loading...</span>
-                </button>
-              </div>
-
-              
-              <input type="hidden" name="anticsrf" value="true">
-            </form>
-          </div>
-
-          <div class="ml-form-successBody row-success" style="display: none">
-
-            <div class="ml-form-successContent">
-              
-                <h4>Sprawdź maila</h4>
-                <p>Link z potwierdzeniem znajdziesz na swoim mailu. Jeśli go tam nie ma, sprawdź spam.</p>
-              
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-  
-
-  
-  
-  <script>
-    function ml_webform_success_5266475() {
-      var $ = ml_jQuery || jQuery;
-      $('.ml-subscribe-form-5266475 .row-success').show();
-      $('.ml-subscribe-form-5266475 .row-form').hide();
-    }
-      </script>
-  
-  
-      <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v08a893c96141fbc55feeeeac1fda7508" type="text/javascript"></script>
-        <script>
-            fetch("https://assets.mailerlite.com/jsonp/447540/forms/88779935637833443/track-view")
-        </script>
+<p>subscribe.html</p>
 </div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1186,7 +286,7 @@ III</code></pre>
 <section id="print-i-f-strings" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> <code>print()</code> i <em>f-strings</em></h1>
 <p>Teraz możemy pisać nasz kod w pythonie. Będę zakładał, że piszemy nasz kod w pliku, ale równie dobrze można to pisać na szybko w konsoli. Często tak robię, jak mam do wygenerowania prostą zbitkę i nie chce mi się&nbsp;tworzyć na to specjalnie pliku. W takim wypadku każdą linijkę kodu wpisujemy w konsolę osobno i osobno zatwierdzamy enterem. Zazwyczja pierwszym, co się pisze, gdy zaczyna się uczyć nowego języka, jest program, który wyświetla tekst „Hello world!“. W pythonie robimy to funkcją <code>print()</code>.</p>
-<div id="117b8754" class="cell" data-execution_count="1">
+<div id="303ce8d3" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Hello world!</code></pre>
@@ -1194,7 +294,7 @@ III</code></pre>
 </div>
 <p>Funkcja <code>print()</code> w większości wystarczy, żebyśmy uzyskali to, co chcemy dziś uzyskać. Wbrew pozorom, jeśli połączymy ją z pętlami, będzie ona potrafiła całkiem sporo. Funkcje w programowaniu zazwyczaj mają po sobie nawiasy, do których wrzucamy różne rzeczy, z którymi funkcja ma coś zrobić. Tak tutaj wrzucamy w te nawiasy tekst, który funkcja ma pokazać w konsoli. Dosłowny tekst zawsze piszemy w cudzysłowie.</p>
 <p>Jeśli potrzebujemy, możemy po przecinku dorzucić argument <code>end</code>, który mówi, co funkcja ma dodać na koniec danego ciągu znaków. Domyślnie jest to nowa linia, którą w informatyce zapisujemy zazwyczaj <code>\n</code>. Nie robimy rzeczywistej nowej linii! Na przykład możemy zmienić jedną pustą linię na dwie, trzy. Możemy też zamienić nową linię na spację, ale po co, to wyjaśnię&nbsp;później. Możemy też wymyślić coś całkiem szalonego, jeśli mamy taką potrzebę.</p>
-<div id="93c9a7b8" class="cell" data-execution_count="2">
+<div id="e3366931" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>, end<span class="op">=</span><span class="st">"</span><span class="ch">\n\n</span><span class="st">-----</span><span class="ch">\n\n</span><span class="st">"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Hello world!
@@ -1204,7 +304,7 @@ III</code></pre>
 </div>
 </div>
 <p>Nabierze to więcej sensu, kiedy dojdziemy do pętli i będziemy wyświetlać wiele tekstów, jeden pod drugim. Podobnie więcej sensu nabierze coś, co omówimy teraz, czyli tzw. <em>f-strings</em>. W informatyce słowem <em>string</em> oznacza się dosłowny ciąg znaków. <em>f-strings</em> to sposób, jak do naszego ciągu znaków wrzucić wartość jakiejś <em>zmiennej</em>. Co to znaczy? Jak powiedziałem wyżej, tekst, który chcemy wygenerować, zawiera elementy stałe i elementy zmienne. Elementem zmiennym może być na przykład liczba. Jak połączyć elementy stałe ze zmiennymi? Właśnie za pomocą <em>f-string</em>. Zmienne definiujemy w pythonie za pomocą znaku <code>=</code>.</p>
-<div id="a5fcc9f9" class="cell" data-execution_count="3">
+<div id="11df761e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">23</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MMPI_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1213,7 +313,7 @@ III</code></pre>
 </div>
 </div>
 <p>W kodzie powyżej najpierw przypisuję wartość 23 do zmiennej <code>i</code> (zmienne mogę&nbsp;nazywać jak chcę). Dzięki temu, od tego momentu, gdy napiszę <code>i</code>, python zrozumie to jako 23. Można spróbować tego w konsoli. Jeśli po zadeklarowaniu zmiennej wpiszemy w konsolę <code>i</code> i zatwierdzimy, zobaczymy liczbę 23. Jeśli piszę to w konsoli, a nie w pliku, to najpierw wpisuję <code>i = 23</code>, klikam enter i dopiero potem odpowiednią funkcję <code>print()</code>. Następnie do funkcji <code>print()</code> wrzucam tekst <code>"MMPI_{i}"</code>. Python wie, że zamiast <code>{i}</code> musi podstawić prawdziwą wartość zmiennej <code>i</code>, czyli w tym wypadku 23. Żeby to jednak wiedział, musimy przed samym ciągiem znaków dodać literkę <code>f</code>, jak <em>format</em>. Dlatego właśnie napisałem <code>f"MMPI_{i}"</code> i dlatego nazywa się to <em>f-string</em>. Jeśli chcielibyśmy w naszym tekście dodać dosłowne nawiasy klamrowe, np. uzyskać „{MMPI_23}“, takie nawiasy klamrowe piszemy podwójnie – <code>{{</code> w <em>f-string</em> zmieni się&nbsp;w dosłowny znak <code>{</code>.</p>
-<div id="80c81a02" class="cell" data-execution_count="4">
+<div id="f2a79488" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">23</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">{{</span><span class="ss">MMPI_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ch">}}</span><span class="ss">"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1222,7 +322,7 @@ III</code></pre>
 </div>
 </div>
 <p>Zawartość zmiennej <code>i</code> możemy w nawiasach klamrowych też modyfikować.</p>
-<div id="a21b51f1" class="cell" data-execution_count="5">
+<div id="309aa055" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">23</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MMPI_</span><span class="sc">{</span>i <span class="op">+</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -1241,7 +341,7 @@ Jak to jest być SKRYBĄ?</code></pre>
 <section id="pętla-for" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="pętla-for"><span class="header-section-number">3.1</span> Pętla <code>for</code></h2>
 <p>Pętla <code>for</code> jest najprostszym rodzajem pętli i tym, z czego będziemy stale korzystać. Omówmy sobie ją na przykładzie generowania nazw kolumn.</p>
-<div id="a10eb7d8" class="cell" data-execution_count="6">
+<div id="3ea7cf53" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"MMPI_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1261,7 +361,7 @@ MMPI_10</code></pre>
 <p>Dlaczego jednak napisałem <code>range(1, 11)</code> a nie <code>range(1, 10)</code>? Python działa tutaj specyficznie. Wynika to z faktu, że w informatyce liczy się od 0, nie od 1. Jeśli do funkcji <code>range()</code> wrzucę tylko jedną liczbę, czyli na przykład <code>range(10)</code>, to dostanę 10 elementów. Ponieważ jednak pierwszy element to 0, to będą to liczby od 0 do 9. Mogę podać dwie liczby, żeby powiedzieć funkcji <code>range()</code>, od czego ma zacząć, ale wtedy muszę mieć w głowie, że skoro <code>range(0, 10)</code> oznacza 10 liczb od 0 do 9, to liczby od 1 do 10 muszę zapisać jako <code>range(1, 11)</code>. Innymi słowy koniec skali nie wlicza się do zakresu.</p>
 <p>Jeśli piszemy to w konsoli, a nie w pliku, możemy zapisać taką pętlę w jednej linijce – <code>for i in range(1, 11): print(f"MMPI_{i}")</code>. Możemy też zapisać samo <code>for i in range(1, 11):</code> (nie zapominając o dwukropku) i potwierdzić enterem. W obu wypadkach wyświetli nam się w konsoli wielokropek i będziemy mogli dopisywać kolejne komendy z pętli. Gdy będziemy usatysfakcjonowani, klikamy enter po raz kolejny, a pętla wykonuje się.</p>
 <p>Tak jak wspomniałem, domyślnie <code>print()</code> wyrzuca do konsoli to, co tej funkcji podaliśmy, dodając na koniec nową linię. Możemy jednak chcieć, żeby nasze elementy pojawiły się po przecinku albo oddzielone spacjami (albo jedno i drugie) i wtedy możemy zmienić argument <code>end</code>.</p>
-<div id="4b4eefae" class="cell" data-execution_count="7">
+<div id="31ba347d" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>):</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"MMPI_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>, end <span class="op">=</span> <span class="st">", "</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1273,7 +373,7 @@ MMPI_10</code></pre>
 <section id="pętla-while" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="pętla-while"><span class="header-section-number">3.2</span> Pętla <code>while</code></h2>
 <p>Pętla <code>while</code> to bardziej podstawowy, prosty rodzaj pętli. Większość pętli <code>while</code> da się napisać w formie pętli <code>for</code>, dlatego nie będę się nad tym jakoś szczególnie rozwodził, ale warto wiedzieć, że coś takiego istnieje. Napiszmy przykład z poprzedniej sekcji w postaci pętli <code>while</code>.</p>
-<div id="841b35d1" class="cell" data-execution_count="8">
+<div id="c5155d0a" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> i <span class="op">&lt;=</span> <span class="dv">10</span>:</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"MMPI_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -1311,7 +411,7 @@ q: I feel that I am a person of worth, at least on an equal plane with others.
 <p>Po pierwsze mamy <code>l</code>, czyli <em>label</em>. Posłuży nam to jako wewnętrzna „nazwa” pozycji testowej i nagłówek kolumny w bazie danych. Dalej mamy <code>t</code>, czyli <em>type</em>, gdzie <code>radio</code> oznacza pytanie jednokrotnego wyboru. Inne typy znajdziemy w <a href="https://www.psytoolkit.org/doc3.4.4/online-survey-syntax.html#questiontypes">dokumentacji</a>. Następnie mamy <code>q</code>, czyli <em>question</em>, właściwa treść pozycji testowej i pod nią odpowiedzi wypisane od myślników. Możemy tu dodawać inne rzeczy (np. <code>o: random</code>, żeby kolejność odpowiedzi była losowa), ale załóżmy, że na ten moment tyle nam wystarczy.</p>
 <p>Po pierwsze spróbujmy zidentyfikować, co w naszym schemacie jest stałe i co się zmienia. Tutaj zmieniają się dwie rzeczy – treść pozycji testowej i numerek przy <code>RSES</code>. Cała reszta jest identyczna dla każdej pozycji testowej.</p>
 <p>Skoro musimy mieć w naszych pytaniach treść pozycji testowej, musimy nasz kwestionariusz wkleić do skryptu. Zapiszemy go w postaci listy.</p>
-<div id="7128e2d8" class="cell" data-execution_count="9">
+<div id="fa7c7b63" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>RSES <span class="op">=</span> [</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I feel that I am a person of worth, at least on an equal plane with others."</span>,</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I feel that I have a number of good qualities."</span>,</span>
@@ -1326,7 +426,7 @@ q: I feel that I am a person of worth, at least on an equal plane with others.
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Cała lista jest nawiasach kwadratowych, każdy item jest w cudzysłowie, zaś itemy rozdzielone są przecinkami. Całą listę zapisałem do zmiennej o nazwie <code>RSES</code>. Teraz możemy powiedzieć pythonowi, żeby zrobił całą serię pytań w stylu PsyToolKit, gdzie po <code>q</code> za każdym razem wstawi jedną z pozycji testowych.</p>
-<div id="da75d285" class="cell" data-execution_count="10">
+<div id="89edd139" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> RSES:</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"l: RSES_1"</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"t: radio"</span>)</span>
@@ -1418,7 +518,7 @@ q: At times I think I am no good at all.
 </div>
 <p>Jak widzimy, nasza zmienna w pętli (1) nie musi nazywać się <code>i</code> oraz (2) nie musi być liczbą. Jak widzimy, możemy wykonać pętlę za każdym razem przypisując do zmiennej kolejny tekst z listy. Każdą linijkę możemy zapisać w osobnej komendzie <code>print()</code> lub też całość wpisać w jedną komendę, zaznaczając nowe linijki za pomocą <code>\n</code>. Tak zrobiłem w przedostatniej linijce.</p>
 <p>Nasz wynik ma jednak problem – każde pytanie nazywa się <code>RSES_1</code>. Liczba po <code>RSES_</code> musi się zmieniać. Tym razem jest to trudniejsze niż wcześniej, bo <code>item</code> nie jest tutaj liczbą, tylko treścią pytania, więc nie możemy zapisać <code>RSES_{item}</code>. Z pomocą przychodzi nam jednak funkcja <code>enumerate()</code>. Pozwala ona przerobić listę na tzw. krotki (ang. <em>tuples</em>, tutaj <em>2-tuples</em> czyli dwukrotki). Każda taka dwukrotka zawiera numer pozycji na liście (licząc od 0) oraz samą pozycję. Numer jest pierwszy, więc dostaniemy się&nbsp;do niego pisząc <code>item[0]</code>. Jeśli chcemy dostać treść pozycji testowej, zapiszemy <code>item[1]</code>. Całość wyglądałaby więc tak:</p>
-<div id="bc95aafe" class="cell" data-execution_count="11">
+<div id="883d3fee" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> <span class="bu">enumerate</span>(RSES):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"l: RSES_</span><span class="sc">{</span>item[<span class="dv">0</span>] <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"t: radio"</span>)</span>
@@ -1522,7 +622,7 @@ q: At times I think I am no good at all.
 <h2 data-number="4.3" class="anchored" data-anchor-id="daty"><span class="header-section-number">4.3</span> Daty</h2>
 <p>Wróćmy do pierwotnego przykładu z plikiem mojej siostry. Jest to przykład o tyle specyficzny, że zmiennym elementem jest tam data. Daty zmieniają się przewidywalne, ale potrzebują specjalnych funkcji, które ogarną takie rzeczy jak to, że różne miesiące mają różną liczbę dni, istnieją lata przestępne itd. Kiedy rzeczywiście miałem ten problem, użyłem funkcji <code>date</code> w Linuksie, która sama z siebie pozwala na robienie takich rzeczy. Większość osób (niestety) nie korzysta z linuksa, dlatego na potrzeby tego wpisu zaadaptuję to rozwiązanie do pythona. Albo chociaż spróbuję.</p>
 <p>Żeby operować na datach, musimy na szczycie skryptu (lub najpierw w konsoli) zapisać:</p>
-<div id="c6080bff" class="cell" data-execution_count="12">
+<div id="99e65b4d" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Załaduje to pakiet <code>datetime</code> pozwalający operować na datach. Robimy to tylko raz na daną sesję, czyli jak raz załadujemy ten pakiet, możemy z niego korzystać dopóty, dopóki nie wyjdziemy z pythona. Jeśli chcemy dostać się do funkcji z pakietu <code>datetime</code>, musimy zapisać je z „przedrostkiem" <code>datetime.</code>, jak zobaczymy za chwilę.</p>
@@ -1537,7 +637,7 @@ III</code></pre>
 <p>Po drugie będziemy musieli dodawać do naszej daty dni. Robimy to funkcją <code>datetime.timedelta(days = 1)</code>. W tej formie do naszej daty dodamy jeden dzień. Takie coś rzeczywiście do daty dodajemy, czyli piszemy na przykład <code>datetime.date(2023, 5, 11) + datetime.timedelta(days = 1)</code>. Wynikiem będzie tutaj 12 maja 2023 roku.</p>
 <p>Po trzecie nasza data musi być w określonym formacie, w tym wypadku DD.MM.RRRR. Domyślnie daty wyświetlają się w formacie ISO 8601, czyli RRRR-MM-DD. Formatować daty można metodą <code>strftime()</code>. Metody to szczególny rodzaj funkcji, który wykorzystujemy tak, że doklejamy je po kropce do nazwy naszego obiektu np. z datą. Najlepiej będzie to widać w przykładzie. Do samej metody wrzucamy zakodowany format, w jakim datę chcemy uzyskać. Wykorzystamy tutaj specjalne kody, których listę możemy znaleźć <a href="https://www.w3schools.com/python/gloss_python_date_format_codes.asp">tutaj</a>. Potrzebny nam format zakodujemy jako <code>"%d.%m.%Y"</code>.</p>
 <p>Zbierając to wszystko do kupy uzyskujemy coś takiego:</p>
-<div id="cb234f2d" class="cell" data-execution_count="13">
+<div id="81d1eda7" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>start_date <span class="op">=</span> datetime.date(<span class="dv">2023</span>, <span class="dv">5</span>, <span class="dv">11</span>)</span>
@@ -1607,7 +707,7 @@ III
 </div>
 </div>
 <p>Wykorzystałem tutaj kilka zmiennych, które nazwałem <code>start_date</code>, <code>date</code> i <code>date_formatted</code>. Nazwy zmiennych mogą być jakiekolwiek. Wybrałem takie, żeby to było czytelne. Jak to w programowaniu, możemy to napisać na parę sposobów. Dla przykładu tutaj datę już sformatowaną zapisałem w osobnej zmiennej, ale mógłbym też napisać:</p>
-<div id="dd736b21" class="cell" data-execution_count="14">
+<div id="66049627" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>start_date <span class="op">=</span> datetime.date(<span class="dv">2023</span>, <span class="dv">5</span>, <span class="dv">11</span>)</span>
@@ -1618,7 +718,7 @@ III
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"I</span><span class="ch">\n\n</span><span class="st">II</span><span class="ch">\n\n</span><span class="st">III</span><span class="ch">\n\n</span><span class="st">"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>…albo w ogóle wszystko zapisać już wewnątrz pętli:</p>
-<div id="9d4baac4" class="cell" data-execution_count="15">
+<div id="5ac6b01a" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">7</span>):</span>
