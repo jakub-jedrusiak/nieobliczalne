@@ -4,9 +4,9 @@ description: "Po co pisać własne pakiety w R? Widzę dwa powody. Po pierwsze m
 image: ./headers/pakiety-w-R.webp
 twitter-card:
     image: "/headers/pakiety-w-R.webp"
+date: "2023-05-26"
 categories:
     - R
-draft: true
 ---
 
 ```{r}
@@ -272,7 +272,9 @@ Przyszedł czas dodać jakieś rzeczywiste funkcje. Pisanie funkcji stanowiącyc
 
 [^6]: Możesz też ręcznie wytworzyć odpowiedni plik .R w folderze `R`.
 
-## Specyficzne wymogi CRAN i R-CMD-check
+Niezależnie jednak, czy robimy mały pakiecik do użytku własnego, czy może coś, co chcemy ostatecznie umieścić w CRAN, warto swoje funkcje udokumentować. Dokumentacja w R jest cudowna, łatwa w obsłudze i zawsze dostępna. Potraktuj swoją dokumentację jako ustrukturyzowane notatki, dzięki którym nie zapomnisz, na czym polegały Twoje funkcje i jak ich używać.
+
+## Specyficzne wymogi CRAN i R-CMD-check {#sec-cran-checks}
 
 Załóżmy, że napisaliśmy już własną funkcję, która liczy podstawowy zestaw statystyk opisowych i zwraca je w ulubionej przez nas formie. Wykorzystam tutaj funkcję z [tekstu o metaprogramowaniu](./posts/metaprogramowanie.qmd). Definicję zapisuję w pliku `opisowe.R`, jaki wytworzyłem w poprzednim akapicie w folderze `R`.
 
@@ -394,11 +396,11 @@ Możemy dodać ogólną stronę w dokumentacji dotyczącą naszego pakietu jako 
 
 # Załączanie danych {#sec-datafiles}
 
-Czasami chcemy załączyć do naszego pakietu dane. Mogą być one wartością samą w sobie, mogą służyć do ilustracji działania reszty naszego pakietu. Niezależnie od celu, pliki z danymi trzeba załączać w odpowiedni sposób, a także je dokumentować.
+Czasami chcemy załączyć do naszego pakietu dane. Mogą być one wartością samą w sobie (jak np. w pakiecie `datasets`), mogą służyć do ilustracji działania reszty naszego pakietu. Niezależnie od celu, pliki z danymi trzeba załączać w odpowiedni sposób, a także je dokumentować.
 
 ## Surowe dane w `data-raw`
 
-Na początku potrzebujemy surowego pliku z danymi, np. w formacie .csv. Wrzucamy go do folderu `data-raw`, który tworzymy w głównym folderze naszego pakietu. Następnie tworzymy skrypt czyszczący. Najłatwiej wytworzyć go funkcją `usethis::use_data_raw()`, która za pierwszy argument przyjmuje nazwę, którą chcemy naszej bazie danych nadać. Mogłoby to być coś w stylu `usethis::use_data_raw("iris")`. Spowoduje to wytworzenie w folderze `data-raw` skryptu `iris.R`, który w tym momencie powinien nam się otworzyć. Zawiera on tylko komentarz i jedną komendę `usethis::use_data()`. Nad tą komendą piszemy skrypt, który ładuje i czyści nasze surowe dane do takiej formy, którą chcemy załączyć w pakiecie. Gotowe dane zapisujemy do zmiennej o wybranej wcześniej nazwie. I to wystarczy. Podczas instalacji naszego pakietu zostaną załadowane też dane, do których dostęp możemy uzyskać za pomocą komendy, która w pełnej wersji ma postać `data("diamonds", package = "ggplot2")`. Poniżej przykład gotowego skryptu ładującego.
+Na początku potrzebujemy surowego pliku z danymi, np. w formacie .csv. Wrzucamy go do folderu `data-raw`, który tworzymy w głównym folderze naszego pakietu. Następnie tworzymy skrypt czyszczący. Najłatwiej wytworzyć go funkcją `usethis::use_data_raw()`, która za pierwszy argument przyjmuje nazwę, którą chcemy naszej bazie danych nadać. Mogłoby to być coś w stylu `usethis::use_data_raw("iris")`. Spowoduje to wytworzenie w folderze `data-raw` skryptu `iris.R`, który w tym momencie powinien nam się otworzyć w RStudio. Zawiera on tylko komentarz i jedną komendę `usethis::use_data()`. Powyżej tej komendy piszemy skrypt, który ładuje i czyści nasze surowe dane do takiej formy, którą chcemy załączyć w pakiecie. Gotowe dane zapisujemy do zmiennej o wybranej wcześniej nazwie. I to wystarczy. Podczas instalacji naszego pakietu zostaną załadowane też dane. Dostęp do nich możemy uzyskać za pomocą komendy, która w pełnej wersji ma postać `data("diamonds", package = "ggplot2")`. Poniżej przykład gotowego skryptu ładującego.
 
 ```{r}
 #| eval: false
@@ -421,7 +423,7 @@ usethis::use_data(mtscr_creativity, overwrite = TRUE)
 
 ## Dokumentacja plików z danymi
 
-Jeśli załączamy w naszym pakiecie dane, to je również powinniśmy udokumentować. Tworzymy w tym celu specjalny plik `data.R` w folderze `R`, w którym opisujemy wszystkie nasze pliki z danymi. Pod szkieletem `roxygen2` umieszczamy nazwę naszego pliku w cudzysłowie. Poniżej skrócony przykład.
+Jeśli załączamy w naszym pakiecie dane, to je również powinniśmy udokumentować. Tworzymy w tym celu specjalny plik `data.R` w folderze `R`, w którym opisujemy wszystkie nasze pliki z danymi. Pod szkieletem `roxygen2` umieszczamy nazwę naszej bazy danych w cudzysłowie. Poniżej skrócony przykład.
 
 ```{r}
 #| eval: false
@@ -445,13 +447,15 @@ Jeśli załączamy w naszym pakiecie dane, to je również powinniśmy udokument
 "mtscr_creativity"
 ```
 
-Specyficzne tagi to `@format`, w którym opisujemy **każdą kolumnę** i `@source`, w którym podajemy źródło naszych danych.
+Specyficzne tagi to `@format`, w którym opisujemy **każdą kolumnę** i `@source`, w którym podajemy źródło naszych danych. `\describe{}` to sposób na dodanie do dokumentacji listy.
 
 # R-CMD-check {#sec-r-cmd-check}
 
-Jeśli piszemy pakiet, zazwyczaj chcemy, żeby działał. Nie mogę być pewny, ale to chyba rozsądne założenie. Do sprawdzenia, czy nie występują podstawowe problemy z naszym kodem, czy czegoś nie zepsuliśmy, nie dopilnowaliśmy. Zestaw podstawowych czynności jest zautomatyzowany i nazywa się R-CMD-check. Muszą go przejść wszystkie pakiety obecne w CRAN. Jeśli wykonaliśmy instrukcję z podrozdziału [-@sec-GitHubActions], wykona go również GitHub i pokaże na odznace.
+Jeśli piszemy pakiet, zazwyczaj chcemy, żeby działał. Nie mogę być pewny, ale to chyba rozsądne założenie. Zazwyczaj pierwszym krokiem jest ręczne sprawdzenie, czy wszystko działa, jak byśmy się tego spodziewali. Żeby uzyskać dostęp do swoich funkcji tu i teraz, używamy komendy `devtools::load_all()`.
 
-Po pierwsze R-CMD-check sprawdzi, czy cały kod spełnia wymogi, czy wszystkie obiekty w kodzie mają globalne definicje, czy wszystkie przykłady wykonują się bez błędu, czy każda funkcja ma wszystkie niezbędne elementy dokumentacji, czy wszystkie używane pakiety zostały dodane jako zależności. Po drugie wykonane zostaną wszystkie testy, które opisuję w podrozdziale [-@sec-tests]. Po trzecie, zostanie sprawdzona struktura repozytorium, czy nic się nie zepsuło, czy nie mamy jakichś plików, które nie powinny tam być. Do tego cała seria mniejszych lub większych rzeczy, które R może nam wytknąć jako błędy, ostrzeżenia lub informacje. Warto informacje wypluwane przez R-CMD-check przeczytać, bo są bardzo konkretne. Błędów być nie może, ostrzeżeń lepiej, żeby nie było, rzeczy wytykane w informacjach poprawiamy, kiedy mamy czas.
+Zestaw podstawowych czynności w kierunku sprawdzenia, czy nie występują podstawowe problemy z naszym kodem, czy czegoś nie zepsuliśmy, nie dopilnowaliśmy, jest zautomatyzowany i nazywa się R-CMD-check. Muszą go przejść wszystkie pakiety obecne w CRAN. Jeśli wykonaliśmy instrukcję z podrozdziału [-@sec-GitHubActions], po każdym commicie wykona go również GitHub i wynik pokaże na odznace.
+
+Po pierwsze R-CMD-check sprawdzi, czy cały kod spełnia standardy, czyli czy wszystkie obiekty w kodzie mają globalne definicje (por. podrozdział [-@sec-cran-checks]), czy wszystkie przykłady wykonują się bez błędu, czy każda funkcja ma wszystkie niezbędne elementy dokumentacji, czy wszystkie używane pakiety zostały dodane jako zależności. Po drugie wykonane zostaną wszystkie testy, które opisuję w podrozdziale [-@sec-tests]. Po trzecie, zostanie sprawdzona struktura repozytorium, czy nic się nie zepsuło, czy nie mamy jakichś plików, które nie powinny tam być. Do tego cała seria mniejszych lub większych rzeczy, które R może nam wytknąć jako błędy, ostrzeżenia lub informacje. Warto informacje wypluwane przez R-CMD-check przeczytać, bo są bardzo konkretne. Błędów być nie może, ostrzeżeń lepiej, żeby nie było, rzeczy wytykane w informacjach poprawiamy, kiedy mamy czas (albo gdy chcemy wysłać pakiet do CRAN).
 
 Żeby wykonać R-CMD-check używamy komendy `devtools::check()`. Ta komenda na wstępie odnowi nam doumentację, więc jeśli jej używamy, to nie musimy już korzystać z `devtools::document()`. Informacje o przeprowadzanych testach wyświetlają się na bieżąco, ale jeśli pojawią się jakieś uchybienia, zostaną one zbiorczo wyświetlone na koniec. Komendę `devtools::check()` dobrze jest wykonać przed każdym wypchnięciem do GitHuba, żeby nie zdziwił nas wynik wykonany już w repozytorium.
 
@@ -459,9 +463,11 @@ Po pierwsze R-CMD-check sprawdzi, czy cały kod spełnia wymogi, czy wszystkie o
 
 Ten podrozdział i wszystkie kolejne, **nie są niezbędne**, żeby pakiet działał i był użyteczny. Są to rzeczy, które warto wiedzieć, ale przydadzą się przede wszystkim w pakietach dużych i/lub udostępnianych szerokiej publiczności. Małe pakiety albo użytkowane w wąskim gronie zazwyczaj nie potrzebują szerokiej kontroli wejścia czy złożonych informacji o błędach. Jedyne, nad czym bym się zastanowił, czy nie wprowadzać od początku, to testy z podrozdziału [-@sec-tests].
 
-Dobre komendy są odporne, w tym znaczeniu, że zabezpieczają użytkownika przed nieprawidłowym wykorzystaniem. Jeśli osoba popełnia błąd, na przykład podaje wektor zamiast ramki danych albo wskazuje kolumny, których nie ma, powinna dostać konkretną informację zwrotną (tj. błąd). Jeśli nie zabezpieczymy naszej funkcji przed nieprawidłowym wykorzystaniem, użytkownik dostanie informacje o błędach z funkcji, z których zbudowaliśmy naszą funkcję. Czasem to dobrze, czasem to źle. Ogólnie dobrze jest zabezpieczać swoje funkcje, ale znowu -- to **nie jest konieczne, żeby pakiet działał**. To będziemy robić, jak będziemy mieli czas albo poważnie będziemy chcieli ulepszyć nasz pakiet do użytku innych. My zazwyczaj znamy nasze funkcje bardzo dobrze, więc zazwyczaj będziemy je poprawnie wykorzystywać.
+Dobre komendy są odporne, w tym znaczeniu, że zabezpieczają użytkownika przed nieprawidłowym wykorzystaniem. Debiloodporne, chciałoby się powiedzieć. Jeśli osoba popełnia błąd, na przykład podaje wektor zamiast ramki danych albo wskazuje kolumny, których nie ma, powinna dostać konkretną informację zwrotną (tj. błąd). Jeśli nie zabezpieczymy naszej funkcji przed nieprawidłowym wykorzystaniem, użytkownik dostanie informacje o błędach z funkcji, z których zbudowaliśmy naszą funkcję. Innymi słowy jeśli na przykład wykorzystujemy komendę `select()` i użytkownik pod kolumnę, która nie istnieje, zobaczy błąd wygenerowany w kolumnie `select()`. Czasem to dobrze, czasem to źle. Jeśli wykonujemy jakieś skomplikowane przekształcenia w naszej funkcji i gdzieś w środku wypłynie błąd, informacja o błędzie może po prostu nijak nie podpowiadać, co mogło ten błąd spowodować. Czasem jednak te informacje będą wystarczająco jasne, by nie musieć tworzyć ich samodzielnie.
 
-Zazwyczaj to zabezpieczenie dotyczy sprawdzania wejścia, czyli czy to, co użytkownik podał, spełnia wymogi naszej funkcji. Zazwyczaj robi się to na samym początku funkcji, dość prosto, bo za pomocą połączenia `if` i `stop()`. My tutaj jednak wykorzystamy ładniejsze informacje o błędach, które wdraża pakiet `cli` w połączeniu z `glue`. Oba te pakiety dodaliśmy już do zależności, jeśli wykorzystaliśmy `usethis::use_tidy_dependencies()`. Rodzina funkcji, które nam się tu przydadzą, to `cli::cli_abort()`, `cli::cli_warn()` lub `cli::cli_inform()`.
+Ogólnie dobrze jest zabezpieczać swoje funkcje, ale znowu -- to **nie jest konieczne, żeby pakiet działał**. To będziemy robić, jak będziemy mieli czas albo poważnie będziemy chcieli ulepszyć nasz pakiet do użytku innych. My zazwyczaj znamy nasze funkcje bardzo dobrze, więc zazwyczaj będziemy je poprawnie wykorzystywać.
+
+Zazwyczaj to zabezpieczenie dotyczy sprawdzania wejścia, czyli czy to, co użytkownik podał, spełnia wymogi naszej funkcji. Zazwyczaj robi się to na samym początku, dość prosto, bo za pomocą połączenia `if` i `stop()`. My tutaj jednak wykorzystamy ładniejsze informacje o błędach, które wdraża pakiet `cli` w połączeniu z `glue`. Oba te pakiety dodaliśmy już do zależności, jeśli wykorzystaliśmy `usethis::use_tidy_dependencies()`. Rodzina funkcji, które nam się tu przydadzą, to `cli::cli_abort()`, `cli::cli_warn()` lub `cli::cli_inform()`.
 
 ## Typ argumentu
 
@@ -485,7 +491,7 @@ input_check <- function(df) {
 input_check(winda_do_nieba)
 ```
 
-Klamra `if` sprawdza, czy `df` *nie jest* ramką danych. Jeśli nie jest, uruchamiana jest funkcja `cli_abort()`. Zatrzymuje ona wykonywanie kodu i pokazuje w konsoli błąd w estetycznej formie.
+Klamra `if` sprawdza, czy `df` *nie jest* ramką danych (zwróćmy uwagę na wykrzyknik `!`). Jeśli nie jest, uruchamiana jest funkcja `cli_abort()`. Zatrzymuje ona wykonywanie kodu i pokazuje w konsoli błąd w estetycznej formie.
 
 Jak używać tej funkcji? Ma ona całkiem sporo możliwości. Najprostszą rzeczą, którą może przyjąć, jest sam komunikat z błędem. Może to być zwykły tekst. Mamy też dodatkowe możliwości formatowania, o których jednak później. Komunikat jest opatrzony ikonką, która zależy od tego, czy chcemy wyrzucić błąd, ostrzeżenie czy informację.
 
@@ -510,13 +516,13 @@ cli::cli_bullets(
 
 ## Formatowanie z `glue`
 
-Poza punktorami możemy dodatkowo formatować tekst korzystając ze składni dostarczanej przez `glue`. `cli` obsługuje ją automatycznie. Wszystkie szczegóły oraz jak to wygląda rzeczywiście znajdziemy na [tej](https://cli.r-lib.org/reference/inline-markup.html) stronie dokumentacji. Ja omówię tutaj same podstawy. Jeśli chodzi o to, jak formatować, ja się często odwołuję do `tidyverse`. Próbuję wywołać podobny błąd np. w funkcji `dplyr::select()` i patrzę, jak oni taki błąd podają.
+Poza punktorami możemy dodatkowo formatować tekst korzystając ze składni dostarczanej przez `glue`. `cli` obsługuje ją automatycznie. Wszystkie szczegóły oraz jak to wygląda rzeczywiście w konsoli znajdziemy na [tej](https://cli.r-lib.org/reference/inline-markup.html) stronie dokumentacji. Ja omówię tutaj same podstawy. Jeśli chodzi o to, jak formatować, jak to powinno wyglądać, osobiście często sprawdzam w `tidyverse`. Próbuję wywołać podobny błąd np. w funkcji `dplyr::select()` i patrzę, co mi wyskakuje. Traktuję to jako wzorzec, podpowiedź.
 
-Tekst, który chcemy sformatować, bierzemy w nawiasy klamrowe. W nawiasie zaczynamy od określenia, w jaki sposób chcemy dany tekst sformatować. Poniżej zestaw możliwych formatów.
+Tekst, który chcemy sformatować, bierzemy w nawiasy klamrowe. W nawiasie zaczynamy od określenia, w jaki sposób chcemy dany tekst sformatować. Poniżej lista możliwych formatów.
 
 ```{r}
 #| eval: false
-cli_li("Tekst {.emph Kursywą}.")
+cli_li("Tekst {.emph kursywą}.")
 cli_li("{.strong Pogrubiony} tekst.")
 cli_li("Fragment kodu: {.code sum(a) / length(a)}.")
 cli_li("Nazwa pakietu: {.pkg cli}.")
@@ -535,11 +541,11 @@ Jeśli chcemy, możemy wykonywać też operacje w nawiasach klamrowych. Zazwycza
 cli_warn("Złamano {.strong {sum(365, 248)}} postanowień. Ostrzegam cię.")
 ```
 
-Wewnątrz klamry z pogrubieniem dołożyłem drugą klamrę, w której umieściłem funkcję sumującą. Umieszczenie funkcji w klamrze sprawiło, że w ostrzeżeniu pojawia nam się wynik, 613. Nie jest to zbyt użytkowy przykład, ale dobrze jest wiedzieć, że tak się da. W kolejnym przykładzie zobaczymy, jak można tego użyć do dostosowywania informacji zwrotnych pod użytkownika.
+Wewnątrz klamry z pogrubieniem dołożyłem drugą klamrę, w której umieściłem funkcję sumującą. Umieszczenie funkcji w klamrze sprawiło, że w ostrzeżeniu pojawia nam się wynik, 613, a nie tekst `sum(365, 248)`. Nie jest to zbyt użytkowy przykład, ale dobrze jest wiedzieć, że tak się da. W kolejnym przykładzie zobaczymy, jak można tego użyć do dostosowywania informacji zwrotnych pod użytkownika.
 
 ## Obecność kolumn w bazie
 
-Poza sprawdzeniem typu argumentu, możemy chcieć się upewnić, że kolumny wskazane przez użytkownika rzeczywiście są w bazie. Pomocna będzie tutaj funkcja `rlang::has_name()`, która sprawdza, czy w bazie obiekt o danej nazwie. Jeśli tak, wyrzuca `TRUE`, a jeśli nie, wyrzuca `FALSE`. Niestety `has_name()` wymaga nazwy kolumny w postaci string, dlatego musimy pobawić się trochę z Tidy Eval. Jeśli nie wiesz, jak to robić, odsyłam do [tego](./posts/metaprogramowanie.qmd) tekstu.
+Poza sprawdzeniem typu argumentu, możemy chcieć się upewnić, że kolumny wskazane przez użytkownika rzeczywiście są obecne w bazie. Pomocna będzie tutaj funkcja `rlang::has_name()`, która dokładnie to sprawdza. Jeśli obiekt istnieje, `has_name()` wyrzuca `TRUE`, a jeśli nie, wyrzuca `FALSE`. Niestety `has_name()` wymaga nazwy kolumny w postaci string, dlatego musimy pobawić się trochę z Tidy Eval. Jeśli nie wiesz, jak to robić, odsyłam do [tego](./posts/metaprogramowanie.qmd) tekstu.
 
 ```{r}
 #| error: true
@@ -564,7 +570,7 @@ W powyższym przykładzie widzimy też, do czego może nam się przydać zagnie
 
 # Testy z `testthat` {#sec-tests}
 
-Testy automatyczne to bardzo szeroki temat. Idea, która za nimi stoi, jest mniej więcej taka -- jest wiele rzeczy, które mogą pójść źle, które można zepsuć, a nikomu się nie chce po każdych zmianach w kodzie sprawdzać, czy jakiś drobny aspekt przez to nie ucierpiał. W tym celu piszemy specjalne skrypty, które za nas sprawdzą, czy wszystko działa, jak powinno. W R testy piszemy z użyciem pakietu `testthat`. By móc z niego korzystać, uruchamiamy komendę `usethat::use_testthat()`.
+Testy automatyczne to bardzo szeroki temat. Idea, która za nimi stoi, jest mniej więcej taka -- jest wiele rzeczy, które mogą pójść źle, które można zepsuć. Nikomu się nie chce po każdych zmianach w kodzie sprawdzać, czy jakiś drobny aspekt przez te zmiany nie ucierpiał. W tym celu piszemy specjalne skrypty, które za nas sprawdzą, czy wszystko działa tak, jak powinno. W R testy piszemy z użyciem pakietu `testthat`. By móc z niego korzystać, uruchamiamy w naszym repozytorium komendę `usethat::use_testthat()`.
 
 ## Struktura testów
 
@@ -579,7 +585,7 @@ test_that("Jakiś element działa jak należy", {
 })
 ```
 
-W nawiasach klamrowych możemy zapomnieć, że jesteśmy wewnątrz funkcji i pisać kod normalnie. Możemy na przykład tworzyć przykładowe zbiory danych, na których będziemy wykonywać testy. Najważniejsze są jednak funkcje z rodziny `expect_*()`, za pomocą których mówimy, czego oczekujemy od danej funkcji. Rodzina ta jest szeroka, bo i funkcje są różne. W ramach jednej funkcji `test_that()` możemy użyć kilku tego typu komend, ale staramy się utrzymać porządek, żeby każda funkcja `test_that()` testowała coś konkretnego. Poniżej wymieniam kilka najważniejszych funkcji `expect_*()`, a bardziej rozszerzoną ich listę można znaleźć [tutaj](https://testthat.r-lib.org/reference/).
+W nawiasach klamrowych możemy zapomnieć, że jesteśmy wewnątrz funkcji i pisać kod normalnie. Możemy na przykład tworzyć przykładowe zbiory danych, na których będziemy wykonywać testy. Najważniejsze są jednak funkcje z rodziny `expect_*()`, za pomocą których mówimy, czego oczekujemy od danej funkcji. Rodzina ta jest szeroka, bo i funkcje do testowania są bardzo różne. W ramach jednej funkcji `test_that()` możemy użyć kilku tego typu komend, ale staramy się utrzymać porządek, żeby każda funkcja `test_that()` testowała coś konkretnego. Poniżej wymieniam kilka najważniejszych funkcji `expect_*()`, a bardziej rozszerzoną ich listę można znaleźć [tutaj](https://testthat.r-lib.org/reference/).
 
 1.  `expect_identical()` i `expect_equal()` -- czy zadane wartości są takie same? Można ustawić tolerancję błędu.
 
@@ -589,7 +595,7 @@ W nawiasach klamrowych możemy zapomnieć, że jesteśmy wewnątrz funkcji i pis
 
 4.  `expect_match()` -- czy w wektorze tekstowym jest tekst odpowiadający [wyrażeniu regularnemu](./posts/regex.qmd)?
 
-5.  `expect_type()` -- czy obiekt jest określonego typu?
+4. `expect_type()` -- czy obiekt jest określonego typu?
 
 6.  `expect_error()`, `expect_warning()` i `expect_message()` -- jak nazwa wskazuje; czy dany kod generuje błąd/ostrzeżenie/informację? Pozwala też sprawdzać treść komunikatów za pomocą [wyrażeń regularnych](./posts/regex.qmd).
 
@@ -681,35 +687,33 @@ test_that("opisowe throws an error when df is not a data frame", {
 
 ```
 
-Po pierwsze stworzyłem tutaj bazę danych, na której będziemy liczyć. Po drugie stworzyłem trzy zestawy testów. Pierwszy sprawdza, czy wynik to ramka danych. Drugi sprawdza, czy statystyki wyglądają, jak mają wyglądać. Ostatni sprawdza, czy funkcja wyrzuca błąd, gdy `df` będzie czymś innym, niż baza danych.
+Po pierwsze stworzyłem tutaj bazę danych, na której będziemy liczyć. Po drugie stworzyłem trzy zestawy testów. Pierwszy sprawdza, czy wynik to ramka danych. Drugi sprawdza, czy statystyki wyglądają, jak mają wyglądać, z dokładnością do 3. miejsca po przecinku. Ostatni sprawdza, czy funkcja wyrzuca błąd, gdy `df` będzie czymś innym, niż baza danych.
 
 Gdy taki plik zapiszemy, testy są już uzbrojone. Możemy je wykonać używając komendy `devtools::test_active_file()`. Wszystkie testy zostaną też wykonane podczas `devtools::check()`.
 
 ## Co i jak testować?
 
-Hot take, którego nie ma jeszcze w podręcznikach -- sztuczna inteligencja jest świetna w pisaniu testów. Nie ma się co oszukiwać, pisanie testów jest upierdliwe, ale na szczęście Chat GPT może to sprawnie zrobić za nas. Od Chatu GPT lepszy jest GitHub Copilot X, do którego dostęp studenci i pracownicy naukowi mają [za darmo](https://education.github.com/discount).
+Hot take, którego nie ma jeszcze w podręcznikach -- sztuczna inteligencja jest świetna w pisaniu testów. Nie ma się co oszukiwać, pisanie testów jest upierdliwe, ale na szczęście Chat GPT może to sprawnie zrobić za nas. Od Chatu GPT lepszy jest GitHub Copilot X, do którego dostęp studenci i pracownicy naukowi mają [za darmo](https://education.github.com/discount). Czasami tylko testy generowane przez AI wykorzystują wycofane już komendy, np. `expect_is()` zamiast `expect_type()`.
 
-Testy jest dobrze pisać, bo czasem możemy przegapić, że coś zepsuliśmy. Jeśli zabezpieczyliśmy się testami, `devtools::check()` nakrzyczy na nas, że testy nie wychodzą. Nakrzyczy na nas też, jeśli nie wyjdą przykłady, ale przykład musi tylko zadziałać. Że będzie zwracał bzdury, tego już bez testów nie wykryjemy.
+Testy jest dobrze pisać, bo czasem możemy przegapić, że coś zepsuliśmy. Jeśli zabezpieczyliśmy się testami, `devtools::check()` nakrzyczy na nas, że coś zepsuliśmy. Nakrzyczy na nas też, jeśli nie wyjdą przykłady, ale przykład musi tylko zadziałać, a test może wymagać *konkretnego* wyjścia. Bez testów nie wykryjemy, że przykład zwraca bzdurę, bo jeśli zwraca cokolwiek, to R-CMD-check to wystarczy.
 
-Sztuka polega na tym, żeby pisać testy tak, żeby nie trzeba było ich zmieniać za każdym jednym razem, jak będziemy coś zmieniać w funkcji. Zbyt duże struktury testów mogą sprawić, że kod będzie bardzo trudny do utrzymania. Trzeba więc znaleźć jakiś punkt pośredni i nie dać się zwariować. Testy mają nam **oszczędzić pracy, a nie dołożyć**.
+Sztuka polega na tym, żeby pisać testy tak, żeby nie trzeba było ich zmieniać za każdym jednym razem, jak będziemy coś zmieniać w funkcji. Zbyt duże struktury testów mogą sprawić, że kod będzie bardzo trudny do utrzymania. Małe poprawki mogą wymusić na nas każdorazowo szerokie zmiany w testach. Trzeba więc znaleźć jakiś punkt pośredni i nie dać się zwariować. Testy mają nam **oszczędzić pracy, a nie dołożyć**.
 
 # *Code coverage* z `codecov`
 
-Z testami wiąże się pojęcie *code coverage*. Jest to wskaźnik, który mówi o tym, jaki procent kodu jest przetestowany. Nie oznacza to, czy sprawdziliśmy wszystkie sytuacje, w których w kodzie może zadziać się coś źle, ale czy każda linia kodu została wykonana w testach chociaż raz. A więc, czy na bardzo podstawowym poziomie działa, czyli czy wykonuje się bez błędu.
+Z testami wiąże się pojęcie *code coverage*. Jest to wskaźnik, który mówi o tym, jaki procent kodu jest sprawdzany w testach. Nie oznacza to, czy sprawdziliśmy wszystkie sytuacje, w których w kodzie może zadziać się coś źle, ale czy każda linia kodu została wykonana w testach chociaż raz. A więc, czy na bardzo podstawowym poziomie działa, czyli czy wykonuje się bez błędu.
 
 ## Sprawdzanie *code coverage*
 
-*Code coverage* możemy bardzo łatwo sprawdzić zarówno dla pojedynczego pliku, jak i dla całego pakietu. Robią to odpowiednio funkcje `devtools::test_coverage_active_file()` i `devtools::test_coverage()`. Raport z takiego sprawdzenia zawiera ogólny *code coverage*, w podziale na pliki oraz informację, jakie linijki zostały, a jakie nie zostały przetestowane.
+*Code coverage* możemy bardzo łatwo sprawdzić zarówno dla pojedynczego pliku, jak i dla całego pakietu. Robią to odpowiednio funkcje `devtools::test_coverage_active_file()` i `devtools::test_coverage()`. Raport z takiego sprawdzenia zawiera ogólny *code coverage*, także w podziale na pliki oraz informację, jakie konkretne linijki zostały, a jakie nie zostały przetestowane.
 
 ![Wynik `devtools::test_coverage()`.](ilustracje/pakiety-w-R/covr.png)
 
 ## Automatyczne raportowanie
 
-Istnieje cała seria narzędzi do automatycznego raportowania *code coverage*. Bardzo często repozytoria chwalą się wielkością tego wskaźnika. Jeśli pakiet jest dobrze testowany, to może znaczyć, że jest porządnie zrobiony albo chociaż z należytą dbałością.
+Istnieje cała seria narzędzi do automatycznego raportowania *code coverage*. Bardzo często repozytoria chwalą się wielkością tego wskaźnika na odznakach. Jeśli pakiet jest dobrze testowany, to może znaczyć, że jest porządnie zrobiony albo chociaż z należytą dbałością.
 
-Narzędziem, które tutaj omówię i które ma dobrą integrację z R, jest `codecov`. Żeby podłączyć swoje repozytorium do `codecov` musimy założyć odpowiednie konto i uruchomić dwie komendy.
-
-Jeśli chodzi o konto, wchodzimy na [codecov.io](https://codecov.io/), zakładamy konto i upoważniamy Codecov do dostępu do naszego konta GitHub. Naszym oczom powinna ukazać się lista wszystkich naszych repozytorów, do której wkrótce wrócimy.
+Narzędziem, które tutaj omówię i które ma dobrą integrację z R, jest Codecov. Żeby podłączyć swoje repozytorium do Codecov musimy założyć odpowiednie konto i uruchomić dwie komendy. Jeśli chodzi o konto, wchodzimy na [codecov.io](https://codecov.io/), zakładamy konto i upoważniamy Codecov do dostępu do naszego konta GitHub. Naszym oczom powinna ukazać się lista wszystkich naszych repozytorów, do której wkrótce wrócimy. Komendy natomiast wymieniam niżej.
 
 ```{r}
 #| eval: false
@@ -717,13 +721,13 @@ usethis::use_coverage("codecov")
 usethis::use_github_action("test-coverage")
 ```
 
-Przygotuje to nasze repozytorium, ale nie w sposób idealny. W momencie, w którym to piszę, trzeba wprowadzić serię poprawek, żeby wszystko szło, jak powinno.
+Przygotuje to nasze repozytorium, ale nie w sposób idealny. W momencie, w którym to piszę, trzeba wprowadzić serię poprawek i dodatkowych czynności, żeby wszystko szło, jak powinno.
 
-1.  Na stronie [codecov.io](https://codecov.io/) wchodzimy w nasze repozytorium i kopiujemy token, który się tam wyświetla. Musimy go wskazać w naszym repozytorium jako sekret. Robimy to w ustawieniach repozytorium, ale szczęśliwie Codecov podpowiada nam link bezpośrednio do ustawień. Nazwa sekretu to `CODECOV_TOKEN`, a jego wartość to sam ten kod, który skopiowaliśmy.
+1. Na stronie [codecov.io](https://codecov.io/) wchodzimy w nasze repozytorium i kopiujemy token, który się tam wyświetla. Musimy go wskazać w naszym repozytorium jako sekret. Robimy to w ustawieniach repozytorium, ale szczęśliwie Codecov podpowiada nam link bezpośrednio do ustawień. Nazwa sekretu to `CODECOV_TOKEN`, a jego wartość to sam ten kod, który skopiowaliśmy.
 
 2.  Jeśli chcemy, możemy upoważnić [apkę Codecov na GitHubie](https://github.com/apps/codecov). Zamieszcza ona automatyczne raporty o *code coverage* przy pull requestach.
 
-3.  Plik `.github/workflows/test-coverage.yaml` modyfikujemy w taki sposób, żeby góra tego pliku wyglądała tak, jak niżej. Nie usuwamy innych zmiennych środowiskowych, tylko dopisujemy `CODECOV_TOKEN`.
+3. Plik `.github/workflows/test-coverage.yaml` modyfikujemy w taki sposób, żeby góra tego pliku wyglądała tak, jak niżej. Nie usuwamy innych zmiennych środowiskowych, tylko dopisujemy `CODECOV_TOKEN`.
 
 ```{YAML}
 #| eval: false
@@ -746,7 +750,7 @@ jobs:
 
 5.  Odznaka dodawana przez `usethis` nie działa. Na [codecov.io](https://codecov.io/), po wejściu w nasze repozytorium (już po jego uruchomieniu), w ustawieniach, w sekcji „Badges & Graphs" znajdziemy poprawny link, którym zastępujemy ten dodany przez `usethis` w `README.Rmd`.
 
-Zestaw określony wyżej może się dość szybko zdezaktualizować, dotarłem do niego na zasadzie prób i błędów. Najbardziej newralgiczne są punkty 3. i 4., które mają za zadanie dać Codecov znać, jaki jest token, który dodaliśmy wcześniej do sekretów repozytorium. Po wykonaniu tych czynności, raporty *code coverage* staną się jawne, będziemy mogli się nimi chwalić na głównej stronie naszego repozytorium, a także będą wykonywane automatycznie przez GitHub za każdym razem, gdy wypchniemy nowy commit.
+Zestaw określony wyżej może się dość szybko zdezaktualizować, dotarłem do niego na zasadzie prób i błędów. Najbardziej newralgiczne są punkty 3. i 4., które mają za zadanie dać Codecov znać, jaki jest token, który dodaliśmy wcześniej do sekretów repozytorium. Po wykonaniu tych czynności raporty *code coverage* staną się jawne, będziemy mogli się nimi chwalić na głównej stronie naszego repozytorium, a także będą wykonywane automatycznie przez GitHub za każdym razem, gdy wypchniemy nowy commit.
 
 # Bonus: załączanie apki w Shiny
 
@@ -775,11 +779,22 @@ mtscr_app <- function() {
 }
 ```
 
-Użytkownik może teraz bez problemu uruchomić naszą apkę w Shiny poprzez funkcję uruchamiającą.
+Użytkownik może teraz bez problemu uruchomić naszą apkę w Shiny poprzez funkcję uruchamiającą. Warto też pomyśleć, czy nie zrobić z niej dodatku do RStudio. Możemy to zrobić tworząc plik `inst/rstudio/addins.dcf` i dopisując do niego coś w tym rodzaju.
+
+```{r}
+#| filename: addins.dcf
+#| eval: false
+Name: MTSCR GUI
+Description: Runs MTSCR GUI app.
+Binding: mtscr_gui # funkcja uruchamiająca
+Interactive: true # dla Shiny dajemy true
+```
+
+Od tego momentu `MTSCR GUI` będzie dostępne w menu *addins* w RStudio.
 
 # Podsumowanie
 
-Docieramy wreszcie do końca tego przydługiego tekstu. Jak zwykle, tylko liznęliśmy temat po powierzchnii, ale mam nadzieję, że było to wystarczające liźnięcie, żeby poczuć smak budowania pakietów. Przede wszystkim liczę na to, że wystarczy to, by móc dalej samodzielnie zdobywać wiedzę w już konkretnych zakresach. Podstawowe źródła to, jak zwykle, dokumentacja i książka Hadleya Wickhama. Tym razem tą książką jest [R Packages](https://r-pkgs.org/) i jest tam większość tego, co można znaleźć w tym tekście, tylko znacznie, znacznie pogłębione.
+Docieramy wreszcie do końca tego przydługiego tekstu. Jak zwykle, tylko liznęliśmy temat po powierzchni, ale mam nadzieję, że było to wystarczające liźnięcie, żeby poczuć smak budowania pakietów. Przede wszystkim liczę na to, że wystarczy to, by móc dalej samodzielnie zdobywać wiedzę w już konkretnych zakresach. Podstawowe źródła to, jak zwykle, dokumentacja i książka Hadleya Wickhama. Tym razem tą książką jest [R Packages](https://r-pkgs.org/) i jest tam większość tego, co można znaleźć w tym tekście, tylko znacznie, znacznie pogłębione.
 
 Oprócz podsumowania w punktach wydaje mi się, że korzystne będzie zebranie wszystkich podstawowych komend w zestawy tematyczne. Zestawy ułożyłem chronologicznie, to znaczy w takiej kolejności, w jakiej będziemy budować nasz pakiet.
 
@@ -822,6 +837,7 @@ usethis::use_citation() # dodaj plik CITATION
 
 ```{r}
 #| eval: false
+devtools::load_all() # załaduj pakiet, żeby testować ręcznie
 usethat::use_testthat() # dodaj testthat
 usethis::use_coverage("codecov") # dodaj codecov
 usethis::use_github_action("test-coverage") # dodaj automatyczne raporty codecov
@@ -831,6 +847,7 @@ usethis::use_github_action("test-coverage") # dodaj automatyczne raporty codecov
 
 ```{r}
 #| eval: false
+devtools::load_all() # załaduj pakiet, żeby testować ręcznie
 usethis::use_r("nazwa_funkcji") # stwórz plik z funkcjami
 usethis::use_test() # dodaj plik z testami
 usethis::use_data_raw("nazwa bazy") # stwórz plik z danymi
@@ -861,6 +878,7 @@ cli::cli_inform("Treść infromacji") # informacja
 
 ```{r}
 #| eval: false
+devtools::load_all() # załaduj pakiet, żeby testować ręcznie
 devtools::check() # zrób R-CMD-check
 devtools::test_coverage() # sprawdź code coverage
 devtools::build_readme() # zaktualizuj README.md

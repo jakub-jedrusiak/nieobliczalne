@@ -23,6 +23,8 @@ Tutaj znajduje się lista tekstów z tego bloga, posegregowane tematycznie. Stat
 
 4.  [Metaprogramowanie](./posts/metaprogramowanie.qmd) -- zaawansowany tekst o Tidy Eval, odpowiada na problemy związane z pisaniem własnych funkcji.
 
+5.  [Pisanie pakietów](./posts/pakiety-w-R.qmd) -- jak zebrać swoje funkcje w jeden wygodny pakiet w R.
+
 # Przydatne narzędzia
 
 1.  [Generowanie tekstu](./posts/powtarzalny-tekst.qmd) -- jak generować powtarzalny tekst automatycznie, zamiast pisać tego ręcznie.
