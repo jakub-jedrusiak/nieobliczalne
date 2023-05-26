@@ -729,8 +729,7 @@ Przygotuje to nasze repozytorium, ale nie w sposób idealny. W momencie, w któr
 
 3. Plik `.github/workflows/test-coverage.yaml` modyfikujemy w taki sposób, żeby góra tego pliku wyglądała tak, jak niżej. Nie usuwamy innych zmiennych środowiskowych, tylko dopisujemy `CODECOV_TOKEN`.
 
-```{YAML}
-#| eval: false
+```
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
@@ -740,8 +739,7 @@ jobs:
 
 4.  Jeśli repozytorium jest prywatne, na końcu zmieniamy naszą formułę tak, żeby wyglądała jak niżej.
 
-```{YAML}
-#| eval: false
+```
 - name: Upload coverage reports to Codecov
   uses: codecov/codecov-action@v3
   with:
