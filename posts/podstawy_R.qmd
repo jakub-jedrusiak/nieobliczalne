@@ -5,7 +5,7 @@ date: "2023-02-21"
 date-modified: "2023-03-02"
 image: ./headers/podstawy_R.webp
 twitter-card:
-    image: "/headers/podstawy_R.webp"
+    image: "/headers/podstawy_R.jpeg"
 freeze: true
 categories:
     - Statystyka

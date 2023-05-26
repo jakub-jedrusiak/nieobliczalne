@@ -5,7 +5,7 @@ description: "Wspominałem już, że nie znoszę mechanicznej pracy. A królową
 date: "2023-05-12"
 image: ./headers/powtarzalny-tekst.webp
 twitter-card:
-    image: "/headers/powtarzalny-tekst.webp"
+    image: "/headers/powtarzalny-tekst.jpeg"
 categories:
     - Python
     - Nauka

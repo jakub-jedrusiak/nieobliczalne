@@ -4,7 +4,7 @@ subtitle: "Git, GitHub i integracja z RStudio"
 description: "Przestawienie się z programu typu SPSS na R daje nam wiele korzyści, w tym umożliwia łatwe wspólne pisanie analiz statystycznych. W końcu kod to tekst. Skoro możemy w Google Docs wspólnie tworzyć dokumenty, to czemu nie mielibyśmy wspólnie pisać analizy statystycznej? Do współpracy przy kodzie nie wykorzystujemy jednak nie Google Docs, ale specjalny protokół znany jako Git."
 image: ./headers/git.webp
 twitter-card:
-    image: "/headers/git.webp"
+    image: "/headers/git.jpeg"
 date: "2023-05-15"
 categories:
     - Narzędzia

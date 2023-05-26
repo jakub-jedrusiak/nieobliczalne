@@ -5,7 +5,7 @@ description: "Piękno pakietu `tidyverse` polega na tym, że zupełnie zmienia s
 date: "2023-05-05"
 image: "./headers/metaprogramowanie.webp"
 twitter-card:
-    image: "/headers/metaprogramowanie.webp"
+    image: "/headers/metaprogramowanie.jpeg"
 freeze: true
 caregories:
   - R

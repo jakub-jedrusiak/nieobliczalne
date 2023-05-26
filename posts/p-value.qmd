@@ -4,7 +4,7 @@ description: "Czymże jest prawda? Czy czegokolwiek możemy być pewni? Nie lubi
 date: "2022-09-21"
 image: ./headers/p-value.webp
 twitter-card:
-    image: "/headers/p-value.webp"
+    image: "/headers/p-value.jpeg"
 freeze: true
 categories:
   - Statystyka

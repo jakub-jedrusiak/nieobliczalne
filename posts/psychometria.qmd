@@ -4,7 +4,7 @@ subtitle: "Podstawowe założenia psychometrii"
 description: ""
 image: ./headers/psychometria.webp
 twitter-card:
-    image: "/headers/psychometria.webp"
+    image: "/headers/psychometria.jpeg"
 categories:
     - Psychologia
 draft: true

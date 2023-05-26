@@ -5,7 +5,7 @@ description: "Przy coraz powszechniej obserwowanym zjawisku wypalenia szkolnego 
 date: "2020-02-07"
 image: ./headers/uczenie-sie.webp
 twitter-card:
-    image: "/headers/uczenie-sie.webp"
+    image: "/headers/uczenie-sie.jpeg"
 bibliography: ../bibliografia/uczenie-sie.bib
 categories:
     - Psychologia

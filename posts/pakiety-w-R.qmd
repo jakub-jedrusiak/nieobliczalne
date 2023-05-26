@@ -3,7 +3,7 @@ title: "Tworzenie pakietów w R"
 description: "Po co pisać własne pakiety w R? Widzę dwa powody. Po pierwsze możemy mieć pewną kolekcję funkcji, których często używamy w różnych analizach. Możemy je w pewnym momencie chcieć zebrać w jedno miejsce. Po drugie możemy chcieć się podzielić naszymi funkcjami z innymi, czy to z zespołem, czy ze światem. W obu przypadkach pakiet jest lepszą, bardziej uporządkowaną i łatwiejszą w używaniu opcją niż pliki ze skryptami."
 image: ./headers/pakiety-w-R.webp
 twitter-card:
-    image: "/headers/pakiety-w-R.webp"
+    image: "/headers/pakiety-w-R.jpeg"
 date: "2023-05-26"
 categories:
     - R
