@@ -4,6 +4,9 @@ project:
 website:
   title: "Nieobliczalne"
   site-url: "https://nieobliczalne.pl"
+  open-graph: true
+  twitter-card:
+    creator: "@jakub_jedrusiak"
   navbar:
     left:
       - href: index.qmd
