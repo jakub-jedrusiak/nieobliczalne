@@ -1,7 +1,7 @@
 ---
 title: "PsyToolKit"
 subtitle: "Darmowe narzędzie do eksperymentów online"
-description: "Badania naukowe często prowadzi się na Formularzach Google albo Microsoft Forms. Możliwości tych platform są ograniczone. Jak mamy pieniądze, to skorzystamy z Qualtrics. Istnieje jednak darmowe narzędzie, napisane specjalnie po to, żeby prowadzić w nim badania naukowe. Nie tylko pozwala ono na tworzenie ankiet, ale też zadań typu test Stroopa."
+description: "Badania naukowe często prowadzi się na Formularzach Google albo Microsoft Forms. Możliwości tych platform są ograniczone. Jak mamy pieniądze, to skorzystamy z Qualtrics. Istnieje jednak darmowe narzędzie, napisane specjalnie po to, żeby prowadzić w nim badania naukowe. Nie tylko pozwala ono na tworzenie ankiet, ale też zadań typu test Stroopa, a więc można oszczędzić pieniądze na Gorilli."
 image: ./headers/psytoolkit.webp
 twitter-card:
     image: "/headers/psytoolkit.jpeg"
@@ -10,5 +10,9 @@ categories:
     - Narzędzia
     - Nauka
 draft: true
+bibliography: "/bibliografia/psytoolkit.bib"
 ---
 
+Narzędzie, o którym mowa, to PsyToolKit [@stoet_psytoolkit_2010; @stoet_psytoolkit_2017], do którego dostęp możemy uzyskać [tutaj](https://www.psytoolkit.org/). Jest ono w pełni darmowe, choć niestety nie otwartoźródłowe (choć liczę, że to się zmieni). Działa ono w przeglądarce i od razu pozwala zbierać dane.
+
+*De facto* PsyToolKit to **dwa oddzielne języki programowania**. W jednym z nich piszemy ankiety, w drugim eksperymenty, w których mierzymy czas reakcji. Fakt, że obie formy są surowym tekstem, pozwala oszczędzić dużo pracy, dzięki możliwościom automatyzacji, o których pisałem [tutaj](/posts/powtarzalny-tekst.qmd). Dla mnie jest to olbrzmia zaleta, bo pozwala pewne rzeczy robić masowo -- rzeczy, które w Forms musielibyśmy wyklikiwać ręcznie. Kiedyś robiłem badanie w Forms, gdzie pokazywaliśmy obrazki i do każdego obrazka zadawaliśmy to samo pytanie [@jedrusiak_uprzedzenia_2023]. Na każdy z 30 obrazków trzeba było stworzyć oddzielną stronę, załadować ten jeden konkretny obrazek i przejść dalej. A potem się zorientowałem, że zrobiłem w pytaniu literówkę. Że pytania powstały przez duplikację, to wszystkie 30 stron trzeba było ręcznie poprawić. I z tego uzbierało się sporo zmarnowanego czasu. W PsyToolKit, z potęgą automatyzacji za plecami, zrobiłbym to w chwilę i to niezależnie, czy obrazków byłoby 30, 60 czy 1000.
