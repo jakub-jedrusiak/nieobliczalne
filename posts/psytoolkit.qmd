@@ -1,18 +1,115 @@
 ---
-title: "PsyToolKit"
+title: "PsyToolkit"
 subtitle: "Darmowe narzędzie do eksperymentów online"
 description: "Badania naukowe często prowadzi się na Formularzach Google albo Microsoft Forms. Możliwości tych platform są ograniczone. Jak mamy pieniądze, to skorzystamy z Qualtrics. Istnieje jednak darmowe narzędzie, napisane specjalnie po to, żeby prowadzić w nim badania naukowe. Nie tylko pozwala ono na tworzenie ankiet, ale też zadań typu test Stroopa, a więc można oszczędzić pieniądze na Gorilli."
-image: ./headers/psytoolkit.webp
+image: ./headers/PsyToolkit.webp
 twitter-card:
-    image: "/headers/psytoolkit.jpeg"
+    image: "/headers/PsyToolkit.jpeg"
 date: ""
 categories:
     - Narzędzia
     - Nauka
 draft: true
-bibliography: "/bibliografia/psytoolkit.bib"
+bibliography: "/bibliografia/PsyToolkit.bib"
 ---
 
-Narzędzie, o którym mowa, to PsyToolKit [@stoet_psytoolkit_2010; @stoet_psytoolkit_2017], do którego dostęp możemy uzyskać [tutaj](https://www.psytoolkit.org/). Jest ono w pełni darmowe, choć niestety nie otwartoźródłowe (choć liczę, że to się zmieni). Działa ono w przeglądarce i od razu pozwala zbierać dane.
+Narzędzie, o którym mowa, to PsyToolkit [@stoet_PsyToolkit_2010; @stoet_PsyToolkit_2017], do którego dostęp możemy uzyskać [tutaj](https://www.psytoolkit.org/). Jest ono w pełni darmowe, choć niestety nie otwartoźródłowe (choć liczę, że to się zmieni). Działa ono w przeglądarce i od razu pozwala zbierać dane, za darmo, czym różnić się będzie od chociażby PsychoPy.
 
-*De facto* PsyToolKit to **dwa oddzielne języki programowania**. W jednym z nich piszemy ankiety, w drugim eksperymenty, w których mierzymy czas reakcji. Fakt, że obie formy są surowym tekstem, pozwala oszczędzić dużo pracy, dzięki możliwościom automatyzacji, o których pisałem [tutaj](/posts/powtarzalny-tekst.qmd). Dla mnie jest to olbrzmia zaleta, bo pozwala pewne rzeczy robić masowo -- rzeczy, które w Forms musielibyśmy wyklikiwać ręcznie. Kiedyś robiłem badanie w Forms, gdzie pokazywaliśmy obrazki i do każdego obrazka zadawaliśmy to samo pytanie [@jedrusiak_uprzedzenia_2023]. Na każdy z 30 obrazków trzeba było stworzyć oddzielną stronę, załadować ten jeden konkretny obrazek i przejść dalej. A potem się zorientowałem, że zrobiłem w pytaniu literówkę. Że pytania powstały przez duplikację, to wszystkie 30 stron trzeba było ręcznie poprawić. I z tego uzbierało się sporo zmarnowanego czasu. W PsyToolKit, z potęgą automatyzacji za plecami, zrobiłbym to w chwilę i to niezależnie, czy obrazków byłoby 30, 60 czy 1000.
+*De facto* PsyToolkit to **dwa oddzielne języki programowania**. W jednym z nich piszemy ankiety, w drugim eksperymenty, w których mierzymy czas reakcji. Fakt, że obie formy są surowym tekstem, pozwala oszczędzić dużo pracy, dzięki możliwościom automatyzacji, o których pisałem [tutaj](/posts/powtarzalny-tekst.qmd). Dla mnie jest to olbrzymia zaleta, bo pozwala pewne rzeczy robić masowo -- rzeczy, które w Forms musielibyśmy wyklikiwać ręcznie. Kiedyś robiłem badanie w Forms, gdzie pokazywaliśmy obrazki i do każdego obrazka zadawaliśmy to samo pytanie [@jedrusiak_uprzedzenia_2023]. Na każdy z 30 obrazków trzeba było stworzyć oddzielną stronę, załadować ten jeden konkretny obrazek i przejść dalej. A potem się zorientowałem, że zrobiłem w pytaniu literówkę. Że pytania powstały przez duplikację, to wszystkie 30 stron trzeba było ręcznie poprawić. I z tego uzbierało się sporo zmarnowanego czasu. W PsyToolkit, z potęgą automatyzacji za plecami, zrobiłbym to w chwilę i to niezależnie, czy obrazków byłoby 30, 60 czy 1000.
+
+Jednocześnie, co muszę podkreślić, oba te języki mają wiele wad. Są niekonsekwentne, niepodobne do innych języków programowania, ograniczone w swoich możliwościach i stosujących niezrozumiałe konwencje, które tylko irytują, a niczego nie ułatwiają. Do tego trudno jest cokolwiek tam zmienić, bo PsyToolkit jest zamkniętoźródłowy, więc tylko prof. Gijsbert Stoet wie, co tam tak naprawdę siedzi pod maską. Dokumentacja to chaos, z jakiegoś powodu została rozdzielona na trzy różne strony, a do tego jest niepełna. Biorąc to wszystko pod uwagę, sądzę, że PsyToolkit to **naprawdę dobre narzędzie, które może się przydać każdemu, kto prowadzi badania przez Internet**.
+
+# Ankiety
+
+Ponieważ PsyToolkit składa się z oddzielnych „modułów", omówimy je sobie po kolei -- najpierw ankiety, potem eksperymenty.
+
+Ankiety jakie są każdy widzi. Są to zbiory pytań różnego typu, które po kolei wyświetlają się osobie badanej na ekranie. W PsyToolkit ankiety służą też jako główny blok badania. Jeśli stworzyliśmy eksperyment, to rzeczywiście możemy go uruchomić właśnie załączając go do ankiety. Główna część ankiety to okienko tekstowe, w którym wpisujemy kod, który stanie się naszą ankietą. Pokażę teraz, ogólną strukturę takiego kodu, a potem co możemy zrobić, żeby jednak go nie pisać.
+
+## Struktura kodu
+
+```         
+l: SSCS4_1
+t: radio
+o: require
+q: Myślę, że jestem kreatywną osobą.
+- Zdecydowanie się nie zgadzam
+- Raczej się nie zgadzam
+- Ani się zgadzam, ani nie zgadzam – nie wiem
+- Raczej się zgadzam
+- Zdecydowanie się zgadzam
+```
+
+Najpierw mamy `l` czyli *label*. Jest to wewnętrzna nazwa naszego pytania, która stanie się nazwą kolumny w bazie danych. Etykiety powinny być unikalne i nie zawierać spacji. Dalej mamy `t`, czyli *type*. PsyToolkit oferuje całą serię różnych typów pytań -- jednokrotnego wyboru, wielokrotnego wyboru, suwaki, tabelki ze skalą Likerta, pytania z odpowiedzią tekstową itd. Pełna ich lista znajduje się w [dokumentacji](https://www.psytoolkit.org/doc3.4.4/online-survey-syntax.html#questiontypes). Kolejną opcją w kodzie jest `o` jak *option*. Różne pytania dysponują różnymi opcjami, jakie możemy do nich wrzucić. Dokumentacja podaje szczegóły, jednak najbardziej typowe to *require* wymuszające odpowiedź na dane pytanie i *random*, która losuje kolejność odpowiedzi. Ciekawą opcją jest też *sep*, bo dzięki niej możemy sprawić, by odpowiedź na dane pytanie zapisywała się osobno. Możemy więc zachować anonimowość badania, a jednocześnie zebrać informacje takie jak adresy mailowe, bo nie będą one łączone z odpowiedziami. Każdą opcję podajemy jako osobną linijkę rozpoczynającą się od `o:`. Wreszcie samo pytanie podajemy w sekcji `q` jak *question* i pod spodem podajemy odpowiedzi od myślników. Dodatkowo możemy dodać do pytania obrazek sekcją `i`.
+
+W kodzie możemy korzystać z podstawowych tagów HTML, ale niestety nie CSS. Jeśli chcemy więc formatować nasz tekst, to przydadzą nam się tagi takie jak `<b> </b>` (**bold**), `<i> </i>` (*italic*) oraz `<br>` (*break line*).
+
+Domyślnie każde pytanie wyświetla się na oddzielnej stronie. Jeśli chcemy zawrzeć więcej pytań na jednej stronie, otaczamy te pytania `page: begin` i `page: end` albo w skrócie `----`. W bardzo podobny sposób ustawiamy losową kolejność pytań w danym zakresie. Do tego służy instrukcja `random: begin` i zamykająca `random: end`.
+
+```         
+page: begin
+
+l: metryczka_info
+t: info
+q: Teraz prosimy o wypełnienie kilku informacji o sobie.
+
+random: begin
+
+l: gender
+t: radio
+q: Wybierz swoją płeć.
+- Kobieta
+- Mężczyzna
+- Inna/nie chcę podawać
+
+l: age
+t: textline
+o: require
+q: Wpisz swój wiek (ukończony, w latach).
+- {maxchar=2}
+
+random: end
+
+page: end
+```
+
+Wszystkie trzy pytania wyświetlą się na tej samej stronie[^1], a pytania o płeć i wiek będą wyświetlać się w losowej kolejności. Z ciekawszych rzeczy widzimy tutaj pytanie typu `info`, czyli nie tyle pytanie, ile ogólną informację do osoby badanej. Do tego widzimy opcję `{maxchar=2}` w pytaniu o wiek. Część opcji ustawiamy właśnie w nawiasach klamrowych, a szczegóły zawsze znajdziemy w dokumentacji. `maxchar` nie pozwala uczestnikowi wpisać w tym pytaniu więcej niż dwóch znaków. Bo normalnie ludzie mają jakąś bliżej nieokreśloną potrzebę wpisywania tam dodatkowych informacji nadających kontekst tej wielopłaszczyznowej, złożonej struktury psychometrycznej, jaką jest wiek (ukończony, w latach).
+
+[^1]: Przestrzegam przed zamykaniem pojedynczych pytań w `page: begin` i `page: end`. Potrafi to powodować różne dziwne problemy w późniejszych częściach ankiety.
+
+Gdy naszą ankietę już napiszemy, zapisujemy kod, zjeżdżamy niżej i kompilujemy całość. Sprawi to, że nasze zmiany wejdą w życie. Kompilator spróbuje też wychwycić błędy, które mogliśmy popełnić w naszym kodzie.
+
+## Easy mode
+
+Gdy znamy już strukturę kodu, pokażę, jak ograniczyć konieczność pisania go. Pierwsza możliwość to ***easy mode***, do którego przechodzimy klikając odpowiedni guzik nad okienkiem z kodem. Przenosi nas to do menu przypominającego zwykłe strony do robienia ankiet. Mamy prosty, graficzny interfejs, za pomogą którego możemy dodawać pytania. Jest to o tyle wygodne, że w jednym miejscu dostajemy od razu wszystkie opcje, jakimi dany typ pytania dysponuje i nie musimy szperać w dokumentacji. Sam często tworzę szkielet kwestionariusza za pomocą *easy mode*, a potem korzystam z automatyzacji, żeby oszczędzić sobie wklepywania pytań pojedynczo. *Easy mode* ma bowiem dokładnie te same wady, co inne graficzne interfejsy do robienia ankiet, z których największy jest taki, że edytuje się jedno pytanie jednocześnie.
+
+![Przykład widoku ankiety w *easy mode*.](ilustracje/psytoolkit/easy-mode.png)
+
+## PsyToolkit Questionnaire Formatter
+
+Odpowiadając na powolność zarówno pisania kodu ręcznie, jak i dodawania pytań pojedynczo, stworzyłem programik [PsyToolkit Questionnaire Formatter](https://github.com/jakub-jedrusiak/PsyToolkit-Questionnaire-Formatter). Jego głównym zadaniem jest **szybkie przerabianie całych kwestionariuszy** w ankiety w PsyToolkit. Programik tak naprawdę jest szybkim interfejsem graficznym dla tego, co opisuję w tekście o [automatycznym generowaniu tekstu](/posts/powtarzalny-tekst.qmd).
+
+![Przykład działania PsyToolkit Questionnaire Formatter](https://raw.githubusercontent.com/jakub-jedrusiak/Psytoolkit-Questionnaire-Formatter/main/images/example.gif)
+
+Aktualnie programik jest ciągle w wersji rozwojowej i nie ma jeszcze wszystkiego, co da się w PsyToolkit zrobić, ale ma wystarczająco dużo, żeby być użytecznym. Do głównego okienka wpisujemy pozycje naszego kwestionariusza, obok dodajemy możliwe odpowiedzi, dorzucamy jakieś oznaczenie kwestionariusza, klikamy *Format* i gotowe, kwestionariusz został przerobiony na gotowy kod w ankiecie PsyToolkit. Do tego program pozwala automatycznie dodać klucz oceniania do odpowiedzi, byśmy szybko uzyskali sumaryczny wynik. Oznaczenie pozycji testowej gwiazdką automatycznie odwróci punktację dla danego pytania. Wszystkie funkcjonalności staram się opisać w [repozytorium](https://github.com/jakub-jedrusiak/PsyToolkit-Questionnaire-Formatter), gdzie podaję też przykłady, także tam mogę odesłać zainteresowanych.
+
+## Logika przepływu z `jump` i `if`
+
+## Obrazki
+
+## Opcje ankiety
+
+Poza samym kodem mamy do dyspozycji całą serię ustawień, decydujących, jak nasza ankieta ma wyglądać, a także przestawić ją w tryb testów czy prawdziwego zbierania danych. Możemy ustawić informację powitalną, zgody etyczne, maksymalny czas trwania ankiety, a także przestawić język wyświetlania samej ankiety na polski[^2]. Możemy również ustalić informację na koniec ankiety, w tym odkłamania. Dodatkowo możemy określić, żeby ankieta nie dała się uruchomić na telefonach albo dać informację, że potrzebne będą słuchawki. Zachęcam do poszperania w ustawieniach, choćby po to, żeby zobaczyć, co mamy do swojej dyspozycji.
+
+[^2]: Nieskromnie się pochwalę, że tłumaczenie na polski jest mojego autorstwa.
+
+## Zapisywanie danych
+
+Poniżej ustawień mamy też możliwość pobrania bazy danych. Baza danych składa się z całej serii plików, dzięki czemu możemy użyć formy najlepiej dostosowanej do naszych potrzeb. Dostajemy na przykład pliki .csv, .xlsx, ale też folder, gdzie każda wypełniona ankieta zapisana jest w osobnym pliku. Ankiety w PsyToolkit mają tę zaletę, że **zapisują również niepełne dane**. Jeśli ktoś przerwie badanie w połowie, ta połowa odpowiedzi zapisze się w bazie danych[^3]. By jednak takie dane pobrać, trzeba zaznaczyć stosowną opcję podczas pobierania.
+
+[^3]: Dlatego warto się zastanowić, czy nie zbierać metryczki na samym początku.
+
+Zaleta bazy danych jest taka, że z góry mamy wpływ na jej strukturę. Wiersz z tytułami kolumn odpowiada temu, co ustawiliśmy w pytaniach jako *label* (`l`). Sprawia to, że otrzymujemy czystą bazę i z góry możemy napisać sprawnie działający [kod w R](/posts/podstawy_R.qmd). Taka baza zawiera też czas wypełniania wraz z dokładnymi *time stampami*. Jeśli załączaliśmy jakieś eksperymenty, dostaniemy dane z nich w kilku miejscach.
+
+# Eksperymenty
+
+# Podsumowanie
