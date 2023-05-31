@@ -56,3 +56,4 @@ csl: ./bibliografia/apa-6th-edition.csl
 
 resources:
   - CNAME
+  - robots.txt
