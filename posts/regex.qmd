@@ -209,6 +209,24 @@ Czy mogłem zrobić to lepiej? Oczywiście! Tylko po co? Te sekwencje muszą by�
 
 Informacji jest dużo, ale na szczęście nie musimy tego wszystkiego znać na pamięć, żeby z tego korzystać. Możemy się wspierać różnymi dostępnymi w sieci materiałami, które przypomną nam, jak się coś robiło. Kluczowe jest, by wiedzieć, że coś da się zrobić. Chyba najlepszym materiałem, z którego korzystam praktycznie zawsze, jak chcę napisać wyrażenie regularne, jest *cheat sheet* do pakietu `stringr`, który możemy znaleźć [tutaj](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf). Mam go w szufladzie biurka położonego tak, że jest to pierwsze, co widzę, jak ją otworzę. Jeśli zapomnę, jak było „zero albo więcej" albo chcę zrobić coś bardziej skomplikowanego, to patrzę do szuflady i już pamiętam. Rzeczy, których używam często, zdążyłem zapamiętać, a resztę czytam ze ściągi.
 
+# Bonus: szybkie usuwanie sierot
+
+Zanim zacznie się kontrowersja, „sieroty” oznaczają tutaj wiszące jednoliterowe spójniki, które nie powinny znaleźć się na końcu linijki. Pozbywamy się ich za pomocą twardych spacji. Zazwyczaj scrollujemy dokument w Wordzie i wyszukujemy je wzrokiem, po czym dodajemy gdzie trzeba. Potem zmieniamy wielkość czcionki albo szerokość akapitu i wszystko się rozjeżdża. Wyrażeniami regularnymi możemy dodać spacje nierozdzielające wszędzie za jednym zamachem. Jak wspominałem, Word nie obsługuje wyrażeń regularnych, więc musimy to zrobić w Libre Office. Trzeba tylko w okienku Znajdź i zamień, w Innych opcjach zaznaczyć Wyrażenia regularne. Nie będę tutaj tłumaczył jak to działa, podam gotowy przepis.
+
+Wyszukaj to:
+
+```
+(?<=\s)([wuioaz])\s
+```
+
+Zamień na to:
+
+```
+$1 
+```
+
+Zwrócę tylko uwagę, że po `$1` musi być twarda spacja. Możemy ją dodać klikają na pole tekstowe prawym przyciskiem myszy, wchodząc w znaki specjalne i wyszukując *NO-BREAK SPACE*. Ma ona kod 160 (U+A0).
+
 # Podsumowanie
 
 Na koniec mogę polecić dwa źródła informacji o wyrażeniach regularnych. Pierwsza to strona [RexEgg](https://www.rexegg.com/), która zawiera mnóstwo wpisów uszeregowanych w tutoriale od podstaw do czarnego pasa. Druga to książka [*Wyrażenia regularne*](https://helion.pl/ksiazki/wyrazenia-regularne-jeffrey-e-f-friedl,wyrare.htm#format/d) autorstwa Jeffreya Friedla, wydana nakładem Wydawnictwa Helion. Oba źródła są pełne informacji, sztuczek i gotowych rozwiązań, za pomocą których różne czary można czynić w tekście. Na stronie [RegexOne](https://regexone.com/) znajdziemy również interaktywne ćwiczenia.
