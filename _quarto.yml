@@ -20,7 +20,7 @@ website:
     right: 
       - icon: rss
         href: index.xml
-  margin-footer: subscribe.html
+  margin-footer: ./html-addons/subscribe.html
   google-analytics: "G-FKTMH2V23V"
   repo-url: "https://github.com/jakub-jedrusiak/nieobliczalne"
   repo-actions: [edit, issue]
@@ -32,17 +32,17 @@ website:
 format:
   html:
     theme:
-      light: [flatly, light.scss]
-      dark: [darkly, dark.scss]
+      light: [flatly, ./styles/light.scss]
+      dark: [darkly, ./styles/dark.scss]
     mainfont: "Open Sans"
     monofont: "Cascadia Code"
     date-format: long
     toc: true
     lang: pl
     default-image-extension: svg
-    css: styles.css
+    css: ./styles/styles.css
     include-in-header:
-        - adsense.html
+        - ./html-addons/adsense.html
     header-includes: |
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
