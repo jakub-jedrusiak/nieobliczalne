@@ -34,7 +34,7 @@ Zanim dojdziemy do tego, *jak* stosować wyrażenia regularne, powiedzmy sobie, 
 
 Mamy też wiele wygodnych stron, na których możemy testować (i wykorzystywać) wyrażenia regularne, a które podpowiedzą nam różne popularne znaki lub zbiory i wyjaśnią, co robi to, co napisaliśmy. Kluczowe przykłady to [RegEx101](https://regex101.com/) i [RegExr](https://regexr.com/). Z nich polecam korzystać zwłaszcza na początku. Przykłady w tym wpisie to screeny z RegEx101.
 
-W ramach samego języka programowania również zazwyczaj możemy korzystać z wyrażeń regularnych. W R obsługuje je głównie pakiet **`stringr`**, zaś w pythonie odpowiada za nie biblioteka **`re`**. Pozwolą one np. na masową modyfikację ciągów znaków w bazach danych.
+W ramach samego języka programowania również zazwyczaj możemy korzystać z wyrażeń regularnych. W R obsługuje je głównie pakiet **`stringr`**, zaś w Pythonie odpowiada za nie biblioteka **`re`**. Pozwolą one np. na masową modyfikację ciągów znaków w bazach danych.
 
 Oryginalnie wyrażenia regularne związane są z programem `grep` i powiązanego z nim `sed`, a także języka `awk` i jego uwspółcześnionej wersji `gawk`. `grep` to wyszukiwarka tekstu w pliku, `sed` służy głównie do zamiany fragmentów tekstu, zaś `awk` to cały język stworzony specjalnie do manipulacji tekstem. Wszystkie one niezmiennie są dostępne w linuksie jako programy działające w konsoli.
 
