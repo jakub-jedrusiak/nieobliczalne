@@ -9,7 +9,7 @@
 <link>https://nieobliczalne.pl/index.html</link>
 <atom:link href="https://nieobliczalne.pl/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.78</generator>
+<generator>quarto-1.4.124</generator>
 <lastBuildDate>Thu, 25 May 2023 22:00:00 GMT</lastBuildDate>
 <item>
   <title>Tworzenie pakietów w R</title>
@@ -2339,9 +2339,9 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 </section>
 <section id="gdzie-korzystać" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Gdzie korzystać?</h1>
-<p>Zanim dojdziemy do tego, <em>jak</em> stosować wyrażenia regularne, powiedzmy sobie, <em>gdzie</em> możemy je stosować. Po pierwsze ma je wiele edytorów tekstu (<a href="https://notepad-plus-plus.org/">Notepad++</a>, <a href="https://kate-editor.org/">Kate</a> i inne), ale niewiele pakietów biurowych. Możemy je znaleźć w Google Docs i LibreOffice. Microsoft Office ma własny, beznadziejny system <a href="https://support.microsoft.com/pl-pl/office/przykłady-znaków-wieloznacznych-939e153f-bd30-47e4-a763-61897c87b3f4">„znaków wieloznacznych”</a> (<em>wildcards</em>), tak jakby nie mogli zastosować ogólnoświatowego standardu. Każde IDE programistyczne, wliczając RStudio i VS Code, daje możliwość używania RegEx. W programowaniu przydają się one szczególnie.</p>
+<p>Zanim dojdziemy do tego, <em>jak</em> stosować wyrażenia regularne, powiedzmy sobie, <em>gdzie</em> możemy je stosować. Po pierwsze ma je wiele edytorów tekstu (<a href="https://notepad-plus-plus.org/">Notepad++</a>, <a href="https://kate-editor.org/">Kate</a> i inne), ale niewiele pakietów biurowych. Możemy je znaleźć w Google Docs i LibreOffice. Microsoft Office ma własny, beznadziejny system <a href="https://support.microsoft.com/pl-pl/office/przyk%C5%82ady-znak%C3%B3w-wieloznacznych-939e153f-bd30-47e4-a763-61897c87b3f4">„znaków wieloznacznych”</a> (<em>wildcards</em>), tak jakby nie mogli zastosować ogólnoświatowego standardu. Każde IDE programistyczne, wliczając RStudio i VS Code, daje możliwość używania RegEx. W programowaniu przydają się one szczególnie.</p>
 <p>Mamy też wiele wygodnych stron, na których możemy testować (i wykorzystywać) wyrażenia regularne, a które podpowiedzą nam różne popularne znaki lub zbiory i wyjaśnią, co robi to, co napisaliśmy. Kluczowe przykłady to <a href="https://regex101.com/">RegEx101</a> i <a href="https://regexr.com/">RegExr</a>. Z nich polecam korzystać zwłaszcza na początku. Przykłady w tym wpisie to screeny z RegEx101.</p>
-<p>W ramach samego języka programowania również zazwyczaj możemy korzystać z wyrażeń regularnych. W R obsługuje je głównie pakiet <strong><code>stringr</code></strong>, zaś w pythonie odpowiada za nie biblioteka <strong><code>re</code></strong>. Pozwolą one np. na masową modyfikację ciągów znaków w bazach danych.</p>
+<p>W ramach samego języka programowania również zazwyczaj możemy korzystać z wyrażeń regularnych. W R obsługuje je głównie pakiet <strong><code>stringr</code></strong>, zaś w Pythonie odpowiada za nie biblioteka <strong><code>re</code></strong>. Pozwolą one np. na masową modyfikację ciągów znaków w bazach danych.</p>
 <p>Oryginalnie wyrażenia regularne związane są z programem <code>grep</code> i powiązanego z nim <code>sed</code>, a także języka <code>awk</code> i jego uwspółcześnionej wersji <code>gawk</code>. <code>grep</code> to wyszukiwarka tekstu w pliku, <code>sed</code> służy głównie do zamiany fragmentów tekstu, zaś <code>awk</code> to cały język stworzony specjalnie do manipulacji tekstem. Wszystkie one niezmiennie są dostępne w linuksie jako programy działające w konsoli.</p>
 </section>
 <section id="zbiory-znaków-i" class="level1" data-number="3">
@@ -2572,8 +2572,17 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 <h1 data-number="8"><span class="header-section-number">8</span> Ściągi</h1>
 <p>Informacji jest dużo, ale na szczęście nie musimy tego wszystkiego znać na pamięć, żeby z tego korzystać. Możemy się wspierać różnymi dostępnymi w sieci materiałami, które przypomną nam, jak się coś robiło. Kluczowe jest, by wiedzieć, że coś da się zrobić. Chyba najlepszym materiałem, z którego korzystam praktycznie zawsze, jak chcę napisać wyrażenie regularne, jest <em>cheat sheet</em> do pakietu <code>stringr</code>, który możemy znaleźć <a href="https://github.com/rstudio/cheatsheets/blob/main/strings.pdf">tutaj</a>. Mam go w szufladzie biurka położonego tak, że jest to pierwsze, co widzę, jak ją otworzę. Jeśli zapomnę, jak było „zero albo więcej” albo chcę zrobić coś bardziej skomplikowanego, to patrzę do szuflady i już pamiętam. Rzeczy, których używam często, zdążyłem zapamiętać, a resztę czytam ze ściągi.</p>
 </section>
-<section id="podsumowanie" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Podsumowanie</h1>
+<section id="bonus-szybkie-usuwanie-sierot" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Bonus: szybkie usuwanie sierot</h1>
+<p>Zanim zacznie się kontrowersja, „sieroty” oznaczają tutaj wiszące jednoliterowe spójniki, które nie powinny znaleźć się&nbsp;na końcu linijki. Pozbywamy się ich za pomocą twardych spacji. Zazwyczaj scrollujemy dokument w Wordzie i wyszukujemy je wzrokiem, po czym dodajemy gdzie trzeba. Potem zmieniamy wielkość czcionki albo szerokość akapitu i wszystko się rozjeżdża. Wyrażeniami regularnymi możemy dodać spacje nierozdzielające wszędzie za jednym zamachem. Jak wspominałem, Word nie obsługuje wyrażeń regularnych, więc musimy to zrobić w Libre Office. Trzeba tylko w okienku Znajdź i zamień, w Innych opcjach zaznaczyć Wyrażenia regularne. Nie będę tutaj tłumaczył jak to działa, podam gotowy przepis.</p>
+<p>Wyszukaj to:</p>
+<pre><code>(?&lt;=\s)([wuioaz])\s</code></pre>
+<p>Zamień na to:</p>
+<pre><code>$1&nbsp;</code></pre>
+<p>Zwrócę tylko uwagę, że po <code>$1</code> musi być twarda spacja. Możemy ją dodać klikają na pole tekstowe prawym przyciskiem myszy, wchodząc w znaki specjalne i wyszukując <em>NO-BREAK SPACE</em>. Ma ona kod 160 (U+A0).</p>
+</section>
+<section id="podsumowanie" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Podsumowanie</h1>
 <p>Na koniec mogę polecić dwa źródła informacji o wyrażeniach regularnych. Pierwsza to strona <a href="https://www.rexegg.com/">RexEgg</a>, która zawiera mnóstwo wpisów uszeregowanych w tutoriale od podstaw do czarnego pasa. Druga to książka <a href="https://helion.pl/ksiazki/wyrazenia-regularne-jeffrey-e-f-friedl,wyrare.htm#format/d"><em>Wyrażenia regularne</em></a> autorstwa Jeffreya Friedla, wydana nakładem Wydawnictwa Helion. Oba źródła są pełne informacji, sztuczek i gotowych rozwiązań, za pomocą których różne czary można czynić w tekście. Na stronie <a href="https://regexone.com/">RegexOne</a> znajdziemy również interaktywne ćwiczenia.</p>
 <ol type="1">
 <li><p>Wyrażenia regularne (<em>regular expressions</em>, RegEx) pozwalają znajdować i modyfikować regularne struktury w tekście.</p></li>
@@ -2770,26 +2779,26 @@ III</code></pre>
 <p>Ta cecha, tzn. przewidywalność jakiegoś tekstu, pozwala nam zautomatyzować jego pisanie. Nieważne, czy tym tekstem są oznaczenia kolumn (<code>MMPI_1</code>, <code>MMPI_2</code>, …, <code>MMPI_567</code>), czy złożone zagnieżdżone struktury np. pytań i odpowiedzi w ankiecie, <strong>jeśli tekst jest przewidywalny, da się&nbsp;go wygenerować</strong>.</p>
 <section id="python" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Python</h1>
-<p>W tym tekście wykorzystamy sobie język programowania o nazwie python. Tego typu praca z tekstem jest tak podstawowa, że można ją wykonać w prawie każdym języku programowania (w tym w R za pomocą <code>paste()</code> czy <code>paste0()</code>), ale tutaj wykorzystamy pythona, bo to chyba najpopularniejszy język programowania w ogóle, drugi najpopularniejszy w statystyce, a przy tym jest to język ogólnego przeznaczenia. A także ma nazwę od Monty’ego Pythona, więc wiadomo, że warto. Specjalistą od pythona nie jestem, moim pierwszym językiem programowania jest R, ale co tam, żyje się raz.</p>
-<p>Żeby móc robić cokolwiek w pythonie, musimy zainstalować sobie interpreter <a href="https://www.python.org/">stąd</a>. Interpreter to coś w rodzaju programu, który potrafi czytać i wykonywać kod w danym języku. Można powiedzieć w pewnym uproszczeniu, że instalujemy sobie pythona. Koniecznie zaznaczcie w trakcie instalacji, żeby <strong>dodać pythona do PATH</strong>. Teoretycznie tyle wystarczy, ale żeby uprzyjemnić proces pisania, fajnie jest przygotować sobie jakieś&nbsp;IDE (program do programowania), np. <a href="https://code.visualstudio.com/">Visual Studio Code</a> albo chociaż porządny edytor tekstu w stylu <a href="https://notepad-plus-plus.org/">Notepad++</a>.</p>
-<p>Gdy to zrobimy, możemy dotrzeć do pythona na kilka sposobów. Podstawowy to wejście w terminal (w Windowsie PowerShell albo wiersz polecenia) i wpisanie tam <code>python</code>. Gdy potwierdzimy enterem, dostaniemy konsolę pythona, gdzie możemy wpisywać komendy. Drugi sposób, przez IDE, to stworzenie pliku z rozszerzeniem .py (np. „skrypt.py” albo „znowu_dają_mi_bezsensowna_robote.py”) zapisywanie w nim naszych komend. Drugi sposób przyda się, gdy chcemy sobie komendy zachować na przyszłość albo piszemy coś bardziej skomplikowanego, na wiele linijek. IDE często mają specjalny guzik do uruchomienia takiego kodu<sup>2</sup>. Możemy też w wierszu polecenia wpisać <code>python C:\ścieżka\do\pliku.py</code>, np. <code>python "C:\Users\Jakub\Desktop\RSES.py"</code>. Ważne – w „suchym" wierszu polecenia, nie w konsoli pythona.</p>
+<p>W tym tekście wykorzystamy sobie język programowania o nazwie Python. Tego typu praca z tekstem jest tak podstawowa, że można ją wykonać w prawie każdym języku programowania (w tym w R za pomocą <code>paste()</code> czy <code>paste0()</code>), ale tutaj wykorzystamy Pythona, bo to chyba najpopularniejszy język programowania w ogóle, drugi najpopularniejszy w statystyce, a przy tym jest to język ogólnego przeznaczenia. A także ma nazwę od Monty’ego Pythona, więc wiadomo, że warto. Specjalistą od Pythona nie jestem, moim pierwszym językiem programowania jest R, ale co tam, żyje się raz.</p>
+<p>Żeby móc robić cokolwiek w Pythonie, musimy zainstalować sobie interpreter <a href="https://www.Python.org/">stąd</a>. Interpreter to coś w rodzaju programu, który potrafi czytać i wykonywać kod w danym języku. Można powiedzieć w pewnym uproszczeniu, że instalujemy sobie Pythona. Koniecznie zaznaczcie w trakcie instalacji, żeby <strong>dodać Pythona do PATH</strong>. Teoretycznie tyle wystarczy, ale żeby uprzyjemnić proces pisania, fajnie jest przygotować sobie jakieś&nbsp;IDE (program do programowania), np. <a href="https://code.visualstudio.com/">Visual Studio Code</a> albo chociaż porządny edytor tekstu w stylu <a href="https://notepad-plus-plus.org/">Notepad++</a>.</p>
+<p>Gdy to zrobimy, możemy dotrzeć do Pythona na kilka sposobów. Podstawowy to wejście w terminal (w Windowsie PowerShell albo wiersz polecenia) i wpisanie tam <code>Python</code>. Gdy potwierdzimy enterem, dostaniemy konsolę Pythona, gdzie możemy wpisywać komendy. Drugi sposób, przez IDE, to stworzenie pliku z rozszerzeniem .py (np. „skrypt.py” albo „znowu_dają_mi_bezsensowna_robote.py”) zapisywanie w nim naszych komend. Drugi sposób przyda się, gdy chcemy sobie komendy zachować na przyszłość albo piszemy coś bardziej skomplikowanego, na wiele linijek. IDE często mają specjalny guzik do uruchomienia takiego kodu<sup>2</sup>. Możemy też w wierszu polecenia wpisać <code>Python C:\ścieżka\do\pliku.py</code>, np. <code>Python "C:\Users\Jakub\Desktop\RSES.py"</code>. Ważne – w „suchym" wierszu polecenia, nie w konsoli Pythona.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nieobliczalne.pl/posts/ilustracje/powtarzalny-tekst/python-powershell.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Konsola pythona w PowerShell</figcaption>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/powtarzalny-tekst/Python-powershell.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Konsola Pythona w PowerShell</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://nieobliczalne.pl/posts/ilustracje/powtarzalny-tekst/python-w-konsoli.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Konsola pythona w konsoli w Linuxie</figcaption>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/powtarzalny-tekst/Python-w-konsoli.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Konsola Pythona w konsoli w Linuxie</figcaption>
 </figure>
 </div>
 </section>
 <section id="print-i-f-strings" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> <code>print()</code> i <em>f-strings</em></h1>
-<p>Teraz możemy pisać nasz kod w pythonie. Będę zakładał, że piszemy nasz kod w pliku, ale równie dobrze można to pisać na szybko w konsoli. Często tak robię, jak mam do wygenerowania prostą zbitkę i nie chce mi się&nbsp;tworzyć na to specjalnie pliku. W takim wypadku każdą linijkę kodu wpisujemy w konsolę osobno i osobno zatwierdzamy enterem. Zazwyczja pierwszym, co się pisze, gdy zaczyna się uczyć nowego języka, jest program, który wyświetla tekst „Hello world!“. W pythonie robimy to funkcją <code>print()</code>.</p>
-<div id="303ce8d3" class="cell" data-execution_count="1">
+<p>Teraz możemy pisać nasz kod w Pythonie. Będę zakładał, że piszemy nasz kod w pliku, ale równie dobrze można to pisać na szybko w konsoli. Często tak robię, jak mam do wygenerowania prostą zbitkę i nie chce mi się&nbsp;tworzyć na to specjalnie pliku. W takim wypadku każdą linijkę kodu wpisujemy w konsolę osobno i osobno zatwierdzamy enterem. Zazwyczja pierwszym, co się pisze, gdy zaczyna się uczyć nowego języka, jest program, który wyświetla tekst „Hello world!“. W Pythonie robimy to funkcją <code>print()</code>.</p>
+<div id="bfdc34a4" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
@@ -2801,7 +2810,7 @@ font-style: inherit;">"Hello world!"</span>)</span></code></pre></div>
 </div>
 <p>Funkcja <code>print()</code> w większości wystarczy, żebyśmy uzyskali to, co chcemy dziś uzyskać. Wbrew pozorom, jeśli połączymy ją z pętlami, będzie ona potrafiła całkiem sporo. Funkcje w programowaniu zazwyczaj mają po sobie nawiasy, do których wrzucamy różne rzeczy, z którymi funkcja ma coś zrobić. Tak tutaj wrzucamy w te nawiasy tekst, który funkcja ma pokazać w konsoli. Dosłowny tekst zawsze piszemy w cudzysłowie.</p>
 <p>Jeśli potrzebujemy, możemy po przecinku dorzucić argument <code>end</code>, który mówi, co funkcja ma dodać na koniec danego ciągu znaków. Domyślnie jest to nowa linia, którą w informatyce zapisujemy zazwyczaj <code>\n</code>. Nie robimy rzeczywistej nowej linii! Na przykład możemy zmienić jedną pustą linię na dwie, trzy. Możemy też zamienić nową linię na spację, ale po co, to wyjaśnię&nbsp;później. Możemy też wymyślić coś całkiem szalonego, jeśli mamy taką potrzebę.</p>
-<div id="e3366931" class="cell" data-execution_count="2">
+<div id="f3aad492" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
@@ -2826,8 +2835,8 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 </code></pre>
 </div>
 </div>
-<p>Nabierze to więcej sensu, kiedy dojdziemy do pętli i będziemy wyświetlać wiele tekstów, jeden pod drugim. Podobnie więcej sensu nabierze coś, co omówimy teraz, czyli tzw. <em>f-strings</em>. W informatyce słowem <em>string</em> oznacza się dosłowny ciąg znaków. <em>f-strings</em> to sposób, jak do naszego ciągu znaków wrzucić wartość jakiejś <em>zmiennej</em>. Co to znaczy? Jak powiedziałem wyżej, tekst, który chcemy wygenerować, zawiera elementy stałe i elementy zmienne. Elementem zmiennym może być na przykład liczba. Jak połączyć elementy stałe ze zmiennymi? Właśnie za pomocą <em>f-string</em>. Zmienne definiujemy w pythonie za pomocą znaku <code>=</code>.</p>
-<div id="11df761e" class="cell" data-execution_count="3">
+<p>Nabierze to więcej sensu, kiedy dojdziemy do pętli i będziemy wyświetlać wiele tekstów, jeden pod drugim. Podobnie więcej sensu nabierze coś, co omówimy teraz, czyli tzw. <em>f-strings</em>. W informatyce słowem <em>string</em> oznacza się dosłowny ciąg znaków. <em>f-strings</em> to sposób, jak do naszego ciągu znaków wrzucić wartość jakiejś <em>zmiennej</em>. Co to znaczy? Jak powiedziałem wyżej, tekst, który chcemy wygenerować, zawiera elementy stałe i elementy zmienne. Elementem zmiennym może być na przykład liczba. Jak połączyć elementy stałe ze zmiennymi? Właśnie za pomocą <em>f-string</em>. Zmienne definiujemy w Pythonie za pomocą znaku <code>=</code>.</p>
+<div id="c9c7a8ca" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">i <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -2849,8 +2858,8 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 <pre><code>MMPI_23</code></pre>
 </div>
 </div>
-<p>W kodzie powyżej najpierw przypisuję wartość 23 do zmiennej <code>i</code> (zmienne mogę&nbsp;nazywać jak chcę). Dzięki temu, od tego momentu, gdy napiszę <code>i</code>, python zrozumie to jako 23. Można spróbować tego w konsoli. Jeśli po zadeklarowaniu zmiennej wpiszemy w konsolę <code>i</code> i zatwierdzimy, zobaczymy liczbę 23. Jeśli piszę to w konsoli, a nie w pliku, to najpierw wpisuję <code>i = 23</code>, klikam enter i dopiero potem odpowiednią funkcję <code>print()</code>. Następnie do funkcji <code>print()</code> wrzucam tekst <code>"MMPI_{i}"</code>. Python wie, że zamiast <code>{i}</code> musi podstawić prawdziwą wartość zmiennej <code>i</code>, czyli w tym wypadku 23. Żeby to jednak wiedział, musimy przed samym ciągiem znaków dodać literkę <code>f</code>, jak <em>format</em>. Dlatego właśnie napisałem <code>f"MMPI_{i}"</code> i dlatego nazywa się to <em>f-string</em>. Jeśli chcielibyśmy w naszym tekście dodać dosłowne nawiasy klamrowe, np. uzyskać „{MMPI_23}“, takie nawiasy klamrowe piszemy podwójnie – <code>{{</code> w <em>f-string</em> zmieni się&nbsp;w dosłowny znak <code>{</code>.</p>
-<div id="f2a79488" class="cell" data-execution_count="4">
+<p>W kodzie powyżej najpierw przypisuję wartość 23 do zmiennej <code>i</code> (zmienne mogę&nbsp;nazywać jak chcę). Dzięki temu, od tego momentu, gdy napiszę <code>i</code>, Python zrozumie to jako 23. Można spróbować tego w konsoli. Jeśli po zadeklarowaniu zmiennej wpiszemy w konsolę <code>i</code> i zatwierdzimy, zobaczymy liczbę 23. Jeśli piszę to w konsoli, a nie w pliku, to najpierw wpisuję <code>i = 23</code>, klikam enter i dopiero potem odpowiednią funkcję <code>print()</code>. Następnie do funkcji <code>print()</code> wrzucam tekst <code>"MMPI_{i}"</code>. Python wie, że zamiast <code>{i}</code> musi podstawić prawdziwą wartość zmiennej <code>i</code>, czyli w tym wypadku 23. Żeby to jednak wiedział, musimy przed samym ciągiem znaków dodać literkę <code>f</code>, jak <em>format</em>. Dlatego właśnie napisałem <code>f"MMPI_{i}"</code> i dlatego nazywa się to <em>f-string</em>. Jeśli chcielibyśmy w naszym tekście dodać dosłowne nawiasy klamrowe, np. uzyskać „{MMPI_23}“, takie nawiasy klamrowe piszemy podwójnie – <code>{{</code> w <em>f-string</em> zmieni się&nbsp;w dosłowny znak <code>{</code>.</p>
+<div id="13bb667c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">i <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -2879,7 +2888,7 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 </div>
 </div>
 <p>Zawartość zmiennej <code>i</code> możemy w nawiasach klamrowych też modyfikować.</p>
-<div id="309aa055" class="cell" data-execution_count="5">
+<div id="066785f8" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">i <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -2932,7 +2941,7 @@ Jak to jest być SKRYBĄ?</code></pre>
 <section id="pętla-for" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="pętla-for"><span class="header-section-number">3.1</span> Pętla <code>for</code></h2>
 <p>Pętla <code>for</code> jest najprostszym rodzajem pętli i tym, z czego będziemy stale korzystać. Omówmy sobie ją na przykładzie generowania nazw kolumn.</p>
-<div id="3ea7cf53" class="cell" data-execution_count="6">
+<div id="005d3162" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
@@ -2972,7 +2981,7 @@ MMPI_10</code></pre>
 <p>Dlaczego jednak napisałem <code>range(1, 11)</code> a nie <code>range(1, 10)</code>? Python działa tutaj specyficznie. Wynika to z faktu, że w informatyce liczy się od 0, nie od 1. Jeśli do funkcji <code>range()</code> wrzucę tylko jedną liczbę, czyli na przykład <code>range(10)</code>, to dostanę 10 elementów. Ponieważ jednak pierwszy element to 0, to będą to liczby od 0 do 9. Mogę podać dwie liczby, żeby powiedzieć funkcji <code>range()</code>, od czego ma zacząć, ale wtedy muszę mieć w głowie, że skoro <code>range(0, 10)</code> oznacza 10 liczb od 0 do 9, to liczby od 1 do 10 muszę zapisać jako <code>range(1, 11)</code>. Innymi słowy koniec skali nie wlicza się do zakresu.</p>
 <p>Jeśli piszemy to w konsoli, a nie w pliku, możemy zapisać taką pętlę w jednej linijce – <code>for i in range(1, 11): print(f"MMPI_{i}")</code>. Możemy też zapisać samo <code>for i in range(1, 11):</code> (nie zapominając o dwukropku) i potwierdzić enterem. W obu wypadkach wyświetli nam się w konsoli wielokropek i będziemy mogli dopisywać kolejne komendy z pętli. Gdy będziemy usatysfakcjonowani, klikamy enter po raz kolejny, a pętla wykonuje się.</p>
 <p>Tak jak wspomniałem, domyślnie <code>print()</code> wyrzuca do konsoli to, co tej funkcji podaliśmy, dodając na koniec nową linię. Możemy jednak chcieć, żeby nasze elementy pojawiły się po przecinku albo oddzielone spacjami (albo jedno i drugie) i wtedy możemy zmienić argument <code>end</code>.</p>
-<div id="31ba347d" class="cell" data-execution_count="7">
+<div id="2097c769" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
@@ -3003,12 +3012,12 @@ font-style: inherit;">", "</span>)</span></code></pre></div>
 <pre><code>MMPI_1, MMPI_2, MMPI_3, MMPI_4, MMPI_5, MMPI_6, MMPI_7, MMPI_8, MMPI_9, MMPI_10, </code></pre>
 </div>
 </div>
-<p>Co prawda po ostatnim elemencie też dostajemy przecinek i spację, ale to już możemy usunąć ręcznie. W pythonie też da się to zaprogramować, ale nie chcę za bardzo gmatwać.</p>
+<p>Co prawda po ostatnim elemencie też dostajemy przecinek i spację, ale to już możemy usunąć ręcznie. W Pythonie też da się to zaprogramować, ale nie chcę za bardzo gmatwać.</p>
 </section>
 <section id="pętla-while" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="pętla-while"><span class="header-section-number">3.2</span> Pętla <code>while</code></h2>
 <p>Pętla <code>while</code> to bardziej podstawowy, prosty rodzaj pętli. Większość pętli <code>while</code> da się napisać w formie pętli <code>for</code>, dlatego nie będę się nad tym jakoś szczególnie rozwodził, ale warto wiedzieć, że coś takiego istnieje. Napiszmy przykład z poprzedniej sekcji w postaci pętli <code>while</code>.</p>
-<div id="c5155d0a" class="cell" data-execution_count="8">
+<div id="bc33db98" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">i <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -3074,7 +3083,7 @@ q: I feel that I am a person of worth, at least on an equal plane with others.
 <p>Po pierwsze mamy <code>l</code>, czyli <em>label</em>. Posłuży nam to jako wewnętrzna „nazwa” pozycji testowej i nagłówek kolumny w bazie danych. Dalej mamy <code>t</code>, czyli <em>type</em>, gdzie <code>radio</code> oznacza pytanie jednokrotnego wyboru. Inne typy znajdziemy w <a href="https://www.psytoolkit.org/doc3.4.4/online-survey-syntax.html#questiontypes">dokumentacji</a>. Następnie mamy <code>q</code>, czyli <em>question</em>, właściwa treść pozycji testowej i pod nią odpowiedzi wypisane od myślników. Możemy tu dodawać inne rzeczy (np. <code>o: random</code>, żeby kolejność odpowiedzi była losowa), ale załóżmy, że na ten moment tyle nam wystarczy.</p>
 <p>Po pierwsze spróbujmy zidentyfikować, co w naszym schemacie jest stałe i co się zmienia. Tutaj zmieniają się dwie rzeczy – treść pozycji testowej i numerek przy <code>RSES</code>. Cała reszta jest identyczna dla każdej pozycji testowej.</p>
 <p>Skoro musimy mieć w naszych pytaniach treść pozycji testowej, musimy nasz kwestionariusz wkleić do skryptu. Zapiszemy go w postaci listy.</p>
-<div id="fa7c7b63" class="cell" data-execution_count="9">
+<div id="3d393cb5" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">RSES <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> [</span>
@@ -3110,8 +3119,8 @@ background-color: null;
 font-style: inherit;">"At times I think I am no good at all."</span></span>
 <span id="cb19-12">]</span></code></pre></div>
 </div>
-<p>Cała lista jest nawiasach kwadratowych, każdy item jest w cudzysłowie, zaś itemy rozdzielone są przecinkami. Całą listę zapisałem do zmiennej o nazwie <code>RSES</code>. Teraz możemy powiedzieć pythonowi, żeby zrobił całą serię pytań w stylu PsyToolKit, gdzie po <code>q</code> za każdym razem wstawi jedną z pozycji testowych.</p>
-<div id="89edd139" class="cell" data-execution_count="10">
+<p>Cała lista jest nawiasach kwadratowych, każdy item jest w cudzysłowie, zaś itemy rozdzielone są przecinkami. Całą listę zapisałem do zmiennej o nazwie <code>RSES</code>. Teraz możemy powiedzieć Pythonowi, żeby zrobił całą serię pytań w stylu PsyToolKit, gdzie po <code>q</code> za każdym razem wstawi jedną z pozycji testowych.</p>
+<div id="8b6f1497" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> item <span class="kw" style="color: #003B4F;
@@ -3245,7 +3254,7 @@ q: At times I think I am no good at all.
 </div>
 <p>Jak widzimy, nasza zmienna w pętli (1) nie musi nazywać się <code>i</code> oraz (2) nie musi być liczbą. Jak widzimy, możemy wykonać pętlę za każdym razem przypisując do zmiennej kolejny tekst z listy. Każdą linijkę możemy zapisać w osobnej komendzie <code>print()</code> lub też całość wpisać w jedną komendę, zaznaczając nowe linijki za pomocą <code>\n</code>. Tak zrobiłem w przedostatniej linijce.</p>
 <p>Nasz wynik ma jednak problem – każde pytanie nazywa się <code>RSES_1</code>. Liczba po <code>RSES_</code> musi się zmieniać. Tym razem jest to trudniejsze niż wcześniej, bo <code>item</code> nie jest tutaj liczbą, tylko treścią pytania, więc nie możemy zapisać <code>RSES_{item}</code>. Z pomocą przychodzi nam jednak funkcja <code>enumerate()</code>. Pozwala ona przerobić listę na tzw. krotki (ang. <em>tuples</em>, tutaj <em>2-tuples</em> czyli dwukrotki). Każda taka dwukrotka zawiera numer pozycji na liście (licząc od 0) oraz samą pozycję. Numer jest pierwszy, więc dostaniemy się&nbsp;do niego pisząc <code>item[0]</code>. Jeśli chcemy dostać treść pozycji testowej, zapiszemy <code>item[1]</code>. Całość wyglądałaby więc tak:</p>
-<div id="883d3fee" class="cell" data-execution_count="11">
+<div id="a949798e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> item <span class="kw" style="color: #003B4F;
@@ -3397,22 +3406,22 @@ q: At times I think I am no good at all.
 </section>
 <section id="zapisywanie-do-pliku" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="zapisywanie-do-pliku"><span class="header-section-number">4.2</span> Zapisywanie do pliku</h2>
-<p>Wynik działania takiej funkcji możemy od razu zapisać do pliku tekstowego za pomocą specjalnego operatora <code>&gt;</code> w PowerShell<sup>4</sup>. Da się to zrobić nie wychodząc z pythona, ale to niepotrzebnie skomplikowane. Druga opcja to po prostu skopiować wygenerowany tekst z konsoli. Jeśli ktoś rzadko z niej korzysta, to ostrzegam, że do kopiowania i wklejania zamiast Ctrl+C i Ctrl+V w konsoli używamy Ctrl+Shift+C i Ctrl+Shift+V. Głównie dlatego, że Ctrl+C ma tam inną funkcję – przerywa aktualnie wykonywane zadanie. Ten sposób może jednak nie być odpowiedni, jeśli tekst jest długi, bo wtedy konsola może zjeść nam kilka (lub bardzo dużo) linijek. Jak więc wykorzystać <code>&gt;</code>? W PowerShell (nie w konsoli pythona! w zwykłym, gołym PowerShell) wpisujemy coś takiego:</p>
-<pre><code>python "C:\ścieżka\do\skryptu.py" &gt; "C:\ścieżka\do\pliku.txt"</code></pre>
+<p>Wynik działania takiej funkcji możemy od razu zapisać do pliku tekstowego za pomocą specjalnego operatora <code>&gt;</code> w PowerShell<sup>4</sup>. Da się to zrobić nie wychodząc z Pythona, ale to niepotrzebnie skomplikowane. Druga opcja to po prostu skopiować wygenerowany tekst z konsoli. Jeśli ktoś rzadko z niej korzysta, to ostrzegam, że do kopiowania i wklejania zamiast Ctrl+C i Ctrl+V w konsoli używamy Ctrl+Shift+C i Ctrl+Shift+V. Głównie dlatego, że Ctrl+C ma tam inną funkcję – przerywa aktualnie wykonywane zadanie. Ten sposób może jednak nie być odpowiedni, jeśli tekst jest długi, bo wtedy konsola może zjeść nam kilka (lub bardzo dużo) linijek. Jak więc wykorzystać <code>&gt;</code>? W PowerShell (nie w konsoli Pythona! w zwykłym, gołym PowerShell) wpisujemy coś takiego:</p>
+<pre><code>Python "C:\ścieżka\do\skryptu.py" &gt; "C:\ścieżka\do\pliku.txt"</code></pre>
 <p>Jako podpowiedź mogę podrzucić, że Windows 11 pozwala kopiować ścieżki po kliknięciu na plik prawym przyciskiem myszy. W Windowsie 10 też możemy sobie w ten sposób ułatwić życie, tylko klikając prawy przycisk myszy musimy jeszcze przytrzymać shift. Ostateczna komenda mogłaby więc wyglądać tak:</p>
-<pre><code>python "C:\Users\Jakub\Desktop\RSES.py" &gt; "C:\Users\Jakub\Desktop\RSES.txt"</code></pre>
+<pre><code>Python "C:\Users\Jakub\Desktop\RSES.py" &gt; "C:\Users\Jakub\Desktop\RSES.txt"</code></pre>
 <p>Powoduje to zapisanie tego, co normalnie skrypt wydrukowałby w konsoli, w pliku <code>RSES.txt</code> na pulpicie. Rozszerzenie <code>.txt</code> jest konieczne. Oczywiście jeśli Twoja nazwa użytkownika to Jakub. Niestety wpisywanie własnych ścieżek jest konieczne.</p>
 </section>
 <section id="daty" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="daty"><span class="header-section-number">4.3</span> Daty</h2>
-<p>Wróćmy do pierwotnego przykładu z plikiem mojej siostry. Jest to przykład o tyle specyficzny, że zmiennym elementem jest tam data. Daty zmieniają się przewidywalne, ale potrzebują specjalnych funkcji, które ogarną takie rzeczy jak to, że różne miesiące mają różną liczbę dni, istnieją lata przestępne itd. Kiedy rzeczywiście miałem ten problem, użyłem funkcji <code>date</code> w Linuksie, która sama z siebie pozwala na robienie takich rzeczy. Większość osób (niestety) nie korzysta z linuksa, dlatego na potrzeby tego wpisu zaadaptuję to rozwiązanie do pythona. Albo chociaż spróbuję.</p>
+<p>Wróćmy do pierwotnego przykładu z plikiem mojej siostry. Jest to przykład o tyle specyficzny, że zmiennym elementem jest tam data. Daty zmieniają się przewidywalne, ale potrzebują specjalnych funkcji, które ogarną takie rzeczy jak to, że różne miesiące mają różną liczbę dni, istnieją lata przestępne itd. Kiedy rzeczywiście miałem ten problem, użyłem funkcji <code>date</code> w Linuksie, która sama z siebie pozwala na robienie takich rzeczy. Większość osób (niestety) nie korzysta z linuksa, dlatego na potrzeby tego wpisu zaadaptuję to rozwiązanie do Pythona. Albo chociaż spróbuję.</p>
 <p>Żeby operować na datach, musimy na szczycie skryptu (lub najpierw w konsoli) zapisać:</p>
-<div id="99e65b4d" class="cell" data-execution_count="12">
+<div id="db8ce823" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> datetime</span></code></pre></div>
 </div>
-<p>Załaduje to pakiet <code>datetime</code> pozwalający operować na datach. Robimy to tylko raz na daną sesję, czyli jak raz załadujemy ten pakiet, możemy z niego korzystać dopóty, dopóki nie wyjdziemy z pythona. Jeśli chcemy dostać się do funkcji z pakietu <code>datetime</code>, musimy zapisać je z „przedrostkiem" <code>datetime.</code>, jak zobaczymy za chwilę.</p>
+<p>Załaduje to pakiet <code>datetime</code> pozwalający operować na datach. Robimy to tylko raz na daną sesję, czyli jak raz załadujemy ten pakiet, możemy z niego korzystać dopóty, dopóki nie wyjdziemy z Pythona. Jeśli chcemy dostać się do funkcji z pakietu <code>datetime</code>, musimy zapisać je z „przedrostkiem" <code>datetime.</code>, jak zobaczymy za chwilę.</p>
 <p>Przypomnijmy strukturę pliku, który chcemy stworzyć:</p>
 <pre><code>Data:11.05.2023
 I
@@ -3422,9 +3431,9 @@ II
 III</code></pre>
 <p>Po pierwsze musimy ustalić, od jakiej daty chcemy zacząć. Możemy wykorzystać dzisiejszą datę wpisując <code>datetime.date.today()</code>. Możemy też wybrać datę początkową arbitralnie, używając czegoś w rodzaju <code>datetime.date(2023, 5, 11)</code>. Data jest w kolejności ISO 8601, czyli rok, miesiąc, dzień.</p>
 <p>Po drugie będziemy musieli dodawać do naszej daty dni. Robimy to funkcją <code>datetime.timedelta(days = 1)</code>. W tej formie do naszej daty dodamy jeden dzień. Takie coś rzeczywiście do daty dodajemy, czyli piszemy na przykład <code>datetime.date(2023, 5, 11) + datetime.timedelta(days = 1)</code>. Wynikiem będzie tutaj 12 maja 2023 roku.</p>
-<p>Po trzecie nasza data musi być w określonym formacie, w tym wypadku DD.MM.RRRR. Domyślnie daty wyświetlają się w formacie ISO 8601, czyli RRRR-MM-DD. Formatować daty można metodą <code>strftime()</code>. Metody to szczególny rodzaj funkcji, który wykorzystujemy tak, że doklejamy je po kropce do nazwy naszego obiektu np. z datą. Najlepiej będzie to widać w przykładzie. Do samej metody wrzucamy zakodowany format, w jakim datę chcemy uzyskać. Wykorzystamy tutaj specjalne kody, których listę możemy znaleźć <a href="https://www.w3schools.com/python/gloss_python_date_format_codes.asp">tutaj</a>. Potrzebny nam format zakodujemy jako <code>"%d.%m.%Y"</code>.</p>
+<p>Po trzecie nasza data musi być w określonym formacie, w tym wypadku DD.MM.RRRR. Domyślnie daty wyświetlają się w formacie ISO 8601, czyli RRRR-MM-DD. Formatować daty można metodą <code>strftime()</code>. Metody to szczególny rodzaj funkcji, który wykorzystujemy tak, że doklejamy je po kropce do nazwy naszego obiektu np. z datą. Najlepiej będzie to widać w przykładzie. Do samej metody wrzucamy zakodowany format, w jakim datę chcemy uzyskać. Wykorzystamy tutaj specjalne kody, których listę możemy znaleźć <a href="https://www.w3schools.com/Python/gloss_Python_date_format_codes.asp">tutaj</a>. Potrzebny nam format zakodujemy jako <code>"%d.%m.%Y"</code>.</p>
 <p>Zbierając to wszystko do kupy uzyskujemy coś takiego:</p>
-<div id="81d1eda7" class="cell" data-execution_count="13">
+<div id="f66e5b90" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> datetime</span>
@@ -3552,7 +3561,7 @@ III
 </div>
 </div>
 <p>Wykorzystałem tutaj kilka zmiennych, które nazwałem <code>start_date</code>, <code>date</code> i <code>date_formatted</code>. Nazwy zmiennych mogą być jakiekolwiek. Wybrałem takie, żeby to było czytelne. Jak to w programowaniu, możemy to napisać na parę sposobów. Dla przykładu tutaj datę już sformatowaną zapisałem w osobnej zmiennej, ale mógłbym też napisać:</p>
-<div id="66049627" class="cell" data-execution_count="14">
+<div id="17f3da89" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> datetime</span>
@@ -3621,7 +3630,7 @@ background-color: null;
 font-style: inherit;">"</span>)</span></code></pre></div>
 </div>
 <p>…albo w ogóle wszystko zapisać już wewnątrz pętli:</p>
-<div id="5ac6b01a" class="cell" data-execution_count="15">
+<div id="45c40fc2" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> datetime</span>
@@ -3699,7 +3708,7 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 <li><p>Ciągi liczb do pętli generujemy funkcją <code>range()</code>, przy czym domyślnie liczy ona od 0. Możemy do niej wrzucić jedną liczbę albo koniec i początek ciągu, który chcemy uzyskać. Koniec domyślnie nie wlicza się do ciągu.</p></li>
 <li><p>Daty to szczególne wartości, którymi zawiadują funkcje z pakietu <code>datetime</code>.</p></li>
 <li><p>Zmienne z datami tworzymy za pomocą <code>date()</code>, różnice w datach liczymy za pośrednictwem <code>timedelta()</code>, a także możemy formatować daty poprzez metodę <code>strftime()</code>.</p></li>
-<li><p>Wyniki działania takich skryptów zapisujemy do plików operatorem <code>&gt;</code>. Robimy to w konsoli systemowej (np. PowerShell), a nie w konsoli pythona.</p></li>
+<li><p>Wyniki działania takich skryptów zapisujemy do plików operatorem <code>&gt;</code>. Robimy to w konsoli systemowej (np. PowerShell), a nie w konsoli Pythona.</p></li>
 </ol>
 
 
@@ -3708,7 +3717,7 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 <hr>
 <ol>
 <li id="fn1"><p>Ciekawostką może być tutaj wczesny kalendarz hebrajski. Kalendarz hebrajski jest księżycowy, ma 12 miesięcy, ale w latach przestępnych dodawany jest 13. miesiąc – adar szeni. Takich lat przestępnych musi przypaść 7 w ciągu 19 lat. Obecnie jest to skodyfikowane (zob. cykl Metona), ale początkowo nie wiadomo było, które konkretnie lata w cyklu mają być przestępne i było to <em>ad hoc</em> ustalane przez społeczność żydowską. Tym samym lata przestępne pojawiały się znienacka i data wcale nie zmieniała się w przewidywalny sposób. Miało to poważne konsekwencje dla daty Wielkanocy, bo zanim został ustalony stabilny wzór (Wielkanocy, nie lat przestępnych w kalendarzu żydowskim, to nadeszło później), nigdy nie wiadomo było, kiedy wypadnie 14 nisan, czyli rocznica śmierci Jezusa według kalendarza żydowskiego.↩︎</p></li>
-<li id="fn2"><p>Instrukcję, jak uruchamiać takie pliki bezpośrednio w Notepad++, znajdziemy np. <a href="https://www.delftstack.com/howto/python/notepad  -run-python/">tutaj</a>.↩︎</p></li>
+<li id="fn2"><p>Instrukcję, jak uruchamiać takie pliki bezpośrednio w Notepad++, znajdziemy np. <a href="https://www.delftstack.com/howto/Python/notepad++-run-Python/">tutaj</a>.↩︎</p></li>
 <li id="fn3"><p>Jest też <em>easy mode</em>, który przypomina generatory na stronach typu Formularze Google.↩︎</p></li>
 <li id="fn4"><p>Sam korzystam z linuksa (<em>I use arch, BTW</em>), ale nie łudzę się – większość osób, które to czytają, to windowsiarze. W linuksie operator <code>&gt;</code> działa identycznie.↩︎</p></li>
 <li id="fn5"><p>Sprawdziłem, taki skrypt generuje u mnie 30 lat rozpiski w 47 milisekund (!), a gotowy plik ma 310 kB.↩︎</p></li>
@@ -4348,7 +4357,7 @@ font-style: inherit;">opisowe</span>(iris, Species, Sepal.Width, Sepal.Length)</
 </div>
 </div>
 <p>Może i ciągle nie działa, ale dostaliśmy inny błąd! To naprawdę jest powód do radości, jak się robi cokolwiek związanego z komputerami.</p>
-<p>Jeśli chodzi o formatowanie, to mogę to zapisać jako <code>{{group}}</code> albo <code>{{ group }}</code>. Zazwyczaj nie stawiamy spacji po nawiasach, ale operator <code>{{ }}</code> jest wyjątkiem. Obie formy zadziałają, ale żeby podkreślić szczególne działanie tego operatora <a href="https://style.tidyverse.org/syntax.html?q={{#embracing"><em>The tidyverse style guide</em></a> zaleca, by stawiać te spacje.</p>
+<p>Jeśli chodzi o formatowanie, to mogę to zapisać jako <code>{{group}}</code> albo <code>{{ group }}</code>. Zazwyczaj nie stawiamy spacji po nawiasach, ale operator <code>{{ }}</code> jest wyjątkiem. Obie formy zadziałają, ale żeby podkreślić szczególne działanie tego operatora <a href="https://style.tidyverse.org/syntax.html?q=%7B%7B#embracing"><em>The tidyverse style guide</em></a> zaleca, by stawiać te spacje.</p>
 </section>
 <section id="quoting-i-unquoting" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> <em>Quoting</em> i <em>unquoting</em></h1>
@@ -6114,7 +6123,7 @@ font-style: inherit;">round</span>()</span>
 <ol>
 <li id="fn1"><p>Bazy najlepiej pobrać na swój dysk z <a href="https://github.com/jakub-jedrusiak/nieobliczalne/tree/main/posts/dane/automatyzacja">repozytorium</a>.↩︎</p></li>
 <li id="fn2"><p>Którą serdecznie pozdrawiam.↩︎</p></li>
-<li id="fn3"><p>W R indeksowanie zaczyna się od 1, a nie od 0 jak w C czy w pythonie. Takie indeksy są bardziej intuicyjne dla osób bez wprawy informatycznej.↩︎</p></li>
+<li id="fn3"><p>W R indeksowanie zaczyna się od 1, a nie od 0 jak w C czy w Pythonie. Takie indeksy są bardziej intuicyjne dla osób bez wprawy informatycznej.↩︎</p></li>
 <li id="fn4"><p>Wtedy pojedyncze elementy wydobywalibyśmy składnią typu <code>lista[2][5]</code>, co oznacza 5. element listy z indeksem 2.↩︎</p></li>
 <li id="fn5"><p>Tak, wiem, że to nie jest lista, tylko wektor. Nie chcę tutaj dodatkowo gmatwać wprowadzając pojęcie wektora. Skutek jest jednak ten sam, nawet jeśli <code>list.files</code> rzeczywiście wyrzucałoby listę, dalej zrobilibyśmy dokładnie to samo.↩︎</p></li>
 <li id="fn6"><p>Lub wektora.↩︎</p></li>
