@@ -10,7 +10,7 @@ categories:
     - Narzędzia
     - Nauka
 draft: true
-bibliography: "/bibliografia/PsyToolkit.bib"
+bibliography: "../bibliografia/psytoolkit.bib"
 ---
 
 Narzędzie, o którym mowa, to PsyToolkit [@stoet_PsyToolkit_2010; @stoet_PsyToolkit_2017], do którego dostęp możemy uzyskać [tutaj](https://www.psytoolkit.org/). Jest ono w pełni darmowe, choć niestety nie otwartoźródłowe (choć liczę, że to się zmieni). Działa ono w przeglądarce i od razu pozwala zbierać dane, za darmo, czym różnić się będzie od chociażby PsychoPy.
