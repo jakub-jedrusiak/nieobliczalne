@@ -1,7 +1,7 @@
 ---
 title: "Nie pisz (prawie) tego samego 100 razy"
-subtitle: "Automatyzacja powtarzalnego tekstu za pomocą pythona"
-description: "Wspominałem już, że nie znoszę mechanicznej pracy. A królową wśród prac mechanicznych jest pisanie wiele razy prawie tego samego tekstu, który różni się tylko w szczegółach. Zdarza się to non-stop. Jednocześnie jest to ten rodzaj pracy, który można niskim kosztem zautomatyzować. W tym wpisie postaram się pokazać, jak można uniknąć góry bezsensownej pracy za pomocą prostych pętli i funkcji `print()` w pythonie."
+subtitle: "Automatyzacja powtarzalnego tekstu za pomocą Pythona"
+description: "Wspominałem już, że nie znoszę mechanicznej pracy. A królową wśród prac mechanicznych jest pisanie wiele razy prawie tego samego tekstu, który różni się tylko w szczegółach. Zdarza się to non-stop. Jednocześnie jest to ten rodzaj pracy, który można niskim kosztem zautomatyzować. W tym wpisie postaram się pokazać, jak można uniknąć góry bezsensownej pracy za pomocą prostych pętli i funkcji `print()` w Pythonie."
 date: "2023-05-12"
 image: ./headers/powtarzalny-tekst.webp
 twitter-card:
@@ -34,23 +34,23 @@ Ta cecha, tzn. przewidywalność jakiegoś tekstu, pozwala nam zautomatyzować j
 
 # Python
 
-W tym tekście wykorzystamy sobie język programowania o nazwie python. Tego typu praca z tekstem jest tak podstawowa, że można ją wykonać w prawie każdym języku programowania (w tym w R za pomocą `paste()` czy `paste0()`), ale tutaj wykorzystamy pythona, bo to chyba najpopularniejszy język programowania w ogóle, drugi najpopularniejszy w statystyce, a przy tym jest to język ogólnego przeznaczenia. A także ma nazwę od Monty'ego Pythona, więc wiadomo, że warto. Specjalistą od pythona nie jestem, moim pierwszym językiem programowania jest R, ale co tam, żyje się raz.
+W tym tekście wykorzystamy sobie język programowania o nazwie Python. Tego typu praca z tekstem jest tak podstawowa, że można ją wykonać w prawie każdym języku programowania (w tym w R za pomocą `paste()` czy `paste0()`), ale tutaj wykorzystamy Pythona, bo to chyba najpopularniejszy język programowania w ogóle, drugi najpopularniejszy w statystyce, a przy tym jest to język ogólnego przeznaczenia. A także ma nazwę od Monty'ego Pythona, więc wiadomo, że warto. Specjalistą od Pythona nie jestem, moim pierwszym językiem programowania jest R, ale co tam, żyje się raz.
 
-Żeby móc robić cokolwiek w pythonie, musimy zainstalować sobie interpreter [stąd](https://www.python.org/). Interpreter to coś w rodzaju programu, który potrafi czytać i wykonywać kod w danym języku. Można powiedzieć w pewnym uproszczeniu, że instalujemy sobie pythona. Koniecznie zaznaczcie w trakcie instalacji, żeby **dodać pythona do PATH**. Teoretycznie tyle wystarczy, ale żeby uprzyjemnić proces pisania, fajnie jest przygotować sobie jakieś IDE (program do programowania), np. [Visual Studio Code](https://code.visualstudio.com/) albo chociaż porządny edytor tekstu w stylu [Notepad++](https://notepad-plus-plus.org/).
+Żeby móc robić cokolwiek w Pythonie, musimy zainstalować sobie interpreter [stąd](https://www.Python.org/). Interpreter to coś w rodzaju programu, który potrafi czytać i wykonywać kod w danym języku. Można powiedzieć w pewnym uproszczeniu, że instalujemy sobie Pythona. Koniecznie zaznaczcie w trakcie instalacji, żeby **dodać Pythona do PATH**. Teoretycznie tyle wystarczy, ale żeby uprzyjemnić proces pisania, fajnie jest przygotować sobie jakieś IDE (program do programowania), np. [Visual Studio Code](https://code.visualstudio.com/) albo chociaż porządny edytor tekstu w stylu [Notepad++](https://notepad-plus-plus.org/).
 
-Gdy to zrobimy, możemy dotrzeć do pythona na kilka sposobów. Podstawowy to wejście w terminal (w Windowsie PowerShell albo wiersz polecenia) i wpisanie tam `python`. Gdy potwierdzimy enterem, dostaniemy konsolę pythona, gdzie możemy wpisywać komendy. Drugi sposób, przez IDE, to stworzenie pliku z rozszerzeniem .py (np. „skrypt.py" albo „znowu_dają_mi_bezsensowna_robote.py") zapisywanie w nim naszych komend. Drugi sposób przyda się, gdy chcemy sobie komendy zachować na przyszłość albo piszemy coś bardziej skomplikowanego, na wiele linijek. IDE często mają specjalny guzik do uruchomienia takiego kodu[^2]. Możemy też w wierszu polecenia wpisać `python C:\ścieżka\do\pliku.py`, np. `python "C:\Users\Jakub\Desktop\RSES.py"`. Ważne -- w „suchym\" wierszu polecenia, nie w konsoli pythona.
+Gdy to zrobimy, możemy dotrzeć do Pythona na kilka sposobów. Podstawowy to wejście w terminal (w Windowsie PowerShell albo wiersz polecenia) i wpisanie tam `Python`. Gdy potwierdzimy enterem, dostaniemy konsolę Pythona, gdzie możemy wpisywać komendy. Drugi sposób, przez IDE, to stworzenie pliku z rozszerzeniem .py (np. „skrypt.py" albo „znowu_dają_mi_bezsensowna_robote.py") zapisywanie w nim naszych komend. Drugi sposób przyda się, gdy chcemy sobie komendy zachować na przyszłość albo piszemy coś bardziej skomplikowanego, na wiele linijek. IDE często mają specjalny guzik do uruchomienia takiego kodu[^2]. Możemy też w wierszu polecenia wpisać `Python C:\ścieżka\do\pliku.py`, np. `Python "C:\Users\Jakub\Desktop\RSES.py"`. Ważne -- w „suchym\" wierszu polecenia, nie w konsoli Pythona.
 
-[^2]: Instrukcję, jak uruchamiać takie pliki bezpośrednio w Notepad++, znajdziemy np. [tutaj](https://www.delftstack.com/howto/python/notepad++-run-python/).
+[^2]: Instrukcję, jak uruchamiać takie pliki bezpośrednio w Notepad++, znajdziemy np. [tutaj](https://www.delftstack.com/howto/Python/notepad++-run-Python/).
 
-![Konsola pythona w PowerShell](ilustracje/powtarzalny-tekst/python-powershell.png)
+![Konsola Pythona w PowerShell](ilustracje/powtarzalny-tekst/Python-powershell.png)
 
-![Konsola pythona w konsoli w Linuxie](ilustracje/powtarzalny-tekst/python-w-konsoli.png)
+![Konsola Pythona w konsoli w Linuxie](ilustracje/powtarzalny-tekst/Python-w-konsoli.png)
 
 # `print()` i *f-strings*
 
-Teraz możemy pisać nasz kod w pythonie. Będę zakładał, że piszemy nasz kod w pliku, ale równie dobrze można to pisać na szybko w konsoli. Często tak robię, jak mam do wygenerowania prostą zbitkę i nie chce mi się tworzyć na to specjalnie pliku. W takim wypadku każdą linijkę kodu wpisujemy w konsolę osobno i osobno zatwierdzamy enterem. Zazwyczja pierwszym, co się pisze, gdy zaczyna się uczyć nowego języka, jest program, który wyświetla tekst „Hello world!". W pythonie robimy to funkcją `print()`.
+Teraz możemy pisać nasz kod w Pythonie. Będę zakładał, że piszemy nasz kod w pliku, ale równie dobrze można to pisać na szybko w konsoli. Często tak robię, jak mam do wygenerowania prostą zbitkę i nie chce mi się tworzyć na to specjalnie pliku. W takim wypadku każdą linijkę kodu wpisujemy w konsolę osobno i osobno zatwierdzamy enterem. Zazwyczja pierwszym, co się pisze, gdy zaczyna się uczyć nowego języka, jest program, który wyświetla tekst „Hello world!". W Pythonie robimy to funkcją `print()`.
 
-```{python}
+``` {python}
 print("Hello world!")
 ```
 
@@ -58,21 +58,21 @@ Funkcja `print()` w większości wystarczy, żebyśmy uzyskali to, co chcemy dzi
 
 Jeśli potrzebujemy, możemy po przecinku dorzucić argument `end`, który mówi, co funkcja ma dodać na koniec danego ciągu znaków. Domyślnie jest to nowa linia, którą w informatyce zapisujemy zazwyczaj `\n`. Nie robimy rzeczywistej nowej linii! Na przykład możemy zmienić jedną pustą linię na dwie, trzy. Możemy też zamienić nową linię na spację, ale po co, to wyjaśnię później. Możemy też wymyślić coś całkiem szalonego, jeśli mamy taką potrzebę.
 
-```{python}
+``` {python}
 print("Hello world!", end="\n\n-----\n\n")
 ```
 
-Nabierze to więcej sensu, kiedy dojdziemy do pętli i będziemy wyświetlać wiele tekstów, jeden pod drugim. Podobnie więcej sensu nabierze coś, co omówimy teraz, czyli tzw. *f-strings*. W informatyce słowem *string* oznacza się dosłowny ciąg znaków. *f-strings* to sposób, jak do naszego ciągu znaków wrzucić wartość jakiejś *zmiennej*. Co to znaczy? Jak powiedziałem wyżej, tekst, który chcemy wygenerować, zawiera elementy stałe i elementy zmienne. Elementem zmiennym może być na przykład liczba. Jak połączyć elementy stałe ze zmiennymi? Właśnie za pomocą *f-string*. Zmienne definiujemy w pythonie za pomocą znaku `=`.
+Nabierze to więcej sensu, kiedy dojdziemy do pętli i będziemy wyświetlać wiele tekstów, jeden pod drugim. Podobnie więcej sensu nabierze coś, co omówimy teraz, czyli tzw. *f-strings*. W informatyce słowem *string* oznacza się dosłowny ciąg znaków. *f-strings* to sposób, jak do naszego ciągu znaków wrzucić wartość jakiejś *zmiennej*. Co to znaczy? Jak powiedziałem wyżej, tekst, który chcemy wygenerować, zawiera elementy stałe i elementy zmienne. Elementem zmiennym może być na przykład liczba. Jak połączyć elementy stałe ze zmiennymi? Właśnie za pomocą *f-string*. Zmienne definiujemy w Pythonie za pomocą znaku `=`.
 
-```{python}
+``` {python}
 i = 23
 
 print(f"MMPI_{i}")
 ```
 
-W kodzie powyżej najpierw przypisuję wartość 23 do zmiennej `i` (zmienne mogę nazywać jak chcę). Dzięki temu, od tego momentu, gdy napiszę `i`, python zrozumie to jako 23. Można spróbować tego w konsoli. Jeśli po zadeklarowaniu zmiennej wpiszemy w konsolę `i` i zatwierdzimy, zobaczymy liczbę 23. Jeśli piszę to w konsoli, a nie w pliku, to najpierw wpisuję `i = 23`, klikam enter i dopiero potem odpowiednią funkcję `print()`. Następnie do funkcji `print()` wrzucam tekst `"MMPI_{i}"`. Python wie, że zamiast `{i}` musi podstawić prawdziwą wartość zmiennej `i`, czyli w tym wypadku 23. Żeby to jednak wiedział, musimy przed samym ciągiem znaków dodać literkę `f`, jak *format*. Dlatego właśnie napisałem `f"MMPI_{i}"` i dlatego nazywa się to *f-string*. Jeśli chcielibyśmy w naszym tekście dodać dosłowne nawiasy klamrowe, np. uzyskać „{MMPI_23}", takie nawiasy klamrowe piszemy podwójnie -- `{{` w *f-string* zmieni się w dosłowny znak `{`.
+W kodzie powyżej najpierw przypisuję wartość 23 do zmiennej `i` (zmienne mogę nazywać jak chcę). Dzięki temu, od tego momentu, gdy napiszę `i`, Python zrozumie to jako 23. Można spróbować tego w konsoli. Jeśli po zadeklarowaniu zmiennej wpiszemy w konsolę `i` i zatwierdzimy, zobaczymy liczbę 23. Jeśli piszę to w konsoli, a nie w pliku, to najpierw wpisuję `i = 23`, klikam enter i dopiero potem odpowiednią funkcję `print()`. Następnie do funkcji `print()` wrzucam tekst `"MMPI_{i}"`. Python wie, że zamiast `{i}` musi podstawić prawdziwą wartość zmiennej `i`, czyli w tym wypadku 23. Żeby to jednak wiedział, musimy przed samym ciągiem znaków dodać literkę `f`, jak *format*. Dlatego właśnie napisałem `f"MMPI_{i}"` i dlatego nazywa się to *f-string*. Jeśli chcielibyśmy w naszym tekście dodać dosłowne nawiasy klamrowe, np. uzyskać „{MMPI_23}", takie nawiasy klamrowe piszemy podwójnie -- `{{` w *f-string* zmieni się w dosłowny znak `{`.
 
-```{python}
+``` {python}
 i = 23
 
 print(f"{{MMPI_{i}}}")
@@ -80,7 +80,7 @@ print(f"{{MMPI_{i}}}")
 
 Zawartość zmiennej `i` możemy w nawiasach klamrowych też modyfikować.
 
-```{python}
+``` {python}
 i = 23
 
 print(f"MMPI_{i + 2}")
@@ -97,7 +97,7 @@ Pętle to w językach programowania sposób, żeby wiele razy zrobić to samo al
 
 Pętla `for` jest najprostszym rodzajem pętli i tym, z czego będziemy stale korzystać. Omówmy sobie ją na przykładzie generowania nazw kolumn.
 
-```{python}
+``` {python}
 for i in range(1, 11):
     print(f"MMPI_{i}")
 ```
@@ -110,18 +110,18 @@ Jeśli piszemy to w konsoli, a nie w pliku, możemy zapisać taką pętlę w jed
 
 Tak jak wspomniałem, domyślnie `print()` wyrzuca do konsoli to, co tej funkcji podaliśmy, dodając na koniec nową linię. Możemy jednak chcieć, żeby nasze elementy pojawiły się po przecinku albo oddzielone spacjami (albo jedno i drugie) i wtedy możemy zmienić argument `end`.
 
-```{python}
+``` {python}
 for i in range(1, 11):
     print(f"MMPI_{i}", end = ", ")
 ```
 
-Co prawda po ostatnim elemencie też dostajemy przecinek i spację, ale to już możemy usunąć ręcznie. W pythonie też da się to zaprogramować, ale nie chcę za bardzo gmatwać.
+Co prawda po ostatnim elemencie też dostajemy przecinek i spację, ale to już możemy usunąć ręcznie. W Pythonie też da się to zaprogramować, ale nie chcę za bardzo gmatwać.
 
 ## Pętla `while`
 
 Pętla `while` to bardziej podstawowy, prosty rodzaj pętli. Większość pętli `while` da się napisać w formie pętli `for`, dlatego nie będę się nad tym jakoś szczególnie rozwodził, ale warto wiedzieć, że coś takiego istnieje. Napiszmy przykład z poprzedniej sekcji w postaci pętli `while`.
 
-```{python}
+``` {python}
 i = 1
 while i <= 10:
     print(f"MMPI_{i}")
@@ -158,7 +158,7 @@ Po pierwsze spróbujmy zidentyfikować, co w naszym schemacie jest stałe i co s
 
 Skoro musimy mieć w naszych pytaniach treść pozycji testowej, musimy nasz kwestionariusz wkleić do skryptu. Zapiszemy go w postaci listy.
 
-```{python}
+``` {python}
 RSES = [
     "I feel that I am a person of worth, at least on an equal plane with others.",
     "I feel that I have a number of good qualities.",
@@ -173,9 +173,9 @@ RSES = [
 ]
 ```
 
-Cała lista jest nawiasach kwadratowych, każdy item jest w cudzysłowie, zaś itemy rozdzielone są przecinkami. Całą listę zapisałem do zmiennej o nazwie `RSES`. Teraz możemy powiedzieć pythonowi, żeby zrobił całą serię pytań w stylu PsyToolKit, gdzie po `q` za każdym razem wstawi jedną z pozycji testowych.
+Cała lista jest nawiasach kwadratowych, każdy item jest w cudzysłowie, zaś itemy rozdzielone są przecinkami. Całą listę zapisałem do zmiennej o nazwie `RSES`. Teraz możemy powiedzieć Pythonowi, żeby zrobił całą serię pytań w stylu PsyToolKit, gdzie po `q` za każdym razem wstawi jedną z pozycji testowych.
 
-```{python}
+``` {python}
 for item in RSES:
     print("l: RSES_1")
     print("t: radio")
@@ -188,7 +188,7 @@ Jak widzimy, nasza zmienna w pętli (1) nie musi nazywać się `i` oraz (2) nie 
 
 Nasz wynik ma jednak problem -- każde pytanie nazywa się `RSES_1`. Liczba po `RSES_` musi się zmieniać. Tym razem jest to trudniejsze niż wcześniej, bo `item` nie jest tutaj liczbą, tylko treścią pytania, więc nie możemy zapisać `RSES_{item}`. Z pomocą przychodzi nam jednak funkcja `enumerate()`. Pozwala ona przerobić listę na tzw. krotki (ang. *tuples*, tutaj *2-tuples* czyli dwukrotki). Każda taka dwukrotka zawiera numer pozycji na liście (licząc od 0) oraz samą pozycję. Numer jest pierwszy, więc dostaniemy się do niego pisząc `item[0]`. Jeśli chcemy dostać treść pozycji testowej, zapiszemy `item[1]`. Całość wyglądałaby więc tak:
 
-```{python}
+``` {python}
 for item in enumerate(RSES):
     print(f"l: RSES_{item[0] + 1}")
     print("t: radio")
@@ -201,33 +201,33 @@ Zwróćmy uwagę, że w pierwszym `print()` napisałem `item[0] + 1`. `item[0]` 
 
 ## Zapisywanie do pliku
 
-Wynik działania takiej funkcji możemy od razu zapisać do pliku tekstowego za pomocą specjalnego operatora `>` w PowerShell[^4]. Da się to zrobić nie wychodząc z pythona, ale to niepotrzebnie skomplikowane. Druga opcja to po prostu skopiować wygenerowany tekst z konsoli. Jeśli ktoś rzadko z niej korzysta, to ostrzegam, że do kopiowania i wklejania zamiast Ctrl+C i Ctrl+V w konsoli używamy Ctrl+Shift+C i Ctrl+Shift+V. Głównie dlatego, że Ctrl+C ma tam inną funkcję -- przerywa aktualnie wykonywane zadanie. Ten sposób może jednak nie być odpowiedni, jeśli tekst jest długi, bo wtedy konsola może zjeść nam kilka (lub bardzo dużo) linijek. Jak więc wykorzystać `>`? W PowerShell (nie w konsoli pythona! w zwykłym, gołym PowerShell) wpisujemy coś takiego:
+Wynik działania takiej funkcji możemy od razu zapisać do pliku tekstowego za pomocą specjalnego operatora `>` w PowerShell[^4]. Da się to zrobić nie wychodząc z Pythona, ale to niepotrzebnie skomplikowane. Druga opcja to po prostu skopiować wygenerowany tekst z konsoli. Jeśli ktoś rzadko z niej korzysta, to ostrzegam, że do kopiowania i wklejania zamiast Ctrl+C i Ctrl+V w konsoli używamy Ctrl+Shift+C i Ctrl+Shift+V. Głównie dlatego, że Ctrl+C ma tam inną funkcję -- przerywa aktualnie wykonywane zadanie. Ten sposób może jednak nie być odpowiedni, jeśli tekst jest długi, bo wtedy konsola może zjeść nam kilka (lub bardzo dużo) linijek. Jak więc wykorzystać `>`? W PowerShell (nie w konsoli Pythona! w zwykłym, gołym PowerShell) wpisujemy coś takiego:
 
 [^4]: Sam korzystam z linuksa (*I use arch, BTW*), ale nie łudzę się -- większość osób, które to czytają, to windowsiarze. W linuksie operator `>` działa identycznie.
 
 ```         
-python "C:\ścieżka\do\skryptu.py" > "C:\ścieżka\do\pliku.txt"
+Python "C:\ścieżka\do\skryptu.py" > "C:\ścieżka\do\pliku.txt"
 ```
 
 Jako podpowiedź mogę podrzucić, że Windows 11 pozwala kopiować ścieżki po kliknięciu na plik prawym przyciskiem myszy. W Windowsie 10 też możemy sobie w ten sposób ułatwić życie, tylko klikając prawy przycisk myszy musimy jeszcze przytrzymać shift. Ostateczna komenda mogłaby więc wyglądać tak:
 
 ```         
-python "C:\Users\Jakub\Desktop\RSES.py" > "C:\Users\Jakub\Desktop\RSES.txt"
+Python "C:\Users\Jakub\Desktop\RSES.py" > "C:\Users\Jakub\Desktop\RSES.txt"
 ```
 
 Powoduje to zapisanie tego, co normalnie skrypt wydrukowałby w konsoli, w pliku `RSES.txt` na pulpicie. Rozszerzenie `.txt` jest konieczne. Oczywiście jeśli Twoja nazwa użytkownika to Jakub. Niestety wpisywanie własnych ścieżek jest konieczne.
 
 ## Daty
 
-Wróćmy do pierwotnego przykładu z plikiem mojej siostry. Jest to przykład o tyle specyficzny, że zmiennym elementem jest tam data. Daty zmieniają się przewidywalne, ale potrzebują specjalnych funkcji, które ogarną takie rzeczy jak to, że różne miesiące mają różną liczbę dni, istnieją lata przestępne itd. Kiedy rzeczywiście miałem ten problem, użyłem funkcji `date` w Linuksie, która sama z siebie pozwala na robienie takich rzeczy. Większość osób (niestety) nie korzysta z linuksa, dlatego na potrzeby tego wpisu zaadaptuję to rozwiązanie do pythona. Albo chociaż spróbuję.
+Wróćmy do pierwotnego przykładu z plikiem mojej siostry. Jest to przykład o tyle specyficzny, że zmiennym elementem jest tam data. Daty zmieniają się przewidywalne, ale potrzebują specjalnych funkcji, które ogarną takie rzeczy jak to, że różne miesiące mają różną liczbę dni, istnieją lata przestępne itd. Kiedy rzeczywiście miałem ten problem, użyłem funkcji `date` w Linuksie, która sama z siebie pozwala na robienie takich rzeczy. Większość osób (niestety) nie korzysta z linuksa, dlatego na potrzeby tego wpisu zaadaptuję to rozwiązanie do Pythona. Albo chociaż spróbuję.
 
 Żeby operować na datach, musimy na szczycie skryptu (lub najpierw w konsoli) zapisać:
 
-```{python}
+``` {python}
 import datetime
 ```
 
-Załaduje to pakiet `datetime` pozwalający operować na datach. Robimy to tylko raz na daną sesję, czyli jak raz załadujemy ten pakiet, możemy z niego korzystać dopóty, dopóki nie wyjdziemy z pythona. Jeśli chcemy dostać się do funkcji z pakietu `datetime`, musimy zapisać je z „przedrostkiem\" `datetime.`, jak zobaczymy za chwilę.
+Załaduje to pakiet `datetime` pozwalający operować na datach. Robimy to tylko raz na daną sesję, czyli jak raz załadujemy ten pakiet, możemy z niego korzystać dopóty, dopóki nie wyjdziemy z Pythona. Jeśli chcemy dostać się do funkcji z pakietu `datetime`, musimy zapisać je z „przedrostkiem\" `datetime.`, jak zobaczymy za chwilę.
 
 Przypomnijmy strukturę pliku, który chcemy stworzyć:
 
@@ -244,11 +244,11 @@ Po pierwsze musimy ustalić, od jakiej daty chcemy zacząć. Możemy wykorzysta�
 
 Po drugie będziemy musieli dodawać do naszej daty dni. Robimy to funkcją `datetime.timedelta(days = 1)`. W tej formie do naszej daty dodamy jeden dzień. Takie coś rzeczywiście do daty dodajemy, czyli piszemy na przykład `datetime.date(2023, 5, 11) + datetime.timedelta(days = 1)`. Wynikiem będzie tutaj 12 maja 2023 roku.
 
-Po trzecie nasza data musi być w określonym formacie, w tym wypadku DD.MM.RRRR. Domyślnie daty wyświetlają się w formacie ISO 8601, czyli RRRR-MM-DD. Formatować daty można metodą `strftime()`. Metody to szczególny rodzaj funkcji, który wykorzystujemy tak, że doklejamy je po kropce do nazwy naszego obiektu np. z datą. Najlepiej będzie to widać w przykładzie. Do samej metody wrzucamy zakodowany format, w jakim datę chcemy uzyskać. Wykorzystamy tutaj specjalne kody, których listę możemy znaleźć [tutaj](https://www.w3schools.com/python/gloss_python_date_format_codes.asp). Potrzebny nam format zakodujemy jako `"%d.%m.%Y"`.
+Po trzecie nasza data musi być w określonym formacie, w tym wypadku DD.MM.RRRR. Domyślnie daty wyświetlają się w formacie ISO 8601, czyli RRRR-MM-DD. Formatować daty można metodą `strftime()`. Metody to szczególny rodzaj funkcji, który wykorzystujemy tak, że doklejamy je po kropce do nazwy naszego obiektu np. z datą. Najlepiej będzie to widać w przykładzie. Do samej metody wrzucamy zakodowany format, w jakim datę chcemy uzyskać. Wykorzystamy tutaj specjalne kody, których listę możemy znaleźć [tutaj](https://www.w3schools.com/Python/gloss_Python_date_format_codes.asp). Potrzebny nam format zakodujemy jako `"%d.%m.%Y"`.
 
 Zbierając to wszystko do kupy uzyskujemy coś takiego:
 
-```{python}
+``` {python}
 import datetime
 
 start_date = datetime.date(2023, 5, 11)
@@ -262,7 +262,7 @@ for i in range(7):
 
 Wykorzystałem tutaj kilka zmiennych, które nazwałem `start_date`, `date` i `date_formatted`. Nazwy zmiennych mogą być jakiekolwiek. Wybrałem takie, żeby to było czytelne. Jak to w programowaniu, możemy to napisać na parę sposobów. Dla przykładu tutaj datę już sformatowaną zapisałem w osobnej zmiennej, ale mógłbym też napisać:
 
-```{python}
+``` {python}
 #| eval: false
 import datetime
 
@@ -276,7 +276,7 @@ for i in range(7):
 
 ...albo w ogóle wszystko zapisać już wewnątrz pętli:
 
-```{python}
+``` {python}
 #| eval: false
 import datetime
 
@@ -308,4 +308,4 @@ Opanowanie automatyzacji wymaga sporo praktyki i początkowo może zajmować wi�
 
 7.  Zmienne z datami tworzymy za pomocą `date()`, różnice w datach liczymy za pośrednictwem `timedelta()`, a także możemy formatować daty poprzez metodę `strftime()`.
 
-8.  Wyniki działania takich skryptów zapisujemy do plików operatorem `>`. Robimy to w konsoli systemowej (np. PowerShell), a nie w konsoli pythona.
+8.  Wyniki działania takich skryptów zapisujemy do plików operatorem `>`. Robimy to w konsoli systemowej (np. PowerShell), a nie w konsoli Pythona.

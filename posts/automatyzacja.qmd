@@ -125,7 +125,7 @@ bazy_danych
 
 Gdy wywołamy naszą listę w konsoli, zobaczymy, że wyświetlają nam się dwie bazy danych, w takiej kolejności, w jakiej je wprowadziliśmy. Oczywiście w liście zmieści się dużo więcej elementów niż dwa. Jeśli chcemy dostać tylko jeden element, używamy składni `nazwa_listy[[indeks]]`[^indeks], czyli na przykład `bazy_danych[[1]]`. W tym wypadku spowoduje to wyciągnięcie samej tylko bazy `iris`. Co ciekawe, listy mogą zawierać też inne listy[^matrioszka], ale nie będziemy wchodzić w to tak głęboko. Możemy też wywołać `bazy_danych[1]`, ale taki zapis powoduje subtelną różnicę -- efektem jest jednoelementowa lista, zaś składnia z podwójnymi nawiasami wyciąga sam 1. element (w naszym przypadku bazę danych `iris`, czyli obiekt tibble). Na początku nie trzeba tego jakoś głęboko rozumieć, wystarczy na wiarę przyjąć, że potrzebne są dwa nawiasy kwadratowe.
 
-[^indeks]: W R indeksowanie zaczyna się od 1, a nie od 0 jak w C czy w pythonie. Takie indeksy są bardziej intuicyjne dla osób bez wprawy informatycznej.
+[^indeks]: W R indeksowanie zaczyna się od 1, a nie od 0 jak w C czy w Pythonie. Takie indeksy są bardziej intuicyjne dla osób bez wprawy informatycznej.
 [^matrioszka]: Wtedy pojedyncze elementy wydobywalibyśmy składnią typu `lista[2][5]`, co oznacza 5. element listy z indeksem 2.
 
 ## Masowe ładowanie danych z `list.files`

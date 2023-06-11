@@ -11,7 +11,7 @@ freeze: true
 editor: source
 ---
 
-```{python}
+``` {python}
 #| label: setup
 #| code-fold: true
 #| code-summary: "Pokaż kod"
@@ -28,7 +28,7 @@ def variations(iterable, subset_length):
 
 Kombinatoryka to część matematyki zajmująca się modyfikacjami zbiorów. Weźmy sobie zbiór 5 pierwszych liter alfabetu i nazwijmy go Z jak zbiór. Zacznę od skomplikowanie brzmiącego wstępu, a potem wyjaśnię to na przykładach.
 
-```{python}
+``` {python}
 Z = ["A", "B", "C", "D", "E"]
 ```
 
@@ -45,7 +45,7 @@ Przed chwilą mówiłem, że zmiana kolejności to permutacja, a potem nagle uż
 
 Omówmy to na przykładzie naszego zbioru liter od A do E. Permutacja tego zbioru będzie wyglądała tak:
 
-```{python}
+``` {python}
 pd.DataFrame(itertools.permutations(Z))
 ```
 
@@ -59,7 +59,7 @@ $$
 
 Ciekawie zaczyna się robić, gdy przed zmianą kolejności chcemy jeszcze rozbić nasz zbiór na mniejsze zbiory. Dla przykładu możemy sobie wyobrazić, że chcemy z naszego zbioru 5 liter wybrać wszystkie możliwe zbiory po 2 litery, np. AB, AC, AD itd. Mamy do dyspozycji mniej miejsca, niż liter w zbiorze. Liczenie czegoś takiego jest analogiczne. Na pierwszym miejscu może pojawić się 1 z 5 liter, na drugim tylko 1 z 4: $V^2_5 = 5 \times 4 = 20$. Powinno więc istnieć 20 takich zbiorów. Wypiszmy je wszystkie.
 
-```{python}
+``` {python}
 variations(Z, 2)
 ```
 
@@ -77,7 +77,7 @@ $$
 
 Spróbujmy wypisać wariacje naszego zbioru po 3 elementy.
 
-```{python}
+``` {python}
 variations(Z, 3)
 ```
 
