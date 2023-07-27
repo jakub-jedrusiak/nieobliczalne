@@ -8,7 +8,52 @@ twitter-card:
     image: "/headers/regresja.jpeg"
 draft: true
 ---
+```{r}
+#| label: setup
+#| include: false
 
-Prawie wszystko w statystyce jest odmianą regresji. Funkcjonuje ona jako osobna analiza, ale logika, która za nią stoi, jest uniwersalna. Na przykład testy *t*, używane jako przykład we [wpisie o wartości $p$](./posts/p-value.qmd). można przedstawić jako rodzaj regresji. Bardziej złożona analiza wariancji (ANOVA) to też logika regresji zastosowana do pewnych szczególnych przypadków. Jeśli dobrze zrozumie się regresję, statystyka staje się znacznie przyjaźniejszym miejscem.
+knitr::opts_chunk$set(echo = FALSE, fig.align = "center", warning = FALSE, message = FALSE)
+pacman::p_load(tidyverse, knitr, kableExtra, broom, papaja, jedrusiakr)
+source("https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R", echo = FALSE)
+sp_tib <- read_delim("./dane/procent-wariancji/spider_anxiety.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE) %>%
+  mutate(Si = anxiety - mean(.$anxiety))
+
+sp_lm <- lm(anxiety ~ spider_size, data = sp_tib)
+
+sp_tib2 <- rbind(sp_tib, c(9, 7.5, 0, NA)) %>%
+  mutate(Si = anxiety - mean(.$anxiety))
+
+sp_lm2 <- lm(anxiety ~ spider_size, data = sp_tib2)
+```
+
+Prawie wszystko w statystyce jest odmianą regresji. Funkcjonuje ona jako osobna analiza, ale logika, która za nią stoi, jest uniwersalna. Na przykład testy *t*, używane jako przykład we [wpisie o wartości $p$](./posts/p-value.qmd), można przedstawić jako rodzaj regresji. Bardziej złożona analiza wariancji (ANOVA) to też logika regresji zastosowana do pewnych szczególnych przypadków. Jeśli dobrze zrozumie się regresję, statystyka staje się znacznie przyjaźniejszym miejscem.
 
 Żeby jednak dobrze zrozumieć regresję, trzeba mieć pewne podstawy. Dużą część z tych podstaw rozpisałem we [wpisie o wariancji](./posts/procent-wariancji.qmd). Zakładam więc, że osoba czytająca wie, co to jest wariancja, reszty, odchylenie standardowe i potrafi zinterpretować wyniki testu *F*. Jeśli nie, dobrze odświeżyć sobie [ten wpis](./posts/procent-wariancji.qmd).
+
+# Cel
+
+Regresja to szczególny rodzaj modelu, gdzie bierzemy jakieś zmienne ilościowe i patrzymy, jak są ze sobą powiązane. Przykładem może być związek wielkości pająka z lękiem, jaki wywołuje, czyli to, co liczyliśmy we [wpisie o wariancji](./posts/procent-wariancji.qmd).
+
+```{r}
+#| label: tbl-spiders
+#| tbl-cap: Wielkość pająka i lęk, jaki wzbudza.
+
+sp_tib %>%
+  select(2:3) %>%
+  kbl(booktabs = TRUE, col.names = c("wielkość pająka", "lęk")) %>%
+  kable_styling(latex_options = c("striped", "HOLD_position"))
+```
+
+```{r}
+#| label: fig-scatter-anxiety-lm
+#| out-width: 85%
+#| fig-cap: Linia kieruje się ku górze, więc im większy pająk, tym większy lęk.
+sp_tib %>% ggplot(aes(x = spider_size, y = anxiety)) +
+  geom_point() +
+  stat_smooth(method = "lm", se = FALSE, colour = "#004225") +
+  geom_segment(aes(xend = spider_size, yend = augment(sp_lm)$.fitted), size = 0.3, linetype = "dashed") +
+  labs(x = "wielkość pająka", y = "lęk") +
+  theme_Publication()
+```
+
+Wykres ujawnia nam 

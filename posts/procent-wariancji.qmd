@@ -90,7 +90,9 @@ Przerywane linie pokazują nam odchylenie każdego punktu od średniej (*residua
 
 $$
 S_i = x_i - \bar x
-$$ gdzie $S_i$ to odchylenie, $x_i$ to wartość konkretnego punktu, a $\bar x$ to średnia. Pozioma kreska nad czymś zawsze oznacza średnią. Dla każdego punktu moglibyśmy policzyć takie odchylenie i dopisać sobie je do tabeli.
+$$
+
+gdzie $S_i$ to odchylenie, $x_i$ to wartość konkretnego punktu, a $\bar x$ to średnia. Pozioma kreska nad czymś zawsze oznacza średnią. Dla każdego punktu moglibyśmy policzyć takie odchylenie i dopisać sobie je do tabeli.
 
 ```{r}
 #| label: tbl-spider-residual
@@ -150,13 +152,17 @@ Także jeśli chcemy uzyskać średnią kwadratów odchyleń, to bierzemy naszą
 
 $$
 \sigma^2 = \frac{SS_T}{N-1} = \frac{\sum^N_{i = 1} S_i^2}{N-1} = \frac{\sum^N_{i = 1} (x_i - \bar x)^2}{N-1}
-$$Spokojnie. To są tylko wzory, nie trzeba się ich bać. Każdy z tych trzech wzorów znaczy to samo i opiera się na tym, co już wiemy z poprzednich części tekstu. Tak naprawdę to ciągle wzór na $SS_T$, tylko teraz podzielony na $N-1$. Po pokonaniu pierwszego szoku można zacząć świętować! W ten sposób udało nam się wreszcie policzyć średnią kwadratów odchyleń (ponownie -- trzeba się zatrzymać, upewnić się, że się rozumie, ewentualnie trochę się cofnąć i dopiero można iść dalej).
+$$
+
+Spokojnie. To są tylko wzory, nie trzeba się ich bać. Każdy z tych trzech wzorów znaczy to samo i opiera się na tym, co już wiemy z poprzednich części tekstu. Tak naprawdę to ciągle wzór na $SS_T$, tylko teraz podzielony na $N-1$. Po pokonaniu pierwszego szoku można zacząć świętować! W ten sposób udało nam się wreszcie policzyć średnią kwadratów odchyleń (ponownie -- trzeba się zatrzymać, upewnić się, że się rozumie, ewentualnie trochę się cofnąć i dopiero można iść dalej).
 
 Trzeba przyznać, że „średni kwadrat odchylenia" albo „średnia z odchyleń podniesionych do potęgi drugiej" to nie są zbyt chwytliwe nazwy. Dlatego właśnie nazwano to **wariancją** i oznaczono przez $\sigma^2$. To jest mała grecka litera sigma. A dlaczego $\sigma^2$ a nie po prostu $\sigma$? Bo to średnia z *kwadratów* odchyleń. Jeśli byśmy chcieli wycofać się teraz z tej gmatwającej wszystko decyzji o podnoszeniu czegokolwiek do kwadratu i uzyskać upragnione średnie odchylenie, to możemy teraz wyciągnąć pierwiastek ze wzoru na wariancję, jaki nam przed chwilą wyszedł i który na pierwszy rzut oka może przytłaczać.
 
 $$
 \sigma = \sqrt{\frac{SS_T}{N-1}} = \sqrt{\frac{\sum^N_{i = 1} S_i^2}{N-1}} = \sqrt{\frac{\sum^N_{i = 1} (x_i - \bar x)^2}{N-1}}
-$$Każdy z tych wzorów znaczy ostatecznie to samo, więc można używać któregokolwiek. Ważne jest to, że wychodzi nam z tego średnie odchylenie, które nazywamy **odchyleniem standardowym** i które oznaczamy literą $\sigma$ lub skrótem *SD* (*standard deviation*). Odchylenie standardowe, jak już wyżej wspomniałem, mówi nam, czy średnia dobrze reprezentuje dane. Jeśli jest wysokie, to znaczy, że dane są mocno rozproszone (odchylenia są ogólnie duże) i sama średnia jest mało wiarygodna. Jeśli *SD* jest niewielkie, to średniej zasadniczo można zaufać. To jakie *SD* jest duże, a jakie małe, zależy od tego, co mierzymy. Dla średniej pensji *SD* = 10 uznalibyśmy za raczej niewielkie, ale takie samo odchylenie standardowe dla średniej liczby nóg takie małe już się nie wydaje. Także może i mamy średnio po 3 nogi jak wychodzimy z psem na spacer, ale ta średnia ma całą nogę odchylenia standardowego!
+$$
+
+Każdy z tych wzorów znaczy ostatecznie to samo, więc można używać któregokolwiek. Ważne jest to, że wychodzi nam z tego średnie odchylenie, które nazywamy **odchyleniem standardowym** i które oznaczamy literą $\sigma$ lub skrótem *SD* (*standard deviation*). Odchylenie standardowe, jak już wyżej wspomniałem, mówi nam, czy średnia dobrze reprezentuje dane. Jeśli jest wysokie, to znaczy, że dane są mocno rozproszone (odchylenia są ogólnie duże) i sama średnia jest mało wiarygodna. Jeśli *SD* jest niewielkie, to średniej zasadniczo można zaufać. To jakie *SD* jest duże, a jakie małe, zależy od tego, co mierzymy. Dla średniej pensji *SD* = 10 uznalibyśmy za raczej niewielkie, ale takie samo odchylenie standardowe dla średniej liczby nóg takie małe już się nie wydaje. Także może i mamy średnio po 3 nogi jak wychodzimy z psem na spacer, ale ta średnia ma całą nogę odchylenia standardowego!
 
 Podsumowując ten fragment:
 
@@ -220,7 +226,9 @@ Możemy więc spojrzeć na to w ten sposób -- na początku mieliśmy 190,875 je
 
 $$
 R^2 = \frac{161}{191}\times 100\% = 84,3\%
-$$Możemy więc powiedzieć, że wielkość pająka (bo nowy model przewiduje niepokój na podstawie wielkości pająka) wyjaśnia 84,3% wariancji niepokoju. Ludzie ciągle różnią się niepokojem w reagowaniu na pająki, ale odchylenia od nowego modelu są znacznie mniejsze. Ogólny wzór na $R^2$ wygląda więc tak[^procent-wariancji-9]:
+$$
+
+Możemy więc powiedzieć, że wielkość pająka (bo nowy model przewiduje niepokój na podstawie wielkości pająka) wyjaśnia 84,3% wariancji niepokoju. Ludzie ciągle różnią się niepokojem w reagowaniu na pająki, ale odchylenia od nowego modelu są znacznie mniejsze. Ogólny wzór na $R^2$ wygląda więc tak[^procent-wariancji-9]:
 
 [^procent-wariancji-9]: Tak naprawdę $SS_M$ da się policzyć bezpośrednio, bez liczenia $SS_T$ i $SS_R$, co pokazuję w *postscriptum*.
 

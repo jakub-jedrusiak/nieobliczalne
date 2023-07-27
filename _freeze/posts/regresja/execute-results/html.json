@@ -1,0 +1,20 @@
+{
+  "hash": "d0b7dcfa8722e3263dda957cd92f30bd",
+  "result": {
+    "markdown": "---\ntitle: \"Regresja, matka wszystkich analiz\"\ndescription: \"W Dhammapadzie czytamy „Nad tysiąc zbędnych słów jest jedno trafne słowo, które słysząc, osiąga się spokój\\\" (Dhp. 100, tłum. Piotr Jagodziński). Sądzę, że słowem, które Budda miał na myśli, była regresja. Freudowsko regresja może nam się kojarzyć jako cofanie się w rozwoju. Rzeczywiście samo słowo możemy przetłumaczyć jako „krok do tyłu\\\" i jak raz można powiedzieć, że to dobrze, że się cofamy.\"\ncategories:\n    - Statystyka\nimage: ./headers/regresja.webp\ntwitter-card:\n    image: \"/headers/regresja.jpeg\"\ndraft: true\n---\n\n\n\n\nPrawie wszystko w statystyce jest odmianą regresji. Funkcjonuje ona jako osobna analiza, ale logika, która za nią stoi, jest uniwersalna. Na przykład testy *t*, używane jako przykład we [wpisie o wartości $p$](./posts/p-value.qmd), można przedstawić jako rodzaj regresji. Bardziej złożona analiza wariancji (ANOVA) to też logika regresji zastosowana do pewnych szczególnych przypadków. Jeśli dobrze zrozumie się regresję, statystyka staje się znacznie przyjaźniejszym miejscem.\n\nŻeby jednak dobrze zrozumieć regresję, trzeba mieć pewne podstawy. Dużą część z tych podstaw rozpisałem we [wpisie o wariancji](./posts/procent-wariancji.qmd). Zakładam więc, że osoba czytająca wie, co to jest wariancja, reszty, odchylenie standardowe i potrafi zinterpretować wyniki testu *F*. Jeśli nie, dobrze odświeżyć sobie [ten wpis](./posts/procent-wariancji.qmd).\n\n# Cel\n\nRegresja to szczególny rodzaj modelu, gdzie bierzemy jakieś zmienne ilościowe i patrzymy, jak są ze sobą powiązane. Przykładem może być związek wielkości pająka z lękiem, jaki wywołuje, czyli to, co liczyliśmy we [wpisie o wariancji](./posts/procent-wariancji.qmd).\n\n\n::: {#tbl-spiders .cell layout-align=\"center\" tbl-cap='Wielkość pająka i lęk, jaki wzbudza.'}\n::: {.cell-output-display}\n`````{=html}\n<table class=\"table\" style=\"margin-left: auto; margin-right: auto;\">\n <thead>\n  <tr>\n   <th style=\"text-align:right;\"> wielkość pająka </th>\n   <th style=\"text-align:right;\"> lęk </th>\n  </tr>\n </thead>\n<tbody>\n  <tr>\n   <td style=\"text-align:right;\"> 1 </td>\n   <td style=\"text-align:right;\"> 2 </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:right;\"> 2 </td>\n   <td style=\"text-align:right;\"> 8 </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:right;\"> 3 </td>\n   <td style=\"text-align:right;\"> 5 </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:right;\"> 4 </td>\n   <td style=\"text-align:right;\"> 8 </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:right;\"> 5 </td>\n   <td style=\"text-align:right;\"> 12 </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:right;\"> 6 </td>\n   <td style=\"text-align:right;\"> 11 </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:right;\"> 7 </td>\n   <td style=\"text-align:right;\"> 18 </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:right;\"> 8 </td>\n   <td style=\"text-align:right;\"> 16 </td>\n  </tr>\n</tbody>\n</table>\n\n`````\n:::\n:::\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![Linia kieruje się ku górze, więc im większy pająk, tym większy lęk.](regresja_files/figure-html/fig-scatter-anxiety-lm-1.png){#fig-scatter-anxiety-lm fig-align='center' width=85%}\n:::\n:::\n\n\nWykres ujawnia nam ",
+    "supporting": [
+      "regresja_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<script src=\"../site_libs/kePrint-0.0.1/kePrint.js\"></script>\n<link href=\"../site_libs/lightable-0.0.1/lightable.css\" rel=\"stylesheet\" />\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
