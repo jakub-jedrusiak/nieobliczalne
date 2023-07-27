@@ -11,7 +11,7 @@ categories:
   - Matematyka
 ---
 
-Czy masz czasem wrażenie, że rzeczy w matematyce nazywają się bez sensu? To jest bardzo słuszne wrażenie. Dziś na warsztat weźmiemy funkcje, które są zmorą uczniów liceów ze względu na nową, dziwną notację typu $f(x)$, cały pozornie chaotyczny język, który odrywa funkcje od reszty matematyki, a także wrażenie, że nijak nie idzie tego spotkać w „prawdziwym życiu", cokolwiek to jest. Ja właśnie spędzam wieczór z prawdziwego życia na pisaniu o funkcjach. Do czegoś mi się jednak przydały. Zaczynając jednak od nazwy -- dlaczego „funkcja"? Bo Liebniz źle rozumiał to słowo. A że raz przyjęte konwencje trzymają się mocno, to do dzisiaj, właściwie przypadkowo, nazywamy tę rzeczy funkcjami.
+Czy masz czasem wrażenie, że rzeczy w matematyce nazywają się bez sensu? To jest bardzo słuszne wrażenie. Dziś na warsztat weźmiemy funkcje, które są zmorą uczniów liceów ze względu na nową, dziwną notację typu $f(x)$, cały pozornie chaotyczny język, który odrywa funkcje od reszty matematyki, a także wrażenie, że nijak nie idzie tego spotkać w „prawdziwym życiu", cokolwiek to jest. Ja właśnie spędzam wieczór z prawdziwego życia na pisaniu o funkcjach. Do czegoś mi się jednak przydały. Zaczynając jednak od nazwy -- dlaczego „funkcja"? Bo Leibniz źle rozumiał to słowo. A że raz przyjęte konwencje trzymają się mocno, to do dzisiaj, właściwie przypadkowo, nazywamy tę rzeczy funkcjami.
 
 # Maszyny matematyczne
 
@@ -85,7 +85,7 @@ $$
 m = b + 3
 $$
 
-Prawda? Niby prawda, ale ten zapis ma kilka wad. Po pierwsze znak $=$ oznacza w matematyce „to jest to samo, co". Jeśli $m$ to nazwa naszej maszyny, to stwierdzamy, że „maszyna to jest to samo, co dowolna liczba dodać trzy". Jako srót myślowy działa to nieźle, ale nie o to dokładnie nam chodzi. Maszyna nie jest dowolną liczbą powiększoną o trzy, maszyna to *robi*, ale nie *jest* tym. Tak jak maszynka do mielenia mięsa nie jest tym samym, co zmielone mięso.
+Prawda? Niby prawda, ale ten zapis ma kilka wad. Po pierwsze znak $=$ oznacza w matematyce „to jest to samo, co". Jeśli $m$ to nazwa naszej maszyny, to stwierdzamy, że „maszyna to jest to samo, co dowolna liczba dodać trzy". Jako skrót myślowy działa to nieźle, ale nie o to dokładnie nam chodzi. Maszyna nie jest dowolną liczbą powiększoną o trzy, maszyna to *robi*, ale nie *jest* tym. Tak jak maszynka do mielenia mięsa nie jest tym samym, co zmielone mięso.
 
 Czepiam się, wiem, ale ten zapis utrudnia nam też inną rzecz -- załóżmy, że chcemy zapisać, że wrzuciliśmy do maszyny 5 i wypluła ona 8. Jak to zrobić w tej konwencji? $5 = 8$? To już trochę krok za daleko. Matematycznej inkwizycji nie ma, ale jakby była, to taki zapis byłby heretycki. Możemy jednak wykorzystać nieco zgrabniejszą konwencję i od razu zawrzeć w niej skrót numer 3., czyli oznaczenie tego, co maszyna z siebie wypluwa. Proponuję zapisać to tak:
 
@@ -179,7 +179,7 @@ k(b) = b^2
 $$
 :::
 
-Każdy wzrór matematyczny da się więc przerobić na maszynę. Mogło Ci się to zdarzyć, jeśli kiedykolwiek pisałeś(-aś) formuły w Excelu. Jeśli dostałbyś(-abyś) plik Excela z 1000 boków kwadratów i zadaniem przygotowania kolumny z polem kwadratu, prawdopodobnie użyłbyś(-abyś) formuły typu `= A1 * A1`, a potem przeciągnąłbyś(-abyś) ją tak, żeby policzyła pola wszystkich kwadratów.
+Każdy wzór matematyczny da się więc przerobić na maszynę. Mogło Ci się to zdarzyć, jeśli kiedykolwiek pisałeś(-aś) formuły w Excelu. Jeśli dostałbyś(-abyś) plik Excela z 1000 boków kwadratów i zadaniem przygotowania kolumny z polem kwadratu, prawdopodobnie użyłbyś(-abyś) formuły typu `= A1 * A1`, a potem przeciągnąłbyś(-abyś) ją tak, żeby policzyła pola wszystkich kwadratów.
 
 ## R i Python {#sec-programming}
 
@@ -472,7 +472,7 @@ $$
 
 W tym scenariuszu liczyliśmy wartość funkcji, ale czasem chcemy policzyć, jaki powinien być *argument*. Przypomnij sobie, co to jest miejsce zerowe -- co muszę wrzucić do funkcji, żeby wypluła mi 0. To też da się liczyć. Bardziej realny przykład. Wyobraź sobie, że masz funkcję, która liczy, ile pieniędzy dostaniesz z rocznej lokaty, w zależności od tego, ile pieniędzy wyłożysz na lokatę. Pierwszy scenariusz to sprawdzanie dokładnie tego, czyli ile dostanę jak wpłacę 10 000 zł, a ile, jak wpłacę 30 000 zł. Drugi scenariusz to liczenie, ile muszę wpłacić, żeby otrzymać po roku 100 zł, a ile, żeby otrzymać 1000 zł.
 
-W praktyce liczy się to według dość prostej logiki. Chcę wiedzieć, ile muszę włożyć do maszyny dodającej 3, żeby wypluła 7. Zapisując to matematycznie, chcę wiedzieć, miedy wartość funkcji $m$ wynosi 7, czyli kiedy $m(x) = 7$. Jednocześnie wiem, że $m(x)$ to po prostu $x + 3$, bo tak działa funkcja dodająca 3. Wychodzi mi z tego proste równanie.
+W praktyce liczy się to według dość prostej logiki. Chcę wiedzieć, ile muszę włożyć do maszyny dodającej 3, żeby wypluła 7. Zapisując to matematycznie, chcę wiedzieć, kiedy wartość funkcji $m$ wynosi 7, czyli kiedy $m(x) = 7$. Jednocześnie wiem, że $m(x)$ to po prostu $x + 3$, bo tak działa funkcja dodająca 3. Wychodzi mi z tego proste równanie.
 
 $$
 m(x) = 7
@@ -574,9 +574,9 @@ Nie da się zapisać na kartce wszystkich możliwych wartości funkcji. Między 
 
 ![](ilustracje/funkcje/axes-empty.png)
 
-Ten pozornie banalny pomysł, nieobcy nikomu, kto kiedykolwiek grał w statki, to wielka rewolucja. Dzięki niej możemy przedstawić nieskończenie wiele wartości danej funkcji oraz zyskać całowicie nową perspektywę na funkcje. Teraz wystarczy, że umówimy się, że pozioma oś to argumenty, a pionowa to wartości. Co to znaczy?
+Ten pozornie banalny pomysł, nieobcy nikomu, kto kiedykolwiek grał w statki, to wielka rewolucja. Dzięki niej możemy przedstawić nieskończenie wiele wartości danej funkcji oraz zyskać całkowicie nową perspektywę na funkcje. Teraz wystarczy, że umówimy się, że pozioma oś to argumenty, a pionowa to wartości. Co to znaczy?
 
-Wyobraźmy sobie funkcję dodającą 1. Matematycznie możemy to zapisać np. jako $j(l) = l + 1$. Teraz wrzućmy do tej funkcji liczbę 1 -- $j(1) = 1 + 1 = 2$. Ten sam wniosek możemy nanieść na wykres. Na osi poziomej znajdujemy liczbę, którą wrzuciliśmy do funkcji (tj. 1), a na osi pionowej liczbę, którą funkcja wpluła (tj. 2). Na przecięciu jednego z drugim możemy teraz postawić kropkę.
+Wyobraźmy sobie funkcję dodającą 1. Matematycznie możemy to zapisać np. jako $j(l) = l + 1$. Teraz wrzućmy do tej funkcji liczbę 1 -- $j(1) = 1 + 1 = 2$. Ten sam wniosek możemy nanieść na wykres. Na osi poziomej znajdujemy liczbę, którą wrzuciliśmy do funkcji (tj. 1), a na osi pionowej liczbę, którą funkcja wypluła (tj. 2). Na przecięciu jednego z drugim możemy teraz postawić kropkę.
 
 ![](ilustracje/funkcje/axes-point.png)
 
@@ -592,7 +592,7 @@ To, co otrzymaliśmy, to ewidentnie prosta linia. Połączmy więc te punkty.
 
 ![](ilustracje/funkcje/axes-line.png)
 
-Tak naprawdę, żeby taką linię narysować, wystarczą dwa punkty. Gdy przyręcasz listwę do ściany, musisz ją przykręcić w dwóch miejscach, żeby się nie ruszała.
+Tak naprawdę, żeby taką linię narysować, wystarczą dwa punkty. Gdy przykręcasz listwę do ściany, musisz ją przykręcić w dwóch miejscach, żeby się nie ruszała.
 
 ![](ilustracje/funkcje/axes-line-two-points.png)
 
@@ -648,7 +648,7 @@ Spójrz na ten wykres i powiedz, co wspólnego mają wszystkie te punkty?
 
 Wszystkie leżą na osi X, to prawda. To jest opis w języku graficznym, gdzie istnieją punkty rozlokowane w przestrzeni. Teraz chcemy jednak przejść z opisu graficznego do algebraicznego, a punktem styku między jednym i drugim są *współrzędne*. Jaką współrzędną mają wspólną wszystkie te punkty? Po przeanalizowaniu wykresu dochodzimy do wniosku, że każdy z naszych punktów ma współrzędną $y = 0$. Różnią się natomiast współrzędnymi $x$.
 
-Jeśli jesteśmy pytani o **punkt przecięcia z osią X**, innymi słowy jesteśmy pytani o takie miejsce, gdzie $y = 0$. Takim miejscem dla narysowanej na wykresie maszyny jest punkt o współrzędnych $(-1, 0)$. Jeśli sięgniesz pamięcią do punktu [-@sec-nomenclature]., zorientujesz się, że mamy specjalną nazwę na punkty, gdze $y$ (czyli wartość funkcji) wynosi $0$ -- **miejsce zerowe**. Pytanie o punkt przecięcia z osią X jest więc tak naprawdę znanym nam już pytaniem o miejsce zerowe, gdzie ewentualnie odpowiedź będzie trzeba zapisać jako $A(-1, 0)$ zamiast $f(-1) = 0$.
+Jeśli jesteśmy pytani o **punkt przecięcia z osią X**, innymi słowy jesteśmy pytani o takie miejsce, gdzie $y = 0$. Takim miejscem dla narysowanej na wykresie maszyny jest punkt o współrzędnych $(-1, 0)$. Jeśli sięgniesz pamięcią do punktu [-@sec-nomenclature]., zorientujesz się, że mamy specjalną nazwę na punkty, gdzie $y$ (czyli wartość funkcji) wynosi $0$ -- **miejsce zerowe**. Pytanie o punkt przecięcia z osią X jest więc tak naprawdę znanym nam już pytaniem o miejsce zerowe, gdzie ewentualnie odpowiedź będzie trzeba zapisać jako $A(-1, 0)$ zamiast $f(-1) = 0$.
 
 ## Przecięcie z osią Y
 
@@ -704,7 +704,7 @@ $$
 f(x) = ax + b
 $$
 
-Oczywiście oznaczenia, jak zawsze, są umowne. Równie dobrze mogę napisać $m(l) = sl + w$ albo nawet $m(l) = sl + m(0)$, bo $m$ to maszyna, $l$ to liczba, $s$ to stromizna, a $w$ to wyraz wolny, który zawsze ma wartość równą wartości funkcji w zerze. Niezależnie, jakie literki sobie wybierzemy, funkcje, które da się przedstawić jako mnożenie $x$ i dodawanie (lub odejmowanie[^4]), będą miały kształt prostej linii. W standardowej notacji literką $a$ oznacza się współczynnk kierunkowy, zaś literką $b$ wyraz wolny.
+Oczywiście oznaczenia, jak zawsze, są umowne. Równie dobrze mogę napisać $m(l) = sl + w$ albo nawet $m(l) = sl + m(0)$, bo $m$ to maszyna, $l$ to liczba, $s$ to stromizna, a $w$ to wyraz wolny, który zawsze ma wartość równą wartości funkcji w zerze. Niezależnie, jakie literki sobie wybierzemy, funkcje, które da się przedstawić jako mnożenie $x$ i dodawanie (lub odejmowanie[^4]), będą miały kształt prostej linii. W standardowej notacji literką $a$ oznacza się współczynnik kierunkowy, zaś literką $b$ wyraz wolny.
 
 [^4]: Używam terminu „dodawanie", bo odejmowanie to dodawanie liczb ujemnych.
 
@@ -713,7 +713,7 @@ Statystyczny spoiler: linie regresji to proste linie, dlatego one również maj�
 # Podsumowanie
 
 1.  Funkcje to „maszyny matematyczne", które przyjmują liczbę, wykonują na niej operację i zwracają wynik.
-2.  Nazwenictwo:
+2.  Nazewnictwo:
     1.  Argument lub miejsce -- to, co wrzucam do funkcji;
     2.  Wartość -- to, co funkcja wypluwa.
 3.  Oznacza się je serią skrótów stanowiących pojedyncze literki -- nazwa funkcji (np. $f$), argument (np. $x$), wartość (np. $f(x)$ lub $y$) i definicja (np. $f(x) = x + 3$).
