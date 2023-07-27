@@ -5,7 +5,7 @@ date: "2023-07-27"
 image: ./headers/funkcje.webp
 twitter-card:
     image: "/headers/funkcje.jpeg"
-freeze: true
+freeze: auto
 categories:
   - Statystyka
   - Matematyka
