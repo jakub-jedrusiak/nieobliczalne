@@ -11,7 +11,9 @@ Tutaj znajduje się lista tekstów z tego bloga, posegregowane tematycznie. Stat
 
 2.  [Testy statystyczne i wartość *p*](./posts/p-value.qmd) -- jak działają testy statystyczne, co to jest *p* i jak je interpretować.
 
-3.  [Kombinatoryka](./posts/kombinatoryka.qmd) -- krótkie omówienie podstawowych terminów kombinatoryki, może być wprowadzeniem do prawdopodobieństwa.
+3.  [Funkcje](./posts/funkcje.qmd) -- wprowadzenie do funkcji, uzupełnienie podstaw przed omówieniem regresji.
+
+4.  [Kombinatoryka](./posts/kombinatoryka.qmd) -- krótkie omówienie podstawowych terminów kombinatoryki, może być wprowadzeniem do prawdopodobieństwa.
 
 # Nauka R
 
