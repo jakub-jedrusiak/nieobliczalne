@@ -5,7 +5,6 @@ date: "none"
 image: ./headers/power-query.webp
 twitter-card:
     image: "/headers/power-query.jpeg"
-date: "none"
 categories:
     - Narzędzia
 draft: true
