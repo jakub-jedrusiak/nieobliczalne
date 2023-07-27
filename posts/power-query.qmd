@@ -1,0 +1,30 @@
+---
+title: Power Query -- Excel na prochach
+description: Większość naukowców i studentów korzysta z Excela i ma swoje wyrobione sposoby, jak wykonywać pewne standardowe zadania. Jednak powiedzmy sobie szczerze -- Excel to narzędzie do zarządzania danymi, a niekoniecznie do czyszczenia danych. Powoduje to, że operacje, które np. w R wykonamy jedną komendą, w Excelu są po prostu niemożliwe. Chyba że skorzystamy z Power Query, czyli jednej z nowszych i mniej znanych części Excela, która może zmienić sposób, w jaki pracujesz.
+date: "none"
+image: ./headers/power-query.webp
+twitter-card:
+    image: "/headers/power-query.jpeg"
+date: "none"
+categories:
+    - Narzędzia
+draft: true
+---
+
+Na laboratorium statystycznym na III roku studiów zajmowałem się głównie kombinowaniem. Chciałem znaleźć bardziej wydajne sposoby wykonywania różnych zadań, żeby jak najbardziej... uniknąć ręcznej pracy, co jest już stałym motywem na tym blogu. Na przykład zrobiłem cały [pakiet](/pakiety-w-R.qmd), który generował opisy zgodne ze wzorcami od prowadzącej (którą pozdrawiam, jeśli to czyta) albo liczył dokładnie taki zestaw statystyk opisowych, jaki był wymagany wraz z interpretacją. Spędziłem na robieniu tego znacznie więcej czasu, niż na działaniu ręcznym, ale ile się nauczyłem, to moje. Najwięcej jednak frustracji na tych zajęciach wywołał we mnie proces czyszczenia danych dokonywany w Excelu. Ręcznie przestawianie kolumn, które się pomieszały, ręczne przemianowywanie etykiet, ręczne przekodowywanie każdej kolumny z odwróconą punktacją po kolei i wreszcie ręczne łączenie wyników testu i retestu. Excel nie jest stworzony do takich rzeczy.
+
+Jednak ta ostatnia część mnie zastanowiła. Wiedziałem, że można to zrobić SQL-owym złączeniem, za które w [R](/podstawy_R.qmd) odpowiada jedna komenda. Jakiś czas wcześniej szukałem sposobu, jak takie złączenia wykonywać i w Excelu. Okazało się, że jest to możliwe, ale za pomocą narzędzia, które co prawda jest już częścią Excela, ale obsługuje się je zupełnie, ale to zupełnie inaczej. Narzędzie to nazywa się Power Query i jego podstawy omówimy sobie w tym wpisie.
+
+# Co to jest Power Query?
+
+# Ładowanie danych
+
+# Czyszczenie
+
+# Dodawanie kolumn
+
+# Złączenia
+
+# Zapisywanie danych
+
+# Podsumowanie
