@@ -1,0 +1,2246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jakub Jędrusiak">
+<meta name="description" content="Funkcja to absolutnie fatalna nazwa na dość prosty w swojej idei twór. W tym wpisie postaram się wyjaśnić po ludzku czym są funkcje w matematyce i jak z nich korzystać. Najważniejsze, co chcę jednak zrobić, to przygotować grunt pod zrozumienie funkcji liniowych w analizie regresji.">
+
+<title>Nieobliczalne - Funkcje matematyczne</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Brak wyników",
+    "search-matching-documents-text": "dopasowane dokumenty",
+    "search-copy-link-title": "Kopiuj link do wyszukiwania",
+    "search-hide-matches-text": "Ukryj dodatkowe dopasowania",
+    "search-more-match-text": "więcej dopasowań w tym dokumencie",
+    "search-more-matches-text": "więcej dopasowań w tym dokumencie",
+    "search-clear-button-title": "Wyczyść",
+    "search-detached-cancel-button-title": "Anuluj",
+    "search-submit-button-title": "Zatwierdź",
+    "search-label": "Szukaj"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-FKTMH2V23V"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-FKTMH2V23V', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"headline",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  });
+});
+</script> 
+  
+<script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3239011499449859" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/cascadia-code">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles/styles.css">
+<meta property="og:title" content="Nieobliczalne - Funkcje matematyczne">
+<meta property="og:description" content="Funkcja to absolutnie fatalna nazwa na dość prosty w swojej idei twór. W tym wpisie postaram się wyjaśnić po ludzku czym są funkcje w matematyce i jak z nich korzystać. Najważniejsze, co chcę jednak zrobić, to przygotować grunt pod zrozumienie funkcji liniowych w analizie regresji.">
+<meta property="og:image" content="https://nieobliczalne.pl/posts/headers/funkcje.webp">
+<meta property="og:site-name" content="Nieobliczalne">
+<meta name="twitter:title" content="Nieobliczalne - Funkcje matematyczne">
+<meta name="twitter:description" content="Funkcja to absolutnie fatalna nazwa na dość prosty w swojej idei twór. W tym wpisie postaram się wyjaśnić po ludzku czym są funkcje w matematyce i jak z nich korzystać. Najważniejsze, co chcę jednak zrobić, to przygotować grunt pod zrozumienie funkcji liniowych w analizie regresji.">
+<meta name="twitter:image" content="https://nieobliczalne.pl/headers/funkcje.jpeg">
+<meta name="twitter:creator" content="@jakub_jedrusiak">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Nieobliczalne</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Szukaj"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Przełącz nawigację" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Strona główna</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../toc.html" rel="" target="">
+ <span class="menu-text">Spis treści</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../newsletter.html" rel="" target="">
+ <span class="menu-text">Subskrybuj</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html" rel="" target="">
+ <span class="menu-text">O mnie</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Na tej stronie</h2>
+   
+  <ul>
+  <li><a href="#maszyny-matematyczne" id="toc-maszyny-matematyczne" class="nav-link active" data-scroll-target="#maszyny-matematyczne"><span class="header-section-number">1</span> Maszyny matematyczne</a></li>
+  <li><a href="#skróty" id="toc-skróty" class="nav-link" data-scroll-target="#skróty"><span class="header-section-number">2</span> Skróty</a></li>
+  <li><a href="#maszyny-użytkowe" id="toc-maszyny-użytkowe" class="nav-link" data-scroll-target="#maszyny-użytkowe"><span class="header-section-number">3</span> Maszyny użytkowe</a>
+  <ul class="collapse">
+  <li><a href="#sec-programming" id="toc-sec-programming" class="nav-link" data-scroll-target="#sec-programming"><span class="header-section-number">3.1</span> R i Python</a></li>
+  </ul></li>
+  <li><a href="#sec-nomenclature" id="toc-sec-nomenclature" class="nav-link" data-scroll-target="#sec-nomenclature"><span class="header-section-number">4</span> Nazewnictwo</a></li>
+  <li><a href="#liczenie-w-praktyce" id="toc-liczenie-w-praktyce" class="nav-link" data-scroll-target="#liczenie-w-praktyce"><span class="header-section-number">5</span> Liczenie w praktyce</a></li>
+  <li><a href="#wykresy" id="toc-wykresy" class="nav-link" data-scroll-target="#wykresy"><span class="header-section-number">6</span> Wykresy</a></li>
+  <li><a href="#nazewnictwo-w-wykresach" id="toc-nazewnictwo-w-wykresach" class="nav-link" data-scroll-target="#nazewnictwo-w-wykresach"><span class="header-section-number">7</span> Nazewnictwo w wykresach</a>
+  <ul class="collapse">
+  <li><a href="#punkty" id="toc-punkty" class="nav-link" data-scroll-target="#punkty"><span class="header-section-number">7.1</span> Punkty</a></li>
+  <li><a href="#przecięcia" id="toc-przecięcia" class="nav-link" data-scroll-target="#przecięcia"><span class="header-section-number">7.2</span> Przecięcia</a></li>
+  <li><a href="#przecięcie-z-osią-x" id="toc-przecięcie-z-osią-x" class="nav-link" data-scroll-target="#przecięcie-z-osią-x"><span class="header-section-number">7.3</span> Przecięcie z osią X</a></li>
+  <li><a href="#przecięcie-z-osią-y" id="toc-przecięcie-z-osią-y" class="nav-link" data-scroll-target="#przecięcie-z-osią-y"><span class="header-section-number">7.4</span> Przecięcie z osią Y</a></li>
+  </ul></li>
+  <li><a href="#funkcje-liniowe" id="toc-funkcje-liniowe" class="nav-link" data-scroll-target="#funkcje-liniowe"><span class="header-section-number">8</span> Funkcje liniowe</a>
+  <ul class="collapse">
+  <li><a href="#nachylenie" id="toc-nachylenie" class="nav-link" data-scroll-target="#nachylenie"><span class="header-section-number">8.1</span> Nachylenie</a></li>
+  <li><a href="#wyraz-wolny" id="toc-wyraz-wolny" class="nav-link" data-scroll-target="#wyraz-wolny"><span class="header-section-number">8.2</span> Wyraz wolny</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/funkcje.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
+    <div class="quarto-margin-footer"><div class="margin-footer-item">
+
+<style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
+    <style type="text/css">
+    /* LOADER */
+    .ml-form-embedSubmitLoad {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+    }
+
+    .g-recaptcha {
+    transform: scale(0.53);
+    -webkit-transform: scale(0.53);
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    height: 42px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+
+    .ml-form-embedSubmitLoad:after {
+      content: " ";
+      display: block;
+      width: 11px;
+      height: 11px;
+      margin: 1px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+    border-color: #ffffff #ffffff #ffffff transparent;
+    animation: ml-form-embedSubmitLoad 1.2s linear infinite;
+    }
+    @keyframes ml-form-embedSubmitLoad {
+      0% {
+      transform: rotate(0deg);
+      }
+      100% {
+      transform: rotate(360deg);
+      }
+    }
+      #mlb2-5266475.ml-form-embedContainer {
+        box-sizing: border-box;
+        display: table;
+        margin: 0 auto;
+        position: static;
+        width: 100% !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer h4,
+      #mlb2-5266475.ml-form-embedContainer p,
+      #mlb2-5266475.ml-form-embedContainer span,
+      #mlb2-5266475.ml-form-embedContainer button {
+        text-transform: none !important;
+        letter-spacing: normal !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper {
+        background-color: #6E6E6E;
+        
+        border-width: 0px;
+        border-color: transparent;
+        border-radius: 10px;
+        border-style: solid;
+        box-sizing: border-box;
+        display: inline-block !important;
+        margin: 0;
+        padding: 0;
+        position: relative;
+              }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper.embedPopup,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper.embedDefault { width: 200px; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper.embedForm { max-width: 200px; width: 100%; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-align-left { text-align: left; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-align-center { text-align: center; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-align-default { display: table-cell !important; vertical-align: middle !important; text-align: center !important; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-align-right { text-align: right; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedHeader img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        height: auto;
+        margin: 0 auto !important;
+        max-width: 100%;
+        width: undefinedpx;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody {
+        padding: 20px 20px 0 20px;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody.ml-form-embedBodyHorizontal {
+        padding-bottom: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent {
+        text-align: left;
+        margin: 0 0 20px 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent h4,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent h4 {
+        color: #ffffff;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        font-weight: 400;
+        margin: 0 0 10px 0;
+        text-align: left;
+        word-break: break-word;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p {
+        color: #ffffff;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        margin: 0 0 10px 0;
+        text-align: left;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ul,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ul,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol {
+        color: #ffffff;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol ol,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol ol {
+        list-style-type: lower-alpha;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol ol ol,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol ol ol {
+        list-style-type: lower-roman;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p a,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p a {
+        color: #000000;
+        text-decoration: underline;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group {
+        text-align: left!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group label {
+        margin-bottom: 5px;
+        color: #333333;
+        font-size: 14px;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-weight: bold; font-style: normal; text-decoration: none;;
+        display: inline-block;
+        line-height: 20px;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p:last-child,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p:last-child {
+        margin: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form {
+        margin: 0;
+        width: 100%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
+        margin: 0 0 20px 0;
+        width: 100%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
+        float: left;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent.horozintalForm {
+        margin: 0;
+        padding: 0 0 20px 0;
+        width: 100%;
+        height: auto;
+        float: left;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow {
+        margin: 0 0 10px 0;
+        width: 100%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-last-item {
+        margin: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-formfieldHorizintal {
+        margin: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input {
+        background-color: #ffffff !important;
+        color: #333333 !important;
+        border-color: #cccccc;
+        border-radius: 4px !important;
+        border-style: solid !important;
+        border-width: 1px !important;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px !important;
+        height: auto;
+        line-height: 21px !important;
+        margin-bottom: 0;
+        margin-top: 0;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 10px 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-webkit-input-placeholder,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::-webkit-input-placeholder { color: #333333; }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-moz-placeholder,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::-moz-placeholder { color: #333333; }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-ms-input-placeholder,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input:-ms-input-placeholder { color: #333333; }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-moz-placeholder,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input:-moz-placeholder { color: #333333; }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow textarea, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow textarea {
+        background-color: #ffffff !important;
+        color: #333333 !important;
+        border-color: #cccccc;
+        border-radius: 4px !important;
+        border-style: solid !important;
+        border-width: 1px !important;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px !important;
+        height: auto;
+        line-height: 21px !important;
+        margin-bottom: 0;
+        margin-top: 0;
+        padding: 10px 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
+          border-color: #cccccc!important;
+          background-color: #ffffff!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input.custom-control-input[type="checkbox"]{
+        box-sizing: border-box;
+        padding: 0;
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+        margin-top: 5px;
+        margin-left: -1.5rem;
+        overflow: visible;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
+        border-radius: 4px!important;
+      }
+
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox input[type=checkbox]:checked~.label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked~.custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input:checked~.custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked~.label-description::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox input[type=checkbox]:checked~.label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked~.label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::before  {
+          border-color: #000000!important;
+          background-color: #000000!important;
+          color: #ffffff!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::after {
+           top: 2px;
+           box-sizing: border-box;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+           top: 0px!important;
+           box-sizing: border-box!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+        top: 0px!important;
+           box-sizing: border-box!important;
+      }
+
+       #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::after {
+            top: 0px!important;
+            box-sizing: border-box!important;
+            position: absolute;
+            left: -1.5rem;
+            display: block;
+            width: 1rem;
+            height: 1rem;
+            content: "";
+       }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before {
+        top: 0px!important;
+        box-sizing: border-box!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-control-label::before {
+          position: absolute;
+          top: 4px;
+          left: -1.5rem;
+          display: block;
+          width: 16px;
+          height: 16px;
+          pointer-events: none;
+          content: "";
+          background-color: #ffffff;
+          border: #adb5bd solid 1px;
+          border-radius: 50%;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-control-label::after {
+          position: absolute;
+          top: 2px!important;
+          left: -1.5rem;
+          display: block;
+          width: 1rem;
+          height: 1rem;
+          content: "";
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
+          position: absolute;
+          top: 4px;
+          left: -1.5rem;
+          display: block;
+          width: 16px;
+          height: 16px;
+          pointer-events: none;
+          content: "";
+          background-color: #ffffff;
+          border: #adb5bd solid 1px;
+          border-radius: 50%;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after {
+          position: absolute;
+          top: 0px!important;
+          left: -1.5rem;
+          display: block;
+          width: 1rem;
+          height: 1rem;
+          content: "";
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+          position: absolute;
+          top: 0px!important;
+          left: -1.5rem;
+          display: block;
+          width: 1rem;
+          height: 1rem;
+          content: "";
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-radio .custom-control-label::after {
+          background: no-repeat 50%/50% 50%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-checkbox .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+          background: no-repeat 50%/50% 50%;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-control, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-control {
+        position: relative;
+        display: block;
+        min-height: 1.5rem;
+        padding-left: 1.5rem;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-input, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input {
+          position: absolute;
+          z-index: -1;
+          opacity: 0;
+          box-sizing: border-box;
+          padding: 0;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label {
+          color: #000000;
+          font-size: 12px!important;
+          font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+          line-height: 22px;
+          margin-bottom: 0;
+          position: relative;
+          vertical-align: top;
+          font-style: normal;
+          font-weight: 700;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-select, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-select {
+        background-color: #ffffff !important;
+        color: #333333 !important;
+        border-color: #cccccc;
+        border-radius: 4px !important;
+        border-style: solid !important;
+        border-width: 1px !important;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px !important;
+        line-height: 20px !important;
+        margin-bottom: 0;
+        margin-top: 0;
+        padding: 10px 28px 10px 12px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+        height: auto;
+        display: inline-block;
+        vertical-align: middle;
+        background: url('https://assets.mlcdn.com/ml/images/default/dropdown.svg') no-repeat right .75rem center/8px 10px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow {
+        height: auto;
+        width: 100%;
+        float: left;
+      }
+      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { width: 70%; float: left; }
+      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal { width: 30%; float: left; }
+      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal.labelsOn { padding-top: 25px;  }
+      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields { box-sizing: border-box; float: left; padding-right: 10px;  }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input {
+        background-color: #ffffff;
+        color: #333333;
+        border-color: #cccccc;
+        border-radius: 4px;
+        border-style: solid;
+        border-width: 1px;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 0;
+        margin-top: 0;
+        padding: 10px 10px;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-y: initial;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button {
+        background-color: #000000 !important;
+        border-color: #000000;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 4px;
+        box-shadow: none;
+        color: #ffffff !important;
+        cursor: pointer;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px !important;
+        font-weight: 700;
+        line-height: 20px;
+        margin: 0 !important;
+        padding: 10px !important;
+        width: 100%;
+        height: auto;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button:hover {
+        background-color: #333333 !important;
+        border-color: #333333 !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type="checkbox"] {
+        box-sizing: border-box;
+        padding: 0;
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+        margin-top: 5px;
+        margin-left: -1.5rem;
+        overflow: visible;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description {
+        color: #000000;
+        display: block;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        text-align: left;
+        margin-bottom: 0;
+        position: relative;
+        vertical-align: top;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label {
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        display: block;
+        min-height: 24px;
+        padding-left: 24px;
+
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label a {
+        color: #000000;
+        text-decoration: underline;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p {
+        color: #000000 !important;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
+        font-size: 12px !important;
+        font-weight: normal !important;
+        line-height: 18px !important;
+        padding: 0 !important;
+        margin: 0 5px 0 0 !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p:last-child {
+        margin: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit {
+        margin: 0 0 20px 0;
+        float: left;
+        width: 100%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button {
+        background-color: #000000 !important;
+        border: none !important;
+        border-radius: 4px !important;
+        box-shadow: none !important;
+        color: #ffffff !important;
+        cursor: pointer;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        line-height: 21px !important;
+        height: auto;
+        padding: 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button.loading {
+        display: none;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button:hover {
+        background-color: #333333 !important;
+      }
+      .ml-subscribe-close {
+        width: 30px;
+        height: 30px;
+        background: url('https://assets.mlcdn.com/ml/images/default/modal_close.png') no-repeat;
+        background-size: 30px;
+        cursor: pointer;
+        margin-top: -10px;
+        margin-right: -10px;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      .ml-error input, .ml-error textarea, .ml-error select {
+        border-color: red!important;
+      }
+
+      .ml-error .custom-checkbox-radio-list {
+        border: 1px solid red !important;
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      .ml-error .label-description,
+      .ml-error .label-description p,
+      .ml-error .label-description p a,
+      .ml-error label:first-child {
+        color: #ff0000 !important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow.ml-error .label-description p,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow.ml-error .label-description p:first-letter {
+        color: #ff0000 !important;
+      }
+            @media only screen and (max-width: 200px){
+
+        .ml-form-embedWrapper.embedDefault, .ml-form-embedWrapper.embedPopup { width: 100%!important; }
+        .ml-form-formContent.horozintalForm { float: left!important; }
+        .ml-form-formContent.horozintalForm .ml-form-horizontalRow { height: auto!important; width: 100%!important; float: left!important; }
+        .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { width: 100%!important; }
+        .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal > div { padding-right: 0px!important; padding-bottom: 10px; }
+        .ml-form-formContent.horozintalForm .ml-button-horizontal { width: 100%!important; }
+        .ml-form-formContent.horozintalForm .ml-button-horizontal.labelsOn { padding-top: 0px!important; }
+
+      }
+    </style>
+
+    
+  
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+      
+        
+        
+      
+
+      
+        
+        
+      
+
+      
+
+            
+            
+            
+            
+            
+            
+      
+
+      
+
+      
+        
+        
+         
+        
+        
+      
+
+        
+        
+        
+        
+        
+        
+      
+
+       
+
+        
+        
+        
+        
+        
+        
+        
+       
+
+
+      
+        
+        
+        
+        
+  
+
+
+
+  
+        
+        
+        
+      
+
+
+      
+    
+    
+    
+    
+    
+  
+
+  
+        
+        
+        
+        
+        
+      
+
+      
+        
+        
+        
+        
+        
+      
+
+      
+        
+        
+        
+        
+        
+      
+
+       
+
+        
+        
+        
+        
+       
+
+       
+        
+        
+        
+        
+      
+
+      
+        
+        
+        
+        
+        
+        
+        
+       
+
+    
+
+    
+
+
+      
+
+
+      
+
+      
+      
+
+      
+
+      
+
+
+
+
+
+    
+
+      
+    <div id="mlb2-5266475" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-5266475">
+      <div class="ml-form-align-center ">
+        <div class="ml-form-embedWrapper embedForm">
+
+          
+          
+
+          <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+
+            <div class="ml-form-embedContent" style=" ">
+              
+                <h4>Bądź na bieżąco</h4>
+                <p>Otrzymuj maila, gdy pojawią się nowe wpisy</p>
+              
+            </div>
+
+            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/447540/forms/88779935637833443/subscribe" data-code="" method="post" target="_blank">
+              <div class="ml-form-formContent">
+                
+
+                  
+                  <div class="ml-form-fieldRow ml-last-item">
+                    <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+
+                      
+
+
+                      <!-- input -->
+                      <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Email" autocomplete="email">
+                      <!-- /input -->
+
+                      <!-- textarea -->
+                      
+                      <!-- /textarea -->
+
+                      <!-- select -->
+                      
+                      <!-- /select -->
+
+                      <!-- checkboxes -->
+            
+            <!-- /checkboxes -->
+
+                      <!-- radio -->
+                      
+                      <!-- /radio -->
+
+                      <!-- countries -->
+                      
+                      <!-- /countries -->
+
+
+
+
+
+                    </div>
+                  </div>
+                
+              </div>
+
+              
+
+              <!-- Privacy policy -->
+              
+              <!-- /Privacy policy -->
+
+              
+
+              
+
+              
+
+
+
+<div class="ml-form-recaptcha ml-validate-required" style="float: left;">
+                <style type="text/css">
+  .ml-form-recaptcha {
+    margin-bottom: 20px;
+  }
+
+  .ml-form-recaptcha.ml-error iframe {
+    border: solid 1px #ff0000;
+  }
+
+  @media screen and (max-width: 480px) {
+    .ml-form-recaptcha {
+      width: 220px!important
+    }
+    .g-recaptcha {
+      transform: scale(0.78);
+      -webkit-transform: scale(0.78);
+      transform-origin: 0 0;
+      -webkit-transform-origin: 0 0;
+    }
+  }
+</style>
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+  <div class="g-recaptcha" data-sitekey="6Lf1KHQUAAAAAFNKEX1hdSWCS3mRMv4FlFaNslaD"></div>
+</div>
+
+
+              
+              <input type="hidden" name="ml-submit" value="1">
+
+              <div class="ml-form-embedSubmit">
+                
+                  <button type="submit" class="primary">Subskrybuj</button>
+                
+                <button disabled="disabled" style="display: none;" type="button" class="loading">
+                  <div class="ml-form-embedSubmitLoad"></div>
+                  <span class="sr-only">Loading...</span>
+                </button>
+              </div>
+
+              
+              <input type="hidden" name="anticsrf" value="true">
+            </form>
+          </div>
+
+          <div class="ml-form-successBody row-success" style="display: none">
+
+            <div class="ml-form-successContent">
+              
+                <h4>Sprawdź maila</h4>
+                <p>Link z potwierdzeniem znajdziesz na swoim mailu. Jeśli go tam nie ma, sprawdź spam.</p>
+              
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+
+  
+  
+  <script>
+    function ml_webform_success_5266475() {
+      var $ = ml_jQuery || jQuery;
+      $('.ml-subscribe-form-5266475 .row-success').show();
+      $('.ml-subscribe-form-5266475 .row-form').hide();
+    }
+      </script>
+  
+  
+      <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v08a893c96141fbc55feeeeac1fda7508" type="text/javascript"></script>
+        <script>
+            fetch("https://assets.mailerlite.com/jsonp/447540/forms/88779935637833443/track-view")
+        </script>
+</div></div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Funkcje matematyczne</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Statystyka</div>
+    <div class="quarto-category">Matematyka</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Funkcja to absolutnie fatalna nazwa na dość prosty w swojej idei twór. W tym wpisie postaram się wyjaśnić po ludzku czym są funkcje w matematyce i jak z nich korzystać. Najważniejsze, co chcę jednak zrobić, to przygotować grunt pod zrozumienie funkcji liniowych w analizie regresji.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jakub Jędrusiak </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Opublikowano</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Invalid Date</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Czy masz czasem wrażenie, że rzeczy w matematyce nazywają się bez sensu? To jest bardzo słuszne wrażenie. Dziś na warsztat weźmiemy funkcje, które są zmorą uczniów liceów ze względu na nową, dziwną notację typu <span class="math inline">\(f(x)\)</span>, cały pozornie chaotyczny język, który odrywa funkcje od reszty matematyki, a także wrażenie, że nijak nie idzie tego spotkać w „prawdziwym życiu”, cokolwiek to jest. Ja właśnie spędzam wieczór z prawdziwego życia na pisaniu o funkcjach. Do czegoś mi się jednak przydały. Zaczynając jednak od nazwy – dlaczego „funkcja”? Bo Liebniz źle rozumiał to słowo. A że raz przyjęte konwencje trzymają się mocno, to do dzisiaj, właściwie przypadkowo, nazywamy tę&nbsp;rzeczy funkcjami.</p>
+<section id="maszyny-matematyczne" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Maszyny matematyczne</h1>
+<p>Skorzystam tutaj z metafory pożyczonej od Jasona Wilkesa, której używał w swojej książce „Spal pracownię matematyczną”.</p>
+<p>Wyobraź sobie maszynę. Wielka, opasła maszyna z wlotem u góry i wyjściem z boku. Do maszyny dołączony jest zestaw metalowych cyferek wybitych na grubych blaszkach. Bierzesz do ręki pierwszą z brzegu blaszkę z wartością 4. Wrzucasz do wejścia przypominającego wlot na monety w automacie z kawą. Maszyna zaczyna buczeć, wydawać metaliczne dźwięki, łupnięcia, stukoty, a po chwili rozlega się dźwięk dzwoneczka i z wylotu wypada blaszka z numerkiem 7.</p>
+<p>„Hmm, ciekawe, co się stanie, kiedy wrzucę inną liczbę?” – myślisz.</p>
+<p>Wrzucasz bierzesz więc blaszkę z numerkiem 8, wrzucasz ją do maszyny i po chwili otrzymujesz 11. Może Ci się już w głowie rodzić pomysł, jak nasza maszyna działa. Żeby go przetestować wrzucasz do maszyny przed chwilą wyciągniętą blaszkę z numerem 11 i po chwili dostajesz z powrotem blaszkę z numerem 14. Domyślasz się już, co się stanie, jak wrzucisz do maszyny 2? Najprawdopodobniej wyrzuci ona 5. Gratuluję, rozgryzłeś(-aś) tajemnicę mojej maszyny – jakąkolwiek liczbę w niej nie umieścisz, dostaniesz liczbę o 3 większą.</p>
+<p>Wrzucasz do maszyny kolejne liczby i patrzysz, jak Twoja hipoteza się uwiarygadnia:</p>
+<p><span class="math display">\[
+1 \rightarrow 4
+\]</span> <span class="math display">\[
+15 \rightarrow 18
+\]</span></p>
+<p><span class="math display">\[
+-10 \rightarrow -7
+\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Co maszyna z siebie wyrzuci, jak wrzucę do niej:</p>
+<ol type="1">
+<li><p><span class="math inline">\(18\)</span></p></li>
+<li><p><span class="math inline">\(45\)</span></p></li>
+<li><p><span class="math inline">\(-20\)</span></p></li>
+<li><p><span class="math inline">\(0\)</span></p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><span class="math inline">\(18 \rightarrow 21\)</span></p></li>
+<li><p><span class="math inline">\(45 \rightarrow 48\)</span></p></li>
+<li><p><span class="math inline">\(-20 \rightarrow -17\)</span></p></li>
+<li><p><span class="math inline">\(0 \rightarrow 3\)</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+<p>Z zadowoleniem bierzesz marker i na maszynie piszesz „Maszyna dodająca 3”. Pięknie. Patrzysz jednak w dalsze części hali i widzisz dziesiątki maszyn do przetestowania. Zaczynasz się więc zastanawiać, czy nie da się tego zapisać jakoś zwięźlej?</p>
+</section>
+<section id="skróty" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Skróty</h1>
+<p>Stajemy przed zadaniem, by w zwięzły sposób opisać działanie naszej maszyny dodającej 3. W tym celu musimy wymyślić kilka skrótów na oznaczenie:</p>
+<ol type="1">
+<li><p>Nazwy maszyny.</p></li>
+<li><p>Tego, co wrzucamy do maszyny.</p></li>
+<li><p>Tego, co maszyna wypluwa.</p></li>
+<li><p>Tego, co maszyna konkretnie robi (tzn. że dodaje 3).</p></li>
+</ol>
+<p>Naszą maszynę najprościej nazwać <span class="math inline">\(m\)</span> jak maszyna albo <span class="math inline">\(t\)</span> jak trzy. Mógłbym użyć całego słowa <span class="math inline">\(maszyna\)</span> lub <span class="math inline">\(trzy\)</span>, ale komu chce się to pisać? Dalej, to, co wrzucamy do maszyny mogę nazwać <span class="math inline">\(l\)</span> jak liczba, <span class="math inline">\(b\)</span> jak blaszka albo <span class="math inline">\(c\)</span> jak… coś. Moglibyśmy wymyślać tak dalej, ale żeby nie utonąć w alfabecie arbitralnych skojarzeń, możemy też wykorzystać dwa już ustalone skróty do stworzenia dwóch kolejnych.</p>
+<p>W jaki sposób? Weźmy na tapet 4. skrót, czyli opis działania maszyny. Wiem, że maszyna dodaje 3 do dowolnej liczby, którą do niej wrzucę. Jeśli wrzucę 5, to dostanę 8, jeśli wrzucę 12, to dostanę 15 itd. Ustaliłem jednak, że to, co wrzucam do maszyny, mogę określić literką <span class="math inline">\(b\)</span>. To, że maszyna dodaje 3 mogę&nbsp;więc zapisać jako <span class="math inline">\(b + 3\)</span>. Skoro <span class="math inline">\(b\)</span> to <strong>dowolna liczba</strong>, to <span class="math inline">\(b + 3\)</span> to ta liczba powiększona o 3.</p>
+<p>Mając te skróty uzyskałem już całkiem zwięzły sposób opisu naszych maszyn. Zamiast słów mógłbym napisać na maszynie:</p>
+<p><span class="math display">\[
+m = b + 3
+\]</span></p>
+<p>Prawda? Niby prawda, ale ten zapis ma kilka wad. Po pierwsze znak <span class="math inline">\(=\)</span> oznacza w matematyce „to jest to samo, co”. Jeśli <span class="math inline">\(m\)</span> to nazwa naszej maszyny, to stwierdzamy, że „maszyna to jest to samo, co dowolna liczba dodać trzy”. Jako srót myślowy działa to nieźle, ale nie o to dokładnie nam chodzi. Maszyna nie jest dowolną liczbą powiększoną o trzy, maszyna to <em>robi</em>, ale nie <em>jest</em> tym. Tak jak maszynka do mielenia mięsa nie jest tym samym, co zmielone mięso.</p>
+<p>Czepiam się, wiem, ale ten zapis utrudnia nam też inną rzecz – załóżmy, że chcemy zapisać, że wrzuciliśmy do maszyny 5 i wypluła ona 8. Jak to zrobić w tej konwencji? <span class="math inline">\(5 = 8\)</span>? To już trochę krok za daleko. Matematycznej inkwizycji nie ma, ale jakby była, to taki zapis byłby heretycki. Możemy jednak wykorzystać nieco zgrabniejszą konwencję i od razu zawrzeć w niej skrót numer 3., czyli oznaczenie tego, co maszyna z siebie wypluwa. Proponuję zapisać to tak:</p>
+<p><span class="math display">\[
+m(5) = 8
+\]</span></p>
+<p>Ten nawias nawet wygląda jak kieszonka. Sama część <span class="math inline">\(m(5)\)</span> wskazuje, że do maszyny <span class="math inline">\(m\)</span> wrzuciliśmy liczbę 5. Po znaku równa się piszemy to, co maszyna z siebie wypluła. Teraz wielkie technikalium – sam skrót <span class="math inline">\(m(5)\)</span> dosłownie nie oznacza samego aktu włożenia 5 do maszyny <span class="math inline">\(m\)</span>, ale to, co maszyna <span class="math inline">\(m\)</span> wypluje, kiedy wrzucę do niej 5. Rozróżnienie to brzmi jak sztuka dla sztuki i czepialstwo i trochę się zgadzam, ale pozwala nam to na kilka rzeczy. Po pierwsze, znika problem ze znakiem <span class="math inline">\(=\)</span> – <span class="math inline">\(m(5)\)</span> rzeczywiście <em>jest</em> tym, co maszyna z siebie wypluje, jak wrzucę do niej 5, czyli <span class="math inline">\(m(5)\)</span> to <em>jest</em> 8 na takiej samej zasadzie, jak <span class="math inline">\(5 + 3\)</span> to <em>jest</em> 8. Dzięki temu mogę też zapisać coś takiego:</p>
+<p><span class="math display">\[
+10 + m(5) = 18
+\]</span></p>
+<p>Ponieważ <span class="math inline">\(m(5)\)</span> to <em>jest</em> 8, to mogę zamiast 8 zapisać <span class="math inline">\(m(5)\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Spróbuj to policzyć:</p>
+<ol type="1">
+<li><p><span class="math inline">\(m(2) + 4\)</span></p></li>
+<li><p><span class="math inline">\(10 - m(6)\)</span></p></li>
+<li><p><span class="math inline">\(2 \times m(-5) + 1\)</span></p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><span class="math inline">\(m(2) + 4 = 5 + 4 = 9\)</span></p></li>
+<li><p><span class="math inline">\(10 - m(6) = 10 - 9 = 1\)</span></p></li>
+<li><p><span class="math inline">\(2 \times m(-5) + 1 = 2 \times -2 + 1 = -4 + 1 = -3\)</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+<p>Zbierzmy to więc do kupy i stwórzmy skrót ostateczny. Jak oznaczyć maszynę <span class="math inline">\(m\)</span>, która bierze dowolną liczbę (oznaczoną jako <span class="math inline">\(b\)</span>) i dodaje do niej 3? Proponuję coś takiego:</p>
+<p><span class="math display">\[
+m(b) = b + 3
+\]</span></p>
+<p>Ten zapis buduje na wszystkim, co ustaliliśmy do tej pory – do maszyny o nazwie <span class="math inline">\(m\)</span> wrzucam liczbę <span class="math inline">\(b\)</span> – <span class="math inline">\(m(b)\)</span> – a maszyna wyrzuca z siebie <span class="math inline">\(b + 3\)</span>. Przypominam – <span class="math inline">\(m\)</span> i <span class="math inline">\(b\)</span> to tylko arbitralne literki. Równie dobrze mógłbym zapisać <span class="math inline">\(a(z) = z + 3\)</span>, <span class="math inline">\(r(k) = k + 3\)</span>, <span class="math inline">\(\dagger(\rceil) = \rceil + 3\)</span>, a czasem na matematyce z przekory pisałem <span class="math inline">\(ą(ć) = ć + 3\)</span>. Możemy opisywać nasze maszyny jak chcemy, ale najlepsze skróty to takie, które przypominają nam, co oznaczają.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Spróbuj zakodować następujące maszyny:</p>
+<ol type="1">
+<li><p>Maszyna dodająca 4.</p></li>
+<li><p>Maszyna mnożąca przez 3.</p></li>
+<li><p>Maszyna mnożąca przez 2, a potem dodająca 1.</p></li>
+<li><p>Maszyna najpierw dodająca 1, a potem mnożąca przez 2.</p></li>
+<li><p>Maszyna dzieląca na 7.</p></li>
+<li><p>Maszyna, która zawsze wyrzuca 5.</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><span class="math inline">\(c(l) = l + 4\)</span></p></li>
+<li><p><span class="math inline">\(t(l) = 3 l\)</span></p></li>
+<li><p><span class="math inline">\(d(l) = 2 l + 1\)</span></p></li>
+<li><p><span class="math inline">\(j(l) = (l + 1) \times 2\)</span> lub po uproszczeniu <span class="math inline">\(j(l) = 2 l + 2\)</span></p></li>
+<li><p><span class="math inline">\(s(l) = \frac{l}{7}\)</span></p></li>
+<li><p><span class="math inline">\(p(l) = 5\)</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="maszyny-użytkowe" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Maszyny użytkowe</h1>
+<p>Po co tworzymy maszyny? Żeby odwalały za nas czarną robotę. Dodawanie 3 nie jest jakoś szczególnie trudne, ale co jeśli musimy zrobić coś bardziej skomplikowanego? Albo dodać 3 do 10 000 różnych liczb? Właśnie po to korzystamy z maszyn – nikt nie chce się&nbsp;w to bawić ręcznie.</p>
+<p>Załóżmy więc, że chcemy stworzyć maszynę liczącą pole kwadratu. Nazwijmy ją <span class="math inline">\(k\)</span> jak kwadrat. Jak do każdej maszyny, musimy coś do naszej maszyny wrzucić. Sama z siebie nic nie zrobi. Czego więc może potrzebować maszyna licząca pole kwadratu? Długości boku tego kwadratu. Oznaczmy go sobie jako <span class="math inline">\(b\)</span>. Jak więc z długości boku policzyć pole? Podnieść ów bok do kwadratu. Spróbuj zebrać to do kupy i sprawdź, czy masz rację poniżej.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Maszyna licząca pole kwadratu
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+k(b) = b^2
+\]</span></p>
+</div>
+</div>
+</div>
+<p>Każdy wzrór matematyczny da się&nbsp;więc przerobić na maszynę. Mogło Ci się to zdarzyć, jeśli kiedykolwiek pisałeś(-aś) formuły w Excelu. Jeśli dostałbyś(-abyś) plik Excela z 1000 boków kwadratów i zadaniem przygotowania kolumny z polem kwadratu, prawdopodobnie użyłbyś(-abyś) formuły typu <code>= A1 * A1</code>, a potem przeciągnąłbyś(-abyś) ją tak, żeby policzyła pola wszystkich kwadratów.</p>
+<section id="sec-programming" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-programming"><span class="header-section-number">3.1</span> R i Python</h2>
+<p>Wszystkie maszyny, które zapisaliśmy w poprzednim zadaniu, moglibyśmy rzeczywiście stworzyć. Może nie w formie pudełka przerabiającego blaszki, ale możemy łatwo je <em>zaprogramować</em>. Nie jest to konieczne do zrozumienia funkcji, ale bardzo polecam, żeby chociaż spróbować. Wczesne zainteresowanie programowaniem mnie osobiście mocno pomogło w późniejszej nauce matematyki.</p>
+<p>Każdy język programowania pozwala nam stworzyć własne maszyny. Jeśli nie pozwala, to śmiem wątpić, czy w ogóle możemy mówić o języku programowania<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. W naszym wypadku użyjemy jednego z dwóch języków programowania powszechnie używanych w nauce – <a href="https://www.programiz.com/r/online-compiler/">R</a> i <a href="https://www.programiz.com/python-programming/online-compiler/">Python</a>. Oba możemy uruchomić w przeglądarce. Jeśli czytasz to zamierzając uczyć się statystyki, polecam wybrać R<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, a jeśli nie, to Python może być nieco bardziej przejrzysty.</p>
+<p>Jak więc rzeczywiście stworzyć naszą maszynę? W Pythonie wykorzystamy następującą składnię:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> nazwa_funkcji(to_co_wrzucamy):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> działanie funkcji</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>W R składnia wygląda tak:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nazwa_funkcji <span class="ot">&lt;-</span> <span class="cf">function</span>(to_co_wrzucamy) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    działanie funkcji</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Możemy wykorzystać oznaczenia, które wcześniej wprowadziliśmy i stworzyć naszą maszynę dodającą 3:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> m(b):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> b <span class="op">+</span> <span class="dv">3</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="cf">function</span>(b) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  b <span class="sc">+</span> <span class="dv">3</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Gdzie to wpisać? Jeśli, za moją sugestią, korzystasz z Programiz, wpisz to w oknie po lewej stronie i kliknij guzik Run. Od teraz możesz po stronie prawej wywołać swoją funkcję. Jeśli wpiszesz np. <code>m(5)</code> i klikniesz enter, funkcja rzeczywiście wypluje z siebie wynik, czyli 8.</p>
+<p>Możesz w ten sposób stworzyć dowolną liczbę maszyn, ale jeśli piszesz w Pythonie, uważaj na wcięcia. Jeśli tworzysz jedną maszynę pod drugą, słowo <code>def</code> drugiej maszyny nie może być poprzedzone spacjami.</p>
+<p><img src="ilustracje/funkcje/programiz_python.png" class="light-mode img-fluid"></p>
+<p><img src="ilustracje/funkcje/programiz_python_dark.png" class="dark-mode img-fluid"></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Spróbuj stworzyć maszyny z poprzedniego zadania w wybranym języku programowania.</p>
+<ol type="1">
+<li><p><span class="math inline">\(c(l) = l + 4\)</span></p></li>
+<li><p><span class="math inline">\(t(l) = 3 l\)</span></p></li>
+<li><p><span class="math inline">\(d(l) = 2 l + 1\)</span></p></li>
+<li><p><span class="math inline">\(j(l) = (l + 1) \times 2\)</span> lub po uproszczeniu <span class="math inline">\(j(l) = 2 l + 2\)</span></p></li>
+<li><p><span class="math inline">\(s(l) = \frac{l}{7}\)</span></p></li>
+<li><p><span class="math inline">\(p(l) = 5\)</span></p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(c(l) = l + 4\)</span></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> c(l):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> l <span class="op">+</span> <span class="dv">4</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cztery <span class="ot">&lt;-</span> <span class="cf">function</span>(l) { <span class="co"># w R jest już funkcja c(), więc trzeba zmienić nazwę</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  l <span class="sc">+</span> <span class="dv">4</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ol start="2" type="1">
+<li><span class="math inline">\(t(l) = 3 l\)</span></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> t(l):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">3</span> <span class="op">*</span> l</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>trzy <span class="ot">&lt;-</span> <span class="cf">function</span>(l) { <span class="co"># w R jest już funkcja t(), więc trzeba zmienić nazwę</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">3</span> <span class="sc">*</span> l</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ol start="3" type="1">
+<li><span class="math inline">\(d(l) = 2 l + 1\)</span></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> d(l):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> l <span class="op">+</span> <span class="dv">1</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="cf">function</span>(l) {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span> <span class="sc">*</span> l <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ol start="4" type="1">
+<li><span class="math inline">\(j(l) = (l + 1) \times 2\)</span> lub po uproszczeniu <span class="math inline">\(j(l) = 2 l + 2\)</span></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> j(l):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (l <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># lub po uproszczeniu</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> j(l):</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> l <span class="op">+</span> <span class="dv">2</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>j <span class="ot">&lt;-</span> <span class="cf">function</span>(l) {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  (l <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># lub po uproszczeniu</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>j <span class="ot">&lt;-</span> <span class="cf">function</span>(l) {</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span> <span class="sc">*</span> l <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ol start="5" type="1">
+<li><span class="math inline">\(s(l) = \frac{l}{7}\)</span></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> s(l):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> l <span class="op">/</span> <span class="dv">7</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="cf">function</span>(l) {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  l <span class="sc">/</span> <span class="dv">7</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ol start="6" type="1">
+<li><span class="math inline">\(p(l) = 5\)</span></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> p(l):</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">5</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="cf">function</span>(l) {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">5</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-nomenclature" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Nazewnictwo</h1>
+<p>Święcie wierzę, że w matematyce połowa problemów na późniejszych etapach nauki bierze się z problemów z nazewnictwem. Nie da się zrobić zadania, jeśli się nie wie, o co pytają. Dodajmy do tego, że wszystko ma po kilka nazw oraz miesza się nazewnictwo algebraiczne i opisujące wykresy (o których później). Spróbujmy to więc uporządkować.</p>
+<ul>
+<li><p>To, co nazywaliśmy maszynami, uniwersalnie nazywa się <strong>funkcjami</strong>. Typową nazwą dla funkcji jest <span class="math inline">\(f\)</span>, ale można je nazywać tak, jak się chce.</p></li>
+<li><p>To, co wrzucamy do funkcji nazywa się <strong>argumentem</strong> albo <strong>miejscem</strong>. Zazwyczaj oznacza się to literą <span class="math inline">\(x\)</span>.</p></li>
+<li><p>To, co funkcja z siebie wyrzuca to <strong>wartość</strong> funkcji. Jeśli przyjmiemy poprzednie oznaczenia, wartość funkcji <span class="math inline">\(f\)</span> dla argumentu <span class="math inline">\(x\)</span> (czyli co funkcja zwróci, jak wrzucę do niej <span class="math inline">\(x\)</span>) oznaczymy jako <span class="math inline">\(f(x)\)</span>. Czasami, jeśli mamy tylko jedną funkcję, wartość bywa oznaczana literką <span class="math inline">\(y\)</span>. Oznaczenia <span class="math inline">\(y\)</span> i <span class="math inline">\(f(x)\)</span> są wymienne.</p></li>
+</ul>
+<p>Przy okazji możemy wprowadzić pojęcie <strong>miejsca zerowego</strong>. Jest to miejsce (czyli argument, <span class="math inline">\(x\)</span>), dla którego wartość funkcji wynosi 0. Innymi słowy, liczba, którą muszę wrzucić do funkcji, żeby funkcja wypluła 0. Dla maszyny dodającej 3 miejscem zerowym jest -3, bo <span class="math inline">\(m(-3) = 0\)</span>. Podkreślam jeszcze raz – miejsce zerowe to jest <em>argument</em>, czyli to, co wrzucam do funkcji. To <em>wartość</em> musi wynosić 0.</p>
+</section>
+<section id="liczenie-w-praktyce" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Liczenie w praktyce</h1>
+<p>W praktyce przy okazji mówienia o funkcjach liczymy jedną z dwóch rzeczy – co funkcja z siebie wyrzuca, kiedy włożę do niej <span class="math inline">\(x\)</span> albo co muszę włożyć do funkcji, żeby wypluła z siebie <span class="math inline">\(y\)</span>.</p>
+<p>Pierwszy scenariusz obejmuje to, co programowaliśmy w punkcie <a href="#sec-programming">3.1</a>. Jeśli chcielibyśmy policzyć to ręcznie, wystarczy, że zamiast skrótu typu <span class="math inline">\(l\)</span> czy <span class="math inline">\(x\)</span> zapiszemy liczbę, którą wrzucamy do funkcji. Czyli jeśli <span class="math inline">\(m(l) = l + 3\)</span>, to <span class="math inline">\(m(5) = 5 + 3\)</span>. Działa dokładnie tak samo też dla bardziej skomplikowanych funkcji.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Poniżej przedstawiono kilka różnych funkcji oraz wartości do policzenia. Zwróć uwagę na nazwy i spróbuj rozwiązać przykłady.</p>
+<p><span class="math display">\[
+a(x) = 7 + x
+\]</span> <span class="math display">\[
+b(z) = 5 \times z
+\]</span> <span class="math display">\[
+c(r) = 4 \times r + 12
+\]</span> <span class="math display">\[
+d(g) = \frac{7 g + 21}{2 g + 1}
+\]</span></p>
+<ol type="1">
+<li><p><span class="math inline">\(a(3)\)</span></p></li>
+<li><p><span class="math inline">\(a(11)\)</span></p></li>
+<li><p><span class="math inline">\(a(-10)\)</span></p></li>
+<li><p><span class="math inline">\(a(-7)\)</span></p></li>
+<li><p><span class="math inline">\(a(0)\)</span></p></li>
+<li><p><span class="math inline">\(b(5)\)</span></p></li>
+<li><p><span class="math inline">\(b(-12)\)</span></p></li>
+<li><p><span class="math inline">\(b(0)\)</span></p></li>
+<li><p><span class="math inline">\(c(6)\)</span></p></li>
+<li><p><span class="math inline">\(c(-8)\)</span></p></li>
+<li><p><span class="math inline">\(c(0)\)</span></p></li>
+<li><p><span class="math inline">\(c(-3)\)</span></p></li>
+<li><p><span class="math inline">\(d(2)\)</span></p></li>
+<li><p><span class="math inline">\(d(0)\)</span></p></li>
+<li><p><span class="math inline">\(d(-5)\)</span></p></li>
+<li><p><span class="math inline">\(d(-3)\)</span></p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><span class="math inline">\(a(3) = 10\)</span></p></li>
+<li><p><span class="math inline">\(a(11) = 18\)</span></p></li>
+<li><p><span class="math inline">\(a(-10) = -3\)</span></p></li>
+<li><p><span class="math inline">\(a(-7) = 0\)</span></p></li>
+<li><p><span class="math inline">\(a(0) = 7\)</span></p></li>
+<li><p><span class="math inline">\(b(5) = 25\)</span></p></li>
+<li><p><span class="math inline">\(b(-12) = -60\)</span></p></li>
+<li><p><span class="math inline">\(b(0) = 0\)</span></p></li>
+<li><p><span class="math inline">\(c(6) = 36\)</span></p></li>
+<li><p><span class="math inline">\(c(-8) = -20\)</span></p></li>
+<li><p><span class="math inline">\(c(0) = 12\)</span></p></li>
+<li><p><span class="math inline">\(c(-3) = 0\)</span></p></li>
+<li><p><span class="math inline">\(d(2) = 7\)</span></p></li>
+<li><p><span class="math inline">\(d(0) = 21\)</span></p></li>
+<li><p><span class="math inline">\(d(-5) = 1 \frac{5}{9}\)</span></p></li>
+<li><p><span class="math inline">\(d(-3) = 0\)</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+<p>W tym scenariuszu liczyliśmy wartość funkcji, ale czasem chcemy policzyć, jaki powinien być <em>argument</em>. Przypomnij sobie, co to jest miejsce zerowe – co muszę wrzucić do funkcji, żeby wypluła mi 0. To też da się liczyć. Bardziej realny przykład. Wyobraź sobie, że masz funkcję, która liczy, ile pieniędzy dostaniesz z rocznej lokaty, w zależności od tego, ile pieniędzy wyłożysz na lokatę. Pierwszy scenariusz to sprawdzanie dokładnie tego, czyli ile dostanę jak wpłacę 10 000 zł, a ile, jak wpłacę 30 000 zł. Drugi scenariusz to liczenie, ile muszę wpłacić, żeby otrzymać po roku 100 zł, a ile, żeby otrzymać 1000 zł.</p>
+<p>W praktyce liczy się to według dość prostej logiki. Chcę wiedzieć, ile muszę włożyć do maszyny dodającej 3, żeby wypluła 7. Zapisując to matematycznie, chcę wiedzieć, miedy wartość funkcji <span class="math inline">\(m\)</span> wynosi 7, czyli kiedy <span class="math inline">\(m(x) = 7\)</span>. Jednocześnie wiem, że <span class="math inline">\(m(x)\)</span> to po prostu <span class="math inline">\(x + 3\)</span>, bo tak działa funkcja dodająca 3. Wychodzi mi z tego proste równanie.</p>
+<p><span class="math display">\[
+m(x) = 7
+\]</span> <span class="math display">\[
+x + 3 = 7
+\]</span> <span class="math display">\[
+x = 4
+\]</span></p>
+<p>Na tej samej zasadzie możemy rozwiązywać bardziej skomplikowane równania, np. znaleźć miejsce zerowe funkcji <span class="math inline">\(y = 5x + 3\)</span> (pamiętaj, <span class="math inline">\(y\)</span> to inne oznaczenie wartości funkcji).</p>
+<p><span class="math display">\[
+y = 0
+\]</span></p>
+<p><span class="math display">\[
+5x + 3 = 0
+\]</span></p>
+<p><span class="math display">\[
+5x = -3
+\]</span></p>
+<p><span class="math display">\[
+x = -\frac{3}{5}
+\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Weźmy funkcje z poprzedniego zadania. Odkryj, co musisz wrzucić do każdej z tych funkcji, żeby przyjęła każdą z podanych wartości (każdy przykład policz dla każdej z funkcji).</p>
+<p><span class="math display">\[
+a(x) = 7 + x
+\]</span> <span class="math display">\[
+b(z) = 5 \times z
+\]</span> <span class="math display">\[
+c(r) = 4 \times r + 12
+\]</span> <span class="math display">\[
+d(g) = \frac{7 g + 21}{2 g + 1}
+\]</span></p>
+<ol type="1">
+<li><p><span class="math inline">\(10\)</span></p></li>
+<li><p><span class="math inline">\(1\)</span></p></li>
+<li><p><span class="math inline">\(0\)</span> (miejsce zerowe)</p></li>
+<li><p><span class="math inline">\(-4\)</span></p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Funkcja</strong> <span class="math inline">\(a\)</span></p>
+<ol type="1">
+<li><p><span class="math inline">\(3\)</span></p></li>
+<li><p><span class="math inline">\(-6\)</span></p></li>
+<li><p><span class="math inline">\(-7\)</span></p></li>
+<li><p><span class="math inline">\(-11\)</span></p></li>
+</ol>
+<p><strong>Funkcja</strong> <span class="math inline">\(b\)</span></p>
+<ol type="1">
+<li><p><span class="math inline">\(2\)</span></p></li>
+<li><p><span class="math inline">\(\frac{1}{5}\)</span></p></li>
+<li><p><span class="math inline">\(0\)</span></p></li>
+<li><p><span class="math inline">\(-\frac{4}{5}\)</span></p></li>
+</ol>
+<p><strong>Funkcja</strong> <span class="math inline">\(c\)</span></p>
+<ol type="1">
+<li><p><span class="math inline">\(-0,5\)</span></p></li>
+<li><p><span class="math inline">\(-2,75\)</span></p></li>
+<li><p><span class="math inline">\(-3\)</span></p></li>
+<li><p><span class="math inline">\(-4\)</span></p></li>
+</ol>
+<p><strong>Funkcja</strong> <span class="math inline">\(d\)</span></p>
+<ol type="1">
+<li><p><span class="math inline">\(\frac{11}{13}\)</span></p></li>
+<li><p><span class="math inline">\(-4\)</span></p></li>
+<li><p>-<span class="math inline">\(3\)</span></p></li>
+<li><p><span class="math inline">\(-1\frac{2}{3}\)</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="wykresy" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Wykresy</h1>
+<p>Nie da się zapisać na kartce wszystkich możliwych wartości funkcji. Między 0 a 1 jest nieskończenie wiele liczb i każdą z tych liczb można do funkcji wrzucić. Ciekawe rozwiązanie tego problemu stworzył jednak Kartezjusz. Tak, ten od „Myślę, więc jestem”. Kartezjusz narysował dwie linie przecinające się pod kątem prostym, a potem oznaczył siatkę.</p>
+<p><img src="ilustracje/funkcje/axes-empty.png" class="img-fluid"></p>
+<p>Ten pozornie banalny pomysł, nieobcy nikomu, kto kiedykolwiek grał w statki, to wielka rewolucja. Dzięki niej możemy przedstawić nieskończenie wiele wartości danej funkcji oraz zyskać całowicie nową perspektywę na funkcje. Teraz wystarczy, że umówimy się, że pozioma oś to argumenty, a pionowa to wartości. Co to znaczy?</p>
+<p>Wyobraźmy sobie funkcję dodającą 1. Matematycznie możemy to zapisać np. jako <span class="math inline">\(j(l) = l + 1\)</span>. Teraz wrzućmy do tej funkcji liczbę 1 – <span class="math inline">\(j(1) = 1 + 1 = 2\)</span>. Ten sam wniosek możemy nanieść na wykres. Na osi poziomej znajdujemy liczbę, którą wrzuciliśmy do funkcji (tj. 1), a na osi pionowej liczbę, którą funkcja wpluła (tj. 2). Na przecięciu jednego z drugim możemy teraz postawić kropkę.</p>
+<p><img src="ilustracje/funkcje/axes-point.png" class="img-fluid"></p>
+<p>Zróbmy to samo dla 0 i 2. <span class="math inline">\(j(0) = 1\)</span> i <span class="math inline">\(j(2) = 3\)</span>. Zaznaczmy to.</p>
+<p><img src="ilustracje/funkcje/axes-points.png" class="img-fluid"></p>
+<p>Ale po co się ograniczać? Zaznaczmy serię innych takich punktów.</p>
+<p><img src="ilustracje/funkcje/axes-pointed-line.png" class="img-fluid"></p>
+<p>To, co otrzymaliśmy, to ewidentnie prosta linia. Połączmy więc te punkty.</p>
+<p><img src="ilustracje/funkcje/axes-line.png" class="img-fluid"></p>
+<p>Tak naprawdę, żeby taką linię narysować, wystarczą dwa punkty. Gdy przyręcasz listwę do ściany, musisz ją przykręcić w dwóch miejscach, żeby się nie ruszała.</p>
+<p><img src="ilustracje/funkcje/axes-line-two-points.png" class="img-fluid"></p>
+<p>Taka linia pozwala nam odczytywać wartości dla dowolnego argumentu. Dla przykładu, jeśli chcę sprawdzić, co funkcja wypluje, jak wrzucę do niej 2, to szukam 2 na osi poziomej i patrzę, jak wysoko jest tam moja linia. W tym wypadku przecięcie jest w punkcie <span class="math inline">\((2, 3)\)</span>. Identyczny wniosek otrzymamy licząc wartość funkcji algebraicznie <span class="math inline">\(j(2) = 2 + 1 = 3\)</span>.</p>
+<p><img src="ilustracje/funkcje/axes-value.png" class="img-fluid"></p>
+</section>
+<section id="nazewnictwo-w-wykresach" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Nazewnictwo w wykresach</h1>
+<p>Ten wynalazek w postaci <em>układu współrzędnych</em> pozwala nam patrzeć na funkcje z zupełnie innej perspektywy. Funkcja nie jest już tylko maszyną, która zjada i wypluwa liczby. Nagle funkcja (a właściwie jej wykres) ma <em>kształt</em> i <em>położenie</em>. Możemy mówić o funkcji na przykład, że ma kształt linii albo paraboli. Możemy o jakiejś funkcji powiedzieć, że jest bardziej nachylona niż inna funkcja. Możemy powiedzieć, że jedna funkcja jest wyżej, a inna niżej. Funkcje mogą się przecinać, albo przecinać się z osiami.</p>
+<p>Jednak ta zmiana perspektywy potrafi też bardzo dużo namieszać. Jest naturalne dla np. zadań maturalnych, że opisują funkcję raz jak maszynę, a raz, jak wykres. W Księdze Rodzaju Bóg stwarza świat i porządkuje bezład przez rozdzielanie. Co prawda teraz siedzimy w odmętach matematycznego piekła, ale spróbować można. Rozdzielmy te dwa sposoby mówienia o funkcjach na graficzny i algebraiczny, a następnie spróbujmy jeden na drugi tłumaczyć.</p>
+<section id="punkty" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="punkty"><span class="header-section-number">7.1</span> Punkty</h2>
+<p><strong>Punkt</strong> to miejsce na wykresie opisywane przez parę liczb – jego współrzędne. Punkty zaznaczamy tam, gdzie argument przecina się z wartością. Para liczb typu <span class="math inline">\((2, 3)\)</span> oznacza więc, że nasz punkt jest dwa oczka w prawo i trzy oczka do góry w układzie współrzędnych. Jeżeli nasz punkt leży na linii wykresu, mówimy, że <strong>punkt należy do wykresu funkcji</strong>. To jest opis graficzny, możemy zobaczyć to na wykresie. Co to znaczy w języku algebraicznym, czyli w języku maszyn?</p>
+<p>Maszyny nie mają osi ani linii wykresu, one tylko przyjmują i wyrzucają liczby. Nie zapominajmy jednak, co oznaczają współrzędne. Pierwsza współrzędna to współrzędna pozioma (<span class="math inline">\(x\)</span>), a druga to współrzędna pionowa (<span class="math inline">\(y\)</span>). Współrzędne poziome oznaczają to, co wrzucam do funkcji, a pionowe to, co funkcja z siebie wypluwa. Stwierdzenie „Punkt <span class="math inline">\((2, 3)\)</span> należy do wykresu funkcji.” oznacza ni mniej, ni więcej, jak „Jeżeli wrzucę do funkcji <span class="math inline">\(2\)</span>, to wypluje ona <span class="math inline">\(3\)</span>.” albo matematycznie <span class="math inline">\(f(2) = 3\)</span>.</p>
+<p>Jeżeli spotkasz się z zadaniem typu „Sprawdź, czy punkt <span class="math inline">\((5, 11)\)</span> należy do wykresu funkcji <span class="math inline">\(y = 2x + 1\)</span>?“, to możesz to sobie przetłumaczyć z graficznego na algebraiczny – sprawdź, czy jak do funkcji <span class="math inline">\(y = 2x + 1\)</span> wrzucisz <span class="math inline">\(5\)</span>, to wyjdzie ci <span class="math inline">\(11\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Czy punkt <span class="math inline">\((21, 7)\)</span> należy do wykresu funkcji <span class="math inline">\(y = \frac{x}{3}\)</span>?</p></li>
+<li><p>Punkt <span class="math inline">\(A\)</span> ma współrzędną <span class="math inline">\(x\)</span> równą <span class="math inline">\(7\)</span> i należy do wykresu funkcji <span class="math inline">\(f(x) = 3x - 10\)</span>. Znajdź drugą współrzędną punktu <span class="math inline">\(A\)</span>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p></li>
+<li><p>Punkt <span class="math inline">\(B\)</span> ma współrzędną <span class="math inline">\(y\)</span> równą 0 i należy do wykresu funkcji <span class="math inline">\(y = -2x + 20\)</span>. Znajdź pierwszą współrzędną punktu <span class="math inline">\(B\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Tak.</p></li>
+<li><p><span class="math inline">\(f(7) = 3 \times 7 - 10 = 11\)</span>, więc <span class="math inline">\(A(7, 11)\)</span>.</p></li>
+<li><p><span class="math inline">\(f(10) = -2 \times 10 + 20 = 0\)</span>, więc <span class="math inline">\(B(10, 0)\)</span>.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="przecięcia" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="przecięcia"><span class="header-section-number">7.2</span> Przecięcia</h2>
+<p>Bardzo często w zadaniach jesteśmy proszeni o wyznaczenie punktów przecięcia wykresu funkcji z osią X, rzadziej z osią Y. Co to znaczy w języku algebraicznym?</p>
+</section>
+<section id="przecięcie-z-osią-x" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="przecięcie-z-osią-x"><span class="header-section-number">7.3</span> Przecięcie z osią X</h2>
+<p>Spójrz na ten wykres i powiedz, co wspólnego mają wszystkie te punkty?</p>
+<p><img src="ilustracje/funkcje/x-axis.png" class="img-fluid"></p>
+<p>Wszystkie leżą na osi X, to prawda. To jest opis w języku graficznym, gdzie istnieją punkty rozlokowane w przestrzeni. Teraz chcemy jednak przejść z opisu graficznego do algebraicznego, a punktem styku między jednym i drugim są <em>współrzędne</em>. Jaką współrzędną mają wspólną wszystkie te punkty? Po przeanalizowaniu wykresu dochodzimy do wniosku, że każdy z naszych punktów ma współrzędną <span class="math inline">\(y = 0\)</span>. Różnią się natomiast współrzędnymi <span class="math inline">\(x\)</span>.</p>
+<p>Jeśli jesteśmy pytani o <strong>punkt przecięcia z osią X</strong>, innymi słowy jesteśmy pytani o takie miejsce, gdzie <span class="math inline">\(y = 0\)</span>. Takim miejscem dla narysowanej na wykresie maszyny jest punkt o współrzędnych <span class="math inline">\((-1, 0)\)</span>. Jeśli sięgniesz pamięcią do punktu <a href="#sec-nomenclature">4</a>., zorientujesz się, że mamy specjalną nazwę na punkty, gdze <span class="math inline">\(y\)</span> (czyli wartość funkcji) wynosi <span class="math inline">\(0\)</span> – <strong>miejsce zerowe</strong>. Pytanie o punkt przecięcia z osią X jest więc tak naprawdę znanym nam już pytaniem o miejsce zerowe, gdzie ewentualnie odpowiedź będzie trzeba zapisać jako <span class="math inline">\(A(-1, 0)\)</span> zamiast <span class="math inline">\(f(-1) = 0\)</span>.</p>
+</section>
+<section id="przecięcie-z-osią-y" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="przecięcie-z-osią-y"><span class="header-section-number">7.4</span> Przecięcie z osią Y</h2>
+<p>Podobne pytanie o wspólną współrzędną możemy sobie zadać dla punktów na osi Y.</p>
+<p><img src="ilustracje/funkcje/y-axis.png" class="img-fluid"></p>
+<p>Tym razem pewnie szybciej możemy dojść do wniosku, że wszystkie zaznaczone punkty mają wspólną współrzędną <span class="math inline">\(x\)</span>, a różnią się współrzędnymi <span class="math inline">\(y\)</span>. Funkcja zaznaczona na rysunku ma punkt przecięcia z osią Y o współrzędnych <span class="math inline">\((0, 1)\)</span>. Pytanie o <strong>punkt przecięcia z osią Y</strong> jest więc niczym innym, jak pytaniem o wartość funkcji w zerze, czyli <span class="math inline">\(f(0)\)</span>.</p>
+</section>
+</section>
+<section id="funkcje-liniowe" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Funkcje liniowe</h1>
+<section id="nachylenie" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="nachylenie"><span class="header-section-number">8.1</span> Nachylenie</h2>
+</section>
+<section id="wyraz-wolny" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="wyraz-wolny"><span class="header-section-number">8.2</span> Wyraz wolny</h2>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
+<ol>
+<li id="fn1"><p>W gimnazjum wciskali nam kit, że będziemy się uczyć programowania w HTML. Nie da się <em>programować</em>&nbsp;w HTML, bo HTML nie ma funkcji, pętli, zmiennych ani innych rzeczy, które pozwalają cokolwiek rzeczywiście zaprogramować. Jeśli chcemy programować cokolwiek na stronach internetowych, użyjemy JavaScript, gdzie wszystkie te rzeczy są.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Polecam też <a href="../posts/podstawy_R.html">wprowadzenie do R</a> na tej stronie.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Spróbuj to samo wyrazić językiem algebraicznym.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Skopiowano!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Skopiowano!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="jakub-jedrusiak/nieobliczalne" data-repo-id="R_kgDOHBIy6A" data-category="General" data-category-id="DIC_kwDOHBIy6M4CUvlw" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

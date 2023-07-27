@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/funkcje.html",
       "/posts/pakiety-w-R.html",
       "/posts/regex.html",
       "/posts/git.html",

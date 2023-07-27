@@ -9,8 +9,849 @@
 <link>https://nieobliczalne.pl/index.html</link>
 <atom:link href="https://nieobliczalne.pl/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.124</generator>
-<lastBuildDate>Thu, 25 May 2023 22:00:00 GMT</lastBuildDate>
+<generator>quarto-1.3.433</generator>
+<lastBuildDate>Wed, 26 Jul 2023 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Funkcje matematyczne</title>
+  <dc:creator>Jakub Jędrusiak</dc:creator>
+  <link>https://nieobliczalne.pl/posts/funkcje.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>Czy masz czasem wrażenie, że rzeczy w matematyce nazywają się bez sensu? To jest bardzo słuszne wrażenie. Dziś na warsztat weźmiemy funkcje, które są zmorą uczniów liceów ze względu na nową, dziwną notację typu <img src="https://latex.codecogs.com/png.latex?f(x)">, cały pozornie chaotyczny język, który odrywa funkcje od reszty matematyki, a także wrażenie, że nijak nie idzie tego spotkać w „prawdziwym życiu”, cokolwiek to jest. Ja właśnie spędzam wieczór z prawdziwego życia na pisaniu o funkcjach. Do czegoś mi się jednak przydały. Zaczynając jednak od nazwy – dlaczego „funkcja”? Bo Liebniz źle rozumiał to słowo. A że raz przyjęte konwencje trzymają się mocno, to do dzisiaj, właściwie przypadkowo, nazywamy tę&nbsp;rzeczy funkcjami.</p>
+<section id="maszyny-matematyczne" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Maszyny matematyczne</h1>
+<p>Skorzystam tutaj z metafory pożyczonej od Jasona Wilkesa, której używał w swojej książce „Spal pracownię matematyczną”.</p>
+<p>Wyobraź sobie maszynę. Wielka, opasła maszyna z wlotem u góry i wyjściem z boku. Do maszyny dołączony jest zestaw metalowych cyferek wybitych na grubych blaszkach. Bierzesz do ręki pierwszą z brzegu blaszkę z wartością 4. Wrzucasz do wejścia przypominającego wlot na monety w automacie z kawą. Maszyna zaczyna buczeć, wydawać metaliczne dźwięki, łupnięcia, stukoty, a po chwili rozlega się dźwięk dzwoneczka i z wylotu wypada blaszka z numerkiem 7.</p>
+<p>„Hmm, ciekawe, co się stanie, kiedy wrzucę inną liczbę?” – myślisz.</p>
+<p>Wrzucasz bierzesz więc blaszkę z numerkiem 8, wrzucasz ją do maszyny i po chwili otrzymujesz 11. Może Ci się już w głowie rodzić pomysł, jak nasza maszyna działa. Żeby go przetestować wrzucasz do maszyny przed chwilą wyciągniętą blaszkę z numerem 11 i po chwili dostajesz z powrotem blaszkę z numerem 14. Domyślasz się już, co się stanie, jak wrzucisz do maszyny 2? Najprawdopodobniej wyrzuci ona 5. Gratuluję, rozgryzłeś(-aś) tajemnicę mojej maszyny – jakąkolwiek liczbę w niej nie umieścisz, dostaniesz liczbę o 3 większą.</p>
+<p>Wrzucasz do maszyny kolejne liczby i patrzysz, jak Twoja hipoteza się uwiarygadnia:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A1%20%5Crightarrow%204%0A"> <img src="https://latex.codecogs.com/png.latex?%0A15%20%5Crightarrow%2018%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A-10%20%5Crightarrow%20-7%0A"></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Co maszyna z siebie wyrzuci, jak wrzucę do niej:</p>
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?18"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?45"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?-20"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?0"></p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?18%20%5Crightarrow%2021"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?45%20%5Crightarrow%2048"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?-20%20%5Crightarrow%20-17"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?0%20%5Crightarrow%203"></p></li>
+</ol>
+</div>
+</div>
+</div>
+<p>Z zadowoleniem bierzesz marker i na maszynie piszesz „Maszyna dodająca 3”. Pięknie. Patrzysz jednak w dalsze części hali i widzisz dziesiątki maszyn do przetestowania. Zaczynasz się więc zastanawiać, czy nie da się tego zapisać jakoś zwięźlej?</p>
+</section>
+<section id="skróty" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Skróty</h1>
+<p>Stajemy przed zadaniem, by w zwięzły sposób opisać działanie naszej maszyny dodającej 3. W tym celu musimy wymyślić kilka skrótów na oznaczenie:</p>
+<ol type="1">
+<li><p>Nazwy maszyny.</p></li>
+<li><p>Tego, co wrzucamy do maszyny.</p></li>
+<li><p>Tego, co maszyna wypluwa.</p></li>
+<li><p>Tego, co maszyna konkretnie robi (tzn. że dodaje 3).</p></li>
+</ol>
+<p>Naszą maszynę najprościej nazwać <img src="https://latex.codecogs.com/png.latex?m"> jak maszyna albo <img src="https://latex.codecogs.com/png.latex?t"> jak trzy. Mógłbym użyć całego słowa <img src="https://latex.codecogs.com/png.latex?maszyna"> lub <img src="https://latex.codecogs.com/png.latex?trzy">, ale komu chce się to pisać? Dalej, to, co wrzucamy do maszyny mogę nazwać <img src="https://latex.codecogs.com/png.latex?l"> jak liczba, <img src="https://latex.codecogs.com/png.latex?b"> jak blaszka albo <img src="https://latex.codecogs.com/png.latex?c"> jak… coś. Moglibyśmy wymyślać tak dalej, ale żeby nie utonąć w alfabecie arbitralnych skojarzeń, możemy też wykorzystać dwa już ustalone skróty do stworzenia dwóch kolejnych.</p>
+<p>W jaki sposób? Weźmy na tapet 4. skrót, czyli opis działania maszyny. Wiem, że maszyna dodaje 3 do dowolnej liczby, którą do niej wrzucę. Jeśli wrzucę 5, to dostanę 8, jeśli wrzucę 12, to dostanę 15 itd. Ustaliłem jednak, że to, co wrzucam do maszyny, mogę określić literką <img src="https://latex.codecogs.com/png.latex?b">. To, że maszyna dodaje 3 mogę&nbsp;więc zapisać jako <img src="https://latex.codecogs.com/png.latex?b%20+%203">. Skoro <img src="https://latex.codecogs.com/png.latex?b"> to <strong>dowolna liczba</strong>, to <img src="https://latex.codecogs.com/png.latex?b%20+%203"> to ta liczba powiększona o 3.</p>
+<p>Mając te skróty uzyskałem już całkiem zwięzły sposób opisu naszych maszyn. Zamiast słów mógłbym napisać na maszynie:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Am%20=%20b%20+%203%0A"></p>
+<p>Prawda? Niby prawda, ale ten zapis ma kilka wad. Po pierwsze znak <img src="https://latex.codecogs.com/png.latex?="> oznacza w matematyce „to jest to samo, co”. Jeśli <img src="https://latex.codecogs.com/png.latex?m"> to nazwa naszej maszyny, to stwierdzamy, że „maszyna to jest to samo, co dowolna liczba dodać trzy”. Jako srót myślowy działa to nieźle, ale nie o to dokładnie nam chodzi. Maszyna nie jest dowolną liczbą powiększoną o trzy, maszyna to <em>robi</em>, ale nie <em>jest</em> tym. Tak jak maszynka do mielenia mięsa nie jest tym samym, co zmielone mięso.</p>
+<p>Czepiam się, wiem, ale ten zapis utrudnia nam też inną rzecz – załóżmy, że chcemy zapisać, że wrzuciliśmy do maszyny 5 i wypluła ona 8. Jak to zrobić w tej konwencji? <img src="https://latex.codecogs.com/png.latex?5%20=%208">? To już trochę krok za daleko. Matematycznej inkwizycji nie ma, ale jakby była, to taki zapis byłby heretycki. Możemy jednak wykorzystać nieco zgrabniejszą konwencję i od razu zawrzeć w niej skrót numer 3., czyli oznaczenie tego, co maszyna z siebie wypluwa. Proponuję zapisać to tak:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Am(5)%20=%208%0A"></p>
+<p>Ten nawias nawet wygląda jak kieszonka. Sama część <img src="https://latex.codecogs.com/png.latex?m(5)"> wskazuje, że do maszyny <img src="https://latex.codecogs.com/png.latex?m"> wrzuciliśmy liczbę 5. Po znaku równa się piszemy to, co maszyna z siebie wypluła. Teraz wielkie technikalium – sam skrót <img src="https://latex.codecogs.com/png.latex?m(5)"> dosłownie nie oznacza samego aktu włożenia 5 do maszyny <img src="https://latex.codecogs.com/png.latex?m">, ale to, co maszyna <img src="https://latex.codecogs.com/png.latex?m"> wypluje, kiedy wrzucę do niej 5. Rozróżnienie to brzmi jak sztuka dla sztuki i czepialstwo i trochę się zgadzam, ale pozwala nam to na kilka rzeczy. Po pierwsze, znika problem ze znakiem <img src="https://latex.codecogs.com/png.latex?="> – <img src="https://latex.codecogs.com/png.latex?m(5)"> rzeczywiście <em>jest</em> tym, co maszyna z siebie wypluje, jak wrzucę do niej 5, czyli <img src="https://latex.codecogs.com/png.latex?m(5)"> to <em>jest</em> 8 na takiej samej zasadzie, jak <img src="https://latex.codecogs.com/png.latex?5%20+%203"> to <em>jest</em> 8. Dzięki temu mogę też zapisać coś takiego:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A10%20+%20m(5)%20=%2018%0A"></p>
+<p>Ponieważ <img src="https://latex.codecogs.com/png.latex?m(5)"> to <em>jest</em> 8, to mogę zamiast 8 zapisać <img src="https://latex.codecogs.com/png.latex?m(5)">.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Spróbuj to policzyć:</p>
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?m(2)%20+%204"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?10%20-%20m(6)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?2%20%5Ctimes%20m(-5)%20+%201"></p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?m(2)%20+%204%20=%205%20+%204%20=%209"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?10%20-%20m(6)%20=%2010%20-%209%20=%201"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?2%20%5Ctimes%20m(-5)%20+%201%20=%202%20%5Ctimes%20-2%20+%201%20=%20-4%20+%201%20=%20-3"></p></li>
+</ol>
+</div>
+</div>
+</div>
+<p>Zbierzmy to więc do kupy i stwórzmy skrót ostateczny. Jak oznaczyć maszynę <img src="https://latex.codecogs.com/png.latex?m">, która bierze dowolną liczbę (oznaczoną jako <img src="https://latex.codecogs.com/png.latex?b">) i dodaje do niej 3? Proponuję coś takiego:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Am(b)%20=%20b%20+%203%0A"></p>
+<p>Ten zapis buduje na wszystkim, co ustaliliśmy do tej pory – do maszyny o nazwie <img src="https://latex.codecogs.com/png.latex?m"> wrzucam liczbę <img src="https://latex.codecogs.com/png.latex?b"> – <img src="https://latex.codecogs.com/png.latex?m(b)"> – a maszyna wyrzuca z siebie <img src="https://latex.codecogs.com/png.latex?b%20+%203">. Przypominam – <img src="https://latex.codecogs.com/png.latex?m"> i <img src="https://latex.codecogs.com/png.latex?b"> to tylko arbitralne literki. Równie dobrze mógłbym zapisać <img src="https://latex.codecogs.com/png.latex?a(z)%20=%20z%20+%203">, <img src="https://latex.codecogs.com/png.latex?r(k)%20=%20k%20+%203">, <img src="https://latex.codecogs.com/png.latex?%5Cdagger(%5Crceil)%20=%20%5Crceil%20+%203">, a czasem na matematyce z przekory pisałem <img src="https://latex.codecogs.com/png.latex?%C4%85(%C4%87)%20=%20%C4%87%20+%203">. Możemy opisywać nasze maszyny jak chcemy, ale najlepsze skróty to takie, które przypominają nam, co oznaczają.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Spróbuj zakodować następujące maszyny:</p>
+<ol type="1">
+<li><p>Maszyna dodająca 4.</p></li>
+<li><p>Maszyna mnożąca przez 3.</p></li>
+<li><p>Maszyna mnożąca przez 2, a potem dodająca 1.</p></li>
+<li><p>Maszyna najpierw dodająca 1, a potem mnożąca przez 2.</p></li>
+<li><p>Maszyna dzieląca na 7.</p></li>
+<li><p>Maszyna, która zawsze wyrzuca 5.</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?c(l)%20=%20l%20+%204"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?t(l)%20=%203%20l"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?d(l)%20=%202%20l%20+%201"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?j(l)%20=%20(l%20+%201)%20%5Ctimes%202"> lub po uproszczeniu <img src="https://latex.codecogs.com/png.latex?j(l)%20=%202%20l%20+%202"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?s(l)%20=%20%5Cfrac%7Bl%7D%7B7%7D"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?p(l)%20=%205"></p></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="maszyny-użytkowe" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Maszyny użytkowe</h1>
+<p>Po co tworzymy maszyny? Żeby odwalały za nas czarną robotę. Dodawanie 3 nie jest jakoś szczególnie trudne, ale co jeśli musimy zrobić coś bardziej skomplikowanego? Albo dodać 3 do 10 000 różnych liczb? Właśnie po to korzystamy z maszyn – nikt nie chce się&nbsp;w to bawić ręcznie.</p>
+<p>Załóżmy więc, że chcemy stworzyć maszynę liczącą pole kwadratu. Nazwijmy ją <img src="https://latex.codecogs.com/png.latex?k"> jak kwadrat. Jak do każdej maszyny, musimy coś do naszej maszyny wrzucić. Sama z siebie nic nie zrobi. Czego więc może potrzebować maszyna licząca pole kwadratu? Długości boku tego kwadratu. Oznaczmy go sobie jako <img src="https://latex.codecogs.com/png.latex?b">. Jak więc z długości boku policzyć pole? Podnieść ów bok do kwadratu. Spróbuj zebrać to do kupy i sprawdź, czy masz rację poniżej.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Maszyna licząca pole kwadratu
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><img src="https://latex.codecogs.com/png.latex?%0Ak(b)%20=%20b%5E2%0A"></p>
+</div>
+</div>
+</div>
+<p>Każdy wzrór matematyczny da się&nbsp;więc przerobić na maszynę. Mogło Ci się to zdarzyć, jeśli kiedykolwiek pisałeś(-aś) formuły w Excelu. Jeśli dostałbyś(-abyś) plik Excela z 1000 boków kwadratów i zadaniem przygotowania kolumny z polem kwadratu, prawdopodobnie użyłbyś(-abyś) formuły typu <code>= A1 * A1</code>, a potem przeciągnąłbyś(-abyś) ją tak, żeby policzyła pola wszystkich kwadratów.</p>
+<section id="sec-programming" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-programming"><span class="header-section-number">3.1</span> R i Python</h2>
+<p>Wszystkie maszyny, które zapisaliśmy w poprzednim zadaniu, moglibyśmy rzeczywiście stworzyć. Może nie w formie pudełka przerabiającego blaszki, ale możemy łatwo je <em>zaprogramować</em>. Nie jest to konieczne do zrozumienia funkcji, ale bardzo polecam, żeby chociaż spróbować. Wczesne zainteresowanie programowaniem mnie osobiście mocno pomogło w późniejszej nauce matematyki.</p>
+<p>Każdy język programowania pozwala nam stworzyć własne maszyny. Jeśli nie pozwala, to śmiem wątpić, czy w ogóle możemy mówić o języku programowania<sup>1</sup>. W naszym wypadku użyjemy jednego z dwóch języków programowania powszechnie używanych w nauce – <a href="https://www.programiz.com/r/online-compiler/">R</a> i <a href="https://www.programiz.com/python-programming/online-compiler/">Python</a>. Oba możemy uruchomić w przeglądarce. Jeśli czytasz to zamierzając uczyć się statystyki, polecam wybrać R<sup>2</sup>, a jeśli nie, to Python może być nieco bardziej przejrzysty.</p>
+<p>Jak więc rzeczywiście stworzyć naszą maszynę? W Pythonie wykorzystamy następującą składnię:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> nazwa_funkcji(to_co_wrzucamy):</span>
+<span id="cb1-2">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> działanie funkcji</span></code></pre></div>
+</div>
+</div>
+<p>W R składnia wygląda tak:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">nazwa_funkcji <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(to_co_wrzucamy) {</span>
+<span id="cb2-2">    działanie funkcji</span>
+<span id="cb2-3">}</span></code></pre></div>
+</div>
+</div>
+<p>Możemy wykorzystać oznaczenia, które wcześniej wprowadziliśmy i stworzyć naszą maszynę dodającą 3:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> m(b):</span>
+<span id="cb3-2">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> b <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span></span></code></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">m <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(b) {</span>
+<span id="cb4-2">  b <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span></span>
+<span id="cb4-3">}</span></code></pre></div>
+</div>
+</div>
+<p>Gdzie to wpisać? Jeśli, za moją sugestią, korzystasz z Programiz, wpisz to w oknie po lewej stronie i kliknij guzik Run. Od teraz możesz po stronie prawej wywołać swoją funkcję. Jeśli wpiszesz np. <code>m(5)</code> i klikniesz enter, funkcja rzeczywiście wypluje z siebie wynik, czyli 8.</p>
+<p>Możesz w ten sposób stworzyć dowolną liczbę maszyn, ale jeśli piszesz w Pythonie, uważaj na wcięcia. Jeśli tworzysz jedną maszynę pod drugą, słowo <code>def</code> drugiej maszyny nie może być poprzedzone spacjami.</p>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/programiz_python.png" class="light-mode img-fluid"></p>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/programiz_python_dark.png" class="dark-mode img-fluid"></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Spróbuj stworzyć maszyny z poprzedniego zadania w wybranym języku programowania.</p>
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?c(l)%20=%20l%20+%204"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?t(l)%20=%203%20l"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?d(l)%20=%202%20l%20+%201"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?j(l)%20=%20(l%20+%201)%20%5Ctimes%202"> lub po uproszczeniu <img src="https://latex.codecogs.com/png.latex?j(l)%20=%202%20l%20+%202"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?s(l)%20=%20%5Cfrac%7Bl%7D%7B7%7D"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?p(l)%20=%205"></p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><img src="https://latex.codecogs.com/png.latex?c(l)%20=%20l%20+%204"></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> c(l):</span>
+<span id="cb5-2">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> l <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span></span></code></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">cztery <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(l) { <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># w R jest już funkcja c(), więc trzeba zmienić nazwę</span></span>
+<span id="cb6-2">  l <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span></span>
+<span id="cb6-3">}</span></code></pre></div>
+</div>
+</div>
+<ol start="2" type="1">
+<li><img src="https://latex.codecogs.com/png.latex?t(l)%20=%203%20l"></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> t(l):</span>
+<span id="cb7-2">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> l</span></code></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">trzy <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(l) { <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># w R jest już funkcja t(), więc trzeba zmienić nazwę</span></span>
+<span id="cb8-2">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> l</span>
+<span id="cb8-3">}</span></code></pre></div>
+</div>
+</div>
+<ol start="3" type="1">
+<li><img src="https://latex.codecogs.com/png.latex?d(l)%20=%202%20l%20+%201"></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> d(l):</span>
+<span id="cb9-2">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> l <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span></code></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">d <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(l) {</span>
+<span id="cb10-2">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> l <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb10-3">}</span></code></pre></div>
+</div>
+</div>
+<ol start="4" type="1">
+<li><img src="https://latex.codecogs.com/png.latex?j(l)%20=%20(l%20+%201)%20%5Ctimes%202"> lub po uproszczeniu <img src="https://latex.codecogs.com/png.latex?j(l)%20=%202%20l%20+%202"></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> j(l):</span>
+<span id="cb11-2">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> (l <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span></span>
+<span id="cb11-3"></span>
+<span id="cb11-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># lub po uproszczeniu</span></span>
+<span id="cb11-5"></span>
+<span id="cb11-6"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> j(l):</span>
+<span id="cb11-7">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> l <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span></span></code></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">j <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(l) {</span>
+<span id="cb12-2">  (l <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span></span>
+<span id="cb12-3">}</span>
+<span id="cb12-4"></span>
+<span id="cb12-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># lub po uproszczeniu</span></span>
+<span id="cb12-6"></span>
+<span id="cb12-7">j <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(l) {</span>
+<span id="cb12-8">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> l <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span></span>
+<span id="cb12-9">}</span></code></pre></div>
+</div>
+</div>
+<ol start="5" type="1">
+<li><img src="https://latex.codecogs.com/png.latex?s(l)%20=%20%5Cfrac%7Bl%7D%7B7%7D"></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> s(l):</span>
+<span id="cb13-2">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> l <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span></span></code></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">s <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(l) {</span>
+<span id="cb14-2">  l <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span></span>
+<span id="cb14-3">}</span></code></pre></div>
+</div>
+</div>
+<ol start="6" type="1">
+<li><img src="https://latex.codecogs.com/png.latex?p(l)%20=%205"></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> p(l):</span>
+<span id="cb15-2">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span></span></code></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(l) {</span>
+<span id="cb16-2">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span></span>
+<span id="cb16-3">}</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-nomenclature" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Nazewnictwo</h1>
+<p>Święcie wierzę, że w matematyce połowa problemów na późniejszych etapach nauki bierze się z problemów z nazewnictwem. Nie da się zrobić zadania, jeśli się nie wie, o co pytają. Dodajmy do tego, że wszystko ma po kilka nazw oraz miesza się nazewnictwo algebraiczne i opisujące wykresy (o których później). Spróbujmy to więc uporządkować.</p>
+<ul>
+<li><p>To, co nazywaliśmy maszynami, uniwersalnie nazywa się <strong>funkcjami</strong>. Typową nazwą dla funkcji jest <img src="https://latex.codecogs.com/png.latex?f">, ale można je nazywać tak, jak się chce.</p></li>
+<li><p>To, co wrzucamy do funkcji nazywa się <strong>argumentem</strong> albo <strong>miejscem</strong>. Zazwyczaj oznacza się to literą <img src="https://latex.codecogs.com/png.latex?x">.</p></li>
+<li><p>To, co funkcja z siebie wyrzuca to <strong>wartość</strong> funkcji. Jeśli przyjmiemy poprzednie oznaczenia, wartość funkcji <img src="https://latex.codecogs.com/png.latex?f"> dla argumentu <img src="https://latex.codecogs.com/png.latex?x"> (czyli co funkcja zwróci, jak wrzucę do niej <img src="https://latex.codecogs.com/png.latex?x">) oznaczymy jako <img src="https://latex.codecogs.com/png.latex?f(x)">. Czasami, jeśli mamy tylko jedną funkcję, wartość bywa oznaczana literką <img src="https://latex.codecogs.com/png.latex?y">. Oznaczenia <img src="https://latex.codecogs.com/png.latex?y"> i <img src="https://latex.codecogs.com/png.latex?f(x)"> są wymienne.</p></li>
+</ul>
+<p>Przy okazji możemy wprowadzić pojęcie <strong>miejsca zerowego</strong>. Jest to miejsce (czyli argument, <img src="https://latex.codecogs.com/png.latex?x">), dla którego wartość funkcji wynosi 0. Innymi słowy, liczba, którą muszę wrzucić do funkcji, żeby funkcja wypluła 0. Dla maszyny dodającej 3 miejscem zerowym jest -3, bo <img src="https://latex.codecogs.com/png.latex?m(-3)%20=%200">. Podkreślam jeszcze raz – miejsce zerowe to jest <em>argument</em>, czyli to, co wrzucam do funkcji. To <em>wartość</em> musi wynosić 0.</p>
+</section>
+<section id="liczenie-w-praktyce" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Liczenie w praktyce</h1>
+<p>W praktyce przy okazji mówienia o funkcjach liczymy jedną z dwóch rzeczy – co funkcja z siebie wyrzuca, kiedy włożę do niej <img src="https://latex.codecogs.com/png.latex?x"> albo co muszę włożyć do funkcji, żeby wypluła z siebie <img src="https://latex.codecogs.com/png.latex?y">.</p>
+<p>Pierwszy scenariusz obejmuje to, co programowaliśmy w punkcie 3.1. Jeśli chcielibyśmy policzyć to ręcznie, wystarczy, że zamiast skrótu typu <img src="https://latex.codecogs.com/png.latex?l"> czy <img src="https://latex.codecogs.com/png.latex?x"> zapiszemy liczbę, którą wrzucamy do funkcji. Czyli jeśli <img src="https://latex.codecogs.com/png.latex?m(l)%20=%20l%20+%203">, to <img src="https://latex.codecogs.com/png.latex?m(5)%20=%205%20+%203">. Działa dokładnie tak samo też dla bardziej skomplikowanych funkcji.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Poniżej przedstawiono kilka różnych funkcji oraz wartości do policzenia. Zwróć uwagę na nazwy i spróbuj rozwiązać przykłady.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aa(x)%20=%207%20+%20x%0A"> <img src="https://latex.codecogs.com/png.latex?%0Ab(z)%20=%205%20%5Ctimes%20z%0A"> <img src="https://latex.codecogs.com/png.latex?%0Ac(r)%20=%204%20%5Ctimes%20r%20+%2012%0A"> <img src="https://latex.codecogs.com/png.latex?%0Ad(g)%20=%20%5Cfrac%7B7%20g%20+%2021%7D%7B2%20g%20+%201%7D%0A"></p>
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?a(3)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?a(11)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?a(-10)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?a(-7)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?a(0)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?b(5)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?b(-12)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?b(0)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?c(6)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?c(-8)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?c(0)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?c(-3)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?d(2)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?d(0)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?d(-5)"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?d(-3)"></p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?a(3)%20=%2010"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?a(11)%20=%2018"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?a(-10)%20=%20-3"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?a(-7)%20=%200"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?a(0)%20=%207"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?b(5)%20=%2025"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?b(-12)%20=%20-60"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?b(0)%20=%200"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?c(6)%20=%2036"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?c(-8)%20=%20-20"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?c(0)%20=%2012"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?c(-3)%20=%200"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?d(2)%20=%207"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?d(0)%20=%2021"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?d(-5)%20=%201%20%5Cfrac%7B5%7D%7B9%7D"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?d(-3)%20=%200"></p></li>
+</ol>
+</div>
+</div>
+</div>
+<p>W tym scenariuszu liczyliśmy wartość funkcji, ale czasem chcemy policzyć, jaki powinien być <em>argument</em>. Przypomnij sobie, co to jest miejsce zerowe – co muszę wrzucić do funkcji, żeby wypluła mi 0. To też da się liczyć. Bardziej realny przykład. Wyobraź sobie, że masz funkcję, która liczy, ile pieniędzy dostaniesz z rocznej lokaty, w zależności od tego, ile pieniędzy wyłożysz na lokatę. Pierwszy scenariusz to sprawdzanie dokładnie tego, czyli ile dostanę jak wpłacę 10 000 zł, a ile, jak wpłacę 30 000 zł. Drugi scenariusz to liczenie, ile muszę wpłacić, żeby otrzymać po roku 100 zł, a ile, żeby otrzymać 1000 zł.</p>
+<p>W praktyce liczy się to według dość prostej logiki. Chcę wiedzieć, ile muszę włożyć do maszyny dodającej 3, żeby wypluła 7. Zapisując to matematycznie, chcę wiedzieć, miedy wartość funkcji <img src="https://latex.codecogs.com/png.latex?m"> wynosi 7, czyli kiedy <img src="https://latex.codecogs.com/png.latex?m(x)%20=%207">. Jednocześnie wiem, że <img src="https://latex.codecogs.com/png.latex?m(x)"> to po prostu <img src="https://latex.codecogs.com/png.latex?x%20+%203">, bo tak działa funkcja dodająca 3. Wychodzi mi z tego proste równanie.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Am(x)%20=%207%0A"> <img src="https://latex.codecogs.com/png.latex?%0Ax%20+%203%20=%207%0A"> <img src="https://latex.codecogs.com/png.latex?%0Ax%20=%204%0A"></p>
+<p>Na tej samej zasadzie możemy rozwiązywać bardziej skomplikowane równania, np. znaleźć miejsce zerowe funkcji <img src="https://latex.codecogs.com/png.latex?y%20=%205x%20+%203"> (pamiętaj, <img src="https://latex.codecogs.com/png.latex?y"> to inne oznaczenie wartości funkcji).</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ay%20=%200%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A5x%20+%203%20=%200%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A5x%20=%20-3%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ax%20=%20-%5Cfrac%7B3%7D%7B5%7D%0A"></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Weźmy funkcje z poprzedniego zadania. Odkryj, co musisz wrzucić do każdej z tych funkcji, żeby przyjęła każdą z podanych wartości (każdy przykład policz dla każdej z funkcji).</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aa(x)%20=%207%20+%20x%0A"> <img src="https://latex.codecogs.com/png.latex?%0Ab(z)%20=%205%20%5Ctimes%20z%0A"> <img src="https://latex.codecogs.com/png.latex?%0Ac(r)%20=%204%20%5Ctimes%20r%20+%2012%0A"> <img src="https://latex.codecogs.com/png.latex?%0Ad(g)%20=%20%5Cfrac%7B7%20g%20+%2021%7D%7B2%20g%20+%201%7D%0A"></p>
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?10"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?1"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?0"> (miejsce zerowe)</p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?-4"></p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Funkcja</strong> <img src="https://latex.codecogs.com/png.latex?a"></p>
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?3"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?-6"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?-7"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?-11"></p></li>
+</ol>
+<p><strong>Funkcja</strong> <img src="https://latex.codecogs.com/png.latex?b"></p>
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?2"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B1%7D%7B5%7D"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?0"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?-%5Cfrac%7B4%7D%7B5%7D"></p></li>
+</ol>
+<p><strong>Funkcja</strong> <img src="https://latex.codecogs.com/png.latex?c"></p>
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?-0,5"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?-2,75"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?-3"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?-4"></p></li>
+</ol>
+<p><strong>Funkcja</strong> <img src="https://latex.codecogs.com/png.latex?d"></p>
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B11%7D%7B13%7D"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?-4"></p></li>
+<li><p>-<img src="https://latex.codecogs.com/png.latex?3"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?-1%5Cfrac%7B2%7D%7B3%7D"></p></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="wykresy" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Wykresy</h1>
+<p>Nie da się zapisać na kartce wszystkich możliwych wartości funkcji. Między 0 a 1 jest nieskończenie wiele liczb i każdą z tych liczb można do funkcji wrzucić. Ciekawe rozwiązanie tego problemu stworzył jednak Kartezjusz. Tak, ten od „Myślę, więc jestem”. Kartezjusz narysował dwie linie przecinające się pod kątem prostym, a potem oznaczył siatkę.</p>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/axes-empty.png" class="img-fluid"></p>
+<p>Ten pozornie banalny pomysł, nieobcy nikomu, kto kiedykolwiek grał w statki, to wielka rewolucja. Dzięki niej możemy przedstawić nieskończenie wiele wartości danej funkcji oraz zyskać całowicie nową perspektywę na funkcje. Teraz wystarczy, że umówimy się, że pozioma oś to argumenty, a pionowa to wartości. Co to znaczy?</p>
+<p>Wyobraźmy sobie funkcję dodającą 1. Matematycznie możemy to zapisać np. jako <img src="https://latex.codecogs.com/png.latex?j(l)%20=%20l%20+%201">. Teraz wrzućmy do tej funkcji liczbę 1 – <img src="https://latex.codecogs.com/png.latex?j(1)%20=%201%20+%201%20=%202">. Ten sam wniosek możemy nanieść na wykres. Na osi poziomej znajdujemy liczbę, którą wrzuciliśmy do funkcji (tj. 1), a na osi pionowej liczbę, którą funkcja wpluła (tj. 2). Na przecięciu jednego z drugim możemy teraz postawić kropkę.</p>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/axes-point.png" class="img-fluid"></p>
+<p>Zróbmy to samo dla 0 i 2. <img src="https://latex.codecogs.com/png.latex?j(0)%20=%201"> i <img src="https://latex.codecogs.com/png.latex?j(2)%20=%203">. Zaznaczmy to.</p>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/axes-points.png" class="img-fluid"></p>
+<p>Ale po co się ograniczać? Zaznaczmy serię innych takich punktów.</p>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/axes-pointed-line.png" class="img-fluid"></p>
+<p>To, co otrzymaliśmy, to ewidentnie prosta linia. Połączmy więc te punkty.</p>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/axes-line.png" class="img-fluid"></p>
+<p>Tak naprawdę, żeby taką linię narysować, wystarczą dwa punkty. Gdy przyręcasz listwę do ściany, musisz ją przykręcić w dwóch miejscach, żeby się nie ruszała.</p>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/axes-line-two-points.png" class="img-fluid"></p>
+<p>Taka linia pozwala nam odczytywać wartości dla dowolnego argumentu. Dla przykładu, jeśli chcę sprawdzić, co funkcja wypluje, jak wrzucę do niej 2, to szukam 2 na osi poziomej i patrzę, jak wysoko jest tam moja linia. W tym wypadku przecięcie jest w punkcie <img src="https://latex.codecogs.com/png.latex?(2,%203)">. Identyczny wniosek otrzymamy licząc wartość funkcji algebraicznie <img src="https://latex.codecogs.com/png.latex?j(2)%20=%202%20+%201%20=%203">.</p>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/axes-value.png" class="img-fluid"></p>
+</section>
+<section id="nazewnictwo-w-wykresach" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Nazewnictwo w wykresach</h1>
+<p>Ten wynalazek w postaci <em>układu współrzędnych</em> pozwala nam patrzeć na funkcje z zupełnie innej perspektywy. Funkcja nie jest już tylko maszyną, która zjada i wypluwa liczby. Nagle funkcja (a właściwie jej wykres) ma <em>kształt</em> i <em>położenie</em>. Możemy mówić o funkcji na przykład, że ma kształt linii albo paraboli. Możemy o jakiejś funkcji powiedzieć, że jest bardziej nachylona niż inna funkcja. Możemy powiedzieć, że jedna funkcja jest wyżej, a inna niżej. Funkcje mogą się przecinać, albo przecinać się z osiami.</p>
+<p>Jednak ta zmiana perspektywy potrafi też bardzo dużo namieszać. Jest naturalne dla np. zadań maturalnych, że opisują funkcję raz jak maszynę, a raz, jak wykres. W Księdze Rodzaju Bóg stwarza świat i porządkuje bezład przez rozdzielanie. Co prawda teraz siedzimy w odmętach matematycznego piekła, ale spróbować można. Rozdzielmy te dwa sposoby mówienia o funkcjach na graficzny i algebraiczny, a następnie spróbujmy jeden na drugi tłumaczyć.</p>
+<section id="punkty" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="punkty"><span class="header-section-number">7.1</span> Punkty</h2>
+<p><strong>Punkt</strong> to miejsce na wykresie opisywane przez parę liczb – jego współrzędne. Punkty zaznaczamy tam, gdzie argument przecina się z wartością. Para liczb typu <img src="https://latex.codecogs.com/png.latex?(2,%203)"> oznacza więc, że nasz punkt jest dwa oczka w prawo i trzy oczka do góry w układzie współrzędnych. Jeżeli nasz punkt leży na linii wykresu, mówimy, że <strong>punkt należy do wykresu funkcji</strong>. To jest opis graficzny, możemy zobaczyć to na wykresie. Co to znaczy w języku algebraicznym, czyli w języku maszyn?</p>
+<p>Maszyny nie mają osi ani linii wykresu, one tylko przyjmują i wyrzucają liczby. Nie zapominajmy jednak, co oznaczają współrzędne. Pierwsza współrzędna to współrzędna pozioma (<img src="https://latex.codecogs.com/png.latex?x">), a druga to współrzędna pionowa (<img src="https://latex.codecogs.com/png.latex?y">). Współrzędne poziome oznaczają to, co wrzucam do funkcji, a pionowe to, co funkcja z siebie wypluwa. Stwierdzenie „Punkt <img src="https://latex.codecogs.com/png.latex?(2,%203)"> należy do wykresu funkcji.” oznacza ni mniej, ni więcej, jak „Jeżeli wrzucę do funkcji <img src="https://latex.codecogs.com/png.latex?2">, to wypluje ona <img src="https://latex.codecogs.com/png.latex?3">.” albo matematycznie <img src="https://latex.codecogs.com/png.latex?f(2)%20=%203">.</p>
+<p>Jeżeli spotkasz się z zadaniem typu „Sprawdź, czy punkt <img src="https://latex.codecogs.com/png.latex?(5,%2011)"> należy do wykresu funkcji <img src="https://latex.codecogs.com/png.latex?y%20=%202x%20+%201">?“, to możesz to sobie przetłumaczyć z graficznego na algebraiczny – sprawdź, czy jak do funkcji <img src="https://latex.codecogs.com/png.latex?y%20=%202x%20+%201"> wrzucisz <img src="https://latex.codecogs.com/png.latex?5">, to wyjdzie ci <img src="https://latex.codecogs.com/png.latex?11">.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Czy punkt <img src="https://latex.codecogs.com/png.latex?(21,%207)"> należy do wykresu funkcji <img src="https://latex.codecogs.com/png.latex?y%20=%20%5Cfrac%7Bx%7D%7B3%7D">?</p></li>
+<li><p>Punkt <img src="https://latex.codecogs.com/png.latex?A"> ma współrzędną <img src="https://latex.codecogs.com/png.latex?x"> równą <img src="https://latex.codecogs.com/png.latex?7"> i należy do wykresu funkcji <img src="https://latex.codecogs.com/png.latex?f(x)%20=%203x%20-%2010">. Znajdź drugą współrzędną punktu <img src="https://latex.codecogs.com/png.latex?A">.<sup>3</sup></p></li>
+<li><p>Punkt <img src="https://latex.codecogs.com/png.latex?B"> ma współrzędną <img src="https://latex.codecogs.com/png.latex?y"> równą 0 i należy do wykresu funkcji <img src="https://latex.codecogs.com/png.latex?y%20=%20-2x%20+%2020">. Znajdź pierwszą współrzędną punktu <img src="https://latex.codecogs.com/png.latex?B">.</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Tak.</p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?f(7)%20=%203%20%5Ctimes%207%20-%2010%20=%2011">, więc <img src="https://latex.codecogs.com/png.latex?A(7,%2011)">.</p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?f(10)%20=%20-2%20%5Ctimes%2010%20+%2020%20=%200">, więc <img src="https://latex.codecogs.com/png.latex?B(10,%200)">.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="przecięcia" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="przecięcia"><span class="header-section-number">7.2</span> Przecięcia</h2>
+<p>Bardzo często w zadaniach jesteśmy proszeni o wyznaczenie punktów przecięcia wykresu funkcji z osią X, rzadziej z osią Y. Co to znaczy w języku algebraicznym?</p>
+</section>
+<section id="przecięcie-z-osią-x" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="przecięcie-z-osią-x"><span class="header-section-number">7.3</span> Przecięcie z osią X</h2>
+<p>Spójrz na ten wykres i powiedz, co wspólnego mają wszystkie te punkty?</p>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/x-axis.png" class="img-fluid"></p>
+<p>Wszystkie leżą na osi X, to prawda. To jest opis w języku graficznym, gdzie istnieją punkty rozlokowane w przestrzeni. Teraz chcemy jednak przejść z opisu graficznego do algebraicznego, a punktem styku między jednym i drugim są <em>współrzędne</em>. Jaką współrzędną mają wspólną wszystkie te punkty? Po przeanalizowaniu wykresu dochodzimy do wniosku, że każdy z naszych punktów ma współrzędną <img src="https://latex.codecogs.com/png.latex?y%20=%200">. Różnią się natomiast współrzędnymi <img src="https://latex.codecogs.com/png.latex?x">.</p>
+<p>Jeśli jesteśmy pytani o <strong>punkt przecięcia z osią X</strong>, innymi słowy jesteśmy pytani o takie miejsce, gdzie <img src="https://latex.codecogs.com/png.latex?y%20=%200">. Takim miejscem dla narysowanej na wykresie maszyny jest punkt o współrzędnych <img src="https://latex.codecogs.com/png.latex?(-1,%200)">. Jeśli sięgniesz pamięcią do punktu 4., zorientujesz się, że mamy specjalną nazwę na punkty, gdze <img src="https://latex.codecogs.com/png.latex?y"> (czyli wartość funkcji) wynosi <img src="https://latex.codecogs.com/png.latex?0"> – <strong>miejsce zerowe</strong>. Pytanie o punkt przecięcia z osią X jest więc tak naprawdę znanym nam już pytaniem o miejsce zerowe, gdzie ewentualnie odpowiedź będzie trzeba zapisać jako <img src="https://latex.codecogs.com/png.latex?A(-1,%200)"> zamiast <img src="https://latex.codecogs.com/png.latex?f(-1)%20=%200">.</p>
+</section>
+<section id="przecięcie-z-osią-y" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="przecięcie-z-osią-y"><span class="header-section-number">7.4</span> Przecięcie z osią Y</h2>
+<p>Podobne pytanie o wspólną współrzędną możemy sobie zadać dla punktów na osi Y.</p>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/y-axis.png" class="img-fluid"></p>
+<p>Tym razem pewnie szybciej możemy dojść do wniosku, że wszystkie zaznaczone punkty mają wspólną współrzędną <img src="https://latex.codecogs.com/png.latex?x">, a różnią się współrzędnymi <img src="https://latex.codecogs.com/png.latex?y">. Funkcja zaznaczona na rysunku ma punkt przecięcia z osią Y o współrzędnych <img src="https://latex.codecogs.com/png.latex?(0,%201)">. Pytanie o <strong>punkt przecięcia z osią Y</strong> jest więc niczym innym, jak pytaniem o wartość funkcji w zerze, czyli <img src="https://latex.codecogs.com/png.latex?f(0)">.</p>
+</section>
+</section>
+<section id="funkcje-liniowe" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Funkcje liniowe</h1>
+<section id="nachylenie" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="nachylenie"><span class="header-section-number">8.1</span> Nachylenie</h2>
+</section>
+<section id="wyraz-wolny" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="wyraz-wolny"><span class="header-section-number">8.2</span> Wyraz wolny</h2>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
+<ol>
+<li id="fn1"><p>W gimnazjum wciskali nam kit, że będziemy się uczyć programowania w HTML. Nie da się <em>programować</em>&nbsp;w HTML, bo HTML nie ma funkcji, pętli, zmiennych ani innych rzeczy, które pozwalają cokolwiek rzeczywiście zaprogramować. Jeśli chcemy programować cokolwiek na stronach internetowych, użyjemy JavaScript, gdzie wszystkie te rzeczy są.↩︎</p></li>
+<li id="fn2"><p>Polecam też <a href="../posts/podstawy_R.html">wprowadzenie do R</a> na tej stronie.↩︎</p></li>
+<li id="fn3"><p>Spróbuj to samo wyrazić językiem algebraicznym.↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>Statystyka</category>
+  <category>Matematyka</category>
+  <guid>https://nieobliczalne.pl/posts/funkcje.html</guid>
+  <pubDate>Wed, 26 Jul 2023 22:00:00 GMT</pubDate>
+  <media:content url="https://nieobliczalne.pl/posts/headers/funkcje.webp" medium="image" type="image/webp"/>
+</item>
 <item>
   <title>Tworzenie pakietów w R</title>
   <dc:creator>Jakub Jędrusiak</dc:creator>
@@ -2296,8 +3137,10 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 
 </section>
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document">
-<hr>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
 <ol>
 <li id="fn1"><p>Funkcje <code>install_*()</code> zapewnia też mniejszy pakiet <code>remotes</code>, który jest praktycznie wycinkiem z <code>devtools</code>. Jeśli mamy <code>devtools</code>, nie potrzebujemy <code>remotes</code>.↩︎</p></li>
 <li id="fn2"><p>Jeśli już wcześniej stworzyłeś(-aś) jakieś pliki z funkcjami i je udokumentowałeś(-aś), to użyj teraz <code>roxygen2md::roxygen2md()</code>, by przerobić je na nowy standard. Jeśli tworzysz pakiet w kolejności, w jakiej omawiam to w tym wpisie, nie ma takiej potrzeby.↩︎</p></li>
@@ -2306,9 +3149,7 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 <li id="fn5"><p>Jeśli nie wiesz, czym jest GitHub i po co go używać, przeczytaj <a href="./posts/git.qmd">ten wpis</a>.↩︎</p></li>
 <li id="fn6"><p>Możesz też ręcznie wytworzyć odpowiedni plik .R w folderze <code>R</code>.↩︎</p></li>
 </ol>
-</aside>
-
- ]]></description>
+</section></div> ]]></description>
   <category>R</category>
   <guid>https://nieobliczalne.pl/posts/pakiety-w-R.html</guid>
   <pubDate>Thu, 25 May 2023 22:00:00 GMT</pubDate>
@@ -2597,16 +3438,16 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document">
-<hr>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
 <ol>
 <li id="fn1"><p>W rzeczywistości RegEx ma do tego specjalne operatory, ale nie chcę wchodzić tak głęboko.↩︎</p></li>
 <li id="fn2"><p>Ewentualnie możemy ich użyć do stosowania operatorów do całych grup, np. <code>(foo)+</code> dopasuje jedno całe słowo „foo” lub ich więcej. Bez nawiasu <code>+</code> odnosiłby się tylko do litery „o”.↩︎</p></li>
 <li id="fn3"><p>Warto zauważyć, że w polu, w którym wpisujemy tekst, którym zastępujemy nasze dopasowania, nie musimy już <em>escape’ować</em> znaków specjalnych. Tam już wszystkie znaki są dosłowne.↩︎</p></li>
 </ol>
-</aside>
-
- ]]></description>
+</section></div> ]]></description>
   <category>Narzędzia</category>
   <guid>https://nieobliczalne.pl/posts/regex.html</guid>
   <pubDate>Fri, 19 May 2023 22:00:00 GMT</pubDate>
@@ -2745,14 +3586,14 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document">
-<hr>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
 <ol>
 <li id="fn1"><p>Jestem przekonany, że to kwestia czasu, patrząc na to, jak już teraz działa GitHub Copilot i jak zapowiada się GitHub Copilot X. Być może, gdy to czytasz, konflikty potrafią się już rozwiązywać same.↩︎</p></li>
 </ol>
-</aside>
-
- ]]></description>
+</section></div> ]]></description>
   <category>Narzędzia</category>
   <category>R</category>
   <guid>https://nieobliczalne.pl/posts/git.html</guid>
@@ -3713,8 +4554,10 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document">
-<hr>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
 <ol>
 <li id="fn1"><p>Ciekawostką może być tutaj wczesny kalendarz hebrajski. Kalendarz hebrajski jest księżycowy, ma 12 miesięcy, ale w latach przestępnych dodawany jest 13. miesiąc – adar szeni. Takich lat przestępnych musi przypaść 7 w ciągu 19 lat. Obecnie jest to skodyfikowane (zob. cykl Metona), ale początkowo nie wiadomo było, które konkretnie lata w cyklu mają być przestępne i było to <em>ad hoc</em> ustalane przez społeczność żydowską. Tym samym lata przestępne pojawiały się znienacka i data wcale nie zmieniała się w przewidywalny sposób. Miało to poważne konsekwencje dla daty Wielkanocy, bo zanim został ustalony stabilny wzór (Wielkanocy, nie lat przestępnych w kalendarzu żydowskim, to nadeszło później), nigdy nie wiadomo było, kiedy wypadnie 14 nisan, czyli rocznica śmierci Jezusa według kalendarza żydowskiego.↩︎</p></li>
 <li id="fn2"><p>Instrukcję, jak uruchamiać takie pliki bezpośrednio w Notepad++, znajdziemy np. <a href="https://www.delftstack.com/howto/Python/notepad++-run-Python/">tutaj</a>.↩︎</p></li>
@@ -3722,9 +4565,7 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 <li id="fn4"><p>Sam korzystam z linuksa (<em>I use arch, BTW</em>), ale nie łudzę się – większość osób, które to czytają, to windowsiarze. W linuksie operator <code>&gt;</code> działa identycznie.↩︎</p></li>
 <li id="fn5"><p>Sprawdziłem, taki skrypt generuje u mnie 30 lat rozpiski w 47 milisekund (!), a gotowy plik ma 310 kB.↩︎</p></li>
 </ol>
-</aside>
-
- ]]></description>
+</section></div> ]]></description>
   <category>Python</category>
   <category>Nauka</category>
   <category>Narzędzia</category>
@@ -5210,8 +6051,10 @@ font-style: inherit;">all_of</span>(groups)</span>
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document">
-<hr>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
 <ol>
 <li id="fn1"><p>Czasami będziemy musieli wykorzystać <code>lst()</code>. Będą to przypadki, w których np. najpierw policzymy liczbę wszystkich przypadków w bazie (<code>N = n</code>), potem liczbę braków danych (<code>`NA` = is.na</code>), a na koniec chcemy policzyć procent brakujących (<code>p_NA = `NA` / N</code>). Chcemy więc wykorzystać nowo stworzone kolumny do stworzenia kolejnej. Zwykłe <code>list()</code> tego nie uciągnie i musimy użyć <code>lst()</code> z pakietu <code>tibble</code>.↩︎</p></li>
 <li id="fn2"><p>Inne przykłady nazw niesyntaktycznych to <code>if</code>, <code>for</code>, <code>while</code>, <code>NULL</code>, nazwy zaczynające się liczbą, nazwy ze spacjami.↩︎</p></li>
@@ -5229,9 +6072,7 @@ font-style: inherit;">5</span>,])</span></code></pre></div>
 <li id="fn6"><p>…<em>my baby shot me down</em>.↩︎</p></li>
 <li id="fn7"><p>CRAN nie lubi, jak używa się obiektów, które nie mają globalnych definicji, dlatego krzyczał na mnie, że nie ma czegoś takiego jak <code>.all_top2</code>. Ja wiedziałem, że jest w bazie danych, kod działał, bo to potem trafiało do <code>summarise()</code>, ale CRAN ma swoje zasady. Dlatego podałem to jako string, który jest przerabiany na wyrażenie (<em>parsing</em>).↩︎</p></li>
 </ol>
-</aside>
-
- ]]></description>
+</section></div> ]]></description>
   <guid>https://nieobliczalne.pl/posts/metaprogramowanie.html</guid>
   <pubDate>Thu, 04 May 2023 22:00:00 GMT</pubDate>
   <media:content url="https://nieobliczalne.pl/posts/headers/metaprogramowanie.webp" medium="image" type="image/webp"/>
@@ -5294,8 +6135,10 @@ font-style: inherit;">5</span>,])</span></code></pre></div>
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document">
-<hr>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
 <ol>
 <li id="fn1"><p>Zapytany o przepisywanie AI Rabbi odpowiada:</p>
 <blockquote class="blockquote">
@@ -5306,9 +6149,7 @@ font-style: inherit;">5</span>,])</span></code></pre></div>
 <li id="fn2"><p>Gdy to piszę, co jakiś czas strona proponuje 40% zniżki, co zmniejsza cenę za pierwszy rok do ok. 230 zł.↩︎</p></li>
 <li id="fn3"><p>Dobry kurs specyfiki pisania w nauce od dr Kristin Sainani z Uniwersytetu Stanforda znajdziemy <a href="https://www.coursera.org/learn/sciwrite?">tutaj</a>.↩︎</p></li>
 </ol>
-</aside>
-
- ]]></description>
+</section></div> ]]></description>
   <category>Nauka</category>
   <guid>https://nieobliczalne.pl/posts/ai-research.html</guid>
   <pubDate>Fri, 28 Apr 2023 22:00:00 GMT</pubDate>
@@ -6118,8 +6959,14 @@ font-style: inherit;">round</span>()</span>
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document">
-<hr>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2">
+<div id="ref-kowal_predictors_2022" class="csl-entry">
+Kowal, M., Sorokowski, P., Pisanski, K., Valentova, J. V., Varella, M. A. C., Frederick, D. A., … Zumárraga-Espinosa, M. (2022). Predictors of enhancing human physical attractiveness: <span>Data</span> from 93 countries. <em>Evolution and Human Behavior</em>, <em>43</em>(6), 455–474. <a href="https://doi.org/10.1016/j.evolhumbehav.2022.08.003">https://doi.org/10.1016/j.evolhumbehav.2022.08.003</a>
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
 <ol>
 <li id="fn1"><p>Bazy najlepiej pobrać na swój dysk z <a href="https://github.com/jakub-jedrusiak/nieobliczalne/tree/main/posts/dane/automatyzacja">repozytorium</a>.↩︎</p></li>
 <li id="fn2"><p>Którą serdecznie pozdrawiam.↩︎</p></li>
@@ -6129,13 +6976,7 @@ font-style: inherit;">round</span>()</span>
 <li id="fn6"><p>Lub wektora.↩︎</p></li>
 <li id="fn7"><p>Funkcja niżej mogłaby być zapisana równie dobrze jako <code>lapply(bazy_lista, read_csv, show_col_types = FALSE, name_repair = "unique_quiet")</code>, ale <code>map</code>, a głównie jej pochodne, mają bardziej przejrzystą i konsekwentną konwencję nazywania.↩︎</p></li>
 </ol>
-</aside>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2">
-<div id="ref-kowal_predictors_2022" class="csl-entry">
-Kowal, M., Sorokowski, P., Pisanski, K., Valentova, J. V., Varella, M. A. C., Frederick, D. A., … Zumárraga-Espinosa, M. (2022). Predictors of enhancing human physical attractiveness: <span>Data</span> from 93 countries. <em>Evolution and Human Behavior</em>, <em>43</em>(6), 455–474. <a href="https://doi.org/10.1016/j.evolhumbehav.2022.08.003">https://doi.org/10.1016/j.evolhumbehav.2022.08.003</a>
-</div>
-</div></section></div> ]]></description>
+</section></div> ]]></description>
   <category>R</category>
   <guid>https://nieobliczalne.pl/posts/automatyzacja.html</guid>
   <pubDate>Tue, 07 Mar 2023 23:00:00 GMT</pubDate>
@@ -8831,6 +9672,7 @@ font-style: inherit;">cor_mark_significant</span>(korelacje)</span></code></pre>
 background-color: null;
 font-style: inherit;">glimpse</span>(diamonds)</span></code></pre></div>
 <div class="sourceCode" style="background: #f1f3f5;">
+
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> Rows: 53,940
 <span style="color: #555555;">#&gt;</span> Columns: 10
 <span style="color: #555555;">#&gt;</span> $ <span style="font-weight: bold;">carat  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23, 0.…
@@ -9835,6 +10677,7 @@ font-style: inherit;">+</span> color <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> clarity)</span></code></pre></div>
 <div class="sourceCode" style="background: #f1f3f5;">
+
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> ANOVA Table (type II tests)
 <span style="color: #555555;">#&gt;</span> 
 <span style="color: #555555;">#&gt;</span>    Effect DFn   DFd       F         p p&lt;.05   ges
@@ -10867,8 +11710,20 @@ font-style: inherit;">eta_squared</span>()</span></code></pre></div>
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document">
-<hr>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2">
+<div id="ref-field2012" class="csl-entry">
+Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
+</div>
+<div id="ref-wickham2020" class="csl-entry">
+Wickham, H., &amp; Grolemund, G. (2020). <em>J<span>ę</span>zyk R: kompletny zestaw narz<span>ę</span>dzi dla analityków danych</em>. Gliwice: Wydawnictwo Helion.
+</div>
+<div id="ref-wilkinson_grammar_2005" class="csl-entry">
+Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>. New York: Springer-Verlag. <a href="https://doi.org/10.1007/0-387-28695-0">https://doi.org/10.1007/0-387-28695-0</a>
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
 <ol>
 <li id="fn1"><p>Drugim najpopularniejszym jest R.↩︎</p></li>
 <li id="fn2"><p>To trudno sobie wyobrazić, łatwiej zobaczyć na obrazkach. Poświęciłem temu cały podrozdział 5.8.↩︎</p></li>
@@ -10909,19 +11764,7 @@ font-style: inherit;">eta_squared</span>()</span></code></pre></div>
 <li id="fn37"><p>Scratch to bardzo przyjemne, darmowe, rysunkowo-blokowe narzędzie do ćwiczenia programowania stworzone przez naukowców z MIT. Nie jest ono specyficzne dla żadnego języka, ale może być dobrym wprowadzeniem do programowania w ogóle. Nie wymaga pisania kodu, a opiera się w całości na przeciąganiu myszką bloczków. Dzięki temu można oswoić się z różnymi ideami w programowaniu, takimi jak funkcje, zmienne itd., bez zaprzątania głowy składnią konkretnego języka.↩︎</p></li>
 <li id="fn38"><p>Należy się upwenić, że te osoby kochają nas wystarczająco, żeby być gotowymi na to poświęcenie.↩︎</p></li>
 </ol>
-</aside>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2">
-<div id="ref-field2012" class="csl-entry">
-Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
-</div>
-<div id="ref-wickham2020" class="csl-entry">
-Wickham, H., &amp; Grolemund, G. (2020). <em>J<span>ę</span>zyk R: kompletny zestaw narz<span>ę</span>dzi dla analityków danych</em>. Gliwice: Wydawnictwo Helion.
-</div>
-<div id="ref-wilkinson_grammar_2005" class="csl-entry">
-Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>. New York: Springer-Verlag. <a href="https://doi.org/10.1007/0-387-28695-0">https://doi.org/10.1007/0-387-28695-0</a>
-</div>
-</div></section></div> ]]></description>
+</section></div> ]]></description>
   <category>Statystyka</category>
   <category>R</category>
   <guid>https://nieobliczalne.pl/posts/podstawy_R.html</guid>
@@ -11741,8 +12584,23 @@ mean of x mean of y
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document">
-<hr>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2">
+<div id="ref-bem2011" class="csl-entry">
+Bem, D. J. (2011). Feeling the future: Experimental evidence for anomalous retroactive influences on cognition and affect. <em>Journal of Personality and Social Psychology</em>, <em>100</em>, 407–425. <a href="https://doi.org/10.1037/a0021524">https://doi.org/10.1037/a0021524</a>
+</div>
+<div id="ref-butcher2018" class="csl-entry">
+Butcher, J. N. M. S., &amp; Hooley, J. M. (2018). <em>Psychologia zaburze<span>ń</span></em>. Sopot: Gda<span>ń</span>skie Wydawnictwo Psychologiczne.
+</div>
+<div id="ref-engber2017" class="csl-entry">
+Engber, D. (2017). Daryl Bem proved ESP is real: Which means science is broken. <em>Slate, May</em>, <em>17</em>.
+</div>
+<div id="ref-wilkes2017" class="csl-entry">
+Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>... i sam sobie wymy<span>ś</span>l matematyk<span>ę</span></em>. Warszawa: Prószy<span>ń</span>ski Media.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
 <ol>
 <li id="fn1"><p>Zdaję sobie sprawę, że „pewność” i jej zmiany pasują bardziej do analiz bayesowskich niż testów, ale tego typu przykłady znacznie łatwiej jest zrozumieć niż bardziej abstrakcyjny `dobór prób z populacji. Do większej abstrakcji przejdę później.↩︎</p></li>
 <li id="fn2"><p>Akurat w przypadku inteligencji znamy prawdziwą średnią (<img src="https://latex.codecogs.com/png.latex?M%20=%20100">) i odchylenie standardowe (<img src="https://latex.codecogs.com/png.latex?SD%20=%2015">), ale w większości przypadków tego szczęścia nie mamy. Na szczęście mieć nie musimy. Są to jednak pewne szczegóły dotyczące działania testów <em>t</em>, w które nie ma teraz sensu wchodzić. Teraz próbujemy dostać ogólny obraz, a potem wnikać w to, jak działają konkretne testy.↩︎</p></li>
@@ -11762,22 +12620,7 @@ mean of x mean of y
 <li id="fn14"><p>Dlatego osobiście wolę nazwy „błąd fałszywego alarmu” (myślałem, że coś było, ale tak naprawdę tego nie było) i „błąd chybienia” (coś naprawdę było, ale to przegapiłem).↩︎</p></li>
 <li id="fn15"><p>Nie dla wszystkich badań to będzie prawda. W psychologii, jeśli coś wpływa na zachowanie absolutnie minimalnie, to równie dobrze możemy to zignorować, bo <em>de facto</em> nie ma znaczenia. Ale na przykład w fizyce minimalny wpływ może być kluczowy, jeśli ma udowodnić, że jakaś siła rzeczywiście istnieje. Czasem też zjawiska bardzo rzadkie są cenne, bo udowadniają nam, że coś jest w ogóle możliwe.↩︎</p></li>
 </ol>
-</aside>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2">
-<div id="ref-bem2011" class="csl-entry">
-Bem, D. J. (2011). Feeling the future: Experimental evidence for anomalous retroactive influences on cognition and affect. <em>Journal of Personality and Social Psychology</em>, <em>100</em>, 407–425. <a href="https://doi.org/10.1037/a0021524">https://doi.org/10.1037/a0021524</a>
-</div>
-<div id="ref-butcher2018" class="csl-entry">
-Butcher, J. N. M. S., &amp; Hooley, J. M. (2018). <em>Psychologia zaburze<span>ń</span></em>. Sopot: Gda<span>ń</span>skie Wydawnictwo Psychologiczne.
-</div>
-<div id="ref-engber2017" class="csl-entry">
-Engber, D. (2017). Daryl Bem proved ESP is real: Which means science is broken. <em>Slate, May</em>, <em>17</em>.
-</div>
-<div id="ref-wilkes2017" class="csl-entry">
-Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>... i sam sobie wymy<span>ś</span>l matematyk<span>ę</span></em>. Warszawa: Prószy<span>ń</span>ski Media.
-</div>
-</div></section></div> ]]></description>
+</section></div> ]]></description>
   <category>Statystyka</category>
   <guid>https://nieobliczalne.pl/posts/p-value.html</guid>
   <pubDate>Tue, 20 Sep 2022 22:00:00 GMT</pubDate>
@@ -12181,8 +13024,17 @@ Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>..
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document">
-<hr>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2">
+<div id="ref-field2012" class="csl-entry">
+Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
+</div>
+<div id="ref-plomin2001" class="csl-entry">
+Plomin, R., DeFries, J., McClearn, G., &amp; McGuffin, P. (2001). <em>Genetyka zachowania</em>. Warszawa: Wydawnictwo Naukowe PWN.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
 <ol>
 <li id="fn1"><p>Wszystko, co napiszę dalej o średniej, mogłoby równie dobrze być pokazane na innym wykresie. To, że na oś poziomą wrzuciłem wielkość pająka wynika tylko ze względów estetycznych. Mógłbym te punkty rozrzucić losowo. Zauważ, że aż do podrozdziału <em>Średnia to nie wszystko</em> nie będę używał wielkości pająka w obliczeniach.↩︎</p></li>
 <li id="fn2"><p>Uważny Czytelnik może zwrócić uwagę, że <em>de facto</em> się powtarzam. Skoro średnia <em>jest</em> modelem, to i suma odchyleń, i średnie odchylenie mówią nam o tym samym – ile błędu jest w modelu. Jest to prawda, bo informacja jest ta sama ale nieco inna perspektywa. Można porównać do to ocen – możemy policzyć sumę wszystkich swoich ocen, a możemy policzyć swoją średnią ocen. Suma ocen nie wydaje się szczególnie potrzebną informacją, oceny sumujemy zazwyczaj po to, by policzyć średnią, ale – jak się przekonamy – gdy mówimy o wariancji sama suma też może być użyteczna.↩︎</p></li>
@@ -12197,16 +13049,7 @@ Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>..
 <li id="fn10"><p>Gdy Bill Gates wchodzi do pubu, średnia pensja (i jej odchylenie standardowe!) osób w pubie nagle dramatycznie skacze, mimo że nikt ze zgromadzonych nie czuje się bogatszy. Niemniej sam jeden Bill Gates nie miałby tak wielkiego wpływu na średnią pensję wszystkich mieszkańców Polski. Tak samo jedna piątka nie zmieni za bardzo średniej z 20 ocen, ale może całkowicie zmienić średnią z 3 ocen. Modele oparte o dużą liczbę obserwacji są więc stabilniejsze.↩︎</p></li>
 <li id="fn11"><p>Tak naprawdę potrzeba nam sporo więcej niż 1, żeby uznać model na wiarygodny. Statystyka <img src="https://latex.codecogs.com/png.latex?F"> musi <em>istotnie</em> odchylać się od 1. Musimy mieć co najmniej 95% pewności, że <img src="https://latex.codecogs.com/png.latex?F"> jest większe od 1. Ale prawdopodobieństwo trudno się liczy, zależy od liczby obserwacji i w ogóle bez sensu się tym zajmować, bo program statystyczny nam to pokaże.↩︎</p></li>
 </ol>
-</aside>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2">
-<div id="ref-field2012" class="csl-entry">
-Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
-</div>
-<div id="ref-plomin2001" class="csl-entry">
-Plomin, R., DeFries, J., McClearn, G., &amp; McGuffin, P. (2001). <em>Genetyka zachowania</em>. Warszawa: Wydawnictwo Naukowe PWN.
-</div>
-</div></section></div> ]]></description>
+</section></div> ]]></description>
   <category>Statystyka</category>
   <guid>https://nieobliczalne.pl/posts/procent-wariancji.html</guid>
   <pubDate>Wed, 18 May 2022 22:00:00 GMT</pubDate>

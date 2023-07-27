@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.124">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -105,11 +105,6 @@ div.csl-indent {
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
   "language": {
     "search-no-results-text": "Brak wyników",
     "search-matching-documents-text": "dopasowane dokumenty",
@@ -144,8 +139,6 @@ cookieconsent.run({
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
-  ,
-"language":"pl"
   });
 });
 </script> 
@@ -176,7 +169,7 @@ cookieconsent.run({
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
+      <div class="navbar-brand-container">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Nieobliczalne</span>
     </a>
@@ -211,10 +204,10 @@ cookieconsent.run({
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
 </div>
+          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -311,6 +304,7 @@ cookieconsent.run({
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/podstawy_R.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
     <div class="quarto-margin-footer"><div class="margin-footer-item">
+
 <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
     <style type="text/css">
     /* LOADER */
@@ -1425,7 +1419,7 @@ cookieconsent.run({
 <section id="sec-loading" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Ładowanie danych z <code>readr</code></h1>
 <p>Jeśli chcemy cokolwiek liczyć, musimy mieć na czym liczyć. R ma wiele sposobów ładowania danych, które w każdym podręczniku zajmują cały rozdział. R poradzi sobie z prawie każdym formatem danych, a także potrafi ładować je bezpośrednio z serwerów (dla przykładu pakiet <code>googlesheets4</code> pozwala ładować pliki z Google Sheets bez pobierania ich na dysk albo <code>QualtRics</code> ułatwiający importowanie plików z danymi ankietowymi z Qualtrics).</p>
-<p>Wszystkie bazy, których używam w tym tekście, są dostępne w repozytorium na GitHubie. Można wejść w <a href="https://github.com/jakub-jedrusiak/jakub-jedrusiak.github.io/tree/main/statystyka/dane/podstawy-R">ten link</a>, wybrać pożądany plik i albo pobrać go na własny dysk, albo zamiast ścieżki do pliku użyć linku w cudzysłowie. By uzyskać właściwy link, należy kliknąć <code>raw</code> tuż nad treścią pliku. Takie linki można wklejać w komendy czytające dane zamiast ścieżek. Przykład linku, jak i tego, jak używać ich z funkcjami typu <code>read_csv</code> podaję w podrozdziale <a href="#sec-summarise" class="quarto-xref">5.7</a> o grupowaniu.</p>
+<p>Wszystkie bazy, których używam w tym tekście, są dostępne w repozytorium na GitHubie. Można wejść w <a href="https://github.com/jakub-jedrusiak/jakub-jedrusiak.github.io/tree/main/statystyka/dane/podstawy-R">ten link</a>, wybrać pożądany plik i albo pobrać go na własny dysk, albo zamiast ścieżki do pliku użyć linku w cudzysłowie. By uzyskać właściwy link, należy kliknąć <code>raw</code> tuż nad treścią pliku. Takie linki można wklejać w komendy czytające dane zamiast ścieżek. Przykład linku, jak i tego, jak używać ich z funkcjami typu <code>read_csv</code> podaję w podrozdziale <a href="#sec-summarise">5.7</a> o grupowaniu.</p>
 <p>Podstawowe pakiety do ładowania danych do <code>readr</code> i <code>readxl</code> dla plików Excela. Na początek nie trzeba znać składni funkcji ładujących dane, bo RStudio dysponuje przyjemnym graficznym narzędziem do ładowania danych. Jeśli w prawym dolnym oknie, w zakładce Files, klikniemy na plik zawierający dane, dostaniemy do dyspozycji opcję Import Dataset… Po jej wybraniu otworzy nam się okno z podglądem danych i kilkoma opcjami do dostosowania, m.in. czy jakichś wierszy nie pominąć albo z którego arkusza pobrać dane. W plikach .csv czasem musimy też wybrać rodzaj separatora i znaku dziesiętnego (opcja Locale). W polskich plikach z danymi separatorem jest zazwyczaj średnik, a znakiem dziesiętnym przecinek (125 421,55), podczas gdy w angielskich danych będą to odpowiednio przecinek i kropka (125,421.55). Jeśli nie ustawimy znaku dziesiętnego, R może potraktować liczby z przecinkiem jako tekst. Poza tym możemy kliknąć w każdy nagłówek kolumny i wybrać typ danych, ale to niebezpieczna opcja, lepiej tego nie robić. Dane powinny być czyste, tj. kolumny liczbowe powinny zawierać same liczby. Jeśli dane nie są czyste (a zazwyczaj nie są), możemy je wyczyścić potem.</p>
 <p>Możemy kliknąć Import, by dopełnić dzieła, ale jeśli tworzymy skrypt, będzie nas interesowała komenda, jaką RStudio dla nas przygotowało w czarnym okienku w prawym dolnym rogu. W pierwszej linijce RStudio proponuje załadowanie odpowiedniego pakietu. Warto to wpisać na początku skryptu, w miejscu, gdzie załadowaliśmy <code>tidyverse</code>. Jeśli proponowanym pakietem jest <code>readr</code>, nie musimy ładować go oddzielnie, bo ładując pakiet <code>tidyverse</code> załadowaliśmy od razu <code>readr</code>. Druga linijka do właściwe ładowanie danych. Widzimy znaną nam już składnię <code>nazwa &lt;-</code>. Nasze dane potrzebują jakiejś nazwy, za pomocą której będziemy się do niej odnosić. Może być to <code>df</code>, <code>dane</code>, <code>warunek_kontrolny</code> czy cokolwiek innego. Za strzałką mamy funkcję odczytującą dane. Najpewniej będzie to <code>read_csv()</code> albo <code>read_excel()</code>. Do tych funkcji wrzucamy jako pierwszy argument lokalizację naszego pliku z danymi w cudzysłowie (‘pojedynczym’ lub “podwójnym”). Ponieważ nam komendę przygotowało RStudio, możemy ją po prostu skopiować i wkleić do naszego skryptu, zmieniając tylko nazwę zmiennej. Co robią poszczególne argumenty, możemy sprawdzić w dokumentacji. Jeśli dane ładuje <code>readr</code>, wykonanie takiej komendy spowoduje ukazanie się informacji zwrotnej – jakie kolumny załadowano i jaki mają typ. Dla przykładu:</p>
 <div class="cell">
@@ -1491,7 +1485,7 @@ cookieconsent.run({
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Dobra, co to jest <code>%&gt;%</code>? Nie było o tym mowy. Owszem, nie było, ale to bardzo wygodna rzecz. Nazywa się <em>pipe</em> (tłumaczone jako <em>potok</em>, bo <em>rura</em> nieładnie brzmi). Mówi mniej więcej „wrzuć to do tego”. W naszym przykładzie <code>df %&gt;% filter()</code> oznacza „wrzuć bazę danych <code>df</code> do funkcji <code>filter</code>“, czyli dokładnie to samo, co <code>filter(df)</code>. Po co więc w ogóle bawić się w potoki? Bo pozwalają nam wygodnie łączyć komendy w ciągi, jak zobaczymy za chwilę. Do wstawiania potoków służy nam wygodny skrót klawiszowy Ctrl+Shift+M, który jest chyba najczęściej stosowanym skrótem przy pisaniu dowolnego programu.</p>
-<p>Druga kwestia to podział na linijki. Rozbiłem tę komendę na dwie linijki dla czytelności, ale spokojnie mógłbym zapisać to w jednej linijce. Warto jednak pisać kod tak, żeby dało się go potem łatwo czytać. RStudio podpowiada nam też wcięcia, żebyśmy widzieli, że te linijki tworzą jedną całość. W podrozdziale <a href="#sec-formatting" class="quarto-xref">9</a> powiem więcej o formatowaniu kodu.</p>
+<p>Druga kwestia to podział na linijki. Rozbiłem tę komendę na dwie linijki dla czytelności, ale spokojnie mógłbym zapisać to w jednej linijce. Warto jednak pisać kod tak, żeby dało się go potem łatwo czytać. RStudio podpowiada nam też wcięcia, żebyśmy widzieli, że te linijki tworzą jedną całość. W podrozdziale <a href="#sec-formatting">9</a> powiem więcej o formatowaniu kodu.</p>
 <p>Ta komenda oznacza „weź zmienną <code>df</code>, wrzuć ją do komendy <code>filter</code> i zostaw tylko te przypadki, w których w kolumnie <code>Płeć</code> jest wartość <code>"Mężczyzna"</code>.” Nazwy kolumn piszemy bez cudzysłowu, ale jeśli wartość komórki to tekst, to zawsze piszemy go w cudzysłowie. Inaczej R pomyśli, że podajemy mu jakąś zmienną, z której ma dopiero odczytać, co ma być w kolumnie <code>Płeć</code>. Nam chodzi o dosłowny tekst <code>"Mężczyzna"</code>.</p>
 <p>Ostatecznie zostaje operator logiczny. Dlaczego piszę <code>==</code> zamiast <code>=</code>? W programowaniu znak <code>=</code> służy do przypisywania wartości do zmiennych. Zapis <code>a = 5</code> oznacza „niech <code>a</code> ma wartość 5”. Sprawdzenie <em>czy</em> <code>a</code> ma wartość 5 odbywa się poprzez komendę <code>a == 5</code>. Konsola wyrzuci nam wtedy <code>TRUE</code>, <code>FALSE</code> albo <code>BŁĄD: nie znaleziono obiektu 'a'</code>. Kilka innych operatorów logicznych prezentuje tabela.</p>
 <table class="table">
@@ -1624,7 +1618,7 @@ cookieconsent.run({
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"H_"</span>), parse_number)</span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery. Gdy używam zestaw, mam na myśli, że trzeba je wpakować w funkcję <code>c()</code> (od <em>concatenate</em>), np. <code>c(1, 8, 10:16)</code>. Możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu <code>tidy-select</code>. Tutaj akurat użyłem <code>starts_with("H_")</code>, żeby powiedzieć <code>across</code>, że chodzi mi o wszystkie kolumny, których nazwy zaczynają się od <code>H_</code>. Te same funkcje możemy wykorzystywać w funkcji <code>select</code> przy wybieraniu kolumn (por. <a href="#sec-select" class="quarto-xref">Sekcja&nbsp;5.1.2</a>). Kilka innych tego typu funkcji umieściłem w tabeli.</p>
+<p>Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery. Gdy używam zestaw, mam na myśli, że trzeba je wpakować w funkcję <code>c()</code> (od <em>concatenate</em>), np. <code>c(1, 8, 10:16)</code>. Możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu <code>tidy-select</code>. Tutaj akurat użyłem <code>starts_with("H_")</code>, żeby powiedzieć <code>across</code>, że chodzi mi o wszystkie kolumny, których nazwy zaczynają się od <code>H_</code>. Te same funkcje możemy wykorzystywać w funkcji <code>select</code> przy wybieraniu kolumn (por. <a href="#sec-select">Sekcja&nbsp;5.1.2</a>). Kilka innych tego typu funkcji umieściłem w tabeli.</p>
 <table class="table">
 <caption>Funkcje pomocnicze do <code>select</code> i <code>across</code>.</caption>
 <colgroup>
@@ -1814,7 +1808,7 @@ cookieconsent.run({
 <span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_suma =</span> H_1 <span class="sc">+</span> H_2 <span class="sc">+</span> H_3 <span class="sc">+</span> H_4 <span class="sc">+</span> H_5 <span class="sc">+</span> H_6 <span class="sc">+</span> H_7 <span class="sc">+</span> H_8 <span class="sc">+</span> H_9 <span class="sc">+</span> H_10</span>
 <span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Jak można się domyślić, istnieje sposób niewymagający tyle pisania, które w skomplikowanych bazach i długich kwestionariuszach naprawdę może być długotrwałe i uciążliwe. <code>tidyverse</code> ratuje nas tutaj funkcją <code>pick</code><a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a>, a bazowy R dokłada funkcję <code>rowSums</code> (i <code>rowMeans</code>). Wystarczy, że do funkcji <code>rowSums</code> wrzucimy, które kolumny chcemy zsumować, wskazując je właśnie za pomocą <code>pick</code> i ewentualnie funkcji pomocniczych, tak jak robiliśmy w <code>select</code> (por. <a href="#sec-select" class="quarto-xref">5.1.2</a>) i <code>across</code> (por. <a href="#sec-across" class="quarto-xref">5.3.1</a>).</p>
+<p>Jak można się domyślić, istnieje sposób niewymagający tyle pisania, które w skomplikowanych bazach i długich kwestionariuszach naprawdę może być długotrwałe i uciążliwe. <code>tidyverse</code> ratuje nas tutaj funkcją <code>pick</code><a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a>, a bazowy R dokłada funkcję <code>rowSums</code> (i <code>rowMeans</code>). Wystarczy, że do funkcji <code>rowSums</code> wrzucimy, które kolumny chcemy zsumować, wskazując je właśnie za pomocą <code>pick</code> i ewentualnie funkcji pomocniczych, tak jak robiliśmy w <code>select</code> (por. <a href="#sec-select">5.1.2</a>) i <code>across</code> (por. <a href="#sec-across">5.3.1</a>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Płeć <span class="sc">==</span> <span class="st">"Mężczyzna"</span>) <span class="sc">%&gt;%</span></span>
@@ -1857,7 +1851,7 @@ cookieconsent.run({
 <span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>W tym wypadku <code>case_when</code>, idąc wiersz po wierszu, sprawdza, czy w kolumnie <code>wyksztalcenie</code> nie znajduje się wartość <code>"Średnie"</code>. Jeśli tak, to w tworzonej właśnie kolumnie <code>wyksztalcenie_grupa</code> wstawia wartość <code>"Ponadpodstawowe"</code> i przechodzi do kolejnego wiersza. Jeśli wykształcenie nie jest średnie, to sprawdza, czy jest zawodowe i w razie czego również wstawia <code>"Ponadpodstawowe"</code>. Jeśli nie jest ani średnie, ani zawodowe, to wstawia to, co akurat jest w kolumnie <code>wyksztalcenie</code>, czyli dla osób z wykształceniem podstawowym wstawia <code>"Podstawowe"</code>, a dla osób z wykształceniem wyższym <code>"Wyższe"</code><a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a>. W ten sposób z 4 kategorii wykształcenia zrobiły nam się 3. W podobny sposób przekodowywalibyśmy klucz w ankiecie na liczby, np. pisząc <code>H_1 == "Zdecydowanie się zgadzam" ~ 6</code>. Możemy ułatwić sobie to przekodowywanie za pomocą <code>questionr</code>, który opisuję w podrozdziale <a href="#sec-questionr" class="quarto-xref">5.5.1.1.1</a>.</p>
+<p>W tym wypadku <code>case_when</code>, idąc wiersz po wierszu, sprawdza, czy w kolumnie <code>wyksztalcenie</code> nie znajduje się wartość <code>"Średnie"</code>. Jeśli tak, to w tworzonej właśnie kolumnie <code>wyksztalcenie_grupa</code> wstawia wartość <code>"Ponadpodstawowe"</code> i przechodzi do kolejnego wiersza. Jeśli wykształcenie nie jest średnie, to sprawdza, czy jest zawodowe i w razie czego również wstawia <code>"Ponadpodstawowe"</code>. Jeśli nie jest ani średnie, ani zawodowe, to wstawia to, co akurat jest w kolumnie <code>wyksztalcenie</code>, czyli dla osób z wykształceniem podstawowym wstawia <code>"Podstawowe"</code>, a dla osób z wykształceniem wyższym <code>"Wyższe"</code><a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a>. W ten sposób z 4 kategorii wykształcenia zrobiły nam się 3. W podobny sposób przekodowywalibyśmy klucz w ankiecie na liczby, np. pisząc <code>H_1 == "Zdecydowanie się zgadzam" ~ 6</code>. Możemy ułatwić sobie to przekodowywanie za pomocą <code>questionr</code>, który opisuję w podrozdziale <a href="#sec-questionr">5.5.1.1.1</a>.</p>
 </section>
 </section>
 <section id="sortowanie-i-kolejność-kolumn" class="level2" data-number="5.5">
@@ -1895,7 +1889,7 @@ cookieconsent.run({
 <p>Komendę <code>factor</code> dla czytelności rozbiłem tutaj na trzy linijki, ale – oczywiście – można ją całą zapisać w jednej. Po pierwsze wskazałem, że na factor przerobiona ma być kolumna <code>wyksztalcenie</code>. Po drugie wskazałem, jakie wykształcenie może mieć wartości, zbierając je w jeden zestaw funkcją <code>c</code> i wrzucając do argumentu <code>levels</code>. Na koniec poinformowałem R, że w kolejność jest tutaj ważna, dopisując <code>ordered = TRUE</code>. Jeśli tak przerobione dane posortujemy, zobaczymy, że baza rzeczywiście zaczyna się od wykształcenia wyższego.</p>
 <section id="sec-questionr" class="level5" data-number="5.5.1.1.1">
 <h5 data-number="5.5.1.1.1" class="anchored" data-anchor-id="sec-questionr"><span class="header-section-number">5.5.1.1.1</span> <code>questionr</code></h5>
-<p>Przy okazji czynników chciałbym wspomnieć o pierwszym dodatku (<em>addin</em>) do RStudio, jaki może nam się przydać. Dodatki przyjmują różną formę, ale tutaj omówię dwa, które są graficznymi narzędziami pomagającymi nam pisać kod. Można mieć do nich mieszany stosunek, ale póki umiemy też napisać kod ręcznie (lub chociaż wiemy, jak skorzystać z dokumentacji), to mogą być dużą pomocą, zwłaszcza na początku przygody z R. Pierwszym takim dodatkiem jest <code>questionr</code>, który pozwala nam stworzyć komendy związane z czynnikami (i kategoryzować dane ilościowe, co ręcznie robiliśmy w podrozdziale <a href="#sec-casewhen" class="quarto-xref">5.4.2</a>).</p>
+<p>Przy okazji czynników chciałbym wspomnieć o pierwszym dodatku (<em>addin</em>) do RStudio, jaki może nam się przydać. Dodatki przyjmują różną formę, ale tutaj omówię dwa, które są graficznymi narzędziami pomagającymi nam pisać kod. Można mieć do nich mieszany stosunek, ale póki umiemy też napisać kod ręcznie (lub chociaż wiemy, jak skorzystać z dokumentacji), to mogą być dużą pomocą, zwłaszcza na początku przygody z R. Pierwszym takim dodatkiem jest <code>questionr</code>, który pozwala nam stworzyć komendy związane z czynnikami (i kategoryzować dane ilościowe, co ręcznie robiliśmy w podrozdziale <a href="#sec-casewhen">5.4.2</a>).</p>
 <p><code>questionr</code> instalujemy jak każdy inny pakiet (<code>install.packages("questionr")</code>). Od tego momentu (lub po zresetowaniu RStudio) w menu Addins na górnej belce znajdziemy trzy nowe opcje. Ta interesująca nas to Level ordering. Na początku zobaczymy okienko, w którym możemy wybrać kilka rzeczy. W jakiej zmiennej chcemy zmienić kolejność, w jakiej kolumnie i z jakiego pakietu wziąć funkcję do zmiany kolejności (domyślnie jest to <code>fct_relevel</code> z <code>forcats</code>). W drugiej zakładce możemy graficznie ustawić taką kolejność, jaką chcemy. W ostatniej zakładce otrzymujemy gotowy kod. <code>Questionr</code> nie robi nic samodzielnie, ten kod trzeba jeszcze wkleić w skrypt. Z jednym kruczkiem. Nam chodzi o samą komendę <code>fct_relevel</code>, bez pierwszej linijki, która służy do zapisania zmian. Ponieważ my tworzymy <code>mutate</code>, to wystarczy, że skopiujemy nasze gotowe <code>fct_relevel()</code> do funkcji <code>mutate</code>, dopisując nazwę kolumny i pierwszy argument. Może być to użyteczne, jeśli mamy dużo czynników lub dużo poziomów w czynniku. Ostatecznie nasza komenda <code>mutate</code> z użyciem <code>questionr</code> wyglądałaby tak:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
@@ -1925,7 +1919,7 @@ cookieconsent.run({
 </section>
 <section id="sec-relocate" class="level3" data-number="5.5.2">
 <h3 data-number="5.5.2" class="anchored" data-anchor-id="sec-relocate"><span class="header-section-number">5.5.2</span> Kolejność kolumn z <code>dplyr::relocate</code></h3>
-<p>Możemy chcieć mieć nasze kolumny w określonej kolejności. Są zasadniczo dwa sposoby zmieniania kolejności kolumn. Jest funkcja <code>relocate</code>, która służy raczej przestawianiu pojedynczych kolumn lub ich niewielkiej liczby. Jeśli chcemy od nowa określić kolejność kolumn, możemy wykorzystać w tym celu znaną nam już funkcję <code>select</code> (por. <a href="#sec-select" class="quarto-xref">5.1.2</a>). Załóżmy, że chcielibyśmy przestawić kolumnę <code>H_suma</code> przed kolumny z cząstkowymi wynikami.</p>
+<p>Możemy chcieć mieć nasze kolumny w określonej kolejności. Są zasadniczo dwa sposoby zmieniania kolejności kolumn. Jest funkcja <code>relocate</code>, która służy raczej przestawianiu pojedynczych kolumn lub ich niewielkiej liczby. Jeśli chcemy od nowa określić kolejność kolumn, możemy wykorzystać w tym celu znaną nam już funkcję <code>select</code> (por. <a href="#sec-select">5.1.2</a>). Załóżmy, że chcielibyśmy przestawić kolumnę <code>H_suma</code> przed kolumny z cząstkowymi wynikami.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># z użyciem relocate</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
@@ -2015,7 +2009,7 @@ cookieconsent.run({
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<p>Jak widzimy, dostaliśmy tabelkę z wykształceniem i wskazanymi statystykami. Funkcja <code>n</code> zliczyła nam przypadki osób z poszczególnym wykształceniem, <code>mean</code> policzyła średnią, <code>sd</code> odchylenie standardowe, a <code>median</code> medianę. <code>V</code> to tzw. współczynnik zmienności. Co to jest, nie jest teraz szczególnie ważne. Policzyłem to tutaj, żeby pokazać, że w obliczeniach możemy też wpisywać niestandardowe operacje (jak dzielenie) bez żadnych strasznych funkcji anonimowych, a także że możemy wziąć wartości z innych kolumn jako argumenty do naszych przekształceń. Tutaj <code>V</code> to odchylenie standardowe średniej homofobii (<code>H_SD</code>) podzielone przez samą średnią (<code>H_M</code>). Każdą kolumnę mogliśmy nazwać wedle życzenia. Jak dowiemy się w podrozdziale <a href="#sec-get_summary_stats" class="quarto-xref">6.1</a>, istnieją funkcje, które najpopularniejsze zastawy statystyk opisowych liczą za nas.</p>
+<p>Jak widzimy, dostaliśmy tabelkę z wykształceniem i wskazanymi statystykami. Funkcja <code>n</code> zliczyła nam przypadki osób z poszczególnym wykształceniem, <code>mean</code> policzyła średnią, <code>sd</code> odchylenie standardowe, a <code>median</code> medianę. <code>V</code> to tzw. współczynnik zmienności. Co to jest, nie jest teraz szczególnie ważne. Policzyłem to tutaj, żeby pokazać, że w obliczeniach możemy też wpisywać niestandardowe operacje (jak dzielenie) bez żadnych strasznych funkcji anonimowych, a także że możemy wziąć wartości z innych kolumn jako argumenty do naszych przekształceń. Tutaj <code>V</code> to odchylenie standardowe średniej homofobii (<code>H_SD</code>) podzielone przez samą średnią (<code>H_M</code>). Każdą kolumnę mogliśmy nazwać wedle życzenia. Jak dowiemy się w podrozdziale <a href="#sec-get_summary_stats">6.1</a>, istnieją funkcje, które najpopularniejsze zastawy statystyk opisowych liczą za nas.</p>
 <p>Tak robiliśmy to zawsze, jednak <code>dplyr</code> 1.1.0. wprowadził inny sposób grupowania. Jeśli nie chcemy zapisywać grup w naszej bazie danych na później (czyli w większości przypadków), nie musimy w ogóle używać funkcji <code>group_by</code>. Zamiast tego <code>summarise</code> dostał argument <code>.by</code>, za pomocą którego możemy wskazać grupy jednorazowo, tylko na potrzeby tego jednego podsumowania. Więcej na temat argumentu <code>.by</code> można znaleźć w dokumentacji. Poniżej przykład z innego zbioru danych, w którym pojawia się średnia liczba krzyków w piosence, w zależności od typu piosenki i jej autora <span class="citation" data-cites="field2012">(<a href="#ref-field2012" role="doc-biblioref">Field, Miles, &amp; Field, 2012</a>)</span>. Przy okazji pokazuję też, że można grupować na podstawie wielu zmiennych naraz.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># załadowanie danych z sieci</span></span>
@@ -2132,7 +2126,7 @@ cookieconsent.run({
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<p>Nawet częściej, niż do grupowania po pytaniach, wykorzystujemy format długi do wykresów. Jak się przekonamy dalej (w podrozdziale <a href="#sec-ggplot" class="quarto-xref">7</a>), w gramatyce grafik (<em>The Grammar of Graphics</em>) do jednego obiektu na wykresie możemy przypisać tylko jedną kolumnę. Jeśli więc chcemy zrobić wykres słupkowy np. wyników <em>przed</em> i <em>po</em>, to do osi X przypiszemy kolumnę z etykietami, a do osi Y kolumnę z wynikami. Nie da się więc sensownie zrobić wykresu, jeśli wyniki <em>przed</em> i <em>po</em> mamy w osobnych kolumnach.</p>
+<p>Nawet częściej, niż do grupowania po pytaniach, wykorzystujemy format długi do wykresów. Jak się przekonamy dalej (w podrozdziale <a href="#sec-ggplot">7</a>), w gramatyce grafik (<em>The Grammar of Graphics</em>) do jednego obiektu na wykresie możemy przypisać tylko jedną kolumnę. Jeśli więc chcemy zrobić wykres słupkowy np. wyników <em>przed</em> i <em>po</em>, to do osi X przypiszemy kolumnę z etykietami, a do osi Y kolumnę z wynikami. Nie da się więc sensownie zrobić wykresu, jeśli wyniki <em>przed</em> i <em>po</em> mamy w osobnych kolumnach.</p>
 <p>Omówmy więc funkcję, której użyłem do zmiany formatu. Kiedyś robiło się to skomplikowanymi funkcjami <code>melt</code> i <code>cast</code>, które często można znaleźć w innych językach programowania. Dziś w R, na szczęście, mamy intuicyjne funkcje <code>pivot_wider</code> i <code>pivot_longer</code>. Tej pierwszej używamy zmieniając format na szeroki, tą drugą zmieniamy format na długi. Na przykładzie powyżej można stwierdzić, że <code>pivot_longer</code> przyjmuje trzy argumenty. Pierwszy to zbiór kolumn, do jakich chcemy tę funkcję zastosować, jakie chcemy zwinąć. Można tu skorzystać z funkcji pomocniczych typu <code>starts_with()</code> czy <code>everything()</code>. Kolejne dwa argumenty funkcji <code>pivot_longer</code> to <code>names_to</code> i <code>values_to</code>. Są to nazwy kolumn, do których mają trafić, jak nazwa wskazuje, nazwy i wartości z naszych obecnych kolumn. W naszym przykładzie etykiety <code>H_1</code>, <code>H_2</code> itd. trafiły do kolumny <code>pytanie</code>, zaś same odpowiedzi na te pytania do kolumny <code>ocena</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="sc">%&gt;%</span></span>
@@ -2186,7 +2180,7 @@ cookieconsent.run({
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<p>Pierwsza rzecz, która może zwrócić naszą uwagę, to znacznie mniejsza liczba osób badanych przy reteście. Jest to naturalne, jako że wiele osób, mimo wcześniejszych deklaracji, nie wypełnia naszego testu po raz drugi. Widzimy też, że każdy wiersz posiada jakiegoś rodzaju kolumnę z unikatowym identyfikatorem osoby badanej. W języku relacyjnych baz danych takie unikatowe kolumny określa się jako <code>PRIMARY KEY</code>. W bazie danych z pierwszego testu kolumna ta nosi nazwę <code>ID</code>, a w bazie danych z retestu nazywa się ona <code>Subject</code>. Od razu wychodzi na jaw, że identyfikatory są spreparowane, bo nikt się nie pomylił, nie robił dopisków ani nie zdecydował się z jakiegoś powodu NaGlE pIsAć TaK. Moja praktyczna porada jest taka, żeby przed łączeniem baz danych zastosować na kolumnach z id funkcje <code>str_to_lower</code> i <code>str_trim</code>, które odpowiednio zmienią pisownię na same małe litery i usuną ewentualne spacje na początku i na końcu id. Ewentualnie można wykorzystać <code>str_replace_all</code> do usunięcia wszystkich spacji. Resztę&nbsp;identyfikatorów można poprawić ręcznie funkcją <code>case_when</code> (patrz <a href="#sec-casewhen" class="quarto-xref">5.4.2</a>).</p>
+<p>Pierwsza rzecz, która może zwrócić naszą uwagę, to znacznie mniejsza liczba osób badanych przy reteście. Jest to naturalne, jako że wiele osób, mimo wcześniejszych deklaracji, nie wypełnia naszego testu po raz drugi. Widzimy też, że każdy wiersz posiada jakiegoś rodzaju kolumnę z unikatowym identyfikatorem osoby badanej. W języku relacyjnych baz danych takie unikatowe kolumny określa się jako <code>PRIMARY KEY</code>. W bazie danych z pierwszego testu kolumna ta nosi nazwę <code>ID</code>, a w bazie danych z retestu nazywa się ona <code>Subject</code>. Od razu wychodzi na jaw, że identyfikatory są spreparowane, bo nikt się nie pomylił, nie robił dopisków ani nie zdecydował się z jakiegoś powodu NaGlE pIsAć TaK. Moja praktyczna porada jest taka, żeby przed łączeniem baz danych zastosować na kolumnach z id funkcje <code>str_to_lower</code> i <code>str_trim</code>, które odpowiednio zmienią pisownię na same małe litery i usuną ewentualne spacje na początku i na końcu id. Ewentualnie można wykorzystać <code>str_replace_all</code> do usunięcia wszystkich spacji. Resztę&nbsp;identyfikatorów można poprawić ręcznie funkcją <code>case_when</code> (patrz <a href="#sec-casewhen">5.4.2</a>).</p>
 <p>Żeby połączyć nasze bazy, musimy najpierw zdecydować, jak chcemy to zrobić. Możemy albo przyłączyć wyniki z retestu do bazy z testem, albo przyłączyć wyniki z testu do bazy z retestem. Jest to o tyle istotne, że jeśli przyłączymy retest do testu, to będziemy mieli puste wartości u tych osób, które nie wypełniły retestu. Jeśli zrobimy odwrotnie, to z założenia każda osoba, która wypełniła retest, wcześniej wypełniła test, a więc figuruje w pierwotnej bazie. W praktyce bywa różnie. Na przykład ludzie kłamią, że wypełnili test, a jak dostaną link do retestu, to myślą, że w takim razie chociaż to wypełnią. Tak czy inaczej, ta decyzja determinuje typ złączenia, jaki wybierzemy. Najbardziej powszechnym typem jest <code>LEFT JOIN</code>, który do każdego wiersza jednej bazy (pisanej jako pierwszej, czyli po lewej) przypisuje pasujący wiersz drugiej bazy (pisanej jako drugiej, czyli po prawej). Jeśli jakiś wiersz w lewej bazie nie ma odpowiednika w prawej bazie, otrzymujemy puste wartości. Jeśli jakiś wiersz w bazie po prawej nie został przypisany do żadnego wiersza po lewej, nie jesteśmy o tym informowani. Więcej o różnych typach złączeń (np. pozwalających uzyskać wszystkie możliwe kombinacje wierszy) można przeczytać i zobaczyć na obrazkach <a href="https://dataschool.com/how-to-teach-people-sql/sql-join-types-explained-visually/">na przykład tutaj</a>.</p>
 <p>Ja przyłączę retest do bazy z wynikami pierwszego testu. Widzę jednak dwa problemy, które będę musiał rozwiązać. Po pierwsze, kolumna z identyfikatorem osoby badanej nazywa się inaczej w obu bazach. Po drugie, kolumny <code>KTR_O</code> i <code>KTR_W</code> nazywają się tak samo w obu bazach. Będę więc musiał wskazać R, na podstawie jakich kolumn ma dokonać złączenia, a także jak ma nazwać kolumny w gotowej bazie, żebym wiedział, które wyniki dotyczą pierwszego testu, a które retestu.</p>
 <div class="cell">
@@ -2222,7 +2216,7 @@ cookieconsent.run({
 </section>
 <section id="sec-exploration" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Eksploracja danych</h1>
-<p>Dane możemy eksplorować ręcznie za pomocą funkcji <code>group_by</code> i <code>summarise</code>, jak to opisałem w podrozdziale (<a href="#sec-summarise" class="quarto-xref">5.7</a>). Ponieważ jednak wiele czynności, takich jak liczenie statystyk opisowych, wykonujemy za każdym razem, kiedy siadamy do analizy, powstały funkcje, które znacznie ten proces przyspieszają i upraszczają. Te, które omówię tutaj, stanowią część świetnego pakietu <code>rstatix</code>, który omawiam także w podrozdziale <a href="#sec-rstatix" class="quarto-xref">8.2</a>.</p>
+<p>Dane możemy eksplorować ręcznie za pomocą funkcji <code>group_by</code> i <code>summarise</code>, jak to opisałem w podrozdziale (<a href="#sec-summarise">5.7</a>). Ponieważ jednak wiele czynności, takich jak liczenie statystyk opisowych, wykonujemy za każdym razem, kiedy siadamy do analizy, powstały funkcje, które znacznie ten proces przyspieszają i upraszczają. Te, które omówię tutaj, stanowią część świetnego pakietu <code>rstatix</code>, który omawiam także w podrozdziale <a href="#sec-rstatix">8.2</a>.</p>
 <!-- O ile ogólna możliwość liczenia statystyk została omówiona w podrozdziale o grupowaniu i agregacji ([-@sec-summarise]), tak tutaj chciałbym podrzucić dwie użyteczne funkcje do szybkiego uzyskania statystyk dla całego zestawu danych. Będą to funkcje `describe` i `describeBy` z pakietu `psych` (który trzeba, oczywiście, zainstalować i załadować przed użyciem). Jest to pierwszy omawiany tu pakiet spoza `tidyverse`. `psych` to rozległy zestaw narzędzi zaprojektowanych specjalnie do obliczeń szeroko wykorzystywanych w psychologii. Składa się z kilkudziesięciu funkcji zaprojektowanych jako zestaw narzędzi do badań empirycznych w psychologii. Jest tylko jeden problem. `psych` miał premierę w 2007 r. i o ile co jakiś czas dostaje update, to nie jest opublikowany na GitHubie. Oznacza to, że społeczność nie może wprowadzać poprawek do kodu. Profesor Revelle rzeczywiście zna się na rzeczy, jako że od 40 lat jest profesorem, ale to ciągle jedna osoba. Dlatego czasem trzeba się trochę nagimnastykować, żeby zmusić `psych` do współpracy z `tidyverse`. -->
 <!-- ## Statystyki opisowe z `psych::describe` {#sec-describe} -->
 <!-- Funkcja `describe` pozwala szybko uzyskać zestaw wielu podstawowych statystyk opisowych dla wszystkich kolumn naraz. Powstaje z tego duża tabela, która zawiera znacznie więcej danych niż nam potrzeba, ale ma tę zaletę, że można ją zrobić szybko. Składnia jest tutaj tak banalna, że ciężko mówić o składni, bo polega na tym, że piszemy `describe(df)`. I to zazwyczaj zupełnie wystarczy. Że to za proste, to pokażę trochę więcej możliwości. -->
@@ -2260,7 +2254,7 @@ cookieconsent.run({
 <section id="sec-get_summary_stats" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="sec-get_summary_stats"><span class="header-section-number">6.1</span> Statystyki opisowe z <code>rstatix::get_summary_stats</code></h2>
 <!-- Muszę się do czegoś przyznać. Przez lata wykorzystywałem `describe` i `describeBy` do statystyk opisowych, ale... są lepsze alternatywy. Chciałem jednak wykorzystać te funkcje jako praktyczny pretekst to pokazania różnic między `data.frame` i `tibble`, używania kropki z potokami i ogólnie jak sobie radzić, jak nowszych alternatyw nie ma. Jednak do liczenia statystyk opisowych takie alternatywy są. I przychodzą do nas z `rstatix`. Jest to świetny, nowoczesny pakiet, który szerzej omówimy w podrozdziale [-@sec-rstatix]. -->
-<p>Do liczenia statystyk opisowych w <code>rstatix</code> wykorzystujemy funkcję <code>get_summary_stats</code>. Dobrze współpracuje ona z <code>tidyverse</code>, potokami i funkcją <code>group_by</code>. Ma też bardzo prostą składnię. Jedyne, co musimy zrobić, to wrzucić do naszej funkcji naszą bazę danych, a otrzymamy rozległą tabelę ze statystykami opisowymi dla wszystkich zmiennych. Szczegóły, wyjaśnienia i ewentualne możliwości modyfikacji poszczególnych statystyk znajdują się w dokumentacji. Jeśli do podstawowych statystych chcielibyśmy doliczyć coś niestandardowego, jak współczynnik zmienności z podrozdziału <a href="#sec-summarise" class="quarto-xref">5.7</a>, zawsze możemy na gotowej tabeli ze statystykami opisowymi użyć użyć <code>mutate</code>.</p>
+<p>Do liczenia statystyk opisowych w <code>rstatix</code> wykorzystujemy funkcję <code>get_summary_stats</code>. Dobrze współpracuje ona z <code>tidyverse</code>, potokami i funkcją <code>group_by</code>. Ma też bardzo prostą składnię. Jedyne, co musimy zrobić, to wrzucić do naszej funkcji naszą bazę danych, a otrzymamy rozległą tabelę ze statystykami opisowymi dla wszystkich zmiennych. Szczegóły, wyjaśnienia i ewentualne możliwości modyfikacji poszczególnych statystyk znajdują się w dokumentacji. Jeśli do podstawowych statystych chcielibyśmy doliczyć coś niestandardowego, jak współczynnik zmienności z podrozdziału <a href="#sec-summarise">5.7</a>, zawsze możemy na gotowej tabeli ze statystykami opisowymi użyć użyć <code>mutate</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rstatix"</span>)</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2287,7 +2281,7 @@ cookieconsent.run({
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<p>Jeśli chcemy otrzymać statysyki opisowe dla zgrupowanych danych, czyli np. osobno dla każdego poziomu wykształcenia, wystarczy, że przed użyciem funkcji <code>get_summary_stats</code> zgrupujemy dane funkcją <code>group_by</code>. W chwili, kiedy to piszę, funkcje <code>rstatix</code> nie posiadają argumentu <code>.by</code>. Jako przykład wykorzystam bazę <code>df_scream</code> z podrozdziału <a href="#sec-summarise" class="quarto-xref">5.7</a>.</p>
+<p>Jeśli chcemy otrzymać statysyki opisowe dla zgrupowanych danych, czyli np. osobno dla każdego poziomu wykształcenia, wystarczy, że przed użyciem funkcji <code>get_summary_stats</code> zgrupujemy dane funkcją <code>group_by</code>. W chwili, kiedy to piszę, funkcje <code>rstatix</code> nie posiadają argumentu <code>.by</code>. Jako przykład wykorzystam bazę <code>df_scream</code> z podrozdziału <a href="#sec-summarise">5.7</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>df_scream <span class="sc">%&gt;%</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(songwriter, song_type) <span class="sc">%&gt;%</span></span>
@@ -2307,7 +2301,7 @@ cookieconsent.run({
 </section>
 <section id="sec-freq_table" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="sec-freq_table"><span class="header-section-number">6.2</span> Tabele liczności z <code>rstatix::freq_table</code></h2>
-<p>Dla danych kategorialnych (np. płeć, wykształcenie, klasa) nie liczymy statystyk opisowych, a tabele liczności. Chcemy na przykład wiedzieć, ile w naszej bazie mamy osób z wykształceniem wyższym, ile ze średnim itd. W podrozdziale <a href="#sec-summarise" class="quarto-xref">5.7</a> pokazałem, jak to zrobić ręcznie funkcjami <code>summarise</code> i <code>n</code>. Pakiet <code>rstatix</code> ma dla nas gotową funkcję <code>freq_table</code> właśnie do tego celu. Wymaga ona jedynie podania, które kolumny z naszej tabeli zliczyć. Robimy to tak samo, jak zrobilibyśmy w funkcji <code>select</code> (patrz <a href="#sec-select" class="quarto-xref">5.1.2</a>) czy <code>across</code> (patrz <a href="#sec-across" class="quarto-xref">5.3.1</a>).</p>
+<p>Dla danych kategorialnych (np. płeć, wykształcenie, klasa) nie liczymy statystyk opisowych, a tabele liczności. Chcemy na przykład wiedzieć, ile w naszej bazie mamy osób z wykształceniem wyższym, ile ze średnim itd. W podrozdziale <a href="#sec-summarise">5.7</a> pokazałem, jak to zrobić ręcznie funkcjami <code>summarise</code> i <code>n</code>. Pakiet <code>rstatix</code> ma dla nas gotową funkcję <code>freq_table</code> właśnie do tego celu. Wymaga ona jedynie podania, które kolumny z naszej tabeli zliczyć. Robimy to tak samo, jak zrobilibyśmy w funkcji <code>select</code> (patrz <a href="#sec-select">5.1.2</a>) czy <code>across</code> (patrz <a href="#sec-across">5.3.1</a>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">freq_table</span>(df, wyksztalcenie)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode">
@@ -2324,7 +2318,7 @@ cookieconsent.run({
 </section>
 <section id="sec-cor_mat" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="sec-cor_mat"><span class="header-section-number">6.3</span> Macierze korelacji i ich istotność z <code>rstatix::cor_mat</code></h2>
-<p>W ramach eksploracji chcemy czasami zrobić macierz korelacji całego naszego zestawu danych. Może nam do tego posłużyć funkcja <code>cor_mat</code> z pakietu <code>rstatix</code>. Zobaczmy to na przykładzie bazy <code>db_joined</code> z podrozdziału <a href="#sec-join" class="quarto-xref">5.9</a>.</p>
+<p>W ramach eksploracji chcemy czasami zrobić macierz korelacji całego naszego zestawu danych. Może nam do tego posłużyć funkcja <code>cor_mat</code> z pakietu <code>rstatix</code>. Zobaczmy to na przykładzie bazy <code>db_joined</code> z podrozdziału <a href="#sec-join">5.9</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>(korelacje <span class="ot">&lt;-</span> <span class="fu">cor_mat</span>(db_joined, <span class="sc">-</span>ID))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode">
@@ -2376,6 +2370,7 @@ cookieconsent.run({
 <div class="cell">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(diamonds)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode">
+
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> Rows: 53,940
 <span style="color: #555555;">#&gt;</span> Columns: 10
 <span style="color: #555555;">#&gt;</span> $ <span style="font-weight: bold;">carat  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23, 0.…
@@ -2466,7 +2461,7 @@ cookieconsent.run({
 <p><img src="podstawy_R_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Jeśli chcemy zmienić etykiety wartości z legendy, mamy dwie opcje – albo przekodujemy te etykiety bezpośrednio w bazie danych, chociażby zaprzęgając do pracy <code>questionr</code> (zob. <a href="#sec-questionr" class="quarto-xref">5.5.1.1.1</a>), albo użyjemy jednej z funkcji <code>scale_*_discrete</code> i jej argumentu <code>labels</code>, gdzie zamiast gwiazdki piszemy nazwę naszej estetyki. Szlif naszych diamentów jest zmapowany do estetyki <code>colour</code>, więc użyjemy funkcji <code>scale_colour_discrete</code>.</p>
+<p>Jeśli chcemy zmienić etykiety wartości z legendy, mamy dwie opcje – albo przekodujemy te etykiety bezpośrednio w bazie danych, chociażby zaprzęgając do pracy <code>questionr</code> (zob. <a href="#sec-questionr">5.5.1.1.1</a>), albo użyjemy jednej z funkcji <code>scale_*_discrete</code> i jej argumentu <code>labels</code>, gdzie zamiast gwiazdki piszemy nazwę naszej estetyki. Szlif naszych diamentów jest zmapowany do estetyki <code>colour</code>, więc użyjemy funkcji <code>scale_colour_discrete</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_diamonds, <span class="fu">aes</span>(carat, price, <span class="at">colour =</span> cut)) <span class="sc">+</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -2636,7 +2631,7 @@ cookieconsent.run({
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<p>Obiekty tego typu zawsze wymagają argumentu <code>data</code>. Dlaczego jednak zapisałem <code>data = .</code>? Problem polega tutaj na użyciu potoków. Standardowo potok <code>%&gt;%</code> wrzuca rzeczy do pierwszego argumentu. Wiele funkcji, tak jak <code>lm</code>, nie przyjmuje bazy danych w pierwszym argumencie. Często nawet nie w drugim, więc najlepiej wprost go nazwać. Omawiany w podrozdziale <a href="#sec-rstatix" class="quarto-xref">8.2</a> pakiet <code>rstatix</code> za pierwszy cel postawił sobie nawet przerobienie testów statystycznych tak, żeby lepiej współpracowały z potokami. Jak więc poradzić sobie w takiej sytuacji? Jedna opcja, to całkiem zrezygnować z potoków i zapisać <code>data = iris</code>. Tak też jest dobrze, ale co jeśli potrzebujemy użyć potoku? Na przykład przed stworzeniem modelu wykonujemy serię przekształceń danych? Warto pamiętać, że potoki nie są obowiązkowe, można równie dobrze zagnieżdżać funkcje. Cierpi na tym tylko czytelność kodu. Druga opcja, to wprost powiedzenie potokowi, gdzie ma wrzucić naszą bazę danych. Do tego właśnie służy <code>.</code>. Zapis <code>data = .</code> mówi potokowi „halo halo, proszę nie wrzucać bazy do pierwszego argumentu, tylko o tu, gdzie pokazałem(-am) kropką”.</p>
+<p>Obiekty tego typu zawsze wymagają argumentu <code>data</code>. Dlaczego jednak zapisałem <code>data = .</code>? Problem polega tutaj na użyciu potoków. Standardowo potok <code>%&gt;%</code> wrzuca rzeczy do pierwszego argumentu. Wiele funkcji, tak jak <code>lm</code>, nie przyjmuje bazy danych w pierwszym argumencie. Często nawet nie w drugim, więc najlepiej wprost go nazwać. Omawiany w podrozdziale <a href="#sec-rstatix">8.2</a> pakiet <code>rstatix</code> za pierwszy cel postawił sobie nawet przerobienie testów statystycznych tak, żeby lepiej współpracowały z potokami. Jak więc poradzić sobie w takiej sytuacji? Jedna opcja, to całkiem zrezygnować z potoków i zapisać <code>data = iris</code>. Tak też jest dobrze, ale co jeśli potrzebujemy użyć potoku? Na przykład przed stworzeniem modelu wykonujemy serię przekształceń danych? Warto pamiętać, że potoki nie są obowiązkowe, można równie dobrze zagnieżdżać funkcje. Cierpi na tym tylko czytelność kodu. Druga opcja, to wprost powiedzenie potokowi, gdzie ma wrzucić naszą bazę danych. Do tego właśnie służy <code>.</code>. Zapis <code>data = .</code> mówi potokowi „halo halo, proszę nie wrzucać bazy do pierwszego argumentu, tylko o tu, gdzie pokazałem(-am) kropką”.</p>
 <p>W powyższym przykładzie widać też, że <code>lm</code>, podobnie jak wiele innych obiektów modeli, nie daje nam domyślnie sensownego podsumowania. Wiele modeli wymaga od nas, byśmy wrzucili je do funkcji <code>summary</code> (nie mylić z <code>summarise</code>) żeby powiedziały nam coś, co da się zrozumieć.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_price)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2733,7 +2728,7 @@ cookieconsent.run({
 <h2 data-number="8.2" class="anchored" data-anchor-id="sec-rstatix"><span class="header-section-number">8.2</span> Swiss Army Knife w R, czyli <code>rstatix</code></h2>
 <p>Niezwykłe możliwości i giętkość pakietu <code>rstatix</code> były już w tym tekście wychwalane i pokazywane. Tutaj jednak chciałbym powiedzieć o głównej zawartości <code>rstatix</code> czy funkcjach wykonujących testy statystyczne.</p>
 <p>R posiada dużą bibliotekę domyślnych funkcji do testów statystycznych, takich jak <code>t.test</code> czy <code>cor.test</code>. I one liczą dobrze, ale w wielu przypadkach są niewygodne. Nie ma się co dziwić, to są stare funkcje, swoją historią sięgające roku 2000, czyli początków R. Nie było wtedy <code>dplyr</code>, RStudio, potoków i całego dobrodziejstwa, które sprawia, że współczesny kod R średnio przypomina klasyczny kod, którego tu nie omawiam, ale który ciągle działa i buduje fundamenty tego języka. Dlatego właśnie wyniki tych testów są niewystandaryzowane, wymagają one niewygodnego wskazywania kolumn jako wektorów<a href="#fn33" class="footnote-ref" id="fnref33" role="doc-noteref"><sup>33</sup></a> i mają argument <code>data</code> na drugim miejscu, przez co potoki zawsze wymagają używania <code>.</code>.</p>
-<p><code>rstatix</code> jest odpowiedzią na te problemy. Poza tym, że dodaje mnóstwo przyjaznych funkcji od siebie, to uwspółcześnia stare funkcje, naprawiając w nich wszystko, co złe, m.in. poprawiając pracę z potokami. Dodatkowo wykorzystuje sprytną nomenklaturę, która ułatwia uczenie się – jeśli w klasycznym R funkcja nazywa się <code>t.test</code>, to w <code>rstatix</code> nazywa się <code>t_test</code>, <code>cor.test</code> zmienia się w <code>cor_test</code> i tak dalej. Jest to zgodne z ogólnym standarem <code>tidyverse</code>, żeby współczesne funkcje zawsze były pisane snake_case (więcej o formatowaniu kodu w podrozdziale <a href="#sec-formatting" class="quarto-xref">9</a>). Większość funkcji pozwala też na wykonywanie wielu testów jednocześnie i radzi sobie ze zgrupowanymi danymi.</p>
+<p><code>rstatix</code> jest odpowiedzią na te problemy. Poza tym, że dodaje mnóstwo przyjaznych funkcji od siebie, to uwspółcześnia stare funkcje, naprawiając w nich wszystko, co złe, m.in. poprawiając pracę z potokami. Dodatkowo wykorzystuje sprytną nomenklaturę, która ułatwia uczenie się – jeśli w klasycznym R funkcja nazywa się <code>t.test</code>, to w <code>rstatix</code> nazywa się <code>t_test</code>, <code>cor.test</code> zmienia się w <code>cor_test</code> i tak dalej. Jest to zgodne z ogólnym standarem <code>tidyverse</code>, żeby współczesne funkcje zawsze były pisane snake_case (więcej o formatowaniu kodu w podrozdziale <a href="#sec-formatting">9</a>). Większość funkcji pozwala też na wykonywanie wielu testów jednocześnie i radzi sobie ze zgrupowanymi danymi.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test korelacji Pearsona</span></span>
 <span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor_test</span>(diamonds, price, carat)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2772,6 +2767,7 @@ cookieconsent.run({
 <span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA</span></span>
 <span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_test</span>(diamonds, price <span class="sc">~</span> cut <span class="sc">+</span> color <span class="sc">+</span> clarity)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode">
+
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> ANOVA Table (type II tests)
 <span style="color: #555555;">#&gt;</span> 
 <span style="color: #555555;">#&gt;</span>    Effect DFn   DFd       F         p p&lt;.05   ges
@@ -2822,7 +2818,7 @@ cookieconsent.run({
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<p>Dodatkowo <code>rstatix</code> dostarcza nam wygodą funkcję <code>add_significance</code>, która do obiektu z modelem zgodnym z <code>broom</code> dodaje kolumnę z gwiazdkami istotności wartości <span class="math inline">\(p\)</span>. Domyślne ustawienia są takie same jak dla funkcji <code>cor_mark_significance</code><a href="#fn34" class="footnote-ref" id="fnref34" role="doc-noteref"><sup>34</sup></a> i również można je modyfikować (por. <a href="#sec-cor_mat" class="quarto-xref">6.3</a>).</p>
+<p>Dodatkowo <code>rstatix</code> dostarcza nam wygodą funkcję <code>add_significance</code>, która do obiektu z modelem zgodnym z <code>broom</code> dodaje kolumnę z gwiazdkami istotności wartości <span class="math inline">\(p\)</span>. Domyślne ustawienia są takie same jak dla funkcji <code>cor_mark_significance</code><a href="#fn34" class="footnote-ref" id="fnref34" role="doc-noteref"><sup>34</sup></a> i również można je modyfikować (por. <a href="#sec-cor_mat">6.3</a>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>lm_price <span class="sc">%&gt;%</span></span>
 <span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
@@ -2955,7 +2951,7 @@ cookieconsent.run({
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<p>Powyższy przykład na nas nie krzyczy, wykonuje się, jednak nie działa tak, jak byśmy chcieli. Celem tego kodu było uzyskanie sumy kolumn od H1 do H10 dla każdej osoby badanej, jak robiliśmy w podrozdziale <a href="#sec-pick" class="quarto-xref">5.4.1</a>. Jednak kod nie działa tak, jak byśmy chcieli. W każdej komórce kolumny <code>H_suma</code> znajduje się ta sama wartość. Zaskakująco duża. Wynika to z tego, że R domyślnie myśli kolumnami, nie wierszami. Gdy więc każemy mu sumować kolumny od <code>H1</code> do <code>H10</code>, to sumuje <em>całe</em> kolumny i w każdą komórkę wrzuca tę sumę. Jeśli chcemy policzyć sumę dla każdego wiersza z osobna, to musimy albo użyć funkcji <code>rowSums</code> zamiast zwykłego <code>sum</code>, albo wcześniej przepuścić przez funkcję <code>rowwise()</code>, czego nie robiliśmy wcześniej.</p>
+<p>Powyższy przykład na nas nie krzyczy, wykonuje się, jednak nie działa tak, jak byśmy chcieli. Celem tego kodu było uzyskanie sumy kolumn od H1 do H10 dla każdej osoby badanej, jak robiliśmy w podrozdziale <a href="#sec-pick">5.4.1</a>. Jednak kod nie działa tak, jak byśmy chcieli. W każdej komórce kolumny <code>H_suma</code> znajduje się ta sama wartość. Zaskakująco duża. Wynika to z tego, że R domyślnie myśli kolumnami, nie wierszami. Gdy więc każemy mu sumować kolumny od <code>H1</code> do <code>H10</code>, to sumuje <em>całe</em> kolumny i w każdą komórkę wrzuca tę sumę. Jeśli chcemy policzyć sumę dla każdego wiersza z osobna, to musimy albo użyć funkcji <code>rowSums</code> zamiast zwykłego <code>sum</code>, albo wcześniej przepuścić przez funkcję <code>rowwise()</code>, czego nie robiliśmy wcześniej.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
@@ -3168,11 +3164,23 @@ cookieconsent.run({
 
 
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-field2012" class="csl-entry" role="listitem">
+Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
+</div>
+<div id="ref-wickham2020" class="csl-entry" role="listitem">
+Wickham, H., &amp; Grolemund, G. (2020). <em>J<span>ę</span>zyk R: kompletny zestaw narz<span>ę</span>dzi dla analityków danych</em>. Gliwice: Wydawnictwo Helion.
+</div>
+<div id="ref-wilkinson_grammar_2005" class="csl-entry" role="listitem">
+Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>. New York: Springer-Verlag. <a href="https://doi.org/10.1007/0-387-28695-0">https://doi.org/10.1007/0-387-28695-0</a>
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
 <ol>
 <li id="fn1"><p>Drugim najpopularniejszym jest R.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>To trudno sobie wyobrazić, łatwiej zobaczyć na obrazkach. Poświęciłem temu cały podrozdział <a href="#sec-pivot" class="quarto-xref">5.8</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>To trudno sobie wyobrazić, łatwiej zobaczyć na obrazkach. Poświęciłem temu cały podrozdział <a href="#sec-pivot">5.8</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Jeśli korzystasz z jakiejś dystrybucji linuxa, R możesz zainstalować z oficjalnych repozytoriów. Pakiet zazwyczaj nazywa się <code>r-base</code>. W Ubuntu wystarczy użyć komendy <code>sudo apt install r-base</code>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>W R da się programować też w innych IDE, np. w Visual Studio Code. Niemniej na sam początek lepiej przylgnąć do standardu RStudio, który pomoże nam nabrać najlepszych praktyk i nauczyć się, z czym R się je.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Sam używam <a href="https://github.com/anthonynorth/rscodeio">rscodeio</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -3185,10 +3193,10 @@ cookieconsent.run({
 <li id="fn12"><p><code>filter</code> wybiera wiersze spełniające jakiś warunek. Jeśli chcemy wybrać wiersze na podstawie ich pozycji (np. wiersze od 1. do 10.), użyjemy funkcji <code>slice</code>.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn13"><p>Zdążyłem zauważyć, że różne pakiety posiadają swoje własne funkcje o nazwie <code>set_names</code>. Wiele razy zdarzyło mi się szukać, dlaczego mój kod nie działa, jak wszystko jest dobrze. Okazywało się potem, że R bierze <code>set_names</code> nie z <code>purrr</code>, tylko np. z <code>magrittr</code>, który też zawiera funkcję o takiej nazwie, ale kompletnie innym działaniu. Jeśli R napotyka w dwóch różnych pakietach funkcje o takich samych nazwach, domyślnie wybiera tę załadowaną <strong>później</strong>. Mówimy, że <em>przesłania</em> ona (<em>masks</em>) poprzenią. Jeśli więc najpierw załadowałem <code>tidyverse</code>, a potem <code>magrittr</code>, to gdy piszę <code>set_names</code> R wybiera wersję „z wierzchu”, czyli z <code>magrittr</code>. Na szczęście możemy wprost powiedzieć R, z którego pakietu ma brać daną funkcję, używając jej pełnej nazwy, np. <code>purrr::set_names</code>. Zawsze jest to <code>nazwa_pakietu::funkcja</code>. Takich pełnych nazw używam też w nagłówkach. Warto wiedzieć, że używając takiego zapisu nie musimy ładować całego pakietu, żeby użyć funkcji z danego pakietu, której np. używamy tylko raz w całym kodzie. Osobiście, dla spokoju ducha, akurat <code>set_names</code> zawsze zapisuję <code>purrr::set_names</code>. Zbyt dużo czasu straciłem na szukanie tego błędu.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn14"><p>Chyba że nie jest to dosłowny ciąg znaków, tylko jakaś zmienna albo funkcja. Jeśli wcześniej zapisaliśmy <code>name &lt;- "wiek"</code>, to możemy w <code>set_names</code> wpisać <code>name</code> bez cudzysłowu, ale wtedy nowa kolumna będzie się nazywała <code>"wiek"</code>. Przykład z użyciem funkcji <em>generującej</em> ciągi znaków poniżej.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn15"><p>Jej zachowanie możemy modyfikować, np. mówiąc jej, że w liczbach typu <code>128 242,78</code> spację ma traktować jako rozdzielacz dużych liczb, a przecinek jako operator dziesiętny (w krajach anglosaskich tę funkcję pełni zazwyczaj kropka). Inaczej <code>parse_number("128 242,78")</code> zwróci nam pierwszą napotkaną liczbę, czyli 128. Szczegóły można znaleźć w dokumentacji, ale w takim wypadku powinniśmy użyć <code>parse_number("128 242,78", locale = locale(grouping_mark = " ", decimal_mark = ","))</code>. Jeśli nasz respondent najpierw wpisał rok, a potem wiek, trzeba będzie się bawić niestandardowo, np. funkcją <code>case_when</code> lub <code>case_match</code> z podrozdziału <a href="#sec-casewhen" class="quarto-xref">5.4.2</a>.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>Jej zachowanie możemy modyfikować, np. mówiąc jej, że w liczbach typu <code>128 242,78</code> spację ma traktować jako rozdzielacz dużych liczb, a przecinek jako operator dziesiętny (w krajach anglosaskich tę funkcję pełni zazwyczaj kropka). Inaczej <code>parse_number("128 242,78")</code> zwróci nam pierwszą napotkaną liczbę, czyli 128. Szczegóły można znaleźć w dokumentacji, ale w takim wypadku powinniśmy użyć <code>parse_number("128 242,78", locale = locale(grouping_mark = " ", decimal_mark = ","))</code>. Jeśli nasz respondent najpierw wpisał rok, a potem wiek, trzeba będzie się bawić niestandardowo, np. funkcją <code>case_when</code> lub <code>case_match</code> z podrozdziału <a href="#sec-casewhen">5.4.2</a>.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn16"><p>Wyrażenia regularne (<em>Regular expressions</em> w skrócie <em>RegEx</em>) to wielki temat, a liźnięcie go polecam każdemu, czy programuje, czy nie. Pozwalają one na wyszukiwanie regularnych wzorców w tekście, np. <code>"H_\d+"</code> oznacza „“H_” a potem jakakolwiek liczba (<code>\d</code>), jedna lub więcej (<code>+</code>)“. Można je wykorzystywać np. w LibreOffice czy Google Docs (Word zrobił własny system, bo przecież czemu wdrażać światowe standardy, jak można zrobić coś tylko dla tego jednego programu?). Wiele razy oszczędzały mi godzin mechanicznej pracy, gdy trzeba było, powiedzmy, dopisać coś na początku każdej linijki z tekstem. Obfita instrukcja do wyrażeń regularnych znajduje się w ściądze do <code>stringr</code>.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn17"><p>Jej zachowanie możemy modyfikować, np. mówiąc jej, że w liczbach typu <code>128 242,78</code> spację ma traktować jako rozdzielacz dużych liczb, a przecinek jako operator dziesiętny (w krajach anglosaskich tę funkcję pełni zazwyczaj kropka). Inaczej <code>parse_number("128 242,78")</code> zwróci nam pierwszą napotkaną liczbę, czyli 128. Szczegóły można znaleźć w dokumentacji, ale w takim wypadku powinniśmy użyć <code>parse_number("128 242,78", locale = locale(grouping_mark = " ", decimal_mark = ","))</code>.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn18"><p>Choć dokumentacja <code>dplyr</code> zaleca, by jednak używać w takich sytuacjach funkcji anonimowych, które opisuję w podrozdziale <a href="#sec-lambda" class="quarto-xref">5.3.3.1</a>.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn18"><p>Choć dokumentacja <code>dplyr</code> zaleca, by jednak używać w takich sytuacjach funkcji anonimowych, które opisuję w podrozdziale <a href="#sec-lambda">5.3.3.1</a>.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn19"><p>Inny sposób dodaje pakiet <code>purrr</code> wchodzący w skład <code>tidyverse</code>. Polega on na użyciu znaczka <code>~</code> (<em>czyt.</em> tylda). Nasza funkcja <code>odejmij_od_7</code> ma w tej konwencji postać <code>~ 7 - .x</code>. Poprzez <code>.x</code> zawsze oznacza się w takich funkcjach to, co do funkcji wrzucamy, czyli to, co w <code>odejmij_od_7</code> oznaczaliśmy jako <code>wynik</code>. Jest to starszy sposób skracania funkcji anonimowych, więc można go spostkać w różnych miejscach, jeszcze z czasów, zanim skrócony zapis znalazł się natywnie w R.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn20"><p>Jakiekolwiek inne operacje na wierszach są możliwe i wymagają użycia funkcji <code>rowwise()</code>. Ponieważ robi się&nbsp;to rzadko, a jest to dość zaawansowane zagadnienie, nie opisuję tego tutaj, a odsyłam zainteresowanych do dokumentacji.<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn21"><p>W chwili kiedy to piszę, <code>pick</code> jest świeżynką, wprowadzoną do <code>dplyr</code> w wersji 1.1.0 na koniec stycznia 2023 r. Jeśli Twój R jej nie znajduje, warto zaktualizować pakiety, albo guzikami w RStudio, albo funkcją <code>devtools::update_packages()</code>. Jeśli nie ma takiej możliwości, w miejsce <code>pick</code> można użyć <code>across</code>.<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -3210,19 +3218,7 @@ cookieconsent.run({
 <li id="fn37"><p>Scratch to bardzo przyjemne, darmowe, rysunkowo-blokowe narzędzie do ćwiczenia programowania stworzone przez naukowców z MIT. Nie jest ono specyficzne dla żadnego języka, ale może być dobrym wprowadzeniem do programowania w ogóle. Nie wymaga pisania kodu, a opiera się w całości na przeciąganiu myszką bloczków. Dzięki temu można oswoić się z różnymi ideami w programowaniu, takimi jak funkcje, zmienne itd., bez zaprzątania głowy składnią konkretnego języka.<a href="#fnref37" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn38"><p>Należy się upwenić, że te osoby kochają nas wystarczająco, żeby być gotowymi na to poświęcenie.<a href="#fnref38" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</aside>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
-<div id="ref-field2012" class="csl-entry" role="listitem">
-Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
-</div>
-<div id="ref-wickham2020" class="csl-entry" role="listitem">
-Wickham, H., &amp; Grolemund, G. (2020). <em>J<span>ę</span>zyk R: kompletny zestaw narz<span>ę</span>dzi dla analityków danych</em>. Gliwice: Wydawnictwo Helion.
-</div>
-<div id="ref-wilkinson_grammar_2005" class="csl-entry" role="listitem">
-Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>. New York: Springer-Verlag. <a href="https://doi.org/10.1007/0-387-28695-0">https://doi.org/10.1007/0-387-28695-0</a>
-</div>
-</div></section></div></main> <!-- /main -->
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -3264,33 +3260,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -3359,15 +3328,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  let localAlternateSentinel = 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -3446,9 +3413,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -3458,17 +3426,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -3481,61 +3440,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    if (id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
-        }
-        return container.innerHTML
-      } else {
-        return note.innerHTML;
-      }
-    } else {
-      return note.innerHTML;
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      try { hash = new URL(url).hash; } catch {}
-      const id = hash.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note !== null) {
-        try {
-          const html = processXRef(id, note);
-          instance.setContent(html);
-        } finally {
-          instance.enable();
-          instance.show();
-        }
-      } else {
-        // See if we can fetch this
-        fetch(url.split('#')[0])
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.getElementById(id);
-          console.log(htmlDoc.body.innerHTML);
-          if (note !== null) {
-            const html = processXRef(id, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -3579,7 +3483,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -3666,17 +3569,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://giscus.app/client.js" data-repo="jakub-jedrusiak/nieobliczalne" data-repo-id="R_kgDOHBIy6A" data-category="General" data-category-id="DIC_kwDOHBIy6M4CUvlw" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
 </script>
-<input type="hidden" id="giscus-base-theme" value="dark">
-<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">
-
-<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

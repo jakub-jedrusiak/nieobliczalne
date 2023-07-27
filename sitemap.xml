@@ -2,66 +2,70 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nieobliczalne.pl/index.html</loc>
-    <lastmod>2023-05-21T11:46:48.005Z</lastmod>
+    <lastmod>2023-07-27T13:01:18.879Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/about.html</loc>
-    <lastmod>2023-05-07T23:08:31.294Z</lastmod>
+    <lastmod>2023-07-27T13:01:17.522Z</lastmod>
   </url>
   <url>
-    <loc>https://nieobliczalne.pl/posts/procent-wariancji.html</loc>
-    <lastmod>2023-05-26T18:36:44.289Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/ai-research.html</loc>
-    <lastmod>2023-05-26T18:36:44.299Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/regex.html</loc>
-    <lastmod>2023-06-11T11:30:19.591Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/metaprogramowanie.html</loc>
-    <lastmod>2023-05-26T18:36:44.296Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/powtarzalny-tekst.html</loc>
-    <lastmod>2023-06-11T11:34:01.643Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/podstawy_R.html</loc>
-    <lastmod>2023-05-26T18:36:44.292Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/p-value.html</loc>
-    <lastmod>2023-05-26T18:36:44.296Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/uczenie-sie.html</loc>
-    <lastmod>2023-05-26T18:36:44.286Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/pakiety-w-R.html</loc>
-    <lastmod>2023-05-26T18:36:44.296Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/automatyzacja.html</loc>
-    <lastmod>2023-06-11T11:23:54.954Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/kombinatoryka.html</loc>
-    <lastmod>2023-06-11T11:34:30.669Z</lastmod>
+    <loc>https://nieobliczalne.pl/posts/funkcje.html</loc>
+    <lastmod>2023-07-27T13:01:16.945Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/git.html</loc>
-    <lastmod>2023-05-26T18:36:44.296Z</lastmod>
+    <lastmod>2023-07-27T13:01:13.869Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/kombinatoryka.html</loc>
+    <lastmod>2023-07-27T13:01:11.462Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/automatyzacja.html</loc>
+    <lastmod>2023-07-27T13:01:08.745Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/pakiety-w-R.html</loc>
+    <lastmod>2023-07-27T13:01:05.752Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/uczenie-sie.html</loc>
+    <lastmod>2023-07-27T13:01:00.446Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/p-value.html</loc>
+    <lastmod>2023-07-27T13:00:53.699Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/podstawy_R.html</loc>
+    <lastmod>2023-07-27T13:00:58.749Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/powtarzalny-tekst.html</loc>
+    <lastmod>2023-07-27T13:01:02.209Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/metaprogramowanie.html</loc>
+    <lastmod>2023-07-27T13:01:07.425Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/regex.html</loc>
+    <lastmod>2023-07-27T13:01:10.309Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/ai-research.html</loc>
+    <lastmod>2023-07-27T13:01:12.465Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/procent-wariancji.html</loc>
+    <lastmod>2023-07-27T13:01:15.532Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/newsletter.html</loc>
-    <lastmod>2023-05-21T11:58:15.114Z</lastmod>
+    <lastmod>2023-07-27T13:01:17.199Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/toc.html</loc>
-    <lastmod>2023-05-26T18:10:17.824Z</lastmod>
+    <lastmod>2023-07-27T13:01:17.822Z</lastmod>
   </url>
 </urlset>
