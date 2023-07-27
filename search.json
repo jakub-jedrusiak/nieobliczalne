@@ -18,7 +18,7 @@
     "href": "posts/funkcje.html",
     "title": "Funkcje matematyczne",
     "section": "",
-    "text": "Czy masz czasem wrażenie, że rzeczy w matematyce nazywają się bez sensu? To jest bardzo słuszne wrażenie. Dziś na warsztat weźmiemy funkcje, które są zmorą uczniów liceów ze względu na nową, dziwną notację typu \\(f(x)\\), cały pozornie chaotyczny język, który odrywa funkcje od reszty matematyki, a także wrażenie, że nijak nie idzie tego spotkać w „prawdziwym życiu”, cokolwiek to jest. Ja właśnie spędzam wieczór z prawdziwego życia na pisaniu o funkcjach. Do czegoś mi się jednak przydały. Zaczynając jednak od nazwy – dlaczego „funkcja”? Bo Liebniz źle rozumiał to słowo. A że raz przyjęte konwencje trzymają się mocno, to do dzisiaj, właściwie przypadkowo, nazywamy tę rzeczy funkcjami."
+    "text": "Czy masz czasem wrażenie, że rzeczy w matematyce nazywają się bez sensu? To jest bardzo słuszne wrażenie. Dziś na warsztat weźmiemy funkcje, które są zmorą uczniów liceów ze względu na nową, dziwną notację typu \\(f(x)\\), cały pozornie chaotyczny język, który odrywa funkcje od reszty matematyki, a także wrażenie, że nijak nie idzie tego spotkać w „prawdziwym życiu”, cokolwiek to jest. Ja właśnie spędzam wieczór z prawdziwego życia na pisaniu o funkcjach. Do czegoś mi się jednak przydały. Zaczynając jednak od nazwy – dlaczego „funkcja”? Bo Leibniz źle rozumiał to słowo. A że raz przyjęte konwencje trzymają się mocno, to do dzisiaj, właściwie przypadkowo, nazywamy tę rzeczy funkcjami."
   },
   {
     "objectID": "posts/funkcje.html#sec-programming",
@@ -46,7 +46,7 @@
     "href": "posts/funkcje.html#przecięcie-z-osią-x",
     "title": "Funkcje matematyczne",
     "section": "7.3 Przecięcie z osią X",
-    "text": "7.3 Przecięcie z osią X\nSpójrz na ten wykres i powiedz, co wspólnego mają wszystkie te punkty?\n\nWszystkie leżą na osi X, to prawda. To jest opis w języku graficznym, gdzie istnieją punkty rozlokowane w przestrzeni. Teraz chcemy jednak przejść z opisu graficznego do algebraicznego, a punktem styku między jednym i drugim są współrzędne. Jaką współrzędną mają wspólną wszystkie te punkty? Po przeanalizowaniu wykresu dochodzimy do wniosku, że każdy z naszych punktów ma współrzędną \\(y = 0\\). Różnią się natomiast współrzędnymi \\(x\\).\nJeśli jesteśmy pytani o punkt przecięcia z osią X, innymi słowy jesteśmy pytani o takie miejsce, gdzie \\(y = 0\\). Takim miejscem dla narysowanej na wykresie maszyny jest punkt o współrzędnych \\((-1, 0)\\). Jeśli sięgniesz pamięcią do punktu 4., zorientujesz się, że mamy specjalną nazwę na punkty, gdze \\(y\\) (czyli wartość funkcji) wynosi \\(0\\) – miejsce zerowe. Pytanie o punkt przecięcia z osią X jest więc tak naprawdę znanym nam już pytaniem o miejsce zerowe, gdzie ewentualnie odpowiedź będzie trzeba zapisać jako \\(A(-1, 0)\\) zamiast \\(f(-1) = 0\\)."
+    "text": "7.3 Przecięcie z osią X\nSpójrz na ten wykres i powiedz, co wspólnego mają wszystkie te punkty?\n\nWszystkie leżą na osi X, to prawda. To jest opis w języku graficznym, gdzie istnieją punkty rozlokowane w przestrzeni. Teraz chcemy jednak przejść z opisu graficznego do algebraicznego, a punktem styku między jednym i drugim są współrzędne. Jaką współrzędną mają wspólną wszystkie te punkty? Po przeanalizowaniu wykresu dochodzimy do wniosku, że każdy z naszych punktów ma współrzędną \\(y = 0\\). Różnią się natomiast współrzędnymi \\(x\\).\nJeśli jesteśmy pytani o punkt przecięcia z osią X, innymi słowy jesteśmy pytani o takie miejsce, gdzie \\(y = 0\\). Takim miejscem dla narysowanej na wykresie maszyny jest punkt o współrzędnych \\((-1, 0)\\). Jeśli sięgniesz pamięcią do punktu 4., zorientujesz się, że mamy specjalną nazwę na punkty, gdzie \\(y\\) (czyli wartość funkcji) wynosi \\(0\\) – miejsce zerowe. Pytanie o punkt przecięcia z osią X jest więc tak naprawdę znanym nam już pytaniem o miejsce zerowe, gdzie ewentualnie odpowiedź będzie trzeba zapisać jako \\(A(-1, 0)\\) zamiast \\(f(-1) = 0\\)."
   },
   {
     "objectID": "posts/funkcje.html#przecięcie-z-osią-y",
@@ -56,25 +56,32 @@
     "text": "7.4 Przecięcie z osią Y\nPodobne pytanie o wspólną współrzędną możemy sobie zadać dla punktów na osi Y.\n\nTym razem pewnie szybciej możemy dojść do wniosku, że wszystkie zaznaczone punkty mają wspólną współrzędną \\(x\\), a różnią się współrzędnymi \\(y\\). Funkcja zaznaczona na rysunku ma punkt przecięcia z osią Y o współrzędnych \\((0, 1)\\). Pytanie o punkt przecięcia z osią Y jest więc niczym innym, jak pytaniem o wartość funkcji w zerze, czyli \\(f(0)\\)."
   },
   {
-    "objectID": "posts/funkcje.html#nachylenie",
-    "href": "posts/funkcje.html#nachylenie",
-    "title": "Funkcje matematyczne",
-    "section": "8.1 Nachylenie",
-    "text": "8.1 Nachylenie"
-  },
-  {
     "objectID": "posts/funkcje.html#wyraz-wolny",
     "href": "posts/funkcje.html#wyraz-wolny",
     "title": "Funkcje matematyczne",
-    "section": "8.2 Wyraz wolny",
-    "text": "8.2 Wyraz wolny"
+    "section": "8.1 Wyraz wolny",
+    "text": "8.1 Wyraz wolny\nZaczniemy od, być może, mniej istotnego i rewolucyjnego, ale który łatwiej jest zobaczyć. Narysujmy sobie 5 kolejnych funkcji: \\(f(x) = x + 2\\), \\(g(x) = x + 1\\), \\(h(x) = x\\), \\(i(x) = x - 1\\), \\(j(x) = x - 2\\).\n\n\n\nCzerwony – \\(f(x)\\); pomarańczowy – \\(g(x)\\); zielony – \\(h(x)\\); niebieski – \\(i(x)\\); fioletowy – \\(j(x)\\).\n\n\nJeśli teraz porównamy te funkcje, to możemy dojść do wniosku, że są to równoległe linie (tak samo nachylone), ale niektóre są wyżej, inne niżej. Dodawanie do \\(x\\) podnosi wykres, a odejmowanie go obniża. Najłatwiej skupić się tutaj na wartości w zerze, czyli na przecięciu z osią Y. Widzimy, że czerwona linia jest najwyżej, a każda kolejna o oczko niżej. Ten punkt, wartość w zerze, jest o tyle ciekawy, że jak spróbujemy podstawić 0 do funkcji, to \\(x\\) nam znika i zostaje tylko to, co dodaliśmy, lub odjęliśmy. \\(f(0) = 0 + 2 = 2\\).\nWbrew pozorom to bardzo ważny wniosek. Pozwala on bardzo szybko określić, co do \\(x\\) było dodane, albo od niego odjęte. Spróbuj to zrobić na podstawie poniższej ryciny.\n\nMożemy iść taką logiką – skoro \\(x\\) nie ma żadnego wpływu na wartość funkcji, jeśli wynosi 0 (bo zostaje tylko to, co dodajemy lub odejmujemy), to wystarczy spojrzeć na \\(f(0)\\). Tutaj wynosi ta wartość \\(1,5\\) i rzeczywiście, ta funkcja to \\(f(x) = x + 1,5\\). Nazywamy to wyraz wolny (ang. intercept) i najłatwiej go odczytać właśnie z przecięcia z osią Y. Wyraz wolny zawsze ma wartość równą \\(f(0)\\). Wyraz wolny decyduje o tym, czy wykres funkcji jest wyżej, czy niżej."
+  },
+  {
+    "objectID": "posts/funkcje.html#nachylenie",
+    "href": "posts/funkcje.html#nachylenie",
+    "title": "Funkcje matematyczne",
+    "section": "8.2 Nachylenie",
+    "text": "8.2 Nachylenie\nDrugi współczynnik trudniej jest zrozumieć, dlatego warto się tu skupić mocniej. Naszkicujmy 5 funkcji – \\(f(x) = 2x\\), \\(g(x) = 1x\\), \\(h(x) = 0x\\), \\(i(x) = -1x\\), \\(j(x) = -2x\\).\n\n\n\nCzerwony – \\(f(x)\\); pomarańczowy – \\(g(x)\\); zielony – \\(h(x)\\); niebieski – \\(i(x)\\); fioletowy – \\(j(x)\\).\n\n\nŻeby się nie zgubić, porównajmy na początek funkcje zaznaczone na czerwono i pomarańczowo. Mam pytanie. Jeśli byłyby to schody, to po których wolał(a)byś wchodzić? Jeśli nie szukasz wszędzie okazji do fitnessu (to pisząc sięgam po kolejnego wafla z kremem orzechowym), to pewnie wybierzesz schody pomarańczowe. Są bowiem mniej strome. Innymi słowy mają mniejsze nachylenie.\nPorównajmy teraz obie te funkcje do funkcji zaznaczonej na zielono. Zielona funkcja jest płaska. Ma zerowe nachylenie. Nie ma się co dziwić, po uproszczeniu jej wzór to \\(h(x) = 0\\) – niezależnie, co wrzucimy, wyrzuci ona 0. Jej wartość jest stała. Następnie przechodzimy do funkcji niebieskiej i fioletowej – co do obu możemy zauważyć, że im bardziej przesuwamy palcem w prawo, tym niżej jesteśmy. Obie te funkcje są malejące, ale funkcja fioletowa maleje szybciej.\nZauważmy jednak, że wszystkie te funkcje przechodzą przez \\((0, 0)\\). Nachylenie nie ma więc związku z tym, czy wykres jest przesunięty w górę, czy w dół. To, jak już ustaliliśmy, kontroluje wyraz wolny. Rampa jest tak samo stroma na pokładzie samolotu i w piekle.\nNachylenie kontrolowane jest przez tzw. współczynnik kierunkowy, czyli liczbę, przez którą mnożę \\(x\\). Im ta liczba większa, tym bardziej stromy wykres. Jeśli ta liczba jest ujemna, funkcja jest malejąca."
+  },
+  {
+    "objectID": "posts/funkcje.html#wzór-ogólny",
+    "href": "posts/funkcje.html#wzór-ogólny",
+    "title": "Funkcje matematyczne",
+    "section": "8.3 Wzór ogólny",
+    "text": "8.3 Wzór ogólny\nUstaliliśmy więc, że funkcje liniowe kontrolowane są przez dwie wartości:\n\nWspółczynnik kierunkowy, czyli liczbę, przez którą mnożę \\(x\\) – kontroluje nachylenie.\nWyraz wolny, czyli liczbę, którą dodaję do \\(x\\) – kontroluje położenie w pionie.\n\nJeśli porwiemy się na to szaleństwo i połączymy mnożenie z dodawaniem, to otrzymamy wzór ogólny funkcji liniowej:\n\\[\nf(x) = ax + b\n\\]\nOczywiście oznaczenia, jak zawsze, są umowne. Równie dobrze mogę napisać \\(m(l) = sl + w\\) albo nawet \\(m(l) = sl + m(0)\\), bo \\(m\\) to maszyna, \\(l\\) to liczba, \\(s\\) to stromizna, a \\(w\\) to wyraz wolny, który zawsze ma wartość równą wartości funkcji w zerze. Niezależnie, jakie literki sobie wybierzemy, funkcje, które da się przedstawić jako mnożenie \\(x\\) i dodawanie (lub odejmowanie4), będą miały kształt prostej linii. W standardowej notacji literką \\(a\\) oznacza się współczynnik kierunkowy, zaś literką \\(b\\) wyraz wolny.\nStatystyczny spoiler: linie regresji to proste linie, dlatego one również mają taką postać. Zazwyczaj zapisywane są upiornie wyglądającą notacją typu \\(\\beta_0 + \\beta_1 X\\), ale to cały czas to samo, tylko w odwrotnej kolejności i literkami greckimi. Nie dajcie się zwieść, to jest tylko po to, żeby Was przestraszyć."
   },
   {
     "objectID": "posts/funkcje.html#footnotes",
     "href": "posts/funkcje.html#footnotes",
     "title": "Funkcje matematyczne",
     "section": "Przypisy",
-    "text": "Przypisy\n\n\nW gimnazjum wciskali nam kit, że będziemy się uczyć programowania w HTML. Nie da się programować w HTML, bo HTML nie ma funkcji, pętli, zmiennych ani innych rzeczy, które pozwalają cokolwiek rzeczywiście zaprogramować. Jeśli chcemy programować cokolwiek na stronach internetowych, użyjemy JavaScript, gdzie wszystkie te rzeczy są.↩︎\nPolecam też wprowadzenie do R na tej stronie.↩︎\nSpróbuj to samo wyrazić językiem algebraicznym.↩︎"
+    "text": "Przypisy\n\n\nW gimnazjum wciskali nam kit, że będziemy się uczyć programowania w HTML. Nie da się programować w HTML, bo HTML nie ma funkcji, pętli, zmiennych ani innych rzeczy, które pozwalają cokolwiek rzeczywiście zaprogramować. Jeśli chcemy programować cokolwiek na stronach internetowych, użyjemy JavaScript, gdzie wszystkie te rzeczy są.↩︎\nPolecam też wprowadzenie do R na tej stronie.↩︎\nSpróbuj to samo wyrazić językiem algebraicznym.↩︎\nUżywam terminu „dodawanie”, bo odejmowanie to dodawanie liczb ujemnych.↩︎"
   },
   {
     "objectID": "posts/git.html",

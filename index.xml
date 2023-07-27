@@ -19,7 +19,7 @@
 
 
 
-<p>Czy masz czasem wrażenie, że rzeczy w matematyce nazywają się bez sensu? To jest bardzo słuszne wrażenie. Dziś na warsztat weźmiemy funkcje, które są zmorą uczniów liceów ze względu na nową, dziwną notację typu <img src="https://latex.codecogs.com/png.latex?f(x)">, cały pozornie chaotyczny język, który odrywa funkcje od reszty matematyki, a także wrażenie, że nijak nie idzie tego spotkać w „prawdziwym życiu”, cokolwiek to jest. Ja właśnie spędzam wieczór z prawdziwego życia na pisaniu o funkcjach. Do czegoś mi się jednak przydały. Zaczynając jednak od nazwy – dlaczego „funkcja”? Bo Liebniz źle rozumiał to słowo. A że raz przyjęte konwencje trzymają się mocno, to do dzisiaj, właściwie przypadkowo, nazywamy tę&nbsp;rzeczy funkcjami.</p>
+<p>Czy masz czasem wrażenie, że rzeczy w matematyce nazywają się bez sensu? To jest bardzo słuszne wrażenie. Dziś na warsztat weźmiemy funkcje, które są zmorą uczniów liceów ze względu na nową, dziwną notację typu <img src="https://latex.codecogs.com/png.latex?f(x)">, cały pozornie chaotyczny język, który odrywa funkcje od reszty matematyki, a także wrażenie, że nijak nie idzie tego spotkać w „prawdziwym życiu”, cokolwiek to jest. Ja właśnie spędzam wieczór z prawdziwego życia na pisaniu o funkcjach. Do czegoś mi się jednak przydały. Zaczynając jednak od nazwy – dlaczego „funkcja”? Bo Leibniz źle rozumiał to słowo. A że raz przyjęte konwencje trzymają się mocno, to do dzisiaj, właściwie przypadkowo, nazywamy tę&nbsp;rzeczy funkcjami.</p>
 <section id="maszyny-matematyczne" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Maszyny matematyczne</h1>
 <p>Skorzystam tutaj z metafory pożyczonej od Jasona Wilkesa, której używał w swojej książce „Spal pracownię matematyczną”.</p>
@@ -84,7 +84,7 @@ Odpowiedź
 <p>W jaki sposób? Weźmy na tapet 4. skrót, czyli opis działania maszyny. Wiem, że maszyna dodaje 3 do dowolnej liczby, którą do niej wrzucę. Jeśli wrzucę 5, to dostanę 8, jeśli wrzucę 12, to dostanę 15 itd. Ustaliłem jednak, że to, co wrzucam do maszyny, mogę określić literką <img src="https://latex.codecogs.com/png.latex?b">. To, że maszyna dodaje 3 mogę&nbsp;więc zapisać jako <img src="https://latex.codecogs.com/png.latex?b%20+%203">. Skoro <img src="https://latex.codecogs.com/png.latex?b"> to <strong>dowolna liczba</strong>, to <img src="https://latex.codecogs.com/png.latex?b%20+%203"> to ta liczba powiększona o 3.</p>
 <p>Mając te skróty uzyskałem już całkiem zwięzły sposób opisu naszych maszyn. Zamiast słów mógłbym napisać na maszynie:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0Am%20=%20b%20+%203%0A"></p>
-<p>Prawda? Niby prawda, ale ten zapis ma kilka wad. Po pierwsze znak <img src="https://latex.codecogs.com/png.latex?="> oznacza w matematyce „to jest to samo, co”. Jeśli <img src="https://latex.codecogs.com/png.latex?m"> to nazwa naszej maszyny, to stwierdzamy, że „maszyna to jest to samo, co dowolna liczba dodać trzy”. Jako srót myślowy działa to nieźle, ale nie o to dokładnie nam chodzi. Maszyna nie jest dowolną liczbą powiększoną o trzy, maszyna to <em>robi</em>, ale nie <em>jest</em> tym. Tak jak maszynka do mielenia mięsa nie jest tym samym, co zmielone mięso.</p>
+<p>Prawda? Niby prawda, ale ten zapis ma kilka wad. Po pierwsze znak <img src="https://latex.codecogs.com/png.latex?="> oznacza w matematyce „to jest to samo, co”. Jeśli <img src="https://latex.codecogs.com/png.latex?m"> to nazwa naszej maszyny, to stwierdzamy, że „maszyna to jest to samo, co dowolna liczba dodać trzy”. Jako skrót myślowy działa to nieźle, ale nie o to dokładnie nam chodzi. Maszyna nie jest dowolną liczbą powiększoną o trzy, maszyna to <em>robi</em>, ale nie <em>jest</em> tym. Tak jak maszynka do mielenia mięsa nie jest tym samym, co zmielone mięso.</p>
 <p>Czepiam się, wiem, ale ten zapis utrudnia nam też inną rzecz – załóżmy, że chcemy zapisać, że wrzuciliśmy do maszyny 5 i wypluła ona 8. Jak to zrobić w tej konwencji? <img src="https://latex.codecogs.com/png.latex?5%20=%208">? To już trochę krok za daleko. Matematycznej inkwizycji nie ma, ale jakby była, to taki zapis byłby heretycki. Możemy jednak wykorzystać nieco zgrabniejszą konwencję i od razu zawrzeć w niej skrót numer 3., czyli oznaczenie tego, co maszyna z siebie wypluwa. Proponuję zapisać to tak:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0Am(5)%20=%208%0A"></p>
 <p>Ten nawias nawet wygląda jak kieszonka. Sama część <img src="https://latex.codecogs.com/png.latex?m(5)"> wskazuje, że do maszyny <img src="https://latex.codecogs.com/png.latex?m"> wrzuciliśmy liczbę 5. Po znaku równa się piszemy to, co maszyna z siebie wypluła. Teraz wielkie technikalium – sam skrót <img src="https://latex.codecogs.com/png.latex?m(5)"> dosłownie nie oznacza samego aktu włożenia 5 do maszyny <img src="https://latex.codecogs.com/png.latex?m">, ale to, co maszyna <img src="https://latex.codecogs.com/png.latex?m"> wypluje, kiedy wrzucę do niej 5. Rozróżnienie to brzmi jak sztuka dla sztuki i czepialstwo i trochę się zgadzam, ale pozwala nam to na kilka rzeczy. Po pierwsze, znika problem ze znakiem <img src="https://latex.codecogs.com/png.latex?="> – <img src="https://latex.codecogs.com/png.latex?m(5)"> rzeczywiście <em>jest</em> tym, co maszyna z siebie wypluje, jak wrzucę do niej 5, czyli <img src="https://latex.codecogs.com/png.latex?m(5)"> to <em>jest</em> 8 na takiej samej zasadzie, jak <img src="https://latex.codecogs.com/png.latex?5%20+%203"> to <em>jest</em> 8. Dzięki temu mogę też zapisać coś takiego:</p>
@@ -196,7 +196,7 @@ Maszyna licząca pole kwadratu
 </div>
 </div>
 </div>
-<p>Każdy wzrór matematyczny da się&nbsp;więc przerobić na maszynę. Mogło Ci się to zdarzyć, jeśli kiedykolwiek pisałeś(-aś) formuły w Excelu. Jeśli dostałbyś(-abyś) plik Excela z 1000 boków kwadratów i zadaniem przygotowania kolumny z polem kwadratu, prawdopodobnie użyłbyś(-abyś) formuły typu <code>= A1 * A1</code>, a potem przeciągnąłbyś(-abyś) ją tak, żeby policzyła pola wszystkich kwadratów.</p>
+<p>Każdy wzór matematyczny da się&nbsp;więc przerobić na maszynę. Mogło Ci się to zdarzyć, jeśli kiedykolwiek pisałeś(-aś) formuły w Excelu. Jeśli dostałbyś(-abyś) plik Excela z 1000 boków kwadratów i zadaniem przygotowania kolumny z polem kwadratu, prawdopodobnie użyłbyś(-abyś) formuły typu <code>= A1 * A1</code>, a potem przeciągnąłbyś(-abyś) ją tak, żeby policzyła pola wszystkich kwadratów.</p>
 <section id="sec-programming" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-programming"><span class="header-section-number">3.1</span> R i Python</h2>
 <p>Wszystkie maszyny, które zapisaliśmy w poprzednim zadaniu, moglibyśmy rzeczywiście stworzyć. Może nie w formie pudełka przerabiającego blaszki, ale możemy łatwo je <em>zaprogramować</em>. Nie jest to konieczne do zrozumienia funkcji, ale bardzo polecam, żeby chociaż spróbować. Wczesne zainteresowanie programowaniem mnie osobiście mocno pomogło w późniejszej nauce matematyki.</p>
@@ -671,7 +671,7 @@ Odpowiedź
 </div>
 </div>
 <p>W tym scenariuszu liczyliśmy wartość funkcji, ale czasem chcemy policzyć, jaki powinien być <em>argument</em>. Przypomnij sobie, co to jest miejsce zerowe – co muszę wrzucić do funkcji, żeby wypluła mi 0. To też da się liczyć. Bardziej realny przykład. Wyobraź sobie, że masz funkcję, która liczy, ile pieniędzy dostaniesz z rocznej lokaty, w zależności od tego, ile pieniędzy wyłożysz na lokatę. Pierwszy scenariusz to sprawdzanie dokładnie tego, czyli ile dostanę jak wpłacę 10 000 zł, a ile, jak wpłacę 30 000 zł. Drugi scenariusz to liczenie, ile muszę wpłacić, żeby otrzymać po roku 100 zł, a ile, żeby otrzymać 1000 zł.</p>
-<p>W praktyce liczy się to według dość prostej logiki. Chcę wiedzieć, ile muszę włożyć do maszyny dodającej 3, żeby wypluła 7. Zapisując to matematycznie, chcę wiedzieć, miedy wartość funkcji <img src="https://latex.codecogs.com/png.latex?m"> wynosi 7, czyli kiedy <img src="https://latex.codecogs.com/png.latex?m(x)%20=%207">. Jednocześnie wiem, że <img src="https://latex.codecogs.com/png.latex?m(x)"> to po prostu <img src="https://latex.codecogs.com/png.latex?x%20+%203">, bo tak działa funkcja dodająca 3. Wychodzi mi z tego proste równanie.</p>
+<p>W praktyce liczy się to według dość prostej logiki. Chcę wiedzieć, ile muszę włożyć do maszyny dodającej 3, żeby wypluła 7. Zapisując to matematycznie, chcę wiedzieć, kiedy wartość funkcji <img src="https://latex.codecogs.com/png.latex?m"> wynosi 7, czyli kiedy <img src="https://latex.codecogs.com/png.latex?m(x)%20=%207">. Jednocześnie wiem, że <img src="https://latex.codecogs.com/png.latex?m(x)"> to po prostu <img src="https://latex.codecogs.com/png.latex?x%20+%203">, bo tak działa funkcja dodająca 3. Wychodzi mi z tego proste równanie.</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0Am(x)%20=%207%0A"> <img src="https://latex.codecogs.com/png.latex?%0Ax%20+%203%20=%207%0A"> <img src="https://latex.codecogs.com/png.latex?%0Ax%20=%204%0A"></p>
 <p>Na tej samej zasadzie możemy rozwiązywać bardziej skomplikowane równania, np. znaleźć miejsce zerowe funkcji <img src="https://latex.codecogs.com/png.latex?y%20=%205x%20+%203"> (pamiętaj, <img src="https://latex.codecogs.com/png.latex?y"> to inne oznaczenie wartości funkcji).</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0Ay%20=%200%0A"></p>
@@ -746,8 +746,8 @@ Odpowiedź
 <h1 data-number="6"><span class="header-section-number">6</span> Wykresy</h1>
 <p>Nie da się zapisać na kartce wszystkich możliwych wartości funkcji. Między 0 a 1 jest nieskończenie wiele liczb i każdą z tych liczb można do funkcji wrzucić. Ciekawe rozwiązanie tego problemu stworzył jednak Kartezjusz. Tak, ten od „Myślę, więc jestem”. Kartezjusz narysował dwie linie przecinające się pod kątem prostym, a potem oznaczył siatkę.</p>
 <p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/axes-empty.png" class="img-fluid"></p>
-<p>Ten pozornie banalny pomysł, nieobcy nikomu, kto kiedykolwiek grał w statki, to wielka rewolucja. Dzięki niej możemy przedstawić nieskończenie wiele wartości danej funkcji oraz zyskać całowicie nową perspektywę na funkcje. Teraz wystarczy, że umówimy się, że pozioma oś to argumenty, a pionowa to wartości. Co to znaczy?</p>
-<p>Wyobraźmy sobie funkcję dodającą 1. Matematycznie możemy to zapisać np. jako <img src="https://latex.codecogs.com/png.latex?j(l)%20=%20l%20+%201">. Teraz wrzućmy do tej funkcji liczbę 1 – <img src="https://latex.codecogs.com/png.latex?j(1)%20=%201%20+%201%20=%202">. Ten sam wniosek możemy nanieść na wykres. Na osi poziomej znajdujemy liczbę, którą wrzuciliśmy do funkcji (tj. 1), a na osi pionowej liczbę, którą funkcja wpluła (tj. 2). Na przecięciu jednego z drugim możemy teraz postawić kropkę.</p>
+<p>Ten pozornie banalny pomysł, nieobcy nikomu, kto kiedykolwiek grał w statki, to wielka rewolucja. Dzięki niej możemy przedstawić nieskończenie wiele wartości danej funkcji oraz zyskać całkowicie nową perspektywę na funkcje. Teraz wystarczy, że umówimy się, że pozioma oś to argumenty, a pionowa to wartości. Co to znaczy?</p>
+<p>Wyobraźmy sobie funkcję dodającą 1. Matematycznie możemy to zapisać np. jako <img src="https://latex.codecogs.com/png.latex?j(l)%20=%20l%20+%201">. Teraz wrzućmy do tej funkcji liczbę 1 – <img src="https://latex.codecogs.com/png.latex?j(1)%20=%201%20+%201%20=%202">. Ten sam wniosek możemy nanieść na wykres. Na osi poziomej znajdujemy liczbę, którą wrzuciliśmy do funkcji (tj. 1), a na osi pionowej liczbę, którą funkcja wypluła (tj. 2). Na przecięciu jednego z drugim możemy teraz postawić kropkę.</p>
 <p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/axes-point.png" class="img-fluid"></p>
 <p>Zróbmy to samo dla 0 i 2. <img src="https://latex.codecogs.com/png.latex?j(0)%20=%201"> i <img src="https://latex.codecogs.com/png.latex?j(2)%20=%203">. Zaznaczmy to.</p>
 <p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/axes-points.png" class="img-fluid"></p>
@@ -755,7 +755,7 @@ Odpowiedź
 <p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/axes-pointed-line.png" class="img-fluid"></p>
 <p>To, co otrzymaliśmy, to ewidentnie prosta linia. Połączmy więc te punkty.</p>
 <p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/axes-line.png" class="img-fluid"></p>
-<p>Tak naprawdę, żeby taką linię narysować, wystarczą dwa punkty. Gdy przyręcasz listwę do ściany, musisz ją przykręcić w dwóch miejscach, żeby się nie ruszała.</p>
+<p>Tak naprawdę, żeby taką linię narysować, wystarczą dwa punkty. Gdy przykręcasz listwę do ściany, musisz ją przykręcić w dwóch miejscach, żeby się nie ruszała.</p>
 <p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/axes-line-two-points.png" class="img-fluid"></p>
 <p>Taka linia pozwala nam odczytywać wartości dla dowolnego argumentu. Dla przykładu, jeśli chcę sprawdzić, co funkcja wypluje, jak wrzucę do niej 2, to szukam 2 na osi poziomej i patrzę, jak wysoko jest tam moja linia. W tym wypadku przecięcie jest w punkcie <img src="https://latex.codecogs.com/png.latex?(2,%203)">. Identyczny wniosek otrzymamy licząc wartość funkcji algebraicznie <img src="https://latex.codecogs.com/png.latex?j(2)%20=%202%20+%201%20=%203">.</p>
 <p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/axes-value.png" class="img-fluid"></p>
@@ -816,7 +816,7 @@ Odpowiedź
 <p>Spójrz na ten wykres i powiedz, co wspólnego mają wszystkie te punkty?</p>
 <p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/x-axis.png" class="img-fluid"></p>
 <p>Wszystkie leżą na osi X, to prawda. To jest opis w języku graficznym, gdzie istnieją punkty rozlokowane w przestrzeni. Teraz chcemy jednak przejść z opisu graficznego do algebraicznego, a punktem styku między jednym i drugim są <em>współrzędne</em>. Jaką współrzędną mają wspólną wszystkie te punkty? Po przeanalizowaniu wykresu dochodzimy do wniosku, że każdy z naszych punktów ma współrzędną <img src="https://latex.codecogs.com/png.latex?y%20=%200">. Różnią się natomiast współrzędnymi <img src="https://latex.codecogs.com/png.latex?x">.</p>
-<p>Jeśli jesteśmy pytani o <strong>punkt przecięcia z osią X</strong>, innymi słowy jesteśmy pytani o takie miejsce, gdzie <img src="https://latex.codecogs.com/png.latex?y%20=%200">. Takim miejscem dla narysowanej na wykresie maszyny jest punkt o współrzędnych <img src="https://latex.codecogs.com/png.latex?(-1,%200)">. Jeśli sięgniesz pamięcią do punktu 4., zorientujesz się, że mamy specjalną nazwę na punkty, gdze <img src="https://latex.codecogs.com/png.latex?y"> (czyli wartość funkcji) wynosi <img src="https://latex.codecogs.com/png.latex?0"> – <strong>miejsce zerowe</strong>. Pytanie o punkt przecięcia z osią X jest więc tak naprawdę znanym nam już pytaniem o miejsce zerowe, gdzie ewentualnie odpowiedź będzie trzeba zapisać jako <img src="https://latex.codecogs.com/png.latex?A(-1,%200)"> zamiast <img src="https://latex.codecogs.com/png.latex?f(-1)%20=%200">.</p>
+<p>Jeśli jesteśmy pytani o <strong>punkt przecięcia z osią X</strong>, innymi słowy jesteśmy pytani o takie miejsce, gdzie <img src="https://latex.codecogs.com/png.latex?y%20=%200">. Takim miejscem dla narysowanej na wykresie maszyny jest punkt o współrzędnych <img src="https://latex.codecogs.com/png.latex?(-1,%200)">. Jeśli sięgniesz pamięcią do punktu 4., zorientujesz się, że mamy specjalną nazwę na punkty, gdzie <img src="https://latex.codecogs.com/png.latex?y"> (czyli wartość funkcji) wynosi <img src="https://latex.codecogs.com/png.latex?0"> – <strong>miejsce zerowe</strong>. Pytanie o punkt przecięcia z osią X jest więc tak naprawdę znanym nam już pytaniem o miejsce zerowe, gdzie ewentualnie odpowiedź będzie trzeba zapisać jako <img src="https://latex.codecogs.com/png.latex?A(-1,%200)"> zamiast <img src="https://latex.codecogs.com/png.latex?f(-1)%20=%200">.</p>
 </section>
 <section id="przecięcie-z-osią-y" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="przecięcie-z-osią-y"><span class="header-section-number">7.4</span> Przecięcie z osią Y</h2>
@@ -827,14 +827,73 @@ Odpowiedź
 </section>
 <section id="funkcje-liniowe" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> Funkcje liniowe</h1>
-<section id="nachylenie" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="nachylenie"><span class="header-section-number">8.1</span> Nachylenie</h2>
+<p>Najprostszy kształt, jaki może przyjąć funkcja to prosta linia. Funkcje potrafią być bardzo zwariowane i tworzyć różne zawijasy, ale wszystko zaczyna się od prostej linii. Jednak linia linii nierówna. Co prawda długość nie ma znaczenia, bo wszystkie funkcje liniowe są nieskończenie długie, ale istnieją dwa parametry, którymi różne linie proste mogą się różnić. Oba sobie tutaj omówimy.</p>
+<section id="wyraz-wolny" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="wyraz-wolny"><span class="header-section-number">8.1</span> Wyraz wolny</h2>
+<p>Zaczniemy od, być może, mniej istotnego i rewolucyjnego, ale który łatwiej jest zobaczyć. Narysujmy sobie 5 kolejnych funkcji: <img src="https://latex.codecogs.com/png.latex?f(x)%20=%20x%20+%202">, <img src="https://latex.codecogs.com/png.latex?g(x)%20=%20x%20+%201">, <img src="https://latex.codecogs.com/png.latex?h(x)%20=%20x">, <img src="https://latex.codecogs.com/png.latex?i(x)%20=%20x%20-%201">, <img src="https://latex.codecogs.com/png.latex?j(x)%20=%20x%20-%202">.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/intercept.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Czerwony – <img src="https://latex.codecogs.com/png.latex?f(x)">; pomarańczowy – <img src="https://latex.codecogs.com/png.latex?g(x)">; zielony – <img src="https://latex.codecogs.com/png.latex?h(x)">; niebieski – <img src="https://latex.codecogs.com/png.latex?i(x)">; fioletowy – <img src="https://latex.codecogs.com/png.latex?j(x)">.</figcaption>
+</figure>
+</div>
+<p>Jeśli teraz porównamy te funkcje, to możemy dojść do wniosku, że są to równoległe linie (tak samo nachylone), ale niektóre są wyżej, inne niżej. Dodawanie do <img src="https://latex.codecogs.com/png.latex?x"> podnosi wykres, a odejmowanie go obniża. Najłatwiej skupić się tutaj na wartości w zerze, czyli na przecięciu z osią Y. Widzimy, że czerwona linia jest najwyżej, a każda kolejna o oczko niżej. Ten punkt, wartość w zerze, jest o tyle ciekawy, że jak spróbujemy podstawić 0 do funkcji, to <img src="https://latex.codecogs.com/png.latex?x"> nam znika i zostaje tylko to, co dodaliśmy, lub odjęliśmy. <img src="https://latex.codecogs.com/png.latex?f(0)%20=%200%20+%202%20=%202">.</p>
+<p>Wbrew pozorom to bardzo ważny wniosek. Pozwala on bardzo szybko określić, co do <img src="https://latex.codecogs.com/png.latex?x"> było dodane, albo od niego odjęte. Spróbuj to zrobić na podstawie poniższej ryciny.</p>
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/intercept-identification.png" class="img-fluid"></p>
+<p>Możemy iść taką logiką – skoro <img src="https://latex.codecogs.com/png.latex?x"> nie ma żadnego wpływu na wartość funkcji, jeśli wynosi 0 (bo zostaje tylko to, co dodajemy lub odejmujemy), to wystarczy spojrzeć na <img src="https://latex.codecogs.com/png.latex?f(0)">. Tutaj wynosi ta wartość <img src="https://latex.codecogs.com/png.latex?1,5"> i rzeczywiście, ta funkcja to <img src="https://latex.codecogs.com/png.latex?f(x)%20=%20x%20+%201,5">. Nazywamy to <strong>wyraz wolny</strong> (ang. <em>intercept</em>) i najłatwiej go odczytać właśnie z przecięcia z osią Y. Wyraz wolny <em>zawsze</em> ma wartość równą <img src="https://latex.codecogs.com/png.latex?f(0)">. Wyraz wolny decyduje o tym, czy wykres funkcji jest wyżej, czy niżej.</p>
 </section>
-<section id="wyraz-wolny" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="wyraz-wolny"><span class="header-section-number">8.2</span> Wyraz wolny</h2>
+<section id="nachylenie" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="nachylenie"><span class="header-section-number">8.2</span> Nachylenie</h2>
+<p>Drugi współczynnik trudniej jest zrozumieć, dlatego warto się tu skupić mocniej. Naszkicujmy 5 funkcji – <img src="https://latex.codecogs.com/png.latex?f(x)%20=%202x">, <img src="https://latex.codecogs.com/png.latex?g(x)%20=%201x">, <img src="https://latex.codecogs.com/png.latex?h(x)%20=%200x">, <img src="https://latex.codecogs.com/png.latex?i(x)%20=%20-1x">, <img src="https://latex.codecogs.com/png.latex?j(x)%20=%20-2x">.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/funkcje/slope.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Czerwony – <img src="https://latex.codecogs.com/png.latex?f(x)">; pomarańczowy – <img src="https://latex.codecogs.com/png.latex?g(x)">; zielony – <img src="https://latex.codecogs.com/png.latex?h(x)">; niebieski – <img src="https://latex.codecogs.com/png.latex?i(x)">; fioletowy – <img src="https://latex.codecogs.com/png.latex?j(x)">.</figcaption>
+</figure>
+</div>
+<p>Żeby się nie zgubić, porównajmy na początek funkcje zaznaczone na czerwono i pomarańczowo. Mam pytanie. Jeśli byłyby to schody, to po których wolał(a)byś wchodzić? Jeśli nie szukasz wszędzie okazji do fitnessu (to pisząc sięgam po kolejnego wafla z kremem orzechowym), to pewnie wybierzesz schody pomarańczowe. Są bowiem mniej <em>strome</em>. Innymi słowy mają mniejsze <em>nachylenie</em>.</p>
+<p>Porównajmy teraz obie te funkcje do funkcji zaznaczonej na zielono. Zielona funkcja jest płaska. Ma zerowe nachylenie. Nie ma się co dziwić, po uproszczeniu jej wzór to <img src="https://latex.codecogs.com/png.latex?h(x)%20=%200"> – niezależnie, co wrzucimy, wyrzuci ona 0. Jej wartość jest stała. Następnie przechodzimy do funkcji niebieskiej i fioletowej – co do obu możemy zauważyć, że im bardziej przesuwamy palcem w prawo, tym niżej jesteśmy. Obie te funkcje są <em>malejące</em>, ale funkcja fioletowa maleje szybciej.</p>
+<p>Zauważmy jednak, że wszystkie te funkcje przechodzą przez <img src="https://latex.codecogs.com/png.latex?(0,%200)">. Nachylenie nie ma więc związku z tym, czy wykres jest przesunięty w górę, czy w dół. To, jak już ustaliliśmy, kontroluje wyraz wolny. Rampa jest tak samo stroma na pokładzie samolotu i w piekle.</p>
+<p>Nachylenie kontrolowane jest przez tzw. <strong>współczynnik kierunkowy</strong>, czyli liczbę, przez którą mnożę <img src="https://latex.codecogs.com/png.latex?x">. Im ta liczba większa, tym bardziej stromy wykres. Jeśli ta liczba jest ujemna, funkcja jest malejąca.</p>
+</section>
+<section id="wzór-ogólny" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="wzór-ogólny"><span class="header-section-number">8.3</span> Wzór ogólny</h2>
+<p>Ustaliliśmy więc, że funkcje liniowe kontrolowane są przez dwie wartości:</p>
+<ol type="1">
+<li><p>Współczynnik kierunkowy, czyli liczbę, przez którą mnożę <img src="https://latex.codecogs.com/png.latex?x"> – kontroluje nachylenie.</p></li>
+<li><p>Wyraz wolny, czyli liczbę, którą dodaję do <img src="https://latex.codecogs.com/png.latex?x"> – kontroluje położenie w pionie.</p></li>
+</ol>
+<p>Jeśli porwiemy się na to szaleństwo i połączymy mnożenie z dodawaniem, to otrzymamy wzór ogólny funkcji liniowej:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af(x)%20=%20ax%20+%20b%0A"></p>
+<p>Oczywiście oznaczenia, jak zawsze, są umowne. Równie dobrze mogę napisać <img src="https://latex.codecogs.com/png.latex?m(l)%20=%20sl%20+%20w"> albo nawet <img src="https://latex.codecogs.com/png.latex?m(l)%20=%20sl%20+%20m(0)">, bo <img src="https://latex.codecogs.com/png.latex?m"> to maszyna, <img src="https://latex.codecogs.com/png.latex?l"> to liczba, <img src="https://latex.codecogs.com/png.latex?s"> to stromizna, a <img src="https://latex.codecogs.com/png.latex?w"> to wyraz wolny, który zawsze ma wartość równą wartości funkcji w zerze. Niezależnie, jakie literki sobie wybierzemy, funkcje, które da się przedstawić jako mnożenie <img src="https://latex.codecogs.com/png.latex?x"> i dodawanie (lub odejmowanie<sup>4</sup>), będą miały kształt prostej linii. W standardowej notacji literką <img src="https://latex.codecogs.com/png.latex?a"> oznacza się współczynnik kierunkowy, zaś literką <img src="https://latex.codecogs.com/png.latex?b"> wyraz wolny.</p>
+<p>Statystyczny spoiler: linie regresji to proste linie, dlatego one również mają taką postać. Zazwyczaj zapisywane są upiornie wyglądającą notacją typu <img src="https://latex.codecogs.com/png.latex?%5Cbeta_0%20+%20%5Cbeta_1%20X">, ale to cały czas to samo, tylko w odwrotnej kolejności i literkami greckimi. Nie dajcie się zwieść, to jest tylko po to, żeby Was przestraszyć.</p>
+</section>
+</section>
+<section id="podsumowanie" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Podsumowanie</h1>
+<ol type="1">
+<li>Funkcje to „maszyny matematyczne”, które przyjmują liczbę, wykonują na niej operację i zwracają wynik.</li>
+<li>Nazewnictwo:
+<ol type="1">
+<li>Argument lub miejsce – to, co wrzucam do funkcji;</li>
+<li>Wartość – to, co funkcja wypluwa.</li>
+</ol></li>
+<li>Oznacza się je serią skrótów stanowiących pojedyncze literki – nazwa funkcji (np. <img src="https://latex.codecogs.com/png.latex?f">), argument (np. <img src="https://latex.codecogs.com/png.latex?x">), wartość (np. <img src="https://latex.codecogs.com/png.latex?f(x)"> lub <img src="https://latex.codecogs.com/png.latex?y">) i definicja (np. <img src="https://latex.codecogs.com/png.latex?f(x)%20=%20x%20+%203">).</li>
+<li>Nieskończoną liczbę wartości funkcji można przedstawić na wykresie, gdzie na osi poziomej (zwanej X) zaznacza się argumenty, a na osi pionowej (zwanej Y) zaznacza się odpowiadające im wartości.</li>
+<li>Wykresy odblokowują nowy sposób mówienia o funkcjach jako o rysunkach:
+<ol type="1">
+<li>„Punkt <img src="https://latex.codecogs.com/png.latex?A(2,%205)"> należy do wykresu funkcji <img src="https://latex.codecogs.com/png.latex?f">” to to samo, co „<img src="https://latex.codecogs.com/png.latex?f(2)%20=%205">“;</li>
+<li>„Wykres funkcji <img src="https://latex.codecogs.com/png.latex?f"> przecina oś X w miejscu <img src="https://latex.codecogs.com/png.latex?5">” to to samo, co „<img src="https://latex.codecogs.com/png.latex?f(5)%20=%200">“;</li>
+<li>„Wykres funkcji <img src="https://latex.codecogs.com/png.latex?f"> przecina oś Y z wartością <img src="https://latex.codecogs.com/png.latex?8">” to to samo, co „<img src="https://latex.codecogs.com/png.latex?f(0)%20=%208">“.</li>
+</ol></li>
+<li>Wszystkie funkcje o kształcie linii prostej dają się przedstawić jako <img src="https://latex.codecogs.com/png.latex?y%20=%20ax%20+%20b">, gdzie:
+<ol type="1">
+<li><img src="https://latex.codecogs.com/png.latex?a"> – współczynnik kierunkowy, kontroluje nachylenie wykresu;</li>
+<li><img src="https://latex.codecogs.com/png.latex?b"> – wyraz wolny, kontroluje przesunięcie wykresu w górę lub w dół i zawsze wynosi <img src="https://latex.codecogs.com/png.latex?f(0)">.</li>
+</ol></li>
+</ol>
 
 
-</section>
 </section>
 
 
@@ -844,6 +903,7 @@ Odpowiedź
 <li id="fn1"><p>W gimnazjum wciskali nam kit, że będziemy się uczyć programowania w HTML. Nie da się <em>programować</em>&nbsp;w HTML, bo HTML nie ma funkcji, pętli, zmiennych ani innych rzeczy, które pozwalają cokolwiek rzeczywiście zaprogramować. Jeśli chcemy programować cokolwiek na stronach internetowych, użyjemy JavaScript, gdzie wszystkie te rzeczy są.↩︎</p></li>
 <li id="fn2"><p>Polecam też <a href="../posts/podstawy_R.html">wprowadzenie do R</a> na tej stronie.↩︎</p></li>
 <li id="fn3"><p>Spróbuj to samo wyrazić językiem algebraicznym.↩︎</p></li>
+<li id="fn4"><p>Używam terminu „dodawanie”, bo odejmowanie to dodawanie liczb ujemnych.↩︎</p></li>
 </ol>
 </section></div> ]]></description>
   <category>Statystyka</category>
