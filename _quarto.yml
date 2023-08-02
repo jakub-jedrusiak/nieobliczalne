@@ -4,10 +4,12 @@ project:
 website:
   title: "Nieobliczalne"
   site-url: "https://nieobliczalne.pl"
+  favicon: ./styles/logo.svg
   open-graph: true
   twitter-card:
     creator: "@jakub_jedrusiak"
   navbar:
+    logo: ./styles/logo.png
     left:
       - href: index.qmd
         text: Strona główna
