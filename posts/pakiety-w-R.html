@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.283">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -66,6 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href=".././styles/logo.svg" rel="icon" type="image/svg+xml">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -86,6 +87,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "Brak wyników",
     "search-matching-documents-text": "dopasowane dokumenty",
@@ -120,6 +126,8 @@ cookieconsent.run({
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
+  ,
+"language":"pl"
   });
 });
 </script> 
@@ -134,7 +142,7 @@ cookieconsent.run({
 <meta property="og:title" content="Nieobliczalne - Tworzenie pakietów w R">
 <meta property="og:description" content="Po co pisać własne pakiety w R? Widzę dwa powody. Po pierwsze możemy mieć pewną kolekcję funkcji, których często używamy w różnych analizach. Możemy je w pewnym momencie chcieć zebrać w jedno miejsce. Po drugie możemy chcieć się podzielić naszymi funkcjami z innymi, czy to z zespołem, czy ze światem. W obu przypadkach pakiet jest lepszą, bardziej uporządkowaną i łatwiejszą w używaniu opcją niż pliki ze skryptami.">
 <meta property="og:image" content="https://nieobliczalne.pl/posts/headers/pakiety-w-R.webp">
-<meta property="og:site-name" content="Nieobliczalne">
+<meta property="og:site_name" content="Nieobliczalne">
 <meta name="twitter:title" content="Nieobliczalne - Tworzenie pakietów w R">
 <meta name="twitter:description" content="Po co pisać własne pakiety w R? Widzę dwa powody. Po pierwsze możemy mieć pewną kolekcję funkcji, których często używamy w różnych analizach. Możemy je w pewnym momencie chcieć zebrać w jedno miejsce. Po drugie możemy chcieć się podzielić naszymi funkcjami z innymi, czy to z zespołem, czy ze światem. W obu przypadkach pakiet jest lepszą, bardziej uporządkowaną i łatwiejszą w używaniu opcją niż pliki ze skryptami.">
 <meta name="twitter:image" content="https://nieobliczalne.pl/headers/pakiety-w-R.jpeg">
@@ -148,7 +156,10 @@ cookieconsent.run({
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src=".././styles/logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Nieobliczalne</span>
     </a>
@@ -183,10 +194,10 @@ cookieconsent.run({
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -260,9 +271,8 @@ cookieconsent.run({
   <li><a href="#inne-rzeczy-do-wykonania" id="toc-inne-rzeczy-do-wykonania" class="nav-link" data-scroll-target="#inne-rzeczy-do-wykonania"><span class="header-section-number">13.9</span> Inne rzeczy do wykonania</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/pakiety-w-R.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/pakiety-w-R.qmd" class="toc-action"><i class="bi bi-github"></i>Edytuj tę stronę</a></li><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action"><i class="bi empty"></i>Zgłoś problem</a></li></ul></div></nav>
     <div class="quarto-margin-footer"><div class="margin-footer-item">
-
 <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
     <style type="text/css">
     /* LOADER */
@@ -1203,6 +1213,7 @@ cookieconsent.run({
   </div>
   
 
+
 </header>
 
 <p>Pakiety to nic innego jak zbiory funkcji. Od zwykłych plików .R z funkcjami różnią się tym, że mają określoną strukturę, dzięki której można je potem zainstalować i szybko zacząć wykorzystywać. Pewnie pierwszym skojarzeniem z pisaniem pakietów jest udostępnianie ich całej społeczności przez CRAN. Owszem, można to zrobić, ale można mieć też prywatne pakiety trzymane na GitHubie. Wtedy taki pakiet może być chałupniczy, niepełny, nieelegancki, ale i tak jest lepszą drogą, niż luźne pliki z definicjami funkcji. Dzięki temu nie musimy od razu wszystkiego zrobić na tip-top, żeby każdy na świecie wygodnie korzystał z naszych trzech funkcji. Naszym celem jest w końcu <strong>oszczędzenie sobie pracy, nie dołożenie</strong>.</p>
@@ -1221,7 +1232,7 @@ cookieconsent.run({
 <p>Stworzony przez nas szkielet pakietu już ma określoną strukturę. W wybranym wcześniej folderze znajdziemy serię szczególnych plików i folderów, która potem będzie się rozrastać. Obecnie są to:</p>
 <ul>
 <li><p><code>.gitignore</code> – plik repozytorium mówiący, co Git ma ignorować (więcej o tym w <a href="./posts/git.qmd">tekście o Git</a>).</p></li>
-<li><p><code>.Rbuildignore</code> – plik, w którym podajemy niestandardowe pliki, które z jakiegoś powodu znajdują się w folderze z naszym pakietem; jest to ważne, bo R-CMD-check (o którym więcej w podrozdziale <a href="#sec-r-cmd-check">8</a>) będzie na nas krzyczał, jeśli znajdzie niestandardowe pliki w nietypowych miejscach.</p></li>
+<li><p><code>.Rbuildignore</code> – plik, w którym podajemy niestandardowe pliki, które z jakiegoś powodu znajdują się w folderze z naszym pakietem; jest to ważne, bo R-CMD-check (o którym więcej w podrozdziale <a href="#sec-r-cmd-check" class="quarto-xref">8</a>) będzie na nas krzyczał, jeśli znajdzie niestandardowe pliki w nietypowych miejscach.</p></li>
 <li><p><code>DESCRIPTION</code> – metadane naszego pakietu, przede wszystkim nazwa, wersja, autorzy i pakiety, których nasz pakiet wymaga do działania.</p></li>
 <li><p><code>man</code> – folder z plikami .Rd z dokumentacją naszych funkcji; nie edytujemy ich ręcznie.</p></li>
 <li><p><code>NAMESPACE</code> – plik z przestrzenią nazw naszego pakietu; nie edytujemy go ręcznie.</p></li>
@@ -1409,8 +1420,8 @@ Wpis BibTex dla użytkowników LaTeX to
 <div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-overflow-wrap code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>The main function is <span class="in">`mtscr_scores()`</span> which can return a df with scores for each participant, each item or each participant-item combination. Scores come from two models – <span class="in">`all_max`</span> and <span class="in">`all_top2`</span>. A value for a participant is the maximum value predicted by the model for that participant.</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mtscr"</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"mtscr_creativity"</span>, <span class="at">package =</span> <span class="st">"mtscr"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="in">library("mtscr")</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="in">data("mtscr_creativity", package = "mtscr")</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="light-mode">
 <div class="quarto-figure quarto-figure-center">
@@ -1434,7 +1445,7 @@ Wpis BibTex dla użytkowników LaTeX to
 <h2 data-number="4.1" class="anchored" data-anchor-id="odznaki"><span class="header-section-number">4.1</span> Odznaki</h2>
 <p>Bardzo często w repozytoriach znajdziemy odznaki. Są to elementy informacyjno-ozdobne, które mówią coś o naszym pakiecie, np. że przechodzi testy, że jest w CRAN albo ile razy w miesiącu ktoś go pobiera. Ciekawe odznaki obejmują:</p>
 <ol type="1">
-<li><p>Odznakę <code>R-CMD-check</code>, o której piszę w podrozdziale <a href="#sec-GitHubActions">5.1</a>.</p></li>
+<li><p>Odznakę <code>R-CMD-check</code>, o której piszę w podrozdziale <a href="#sec-GitHubActions" class="quarto-xref">5.1</a>.</p></li>
 <li><p>Odznakę <code>lifecycle</code>, którą możemy poinformować, że nasz pakiet jako całość jest eksperymentalny, stabilny lub wycofany. Możemy ją dodać wykorzystując komendę <code>usethis::use_lifecycle_badge("stable")</code>. Argument wybieramy jaki chcemy, zgodnie z listą dostępną <a href="https://lifecycle.r-lib.org/articles/stages.html">tutaj</a>.</p></li>
 <li><p>Odznakę CRAN, która informuje, jaka wersja naszego pakietu dostępna jest w CRAN. Jeśli pakiet nie jest dostępny, to odznaka też może o tym poinformować. Dodajemy ją komendą <code>usethis::use_cran_badge()</code>.</p></li>
 </ol>
@@ -1471,7 +1482,7 @@ Wpis BibTex dla użytkowników LaTeX to
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_github_action_check_standard</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Dodaje ona kilka rzeczy. Po pierwsze sprawia ona, że po każdym naszym commicie GitHub wykonuje zestaw podstawowych testów zwanych R-CMD-check, o których więcej piszę w podrozdziale <a href="#sec-r-cmd-check">Sekcja&nbsp;8</a>. W drugiej kolejności dodaje ona odznakę R-CMD-check do naszego pliku <code>README</code>, żebyśmy mogli błyszczeć przechodzeniem testów.</p>
+<p>Dodaje ona kilka rzeczy. Po pierwsze sprawia ona, że po każdym naszym commicie GitHub wykonuje zestaw podstawowych testów zwanych R-CMD-check, o których więcej piszę w podrozdziale <a href="#sec-r-cmd-check" class="quarto-xref">Sekcja&nbsp;8</a>. W drugiej kolejności dodaje ona odznakę R-CMD-check do naszego pliku <code>README</code>, żebyśmy mogli błyszczeć przechodzeniem testów.</p>
 </section>
 </section>
 <section id="pliki-z-funkcjami" class="level1" data-number="6">
@@ -1510,7 +1521,7 @@ Wpis BibTex dla użytkowników LaTeX to
 </div>
 <p>Ponieważ jest to pakiet, musimy trochę przepisać naszą funkcję, jeśli nie chcemy, żeby R-CMD-check później na nas krzyczał. Jeśli nas to nie obchodzi, możemy to pominąć, ale lepiej jest od razu nabierać dobrych nawyków. Takie dopasowywanie funkcji dotyczy zazwyczaj tylko kilku rzeczy, z których najważniejsza to globalne definicje obiektów. R musi wiedzieć dokładnie, czym są pokazywane mu obiekty, żeby się nie buntował, niezależnie od tego, czy tym obiektem jest funkcja, czy baza danych.</p>
 <ol type="1">
-<li><p>Funkcje powinny być zapisane w postaci pełnych nazw, czyli np. <code>dplyr::group_by()</code>. Pakiety, z których pochodzą te funkcje, powinny być dodane jako zależności (por. podrozdział <a href="#sec-dependencies">3.4</a>). Jeśli użyliśmy <code>usethis::use_tidy_eval()</code> (por. podrozdział <a href="#sec-dependencies">3.4</a>), to funkcje z pakietu <code>rlang</code> są ładowane z automatu i nie potrzebują pełnych nazw.</p></li>
+<li><p>Funkcje powinny być zapisane w postaci pełnych nazw, czyli np. <code>dplyr::group_by()</code>. Pakiety, z których pochodzą te funkcje, powinny być dodane jako zależności (por. podrozdział <a href="#sec-dependencies" class="quarto-xref">3.4</a>). Jeśli użyliśmy <code>usethis::use_tidy_eval()</code> (por. podrozdział <a href="#sec-dependencies" class="quarto-xref">3.4</a>), to funkcje z pakietu <code>rlang</code> są ładowane z automatu i nie potrzebują pełnych nazw.</p></li>
 <li><p>Jeśli w funkcjach typu <code>mutate()</code> wykorzystujemy nazwy kolumn bez cudzysłowu, np. <code>mutate(iris, millimeters = Sepal.Length * 10)</code>, R-CMD-check będzie krzyczał, że <code>Sepal.Length</code> nie ma globalnej definicji. W takim wypadku używamy wyrażenia <code>.data</code> z <code>rlang</code> i piszemy <code>dplyr::mutate(iris, millimeters = .data$Sepal.Length * 10)</code>.</p></li>
 <li><p>Jeśli w funkcjach wybierających kolumny (przede wszystkim <code>select()</code>) piszemy nazwy kolumn, to podajemy je w cudzysłowie. Powód jest taki, jak wyżej, brak globalnej definicji, ale <code>.data</code> nie nadaje się do <code>tidyselect</code>. Dla przykładu zamiast <code>select(iris, Sepal.Width, Sepal.Length)</code> powinniśmy napisać <code>dplyr::select(iris, "Sepal.Width", "Sepal.Length")</code>.</p></li>
 <li><p>Na ogół lepiej używać natywnego potoku <code>|&gt;</code> niż <code>%&gt;%</code>. Jeśli chcemy używać potoku z <code>magrittr</code> używamy wcześniej <code>usethis::use_pipe()</code>. Natywny potok oszczędza nam dodatkowej zależności.</p></li>
@@ -1596,7 +1607,7 @@ Wpis BibTex dla użytkowników LaTeX to
 </div>
 </div>
 <p>Żeby przerobić szkielety <code>roxygen2</code> na rzeczywiste pliki dokumentacji (czyli pliki .Rd w folderze .man), należy uruchomić komendę <code>devtools::document()</code>. Tutaj zaczynają się ujawniać komendy, których warto używać często, a już zwłaszcza przed wysłaniem aktualizacji na GitHuba. Zbieram je wszystkie na końcu, w podsumowaniu.</p>
-<p>W przykładzie widać teź, że mogę używać w swoich szkieletach formatowania markdown. Jest to jednak możliwe tylko, jeśli wcześniej użyłem <code>usethis::use_roxygen_md()</code>, o czym pisałem w podrozdziale <a href="#sec-structure">2</a>.</p>
+<p>W przykładzie widać teź, że mogę używać w swoich szkieletach formatowania markdown. Jest to jednak możliwe tylko, jeśli wcześniej użyłem <code>usethis::use_roxygen_md()</code>, o czym pisałem w podrozdziale <a href="#sec-structure" class="quarto-xref">2</a>.</p>
 </section>
 <section id="dokumentacja-całego-pakietu" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="dokumentacja-całego-pakietu"><span class="header-section-number">6.3</span> Dokumentacja całego pakietu</h2>
@@ -1664,13 +1675,13 @@ Wpis BibTex dla użytkowników LaTeX to
 <section id="sec-r-cmd-check" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> R-CMD-check</h1>
 <p>Jeśli piszemy pakiet, zazwyczaj chcemy, żeby działał. Nie mogę być pewny, ale to chyba rozsądne założenie. Zazwyczaj pierwszym krokiem jest ręczne sprawdzenie, czy wszystko działa, jak byśmy się tego spodziewali. Żeby uzyskać dostęp do swoich funkcji tu i teraz, używamy komendy <code>devtools::load_all()</code>.</p>
-<p>Zestaw podstawowych czynności w kierunku sprawdzenia, czy nie występują podstawowe problemy z naszym kodem, czy czegoś nie zepsuliśmy, nie dopilnowaliśmy, jest zautomatyzowany i nazywa się R-CMD-check. Muszą go przejść wszystkie pakiety obecne w CRAN. Jeśli wykonaliśmy instrukcję z podrozdziału <a href="#sec-GitHubActions">5.1</a>, po każdym commicie wykona go również GitHub i wynik pokaże na odznace.</p>
-<p>Po pierwsze R-CMD-check sprawdzi, czy cały kod spełnia standardy, czyli czy wszystkie obiekty w kodzie mają globalne definicje (por. podrozdział <a href="#sec-cran-checks">6.1</a>), czy wszystkie przykłady wykonują się bez błędu, czy każda funkcja ma wszystkie niezbędne elementy dokumentacji, czy wszystkie używane pakiety zostały dodane jako zależności. Po drugie wykonane zostaną wszystkie testy, które opisuję w podrozdziale <a href="#sec-tests">10</a>. Po trzecie, zostanie sprawdzona struktura repozytorium, czy nic się nie zepsuło, czy nie mamy jakichś plików, które nie powinny tam być. Do tego cała seria mniejszych lub większych rzeczy, które R może nam wytknąć jako błędy, ostrzeżenia lub informacje. Warto informacje wypluwane przez R-CMD-check przeczytać, bo są bardzo konkretne. Błędów być nie może, ostrzeżeń lepiej, żeby nie było, rzeczy wytykane w informacjach poprawiamy, kiedy mamy czas (albo gdy chcemy wysłać pakiet do CRAN).</p>
+<p>Zestaw podstawowych czynności w kierunku sprawdzenia, czy nie występują podstawowe problemy z naszym kodem, czy czegoś nie zepsuliśmy, nie dopilnowaliśmy, jest zautomatyzowany i nazywa się R-CMD-check. Muszą go przejść wszystkie pakiety obecne w CRAN. Jeśli wykonaliśmy instrukcję z podrozdziału <a href="#sec-GitHubActions" class="quarto-xref">5.1</a>, po każdym commicie wykona go również GitHub i wynik pokaże na odznace.</p>
+<p>Po pierwsze R-CMD-check sprawdzi, czy cały kod spełnia standardy, czyli czy wszystkie obiekty w kodzie mają globalne definicje (por. podrozdział <a href="#sec-cran-checks" class="quarto-xref">6.1</a>), czy wszystkie przykłady wykonują się bez błędu, czy każda funkcja ma wszystkie niezbędne elementy dokumentacji, czy wszystkie używane pakiety zostały dodane jako zależności. Po drugie wykonane zostaną wszystkie testy, które opisuję w podrozdziale <a href="#sec-tests" class="quarto-xref">10</a>. Po trzecie, zostanie sprawdzona struktura repozytorium, czy nic się nie zepsuło, czy nie mamy jakichś plików, które nie powinny tam być. Do tego cała seria mniejszych lub większych rzeczy, które R może nam wytknąć jako błędy, ostrzeżenia lub informacje. Warto informacje wypluwane przez R-CMD-check przeczytać, bo są bardzo konkretne. Błędów być nie może, ostrzeżeń lepiej, żeby nie było, rzeczy wytykane w informacjach poprawiamy, kiedy mamy czas (albo gdy chcemy wysłać pakiet do CRAN).</p>
 <p>Żeby wykonać R-CMD-check używamy komendy <code>devtools::check()</code>. Ta komenda na wstępie odnowi nam doumentację, więc jeśli jej używamy, to nie musimy już korzystać z <code>devtools::document()</code>. Informacje o przeprowadzanych testach wyświetlają się na bieżąco, ale jeśli pojawią się jakieś uchybienia, zostaną one zbiorczo wyświetlone na koniec. Komendę <code>devtools::check()</code> dobrze jest wykonać przed każdym wypchnięciem do GitHuba, żeby nie zdziwił nas wynik wykonany już w repozytorium.</p>
 </section>
 <section id="sprawdzanie-wejścia-i-informacje-o-błędach" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> Sprawdzanie wejścia i informacje o błędach</h1>
-<p>Ten podrozdział i wszystkie kolejne, <strong>nie są niezbędne</strong>, żeby pakiet działał i był użyteczny. Są to rzeczy, które warto wiedzieć, ale przydadzą się przede wszystkim w pakietach dużych i/lub udostępnianych szerokiej publiczności. Małe pakiety albo użytkowane w wąskim gronie zazwyczaj nie potrzebują szerokiej kontroli wejścia czy złożonych informacji o błędach. Jedyne, nad czym bym się zastanowił, czy nie wprowadzać od początku, to testy z podrozdziału <a href="#sec-tests">10</a>.</p>
+<p>Ten podrozdział i wszystkie kolejne, <strong>nie są niezbędne</strong>, żeby pakiet działał i był użyteczny. Są to rzeczy, które warto wiedzieć, ale przydadzą się przede wszystkim w pakietach dużych i/lub udostępnianych szerokiej publiczności. Małe pakiety albo użytkowane w wąskim gronie zazwyczaj nie potrzebują szerokiej kontroli wejścia czy złożonych informacji o błędach. Jedyne, nad czym bym się zastanowił, czy nie wprowadzać od początku, to testy z podrozdziału <a href="#sec-tests" class="quarto-xref">10</a>.</p>
 <p>Dobre komendy są odporne, w tym znaczeniu, że zabezpieczają użytkownika przed nieprawidłowym wykorzystaniem. Debiloodporne, chciałoby się powiedzieć. Jeśli osoba popełnia błąd, na przykład podaje wektor zamiast ramki danych albo wskazuje kolumny, których nie ma, powinna dostać konkretną informację zwrotną (tj. błąd). Jeśli nie zabezpieczymy naszej funkcji przed nieprawidłowym wykorzystaniem, użytkownik dostanie informacje o błędach z funkcji, z których zbudowaliśmy naszą funkcję. Innymi słowy jeśli na przykład wykorzystujemy komendę <code>select()</code> i użytkownik pod kolumnę, która nie istnieje, zobaczy błąd wygenerowany w kolumnie <code>select()</code>. Czasem to dobrze, czasem to źle. Jeśli wykonujemy jakieś skomplikowane przekształcenia w naszej funkcji i gdzieś w środku wypłynie błąd, informacja o błędzie może po prostu nijak nie podpowiadać, co mogło ten błąd spowodować. Czasem jednak te informacje będą wystarczająco jasne, by nie musieć tworzyć ich samodzielnie.</p>
 <p>Ogólnie dobrze jest zabezpieczać swoje funkcje, ale znowu – to <strong>nie jest konieczne, żeby pakiet działał</strong>. To będziemy robić, jak będziemy mieli czas albo poważnie będziemy chcieli ulepszyć nasz pakiet do użytku innych. My zazwyczaj znamy nasze funkcje bardzo dobrze, więc zazwyczaj będziemy je poprawnie wykorzystywać.</p>
 <p>Zazwyczaj to zabezpieczenie dotyczy sprawdzania wejścia, czyli czy to, co użytkownik podał, spełnia wymogi naszej funkcji. Zazwyczaj robi się to na samym początku, dość prosto, bo za pomocą połączenia <code>if</code> i <code>stop()</code>. My tutaj jednak wykorzystamy ładniejsze informacje o błędach, które wdraża pakiet <code>cli</code> w połączeniu z <code>glue</code>. Oba te pakiety dodaliśmy już do zależności, jeśli wykorzystaliśmy <code>usethis::use_tidy_dependencies()</code>. Rodzina funkcji, które nam się tu przydadzą, to <code>cli::cli_abort()</code>, <code>cli::cli_warn()</code> lub <code>cli::cli_inform()</code>.</p>
@@ -2104,7 +2115,7 @@ Wpis BibTex dla użytkowników LaTeX to
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Funkcje <code>install_*()</code> zapewnia też mniejszy pakiet <code>remotes</code>, który jest praktycznie wycinkiem z <code>devtools</code>. Jeśli mamy <code>devtools</code>, nie potrzebujemy <code>remotes</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -2114,7 +2125,7 @@ Wpis BibTex dla użytkowników LaTeX to
 <li id="fn5"><p>Jeśli nie wiesz, czym jest GitHub i po co go używać, przeczytaj <a href="./posts/git.qmd">ten wpis</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>Możesz też ręcznie wytworzyć odpowiedni plik .R w folderze <code>R</code>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section></div></main> <!-- /main -->
+</aside></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -2156,6 +2167,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -2224,13 +2262,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2309,10 +2349,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2322,8 +2361,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2336,6 +2384,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -2379,6 +2502,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -2465,18 +2589,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://giscus.app/client.js" data-repo="jakub-jedrusiak/nieobliczalne" data-repo-id="R_kgDOHBIy6A" data-category="General" data-category-id="DIC_kwDOHBIy6M4CUvlw" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
 </script>
+<input type="hidden" id="giscus-base-theme" value="dark">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 

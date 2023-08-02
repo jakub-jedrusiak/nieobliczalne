@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.283">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -51,6 +51,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href=".././styles/logo.svg" rel="icon" type="image/svg+xml">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -71,6 +72,11 @@ div.csl-indent {
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "Brak wyników",
     "search-matching-documents-text": "dopasowane dokumenty",
@@ -105,12 +111,13 @@ cookieconsent.run({
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
+  ,
+"language":"pl"
   });
 });
 </script> 
   
 <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3239011499449859" crossorigin="anonymous"></script>
-
 <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
@@ -124,7 +131,7 @@ cookieconsent.run({
 <meta property="og:title" content="Nieobliczalne - Wyjaśnianie wariancji i test F">
 <meta property="og:description" content="Co to znaczy, że geny wyjaśniają 90% wariancji wzrostu? Że z moich 170 cm wzrostu 153 cm zawdzięczam genom, a pozostałe 17 cm środowisku? Czym w ogóle jest wariancja? Odpowiem na to pytanie, jak i wprowadzę pojęcie modelu i jego testowania.">
 <meta property="og:image" content="https://nieobliczalne.pl/posts/headers/procent-wariancji.webp">
-<meta property="og:site-name" content="Nieobliczalne">
+<meta property="og:site_name" content="Nieobliczalne">
 <meta name="twitter:title" content="Nieobliczalne - Wyjaśnianie wariancji i test F">
 <meta name="twitter:description" content="Co to znaczy, że geny wyjaśniają 90% wariancji wzrostu? Że z moich 170 cm wzrostu 153 cm zawdzięczam genom, a pozostałe 17 cm środowisku? Czym w ogóle jest wariancja? Odpowiem na to pytanie, jak i wprowadzę pojęcie modelu i jego testowania.">
 <meta name="twitter:image" content="https://nieobliczalne.pl/headers/procent-wariancji.jpeg">
@@ -138,7 +145,10 @@ cookieconsent.run({
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src=".././styles/logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Nieobliczalne</span>
     </a>
@@ -173,10 +183,10 @@ cookieconsent.run({
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -195,9 +205,8 @@ cookieconsent.run({
   <li><a href="#test-f" id="toc-test-f" class="nav-link" data-scroll-target="#test-f"><span class="header-section-number">4</span> Test <em>F</em></a></li>
   <li><a href="#postscriptum-jak-szybciej-liczyć-ssm" id="toc-postscriptum-jak-szybciej-liczyć-ssm" class="nav-link" data-scroll-target="#postscriptum-jak-szybciej-liczyć-ssm"><span class="header-section-number">5</span> <em>Postscriptum</em> – jak szybciej liczyć <em>SS<sub>M</sub></em></a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/procent-wariancji.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/procent-wariancji.qmd" class="toc-action"><i class="bi bi-github"></i>Edytuj tę stronę</a></li><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action"><i class="bi empty"></i>Zgłoś problem</a></li></ul></div></nav>
     <div class="quarto-margin-footer"><div class="margin-footer-item">
-
 <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
     <style type="text/css">
     /* LOADER */
@@ -1138,6 +1147,7 @@ cookieconsent.run({
   </div>
   
 
+
 </header>
 
 <p>W psychologii można spotkać się z przytaczaniem wartości odziedziczalności. Możemy, dla przykładu, przeczytać, że wzrost jest odziedziczalny w 90% <span class="citation" data-cites="plomin2001">(<a href="#ref-plomin2001" role="doc-biblioref">Plomin, DeFries, McClearn, &amp; McGuffin, 2001</a>)</span>. Ale co to znaczy? Że z moich 170 cm wzrostu 153 cm zawdzięczam genom, a pozostałe 17 cm środowisku? To jest bez sensu. Czy odziedziczalność powie mi, czy byłem skazany na bycie niskim od początku albo czy dało się tego uniknąć? W <em>Genetyce zachowania</em> możemy przeczytać, że odziedziczalność to:</p>
@@ -1232,7 +1242,8 @@ cookieconsent.run({
 <p>Przerywane linie pokazują nam odchylenie każdego punktu od średniej (<em>residual</em>). Dla przykładu pierwszy punkt ma wartość niepokoju 2, więc jego odchylenie to <span class="math inline">\(2 - 10 = -8\)</span>. Dlaczego na minusie? Bo pierwszy punkt jest <strong>poniżej</strong> średniej, więc żeby przejść od średniej do wartości tego konkretnego punktu musimy wykonać <strong>odejmowanie</strong>. Inny przykład – ostatni punkt ma wartość niepokoju 15, więc jego odchylenie od średniej wynosi <span class="math inline">\(15 - 10 = 5\)</span>. Tutaj odchylenie jest już dodatnie, co ma sens, bo ostatni punkt jest <strong>powyżej</strong> średniej, więc żeby przesunąć się od wartości średniej do wartości tego punktu musimy <strong>dodawać</strong>. Jak widać, żeby policzyć odchylenie, wystarczy od wartości punktu odjąć średnią. Można zapisać to matematycznie:</p>
 <p><span class="math display">\[
 S_i = x_i - \bar x
-\]</span> gdzie <span class="math inline">\(S_i\)</span> to odchylenie, <span class="math inline">\(x_i\)</span> to wartość konkretnego punktu, a <span class="math inline">\(\bar x\)</span> to średnia. Pozioma kreska nad czymś zawsze oznacza średnią. Dla każdego punktu moglibyśmy policzyć takie odchylenie i dopisać sobie je do tabeli.</p>
+\]</span></p>
+<p>gdzie <span class="math inline">\(S_i\)</span> to odchylenie, <span class="math inline">\(x_i\)</span> to wartość konkretnego punktu, a <span class="math inline">\(\bar x\)</span> to średnia. Pozioma kreska nad czymś zawsze oznacza średnią. Dla każdego punktu moglibyśmy policzyć takie odchylenie i dopisać sobie je do tabeli.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="tbl-spider-residual" class="anchored">
@@ -1321,11 +1332,13 @@ SS_T = \sum_{i=1}^N S_i^2 = \sum_{i=1}^N (x_i - \bar x)^2
 <p>Także jeśli chcemy uzyskać średnią kwadratów odchyleń, to bierzemy naszą całkowitą sumę kwadratów i dzielimy ją przez <span class="math inline">\(N-1\)</span>. Tak jak średnią ocen liczymy dzieląc sumę ocen przez ich liczbę. Możemy to zapisać matematycznie na kilka sposobów:</p>
 <p><span class="math display">\[
 \sigma^2 = \frac{SS_T}{N-1} = \frac{\sum^N_{i = 1} S_i^2}{N-1} = \frac{\sum^N_{i = 1} (x_i - \bar x)^2}{N-1}
-\]</span>Spokojnie. To są tylko wzory, nie trzeba się ich bać. Każdy z tych trzech wzorów znaczy to samo i opiera się na tym, co już wiemy z poprzednich części tekstu. Tak naprawdę to ciągle wzór na <span class="math inline">\(SS_T\)</span>, tylko teraz podzielony na <span class="math inline">\(N-1\)</span>. Po pokonaniu pierwszego szoku można zacząć świętować! W ten sposób udało nam się wreszcie policzyć średnią kwadratów odchyleń (ponownie – trzeba się zatrzymać, upewnić się, że się rozumie, ewentualnie trochę się cofnąć i dopiero można iść dalej).</p>
+\]</span></p>
+<p>Spokojnie. To są tylko wzory, nie trzeba się ich bać. Każdy z tych trzech wzorów znaczy to samo i opiera się na tym, co już wiemy z poprzednich części tekstu. Tak naprawdę to ciągle wzór na <span class="math inline">\(SS_T\)</span>, tylko teraz podzielony na <span class="math inline">\(N-1\)</span>. Po pokonaniu pierwszego szoku można zacząć świętować! W ten sposób udało nam się wreszcie policzyć średnią kwadratów odchyleń (ponownie – trzeba się zatrzymać, upewnić się, że się rozumie, ewentualnie trochę się cofnąć i dopiero można iść dalej).</p>
 <p>Trzeba przyznać, że „średni kwadrat odchylenia” albo „średnia z odchyleń podniesionych do potęgi drugiej” to nie są zbyt chwytliwe nazwy. Dlatego właśnie nazwano to <strong>wariancją</strong> i oznaczono przez <span class="math inline">\(\sigma^2\)</span>. To jest mała grecka litera sigma. A dlaczego <span class="math inline">\(\sigma^2\)</span> a nie po prostu <span class="math inline">\(\sigma\)</span>? Bo to średnia z <em>kwadratów</em> odchyleń. Jeśli byśmy chcieli wycofać się teraz z tej gmatwającej wszystko decyzji o podnoszeniu czegokolwiek do kwadratu i uzyskać upragnione średnie odchylenie, to możemy teraz wyciągnąć pierwiastek ze wzoru na wariancję, jaki nam przed chwilą wyszedł i który na pierwszy rzut oka może przytłaczać.</p>
 <p><span class="math display">\[
 \sigma = \sqrt{\frac{SS_T}{N-1}} = \sqrt{\frac{\sum^N_{i = 1} S_i^2}{N-1}} = \sqrt{\frac{\sum^N_{i = 1} (x_i - \bar x)^2}{N-1}}
-\]</span>Każdy z tych wzorów znaczy ostatecznie to samo, więc można używać któregokolwiek. Ważne jest to, że wychodzi nam z tego średnie odchylenie, które nazywamy <strong>odchyleniem standardowym</strong> i które oznaczamy literą <span class="math inline">\(\sigma\)</span> lub skrótem <em>SD</em> (<em>standard deviation</em>). Odchylenie standardowe, jak już wyżej wspomniałem, mówi nam, czy średnia dobrze reprezentuje dane. Jeśli jest wysokie, to znaczy, że dane są mocno rozproszone (odchylenia są ogólnie duże) i sama średnia jest mało wiarygodna. Jeśli <em>SD</em> jest niewielkie, to średniej zasadniczo można zaufać. To jakie <em>SD</em> jest duże, a jakie małe, zależy od tego, co mierzymy. Dla średniej pensji <em>SD</em> = 10 uznalibyśmy za raczej niewielkie, ale takie samo odchylenie standardowe dla średniej liczby nóg takie małe już się nie wydaje. Także może i mamy średnio po 3 nogi jak wychodzimy z psem na spacer, ale ta średnia ma całą nogę odchylenia standardowego!</p>
+\]</span></p>
+<p>Każdy z tych wzorów znaczy ostatecznie to samo, więc można używać któregokolwiek. Ważne jest to, że wychodzi nam z tego średnie odchylenie, które nazywamy <strong>odchyleniem standardowym</strong> i które oznaczamy literą <span class="math inline">\(\sigma\)</span> lub skrótem <em>SD</em> (<em>standard deviation</em>). Odchylenie standardowe, jak już wyżej wspomniałem, mówi nam, czy średnia dobrze reprezentuje dane. Jeśli jest wysokie, to znaczy, że dane są mocno rozproszone (odchylenia są ogólnie duże) i sama średnia jest mało wiarygodna. Jeśli <em>SD</em> jest niewielkie, to średniej zasadniczo można zaufać. To jakie <em>SD</em> jest duże, a jakie małe, zależy od tego, co mierzymy. Dla średniej pensji <em>SD</em> = 10 uznalibyśmy za raczej niewielkie, ale takie samo odchylenie standardowe dla średniej liczby nóg takie małe już się nie wydaje. Także może i mamy średnio po 3 nogi jak wychodzimy z psem na spacer, ale ta średnia ma całą nogę odchylenia standardowego!</p>
 <p>Podsumowując ten fragment:</p>
 <ol type="1">
 <li><p>Zauważyliśmy, że każdy punkt ma swoje większe lub mniejsze odchylenie od średniej.</p></li>
@@ -1422,7 +1435,8 @@ SS_T = \sum_{i=1}^N S_i^2 = \sum_{i=1}^N (x_i - \bar x)^2
 <p>Możemy więc spojrzeć na to w ten sposób – na początku mieliśmy 190,875 jednostek wariancji, a teraz, po dopasowaniu nowego modelu, mamy ich tylko 29,98. Dla wygody zaokrąglijmy te liczby do całości. Także cała różnica, <span class="math inline">\(191 - 30 = 161\)</span>, gdzieś nam wyparowała. Ta wariancja była, a teraz nagle jej nie ma. O takiej wariancji możemy powiedzieć, że została <em>wyjaśniona</em> i możemy ją oznaczyć <span class="math inline">\(SS_M\)</span> od <em>model sum of squares</em>. Czyli stworzyliśmy nowy model, który pozwala nam przewidywać niepokój z wielkości pająka i w ten sposób wyjaśniliśmy jakąś część wariancji. Jaką? Coż, wystarczy to przeliczyć na procenty. Cała wariancja<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> wynosiła 191 jednostek, a wariacja wyjaśniona wyniosła 161 jednostek. Odsetek wariancji, który udało nam się wyjaśnić, oznaczamy <span class="math inline">\(R^2\)</span> i możemy go wyrazić w procentach<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>.</p>
 <p><span class="math display">\[
 R^2 = \frac{161}{191}\times 100\% = 84,3\%
-\]</span>Możemy więc powiedzieć, że wielkość pająka (bo nowy model przewiduje niepokój na podstawie wielkości pająka) wyjaśnia 84,3% wariancji niepokoju. Ludzie ciągle różnią się niepokojem w reagowaniu na pająki, ale odchylenia od nowego modelu są znacznie mniejsze. Ogólny wzór na <span class="math inline">\(R^2\)</span> wygląda więc tak<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>:</p>
+\]</span></p>
+<p>Możemy więc powiedzieć, że wielkość pająka (bo nowy model przewiduje niepokój na podstawie wielkości pająka) wyjaśnia 84,3% wariancji niepokoju. Ludzie ciągle różnią się niepokojem w reagowaniu na pająki, ale odchylenia od nowego modelu są znacznie mniejsze. Ogólny wzór na <span class="math inline">\(R^2\)</span> wygląda więc tak<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>:</p>
 <p><span class="math display">\[
 R^2 = \frac{SS_M}{SS_T} = \frac{SS_T - SS_R}{SS_T}
 \]</span></p>
@@ -1553,7 +1567,7 @@ Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R
 <div id="ref-plomin2001" class="csl-entry" role="listitem">
 Plomin, R., DeFries, J., McClearn, G., &amp; McGuffin, P. (2001). <em>Genetyka zachowania</em>. Warszawa: Wydawnictwo Naukowe PWN.
 </div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+</div></section><aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Wszystko, co napiszę dalej o średniej, mogłoby równie dobrze być pokazane na innym wykresie. To, że na oś poziomą wrzuciłem wielkość pająka wynika tylko ze względów estetycznych. Mógłbym te punkty rozrzucić losowo. Zauważ, że aż do podrozdziału <em>Średnia to nie wszystko</em> nie będę używał wielkości pająka w obliczeniach.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -1571,7 +1585,7 @@ R^2 = \frac{\frac{SS_M}{N-1}}{\frac{SS_T}{N-1}} = \frac{SS_M}{\cancel{N-1}} \tim
 <li id="fn10"><p>Gdy Bill Gates wchodzi do pubu, średnia pensja (i jej odchylenie standardowe!) osób w pubie nagle dramatycznie skacze, mimo że nikt ze zgromadzonych nie czuje się bogatszy. Niemniej sam jeden Bill Gates nie miałby tak wielkiego wpływu na średnią pensję wszystkich mieszkańców Polski. Tak samo jedna piątka nie zmieni za bardzo średniej z 20 ocen, ale może całkowicie zmienić średnią z 3 ocen. Modele oparte o dużą liczbę obserwacji są więc stabilniejsze.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn11"><p>Tak naprawdę potrzeba nam sporo więcej niż 1, żeby uznać model na wiarygodny. Statystyka <span class="math inline">\(F\)</span> musi <em>istotnie</em> odchylać się od 1. Musimy mieć co najmniej 95% pewności, że <span class="math inline">\(F\)</span> jest większe od 1. Ale prawdopodobieństwo trudno się liczy, zależy od liczby obserwacji i w ogóle bez sensu się tym zajmować, bo program statystyczny nam to pokaże.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section></div></main> <!-- /main -->
+</aside></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1613,6 +1627,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1681,13 +1722,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1766,10 +1809,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1779,8 +1821,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1793,6 +1844,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1836,6 +1962,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1922,18 +2049,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://giscus.app/client.js" data-repo="jakub-jedrusiak/nieobliczalne" data-repo-id="R_kgDOHBIy6A" data-category="General" data-category-id="DIC_kwDOHBIy6M4CUvlw" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
 </script>
+<input type="hidden" id="giscus-base-theme" value="dark">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 

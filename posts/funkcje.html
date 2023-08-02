@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.283">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -66,6 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href=".././styles/logo.svg" rel="icon" type="image/svg+xml">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -86,6 +87,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "Brak wyników",
     "search-matching-documents-text": "dopasowane dokumenty",
@@ -120,6 +126,8 @@ cookieconsent.run({
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
+  ,
+"language":"pl"
   });
 });
 </script> 
@@ -136,7 +144,7 @@ cookieconsent.run({
 <meta property="og:title" content="Nieobliczalne - Funkcje matematyczne">
 <meta property="og:description" content="Funkcja to absolutnie fatalna nazwa na dość prosty w swojej idei twór. W tym wpisie postaram się wyjaśnić po ludzku czym są funkcje w matematyce i jak z nich korzystać. Najważniejsze, co chcę jednak zrobić, to przygotować grunt pod zrozumienie funkcji liniowych w analizie regresji.">
 <meta property="og:image" content="https://nieobliczalne.pl/posts/headers/funkcje.webp">
-<meta property="og:site-name" content="Nieobliczalne">
+<meta property="og:site_name" content="Nieobliczalne">
 <meta name="twitter:title" content="Nieobliczalne - Funkcje matematyczne">
 <meta name="twitter:description" content="Funkcja to absolutnie fatalna nazwa na dość prosty w swojej idei twór. W tym wpisie postaram się wyjaśnić po ludzku czym są funkcje w matematyce i jak z nich korzystać. Najważniejsze, co chcę jednak zrobić, to przygotować grunt pod zrozumienie funkcji liniowych w analizie regresji.">
 <meta name="twitter:image" content="https://nieobliczalne.pl/headers/funkcje.jpeg">
@@ -150,7 +158,10 @@ cookieconsent.run({
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src=".././styles/logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Nieobliczalne</span>
     </a>
@@ -185,10 +196,10 @@ cookieconsent.run({
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -225,9 +236,8 @@ cookieconsent.run({
   </ul></li>
   <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">9</span> Podsumowanie</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/funkcje.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/funkcje.qmd" class="toc-action"><i class="bi bi-github"></i>Edytuj tę stronę</a></li><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action"><i class="bi empty"></i>Zgłoś problem</a></li></ul></div></nav>
     <div class="quarto-margin-footer"><div class="margin-footer-item">
-
 <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
     <style type="text/css">
     /* LOADER */
@@ -1169,6 +1179,7 @@ cookieconsent.run({
   </div>
   
 
+
 </header>
 
 <p>Czy masz czasem wrażenie, że rzeczy w matematyce nazywają się bez sensu? To jest bardzo słuszne wrażenie. Dziś na warsztat weźmiemy funkcje, które są zmorą uczniów liceów ze względu na nową, dziwną notację typu <span class="math inline">\(f(x)\)</span>, cały pozornie chaotyczny język, który odrywa funkcje od reszty matematyki, a także wrażenie, że nijak nie idzie tego spotkać w „prawdziwym życiu”, cokolwiek to jest. Ja właśnie spędzam wieczór z prawdziwego życia na pisaniu o funkcjach. Do czegoś mi się jednak przydały. Zaczynając jednak od nazwy – dlaczego „funkcja”? Bo Leibniz źle rozumiał to słowo. A że raz przyjęte konwencje trzymają się mocno, to do dzisiaj, właściwie przypadkowo, nazywamy tę&nbsp;rzeczy funkcjami.</p>
@@ -1608,7 +1619,7 @@ Odpowiedź
 <section id="liczenie-w-praktyce" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Liczenie w praktyce</h1>
 <p>W praktyce przy okazji mówienia o funkcjach liczymy jedną z dwóch rzeczy – co funkcja z siebie wyrzuca, kiedy włożę do niej <span class="math inline">\(x\)</span> albo co muszę włożyć do funkcji, żeby wypluła z siebie <span class="math inline">\(y\)</span>.</p>
-<p>Pierwszy scenariusz obejmuje to, co programowaliśmy w punkcie <a href="#sec-programming">3.1</a>. Jeśli chcielibyśmy policzyć to ręcznie, wystarczy, że zamiast skrótu typu <span class="math inline">\(l\)</span> czy <span class="math inline">\(x\)</span> zapiszemy liczbę, którą wrzucamy do funkcji. Czyli jeśli <span class="math inline">\(m(l) = l + 3\)</span>, to <span class="math inline">\(m(5) = 5 + 3\)</span>. Działa dokładnie tak samo też dla bardziej skomplikowanych funkcji.</p>
+<p>Pierwszy scenariusz obejmuje to, co programowaliśmy w punkcie <a href="#sec-programming" class="quarto-xref">3.1</a>. Jeśli chcielibyśmy policzyć to ręcznie, wystarczy, że zamiast skrótu typu <span class="math inline">\(l\)</span> czy <span class="math inline">\(x\)</span> zapiszemy liczbę, którą wrzucamy do funkcji. Czyli jeśli <span class="math inline">\(m(l) = l + 3\)</span>, to <span class="math inline">\(m(5) = 5 + 3\)</span>. Działa dokładnie tak samo też dla bardziej skomplikowanych funkcji.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1850,7 +1861,7 @@ Odpowiedź
 <p>Spójrz na ten wykres i powiedz, co wspólnego mają wszystkie te punkty?</p>
 <p><img src="ilustracje/funkcje/x-axis.png" class="img-fluid"></p>
 <p>Wszystkie leżą na osi X, to prawda. To jest opis w języku graficznym, gdzie istnieją punkty rozlokowane w przestrzeni. Teraz chcemy jednak przejść z opisu graficznego do algebraicznego, a punktem styku między jednym i drugim są <em>współrzędne</em>. Jaką współrzędną mają wspólną wszystkie te punkty? Po przeanalizowaniu wykresu dochodzimy do wniosku, że każdy z naszych punktów ma współrzędną <span class="math inline">\(y = 0\)</span>. Różnią się natomiast współrzędnymi <span class="math inline">\(x\)</span>.</p>
-<p>Jeśli jesteśmy pytani o <strong>punkt przecięcia z osią X</strong>, innymi słowy jesteśmy pytani o takie miejsce, gdzie <span class="math inline">\(y = 0\)</span>. Takim miejscem dla narysowanej na wykresie maszyny jest punkt o współrzędnych <span class="math inline">\((-1, 0)\)</span>. Jeśli sięgniesz pamięcią do punktu <a href="#sec-nomenclature">4</a>., zorientujesz się, że mamy specjalną nazwę na punkty, gdzie <span class="math inline">\(y\)</span> (czyli wartość funkcji) wynosi <span class="math inline">\(0\)</span> – <strong>miejsce zerowe</strong>. Pytanie o punkt przecięcia z osią X jest więc tak naprawdę znanym nam już pytaniem o miejsce zerowe, gdzie ewentualnie odpowiedź będzie trzeba zapisać jako <span class="math inline">\(A(-1, 0)\)</span> zamiast <span class="math inline">\(f(-1) = 0\)</span>.</p>
+<p>Jeśli jesteśmy pytani o <strong>punkt przecięcia z osią X</strong>, innymi słowy jesteśmy pytani o takie miejsce, gdzie <span class="math inline">\(y = 0\)</span>. Takim miejscem dla narysowanej na wykresie maszyny jest punkt o współrzędnych <span class="math inline">\((-1, 0)\)</span>. Jeśli sięgniesz pamięcią do punktu <a href="#sec-nomenclature" class="quarto-xref">4</a>., zorientujesz się, że mamy specjalną nazwę na punkty, gdzie <span class="math inline">\(y\)</span> (czyli wartość funkcji) wynosi <span class="math inline">\(0\)</span> – <strong>miejsce zerowe</strong>. Pytanie o punkt przecięcia z osią X jest więc tak naprawdę znanym nam już pytaniem o miejsce zerowe, gdzie ewentualnie odpowiedź będzie trzeba zapisać jako <span class="math inline">\(A(-1, 0)\)</span> zamiast <span class="math inline">\(f(-1) = 0\)</span>.</p>
 </section>
 <section id="przecięcie-z-osią-y" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="przecięcie-z-osią-y"><span class="header-section-number">7.4</span> Przecięcie z osią Y</h2>
@@ -1933,7 +1944,7 @@ f(x) = ax + b
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>W gimnazjum wciskali nam kit, że będziemy się uczyć programowania w HTML. Nie da się <em>programować</em>&nbsp;w HTML, bo HTML nie ma funkcji, pętli, zmiennych ani innych rzeczy, które pozwalają cokolwiek rzeczywiście zaprogramować. Jeśli chcemy programować cokolwiek na stronach internetowych, użyjemy JavaScript, gdzie wszystkie te rzeczy są.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -1941,7 +1952,7 @@ f(x) = ax + b
 <li id="fn3"><p>Spróbuj to samo wyrazić językiem algebraicznym.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Używam terminu „dodawanie”, bo odejmowanie to dodawanie liczb ujemnych.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section></div></main> <!-- /main -->
+</aside></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1983,6 +1994,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -2051,13 +2089,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2136,10 +2176,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2149,8 +2188,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2163,6 +2211,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -2206,6 +2329,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -2292,18 +2416,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://giscus.app/client.js" data-repo="jakub-jedrusiak/nieobliczalne" data-repo-id="R_kgDOHBIy6A" data-category="General" data-category-id="DIC_kwDOHBIy6M4CUvlw" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
 </script>
+<input type="hidden" id="giscus-base-theme" value="dark">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.283">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -66,6 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href=".././styles/logo.svg" rel="icon" type="image/svg+xml">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -86,6 +87,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "Brak wyników",
     "search-matching-documents-text": "dopasowane dokumenty",
@@ -120,6 +126,8 @@ cookieconsent.run({
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
+  ,
+"language":"pl"
   });
 });
 </script> 
@@ -134,7 +142,7 @@ cookieconsent.run({
 <meta property="og:title" content="Nieobliczalne - Metaprogramowanie w R">
 <meta property="og:description" content="Piękno pakietu tidyverse polega na tym, że zupełnie zmienia sposób w jaki wpisujemy nazwy kolumn do funkcji – bez głębszego zastanawiania się. To zupełnie inaczej, niż w większości języków programowania. To tzw. Tidy Evaluation (Tidy Eval) ułatwia pisanie zwykłego kodu, ale zaskakująco utrudnia pisanie własnych funkcji.">
 <meta property="og:image" content="https://nieobliczalne.pl/posts/headers/metaprogramowanie.webp">
-<meta property="og:site-name" content="Nieobliczalne">
+<meta property="og:site_name" content="Nieobliczalne">
 <meta name="twitter:title" content="Nieobliczalne - Metaprogramowanie w R">
 <meta name="twitter:description" content="Piękno pakietu tidyverse polega na tym, że zupełnie zmienia sposób w jaki wpisujemy nazwy kolumn do funkcji – bez głębszego zastanawiania się. To zupełnie inaczej, niż w większości języków programowania. To tzw. Tidy Evaluation (Tidy Eval) ułatwia pisanie zwykłego kodu, ale zaskakująco utrudnia pisanie własnych funkcji.">
 <meta name="twitter:image" content="https://nieobliczalne.pl/headers/metaprogramowanie.jpeg">
@@ -148,7 +156,10 @@ cookieconsent.run({
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src=".././styles/logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Nieobliczalne</span>
     </a>
@@ -183,10 +194,10 @@ cookieconsent.run({
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -203,7 +214,7 @@ cookieconsent.run({
   <li><a href="#tidy-eval" id="toc-tidy-eval" class="nav-link" data-scroll-target="#tidy-eval"><span class="header-section-number">2</span> Tidy Eval</a></li>
   <li><a href="#lazy-evaluation" id="toc-lazy-evaluation" class="nav-link" data-scroll-target="#lazy-evaluation"><span class="header-section-number">3</span> <em>Lazy evaluation</em></a></li>
   <li><a href="#tidy-eval-ciąg-dalszy" id="toc-tidy-eval-ciąg-dalszy" class="nav-link" data-scroll-target="#tidy-eval-ciąg-dalszy"><span class="header-section-number">4</span> Tidy Eval (ciąg dalszy)</a></li>
-  <li><a href="#niejednoznaczność-i" id="toc-niejednoznaczność-i" class="nav-link" data-scroll-target="#niejednoznaczność-i"><span class="header-section-number">5</span> Niejednoznaczność i <code>{{ }}</code></a></li>
+  <li><a href="#niejednoznaczność-i" id="toc-niejednoznaczność-i" class="nav-link" data-scroll-target="#niejednoznaczność-i"><span class="header-section-number">5</span> Niejednoznaczność i <code>{ }</code></a></li>
   <li><a href="#quoting-i-unquoting" id="toc-quoting-i-unquoting" class="nav-link" data-scroll-target="#quoting-i-unquoting"><span class="header-section-number">6</span> <em>Quoting</em> i <em>unquoting</em></a></li>
   <li><a href="#expr-i-quo" id="toc-expr-i-quo" class="nav-link" data-scroll-target="#expr-i-quo"><span class="header-section-number">7</span> <code>expr()</code> i <code>quo()</code></a></li>
   <li><a href="#enquo-quos-i-enquos-oraz-pokrewne" id="toc-enquo-quos-i-enquos-oraz-pokrewne" class="nav-link" data-scroll-target="#enquo-quos-i-enquos-oraz-pokrewne"><span class="header-section-number">8</span> <code>enquo()</code>, <code>quos()</code> i <code>enquos()</code> oraz pokrewne</a></li>
@@ -217,9 +228,8 @@ cookieconsent.run({
   </ul></li>
   <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">12</span> Podsumowanie</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/metaprogramowanie.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/metaprogramowanie.qmd" class="toc-action"><i class="bi bi-github"></i>Edytuj tę stronę</a></li><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action"><i class="bi empty"></i>Zgłoś problem</a></li></ul></div></nav>
     <div class="quarto-margin-footer"><div class="margin-footer-item">
-
 <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
     <style type="text/css">
     /* LOADER */
@@ -1158,6 +1168,7 @@ cookieconsent.run({
   </div>
   
 
+
 </header>
 
 <section id="przykład-motywacyjny" class="level1" data-number="1">
@@ -1235,7 +1246,7 @@ cookieconsent.run({
 <section id="tidy-eval" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Tidy Eval</h1>
 <p>To, co teraz opowiem, jest uznawane za bardzo zaawansowaną część języka R. Najgłębiej opisuje te zagadnienia Hadley Wickham<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> w książce <a href="https://adv-r.hadley.nz/"><em>Advanced R</em></a>. Sam bardzo długo próbowałem to zrozumieć, aż w końcu udało mi się niedawno, podczas pisania pakietu <a href="https://github.com/jakub-jedrusiak/mtscr"><code>mtscr</code></a>. Gdy wreszcie to zrozumiałem, to uznałem, że nie jest to aż takie trudne, tylko opisane jak dla informatyków, matematyków, inżynierów, a nie jak dla psychologów, socjologów, ekonomistów czy całej reszty ludzkości. Dokładnie ten sam problem mam ze statystyką w ogóle.</p>
-<p>Jednocześnie nie jest to coś, co większość useRów musi rozumieć. Taka potrzeba pojawia się zazwyczaj głęboko, późno, gdy chcemy usprawnić nasz kod własnymi funkcjami<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> albo musimy napisać jakiś pakiet. Zazwyczaj pierwszy raz, kiedy chcemy napisać funkcję robiącą wykres w <code>ggplot2</code> i się blokujemy. Wtedy znajdujemy na StackOverflow informację, że trzeba nazwy kolumn wziąć w podwójne klamry (np. <code>{{column}}</code>) i tyle nam wystarczy, nie musimy zajmować się tym głębiej. Do czasu, kiedy jednak musimy.</p>
+<p>Jednocześnie nie jest to coś, co większość useRów musi rozumieć. Taka potrzeba pojawia się zazwyczaj głęboko, późno, gdy chcemy usprawnić nasz kod własnymi funkcjami<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> albo musimy napisać jakiś pakiet. Zazwyczaj pierwszy raz, kiedy chcemy napisać funkcję robiącą wykres w <code>ggplot2</code> i się blokujemy. Wtedy znajdujemy na StackOverflow informację, że trzeba nazwy kolumn wziąć w podwójne klamry (np. <code>{column}</code>) i tyle nam wystarczy, nie musimy zajmować się tym głębiej. Do czasu, kiedy jednak musimy.</p>
 <p>Skąd więc biorą się problemy takie jak w przykładzie? To jest cena, którą płacimy za wygodne pisanie kodu. W klasycznym R, gdy chcemy coś policzyć, musimy wykorzystywać pełne nazwy kolumn. Podobnie gdy coś filtrujemy.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
@@ -1335,7 +1346,7 @@ cookieconsent.run({
 <p>Istota Tidy Eval polega na tym, że możemy powiedzieć R dwie rzeczy – „nie otwieraj tego pudełka teraz” oraz „teraz możesz otworzyć to pudełko”. Możemy więc dokładnie sterować, kiedy R dokona ewaluacji danego wyrażenia. Nie wydaje się to bardzo znaczące, ale naprawdę jest.</p>
 </section>
 <section id="niejednoznaczność-i" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Niejednoznaczność i <code>{{ }}</code></h1>
+<h1 data-number="5"><span class="header-section-number">5</span> Niejednoznaczność i <code>{ }</code></h1>
 <p>Nie wchodźmy na ten moment w szczegóły, <em>a propos</em> tego, jak działają funkcje tidyverse. Przyjmijmy na ten moment, że potrafią one traktować coś, co inne funkcje uznałyby za obiekt, jako nazwę kolumny. To rodzi nam potencjał do pewnej niejednoznaczności. Kiedy piszemy <code>iris$Sepal.Length</code>, to może jest to niewygodne, ale nie ma wątpliwości, o co nam chodzi. Niejednoznaczność pojawiła się po raz pierwszy, gdy w naszej funkcji <code>opisowe</code> zapisaliśmy <code>group_by(group)</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
@@ -1376,7 +1387,7 @@ cookieconsent.run({
 </div>
 <p>Efekt działania obu tych wywołań jest taki sam – jest nim logarytm dziesiętny ze 100, czyli 2. W pierwszym wypadku wpakowaliśmy 100 do funkcji bezpośrednio. Innymi słowy do pudełka z napisem <code>x</code> wpakowaliśmy liczbę 100. <code>x</code> To nazwa (jedynego) argumentu funkcji <code>log10()</code>. W drugim przypadku wpakowaliśmy liczbę 100 do pudełka z napisem <code>liczba</code> i dopiero to pudełko chcemy włożyć do pudełka <code>x</code>. Ale R nie lubi matrioszek. R nie włoży pudełka do pudełka. Zanim R włoży coś do pudełka <code>x</code>, to to rozpakuje. Do samego końca. To jest standardowy mechanizm ewaluacji – rozpakuj do końca, aż nie dostaniesz czegoś konkretnego. Jeśli pudełko <code>liczba</code> byłoby puste, R miałby problem.</p>
 <p>Funkcje korzystające z Tidy Eval działają trochę inaczej. Gdy R przynosi im pudełko <code>x</code>, wyciąga z niego pudełko <code>liczba</code> i mówi “O, drugie pudełko. Czekaj, rozpakuję ci to”, na co taka funkcja <code>group_by()</code> odpowiada “Nie, spoko, poradzę sobie”. Dlatego R podaje jej samo pudełko <code>liczba</code>. Funkcja <code>group_by()</code> bierze to pudełko, czyta etykietę i wie, że ma szukać w bazie danych kolumny, co się nazywa “liczba”. Skąd wie, to pomińmy na teraz. Można więc powiedzieć, że standardowa ewaluacja to “rozpakowuj do końca”, a Tidy Eval to “nie rozpakowuj”.</p>
-<p>Problem pojawia się wtedy, gdy piszemy własną funkcję, gdzie chcemy wykorzystać funkcję z Tidy Eval. Gdy w naszej funkcji <code>opisowe</code> wywołujemy <code>group_by(group)</code>, to <code>group_by()</code> posłusznie nie rozpakowuje <code>group</code>, tylko szuka <code>group</code> w bazie danych. Chcemy więc powiedzieć funkcji <code>group_by()</code> “Nie, nie. To rozpakuj, to jest argument.”. Właśnie to uzyskamy za pomocą operatora <code>{{ }}</code> (czytane <em>curly curly</em>). <code>group_by()</code> będzie wiedziało, że to jest do rozpakowania. Dokonajmy więc pierwszej modyfikacji naszej funkcji <code>opisowe</code>.</p>
+<p>Problem pojawia się wtedy, gdy piszemy własną funkcję, gdzie chcemy wykorzystać funkcję z Tidy Eval. Gdy w naszej funkcji <code>opisowe</code> wywołujemy <code>group_by(group)</code>, to <code>group_by()</code> posłusznie nie rozpakowuje <code>group</code>, tylko szuka <code>group</code> w bazie danych. Chcemy więc powiedzieć funkcji <code>group_by()</code> “Nie, nie. To rozpakuj, to jest argument.”. Właśnie to uzyskamy za pomocą operatora <code>{ }</code> (czytane <em>curly curly</em>). <code>group_by()</code> będzie wiedziało, że to jest do rozpakowania. Dokonajmy więc pierwszej modyfikacji naszej funkcji <code>opisowe</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
@@ -1409,12 +1420,12 @@ cookieconsent.run({
 </div>
 </div>
 <p>Może i ciągle nie działa, ale dostaliśmy inny błąd! To naprawdę jest powód do radości, jak się robi cokolwiek związanego z komputerami.</p>
-<p>Jeśli chodzi o formatowanie, to mogę to zapisać jako <code>{{group}}</code> albo <code>{{ group }}</code>. Zazwyczaj nie stawiamy spacji po nawiasach, ale operator <code>{{ }}</code> jest wyjątkiem. Obie formy zadziałają, ale żeby podkreślić szczególne działanie tego operatora <a href="https://style.tidyverse.org/syntax.html?q=%7B%7B#embracing"><em>The tidyverse style guide</em></a> zaleca, by stawiać te spacje.</p>
+<p>Jeśli chodzi o formatowanie, to mogę to zapisać jako <code>{group}</code> albo <code>{ group }</code>. Zazwyczaj nie stawiamy spacji po nawiasach, ale operator <code>{ }</code> jest wyjątkiem. Obie formy zadziałają, ale żeby podkreślić szczególne działanie tego operatora <a href="https://style.tidyverse.org/syntax.html?q=%7B%7B#embracing"><em>The tidyverse style guide</em></a> zaleca, by stawiać te spacje.</p>
 </section>
 <section id="quoting-i-unquoting" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> <em>Quoting</em> i <em>unquoting</em></h1>
-<p>To, co w poprzednim akapicie zrobiliśmy za pomocą <code>{{ }}</code> tak naprawdę składa się z dwóch kroków. Po pierwsze musieliśmy powiedzieć R, żeby nie rozpakowywał tego pudełka sam. Po drugie musimy powiedzieć funkcji <code>group_by()</code>, żeby ona to pudełko rozpakowała. Zaklejanie pudełka tak, żeby R nie mogło go odpakować nazywa się <em>quoting</em> (branie w cudzysłów). Funkcje typu <code>select()</code>, <code>filter()</code>, <code>group_by()</code>, <code>summarise()</code>, <code>across()</code> itd., czyli takie które stosują <em>quoting</em>, a które wcześniej nazywałem funkcjami z Tidy Eval, bardziej formalnie nazywają się <em>quoting functions</em>. Polecenie dla <em>quoting function</em>, by odpakowała tak zaklejone pudełko, nazywa się <em>unquoting</em>. Mówiąc bardziej formalnie – <em>quoting</em> to przyjmowanie kodu bez jego wykonywania, zatrzymywanie go. <em>Unquoting</em> to wykonywanie wcześniej zatrzymanego kodu.</p>
-<p>Obie te czynności wykonujemy jednocześnie wygodnym operatorem <code>{{ }}</code>, ale możemy (a czasem musimy) wykonać je też osobno. Dlatego też teraz omówimy sobie serię funkcji za pomocą których możemy wykonać <em>quoting</em>, a następnie <em>unquoting</em>. Wykorzystamy sobie tutaj funkcje wdrażane przez niewielki acz przepotężny pakiet <code>rlang</code> należący do rodziny tidyverse. Base-R też potrafi te rzeczy robić, ale <code>rlang</code> nie dość, że jest standardem, to jeszcze jest łatwiejszy do zrozumienia.</p>
+<p>To, co w poprzednim akapicie zrobiliśmy za pomocą <code>{ }</code> tak naprawdę składa się z dwóch kroków. Po pierwsze musieliśmy powiedzieć R, żeby nie rozpakowywał tego pudełka sam. Po drugie musimy powiedzieć funkcji <code>group_by()</code>, żeby ona to pudełko rozpakowała. Zaklejanie pudełka tak, żeby R nie mogło go odpakować nazywa się <em>quoting</em> (branie w cudzysłów). Funkcje typu <code>select()</code>, <code>filter()</code>, <code>group_by()</code>, <code>summarise()</code>, <code>across()</code> itd., czyli takie które stosują <em>quoting</em>, a które wcześniej nazywałem funkcjami z Tidy Eval, bardziej formalnie nazywają się <em>quoting functions</em>. Polecenie dla <em>quoting function</em>, by odpakowała tak zaklejone pudełko, nazywa się <em>unquoting</em>. Mówiąc bardziej formalnie – <em>quoting</em> to przyjmowanie kodu bez jego wykonywania, zatrzymywanie go. <em>Unquoting</em> to wykonywanie wcześniej zatrzymanego kodu.</p>
+<p>Obie te czynności wykonujemy jednocześnie wygodnym operatorem <code>{ }</code>, ale możemy (a czasem musimy) wykonać je też osobno. Dlatego też teraz omówimy sobie serię funkcji za pomocą których możemy wykonać <em>quoting</em>, a następnie <em>unquoting</em>. Wykorzystamy sobie tutaj funkcje wdrażane przez niewielki acz przepotężny pakiet <code>rlang</code> należący do rodziny tidyverse. Base-R też potrafi te rzeczy robić, ale <code>rlang</code> nie dość, że jest standardem, to jeszcze jest łatwiejszy do zrozumienia.</p>
 </section>
 <section id="expr-i-quo" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> <code>expr()</code> i <code>quo()</code></h1>
@@ -1534,7 +1545,7 @@ cookieconsent.run({
 <span style="color: #555555;">#&gt;</span> [1] "quo(x):"
 <span style="color: #555555;">#&gt;</span> <span style="font-weight: bold;">&lt;quosure&gt;</span>
 <span style="color: #555555;">#&gt;</span> expr: <span style="color: #0000BB;">^x</span>
-<span style="color: #555555;">#&gt;</span> env:  <span style="color: #0000BB;">0x55789fd0b1d0</span>
+<span style="color: #555555;">#&gt;</span> env:  <span style="color: #0000BB;">0x55ac0242f938</span>
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
@@ -1585,7 +1596,7 @@ cookieconsent.run({
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<p>…czyli za jednym zamachem (hehe) zatrzymać otwierające pudełka R i otworzyć to pudełko już na pewno wewnątrz <code>select()</code>. Zwróćmy uwagę, że to jest dokładnie to, co robił operator <code>{{ }}</code>, który w gruncie rzeczy jest wygodniejszym zapisem <code>!!enquo()</code>.</p>
+<p>…czyli za jednym zamachem (hehe) zatrzymać otwierające pudełka R i otworzyć to pudełko już na pewno wewnątrz <code>select()</code>. Zwróćmy uwagę, że to jest dokładnie to, co robił operator <code>{ }</code>, który w gruncie rzeczy jest wygodniejszym zapisem <code>!!enquo()</code>.</p>
 <p>Poza zwykłym <em>bang-bang</em> <code>!!</code> mamy też <em>bang-bang-bang</em> <code>!!!</code> i to nawet nie jest żart. Przypomnij sobie funkcję <code>enquos()</code>, która zatrzymywała wiele argumentów naraz w postaci listy. Jeśli coś takiego spróbujemy odpakować, to dostaniemy listę. Często zaś nie chcemy dostać listy, tylko samą jej zawartość po kolei. Innymi słowy chcę dostać <code>select(iris, Sepal.Width, Sepal.Length)</code>, a nie <code>select(iris, list(Sepal.Width, Sepal.Length))</code>. Do tego służy właśnie <code>!!!</code>, który bierze listę zatrzymanych wyrażeń, tnie ją na pojedyncze pudełka i każde z nich otwiera. Tym samym to jest dokładnie to, co przyda nam się do załatwienia argumentu <code>...</code> w naszej funkcji <code>opisowe</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
@@ -1707,7 +1718,7 @@ cookieconsent.run({
 <span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Użyłem tu <code>ensym()</code>, ale spokojnie mogłoby być <code>enquo()</code>. Funkcja wywołuje inną funkcję z pakietu, żeby przygotować dane do modelowania. Wszystkie nazwy kolumn na początku „rozbrajam” i ponownie „uzbrajam” już wewnątrz <code>mtscr_prepare()</code>. Jeśli byłby to tylko ten fragment kodu, mógłbym użyć operatora <code>{{ }}</code>, ale potem potrzebowałem wersji ręcznie „rozbrojonej”.</p>
+<p>Użyłem tu <code>ensym()</code>, ale spokojnie mogłoby być <code>enquo()</code>. Funkcja wywołuje inną funkcję z pakietu, żeby przygotować dane do modelowania. Wszystkie nazwy kolumn na początku „rozbrajam” i ponownie „uzbrajam” już wewnątrz <code>mtscr_prepare()</code>. Jeśli byłby to tylko ten fragment kodu, mógłbym użyć operatora <code>{ }</code>, ale potem potrzebowałem wersji ręcznie „rozbrojonej”.</p>
 </section>
 <section id="formuły-z-nazw-kolumn" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="formuły-z-nazw-kolumn"><span class="header-section-number">11.2</span> Formuły z nazw kolumn</h2>
@@ -1749,12 +1760,12 @@ cookieconsent.run({
 </section>
 <section id="podsumowanie" class="level1" data-number="12">
 <h1 data-number="12"><span class="header-section-number">12</span> Podsumowanie</h1>
-<p><strong>To nie jest łatwe.</strong> Nie trzeba się martwić, jak się tego nie rozumie przy pierwszym kontakcie. Ja miałem bardzo dużo podejść, zanim w końcu to zrozumiałem, a i tak nie jestem specjalistą, znacznie więcej nie wiem, niż wiem. Zaskakująco pomocną rzeczą jest <em>cheat sheet</em> z <code>rlang</code>. Mam wrażenie, że wytłumaczył mi te rzeczy lepiej, niż poradniki, ale może to być kwestia tego, że zrozumiałem <em>cheat sheet</em>, bo czytałem poradniki. Tak czy inaczej warto sobie wydrukować go <a href="https://github.com/rstudio/cheatsheets/blob/main/tidyeval.pdf">stąd</a>. Jednocześnie najnowsza wersja jest z 2018 r. i trochę zdążyło się zmienić w międzyczasie. Dlatego nie znajdziemy tam przede wszystkim operatora <code>{{ }}</code>, który pojawił się dopiero w połowie 2019 r. i stał się standardem. Wielu rzeczy też tutaj nie omówiłem (chociażby operatora <code>:=</code>), ale mam nadzieję, że ten wstęp wystarczy, żeby wejście w naukę tych tematów było gładsze.</p>
+<p><strong>To nie jest łatwe.</strong> Nie trzeba się martwić, jak się tego nie rozumie przy pierwszym kontakcie. Ja miałem bardzo dużo podejść, zanim w końcu to zrozumiałem, a i tak nie jestem specjalistą, znacznie więcej nie wiem, niż wiem. Zaskakująco pomocną rzeczą jest <em>cheat sheet</em> z <code>rlang</code>. Mam wrażenie, że wytłumaczył mi te rzeczy lepiej, niż poradniki, ale może to być kwestia tego, że zrozumiałem <em>cheat sheet</em>, bo czytałem poradniki. Tak czy inaczej warto sobie wydrukować go <a href="https://github.com/rstudio/cheatsheets/blob/main/tidyeval.pdf">stąd</a>. Jednocześnie najnowsza wersja jest z 2018 r. i trochę zdążyło się zmienić w międzyczasie. Dlatego nie znajdziemy tam przede wszystkim operatora <code>{ }</code>, który pojawił się dopiero w połowie 2019 r. i stał się standardem. Wielu rzeczy też tutaj nie omówiłem (chociażby operatora <code>:=</code>), ale mam nadzieję, że ten wstęp wystarczy, żeby wejście w naukę tych tematów było gładsze.</p>
 <p>Zbierając to wszystko do kupy:</p>
 <ol type="1">
 <li>Jeśli wrzucamy do funkcji typu <code>select()</code> nazwę zmiennej, odruchowo bierze ją ona za nazwę kolumny, której często nie znajduje.</li>
-<li>Podstawowym sposobem dania funkcji znać, że to nie kolumna, a zmienna do odpakowania jest <code>{{ }}</code>.</li>
-<li><code>{{ }}</code> robi dwie rzeczy – <em>quoting</em>, żeby powstrzymać R przed odpakowywaniem nazwy kolumny poza funkcją typu <code>select()</code> i <em>unquoting</em>, żeby dać funkcji typu <code>select()</code> znać, że to nie kolumna, tylko ma to odpakować.</li>
+<li>Podstawowym sposobem dania funkcji znać, że to nie kolumna, a zmienna do odpakowania jest <code>{ }</code>.</li>
+<li><code>{ }</code> robi dwie rzeczy – <em>quoting</em>, żeby powstrzymać R przed odpakowywaniem nazwy kolumny poza funkcją typu <code>select()</code> i <em>unquoting</em>, żeby dać funkcji typu <code>select()</code> znać, że to nie kolumna, tylko ma to odpakować.</li>
 <li>Obie te czynności można wykonać osobno – <em>quoting</em> przede wszystkim funkcją <code>enquo()</code>, <em>unquoting</em> przede wszystkim operatorem <code>!!</code>.</li>
 <li><code>quo()</code> służy do zatrzymywania zwykłych wyrażeń, <code>enquo()</code> do zatrzymywania argumentów, <code>quos()</code> do zatrzymywania wielu rzeczy naraz, a <code>enquos()</code> do zatrzymywania wielu argumentów naraz.</li>
 <li><code>!!</code> odpakowuje pojedyncze wyrażenia, a <code>!!!</code> odpakowuje listy wyrażeń. Argument <code>...</code> wymaga <code>enquos()</code> i <code>!!!</code>.</li>
@@ -1766,7 +1777,7 @@ cookieconsent.run({
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Czasami będziemy musieli wykorzystać <code>lst()</code>. Będą to przypadki, w których np. najpierw policzymy liczbę wszystkich przypadków w bazie (<code>N = n</code>), potem liczbę braków danych (<code>`NA` = is.na</code>), a na koniec chcemy policzyć procent brakujących (<code>p_NA = `NA` / N</code>). Chcemy więc wykorzystać nowo stworzone kolumny do stworzenia kolejnej. Zwykłe <code>list()</code> tego nie uciągnie i musimy użyć <code>lst()</code> z pakietu <code>tibble</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -1779,7 +1790,7 @@ cookieconsent.run({
 <li id="fn6"><p>…<em>my baby shot me down</em>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>CRAN nie lubi, jak używa się obiektów, które nie mają globalnych definicji, dlatego krzyczał na mnie, że nie ma czegoś takiego jak <code>.all_top2</code>. Ja wiedziałem, że jest w bazie danych, kod działał, bo to potem trafiało do <code>summarise()</code>, ale CRAN ma swoje zasady. Dlatego podałem to jako string, który jest przerabiany na wyrażenie (<em>parsing</em>).<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section></div></main> <!-- /main -->
+</aside></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1821,6 +1832,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1889,13 +1927,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1974,10 +2014,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1987,8 +2026,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2001,6 +2049,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -2044,6 +2167,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -2130,18 +2254,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://giscus.app/client.js" data-repo="jakub-jedrusiak/nieobliczalne" data-repo-id="R_kgDOHBIy6A" data-category="General" data-category-id="DIC_kwDOHBIy6M4CUvlw" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
 </script>
+<input type="hidden" id="giscus-base-theme" value="dark">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 

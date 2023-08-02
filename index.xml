@@ -9,7 +9,7 @@
 <link>https://nieobliczalne.pl/index.html</link>
 <atom:link href="https://nieobliczalne.pl/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.3.433</generator>
+<generator>quarto-1.4.283</generator>
 <lastBuildDate>Wed, 26 Jul 2023 22:00:00 GMT</lastBuildDate>
 <item>
   <title>Funkcje matematyczne</title>
@@ -897,7 +897,7 @@ Odpowiedź
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>W gimnazjum wciskali nam kit, że będziemy się uczyć programowania w HTML. Nie da się <em>programować</em>&nbsp;w HTML, bo HTML nie ma funkcji, pętli, zmiennych ani innych rzeczy, które pozwalają cokolwiek rzeczywiście zaprogramować. Jeśli chcemy programować cokolwiek na stronach internetowych, użyjemy JavaScript, gdzie wszystkie te rzeczy są.↩︎</p></li>
@@ -905,7 +905,7 @@ Odpowiedź
 <li id="fn3"><p>Spróbuj to samo wyrazić językiem algebraicznym.↩︎</p></li>
 <li id="fn4"><p>Używam terminu „dodawanie”, bo odejmowanie to dodawanie liczb ujemnych.↩︎</p></li>
 </ol>
-</section></div> ]]></description>
+</aside></div> ]]></description>
   <category>Statystyka</category>
   <category>Matematyka</category>
   <guid>https://nieobliczalne.pl/posts/funkcje.html</guid>
@@ -1324,20 +1324,12 @@ font-style: inherit;">`all_top2`</span>. A value for a participant is the maximu
 <span id="cb7-3"><span class="in" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">```{r}</span></span>
-<span id="cb7-4"><span class="fu" style="color: #4758AB;
+<span id="cb7-4"><span class="in" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
+font-style: inherit;">library("mtscr")</span></span>
+<span id="cb7-5"><span class="in" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">"mtscr"</span>)</span>
-<span id="cb7-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">data</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"mtscr_creativity"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">package =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"mtscr"</span>)</span>
+font-style: inherit;">data("mtscr_creativity", package = "mtscr")</span></span>
 <span id="cb7-6"><span class="in" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">```</span></span></code></pre></div>
@@ -3199,7 +3191,7 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Funkcje <code>install_*()</code> zapewnia też mniejszy pakiet <code>remotes</code>, który jest praktycznie wycinkiem z <code>devtools</code>. Jeśli mamy <code>devtools</code>, nie potrzebujemy <code>remotes</code>.↩︎</p></li>
@@ -3209,7 +3201,7 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 <li id="fn5"><p>Jeśli nie wiesz, czym jest GitHub i po co go używać, przeczytaj <a href="./posts/git.qmd">ten wpis</a>.↩︎</p></li>
 <li id="fn6"><p>Możesz też ręcznie wytworzyć odpowiedni plik .R w folderze <code>R</code>.↩︎</p></li>
 </ol>
-</section></div> ]]></description>
+</aside></div> ]]></description>
   <category>R</category>
   <guid>https://nieobliczalne.pl/posts/pakiety-w-R.html</guid>
   <pubDate>Thu, 25 May 2023 22:00:00 GMT</pubDate>
@@ -3500,14 +3492,14 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>W rzeczywistości RegEx ma do tego specjalne operatory, ale nie chcę wchodzić tak głęboko.↩︎</p></li>
 <li id="fn2"><p>Ewentualnie możemy ich użyć do stosowania operatorów do całych grup, np. <code>(foo)+</code> dopasuje jedno całe słowo „foo” lub ich więcej. Bez nawiasu <code>+</code> odnosiłby się tylko do litery „o”.↩︎</p></li>
 <li id="fn3"><p>Warto zauważyć, że w polu, w którym wpisujemy tekst, którym zastępujemy nasze dopasowania, nie musimy już <em>escape’ować</em> znaków specjalnych. Tam już wszystkie znaki są dosłowne.↩︎</p></li>
 </ol>
-</section></div> ]]></description>
+</aside></div> ]]></description>
   <category>Narzędzia</category>
   <guid>https://nieobliczalne.pl/posts/regex.html</guid>
   <pubDate>Fri, 19 May 2023 22:00:00 GMT</pubDate>
@@ -3648,12 +3640,12 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Jestem przekonany, że to kwestia czasu, patrząc na to, jak już teraz działa GitHub Copilot i jak zapowiada się GitHub Copilot X. Być może, gdy to czytasz, konflikty potrafią się już rozwiązywać same.↩︎</p></li>
 </ol>
-</section></div> ]]></description>
+</aside></div> ]]></description>
   <category>Narzędzia</category>
   <category>R</category>
   <guid>https://nieobliczalne.pl/posts/git.html</guid>
@@ -3699,7 +3691,7 @@ III</code></pre>
 <section id="print-i-f-strings" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> <code>print()</code> i <em>f-strings</em></h1>
 <p>Teraz możemy pisać nasz kod w Pythonie. Będę zakładał, że piszemy nasz kod w pliku, ale równie dobrze można to pisać na szybko w konsoli. Często tak robię, jak mam do wygenerowania prostą zbitkę i nie chce mi się&nbsp;tworzyć na to specjalnie pliku. W takim wypadku każdą linijkę kodu wpisujemy w konsolę osobno i osobno zatwierdzamy enterem. Zazwyczja pierwszym, co się pisze, gdy zaczyna się uczyć nowego języka, jest program, który wyświetla tekst „Hello world!“. W Pythonie robimy to funkcją <code>print()</code>.</p>
-<div id="bfdc34a4" class="cell" data-execution_count="1">
+<div id="dfeaad91" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
@@ -3711,7 +3703,7 @@ font-style: inherit;">"Hello world!"</span>)</span></code></pre></div>
 </div>
 <p>Funkcja <code>print()</code> w większości wystarczy, żebyśmy uzyskali to, co chcemy dziś uzyskać. Wbrew pozorom, jeśli połączymy ją z pętlami, będzie ona potrafiła całkiem sporo. Funkcje w programowaniu zazwyczaj mają po sobie nawiasy, do których wrzucamy różne rzeczy, z którymi funkcja ma coś zrobić. Tak tutaj wrzucamy w te nawiasy tekst, który funkcja ma pokazać w konsoli. Dosłowny tekst zawsze piszemy w cudzysłowie.</p>
 <p>Jeśli potrzebujemy, możemy po przecinku dorzucić argument <code>end</code>, który mówi, co funkcja ma dodać na koniec danego ciągu znaków. Domyślnie jest to nowa linia, którą w informatyce zapisujemy zazwyczaj <code>\n</code>. Nie robimy rzeczywistej nowej linii! Na przykład możemy zmienić jedną pustą linię na dwie, trzy. Możemy też zamienić nową linię na spację, ale po co, to wyjaśnię&nbsp;później. Możemy też wymyślić coś całkiem szalonego, jeśli mamy taką potrzebę.</p>
-<div id="f3aad492" class="cell" data-execution_count="2">
+<div id="bc14c1c3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
@@ -3737,7 +3729,7 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 </div>
 </div>
 <p>Nabierze to więcej sensu, kiedy dojdziemy do pętli i będziemy wyświetlać wiele tekstów, jeden pod drugim. Podobnie więcej sensu nabierze coś, co omówimy teraz, czyli tzw. <em>f-strings</em>. W informatyce słowem <em>string</em> oznacza się dosłowny ciąg znaków. <em>f-strings</em> to sposób, jak do naszego ciągu znaków wrzucić wartość jakiejś <em>zmiennej</em>. Co to znaczy? Jak powiedziałem wyżej, tekst, który chcemy wygenerować, zawiera elementy stałe i elementy zmienne. Elementem zmiennym może być na przykład liczba. Jak połączyć elementy stałe ze zmiennymi? Właśnie za pomocą <em>f-string</em>. Zmienne definiujemy w Pythonie za pomocą znaku <code>=</code>.</p>
-<div id="c9c7a8ca" class="cell" data-execution_count="3">
+<div id="553b0e3a" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">i <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -3760,7 +3752,7 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 </div>
 </div>
 <p>W kodzie powyżej najpierw przypisuję wartość 23 do zmiennej <code>i</code> (zmienne mogę&nbsp;nazywać jak chcę). Dzięki temu, od tego momentu, gdy napiszę <code>i</code>, Python zrozumie to jako 23. Można spróbować tego w konsoli. Jeśli po zadeklarowaniu zmiennej wpiszemy w konsolę <code>i</code> i zatwierdzimy, zobaczymy liczbę 23. Jeśli piszę to w konsoli, a nie w pliku, to najpierw wpisuję <code>i = 23</code>, klikam enter i dopiero potem odpowiednią funkcję <code>print()</code>. Następnie do funkcji <code>print()</code> wrzucam tekst <code>"MMPI_{i}"</code>. Python wie, że zamiast <code>{i}</code> musi podstawić prawdziwą wartość zmiennej <code>i</code>, czyli w tym wypadku 23. Żeby to jednak wiedział, musimy przed samym ciągiem znaków dodać literkę <code>f</code>, jak <em>format</em>. Dlatego właśnie napisałem <code>f"MMPI_{i}"</code> i dlatego nazywa się to <em>f-string</em>. Jeśli chcielibyśmy w naszym tekście dodać dosłowne nawiasy klamrowe, np. uzyskać „{MMPI_23}“, takie nawiasy klamrowe piszemy podwójnie – <code>{{</code> w <em>f-string</em> zmieni się&nbsp;w dosłowny znak <code>{</code>.</p>
-<div id="13bb667c" class="cell" data-execution_count="4">
+<div id="1c0955c7" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">i <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -3789,7 +3781,7 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 </div>
 </div>
 <p>Zawartość zmiennej <code>i</code> możemy w nawiasach klamrowych też modyfikować.</p>
-<div id="066785f8" class="cell" data-execution_count="5">
+<div id="8e1bf3da" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">i <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -3842,7 +3834,7 @@ Jak to jest być SKRYBĄ?</code></pre>
 <section id="pętla-for" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="pętla-for"><span class="header-section-number">3.1</span> Pętla <code>for</code></h2>
 <p>Pętla <code>for</code> jest najprostszym rodzajem pętli i tym, z czego będziemy stale korzystać. Omówmy sobie ją na przykładzie generowania nazw kolumn.</p>
-<div id="005d3162" class="cell" data-execution_count="6">
+<div id="937700db" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
@@ -3882,7 +3874,7 @@ MMPI_10</code></pre>
 <p>Dlaczego jednak napisałem <code>range(1, 11)</code> a nie <code>range(1, 10)</code>? Python działa tutaj specyficznie. Wynika to z faktu, że w informatyce liczy się od 0, nie od 1. Jeśli do funkcji <code>range()</code> wrzucę tylko jedną liczbę, czyli na przykład <code>range(10)</code>, to dostanę 10 elementów. Ponieważ jednak pierwszy element to 0, to będą to liczby od 0 do 9. Mogę podać dwie liczby, żeby powiedzieć funkcji <code>range()</code>, od czego ma zacząć, ale wtedy muszę mieć w głowie, że skoro <code>range(0, 10)</code> oznacza 10 liczb od 0 do 9, to liczby od 1 do 10 muszę zapisać jako <code>range(1, 11)</code>. Innymi słowy koniec skali nie wlicza się do zakresu.</p>
 <p>Jeśli piszemy to w konsoli, a nie w pliku, możemy zapisać taką pętlę w jednej linijce – <code>for i in range(1, 11): print(f"MMPI_{i}")</code>. Możemy też zapisać samo <code>for i in range(1, 11):</code> (nie zapominając o dwukropku) i potwierdzić enterem. W obu wypadkach wyświetli nam się w konsoli wielokropek i będziemy mogli dopisywać kolejne komendy z pętli. Gdy będziemy usatysfakcjonowani, klikamy enter po raz kolejny, a pętla wykonuje się.</p>
 <p>Tak jak wspomniałem, domyślnie <code>print()</code> wyrzuca do konsoli to, co tej funkcji podaliśmy, dodając na koniec nową linię. Możemy jednak chcieć, żeby nasze elementy pojawiły się po przecinku albo oddzielone spacjami (albo jedno i drugie) i wtedy możemy zmienić argument <code>end</code>.</p>
-<div id="2097c769" class="cell" data-execution_count="7">
+<div id="3b35b44b" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
@@ -3918,7 +3910,7 @@ font-style: inherit;">", "</span>)</span></code></pre></div>
 <section id="pętla-while" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="pętla-while"><span class="header-section-number">3.2</span> Pętla <code>while</code></h2>
 <p>Pętla <code>while</code> to bardziej podstawowy, prosty rodzaj pętli. Większość pętli <code>while</code> da się napisać w formie pętli <code>for</code>, dlatego nie będę się nad tym jakoś szczególnie rozwodził, ale warto wiedzieć, że coś takiego istnieje. Napiszmy przykład z poprzedniej sekcji w postaci pętli <code>while</code>.</p>
-<div id="bc33db98" class="cell" data-execution_count="8">
+<div id="109f2a27" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">i <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -3984,7 +3976,7 @@ q: I feel that I am a person of worth, at least on an equal plane with others.
 <p>Po pierwsze mamy <code>l</code>, czyli <em>label</em>. Posłuży nam to jako wewnętrzna „nazwa” pozycji testowej i nagłówek kolumny w bazie danych. Dalej mamy <code>t</code>, czyli <em>type</em>, gdzie <code>radio</code> oznacza pytanie jednokrotnego wyboru. Inne typy znajdziemy w <a href="https://www.psytoolkit.org/doc3.4.4/online-survey-syntax.html#questiontypes">dokumentacji</a>. Następnie mamy <code>q</code>, czyli <em>question</em>, właściwa treść pozycji testowej i pod nią odpowiedzi wypisane od myślników. Możemy tu dodawać inne rzeczy (np. <code>o: random</code>, żeby kolejność odpowiedzi była losowa), ale załóżmy, że na ten moment tyle nam wystarczy.</p>
 <p>Po pierwsze spróbujmy zidentyfikować, co w naszym schemacie jest stałe i co się zmienia. Tutaj zmieniają się dwie rzeczy – treść pozycji testowej i numerek przy <code>RSES</code>. Cała reszta jest identyczna dla każdej pozycji testowej.</p>
 <p>Skoro musimy mieć w naszych pytaniach treść pozycji testowej, musimy nasz kwestionariusz wkleić do skryptu. Zapiszemy go w postaci listy.</p>
-<div id="3d393cb5" class="cell" data-execution_count="9">
+<div id="ba27a658" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">RSES <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> [</span>
@@ -4021,7 +4013,7 @@ font-style: inherit;">"At times I think I am no good at all."</span></span>
 <span id="cb19-12">]</span></code></pre></div>
 </div>
 <p>Cała lista jest nawiasach kwadratowych, każdy item jest w cudzysłowie, zaś itemy rozdzielone są przecinkami. Całą listę zapisałem do zmiennej o nazwie <code>RSES</code>. Teraz możemy powiedzieć Pythonowi, żeby zrobił całą serię pytań w stylu PsyToolKit, gdzie po <code>q</code> za każdym razem wstawi jedną z pozycji testowych.</p>
-<div id="8b6f1497" class="cell" data-execution_count="10">
+<div id="3bda2639" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> item <span class="kw" style="color: #003B4F;
@@ -4155,7 +4147,7 @@ q: At times I think I am no good at all.
 </div>
 <p>Jak widzimy, nasza zmienna w pętli (1) nie musi nazywać się <code>i</code> oraz (2) nie musi być liczbą. Jak widzimy, możemy wykonać pętlę za każdym razem przypisując do zmiennej kolejny tekst z listy. Każdą linijkę możemy zapisać w osobnej komendzie <code>print()</code> lub też całość wpisać w jedną komendę, zaznaczając nowe linijki za pomocą <code>\n</code>. Tak zrobiłem w przedostatniej linijce.</p>
 <p>Nasz wynik ma jednak problem – każde pytanie nazywa się <code>RSES_1</code>. Liczba po <code>RSES_</code> musi się zmieniać. Tym razem jest to trudniejsze niż wcześniej, bo <code>item</code> nie jest tutaj liczbą, tylko treścią pytania, więc nie możemy zapisać <code>RSES_{item}</code>. Z pomocą przychodzi nam jednak funkcja <code>enumerate()</code>. Pozwala ona przerobić listę na tzw. krotki (ang. <em>tuples</em>, tutaj <em>2-tuples</em> czyli dwukrotki). Każda taka dwukrotka zawiera numer pozycji na liście (licząc od 0) oraz samą pozycję. Numer jest pierwszy, więc dostaniemy się&nbsp;do niego pisząc <code>item[0]</code>. Jeśli chcemy dostać treść pozycji testowej, zapiszemy <code>item[1]</code>. Całość wyglądałaby więc tak:</p>
-<div id="a949798e" class="cell" data-execution_count="11">
+<div id="84bf3d2e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> item <span class="kw" style="color: #003B4F;
@@ -4317,7 +4309,7 @@ q: At times I think I am no good at all.
 <h2 data-number="4.3" class="anchored" data-anchor-id="daty"><span class="header-section-number">4.3</span> Daty</h2>
 <p>Wróćmy do pierwotnego przykładu z plikiem mojej siostry. Jest to przykład o tyle specyficzny, że zmiennym elementem jest tam data. Daty zmieniają się przewidywalne, ale potrzebują specjalnych funkcji, które ogarną takie rzeczy jak to, że różne miesiące mają różną liczbę dni, istnieją lata przestępne itd. Kiedy rzeczywiście miałem ten problem, użyłem funkcji <code>date</code> w Linuksie, która sama z siebie pozwala na robienie takich rzeczy. Większość osób (niestety) nie korzysta z linuksa, dlatego na potrzeby tego wpisu zaadaptuję to rozwiązanie do Pythona. Albo chociaż spróbuję.</p>
 <p>Żeby operować na datach, musimy na szczycie skryptu (lub najpierw w konsoli) zapisać:</p>
-<div id="db8ce823" class="cell" data-execution_count="12">
+<div id="d7991594" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> datetime</span></code></pre></div>
@@ -4334,7 +4326,7 @@ III</code></pre>
 <p>Po drugie będziemy musieli dodawać do naszej daty dni. Robimy to funkcją <code>datetime.timedelta(days = 1)</code>. W tej formie do naszej daty dodamy jeden dzień. Takie coś rzeczywiście do daty dodajemy, czyli piszemy na przykład <code>datetime.date(2023, 5, 11) + datetime.timedelta(days = 1)</code>. Wynikiem będzie tutaj 12 maja 2023 roku.</p>
 <p>Po trzecie nasza data musi być w określonym formacie, w tym wypadku DD.MM.RRRR. Domyślnie daty wyświetlają się w formacie ISO 8601, czyli RRRR-MM-DD. Formatować daty można metodą <code>strftime()</code>. Metody to szczególny rodzaj funkcji, który wykorzystujemy tak, że doklejamy je po kropce do nazwy naszego obiektu np. z datą. Najlepiej będzie to widać w przykładzie. Do samej metody wrzucamy zakodowany format, w jakim datę chcemy uzyskać. Wykorzystamy tutaj specjalne kody, których listę możemy znaleźć <a href="https://www.w3schools.com/Python/gloss_Python_date_format_codes.asp">tutaj</a>. Potrzebny nam format zakodujemy jako <code>"%d.%m.%Y"</code>.</p>
 <p>Zbierając to wszystko do kupy uzyskujemy coś takiego:</p>
-<div id="f66e5b90" class="cell" data-execution_count="13">
+<div id="b8386b94" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> datetime</span>
@@ -4462,7 +4454,7 @@ III
 </div>
 </div>
 <p>Wykorzystałem tutaj kilka zmiennych, które nazwałem <code>start_date</code>, <code>date</code> i <code>date_formatted</code>. Nazwy zmiennych mogą być jakiekolwiek. Wybrałem takie, żeby to było czytelne. Jak to w programowaniu, możemy to napisać na parę sposobów. Dla przykładu tutaj datę już sformatowaną zapisałem w osobnej zmiennej, ale mógłbym też napisać:</p>
-<div id="17f3da89" class="cell" data-execution_count="14">
+<div id="f9f41398" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> datetime</span>
@@ -4531,7 +4523,7 @@ background-color: null;
 font-style: inherit;">"</span>)</span></code></pre></div>
 </div>
 <p>…albo w ogóle wszystko zapisać już wewnątrz pętli:</p>
-<div id="45c40fc2" class="cell" data-execution_count="15">
+<div id="8203881a" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> datetime</span>
@@ -4616,7 +4608,7 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Ciekawostką może być tutaj wczesny kalendarz hebrajski. Kalendarz hebrajski jest księżycowy, ma 12 miesięcy, ale w latach przestępnych dodawany jest 13. miesiąc – adar szeni. Takich lat przestępnych musi przypaść 7 w ciągu 19 lat. Obecnie jest to skodyfikowane (zob. cykl Metona), ale początkowo nie wiadomo było, które konkretnie lata w cyklu mają być przestępne i było to <em>ad hoc</em> ustalane przez społeczność żydowską. Tym samym lata przestępne pojawiały się znienacka i data wcale nie zmieniała się w przewidywalny sposób. Miało to poważne konsekwencje dla daty Wielkanocy, bo zanim został ustalony stabilny wzór (Wielkanocy, nie lat przestępnych w kalendarzu żydowskim, to nadeszło później), nigdy nie wiadomo było, kiedy wypadnie 14 nisan, czyli rocznica śmierci Jezusa według kalendarza żydowskiego.↩︎</p></li>
@@ -4625,7 +4617,7 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 <li id="fn4"><p>Sam korzystam z linuksa (<em>I use arch, BTW</em>), ale nie łudzę się – większość osób, które to czytają, to windowsiarze. W linuksie operator <code>&gt;</code> działa identycznie.↩︎</p></li>
 <li id="fn5"><p>Sprawdziłem, taki skrypt generuje u mnie 30 lat rozpiski w 47 milisekund (!), a gotowy plik ma 310 kB.↩︎</p></li>
 </ol>
-</section></div> ]]></description>
+</aside></div> ]]></description>
   <category>Python</category>
   <category>Nauka</category>
   <category>Narzędzia</category>
@@ -4868,7 +4860,7 @@ font-style: inherit;">opisowe</span>(iris, Species, Sepal.Length, Sepal.Width)</
 <section id="tidy-eval" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Tidy Eval</h1>
 <p>To, co teraz opowiem, jest uznawane za bardzo zaawansowaną część języka R. Najgłębiej opisuje te zagadnienia Hadley Wickham<sup>3</sup> w książce <a href="https://adv-r.hadley.nz/"><em>Advanced R</em></a>. Sam bardzo długo próbowałem to zrozumieć, aż w końcu udało mi się niedawno, podczas pisania pakietu <a href="https://github.com/jakub-jedrusiak/mtscr"><code>mtscr</code></a>. Gdy wreszcie to zrozumiałem, to uznałem, że nie jest to aż takie trudne, tylko opisane jak dla informatyków, matematyków, inżynierów, a nie jak dla psychologów, socjologów, ekonomistów czy całej reszty ludzkości. Dokładnie ten sam problem mam ze statystyką w ogóle.</p>
-<p>Jednocześnie nie jest to coś, co większość useRów musi rozumieć. Taka potrzeba pojawia się zazwyczaj głęboko, późno, gdy chcemy usprawnić nasz kod własnymi funkcjami<sup>4</sup> albo musimy napisać jakiś pakiet. Zazwyczaj pierwszy raz, kiedy chcemy napisać funkcję robiącą wykres w <code>ggplot2</code> i się blokujemy. Wtedy znajdujemy na StackOverflow informację, że trzeba nazwy kolumn wziąć w podwójne klamry (np. <code>{{column}}</code>) i tyle nam wystarczy, nie musimy zajmować się tym głębiej. Do czasu, kiedy jednak musimy.</p>
+<p>Jednocześnie nie jest to coś, co większość useRów musi rozumieć. Taka potrzeba pojawia się zazwyczaj głęboko, późno, gdy chcemy usprawnić nasz kod własnymi funkcjami<sup>4</sup> albo musimy napisać jakiś pakiet. Zazwyczaj pierwszy raz, kiedy chcemy napisać funkcję robiącą wykres w <code>ggplot2</code> i się blokujemy. Wtedy znajdujemy na StackOverflow informację, że trzeba nazwy kolumn wziąć w podwójne klamry (np. <code>{column}</code>) i tyle nam wystarczy, nie musimy zajmować się tym głębiej. Do czasu, kiedy jednak musimy.</p>
 <p>Skąd więc biorą się problemy takie jak w przykładzie? To jest cena, którą płacimy za wygodne pisanie kodu. W klasycznym R, gdy chcemy coś policzyć, musimy wykorzystywać pełne nazwy kolumn. Podobnie gdy coś filtrujemy.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"></span>
@@ -5038,7 +5030,7 @@ font-style: inherit;">12</span>, to_nie_istnieje)</span></code></pre></div>
 <p>Istota Tidy Eval polega na tym, że możemy powiedzieć R dwie rzeczy – „nie otwieraj tego pudełka teraz” oraz „teraz możesz otworzyć to pudełko”. Możemy więc dokładnie sterować, kiedy R dokona ewaluacji danego wyrażenia. Nie wydaje się to bardzo znaczące, ale naprawdę jest.</p>
 </section>
 <section id="niejednoznaczność-i" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Niejednoznaczność i <code>{{ }}</code></h1>
+<h1 data-number="5"><span class="header-section-number">5</span> Niejednoznaczność i <code>{ }</code></h1>
 <p>Nie wchodźmy na ten moment w szczegóły, <em>a propos</em> tego, jak działają funkcje tidyverse. Przyjmijmy na ten moment, że potrafią one traktować coś, co inne funkcje uznałyby za obiekt, jako nazwę kolumny. To rodzi nam potencjał do pewnej niejednoznaczności. Kiedy piszemy <code>iris$Sepal.Length</code>, to może jest to niewygodne, ale nie ma wątpliwości, o co nam chodzi. Niejednoznaczność pojawiła się po raz pierwszy, gdy w naszej funkcji <code>opisowe</code> zapisaliśmy <code>group_by(group)</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">opisowe <span class="ot" style="color: #003B4F;
@@ -5161,7 +5153,7 @@ font-style: inherit;">x =</span> liczba)</span></code></pre></div>
 </div>
 <p>Efekt działania obu tych wywołań jest taki sam – jest nim logarytm dziesiętny ze 100, czyli 2. W pierwszym wypadku wpakowaliśmy 100 do funkcji bezpośrednio. Innymi słowy do pudełka z napisem <code>x</code> wpakowaliśmy liczbę 100. <code>x</code> To nazwa (jedynego) argumentu funkcji <code>log10()</code>. W drugim przypadku wpakowaliśmy liczbę 100 do pudełka z napisem <code>liczba</code> i dopiero to pudełko chcemy włożyć do pudełka <code>x</code>. Ale R nie lubi matrioszek. R nie włoży pudełka do pudełka. Zanim R włoży coś do pudełka <code>x</code>, to to rozpakuje. Do samego końca. To jest standardowy mechanizm ewaluacji – rozpakuj do końca, aż nie dostaniesz czegoś konkretnego. Jeśli pudełko <code>liczba</code> byłoby puste, R miałby problem.</p>
 <p>Funkcje korzystające z Tidy Eval działają trochę inaczej. Gdy R przynosi im pudełko <code>x</code>, wyciąga z niego pudełko <code>liczba</code> i mówi “O, drugie pudełko. Czekaj, rozpakuję ci to”, na co taka funkcja <code>group_by()</code> odpowiada “Nie, spoko, poradzę sobie”. Dlatego R podaje jej samo pudełko <code>liczba</code>. Funkcja <code>group_by()</code> bierze to pudełko, czyta etykietę i wie, że ma szukać w bazie danych kolumny, co się nazywa “liczba”. Skąd wie, to pomińmy na teraz. Można więc powiedzieć, że standardowa ewaluacja to “rozpakowuj do końca”, a Tidy Eval to “nie rozpakowuj”.</p>
-<p>Problem pojawia się wtedy, gdy piszemy własną funkcję, gdzie chcemy wykorzystać funkcję z Tidy Eval. Gdy w naszej funkcji <code>opisowe</code> wywołujemy <code>group_by(group)</code>, to <code>group_by()</code> posłusznie nie rozpakowuje <code>group</code>, tylko szuka <code>group</code> w bazie danych. Chcemy więc powiedzieć funkcji <code>group_by()</code> “Nie, nie. To rozpakuj, to jest argument.”. Właśnie to uzyskamy za pomocą operatora <code>{{ }}</code> (czytane <em>curly curly</em>). <code>group_by()</code> będzie wiedziało, że to jest do rozpakowania. Dokonajmy więc pierwszej modyfikacji naszej funkcji <code>opisowe</code>.</p>
+<p>Problem pojawia się wtedy, gdy piszemy własną funkcję, gdzie chcemy wykorzystać funkcję z Tidy Eval. Gdy w naszej funkcji <code>opisowe</code> wywołujemy <code>group_by(group)</code>, to <code>group_by()</code> posłusznie nie rozpakowuje <code>group</code>, tylko szuka <code>group</code> w bazie danych. Chcemy więc powiedzieć funkcji <code>group_by()</code> “Nie, nie. To rozpakuj, to jest argument.”. Właśnie to uzyskamy za pomocą operatora <code>{ }</code> (czytane <em>curly curly</em>). <code>group_by()</code> będzie wiedziało, że to jest do rozpakowania. Dokonajmy więc pierwszej modyfikacji naszej funkcji <code>opisowe</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">opisowe <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -5258,12 +5250,12 @@ font-style: inherit;">opisowe</span>(iris, Species, Sepal.Width, Sepal.Length)</
 </div>
 </div>
 <p>Może i ciągle nie działa, ale dostaliśmy inny błąd! To naprawdę jest powód do radości, jak się robi cokolwiek związanego z komputerami.</p>
-<p>Jeśli chodzi o formatowanie, to mogę to zapisać jako <code>{{group}}</code> albo <code>{{ group }}</code>. Zazwyczaj nie stawiamy spacji po nawiasach, ale operator <code>{{ }}</code> jest wyjątkiem. Obie formy zadziałają, ale żeby podkreślić szczególne działanie tego operatora <a href="https://style.tidyverse.org/syntax.html?q=%7B%7B#embracing"><em>The tidyverse style guide</em></a> zaleca, by stawiać te spacje.</p>
+<p>Jeśli chodzi o formatowanie, to mogę to zapisać jako <code>{group}</code> albo <code>{ group }</code>. Zazwyczaj nie stawiamy spacji po nawiasach, ale operator <code>{ }</code> jest wyjątkiem. Obie formy zadziałają, ale żeby podkreślić szczególne działanie tego operatora <a href="https://style.tidyverse.org/syntax.html?q=%7B%7B#embracing"><em>The tidyverse style guide</em></a> zaleca, by stawiać te spacje.</p>
 </section>
 <section id="quoting-i-unquoting" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> <em>Quoting</em> i <em>unquoting</em></h1>
-<p>To, co w poprzednim akapicie zrobiliśmy za pomocą <code>{{ }}</code> tak naprawdę składa się z dwóch kroków. Po pierwsze musieliśmy powiedzieć R, żeby nie rozpakowywał tego pudełka sam. Po drugie musimy powiedzieć funkcji <code>group_by()</code>, żeby ona to pudełko rozpakowała. Zaklejanie pudełka tak, żeby R nie mogło go odpakować nazywa się <em>quoting</em> (branie w cudzysłów). Funkcje typu <code>select()</code>, <code>filter()</code>, <code>group_by()</code>, <code>summarise()</code>, <code>across()</code> itd., czyli takie które stosują <em>quoting</em>, a które wcześniej nazywałem funkcjami z Tidy Eval, bardziej formalnie nazywają się <em>quoting functions</em>. Polecenie dla <em>quoting function</em>, by odpakowała tak zaklejone pudełko, nazywa się <em>unquoting</em>. Mówiąc bardziej formalnie – <em>quoting</em> to przyjmowanie kodu bez jego wykonywania, zatrzymywanie go. <em>Unquoting</em> to wykonywanie wcześniej zatrzymanego kodu.</p>
-<p>Obie te czynności wykonujemy jednocześnie wygodnym operatorem <code>{{ }}</code>, ale możemy (a czasem musimy) wykonać je też osobno. Dlatego też teraz omówimy sobie serię funkcji za pomocą których możemy wykonać <em>quoting</em>, a następnie <em>unquoting</em>. Wykorzystamy sobie tutaj funkcje wdrażane przez niewielki acz przepotężny pakiet <code>rlang</code> należący do rodziny tidyverse. Base-R też potrafi te rzeczy robić, ale <code>rlang</code> nie dość, że jest standardem, to jeszcze jest łatwiejszy do zrozumienia.</p>
+<p>To, co w poprzednim akapicie zrobiliśmy za pomocą <code>{ }</code> tak naprawdę składa się z dwóch kroków. Po pierwsze musieliśmy powiedzieć R, żeby nie rozpakowywał tego pudełka sam. Po drugie musimy powiedzieć funkcji <code>group_by()</code>, żeby ona to pudełko rozpakowała. Zaklejanie pudełka tak, żeby R nie mogło go odpakować nazywa się <em>quoting</em> (branie w cudzysłów). Funkcje typu <code>select()</code>, <code>filter()</code>, <code>group_by()</code>, <code>summarise()</code>, <code>across()</code> itd., czyli takie które stosują <em>quoting</em>, a które wcześniej nazywałem funkcjami z Tidy Eval, bardziej formalnie nazywają się <em>quoting functions</em>. Polecenie dla <em>quoting function</em>, by odpakowała tak zaklejone pudełko, nazywa się <em>unquoting</em>. Mówiąc bardziej formalnie – <em>quoting</em> to przyjmowanie kodu bez jego wykonywania, zatrzymywanie go. <em>Unquoting</em> to wykonywanie wcześniej zatrzymanego kodu.</p>
+<p>Obie te czynności wykonujemy jednocześnie wygodnym operatorem <code>{ }</code>, ale możemy (a czasem musimy) wykonać je też osobno. Dlatego też teraz omówimy sobie serię funkcji za pomocą których możemy wykonać <em>quoting</em>, a następnie <em>unquoting</em>. Wykorzystamy sobie tutaj funkcje wdrażane przez niewielki acz przepotężny pakiet <code>rlang</code> należący do rodziny tidyverse. Base-R też potrafi te rzeczy robić, ale <code>rlang</code> nie dość, że jest standardem, to jeszcze jest łatwiejszy do zrozumienia.</p>
 </section>
 <section id="expr-i-quo" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> <code>expr()</code> i <code>quo()</code></h1>
@@ -5519,7 +5511,7 @@ font-style: inherit;">quo_vs_enquo</span>(argument)</span></code></pre></div>
 <span style="color: #555555;">#&gt;</span> [1] "quo(x):"
 <span style="color: #555555;">#&gt;</span> <span style="font-weight: bold;">&lt;quosure&gt;</span>
 <span style="color: #555555;">#&gt;</span> expr: <span style="color: #0000BB;">^x</span>
-<span style="color: #555555;">#&gt;</span> env:  <span style="color: #0000BB;">0x55789fd0b1d0</span>
+<span style="color: #555555;">#&gt;</span> env:  <span style="color: #0000BB;">0x55ac0242f938</span>
 </code></pre>
 </div>
 </div>
@@ -5610,7 +5602,7 @@ font-style: inherit;">head</span>()</span></code></pre></div>
 </code></pre>
 </div>
 </div>
-<p>…czyli za jednym zamachem (hehe) zatrzymać otwierające pudełka R i otworzyć to pudełko już na pewno wewnątrz <code>select()</code>. Zwróćmy uwagę, że to jest dokładnie to, co robił operator <code>{{ }}</code>, który w gruncie rzeczy jest wygodniejszym zapisem <code>!!enquo()</code>.</p>
+<p>…czyli za jednym zamachem (hehe) zatrzymać otwierające pudełka R i otworzyć to pudełko już na pewno wewnątrz <code>select()</code>. Zwróćmy uwagę, że to jest dokładnie to, co robił operator <code>{ }</code>, który w gruncie rzeczy jest wygodniejszym zapisem <code>!!enquo()</code>.</p>
 <p>Poza zwykłym <em>bang-bang</em> <code>!!</code> mamy też <em>bang-bang-bang</em> <code>!!!</code> i to nawet nie jest żart. Przypomnij sobie funkcję <code>enquos()</code>, która zatrzymywała wiele argumentów naraz w postaci listy. Jeśli coś takiego spróbujemy odpakować, to dostaniemy listę. Często zaś nie chcemy dostać listy, tylko samą jej zawartość po kolei. Innymi słowy chcę dostać <code>select(iris, Sepal.Width, Sepal.Length)</code>, a nie <code>select(iris, list(Sepal.Width, Sepal.Length))</code>. Do tego służy właśnie <code>!!!</code>, który bierze listę zatrzymanych wyrażeń, tnie ją na pojedyncze pudełka i każde z nich otwiera. Tym samym to jest dokładnie to, co przyda nam się do załatwienia argumentu <code>...</code> w naszej funkcji <code>opisowe</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1">opisowe <span class="ot" style="color: #003B4F;
@@ -5974,7 +5966,7 @@ font-style: inherit;">TRUE</span></span>
 <span id="cb28-12">  )</span>
 <span id="cb28-13">}</span></code></pre></div>
 </div>
-<p>Użyłem tu <code>ensym()</code>, ale spokojnie mogłoby być <code>enquo()</code>. Funkcja wywołuje inną funkcję z pakietu, żeby przygotować dane do modelowania. Wszystkie nazwy kolumn na początku „rozbrajam” i ponownie „uzbrajam” już wewnątrz <code>mtscr_prepare()</code>. Jeśli byłby to tylko ten fragment kodu, mógłbym użyć operatora <code>{{ }}</code>, ale potem potrzebowałem wersji ręcznie „rozbrojonej”.</p>
+<p>Użyłem tu <code>ensym()</code>, ale spokojnie mogłoby być <code>enquo()</code>. Funkcja wywołuje inną funkcję z pakietu, żeby przygotować dane do modelowania. Wszystkie nazwy kolumn na początku „rozbrajam” i ponownie „uzbrajam” już wewnątrz <code>mtscr_prepare()</code>. Jeśli byłby to tylko ten fragment kodu, mógłbym użyć operatora <code>{ }</code>, ale potem potrzebowałem wersji ręcznie „rozbrojonej”.</p>
 </section>
 <section id="formuły-z-nazw-kolumn" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="formuły-z-nazw-kolumn"><span class="header-section-number">11.2</span> Formuły z nazw kolumn</h2>
@@ -6096,12 +6088,12 @@ font-style: inherit;">all_of</span>(groups)</span>
 </section>
 <section id="podsumowanie" class="level1" data-number="12">
 <h1 data-number="12"><span class="header-section-number">12</span> Podsumowanie</h1>
-<p><strong>To nie jest łatwe.</strong> Nie trzeba się martwić, jak się tego nie rozumie przy pierwszym kontakcie. Ja miałem bardzo dużo podejść, zanim w końcu to zrozumiałem, a i tak nie jestem specjalistą, znacznie więcej nie wiem, niż wiem. Zaskakująco pomocną rzeczą jest <em>cheat sheet</em> z <code>rlang</code>. Mam wrażenie, że wytłumaczył mi te rzeczy lepiej, niż poradniki, ale może to być kwestia tego, że zrozumiałem <em>cheat sheet</em>, bo czytałem poradniki. Tak czy inaczej warto sobie wydrukować go <a href="https://github.com/rstudio/cheatsheets/blob/main/tidyeval.pdf">stąd</a>. Jednocześnie najnowsza wersja jest z 2018 r. i trochę zdążyło się zmienić w międzyczasie. Dlatego nie znajdziemy tam przede wszystkim operatora <code>{{ }}</code>, który pojawił się dopiero w połowie 2019 r. i stał się standardem. Wielu rzeczy też tutaj nie omówiłem (chociażby operatora <code>:=</code>), ale mam nadzieję, że ten wstęp wystarczy, żeby wejście w naukę tych tematów było gładsze.</p>
+<p><strong>To nie jest łatwe.</strong> Nie trzeba się martwić, jak się tego nie rozumie przy pierwszym kontakcie. Ja miałem bardzo dużo podejść, zanim w końcu to zrozumiałem, a i tak nie jestem specjalistą, znacznie więcej nie wiem, niż wiem. Zaskakująco pomocną rzeczą jest <em>cheat sheet</em> z <code>rlang</code>. Mam wrażenie, że wytłumaczył mi te rzeczy lepiej, niż poradniki, ale może to być kwestia tego, że zrozumiałem <em>cheat sheet</em>, bo czytałem poradniki. Tak czy inaczej warto sobie wydrukować go <a href="https://github.com/rstudio/cheatsheets/blob/main/tidyeval.pdf">stąd</a>. Jednocześnie najnowsza wersja jest z 2018 r. i trochę zdążyło się zmienić w międzyczasie. Dlatego nie znajdziemy tam przede wszystkim operatora <code>{ }</code>, który pojawił się dopiero w połowie 2019 r. i stał się standardem. Wielu rzeczy też tutaj nie omówiłem (chociażby operatora <code>:=</code>), ale mam nadzieję, że ten wstęp wystarczy, żeby wejście w naukę tych tematów było gładsze.</p>
 <p>Zbierając to wszystko do kupy:</p>
 <ol type="1">
 <li>Jeśli wrzucamy do funkcji typu <code>select()</code> nazwę zmiennej, odruchowo bierze ją ona za nazwę kolumny, której często nie znajduje.</li>
-<li>Podstawowym sposobem dania funkcji znać, że to nie kolumna, a zmienna do odpakowania jest <code>{{ }}</code>.</li>
-<li><code>{{ }}</code> robi dwie rzeczy – <em>quoting</em>, żeby powstrzymać R przed odpakowywaniem nazwy kolumny poza funkcją typu <code>select()</code> i <em>unquoting</em>, żeby dać funkcji typu <code>select()</code> znać, że to nie kolumna, tylko ma to odpakować.</li>
+<li>Podstawowym sposobem dania funkcji znać, że to nie kolumna, a zmienna do odpakowania jest <code>{ }</code>.</li>
+<li><code>{ }</code> robi dwie rzeczy – <em>quoting</em>, żeby powstrzymać R przed odpakowywaniem nazwy kolumny poza funkcją typu <code>select()</code> i <em>unquoting</em>, żeby dać funkcji typu <code>select()</code> znać, że to nie kolumna, tylko ma to odpakować.</li>
 <li>Obie te czynności można wykonać osobno – <em>quoting</em> przede wszystkim funkcją <code>enquo()</code>, <em>unquoting</em> przede wszystkim operatorem <code>!!</code>.</li>
 <li><code>quo()</code> służy do zatrzymywania zwykłych wyrażeń, <code>enquo()</code> do zatrzymywania argumentów, <code>quos()</code> do zatrzymywania wielu rzeczy naraz, a <code>enquos()</code> do zatrzymywania wielu argumentów naraz.</li>
 <li><code>!!</code> odpakowuje pojedyncze wyrażenia, a <code>!!!</code> odpakowuje listy wyrażeń. Argument <code>...</code> wymaga <code>enquos()</code> i <code>!!!</code>.</li>
@@ -6113,7 +6105,7 @@ font-style: inherit;">all_of</span>(groups)</span>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Czasami będziemy musieli wykorzystać <code>lst()</code>. Będą to przypadki, w których np. najpierw policzymy liczbę wszystkich przypadków w bazie (<code>N = n</code>), potem liczbę braków danych (<code>`NA` = is.na</code>), a na koniec chcemy policzyć procent brakujących (<code>p_NA = `NA` / N</code>). Chcemy więc wykorzystać nowo stworzone kolumny do stworzenia kolejnej. Zwykłe <code>list()</code> tego nie uciągnie i musimy użyć <code>lst()</code> z pakietu <code>tibble</code>.↩︎</p></li>
@@ -6132,7 +6124,7 @@ font-style: inherit;">5</span>,])</span></code></pre></div>
 <li id="fn6"><p>…<em>my baby shot me down</em>.↩︎</p></li>
 <li id="fn7"><p>CRAN nie lubi, jak używa się obiektów, które nie mają globalnych definicji, dlatego krzyczał na mnie, że nie ma czegoś takiego jak <code>.all_top2</code>. Ja wiedziałem, że jest w bazie danych, kod działał, bo to potem trafiało do <code>summarise()</code>, ale CRAN ma swoje zasady. Dlatego podałem to jako string, który jest przerabiany na wyrażenie (<em>parsing</em>).↩︎</p></li>
 </ol>
-</section></div> ]]></description>
+</aside></div> ]]></description>
   <guid>https://nieobliczalne.pl/posts/metaprogramowanie.html</guid>
   <pubDate>Thu, 04 May 2023 22:00:00 GMT</pubDate>
   <media:content url="https://nieobliczalne.pl/posts/headers/metaprogramowanie.webp" medium="image" type="image/webp"/>
@@ -6197,7 +6189,7 @@ font-style: inherit;">5</span>,])</span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Zapytany o przepisywanie AI Rabbi odpowiada:</p>
@@ -6209,7 +6201,7 @@ font-style: inherit;">5</span>,])</span></code></pre></div>
 <li id="fn2"><p>Gdy to piszę, co jakiś czas strona proponuje 40% zniżki, co zmniejsza cenę za pierwszy rok do ok. 230 zł.↩︎</p></li>
 <li id="fn3"><p>Dobry kurs specyfiki pisania w nauce od dr Kristin Sainani z Uniwersytetu Stanforda znajdziemy <a href="https://www.coursera.org/learn/sciwrite?">tutaj</a>.↩︎</p></li>
 </ol>
-</section></div> ]]></description>
+</aside></div> ]]></description>
   <category>Nauka</category>
   <guid>https://nieobliczalne.pl/posts/ai-research.html</guid>
   <pubDate>Fri, 28 Apr 2023 22:00:00 GMT</pubDate>
@@ -6786,7 +6778,7 @@ font-style: inherit;"># zamień id na losowe znaki</span></span>
 <span id="cb9-29">}</span></code></pre></div>
 </div>
 <p>Uzyskałem w ten sposób funkcję <code>wyczysc()</code>, która wykonuje wszystkie nasze przekształcenia. Warto zwrócić uwagę, że bazę danych nazwałem <code>df</code> i zrobiłem z niej argument naszej funkcji, a także ostatni blok nie ma przypisania do zmiennej <code>baza</code>. Wynika to z tego, że domyślnie funkcje w R zwracają ostatnią rzecz, którą zrobią, czyli tutaj połączoną bazę. Jeśli zapisałbym ostateczną bazę do zmiennej <code>baza</code>, musiałbym w ostatniej linijce dopisać samo <code>baza</code> albo <code>return(baza)</code>, jako że to jest to, co funkcja ma nam ostatecznie dać – wyczyszczoną bazę.</p>
-<p>Przy tej okazji ostrzegam, że używanie <strong>nazw kolumn</strong> jako argumentów takich własnych funkcji może spowodować niespodziewane problemy. Jeśli stworzymy argument <code>nazwa_kolumny</code>, to funkcje typu <code>select()</code> nie wiedzą, że chodzi nam o argument <code>nazwa_kolumny</code>, a nie o kolumnę o nazwie <code>nazwa_kolumny</code>. Więcej o tym piszę <a href="./posts/metaprogramowanie.qmd">tutaj</a>, ale <em>ad hoc</em> można sobie z tym poradzić pisząc nazwę argumentu w podwójnych nawiasach klamrowych, np. <code>{{ nazwa_kolumny }}</code>.</p>
+<p>Przy tej okazji ostrzegam, że używanie <strong>nazw kolumn</strong> jako argumentów takich własnych funkcji może spowodować niespodziewane problemy. Jeśli stworzymy argument <code>nazwa_kolumny</code>, to funkcje typu <code>select()</code> nie wiedzą, że chodzi nam o argument <code>nazwa_kolumny</code>, a nie o kolumnę o nazwie <code>nazwa_kolumny</code>. Więcej o tym piszę <a href="./posts/metaprogramowanie.qmd">tutaj</a>, ale <em>ad hoc</em> można sobie z tym poradzić pisząc nazwę argumentu w podwójnych nawiasach klamrowych, np. <code>{ nazwa_kolumny }</code>.</p>
 <p>Użyjmy teraz naszej nowej funkcji <code>wyczysc</code> do wyczyszczenia naszych plików.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">bazy <span class="ot" style="color: #003B4F;
@@ -7025,7 +7017,7 @@ font-style: inherit;">round</span>()</span>
 <div id="ref-kowal_predictors_2022" class="csl-entry">
 Kowal, M., Sorokowski, P., Pisanski, K., Valentova, J. V., Varella, M. A. C., Frederick, D. A., … Zumárraga-Espinosa, M. (2022). Predictors of enhancing human physical attractiveness: <span>Data</span> from 93 countries. <em>Evolution and Human Behavior</em>, <em>43</em>(6), 455–474. <a href="https://doi.org/10.1016/j.evolhumbehav.2022.08.003">https://doi.org/10.1016/j.evolhumbehav.2022.08.003</a>
 </div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+</div></section><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Bazy najlepiej pobrać na swój dysk z <a href="https://github.com/jakub-jedrusiak/nieobliczalne/tree/main/posts/dane/automatyzacja">repozytorium</a>.↩︎</p></li>
@@ -7036,7 +7028,7 @@ Kowal, M., Sorokowski, P., Pisanski, K., Valentova, J. V., Varella, M. A. C., Fr
 <li id="fn6"><p>Lub wektora.↩︎</p></li>
 <li id="fn7"><p>Funkcja niżej mogłaby być zapisana równie dobrze jako <code>lapply(bazy_lista, read_csv, show_col_types = FALSE, name_repair = "unique_quiet")</code>, ale <code>map</code>, a głównie jej pochodne, mają bardziej przejrzystą i konsekwentną konwencję nazywania.↩︎</p></li>
 </ol>
-</section></div> ]]></description>
+</aside></div> ]]></description>
   <category>R</category>
   <guid>https://nieobliczalne.pl/posts/automatyzacja.html</guid>
   <pubDate>Tue, 07 Mar 2023 23:00:00 GMT</pubDate>
@@ -9732,7 +9724,6 @@ font-style: inherit;">cor_mark_significant</span>(korelacje)</span></code></pre>
 background-color: null;
 font-style: inherit;">glimpse</span>(diamonds)</span></code></pre></div>
 <div class="sourceCode" style="background: #f1f3f5;">
-
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> Rows: 53,940
 <span style="color: #555555;">#&gt;</span> Columns: 10
 <span style="color: #555555;">#&gt;</span> $ <span style="font-weight: bold;">carat  </span> <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23, 0.…
@@ -10264,7 +10255,9 @@ font-style: inherit;">shape =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"diamond"</span>, <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">size =</span> 2L) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>L) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
 <span id="cb69-4">    <span class="fu" style="color: #4758AB;
@@ -10371,7 +10364,9 @@ font-style: inherit;">shape =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"diamond"</span>, <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">size =</span> 2L) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>L) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
 <span id="cb70-4">    <span class="fu" style="color: #4758AB;
@@ -10737,7 +10732,6 @@ font-style: inherit;">+</span> color <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> clarity)</span></code></pre></div>
 <div class="sourceCode" style="background: #f1f3f5;">
-
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> ANOVA Table (type II tests)
 <span style="color: #555555;">#&gt;</span> 
 <span style="color: #555555;">#&gt;</span>    Effect DFn   DFd       F         p p&lt;.05   ges
@@ -11584,7 +11578,9 @@ font-style: inherit;">shape =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"diamond"</span>, <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">size =</span> 2L) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>L) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
 <span id="cb96-80">        <span class="fu" style="color: #4758AB;
@@ -11782,7 +11778,7 @@ Wickham, H., &amp; Grolemund, G. (2020). <em>J<span>ę</span>zyk R: kompletny ze
 <div id="ref-wilkinson_grammar_2005" class="csl-entry">
 Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>. New York: Springer-Verlag. <a href="https://doi.org/10.1007/0-387-28695-0">https://doi.org/10.1007/0-387-28695-0</a>
 </div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+</div></section><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Drugim najpopularniejszym jest R.↩︎</p></li>
@@ -11824,7 +11820,7 @@ Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>
 <li id="fn37"><p>Scratch to bardzo przyjemne, darmowe, rysunkowo-blokowe narzędzie do ćwiczenia programowania stworzone przez naukowców z MIT. Nie jest ono specyficzne dla żadnego języka, ale może być dobrym wprowadzeniem do programowania w ogóle. Nie wymaga pisania kodu, a opiera się w całości na przeciąganiu myszką bloczków. Dzięki temu można oswoić się z różnymi ideami w programowaniu, takimi jak funkcje, zmienne itd., bez zaprzątania głowy składnią konkretnego języka.↩︎</p></li>
 <li id="fn38"><p>Należy się upwenić, że te osoby kochają nas wystarczająco, żeby być gotowymi na to poświęcenie.↩︎</p></li>
 </ol>
-</section></div> ]]></description>
+</aside></div> ]]></description>
   <category>Statystyka</category>
   <category>R</category>
   <guid>https://nieobliczalne.pl/posts/podstawy_R.html</guid>
@@ -11898,7 +11894,7 @@ font-style: inherit;">return</span> df</span></code></pre></div>
 </details>
 </div>
 <p>Kombinatoryka to część matematyki zajmująca się modyfikacjami zbiorów. Weźmy sobie zbiór 5 pierwszych liter alfabetu i nazwijmy go Z jak zbiór. Zacznę od skomplikowanie brzmiącego wstępu, a potem wyjaśnię to na przykładach.</p>
-<div id="da56fd35" class="cell" data-execution_count="2">
+<div id="91763d14" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">Z <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
@@ -11923,7 +11919,7 @@ font-style: inherit;">"E"</span>]</span></code></pre></div>
 <section id="permutacje" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Permutacje</h1>
 <p>Omówmy to na przykładzie naszego zbioru liter od A do E. Permutacja tego zbioru będzie wyglądała tak:</p>
-<div id="b43332ce" class="cell" data-execution_count="3">
+<div id="fd0f24a4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">pd.DataFrame(itertools.permutations(Z))</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
@@ -12042,7 +12038,7 @@ font-style: inherit;">"E"</span>]</span></code></pre></div>
 <section id="wariacje" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Wariacje</h1>
 <p>Ciekawie zaczyna się robić, gdy przed zmianą kolejności chcemy jeszcze rozbić nasz zbiór na mniejsze zbiory. Dla przykładu możemy sobie wyobrazić, że chcemy z naszego zbioru 5 liter wybrać wszystkie możliwe zbiory po 2 litery, np. AB, AC, AD itd. Mamy do dyspozycji mniej miejsca, niż liter w zbiorze. Liczenie czegoś takiego jest analogiczne. Na pierwszym miejscu może pojawić się 1 z 5 liter, na drugim tylko 1 z 4: <img src="https://latex.codecogs.com/png.latex?V%5E2_5%20=%205%20%5Ctimes%204%20=%2020">. Powinno więc istnieć 20 takich zbiorów. Wypiszmy je wszystkie.</p>
-<div id="9d1d158a" class="cell" data-execution_count="4">
+<div id="2d620fe7" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">variations(Z, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>)</span></code></pre></div>
@@ -12120,7 +12116,7 @@ font-style: inherit;">2</span>)</span></code></pre></div>
 <p>W taki sposób <img src="https://latex.codecogs.com/png.latex?3%20%5Ctimes%202%20%5Ctimes%201"> skróci się i zostanie tylko <img src="https://latex.codecogs.com/png.latex?5%20%5Ctimes%204">. Jeśli mielibyśmy 3 miejsca, chcielibyśmy uzyskać <img src="https://latex.codecogs.com/png.latex?5%20%5Ctimes%204%20%5Ctimes%203">, a więc w mianowniku zapisalibyśmy tylko <img src="https://latex.codecogs.com/png.latex?2%20%5Ctimes%201">, czyli ostatecznie <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B5!%7D%7B2!%7D">. Powstaje nam z tego następujący wzór na liczbę wariacji <em>n</em> elementów po <em>k</em> elementów (czyli rozbicie w podzbiory po <em>k</em> elementów):</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AV%5Ek_n%20=%20%5Cfrac%7Bn!%7D%7B(n-k)!%7D%0A"></p>
 <p>Spróbujmy wypisać wariacje naszego zbioru po 3 elementy.</p>
-<div id="800fa1f7" class="cell" data-execution_count="5">
+<div id="241e2592" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">variations(Z, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>)</span></code></pre></div>
@@ -12273,42 +12269,60 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><span class="in" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">```{mermaid}</span></span>
-<span id="cb6-2">%%| fig<span class="ot" style="color: #003B4F;
+<span id="cb6-2"><span class="in" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">-r</span>esponsive: true</span>
-<span id="cb6-3">%%| fig<span class="ot" style="color: #003B4F;
+font-style: inherit;">%%| fig-responsive: true</span></span>
+<span id="cb6-3"><span class="in" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">-w</span>idth: <span class="dv" style="color: #AD0000;
+font-style: inherit;">%%| fig-width: 80%</span></span>
+<span id="cb6-4"><span class="in" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">80</span>%</span>
-<span id="cb6-4">%%| code<span class="ot" style="color: #003B4F;
+font-style: inherit;">%%| code-fold: true</span></span>
+<span id="cb6-5"><span class="in" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">-f</span>old: true</span>
-<span id="cb6-5">%%| code<span class="ot" style="color: #003B4F;
+font-style: inherit;">%%| code-summary: "Pokaż kod"</span></span>
+<span id="cb6-6"><span class="in" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">-s</span>ummary: <span class="ot" style="color: #003B4F;
+font-style: inherit;">flowchart TD</span></span>
+<span id="cb6-7"><span class="in" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">"</span><span class="st" style="color: #20794D;
+font-style: inherit;">    START(START) --&gt; zbior</span></span>
+<span id="cb6-8"><span class="in" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">Pokaż kod</span><span class="ot" style="color: #003B4F;
+font-style: inherit;">    zbior[/Mam zbiór, z którym chcę coś zrobić/] --&gt;</span></span>
+<span id="cb6-9"><span class="in" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">"</span></span>
-<span id="cb6-6">flowchart TD</span>
-<span id="cb6-7">    START(START) --&gt; zbior</span>
-<span id="cb6-8">    zbior[<span class="ot" style="color: #003B4F;
+font-style: inherit;">    kolejnosc{Czy kolejność ma znaczenie?}</span></span>
+<span id="cb6-10"><span class="in" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">/Mam zbiór, z którym chcę coś zrobić/</span>] --&gt;</span>
-<span id="cb6-9">    kolejnosc{Czy kolejność ma znaczenie?}</span>
-<span id="cb6-10">    kolejnosc --&gt;|Nie| C[kombinacja]</span>
-<span id="cb6-11">        C --&gt; C_powtorzenia{Czy elementy mogą się powtarzać?}</span>
-<span id="cb6-12">        C_powtorzenia --&gt;|Tak| C_powtorzenia_koniec(kombinacja z powtórzeniami)</span>
-<span id="cb6-13">        C_powtorzenia --&gt;|Nie| C_koniec(kombinacja bez powrótrzeń)</span>
-<span id="cb6-14">    kolejnosc --&gt;|Tak| V[wariacja]</span>
-<span id="cb6-15">        V --&gt; V_calosc{Czy wykorzystuję cały zbiór?}</span>
-<span id="cb6-16">        V_calosc --&gt;|Tak| P(permutacja)</span>
-<span id="cb6-17">        V_calosc --&gt;|Nie| V_powtorzenia{Czy elementy mogą się powtarzać?}</span>
-<span id="cb6-18">        V_powtorzenia --&gt;|Tak| V_powtorzenia_koniec(wariacja z powtórzeniami)</span>
-<span id="cb6-19">        V_powtorzenia --&gt;|Nie| V_koniec(wariacja bez powrótrzeń)</span>
+font-style: inherit;">    kolejnosc --&gt;|Nie| C[kombinacja]</span></span>
+<span id="cb6-11"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">        C --&gt; C_powtorzenia{Czy elementy mogą się powtarzać?}</span></span>
+<span id="cb6-12"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">        C_powtorzenia --&gt;|Tak| C_powtorzenia_koniec(kombinacja z powtórzeniami)</span></span>
+<span id="cb6-13"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">        C_powtorzenia --&gt;|Nie| C_koniec(kombinacja bez powrótrzeń)</span></span>
+<span id="cb6-14"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    kolejnosc --&gt;|Tak| V[wariacja]</span></span>
+<span id="cb6-15"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">        V --&gt; V_calosc{Czy wykorzystuję cały zbiór?}</span></span>
+<span id="cb6-16"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">        V_calosc --&gt;|Tak| P(permutacja)</span></span>
+<span id="cb6-17"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">        V_calosc --&gt;|Nie| V_powtorzenia{Czy elementy mogą się powtarzać?}</span></span>
+<span id="cb6-18"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">        V_powtorzenia --&gt;|Tak| V_powtorzenia_koniec(wariacja z powtórzeniami)</span></span>
+<span id="cb6-19"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">        V_powtorzenia --&gt;|Nie| V_koniec(wariacja bez powrótrzeń)</span></span>
 <span id="cb6-20"><span class="in" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">```</span></span></code></pre></div>
@@ -12659,7 +12673,7 @@ Engber, D. (2017). Daryl Bem proved ESP is real: Which means science is broken. 
 <div id="ref-wilkes2017" class="csl-entry">
 Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>... i sam sobie wymy<span>ś</span>l matematyk<span>ę</span></em>. Warszawa: Prószy<span>ń</span>ski Media.
 </div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+</div></section><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Zdaję sobie sprawę, że „pewność” i jej zmiany pasują bardziej do analiz bayesowskich niż testów, ale tego typu przykłady znacznie łatwiej jest zrozumieć niż bardziej abstrakcyjny `dobór prób z populacji. Do większej abstrakcji przejdę później.↩︎</p></li>
@@ -12680,7 +12694,7 @@ Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>..
 <li id="fn14"><p>Dlatego osobiście wolę nazwy „błąd fałszywego alarmu” (myślałem, że coś było, ale tak naprawdę tego nie było) i „błąd chybienia” (coś naprawdę było, ale to przegapiłem).↩︎</p></li>
 <li id="fn15"><p>Nie dla wszystkich badań to będzie prawda. W psychologii, jeśli coś wpływa na zachowanie absolutnie minimalnie, to równie dobrze możemy to zignorować, bo <em>de facto</em> nie ma znaczenia. Ale na przykład w fizyce minimalny wpływ może być kluczowy, jeśli ma udowodnić, że jakaś siła rzeczywiście istnieje. Czasem też zjawiska bardzo rzadkie są cenne, bo udowadniają nam, że coś jest w ogóle możliwe.↩︎</p></li>
 </ol>
-</section></div> ]]></description>
+</aside></div> ]]></description>
   <category>Statystyka</category>
   <guid>https://nieobliczalne.pl/posts/p-value.html</guid>
   <pubDate>Tue, 20 Sep 2022 22:00:00 GMT</pubDate>
@@ -12784,7 +12798,8 @@ Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>..
 </div>
 </div>
 <p>Przerywane linie pokazują nam odchylenie każdego punktu od średniej (<em>residual</em>). Dla przykładu pierwszy punkt ma wartość niepokoju 2, więc jego odchylenie to <img src="https://latex.codecogs.com/png.latex?2%20-%2010%20=%20-8">. Dlaczego na minusie? Bo pierwszy punkt jest <strong>poniżej</strong> średniej, więc żeby przejść od średniej do wartości tego konkretnego punktu musimy wykonać <strong>odejmowanie</strong>. Inny przykład – ostatni punkt ma wartość niepokoju 15, więc jego odchylenie od średniej wynosi <img src="https://latex.codecogs.com/png.latex?15%20-%2010%20=%205">. Tutaj odchylenie jest już dodatnie, co ma sens, bo ostatni punkt jest <strong>powyżej</strong> średniej, więc żeby przesunąć się od wartości średniej do wartości tego punktu musimy <strong>dodawać</strong>. Jak widać, żeby policzyć odchylenie, wystarczy od wartości punktu odjąć średnią. Można zapisać to matematycznie:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AS_i%20=%20x_i%20-%20%5Cbar%20x%0A"> gdzie <img src="https://latex.codecogs.com/png.latex?S_i"> to odchylenie, <img src="https://latex.codecogs.com/png.latex?x_i"> to wartość konkretnego punktu, a <img src="https://latex.codecogs.com/png.latex?%5Cbar%20x"> to średnia. Pozioma kreska nad czymś zawsze oznacza średnią. Dla każdego punktu moglibyśmy policzyć takie odchylenie i dopisać sobie je do tabeli.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AS_i%20=%20x_i%20-%20%5Cbar%20x%0A"></p>
+<p>gdzie <img src="https://latex.codecogs.com/png.latex?S_i"> to odchylenie, <img src="https://latex.codecogs.com/png.latex?x_i"> to wartość konkretnego punktu, a <img src="https://latex.codecogs.com/png.latex?%5Cbar%20x"> to średnia. Pozioma kreska nad czymś zawsze oznacza średnią. Dla każdego punktu moglibyśmy policzyć takie odchylenie i dopisać sobie je do tabeli.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="tbl-spider-residual" class="anchored">
@@ -12869,9 +12884,11 @@ Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>..
 <p>Ale z całkowitą sumą kwadratów jest pewien problem. Siłą rzeczy, im będzie więcej obserwacji, tym ta liczba będzie większa, nawet jeśli odchylenia będą mniejsze. 100 ciężarówek z 50 paletami każda dadzą w sumie więcej towaru, niż 1 ciężarówka z 200 paletami. Suma ocen wzrasta z każdą oceną, mimo że średnia może nawet nie drgnąć. Ale możemy sobie z tym poradzić dość łatwo – po prostu zróbmy z tego średnią. Średnia to suma dzielona przez liczbę przypadków. <img src="https://latex.codecogs.com/png.latex?SS_T"> jest sumą kwadratów odchyleń (w tym miejscu tekstu należy się zatrzymać i upewnić się, że rozumie się wyrażenie „suma kwadratów odchyleń”), więc jak podzielimy ją przez liczbę obserwacji, to wyjdzie nam średnia z kwadratów odchyleń. Prawda? No prawie, bo to znowu byłoby za proste.</p>
 <p>Nie rozwodząc się za bardzo, bo to też jest szeroki temat, zamiast dzielić <img src="https://latex.codecogs.com/png.latex?SS_T"> przez 8, musimy podzielić ją przez 7. Mówiąc w dużym skrócie, nas w badaniach obchodzi cała populacja. Badamy tylko (losową) próbę z tej populacji, ale tak naprawdę to o samej populacji chcemy wnioskować. Nie wystawiłem 8 osób na kontakt z dużymi i małymi pająkami, bo ciekawiły mnie te konkretne osoby, tylko dlatego, że chcę powiedzieć coś ogólnie o ludziach, o Polakach, o nastolatkach czy jakiejkolwiek innej interesującej mnie populacji. Jeśli podzielilibyśmy przez 8, to wyszłaby nam średnia, która jest prawdziwa dla tej konkretnej próby, ale prawie na pewno niższa, niż ta prawdziwa, populacyjna. Ale jak podzielimy przez 7, to będziemy znacznie, znacznie bliżej prawdziwym wartościom. To da się matematycznie udowodnić, ale bez przesady, nie wszystko naraz. Ta skorygowana liczba nazywa się <em>stopniami swobody</em> i dla średniej zawsze jest ich <img src="https://latex.codecogs.com/png.latex?N-1">. To będzie ogólnie problem w statystyce, że od czasu do czasu będziemy musieli dzielić przez stopnie swobody zamiast normalnie przez wielkość próby, żeby dostać bardziej wiarygodne liczby. Jeśli uczy się tego pierwszy raz, to można to <img src="https://latex.codecogs.com/png.latex?N-1"> przyjąć na wiarę, bo sama wariancja jest wystarczająco skomplikowana. Nie trzeba wszystkiego w pełni zrozumieć od razu.</p>
 <p>Także jeśli chcemy uzyskać średnią kwadratów odchyleń, to bierzemy naszą całkowitą sumę kwadratów i dzielimy ją przez <img src="https://latex.codecogs.com/png.latex?N-1">. Tak jak średnią ocen liczymy dzieląc sumę ocen przez ich liczbę. Możemy to zapisać matematycznie na kilka sposobów:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csigma%5E2%20=%20%5Cfrac%7BSS_T%7D%7BN-1%7D%20=%20%5Cfrac%7B%5Csum%5EN_%7Bi%20=%201%7D%20S_i%5E2%7D%7BN-1%7D%20=%20%5Cfrac%7B%5Csum%5EN_%7Bi%20=%201%7D%20(x_i%20-%20%5Cbar%20x)%5E2%7D%7BN-1%7D%0A">Spokojnie. To są tylko wzory, nie trzeba się ich bać. Każdy z tych trzech wzorów znaczy to samo i opiera się na tym, co już wiemy z poprzednich części tekstu. Tak naprawdę to ciągle wzór na <img src="https://latex.codecogs.com/png.latex?SS_T">, tylko teraz podzielony na <img src="https://latex.codecogs.com/png.latex?N-1">. Po pokonaniu pierwszego szoku można zacząć świętować! W ten sposób udało nam się wreszcie policzyć średnią kwadratów odchyleń (ponownie – trzeba się zatrzymać, upewnić się, że się rozumie, ewentualnie trochę się cofnąć i dopiero można iść dalej).</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csigma%5E2%20=%20%5Cfrac%7BSS_T%7D%7BN-1%7D%20=%20%5Cfrac%7B%5Csum%5EN_%7Bi%20=%201%7D%20S_i%5E2%7D%7BN-1%7D%20=%20%5Cfrac%7B%5Csum%5EN_%7Bi%20=%201%7D%20(x_i%20-%20%5Cbar%20x)%5E2%7D%7BN-1%7D%0A"></p>
+<p>Spokojnie. To są tylko wzory, nie trzeba się ich bać. Każdy z tych trzech wzorów znaczy to samo i opiera się na tym, co już wiemy z poprzednich części tekstu. Tak naprawdę to ciągle wzór na <img src="https://latex.codecogs.com/png.latex?SS_T">, tylko teraz podzielony na <img src="https://latex.codecogs.com/png.latex?N-1">. Po pokonaniu pierwszego szoku można zacząć świętować! W ten sposób udało nam się wreszcie policzyć średnią kwadratów odchyleń (ponownie – trzeba się zatrzymać, upewnić się, że się rozumie, ewentualnie trochę się cofnąć i dopiero można iść dalej).</p>
 <p>Trzeba przyznać, że „średni kwadrat odchylenia” albo „średnia z odchyleń podniesionych do potęgi drugiej” to nie są zbyt chwytliwe nazwy. Dlatego właśnie nazwano to <strong>wariancją</strong> i oznaczono przez <img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2">. To jest mała grecka litera sigma. A dlaczego <img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2"> a nie po prostu <img src="https://latex.codecogs.com/png.latex?%5Csigma">? Bo to średnia z <em>kwadratów</em> odchyleń. Jeśli byśmy chcieli wycofać się teraz z tej gmatwającej wszystko decyzji o podnoszeniu czegokolwiek do kwadratu i uzyskać upragnione średnie odchylenie, to możemy teraz wyciągnąć pierwiastek ze wzoru na wariancję, jaki nam przed chwilą wyszedł i który na pierwszy rzut oka może przytłaczać.</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csigma%20=%20%5Csqrt%7B%5Cfrac%7BSS_T%7D%7BN-1%7D%7D%20=%20%5Csqrt%7B%5Cfrac%7B%5Csum%5EN_%7Bi%20=%201%7D%20S_i%5E2%7D%7BN-1%7D%7D%20=%20%5Csqrt%7B%5Cfrac%7B%5Csum%5EN_%7Bi%20=%201%7D%20(x_i%20-%20%5Cbar%20x)%5E2%7D%7BN-1%7D%7D%0A">Każdy z tych wzorów znaczy ostatecznie to samo, więc można używać któregokolwiek. Ważne jest to, że wychodzi nam z tego średnie odchylenie, które nazywamy <strong>odchyleniem standardowym</strong> i które oznaczamy literą <img src="https://latex.codecogs.com/png.latex?%5Csigma"> lub skrótem <em>SD</em> (<em>standard deviation</em>). Odchylenie standardowe, jak już wyżej wspomniałem, mówi nam, czy średnia dobrze reprezentuje dane. Jeśli jest wysokie, to znaczy, że dane są mocno rozproszone (odchylenia są ogólnie duże) i sama średnia jest mało wiarygodna. Jeśli <em>SD</em> jest niewielkie, to średniej zasadniczo można zaufać. To jakie <em>SD</em> jest duże, a jakie małe, zależy od tego, co mierzymy. Dla średniej pensji <em>SD</em> = 10 uznalibyśmy za raczej niewielkie, ale takie samo odchylenie standardowe dla średniej liczby nóg takie małe już się nie wydaje. Także może i mamy średnio po 3 nogi jak wychodzimy z psem na spacer, ale ta średnia ma całą nogę odchylenia standardowego!</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csigma%20=%20%5Csqrt%7B%5Cfrac%7BSS_T%7D%7BN-1%7D%7D%20=%20%5Csqrt%7B%5Cfrac%7B%5Csum%5EN_%7Bi%20=%201%7D%20S_i%5E2%7D%7BN-1%7D%7D%20=%20%5Csqrt%7B%5Cfrac%7B%5Csum%5EN_%7Bi%20=%201%7D%20(x_i%20-%20%5Cbar%20x)%5E2%7D%7BN-1%7D%7D%0A"></p>
+<p>Każdy z tych wzorów znaczy ostatecznie to samo, więc można używać któregokolwiek. Ważne jest to, że wychodzi nam z tego średnie odchylenie, które nazywamy <strong>odchyleniem standardowym</strong> i które oznaczamy literą <img src="https://latex.codecogs.com/png.latex?%5Csigma"> lub skrótem <em>SD</em> (<em>standard deviation</em>). Odchylenie standardowe, jak już wyżej wspomniałem, mówi nam, czy średnia dobrze reprezentuje dane. Jeśli jest wysokie, to znaczy, że dane są mocno rozproszone (odchylenia są ogólnie duże) i sama średnia jest mało wiarygodna. Jeśli <em>SD</em> jest niewielkie, to średniej zasadniczo można zaufać. To jakie <em>SD</em> jest duże, a jakie małe, zależy od tego, co mierzymy. Dla średniej pensji <em>SD</em> = 10 uznalibyśmy za raczej niewielkie, ale takie samo odchylenie standardowe dla średniej liczby nóg takie małe już się nie wydaje. Także może i mamy średnio po 3 nogi jak wychodzimy z psem na spacer, ale ta średnia ma całą nogę odchylenia standardowego!</p>
 <p>Podsumowując ten fragment:</p>
 <ol type="1">
 <li><p>Zauważyliśmy, że każdy punkt ma swoje większe lub mniejsze odchylenie od średniej.</p></li>
@@ -12966,7 +12983,8 @@ Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>..
 </div>
 <p>Możemy w pewnym sensie mówić o wariancji wokół średniej i wariancji wokół modelu<sup>5</sup>. Wariancja, niezależnie wokół czego, to suma kwadratów podzielona przez <img src="https://latex.codecogs.com/png.latex?N-1">, więc naturalnie musielibyśmy teraz <img src="https://latex.codecogs.com/png.latex?SS_T"> i <img src="https://latex.codecogs.com/png.latex?SS_R"> podzielić przez <img src="https://latex.codecogs.com/png.latex?N-1">. Jednak to, co chcę pokazać dalej, będzie łatwiejsze do zrozumienia, jeśli będziemy się posługiwać surowymi sumami kwadratów. Możemy więc zignorować dzielenie przez <img src="https://latex.codecogs.com/png.latex?N-1">. Jeśli ktoś mi nie ufa, to może robić to, co za moment zrobię, ale wcześniej podzielić nasze sumy kwadratów przez <img src="https://latex.codecogs.com/png.latex?N-1"> i gwarantuję, że wyjdzie mu to samo<sup>6</sup>.</p>
 <p>Możemy więc spojrzeć na to w ten sposób – na początku mieliśmy 190,875 jednostek wariancji, a teraz, po dopasowaniu nowego modelu, mamy ich tylko 29,98. Dla wygody zaokrąglijmy te liczby do całości. Także cała różnica, <img src="https://latex.codecogs.com/png.latex?191%20-%2030%20=%20161">, gdzieś nam wyparowała. Ta wariancja była, a teraz nagle jej nie ma. O takiej wariancji możemy powiedzieć, że została <em>wyjaśniona</em> i możemy ją oznaczyć <img src="https://latex.codecogs.com/png.latex?SS_M"> od <em>model sum of squares</em>. Czyli stworzyliśmy nowy model, który pozwala nam przewidywać niepokój z wielkości pająka i w ten sposób wyjaśniliśmy jakąś część wariancji. Jaką? Coż, wystarczy to przeliczyć na procenty. Cała wariancja<sup>7</sup> wynosiła 191 jednostek, a wariacja wyjaśniona wyniosła 161 jednostek. Odsetek wariancji, który udało nam się wyjaśnić, oznaczamy <img src="https://latex.codecogs.com/png.latex?R%5E2"> i możemy go wyrazić w procentach<sup>8</sup>.</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR%5E2%20=%20%5Cfrac%7B161%7D%7B191%7D%5Ctimes%20100%5C%25%20=%2084,3%5C%25%0A">Możemy więc powiedzieć, że wielkość pająka (bo nowy model przewiduje niepokój na podstawie wielkości pająka) wyjaśnia 84,3% wariancji niepokoju. Ludzie ciągle różnią się niepokojem w reagowaniu na pająki, ale odchylenia od nowego modelu są znacznie mniejsze. Ogólny wzór na <img src="https://latex.codecogs.com/png.latex?R%5E2"> wygląda więc tak<sup>9</sup>:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AR%5E2%20=%20%5Cfrac%7B161%7D%7B191%7D%5Ctimes%20100%5C%25%20=%2084,3%5C%25%0A"></p>
+<p>Możemy więc powiedzieć, że wielkość pająka (bo nowy model przewiduje niepokój na podstawie wielkości pająka) wyjaśnia 84,3% wariancji niepokoju. Ludzie ciągle różnią się niepokojem w reagowaniu na pająki, ale odchylenia od nowego modelu są znacznie mniejsze. Ogólny wzór na <img src="https://latex.codecogs.com/png.latex?R%5E2"> wygląda więc tak<sup>9</sup>:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AR%5E2%20=%20%5Cfrac%7BSS_M%7D%7BSS_T%7D%20=%20%5Cfrac%7BSS_T%20-%20SS_R%7D%7BSS_T%7D%0A"></p>
 <p>Moglibyśmy się pytać, co odpowiada za pozostałe 17,3% wariancji. Mogą to być dodatkowe czynniki, takie jak doświadczenia z pająkami w dzieciństwie albo uszkodzenia mózgu. To wymaga dalszych badań.</p>
 <p>Możemy wyobrazić sobie, że pojawia nam się nowa osoba badana, która pająków nie boi się w ogóle, co pokazałem na wykresie. Jak to wpływa na nasz model?</p>
@@ -13093,7 +13111,7 @@ Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R
 <div id="ref-plomin2001" class="csl-entry">
 Plomin, R., DeFries, J., McClearn, G., &amp; McGuffin, P. (2001). <em>Genetyka zachowania</em>. Warszawa: Wydawnictwo Naukowe PWN.
 </div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+</div></section><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Wszystko, co napiszę dalej o średniej, mogłoby równie dobrze być pokazane na innym wykresie. To, że na oś poziomą wrzuciłem wielkość pająka wynika tylko ze względów estetycznych. Mógłbym te punkty rozrzucić losowo. Zauważ, że aż do podrozdziału <em>Średnia to nie wszystko</em> nie będę używał wielkości pająka w obliczeniach.↩︎</p></li>
@@ -13109,7 +13127,7 @@ Plomin, R., DeFries, J., McClearn, G., &amp; McGuffin, P. (2001). <em>Genetyka z
 <li id="fn10"><p>Gdy Bill Gates wchodzi do pubu, średnia pensja (i jej odchylenie standardowe!) osób w pubie nagle dramatycznie skacze, mimo że nikt ze zgromadzonych nie czuje się bogatszy. Niemniej sam jeden Bill Gates nie miałby tak wielkiego wpływu na średnią pensję wszystkich mieszkańców Polski. Tak samo jedna piątka nie zmieni za bardzo średniej z 20 ocen, ale może całkowicie zmienić średnią z 3 ocen. Modele oparte o dużą liczbę obserwacji są więc stabilniejsze.↩︎</p></li>
 <li id="fn11"><p>Tak naprawdę potrzeba nam sporo więcej niż 1, żeby uznać model na wiarygodny. Statystyka <img src="https://latex.codecogs.com/png.latex?F"> musi <em>istotnie</em> odchylać się od 1. Musimy mieć co najmniej 95% pewności, że <img src="https://latex.codecogs.com/png.latex?F"> jest większe od 1. Ale prawdopodobieństwo trudno się liczy, zależy od liczby obserwacji i w ogóle bez sensu się tym zajmować, bo program statystyczny nam to pokaże.↩︎</p></li>
 </ol>
-</section></div> ]]></description>
+</aside></div> ]]></description>
   <category>Statystyka</category>
   <guid>https://nieobliczalne.pl/posts/procent-wariancji.html</guid>
   <pubDate>Wed, 18 May 2022 22:00:00 GMT</pubDate>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.283">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,6 +66,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href=".././styles/logo.svg" rel="icon" type="image/svg+xml">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -52,6 +87,11 @@ ul.task-list li input[type="checkbox"] {
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "Brak wyników",
     "search-matching-documents-text": "dopasowane dokumenty",
@@ -86,12 +126,13 @@ cookieconsent.run({
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
+  ,
+"language":"pl"
   });
 });
 </script> 
   
 <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3239011499449859" crossorigin="anonymous"></script>
-
 <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
@@ -105,7 +146,7 @@ cookieconsent.run({
 <meta property="og:title" content="Nieobliczalne - Regresja, matka wszystkich analiz">
 <meta property="og:description" content="W Dhammapadzie czytamy „Nad tysiąc zbędnych słów jest jedno trafne słowo, które słysząc, osiąga się spokój” (Dhp. 100, tłum. Piotr Jagodziński). Sądzę, że słowem, które Budda miał na myśli, była regresja. Freudowsko regresja może nam się kojarzyć jako cofanie się w rozwoju. Rzeczywiście samo słowo możemy przetłumaczyć jako „krok do tyłu” i jak raz można powiedzieć, że to dobrze, że się cofamy.">
 <meta property="og:image" content="https://nieobliczalne.pl/posts/headers/regresja.webp">
-<meta property="og:site-name" content="Nieobliczalne">
+<meta property="og:site_name" content="Nieobliczalne">
 <meta name="twitter:title" content="Nieobliczalne - Regresja, matka wszystkich analiz">
 <meta name="twitter:description" content="W Dhammapadzie czytamy „Nad tysiąc zbędnych słów jest jedno trafne słowo, które słysząc, osiąga się spokój” (Dhp. 100, tłum. Piotr Jagodziński). Sądzę, że słowem, które Budda miał na myśli, była regresja. Freudowsko regresja może nam się kojarzyć jako cofanie się w rozwoju. Rzeczywiście samo słowo możemy przetłumaczyć jako „krok do tyłu” i jak raz można powiedzieć, że to dobrze, że się cofamy.">
 <meta name="twitter:image" content="https://nieobliczalne.pl/headers/regresja.jpeg">
@@ -119,7 +160,10 @@ cookieconsent.run({
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src=".././styles/logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Nieobliczalne</span>
     </a>
@@ -154,10 +198,10 @@ cookieconsent.run({
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -171,10 +215,37 @@ cookieconsent.run({
    
   <ul>
   <li><a href="#cel" id="toc-cel" class="nav-link active" data-scroll-target="#cel"><span class="header-section-number">1</span> Cel</a></li>
+  <li><a href="#linia-regresji-jako-funkcja" id="toc-linia-regresji-jako-funkcja" class="nav-link" data-scroll-target="#linia-regresji-jako-funkcja"><span class="header-section-number">2</span> Linia regresji jako funkcja</a>
+  <ul class="collapse">
+  <li><a href="#współczynniki" id="toc-współczynniki" class="nav-link" data-scroll-target="#współczynniki"><span class="header-section-number">2.1</span> Współczynniki</a>
+  <ul class="collapse">
+  <li><a href="#wyraz-wolny-intercept" id="toc-wyraz-wolny-intercept" class="nav-link" data-scroll-target="#wyraz-wolny-intercept"><span class="header-section-number">2.1.1</span> Wyraz wolny (<em>intercept</em>)</a></li>
+  <li><a href="#jednostki" id="toc-jednostki" class="nav-link" data-scroll-target="#jednostki"><span class="header-section-number">2.1.2</span> Jednostki</a></li>
+  <li><a href="#nachylenie" id="toc-nachylenie" class="nav-link" data-scroll-target="#nachylenie"><span class="header-section-number">2.1.3</span> Nachylenie</a></li>
+  <li><a href="#istotność-statystyczna" id="toc-istotność-statystyczna" class="nav-link" data-scroll-target="#istotność-statystyczna"><span class="header-section-number">2.1.4</span> Istotność statystyczna</a></li>
+  </ul></li>
+  <li><a href="#przewidywanie-lęku" id="toc-przewidywanie-lęku" class="nav-link" data-scroll-target="#przewidywanie-lęku"><span class="header-section-number">2.2</span> Przewidywanie lęku</a>
+  <ul class="collapse">
+  <li><a href="#przedziały-ufności" id="toc-przedziały-ufności" class="nav-link" data-scroll-target="#przedziały-ufności"><span class="header-section-number">2.2.1</span> Przedziały ufności</a></li>
+  <li><a href="#jednostki-standardowe" id="toc-jednostki-standardowe" class="nav-link" data-scroll-target="#jednostki-standardowe"><span class="header-section-number">2.2.2</span> Jednostki standardowe</a></li>
+  <li><a href="#zależności-nieliniowe" id="toc-zależności-nieliniowe" class="nav-link" data-scroll-target="#zależności-nieliniowe"><span class="header-section-number">2.2.3</span> Zależności nieliniowe</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#regresja-wielokrotna" id="toc-regresja-wielokrotna" class="nav-link" data-scroll-target="#regresja-wielokrotna"><span class="header-section-number">3</span> Regresja wielokrotna</a></li>
+  <li><a href="#analiza-regresji-w-praktyce" id="toc-analiza-regresji-w-praktyce" class="nav-link" data-scroll-target="#analiza-regresji-w-praktyce"><span class="header-section-number">4</span> Analiza regresji w praktyce</a>
+  <ul class="collapse">
+  <li><a href="#jamovi" id="toc-jamovi" class="nav-link" data-scroll-target="#jamovi"><span class="header-section-number">4.1</span> jamovi</a></li>
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r"><span class="header-section-number">4.2</span> R</a></li>
+  </ul></li>
+  <li><a href="#diagnoza-modelu" id="toc-diagnoza-modelu" class="nav-link" data-scroll-target="#diagnoza-modelu"><span class="header-section-number">5</span> Diagnoza modelu</a>
+  <ul class="collapse">
+  <li><a href="#wartości-odstające-outliers" id="toc-wartości-odstające-outliers" class="nav-link" data-scroll-target="#wartości-odstające-outliers"><span class="header-section-number">5.1</span> Wartości odstające (<em>outliers</em>)</a></li>
+  <li><a href="#homo--i-heteroskedastyczność" id="toc-homo--i-heteroskedastyczność" class="nav-link" data-scroll-target="#homo--i-heteroskedastyczność"><span class="header-section-number">5.2</span> Homo- i heteroskedastyczność</a></li>
+  </ul></li>
+  <li><a href="#regresja-a-związki-przyczynowo-skutkowe" id="toc-regresja-a-związki-przyczynowo-skutkowe" class="nav-link" data-scroll-target="#regresja-a-związki-przyczynowo-skutkowe"><span class="header-section-number">6</span> Regresja a związki przyczynowo-skutkowe</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/regresja.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/regresja.qmd" class="toc-action"><i class="bi bi-github"></i>Edytuj tę stronę</a></li><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action"><i class="bi empty"></i>Zgłoś problem</a></li></ul></div></nav>
     <div class="quarto-margin-footer"><div class="margin-footer-item">
-
 <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
     <style type="text/css">
     /* LOADER */
@@ -1109,10 +1180,11 @@ cookieconsent.run({
   </div>
   
 
+
 </header>
 
 <p>Prawie wszystko w statystyce jest odmianą regresji. Funkcjonuje ona jako osobna analiza, ale logika, która za nią stoi, jest uniwersalna. Na przykład testy <em>t</em>, używane jako przykład we <a href="./posts/p-value.qmd">wpisie o wartości <span class="math inline">\(p\)</span></a>, można przedstawić jako rodzaj regresji. Bardziej złożona analiza wariancji (ANOVA) to też logika regresji zastosowana do pewnych szczególnych przypadków. Jeśli dobrze zrozumie się regresję, statystyka staje się znacznie przyjaźniejszym miejscem.</p>
-<p>Żeby jednak dobrze zrozumieć regresję, trzeba mieć pewne podstawy. Dużą część z tych podstaw rozpisałem we <a href="./posts/procent-wariancji.qmd">wpisie o wariancji</a>. Zakładam więc, że osoba czytająca wie, co to jest wariancja, reszty, odchylenie standardowe i potrafi zinterpretować wyniki testu <em>F</em>. Jeśli nie, dobrze odświeżyć sobie <a href="./posts/procent-wariancji.qmd">ten wpis</a>.</p>
+<p>Żeby jednak dobrze zrozumieć regresję, trzeba mieć pewne podstawy. Dużą część z tych podstaw rozpisałem we <a href="./posts/procent-wariancji.qmd">wpisie o wariancji</a>. Zakładam więc, że osoba czytająca wie, co to jest wariancja, reszty, odchylenie standardowe i potrafi zinterpretować wyniki testu <em>F</em>. Jeśli nie, dobrze odświeżyć sobie <a href="./posts/procent-wariancji.qmd">ten wpis</a>. Zakładam też, że osoba czytająca jest na ty ze wzorem ogólnym funkcji liniowej <span class="math inline">\(y = ax + b\)</span>, wie, jak współczynnik kierunkowy i wyraz wolny wpływają na funkcję liniową oraz czym się różnią argumenty od wartości. Jeśli coś kołacze w oddali, ale nie ma pewności, polecam <a href="./posts/funkcje.qmd">wpis o funkcjach</a>.</p>
 <section id="cel" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Cel</h1>
 <p>Regresja to szczególny rodzaj modelu, gdzie bierzemy jakieś zmienne ilościowe i patrzymy, jak są ze sobą powiązane. Przykładem może być związek wielkości pająka z lękiem, jaki wywołuje, czyli to, co liczyliśmy we <a href="./posts/procent-wariancji.qmd">wpisie o wariancji</a>.</p>
@@ -1177,12 +1249,325 @@ cookieconsent.run({
 </div>
 </div>
 </div>
-<p>Wykres ujawnia nam</p>
+<p>Wykres ujawnia nam, że im większy pająk, tym większy lęk wywołuje. Widać to zarówno na oko, jak i po dodaniu linii regresji. Jednocześnie ciągle istnieją jakieś odchylenia od modelu, nie udało nam się wyjaśnić całości wariancji lęku. Może wynika to z takiej, a nie innej próbki. Może poza wielkością niektóre pająki były włochate, albo grube albo miały wyraźne szczękoczułki, albo przeciwne, były chude, z niewielkim rozstawem odnóży, płaciły podatki i chodziły w niedzielę do kościoła. Jak jednak wiemy z wpisu o wariancji, sama wielkość pająka pozwala nam wyjaśnić około <span class="math inline">\(R^2 = 85\%\)</span> wariancji lęku.</p>
+<p>To, czego jednak do tej pory nie robiliśmy, to nie wyrażaliśmy związku wielkości pająka z lękiem <em>ilościowo</em>. Owszem, powiedzieliśmy, że jedno i drugie wspólnie rośnie, ale tylko tyle. Ale jak bardzo rośnie? Innymi słowy, jak zacznę tego pająka powiększać Amplifikatorem Koszmarów©, i powiększę go o 2 cm, to o ile wzrośnie wywoływany przez niego lęk? Do ilościowego wyrażania związków między zmiennymi służy właśnie analiza regresji.</p>
+</section>
+<section id="linia-regresji-jako-funkcja" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Linia regresji jako funkcja</h1>
+<p>Linia regresji, poza tym, że jest linią na wykresie, jest też pewną określoną <em>funkcją</em>. Osoby, które czytały <a href="./posts/funkcje.qmd">wpis o funkcjach</a> mogą skojarzyć tutaj rozróżnienie między opisem graficznym i algebraicznym. Jak każda funkcja, regresja przyjmuje jakąś liczbę, mieli ją i wypluwa odpowiedni wynik. Jak każda funkcja <em>liniowa</em>, linia regresji musi dać się przedstawić w postaci <span class="math inline">\(y = ax + b\)</span>.</p>
+<p>Żeby to, co mówię, było bardziej namacalne, spójrzmy na rzeczywisty wynik analizy regresji, jaki możemy spotkać robiąc ją w R.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = anxiety ~ spider_size, data = sp_tib)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.0357 -1.3036 -0.9524  1.4762  3.0595 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)   0.8929     1.7416   0.513  0.62651   
+spider_size   2.0238     0.3449   5.868  0.00108 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.235 on 6 degrees of freedom
+Multiple R-squared:  0.8516,    Adjusted R-squared:  0.8269 
+F-statistic: 34.43 on 1 and 6 DF,  p-value: 0.001084</code></pre>
+</div>
+</div>
+<p>Albo w nieco przemodelowanej pakietem <code>broom</code> postaci.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.893</td>
+<td style="text-align: right;">1.742</td>
+<td style="text-align: right;">0.513</td>
+<td style="text-align: right;">0.627</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">spider_size</td>
+<td style="text-align: right;">2.024</td>
+<td style="text-align: right;">0.345</td>
+<td style="text-align: right;">5.868</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Pierwszy widok dostarcza nam bardzo dużo informacji, drugi ogranicza się do tych najistotniejszych w tej chwili. To, co nas w tej chwili interesuje, to współczynniki regresji (<em>regression coefficients</em>). Zarówno w pierwszym widoku, jak i w tabelce znajdziemy je w kolumnie <code>estimate</code>.</p>
+<p>Zbierzmy to teraz do kupy. Regresja pozwala nam zrobić krok do tyłu w tym sensie, że dzięki niej możemy się „pozbyć” jednej zmiennej, a właściwie wyrazić daną zmienną jako <strong>funkcję innej zmiennej</strong>. Mówiąc bardziej po ludzku, tworzę taką funkcję, co jak do niej wrzucę wielkość pająka, to ona wypluje mi lęk, jaki ten pająk wywołuje (w określonych granicach błędu). Technicznie przestaję wtedy potrzebować osobnej kolumny na lęk, bo mogę go sobie policzyć z wielkości pająka. Oczywiście nikt tego nie robi, bo właściwie nie ma modeli wyjaśniających 100% wariancji (a przynajmniej nie w psychologii). Regresja polega tu na tym, że jeżeli lęk wynika z wielkości pająka, to porzucam pochodny lęk i <em>cofam się</em> do bardziej pierwotnej wielkości pająka.</p>
+<section id="współczynniki" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="współczynniki"><span class="header-section-number">2.1</span> Współczynniki</h2>
+<p>Podstawowy model regresji to funkcja <em>liniowa</em>. Do potencjalnych problemów z tym związanych wrócimy jeszcze w tym wpisie. O funkcjach liniowych wiemy, że dają się wyrazić jako <span class="math inline">\(y = ax + b\)</span> a w tym wypadku chciałoby się napisać <span class="math inline">\(lęk = a \times wielkość + b\)</span>, bo z wielkości pająka chcemy wyliczyć lęk. I to da się&nbsp;zrobić. Musimy tylko wiedzieć, jakie liczby będą stanowiły nasz współczynnik kierunkowy <span class="math inline">\(a\)</span> i wyraz wolny <span class="math inline">\(b\)</span>. Umówmy się, że lęk będziemy oznaczać literką <span class="math inline">\(l\)</span>, a wielkość literką <span class="math inline">\(w\)</span>, także nasza funkcja otrzymuje postać <span class="math inline">\(l(w) = aw + b\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.893</td>
+<td style="text-align: right;">1.742</td>
+<td style="text-align: right;">0.513</td>
+<td style="text-align: right;">0.627</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">spider_size</td>
+<td style="text-align: right;">2.024</td>
+<td style="text-align: right;">0.345</td>
+<td style="text-align: right;">5.868</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<section id="wyraz-wolny-intercept" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="wyraz-wolny-intercept"><span class="header-section-number">2.1.1</span> Wyraz wolny (<em>intercept</em>)</h3>
+<p>Zacznijmy od wyrazu wolnego. Wyraz wolny, jak powiedzieliśmy sobie we wpisie o funkcjach, zawsze ma wartość <span class="math inline">\(l(0)\)</span>. Zakładając, że nasza wielkość jest w centymetrach, jesteśmy w bardzo wygodnej sytuacji, że nie istnieje wielkość ujemna. Podobnie nie istnieje pająk o zerowej wielkości. Jak więc interpretować <span class="math inline">\(l(0)\)</span>? Pająk o zerowej wielkości brzmi jak coś, co może wywoływać lęk wyłącznie w filozofach. Pająk o zerowej wielkości nie istnieje naprawdę<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, ale możemy go potraktować jako pewną bazową wartość, lęk wywoływany przez każdego pająka niezależnie od wielkości. Nasz punkt startowy lęku. Znajdziemy go w wierszu zatytułowanym <em>intercept</em>, czyli właśnie wyraz wolny<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Wiemy więc, że w naszym modelu <span class="math inline">\(b = 0,893\)</span>.</p>
+</section>
+<section id="jednostki" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="jednostki"><span class="header-section-number">2.1.2</span> Jednostki</h3>
+<p>Teraz mogą się pojawić pytania o to, co oznacza sama ta liczba, w jakiej jest <em>skali</em>. Odpowiedź brzmi – w takiej skali, w jakiej mierzyliśmy lęk. W naszym przypadku jest to skala kwestionariuszowa od 0 do 20 i bazowy lęk wynosi w zaokrągleniu 0,9. Jeśli mierzylibyśmy lęk jako reakcję skórno-galwaniczną, to wyraz wolny byłby w EDR. Jeśli lęk mierzylibyśmy rozszerzaniem źrenic, to współczynnik <span class="math inline">\(b\)</span> byłby w milimetrach. Ostatecznie wynik będzie w takiej jednostce, jakiej sami używaliśmy.</p>
+<p>Ma to sens, jak pomyślimy, że mamy wzór <span class="math inline">\(l(w) = aw + b\)</span>. Skoro więc <span class="math inline">\(l(w)\)</span> ma wyjść w jednostkach pomiarowych, to zarówno <span class="math inline">\(aw\)</span>, jak i <span class="math inline">\(b\)</span> w tych jednostkach muszą się ostatecznie wyrazić. Jeśli chcielibyśmy dostać wynik w kilogramach, to musimy dodawać kilogramy, jeśli chcemy wynik w metrach, to metry, a jeżeli chcemy wynik w kwestionariuszowym natężeniu lęku, to musimy dodawać wartości kwestionariuszowego natężenia lęku.</p>
+<p>Jak pokażę później, czasem jednostka typu wynik w kwestionariuszu jest trudna do interpretacji. Dlatego czasem będziemy używać wartości <em>standaryzowanych</em>, które zinterpretować jest już dość łatwo.</p>
+</section>
+<section id="nachylenie" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="nachylenie"><span class="header-section-number">2.1.3</span> Nachylenie</h3>
+<p>Jak można się domyślić, nachylenie, czyli współczynnik kierunkowy <span class="math inline">\(a\)</span>, da się odczytać z tabeli i wynosi tutaj w zaokrągleniu <span class="math inline">\(a = 2\)</span>. Możemy więc podstawić je do wzoru i otrzymujemy gotowy wzór na lęk – <span class="math inline">\(l(w) = 2w + 0,9\)</span> (wartości zaokrąglone).</p>
+<p>Większy problem, niż odczytanie, stanowi interpretacja. Z informacji, które podawałem we wpisie o funkcjach, da się wywnioskować tylko tyle, że jest to funkcja rosnąca, bo <span class="math inline">\(a &gt; 0\)</span>. Tutaj jednak musimy trochę dołożyć to tego obrazu. Podstawmy do wzoru kolejne liczby.</p>
+<p><span class="math display">\[
+y = 2 \times 1 + 0,9 = 2,9
+\]</span></p>
+<p><span class="math display">\[
+y = 2 \times 2 + 0,9 = 4,9
+\]</span></p>
+<p><span class="math display">\[
+y = 2 \times 3 + 0,9 = 6,9
+\]</span></p>
+<p>Porównując kolejne wyniki możemy zobaczyć pewną prawidłowość – gdy <span class="math inline">\(w\)</span> rośnie o 1, to lęk rośnie o 2. Ma to sens, bo w pierwszym równaniu mamy jedną dwójkę, w drugim dwie dwójki, a w trzecim trzy dwójki. Dodając 1 do <span class="math inline">\(w\)</span> tak naprawdę dodaję kolejną dwójkę.</p>
+<p>Wniosek z tego pozwala nam spojrzeć inaczej na wartość współczynnika kierunkowego:</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ważne
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Współczynnik kierunkowy mówi o tym, o ile zmieni się wartość funkcji (lęk), gdy wartość argumentu (wielkość pająka) wzrośnie o 1.</p>
+</div>
+</div>
+<p>Tutaj możemy powiedzieć, że każdy centymetr pająka zwiększa lęk o 2 jednostki. Interpretowanie nachylenia w ten sposób jest nieintuicyjne, dlatego poświęć chwilę na upewnienie się, że wiesz, dlaczego wzrost <span class="math inline">\(w\)</span> o 1 przełoży się na wzrost lęku o <span class="math inline">\(2\)</span> na podstawie przykładowych obliczeń powyżej. Moja podpowiedź jest taka, że warto się cofnąć do wczesnych lat podstawówki<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> i przypomnieć sobie, jak mnożenie zapisywaliśmy jako wielokrotne dodawanie: <span class="math inline">\(2 \times 3 = 2 + 2 + 2\)</span>, <span class="math inline">\(2 \times 4 = 2 + 2 + 2 + 2\)</span> itd.</p>
+<p>Nachylenie, jego zmiany i interpretacja są tak ważne w algebrze, że w pewnym momencie napiszę cały post (lub nawet kilka) tylko na ten temat.</p>
+</section>
+<section id="istotność-statystyczna" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="istotność-statystyczna"><span class="header-section-number">2.1.4</span> Istotność statystyczna</h3>
+<p>Poza samą wartością współczynnika możesz zauważyć, że w tabeli występują też inne informacje, w tym wartość <span class="math inline">\(p\)</span> dla każdego współczynnika. Jeśli nie wiesz, jak działa wartość <span class="math inline">\(p\)</span>, zachęcam do nadrobienia <a href="./posts/p-value.qmd">wpisu o istotności statystycznej</a>. Jak tę wartość interpretować?</p>
+<p>Korzystając ze skrótu myślowego, jest to swoista pewność, czy dana wartość jest różna od 0. Mówiąc dokładniej, jak trudno byłoby uzyskać taką wartość przez przypadek. Zerknijmy na wartości <span class="math inline">\(p\)</span> w naszym modelu.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">p.value.signif</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.627</td>
+<td style="text-align: left;">ns</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">spider_size</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: left;">**</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Jak widzimy, wyraz wolny jest tu nieistotny, zaś wielkość pająka jest istotna. Oznacza to, że owszem, wyszło nam,&nbsp;że „bazowy” lęk wywoływany przez pająki wynosi 0,9, ale równie dobrze to mógł być przypadek. W rzeczywistości „bazowy” lęk może wynosić 0 i nie jesteśmy w stanie tego tutaj rozsądzić. Na szczęście dla wyrazu wolnego nie ma to większego znaczenia. Ważniejsze jest dla nas to, że wielkość pająka <em>istotnie</em> przewiduje wywoływany przez niego lęk (<span class="math inline">\(p = 0,001\)</span>). Oznacza to, że mamy wystarczającą dozę pewności, żeby powiedzieć, że wielkość pająka <em>naprawdę</em> ma związek z wywoływanym przez niego lękiem.</p>
+<p>Gorzej jest, gdy dany predyktor (<em>fancy</em> nazwa na zmienną niezależną) okazuje się być nieistotny statystycznie. Może to oznaczać, że albo rzeczywiście nie ma wpływu, albo ma wpływ mniejszy, niż nasza próbka pozwalała nam wykryć. Jeśli mieliśmy wystarczająco dużą próbkę, to możemy powiedzieć, że dany czynnik nie ma wpływu albo chociaż praktycznego znaczenia. Jaka próbka jest „wystarczająco duża” to pytanie, na które odpowiada analiza mocy, która zasługuje na osobny wpis.</p>
+</section>
+</section>
+<section id="przewidywanie-lęku" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="przewidywanie-lęku"><span class="header-section-number">2.2</span> Przewidywanie lęku</h2>
+<p>Analiza regresji, której wyniki pokazałem wyżej, pozwoliła nam ustalić prosty wzór, za pomocą którego możemy przewidzieć, jaki pająk wywoła jaki lęk. Zapiszmy go wyśrodkowanego, będzie bardziej uroczyście.</p>
+<p><span class="math display">\[
+l(w) = 2w + 0,9
+\]</span></p>
+<p>Jak już robiliśmy to wcześniej, żeby przewidzieć z tego modelu natężenie lęku, wystarczy podstawić za <span class="math inline">\(w\)</span> wielkość pająka. I w ten sposób np. <span class="math inline">\(l(6) = 2 \times 6 + 0,9 = 12,9\)</span>. Spojrzenie w tabelę pozwala jednak ustalić, że rzeczywisty lęk wywoływany przez pająka o wielkości 6 cm to 11, czyli mamy błąd rzędu 1,9. Nie należy się dziwić, jak podkreślałem we wpisie o wariancji, właściwie każdy model obarczony jest błędem, czasem większym, czasem mniejszym.</p>
+<p>Co jednak jest piękne, możemy próbować przewidywać lęk wywoływany przez pająki, dla których nie mamy danych. Jeśli zależność rzeczywiście jest liniowa, mogę przewidzieć, że pająk o wielkości 10 cm wywoła lęk rzędu <span class="math inline">\(l(10) = 2 \times 10 + 0,9 = 20,9\)</span>. Jak widać przewidywanie wartości spoza modelu może być o tyle problematyczne, że skala kończy nam się na 20, czyli lęk wychodzi w tym wypadku poza skalę. Może to sugerować, że potrzebujemy lepszej skali do pomiaru lęku, jeśli chcemy badać takie skurczybyki.</p>
+<section id="przedziały-ufności" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="przedziały-ufności"><span class="header-section-number">2.2.1</span> Przedziały ufności</h3>
+<p>Truizm, że nasze przewidywania obarczone są „pewnym błędem” nie jest zbyt pomocny. Na szczęście jesteśmy w świecie danych ilościowych, więc możemy przewidywać, jak duży jest ten błąd. Dokonujemy tego za pomocą <strong>przedziałów ufności</strong>. W skrócie pozwalają nam one powiedzieć coś w rodzaju „Na 95% ten pająk wywoła lęk między A a B”, czyli zamiast pojedynczego wyniku, mamy widełki.</p>
+<p>Pierwszym krokiem do policzenia przedziałów ufności jest określenie, jak dużą pewność chcemy mieć. Popularne wartości to 80% i 95%. Zwiększanie pewności okupione jest pewnym kosztem – im większą chcemy mieć pewność, tym szersze są nasze widełki. Na 100% możemy stwierdzić tylko, że rzeczywisty wynik jest między 0 a 20, bo to nasza skala. Na jaki poziom <em>niepewności</em>, tak naprawdę, możemy sobie pozwolić, to już zależy od naszej oceny, czyli tego, co właściwie robimy. Oczywiście im lepiej dopasowany model, tym ogólnie bardziej sprecyzowane są nasze widełki.</p>
+<p>Wzory na przedziały ufności są dość złożone, dlatego użyjemy funkcji <code>predict()</code> w R.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    sp_lm, <span class="co"># nasz model</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">spider_size =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>), <span class="co"># ramka danych z wielkościami</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">interval =</span> <span class="st">"confidence"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">level =</span> <span class="fl">0.95</span> <span class="co"># poziom ufności</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">fit</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">lwr</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">upr</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">11.0</td>
+<td style="text-align: right;">9.0</td>
+<td style="text-align: right;">13.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">13.0</td>
+<td style="text-align: right;">10.7</td>
+<td style="text-align: right;">15.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15.1</td>
+<td style="text-align: right;">12.2</td>
+<td style="text-align: right;">17.9</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Tutaj przewidzieliśmy wartości dla pająków o wielkości 5 cm, 6 cm i 7 cm. Otrzymaliśmy wartości punktowe<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> oraz widełki. I tak nasz model przewiduje, że na 95% pająk o wielkości 6 cm wywoła lęk między 10,7 a 15,3.</p>
+<p>W badaniach naukowych rzadko musimy dokonywać takich przewidywań. Zazwyczaj wystarczy nam dopasowanie modelu, który odpowiada na konkretne pytania badawcze. Jeśli model jest istotny, jesteśmy w domu.</p>
+</section>
+<section id="jednostki-standardowe" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="jednostki-standardowe"><span class="header-section-number">2.2.2</span> Jednostki standardowe</h3>
+</section>
+<section id="zależności-nieliniowe" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="zależności-nieliniowe"><span class="header-section-number">2.2.3</span> Zależności nieliniowe</h3>
+<p>Regresja liniowa działa tylko wtedy, gdy zależność jest liniowa. Jeśli mamy inne zależności, np. odwrócona litera U albo wzrost do pewnego poziomu i stabilizacja, regresja liniowa po prostu się nie sprawdzi.</p>
+<p>Nawet jeśli model będzie nieźle dopasowany, to niekoniecznie znaczy, że zależność rzeczywiście jest liniowa. Dlatego spojrzenie na wykresy jest cenne. Żeby to zilustrować, niżej pokazuję wykresy z projektu <a href="https://doi.org/10.1145/3025453.3025912">DataSaurus Dozen</a>. Wierzcie lub nie, ale wszystkie te dane mają takie same statystyki opisowe, mimo że prezentują zupełnie inne historie.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="regresja_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><img src="./ilustracje/regresja/datasaurus-dozen.gif" class="img-fluid"></p>
+</section>
+</section>
+</section>
+<section id="regresja-wielokrotna" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Regresja wielokrotna</h1>
+</section>
+<section id="analiza-regresji-w-praktyce" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Analiza regresji w praktyce</h1>
+<p>Wiemy już, jak zinterpretować wyniki analizy regresji i jak ma się ona do funkcji liniowych. Tutaj natomiast pokażę, jak ją&nbsp;wykonać. Dane w pliku .csv można pobrać <a href="https://raw.githubusercontent.com/jakub-jedrusiak/nieobliczalne/main/posts/dane/procent-wariancji/spider_anxiety.csv">stąd</a>.</p>
+<section id="jamovi" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="jamovi"><span class="header-section-number">4.1</span> jamovi</h2>
+<p>W jamovi wystarczy analizę wyklikać. Po załadowaniu danych przechodzimy do zakładki Analiza, tam z menu Regresja wybieramy Regresja liniowa i wyklikujemy nasze dane. Predyktory są tutaj nazwane współzmiennymi. W związku z tym naszą zmienną zależną jest lęk (<code>anxiety</code>), a współzmienną wielkość pająka (<code>spider_size</code>). Wyniki w formie tabelek wyświetlają nam się po prawej stronie. Jeśli chcemy dostać więcej statystyk, wyklikujemy je w odpowiednich zakładkach.</p>
+<p><img src="./ilustracje/regresja/jamovi.png" class="img-fluid"></p>
+</section>
+<section id="r" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="r"><span class="header-section-number">4.2</span> R</h2>
+<p>Podstawową komendą do wykonywania analizy regresji w R jest <code>lm()</code>. Jeśli nie wiesz, jak korzystać z R, a chcesz się nauczyć, polecam swoje <a href="./posts/podstawy_R.qmd">wprowadzenie do R</a>. Po załadowaniu danych tworzymy model. Dane załadowałem tutaj do zmiennej <code>sp_tib</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sp_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(anxiety <span class="sc">~</span> spider_size, sp_tib)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Pierwszym argumentem jest tutaj formuła. Po lewej stronie znaku <code>~</code> wypisujemy zmienne zależne, podczas gdy po stronie prawej – zmienne niezależne. Jeśli chcemy dodać więcej zmiennych, łączymy je znakiem <code>+</code>. Drugim argumentem są nasze dane. Łatwo zapomnieć o ich dopisaniu, wtedy otrzymamy błąd, że zmienna <code>anxiety</code> nie została odnaleziona.</p>
+<p>Następnie model podsumowujemy. Domyślnie robi to funkcja <code>summary()</code>, jednak polecam skorzystać tutaj z pakietu <code>broom</code>, który wyrzuca nam czystsze i bogatsze w dane tabele. Funkcja <code>tidy()</code> wyrzuci nam same współczynniki, zaś funkcja <code>glance()</code> statystyki diagnostyczne modelu.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom) <span class="co"># ładujemy broom</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(sp_lm)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 (Intercept)    0.893     1.74      0.513 0.627  
+2 spider_size    2.02      0.345     5.87  0.00108</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(sp_lm)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0.852         0.827  2.24      34.4 0.00108     1  -16.6  39.3  39.5
+# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="diagnoza-modelu" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Diagnoza modelu</h1>
+<section id="wartości-odstające-outliers" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="wartości-odstające-outliers"><span class="header-section-number">5.1</span> Wartości odstające (<em>outliers</em>)</h2>
+</section>
+<section id="homo--i-heteroskedastyczność" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="homo--i-heteroskedastyczność"><span class="header-section-number">5.2</span> Homo- i heteroskedastyczność</h2>
+</section>
+</section>
+<section id="regresja-a-związki-przyczynowo-skutkowe" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Regresja a związki przyczynowo-skutkowe</h1>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
+<ol>
+<li id="fn1"><p>Choć wspomnieni filozofowie mogliby się nie zgodzić.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Dokładnie słowo <em>intercept</em> znaczy przecięcie i chodzi o przecięcie wykresu z osią Y. Jak pamiętamy z funkcji, przecięcie z osią Y to po prostu <span class="math inline">\(f(0)\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Dokonać regresji, hehe.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Mogą się nieznacznie różnić od tych policzonych ręcznie, bo R używa wartości niezaokrąglonych w obliczeniach.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1224,6 +1609,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1292,13 +1704,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1377,10 +1791,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1390,8 +1803,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1404,6 +1826,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1447,6 +1944,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1533,18 +2031,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://giscus.app/client.js" data-repo="jakub-jedrusiak/nieobliczalne" data-repo-id="R_kgDOHBIy6A" data-category="General" data-category-id="DIC_kwDOHBIy6M4CUvlw" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
 </script>
+<input type="hidden" id="giscus-base-theme" value="dark">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 

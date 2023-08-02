@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.283">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -51,6 +51,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href=".././styles/logo.svg" rel="icon" type="image/svg+xml">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -71,6 +72,11 @@ div.csl-indent {
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "Brak wyników",
     "search-matching-documents-text": "dopasowane dokumenty",
@@ -105,6 +111,8 @@ cookieconsent.run({
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
+  ,
+"language":"pl"
   });
 });
 </script> 
@@ -119,7 +127,7 @@ cookieconsent.run({
 <meta property="og:title" content="Nieobliczalne - Pamięć w służbie ucznia">
 <meta property="og:description" content="Przy coraz powszechniej obserwowanym zjawisku wypalenia szkolnego pośród uczniów, a także niskiej długoterminowej skuteczności ogólnie stosowanych technik uczenia się, pojawia się potrzeba nabycia przez uczniów nowych, skuteczniejszych sposobów zdobywania wiedzy. Jest to szczególnie ważne, biorąc pod uwagę wysokie rozpowszechnienie fałszywych informacji na temat uczenia się. Artykuł redefiniuje pojęcie technik uczenia się odróżniając je od mnemotechnik, podaje ogólne prawidłowości rządzące zapamiętywaniem, a także omawia trzy konkretne techniki – pałac pamięci, metodę Feynmana i fiszki elektroniczne z wykorzystaniem otwartego programu Anki.">
 <meta property="og:image" content="https://nieobliczalne.pl/posts/headers/uczenie-sie.webp">
-<meta property="og:site-name" content="Nieobliczalne">
+<meta property="og:site_name" content="Nieobliczalne">
 <meta name="twitter:title" content="Nieobliczalne - Pamięć w służbie ucznia">
 <meta name="twitter:description" content="Przy coraz powszechniej obserwowanym zjawisku wypalenia szkolnego pośród uczniów, a także niskiej długoterminowej skuteczności ogólnie stosowanych technik uczenia się, pojawia się potrzeba nabycia przez uczniów nowych, skuteczniejszych sposobów zdobywania wiedzy. Jest to szczególnie ważne, biorąc pod uwagę wysokie rozpowszechnienie fałszywych informacji na temat uczenia się. Artykuł redefiniuje pojęcie technik uczenia się odróżniając je od mnemotechnik, podaje ogólne prawidłowości rządzące zapamiętywaniem, a także omawia trzy konkretne techniki – pałac pamięci, metodę Feynmana i fiszki elektroniczne z wykorzystaniem otwartego programu Anki.">
 <meta name="twitter:image" content="https://nieobliczalne.pl/headers/uczenie-sie.jpeg">
@@ -133,7 +141,10 @@ cookieconsent.run({
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src=".././styles/logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Nieobliczalne</span>
     </a>
@@ -168,10 +179,10 @@ cookieconsent.run({
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -215,9 +226,8 @@ cookieconsent.run({
   </ul></li>
   <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">5</span> Podsumowanie</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/uczenie-sie.qmd" class="toc-action">Edytuj tę stronę</a></p><p><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action">Zgłoś problem</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/uczenie-sie.qmd" class="toc-action"><i class="bi bi-github"></i>Edytuj tę stronę</a></li><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action"><i class="bi empty"></i>Zgłoś problem</a></li></ul></div></nav>
     <div class="quarto-margin-footer"><div class="margin-footer-item">
-
 <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
     <style type="text/css">
     /* LOADER */
@@ -1159,6 +1169,7 @@ cookieconsent.run({
   </div>
   
 
+
 </header>
 
 <p>Ten tekst oryginalnie miał być częścią publikacji pokonferencyjnej, która nigdy się nie ukazała, dlatego jest napisany bardziej formalnie niż inne teksty tutaj zebrane.</p>
@@ -1258,7 +1269,7 @@ cookieconsent.run({
 <section id="fiszki-elektroniczne-w-programie-anki" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Fiszki elektroniczne w programie Anki</h1>
 <p>Fiszki jako metoda zostały spopularyzowane przez Sebastiana Leitnera w publikacji <em>Naucz się uczyć</em> <span class="citation" data-cites="leitner_naucz_1972">(<a href="#ref-leitner_naucz_1972" role="doc-biblioref">1972</a>)</span>. Przyjmują one formę kart, które z jednej strony mają zapisane pytanie, a z drugiej odpowiedź. Najbardziej oczywistym ich zastosowaniem jest nauka słownictwa w języku obcym, ale mogą one zostać wykorzystane w nauce właściwie każdego materiału (więcej informacji niżej).</p>
-<p>Same karty nie stanowią jednak techniki uczenia się w myśl naszej definicji. Leitner <span class="citation" data-cites="leitner_naucz_1972">(<a href="#ref-leitner_naucz_1972" role="doc-biblioref">1972</a>)</span> proponował stworzenie tzw. kartoteki autodydaktycznej, czyli pudełka, które miało usprawnić i usystematyzować proces sprawdzania swojej wiedzy za pomocą fiszek. Pozwala ona na niejednakowe powtarzanie informacji – skupienie się na tych, które trudniej uczniowi zapamiętać, przy rzadszym powtarzaniu tych, które uczeń uznaje za łatwe. Selekcja ta jest znacznie łatwiejsza do zastosowania przy fiszkach, niż przy korzystaniu z metody opisanej przez Willinghama <span class="citation" data-cites="willingham_strategies_2014">(<a href="#ref-willingham_strategies_2014" role="doc-biblioref">Willingham, 2014</a>, por. <a href="#sec-skutecznosc" role="doc-biblioref">Sekcja&nbsp;1.2</a>)</span>.</p>
+<p>Same karty nie stanowią jednak techniki uczenia się w myśl naszej definicji. Leitner <span class="citation" data-cites="leitner_naucz_1972">(<a href="#ref-leitner_naucz_1972" role="doc-biblioref">1972</a>)</span> proponował stworzenie tzw. kartoteki autodydaktycznej, czyli pudełka, które miało usprawnić i usystematyzować proces sprawdzania swojej wiedzy za pomocą fiszek. Pozwala ona na niejednakowe powtarzanie informacji – skupienie się na tych, które trudniej uczniowi zapamiętać, przy rzadszym powtarzaniu tych, które uczeń uznaje za łatwe. Selekcja ta jest znacznie łatwiejsza do zastosowania przy fiszkach, niż przy korzystaniu z metody opisanej przez Willinghama <span class="citation" data-cites="willingham_strategies_2014">(<a href="#ref-willingham_strategies_2014" role="doc-biblioref">Willingham, 2014</a>, por. <a href="#sec-skutecznosc" class="quarto-xref" role="doc-biblioref">Sekcja&nbsp;1.2</a>)</span>.</p>
 <p>Temat fiszek jest bardzo rozległy, dlatego poświęcę mu więcej uwagi niż wcześniej omawianym metodom. Najpierw omówię przewagę fiszek elektronicznych nad tradycyjnymi. Następnie podam kilka dowodów na skuteczność tej metody i porad jak na etapie tworzenia sprawić, by fiszki rzeczywiście były skuteczne (wraz z przykładami). Później omówimę polecany przez siebie program do tworzenia fiszek (Anki) i to, jak praktycznie wygląda jego codzienne użytkowanie. Następnie przeanalizuję potencjalne zalety korzystania z fiszek w kontekście polskiego systemu oświaty. Na koniec podam kilka przykładów dodatków do programu Anki wraz z opisem, jak mogą one usprawnić uczenie się tą metodą.</p>
 <section id="fiszki-tradycyjne-a-elektroniczne" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="fiszki-tradycyjne-a-elektroniczne"><span class="header-section-number">4.1</span> Fiszki tradycyjne a elektroniczne</h2>
@@ -1272,7 +1283,7 @@ cookieconsent.run({
 <li>Każda fiszka ma osobno liczony czas rozłożonej powtórki, podczas gdy forma tradycyjna uzależnia czas rozłożonej powtórki od tworzenia nowych fiszek – gdy uczeń przestaje tworzyć nowe fiszki, nie powtarza też tych starych.</li>
 <li>Forma elektroniczna zdaje się być atrakcyjniejsza dla uczniów.</li>
 <li>Łatwo tworzy się fiszki obrazkowe i dźwiękowe, co dla formy tradycyjnej jest trudne lub wręcz niemożliwe.</li>
-<li>Klasa może łatwo współpracować w tworzeniu fiszek elektronicznych (patrz <a href="#sec-wspolpraca">Sekcja&nbsp;4.7</a>).</li>
+<li>Klasa może łatwo współpracować w tworzeniu fiszek elektronicznych (patrz <a href="#sec-wspolpraca" class="quarto-xref">Sekcja&nbsp;4.7</a>).</li>
 </ul>
 </section>
 <section id="skuteczność-1" class="level2" data-number="4.2">
@@ -1298,7 +1309,7 @@ cookieconsent.run({
 <p>Za pomocą fiszek z luką łatwo jest tworzyć fiszki z pytaniami o definicje zjawisk. Polecam w tym celu korzystać ze schematu „[Termin] to [definicja].”, by uczeń był w stanie zarówno nazwać opisywane zjawisko, jak i potrafił je zdefiniować. Łatwo jest się spotkać z sytuacją, w której uczeń zastanawia się nie tyle „Co to jest?”, a raczej „Jak to się nazywało?”. Dla przykładu fiszka z definicją efektu odniesienia do ja według Wojciszke <span class="citation" data-cites="wojciszke_psychologia_2019">(<a href="#ref-wojciszke_psychologia_2019" role="doc-biblioref">2019, s. 533</a>)</span>:</p>
 <p><strong>Przód 1.:</strong> […] to „lepsze zapamiętywanie informacji odnoszonych do własnej osoby niż do innych osób bądź przetwarzanej w inny sposób.” <strong>Przód 2.:</strong> Efekt odniesienia do ja to […] <strong>Tył:</strong> „Efekt odniesienia do ja to lepsze zapamiętywanie informacji odnoszonych do własnej osoby niż do innych osób bądź przetwarzanej w inny sposób.”</p>
 <p><strong><em>Listy elementów a fiszki.</em></strong> Jeśli uczeń musi stworzyć fiszkę, na którą odpowiada lista elementów (tak jak w przykładzie 8.) za Wozniakiem <span class="citation" data-cites="wozniak_effective_1999">(<a href="#ref-wozniak_effective_1999" role="doc-biblioref">1999</a>)</span> radzę skorzystać wtedy z metody pałacu pamięci lub innej mnemotechniki. Może nie być to konieczne w prostej liście trzech jednowyrazowych elementów, ale często uczniowie muszą zapamiętywać listy dłuższe i bardziej skomplikowane. Ponadto jeśli da się rozbić długą listę na mniejsze, należy to zrobić. Dla przykładu – uczeń chcący zapamiętać listę wszystkich krajów UE może rozbić tę listę na 8 mniejszych list stworzonych na zasadzie roku przystąpienia. W ten sposób zamiast listy 27-elementowej, otrzyma zestaw list, z których najdłuższa będzie miała tylko 10 elementów <span class="citation" data-cites="wozniak_effective_1999">(przykład na podstawie: <a href="#ref-wozniak_effective_1999" role="doc-biblioref">Wozniak, 1999</a>)</span>.</p>
-<p><strong><em>Fiszki obrazkowe.</em></strong> Pośród zalet fiszek elektronicznych wymieniliśmy łatwość w tworzeniu fiszek obrazkowych. Jeśli to możliwe, uczeń powinien korzystać z tego typu materiałów w swoich fiszkach. Aby ułatwić tworzenie fiszek obrazkowych z luką (zasłonięty podpis na schemacie) w programie Anki, zalecamy zapoznanie się z dodatkiem Image Occlusion Enhanced (patrz <a href="#sec-dodatki">Sekcja&nbsp;4.8</a>).</p>
+<p><strong><em>Fiszki obrazkowe.</em></strong> Pośród zalet fiszek elektronicznych wymieniliśmy łatwość w tworzeniu fiszek obrazkowych. Jeśli to możliwe, uczeń powinien korzystać z tego typu materiałów w swoich fiszkach. Aby ułatwić tworzenie fiszek obrazkowych z luką (zasłonięty podpis na schemacie) w programie Anki, zalecamy zapoznanie się z dodatkiem Image Occlusion Enhanced (patrz <a href="#sec-dodatki" class="quarto-xref">Sekcja&nbsp;4.8</a>).</p>
 <p><strong><em>Fiszki a rozumienie.</em></strong> Wozniak zaznacza również fakt, że fiszki nie zastępują uczenia się. Można z nich korzystać dopiero po sesji nauki. Innymi słowy, nie należy tworzyć fiszek z materiału, którego się nie rozumie.</p>
 <p><strong><em>Prostota fiszek.</em></strong> Inną wymienioną przez Wozniaka zasadą jest, by fiszki były proste. Nie należy zakładać, że zapamięta się jakąś informację „przy okazji”, a raczej dla każdej z informacji zrobić osobną fiszkę. Dla przykładu, fiszka „Kto odkrył mechanizm warunkowania klasycznego?” powinna mieć odpowiedź „Iwan Pawłow”, nie zaś „Iwan Pawłow na początku XX wieku”. Jeśli uczeń chce zapamiętać, kiedy eksperymenty Pawłowa były przeprowadzane, powinien stworzyć dla tego pytania osobną fiszkę.</p>
 </section>
@@ -1308,7 +1319,7 @@ cookieconsent.run({
 <ol type="1">
 <li>Jest to narzędzie całkowicie darmowe.</li>
 <li>Jest dostępne w języku polskim.</li>
-<li>Jako program otwartoźródłowy, posiada mnóstwo darmowych dodatków, pozwalających na zwiększenie jego możliwości (patrz <a href="#sec-dodatki">Sekcja&nbsp;4.8</a>).</li>
+<li>Jako program otwartoźródłowy, posiada mnóstwo darmowych dodatków, pozwalających na zwiększenie jego możliwości (patrz <a href="#sec-dodatki" class="quarto-xref">Sekcja&nbsp;4.8</a>).</li>
 <li>Jest to narzędzie dostępne dla wszystkich popularnych systemów operacyjnych – zarówno tych stacjonarnych (Windows, Linux, MacOS) jak i mobilnych (Android, iOS).</li>
 <li>Posiada wbudowany system synchronizacji, dzięki czemu fiszki stworzone na komputerze w bardzo łatwy sposób można zsynchronizować z aplikacją na telefonie.</li>
 <li>Uczeń samodzielnie stwierdza, czy dobrze odpowiedział na pytanie. Dzięki temu, możliwe jest sprawne korzystanie z fiszek zadających pytania o definicje – inne programy często wymagają od ucznia udzielenia poprawnej odpowiedzi słowo w słowo, podczas gdy tutaj, to uczeń decyduje, czy jest swoją odpowiedzią usatysfakcjonowany.</li>
@@ -1318,7 +1329,7 @@ cookieconsent.run({
 <section id="przeglądanie-fiszek" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="przeglądanie-fiszek"><span class="header-section-number">4.5</span> Przeglądanie fiszek</h2>
 <p>Fiszki zgrupowane są w tzw. talie. Zgodnie z instrukcją programu Anki, talie powinny być możliwie szerokie tematycznie (czyli jedna talia „Angielski” zamiast osobnych „Angielski – owoce”, „Angielski – zwierzęta” i „Angielski – kolory”). Dzięki temu kontekst talii nie będzie stanowił podpowiedzi przy uczeniu się <span class="citation" data-cites="wozniak_effective_1999">(<a href="#ref-wozniak_effective_1999" role="doc-biblioref">Wozniak, 1999</a>)</span>. Ponadto, przemieszanie kart oznacza przejście z uczenia się blokowego na uczenie interwałowe, które może być skuteczniejsze <span class="citation" data-cites="rohrer_interleaving_2012">(<a href="#ref-rohrer_interleaving_2012" role="doc-biblioref">Rohrer, 2012</a>)</span>, chociaż dowody są w tej kwestii ograniczone <span class="citation" data-cites="dunlosky_improving_2013">(<a href="#ref-dunlosky_improving_2013" role="doc-biblioref">Dunlosky, Rawson, Marsh, Nathan, &amp; Willingham, 2013</a>)</span>.</p>
-<p>Co więcej, zalecam wyłączenie zwykłego licznika kart, który w programie Anki, poza ilością pozostałych w danej sesji fiszek, wskazuje, czy aktualnie wyświetlana karta jest nowa, pojawia się dzisiaj po raz pierwszy, czy po raz kolejny. Może to stanowić niechcianą podpowiedź. Zwykły licznik można zastąpić dodatkiem Remaining Time (patrz <a href="#sec-dodatki">Sekcja&nbsp;4.8</a>).</p>
+<p>Co więcej, zalecam wyłączenie zwykłego licznika kart, który w programie Anki, poza ilością pozostałych w danej sesji fiszek, wskazuje, czy aktualnie wyświetlana karta jest nowa, pojawia się dzisiaj po raz pierwszy, czy po raz kolejny. Może to stanowić niechcianą podpowiedź. Zwykły licznik można zastąpić dodatkiem Remaining Time (patrz <a href="#sec-dodatki" class="quarto-xref">Sekcja&nbsp;4.8</a>).</p>
 <p>Każdego dnia, program proponował będzie przejrzenie określonej porcji fiszek z danej talii. To, jakie konkretnie karty zostaną pokazane, zależy od uprzednio udzielanych na nią odpowiedzi. W ten sposób karta widziana po raz pierwszy pokaże się dwukrotnie w tej samej sesji nauki. Jeśli uczniowi uda się odpowiedzieć poprawnie dwa razy z rzędu, karta pojawi się następnego dnia. Jeśli i wtedy odpowie poprawnie, pojawi się po trzech dniach. Przerwa będzie się stopniowo wydłużała. Błąd powoduje rozpoczęcie procesu od nowa dla danej karty.</p>
 </section>
 <section id="rozłożone-powtórki-fiszek-w-kontekście-egzaminów" class="level2" data-number="4.6">
@@ -1336,9 +1347,9 @@ cookieconsent.run({
 <section id="sec-dodatki" class="level2" data-number="4.8">
 <h2 data-number="4.8" class="anchored" data-anchor-id="sec-dodatki"><span class="header-section-number">4.8</span> Dodatki</h2>
 <p>By zebrać rozrzucone w różnych miejscach tego artykułu informacje o kilku wartych uwagi dodatkach do programu Anki. Jako program otwartoźródłowy, Anki posiada dużą liczbę bezpłatnych dodatków, rozszerzających jego możliwości o różne dodatkowe funkcje. Poniżej omówimy kilka dodatków, o których wspominaliśmy wyżej oraz kilka innych, również wartościowych. Ze względu na praktyczną naturę tego podrozdziału, warto najpierw samodzielnie zapoznać się z podstawowymi funkcjami programu Anki. Inaczej Czytelnik może nie być w stanie wyobrazić sobie działania części z omawianych niżej rozszerzeń.</p>
-<p><strong><em>Image Occlusion Enhanced.</em></strong> Jest to dodatek, dzięki któremu można w prosty sposób tworzyć fiszki obrazkowe z luką (patrz <a href="#fig-analogia">Rysunek&nbsp;1</a>). Uczeń może za jego pomocą nauczyć się rozpoznawać elementy schematów. Szczególnie użyteczne dla przedmiotów przyrodniczych, gdzie można użyć obrazów zamiast opisów (np. ryciny anatomiczne, mapy).</p>
+<p><strong><em>Image Occlusion Enhanced.</em></strong> Jest to dodatek, dzięki któremu można w prosty sposób tworzyć fiszki obrazkowe z luką (patrz <a href="#fig-analogia" class="quarto-xref">Rysunek&nbsp;1</a>). Uczeń może za jego pomocą nauczyć się rozpoznawać elementy schematów. Szczególnie użyteczne dla przedmiotów przyrodniczych, gdzie można użyć obrazów zamiast opisów (np. ryciny anatomiczne, mapy).</p>
 <p><img src="./ilustracje/uczenie-sie/rysunek-2.png" class="img-fluid" alt="Przykład fiszki wykonanej za pomocą Image Occlusion Enhanced (na podstawie: Hoser, 1996, s. 134)">{!fig-image}</p>
-<p><strong><em>Review Heatmap.</em></strong> Jest to dodatek, który dodaje do głównego ekranu Anki schemat, na którym kolorem zaznaczone są dni, w których przeglądano karty. Im więcej kart przejrzano w danym dniu, tym ciemniejszy jest kolor (patrz <a href="#fig-heatmap">Rysunek&nbsp;2</a>). Poza tym podaje średnią ilość dziennie przeglądanych kart, czy dni, w jakie z rzędu uczeń dokonywał powtórek. Chęć nieprzerywania tej passy może okazać się bodźcem motywującym do codziennych powtórek. Co więcej metaanaliza Harkina i współpracowników <span class="citation" data-cites="harkin_does_2016">(<a href="#ref-harkin_does_2016" role="doc-biblioref">2016</a>)</span> wskazuje, że monitorowanie swoich postępów znacząco zwiększa skuteczność osiągania celów.</p>
+<p><strong><em>Review Heatmap.</em></strong> Jest to dodatek, który dodaje do głównego ekranu Anki schemat, na którym kolorem zaznaczone są dni, w których przeglądano karty. Im więcej kart przejrzano w danym dniu, tym ciemniejszy jest kolor (patrz <a href="#fig-heatmap" class="quarto-xref">Rysunek&nbsp;2</a>). Poza tym podaje średnią ilość dziennie przeglądanych kart, czy dni, w jakie z rzędu uczeń dokonywał powtórek. Chęć nieprzerywania tej passy może okazać się bodźcem motywującym do codziennych powtórek. Co więcej metaanaliza Harkina i współpracowników <span class="citation" data-cites="harkin_does_2016">(<a href="#ref-harkin_does_2016" role="doc-biblioref">2016</a>)</span> wskazuje, że monitorowanie swoich postępów znacząco zwiększa skuteczność osiągania celów.</p>
 <div id="fig-heatmap" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="./ilustracje/uczenie-sie/rysunek-3.png" class="img-fluid figure-img"></p>
@@ -1568,6 +1579,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -1634,13 +1672,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1719,10 +1759,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1732,8 +1771,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1746,6 +1794,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1789,6 +1912,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1875,18 +1999,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://giscus.app/client.js" data-repo="jakub-jedrusiak/nieobliczalne" data-repo-id="R_kgDOHBIy6A" data-category="General" data-category-id="DIC_kwDOHBIy6M4CUvlw" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
 </script>
+<input type="hidden" id="giscus-base-theme" value="dark">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 
