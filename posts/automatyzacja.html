@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.283">
+<meta name="generator" content="quarto-1.4.322">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -192,27 +192,27 @@ cookieconsent.run({
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html" rel="" target="">
- <span class="menu-text">Strona główna</span></a>
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Strona główna</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../toc.html" rel="" target="">
- <span class="menu-text">Spis treści</span></a>
+    <a class="nav-link" href="../toc.html"> 
+<span class="menu-text">Spis treści</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../newsletter.html" rel="" target="">
- <span class="menu-text">Subskrybuj</span></a>
+    <a class="nav-link" href="../newsletter.html"> 
+<span class="menu-text">Subskrybuj</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html" rel="" target="">
- <span class="menu-text">O mnie</span></a>
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">O mnie</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../index.xml"> <i class="bi bi-rss" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -235,7 +235,7 @@ cookieconsent.run({
   <li><a href="#listy" id="toc-listy" class="nav-link" data-scroll-target="#listy"><span class="header-section-number">2</span> Listy</a>
   <ul class="collapse">
   <li><a href="#masowe-ładowanie-danych-z-list.files" id="toc-masowe-ładowanie-danych-z-list.files" class="nav-link" data-scroll-target="#masowe-ładowanie-danych-z-list.files"><span class="header-section-number">2.1</span> Masowe ładowanie danych z <code>list.files</code></a></li>
-  <li><a href="#masowe-czyszczenie-z-map-lub-apply" id="toc-masowe-czyszczenie-z-map-lub-apply" class="nav-link" data-scroll-target="#masowe-czyszczenie-z-map-lub-apply"><span class="header-section-number">2.2</span> Masowe czyszczenie z <code>map</code> lub <code>apply</code></a></li>
+  <li><a href="#masowe-czyszczenie-z-map-lub-lapply" id="toc-masowe-czyszczenie-z-map-lub-lapply" class="nav-link" data-scroll-target="#masowe-czyszczenie-z-map-lub-lapply"><span class="header-section-number">2.2</span> Masowe czyszczenie z <code>map()</code> lub <code>lapply()</code></a></li>
   </ul></li>
   <li><a href="#pętle" id="toc-pętle" class="nav-link" data-scroll-target="#pętle"><span class="header-section-number">3</span> Pętle</a>
   <ul class="collapse">
@@ -1189,26 +1189,13 @@ cookieconsent.run({
 
 </header>
 
-<p>Nie znoszę mechanicznej pracy. Jestem jedną z tych osób, które wolą spędzić 30 minut na automatyzacji czegoś, co ręcznie zrobiłbym w 15 minut. Ale ma to swoje zalety. Po pierwsze, poświęciłem na to tyle czasu, że teraz jestem w stanie wiele rzeczy zautomatyzować dość szybko. Tym doświadczeniem chcę się też podzielić. Po drugie, jeśli praca manualna wielokrotnie się powtarza, netto oszczędzam czas, mimo że na początku muszę zainwestować tego czasu więcej. Raz zautomatyzowana czynność już zautomatyzowana całkowicie, ile razy byśmy jej nie wykorzystali. Po trzecie, jeśli automatyzujemy, to tyle samo czasu zajmuje wyczyszczenie 1 pliku i 100 plików. Jeśli czyścimy ręcznie, to 100 plików przekłada się&nbsp;na 100 razy więcej (zmarnowanego) czasu. Po czwarte – mam ciekawsze rzeczy do roboty niż wypisywanie kolejnych liczb. Automatyzacja mnie chociaż nie nudzi, zawsze uczę się czegoś nowego (<a href="https://youtu.be/wf4o6rYaPCI">jak prezydent</a>) i mogę w ten sposób wykorzystać swoje zasoby po prostu lepiej.</p>
+<p>Nie znoszę mechanicznej pracy. Jestem jedną z tych osób, które wolą spędzić 30 minut na automatyzacji czegoś, co ręcznie da się&nbsp;zrobić w 15 minut. Może jest to strzelanie do muchy z armaty, ale ma swoje zalety. Po pierwsze, poświęciłem na to tyle czasu, że teraz jestem w stanie wiele rzeczy zautomatyzować dość szybko. Tym doświadczeniem chcę się też podzielić. Po drugie, jeśli praca manualna wielokrotnie się powtarza, brutto oszczędzam czas, mimo że na początku muszę zainwestować go więcej. Raz zautomatyzowana czynność już zautomatyzowana całkowicie, ile razy byśmy jej nie wykorzystali. Po trzecie, jeśli automatyzujemy, to tyle samo czasu zajmuje wyczyszczenie 1 pliku i 100 plików. Jeśli czyścimy ręcznie, to 100 plików przekłada się&nbsp;na 100 razy więcej (zmarnowanego) czasu. Po czwarte – mam ciekawsze rzeczy do roboty niż wypisywanie kolejnych liczb. Automatyzacja chociaż mnie nie nudzi, zawsze uczę się czegoś nowego (<a href="https://youtu.be/wf4o6rYaPCI">jak prezydent</a>) i mogę w ten sposób wykorzystać swoje zasoby po prostu lepiej.</p>
+<p>Zakładam tutaj, że osoba czytająca zna R na chociaż podstawowym poziomie. Jeśli nie, polecam swoje <a href="../posts/podstawy_R.html">wprowadzenie do R</a>.</p>
 <section id="automatyzacja-w-czyszczeniu-danych" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Automatyzacja w czyszczeniu danych</h1>
-<p>Weźmy sobie za przykład następującą sytuację – wykonaliśmy eksperyment w programie PsychoPy i zbadaliśmy 35 osób. Nasz eksperyment dotyczył tego, na ile osoby będą w stanie zapamiętać historyjkę opowiadaną im w prawej słuchawce, jeśli w lewej słuchawce będzie im puszczany rozpraszacz. Mamy przy okazji dwa warunki, łatwy i trudny, w zależności od tego, jak intensywnie zachodziło rozpraszanie. Ze względu na specyfikę PsychoPy, otrzymaliśmy 35 osobnych plików z wynikami<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Spojrzenie w przykładowy plik pozwala stwierdzić, że jest to kompletny chaos.</p>
+<p>Weźmy sobie za przykład następującą sytuację: wykonaliśmy eksperyment w programie PsychoPy. Zbadaliśmy 35 osób. Badanie dotyczyło tego, na ile osoby badane będą w stanie zapamiętać historyjkę opowiadaną im w prawej słuchawce, jeśli w lewej słuchawce będzie im puszczany rozpraszacz. Mamy przy okazji dwa warunki, łatwy i trudny, w zależności od tego, jak intensywnie zachodziło rozpraszanie. Ze względu na specyfikę PsychoPy, otrzymaliśmy 35 osobnych plików z wynikami. Specyfika tego programu (skądinąd świetnego!) jest taka, że pliki z wynikami to kompletny chaos. Spójrzmy sobie na przykładowy taki plik. Cała baza dostępna jest w <a href="https://github.com/jakub-jedrusiak/nieobliczalne/tree/main/posts/dane/automatyzacja">repozytorium</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
-<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> ── </span><span style="color: #BB0000; font-weight: bold;">Attaching core tidyverse packages</span><span style="color: #BB0000;"> ──────────────────────── tidyverse 2.0.0 ──
-</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">dplyr    </span><span style="color: #BB0000;"> 1.1.2     </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">purrr    </span><span style="color: #BB0000;"> 1.0.1
-</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">forcats  </span><span style="color: #BB0000;"> 1.0.0     </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">readr    </span><span style="color: #BB0000;"> 2.1.4
-</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">ggplot2  </span><span style="color: #BB0000;"> 3.4.2     </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">stringr  </span><span style="color: #BB0000;"> 1.5.0
-</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">lubridate</span><span style="color: #BB0000;"> 1.9.2     </span><span style="color: #00BB00;">✔</span><span style="color: #BB0000;"> </span><span style="color: #0000BB;">tidyr    </span><span style="color: #BB0000;"> 1.3.0
-</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> ── </span><span style="color: #BB0000; font-weight: bold;">Conflicts</span><span style="color: #BB0000;"> ────────────────────────────────────────── tidyverse_conflicts() ──
-</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> ✖ </span><span style="color: #0000BB;">dplyr</span><span style="color: #BB0000;">::</span><span style="color: #00BB00;">filter()</span><span style="color: #BB0000;"> masks </span><span style="color: #0000BB;">stats</span><span style="color: #BB0000;">::filter()
-</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> ✖ </span><span style="color: #0000BB;">dplyr</span><span style="color: #BB0000;">::</span><span style="color: #00BB00;">lag()</span><span style="color: #BB0000;">    masks </span><span style="color: #0000BB;">stats</span><span style="color: #BB0000;">::lag()
-</span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">ℹ</span><span style="color: #BB0000;"> Use the conflicted package (</span><span style="color: #0000BB; font-style: italic;">&lt;http://conflicted.r-lib.org/&gt;</span><span style="color: #BB0000;">) to force all conflicts to become errors
-</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"./dane/automatyzacja/BD_eksperyment_latwy_2021_Apr_24_1631.csv"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"./dane/automatyzacja/BD_eksperyment_latwy_2021_Apr_24_1631.csv"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> New names:
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BB0000; font-weight: bold;">Rows: </span><span style="color: #0000BB;">12</span><span style="color: #BB0000;"> </span><span style="color: #BB0000; font-weight: bold;">Columns: </span><span style="color: #0000BB;">19</span><span style="color: #BB0000;">
@@ -1246,10 +1233,10 @@ cookieconsent.run({
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<p>Pierwsze 3 wiersze zawierają informacje metryczkowe. Kolejnych 8 zawiera odpowiedzi na pytania, ale w innych kolumnach. Wiersz 12. nie zawiera żadnych użytecznych informacji, bo tylko czas, jaki osoba badana spędziła na czytaniu ostatniej instrukcji. Co więcej, identyfikatorem osoby badanej były inicjały, więc w wielu przypadkach mamy powtórzenia (np. dwie osoby o inicjałach MK). Zasadniczo jest tu wiele niedociągnięć co do projektu bazy i nie ma się co dziwić – dane nie są spreparowane, to projekt studencki. Cenne doświadczenie, które pokazuje, czego w przyszłości unikać.</p>
-<p>Trzeba się trochę nagłowić, żeby takie dane wyczyścić. Pewnym ułatwieniem jest, że wszystkie te pliki mają identyczną strukturę. Ja wykorzystałem tutaj taki kod:</p>
+<p>Pierwsze 3 wiersze zawierają informacje metryczkowe. Kolejnych 8 zawiera odpowiedzi na pytania, ale kolumny są przesunięte. Wiersz 12. nie zawiera żadnych użytecznych informacji, bo tylko czas, jaki osoba badana spędziła na czytaniu ostatniej instrukcji. Co więcej, identyfikatorem osoby badanej były inicjały, więc w wielu przypadkach mamy powtórzenia (np. dwie osoby o inicjałach MK). Ogólnie w bazie jest wiele niedociągnięć, których dało się uniknąć lepiej projektując samo badanie. Mie ma się jednak co dziwić – to prawdziwe dane z projektu studenckiego. Cenne doświadczenie, które pokazuje przede wszystkim, czego w przyszłości unikać.</p>
+<p>Trzeba się trochę nagłowić, żeby takie dane wyczyścić. Pewnym ułatwieniem jest, że wszystkie te pliki mają identyczną strukturę, więc każdy czyścimy właściwie tak samo. Moja strategia była tutaj taka – najpierw wczytać całą bazę, potem wyizolować z niej samą metryczkę i wyczyścić, następnie wyizolować główne dane i je również z osobna wyczyścić, a na koniec połączyć uzyskane dane w jedną bazę. Zrobiłem to przy tym tak, żeby na koniec z każdego pliku mieć tylko jeden wiersz.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>baza_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./dane/automatyzacja/BD_eksperyment_latwy_2021_Apr_24_1631.csv"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>baza_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./dane/automatyzacja/BD_eksperyment_latwy_2021_Apr_24_1631.csv"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> New names:
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BB0000; font-weight: bold;">Rows: </span><span style="color: #0000BB;">12</span><span style="color: #BB0000;"> </span><span style="color: #BB0000; font-weight: bold;">Columns: </span><span style="color: #0000BB;">19</span><span style="color: #BB0000;">
@@ -1263,39 +1250,39 @@ cookieconsent.run({
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">•</span><span style="color: #BB0000;"> `` -&gt; `...19`
 </span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># najpierw sama metryczka</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>metryczka <span class="ot">&lt;-</span> baza_raw <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># wybierz wiersze z samej metryczki</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(participant, expName, <span class="dv">2</span>, <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="co"># wybierz kolumny z id, pytaniem i odpowiedzią</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> form.itemText, <span class="at">values_from =</span> form.response) <span class="sc">%&gt;%</span> <span class="co"># format długi</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"warunek"</span>, <span class="st">"plec"</span>, <span class="st">"wiek"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">warunek =</span> <span class="fu">str_remove</span>(warunek, <span class="st">"eksperyment_"</span>) <span class="co"># zostaw samo łatwy albo trudny</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># potem same odpowiedzi na pytania</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>pytania <span class="ot">&lt;-</span> baza_raw <span class="sc">%&gt;%</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">11</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(form_2.itemText, form_2.response) <span class="sc">%&gt;%</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">form_2.response =</span> <span class="fu">case_match</span>( <span class="co"># tak i nie na 1 i 0</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        form_2.response,</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tak"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"nie"</span> <span class="sc">~</span> <span class="dv">0</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> form_2.itemText, <span class="at">values_from =</span> form_2.response) <span class="sc">%&gt;%</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="fu">paste0</span>(<span class="st">"pyt_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>))</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># na koniec łączę</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>baza <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(metryczka, pytania) <span class="sc">%&gt;%</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">id =</span> stringi<span class="sc">::</span><span class="fu">stri_rand_strings</span>(<span class="dv">1</span>, <span class="dv">5</span>) <span class="co"># zamień id na losowe znaki</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>baza</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># najpierw sama metryczka</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>metryczka <span class="ot">&lt;-</span> baza_raw <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># wybierz wiersze z samej metryczki</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(participant, expName, form.itemText, form.response) <span class="sc">%&gt;%</span> <span class="co"># wybierz kolumny z id, warunkiem, pytaniem i odpowiedzią</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> form.itemText, <span class="at">values_from =</span> form.response) <span class="sc">%&gt;%</span> <span class="co"># format szeroki</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"warunek"</span>, <span class="st">"plec"</span>, <span class="st">"wiek"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">warunek =</span> <span class="fu">str_remove</span>(warunek, <span class="st">"eksperyment_"</span>) <span class="co"># zostaw samo "łatwy" albo "trudny"</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># potem same odpowiedzi na pytania</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>pytania <span class="ot">&lt;-</span> baza_raw <span class="sc">%&gt;%</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">11</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(form_2.itemText, form_2.response) <span class="sc">%&gt;%</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">form_2.response =</span> <span class="fu">case_match</span>( <span class="co"># tak i nie zamień na 1 i 0</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>            form_2.response,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">"tak"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">"nie"</span> <span class="sc">~</span> <span class="dv">0</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> form_2.itemText, <span class="at">values_from =</span> form_2.response) <span class="sc">%&gt;%</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="fu">paste0</span>(<span class="st">"pyt_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>))</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># na koniec łączę</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>baza <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(metryczka, pytania) <span class="sc">%&gt;%</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">id =</span> stringi<span class="sc">::</span><span class="fu">stri_rand_strings</span>(<span class="dv">1</span>, <span class="dv">5</span>) <span class="co"># zamień id na losowe znaki</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>baza</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 1 × 12</span>
 <span style="color: #555555;">#&gt;</span>   <span style="font-weight: bold;">id</span>    <span style="font-weight: bold;">warunek</span> <span style="font-weight: bold;">plec</span>     <span style="font-weight: bold;">wiek</span> <span style="font-weight: bold;">pyt_1</span> <span style="font-weight: bold;">pyt_2</span> <span style="font-weight: bold;">pyt_3</span> <span style="font-weight: bold;">pyt_4</span> <span style="font-weight: bold;">pyt_5</span> <span style="font-weight: bold;">pyt_6</span> <span style="font-weight: bold;">pyt_7</span> <span style="font-weight: bold;">pyt_8</span>
@@ -1304,20 +1291,22 @@ cookieconsent.run({
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<p>Z ciekawszych rzeczy wykorzystuję tutaj funkcję <code>stri_rand_strings</code> z pakietu <code>stringi</code>, żeby zmienić ID osoby badanej. ID nie musi tutaj nic znaczyć, ma być po prostu unikalne. A z tym mamy tutaj problem, bo się wcześniej nie umówiliśmy na żaden sensowny sposób kodowania osób badanych. Dlatego na tym etapie mogę zastąpić inicjały losowym ciągiem 5 znaków, zapewniając sobie, że w ostatecznej bazie identyfikatory będą unikalne. Jest to też sposób na anonimizację bazy danych.</p>
-<p>Uzyskaliśmy w ten sposób jeden wyczyszczony wiersz. Jeszcze tylko 34. I jak mamy to zrobić? Mamy ten sam kod skopiować jeszcze 34 razy? A co jeśli mam 1000 osób? A co jeśli jestem Martą Kowal<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> i mam do przeanalizowania (ponad) 93 158 osób <span class="citation" data-cites="kowal_predictors_2022">(<a href="#ref-kowal_predictors_2022" role="doc-biblioref">Kowal i in., 2022</a>)</span>? Kopiowanie kodu nigdy nie jest dobrą drogą. Jeśli często kopiujemy kod, powinniśmy zrobić z niego funkcję. Jeśli tę samą funkcję chcemy zastosować do wielu obiektów, powinniśmy użyć list albo pętli.</p>
+<p>Z ciekawszych rzeczy wykorzystuję tutaj funkcję <code>stri_rand_strings</code> z pakietu <code>stringi</code>, żeby zmienić ID osoby badanej. ID nie musi tutaj nic znaczyć, ma być po prostu unikalne, a z tym mamy tutaj problem, bo się wcześniej nie umówiliśmy na żaden określony sposób kodowania. Dlatego na tym etapie mogę zastąpić inicjały losowym ciągiem 5 znaków, zapewniając tym samym, że w ostatecznej bazie identyfikatory będą unikalne. Jest to też sposób na anonimizację bazy danych.</p>
+<p>Uzyskaliśmy w ten sposób jeden wyczyszczony wiersz. Jeszcze tylko 34…</p>
+<p>I jak mamy to zrobić? Mamy ten sam kod skopiować jeszcze 34 razy, zamieniając tylko nazwę&nbsp;pliku? A co jeśli mam 1000 osób? A co jeśli jestem Martą Kowal<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> i mam do przeanalizowania (ponad) 93 158 osób <span class="citation" data-cites="kowal_predictors_2022">(<a href="#ref-kowal_predictors_2022" role="doc-biblioref">Kowal i in., 2022</a>)</span>? Kopiowanie kodu nigdy nie jest dobrą drogą. Jeśli często kopiujemy kod, powinniśmy zrobić z niego funkcję. Jeśli tę samą funkcję chcemy zastosować do wielu obiektów, powinniśmy użyć list albo pętli.</p>
 </section>
 <section id="listy" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Listy</h1>
-<p>Podstawową metodą automatyzacji we wszystkich językach programowania są pętle. W R też one występują, można z nich korzystać i omówię je, jednak pętle w R nie są najlepszą metodą. Są one mało wydajne. Jeśli chcemy coś wykonać wielokrotnie, najlepszą drogą – o ile to możliwe – są listy. Lista to szczególny typ danych w R, którego największą zaletą jest to, że może przechowywać inne formy danych. Innymi słowy możemy szybko zrobić <em>listę</em> naszych surowych baz danych, które chcemy potem wyczyścić. Co ważniejsze, możemy potem do każdego elementu listy zastosować jakąś funkcję.</p>
-<p>Listę tworzymy przede wszystkim przez komendę <code>list</code>. Możemy do niej wrzucić rzeczy, które chcemy przerobić na listę. Dla przykładu zróbmy listę z dwóch wbudowanych baz danych – <code>iris</code> i <code>mpg</code>.</p>
+<p>Podstawową metodą automatyzacji we wszystkich językach programowania są pętle. No, prawie wszystkich. Na przykład w R lepiej ich unikać. Specyfika tego języka jest taka, że pętle – mimo że są obecne – to są mało wydajne. W małych zbiorach danych nie ma to większego znaczenia, jednak dobrą praktyką jest – o ile to możliwe – automatyzować przez tak zwane <strong>listy</strong>.</p>
+<p>Lista to szczególny typ obiektu w R, który można sobie wyobrazić jako pudełko na inne obiekty. Mogę tam włożyć ramki danych, wektory (tworzone przez <code>c()</code>), wykresy, a nawet inne listy, tworząc coś na kształt matrioszki. Od wektora, czyli podstawowej formy danych w R, lista różni się tym, że może <strong>zawierać dane różnych typów</strong>. Wektor musi mieć konkretny typ, np. same liczby. Lista takich ograniczeń nie ma.</p>
+<p>Listę tworzymy przede wszystkim za pomocą komendy <code>list()</code>. Przyjmuje one obiekty, z których lista ma powstać. Dla przykładu stwórzmy sobie listę z dwóch wbudowanych baz danych – <code>iris</code> i <code>mpg</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bazy_danych <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(iris), <span class="co"># tibble dla lepszego drukowania w konsoli</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(mpg)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>bazy_danych</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bazy_danych <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(iris), <span class="co"># tibble dla lepszego drukowania w konsoli</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(mpg)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>bazy_danych</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [[1]]
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 150 × 5</span>
@@ -1353,79 +1342,114 @@ cookieconsent.run({
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<p>Gdy wywołamy naszą listę w konsoli, zobaczymy, że wyświetlają nam się dwie bazy danych, w takiej kolejności, w jakiej je wprowadziliśmy. Oczywiście w liście zmieści się dużo więcej elementów niż dwa. Jeśli chcemy dostać tylko jeden element, używamy składni <code>nazwa_listy[[indeks]]</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, czyli na przykład <code>bazy_danych[[1]]</code>. W tym wypadku spowoduje to wyciągnięcie samej tylko bazy <code>iris</code>. Co ciekawe, listy mogą zawierać też inne listy<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, ale nie będziemy wchodzić w to tak głęboko. Możemy też wywołać <code>bazy_danych[1]</code>, ale taki zapis powoduje subtelną różnicę – efektem jest jednoelementowa lista, zaś składnia z podwójnymi nawiasami wyciąga sam 1. element (w naszym przypadku bazę&nbsp;danych <code>iris</code>, czyli obiekt tibble). Na początku nie trzeba tego jakoś głęboko rozumieć, wystarczy na wiarę&nbsp;przyjąć, że potrzebne są dwa nawiasy kwadratowe.</p>
+<p>Gdy wywołamy naszą listę w konsoli, zobaczymy, że wyświetlają nam się dwie bazy danych, oznaczone jako <code>[[1]]</code> i <code>[[2]]</code>. Kolejność jest taka, jakiej użyliśmy w komendzie <code>list()</code>. Jeśli chcemy wyciągnąć coś z listy, np. pojedynczą ramkę danych, używamy składni <code>nazwa_listy[[indeks]]</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. czyli na przykład <code>bazy_danych[[1]]</code>. W tym wypadku spowoduje to wyciągnięcie samej tylko bazy <code>iris</code> <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Możemy też wywołać <code>bazy_danych[1]</code>, ale taki zapis powoduje subtelną różnicę – efektem jest jednoelementowa lista. Składnia z podwójnymi nawiasami zwróci nam tylko sam element. Jeśli jest to ramka danych, dostaniemy ramkę danych, jeśli jest to wektor, to dostaniemy wektor itd. Nawiasy pojedyncze zawsze zwracają listę.</p>
 <section id="masowe-ładowanie-danych-z-list.files" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="masowe-ładowanie-danych-z-list.files"><span class="header-section-number">2.1</span> Masowe ładowanie danych z <code>list.files</code></h2>
-<p>Komenda <code>list</code> jest fajna, o ile mamy dane już załadowane. My mamy 35 plików w folderze, które dopiero musimy załadować. Możemy je jednak załadować wszystkie jednocześnie, od razu do listy. Wykorzystamy w tym celu funkcję <code>list.files</code> (lub zamiennie <code>dir</code>, to dwie nazwy tej samej funkcji). Zwraca ona listę plików znajdujących się we wskazanym folderze. Domyślnie zwraca ona same nazwy, więc jeśli chcemy całe ścieżki (a chcemy, jeśli dane są w innym folderze, niż główny), to musimy dołożyć argument <code>full.names = TRUE</code>.</p>
+<p>Z tego, co napisałem, wynika, że możemy łatwo wyczyścić nasze dane, jeśli zrobimy z nich listę. Ale jak dopiero otwieramy RStudio, to nie mamy danych jeszcze załadowanych! Nawet jakbyśmy chcieli, zrobić listę, to nie mamy czego wrzucić do komendy <code>list()</code>. Listy pozwolą nam jednak nie tylko masowo dane wyczyścić, ale też masowo je załadować.</p>
+<p>Załóżmy, że nasze 35 plików z danymi znajduje się w folderze dane, podfolder automatyzacja. Nie jest to, oczywiście, obowiązek, Twoja struktura może się różnić, ale dobrze jest mieć dane w oddzielnym folderze. Możemy teraz użyć komendy <code>list.files()</code>, żeby stworzyć <strong>listę naszych plików</strong><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. To samo robi komenda <code>dir()</code>. Obie przyjmują ścieżkę do folderu, w którym są pliki do wrzucenia na listę. Ustawimy jeszcze <code>full.names = TRUE</code>, bo nie chcemy dostać samych <em>nazw</em> plików, ale całe <em>ścieżki</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bazy_lista <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"./dane/automatyzacja"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bazy_lista <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"./dane/automatyzacja"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Jeśli wyświetlimy teraz <code>bazy_lista</code> zobaczymy listę naszych plików z ich względnymi ścieżkami. Lista plików to jednak nie są jeszcze załadowane bazy. Ale można je wykorzystać do załadowania baz! Spójrzmy na przykładową ścieżkę.</p>
+<p>Jeśli wyświetlimy teraz obiekt <code>bazy_lista</code>, zobaczymy listę ścieżek wszystkich naszych plików z danymi. Nie są to załadowane bazy, tylko lista plików.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bazy_lista[<span class="dv">1</span>]</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bazy_lista</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode">
-<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] "./dane/automatyzacja/AC_eksperyment_trudny_2021_Apr_22_2124.csv"
+<pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span>  [1] "./dane/automatyzacja/AC_eksperyment_trudny_2021_Apr_22_2124.csv"     
+<span style="color: #555555;">#&gt;</span>  [2] "./dane/automatyzacja/AG_eksperyment_latwy_2021_Apr_25_0233.csv"      
+<span style="color: #555555;">#&gt;</span>  [3] "./dane/automatyzacja/AT_eksperyment_latwy_2021_Apr_25_1402.csv"      
+<span style="color: #555555;">#&gt;</span>  [4] "./dane/automatyzacja/BD_eksperyment_latwy_2021_Apr_24_1631.csv"      
+<span style="color: #555555;">#&gt;</span>  [5] "./dane/automatyzacja/BM_eksperyment_trudny_2021_Apr_25_2042.csv"     
+<span style="color: #555555;">#&gt;</span>  [6] "./dane/automatyzacja/DF_eksperyment_latwy_2021_Apr_22_1456.csv"      
+<span style="color: #555555;">#&gt;</span>  [7] "./dane/automatyzacja/DJ_eksperyment_trudny_2021_Apr_25_2048.csv"     
+<span style="color: #555555;">#&gt;</span>  [8] "./dane/automatyzacja/DJ_eksperyment_trudny_2021_Apr_25_2102.csv"     
+<span style="color: #555555;">#&gt;</span>  [9] "./dane/automatyzacja/FB_eksperyment_latwy_2021_Apr_24_1649.csv"      
+<span style="color: #555555;">#&gt;</span> [10] "./dane/automatyzacja/GM_eksperyment_latwy_2021_Apr_24_1434.csv"      
+<span style="color: #555555;">#&gt;</span> [11] "./dane/automatyzacja/HJ_eksperyment_trudny_2021_kwi_21_1805.csv"     
+<span style="color: #555555;">#&gt;</span> [12] "./dane/automatyzacja/JJ_eksperyment_trudny_2021_Apr_24_1112.csv"     
+<span style="color: #555555;">#&gt;</span> [13] "./dane/automatyzacja/JK_eksperyment_latwy_2021_Apr_25_1422.csv"      
+<span style="color: #555555;">#&gt;</span> [14] "./dane/automatyzacja/JK_eksperyment_trudny_2021_Apr_23_2129.csv"     
+<span style="color: #555555;">#&gt;</span> [15] "./dane/automatyzacja/JK_eksperyment_trudny_2021_kwi_21_1326.csv"     
+<span style="color: #555555;">#&gt;</span> [16] "./dane/automatyzacja/julka_eksperyment_latwy_2021_Apr_25_2150.csv"   
+<span style="color: #555555;">#&gt;</span> [17] "./dane/automatyzacja/JW_eksperyment_latwy_2021_Apr_24_1657.csv"      
+<span style="color: #555555;">#&gt;</span> [18] "./dane/automatyzacja/kacperek_eksperyment_latwy_2021_Apr_25_2158.csv"
+<span style="color: #555555;">#&gt;</span> [19] "./dane/automatyzacja/Kasia_eksperyment_latwy_2021_Apr_25_1421.csv"   
+<span style="color: #555555;">#&gt;</span> [20] "./dane/automatyzacja/Kinga_eksperyment_latwy_2021_Apr_25_1419.csv"   
+<span style="color: #555555;">#&gt;</span> [21] "./dane/automatyzacja/kk_eksperyment_trudny_2021_Apr_22_2104.csv"     
+<span style="color: #555555;">#&gt;</span> [22] "./dane/automatyzacja/KK_eksperyment_trudny_2021_Apr_23_2136.csv"     
+<span style="color: #555555;">#&gt;</span> [23] "./dane/automatyzacja/KP_eksperyment_trudny_2021_kwi_21_2037.csv"     
+<span style="color: #555555;">#&gt;</span> [24] "./dane/automatyzacja/KW_eksperyment_trudny_2021_Apr_22_2254.csv"     
+<span style="color: #555555;">#&gt;</span> [25] "./dane/automatyzacja/maciek_eksperyment_latwy_2021_Apr_22_1138.csv"  
+<span style="color: #555555;">#&gt;</span> [26] "./dane/automatyzacja/Magda_eksperyment_latwy_2021_Apr_25_1932.csv"   
+<span style="color: #555555;">#&gt;</span> [27] "./dane/automatyzacja/Michal_eksperyment_latwy_2021_Apr_25_1405.csv"  
+<span style="color: #555555;">#&gt;</span> [28] "./dane/automatyzacja/MJ_eksperyment_trudny_2021_Apr_25_2054.csv"     
+<span style="color: #555555;">#&gt;</span> [29] "./dane/automatyzacja/MK_eksperyment_latwy_2021_Apr_24_1706.csv"      
+<span style="color: #555555;">#&gt;</span> [30] "./dane/automatyzacja/MK_eksperyment_trudny_2021_Apr_22_2109.csv"     
+<span style="color: #555555;">#&gt;</span> [31] "./dane/automatyzacja/OK_eksperyment_trudny_2021_Apr_24_1343.csv"     
+<span style="color: #555555;">#&gt;</span> [32] "./dane/automatyzacja/SG_eksperyment_trudny_2021_Apr_24_1546.csv"     
+<span style="color: #555555;">#&gt;</span> [33] "./dane/automatyzacja/SJ_eksperyment_trudny_2021_kwi_21_1621.csv"     
+<span style="color: #555555;">#&gt;</span> [34] "./dane/automatyzacja/SP_eksperyment_trudny_2021_kwi_21_2030.csv"     
+<span style="color: #555555;">#&gt;</span> [35] "./dane/automatyzacja/ZD_eksperyment_latwy_2021_Apr_26_1036.csv"
 </code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<p>To jest dokładnie to, co wrzucilibyśmy do funkcji <code>read_csv</code> chcąc rzeczywiście załadować nasze dane. Jeśli więc weźmiemy naszą listę ścieżek<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> i powiemy R „każdą z tych ścieżek wrzuć po kolei do <code>read_csv</code>”, to będziemy mieli nasze bazy załadowane. Żeby zastosować jakąś funkcję osobno do każdego elementu listy<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, użyjemy jednej z funkcji z rodziny <code>apply</code> (<code>apply</code>, <code>sapply</code>, <code>lapply</code> lub <code>tapply</code>) albo ich odpowiednika z <code>tidyverse</code>, czyli <code>map</code> z pakietu <code>purrr</code>. Choć <code>apply</code> jest powszechniejsze<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, my użyjemy tutaj bardziej intuicyjnego w obsłudze <code>map</code>.</p>
+<p>Nasze dane możemy załadować np. komendą <code>read_csv()</code> z pakietu <code>readr</code>. Ta funkcja może przyjąć całą serię różnych argumentów, ale najważniejszym jest… ścieżka do pliku do załadowania. Dokładnie to, co mamy zgromadzone w obiekcie <code>bazy_lista</code>! Każdą z tych ścieżek moglibyśmy teraz wrzucić do funkcji <code>read_csv()</code> i dostalibyśmy nie ścieżkę, ale załadowaną bazę. Chcemy więc teraz powiedzieć R „po kolei weź każdą ścieżkę z <code>bazy_lista</code> i wrzuć ją do <code>read_csv()</code>. Do tego służą funkcje z rodziny <code>apply</code>, czyli <code>apply()</code>, <code>sapply()</code>, <code>lapply()</code> lub <code>tapply()</code>. Jak w przypadku wielu funkcji, rodzina <code>apply</code> ma też swoje odpowiedniki w tidyverse. Jak raz „oryginały” są używane częściej<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, ale i tak my skorzystamy z funkcji <code>map()</code> z pakietu <code>purrr</code>, bo jest bardziej intuicyjna.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>bazy_lista <span class="ot">&lt;-</span> <span class="fu">map</span>(bazy_lista, read_csv, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">name_repair =</span> <span class="st">"unique_quiet"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bazy_lista <span class="ot">&lt;-</span> <span class="fu">map</span>(bazy_lista, read_csv, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">name_repair =</span> <span class="st">"unique_quiet"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><code>map</code> przyjmuje, w podstawowej wersji, dwa argumenty. Pierwszym jest obiekt, do którego chcemy zastosować naszą funkcję, a drugim sama funkcja. Podobnie jak w <code>across</code> (patrz <a href="./posts/./posts/podstawy_R.qmd#sec-across">tutaj</a>) chodzi nam o obiekt zawierający funkcję, a nie o efekt jej działania, dlatego <strong>po nazwie funkcji nie dajemy nawiasów</strong>. To bardzo częsty błąd. Jeśli chodzi o samo <code>read_csv</code> dodałem tutaj <code>show_col_types = FALSE</code> i <code>name_repair = "unique_quiet"</code>, żeby nasza konsola nie została zalana milionem informacji o aktualnie wczytywanej bazie.</p>
-<p>Efektem działania tej funkcji jest lista baz danych. Już nie ścieżek, a załadowanych baz. Skoro mamy je załadowane, możemy je wyczyścić.</p>
+<p><code>map</code> przyjmuje, w podstawowej wersji, dwa argumenty. Pierwszym jest obiekt, do którego chcemy zastosować naszą funkcję, a drugim sama funkcja. My chcemy zastosować funkcję <code>read_csv()</code> na każdym elemencie wektora <code>bazy_lista</code>. Podobnie jak w <code>across</code> (patrz <a href="./posts/podstawy_R.qmd#sec-across">tutaj</a>), gdy podajemy, jaką funkcję chcemy zastosować, to musimy zapisać obiekt <em>zawierający</em> funkcję, a nie o efekt <em>działania</em> funkcji, dlatego <strong>po nazwie funkcji nie dajemy nawiasów</strong>. To bardzo częsty błąd. Na koniec możemy dorzucić parę innych argumentów, takich jak <code>show_col_types = FALSE</code> i <code>name_repair = "unique_quiet"</code>, żeby nasza konsola nie została zalana milionem informacji o aktualnie wczytywanej bazie<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p>
+<p>Teraz R weźmie każdą ścieżkę i wrzuci ją do funkcji <code>read_csv()</code>. Każda ścieżka zostanie więc załadowana, a wynikowe bazy wrzucone na listę. Jeśli więc teraz byśmy spojrzeli w obiekt <code>bazy_lista</code>, to nie zobaczymy tam już ścieżek, ale prawdziwe ramki danych.</p>
 </section>
-<section id="masowe-czyszczenie-z-map-lub-apply" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="masowe-czyszczenie-z-map-lub-apply"><span class="header-section-number">2.2</span> Masowe czyszczenie z <code>map</code> lub <code>apply</code></h2>
-<p>Skoro poznaliśmy już funkcję <code>map</code>, wyczyszczenie naszych baz nie powinno stanowić problemu. Mamy listę baz. Ten sam zestaw funkcji czyszczących musimy zastosować do każdej bazy z listy. Żeby zastosować funkcję do każdego elementu używamy właśnie <code>map</code> lub <code>apply</code>. Problem polega jednak na tym, że nie mamy pojedynczej funkcji czyszczącej, a cały wielki zestaw tych funkcji. W rzeczywistości nie jest to żaden problem, bo jak dowiedzieliśmy się <a href="./posts/podstawy_R.qmd#sec-customfunctions">tutaj</a>, możemy nasz zestaw przerobić na pojedynczą funkcję.</p>
+<section id="masowe-czyszczenie-z-map-lub-lapply" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="masowe-czyszczenie-z-map-lub-lapply"><span class="header-section-number">2.2</span> Masowe czyszczenie z <code>map()</code> lub <code>lapply()</code></h2>
+<p>Skoro poznaliśmy już funkcję <code>map()</code>, wyczyszczenie naszych baz nie powinno stanowić problemu. W końcu są one na liście, a my właśnie nauczyliśmy się, zastosować jakąś funkcję do <em>każdego elementu listy z osobna</em>. Problem polega jednak na tym, że nie mamy pojedynczej funkcji czyszczącej, a cały wielki zestaw tych funkcji. Jednak jak dowiedzieliśmy się <a href="./posts/podstawy_R.qmd#sec-customfunctions">tutaj</a>, możemy nasz zestaw po prostu przerobić na pojedynczą funkcję.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>wyczysc <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    metryczka <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># wybierz wiersze z samej metryczki</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(participant, expName, <span class="dv">2</span>, <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="co"># wybierz kolumny z id, pytaniem i odpowiedzią</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> form.itemText, <span class="at">values_from =</span> form.response) <span class="sc">%&gt;%</span> <span class="co"># format długi</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"warunek"</span>, <span class="st">"plec"</span>, <span class="st">"wiek"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">warunek =</span> <span class="fu">str_remove</span>(warunek, <span class="st">"eksperyment_"</span>) <span class="co"># zostaw samo łatwy albo trudny</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    pytania <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">11</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(form_2.itemText, form_2.response) <span class="sc">%&gt;%</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">form_2.response =</span> <span class="fu">case_match</span>( <span class="co"># tak i nie na 1 i 0</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>            form_2.response,</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">"tak"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"nie"</span> <span class="sc">~</span> <span class="dv">0</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> form_2.itemText, <span class="at">values_from =</span> form_2.response) <span class="sc">%&gt;%</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">set_names</span>(<span class="fu">paste0</span>(<span class="st">"pyt_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>))</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_cols</span>(metryczka, pytania) <span class="sc">%&gt;%</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> stringi<span class="sc">::</span><span class="fu">stri_rand_strings</span>(<span class="dv">1</span>, <span class="dv">5</span>) <span class="co"># zamień id na losowe znaki</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>wyczysc <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    metryczka <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># wybierz wiersze z samej metryczki</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(participant, expName, form.itemText, form.response) <span class="sc">%&gt;%</span> <span class="co"># wybierz kolumny z id, warunkiem, pytaniem i odpowiedzią</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> form.itemText, <span class="at">values_from =</span> form.response) <span class="sc">%&gt;%</span> <span class="co"># format długi</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">set_names</span>(<span class="st">"id"</span>, <span class="st">"warunek"</span>, <span class="st">"plec"</span>, <span class="st">"wiek"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">wiek =</span> <span class="fu">parse_number</span>(wiek),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">warunek =</span> <span class="fu">str_remove</span>(warunek, <span class="st">"eksperyment_"</span>) <span class="co"># zostaw samo "łatwy" albo "trudny"</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    pytania <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">11</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(form_2.itemText, form_2.response) <span class="sc">%&gt;%</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">form_2.response =</span> <span class="fu">case_match</span>( <span class="co"># tak i nie na 1 i 0</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>            form_2.response,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">"tak"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"nie"</span> <span class="sc">~</span> <span class="dv">0</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> form_2.itemText, <span class="at">values_from =</span> form_2.response) <span class="sc">%&gt;%</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">set_names</span>(<span class="fu">paste0</span>(<span class="st">"pyt_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>))</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_cols</span>(metryczka, pytania) <span class="sc">%&gt;%</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> stringi<span class="sc">::</span><span class="fu">stri_rand_strings</span>(<span class="dv">1</span>, <span class="dv">5</span>) <span class="co"># zamień id na losowe znaki</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Uzyskałem w ten sposób funkcję <code>wyczysc()</code>, która wykonuje wszystkie nasze przekształcenia. Warto zwrócić uwagę, że bazę danych nazwałem <code>df</code> i zrobiłem z niej argument naszej funkcji, a także ostatni blok nie ma przypisania do zmiennej <code>baza</code>. Wynika to z tego, że domyślnie funkcje w R zwracają ostatnią rzecz, którą zrobią, czyli tutaj połączoną bazę. Jeśli zapisałbym ostateczną bazę do zmiennej <code>baza</code>, musiałbym w ostatniej linijce dopisać samo <code>baza</code> albo <code>return(baza)</code>, jako że to jest to, co funkcja ma nam ostatecznie dać – wyczyszczoną bazę.</p>
-<p>Przy tej okazji ostrzegam, że używanie <strong>nazw kolumn</strong> jako argumentów takich własnych funkcji może spowodować niespodziewane problemy. Jeśli stworzymy argument <code>nazwa_kolumny</code>, to funkcje typu <code>select()</code> nie wiedzą, że chodzi nam o argument <code>nazwa_kolumny</code>, a nie o kolumnę o nazwie <code>nazwa_kolumny</code>. Więcej o tym piszę <a href="./posts/metaprogramowanie.qmd">tutaj</a>, ale <em>ad hoc</em> można sobie z tym poradzić pisząc nazwę argumentu w podwójnych nawiasach klamrowych, np. <code>{ nazwa_kolumny }</code>.</p>
+<p>Uzyskałem w ten sposób funkcję <code>wyczysc()</code>, która wykonuje wszystkie nasze przekształcenia. Warto zwrócić uwagę, że bazę danych nazwałem <code>df</code> i zrobiłem z niej argument naszej funkcji, a także, że ostatni blok nie ma przypisania do zmiennej <code>baza</code>. Wynika to z tego, że domyślnie funkcje w R zwracają ostatnią rzecz, którą zrobią. W tym wypadku wynikiem działania funkcji <code>wyczysc()</code> będzie efekt działania <code>bind_cols()</code>. Jeśli zapisałbym ostateczną bazę do zmiennej <code>baza</code>, musiałbym w ostatniej linijce dopisać samo <code>baza</code> albo <code>return(baza)</code>, ponieważ to jest to, co ostatecznie chcemy dostać – wyczyszczoną bazę.</p>
+<p>Przy tej okazji ostrzegam, że używanie <strong>nazw kolumn</strong> jako argumentów takich własnych funkcji może spowodować niespodziewane problemy. Jeśli nasza funkcja dostanie argument <code>nazwa_kolumny</code>, to funkcje typu <code>select()</code> będą w bazie szukać kolumny, która nazywa się <code>nazwa_kolumny</code>, a nie wartości tego argumentu (np. jeśli ustawimy <code>nazwa_kolumny = pyt_1</code>, to <code>select()</code> czy <code>mutate()</code> nie będą szukały kolumny <code>pyt_1</code>, tylko kolumny <em>o nazwie</em> <code>nazwa_kolumny</code>). Więcej o tym piszę <a href="./posts/metaprogramowanie.qmd">tutaj</a>, ale <em>ad hoc</em> można sobie z tym poradzić pisząc nazwę argumentu wewnątrz funkcji typu <code>select()</code> w podwójnych nawiasach klamrowych, np. <code>{ nazwa_kolumny }</code>.</p>
 <p>Użyjmy teraz naszej nowej funkcji <code>wyczysc</code> do wyczyszczenia naszych plików.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">map</span>(bazy_lista, wyczysc)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">map</span>(bazy_lista, wyczysc)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Efektem działania tej funkcji jest lista wyczyszczonych baz, z których każda ma tylko jeden wiersz (bo tak zrobiliśmy nasze czyszczenie). Jednak do analizy statystycznej nie jest potrzebna lista, tylko pojedyncza baza. Połączmy więc naszą listę w pojedynczą bazę za pomocą funkcji <code>bind_rows</code>. Możemy ją wywołać na nowopowstałej zmiennej <code>bazy</code> albo już wcześniej dodać ją potokiem do mapowania.</p>
+<p>Efektem działania tej funkcji jest lista wyczyszczonych już baz. Każda taka baza ma tylko jeden wiersz (bo tak zrobiliśmy nasze czyszczenie). Jednak do analizy statystycznej nie jest potrzebna lista, tylko jedna całościowa baza. Połączmy więc wszystkie bazy na liście w jedną bazę za pomocą funkcji <code>bind_rows</code>. Możemy ją wywołać na wyczyszczonej zmiennej <code>bazy</code> albo już wcześniej dodać ją potokiem do mapowania. Wygląda to tak:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tak jest dobrze</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">map</span>(bazy_lista, wyczysc)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(bazy)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># tak też jest dobrze</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">map</span>(bazy_lista, wyczysc) <span class="sc">%&gt;%</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>()</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>bazy</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tak jest dobrze</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">map</span>(bazy_lista, wyczysc)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(bazy)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># tak też jest dobrze</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">map</span>(bazy_lista, wyczysc) <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>()</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>bazy</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 35 × 12</span>
 <span style="color: #555555;">#&gt;</span>    <span style="font-weight: bold;">id</span>    <span style="font-weight: bold;">warunek</span> <span style="font-weight: bold;">plec</span>       <span style="font-weight: bold;">wiek</span> <span style="font-weight: bold;">pyt_1</span> <span style="font-weight: bold;">pyt_2</span> <span style="font-weight: bold;">pyt_3</span> <span style="font-weight: bold;">pyt_4</span> <span style="font-weight: bold;">pyt_5</span> <span style="font-weight: bold;">pyt_6</span> <span style="font-weight: bold;">pyt_7</span> <span style="font-weight: bold;">pyt_8</span>
@@ -1449,44 +1473,44 @@ cookieconsent.run({
 </section>
 <section id="pętle" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Pętle</h1>
-<p>Pętle to w wielu językach programowania podstawowa metoda automatyzacji. Pozwalają nam wykonać tę samą operację wiele, wiele razy, za każdym razem coś zmieniając. W R ich za bardzo nie używamy. W sensie można, ale ponieważ R to język typowo przeznaczony do analizy statystycznej. Nie jest to język ogólnego przeznaczenia, dlatego rzadko musimy robić w nim rzeczy, których nie możemy zrobić listami i <code>map</code>. Dlatego ta druga opcja jest preferowana w R i R jest zoptymalizowane pod listy, zaś pętle działają, ale ich efektywność przy dużej ilości plików pozostawia wiele do życzenia. Jednak czasami może się przydać. Co więcej, czasami da się coś zrobić listą, ale łatwiej to <em>zrozumieć</em>, gdy używamy pętli. Na sam początek pętle mogą być przyjemniejsze w odbiorze dla niewprawionego programisty (albo właśnie wprawionego, który zna pętle z innych języków). Istnieją dwa rodzaje pętli – <code>for</code> i <code>while</code>.</p>
+<p>Pętle to w wielu językach programowania podstawowa metoda automatyzacji. Pozwalają nam wykonać tę samą operację wiele, wiele razy, za każdym razem coś zmieniając. W R ich za bardzo nie używamy. Niby można, ale R to nie jest język ogólnego przeznaczenia, dlatego rzadko musimy robić w nim rzeczy, których nie możemy zrobić listami i <code>map</code>. Czasami jednak taka umiejętność może się&nbsp;przydać. Co więcej, czasami da się coś zrobić listą, ale łatwiej to <em>zrozumieć</em>, gdy używamy pętli. Na sam początek pętle mogą być przyjemniejsze w odbiorze dla niewprawionego programisty (albo właśnie wprawionego, który zna pętle z innych języków). Istnieją dwa rodzaje pętli – <code>for</code> i <code>while</code>.</p>
 <section id="pętle-for" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="pętle-for"><span class="header-section-number">3.1</span> Pętle <code>for</code></h2>
 <p>Pętla <code>for</code> służy do wykonania danej czynności określoną liczbę razy albo dla określonych rzeczy. Tutaj przykład wykorzystania tej pętli do wykonania czynności, którą robiliśmy wcześniej, czyli ładowania baz danych na podstawie listy plików.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>bazy_lista <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"./dane/automatyzacja"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">list</span>() <span class="co"># pusta lista na przyszłość</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">35</span>) {</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    bazy[[i]] <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(bazy_lista[[i]], <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">name_repair =</span> <span class="st">"unique_quiet"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Zapis ten jest bardziej programistyczny i korzysta z klasycznego R. Najpierw tworzymy pustą listę <code>bazy</code>. Następnie pętla <code>for</code> wykona to, co zapisaliśmy w jej klamrach, za każdym razem zamieniając <code>i</code> na kolejną liczbę. Czyli najpierw wczyta bazę ze ścieżki <code>bazy_lista[[1]]</code>, potem <code>bazy_lista[[2]]</code> i tak dalej aż do <code>bazy_lista[[35]]</code>. Wczytane bazy zapisze do listy <code>bazy</code> na stosownym miejscu. <code>1:35</code> moglibyśmy zamienić na <code>1:length(bazy_lista)</code>, żeby nie zapisywać na sztywno <code>35</code>, jakby miała się ta liczba zmienić.</p>
+<p>Moglibyśmy też użyć nieco innej składni.</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bazy_lista <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"./dane/automatyzacja"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">list</span>() <span class="co"># pusta lista na przyszłość</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">35</span>) {</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    bazy[[i]] <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(bazy_lista[[i]], <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">name_repair =</span> <span class="st">"unique_quiet"</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> bazy_lista) {</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    bazy <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        bazy,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">list</span>(<span class="fu">read_csv</span>(i, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">name_repair =</span> <span class="st">"unique_quiet"</span>))</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Zapis ten jest bardziej programistyczny i korzysta z klasycznego R. To, co tutaj robimy, to tworzymy pustą listę <code>bazy</code>. Następnie pętla <code>for</code> wykona to, co zapisaliśmy w jej klamrach, za każdym razem zamieniając <code>i</code> na kolejną liczbę. Czyli najpierw wczyta bazę ze ścieżki <code>bazy_lista[[1]]</code>, potem <code>bazy_lista[[2]]</code> i tak dalej aż do <code>bazy_lista[[35]]</code>. Wczytane bazy zapisze do listy <code>bazy</code> na stosownym miejscu. <code>1:35</code> moglibyśmy zamienić na <code>1:length(bazy_lista)</code>, żeby nie zapisywać na sztywno <code>35</code>, a podstawić tam naszą liczbę plików (czyli długość zmiennej <code>bazy_lista</code>).</p>
-<p>Moglibyśmy też użyć nieco innej składni.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>bazy_lista <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"./dane/automatyzacja"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>bazy <span class="ot">&lt;-</span> <span class="fu">list</span>() <span class="co"># pusta lista na przyszłość</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> bazy_lista) {</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    bazy <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        bazy,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">list</span>(<span class="fu">read_csv</span>(i, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">name_repair =</span> <span class="st">"unique_quiet"</span>))</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Nie jest to najlepszy, najbardziej wydajny kod z dobrze zaplanowaną pamięcią, ale nie chcę wchodzić w bardziej zaawansowane koncepcje jak rezerwowanie miejsca w pamięci przed uruchomieniem pętli. Ta składnia działa nieco inaczej, bo <code>i</code> nie jest tutaj liczbą, tylko kolejnymi ścieżkami do naszych plików i to one lądują w <code>read_csv</code>. Wczytaną bazę dołączam do listy baz za pomocą <code>c</code>. Co ważne, nasza nowa baza też musi mieć format listy, dlatego całe <code>read_csv</code> opakowałem w <code>list</code>.</p>
-<p>Jak widać, takie rozwiązanie wymaga podejścia do R od bardziej programistycznej strony. Tak jak jednak wspominałem, w rzeczywistości rzadko jest to potrzebne, bo możemy używać funkcji <code>apply</code> lub <code>map</code>.</p>
+<p>Nie jest to najlepszy, najbardziej wydajny kod, ale nie chcę wchodzić w bardziej zaawansowane koncepcje jak rezerwowanie miejsca w pamięci przed uruchomieniem pętli. Ta składnia działa nieco inaczej, bo <code>i</code> nie jest tutaj liczbą, tylko kolejnymi ścieżkami do naszych plików i to one lądują w <code>read_csv()</code>. Tak wczytaną bazę dołączam do listy baz za pomocą <code>c</code>. Co ważne, nasza nowa baza też musi mieć format listy, dlatego całe <code>read_csv</code> opakowałem w <code>list</code>.</p>
+<p>Jak widać, takie rozwiązanie wymaga podejścia do R od bardziej programistycznej strony. Tak jak jednak wspominałem, w rzeczywistości rzadko jest to potrzebne, bo możemy używać funkcji <code>lapply()</code> lub <code>map()</code>.</p>
 </section>
 <section id="pętle-while" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="pętle-while"><span class="header-section-number">3.2</span> Pętle <code>while</code></h2>
-<p>Pętle <code>while</code> wykonują jakieś polecenie tak długo, dopóki spełniony jest warunek, który jej podamy. Musimy być jednak ostrożni, bo jeśli ten warunek nie zostaje osiągnięty (bo np. źle go zaplanowaliśmy), to pętla będzie działała w nieskończoność, nierzadko zapychając pamięć komputera. Pętla <code>while</code>, choć wykorzystywana nawet rzadziej niż pętla <code>for</code>, przydała mi się w celach testowo-dydaktycznych, bo wykorzystywałem ją do znalezienia zbioru losowych liczb o określonych parametrach statystycznych. Żeby podać przykład:</p>
+<p>Pętle <code>while</code> wykonują jakieś polecenie dopóty, dopóki spełniony jest warunek, który jej podamy. Musimy być jednak ostrożni, bo jeśli ten warunek nie zostanie osiągnięty nigdy (bo np. źle go zaplanowaliśmy), to pętla będzie działała w nieskończoność, nierzadko zapychając pamięć komputera. Pętla <code>while</code>, choć wykorzystywana nawet rzadziej niż pętla <code>for</code>, przydała mi się w celach testowo-dydaktycznych, bo wykorzystywałem ją do znalezienia zbioru losowych liczb o określonych parametrach statystycznych. Żeby podać przykład:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>liczby <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">101</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="fu">mean</span>(liczby) <span class="sc">!=</span> <span class="dv">105</span>) {</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    liczby <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">101</span>, <span class="at">sd =</span> <span class="dv">15</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>()</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>liczby <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">101</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="fu">mean</span>(liczby) <span class="sc">!=</span> <span class="dv">105</span>) {</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    liczby <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">101</span>, <span class="at">sd =</span> <span class="dv">15</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>()</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Ten kod wykorzystałem do znalezienia zestawu 100 losowych liczb z rozkładu normalnego IQ (<span class="math inline">\(M = 100\)</span>, <span class="math inline">\(SD = 15\)</span>), których średnia będzie wynosiła dokładnie 101. Wykorzystałem to <a href="./posts/./posts/p-value.qmd">w tekście o wartości <span class="math inline">\(p\)</span></a> do znalezienia ładnej próbki, której średnia nie będzie wynosiła dokładnie tyle, ile średnia z populacji. Funkcja <code>rnorm</code> losuje liczby z rozkładu normalnego o podanych parametrach 5, <code>round</code> zaokrągla je do całości. Pętla <code>while</code> mówi tutaj „Sprawdź, czy średnia wylosowanych liczb nie równa się 105. Jeśli nie, to wylosuj ponownie.” albo inaczej „Powtarzaj losowanie dopóki średnia liczb nie będzie się równała 101”.</p>
 </section>
@@ -1496,7 +1520,7 @@ cookieconsent.run({
 <ol type="1">
 <li>R daje nam duże możliwości automatyzacji powtarzalnych czynności.</li>
 <li>Podstawową metodą automatyzacji w R są listy.</li>
-<li>Funkcja <code>map</code> (<code>apply</code>) stosuje daną funkcję do każdego elementu listy.</li>
+<li>Funkcja <code>map()</code> (<code>lapply()</code>) stosuje daną funkcję do każdego elementu listy.</li>
 <li>W R istnieją pętle, ale lepiej ich unikać.</li>
 <li>Pętla <code>for</code> powtarza zestaw funkcji określoną liczbę razy albo dla wszystkich wartości zbioru.</li>
 <li>Pętla <code>while</code> powtarza zestaw funkcji tak długo, jak spełniony jest podany jest warunek.</li>
@@ -1514,13 +1538,12 @@ Kowal, M., Sorokowski, P., Pisanski, K., Valentova, J. V., Varella, M. A. C., Fr
 </div></section><aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
-<li id="fn1"><p>Bazy najlepiej pobrać na swój dysk z <a href="https://github.com/jakub-jedrusiak/nieobliczalne/tree/main/posts/dane/automatyzacja">repozytorium</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Którą serdecznie pozdrawiam.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>W R indeksowanie zaczyna się od 1, a nie od 0 jak w C czy w Pythonie. Takie indeksy są bardziej intuicyjne dla osób bez wprawy informatycznej.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Wtedy pojedyncze elementy wydobywalibyśmy składnią typu <code>lista[2][5]</code>, co oznacza 5. element listy z indeksem 2.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Tak, wiem, że to nie jest lista, tylko wektor. Nie chcę tutaj dodatkowo gmatwać wprowadzając pojęcie wektora. Skutek jest jednak ten sam, nawet jeśli <code>list.files</code> rzeczywiście wyrzucałoby listę, dalej zrobilibyśmy dokładnie to samo.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>Lub wektora.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>Funkcja niżej mogłaby być zapisana równie dobrze jako <code>lapply(bazy_lista, read_csv, show_col_types = FALSE, name_repair = "unique_quiet")</code>, ale <code>map</code>, a głównie jej pochodne, mają bardziej przejrzystą i konsekwentną konwencję nazywania.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Którą serdecznie pozdrawiam.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>W R indeksowanie zaczyna się od 1, a nie od 0 jak w C czy w Pythonie. Takie indeksy są bardziej intuicyjne dla osób bez wprawy informatycznej.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Jeśli chcemy wybrać jakiś element z listy zagnieżdżonej w innej liście, użyjemy składni w stylu <code>lista[2][5]</code>. W ten sposób z listy o nazwie <code>lista</code> wyciągamy drugi element, a następnie z owego elementu (którym może być inna lista) wyciągamy piąty element.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Tak, wiem, że to nie jest lista, tylko wektor. Nie chcę tutaj dodatkowo gmatwać wprowadzając pojęcie wektora. Skutek jest jednak ten sam, nawet jeśli <code>list.files</code> rzeczywiście wyrzucałoby listę, dalej zrobilibyśmy dokładnie to samo.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Funkcja niżej mogłaby być zapisana równie dobrze jako <code>lapply(bazy_lista, read_csv, show_col_types = FALSE, name_repair = "unique_quiet")</code>, ale <code>map</code>, a głównie jej pochodne, mają bardziej przejrzystą i konsekwentną konwencję nazywania.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Od jakiegoś czasu tidyverse wycofuje się z tej konwencji dodawania argumentów. Jeśli mamy jakieś dodatkowe argumenty do dodania, powinniśmy zrobić to w postaci <a href="podstawy_R#sec-lambda.qmd">funkcji anonimowej</a>. Tym sposobem powinniśmy byli zapisać raczej <code>map(bazy_lista, \(x) {read_csv(x, show_col_types = FALSE, name_repair = "unique_quiet")})</code>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </aside></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1925,6 +1948,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        console.log("RESIZE");
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
