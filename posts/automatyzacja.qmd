@@ -13,6 +13,7 @@ categories:
 #| label: setup
 #| include: false
 
+library(tidyverse, quietly = TRUE)
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 library(tibble)
 set.seed(1014)
@@ -47,23 +48,21 @@ knitr::knit_hooks$set(
 )
 ```
 
-Nie znoszę mechanicznej pracy. Jestem jedną z tych osób, które wolą spędzić 30 minut na automatyzacji czegoś, co ręcznie zrobiłbym w 15 minut. Ale ma to swoje zalety. Po pierwsze, poświęciłem na to tyle czasu, że teraz jestem w stanie wiele rzeczy zautomatyzować dość szybko. Tym doświadczeniem chcę się też podzielić. Po drugie, jeśli praca manualna wielokrotnie się powtarza, netto oszczędzam czas, mimo że na początku muszę zainwestować tego czasu więcej. Raz zautomatyzowana czynność już zautomatyzowana całkowicie, ile razy byśmy jej nie wykorzystali. Po trzecie, jeśli automatyzujemy, to tyle samo czasu zajmuje wyczyszczenie 1 pliku i 100 plików. Jeśli czyścimy ręcznie, to 100 plików przekłada się na 100 razy więcej (zmarnowanego) czasu. Po czwarte -- mam ciekawsze rzeczy do roboty niż wypisywanie kolejnych liczb. Automatyzacja mnie chociaż nie nudzi, zawsze uczę się czegoś nowego ([jak prezydent](https://youtu.be/wf4o6rYaPCI)) i mogę w ten sposób wykorzystać swoje zasoby po prostu lepiej.
+Nie znoszę mechanicznej pracy. Jestem jedną z tych osób, które wolą spędzić 30 minut na automatyzacji czegoś, co ręcznie da się zrobić w 15 minut. Może jest to strzelanie do muchy z armaty, ale ma swoje zalety. Po pierwsze, poświęciłem na to tyle czasu, że teraz jestem w stanie wiele rzeczy zautomatyzować dość szybko. Tym doświadczeniem chcę się też podzielić. Po drugie, jeśli praca manualna wielokrotnie się powtarza, brutto oszczędzam czas, mimo że na początku muszę zainwestować go więcej. Raz zautomatyzowana czynność już zautomatyzowana całkowicie, ile razy byśmy jej nie wykorzystali. Po trzecie, jeśli automatyzujemy, to tyle samo czasu zajmuje wyczyszczenie 1 pliku i 100 plików. Jeśli czyścimy ręcznie, to 100 plików przekłada się na 100 razy więcej (zmarnowanego) czasu. Po czwarte -- mam ciekawsze rzeczy do roboty niż wypisywanie kolejnych liczb. Automatyzacja chociaż mnie nie nudzi, zawsze uczę się czegoś nowego ([jak prezydent](https://youtu.be/wf4o6rYaPCI)) i mogę w ten sposób wykorzystać swoje zasoby po prostu lepiej.
+
+Zakładam tutaj, że osoba czytająca zna R na chociaż podstawowym poziomie. Jeśli nie, polecam swoje [wprowadzenie do R](podstawy_R.qmd).
 
 # Automatyzacja w czyszczeniu danych
 
-Weźmy sobie za przykład następującą sytuację -- wykonaliśmy eksperyment w programie PsychoPy i zbadaliśmy 35 osób. Nasz eksperyment dotyczył tego, na ile osoby będą w stanie zapamiętać historyjkę opowiadaną im w prawej słuchawce, jeśli w lewej słuchawce będzie im puszczany rozpraszacz. Mamy przy okazji dwa warunki, łatwy i trudny, w zależności od tego, jak intensywnie zachodziło rozpraszanie. Ze względu na specyfikę PsychoPy, otrzymaliśmy 35 osobnych plików z wynikami[^files]. Spojrzenie w przykładowy plik pozwala stwierdzić, że jest to kompletny chaos.
-
-[^files]: Bazy najlepiej pobrać na swój dysk z [repozytorium](https://github.com/jakub-jedrusiak/nieobliczalne/tree/main/posts/dane/automatyzacja).
+Weźmy sobie za przykład następującą sytuację: wykonaliśmy eksperyment w programie PsychoPy. Zbadaliśmy 35 osób. Badanie dotyczyło tego, na ile osoby badane będą w stanie zapamiętać historyjkę opowiadaną im w prawej słuchawce, jeśli w lewej słuchawce będzie im puszczany rozpraszacz. Mamy przy okazji dwa warunki, łatwy i trudny, w zależności od tego, jak intensywnie zachodziło rozpraszanie. Ze względu na specyfikę PsychoPy, otrzymaliśmy 35 osobnych plików z wynikami. Specyfika tego programu (skądinąd świetnego!) jest taka, że pliki z wynikami to kompletny chaos. Spójrzmy sobie na przykładowy taki plik. Cała baza dostępna jest w [repozytorium](https://github.com/jakub-jedrusiak/nieobliczalne/tree/main/posts/dane/automatyzacja).
 
 ```{r}
-library(tidyverse, quietly = TRUE)
-
 read_csv("./dane/automatyzacja/BD_eksperyment_latwy_2021_Apr_24_1631.csv")
 ```
 
-Pierwsze 3 wiersze zawierają informacje metryczkowe. Kolejnych 8 zawiera odpowiedzi na pytania, ale w innych kolumnach. Wiersz 12. nie zawiera żadnych użytecznych informacji, bo tylko czas, jaki osoba badana spędziła na czytaniu ostatniej instrukcji. Co więcej, identyfikatorem osoby badanej były inicjały, więc w wielu przypadkach mamy powtórzenia (np. dwie osoby o inicjałach MK). Zasadniczo jest tu wiele niedociągnięć co do projektu bazy i nie ma się co dziwić -- dane nie są spreparowane, to projekt studencki. Cenne doświadczenie, które pokazuje, czego w przyszłości unikać.
+Pierwsze 3 wiersze zawierają informacje metryczkowe. Kolejnych 8 zawiera odpowiedzi na pytania, ale kolumny są przesunięte. Wiersz 12. nie zawiera żadnych użytecznych informacji, bo tylko czas, jaki osoba badana spędziła na czytaniu ostatniej instrukcji. Co więcej, identyfikatorem osoby badanej były inicjały, więc w wielu przypadkach mamy powtórzenia (np. dwie osoby o inicjałach MK). Ogólnie w bazie jest wiele niedociągnięć, których dało się uniknąć lepiej projektując samo badanie. Mie ma się jednak co dziwić -- to prawdziwe dane z projektu studenckiego. Cenne doświadczenie, które pokazuje przede wszystkim, czego w przyszłości unikać.
 
-Trzeba się trochę nagłowić, żeby takie dane wyczyścić. Pewnym ułatwieniem jest, że wszystkie te pliki mają identyczną strukturę. Ja wykorzystałem tutaj taki kod:
+Trzeba się trochę nagłowić, żeby takie dane wyczyścić. Pewnym ułatwieniem jest, że wszystkie te pliki mają identyczną strukturę, więc każdy czyścimy właściwie tak samo. Moja strategia była tutaj taka -- najpierw wczytać całą bazę, potem wyizolować z niej samą metryczkę i wyczyścić, następnie wyizolować główne dane i je również z osobna wyczyścić, a na koniec połączyć uzyskane dane w jedną bazę. Zrobiłem to przy tym tak, żeby na koniec z każdego pliku mieć tylko jeden wiersz.
 
 ```{r}
 baza_raw <- read_csv("./dane/automatyzacja/BD_eksperyment_latwy_2021_Apr_24_1631.csv")
@@ -71,12 +70,12 @@ baza_raw <- read_csv("./dane/automatyzacja/BD_eksperyment_latwy_2021_Apr_24_1631
 # najpierw sama metryczka
 metryczka <- baza_raw %>%
     slice(1:2) %>% # wybierz wiersze z samej metryczki
-    select(participant, expName, 2, 4) %>% # wybierz kolumny z id, pytaniem i odpowiedzią
-    pivot_wider(names_from = form.itemText, values_from = form.response) %>% # format długi
+    select(participant, expName, form.itemText, form.response) %>% # wybierz kolumny z id, warunkiem, pytaniem i odpowiedzią
+    pivot_wider(names_from = form.itemText, values_from = form.response) %>% # format szeroki
     set_names("id", "warunek", "plec", "wiek") %>%
     mutate(
         wiek = parse_number(wiek),
-        warunek = str_remove(warunek, "eksperyment_") # zostaw samo łatwy albo trudny
+        warunek = str_remove(warunek, "eksperyment_") # zostaw samo "łatwy" albo "trudny"
     )
 
 # potem same odpowiedzi na pytania
@@ -84,10 +83,10 @@ pytania <- baza_raw %>%
     slice(4:11) %>%
     select(form_2.itemText, form_2.response) %>%
     mutate(
-        form_2.response = case_match( # tak i nie na 1 i 0
-        form_2.response,
-        "tak" ~ 1,
-        "nie" ~ 0
+        form_2.response = case_match( # tak i nie zamień na 1 i 0
+            form_2.response,
+            "tak" ~ 1,
+            "nie" ~ 0
         )
     ) %>%
     pivot_wider(names_from = form_2.itemText, values_from = form_2.response) %>%
@@ -102,17 +101,21 @@ baza <- bind_cols(metryczka, pytania) %>%
 baza
 ```
 
-Z ciekawszych rzeczy wykorzystuję tutaj funkcję `stri_rand_strings` z pakietu `stringi`, żeby zmienić ID osoby badanej. ID nie musi tutaj nic znaczyć, ma być po prostu unikalne. A z tym mamy tutaj problem, bo się wcześniej nie umówiliśmy na żaden sensowny sposób kodowania osób badanych. Dlatego na tym etapie mogę zastąpić inicjały losowym ciągiem 5 znaków, zapewniając sobie, że w ostatecznej bazie identyfikatory będą unikalne. Jest to też sposób na anonimizację bazy danych.
+Z ciekawszych rzeczy wykorzystuję tutaj funkcję `stri_rand_strings` z pakietu `stringi`, żeby zmienić ID osoby badanej. ID nie musi tutaj nic znaczyć, ma być po prostu unikalne, a z tym mamy tutaj problem, bo się wcześniej nie umówiliśmy na żaden określony sposób kodowania. Dlatego na tym etapie mogę zastąpić inicjały losowym ciągiem 5 znaków, zapewniając tym samym, że w ostatecznej bazie identyfikatory będą unikalne. Jest to też sposób na anonimizację bazy danych.
 
-Uzyskaliśmy w ten sposób jeden wyczyszczony wiersz. Jeszcze tylko 34. I jak mamy to zrobić? Mamy ten sam kod skopiować jeszcze 34 razy? A co jeśli mam 1000 osób? A co jeśli jestem Martą Kowal[^kowal] i mam do przeanalizowania (ponad) 93 158 osób [@kowal_predictors_2022]? Kopiowanie kodu nigdy nie jest dobrą drogą. Jeśli często kopiujemy kod, powinniśmy zrobić z niego funkcję. Jeśli tę samą funkcję chcemy zastosować do wielu obiektów, powinniśmy użyć list albo pętli.
+Uzyskaliśmy w ten sposób jeden wyczyszczony wiersz. Jeszcze tylko 34...
+
+I jak mamy to zrobić? Mamy ten sam kod skopiować jeszcze 34 razy, zamieniając tylko nazwę pliku? A co jeśli mam 1000 osób? A co jeśli jestem Martą Kowal[^kowal] i mam do przeanalizowania (ponad) 93 158 osób [@kowal_predictors_2022]? Kopiowanie kodu nigdy nie jest dobrą drogą. Jeśli często kopiujemy kod, powinniśmy zrobić z niego funkcję. Jeśli tę samą funkcję chcemy zastosować do wielu obiektów, powinniśmy użyć list albo pętli.
 
 [^kowal]: Którą serdecznie pozdrawiam.
 
 # Listy
 
-Podstawową metodą automatyzacji we wszystkich językach programowania są pętle. W R też one występują, można z nich korzystać i omówię je, jednak pętle w R nie są najlepszą metodą. Są one mało wydajne. Jeśli chcemy coś wykonać wielokrotnie, najlepszą drogą -- o ile to możliwe -- są listy. Lista to szczególny typ danych w R, którego największą zaletą jest to, że może przechowywać inne formy danych. Innymi słowy możemy szybko zrobić *listę* naszych surowych baz danych, które chcemy potem wyczyścić. Co ważniejsze, możemy potem do każdego elementu listy zastosować jakąś funkcję.
+Podstawową metodą automatyzacji we wszystkich językach programowania są pętle. No, prawie wszystkich. Na przykład w R lepiej ich unikać. Specyfika tego języka jest taka, że pętle -- mimo że są obecne -- to są mało wydajne. W małych zbiorach danych nie ma to większego znaczenia, jednak dobrą praktyką jest -- o ile to możliwe -- automatyzować przez tak zwane **listy**.
 
-Listę tworzymy przede wszystkim przez komendę `list`. Możemy do niej wrzucić rzeczy, które chcemy przerobić na listę. Dla przykładu zróbmy listę z dwóch wbudowanych baz danych -- `iris` i `mpg`.
+Lista to szczególny typ obiektu w R, który można sobie wyobrazić jako pudełko na inne obiekty. Mogę tam włożyć ramki danych, wektory (tworzone przez `c()`), wykresy, a nawet inne listy, tworząc coś na kształt matrioszki. Od wektora, czyli podstawowej formy danych w R, lista różni się tym, że może **zawierać dane różnych typów**. Wektor musi mieć konkretny typ, np. same liczby. Lista takich ograniczeń nie ma.
+
+Listę tworzymy przede wszystkim za pomocą komendy `list()`. Przyjmuje one obiekty, z których lista ma powstać. Dla przykładu stwórzmy sobie listę z dwóch wbudowanych baz danych -- `iris` i `mpg`.
 
 ```{r}
 bazy_danych <- list(
@@ -123,53 +126,56 @@ bazy_danych <- list(
 bazy_danych
 ```
 
-Gdy wywołamy naszą listę w konsoli, zobaczymy, że wyświetlają nam się dwie bazy danych, w takiej kolejności, w jakiej je wprowadziliśmy. Oczywiście w liście zmieści się dużo więcej elementów niż dwa. Jeśli chcemy dostać tylko jeden element, używamy składni `nazwa_listy[[indeks]]`[^indeks], czyli na przykład `bazy_danych[[1]]`. W tym wypadku spowoduje to wyciągnięcie samej tylko bazy `iris`. Co ciekawe, listy mogą zawierać też inne listy[^matrioszka], ale nie będziemy wchodzić w to tak głęboko. Możemy też wywołać `bazy_danych[1]`, ale taki zapis powoduje subtelną różnicę -- efektem jest jednoelementowa lista, zaś składnia z podwójnymi nawiasami wyciąga sam 1. element (w naszym przypadku bazę danych `iris`, czyli obiekt tibble). Na początku nie trzeba tego jakoś głęboko rozumieć, wystarczy na wiarę przyjąć, że potrzebne są dwa nawiasy kwadratowe.
+Gdy wywołamy naszą listę w konsoli, zobaczymy, że wyświetlają nam się dwie bazy danych, oznaczone jako `[[1]]` i `[[2]]`. Kolejność jest taka, jakiej użyliśmy w komendzie `list()`. Jeśli chcemy wyciągnąć coś z listy, np. pojedynczą ramkę danych, używamy składni `nazwa_listy[[indeks]]`[^indeks]. czyli na przykład `bazy_danych[[1]]`. W tym wypadku spowoduje to wyciągnięcie samej tylko bazy `iris` [^matrioszka]. Możemy też wywołać `bazy_danych[1]`, ale taki zapis powoduje subtelną różnicę -- efektem jest jednoelementowa lista. Składnia z podwójnymi nawiasami zwróci nam tylko sam element. Jeśli jest to ramka danych, dostaniemy ramkę danych, jeśli jest to wektor, to dostaniemy wektor itd. Nawiasy pojedyncze zawsze zwracają listę.
 
 [^indeks]: W R indeksowanie zaczyna się od 1, a nie od 0 jak w C czy w Pythonie. Takie indeksy są bardziej intuicyjne dla osób bez wprawy informatycznej.
-[^matrioszka]: Wtedy pojedyncze elementy wydobywalibyśmy składnią typu `lista[2][5]`, co oznacza 5. element listy z indeksem 2.
+[^matrioszka]: Jeśli chcemy wybrać jakiś element z listy zagnieżdżonej w innej liście, użyjemy składni w stylu `lista[2][5]`. W ten sposób z listy o nazwie `lista` wyciągamy drugi element, a następnie z owego elementu (którym może być inna lista) wyciągamy piąty element.
 
 ## Masowe ładowanie danych z `list.files`
 
-Komenda `list` jest fajna, o ile mamy dane już załadowane. My mamy 35 plików w folderze, które dopiero musimy załadować. Możemy je jednak załadować wszystkie jednocześnie, od razu do listy. Wykorzystamy w tym celu funkcję `list.files` (lub zamiennie `dir`, to dwie nazwy tej samej funkcji). Zwraca ona listę plików znajdujących się we wskazanym folderze. Domyślnie zwraca ona same nazwy, więc jeśli chcemy całe ścieżki (a chcemy, jeśli dane są w innym folderze, niż główny), to musimy dołożyć argument `full.names = TRUE`.
+Z tego, co napisałem, wynika, że możemy łatwo wyczyścić nasze dane, jeśli zrobimy z nich listę. Ale jak dopiero otwieramy RStudio, to nie mamy danych jeszcze załadowanych! Nawet jakbyśmy chcieli, zrobić listę, to nie mamy czego wrzucić do komendy `list()`. Listy pozwolą nam jednak nie tylko masowo dane wyczyścić, ale też masowo je załadować.
+
+Załóżmy, że nasze 35 plików z danymi znajduje się w folderze dane, podfolder automatyzacja. Nie jest to, oczywiście, obowiązek, Twoja struktura może się różnić, ale dobrze jest mieć dane w oddzielnym folderze. Możemy teraz użyć komendy `list.files()`, żeby stworzyć **listę naszych plików**[^wektor]. To samo robi komenda `dir()`. Obie przyjmują ścieżkę do folderu, w którym są pliki do wrzucenia na listę. Ustawimy jeszcze `full.names = TRUE`, bo nie chcemy dostać samych *nazw* plików, ale całe *ścieżki*.
 
 ```{r}
 bazy_lista <- list.files("./dane/automatyzacja", full.names = TRUE)
 ```
 
-Jeśli wyświetlimy teraz `bazy_lista` zobaczymy listę naszych plików z ich względnymi ścieżkami. Lista plików to jednak nie są jeszcze załadowane bazy. Ale można je wykorzystać do załadowania baz! Spójrzmy na przykładową ścieżkę.
+Jeśli wyświetlimy teraz obiekt `bazy_lista`, zobaczymy listę ścieżek wszystkich naszych plików z danymi. Nie są to załadowane bazy, tylko lista plików.
 
 ```{r}
-bazy_lista[1]
+bazy_lista
 ```
 
-To jest dokładnie to, co wrzucilibyśmy do funkcji `read_csv` chcąc rzeczywiście załadować nasze dane. Jeśli więc weźmiemy naszą listę ścieżek[^wektor] i powiemy R „każdą z tych ścieżek wrzuć po kolei do `read_csv`”, to będziemy mieli nasze bazy załadowane. Żeby zastosować jakąś funkcję osobno do każdego elementu listy[^wektor2], użyjemy jednej z funkcji z rodziny `apply` (`apply`, `sapply`, `lapply` lub `tapply`) albo ich odpowiednika z `tidyverse`, czyli `map` z pakietu `purrr`. Choć `apply` jest powszechniejsze[^lapply], my użyjemy tutaj bardziej intuicyjnego w obsłudze `map`.
+Nasze dane możemy załadować np. komendą `read_csv()` z pakietu `readr`. Ta funkcja może przyjąć całą serię różnych argumentów, ale najważniejszym jest... ścieżka do pliku do załadowania. Dokładnie to, co mamy zgromadzone w obiekcie `bazy_lista`! Każdą z tych ścieżek moglibyśmy teraz wrzucić do funkcji `read_csv()` i dostalibyśmy nie ścieżkę, ale załadowaną bazę. Chcemy więc teraz powiedzieć R „po kolei weź każdą ścieżkę z `bazy_lista` i wrzuć ją do `read_csv()`. Do tego służą funkcje z rodziny `apply`, czyli `apply()`, `sapply()`, `lapply()` lub `tapply()`. Jak w przypadku wielu funkcji, rodzina `apply` ma też swoje odpowiedniki w tidyverse. Jak raz „oryginały” są używane częściej[^lapply], ale i tak my skorzystamy z funkcji `map()` z pakietu `purrr`, bo jest bardziej intuicyjna.
 
 [^wektor]: Tak, wiem, że to nie jest lista, tylko wektor. Nie chcę tutaj dodatkowo gmatwać wprowadzając pojęcie wektora. Skutek jest jednak ten sam, nawet jeśli `list.files` rzeczywiście wyrzucałoby listę, dalej zrobilibyśmy dokładnie to samo.
-[^wektor2]: Lub wektora.
 [^lapply]: Funkcja niżej mogłaby być zapisana równie dobrze jako `lapply(bazy_lista, read_csv, show_col_types = FALSE, name_repair = "unique_quiet")`, ale `map`, a głównie jej pochodne, mają bardziej przejrzystą i konsekwentną konwencję nazywania.
 
 ```{r}
 bazy_lista <- map(bazy_lista, read_csv, show_col_types = FALSE, name_repair = "unique_quiet")
 ```
 
-`map` przyjmuje, w podstawowej wersji, dwa argumenty. Pierwszym jest obiekt, do którego chcemy zastosować naszą funkcję, a drugim sama funkcja. Podobnie jak w `across` (patrz [tutaj](./posts/./posts/podstawy_R.qmd#sec-across)) chodzi nam o obiekt zawierający funkcję, a nie o efekt jej działania, dlatego **po nazwie funkcji nie dajemy nawiasów**. To bardzo częsty błąd. Jeśli chodzi o samo `read_csv` dodałem tutaj `show_col_types = FALSE` i `name_repair = "unique_quiet"`, żeby nasza konsola nie została zalana milionem informacji o aktualnie wczytywanej bazie.
+`map` przyjmuje, w podstawowej wersji, dwa argumenty. Pierwszym jest obiekt, do którego chcemy zastosować naszą funkcję, a drugim sama funkcja. My chcemy zastosować funkcję `read_csv()` na każdym elemencie wektora `bazy_lista`. Podobnie jak w `across` (patrz [tutaj](./posts/podstawy_R.qmd#sec-across)), gdy podajemy, jaką funkcję chcemy zastosować, to musimy zapisać obiekt *zawierający* funkcję, a nie o efekt *działania* funkcji, dlatego **po nazwie funkcji nie dajemy nawiasów**. To bardzo częsty błąd. Na koniec możemy dorzucić parę innych argumentów, takich jak `show_col_types = FALSE` i `name_repair = "unique_quiet"`, żeby nasza konsola nie została zalana milionem informacji o aktualnie wczytywanej bazie[^lambda].
 
-Efektem działania tej funkcji jest lista baz danych. Już nie ścieżek, a załadowanych baz. Skoro mamy je załadowane, możemy je wyczyścić.
+[^lambda]: Od jakiegoś czasu tidyverse wycofuje się z tej konwencji dodawania argumentów. Jeśli mamy jakieś dodatkowe argumenty do dodania, powinniśmy zrobić to w postaci [funkcji anonimowej](podstawy_R#sec-lambda.qmd). Tym sposobem powinniśmy byli zapisać raczej `map(bazy_lista, \(x) {read_csv(x, show_col_types = FALSE, name_repair = "unique_quiet")})`.
 
-## Masowe czyszczenie z `map` lub `apply`
+Teraz R weźmie każdą ścieżkę i wrzuci ją do funkcji `read_csv()`. Każda ścieżka zostanie więc załadowana, a wynikowe bazy wrzucone na listę. Jeśli więc teraz byśmy spojrzeli w obiekt `bazy_lista`, to nie zobaczymy tam już ścieżek, ale prawdziwe ramki danych.
 
-Skoro poznaliśmy już funkcję `map`, wyczyszczenie naszych baz nie powinno stanowić problemu. Mamy listę baz. Ten sam zestaw funkcji czyszczących musimy zastosować do każdej bazy z listy. Żeby zastosować funkcję do każdego elementu używamy właśnie `map` lub `apply`. Problem polega jednak na tym, że nie mamy pojedynczej funkcji czyszczącej, a cały wielki zestaw tych funkcji. W rzeczywistości nie jest to żaden problem, bo jak dowiedzieliśmy się [tutaj](./posts/podstawy_R.qmd#sec-customfunctions), możemy nasz zestaw przerobić na pojedynczą funkcję.
+## Masowe czyszczenie z `map()` lub `lapply()`
+
+Skoro poznaliśmy już funkcję `map()`, wyczyszczenie naszych baz nie powinno stanowić problemu. W końcu są one na liście, a my właśnie nauczyliśmy się, zastosować jakąś funkcję do *każdego elementu listy z osobna*. Problem polega jednak na tym, że nie mamy pojedynczej funkcji czyszczącej, a cały wielki zestaw tych funkcji. Jednak jak dowiedzieliśmy się [tutaj](./posts/podstawy_R.qmd#sec-customfunctions), możemy nasz zestaw po prostu przerobić na pojedynczą funkcję.
 
 ```{r}
 wyczysc <- function(df) {
     metryczka <- df %>%
         slice(1:2) %>% # wybierz wiersze z samej metryczki
-        select(participant, expName, 2, 4) %>% # wybierz kolumny z id, pytaniem i odpowiedzią
+        select(participant, expName, form.itemText, form.response) %>% # wybierz kolumny z id, warunkiem, pytaniem i odpowiedzią
         pivot_wider(names_from = form.itemText, values_from = form.response) %>% # format długi
         set_names("id", "warunek", "plec", "wiek") %>%
         mutate(
             wiek = parse_number(wiek),
-            warunek = str_remove(warunek, "eksperyment_") # zostaw samo łatwy albo trudny
+            warunek = str_remove(warunek, "eksperyment_") # zostaw samo "łatwy" albo "trudny"
         )
 
     pytania <- df %>%
@@ -192,9 +198,9 @@ wyczysc <- function(df) {
 }
 ```
 
-Uzyskałem w ten sposób funkcję `wyczysc()`, która wykonuje wszystkie nasze przekształcenia. Warto zwrócić uwagę, że bazę danych nazwałem `df` i zrobiłem z niej argument naszej funkcji, a także ostatni blok nie ma przypisania do zmiennej `baza`. Wynika to z tego, że domyślnie funkcje w R zwracają ostatnią rzecz, którą zrobią, czyli tutaj połączoną bazę. Jeśli zapisałbym ostateczną bazę do zmiennej `baza`, musiałbym w ostatniej linijce dopisać samo `baza` albo `return(baza)`, jako że to jest to, co funkcja ma nam ostatecznie dać -- wyczyszczoną bazę.
+Uzyskałem w ten sposób funkcję `wyczysc()`, która wykonuje wszystkie nasze przekształcenia. Warto zwrócić uwagę, że bazę danych nazwałem `df` i zrobiłem z niej argument naszej funkcji, a także, że ostatni blok nie ma przypisania do zmiennej `baza`. Wynika to z tego, że domyślnie funkcje w R zwracają ostatnią rzecz, którą zrobią. W tym wypadku wynikiem działania funkcji `wyczysc()` będzie efekt działania `bind_cols()`. Jeśli zapisałbym ostateczną bazę do zmiennej `baza`, musiałbym w ostatniej linijce dopisać samo `baza` albo `return(baza)`, ponieważ to jest to, co ostatecznie chcemy dostać -- wyczyszczoną bazę.
 
-Przy tej okazji ostrzegam, że używanie **nazw kolumn** jako argumentów takich własnych funkcji może spowodować niespodziewane problemy. Jeśli stworzymy argument `nazwa_kolumny`, to funkcje typu `select()` nie wiedzą, że chodzi nam o argument `nazwa_kolumny`, a nie o kolumnę o nazwie `nazwa_kolumny`. Więcej o tym piszę [tutaj](./posts/metaprogramowanie.qmd), ale *ad hoc* można sobie z tym poradzić pisząc nazwę argumentu w podwójnych nawiasach klamrowych, np. `{{ nazwa_kolumny }}`.
+Przy tej okazji ostrzegam, że używanie **nazw kolumn** jako argumentów takich własnych funkcji może spowodować niespodziewane problemy. Jeśli nasza funkcja dostanie argument `nazwa_kolumny`, to funkcje typu `select()` będą w bazie szukać kolumny, która nazywa się `nazwa_kolumny`, a nie wartości tego argumentu (np. jeśli ustawimy `nazwa_kolumny = pyt_1`, to `select()` czy `mutate()` nie będą szukały kolumny `pyt_1`, tylko kolumny *o nazwie* `nazwa_kolumny`). Więcej o tym piszę [tutaj](./posts/metaprogramowanie.qmd), ale *ad hoc* można sobie z tym poradzić pisząc nazwę argumentu wewnątrz funkcji typu `select()` w podwójnych nawiasach klamrowych, np. `{{ nazwa_kolumny }}`.
 
 Użyjmy teraz naszej nowej funkcji `wyczysc` do wyczyszczenia naszych plików.
 
@@ -202,7 +208,7 @@ Użyjmy teraz naszej nowej funkcji `wyczysc` do wyczyszczenia naszych plików.
 bazy <- map(bazy_lista, wyczysc)
 ```
 
-Efektem działania tej funkcji jest lista wyczyszczonych baz, z których każda ma tylko jeden wiersz (bo tak zrobiliśmy nasze czyszczenie). Jednak do analizy statystycznej nie jest potrzebna lista, tylko pojedyncza baza. Połączmy więc naszą listę w pojedynczą bazę za pomocą funkcji `bind_rows`. Możemy ją wywołać na nowopowstałej zmiennej `bazy` albo już wcześniej dodać ją potokiem do mapowania.
+Efektem działania tej funkcji jest lista wyczyszczonych już baz. Każda taka baza ma tylko jeden wiersz (bo tak zrobiliśmy nasze czyszczenie). Jednak do analizy statystycznej nie jest potrzebna lista, tylko jedna całościowa baza. Połączmy więc wszystkie bazy na liście w jedną bazę za pomocą funkcji `bind_rows`. Możemy ją wywołać na wyczyszczonej zmiennej `bazy` albo już wcześniej dodać ją potokiem do mapowania. Wygląda to tak:
 
 ```{r}
 # tak jest dobrze
@@ -220,7 +226,7 @@ Ostatecznie uzyskujemy piękną, czystą i pojedynczą bazę danych, na której 
 
 # Pętle
 
-Pętle to w wielu językach programowania podstawowa metoda automatyzacji. Pozwalają nam wykonać tę samą operację wiele, wiele razy, za każdym razem coś zmieniając. W R ich za bardzo nie używamy. W sensie można, ale ponieważ R to język typowo przeznaczony do analizy statystycznej. Nie jest to język ogólnego przeznaczenia, dlatego rzadko musimy robić w nim rzeczy, których nie możemy zrobić listami i `map`. Dlatego ta druga opcja jest preferowana w R i R jest zoptymalizowane pod listy, zaś pętle działają, ale ich efektywność przy dużej ilości plików pozostawia wiele do życzenia. Jednak czasami może się przydać. Co więcej, czasami da się coś zrobić listą, ale łatwiej to *zrozumieć*, gdy używamy pętli. Na sam początek pętle mogą być przyjemniejsze w odbiorze dla niewprawionego programisty (albo właśnie wprawionego, który zna pętle z innych języków). Istnieją dwa rodzaje pętli -- `for` i `while`.
+Pętle to w wielu językach programowania podstawowa metoda automatyzacji. Pozwalają nam wykonać tę samą operację wiele, wiele razy, za każdym razem coś zmieniając. W R ich za bardzo nie używamy. Niby można, ale R to nie jest język ogólnego przeznaczenia, dlatego rzadko musimy robić w nim rzeczy, których nie możemy zrobić listami i `map`. Czasami jednak taka umiejętność może się przydać. Co więcej, czasami da się coś zrobić listą, ale łatwiej to *zrozumieć*, gdy używamy pętli. Na sam początek pętle mogą być przyjemniejsze w odbiorze dla niewprawionego programisty (albo właśnie wprawionego, który zna pętle z innych języków). Istnieją dwa rodzaje pętli -- `for` i `while`.
 
 ## Pętle `for`
 
@@ -236,7 +242,7 @@ for (i in 1:35) {
 }
 ```
 
-Zapis ten jest bardziej programistyczny i korzysta z klasycznego R. To, co tutaj robimy, to tworzymy pustą listę `bazy`. Następnie pętla `for` wykona to, co zapisaliśmy w jej klamrach, za każdym razem zamieniając `i` na kolejną liczbę. Czyli najpierw wczyta bazę ze ścieżki `bazy_lista[[1]]`, potem `bazy_lista[[2]]` i tak dalej aż do `bazy_lista[[35]]`. Wczytane bazy zapisze do listy `bazy` na stosownym miejscu. `1:35` moglibyśmy zamienić na `1:length(bazy_lista)`, żeby nie zapisywać na sztywno `35`, a podstawić tam naszą liczbę plików (czyli długość zmiennej `bazy_lista`).
+Zapis ten jest bardziej programistyczny i korzysta z klasycznego R. Najpierw tworzymy pustą listę `bazy`. Następnie pętla `for` wykona to, co zapisaliśmy w jej klamrach, za każdym razem zamieniając `i` na kolejną liczbę. Czyli najpierw wczyta bazę ze ścieżki `bazy_lista[[1]]`, potem `bazy_lista[[2]]` i tak dalej aż do `bazy_lista[[35]]`. Wczytane bazy zapisze do listy `bazy` na stosownym miejscu. `1:35` moglibyśmy zamienić na `1:length(bazy_lista)`, żeby nie zapisywać na sztywno `35`, jakby miała się ta liczba zmienić.
 
 Moglibyśmy też użyć nieco innej składni.
 
@@ -252,13 +258,13 @@ for (i in bazy_lista) {
 }
 ```
 
-Nie jest to najlepszy, najbardziej wydajny kod z dobrze zaplanowaną pamięcią, ale nie chcę wchodzić w bardziej zaawansowane koncepcje jak rezerwowanie miejsca w pamięci przed uruchomieniem pętli. Ta składnia działa nieco inaczej, bo `i` nie jest tutaj liczbą, tylko kolejnymi ścieżkami do naszych plików i to one lądują w `read_csv`. Wczytaną bazę dołączam do listy baz za pomocą `c`. Co ważne, nasza nowa baza też musi mieć format listy, dlatego całe `read_csv` opakowałem w `list`.
+Nie jest to najlepszy, najbardziej wydajny kod, ale nie chcę wchodzić w bardziej zaawansowane koncepcje jak rezerwowanie miejsca w pamięci przed uruchomieniem pętli. Ta składnia działa nieco inaczej, bo `i` nie jest tutaj liczbą, tylko kolejnymi ścieżkami do naszych plików i to one lądują w `read_csv()`. Tak wczytaną bazę dołączam do listy baz za pomocą `c`. Co ważne, nasza nowa baza też musi mieć format listy, dlatego całe `read_csv` opakowałem w `list`.
 
-Jak widać, takie rozwiązanie wymaga podejścia do R od bardziej programistycznej strony. Tak jak jednak wspominałem, w rzeczywistości rzadko jest to potrzebne, bo możemy używać funkcji `apply` lub `map`.
+Jak widać, takie rozwiązanie wymaga podejścia do R od bardziej programistycznej strony. Tak jak jednak wspominałem, w rzeczywistości rzadko jest to potrzebne, bo możemy używać funkcji `lapply()` lub `map()`.
 
 ## Pętle `while`
 
-Pętle `while` wykonują jakieś polecenie tak długo, dopóki spełniony jest warunek, który jej podamy. Musimy być jednak ostrożni, bo jeśli ten warunek nie zostaje osiągnięty (bo np. źle go zaplanowaliśmy), to pętla będzie działała w nieskończoność, nierzadko zapychając pamięć komputera. Pętla `while`, choć wykorzystywana nawet rzadziej niż pętla `for`, przydała mi się w celach testowo-dydaktycznych, bo wykorzystywałem ją do znalezienia zbioru losowych liczb o określonych parametrach statystycznych. Żeby podać przykład:
+Pętle `while` wykonują jakieś polecenie dopóty, dopóki spełniony jest warunek, który jej podamy. Musimy być jednak ostrożni, bo jeśli ten warunek nie zostanie osiągnięty nigdy (bo np. źle go zaplanowaliśmy), to pętla będzie działała w nieskończoność, nierzadko zapychając pamięć komputera. Pętla `while`, choć wykorzystywana nawet rzadziej niż pętla `for`, przydała mi się w celach testowo-dydaktycznych, bo wykorzystywałem ją do znalezienia zbioru losowych liczb o określonych parametrach statystycznych. Żeby podać przykład:
 
 ```{r}
 liczby <- rnorm(100, mean = 101, sd = 15)
@@ -275,7 +281,7 @@ Ten kod wykorzystałem do znalezienia zestawu 100 losowych liczb z rozkładu nor
 
 1. R daje nam duże możliwości automatyzacji powtarzalnych czynności.
 2. Podstawową metodą automatyzacji w R są listy.
-3. Funkcja `map` (`apply`) stosuje daną funkcję do każdego elementu listy.
+3. Funkcja `map()` (`lapply()`) stosuje daną funkcję do każdego elementu listy.
 4. W R istnieją pętle, ale lepiej ich unikać.
 5. Pętla `for` powtarza zestaw funkcji określoną liczbę razy albo dla wszystkich wartości zbioru.
 6. Pętla `while` powtarza zestaw funkcji tak długo, jak spełniony jest podany jest warunek.
