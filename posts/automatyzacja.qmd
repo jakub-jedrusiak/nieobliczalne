@@ -275,7 +275,7 @@ while (mean(liczby) != 105) {
 }
 ```
 
-Ten kod wykorzystałem do znalezienia zestawu 100 losowych liczb z rozkładu normalnego IQ ($M = 100$, $SD = 15$), których średnia będzie wynosiła dokładnie 101. Wykorzystałem to [w tekście o wartości $p$](./posts/./posts/p-value.qmd) do znalezienia ładnej próbki, której średnia nie będzie wynosiła dokładnie tyle, ile średnia z populacji. Funkcja `rnorm` losuje liczby z rozkładu normalnego o podanych parametrach 5, `round` zaokrągla je do całości. Pętla `while` mówi tutaj „Sprawdź, czy średnia wylosowanych liczb nie równa się 105. Jeśli nie, to wylosuj ponownie.” albo inaczej „Powtarzaj losowanie dopóki średnia liczb nie będzie się równała 101”.
+Ten kod wykorzystałem do znalezienia zestawu 100 losowych liczb z rozkładu normalnego IQ ($M = 100$, $SD = 15$), których średnia będzie wynosiła dokładnie 101. Wykorzystałem to [w tekście o wartości $p$](./posts/p-value.qmd) do znalezienia ładnej próbki, której średnia nie będzie wynosiła dokładnie tyle, ile średnia z populacji. Funkcja `rnorm` losuje liczby z rozkładu normalnego o podanych parametrach 5, `round` zaokrągla je do całości. Pętla `while` mówi tutaj „Sprawdź, czy średnia wylosowanych liczb nie równa się 105. Jeśli nie, to wylosuj ponownie.” albo inaczej „Powtarzaj losowanie dopóki średnia liczb nie będzie się równała 101”.
 
 # Podsumowanie
 
