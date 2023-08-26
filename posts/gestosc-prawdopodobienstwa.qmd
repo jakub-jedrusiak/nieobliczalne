@@ -1,0 +1,579 @@
+---
+title: Gęstość prawdopodobieństwa i rozkład normalny
+description: Istnieje szczególny rodzaj wykresów zwany wykresami gęstości. I bardzo łatwo jest czytać je źle. A nie jest to pierwszy lepszy wykres -- wykresy gęstości prawdopodobieństwa to fundament całej statystyki. Dlatego w tym wpisie omawiam, jak czytać takie wykresy, co one oznaczają, a także co to jest rozkład normalny i jego dystrybuanta.
+date: 2023-08-27
+freeze: auto
+draft: true
+code-fold: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+library(rlang)
+library(kableExtra)
+source("../styles/ggplot_theme_Publication-2.R")
+set.seed(2303)
+```
+
+Pomimo tego, że rozkład normalny jest podstawą statystyki jako takiej, **nie trzeba go rozumieć, żeby używać statystyki**. Jest to użyteczna wiedza, którą musimy posiąść, jeśli *naprawdę* chcemy rozumieć, co robimy. Jednak da się żyć i sprawnie wyciągać wnioski statystyczne i bez tej wiedzy. Ten wpis można potraktować więc jako spojrzenie w głębię statystyki, ale na pierwsze zetknięcie z tą dziedziną znacznie lepiej przeczytać wpisy o [wariancji](procent-wariancji.qmd) i o [wartości $p$](p-value.qmd).
+
+# Histogramy i gęstość prawdopodobieństwa
+
+Wyobraźmy sobie, że losujemy 2000 osób i robimy im test inteligencji, np. WAIS-R. Przeliczamy, jak naszym badanym poszło, patrzymy w tabelki z normami i dla każdej osoby badanej uzyskujemy wynik na specjalnej skali do wyrażania inteligencji. Skala ta jest zrobiona tak, żeby światowa średnia inteligencja zawsze wynosiła $\mu = 100$, a odchylenie standardowe $\sigma = 15$. Na razie nie jest ważne, czym jest odchylenie standardowe matematycznie (zainteresowanym polecam [wpis o wariancji](./procent-wariancji.qmd)). Chodzi w nim mniej więcej o to, że większość (około $\frac{2}{3}$) populacji ma wyniki między 85 a 115, czyli 100±15. Wyniki przedstawiamy na histogramie.
+
+```{r}
+#| label: fig-histogram-1
+#| fig-cap: Histogram inteligencji w próbie 2000 osób. Wynik na osi Y to liczba osób, których inteligencja mieści się w danych widełkach. Szerokość jednego słupka to 20 punktów.
+p_tys <- tibble(IQ = rnorm(2000, 100, 15))
+ggplot(p_tys, aes(IQ)) +
+    geom_histogram(binwidth = 20, fill = "gray95", colour = "black") +
+    ylim(0, 1100) +
+    labs(x = "IQ", y = "liczba osób w próbce") +
+    theme_Publication()
+```
+
+Jak czytać coś takiego? Każdy słupek to pewne widełki. Tutaj ustawiłem te widełki na szerokość 20 punktów. I tak na przykład środkowy słupek to widełki 90-110. Z osi Y naszego histogramu możemy odczytać, że takich osób w naszej próbce było trochę ponad 900. W widełkach 70-90 i 110-130 uplasowało się trochę po prawie 500 osób itd. Fakt, że w histogramie każdy słupek reprezentuje wartości od-do jest niepozorny, ale potem okaże się bardzo ważny.
+
+Zamiast prezentować bezwzględne liczby możemy użyć proporcji. Trochę ponad 900 osób to w naszej próbce trochę mniej niż 50%. Jest to wygodne, ponieważ odcina trochę sam histogram od wielkości próby. Ponieważ próba ma być tylko przybliżeniem prawdziwej populacji, to ostatecznie nie interesuje nas, ile osób w próbie miało inteligencję między 90 a 100, tylko jaki procent osób w całej Polsce ma inteligencję między 90 a 100. Z naszej próby możemy wnioskować, że takich osób jest trochę mniej niż 50%.
+
+```{r}
+#| label: fig-histogram-2
+#| fig-cap: Tym razem na osi Y umieściłem nie liczebność danej grupy, a jaki procent stanowi ona w całej próbie.
+ggplot(p_tys, aes(IQ)) +
+    geom_histogram(aes(y = after_stat(count / sum(count))), binwidth = 20, fill = "gray95", colour = "black") +
+    labs(x = "IQ", y = "odsetek osób w próbce") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.6)) +
+    theme_Publication()
+```
+
+Takie przedstawienie sprawy odblokowuje nam jednak nowy sposób myślenia o tym rozkładzie -- jeśli miałbym teraz losowo wybrać jedną osobę z tej grupy, to mam trochę mniej niż 50% szans, że będzie z widełek 90-110, trochę ponad 20%, że będzie z widełek 110-130 itd. Ta zmiana osi Y sprawiła, że możemy patrzeć na nasz histogram jako na **histogram prawdopodobieństwa**. Słupki możemy też do siebie dodawać, np. skoro widełki 90-110 mają prawdopodobieństwo 47%, a widełki 110-130 mają prawdopodobieństwo 24%, to łącznie widełki 90-130 mają prawdopodobieństwo 71%.
+
+Możemy jednak być niezadowoleni z tej dokładności. Co jeśli chcę stwierdzić, jaką mam szansę znaleźć osobę z węższych widełek, np. 95-105? Nasze słupki są zbyt szerokie, żeby to określić, ale możemy je zawęzić i uzyskać dokładniejszy obraz.
+
+```{r}
+#| label: fig-histogram-3
+#| fig-cap: Zmniejszenie szerokości słupków (tutaj do 10) sprawia, że histogram jest dokładniejszy. Każdy słupek z osobna ma też mniejsze prawdopodobieństwo.
+ggplot(p_tys, aes(IQ)) +
+    geom_histogram(aes(y = after_stat(count / sum(count))), binwidth = 10, fill = "gray95", colour = "black") +
+    labs(x = "IQ", y = "odsetek osób w próbce") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.3)) +
+    theme_Publication()
+```
+
+Na rysunku [-@fig-histogram-3]. każdy słupek ma szerokość 10, więc nasze widełki skurczyły się do 95-105, 105-115, 115-130 itd. Warto też zwrócić uwagę, że każdy ze słupków stał się niższy. Łączne prawdopodobieństwo musi zawsze wynosić 100%, więc skoro rozbijam tę wartość na więcej kawałków, to każdy kawałek musi być, siłą rzeczy, mniejszy. Widać to na rysunku [-@fig-histogram-4], gdzie nakładam na siebie szerszy i węższy histogram.
+
+```{r}
+#| label: fig-histogram-4
+#| fig-cap: Po nałożeniu na siebie histogramów widać, jak się różnią.
+ggplot(p_tys, aes(IQ)) +
+    geom_histogram(aes(y = after_stat(count / sum(count))), binwidth = 20, fill = "gray95", colour = "black", alpha = 0.5) +
+    geom_histogram(aes(y = after_stat(count / sum(count))), binwidth = 10, fill = "gray75", colour = "black", alpha = 0.5) +
+    labs(x = "IQ", y = "odsetek osób w próbce") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.6)) +
+    theme_Publication()
+```
+
+A co jeśli taka dokładność też mnie nie zadowala? Mogę spróbować zmniejszyć dokładność do 1 punktu, wtedy będę mógł liczyć prawdopodobieństwo dla dowolnych widełek.
+
+```{r}
+#| label: fig-histogram-5
+#| fig-cap: Ten histogram ma już bardzo wąskie słupki, bo o szerokości zaledwie 1 punktu. Maksymalne prawdopodobieństwo wynosi już poniżej 3%.
+ggplot(p_tys, aes(IQ)) +
+    geom_histogram(aes(y = after_stat(count / sum(count))), binwidth = 1, fill = "gray95", colour = "black", linewidth = 0.1) +
+    labs(x = "IQ", y = "odsetek osób w próbce") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.03)) +
+    theme_Publication()
+```
+
+Super, może nie jest to zbyt wygodny wykres, ale dodając do siebie słupki możemy wyliczyć prawdopodobieństwo dowolnego wyniku, np. widełek 101-103. WAIS-R pozwala nam uzyskać wyniki z dokładnością do 1 punktu, więc niżej nie ma po co schodzić. Chyba że...
+
+Owszem, nasze testy inteligencji dają wyniki z określoną dokładnością, ale zakładamy, że inteligencja istnieje naprawdę. Teoretycznie ludzie mogą się różnić inteligencją o pół punktu, ale nie mamy narzędzi, żeby to wykryć. Możemy też sobie wyobrazić, że mierzymy zmienne, które rzeczywiście są ciągłe, np. reakcję skórno-galwaniczną (wskaźnik stresu), rozszerzenie źrenic, tempo oddechu itd. Źrenice naprawdę mogą rozszerzyć się o kolejne 0,0001 mm i tylko od naszej aparatury pomiarowej zależy, czy będziemy w stanie to wykryć. Możemy więc sobie wyobrazić, że zwężamy nasze słupki jeszcze bardziej i bardziej i bardziej, aż w końcu będą one nieskończenie cienkie i tak naprawdę utworzą nam ciągłą linię. Taki wykres nazywamy **wykresem gęstości**. Na skali Y mamy procenty, więc możemy taki wykres nazwać **wykresem gęstości prawdopodobieństwa**.
+
+```{r}
+#| label: fig-density-1
+#| fig-cap: Wykres gęstości prawdopodobieństwa na podstawie naszej próbki, który możemy rozumieć jako histogram ze słupkami tak cienkimi, że zlewają się w jedno pole.
+ggplot(p_tys, aes(IQ)) +
+    geom_density(fill = "gray95") +
+    labs(x = "IQ", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.03)) +
+    theme_Publication()
+```
+
+Powyższy wykres gęstości jest ilustracją naszej próbki. Każda taka próbka będzie się różniła co do szczegółów. Nasza próbka liczyła sobie 2000 osób. Możemy się domyślić, że próbka 3000 osób da dokładniejsze wyniki. 4000 osób da jeszcze dokładniejsze wyniki. 10 000 osób jeszcze dokładniejsze itd. Ostatecznie taki rozkład będzie się zbliżał do równiutkiego, regularnego kształtu zwanego **krzywą dzwonową**. Rozkład o takim kształcie nazywamy **rozkładem normalnym**.
+
+```{r}
+#| label: fig-density-2
+#| fig-cap: Wykres gęstości prawdopodobieństwa z rozkładu normalnego ma kształt krzywej dzwonowej.
+ggplot(p_tys, aes(IQ)) +
+    geom_area(stat = "function", fun = dnorm, args = list(mean = 100, sd = 15), fill = "gray95", colour = "black") +
+    labs(x = "IQ", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.03)) +
+    theme_Publication()
+```
+
+# Gęstość prawdopodobieństwa *vs.* prawdopodobieństwo
+
+Dokładny wykres gęstości prawdopodobieństwa pozwala nam liczyć prawdopodobieństwo dla dowolnych zakresów z dowolną dokładnością. Czai się tutaj jednak pewna pułapka. Gdy patrzymy na nasz wykres gęstości, chciałoby się powiedzieć, że szansa na to, że ktoś będzie miał inteligencję równą 100 wynosi ok. 2,5%. Z tym wnioskowaniem jest jednak pewien znaczący problem, który prezentuje tabela [-@tbl-likelihood].
+
+```{r}
+#| label: tbl-likelihood
+#| tbl-cap: Wartości z osi Y dla IQ między 95 a 105 co 0.25.
+points <- tibble(X = seq(95, 105, 0.25), Y = dnorm(X, 100, 15))
+
+kbl(points, booktabs = TRUE, row.names = TRUE)
+```
+
+To są dokładne wartości z osi Y dla 41 różnych punktów z osi X. Zaczynamy od 95 i dochodzimy do 105 co 0,25. Załóżmy, że chcemy policzyć prawdopodobieństwo, że losowa osoba znajdzie się w widełkach 95-105. Innymi słowy jaka część naszej próbki wykazała inteligencję między 95 a 105. Z wykresu [-@fig-histogram-3]. spodziewamy się, że wyjdzie około 25%. Dodajemy więc zgromadzone w tabeli wartości i wychodzi nam, że nasze prawdopodobieństwo wynosi 107%. Chwila, co?
+
+Rzeczywiście nie ma to sensu. Nie dość, że prawdopodobieństwo nie może być większe niż 100%, to wychodzi na to, że 107% naszej próbki miało inteligencję z przedziału 95-105. A przecież jest jeszcze cała reszta rozkładu. Ba! między punktem 100 i 101 jest nieskończona liczba punktów! Jeśli zamiast co 0,25 wykorzystałbym krok 0,1, prawdopodobieństwo wzrosłoby do 264%, zaś przy kroku 0,01, wyniesie 2614%! Dlaczego tak się dzieje?
+
+Przypomnijmy sobie rysunek [-@fig-histogram-4]. Zauważyliśmy na nim, że im węższe są nasze słupki, tym każdy pojedynczy słupek musi być niższy, żeby zawsze dodawały się do 100%. Nagle jednak stwierdziłem, że zrobię słupki nieskończenie cienkie. Idąc zwykłą logiką, automatycznie powinny się one stać nieskończenie niskie. Jednak gdy program statystyczny liczy wykres gęstości prawdopodobieństwa, korzysta z zaawansowanych matematycznie narzędzi, które pozwalają uzyskać efekt ciągłej linii bez redukcji pojedynczych prawdopodobieństw do zera. I musimy o tym pamiętać, gdy korzystamy z tych wykresów.
+
+To, co znajduje się na osi Y, określamy ankielskim słowem *likelihood*, co bywa tłumaczone jako właśnie *gęstość prawdopodobieństwa* albo *wiarygodność*. Nas jednak nie obchodzi gęstość prawdopodobieństwa tylko samo prawdopodobieństwo! To, co intuicyjnie rozumiemy przez *prawdopodobieństwo*, oddaje angielski termin *probability* i jest zupełnie czymś innym niż *likelihood*. Jest to kluczowe rozróżnienie dla wykresów gęstości w ogóle -- **gęstość prawdopodobieństwa i prawdopodobieństwo to dwie różne rzeczy**! Gęstość prawdopodobieństwa możemy odczytać z osi Y, a skąd wziąć prawdopodobieństwo?
+
+Wykres gęstości możemy wyobrazić sobie jako histogram. Ponieważ jest to histogram, to zawsze potrzebujemy jakichś widełek. A niech będą cieniutkie, ale jakieś są potrzebne. W poprzednim przykładzie wzięliśmy prawdziwe widełki 95-105 i próbowaliśmy dodawać do siebie cienkie prostokąty między tymi wartościami. Istnieje jednak bardzo duża różnica pomiędzy cienkimi a nieskończenie cienkimi prostokątami! Skoro są nieskończenie cienkie, to jest ich też nieskończona liczba. A jak dodać do siebie nieskończoną liczbę nieskończenie cienkich prostokątów i przy okazji nie otrzymać nieskończenie wielkiej wartości? Wydaje się to niemożliwe, ale matematyka ma do tego narzędzia.
+
+# Prawdopodobieństwo z wykresów gęstości
+
+Tak jak wcześniej powiedziałem, jeśli chcemy z wykresu gęstości otrzymać prawdopodobieństwo, to -- jak przy każdym histogramie -- musimy ustalić sobie jakieś widełki. Mogą to być widełki pomiędzy jakimiś wartościami, np. IQ 95-105, ale też nierówności typu „IQ mniejsze od 85” albo „IQ większe niż 130”. Zanim zaczniemy liczyć dokładnie, nauczymy się szacować prawdopodobieństwo.
+
+## Szacowanie prostokątami Riemanna
+
+Załóżmy ponownie, że chcemy policzyć, jaka część populacji wykazuje inteligencję między 95 a 105. Od razu podam odpowiedź -- 26,11%. Nic nam po samej odpowiedzi, jeśli nie umiemy tego liczyć, ale miejmy to w głowie, gdy będziemy patrzeć, jak dobrze udało nam się oszacować. Zaznaczmy sobie przestrzeń, o którą nam chodzi.
+
+```{r}
+normal <- list(stat = "function", fun = dnorm, args = list(mean = 100, sd = 15))
+
+ggplot(p_tys, aes(IQ)) +
+    exec(geom_area, !!!normal, fill = "gray95") +
+    exec(geom_area, !!!normal, fill = "#DB3D3D", xlim = c(95, 105)) +
+    stat_function(fun = dnorm, args = list(mean = 100, sd = 15)) +
+    labs(x = "IQ", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.03)) +
+    theme_Publication()
+```
+
+Żeby odczytać prawdopodobieństwo z takiego wykresu, musimy oszacować, wielkość przestrzeni, którą zaznaczyłem na czerwono. Wielkość przestrzeni, czyli... pole. Na czerwono zaznaczony jest prawie prostokąt, tylko ma brzuszek na górze. Jeśli będę mógł oszacować pole tego prostokąta, to to pole właśnie będzie naszym prawdopodobieństwem. Jak więc to zrobić? Bardzo z grubsza możemy brzuszek zignorować i udawać, że jest to rzeczywiście prostokąt.
+
+```{r}
+ggplot(p_tys, aes(IQ)) +
+    exec(geom_area, !!!normal, fill = "gray95", colour = "black") +
+    annotate(geom = "rect", fill = "#DB3D3D", colour = "#8F1A1A", ymin = 0, ymax = dnorm(100, 100, 15), xmin = 95, xmax = 105, alpha = 0.25) +
+    labs(x = "IQ", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.03)) +
+    theme_Publication()
+```
+
+Szerokość tego prostokąta wynosi 10 (bo od 95 do 105), zaś jego wysokość odczytujemy z osi Y, czyli jest taka, jak gęstość prawdopodobieństwa dla $x = 100$. Odczytywanie tej wielkości z wykresu szybko robi się niepraktyczne, dlatego możemy ją wyliczyć. Możemy to zrobić podstawiając bezpośrednio do wzoru (który wygląda tak strasznie, że go nie pokażę), wykorzystując funkcję `dnorm(100, 100, 15)` w R (pierwszy argument to wartość, drugi to średnia, trzeci odchylenie standardowe), korzystając z [internetowego kalkulatora](https://www.danielsoper.com/statcalc/calculator.aspx?id=54) albo kalkulatora naukowego. Możemy teraz skorzystać ze wzoru na pole prostokąta i, po wybiciu się z flashbacków ze szkoły podstawowej, otrzymać wynik:
+
+$$
+P \approx 0.02659 \times 10 = 0,2659 = 26,59\%
+$$
+
+Nieźle! Pomimo tak zgrubnego oszacowania, błąd wynosi mniej niż 1 punkt procentowy. Tworzy nam się więc recepta -- wystarczy pomnożyć gęstość prawdopodobieństwa przez szerokość widełek i wyjdzie! Co nie? No i tak, i nie. Powyższy przykład pokazuje, że czasem to zadziała. Zobaczmy jednak, co się stanie, jak będziemy chcieli tak oszacować wartość dla szerszego przedziału 70-130.
+
+```{r}
+ggplot(p_tys, aes(IQ)) +
+    exec(geom_area, !!!normal, fill = "gray95", colour = "black") +
+    annotate(geom = "rect", fill = "#DB3D3D", colour = "#8F1A1A", ymin = 0, ymax = dnorm(100, 100, 15), xmin = 70, xmax = 130, alpha = 0.25) +
+    labs(x = "IQ", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.03)) +
+    theme_Publication()
+```
+
+Wysokość się nie zmieniła, zaś szerokość wzrosła do 60. Podstawienie tego do wzoru da nam prawdopodobieństwo 159,58%. No. Przesadziliśmy. Jak widać na wykresie, nasz prostokąt wystaje spoza krzywej tak bardzo, że mocno zawyża pole. To może zmienić strategię i wciśnijmy nasz prostokąt pod krzywą, żeby na pewno nie wystawał?
+
+```{r}
+ggplot(p_tys, aes(IQ)) +
+    exec(geom_area, !!!normal, fill = "gray95", colour = "black") +
+    annotate(geom = "rect", fill = "#DB3D3D", colour = "#8F1A1A", ymin = 0, ymax = dnorm(70, 100, 15), xmin = 70, xmax = 130, alpha = 0.25) +
+    labs(x = "IQ", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.03)) +
+    theme_Publication()
+```
+
+Wysokość tego prostokąta równa jest gęstości prawdopodobieństwa w punktach 70 i 130. Rozkład normalny jest symetryczny, więc oba te punkty mają taką samą wysokość -- są tak samo oddalone od środka, o 30 punktów. Policzenie pola tego prostokąta ujawnia nam to, co widać już na oko, czyli że pole jest znacznie zaniżone, bowiem wychodzi $P \approx 60 \times 0,0036 = 0,216 = 21,6\%$. Wiemy więc tyle, że nasze pole jest nie mniejsze niż 0,216 i nie większe niż 1,6. Super. Tyle to widzę na oko.
+
+Możemy jednak zmienić strategię i zamiast wyznaczać jednego dużego prostokąta, wyznaczyć wiele małych. Na przykład nasz przedział możemy podzielić na 7 prostokątów po 10[^1]. W ten sposób wykres gęstości zaczyna trochę przypominać histogram, ale trzeba pamiętać, że po to rysujemy prostokąty, żeby policzyć pole.
+
+[^1]: Zakładając, że prostokąty mają dotykać wykresu środkiem, skrajne prostokąty wystają 5 w prawo i 5 w lewo, stąd dodatkowe 10. Inne metody szacowania obejmują prostokąty dotykające wykresu rogiem (prawym lub lewym) albo nawet zastąpienie prostokątów trapezami.
+
+```{r}
+riemann <- tibble(X = seq(70, 130, 10), Y = dnorm(X, 100, 15))
+
+ggplot(p_tys, aes(IQ)) +
+    exec(geom_area, !!!normal, fill = "gray95", colour = "black") +
+    geom_col(data = riemann, aes(X, Y), fill = "#DB3D3D", colour = "#8F1A1A", alpha = 0.25, width = resolution(riemann$X)) +
+    labs(x = "IQ", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.03)) +
+    theme_Publication()
+```
+
+Nasze prostokąty mają środki w punktach 70, 80, 90, 100, 110, 120 i 130. Gdy policzymy gęstość prawdopodobieństwa dla każdego z tych punktów i przemnożymy przez szerokość 10, to wychodzi nam pole $P \approx 0,9826 = 98,26\%$. Wartość prawdziwa to $P \approx 0,9545$, więc błąd ewidentnie zmalał. I maleje bardziej, gdy narysujemy jeszcze cieńsze prostokąty.
+
+Wróćmy pamięcią do tabeli [@tbl-likelihood]. Zaznaczyłem tam 41 punktów od 95 do 105 licząc co 0,25. Następnie zsumowałem te wartości i otrzymałem 107%. Ale wyobraźmy sobie to, co zrobiłem, nieco inaczej. Wyznaczyłem wysokość 41 prostokątów, z których każdy miał szerokość 0,25. Następnie dodałem wszystkie wysokości, ale zignorowałem szerokość. Jeśli teraz uwzględnię, że liczę pole i każdy prostokąt[^2] przemnożę przez 0,25, to powinienem otrzymać niezłe oszacowanie! I rzeczywiście, 41 prostokątów o szerokości 0,25 pozwala nam oszacować powierzchnię między 95 a 105 na 26,74%. W porównaniu z prawdziwą wartością 26,11%, jest to naprawdę bardzo bliskie oszacowanie.
+
+[^2]: Albo pomnożę wcześniej uzyskaną sumę przez 0,25. Wynika to z tego, że 0,25 można wyciągnąć przed nawias: $$\begin{align*} P & = a \times b_1 + a \times b_2 + \dots + a \times b_{41} = \\ & = a \times (b_1 + b_2 + \dots + b_{41})\end{align*}$$
+
+## Zapis całkowy
+
+Szacowanie pola pod krzywą za pomocą prostokątów Riemanna, czyli to, co zrobiliśmy wyżej, to stara i skuteczna metoda. Jeśli chcemy otrzymać naprawdę dokładne wartości, możemy dzielić pole na setki, tysiące, miliony prostokątów i uzyskać przez to dowolną dokładność naszego oszacowania. Technicznie jednak żadna z tych wartości nie będzie doskonale dokładna. Nie ma to praktycznego znaczenia, ale jeśli chcemy zachować matematyczną czystość, musimy skorzystać z pewnego szczególnego zapisu.
+
+Wiemy już, że prostokąty pod krzywą są nieskończenie cienkie. Wiemy też, że wzór na pole prostokąta to długość razy szerokość. Spójrzmy na taki „nieskończenie” cienki prostokąt.
+
+```{r}
+ggplot(p_tys, aes(IQ)) +
+    exec(geom_area, !!!normal, fill = "gray95", colour = "black") +
+    annotate(geom = "rect", fill = "#DB3D3D", colour = "#8F1A1A", ymin = 0, ymax = dnorm(100, 100, 15), xmin = 99.9, xmax = 100.1, alpha = 0.25) +
+    labs(x = "IQ", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.03)) +
+    theme_Publication()
+```
+
+Wysokość tego prostokąta to gęstość prawdopodobieństwa dla $IQ = 100$. Możemy zapisać to pewną przerażająco wyglądającą notacją $\mathcal{N}(100;\ 100,\ 15^2)$. Oznacza to „wartość rozkładu normalnego o średniej $\mu = 100$ i wariancji $\sigma^2 = 15^2$ w punkcie 100”. Każdy rozkład normalny daje się dwiema liczbami -- średnią i odchyleniem standardowym. Jak znam te dwie rzeczy, mogę liczyć. Warto zwrócić uwagę, że podajemy w tej notacji wariancję, a nie odchylenie standardowe, ale (jak pamiętamy z wpisu o [wariancji](procent-wariancji.qmd)) wariancja to odchylenie standardowe do kwadratu.
+
+Szerokość naszego prostokąta jest nieskończenie mała, co możemy zapisać jako $dx$, co w matematyce w uproszczeniu oznacza „nieskończenie mała wartość z osi X”.
+
+Pole takiego prostokąta zapisalibyśmy więc jako $P = \mathcal{N}(100;\ 100,\ 15^2) \times dx$. Ponieważ taki prostokąt jest nieskończenie cienki, to $dx$ to właściwie zero, więc i pole jednego takiego prostokąta jest zerowe. Ale jeśli dodamy nieskończoną liczbę takich prostokątów, może coś nam z tego wyjdzie. Oczywiście w praktyce one nigdy nie będą *nieskończenie cienkie*, ale gdy zawężamy je coraz bardziej, to nasz wynik *zbliża się* do prawdziwego wyniku.
+
+Matematyka pozwala nam zapisać nasze zamiary w dokładny sposób. Możemy na przykład zapisać coś w rodzaju „dodaję pola wszystkich nieskończenie małych prostokątów między 95 a 105”. W praktyce takie dodawanie musi mieć jakąś konkretną szerokość tych prostokątów, więc robilibyśmy to tak:
+
+$$
+\begin{align*}
+P & \approx \mathcal{N}(95;\ 100,\ 15^2) \times 0.001 + \\
+& + \mathcal{N}(95,001;\ 100,\ 15^2) \times 0.001 + \\
+& + \mathcal{N}(95,002;\ 100,\ 15^2) \times 0.001 + \\
+& + \dots + \\
+& + \mathcal{N}(105;\ 100,\ 15^2) \times 0.001
+\end{align*}
+$$
+
+Matematyka pozwala nam jednak naprawdę zapisać, że dodajemy *wszystkie*, naprawdę *nieskończenie* cienkie prostokąty. Dla wszystkich prostokątów między 95 a 105 zapis taki wygląda tak:
+
+$$
+P = \int^{105}_{95} \mathcal{N}(x;\ 100,\ 15^2) dx
+$$
+
+Rozciągnięta litera S oznacza sumę, liczby w jej indeksach mówią, odkąd dokąd ma sumować, zaś to, co następuje dalej to to, co ma sumować -- pole prostokąta o wysokości równej gęstości prawdopodobieństwa w punkcie i nieskończenie małej szerokości. Nazywamy to **całką oznaczoną**. Oznaczona, bo ma jakieś konkretne granice, konkretny przedział, w którym ma robić tę sumę. Teraz i Ty możesz śmiać się słysząc, że wchodzi całka oznaczona do pociągu, a to nie jej przedział.
+
+Żeby lepiej było widać, co to oznacza w naszym wypadku, zapiszę to jeszcze w taki sposób:
+
+$$
+P (95 < IQ < 105) = \int^{105}_{95} \mathcal{N}(IQ;\ 100,\ 15^2) dIQ
+$$
+
+# Dystrybuanta rozkładu normalnego
+
+Wiemy więc już, jak zapisywać i jak szacować wartości prawdopodobieństwa z rozkładu normalnego. Jest to jednak czynność na tyle powszechna, że ma swoje własne, szczególne drogi na skróty. Najważniejszą z nich jest tak zwana **dystrybuanta**. Za tą straszną nazwą kryje się prosta idea, jaką jest suma krocząca prawdopodobieństwa. Co to znaczy? Załóżmy, że chcemy policzyć prawdopodobieństwo wysolowania osoby z IQ poniżej 85. Na wykresie wygląda to tak:
+
+```{r}
+ggplot(p_tys, aes(IQ)) +
+    exec(geom_area, !!!normal, fill = "gray95") +
+    exec(geom_area, !!!normal, fill = "#DB3D3D", xlim = c(min(p_tys$IQ), 85)) +
+    stat_function(fun = dnorm, args = list(mean = 100, sd = 15)) +
+    labs(x = "IQ", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.03)) +
+    theme_Publication()
+```
+
+Możemy wykorzystać nowo poznaną notację całkową, żeby wyrazić, co chcemy zrobić:
+
+$$
+P(IQ < 85) = \int^{85}_{-\infty} \mathcal{N}(x;\ 100,\ 15^2) dx
+$$
+
+...czyli policz pole od $-\infty$, czyli tak bardzo w lewo, jak sięgniesz, do 85. Jak wiemy, prawdopodobieństwo z wykresu gęstości to właśnie pole.
+
+To jest dokładnie to, co robi dystrybuanta. Dystrybuanta to taka funkcja, co jak do niej wrzucę 85, to ona mi powie, jakie jest prawdopodobieństwo, że wylosuję 85 *lub niżej*. Dystrybuanta często jest oznaczana jako CDF od *cumulative distribution function* i można ją znaleźć w wielu kalkulatorach, w Excelu, w R występuje jako funkcja `pnorm()`, na jednej z setek [stron internetowych](https://www.danielsoper.com/statcalc/calculator.aspx?id=53), a także... drukowaną w książkach.
+
+## Mniejsze niż
+
+Spórbujmy wykorzystać współczesne narzędzia[^3], żeby odpowiedzieć na zadane pytanie -- jakie jest prawdopodobieństwo, że losowo wybrana z populacji osoba będzie miała inteligencję 85 albo mniejszą?
+
+[^3]: Ja wykorzystam tutaj R, ale możesz skorzystać z zalinkowanego [kalkulatora](https://www.danielsoper.com/statcalc/calculator.aspx?id=53). Przy tej okazji polecam swoje [wprowadzenie do R](podstawy_R.qmd) oraz rozważenie kupna kalkulatora naukowego z opcją liczenia dystrybuanty. Ja używam Casio fx-991CEX i sobie chwalę. Teraz zastępuje go druga edycja Casio fx-991ES PLUS.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-fold: false
+pnorm(85, 100, 15)
+```
+
+## Większe niż
+
+Możemy też odpowiadać na pytania odwrotne, np. jakie jest prawdopodobieństwo, że losowo wybrany człowiek klasyfikuje się do Mensy (czyli ma IQ powyżej 130)? Na wykresie wygląda to tak:
+
+```{r}
+ggplot(p_tys, aes(IQ)) +
+    exec(geom_area, !!!normal, fill = "gray95") +
+    exec(geom_area, !!!normal, fill = "#DB3D3D", xlim = c(130, max(p_tys$IQ))) +
+    stat_function(fun = dnorm, args = list(mean = 100, sd = 15)) +
+    labs(x = "IQ", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.03)) +
+    theme_Publication()
+```
+
+Możemy to ugryźć na dwa sposoby. Jeśli nasz kalkulator nam to umożliwia, możemy przełączyć dystrybuantę na jej lustrzane odbicie, czyli wprost powiedzieć, żeby wyrzuciła nam wartości *większe* niż 130 zamiast zwyczajnych mniejszych. W R możemy to zrobić ustawiając argument `lower.tail = FALSE`.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-fold: false
+pnorm(130, 100, 15, lower.tail = FALSE)
+```
+
+Bardziej klasyczny sposób opiera się na tym, że prawdopodobieństwo sumarycznie musi wynosić 1. Możemy więc ze zwykłej dystrybuanty policzyć prawdopodobieństwo, że IQ wynosi *mniej niż* 130, a następnie otrzymaną wartość odjąć od 1. Tak też możesz zrobić korzystając z kalkulatora internetowego.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-fold: false
+1 - pnorm(130, 100, 15)
+```
+
+Swoją drogą przypomnę, że prawdopodobieństwo odpowiada tutaj odsetkowi osób w próbie lub w populacji. Możemy więc policzyć na przykład, ilu potencjalnych Mensan zamieszkuje Polskę:
+
+```{r}
+#| echo: true
+#| include: true
+#| code-fold: false
+# liczba mieszkańców Polski (2022) razy odsetek potencjalnych Mensan
+37766327 * pnorm(130, 100, 15, lower.tail = FALSE)
+```
+
+## Między danymi wartościami {#sec-pomiedzy}
+
+Na początku tego wpisu powiedziałem, że odchylenie standardowe $\sigma = 15$ oznacza, że około $\frac{2}{3}$ populacji znajduje się w widełkach 85-115, czyli 100±15. Skąd to wiedziałem? Cóż, możemy to policzyć.
+
+Wiele kalkulatorów pozwala na policzenie wartości według danych widełek, ale część pozwala tylko na liczenie czystej dystrybuanty czyli prawdopodobieństwa, że wartość będzie *mniejsza* niż zadana. Na wykresie od naszej wartości w lewo. Możemy jednak wykorzystać dystrybuantę do policzenia odsetka populacji *pomiędzy* jakimiś wartościami. Robimy to w dwóch krokach.
+
+Po pierwsze, liczymy wartość dystrybuanty dla górnych widełek, czyli w naszym przypadku 115.
+
+```{r}
+ggplot(p_tys, aes(IQ)) +
+    exec(geom_area, !!!normal, fill = "gray95") +
+    exec(geom_area, !!!normal, fill = "#DB3D3D", xlim = c(min(p_tys$IQ), 115)) +
+    stat_function(fun = dnorm, args = list(mean = 100, sd = 15)) +
+    labs(x = "IQ", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.03)) +
+    theme_Publication()
+```
+
+Następnie liczymy dystrybuantę dla dolnych widełek, czyli w tym wypadku 85.
+
+```{r}
+ggplot(p_tys, aes(IQ)) +
+    exec(geom_area, !!!normal, fill = "gray95") +
+    exec(geom_area, !!!normal, fill = "#DB3D3D", xlim = c(min(p_tys$IQ), 115)) +
+    exec(geom_area, !!!normal, fill = "#3DDB6A", xlim = c(min(p_tys$IQ), 85)) +
+    stat_function(fun = dnorm, args = list(mean = 100, sd = 15)) +
+    labs(x = "IQ", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.03)) +
+    theme_Publication()
+```
+
+A na koniec odejmujemy jedno od drugiego.
+
+```{r}
+ggplot(p_tys, aes(IQ)) +
+    exec(geom_area, !!!normal, fill = "gray95") +
+    exec(geom_area, !!!normal, fill = "#DB3D3D", xlim = c(85, 115)) +
+    stat_function(fun = dnorm, args = list(mean = 100, sd = 15)) +
+    labs(x = "IQ", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, 0.03)) +
+    theme_Publication()
+```
+
+W R możemy to zrobić tak:
+
+```{r}
+#| echo: true
+#| include: true
+#| code-fold: false
+pnorm(115, 100, 15) - pnorm(85, 100, 15)
+```
+
+Jak widzimy, można z grubsza powiedzieć, że w rozkładzie normalnym ±1 odchylenie standardowe przekłada się na $\frac{2}{3}$ populacji albo $P(\mu \pm 1\sigma) = 68,2\%$. Na tej samej zasadzie $P(\mu \pm 2\sigma) = 95,4\%$ i $P(\mu \pm 3\sigma) = 99,5\%$. Ta intuicja bywa nazywana **prawem trzech sigm**.
+
+[![Rycina ilustrująca prawo trzech sigm na Wikipedii](https://upload.wikimedia.org/wikipedia/commons/8/8c/Standard_deviation_diagram.svg "M. W. Toews, CC BY 2.5 &lt;https://creativecommons.org/licenses/by/2.5&gt;, via Wikimedia Commons"){fig-alt="Standard deviation diagram" width="100%"}](https://commons.wikimedia.org/wiki/File:Standard_deviation_diagram.svg)
+
+::: callout-tip
+## Zadanie
+
+Jakie jest prawdopodobieństwo wylosowania osoby o inteligencji:
+
+1.  mniejszej niż -2 odchylenia standardowe (czyli $100 - 2 \times 15 = 70$),
+
+2.  większej niż +1 odchylenie standardowe,
+
+3.  między -1 odchyleniem standardowym a średnią,
+
+4.  dokładnie 100.
+:::
+
+::: {.callout-note collapse="true"}
+## Odpowiedź
+
+1.  $P(IQ < 70) = \int^{70}_{-\infty} \mathcal{N}(x;\ 100,\ 15^2) dx \approx 0,02275013 \approx 2,28\%$
+
+2.  $P(IQ > 115) = \int^{\infty}_{115} \mathcal{N}(x;\ 100,\ 15^2) dx \approx 0,1586553 \approx 15,87\%$
+
+3.  $P(85 > IQ > 100) = \int^{100}_{85} \mathcal{N}(x;\ 100,\ 15^2) dx \approx 0,3413447 \approx 34,13\%$
+
+4.  Do tego pytania można podejść dwojako. Możemy stwierdzić, że dokładnie 100 to jest pojedynczy nieskończenie cienki prostokąt, a więc prawdopodobieństwo (jego pole) wynosi zero. Lepiej to widać na rozszerzeniu źrenic -- dokładnie 7 mm oznacza brak nawet jednej milionowej odchylenia, więc jest właściwie niemożliwe. Pamiętaj -- wykres gęstości działa jak histogram, więc potrzebuje widełek. Możemy jednak stwierdzić, że wyniki między 99,5 a 100,5 zaokrąglają się do 100 i to uznać za odpowiedź. W takim wypadku $P(IQ \approx 100) = \int^{100,5}_{99,5} \mathcal{N}(x;\ 100,\ 15^2) dx \approx 0.02659123 \approx 2,66\%$.
+:::
+
+## Odwrotna dystrybuanta
+
+Każda funkcja ma swoją funkcję odwrotną. Tak samo dystrybuanta. Do dystrybuanty wrzucamy maksymalną wartość z rozkładu (np. maksymalne IQ), a ona zwraca, jaki procent populacji cechuje taka lub niższa wartość. Do odwrotnej dystrybuanty wrzucamy, jaki procent populacji chcemy objąć, a ona wyrzuca maksymalną wartość z rozkładu.
+
+Załóżmy, że chcemy do jakiegoś projektu włączyć ludzi z górnych 10% rozkładu inteligencji. Czyli jak dobrze musi wypaść w teście inteligencji dana osoba, żeby zostać włączona do projektu? Jakie minimalne IQ musi uzyskać? Na takie właśnie pytania odpowiada odwrotna dystrybuanta. Przykładowy kalkulator można znaleźć [tutaj](https://planetcalc.com/4987/), zaś w R odpowiada za nią funkcja `qnorm()`.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-fold: false
+# patrząc od lewej
+qnorm(0.9, 100, 15)
+
+# patrząc od prawej
+qnorm(0.1, 100, 15, lower.tail = FALSE)
+```
+
+## Tablice statystyczne
+
+Zanim komputery stały się oczywiste dystrybuantę rozkładu normalnego odczytywano z drukowanych tablic. Do dziś można je znaleźć w podręcznikach do statystyki czy tablicach do zadań. Warto umieć je czytać, dlatego omówię je krótko.
+
+### Standaryzacja
+
+Każdy rozkład normalny jest opisywany przez swoją średnią i odchylenie standardowe. Możemy wymyślać dowolne rozkłady normalne manipulując tymi dwiema wartościami. Cały ten wpis posługiwaliśmy się skalą inteligencji, a więc rozkładem normalnym o parametrach $\mu = 100$ i $\sigma = 15$. Istnieją jeszcze inne rozkłady stosowane w psychologii, np. steny (m.in. wyniki NEO-PI-R, czyli testu osobowości wg Wielkiej Piątki) z parametrami $\mu = 5,5$ i $\sigma = 2$ czy teny (m.in. potężny kliniczny test MMPI) z parametrami $\mu = 50$ i $\sigma = 10$. Matką wszystkich rozkładów normalnych jest jednak tzw. **standardowy rozkład normalny**, czyli spreparowany tak, by średnia wynosiła $\mu = 0$, a odchylenie standardowe $\sigma = 1$.
+
+Wynik z każdego rozkładu normalnego da się przeliczyć na standardowy rozkład normalny, co często się robi. Prawo trzech sigm pokazuje, że człowiek może nauczyć się myśleć w odchyleniach standardowych. Ponieważ standardowy rozkład normalny jest... standardowy, to wszystkie tablice są skalibrowane pod niego. By móc skorzystać ze zwykłych tablic statystycznych, musimy umieć **wystandaryzować** daną wartość, czyli przedstawić ją właśnie w postaci odchyleń standardowych. Istnieją do tego [kalkulatory](https://www.danielsoper.com/statcalc/calculator.aspx?id=22), ale wzór jest tutaj naprawdę prosty. Od wyniku odejmujemy średnią, dzięki czemu będzie on dodatni, jeśli jest wyższy od średniej i ujemny, jeśli jest niższy. Potem dzielimy otrzymaną liczbę przez odchylenie standardowe i już. Tak otrzymaną wartość oznaczamy literą $Z$ (tzw. *Z-score*).
+
+$$
+Z(x) = \frac{x - \mu}{\sigma}
+$$
+
+## Korzystanie
+
+```{r}
+#| label: tbl-tablica-rozkladu-normalnego
+#| tbl-cap: Przykładowa tablica dystrybuanty rozkładu normalnego z zaznaczonymi wartościami dla *Z* = 1,67 i *Z* = 1,33.
+norm_table <- seq(0, 3.09, by = 0.01) %>%
+    pnorm() %>%
+    matrix(
+        ncol = 10,
+        byrow = TRUE,
+        dimnames = list(
+            format(seq(0, 3, 0.1), decimal.mark = ","),
+            paste0("0,0", 0:9)
+        )
+    ) %>%
+    round(4) %>%
+    format(decimal.mark = ",")
+
+norm_table["1,6", "0,07"] <- cell_spec(norm_table["1,6", "0,07"], bold = TRUE)
+norm_table["1,3", "0,03"] <- cell_spec(norm_table["1,3", "0,03"], bold = TRUE)
+
+kbl(norm_table, escape = FALSE) %>%
+    column_spec(1, bold = TRUE)
+```
+
+Spróbujmy wykorzystać tablicę [-@tbl-tablica-rozkladu-normalnego], żeby rozwiązać problem z prawdopodobieństwem wylosowania osoby z IQ między 80 a 125. Najpierw musimy przeliczyć nasze wartości ze skali IQ na skalę standardową.
+
+$$
+\begin{align*}
+Z(125) & = \frac{125 - 100}{15} = \frac{25}{15} \approx 1,67 \\
+Z(80) & = \frac{80 - 100}{15} = \frac{-20}{15} \approx -1,33
+\end{align*}
+$$
+
+Teraz możemy odczytać stosowne wartości dystrybuanty z tabeli. Zacznijmy od górnych widełek. Z lewej strony szukam wartości 1,6 i patrzę w kolumnę oznaczoną 0,07, bo razem daje to 1,67. Więcej problemu sprawi wartość -1,33, bo jest ujemna, zaś tabela składa się z wartości dodatnich. Jednak wiemy, że rozkład normalny jest symetryczny, czyli wartość przy $Z = -1,33$ będzie taka sama, jak odwrotność wartości dla $Z = 1,33$. Słowny opis jest mało zrozumiały, więc posłużmy się wykresem.
+
+```{r}
+ggplot(tibble(X = seq(-3.2, 3.2, 0.01)), aes(X)) +
+    geom_area(stat = "function", fun = dnorm, fill = "gray95") +
+    geom_area(stat = "function", fun = dnorm, fill = "#DB3D3D", xlim = c(-3.2, -1.33)) +
+    geom_area(stat = "function", fun = dnorm, fill = "#DB3D3D", xlim = c(1.33, 3.2)) +
+    stat_function(fun = dnorm) +
+    labs(x = "Z", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent) +
+    scale_x_continuous(breaks = c(-3, -2, -1.33, 0, 1.33, 2, 3)) +
+    theme_Publication()
+```
+
+Obszary zaznaczone na czerwono są identyczne. Możemy więc policzyć wartość dla -1,33 stosując sztuczkę z podrozdziału [-@sec-pomiedzy]. -- wziąć wartość dla 1,33 i odjąć ją od 1. Otrzymamy w ten sposób powierzchnię z prawej, która jest taka sama, jak powierzchnia z lewej.
+
+W ten sposób możemy odczytać, że górne widełki mają wartość dystrybuanty $P(x < 1,67) = 0,9525$, zaś dolne $P(x < -1,33) = 1 - 0,9082 = 0,0918$. Teraz możemy odjąć jedno od drugiego, żeby otrzymać prawdopodobieństwo, że wylosowane IQ będzie między 80 a 125.
+
+$$
+\begin{align*}
+P(80 < IQ < 125) & = \\
+= P(-1,33 < Z(IQ) < 1,67) & = \\
+& = 0,9525 - 0,0918 = \\
+& = 0,8607
+\end{align*}
+$$
+
+```{r}
+ggplot(tibble(X = seq(-3.2, 3.2, 0.01)), aes(X)) +
+    geom_area(stat = "function", fun = dnorm, fill = "gray95") +
+    geom_area(stat = "function", fun = dnorm, fill = "#DB3D3D", xlim = c(-1.33, 1.67)) +
+    stat_function(fun = dnorm) +
+    labs(x = "Z", y = "gęstość prawdopodobieństwa") +
+    scale_y_continuous(labels = scales::percent) +
+    scale_x_continuous(breaks = seq(-3, 3)) +
+    theme_Publication()
+```
+
+Jak wygląda dokładność tego wyniku w porównaniu do tego wyrzucanego przez R? Całkiem nieźle. Rozbieżności pojawiają się dopiero na czwartym miejscu po przecinku.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-fold: false
+# ze standardowego rozkładu normalnego
+pnorm(1.67) - pnorm(-1.33)
+
+# z rozkładu inteligencji
+pnorm(125, 100, 15) - pnorm(80, 100, 15)
+```
+
+::: callout-tip
+## Zadanie
+Korzystając z tablic rozkładu normalnego oblicz, jakie jest prawdopodobieństwo, że losowo wybrana osoba będzie miała IQ typu „tak blisko!”, czyli między 125 a 129. Zanim sprawdzisz odpowiedź niżej, spróbuj sprawdzić ją na kalkulatorze lub w R.
+:::
+
+::: {.callout-note collapse="true"}
+## Odpowiedź
+```{r}
+#| echo: true
+#| include: true
+#| code-fold: false
+pnorm(129, 100, 15) - pnorm(125, 100, 15)
+```
+:::
+
+# Podsumowanie
+
+1.  Słupki histogramu funkcjonują jak widełki -- pokazują jaka część próbki (lub populacji) ma daną nasilenie danej cechy między wartością $a$, a wartością $b$. Im słupki węższe, tym dokładniejszy histogram, ale same słupki niższe.
+
+2.  Jeśli oś Y histogramu przedstawimy w postaci procentów, możemy rozumieć go jako wykres prawdopodobieństwa wylosowania osób o danym nasileniu danej cechy albo jako wykres odsetka populacji o danym nasileniu danej cechy. To to samo.
+
+2.  Wykres gęstości można rozumieć jako histogram z nieskończenie cienkimi słupkami. Nie są one przy okazji nieskończenie niskie przez techniki matematyczne używane do ich tworzenia.
+
+3.  Dla inteligencji (i wielu innych cech) wykres gęstości z bardzo dużej próbki ma kształt krzywej dzwonowej. Innymi słowy rozkład inteligencji jest normalny. Inteligencję zwyczajowo przedstawia się na skali normalnej ze średnią $\mu = 100$ i odchyleniem standardowym $\sigma = 15$.
+
+4.  Z osi Y wykresu gęstości prawdopodobieństwa możemy odczytać *gęstość prawdopodobieństwa* (*likelihood*), ale nie prawdopodobieństwo (*probability*). **Gęstość prawdopodobieństwa i prawdopodobieństwo to dwie różne rzeczy!**
+
+5.  Prawdopodobieństwo na wykresach gęstości to **pole pod krzywą gęstości**, czyli suma pól nieskończenie cienkich prostokątów, z których jest ono zbudowane. Zapisać to możemy jako $\int_a^b \mathcal{N}(x;\ \mu,\ \sigma^2)dx$. Zawsze jednak potrzebujemy jakichś widełek, choćby bardzo wąskich; nie możemy policzyć pola pod punktem.
+
+6.  Możemy oszacować pole pod krzywą dzwonową (czyli prawdopodobieństwo) dzieląc je na mniejsze prostokąty. Szerokość takiego prostokąta ustalamy sami, zaś wysokość to gęstość prawdopodobieństwa w danym punkcie. Pola takich prostokątów możemy policzyć i dodać. Im prostokąty cieńsze, tym dokładniejsze oszacowanie.
+
+8.  Zazwyczaj do określania prawdopodobieństwa z rozkładu służy funkcja zwana dystrybuantą. Wrzuca się do niej wartość (np. IQ lub Z), a ona zwraca prawdopodobieństwo wylosowania wartości takiej **lub niższej**. W R dystrybuanta rozkładu normalnego ma postać `pnorm(x, mean = 0, sd = 1)`.
+
+9.  Za pomocą dystrybuanty możemy też policzyć prawdopodobieństwo, że wartość jest *wyższa* od zadanej odejmując wartość dystrybuanty w punkcie od 1. Możemy też policzyć prawdopodobieństwo wylosowania wartości z określonych widełek najpierw licząc widełki górne, a potem widełki dolne.
+
+10. Standardowy rozkład normalny ma średnią $\mu = 0$ i odchylenie standardowe $\sigma = 1$. Wartość wyrażona na tej skali oznaczana jest jako $Z$. Każdą skalę możemy przeliczyć na skalę standardową od wartości odejmując średnią i dzieląc wynik przez odchylenie standardowe. $$Z(x) = \frac{x - \mu}{\sigma}$$
