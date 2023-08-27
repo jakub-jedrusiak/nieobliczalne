@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nieobliczalne.pl/toc.html</loc>
-    <lastmod>2023-07-27T13:06:08.313Z</lastmod>
+    <lastmod>2023-08-27T00:09:25.453Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/pakiety-w-R.html</loc>
@@ -25,28 +25,32 @@
     <lastmod>2023-05-26T18:36:44.299Z</lastmod>
   </url>
   <url>
-    <loc>https://nieobliczalne.pl/posts/funkcje.html</loc>
-    <lastmod>2023-08-02T12:07:49.616Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/p-value.html</loc>
-    <lastmod>2023-05-26T18:36:44.296Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/newsletter.html</loc>
-    <lastmod>2023-05-21T11:58:15.114Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/about.html</loc>
-    <lastmod>2023-05-07T23:08:31.294Z</lastmod>
+    <loc>https://nieobliczalne.pl/posts/uczenie-sie.html</loc>
+    <lastmod>2023-05-26T18:36:44.286Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/procent-wariancji.html</loc>
     <lastmod>2023-07-25T16:58:40.852Z</lastmod>
   </url>
   <url>
-    <loc>https://nieobliczalne.pl/posts/uczenie-sie.html</loc>
-    <lastmod>2023-05-26T18:36:44.286Z</lastmod>
+    <loc>https://nieobliczalne.pl/about.html</loc>
+    <lastmod>2023-05-07T23:08:31.294Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/newsletter.html</loc>
+    <lastmod>2023-05-21T11:58:15.114Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/p-value.html</loc>
+    <lastmod>2023-05-26T18:36:44.296Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/funkcje.html</loc>
+    <lastmod>2023-08-02T12:07:49.616Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa.html</loc>
+    <lastmod>2023-08-27T00:07:07.076Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/powtarzalny-tekst.html</loc>
@@ -58,7 +62,7 @@
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/automatyzacja.html</loc>
-    <lastmod>2023-08-21T15:18:13.940Z</lastmod>
+    <lastmod>2023-08-21T15:20:20.140Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/git.html</loc>

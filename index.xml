@@ -9,7 +9,7 @@
 <link>https://nieobliczalne.pl/index.html</link>
 <atom:link href="https://nieobliczalne.pl/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.322</generator>
+<generator>quarto-1.4.330</generator>
 <lastBuildDate>Wed, 26 Jul 2023 22:00:00 GMT</lastBuildDate>
 <item>
   <title>Funkcje matematyczne</title>
@@ -7002,7 +7002,7 @@ background-color: null;
 font-style: inherit;">round</span>()</span>
 <span id="cb13-6">}</span></code></pre></div>
 </div>
-<p>Ten kod wykorzystałem do znalezienia zestawu 100 losowych liczb z rozkładu normalnego IQ (<img src="https://latex.codecogs.com/png.latex?M%20=%20100">, <img src="https://latex.codecogs.com/png.latex?SD%20=%2015">), których średnia będzie wynosiła dokładnie 101. Wykorzystałem to <a href="./posts/./posts/p-value.qmd">w tekście o wartości <img src="https://latex.codecogs.com/png.latex?p"></a> do znalezienia ładnej próbki, której średnia nie będzie wynosiła dokładnie tyle, ile średnia z populacji. Funkcja <code>rnorm</code> losuje liczby z rozkładu normalnego o podanych parametrach 5, <code>round</code> zaokrągla je do całości. Pętla <code>while</code> mówi tutaj „Sprawdź, czy średnia wylosowanych liczb nie równa się 105. Jeśli nie, to wylosuj ponownie.” albo inaczej „Powtarzaj losowanie dopóki średnia liczb nie będzie się równała 101”.</p>
+<p>Ten kod wykorzystałem do znalezienia zestawu 100 losowych liczb z rozkładu normalnego IQ (<img src="https://latex.codecogs.com/png.latex?M%20=%20100">, <img src="https://latex.codecogs.com/png.latex?SD%20=%2015">), których średnia będzie wynosiła dokładnie 101. Wykorzystałem to <a href="./posts/p-value.qmd">w tekście o wartości <img src="https://latex.codecogs.com/png.latex?p"></a> do znalezienia ładnej próbki, której średnia nie będzie wynosiła dokładnie tyle, ile średnia z populacji. Funkcja <code>rnorm</code> losuje liczby z rozkładu normalnego o podanych parametrach 5, <code>round</code> zaokrągla je do całości. Pętla <code>while</code> mówi tutaj „Sprawdź, czy średnia wylosowanych liczb nie równa się 105. Jeśli nie, to wylosuj ponownie.” albo inaczej „Powtarzaj losowanie dopóki średnia liczb nie będzie się równała 101”.</p>
 </section>
 </section>
 <section id="podsumowanie" class="level1" data-number="4">
@@ -10262,9 +10262,7 @@ font-style: inherit;">shape =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"diamond"</span>, <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>L) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">size =</span> 2L) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
 <span id="cb69-4">    <span class="fu" style="color: #4758AB;
@@ -10371,9 +10369,7 @@ font-style: inherit;">shape =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"diamond"</span>, <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>L) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">size =</span> 2L) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
 <span id="cb70-4">    <span class="fu" style="color: #4758AB;
@@ -11585,9 +11581,7 @@ font-style: inherit;">shape =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"diamond"</span>, <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>L) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">size =</span> 2L) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
 <span id="cb96-80">        <span class="fu" style="color: #4758AB;
