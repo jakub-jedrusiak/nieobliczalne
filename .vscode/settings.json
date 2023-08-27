@@ -1,11 +1,13 @@
 {
-    "cSpell.language": "en,pl",
+    "cSpell.language": "pl,en-GB",
     "cSpell.enabled": true,
     "cSpell.ignoreWords": [
         "Grolemunda",
         "Rproj",
         "Statistici",
+        "WAIS",
         "Wickhama",
+        "binwidth",
         "calej",
         "diplajer",
         "googlesheets",
@@ -15,23 +17,41 @@
         "lapply",
         "latwy",
         "rownames",
+        "rozkladu",
         "sapply",
         "setwd",
         "stri",
         "stworzyc",
         "tapply",
         "wartosc",
-        "wyksztalcenie"
+        "wyksztalcenie",
+        "ylim"
     ],
     "cSpell.words": [
+        "booktabs",
+        "callout",
+        "dimnames",
+        "dnorm",
+        "infty",
+        "linetype",
+        "linewidth",
+        "mathcal",
+        "Mensan",
         "metryczkowe",
+        "ncol",
+        "pnorm",
+        "qnorm",
+        "rlang",
         "summarise",
         "webp",
-        "wyczysc"
+        "wyczysc",
+        "xend",
+        "xlim",
+        "yend"
     ],
     "cSpell.enableFiletypes": [
         "mermaid",
         "quarto"
     ],
-    "cSpell.diagnosticLevel": "Hint"
+    "cSpell.diagnosticLevel": "Information"
 }
