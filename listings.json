@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/rozklady-probkowania.html",
       "/posts/gestosc-prawdopodobienstwa.html",
       "/posts/funkcje.html",
       "/posts/pakiety-w-R.html",
