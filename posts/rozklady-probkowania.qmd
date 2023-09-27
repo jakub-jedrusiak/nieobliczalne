@@ -1,0 +1,197 @@
+---
+title: Rozkłady próbkowania
+subtitle: Największe nieporozumienie w statystyce
+description: W tym wpisie wprowadzam bardzo ważne rozróżnienie, które uwielbia się mylić wszystkim -- od studentów po profesorów (tych mniej siedzących w statystyce). Czym innym jest rozkład zmiennej, a czym innym jest rozkład próbkowania. Co więcej, rozkłady próbkowania leżą u podstaw wnioskowania statystycznego, to koncept fundamentalny, więc warto je docenić. Są one podstawą wartości $p$. To one (a nie rozkłady zmiennych!) powinny być normalne do analiz parametrycznych. Omawiam tutaj też błąd standardowy i Centralne Twierdzenie Graniczne.
+image: ./headers/rozklady-probkowania.webp
+twitter-card:
+    image: "/headers/rozklady-probkowania.jpeg"
+date: "2023-09-28"
+draft: true
+code-fold: true
+categories:
+    - Statystyka
+---
+
+``` {r}
+#| label: setup
+
+set.seed(2303)
+library(tidyverse)
+iq <- 0
+while (round(mean(iq)) != 98) {
+    iq <- rnorm(100, 100, 15)
+}
+iq <- tibble(iq = iq)
+```
+
+Sięgnijmy pamięcią do przykładu z [tekstu o wartości $p$](./p-value.qmd). Na tym tekście będziemy budować, więc zachęcam, żeby z nim zapoznać się w pierwszej kolejności. Konieczne jest też rozumienie podstaw rozkładu normalnego. Jeśli nie potrafisz obliczyć, powiedzmy, jaka część populacji ma inteligencję między 85 a 115, zachęcam do nadrobienia [tekstu o rozkładach normalnych](./gestosc-prawdopodobienstwa.qmd). Nie jest to *niezbędne* do zrozumienia większości tego tekstu, ale bardzo pomoże.
+
+Sprawdzaliśmy tam między innymi kontrowersyjną (i fałszywą) hipotezę, że kobiety są mniej inteligentne od mężczyzn. Zbadaliśmy 100 kobiet i 100 mężczyzn i wyszło nam, że tak istotnie jest -- mężczyźni osiągnęli średnią 101, kobiety 99. Wiedzeni nieufnością powtórzyliśmy nasze badanie i -- ku naszemu zdumieniu -- tym razem kobiety osiągnęły średnią 101 a mężczyźni 98. Po głębszym zastanowieniu możemy stwierdzić, że nie ma w tym nic dziwnego. W końcu całkowicie losowo mogę trafić na bardziej lub mniej inteligentną próbkę mężczyzn. Jakie jednak mogę mieć zaufanie do swoich wyników? Jak to, że moi mężczyźni osiągnęli średnią 98 ma się do rzeczywistej średniej *wszystkich* mężczyzn? Czy muszę zbadać ich wszystkich, żeby mieć pewność? To zgłębimy tutaj.
+
+Cały sens statystyki polega na tym, żeby być w stanie pobrać próbkę i na jej podstawie powiedzieć coś na temat populacji, z której ją pobraliśmy [@wackerly2008]. Nie muszę więc badać wszystkich mężczyzn świata, żeby coś o nich (jako o zbiorowości) powiedzieć. Statystyka jest jednak lepsza od chłopskiego rozumu nie tylko w tym, że daje bardziej obiektywne dane, niż chłopski rozum (wbrew temu, co mogliśmy słyszeć od wujków przy rodzinnym stole), ale też pozwala powiedzieć, jak bardzo pewni możemy być naszych wniosków. Kluczowe pytanie na ten moment będzie więc brzmiało -- skoro w mojej próbce 100 mężczyzn wyszła średnia 98, to jak to ma się do średniej inteligencji wszystkich mężczyzn?
+
+# Populacja i próba
+
+Populacja to taka abstrakcja, oznaczająca mniej więcej „wszyscy". Jeśli badamy żubry w Puszczy Białowieskiej, naszą populacją są żubry z Puszczy Białowieskiej. Jeśli interesują nas konkretnie biol-chemy z 3C, to nasza populacja to biol-chemy z 3C. Ale jeśli badamy biol-chemy z 3C, żeby powiedzieć coś o wszystkich biol-chemach w kraju, to po pierwsze nie mamy dobrej próbki, a po drugie naszą populacją stają się wszystkie biol-chemy w kraju. Populacją jest więc to, o czym chcemy wyciągać wnioski. Zbadanie całej populacji jest drogie, czasochłonne i często po prostu niepotrzebne. Zdarza się to, jak w odbywającym się co 10 lat spisie powszechnym, jednak możemy wyciągać sensowne wnioski na temat całych populacji na podstawie ich wycinków. Takie wycinki to **próby**.
+
+Dobieranie próby do badań to jest całe duże zagadnienie w metodologii. Mówiąc jednak ogólnie, dobra próba powinna być po pierwsze liczna, a po drugie możliwie losowa.
+
+Liczność próby to wymóg dość intuicyjny. Jak w starym kawale. Ja jestem biały, mój tato jest biały, moja mama jest biała, moja siostra jest biała, moi koledzy z klasy są biali, czyli nie ma czarnych ludzi. Tutaj również ujawnia się wyższość statystyki nad przemyśleniami wujka, który o stanie narodu z pozycji autorytetu wnioskuje na podstawie kolegów z wojska, a o stanie męskości na podstawie chłopaka w ciasnych spodniach, którego widział w supermarkecie. Może się to wydawać oczywiste, ale uznawana (choć powoli niknąca) psychoanaliza, olbrzymi system przekonań właściwie o wszystkim, co tkwi w człowieku, powstała na bazie sylwetek 38 pacjentów [@borch-jacobsen2021]. Związek liczności z pewnością wyrazimy tu matematycznie.
+
+Próbka jest jednak dobra wtedy, kiedy jest losowa. Jeśli chcemy sprawdzić, ile książek rocznie czytają Polacy, to nie zaczaimy się z sondą uliczną pod biblioteką. Jeśli próbka jest rzeczywiście losowa, to nawet jeśli ktoś z tej próbki odstaje w jedną stronę, to prawdopodobnie ktoś inny odstaje podobnie w drugą stronę i ostatecznie się wyrównują. Pod warunkiem, że próba jest rozsądnie liczna.
+
+# Rozkład zmiennej w próbie
+
+Załóżmy, że mamy losową próbę 100 mężczyzn i wszystkim mierzymy inteligencję. Niektórzy z tych mężczyzn mają wpółczynniki inteligencji 100, inni 95, jeszcze inni 105 itd. Wiedząc nieco o skali inteligencji nawet intuicyjnie będziemy czuć, że więcej ludzi będzie miało raczej przeciętną inteligencję, czyli około 100, niż 130 (co jest progiem przyjęcia do Mensy). Częstość poszczególnych wyników możemy przedstawić na histogramie (a potem dorzucić wykres gęstości, o czym mówiliśmy w [tekście o gęstości prawdopodobieństwa](./gestosc-prawdopodobienstwa.qmd)).
+
+```{r}
+ggplot(iq, aes(iq)) +
+    geom_histogram(binwidth = 5) +
+    geom_vline(xintercept = mean(iq$iq)) +
+    geom_vline(xintercept = c(mean(iq$iq) - sd(iq$iq), mean(iq$iq) + sd(iq$iq)), linetype = "dashed") +
+    xlim(100 - 15 * 3, 100 + 15 * 3)
+```
+
+Widzimy, że najwięcej osób wykazało inteligencję blisko środka rozkładu. Średnia inteligencja wyniosła **w tej konkternej próbie** `r round(mean(iq$iq), 1)`, co zaznaczyłem pionową kreską. To, co widzimy na rysunku, to **rozkład zmiennej** w próbie. Pobraliśmy próbkę, zmierzyliśmy inteligencję, narysowaliśmy rozkład. To, co widzimy na obrazku, odnosi się tylko do naszej konkretnej próby. Może przypominać rzeczywisty rozkład inteligencji w populacji (i przypomina), ale może to odwzorowanie może być dalekie od doskonałości. Istnieje więc jakiś **rozkład zmiennej w populacji**, który staramy się przybliżyć za pomocą **rozkładu zmiennej w próbie**. Im próba bardziej liczna, tym rozkład zmiennej bliższy prawdziwemu rozkładowi w populacji. Wydaje się to naturalne.
+
+Poza średnią rozkład ma swoje odchylenie standardowe. Jest to podstawowe pojęcie, chociaż nieintuicyjne przy pierwszym kontakcie. W szczegółach omawiam je w [tekście o wariancji](./procent-wariancji.qmd), ale w uproszczeniu mówi nam ono o tym, gdzie znajduje się większość ludzi. Odchylenie standardowe w naszej próbie wyniosło `r round(sd(iq$iq), 1)`, więc większość ludzi ma inteligencję między `r round(mean(iq$iq) - sd(iq$iq), 1)` a `r round(mean(iq$iq) + sd(iq$iq), 1)`, czyli średnia ± odchylenie standardowe. Jeśli teraz usłyszymy, że ktoś w teście inteligencji uzyskał wynik 130, to możemy sobie pomyśleć „dużo, aż 2 odchylenia standardowe od średniej”. Tutaj zakres jednego odchylenia standardowego od średniej zaznaczyłem przerywanymi kreskami. Jeśli odchylenie standardowe jest niewielkie, to średnia ma nieduży błąd, pojedyncze obserwacje są blisko niej. Jeśli jest ono duże, możemy się spodziewać większego rozstrzału.
+
+Losowanie osób do naszego badania możemy sobie wyobrazić jako **losowanie z rozkładu zmiennej w populacji**. Rozkład zmiennej w populacji mówi nam, jakie wyniki są częstsze, jakie rzadsze. Gdy wychodzimy na ulicę i pytamy ludzi, czy chcą wziąć udział w badaniu naukowym, mówiąc po statystycznemu **losujemy z rozkładu**. Osoba jest częścią populacji, więc losuję z rozkładu zmiennej w populacji. Rozkład budują ludzie. Gdy biorę losowego człowieka i mierzę jego inteligencję, statystyka każe nam patrzeć na to tak, jakbym wylosował wynik z rozkładu inteligencji w populacji. Powtarzam się, bo to naprawdę dziwne przejście z konkretnego, namacalnego zaczepiania ludzi na ulicy do matematycznej abstrakcji. Spróbuj oswoić się z tą perspektywą, nim przejdziesz dalej, bo przyda nam się w kolejnym podrozdziale.
+
+# Rozkład próbkowania
+
+Wiemy jednak, że każda próbka może trochę różnić się średnią. W niektórych próbkach wyjdzie nam 102, w innych 98. Możemy jednak intuicyjnie czuć, że znacznie trudniej przez przypadek zebrać próbkę o średniej 130 albo 70. Raczej średnie każdej jednej próbki będą krążyć dookoła prawdziwej średniej, czyli w tym wypadku 100. Zazwyczaj nie wiemy, jaka jest prawdziwa średnia z populacji, ale jak sobie z tym poradzić powiemy później. Średnie bliżej 100 powinny pojawiać się częściej, a średnie dalej od 100 rzadziej, możemy więc zrobić 100 próbek, każda po 100 osób i zobaczyć, jak często losują nam się jakie średnie. Możemy to nanieść na histogram.
+
+```{r}
+iq_pop <- c()
+for (i in 1:100) {
+    iq_pop <- c(iq_pop, mean(rnorm(100, 100, 15)))
+}
+
+iq_pop <- tibble(iq = iq_pop)
+
+ggplot(iq_pop, aes(iq)) +
+    geom_histogram() +
+    geom_vline(xintercept = mean(iq_pop$iq)) +
+    geom_vline(xintercept = c(mean(iq_pop$iq) - sd(iq_pop$iq), mean(iq_pop$iq) + sd(iq_pop$iq)), linetype = "dashed")
+```
+
+Wylosowaliśmy więc 100 różnych próbek, w każdej zmierzyliśmy średnią inteligencję. Na histogramie widać, że średnie w pobliżu 100 rzeczywiście pojawiały się częściej, niż te dalsze od 100. Średnia średnia wyniosła tutaj `r round(mean(iq_pop$iq), 1)`, zaś jej odchylenie standardowe `r round(sd(iq_pop$iq), 1)`, czyli zazwyczaj próbki miały średnią między `r round(mean(iq_pop$iq) - sd(iq_pop$iq), 1)` a `r round(mean(iq_pop$iq) + sd(iq_pop$iq), 1)`. Zwróćmy jednak uwagę, że robiąc ten wykres, spłaszczyliśmy każdą próbkę 100 osób do jednej tylko liczby -- średniej inteligencji. Ten wykres nie mówi nam więc nic na temat tego, jak wyglądał rozkład zmiennej w każdej próbce. On nam mówi tylko i aż tyle, jak często próbka 100 osób miała jaką średnią. Taki rozkład nazywamy **rozkładem próbkowania**. Rozkład próbkowania to rozkład średnich z **różnych prób** i jest czymś zupełnie innym niż rozkład zmiennej w próbie czy w populacji. I to rozróżnienie jest powalająco istotne.
+
+Rozkład zmiennej w próbie przypomina rozkład zmiennej w populacji. Im więcej osób w próbie, tym bardziej. Rozkład próbkowania nie musi przypominać rozkładu zmiennej w populacji, ani się do niego nie zbliża. Rozkład zmiennej w próbie składa się z pojedynczych pomiarów, rozkład próbkowania składa się ze **średnich**. Rozkład zmiennej w próbie mówi nam, jak wiele osób w naszej próbce wpada w określone widełki. Rozkład próbkowania mówi nam o tym, jak łatwo wylosować próbkę o określonej średniej. Wykorzystajmy więc perspektywę, którą podpowiedziałem na koniec poprzedniego podrozdziału. Gdy losujemy osobę z ulicy i mierzymy jej inteligencję, to losujemy ją z rozkładu zmiennej w populacji. Gdy losujemy 100 osób z ulicy i liczymy ich średnią inteligencję, to losujemy średnią z rozkładu próbkowania. **O średniej każdej próbki można myśleć jako o wylosowanej z rozkładu próbkowania**, tak jak każda osoba ze swoją inteligencją jest wylosowana z rozkładu inteligencji w populacji.
+
+Rozkładów próbkowania zazwyczaj się nie rysuje. Gdy pobieramy próbę, mamy tylko jedną średnią, nie ma sensu robić histogramu z jednej liczby. Rozkład próbkowania to pewna abstrakcja. Tak jak można sobie teoretycznie wyobrazić, że zbadaliśmy wszystkich członków populacji, by uzyskać rozkład zmiennej, tak możemy sobie wypbrazić, że zbadaliśmy wszystkie możliwe próbki po 100 osób, by uzyskać rozkład próbkowania. Dlaczego to jest istotne? Bo mówi nam, jak wiele zaufania możemy mieć do pojedynczej średniej z próby. W jaki sposób?
+
+Załóżmy, że rozkład próbkowania ma średnią 100 i odchylenie standardowe 5. **Odchylenie standardowe rozkładu próbkowania to coś zupełnie innego niż odchylenie standardowe rozkładu zmiennej!** Odchylenie standardowe rozkładu inteligencji wynosi 15, ale rozkład próbkowania nie mówi nam o inteligencji pojedynczych ludzi, tylko o średniej inteligencji grup ludzi. To są dwa różne odchylenia! Za to **średnia rozkładu próbkowania jest równa średniej z populacji**. Wracając. Jeśli średnia rozkładu próbkowania wynosi 100, a odchylenie standardowe 5, to nagminnie powinniśmy się spodziewać średnich między 95 a 105. Średnia 115 powinna nas zdziwić znacznie bardziej. Jeśli w takim wypadku wyszłoby nam, że w naszej próbce kobiety mają inteligencję 100, a mężczyźni 115, to bylibyśmy bardziej skłonni stwierdzić, że coś jest na rzeczy. Intuicyjnie możemy też czuć, że średnie 100 i 102 nie zrobiłyby na nas takiego wrażenia, bo naprawdę łatwo uzyskać je przez przypadek, bo większość średnich będzie między 95 a 105.
+
+# Centralne Twierdzenie Graniczne
+
+Teraz się zacznie robić ciekawie. Trzymaj się, już za niedługo będą przykłady. Do tej pory rozkład próbkowania był tylko abstrakcją. Czymś, co równie trudno zmierzyć, jak prawdziwą średnią z populacji. Na co dzień myślę dość konkretnie, abstrakcje są mi potrzebne wtedy, gdy mogę je wykorzystać do myślenia czy w innym celu. Po co mi więc taka abstrakcja jak rozkład próbkowania? Bo mając pojedynczą próbkę, jej średnią i odchylenie standardowe, wbrew pozorom, można całkiem sporo powiedzieć o rozkładzie próbkowania, z którego ta średnia pochodzi. Pozwala nam na to przepotężne prawo, leżące u podstaw całej statystyki, zwane **Centralnym Twierdzeniem Granicznym** (*Central Limit Theorem*).
+
+## Normalność
+
+Twierdzenie to mówi nam o dwóch piekielnie ważnych rzeczach. Po pierwsze, jeśli próba jest odpowiednio duża, to **każdy rozkład próbkowania jest normalny**. Odpowiednio duża oznacza tutaj według większości autorów minimum 15 osób, chociaż co bardziej konserwatywni autorzy mówią 20 albo nawet 30 osób. Podkreślam tutaj słowo **każdy**. Oznacza to, że nieważne, jak wygląda rozkład zmiennej, czy jest normalny, czy nie. Rozkład próbkowania będzie normalny. Wyobraźmy sobie, że rozkład poniżej to rozkład zarobków w pewnym państwie. Większość ludzi zarabia niedużo, ale jest też niewielka ilość ludzi zarabiająca bardzo dużo.
+
+```{r}
+rexp(10000, 0.0007) %>%
+    tibble(income = .) %>%
+    ggplot(aes(income)) +
+        geom_histogram()
+```
+
+Z pobieram z tego rozkładu losową próbkę 100 osób. Wychodzi mi średni dochód `r round(mean(rexp(100, 0.0007)))`. Spoko. Pobieram kolejne 100 osób i tym razem dostaję średni dochód `r round(mean(rexp(100, 0.0007)))`. Robię tak jeszcze bardzo dużo razy, więc ostatecznie mam zapisane w Excelu bardzo dużo średnich. Gdy z tych średnich, nie z pojedynczych obserwacji, zrobię histogram, dostanę coś takiego.
+
+```{r}
+income <- c()
+for (i in 1:1000) {
+    income <- c(income, mean(rexp(100, 0.0007)))
+}
+
+income <- tibble(income = income)
+
+ggplot(income, aes(income)) +
+    geom_histogram() +
+    geom_vline(xintercept = mean(income$income)) +
+    geom_vline(xintercept = c(mean(income$income) - sd(income$income), mean(income$income) + sd(income$income)), linetype = "dashed")
+```
+
+Ten rozkład wygląda zupełnie inaczej, niż rozkład wyjściowy. Dlaczego? Bo rozkład wyjściowy to rozkład zmiennej, a to na obrazku to rozkład średnich, jakie wychodzą w różnych próbkach, czyli rozkład próbkowania. Wielkość pojedynczej próbki wynosi 100, czyli więcej niż 15, a więc rozkład próbkowania wyszedł normalny. To jest pierwsze, co mówi nam CLT.
+
+Jeśli czytałeś(-aś) [tekst o rozkładach normalnych](./gestosc-prawdopodobienstwa.qmd), możesz się już domyślać, dlaczego to jest ważne. Jeśli wiemy, że rozkład jest normalny, to moglibyśmy powiedzieć, np. „OK, w mojej próbce dzieci karmionych kalarepą średnia inteligencja wynosi wynosi 110. Rozkład próbkowania ma średnią 100 i odchylenie standardowe 5, więc szansa na to, że taka *lub wyższa* średnia wylosuje się z rozkładu normalnego przez przypadek wynosi $\int_{110}^{\infty} \mathcal N(x;\ 100,\ 5^2) = 1 - pnorm(110,\ mean = 100,\ sd = 5) \approx 2,3\%$, a więc raczej nie jest to przypadek”. Skąd jednak mam wiedzieć, jaką średnią i odchylenie standardowe ma rozkład próbkowania, jak mam tylko jedną próbkę?
+
+::: callout-tip
+## Zadanie
+
+Szybka powtórka z rozkładów normalnych i rozgrzewka w myśleniu o rozkładach próbkowania.
+
+1.  Twoja próbka 40 osób ma średnią 121. Rozkład próbkowania ma średnią 100 i odchylenie standardowe 7. Jaka jest szansa, że próbka 40 osób będzie miała średnią 121 lub wyższą?
+
+2.  Twoja próbka 120 osób ma średnią -0,78. Rozkład próbkowania ma średnią 0 i odchylenie standardowe 0,5. Jaka jest szansa, że próbka 120 osób będzie miała średnią taką lub niższą?
+
+3. Twoja próbka 300 osób ma średnią 5,7. Rozkład próbkowania ma średnią 5,5 i odchylenie standardowe 0,65. Różnica między Twoją średnią a średnią rozkładu próbkowania wynoci 0,2. Jaka jest szansa wylosowania próbki o takim lub większym odchyleniu (czyli mniej niż 5,3 lub więcej niż 5,7)? 
+:::
+
+::: {.callout-note collapse="true"}
+## Odpowiedź
+
+1.  $1 - pnorm(121,\ mean = 100,\ sd = 7) \approx 0,13\%$
+
+2.  $pnorm(-0.78,\ 0,\ 0.5) \approx 5,9\%$
+
+3.  $1 - pnorm(5.7,\ 5.5,\ 0.65) + pnorm(5.3,\ 5.5,\ 0.65) \approx 75,8\%$
+:::
+
+## Błąd standardowy
+
+Druga rzecz, na którą pozwala nam CLT to dokładnie rozwiązanie naszego problemu. Mówi nam ono, że możemy oszacować odchylenie standardowe rozkładu próbkowania dzieląc odchylenie standardowe naszej próbki przez pierwiastek z liczby osób badanych.
+
+$$
+SE = \frac{SD}{\sqrt{N}}
+$$
+
+Rozszyfrujmy to sobie i podajmy przykład. Skrót $SE$ oznacza **błąd standardowy**. Jest to specjalna nazwa na **odchylenie standardowe rozkładu próbkowania**. Pozwala ona odróżnić łatwo odchylenie standardowe rozkładu zmiennej, od odchylenia standardowego rozkładu próbkowania. $N$ to liczba osób w próbce. $SD$ w tym wzorze odnosi się do odchylenia standardowego *zmiennej*. Jeśli znamy prawdziwe odchylenie standardowe w populacji, to możemy je wykorzystać, ale jeśli nie (czyli zazwyczaj), to możemy je zastąpić odchyleniem standardowym naszej próbki. Jeśli sięgniesz pamięcią do wzoru na odchylenie standardowe, to możesz sobie przypomnieć, że sumę odchyleń podniesionych do kwadratu dzieliliśmy przez $N - 1$ zamiast przez $N$. Jest to takie zabezpieczenie wbudowane we wzór na odchylenie standardowe, dzięki któremu odchylenie standardowe z próby bardziej przypomina to z populacji. Dzięki temu, że dzieliliśmy przez $N - 1$ zamiast przez $N$, teraz możemy podstawiać do wzoru na błąd standardowy odchylenie standardowe z próby.
+
+Zaczęliśmy od wylosowania próbki 100 mężczyzn i zmierzeniu ich inteligencji. Wiemy, że rozkład inteligencji ma średnią 100, a więc rozkład próbkowania również ma średnią 100. Odchylenie standardowe wynosi 15, co również wiemy dlatego, że wiemy odrobinę o inteligencji. Możemy więc oszacować błąd standardowy, czyli odchylenie standardowe rozkładu próbkowania.
+
+$$
+SE = \frac{SD}{\sqrt{N}} = \frac{15}{\sqrt{100}} = 1,5
+$$
+
+Przypomnijmy, że wcześniej zrobiliśmy symulację rozkładu próbkowania, losując 100 próbek po 100 osób i licząc średnie. Tak uzyskany rozkład próbkowania miał odchylenie standardowe `r round(sd(iq_pop$iq), 2)`. Jak widzimy, było to w miarę rozsądne oszacowanie, ale jeśli zamiast 100 próbek pobralibyśmy 1000, 10 000 czy 100 000, to nasz symulowany rozkład miałby odchylenie standardowe coraz bliższe 1,5.
+
+W naszym drugim przykładzie z dochodamu nie znamy prawdziwego odchylenia standardowego, ale możemy je oszacować. Załóżmy, że wylosowałem 100 osób, zapytałem o dochody i wyszło mi odchylenie standardowe 1753,93. Możemy oszacować błąd standardowy:
+
+$$
+SE = \frac{1753,93}{\sqrt{100}} \approx 175
+$$
+
+Jeśli wiedziałbym, że prawdziwa średnia wynosi, powiedzmy 1600 (ze średnią poradzimy sobie potem), to próbki ze średnią między 1425 i 1775 mogę uznać za zupełnie typowe (ok. 67% przypadków według prawa trzech sigm), zaś próbki ze średnią między 1250 a 1950 za zupełnie typowe (ok. 95% przypadków według prawa trzech sigm). Jeśli dzieci karmione kalarepą osiągałyby średni dochód na poziomie 2000, to miałbym mniej niż 5% szans, że ten wynik jest przypadkowy.
+
+Z tego wzoru wynika też ważny wniosek -- **im większa próbka, tym mniejszy błąd standardowy**. 95% próbek 100 osób będzie miało średnią inteligencję między 97 a 103 (100±1,5), co policzyliśmy wyżej. Różnica między 100 a 101 będzie więc typowa, bo bardzo łatwo uzyskać ją przez przypadek. Jeśli jednak nasza próbka wyniesie nie 100, a 1000 osób, to błąd standardowy spadnie do $SE = \frac{15}{\sqrt{1000}} \approx 0,47$, a więc 95% próbek będzie miało średnią między 99,06 a 100,94. Tym samym średnia 101 staje się bardziej podejrzana. Ba! Staje się istotnie różna od 100, bo szansa na uzyskanie jej przez przypadek w próbie 1000 osób jest mniejsza niż 5%[^1]. Takie widełki nazywamy **95% przedziałem ufności**. Jeśli chcemy uzyskać dokładnie 95% pewności, będziemy mnożyć błąd standardowy nie przez 2, a przez 1,96 (patrz [odwrotna dystrybuanta rozkładu normalnego](./gestosc-prawdopodobienstwa.qmd#sec-inverse-norm)).
+
+[^1]: A dokładnie wynosi $\int_101^\infty \mathcal N(x;\ 100,\ 0,47) \approx 1,7\%$, jeśli chcemy znać szansę uzyskania średniej 101 lub większej albo $3,3\%$, jeśli nie zakładamy, w którą stronę mężczyźni różnią się od kobiet i liczymy w obie strony.
+
+::: callout-tip
+## Zadanie
+
+Pewna zmienna ma rozkład o średniej 5,5. 25 dzieci karmionych kalarepą uzyskuje średnią 5,8 z odchyleniem standardowym 0,5. Jaka jest szansa, że wynik jest przypadkowy? Załóż hipotezę prawostronną (tj. że średnia u dzieci jest 5,8 albo wyższa). Oblicz 95% przedział ufności dla średniej 5,5.
+:::
+
+::: {.callout-note collapse="true"}
+## Odpowiedź
+
+### Błąd standardowy
+$$
+SE = \frac{0,5}{\sqrt{25}} = \frac{0,5}{5} = 0,1
+$$
+### Wartość $p$
+$$
+1 - pnorm(5.8,\ 5.5,\ 0.1) = 0,13\%
+$$
+
+### Przedział ufności
+$$
+5,5 \pm 1,96 \times 0,1 = 5,5 \pm 0,196 = 5,304 \text{ i } 5,696
+$$
+:::
+
