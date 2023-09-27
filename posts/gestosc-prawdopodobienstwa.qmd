@@ -652,13 +652,13 @@ Jakie jest prawdopodobieństwo wylosowania osoby o inteligencji:
 4.  Do tego pytania można podejść dwojako. Możemy stwierdzić, że dokładnie 100 to jest pojedynczy nieskończenie cienki prostokąt, a więc prawdopodobieństwo (jego pole) wynosi zero. Lepiej to widać na rozszerzeniu źrenic -- dokładnie 7 mm oznacza brak nawet jednej milionowej odchylenia, więc jest właściwie niemożliwe. Pamiętaj -- wykres gęstości działa jak histogram, więc potrzebuje widełek. Możemy jednak stwierdzić, że wyniki między 99,5 a 100,5 zaokrąglają się do 100 i to uznać za odpowiedź. W takim wypadku $P(IQ \approx 100) = \int^{100,5}_{99,5} \mathcal{N}(x;\ 100,\ 15^2) dx \approx 0.02659123 \approx 2,66\%$.
 :::
 
-## Odwrotna dystrybuanta
+## Odwrotna dystrybuanta {#sec-inverse-norm}
 
 Każda funkcja ma swoją funkcję odwrotną[^4]. Tak samo dystrybuanta. Do dystrybuanty wrzucamy jakąś wartość z rozkładu (np. IQ), a ona zwraca, jaki procent populacji cechuje taka lub niższa wartość. Do odwrotnej dystrybuanty wrzucamy, jaki procent populacji chcemy objąć, a ona wyrzuca maksymalną wartość z rozkładu.
 
 [^4]: Nie biorę żadnej odpowiedzialności za to stwierdzenie.
 
-Załóżmy, że chcemy do projektu naukowego włączyć ludzi z górnych 10% rozkładu inteligencji. Czyli jak dobrze musi wypaść w teście inteligencji dana osoba, żeby zostać włączona do projektu? Jakie minimalne IQ musi uzyskać? Na takie właśnie pytania odpowiada odwrotna dystrybuanta. Przykładowy kalkulator można znaleźć [tutaj](https://planetcalc.com/4987/), zaś w R odpowiada za nią funkcja `qnorm()`.
+Załóżmy, że chcemy do projektu naukowego włączyć ludzi z górnych 10% rozkładu inteligencji. Czyli jak dobrze musi wypaść w teście inteligencji dana osoba, żeby zostać włączona do projektu? Jakie minimalne IQ musi uzyskać? Na takie właśnie pytania odpowiada odwrotna dystrybuanta. Przykładowy kalkulator można znaleźć [tutaj](https://planetcalc.com/4987/), zaś w R odpowiada za nią funkcja `qnorm()`.
 
 ```{r}
 #| echo: true
