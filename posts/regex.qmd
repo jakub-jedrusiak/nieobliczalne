@@ -6,6 +6,7 @@ image: ./headers/regex.webp
 twitter-card:
     image: "/headers/regex.jpeg"
 date: "2023-05-20"
+date-modified: "2023-10-17"
 categories:
     - Narzędzia
 ---
