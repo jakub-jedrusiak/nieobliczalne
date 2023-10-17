@@ -2,13 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.330">
+<meta name="generator" content="quarto-1.4.424">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jakub Jędrusiak">
+<meta name="description" content="W tym wpisie wprowadzam bardzo ważne rozróżnienie, które uwielbia się mylić wszystkim – od studentów po profesorów (tych mniej siedzących w statystyce). Czym innym jest rozkład zmiennej, a czym innym jest rozkład próbkowania. Co więcej, rozkłady próbkowania leżą u podstaw wnioskowania statystycznego, to koncept fundamentalny, więc warto je docenić. Są one podstawą wartości p. To one (a nie rozkłady zmiennych!) powinny być normalne do analiz parametrycznych. Omawiam tutaj też błąd standardowy i Centralne Twierdzenie Graniczne.">
 
-<title>Nieobliczalne – rozklady-probkowania</title>
+<title>Nieobliczalne - Rozkłady próbkowania</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,7 +22,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -51,12 +106,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Brak wyników",
     "search-matching-documents-text": "dopasowane dokumenty",
@@ -102,8 +158,19 @@ cookieconsent.run({
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/cascadia-code">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles/styles.css">
+<meta property="og:title" content="Nieobliczalne - Rozkłady próbkowania">
+<meta property="og:description" content="W tym wpisie wprowadzam bardzo ważne rozróżnienie, które uwielbia się mylić wszystkim – od studentów po profesorów (tych mniej siedzących w statystyce). Czym innym jest rozkład zmiennej, a czym innym jest rozkład próbkowania. Co więcej, rozkłady próbkowania leżą u podstaw wnioskowania statystycznego, to koncept fundamentalny, więc warto je docenić. Są one podstawą wartości \(p\). To one (a nie rozkłady zmiennych!) powinny być normalne do analiz parametrycznych. Omawiam tutaj też błąd standardowy i Centralne Twierdzenie Graniczne.">
+<meta property="og:image" content="https://nieobliczalne.pl/posts/headers/rozklady-probkowania.webp">
+<meta property="og:site_name" content="Nieobliczalne">
+<meta name="twitter:title" content="Nieobliczalne - Rozkłady próbkowania">
+<meta name="twitter:description" content="W tym wpisie wprowadzam bardzo ważne rozróżnienie, które uwielbia się mylić wszystkim – od studentów po profesorów (tych mniej siedzących w statystyce). Czym innym jest rozkład zmiennej, a czym innym jest rozkład próbkowania. Co więcej, rozkłady próbkowania leżą u podstaw wnioskowania statystycznego, to koncept fundamentalny, więc warto je docenić. Są one podstawą wartości \(p\). To one (a nie rozkłady zmiennych!) powinny być normalne do analiz parametrycznych. Omawiam tutaj też błąd standardowy i Centralne Twierdzenie Graniczne.">
+<meta name="twitter:image" content="https://nieobliczalne.pl/headers/rozklady-probkowania.jpeg">
+<meta name="twitter:creator" content="@jakub_jedrusiak">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
@@ -162,17 +229,940 @@ cookieconsent.run({
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Na tej stronie</h2>
+   
+  <ul>
+  <li><a href="#populacja-i-próba" id="toc-populacja-i-próba" class="nav-link active" data-scroll-target="#populacja-i-próba"><span class="header-section-number">1</span> Populacja i próba</a></li>
+  <li><a href="#rozkład-zmiennej-w-próbie" id="toc-rozkład-zmiennej-w-próbie" class="nav-link" data-scroll-target="#rozkład-zmiennej-w-próbie"><span class="header-section-number">2</span> Rozkład zmiennej w próbie</a></li>
+  <li><a href="#rozkład-próbkowania" id="toc-rozkład-próbkowania" class="nav-link" data-scroll-target="#rozkład-próbkowania"><span class="header-section-number">3</span> Rozkład próbkowania</a></li>
+  <li><a href="#centralne-twierdzenie-graniczne" id="toc-centralne-twierdzenie-graniczne" class="nav-link" data-scroll-target="#centralne-twierdzenie-graniczne"><span class="header-section-number">4</span> Centralne Twierdzenie Graniczne</a>
+  <ul class="collapse">
+  <li><a href="#normalność" id="toc-normalność" class="nav-link" data-scroll-target="#normalność"><span class="header-section-number">4.1</span> Normalność</a></li>
+  <li><a href="#błąd-standardowy" id="toc-błąd-standardowy" class="nav-link" data-scroll-target="#błąd-standardowy"><span class="header-section-number">4.2</span> Błąd standardowy</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/rozklady-probkowania.qmd" class="toc-action"><i class="bi bi-github"></i>Edytuj tę stronę</a></li><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action"><i class="bi empty"></i>Zgłoś problem</a></li></ul></div></nav>
     <div class="quarto-margin-footer"><div class="margin-footer-item">
-<p>./html-addons/subscribe.html</p>
+<style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
+    <style type="text/css">
+    /* LOADER */
+    .ml-form-embedSubmitLoad {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+    }
+
+    .g-recaptcha {
+    transform: scale(0.53);
+    -webkit-transform: scale(0.53);
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    height: 42px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+
+    .ml-form-embedSubmitLoad:after {
+      content: " ";
+      display: block;
+      width: 11px;
+      height: 11px;
+      margin: 1px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+    border-color: #ffffff #ffffff #ffffff transparent;
+    animation: ml-form-embedSubmitLoad 1.2s linear infinite;
+    }
+    @keyframes ml-form-embedSubmitLoad {
+      0% {
+      transform: rotate(0deg);
+      }
+      100% {
+      transform: rotate(360deg);
+      }
+    }
+      #mlb2-5266475.ml-form-embedContainer {
+        box-sizing: border-box;
+        display: table;
+        margin: 0 auto;
+        position: static;
+        width: 100% !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer h4,
+      #mlb2-5266475.ml-form-embedContainer p,
+      #mlb2-5266475.ml-form-embedContainer span,
+      #mlb2-5266475.ml-form-embedContainer button {
+        text-transform: none !important;
+        letter-spacing: normal !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper {
+        background-color: #6E6E6E;
+        
+        border-width: 0px;
+        border-color: transparent;
+        border-radius: 10px;
+        border-style: solid;
+        box-sizing: border-box;
+        display: inline-block !important;
+        margin: 0;
+        padding: 0;
+        position: relative;
+              }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper.embedPopup,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper.embedDefault { width: 200px; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper.embedForm { max-width: 200px; width: 100%; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-align-left { text-align: left; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-align-center { text-align: center; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-align-default { display: table-cell !important; vertical-align: middle !important; text-align: center !important; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-align-right { text-align: right; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedHeader img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        height: auto;
+        margin: 0 auto !important;
+        max-width: 100%;
+        width: undefinedpx;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody {
+        padding: 20px 20px 0 20px;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody.ml-form-embedBodyHorizontal {
+        padding-bottom: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent {
+        text-align: left;
+        margin: 0 0 20px 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent h4,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent h4 {
+        color: #ffffff;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        font-weight: 400;
+        margin: 0 0 10px 0;
+        text-align: left;
+        word-break: break-word;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p {
+        color: #ffffff;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        margin: 0 0 10px 0;
+        text-align: left;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ul,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ul,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol {
+        color: #ffffff;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol ol,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol ol {
+        list-style-type: lower-alpha;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol ol ol,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol ol ol {
+        list-style-type: lower-roman;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p a,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p a {
+        color: #000000;
+        text-decoration: underline;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group {
+        text-align: left!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group label {
+        margin-bottom: 5px;
+        color: #333333;
+        font-size: 14px;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-weight: bold; font-style: normal; text-decoration: none;;
+        display: inline-block;
+        line-height: 20px;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p:last-child,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p:last-child {
+        margin: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form {
+        margin: 0;
+        width: 100%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
+        margin: 0 0 20px 0;
+        width: 100%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
+        float: left;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent.horozintalForm {
+        margin: 0;
+        padding: 0 0 20px 0;
+        width: 100%;
+        height: auto;
+        float: left;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow {
+        margin: 0 0 10px 0;
+        width: 100%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-last-item {
+        margin: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-formfieldHorizintal {
+        margin: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input {
+        background-color: #ffffff !important;
+        color: #333333 !important;
+        border-color: #cccccc;
+        border-radius: 4px !important;
+        border-style: solid !important;
+        border-width: 1px !important;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px !important;
+        height: auto;
+        line-height: 21px !important;
+        margin-bottom: 0;
+        margin-top: 0;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 10px 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-webkit-input-placeholder,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::-webkit-input-placeholder { color: #333333; }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-moz-placeholder,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::-moz-placeholder { color: #333333; }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-ms-input-placeholder,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input:-ms-input-placeholder { color: #333333; }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-moz-placeholder,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input:-moz-placeholder { color: #333333; }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow textarea, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow textarea {
+        background-color: #ffffff !important;
+        color: #333333 !important;
+        border-color: #cccccc;
+        border-radius: 4px !important;
+        border-style: solid !important;
+        border-width: 1px !important;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px !important;
+        height: auto;
+        line-height: 21px !important;
+        margin-bottom: 0;
+        margin-top: 0;
+        padding: 10px 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
+          border-color: #cccccc!important;
+          background-color: #ffffff!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input.custom-control-input[type="checkbox"]{
+        box-sizing: border-box;
+        padding: 0;
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+        margin-top: 5px;
+        margin-left: -1.5rem;
+        overflow: visible;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
+        border-radius: 4px!important;
+      }
+
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox input[type=checkbox]:checked~.label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked~.custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input:checked~.custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked~.label-description::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox input[type=checkbox]:checked~.label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked~.label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::before  {
+          border-color: #000000!important;
+          background-color: #000000!important;
+          color: #ffffff!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::after {
+           top: 2px;
+           box-sizing: border-box;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+           top: 0px!important;
+           box-sizing: border-box!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+        top: 0px!important;
+           box-sizing: border-box!important;
+      }
+
+       #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::after {
+            top: 0px!important;
+            box-sizing: border-box!important;
+            position: absolute;
+            left: -1.5rem;
+            display: block;
+            width: 1rem;
+            height: 1rem;
+            content: "";
+       }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before {
+        top: 0px!important;
+        box-sizing: border-box!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-control-label::before {
+          position: absolute;
+          top: 4px;
+          left: -1.5rem;
+          display: block;
+          width: 16px;
+          height: 16px;
+          pointer-events: none;
+          content: "";
+          background-color: #ffffff;
+          border: #adb5bd solid 1px;
+          border-radius: 50%;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-control-label::after {
+          position: absolute;
+          top: 2px!important;
+          left: -1.5rem;
+          display: block;
+          width: 1rem;
+          height: 1rem;
+          content: "";
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
+          position: absolute;
+          top: 4px;
+          left: -1.5rem;
+          display: block;
+          width: 16px;
+          height: 16px;
+          pointer-events: none;
+          content: "";
+          background-color: #ffffff;
+          border: #adb5bd solid 1px;
+          border-radius: 50%;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after {
+          position: absolute;
+          top: 0px!important;
+          left: -1.5rem;
+          display: block;
+          width: 1rem;
+          height: 1rem;
+          content: "";
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+          position: absolute;
+          top: 0px!important;
+          left: -1.5rem;
+          display: block;
+          width: 1rem;
+          height: 1rem;
+          content: "";
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-radio .custom-control-label::after {
+          background: no-repeat 50%/50% 50%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-checkbox .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+          background: no-repeat 50%/50% 50%;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-control, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-control {
+        position: relative;
+        display: block;
+        min-height: 1.5rem;
+        padding-left: 1.5rem;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-input, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input {
+          position: absolute;
+          z-index: -1;
+          opacity: 0;
+          box-sizing: border-box;
+          padding: 0;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label {
+          color: #000000;
+          font-size: 12px!important;
+          font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+          line-height: 22px;
+          margin-bottom: 0;
+          position: relative;
+          vertical-align: top;
+          font-style: normal;
+          font-weight: 700;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-select, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-select {
+        background-color: #ffffff !important;
+        color: #333333 !important;
+        border-color: #cccccc;
+        border-radius: 4px !important;
+        border-style: solid !important;
+        border-width: 1px !important;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px !important;
+        line-height: 20px !important;
+        margin-bottom: 0;
+        margin-top: 0;
+        padding: 10px 28px 10px 12px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+        height: auto;
+        display: inline-block;
+        vertical-align: middle;
+        background: url('https://assets.mlcdn.com/ml/images/default/dropdown.svg') no-repeat right .75rem center/8px 10px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow {
+        height: auto;
+        width: 100%;
+        float: left;
+      }
+      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { width: 70%; float: left; }
+      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal { width: 30%; float: left; }
+      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal.labelsOn { padding-top: 25px;  }
+      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields { box-sizing: border-box; float: left; padding-right: 10px;  }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input {
+        background-color: #ffffff;
+        color: #333333;
+        border-color: #cccccc;
+        border-radius: 4px;
+        border-style: solid;
+        border-width: 1px;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 0;
+        margin-top: 0;
+        padding: 10px 10px;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-y: initial;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button {
+        background-color: #000000 !important;
+        border-color: #000000;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 4px;
+        box-shadow: none;
+        color: #ffffff !important;
+        cursor: pointer;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px !important;
+        font-weight: 700;
+        line-height: 20px;
+        margin: 0 !important;
+        padding: 10px !important;
+        width: 100%;
+        height: auto;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button:hover {
+        background-color: #333333 !important;
+        border-color: #333333 !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type="checkbox"] {
+        box-sizing: border-box;
+        padding: 0;
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+        margin-top: 5px;
+        margin-left: -1.5rem;
+        overflow: visible;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description {
+        color: #000000;
+        display: block;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        text-align: left;
+        margin-bottom: 0;
+        position: relative;
+        vertical-align: top;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label {
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        display: block;
+        min-height: 24px;
+        padding-left: 24px;
+
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label a {
+        color: #000000;
+        text-decoration: underline;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p {
+        color: #000000 !important;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
+        font-size: 12px !important;
+        font-weight: normal !important;
+        line-height: 18px !important;
+        padding: 0 !important;
+        margin: 0 5px 0 0 !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p:last-child {
+        margin: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit {
+        margin: 0 0 20px 0;
+        float: left;
+        width: 100%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button {
+        background-color: #000000 !important;
+        border: none !important;
+        border-radius: 4px !important;
+        box-shadow: none !important;
+        color: #ffffff !important;
+        cursor: pointer;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        line-height: 21px !important;
+        height: auto;
+        padding: 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button.loading {
+        display: none;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button:hover {
+        background-color: #333333 !important;
+      }
+      .ml-subscribe-close {
+        width: 30px;
+        height: 30px;
+        background: url('https://assets.mlcdn.com/ml/images/default/modal_close.png') no-repeat;
+        background-size: 30px;
+        cursor: pointer;
+        margin-top: -10px;
+        margin-right: -10px;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      .ml-error input, .ml-error textarea, .ml-error select {
+        border-color: red!important;
+      }
+
+      .ml-error .custom-checkbox-radio-list {
+        border: 1px solid red !important;
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      .ml-error .label-description,
+      .ml-error .label-description p,
+      .ml-error .label-description p a,
+      .ml-error label:first-child {
+        color: #ff0000 !important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow.ml-error .label-description p,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow.ml-error .label-description p:first-letter {
+        color: #ff0000 !important;
+      }
+            @media only screen and (max-width: 200px){
+
+        .ml-form-embedWrapper.embedDefault, .ml-form-embedWrapper.embedPopup { width: 100%!important; }
+        .ml-form-formContent.horozintalForm { float: left!important; }
+        .ml-form-formContent.horozintalForm .ml-form-horizontalRow { height: auto!important; width: 100%!important; float: left!important; }
+        .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { width: 100%!important; }
+        .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal > div { padding-right: 0px!important; padding-bottom: 10px; }
+        .ml-form-formContent.horozintalForm .ml-button-horizontal { width: 100%!important; }
+        .ml-form-formContent.horozintalForm .ml-button-horizontal.labelsOn { padding-top: 0px!important; }
+
+      }
+    </style>
+
+    
+  
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+      
+        
+        
+      
+
+      
+        
+        
+      
+
+      
+
+            
+            
+            
+            
+            
+            
+      
+
+      
+
+      
+        
+        
+         
+        
+        
+      
+
+        
+        
+        
+        
+        
+        
+      
+
+       
+
+        
+        
+        
+        
+        
+        
+        
+       
+
+
+      
+        
+        
+        
+        
+  
+
+
+
+  
+        
+        
+        
+      
+
+
+      
+    
+    
+    
+    
+    
+  
+
+  
+        
+        
+        
+        
+        
+      
+
+      
+        
+        
+        
+        
+        
+      
+
+      
+        
+        
+        
+        
+        
+      
+
+       
+
+        
+        
+        
+        
+       
+
+       
+        
+        
+        
+        
+      
+
+      
+        
+        
+        
+        
+        
+        
+        
+       
+
+    
+
+    
+
+
+      
+
+
+      
+
+      
+      
+
+      
+
+      
+
+
+
+
+
+    
+
+      
+    <div id="mlb2-5266475" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-5266475">
+      <div class="ml-form-align-center ">
+        <div class="ml-form-embedWrapper embedForm">
+
+          
+          
+
+          <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+
+            <div class="ml-form-embedContent" style=" ">
+              
+                <h4>Bądź na bieżąco</h4>
+                <p>Otrzymuj maila, gdy pojawią się nowe wpisy</p>
+              
+            </div>
+
+            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/447540/forms/88779935637833443/subscribe" data-code="" method="post" target="_blank">
+              <div class="ml-form-formContent">
+                
+
+                  
+                  <div class="ml-form-fieldRow ml-last-item">
+                    <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+
+                      
+
+
+                      <!-- input -->
+                      <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Email" autocomplete="email">
+                      <!-- /input -->
+
+                      <!-- textarea -->
+                      
+                      <!-- /textarea -->
+
+                      <!-- select -->
+                      
+                      <!-- /select -->
+
+                      <!-- checkboxes -->
+            
+            <!-- /checkboxes -->
+
+                      <!-- radio -->
+                      
+                      <!-- /radio -->
+
+                      <!-- countries -->
+                      
+                      <!-- /countries -->
+
+
+
+
+
+                    </div>
+                  </div>
+                
+              </div>
+
+              
+
+              <!-- Privacy policy -->
+              
+              <!-- /Privacy policy -->
+
+              
+
+              
+
+              
+
+
+
+<div class="ml-form-recaptcha ml-validate-required" style="float: left;">
+                <style type="text/css">
+  .ml-form-recaptcha {
+    margin-bottom: 20px;
+  }
+
+  .ml-form-recaptcha.ml-error iframe {
+    border: solid 1px #ff0000;
+  }
+
+  @media screen and (max-width: 480px) {
+    .ml-form-recaptcha {
+      width: 220px!important
+    }
+    .g-recaptcha {
+      transform: scale(0.78);
+      -webkit-transform: scale(0.78);
+      transform-origin: 0 0;
+      -webkit-transform-origin: 0 0;
+    }
+  }
+</style>
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+  <div class="g-recaptcha" data-sitekey="6Lf1KHQUAAAAAFNKEX1hdSWCS3mRMv4FlFaNslaD"></div>
+</div>
+
+
+              
+              <input type="hidden" name="ml-submit" value="1">
+
+              <div class="ml-form-embedSubmit">
+                
+                  <button type="submit" class="primary">Subskrybuj</button>
+                
+                <button disabled="disabled" style="display: none;" type="button" class="loading">
+                  <div class="ml-form-embedSubmitLoad"></div>
+                  <span class="sr-only">Loading...</span>
+                </button>
+              </div>
+
+              
+              <input type="hidden" name="anticsrf" value="true">
+            </form>
+          </div>
+
+          <div class="ml-form-successBody row-success" style="display: none">
+
+            <div class="ml-form-successContent">
+              
+                <h4>Sprawdź maila</h4>
+                <p>Link z potwierdzeniem znajdziesz na swoim mailu. Jeśli go tam nie ma, sprawdź spam.</p>
+              
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+
+  
+  
+  <script>
+    function ml_webform_success_5266475() {
+      var $ = ml_jQuery || jQuery;
+      $('.ml-subscribe-form-5266475 .row-success').show();
+      $('.ml-subscribe-form-5266475 .row-form').hide();
+    }
+      </script>
+  
+  
+      <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v08a893c96141fbc55feeeeac1fda7508" type="text/javascript"></script>
+        <script>
+            fetch("https://assets.mailerlite.com/jsonp/447540/forms/88779935637833443/track-view")
+        </script>
 </div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-</div>
+<h1 class="title">Rozkłady próbkowania</h1>
+<p class="subtitle lead">Największe nieporozumienie w statystyce</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Statystyka</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    W tym wpisie wprowadzam bardzo ważne rozróżnienie, które uwielbia się mylić wszystkim – od studentów po profesorów (tych mniej siedzących w statystyce). Czym innym jest rozkład zmiennej, a czym innym jest rozkład próbkowania. Co więcej, rozkłady próbkowania leżą u podstaw wnioskowania statystycznego, to koncept fundamentalny, więc warto je docenić. Są one podstawą wartości <span class="math inline">\(p\)</span>. To one (a nie rozkłady zmiennych!) powinny być normalne do analiz parametrycznych. Omawiam tutaj też błąd standardowy i Centralne Twierdzenie Graniczne.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -184,6 +1174,12 @@ cookieconsent.run({
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Opublikowano</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">28 września 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -193,9 +1189,261 @@ cookieconsent.run({
 </header>
 
 
+<div class="cell">
+<details>
+<summary>Kod</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2303</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details>
+<summary>Kod</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>iq <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="fu">round</span>(<span class="fu">mean</span>(iq)) <span class="sc">!=</span> <span class="dv">98</span>) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    iq <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">15</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>iq <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">iq =</span> iq)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Sięgnijmy pamięcią do przykładu z <a href="../posts/p-value.html">tekstu o wartości <span class="math inline">\(p\)</span></a>. Na tym tekście będziemy budować, więc zachęcam, żeby z nim zapoznać się w pierwszej kolejności. Konieczne jest też rozumienie podstaw rozkładu normalnego. Jeśli nie potrafisz obliczyć, powiedzmy, jaka część populacji ma inteligencję między 85 a 115, zachęcam do nadrobienia <a href="../posts/gestosc-prawdopodobienstwa.html">tekstu o rozkładach normalnych</a>. Nie jest to <em>niezbędne</em> do zrozumienia większości tego tekstu, ale bardzo pomoże.</p>
+<p>Sprawdzaliśmy tam między innymi kontrowersyjną (i fałszywą) hipotezę, że kobiety są mniej inteligentne od mężczyzn. Zbadaliśmy 100 kobiet i 100 mężczyzn i wyszło nam, że tak istotnie jest – mężczyźni osiągnęli średnią 101, kobiety 99. Wiedzeni nieufnością powtórzyliśmy nasze badanie i – ku naszemu zdumieniu – tym razem kobiety osiągnęły średnią 101 a mężczyźni 98. Po głębszym zastanowieniu możemy stwierdzić, że nie ma w tym nic dziwnego. W końcu całkowicie losowo mogę trafić na bardziej lub mniej inteligentną próbkę mężczyzn. Jakie jednak mogę mieć zaufanie do swoich wyników? Jak to, że moi mężczyźni osiągnęli średnią 98 ma się do rzeczywistej średniej <em>wszystkich</em> mężczyzn? Czy muszę zbadać ich wszystkich, żeby mieć pewność? To zgłębimy tutaj.</p>
+<p>Cały sens statystyki polega na tym, żeby być w stanie pobrać próbkę i na jej podstawie powiedzieć coś na temat populacji, z której ją pobraliśmy <span class="citation" data-cites="wackerly2008">(<a href="#ref-wackerly2008" role="doc-biblioref">Wackerly, Mendenhall, &amp; Scheaffer, 2008</a>)</span>. Nie muszę więc badać wszystkich mężczyzn świata, żeby coś o nich (jako o zbiorowości) powiedzieć. Statystyka jest jednak lepsza od chłopskiego rozumu nie tylko w tym, że daje bardziej obiektywne dane, niż chłopski rozum (wbrew temu, co mogliśmy słyszeć od wujków przy rodzinnym stole), ale też pozwala powiedzieć, jak bardzo pewni możemy być naszych wniosków. Kluczowe pytanie na ten moment będzie więc brzmiało – skoro w mojej próbce 100 mężczyzn wyszła średnia 98, to jak to ma się do średniej inteligencji wszystkich mężczyzn?</p>
+<section id="populacja-i-próba" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Populacja i próba</h1>
+<p>Populacja to taka abstrakcja, oznaczająca mniej więcej „wszyscy”. Jeśli badamy żubry w Puszczy Białowieskiej, naszą populacją są żubry z Puszczy Białowieskiej. Jeśli interesują nas konkretnie biol-chemy z 3C, to nasza populacja to biol-chemy z 3C. Ale jeśli badamy biol-chemy z 3C, żeby powiedzieć coś o wszystkich biol-chemach w kraju, to po pierwsze nie mamy dobrej próbki, a po drugie naszą populacją stają się wszystkie biol-chemy w kraju. Populacją jest więc to, o czym chcemy wyciągać wnioski. Zbadanie całej populacji jest drogie, czasochłonne i często po prostu niepotrzebne. Zdarza się to, jak w odbywającym się co 10 lat spisie powszechnym, jednak możemy wyciągać sensowne wnioski na temat całych populacji na podstawie ich wycinków. Takie wycinki to <strong>próby</strong>.</p>
+<p>Dobieranie próby do badań to jest całe duże zagadnienie w metodologii. Mówiąc jednak ogólnie, dobra próba powinna być po pierwsze liczna, a po drugie możliwie losowa.</p>
+<p>Liczność próby to wymóg dość intuicyjny. Jak w starym kawale. Ja jestem biały, mój tato jest biały, moja mama jest biała, moja siostra jest biała, moi koledzy z klasy są biali, czyli nie ma czarnych ludzi. Tutaj również ujawnia się wyższość statystyki nad przemyśleniami wujka, który o stanie narodu z pozycji autorytetu wnioskuje na podstawie kolegów z wojska, a o stanie męskości na podstawie chłopaka w ciasnych spodniach, którego widział w supermarkecie. Może się to wydawać oczywiste, ale uznawana (choć powoli niknąca) psychoanaliza, olbrzymi system przekonań właściwie o wszystkim, co tkwi w człowieku, powstała na bazie sylwetek 38 pacjentów <span class="citation" data-cites="borch-jacobsen2021">(<a href="#ref-borch-jacobsen2021" role="doc-biblioref">Borch-Jacobsen, 2021</a>)</span>. Związek liczności z pewnością wyrazimy tu matematycznie.</p>
+<p>Próbka jest jednak dobra wtedy, kiedy jest losowa. Jeśli chcemy sprawdzić, ile książek rocznie czytają Polacy, to nie zaczaimy się z sondą uliczną pod biblioteką. Jeśli próbka jest rzeczywiście losowa, to nawet jeśli ktoś z tej próbki odstaje w jedną stronę, to prawdopodobnie ktoś inny odstaje podobnie w drugą stronę i ostatecznie się wyrównują. Pod warunkiem, że próba jest rozsądnie liczna.</p>
+</section>
+<section id="rozkład-zmiennej-w-próbie" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Rozkład zmiennej w próbie</h1>
+<p>Załóżmy, że mamy losową próbę 100 mężczyzn i wszystkim mierzymy inteligencję. Niektórzy z tych mężczyzn mają wpółczynniki inteligencji 100, inni 95, jeszcze inni 105 itd. Wiedząc nieco o skali inteligencji nawet intuicyjnie będziemy czuć, że więcej ludzi będzie miało raczej przeciętną inteligencję, czyli około 100, niż 130 (co jest progiem przyjęcia do Mensy). Częstość poszczególnych wyników możemy przedstawić na histogramie (a potem dorzucić wykres gęstości, o czym mówiliśmy w <a href="../posts/gestosc-prawdopodobienstwa.html">tekście o gęstości prawdopodobieństwa</a>).</p>
+<div class="cell">
+<details>
+<summary>Kod</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iq, <span class="fu">aes</span>(iq)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(iq<span class="sc">$</span>iq)) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="fu">mean</span>(iq<span class="sc">$</span>iq) <span class="sc">-</span> <span class="fu">sd</span>(iq<span class="sc">$</span>iq), <span class="fu">mean</span>(iq<span class="sc">$</span>iq) <span class="sc">+</span> <span class="fu">sd</span>(iq<span class="sc">$</span>iq)), <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="dv">100</span> <span class="sc">-</span> <span class="dv">15</span> <span class="sc">*</span> <span class="dv">3</span>, <span class="dv">100</span> <span class="sc">+</span> <span class="dv">15</span> <span class="sc">*</span> <span class="dv">3</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values (`geom_bar()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="rozklady-probkowania_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Widzimy, że najwięcej osób wykazało inteligencję blisko środka rozkładu. Średnia inteligencja wyniosła <strong>w tej konkternej próbie</strong> 97.6, co zaznaczyłem pionową kreską. To, co widzimy na rysunku, to <strong>rozkład zmiennej</strong> w próbie. Pobraliśmy próbkę, zmierzyliśmy inteligencję, narysowaliśmy rozkład. To, co widzimy na obrazku, odnosi się tylko do naszej konkretnej próby. Może przypominać rzeczywisty rozkład inteligencji w populacji (i przypomina), ale może to odwzorowanie może być dalekie od doskonałości. Istnieje więc jakiś <strong>rozkład zmiennej w populacji</strong>, który staramy się przybliżyć za pomocą <strong>rozkładu zmiennej w próbie</strong>. Im próba bardziej liczna, tym rozkład zmiennej bliższy prawdziwemu rozkładowi w populacji. Wydaje się to naturalne.</p>
+<p>Poza średnią rozkład ma swoje odchylenie standardowe. Jest to podstawowe pojęcie, chociaż nieintuicyjne przy pierwszym kontakcie. W szczegółach omawiam je w <a href="../posts/procent-wariancji.html">tekście o wariancji</a>, ale w uproszczeniu mówi nam ono o tym, gdzie znajduje się większość ludzi. Odchylenie standardowe w naszej próbie wyniosło 15.2, więc większość ludzi ma inteligencję między 82.4 a 112.8, czyli średnia ± odchylenie standardowe. Jeśli teraz usłyszymy, że ktoś w teście inteligencji uzyskał wynik 130, to możemy sobie pomyśleć „dużo, aż 2 odchylenia standardowe od średniej”. Tutaj zakres jednego odchylenia standardowego od średniej zaznaczyłem przerywanymi kreskami. Jeśli odchylenie standardowe jest niewielkie, to średnia ma nieduży błąd, pojedyncze obserwacje są blisko niej. Jeśli jest ono duże, możemy się spodziewać większego rozstrzału.</p>
+<p>Losowanie osób do naszego badania możemy sobie wyobrazić jako <strong>losowanie z rozkładu zmiennej w populacji</strong>. Rozkład zmiennej w populacji mówi nam, jakie wyniki są częstsze, jakie rzadsze. Gdy wychodzimy na ulicę i pytamy ludzi, czy chcą wziąć udział w badaniu naukowym, mówiąc po statystycznemu <strong>losujemy z rozkładu</strong>. Osoba jest częścią populacji, więc losuję z rozkładu zmiennej w populacji. Rozkład budują ludzie. Gdy biorę losowego człowieka i mierzę jego inteligencję, statystyka każe nam patrzeć na to tak, jakbym wylosował wynik z rozkładu inteligencji w populacji. Powtarzam się, bo to naprawdę dziwne przejście z konkretnego, namacalnego zaczepiania ludzi na ulicy do matematycznej abstrakcji. Spróbuj oswoić się z tą perspektywą, nim przejdziesz dalej, bo przyda nam się w kolejnym podrozdziale.</p>
+</section>
+<section id="rozkład-próbkowania" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Rozkład próbkowania</h1>
+<p>Wiemy jednak, że każda próbka może trochę różnić się średnią. W niektórych próbkach wyjdzie nam 102, w innych 98. Możemy jednak intuicyjnie czuć, że znacznie trudniej przez przypadek zebrać próbkę o średniej 130 albo 70. Raczej średnie każdej jednej próbki będą krążyć dookoła prawdziwej średniej, czyli w tym wypadku 100. Zazwyczaj nie wiemy, jaka jest prawdziwa średnia z populacji, ale jak sobie z tym poradzić powiemy później. Średnie bliżej 100 powinny pojawiać się częściej, a średnie dalej od 100 rzadziej, możemy więc zrobić 100 próbek, każda po 100 osób i zobaczyć, jak często losują nam się jakie średnie. Możemy to nanieść na histogram.</p>
+<div class="cell">
+<details>
+<summary>Kod</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>iq_pop <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    iq_pop <span class="ot">&lt;-</span> <span class="fu">c</span>(iq_pop, <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">15</span>)))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>iq_pop <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">iq =</span> iq_pop)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iq_pop, <span class="fu">aes</span>(iq)) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(iq_pop<span class="sc">$</span>iq)) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="fu">mean</span>(iq_pop<span class="sc">$</span>iq) <span class="sc">-</span> <span class="fu">sd</span>(iq_pop<span class="sc">$</span>iq), <span class="fu">mean</span>(iq_pop<span class="sc">$</span>iq) <span class="sc">+</span> <span class="fu">sd</span>(iq_pop<span class="sc">$</span>iq)), <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="rozklady-probkowania_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Wylosowaliśmy więc 100 różnych próbek, w każdej zmierzyliśmy średnią inteligencję. Na histogramie widać, że średnie w pobliżu 100 rzeczywiście pojawiały się częściej, niż te dalsze od 100. Średnia średnia wyniosła tutaj 99.9, zaś jej odchylenie standardowe 1.5, czyli zazwyczaj próbki miały średnią między 98.5 a 101.4. Zwróćmy jednak uwagę, że robiąc ten wykres, spłaszczyliśmy każdą próbkę 100 osób do jednej tylko liczby – średniej inteligencji. Ten wykres nie mówi nam więc nic na temat tego, jak wyglądał rozkład zmiennej w każdej próbce. On nam mówi tylko i aż tyle, jak często próbka 100 osób miała jaką średnią. Taki rozkład nazywamy <strong>rozkładem próbkowania</strong>. Rozkład próbkowania to rozkład średnich z <strong>różnych prób</strong> i jest czymś zupełnie innym niż rozkład zmiennej w próbie czy w populacji. I to rozróżnienie jest powalająco istotne.</p>
+<p>Rozkład zmiennej w próbie przypomina rozkład zmiennej w populacji. Im więcej osób w próbie, tym bardziej. Rozkład próbkowania nie musi przypominać rozkładu zmiennej w populacji, ani się do niego nie zbliża. Rozkład zmiennej w próbie składa się z pojedynczych pomiarów, rozkład próbkowania składa się ze <strong>średnich</strong>. Rozkład zmiennej w próbie mówi nam, jak wiele osób w naszej próbce wpada w określone widełki. Rozkład próbkowania mówi nam o tym, jak łatwo wylosować próbkę o określonej średniej. Wykorzystajmy więc perspektywę, którą podpowiedziałem na koniec poprzedniego podrozdziału. Gdy losujemy osobę z ulicy i mierzymy jej inteligencję, to losujemy ją z rozkładu zmiennej w populacji. Gdy losujemy 100 osób z ulicy i liczymy ich średnią inteligencję, to losujemy średnią z rozkładu próbkowania. <strong>O średniej każdej próbki można myśleć jako o wylosowanej z rozkładu próbkowania</strong>, tak jak każda osoba ze swoją inteligencją jest wylosowana z rozkładu inteligencji w populacji.</p>
+<p>Rozkładów próbkowania zazwyczaj się nie rysuje. Gdy pobieramy próbę, mamy tylko jedną średnią, nie ma sensu robić histogramu z jednej liczby. Rozkład próbkowania to pewna abstrakcja. Tak jak można sobie teoretycznie wyobrazić, że zbadaliśmy wszystkich członków populacji, by uzyskać rozkład zmiennej, tak możemy sobie wypbrazić, że zbadaliśmy wszystkie możliwe próbki po 100 osób, by uzyskać rozkład próbkowania. Dlaczego to jest istotne? Bo mówi nam, jak wiele zaufania możemy mieć do pojedynczej średniej z próby. W jaki sposób?</p>
+<p>Załóżmy, że rozkład próbkowania ma średnią 100 i odchylenie standardowe 5. <strong>Odchylenie standardowe rozkładu próbkowania to coś zupełnie innego niż odchylenie standardowe rozkładu zmiennej!</strong> Odchylenie standardowe rozkładu inteligencji wynosi 15, ale rozkład próbkowania nie mówi nam o inteligencji pojedynczych ludzi, tylko o średniej inteligencji grup ludzi. To są dwa różne odchylenia! Za to <strong>średnia rozkładu próbkowania jest równa średniej z populacji</strong>. Wracając. Jeśli średnia rozkładu próbkowania wynosi 100, a odchylenie standardowe 5, to nagminnie powinniśmy się spodziewać średnich między 95 a 105. Średnia 115 powinna nas zdziwić znacznie bardziej. Jeśli w takim wypadku wyszłoby nam, że w naszej próbce kobiety mają inteligencję 100, a mężczyźni 115, to bylibyśmy bardziej skłonni stwierdzić, że coś jest na rzeczy. Intuicyjnie możemy też czuć, że średnie 100 i 102 nie zrobiłyby na nas takiego wrażenia, bo naprawdę łatwo uzyskać je przez przypadek, bo większość średnich będzie między 95 a 105.</p>
+</section>
+<section id="centralne-twierdzenie-graniczne" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Centralne Twierdzenie Graniczne</h1>
+<p>Teraz się zacznie robić ciekawie. Trzymaj się, już za niedługo będą przykłady. Do tej pory rozkład próbkowania był tylko abstrakcją. Czymś, co równie trudno zmierzyć, jak prawdziwą średnią z populacji. Na co dzień myślę dość konkretnie, abstrakcje są mi potrzebne wtedy, gdy mogę je wykorzystać do myślenia czy w innym celu. Po co mi więc taka abstrakcja jak rozkład próbkowania? Bo mając pojedynczą próbkę, jej średnią i odchylenie standardowe, wbrew pozorom, można całkiem sporo powiedzieć o rozkładzie próbkowania, z którego ta średnia pochodzi. Pozwala nam na to przepotężne prawo, leżące u podstaw całej statystyki, zwane <strong>Centralnym Twierdzeniem Granicznym</strong> (<em>Central Limit Theorem</em>).</p>
+<section id="normalność" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="normalność"><span class="header-section-number">4.1</span> Normalność</h2>
+<p>Twierdzenie to mówi nam o dwóch piekielnie ważnych rzeczach. Po pierwsze, jeśli próba jest odpowiednio duża, to <strong>każdy rozkład próbkowania jest normalny</strong>. Odpowiednio duża oznacza tutaj według większości autorów minimum 15 osób, chociaż co bardziej konserwatywni autorzy mówią 20 albo nawet 30 osób. Podkreślam tutaj słowo <strong>każdy</strong>. Oznacza to, że nieważne, jak wygląda rozkład zmiennej, czy jest normalny, czy nie. Rozkład próbkowania będzie normalny. Wyobraźmy sobie, że rozkład poniżej to rozkład zarobków w pewnym państwie. Większość ludzi zarabia niedużo, ale jest też niewielka ilość ludzi zarabiająca bardzo dużo.</p>
+<div class="cell">
+<details>
+<summary>Kod</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rexp</span>(<span class="dv">10000</span>, <span class="fl">0.0007</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">income =</span> .) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(income)) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_histogram</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="rozklady-probkowania_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Z pobieram z tego rozkładu losową próbkę 100 osób. Wychodzi mi średni dochód 1185. Spoko. Pobieram kolejne 100 osób i tym razem dostaję średni dochód 1448. Robię tak jeszcze bardzo dużo razy, więc ostatecznie mam zapisane w Excelu bardzo dużo średnich. Gdy z tych średnich, nie z pojedynczych obserwacji, zrobię histogram, dostanę coś takiego.</p>
+<div class="cell">
+<details>
+<summary>Kod</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>income <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    income <span class="ot">&lt;-</span> <span class="fu">c</span>(income, <span class="fu">mean</span>(<span class="fu">rexp</span>(<span class="dv">100</span>, <span class="fl">0.0007</span>)))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>income <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">income =</span> income)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(income, <span class="fu">aes</span>(income)) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(income<span class="sc">$</span>income)) <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(<span class="fu">mean</span>(income<span class="sc">$</span>income) <span class="sc">-</span> <span class="fu">sd</span>(income<span class="sc">$</span>income), <span class="fu">mean</span>(income<span class="sc">$</span>income) <span class="sc">+</span> <span class="fu">sd</span>(income<span class="sc">$</span>income)), <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="rozklady-probkowania_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Ten rozkład wygląda zupełnie inaczej, niż rozkład wyjściowy. Dlaczego? Bo rozkład wyjściowy to rozkład zmiennej, a to na obrazku to rozkład średnich, jakie wychodzą w różnych próbkach, czyli rozkład próbkowania. Wielkość pojedynczej próbki wynosi 100, czyli więcej niż 15, a więc rozkład próbkowania wyszedł normalny. To jest pierwsze, co mówi nam CLT.</p>
+<p>Jeśli czytałeś(-aś) <a href="../posts/gestosc-prawdopodobienstwa.html">tekst o rozkładach normalnych</a>, możesz się już domyślać, dlaczego to jest ważne. Jeśli wiemy, że rozkład jest normalny, to moglibyśmy powiedzieć, np. „OK, w mojej próbce dzieci karmionych kalarepą średnia inteligencja wynosi wynosi 110. Rozkład próbkowania ma średnią 100 i odchylenie standardowe 5, więc szansa na to, że taka <em>lub wyższa</em> średnia wylosuje się z rozkładu normalnego przez przypadek wynosi <span class="math inline">\(\int_{110}^{\infty} \mathcal N(x;\ 100,\ 5^2) = 1 - pnorm(110,\ mean = 100,\ sd = 5) \approx 2,3\%\)</span>, a więc raczej nie jest to przypadek”. Skąd jednak mam wiedzieć, jaką średnią i odchylenie standardowe ma rozkład próbkowania, jak mam tylko jedną próbkę?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Szybka powtórka z rozkładów normalnych i rozgrzewka w myśleniu o rozkładach próbkowania.</p>
+<ol type="1">
+<li><p>Twoja próbka 40 osób ma średnią 121. Rozkład próbkowania ma średnią 100 i odchylenie standardowe 7. Jaka jest szansa, że próbka 40 osób będzie miała średnią 121 lub wyższą?</p></li>
+<li><p>Twoja próbka 120 osób ma średnią -0,78. Rozkład próbkowania ma średnią 0 i odchylenie standardowe 0,5. Jaka jest szansa, że próbka 120 osób będzie miała średnią taką lub niższą?</p></li>
+<li><p>Twoja próbka 300 osób ma średnią 5,7. Rozkład próbkowania ma średnią 5,5 i odchylenie standardowe 0,65. Różnica między Twoją średnią a średnią rozkładu próbkowania wynoci 0,2. Jaka jest szansa wylosowania próbki o takim lub większym odchyleniu (czyli mniej niż 5,3 lub więcej niż 5,7)?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><span class="math inline">\(1 - pnorm(121,\ mean = 100,\ sd = 7) \approx 0,13\%\)</span></p></li>
+<li><p><span class="math inline">\(pnorm(-0.78,\ 0,\ 0.5) \approx 5,9\%\)</span></p></li>
+<li><p><span class="math inline">\(1 - pnorm(5.7,\ 5.5,\ 0.65) + pnorm(5.3,\ 5.5,\ 0.65) \approx 75,8\%\)</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="błąd-standardowy" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="błąd-standardowy"><span class="header-section-number">4.2</span> Błąd standardowy</h2>
+<p>Druga rzecz, na którą pozwala nam CLT to dokładnie rozwiązanie naszego problemu. Mówi nam ono, że możemy oszacować odchylenie standardowe rozkładu próbkowania dzieląc odchylenie standardowe naszej próbki przez pierwiastek z liczby osób badanych.</p>
+<p><span class="math display">\[
+SE = \frac{SD}{\sqrt{N}}
+\]</span></p>
+<p>Rozszyfrujmy to sobie i podajmy przykład. Skrót <span class="math inline">\(SE\)</span> oznacza <strong>błąd standardowy</strong>. Jest to specjalna nazwa na <strong>odchylenie standardowe rozkładu próbkowania</strong>. Pozwala ona odróżnić łatwo odchylenie standardowe rozkładu zmiennej, od odchylenia standardowego rozkładu próbkowania. <span class="math inline">\(N\)</span> to liczba osób w próbce. <span class="math inline">\(SD\)</span> w tym wzorze odnosi się do odchylenia standardowego <em>zmiennej</em>. Jeśli znamy prawdziwe odchylenie standardowe w populacji, to możemy je wykorzystać, ale jeśli nie (czyli zazwyczaj), to możemy je zastąpić odchyleniem standardowym naszej próbki. Jeśli sięgniesz pamięcią do wzoru na odchylenie standardowe, to możesz sobie przypomnieć, że sumę odchyleń podniesionych do kwadratu dzieliliśmy przez <span class="math inline">\(N - 1\)</span> zamiast przez <span class="math inline">\(N\)</span>. Jest to takie zabezpieczenie wbudowane we wzór na odchylenie standardowe, dzięki któremu odchylenie standardowe z próby bardziej przypomina to z populacji. Dzięki temu, że dzieliliśmy przez <span class="math inline">\(N - 1\)</span> zamiast przez <span class="math inline">\(N\)</span>, teraz możemy podstawiać do wzoru na błąd standardowy odchylenie standardowe z próby.</p>
+<p>Zaczęliśmy od wylosowania próbki 100 mężczyzn i zmierzeniu ich inteligencji. Wiemy, że rozkład inteligencji ma średnią 100, a więc rozkład próbkowania również ma średnią 100. Odchylenie standardowe wynosi 15, co również wiemy dlatego, że wiemy odrobinę o inteligencji. Możemy więc oszacować błąd standardowy, czyli odchylenie standardowe rozkładu próbkowania.</p>
+<p><span class="math display">\[
+SE = \frac{SD}{\sqrt{N}} = \frac{15}{\sqrt{100}} = 1,5
+\]</span></p>
+<p>Przypomnijmy, że wcześniej zrobiliśmy symulację rozkładu próbkowania, losując 100 próbek po 100 osób i licząc średnie. Tak uzyskany rozkład próbkowania miał odchylenie standardowe 1.45. Jak widzimy, było to w miarę rozsądne oszacowanie, ale jeśli zamiast 100 próbek pobralibyśmy 1000, 10 000 czy 100 000, to nasz symulowany rozkład miałby odchylenie standardowe coraz bliższe 1,5.</p>
+<p>W naszym drugim przykładzie z dochodamu nie znamy prawdziwego odchylenia standardowego, ale możemy je oszacować. Załóżmy, że wylosowałem 100 osób, zapytałem o dochody i wyszło mi odchylenie standardowe 1753,93. Możemy oszacować błąd standardowy:</p>
+<p><span class="math display">\[
+SE = \frac{1753,93}{\sqrt{100}} \approx 175
+\]</span></p>
+<p>Jeśli wiedziałbym, że prawdziwa średnia wynosi, powiedzmy 1600 (ze średnią poradzimy sobie potem), to próbki ze średnią między 1425 i 1775 mogę uznać za zupełnie typowe (ok. 67% przypadków według prawa trzech sigm), zaś próbki ze średnią między 1250 a 1950 za zupełnie typowe (ok. 95% przypadków według prawa trzech sigm). Jeśli dzieci karmione kalarepą osiągałyby średni dochód na poziomie 2000, to miałbym mniej niż 5% szans, że ten wynik jest przypadkowy.</p>
+<p>Z tego wzoru wynika też ważny wniosek – <strong>im większa próbka, tym mniejszy błąd standardowy</strong>. 95% próbek 100 osób będzie miało średnią inteligencję między 97 a 103 (100±1,5), co policzyliśmy wyżej. Różnica między 100 a 101 będzie więc typowa, bo bardzo łatwo uzyskać ją przez przypadek. Jeśli jednak nasza próbka wyniesie nie 100, a 1000 osób, to błąd standardowy spadnie do <span class="math inline">\(SE = \frac{15}{\sqrt{1000}} \approx 0,47\)</span>, a więc 95% próbek będzie miało średnią między 99,06 a 100,94. Tym samym średnia 101 staje się bardziej podejrzana. Ba! Staje się istotnie różna od 100, bo szansa na uzyskanie jej przez przypadek w próbie 1000 osób jest mniejsza niż 5%<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Takie widełki nazywamy <strong>95% przedziałem ufności</strong>. Jeśli chcemy uzyskać dokładnie 95% pewności, będziemy mnożyć błąd standardowy nie przez 2, a przez 1,96 (patrz <a href="../posts/gestosc-prawdopodobienstwa.html#sec-inverse-norm">odwrotna dystrybuanta rozkładu normalnego</a>).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pewna zmienna ma rozkład o średniej 5,5. 25 dzieci karmionych kalarepą uzyskuje średnią 5,8 z odchyleniem standardowym 0,5. Jaka jest szansa, że wynik jest przypadkowy? Załóż hipotezę prawostronną (tj. że średnia u dzieci jest 5,8 albo wyższa). Oblicz 95% przedział ufności dla średniej 5,5.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="błąd-standardowy-1" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="błąd-standardowy-1"><span class="header-section-number">4.2.1</span> Błąd standardowy</h3>
+<p><span class="math display">\[
+SE = \frac{0,5}{\sqrt{25}} = \frac{0,5}{5} = 0,1
+\]</span> ### Wartość <span class="math inline">\(p\)</span> <span class="math display">\[
+1 - pnorm(5.8,\ 5.5,\ 0.1) = 0,13\%
+\]</span></p>
+</section>
+<section id="przedział-ufności" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="przedział-ufności"><span class="header-section-number">4.2.2</span> Przedział ufności</h3>
+<p><span class="math display">\[
+5,5 \pm 1,96 \times 0,1 = 5,5 \pm 0,196 = 5,304 \text{ i } 5,696
+\]</span></p>
+</section>
+</div>
+</div>
+</div>
 
 
-</main> <!-- /main -->
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-borch-jacobsen2021" class="csl-entry" role="listitem">
+Borch-Jacobsen, M. (2021). <em>Freud’s patients: a book of lives</em>. London: Reaktion Books.
+</div>
+<div id="ref-wackerly2008" class="csl-entry" role="listitem">
+Wackerly, D. D., Mendenhall, W., &amp; Scheaffer, R. L. (2008). <em>Mathematical statistics with applications</em> (Seventh edition). Belmont: Thomson Brooks/Cole.
+</div>
+</div></section><aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
+<ol>
+<li id="fn1"><p>A dokładnie wynosi <span class="math inline">\(\int_101^\infty \mathcal N(x;\ 100,\ 0,47) \approx 1,7\%\)</span>, jeśli chcemy znać szansę uzyskania średniej 101 lub większej albo <span class="math inline">\(3,3\%\)</span>, jeśli nie zakładamy, w którą stronę mężczyźni różnią się od kobiet i liczymy w obie strony.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -468,15 +1716,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
         for (let i = 0; i < 2; i++) {
           container.appendChild(note.children[i].cloneNode(true));
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -485,6 +1756,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -527,6 +1799,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -602,7 +1897,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);
@@ -696,7 +1990,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 
-<div class="toc-actions"><ul><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/rozklady-probkowania.qmd" class="toc-action"><i class="bi bi-github"></i>Edytuj tę stronę</a></li><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action"><i class="bi empty"></i>Zgłoś problem</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
