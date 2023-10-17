@@ -16,7 +16,31 @@ Jak wiele razy dawałem wyraz na tej stronie -- nie znoszę mechanicznej pracy. 
 
 # Możliwości
 
-Zwlekałem z napisaniem tego tekstu, bo ciężko mi było znaleźć uniwersalny przykład zastosowania wyrażeń regularnych w praktyce. Wszystkie wydają się bardzo konkretne, wąskie. Bałem się, że osoba czytająca ten przykład może pomyśleć „nie zdarzyło mi się to". I takie w istocie są wyrażenia regularne, ale trochę o to w nich chodzi -- żeby zastosować je konkretnie do własnych potrzeb, które mogą być bardzo specyficzne. Jednak ogólne możliwości są bardzo duże, a paleta zastosowań nieskończona. Pozwolę sobie więc za przykład wziąć swoją specyficzną potrzebę. Ostatnio poprawiałem linki do innych wpisów na tym blogu. Wcześniej używałem linków do stron, które wyglądały tak:
+Zwlekałem z napisaniem tego tekstu, bo ciężko mi było znaleźć uniwersalny przykład zastosowania wyrażeń regularnych w praktyce. Wszystkie wydają się bardzo konkretne, wąskie. Bałem się, że osoba czytająca ten przykład może pomyśleć „nie zdarzyło mi się to". I takie w istocie są wyrażenia regularne, ale trochę o to w nich chodzi -- żeby zastosować je konkretnie do własnych potrzeb, które mogą być bardzo specyficzne. Jednak ogólne możliwości są bardzo duże, a paleta zastosowań nieskończona. Bardzo prostym przykładem jest sytuacja, gdy otrzymaliśmy listę elementów ponumerowanych tekstem (w sensie nie jest to lista w Wordzie, tylko numerki są rzeczywiście zapisane). Z różnych przyczyn możemy chcieć się tych numerków pozbyć. Czasem musiałem to robić jak składałem tekst. Załóżmy, że mamy taką listę:
+
+> 1.  Keter
+>
+> 2.  Chochma
+>
+> 3.  Bina
+>
+> 4.  Chesed
+>
+> 5.  Gewura
+>
+> 6.  Tiferet
+>
+> 7.  Necach
+>
+> 8.  Hod
+>
+> 9.  Jesod
+>
+> 10. Malchut
+
+Możemy zaznaczyć każdy numerek i wykonać tę nudną, mechaniczną pracę. Ale im więcej elementów na liście, tym zmarnuje nam to więcej czasu. Gdybyśmy mogli powiedzieć komputerowi „na początku każdego wersu jest liczba, kropka i spacja -- usuń je\", oszczędziłoby nam to czas. I tutaj właśnie przychodzą nam w sukurs wyrażenia regularne. Jest to zestaw kodów pozwalających nam zapisać takie rzeczy jak „początek wiersza\" (`^`) i „jedna lub więcej dowolna liczba\" (`\d+`), dzięki czemu możemy jednym kliknięciem usunąć nasze liczby w całym tekście.
+
+Jako drugi, bardziej złożony przykład wezmę swoją specyficzną potrzebę. Ostatnio poprawiałem linki do innych wpisów na tym blogu. Wcześniej używałem linków do stron, które wyglądały tak:
 
 > Więcej można przeczytać w tekście o \[podstawach R\](https://nieobliczalne.pl/posts/podstawy_R.html).
 
@@ -24,7 +48,7 @@ Jak doczytałem potem, mogłem użyć lepszej składni, która idzie tak:
 
 > Więcej można przeczytać w tekście o \[podstawach R\](./posts/podstawy_R.qmd).
 
-Ma ona kilka zalet, m.in. to, że jakbym kiedykolwiek zmienił domenę, to nie muszę poprawiać wszystkich linków ręcznie. Zdecydowałem się więc poprawić starą konwencję na nową. Poprawianie linków we wszystkich wpisach to jednak dużo mechanicznej pracy, której nie lubię. Narzędziem, które mogłoby się tutaj przydać, jest zwykłe znajdź i zmień (*find & replace*). Możemy zwrócić uwagę, że wystarczy, abym `https://nieobliczalne.pl` zamienił na kropkę, a końcowe `html` na `qmd`. Nie mogę jednak tego zrobić na raty, bo wtedy zamienię też `html` z innych linków na `qmd`. I tutaj właśnie przychodzą nam w sukurs wyrażenia regularne.
+Ma ona kilka zalet, m.in. to, że jakbym kiedykolwiek zmienił domenę, to nie muszę poprawiać wszystkich linków ręcznie. Zdecydowałem się więc poprawić starą konwencję na nową. Poprawianie linków we wszystkich wpisach to jednak dużo mechanicznej pracy, której nie lubię. Narzędziem, które mogłoby się tutaj przydać, jest zwykłe znajdź i zmień (*find & replace*). Możemy zwrócić uwagę, że wystarczy, abym `https://nieobliczalne.pl` zamienił na kropkę, a końcowe `html` na `qmd`. Nie mogę jednak tego zrobić na raty, bo wtedy zamienię też `html` z innych linków na `qmd`.
 
 Wyrażenia regularne pozwalają mi zakodować swoje potrzeby. Potrzebuję wyszukać wszystkie słowa zapisane wielką literą? Nie ma problemu. Potrzebuję zamienić w długim kodzie wyrażenia typu `{AUT.15}` na `{AUT_15}`, gdzie liczby są różne? Spoko. Chcę masowo zmienić spacje po jednoliterowych myślnikach na twarde spacje? Jasne. Potrzebuję spacjami podzielić wszystkie numery telefonów w tekście na trójki? Da się zrobić. Chcę wyszukać dane słowo we wszystkich formach (paczka, paczki, paczce itd.)? Potrzymaj mi herbatę. O ile nasz tekst ma **określoną strukturę**, możemy go wyszukać i w razie potrzeby zmodyfikować.
 
@@ -48,11 +72,11 @@ Wyrażenia regularne pozwalają nam powiedzieć „wszystko, co ma rdzeń *staty
 
 > \[Ss\]tatysty(ka\|ki\|ce\|kę\|ką\|ko)
 
-::: {.light-mode}
+::: light-mode
 [![Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej.](ilustracje/regex/or.png)](https://regex101.com/r/kUE7Db/1)
 :::
 
-::: {.dark-mode}
+::: dark-mode
 [![Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej.](ilustracje/regex/or_dark.png)](https://regex101.com/r/kUE7Db/1)
 :::
 
@@ -60,17 +84,17 @@ Rozbijmy ten przykład na czynniki pierwsze. Po pierwsze mamy `[Ss]`. Nawiasy kw
 
 Dalej mamy zwykłą część słowa „statystyka" i nawiasy. RegEx domyślnie ignoruje nawiasy (tj. nie wyszukuje ich). Służą one jako znaki specjalne do tworzenia grup, o których więcej później. Wewnątrz nawiasu wypisałem końcówki, które mają być dopasowane. Każdą końcówkę rozdzieliłem pionową kreską, co oznacza „albo to, albo to, albo to...".
 
-Jeśli chcielibyśmy wyszukać rzeczywiste nawiasy albo separator „\|", musimy poprzedzić je lewym ukośnikiem `\`. Ta czynność nazywa się *escaping* i wymagają tego wszystkie znaki specjalne, na czele z nawiasami, kropką i samym lewym ukośnikiem, który wyszukujemy pisząc `\\`.
+Jeśli chcielibyśmy wyszukać rzeczywiste nawiasy albo separator „\|", musimy poprzedzić je lewym ukośnikiem `\`. Ta czynność nazywa się *escaping* i wymagają tego wszystkie znaki specjalne, na czele z nawiasami, kropką i samym lewym ukośnikiem, który wyszukujemy pisząc `\\`. Później będzie o tym więcej, ale chodzi o to, że jak chcemy wyszukać znak `(`, to w wyrażeniu regularnym zapiszemy `\(`, bo samo `(` oznacza początek grupy. Lewy ukośnik przełącza specjalne znaczenie na dosłowne.
 
 Poprzedni przykład mógłbym napisać nieco zwięźlej jako `[Ss]tatysty[kc][aieęąo]`. Technicznie wtedy dopasujemy też takie twory jak „statystycą" albo „statystyke", ale to zazwyczaj nie jest problem, bo ich w tekście po prostu nie ma. Tutaj pojawia się jednak dość ważny wniosek -- wyrażenia regularne dość **łatwo się pisze i fatalnie się czyta**.
 
-Jako ciekawostkę mogę podać, że pisząc to wyrażenie regularne odmieniłem słowo „statystyka" przez przypadki w [Kate](https://kate-editor.org/), potem wyrażeniami regularnymi usunąłem „statysty-", zastąpiłem znak nowej linii (`\n`) separatorem (`|`) i na koniec wziąłem to w nawiasy. Tak było mi łatwiej, niż pisać same te końcówki. Ale ja jestem uczulony na pracę mechaniczną bardziej niż reszta społeczeństwa i robiłem to już tyle razy, że nawet o tym nie myślę. Tak jest mi szybciej, ale nie każdy potrzebuje robić takie rzeczy automatycznie.
+Jako ciekawostkę mogę podać, że pisząc to wyrażenie regularne odmieniłem słowo „statystyka" przez przypadki w [Kate](https://kate-editor.org/), potem wyrażeniami regularnymi usunąłem „statysty-", zastąpiłem znak nowej linii (`\n`) separatorem (`|`) i na koniec ręcznie wziąłem to w nawiasy ([patrz tutaj](https://regex101.com/r/fHY1bx/1)). Tak było mi łatwiej, niż pisać same te końcówki. Ale ja jestem uczulony na pracę mechaniczną bardziej niż reszta społeczeństwa i robiłem to już tyle razy, że nawet o tym nie myślę. Tak jest mi szybciej, ale nie każdy potrzebuje robić takie rzeczy automatycznie.
 
 # Znaki specjalne i kotwice
 
 RegEx dysponuje całą serią znaków specjalnych typu „dowolna liczba" (`\d`), „dowolna litera" (`\w`), „dowolny znak odstępu" (`\s`, głównie spacja, ale też np. tabulator albo twarde spacje) itd. Najszerszym znaczeniowo znakiem tego typu jest kropka (`.`). Oznacza ona po prostu „dowolny znak". Dokładny spis tych znaków specjalnych może różnić się w zależności od wersji (*flavour*) RegEx, jaką dany program czy język implementuje. Są to wygodne skróty dla zapisów typu `[0-9]`. Każdy z nich ma też wersję zanegowaną w postaci wielkiej litery, np. `\D` dopasuje wszystko, co *nie jest* liczbą. Do tego dochodzą nam znaki niewidoczne typu znak nowej linii (`\n`, „enter") albo tabulator (`\t`).
 
-Jeśli podajemy dane wyrażenie regularne jako argument w jakiejś funkcji w języku programowania, bardzo często będziemy musieli zapisać np. `\\d` czy `\\n`. Wynika to z faktu, że język programowania musi wiedzieć, że chodzi nam o lewy ukośnik w wyrażeniu regularnym, a nie, że *escape'ujemy* jakiś znak.
+Jeśli podajemy dane wyrażenie regularne jako argument w jakiejś funkcji w języku programowania, bardzo często będziemy musieli zapisać np. `\\d` czy `\\n`. Wynika to z faktu, że język programowania musi wiedzieć, że chodzi nam o lewy ukośnik w wyrażeniu regularnym, a nie, że *escape'ujemy* jakiś znak. Innymi słowy jeśli w Pythonie czy w R zapiszemy po prostu `"\d"`, to program zwariuje, bo nie będzie wiedział, jak *escape'ować* literę *d*. Dlatego zapiszemy `"\\d"` i wtedy program odczytując coś takiego, zrozumie to jako `\d`. Jednak znowu -- to się tyczy tylko języków programowania.
 
 RegEx implementuje również tak zwane **kotwice**, czyli oznaczenia pozycji. Mówiąc konkretnie, `^` oznacza początek linii (akapitu), a `$` oznacza koniec linii. linia jest tutaj fragmentem tekstu między kolejnymi „enterami", a nie tym, co akurat program wyświetla jako linię tekstu. Dlatego w tekście ciągłym cały akapit jest, technicznie, linią.
 
@@ -84,11 +108,11 @@ Weźmy sobie za przykład tekst skopiowany z Worda, w którym mamy pozostałośc
 
 Odpowiednie wyrażenie regularne mogłoby brzmieć `^\d\.`. Po kropce jest tam spacja, którą silnik uporczywie mi usuwa, dlatego na stronie jej nie widać.
 
-::: {.light-mode}
+::: light-mode
 [![](ilustracje/regex/anchors.png)](https://regex101.com/r/WVPWt4/1)
 :::
 
-::: {.dark-mode}
+::: dark-mode
 [![](ilustracje/regex/anchors_dark.png)](https://regex101.com/r/WVPWt4/1)
 :::
 
@@ -102,11 +126,11 @@ Najbardziej (według mnie) użyteczne operatory, jakie oferuje RegEx, to operato
 
 > \[A-Z\]\\w+
 
-::: {.light-mode}
+::: light-mode
 [![](ilustracje/regex/repeat.png)](https://regex101.com/r/uzD28P/1)
 :::
 
-::: {.dark-mode}
+::: dark-mode
 [![](ilustracje/regex/repeat_dark.png)](https://regex101.com/r/uzD28P/1)
 :::
 
@@ -129,21 +153,21 @@ Z użyciem tych operatorów może się wiązać problem chciwości (*greedyness*
 
 > \\(.+\\)
 
-::: {.light-mode}
+::: light-mode
 [![](ilustracje/regex/greedy_1.png)](https://regex101.com/r/kDdEiE/1)
 :::
 
-::: {.dark-mode}
+::: dark-mode
 [![](ilustracje/regex/greedy_1_dark.png)](https://regex101.com/r/kDdEiE/1)
 :::
 
 Dziwne. Czemu takie długie wyszło? W naszym wyrażeniu regularnym wykorzystałem nawiasy (z lewym ukośnikiem, bo nawiasy to znak specjalny) oraz sekwencję `.+` oznaczającą „jeden dowolny znak lub więcej". Domyślnie jednak `+` jest chciwy (*greedy*) i wyszuka **najdłuższe możliwe sekwencje**. Oznacza to, że zaznaczył wszystko między pierwszym nawiasem otwierającym i ostatnim nawiasem zamykającym. W końcu nawiasy zamykające łapią się do kategorii dowolnych znaków. Żeby temu przeciwdziałać, zamiast `.+` możemy użyć `.+?`.
 
-::: {.light-mode}
+::: light-mode
 [![](ilustracje/regex/greedy_2.png)](https://regex101.com/r/kDdEiE/2)
 :::
 
-::: {.dark-mode}
+::: dark-mode
 [![](ilustracje/regex/greedy_2_dark.png)](https://regex101.com/r/kDdEiE/2)
 :::
 
@@ -151,11 +175,11 @@ Jest już lepiej! Problem jednak powodują w tym wypadku puste nawiasy. Nasze wy
 
 Rozwiązania widzę tutaj dwa. Po pierwsze można wykorzystać *lookarounds*, żeby pustych nawiasów nie dopasowywać. Pozwolą one też dopasować tekst *wewnątrz* nawiasów bez samych nawiasów. Nie chcę jednak wchodzić tak głęboko, dlatego zainteresowanych odsyłam [tutaj](https://www.rexegg.com/regex-lookarounds.html). Po drugie możemy umożliwić dopasowywanie też pustych nawiasów zastępując operator „jeden lub więcej" (`+`) operatorem „zero lub więcej" (`*`). Pamiętajmy jednak o chciwości tych operatorów i dodajmy jeszcze `?`.
 
-::: {.light-mode}
+::: light-mode
 [![](ilustracje/regex/greedy_3.png)](https://regex101.com/r/kDdEiE/3)
 :::
 
-::: {.dark-mode}
+::: dark-mode
 [![](ilustracje/regex/greedy_3_dark.png)](https://regex101.com/r/kDdEiE/3)
 :::
 
@@ -163,25 +187,25 @@ Rozwiązania widzę tutaj dwa. Po pierwsze można wykorzystać *lookarounds*, ż
 
 Zazwyczaj po to wyszukujemy tekst, żeby zastąpić go innym. Jak to jednak zrobić, jeśli mamy takie fragmenty tekstu jak `.+`? Nie mogę wpisać w pole z tekstem do podstawienia `.+`, bo dostanę dosłowną kropkę i plus. Program musi dokładnie wiedzieć, co w dane miejsce wstawić. Załóżmy, że w poprzednim przykładzie chcemy zamienić nawiasy okrągłe na kwadratowe. Jak to zrobić? Za pomocą grup.
 
-::: {.light-mode}
+::: light-mode
 [![](ilustracje/regex/groups_1.png)](https://regex101.com/r/q6PCek/1)
 :::
 
-::: {.dark-mode}
+::: dark-mode
 [![](ilustracje/regex/groups_1_dark.png)](https://regex101.com/r/q6PCek/1)
 :::
 
 Jak to zrobiłem? Najpierw w wyszukiwaniu zmieniłem sekwencję `\(.*?\)` w `\((.*?)\)`. Innymi słowy otoczyłem `.*?` dodatkową parą nawiasów. Na screenie zaznaczone są na zielono. Znaki w nawiasach tworzą grupy. Grupy po to są nam potrzebne, żebyśmy mogli je potem wykorzystywać do zastępowania tekstu[^2]. Zwróćmy uwagę na tekst w drugim polu, gdzie wpisałem `[$1]`. Oznacza to „tekst z pierwszej grupy (`$1`) w nawiasach kwadratowych". Czyli bierzemy wnętrze naszego pierwotnego nawiasu (grupę 1.) i otaczamy je nawiasami kwadratowymi. Nawiasy okrągłe nie są częścią grupy, więc nie pojawiają się w tekście po zmianie.
 
-Odwołania do grup mogą wyglądać różnie w różnych wersjach RegEx. W tym wypadku użyłem `$1`, ale możemy się też spotkać z innymi oznaczeniami, przede wszystkim `\1`. Zależy to od programu.
-
 [^2]: Ewentualnie możemy ich użyć do stosowania operatorów do całych grup, np. `(foo)+` dopasuje jedno całe słowo „foo" lub ich więcej. Bez nawiasu `+` odnosiłby się tylko do litery „o".
+
+Odwołania do grup mogą wyglądać różnie w różnych wersjach RegEx. W tym wypadku użyłem `$1`, ale możemy się też spotkać z innymi oznaczeniami, przede wszystkim `\1`. Zależy to od programu.
 
 # Zamiana linków na ścieżki
 
 Z całą tą nową wiedzą możemy wreszcie rozwiązać problem z początku tego wpisu. Przypomnijmy -- chcemy linki zamienić na ścieżki do plików .qmd.
 
-> Więcej można przeczytać w tekście o \[podstawach R](https://nieobliczalne.pl/posts/podstawy_R.html).
+> Więcej można przeczytać w tekście o \[podstawach R\](https://nieobliczalne.pl/posts/podstawy_R.html).
 
 Rozwiązaniem, którego ja użyłem, było:
 
@@ -191,11 +215,11 @@ Tekstem zastępującym było:
 
 > \](./\$1.qmd)
 
-::: {.light-mode}
+::: light-mode
 [![](ilustracje/regex/main_problem.png)](https://regex101.com/r/Ub7uVB/1)
 :::
 
-::: {.dark-mode}
+::: dark-mode
 [![](ilustracje/regex/main_problem_dark.png)](https://regex101.com/r/Ub7uVB/1)
 :::
 
@@ -211,17 +235,17 @@ Informacji jest dużo, ale na szczęście nie musimy tego wszystkiego znać na p
 
 # Bonus: szybkie usuwanie sierot
 
-Zanim zacznie się kontrowersja, „sieroty” oznaczają tutaj wiszące jednoliterowe spójniki, które nie powinny znaleźć się na końcu linijki. Pozbywamy się ich za pomocą twardych spacji. Zazwyczaj scrollujemy dokument w Wordzie i wyszukujemy je wzrokiem, po czym dodajemy gdzie trzeba. Potem zmieniamy wielkość czcionki albo szerokość akapitu i wszystko się rozjeżdża. Wyrażeniami regularnymi możemy dodać spacje nierozdzielające wszędzie za jednym zamachem. Jak wspominałem, Word nie obsługuje wyrażeń regularnych, więc musimy to zrobić w Libre Office. Trzeba tylko w okienku Znajdź i zamień, w Innych opcjach zaznaczyć Wyrażenia regularne. Nie będę tutaj tłumaczył jak to działa, podam gotowy przepis.
+Zanim zacznie się kontrowersja, „sieroty" oznaczają tutaj wiszące jednoliterowe spójniki, które nie powinny znaleźć się na końcu linijki. Pozbywamy się ich za pomocą twardych spacji. Zazwyczaj scrollujemy dokument w Wordzie i wyszukujemy je wzrokiem, po czym dodajemy gdzie trzeba. Potem zmieniamy wielkość czcionki albo szerokość akapitu i wszystko się rozjeżdża. Wyrażeniami regularnymi możemy dodać spacje nierozdzielające wszędzie za jednym zamachem. Jak wspominałem, Word nie obsługuje wyrażeń regularnych, więc musimy to zrobić w Libre Office. Trzeba tylko w okienku Znajdź i zamień, w Innych opcjach zaznaczyć Wyrażenia regularne. Nie będę tutaj tłumaczył jak to działa, podam gotowy przepis.
 
 Wyszukaj to:
 
-```
+```         
 (?<=\s)([wuioaz])\s
 ```
 
 Zamień na to:
 
-```
+```         
 $1 
 ```
 
@@ -233,7 +257,7 @@ Na koniec mogę polecić dwa źródła informacji o wyrażeniach regularnych. Pi
 
 1.  Wyrażenia regularne (*regular expressions*, RegEx) pozwalają znajdować i modyfikować regularne struktury w tekście.
 
-2.  Nawiasy kwadratowe dopasowują dowolny znak zapisany w tych nawiasach, np. `[tk]` dopasuje s<span class="regex_match">t</span>a<span class="regex_match">t</span>ys<span class="regex_match">t</span>y<span class="regex_match">k</span>a. `[^tk]` dopasuje odwrotność, czyli <span class="regex_match">s</span>t<span class="regex_match">a</span>t<span class="regex_match">ys</span>t<span class="regex_match">y</span>k<span class="regex_match">a</span>.
+2.  Nawiasy kwadratowe dopasowują dowolny znak zapisany w tych nawiasach, np. `[tk]` dopasuje s[t]{.regex_match}a[t]{.regex_match}ys[t]{.regex_match}y[k]{.regex_match}a. `[^tk]` dopasuje odwrotność, czyli [s]{.regex_match}t[a]{.regex_match}t[ys]{.regex_match}t[y]{.regex_match}k[a]{.regex_match}.
 
 3.  `^` to początek linijki, `$` to koniec linijki.
 
