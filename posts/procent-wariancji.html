@@ -1229,7 +1229,7 @@ Tabela&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza.
 <p>Dla takich danych możemy policzyć całkiem sporo rzeczy. Łatwiej jest jednak zrozumieć dane, jak się je rzeczywiście widzi. Spróbujmy więc stworzyć wykres. Chcielibyśmy wiedzieć, jaki jest związek wielkości pająka z niepokojem, jaki wywołuje<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
@@ -1244,7 +1244,7 @@ Rysunek&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza, tyle że na wykres
 <p>Widzimy więc wyraźnie, że im większy pająk, tym większy lęk wywołuje. Ale z tym wnioskiem wybiegliśmy sporo w przyszłość. Zazwyczaj w pierwszym odruchu robimy coś znacznie prostszego – liczymy średnią. Średni niepokój wyniósł tutaj dokładnie 10. Szybkie spojrzenie w tabelę pozwala nam stwierdzić, że żaden badany takiego wyniku niepokoju nie uzyskał i niezbyt nas to dziwi. W końcu to tylko średnia, żaden prawdziwy wynik nie musi mieć dokładnie średniej wartości. Jak w znienawidzonym przez statystyków kawale o średniej liczbie nóg na spacerze z psem. Rozumiemy więc, że średnia tylko w pewnym przybliżeniu oddaje cały zbiór danych, a konkretne wartości mogą się od średniej mniej lub bardziej odchylać. Te odchylenia możemy nanieść na wykres.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-mean" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-mean" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-mean-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
@@ -1332,7 +1332,7 @@ Tabela&nbsp;2: Każdy punkt ma swoje odchylenie od średniej, które możemy pol
 <p>Średnia gwarantuje mi, że pomylę się tak mało, jak to tylko możliwe, czyli że sumarycznie przerywane kreski na wykresie będą tak krótkie, jak się da. Średnia jest więc modelem niedoskonałym (bo ma błąd), ale lepszym niż jakakolwiek inna pojedyncza liczba (bo ma najmniejszy błąd).</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-15" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-15" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-15-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
@@ -1379,7 +1379,7 @@ SS_T = \sum_{i=1}^N S_i^2 = \sum_{i=1}^N (x_i - \bar x)^2
 <p>Wiemy już bardzo dokładnie czym jest wariancja i jaki ma związek ze średnią. Ale nie oszukujmy się, jesteśmy w stanie wymyślić lepsze modele niż średnia. Od samego początku korci nas, żeby na wykresie niepokoju od wielkości pająka narysować piękną, skośną, rosnącą linię, która będzie zależała nie tylko od wartości niepokoju, ale również od wielkości pająka. Przecież od razu widać, że pasowałaby do naszych danych znacznie bardziej.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-lm" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-lm" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-lm-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
@@ -1481,7 +1481,7 @@ R^2 = \frac{SS_M}{SS_T} = \frac{SS_T - SS_R}{SS_T}
 <p>Możemy wyobrazić sobie, że pojawia nam się nowa osoba badana, która pająków nie boi się w ogóle, co pokazałem na wykresie. Jak to wpływa na nasz model?</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-lm2" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-lm2" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-lm2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-lm2-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
@@ -1515,7 +1515,7 @@ F = \frac{MS_M}{MS_R}
 <p>Można zauważyć ciekawą rzecz związaną z obliczaniem <span class="math inline">\(SS_M\)</span>. Jak się okazuje, <span class="math inline">\(SS_M\)</span> da się policzyć bez liczenia <span class="math inline">\(SS_T\)</span> i <span class="math inline">\(SS_R\)</span>. <span class="math inline">\(SS_M\)</span> uzyskujemy, jeśli zignorujemy obserwacje i zsumujemy kwadraty różnic między średnią a nowym modelem. Zaznaczyłem te różnice na poniższym wykresie przerywanymi liniami.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-ssm" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-ssm" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-ssm-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">

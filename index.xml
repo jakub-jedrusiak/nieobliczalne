@@ -10,7 +10,726 @@
 <atom:link href="https://nieobliczalne.pl/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.449</generator>
-<lastBuildDate>Sat, 26 Aug 2023 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 28 Oct 2023 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Rozkłady próbkowania i rozkłady \(t\)</title>
+  <dc:creator>Jakub Jędrusiak</dc:creator>
+  <link>https://nieobliczalne.pl/posts/rozklady-probkowania.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Sięgnijmy pamięcią do przykładu z <a href="../posts/p-value.html">tekstu o wartości <img src="https://latex.codecogs.com/png.latex?p"></a>. Na tym tekście będziemy budować, więc zachęcam, żeby z nim zapoznać się w pierwszej kolejności. Konieczne jest też rozumienie podstaw rozkładu normalnego. Jeśli nie potrafisz obliczyć, powiedzmy, jaka część populacji ma inteligencję między 85 a 115, zachęcam do nadrobienia <a href="../posts/gestosc-prawdopodobienstwa.html">tekstu o rozkładach normalnych</a>. Nie jest to <em>niezbędne</em> do zrozumienia większości tego tekstu, ale bardzo pomoże.</p>
+<p>Sprawdzaliśmy tam między innymi kontrowersyjną (i fałszywą) hipotezę, że kobiety są mniej inteligentne od mężczyzn. Zbadaliśmy 100 kobiet i 100 mężczyzn i wyszło nam, że tak istotnie jest – mężczyźni osiągnęli średnią 101, kobiety 99. Wiedzeni nieufnością powtórzyliśmy nasze badanie i – ku naszemu zdumieniu – tym razem kobiety osiągnęły średnią 101 a mężczyźni 98. Po głębszym zastanowieniu możemy stwierdzić, że nie ma w tym nic dziwnego. W końcu całkowicie losowo mogę trafić na bardziej lub mniej inteligentną próbkę mężczyzn. Jakie jednak mogę mieć zaufanie do swoich wyników? Jak to, że moi mężczyźni osiągnęli średnią 98 ma się do rzeczywistej średniej <em>wszystkich</em> mężczyzn? Czy muszę zbadać ich wszystkich, żeby mieć pewność? To zgłębimy tutaj.</p>
+<p>Cały sens statystyki polega na tym, żeby być w stanie pobrać próbkę i na jej podstawie powiedzieć coś na temat populacji, z której ją pobraliśmy <span class="citation" data-cites="wackerly2008">(Wackerly, Mendenhall, &amp; Scheaffer, 2008)</span>. Nie muszę więc badać wszystkich mężczyzn świata, żeby coś o nich (jako o zbiorowości) powiedzieć. Statystyka jest jednak lepsza od chłopskiego rozumu nie tylko w tym, że daje bardziej obiektywne dane, niż chłopski rozum (wbrew temu, co mogliśmy słyszeć od wujków przy rodzinnym stole), ale też pozwala powiedzieć, jak bardzo pewni możemy być naszych wniosków. Kluczowe pytanie na ten moment będzie więc brzmiało – skoro w mojej próbce 100 mężczyzn wyszła średnia 98, to jak to ma się do średniej inteligencji wszystkich mężczyzn?</p>
+<section id="populacja-i-próba" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Populacja i próba</h1>
+<p>Populacja to taka abstrakcja, oznaczająca mniej więcej „wszyscy”. Jeśli badamy żubry w Puszczy Białowieskiej, naszą populacją są żubry z Puszczy Białowieskiej. Jeśli interesują nas konkretnie biol-chemy z 3C, to nasza populacja to biol-chemy z 3C. Ale jeśli badamy biol-chemy z 3C, żeby powiedzieć coś o wszystkich biol-chemach w kraju, to po pierwsze nie mamy dobrej próbki, a po drugie naszą populacją stają się wszystkie biol-chemy w kraju. Populacją jest więc to, o czym chcemy wyciągać wnioski. Zbadanie całej populacji jest drogie, czasochłonne i często po prostu niepotrzebne. Zdarza się to, jak w odbywającym się co 10 lat spisie powszechnym, jednak możemy wyciągać sensowne wnioski na temat całych populacji na podstawie ich wycinków. Takie wycinki to <strong>próby</strong>.</p>
+<p>Dobieranie próby do badań to jest całe duże zagadnienie w metodologii. Mówiąc jednak ogólnie, dobra próba powinna być po pierwsze liczna, a po drugie możliwie losowa.</p>
+<p>Liczność próby to wymóg dość intuicyjny. Jak w starym kawale. Ja jestem biały, mój tato jest biały, moja mama jest biała, moja siostra jest biała, moi koledzy z klasy są biali, czyli nie ma czarnych ludzi. Tutaj również ujawnia się wyższość statystyki nad przemyśleniami wujka, który o stanie narodu z pozycji autorytetu wnioskuje na podstawie kolegów z wojska, a o stanie męskości na podstawie chłopaka w ciasnych spodniach, którego widział w supermarkecie. Może się to wydawać oczywiste, ale uznawana (choć powoli niknąca) psychoanaliza, olbrzymi system przekonań właściwie o wszystkim, co tkwi w człowieku, powstała na bazie sylwetek 38 pacjentów <span class="citation" data-cites="borch-jacobsen2021">(Borch-Jacobsen, 2021)</span>. Związek liczności z pewnością wyrazimy tu matematycznie.</p>
+<p>Próbka jest jednak dobra wtedy, kiedy jest losowa. Jeśli chcemy sprawdzić, ile książek rocznie czytają Polacy, to nie zaczaimy się z sondą uliczną pod biblioteką. Jeśli próbka jest rzeczywiście losowa, to nawet jeśli ktoś z tej próbki odstaje w jedną stronę, to prawdopodobnie ktoś inny odstaje podobnie w drugą stronę i ostatecznie się wyrównują. Pod warunkiem, że próba jest rozsądnie liczna.</p>
+</section>
+<section id="rozkład-zmiennej-w-próbie" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Rozkład zmiennej w próbie</h1>
+<p>Załóżmy, że mamy losową próbę 100 mężczyzn i wszystkim mierzymy inteligencję. Niektórzy z tych mężczyzn mają współczynniki inteligencji 100, inni 95, jeszcze inni 105 itd. Wiedząc nieco o skali inteligencji nawet intuicyjnie będziemy czuć, że więcej ludzi będzie miało raczej przeciętną inteligencję, czyli około 100, niż 130 (co jest progiem przyjęcia do Mensy). Częstość poszczególnych wyników możemy przedstawić na histogramie (a potem dorzucić wykres gęstości, o czym mówiliśmy w <a href="../posts/gestosc-prawdopodobienstwa.html">tekście o gęstości prawdopodobieństwa</a>).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Kod</summary>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(iq, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(iq)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-2">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_histogram</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">binwidth =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gray60"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-3">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_vline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xintercept =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(iq<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>iq)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-4">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_vline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xintercept =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(iq<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>iq) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(iq<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>iq), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(iq<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>iq) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(iq<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>iq)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linetype =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dashed"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-5">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">xlim</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-6">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"IQ"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Liczba przypadków"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-7">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_main</span>()</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="https://nieobliczalne.pl/posts/rozklady-probkowania_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Widzimy, że najwięcej osób wykazało inteligencję blisko środka rozkładu. Średnia inteligencja wyniosła <strong>w tej konkretnej próbie</strong> 97.6, co zaznaczyłem pionową kreską. To, co widzimy na rysunku, to <strong>rozkład zmiennej</strong> w próbie. Pobraliśmy próbkę, zmierzyliśmy inteligencję, narysowaliśmy rozkład. To, co widzimy na obrazku, odnosi się tylko do naszej konkretnej próby. Może przypominać rzeczywisty rozkład inteligencji w populacji (i przypomina), ale może to odwzorowanie może być dalekie od doskonałości. Istnieje więc jakiś <strong>rozkład zmiennej w populacji</strong>, który staramy się przybliżyć za pomocą <strong>rozkładu zmiennej w próbie</strong>. Im próba bardziej liczna, tym rozkład zmiennej bliższy prawdziwemu rozkładowi w populacji. Wydaje się to naturalne.</p>
+<p>Poza średnią rozkład ma swoje odchylenie standardowe. Jest to podstawowe pojęcie, chociaż nieintuicyjne przy pierwszym kontakcie. W szczegółach omawiam je w <a href="../posts/procent-wariancji.html">tekście o wariancji</a>, ale w uproszczeniu mówi nam ono o tym, gdzie znajduje się większość ludzi. Odchylenie standardowe w naszej próbie wyniosło 15.2, więc większość ludzi ma inteligencję między 82.4 a 112.8, czyli średnia ± odchylenie standardowe. Jeśli teraz usłyszymy, że ktoś w teście inteligencji uzyskał wynik 130, to możemy sobie pomyśleć „dużo, aż 2 odchylenia standardowe od średniej”. Tutaj zakres jednego odchylenia standardowego od średniej zaznaczyłem przerywanymi kreskami. Jeśli odchylenie standardowe jest niewielkie, to średnia ma nieduży błąd, pojedyncze obserwacje są blisko niej. Jeśli jest ono duże, możemy się spodziewać większego rozstrzału.</p>
+<p>Losowanie osób do naszego badania możemy sobie wyobrazić jako <strong>losowanie z rozkładu zmiennej w populacji</strong>. Rozkład zmiennej w populacji mówi nam, jakie wyniki są częstsze, jakie rzadsze. Gdy wychodzimy na ulicę i pytamy ludzi, czy chcą wziąć udział w badaniu naukowym, mówiąc po statystycznemu <strong>losujemy z rozkładu</strong>. Osoba jest częścią populacji, więc losuję z rozkładu zmiennej w populacji. Rozkład budują ludzie. Gdy biorę losowego człowieka i mierzę jego inteligencję, statystyka każe nam patrzeć na to tak, jakbym wylosował wynik z rozkładu inteligencji w populacji. Powtarzam się, bo to naprawdę dziwne przejście z konkretnego, namacalnego zaczepiania ludzi na ulicy do matematycznej abstrakcji. Spróbuj oswoić się z tą perspektywą, nim przejdziesz dalej, bo przyda nam się w kolejnym podrozdziale.</p>
+</section>
+<section id="rozkład-próbkowania" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Rozkład próbkowania</h1>
+<p>Wiemy jednak, że każda próbka może trochę różnić się średnią. W niektórych próbkach wyjdzie nam 102, w innych 98. Możemy jednak intuicyjnie czuć, że znacznie trudniej przez przypadek zebrać próbkę o średniej 130 albo 70. Raczej średnie każdej jednej próbki będą krążyć dookoła prawdziwej średniej, czyli w tym wypadku 100. Zazwyczaj nie wiemy, jaka jest prawdziwa średnia z populacji, ale jak sobie z tym poradzić powiemy później. Średnie bliżej 100 powinny pojawiać się częściej, a średnie dalej od 100 rzadziej, możemy więc zrobić 100 próbek, każda po 100 osób i zobaczyć, jak często losują nam się jakie średnie. Możemy to nanieść na histogram.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Kod</summary>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">iq_pop <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">iq =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">map_dbl</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, \(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span>))))</span>
+<span id="cb2-2"></span>
+<span id="cb2-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(iq_pop, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(iq)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-4">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_histogram</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">binwidth =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gray60"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-5">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_vline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xintercept =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(iq_pop<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>iq)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-6">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_vline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xintercept =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(iq_pop<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>iq) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(iq_pop<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>iq), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(iq_pop<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>iq) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(iq_pop<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>iq)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linetype =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dashed"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-7">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Średnie IQ"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Liczba przypadków"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-8">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_main</span>()</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="https://nieobliczalne.pl/posts/rozklady-probkowania_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Wylosowaliśmy więc 100 różnych próbek, w każdej zmierzyliśmy średnią inteligencję. Na histogramie widać, że średnie w pobliżu 100 rzeczywiście pojawiały się częściej, niż te dalsze od 100. Średnia średnia wyniosła tutaj 99.9, zaś jej odchylenie standardowe 1.5, czyli zazwyczaj próbki miały średnią między 98.5 a 101.4. Zwróćmy jednak uwagę, że robiąc ten wykres, spłaszczyliśmy każdą próbkę 100 osób do jednej tylko liczby – średniej inteligencji. Ten wykres nie mówi nam więc nic na temat tego, jak wyglądał rozkład zmiennej w każdej próbce. On nam mówi tylko i aż tyle, jak często próbka 100 osób miała jaką średnią. Taki rozkład nazywamy <strong>rozkładem próbkowania</strong>. Rozkład próbkowania to rozkład średnich z <strong>różnych prób</strong> i jest czymś zupełnie innym niż rozkład zmiennej w próbie czy w populacji. I to rozróżnienie jest powalająco istotne.</p>
+<p>Rozkład zmiennej w próbie przypomina rozkład zmiennej w populacji. Im więcej osób w próbie, tym bardziej. Rozkład próbkowania nie musi przypominać rozkładu zmiennej w populacji, ani się do niego nie zbliża. Rozkład zmiennej w próbie składa się z pojedynczych pomiarów, rozkład próbkowania składa się ze <strong>średnich</strong>. Rozkład zmiennej w próbie mówi nam, jak wiele osób w naszej próbce wpada w określone widełki. Rozkład próbkowania mówi nam o tym, jak łatwo wylosować próbkę o określonej średniej. Wykorzystajmy więc perspektywę, którą podpowiedziałem na koniec poprzedniego podrozdziału. Gdy losujemy osobę z ulicy i mierzymy jej inteligencję, to losujemy ją z rozkładu zmiennej w populacji. Gdy losujemy 100 osób z ulicy i liczymy ich średnią inteligencję, to losujemy średnią z rozkładu próbkowania. <strong>O średniej każdej próbki można myśleć jako o wylosowanej z rozkładu próbkowania</strong>, tak jak każda osoba ze swoją inteligencją jest wylosowana z rozkładu inteligencji w populacji.</p>
+<p>Rozkładów próbkowania zazwyczaj się nie rysuje. Gdy pobieramy próbę, mamy tylko jedną średnią, nie ma sensu robić histogramu z jednej liczby. Rozkład próbkowania to pewna abstrakcja. Tak jak można sobie teoretycznie wyobrazić, że zbadaliśmy wszystkich członków populacji, by uzyskać rozkład zmiennej, tak możemy sobie wyobrazić, że zbadaliśmy wszystkie możliwe próbki po 100 osób, by uzyskać rozkład próbkowania. Dlaczego to jest istotne? Bo mówi nam, jak wiele zaufania możemy mieć do pojedynczej średniej z próby. W jaki sposób?</p>
+<p>Załóżmy, że rozkład próbkowania ma średnią 100 i odchylenie standardowe 5. <strong>Odchylenie standardowe rozkładu próbkowania to coś zupełnie innego niż odchylenie standardowe rozkładu zmiennej!</strong> Odchylenie standardowe rozkładu inteligencji wynosi 15, ale rozkład próbkowania nie mówi nam o inteligencji pojedynczych ludzi, tylko o średniej inteligencji grup ludzi. To są dwa różne odchylenia! Za to <strong>średnia rozkładu próbkowania jest równa średniej z populacji</strong>. Wracając. Jeśli średnia rozkładu próbkowania wynosi 100, a odchylenie standardowe 5, to nagminnie powinniśmy się spodziewać średnich między 95 a 105. Średnia 115 powinna nas zdziwić znacznie bardziej. Jeśli w takim wypadku wyszłoby nam, że w naszej próbce kobiety mają inteligencję 100, a mężczyźni 115, to bylibyśmy bardziej skłonni stwierdzić, że coś jest na rzeczy. Intuicyjnie możemy też czuć, że średnie 100 i 102 nie zrobiłyby na nas takiego wrażenia, bo naprawdę łatwo uzyskać je przez przypadek, bo większość średnich będzie między 95 a 105.</p>
+</section>
+<section id="centralne-twierdzenie-graniczne" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Centralne Twierdzenie Graniczne</h1>
+<p>Teraz się zacznie robić ciekawie. Trzymaj się, już za niedługo będą przykłady. Do tej pory rozkład próbkowania był tylko abstrakcją. Czymś, co równie trudno zmierzyć, jak prawdziwą średnią z populacji. Na co dzień myślę dość konkretnie, abstrakcje są mi potrzebne wtedy, gdy mogę je wykorzystać do myślenia czy w innym celu. Po co mi więc taka abstrakcja jak rozkład próbkowania? Bo mając pojedynczą próbkę, jej średnią i odchylenie standardowe, wbrew pozorom, można całkiem sporo powiedzieć o rozkładzie próbkowania, z którego ta średnia pochodzi. Pozwala nam na to przepotężne prawo, leżące u podstaw całej statystyki, zwane <strong>Centralnym Twierdzeniem Granicznym</strong> (<em>Central Limit Theorem</em>).</p>
+<section id="normalność" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="normalność"><span class="header-section-number">4.1</span> Normalność</h2>
+<p>Twierdzenie to mówi nam o dwóch piekielnie ważnych rzeczach. Po pierwsze, jeśli próba jest odpowiednio duża<sup>1</sup>, to <strong>każdy rozkład próbkowania jest normalny</strong>. Odpowiednio duża oznacza tutaj według większości autorów minimum 15 osób, chociaż co bardziej konserwatywni autorzy mówią 20 albo nawet 30 osób. Podkreślam tutaj słowo <strong>każdy</strong>. Oznacza to, że nieważne, jak wygląda rozkład zmiennej, czy jest normalny, czy nie. Rozkład próbkowania będzie normalny. Wyobraźmy sobie, że rozkład poniżej to rozkład zarobków w pewnym państwie. Większość ludzi zarabia niedużo, ale jest też niewielka ilość ludzi zarabiająca bardzo dużo.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Kod</summary>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rexp</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10000</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.0007</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb3-2">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">income =</span> .) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb3-3">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(income)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb3-4">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_histogram</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gray60"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb3-5">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Dochód"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Liczba przypadków"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb3-6">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_main</span>()</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="https://nieobliczalne.pl/posts/rozklady-probkowania_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Z pobieram z tego rozkładu losową próbkę 100 osób. Wychodzi mi średni dochód 1185. Spoko. Pobieram kolejne 100 osób i tym razem dostaję średni dochód 1448. Robię tak jeszcze bardzo dużo razy, więc ostatecznie mam zapisane w Excelu bardzo dużo średnich. Gdy z tych średnich, nie z pojedynczych obserwacji, zrobię histogram, dostanę coś takiego.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Kod</summary>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">income <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">income =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">map_vec</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span>, \(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rexp</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.0007</span>))))</span>
+<span id="cb4-2"></span>
+<span id="cb4-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(income, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(income)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-4">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_histogram</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gray60"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-5">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_vline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xintercept =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(income<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>income)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-6">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_vline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xintercept =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(income<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>income) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(income<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>income), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(income<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>income) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(income<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>income)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linetype =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dashed"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-7">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Średni dochód"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Liczba przypadków"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-8">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_main</span>()</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="https://nieobliczalne.pl/posts/rozklady-probkowania_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Ten rozkład wygląda zupełnie inaczej, niż rozkład wyjściowy. Dlaczego? Bo rozkład wyjściowy to rozkład zmiennej, a to na obrazku to rozkład średnich, jakie wychodzą w różnych próbkach, czyli rozkład próbkowania. Wielkość pojedynczej próbki wynosi 100, czyli więcej niż 15, a więc rozkład próbkowania wyszedł normalny. To jest pierwsze, co mówi nam CLT.</p>
+<p>Jest to założenie o tyle ważne, że idzie na przekór popularnym w naukowym świecie nieporozumieniom. W części testów (np. w teście <img src="https://latex.codecogs.com/png.latex?t">) istnieje założenie o normalności. Ta normalność dotyczy jednak nie rozkładu <em>zmiennej</em>, ale rozkładu <em>próbkowania</em>. Dane wcale nie muszą rozkładać się normalnie! Jeśli mamy te minimum 15-30 osób, to rozkład próbkowania i tak jest normalny na mocy centralnego twierdzenia granicznego. Owszem, możemy sprawdzić, czy dane rozkładają się normalnie, bo jeśli tak, to rozkład próbkowania też jest normalny, ale nawet najbardziej szalone rozkłady zmiennej mają normalne rozkłady próbkowania, o ile liczność próbki jest wystarczająca.</p>
+<p>Jeśli czytałeś(-aś) <a href="../posts/gestosc-prawdopodobienstwa.html">tekst o rozkładach normalnych</a>, możesz się już domyślać, dlaczego to jest ważne. Jeśli wiemy, że rozkład jest normalny, to moglibyśmy powiedzieć, np. „OK, w mojej próbce dzieci karmionych kalarepą średnia inteligencja wynosi wynosi 110. Rozkład próbkowania ma średnią 100 i odchylenie standardowe 5, więc szansa na to, że taka <em>lub wyższa</em> średnia wylosuje się z rozkładu normalnego przez przypadek wynosi <img src="https://latex.codecogs.com/png.latex?%5Cint_%7B110%7D%5E%7B%5Cinfty%7D%20%5Cmathcal%20N(x;%5C%20100,%5C%205%5E2)%20=%201%20-%20pnorm(110,%5C%20mean%20=%20100,%5C%20sd%20=%205)%20%5Capprox%202,3%5C%25">, a więc raczej nie jest to przypadek”. Skąd jednak mam wiedzieć, jaką średnią i odchylenie standardowe ma rozkład próbkowania, jak mam tylko jedną próbkę?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Szybka powtórka z rozkładów normalnych i rozgrzewka w myśleniu o rozkładach próbkowania.</p>
+<ol type="1">
+<li><p>Twoja próbka 40 osób ma średnią 121. Rozkład próbkowania ma średnią 100 i odchylenie standardowe 7. Jaka jest szansa, że próbka 40 osób będzie miała średnią 121 lub wyższą?</p></li>
+<li><p>Twoja próbka 120 osób ma średnią -0,78. Rozkład próbkowania ma średnią 0 i odchylenie standardowe 0,5. Jaka jest szansa, że próbka 120 osób będzie miała średnią taką lub niższą?</p></li>
+<li><p>Twoja próbka 300 osób ma średnią 5,7. Rozkład próbkowania ma średnią 5,5 i odchylenie standardowe 0,65. Różnica między Twoją średnią a średnią rozkładu próbkowania wynosi 0,2. Jaka jest szansa wylosowania próbki o takim lub większym odchyleniu (czyli mniej niż 5,3 lub więcej niż 5,7)?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?1%20-%20pnorm(121,%5C%20mean%20=%20100,%5C%20sd%20=%207)%20%5Capprox%200,13%5C%25"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?pnorm(-0.78,%5C%200,%5C%200.5)%20%5Capprox%205,9%5C%25"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?1%20-%20pnorm(5.7,%5C%205.5,%5C%200.65)%20+%20pnorm(5.3,%5C%205.5,%5C%200.65)%20%5Capprox%2075,8%5C%25"></p></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="błąd-standardowy" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="błąd-standardowy"><span class="header-section-number">4.2</span> Błąd standardowy</h2>
+<p>Druga rzecz, na którą pozwala nam CLT to dokładnie rozwiązanie naszego problemu. Mówi nam ono, że możemy oszacować odchylenie standardowe rozkładu próbkowania dzieląc odchylenie standardowe naszej próbki przez pierwiastek z liczby osób badanych.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ASE%20=%20%5Cfrac%7BSD%7D%7B%5Csqrt%7BN%7D%7D%0A"></p>
+<p>Rozszyfrujmy to sobie i podajmy przykład. Skrót <img src="https://latex.codecogs.com/png.latex?SE"> oznacza <strong>błąd standardowy</strong>. Jest to specjalna nazwa na <strong>odchylenie standardowe rozkładu próbkowania</strong>. Pozwala ona odróżnić łatwo odchylenie standardowe rozkładu zmiennej, od odchylenia standardowego rozkładu próbkowania. <img src="https://latex.codecogs.com/png.latex?N"> to liczba osób w próbce. <img src="https://latex.codecogs.com/png.latex?SD"> w tym wzorze odnosi się do odchylenia standardowego <em>zmiennej</em>. Jeśli znamy prawdziwe odchylenie standardowe w populacji, to możemy je wykorzystać, ale jeśli nie (czyli zazwyczaj), to możemy je zastąpić odchyleniem standardowym naszej próbki. Jeśli sięgniesz pamięcią do wzoru na odchylenie standardowe, to możesz sobie przypomnieć, że sumę odchyleń podniesionych do kwadratu dzieliliśmy przez <img src="https://latex.codecogs.com/png.latex?N%20-%201"> zamiast przez <img src="https://latex.codecogs.com/png.latex?N">. Jest to takie zabezpieczenie wbudowane we wzór na odchylenie standardowe, dzięki któremu odchylenie standardowe z próby bardziej przypomina to z populacji. Dzięki temu, że dzieliliśmy przez <img src="https://latex.codecogs.com/png.latex?N%20-%201"> zamiast przez <img src="https://latex.codecogs.com/png.latex?N">, teraz możemy podstawiać do wzoru na błąd standardowy odchylenie standardowe z próby.</p>
+<p>Zaczęliśmy od wylosowania próbki 100 mężczyzn i zmierzeniu ich inteligencji. Wiemy, że rozkład inteligencji ma średnią 100, a więc rozkład próbkowania również ma średnią 100. Odchylenie standardowe wynosi 15, co również wiemy dlatego, że wiemy odrobinę o inteligencji. Możemy więc oszacować błąd standardowy, czyli odchylenie standardowe rozkładu próbkowania.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ASE%20=%20%5Cfrac%7BSD%7D%7B%5Csqrt%7BN%7D%7D%20=%20%5Cfrac%7B15%7D%7B%5Csqrt%7B100%7D%7D%20=%201,5%0A"></p>
+<p>Przypomnijmy, że wcześniej zrobiliśmy symulację rozkładu próbkowania, losując 100 próbek po 100 osób i licząc średnie. Tak uzyskany rozkład próbkowania miał odchylenie standardowe 1.45. Jak widzimy, było to w miarę rozsądne oszacowanie, ale jeśli zamiast 100 próbek pobralibyśmy 1000, 10 000 czy 100 000, to nasz symulowany rozkład miałby odchylenie standardowe coraz bliższe 1,5. Poniżej przedstawiam 3 wykresy gęstości, które pokazują, że im więcej próbek włączymy do symulacji, tym rozkład staje się bardziej normalny, a jego odchylenie standardowe bliższe prawdziwemu. Oznacza to, że symulacja symulacją, ale pod spodem czai się jakiś <em>prawdziwy</em> rozkład próbkowania, który ma średnią 100 (równą prawdziwej średniej z populacji) i odchylenie standardowe 1,5.</p>
+<p>W naszym drugim przykładzie z dochodami nie znamy prawdziwego odchylenia standardowego, ale możemy je oszacować. Załóżmy, że wylosowałem 100 osób, zapytałem o dochody i wyszło mi odchylenie standardowe 1753,93. Możemy oszacować błąd standardowy:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ASE%20=%20%5Cfrac%7B1753,93%7D%7B%5Csqrt%7B100%7D%7D%20%5Capprox%20175%0A"></p>
+<p>Jeśli wiedziałbym, że prawdziwa średnia wynosi, powiedzmy 1600 (ze średnią poradzimy sobie potem), to próbki ze średnią między 1425 i 1775 mogę uznać za zupełnie typowe (ok. 67% przypadków według prawa trzech sigm), zaś próbki ze średnią między 1250 a 1950 za zupełnie typowe (ok. 95% przypadków według prawa trzech sigm). Jeśli dzieci karmione kalarepą osiągałyby średni dochód na poziomie 2000, to miałbym mniej niż 5% szans, że ten wynik jest przypadkowy.</p>
+<p>Z tego wzoru wynika też ważny wniosek – <strong>im większa próbka, tym mniejszy błąd standardowy</strong>. Możemy to sobie przedstawić na wykresach. Poniżej nałożyłem na siebie 3 histogramy. Każdy histogram to</p>
+<p>95% próbek 100 osób będzie miało średnią inteligencję między 97 a 103 (<img src="https://latex.codecogs.com/png.latex?100%20%5Cpm%202%20%5Ctimes%201,5">), co policzyliśmy wyżej. Różnica między 100 a 101 będzie więc typowa, bo bardzo łatwo uzyskać ją przez przypadek. Jeśli jednak nasza próbka wyniesie nie 100, a 1000 osób, to błąd standardowy spadnie do <img src="https://latex.codecogs.com/png.latex?SE%20=%20%5Cfrac%7B15%7D%7B%5Csqrt%7B1000%7D%7D%20%5Capprox%200,47">, a więc 95% próbek będzie miało średnią między 99,06 a 100,94. Tym samym średnia 101 staje się bardziej podejrzana. Ba! Staje się istotnie różna od 100, bo szansa na uzyskanie jej przez przypadek w próbie 1000 osób jest mniejsza niż 5%<sup>2</sup>. Takie widełki nazywamy <strong>95% przedziałem ufności</strong>. Jeśli chcemy uzyskać dokładnie 95% pewności, będziemy mnożyć błąd standardowy nie przez 2, jak zrobiłem to wyżej, a przez 1,96 (patrz <a href="../posts/gestosc-prawdopodobienstwa.html#sec-inverse-norm">odwrotna dystrybuanta rozkładu normalnego</a>).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pewna zmienna ma rozkład o średniej 5,5. 25 dzieci karmionych kalarepą uzyskuje średnią 5,8 z odchyleniem standardowym 0,5. Jaka jest szansa, że wynik jest przypadkowy? Załóż hipotezę prawostronną (tj. że średnia u dzieci jest 5,8 albo wyższa). Oblicz 95% przedział ufności dla średniej 5,5.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="błąd-standardowy-1" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="błąd-standardowy-1"><span class="header-section-number">4.2.1</span> Błąd standardowy</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%0ASE%20=%20%5Cfrac%7B0,5%7D%7B%5Csqrt%7B25%7D%7D%20=%20%5Cfrac%7B0,5%7D%7B5%7D%20=%200,1%0A"></p>
+</section>
+<section id="wartość-p" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="wartość-p"><span class="header-section-number">4.2.2</span> Wartość <img src="https://latex.codecogs.com/png.latex?p"></h3>
+<p><img src="https://latex.codecogs.com/png.latex?%0A1%20-%20pnorm(5.8,%5C%205.5,%5C%200.1)%20=%200,13%5C%25%0A"></p>
+</section>
+<section id="przedział-ufności" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="przedział-ufności"><span class="header-section-number">4.2.3</span> Przedział ufności</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%0A5,5%20%5Cpm%201,96%20%5Ctimes%200,1%20=%205,5%20%5Cpm%200,196%20=%205,304%20%5Ctext%7B%20i%20%7D%205,696%0A"></p>
+</section>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="rozkłady-t" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Rozkłady <em>t</em></h1>
+<p>Centralne Twierdzenie Graniczne pozwala nam sobie wyobrazić rozkład możliwych średnich, jakie da nam próbka o określonej wielkości. Co więcej, pozwala liczyć prawdopodobieństwo. Załóżmy, że mam próbkę o odchyleniu standardowym 20 i średniej 10. Próbka liczyła 100 osób, więc błąd standardowy wynosi <img src="https://latex.codecogs.com/png.latex?SE%20=%2020%20%5Cdivsymbol%20%5Csqrt%7B100%7D%20=%202">. Oznacza to, że np. średnią 12 lub większą wylosuję z prawdopodobieństwem <img src="https://latex.codecogs.com/png.latex?%5Cint%5E%5Cinfty_%7B12%7D%20%5Cmathcal%7BN%7D(x;%5C%2010,%5C%202%5E2)%20dx%20%5Capprox%2015,87%5C%25">. Jeśli jednak moja próbka będzie miała 1000 osób (i takie samo odchylenie standardowe i średnią), to mój błąd standardowy wyniesie już <img src="https://latex.codecogs.com/png.latex?SE%20=%2020%20%5Cdivsymbol%20%5Csqrt%7B1000%7D%20%5Capprox%200,63">. W tym momencie szansa na wylosowanie próbki o średniej 12 lub więcej spada praktycznie do zera (zachęcam do policzenia). Pojawia się jednak pewien problem. Cicho założyłem tutaj, że średnia 10 naprawdę jest średnią&nbsp;z populacji. Ale w rzeczywistości przecież nie musi tak być! Średnia z mojej konkretnej próbki przecież jest obarczona losowym błędem. Może być wyższa od prawdziwej albo niższa od prawdziwej. Skąd ja mam to wiedzieć? A jeśli nie znam prawdziwej średniej, to czy rzeczywiście mogę powiedzieć cokolwiek o rozkładzie próbkowania, skoro średnia rozkładu próbkowania jest równa średniej <em>z populacji</em>? Jest na to metoda.</p>
+<p>Przypomnijmy sobie, że (jeśli próbka jest odpowiednio duża) rozkład próbkowania jest normalny. Rozkłady normalne opisują dwie liczby – średnia i odchylenie standardowe. Odchylenie standardowe rozkładu próbkowania to błąd standardowy i, jak już mówiliśmy, możemy je policzyć dzieląc odchylenie standardowe <em>z populacji</em> przez pierwiastek z wielkości próby ($SE = $). Odchylenia standardowego z populacji nie mamy, ale wzór na odchylenie standardowe z próby ma zabezpieczenie, które pozwala użyć odchylenia standardowego z próbki zamiast tego z populacji. Chodzi o tajemnicze dzielenie przez <img src="https://latex.codecogs.com/png.latex?N%20-%201"> zamiast przez <img src="https://latex.codecogs.com/png.latex?N">. Dzięki temu zabiegowi możemy <em>szacować</em> błąd standardowy za pomocą tego odchylenia standardowego, które rzeczywiście mamy. To, że coś jest <em>oszacowane</em><sup>3</sup> możemy oznaczyć daszkiem – <img src="https://latex.codecogs.com/png.latex?%5Chat%7BSE%7D%20=%20%5Cfrac%7B%5Chat%7B%5Csigma%7D%7D%7B%5Csqrt%7BN%7D%7D">. Czyli odchylenie standardowe rozkładu próbkowania (błąd standardowy) mamy oszacowane, ale średnia takiego zabezpieczenia nie zawiera. Jeśli chcemy wykorzystać średnią z próby zamiast prawdziwej średniej z populacji musimy skorzystać z pewnej sztuczki – zamiast zwykłego rozkładu normalnego wykorzystamy rozkład <em>t</em>.</p>
+<p>Rozkład<sup>4</sup> <em>t</em> to trochę zmodyfikowany rozkład normalny, który bierze pod uwagę fakt, że nie mamy prawdziwej średniej z populacji, tylko obarczoną losowym błędem średnią z próby. Działa on (i wygląda) bardzo podobnie do rozkładu normalnego. Ma też swoją dystrybuantę, z której możemy korzystać identycznie, jak z dystrybuanty rozkładu normalnego. W R dostaniemy się do niej funkcją <code>pt()</code> albo możemy wykorzystać jakiś <a href="https://www.danielsoper.com/statcalc/calculator.aspx?id=41">kalkulator online</a>. Większość kalkulatorów dystrybuanty rozkładu <em>t</em> wymaga jednak wartości <em>wystandaryzowanych</em>, czyli przemielonych wzorem <img src="https://latex.codecogs.com/png.latex?Z(x)%20=%20%5Cfrac%7Bx%20-%20M_x%7D%7BSD%7D">.</p>
+<p>Do tego, rozkład <em>t</em>, poza średnią i odchyleniem standardowym wykorzystuje jeszcze trzeci parametr – stopnie swobody. Pomyślmy, zadaniem rozkładu <em>t</em> jest wziąć pod uwagę, że nasza średnia z próby ma w sobie jakiś błąd. Ale wydaje się naturalne, że średnia z próby 10 osób pewnie ma większy błąd niż średnia z próby 100 osób. Rozkład <em>t</em> musi więc wiedzieć, jak duża jest nasza próba, żeby określić, jak dużą poprawkę zastosować. Stopnie swobody to złożony matematyczny potworek, który spotkaliśmy już przy wzorze na odchylenie standardowe. Nie będę tłumaczył co to jest i dlaczego, ale żeby dostać liczbę stopni swobody dla rozkładu <em>t</em>, od wielkości naszej próby odejmujemy 1. Próba 100 osób ma więc 99 stopni swobody. W praktyce jest to okienko w kalkulatorze, które trzeba uzupełnić.</p>
+<p>Przeróbmy to na przykładzie. Weźmy naszą poprzednią próbkę 100 osób o średniej 10 i odchyleniu standardowym 20. Błąd standardowy wynosi 2 na mocy Centralnego Twierdzenia Granicznego. Załóżmy, że zmierzyliśmy to samo u dzieci karmionych kalarepą i wyszła nam średnia 12. Jaka jest szansa, że to przypadek? Rozwiązywaliśmy już takie problemy za pomocą rozkładu normalnego, teraz jednak robimy to porządnie i wykorzystujemy rozkład <em>t</em>. Chcemy sprawdzić prawdopodobieństwo przypadkowego uzyskania średniej 12 lub więcej. Najpierw standaryzuję nasz wynik 12 i wychodzi <img src="https://latex.codecogs.com/png.latex?t%20=%20%5Cfrac%7B12%20-%2010%7D%7B2%7D%20=%201">. Liczba stopni swobody to <img src="https://latex.codecogs.com/png.latex?100%20-%201%20=%2099">. Następnie liczę <img src="https://latex.codecogs.com/png.latex?%5Cint%5E%5Cinfty_1%20t(x;%5C%2099)%20dx">. W R załatwi to komenda <code>pt(1, 99, lower.tail = FALSE)</code> albo <code>1 - pt(1, 99)</code>. Uzyskana wartość to <img src="https://latex.codecogs.com/png.latex?p%20=%2015,99%5C%25">, czyli odrobinę wyższa niż ta z rozkładu normalnego. To zawyżenie prawdopodobieństwa to właśnie poprawka na fakt, że nie mamy średniej <em>z populacji</em>, tylko z próby. Jak widać różnica nie jest duża, a to wynika z faktu, że jeśli nasza próbka to jakieś 100 lub więcej osób, to rozkłady <em>t</em> stają się naprawdę bardzo podobne do rozkładów normalnych.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Test <em>t</em>-Studenta
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Policz błąd standardowy.</p></li>
+<li><p>Wystandaryzuj różnicę. Załóż, że prawdziwa jest średnia grupy kontrolnej.</p></li>
+<li><p>Policz liczbę stopni swobody <img src="https://latex.codecogs.com/png.latex?N-1">.</p></li>
+<li><p>Policz wartość dystrybuanty rozkładu <em>t</em>:</p>
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?%5Cint_%7B-%5Cinfty%7D%5E%7Bx%7D%20t(x;%5C%20df)%20dx"> – dla hipotezy kierunkowej zakładającej spadek.</p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?%5Cint%5E%7B%5Cinfty%7D_%7Bx%7D%20t(x;%5C%20df)%20dx"> – dla hipotezy kierunkowej zakładającej wzrost.</p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?1%20-%20%5Cint_%7B-x%7D%5E%7Bx%7D%20t(x;%5C%20df)%20dx"> albo inaczej <img src="https://latex.codecogs.com/png.latex?%5Cint_%7B-%5Cinfty%7D%5E%7B-x%7D%20t(x;%5C%20df)%20dx%20+%201%20-%20%5Cint_%7Bx%7D%5E%7B%5Cinfty%7D%20t(x;%5C%20df)%20dx"> – dla hipotezy bezkierunkowej.</p></li>
+</ol></li>
+</ol>
+</div>
+</div>
+<p>W rzeczywistości jest kilka rzeczy, które można zrobić lepiej, żeby odpowiedzieć na to pytanie. Związane jest to z tym, jak się modeluje różnice. Jeśli średnia dzieci karmionych kalarepą się różni, ale odchylenie standardowe jest takie samo, to możemy policzyć to tak, jak pokazałem wyżej. Nazywa się to testem <em>t</em> Studenta. Jeśli jednak nie zakładamy, że odchylenia standardowe tych dwóch populacji (ogólnej i dzieci karmionych kalarepą) są identyczne, powinniśmy <strong>dodać wariancje</strong> tych dwóch rozkładów, żeby uzyskać wariancję rozkładu próbkowania <em>różnicy</em>. Innymi słowy tworzymy tutaj trzeci rozkład, który nie pokazuje nam średniej w populacji ogólnej, ani średniej w populacji dzieci karmionych kalarepą, ale mówi nam, jakie różnice między próbkami z tych dwóch populacji będziemy spotykać. Różnica tutaj wyniosła 2 (na plusie). Rozkład ten może nam powiedzieć, jak łatwo dostać różnicę 2 przez przypadek albo innymi słowy jak często będziemy spotykali taką lub większą różnicę. Tutaj i dzieci karmione standardowo, i dzieci karmione kalarepą wykazały błąd standardowy 2. Wariancja to odchylenie standardowe do kwadratu, więc <img src="https://latex.codecogs.com/png.latex?2%5E2%20+%202%5E2%20=%208">. Jeśli chcemy mieć znowu błąd standardowy (ale tym razem <em>różnicy</em>, nie żadnej średniej), wyciągamy z tego pierwiastek <img src="https://latex.codecogs.com/png.latex?%5Csqrt%7B8%7D%20=%202%20%5Csqrt%7B2%7D%20%5Capprox%202,83">. Różnicę 2 dzielimy więc przez nowo uzyskane odchylenie <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B2%7D%7B2,83%7D%20=%200,71">. I dopiero tę wartość wrzucamy do dystrybuanty <img src="https://latex.codecogs.com/png.latex?p%20=%201%20-%20pt(0.71,%5C%2099)%20%5Capprox%2024%5C%25">. W takiej wersji (niezakładającej różnych wariancji) ten test nazywa się testem <em>t</em> Welcha. W R jest to domyślny test <em>t</em>, przeprowadzany jeśli nie ustawimy tego inaczej.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Test <em>t</em>-Welcha
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Policz osobno błędy standardowe w obu grupach.</p></li>
+<li><p>Podnieś je do kwadratu, żeby uzyskać wariancje i zsumuj je.</p></li>
+<li><p>Wyciągnij z otrzymanej wariancji pierwiastek, żeby uzyskać błąd standardowy rozkładu różnic.</p></li>
+<li><p>Wystandaryzuj różnicę. Załóż, że prawdziwa jest średnia grupy kontrolnej. Wykorzystaj błąd standardowy rozkładu różnic.</p></li>
+<li><p>Policz liczbę stopni swobody <img src="https://latex.codecogs.com/png.latex?N-1">.</p></li>
+<li><p>Policz wartość dystrybuanty rozkładu <em>t</em>:</p>
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?%5Cint_%7B-%5Cinfty%7D%5E%7Bx%7D%20t(x;%5C%20df)%20dx"> – dla hipotezy kierunkowej zakładającej spadek.</p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?%5Cint%5E%7B%5Cinfty%7D_%7Bx%7D%20t(x;%5C%20df)%20dx"> – dla hipotezy kierunkowej zakładającej wzrost.</p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?1%20-%20%5Cint_%7B-x%7D%5E%7Bx%7D%20t(x;%5C%20df)%20dx"> albo inaczej <img src="https://latex.codecogs.com/png.latex?%5Cint_%7B-%5Cinfty%7D%5E%7B-x%7D%20t(x;%5C%20df)%20dx%20+%201%20-%20%5Cint_%7Bx%7D%5E%7B%5Cinfty%7D%20t(x;%5C%20df)%20dx"> – dla hipotezy bezkierunkowej.</p></li>
+</ol></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Załóżmy, że badamy, jak soplówka jeżowata (taki grzyb) wpływa na funkcje poznawcze. Wykorzystamy sobie prawdziwe dane z badań Moriego i współpracowników <span class="citation" data-cites="mori2009">(2009)</span>. Zbadaliśmy 2 grupy po 15 osób. Przez 16 tygodni jednej grupie podawaliśmy placebo, a drugiej soplówkę jeżowatą. Na koniec zmierzyliśmy ich funkcje poznawcze standaryzowanym testem. Po 16 tygodniach, w grupie eksperymentalnej średni wynik w teście funkcji poznawczych wyniósł <img src="https://latex.codecogs.com/png.latex?M_%7Beksp.%7D%20=%2027,4"> (<img src="https://latex.codecogs.com/png.latex?SD_%7Beksp.%7D%20=%201,6">), zaś w grupie kontrolnej <img src="https://latex.codecogs.com/png.latex?M_%7Bkont.%7D%20=%2025,4"> (<img src="https://latex.codecogs.com/png.latex?SD_%7Bkont.%7D%20=%204">). Czy różnica jest istotna statystycznie (czyli czy prawdopodobieństwo uzyskania tego wyniku przypadkowo wynosi mniej niż 5%)?</p>
+<ol type="1">
+<li><p>Policz z założeniem (ewidentnie fałszywym), że grupy mają identyczną wariancję równą wariancji grupy kontrolnej.</p>
+<ol type="1">
+<li><p>Załóż hipotezę kierunkową, że soplówka jeżowata <em>zwiększa</em> skuteczność w testach funkcji poznawczych (różnica taka jaka jest lub wyższa).</p></li>
+<li><p>Załóż hipotezę bezkierunkową, że soplówka jeżowata <em>zmienia</em> skuteczność w testach funkcji poznawczych (różnica w dół lub w górę).</p></li>
+</ol></li>
+<li><p>Policz bez założenia o jednorodności wariancji.</p>
+<ol type="1">
+<li><p>Załóż hipotezę kierunkową.</p></li>
+<li><p>Załóż hipotezę bezkierunkową.</p></li>
+</ol></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="section" class="level3" data-number="5.0.1">
+<h3 data-number="5.0.1" class="anchored" data-anchor-id="section"><span class="header-section-number">5.0.1</span> 1.</h3>
+<p>Najpierw liczę błąd standardowy: <img src="https://latex.codecogs.com/png.latex?%0ASE%20=%20%5Cfrac%7B4%7D%7B%5Csqrt%7B15%7D%7D%20=%201,03%0A"></p>
+<p>Potem standaryzuję różnicę zakładając, że średnia z grupy kontrolnej jest prawdziwa: <img src="https://latex.codecogs.com/png.latex?%0At%20=%20%5Cfrac%7B27,4%20-%2025,4%7D%7B1,03%7D%20=%201,94%0A"></p>
+<section id="section-1" class="level4" data-number="5.0.1.1">
+<h4 data-number="5.0.1.1" class="anchored" data-anchor-id="section-1"><span class="header-section-number">5.0.1.1</span> 1.1</h4>
+<p>Liczę wartość <img src="https://latex.codecogs.com/png.latex?p"> dla hipotezy kierunkowej: <img src="https://latex.codecogs.com/png.latex?%0A%5Cint_%7B1,94%7D%5E%7B%5Cinfty%7D%20t(x;%5C%2014)%20dx%20=%201%20-%20pt(1.94,%5C%2014)%20%5Capprox%203,6%5C%25%0A"></p>
+<p>3,6% to mniej niż 5%, a więc różnica jest istotna statystycznie.</p>
+</section>
+<section id="section-2" class="level4" data-number="5.0.1.2">
+<h4 data-number="5.0.1.2" class="anchored" data-anchor-id="section-2"><span class="header-section-number">5.0.1.2</span> 1.2</h4>
+<p>Liczę wartość <img src="https://latex.codecogs.com/png.latex?p"> dla hipotezy bezkierunkowej: <img src="https://latex.codecogs.com/png.latex?%0A1%20-%20%5Cint_%7B-1,94%7D%5E%7B1,94%7D%20t(x;%5C%2014)%20dx%20=%20pt(-1.94,%5C%2014)%20+%201%20-%20pt(1.94,%5C%2014)%20%5Capprox%207,3%5C%25%0A"></p>
+<p>7,3% to więcej niż 5%, więc różnica nie jest istotna statystycznie.</p>
+</section>
+</section>
+<section id="section-3" class="level3" data-number="5.0.2">
+<h3 data-number="5.0.2" class="anchored" data-anchor-id="section-3"><span class="header-section-number">5.0.2</span> 2.</h3>
+<p>Liczę osobno błędy standardowe:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign*%7D%0ASE_%7Bkont.%7D%20&amp;=%20%5Cfrac%7B4%7D%7B%5Csqrt%7B15%7D%7D%20=%201,03%20%5C%5C%0ASE_%7Beksp.%7D%20&amp;=%20%5Cfrac%7B1,6%7D%7B%5Csqrt%7B15%7D%7D%20=%200,41%0A%5Cend%7Balign*%7D%0A"></p>
+<p>Dodaję wariancje, żeby uzyskać wariancję rozkładu różnic: <img src="https://latex.codecogs.com/png.latex?%0A1,03%5E2%20+%200,41%5E2%20=%201,229%0A"></p>
+<p>Wyciągam pierwiastek z wariancji, żeby uzyskać błąd standardowy rozkładu różnic:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csqrt%7B1,229%7D%20=%201,11%0A"></p>
+<p>Standaryzuję wartość różnicy zakładając, że średnia z grupy kontrolnej jest prawdziwa:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0At%20=%20%5Cfrac%7B27,4%20-%2025,4%7D%7B1,11%7D%20=%201,8%0A"></p>
+<section id="section-4" class="level4" data-number="5.0.2.1">
+<h4 data-number="5.0.2.1" class="anchored" data-anchor-id="section-4"><span class="header-section-number">5.0.2.1</span> 2.1</h4>
+<p>Liczę wartość <img src="https://latex.codecogs.com/png.latex?p"> dla hipotezy kierunkowej:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cint_%7B1,8%7D%5E%7B%5Cinfty%7D%20t(x;%5C%2014)%20dx%20=%201%20-%20pt(1.8,%5C%2014)%20%5Capprox%204,8%5C%25%0A"></p>
+<p>4,8% to mniej niż 5%, czyli różnica jest istotna statystycznie.</p>
+</section>
+<section id="section-5" class="level4" data-number="5.0.2.2">
+<h4 data-number="5.0.2.2" class="anchored" data-anchor-id="section-5"><span class="header-section-number">5.0.2.2</span> 2.2</h4>
+<p>Liczę wartość <img src="https://latex.codecogs.com/png.latex?p"> dla hipotezy bezkierunkowej: <img src="https://latex.codecogs.com/png.latex?%0A1%20-%20%5Cint_%7B-1,8%7D%5E%7B1,8%7D%20t(x;%5C%2014)%20dx%20=%20pt(-1.8,%5C%2014)%20+%201%20-%20pt(1.8,%5C%2014)%20%5Capprox%209,3%5C%25%0A"></p>
+<p>9,3% to więcej niż 5%, czyli różnica jest nieistotna statystycznie.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</section>
+<section id="podsumowanie" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Podsumowanie</h1>
+<ol type="1">
+<li><p>Rozkład zmiennej w próbie mówi nam tylko o danej konkretnej próbie. Rozkład próbkowania mówi nam, jak wyglądają średnie we wszystkich możliwych próbach i jak łatwo jest je uzyskać.</p></li>
+<li><p>Jak mówi Centralne Twierdzenie Graniczne, rozkład próbkowania jest normalny, jeśli próba liczy minimum 15 (według niektórych 30) obserwacji. Średnia tego rozkładu równa jest prawdziwej średniej z populacji.</p></li>
+<li><p>Rozkład próbkowania ma swoje odchylenie standardowe zwane błędem standardowym, liczone ze wzoru z Centralnego Twierdzenia Granicznego <img src="https://latex.codecogs.com/png.latex?SE%20=%20%5Cfrac%7B%5Csigma%7D%7B%5Csqrt%7BN%7D%7D"></p></li>
+<li><p>Z tego wzoru wynika, że im większa próba, tym błąd standardowy mniejszy, a więc średnia z próby bardziej wiarygodna.</p></li>
+<li><p>Wzór na odchylenie standardowe ma w sobie poprawkę, która pozwala używać go zamiast odchylenia standardowego z populacji. Jeśli chcemy użyć średniej z próby jako średniej z populacji, musimy wykorzystać rozkład <em>t</em>.</p></li>
+<li><p>Istotność statystyczną, gdy wariancje są równe, możemy sprawdzić testem <em>t</em>-Studenta. Wartość <em>t</em> do dystrybuanty liczymy ze wzoru <img src="https://latex.codecogs.com/png.latex?t%20=%20%5Cfrac%7Bx%20-%20M%7D%7BSE%7D"></p></li>
+<li><p>Istotność statystyczną, bez założenia jednorodności wariancji, możemy sprawdzić testem <em>t</em>-Welcha. Wartość <em>t</em> do dystrybuanty liczymy ze wzoru <img src="https://latex.codecogs.com/png.latex?t%20=%20%5Cfrac%7Bx%20-%20M%7D%7B%5Csqrt%7BSE_1%5E2%20+%20SE_2%5E2%7D%7D%20=%20%5Cfrac%7Bx%20-%20M%7D%7B%5Csqrt%7B%5Cfrac%7B%5Csigma_1%5E2%7D%7Bn_1%7D%20+%20%5Cfrac%7B%5Csigma_2%5E2%7D%7Bn_2%7D%7D%7D"></p></li>
+</ol>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2">
+<div id="ref-borch-jacobsen2021" class="csl-entry">
+Borch-Jacobsen, M. (2021). <em>Freud’s patients: a book of lives</em>. London: Reaktion Books.
+</div>
+<div id="ref-mori2009" class="csl-entry">
+Mori, K., Inatomi, S., Ouchi, K., Azumi, Y., &amp; Tuchida, T. (2009). Improving effects of the mushroom Yamabushitake ( <span><em>Hericium erinaceus</em></span> ) on mild cognitive impairment: a double-blind placebo-controlled clinical trial. <em>Phytotherapy Research</em>, <em>23</em>(3), 367–372. <a href="https://doi.org/10.1002/ptr.2634">https://doi.org/10.1002/ptr.2634</a>
+</div>
+<div id="ref-wackerly2008" class="csl-entry">
+Wackerly, D. D., Mendenhall, W., &amp; Scheaffer, R. L. (2008). <em>Mathematical statistics with applications</em> (Seventh edition). Belmont: Thomson Brooks/Cole.
+</div>
+</div></section><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
+<ol>
+<li id="fn1"><p>Sprawa jest nieco bardziej skomplikowana. Prawdą jest, że odpowiednio duża próbka <em>wystarczy</em>, żeby uznać, że rozkład próbkowania jest normalny, ale może on być normalny też dla mniejszych prób, jeśli rozkład <em>zmiennej</em> też jest normalny. I tak na przykład próbka 10 wyników w teście inteligencji też będzie miała normalny rozkład próbkowania, bo inteligencja rozkłada się normalnie. Ale w praktyce badań naukowych takie rozważania to bicie piany – nikt nie będzie robił badania ilościowego z próbką 10 osób. Jedyny moment, kiedy może się to przydać, to gdy niezbyt duża próbka zostanie jeszcze podzielona na podgrupy i okaże się np. że mężczyzn jest mniej niż 15 (w badaniach psychologicznych nierzadkie zjawisko!). Uzyskanie istotności statystycznej z taką próbką i tak będzie trudne, ale założenie normalności rozkładu próbkowania nie zostanie złamane.↩︎</p></li>
+<li id="fn2"><p>A dokładnie wynosi <img src="https://latex.codecogs.com/png.latex?%5Cint_%7B101%7D%5E%5Cinfty%20%5Cmathcal%20N(x;%5C%20100,%5C%200,47)%20%5Capprox%201,7%5C%25">, jeśli chcemy znać szansę uzyskania średniej 101 lub większej albo <img src="https://latex.codecogs.com/png.latex?3,3%5C%25">, jeśli nie zakładamy, w którą stronę mężczyźni różnią się od kobiet i liczymy w obie strony.↩︎</p></li>
+<li id="fn3"><p>Albo, w statystycznej nowomowie, <em>wyestymowane</em>.↩︎</p></li>
+<li id="fn4"><p>W rzeczywistości rozkłady <em>t</em> to cała grupa nieco różniących się od siebie w szczegółach rozkładów, z których najbardziej znany jest rozkład <em>t</em>-Studenta. <em>Student</em> to pseudonim Williama S. Gosseta, który opracował ten rozkład, żeby móc testować partie piwa Guinness. Gosset chciał, żeby różnice między piwem wzorcowym a każdą partią wypuszczaną na rynek <em>nie były</em> istotne statystycznie.↩︎</p></li>
+</ol>
+</aside></div> ]]></description>
+  <category>Statystyka</category>
+  <guid>https://nieobliczalne.pl/posts/rozklady-probkowania.html</guid>
+  <pubDate>Sat, 28 Oct 2023 22:00:00 GMT</pubDate>
+  <media:content url="https://nieobliczalne.pl/posts/headers/rozklady-probkowania.webp" medium="image" type="image/webp"/>
+</item>
 <item>
   <title>Gęstość prawdopodobieństwa i rozkład normalny</title>
   <dc:creator>Jakub Jędrusiak</dc:creator>
@@ -18010,7 +18729,7 @@ Tabela&nbsp;1: Średnie wyniki IQ są zawsze trochę inne, ale rzadko są daleki
 <p>Zaczynamy zauważać, że wyniki za każdym razem były trochę inne, ale zawsze lądowały w pobliżu 100. Innymi słowy średnie bliskie 100 pojawiały się często, a średnie dalekie od 100 pojawiały się rzadko. Nie mamy na przykład ani jednego wyniku mniejszego niż 95, a w zakresie 99-101 mieści się 47% wszystkich uzyskanych średnich. Możemy zrobić nawet wykres, jak często pojawiały się jakie średnie.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-iq-means-histogram" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-align="center">
+<div id="fig-iq-means-histogram" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-iq-means-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/p-value_files/figure-html/fig-iq-means-histogram-1.png" class="img-fluid quarto-figure-center figure-img" width="672">
@@ -18119,7 +18838,7 @@ Tabela&nbsp;2: Możemy wiele razy powtórzyć nasz eksperyment, a różnice za k
 <p>Podstawą do różnicy była tu średnia inteligencja kobiet, więc ujemna różnica oznacza, że mężczyźni okazali się mniej inteligentni, zaś dodatnia, że bardziej. Tak jak w przypadku tabeli 1., niektóre różnice są większe, niektóre mniejsze, ale ich rozkład nie jest przypadkowy. Wrzućmy nasze różnice na wykres.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-iq-diffs-histogram" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-align="center">
+<div id="fig-iq-diffs-histogram" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-iq-diffs-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/p-value_files/figure-html/fig-iq-diffs-histogram-1.png" class="img-fluid quarto-figure-center figure-img" width="672">
@@ -18194,7 +18913,7 @@ mean of x mean of y
 <p>Zobaczmy to na przykładzie. Pokazywałem wcześniej (na rysunku 1) wyniki symulacji, gdzie braliśmy 100 osób, liczyliśmy ich średnią inteligencję. Powtórzyliśmy to 1000 razy i patrzyliśmy, jak często pojawiają się dane średnie. Teraz zrobimy to samo, ale każda pojedyncza próbka będzie składała się z 1000 osób.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-iq-stderr-histogram" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-align="center">
+<div id="fig-iq-stderr-histogram" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-iq-stderr-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/p-value_files/figure-html/fig-iq-stderr-histogram-1.png" class="img-fluid quarto-figure-center figure-img" width="672">
@@ -18376,7 +19095,7 @@ Tabela&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza.
 <p>Dla takich danych możemy policzyć całkiem sporo rzeczy. Łatwiej jest jednak zrozumieć dane, jak się je rzeczywiście widzi. Spróbujmy więc stworzyć wykres. Chcielibyśmy wiedzieć, jaki jest związek wielkości pająka z niepokojem, jaki wywołuje<sup>1</sup>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
@@ -18391,7 +19110,7 @@ Rysunek&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza, tyle że na wykres
 <p>Widzimy więc wyraźnie, że im większy pająk, tym większy lęk wywołuje. Ale z tym wnioskiem wybiegliśmy sporo w przyszłość. Zazwyczaj w pierwszym odruchu robimy coś znacznie prostszego – liczymy średnią. Średni niepokój wyniósł tutaj dokładnie 10. Szybkie spojrzenie w tabelę pozwala nam stwierdzić, że żaden badany takiego wyniku niepokoju nie uzyskał i niezbyt nas to dziwi. W końcu to tylko średnia, żaden prawdziwy wynik nie musi mieć dokładnie średniej wartości. Jak w znienawidzonym przez statystyków kawale o średniej liczbie nóg na spacerze z psem. Rozumiemy więc, że średnia tylko w pewnym przybliżeniu oddaje cały zbiór danych, a konkretne wartości mogą się od średniej mniej lub bardziej odchylać. Te odchylenia możemy nanieść na wykres.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-mean" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-mean" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-mean-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
@@ -18477,7 +19196,7 @@ Tabela&nbsp;2: Każdy punkt ma swoje odchylenie od średniej, które możemy pol
 <p>Średnia gwarantuje mi, że pomylę się tak mało, jak to tylko możliwe, czyli że sumarycznie przerywane kreski na wykresie będą tak krótkie, jak się da. Średnia jest więc modelem niedoskonałym (bo ma błąd), ale lepszym niż jakakolwiek inna pojedyncza liczba (bo ma najmniejszy błąd).</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-15" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-15" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-15-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
@@ -18518,7 +19237,7 @@ Rysunek&nbsp;3: Modelem mogłaby być dowolna liczba, jeśli się uprzeć, ale �
 <p>Wiemy już bardzo dokładnie czym jest wariancja i jaki ma związek ze średnią. Ale nie oszukujmy się, jesteśmy w stanie wymyślić lepsze modele niż średnia. Od samego początku korci nas, żeby na wykresie niepokoju od wielkości pająka narysować piękną, skośną, rosnącą linię, która będzie zależała nie tylko od wartości niepokoju, ale również od wielkości pająka. Przecież od razu widać, że pasowałaby do naszych danych znacznie bardziej.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-lm" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-lm" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-lm-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
@@ -18616,7 +19335,7 @@ Tabela&nbsp;3: Nowy model magicznie przewiduje niepokój z wielkości pająka (x
 <p>Możemy wyobrazić sobie, że pojawia nam się nowa osoba badana, która pająków nie boi się w ogóle, co pokazałem na wykresie. Jak to wpływa na nasz model?</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-lm2" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-lm2" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-lm2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-lm2-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
@@ -18648,7 +19367,7 @@ Rysunek&nbsp;5: Nowa osoba badana, która nie boi się pająków wcale, nie przy
 <p>Można zauważyć ciekawą rzecz związaną z obliczaniem <img src="https://latex.codecogs.com/png.latex?SS_M">. Jak się okazuje, <img src="https://latex.codecogs.com/png.latex?SS_M"> da się policzyć bez liczenia <img src="https://latex.codecogs.com/png.latex?SS_T"> i <img src="https://latex.codecogs.com/png.latex?SS_R">. <img src="https://latex.codecogs.com/png.latex?SS_M"> uzyskujemy, jeśli zignorujemy obserwacje i zsumujemy kwadraty różnic między średnią a nowym modelem. Zaznaczyłem te różnice na poniższym wykresie przerywanymi liniami.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-ssm" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-ssm" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-ssm-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
