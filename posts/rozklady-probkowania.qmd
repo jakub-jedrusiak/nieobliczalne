@@ -5,9 +5,10 @@ description: W tym wpisie wprowadzam bardzo ważne rozróżnienie, które uwielb
 image: ./headers/rozklady-probkowania.webp
 twitter-card:
     image: "/headers/rozklady-probkowania.jpeg"
-date: "2023-09-28"
-draft: true
+date: "2023-10-29"
 code-fold: true
+execute: 
+  warning: false
 categories:
     - Statystyka
 ---
@@ -24,6 +25,37 @@ while (round(mean(iq)) != 98) {
     iq <- rnorm(100, 100, 15)
 }
 iq <- tibble(iq = iq)
+
+theme_main <- function(subtitle = FALSE) {
+    theme(
+        text = element_text(colour = "gray60"),
+        panel.grid = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "gray60"),
+        axis.ticks = element_line(colour = "gray60"),
+        axis.text.x = element_text(colour = "gray30", size = 8),
+        axis.text.y = element_text(colour = "gray60", size = 8),
+        axis.title = element_text(face = "plain", size = 10),
+        axis.title.x = element_text(margin = margin(t = 12)),
+        axis.title.y = element_text(margin = margin(r = 8)),
+        plot.caption = element_text(hjust = 0, size = 8, margin = margin(t = 12)),
+        plot.caption.position = "plot",
+        plot.title.position = "plot",
+        plot.title = element_text(colour = "gray30", margin = if (subtitle) {
+            unit(c(0, 0, 5.5, 0), "points")
+        } else {
+            unit(c(0, 0, 12, 0), "points")
+        }),
+        plot.subtitle = element_text(size = 8, margin = if (subtitle) {
+            unit(c(0, 0, 12, 0), "points")
+        } else {
+            unit(c(0, 0, 5.5, 0), "points")
+        }),
+        legend.text = element_text(size = 6),
+        legend.key.size = unit(12, "points"),
+        legend.box.spacing = unit(0, "points")
+    )
+}
 ```
 
 Sięgnijmy pamięcią do przykładu z [tekstu o wartości $p$](./p-value.qmd). Na tym tekście będziemy budować, więc zachęcam, żeby z nim zapoznać się w pierwszej kolejności. Konieczne jest też rozumienie podstaw rozkładu normalnego. Jeśli nie potrafisz obliczyć, powiedzmy, jaka część populacji ma inteligencję między 85 a 115, zachęcam do nadrobienia [tekstu o rozkładach normalnych](./gestosc-prawdopodobienstwa.qmd). Nie jest to *niezbędne* do zrozumienia większości tego tekstu, ale bardzo pomoże.
@@ -48,10 +80,12 @@ Załóżmy, że mamy losową próbę 100 mężczyzn i wszystkim mierzymy intelig
 
 ```{r}
 ggplot(iq, aes(iq)) +
-    geom_histogram(binwidth = 5) +
+    geom_histogram(binwidth = 5, fill = "white", colour = "gray60") +
     geom_vline(xintercept = mean(iq$iq)) +
     geom_vline(xintercept = c(mean(iq$iq) - sd(iq$iq), mean(iq$iq) + sd(iq$iq)), linetype = "dashed") +
-    xlim(100 - 15 * 3, 100 + 15 * 3)
+    xlim(100 - 15 * 3, 100 + 15 * 3) +
+    labs(x = "IQ", y = "Liczba przypadków") +
+    theme_main()
 ```
 
 Widzimy, że najwięcej osób wykazało inteligencję blisko środka rozkładu. Średnia inteligencja wyniosła **w tej konkretnej próbie** `r round(mean(iq$iq), 1)`, co zaznaczyłem pionową kreską. To, co widzimy na rysunku, to **rozkład zmiennej** w próbie. Pobraliśmy próbkę, zmierzyliśmy inteligencję, narysowaliśmy rozkład. To, co widzimy na obrazku, odnosi się tylko do naszej konkretnej próby. Może przypominać rzeczywisty rozkład inteligencji w populacji (i przypomina), ale może to odwzorowanie może być dalekie od doskonałości. Istnieje więc jakiś **rozkład zmiennej w populacji**, który staramy się przybliżyć za pomocą **rozkładu zmiennej w próbie**. Im próba bardziej liczna, tym rozkład zmiennej bliższy prawdziwemu rozkładowi w populacji. Wydaje się to naturalne.
@@ -68,9 +102,11 @@ Wiemy jednak, że każda próbka może trochę różnić się średnią. W niekt
 iq_pop <- tibble(iq = map_dbl(1:100, \(x) mean(rnorm(100, 100, 15))))
 
 ggplot(iq_pop, aes(iq)) +
-    geom_histogram() +
+    geom_histogram(binwidth = 1, fill = "white", colour = "gray60") +
     geom_vline(xintercept = mean(iq_pop$iq)) +
-    geom_vline(xintercept = c(mean(iq_pop$iq) - sd(iq_pop$iq), mean(iq_pop$iq) + sd(iq_pop$iq)), linetype = "dashed")
+    geom_vline(xintercept = c(mean(iq_pop$iq) - sd(iq_pop$iq), mean(iq_pop$iq) + sd(iq_pop$iq)), linetype = "dashed") +
+    labs(x = "Średnie IQ", y = "Liczba przypadków") +
+    theme_main()
 ```
 
 Wylosowaliśmy więc 100 różnych próbek, w każdej zmierzyliśmy średnią inteligencję. Na histogramie widać, że średnie w pobliżu 100 rzeczywiście pojawiały się częściej, niż te dalsze od 100. Średnia średnia wyniosła tutaj `r round(mean(iq_pop$iq), 1)`, zaś jej odchylenie standardowe `r round(sd(iq_pop$iq), 1)`, czyli zazwyczaj próbki miały średnią między `r round(mean(iq_pop$iq) - sd(iq_pop$iq), 1)` a `r round(mean(iq_pop$iq) + sd(iq_pop$iq), 1)`. Zwróćmy jednak uwagę, że robiąc ten wykres, spłaszczyliśmy każdą próbkę 100 osób do jednej tylko liczby -- średniej inteligencji. Ten wykres nie mówi nam więc nic na temat tego, jak wyglądał rozkład zmiennej w każdej próbce. On nam mówi tylko i aż tyle, jak często próbka 100 osób miała jaką średnią. Taki rozkład nazywamy **rozkładem próbkowania**. Rozkład próbkowania to rozkład średnich z **różnych prób** i jest czymś zupełnie innym niż rozkład zmiennej w próbie czy w populacji. I to rozróżnienie jest powalająco istotne.
@@ -95,7 +131,9 @@ Twierdzenie to mówi nam o dwóch piekielnie ważnych rzeczach. Po pierwsze, je�
 rexp(10000, 0.0007) %>%
     tibble(income = .) %>%
     ggplot(aes(income)) +
-    geom_histogram()
+    geom_histogram(fill = "white", colour = "gray60") +
+    labs(x = "Dochód", y = "Liczba przypadków") +
+    theme_main()
 ```
 
 Z pobieram z tego rozkładu losową próbkę 100 osób. Wychodzi mi średni dochód `r round(mean(rexp(100, 0.0007)))`. Spoko. Pobieram kolejne 100 osób i tym razem dostaję średni dochód `r round(mean(rexp(100, 0.0007)))`. Robię tak jeszcze bardzo dużo razy, więc ostatecznie mam zapisane w Excelu bardzo dużo średnich. Gdy z tych średnich, nie z pojedynczych obserwacji, zrobię histogram, dostanę coś takiego.
@@ -104,9 +142,11 @@ Z pobieram z tego rozkładu losową próbkę 100 osób. Wychodzi mi średni doch
 income <- tibble(income = map_vec(1:1000, \(x) mean(rexp(100, 0.0007))))
 
 ggplot(income, aes(income)) +
-    geom_histogram() +
+    geom_histogram(fill = "white", colour = "gray60") +
     geom_vline(xintercept = mean(income$income)) +
-    geom_vline(xintercept = c(mean(income$income) - sd(income$income), mean(income$income) + sd(income$income)), linetype = "dashed")
+    geom_vline(xintercept = c(mean(income$income) - sd(income$income), mean(income$income) + sd(income$income)), linetype = "dashed") +
+    labs(x = "Średni dochód", y = "Liczba przypadków") +
+    theme_main()
 ```
 
 Ten rozkład wygląda zupełnie inaczej, niż rozkład wyjściowy. Dlaczego? Bo rozkład wyjściowy to rozkład zmiennej, a to na obrazku to rozkład średnich, jakie wychodzą w różnych próbkach, czyli rozkład próbkowania. Wielkość pojedynczej próbki wynosi 100, czyli więcej niż 15, a więc rozkład próbkowania wyszedł normalny. To jest pierwsze, co mówi nam CLT.
@@ -154,15 +194,6 @@ SE = \frac{SD}{\sqrt{N}} = \frac{15}{\sqrt{100}} = 1,5
 $$
 
 Przypomnijmy, że wcześniej zrobiliśmy symulację rozkładu próbkowania, losując 100 próbek po 100 osób i licząc średnie. Tak uzyskany rozkład próbkowania miał odchylenie standardowe `r round(sd(iq_pop$iq), 2)`. Jak widzimy, było to w miarę rozsądne oszacowanie, ale jeśli zamiast 100 próbek pobralibyśmy 1000, 10 000 czy 100 000, to nasz symulowany rozkład miałby odchylenie standardowe coraz bliższe 1,5. Poniżej przedstawiam 3 wykresy gęstości, które pokazują, że im więcej próbek włączymy do symulacji, tym rozkład staje się bardziej normalny, a jego odchylenie standardowe bliższe prawdziwemu. Oznacza to, że symulacja symulacją, ale pod spodem czai się jakiś *prawdziwy* rozkład próbkowania, który ma średnią 100 (równą prawdziwej średniej z populacji) i odchylenie standardowe 1,5.
-
-```{r}
-tibble(group = c(rep("10", 10), rep("100", 100), rep("100000", 100000)), iq = map_vec(seq(length(group)), \(x) mean(rnorm(100, 100, 15)))) %>%
-    mutate(group = factor(group, ordered = TRUE)) %>%
-    ggplot(aes(iq, fill = group, colour = group, group = group)) +
-    geom_histogram(aes(y = after_stat(count / sum(count))), alpha = 0.3, position = "identity") +
-    geom_vline(xintercept = 100) +
-    geom_vline(xintercept = c(98.5, 101.5), linetype = "dashed")
-```
 
 W naszym drugim przykładzie z dochodami nie znamy prawdziwego odchylenia standardowego, ale możemy je oszacować. Załóżmy, że wylosowałem 100 osób, zapytałem o dochody i wyszło mi odchylenie standardowe 1753,93. Możemy oszacować błąd standardowy:
 

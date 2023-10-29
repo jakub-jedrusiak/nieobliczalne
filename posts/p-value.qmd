@@ -34,7 +34,7 @@ iq_stderr <- readRDS("./dane/p-value/iq-stderr.RDS")
 
 Dla przykładu -- wychodzę z mieszkania i zamykam drzwi na klucz. Zrobiłem to odruchowo, nieuważnie, więc po chwili nie wiem już, czy zamknąłem te drzwi, czy nie. Wzbiera we mnie lęk, więc cofam się i sprawdzam. Uff, zamknąłem. W tej chwili uzyskuję chwilową pewność[^p-value-1], że drzwi są zamknięte i spokojnie wychodzę z budynku. Wspomnienie zaciera się nieco, więc moja pewność spada ze 100% do 96%. Jednak taki poziom pewności w zupełności wystarczy, żebym na pytanie „Zamknąłeś drzwi?" odpowiedział „Tak".
 
-[^p-value-1]: Zdaję sobie sprawę, że „pewność" i jej zmiany pasują bardziej do analiz bayesowskich niż testów, ale tego typu przykłady znacznie łatwiej jest zrozumieć niż bardziej abstrakcyjny \`dobór prób z populacji. Do większej abstrakcji przejdę później.
+[^p-value-1]: Zdaję sobie sprawę, że „pewność" i jej zmiany pasują bardziej do analiz bayesowskich niż testów, ale tego typu przykłady znacznie łatwiej jest zrozumieć niż bardziej abstrakcyjny dobór prób z populacji. Do większej abstrakcji przejdę później.
 
 Jeśli jednak cierpiałbym na zaburzenie obsesyjno-kompulsywne (OCD), 96% pewności mogłoby się okazać stanowczo za dużym ryzykiem. Mógłbym wracać do tych drzwi kilkanaście razy, za każdym razem sprawdzając, czy na pewno są zamknięte. Każda pewność niższa niż 100% byłaby dla mnie trudna do zaakceptowania. Nawet 0,5% szans, że stanie się coś złego, mógłbym uważać za bardzo, bardzo dużo. Jednak takie zachowania i zniekształcenia poznawcze uznajemy za objaw psychopatologii [@butcher2018]. W świecie rzeczywistym musimy akceptować jakąś niepewność, jakąś szansę na pomyłkę. W przypadku zamykania drzwi robimy to na oko. W nauce, gdzie prawdopodobieństwo określamy liczbowo, możemy przyjąć konkretną granicę.
 
@@ -229,7 +229,7 @@ Jako ciekawostkę mogę jeszcze dorzucić, że jeśli spodziewamy się, jak duż
 
 ### Dlaczego większe próbki pozwalają wykryć mniejsze efekty?
 
-Ta część jest zupełnie nieobowiązkowa. Spokojnie da się dobrze rozumieć testy statystyczne po prostu wiedząc, *że* większe próbki pozwalają wykryć mniejsze efekty, bez wchodzenia w szczegóły *dlaczego* tak się dzieje. Ale poświęcę chwilę, żeby to drugie też wyjaśnić. Kilka kolejnych akapitów będzie też bardziej techniczne i można spokojnie je pominąć i przejść do podrozdziału o wielkości efektu.
+Ta część jest zupełnie nieobowiązkowa. Spokojnie da się dobrze rozumieć testy statystyczne po prostu wiedząc, *że* większe próbki pozwalają wykryć mniejsze efekty, bez wchodzenia w szczegóły *dlaczego* tak się dzieje. Ale poświęcę chwilę, żeby to drugie też wyjaśnić. Kilka kolejnych akapitów będzie też bardziej techniczne i można spokojnie je pominąć i przejść do podrozdziału o wielkości efektu. Jest to też dość skrótowe ujęcie. Tematowi poświęciłem cały [osobny wpis](./rozklady-probkowania.qmd), gdzie wyjaśniam to wolniej i bardziej dogłębnie.
 
 Pod rysunkiem [-@fig-iq-stderr-histogram]. pisałem o tym, że większość wyników mieści się w jakimśtam zakresie dookoła średniej. Ten zakres, w którym zawiera się większość wyników, nazywamy **odchyleniem standardowym** i więcej na jego temat piszę [w tym wpisie](./posts/procent-wariancji.qmd).
 

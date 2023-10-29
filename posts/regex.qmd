@@ -39,7 +39,7 @@ Zwlekałem z napisaniem tego tekstu, bo ciężko mi było znaleźć uniwersalny 
 >
 > 10. Malchut
 
-Możemy zaznaczyć każdy numerek i wykonać tę nudną, mechaniczną pracę. Ale im więcej elementów na liście, tym zmarnuje nam to więcej czasu. Gdybyśmy mogli powiedzieć komputerowi „na początku każdego wersu jest liczba, kropka i spacja -- usuń je\", oszczędziłoby nam to czas. I tutaj właśnie przychodzą nam w sukurs wyrażenia regularne. Jest to zestaw kodów pozwalających nam zapisać takie rzeczy jak „początek wiersza\" (`^`) i „jedna lub więcej dowolna liczba\" (`\d+`), dzięki czemu możemy jednym kliknięciem usunąć nasze liczby w całym tekście.
+Możemy zaznaczyć każdy numerek i wykonać tę nudną, mechaniczną pracę. Ale im więcej elementów na liście, tym zmarnuje nam to więcej czasu. Gdybyśmy mogli powiedzieć komputerowi „na początku każdego wersu jest liczba, kropka i spacja -- usuń je", oszczędziłoby nam to czas. I tutaj właśnie przychodzą nam w sukurs wyrażenia regularne. Jest to zestaw kodów pozwalających nam zapisać takie rzeczy jak „początek wiersza" (`^`) i „jedna lub więcej dowolna liczba" (`\d+`), dzięki czemu możemy jednym kliknięciem usunąć nasze liczby w całym tekście.
 
 Jako drugi, bardziej złożony przykład wezmę swoją specyficzną potrzebę. Ostatnio poprawiałem linki do innych wpisów na tym blogu. Wcześniej używałem linków do stron, które wyglądały tak:
 
