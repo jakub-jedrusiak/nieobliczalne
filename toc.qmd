@@ -17,6 +17,8 @@ Tutaj znajduje się lista tekstów z tego bloga, posegregowane tematycznie. Stat
 
 5.  [Gęstość prawdopodobieństwa](./posts/gestosc-prawdopodobienstwa.qmd) -- głębsze spojrzenie na wykresy gęstości prawdopodobieństwa i obliczenia na rozkładach normalnych.
 
+6.  [Rozkłady próbkowania](./posts/rozklady-probkowania.qmd) -- logika Centralnego Twierdzenia Granicznego i rozkładów próbkowania. Do tego omówienie rozkładów *t* i ręczne liczenie wartości *p*.
+
 # Nauka R
 
 1.  [Podstawy R](./posts/podstawy_R.qmd) -- wszystko, czego potrzeba, żeby zacząć z pisaniem analiz w R.
