@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nieobliczalne.pl/toc.html</loc>
-    <lastmod>2023-08-27T00:09:25.453Z</lastmod>
+    <lastmod>2023-10-29T20:59:48.272Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/pakiety-w-R.html</loc>
@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/regex.html</loc>
-    <lastmod>2023-10-17T13:14:46.544Z</lastmod>
+    <lastmod>2023-10-19T21:43:53.926Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/kombinatoryka.html</loc>
@@ -34,7 +34,7 @@
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/p-value.html</loc>
-    <lastmod>2023-10-17T13:12:42.884Z</lastmod>
+    <lastmod>2023-10-17T13:16:46.677Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/newsletter.html</loc>
@@ -43,6 +43,10 @@
   <url>
     <loc>https://nieobliczalne.pl/about.html</loc>
     <lastmod>2023-05-07T23:08:31.294Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/rozklady-probkowania.html</loc>
+    <lastmod>2023-10-29T20:55:56.160Z</lastmod>
   </url>
   <url>
     <loc>https://nieobliczalne.pl/posts/funkcje.html</loc>

@@ -9,7 +9,7 @@
 <link>https://nieobliczalne.pl/</link>
 <atom:link href="https://nieobliczalne.pl/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.424</generator>
+<generator>quarto-1.4.449</generator>
 <lastBuildDate>Sat, 26 Aug 2023 22:00:00 GMT</lastBuildDate>
 <item>
   <title>Gęstość prawdopodobieństwa i rozkład normalny</title>
@@ -25,7 +25,7 @@
 <h1 data-number="1"><span class="header-section-number">1</span> Histogramy i gęstość prawdopodobieństwa</h1>
 <p>Wyobraźmy sobie, że losujemy 2000 osób i robimy im test inteligencji, np. WAIS-R. Jedno takie badanie trwa 60-90 minut, więc po ponad roku nierobienia niczego innego mamy całą dużą bazę wyników surowych. Przeliczamy, jak naszym badanym poszło, patrzymy w tabelki z normami i dla każdej osoby badanej uzyskujemy wynik na specjalnej skali do wyrażania inteligencji. Skala ta jest zrobiona tak, żeby światowa średnia inteligencja zawsze wynosiła <img src="https://latex.codecogs.com/png.latex?%5Cmu%20=%20100">, a odchylenie standardowe <img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%2015">. Na razie nie jest ważne, czym jest odchylenie standardowe matematycznie (zainteresowanym polecam <a href="../posts/procent-wariancji.html">wpis o wariancji</a>). Chodzi w nim mniej więcej o to, że większość populacji (około <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B2%7D%7B3%7D">) ma wyniki między 85 a 115, czyli 100±15. Wyniki przedstawiamy na histogramie.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">p_tys <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -106,7 +106,7 @@ Rysunek&nbsp;1: Histogram inteligencji w próbie 2000 osób. Wynik na osi Y to l
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -170,7 +170,7 @@ Rysunek&nbsp;2: Histogram inteligencji w próbie 2000 osób. Wynik na osi Y to l
 <p>Jak czytać coś takiego? Każdy słupek to pewne widełki. Tutaj ustawiłem te widełki na szerokość 20 punktów. I tak na przykład środkowy słupek to widełki 90-110. Z osi Y naszego histogramu możemy odczytać, że takich osób w naszej próbce było trochę ponad 900. W widełkach 70-90 i 110-130 uplasowało się trochę po prawie 500 osób itd. Fakt, że w histogramie każdy słupek reprezentuje wartości od-do jest niepozorny, ale potem okaże się bardzo ważny.</p>
 <p>Zamiast prezentować bezwzględne liczby możemy użyć proporcji. Trochę ponad 900 osób to w naszej próbce trochę mniej niż 50%. Jest to wygodne, ponieważ odcina trochę sam histogram od wielkości próby. Ponieważ próba ma być tylko przybliżeniem prawdziwej populacji, to ostatecznie nie interesuje nas, ile osób w próbie miało inteligencję między 90 a 110, tylko jaki procent osób w całej Polsce ma inteligencję między 90 a 110. Z naszej próby możemy wnioskować, że takich osób jest trochę mniej niż 50%.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -254,7 +254,7 @@ Rysunek&nbsp;3: Tym razem na osi Y umieściłem nie liczebność danej grupy, a 
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -337,7 +337,7 @@ Rysunek&nbsp;4: Tym razem na osi Y umieściłem nie liczebność danej grupy, a 
 <p>Słupki możemy też do siebie dodawać, np. skoro widełki 90-110 mają prawdopodobieństwo 47%, a widełki 110-130 mają prawdopodobieństwo 24%, to łącznie widełki 90-130 mają prawdopodobieństwo 71%.</p>
 <p>Możemy jednak być niezadowoleni z tej dokładności. Co jeśli chcę określić, jaką mam szansę znaleźć osobę z węższych widełek, np. 95-105? Nasze słupki są zbyt szerokie, żeby to stwierdzić, ale możemy je zawęzić i uzyskać dokładniejszy obraz.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -421,7 +421,7 @@ Rysunek&nbsp;5: Zmniejszenie szerokości słupków (tutaj do 10) sprawia, że hi
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -502,7 +502,7 @@ Rysunek&nbsp;6: Zmniejszenie szerokości słupków (tutaj do 10) sprawia, że hi
 </div>
 <p>Na powyższym rysunku każdy słupek ma szerokość 10, więc nasze widełki skurczyły się do 95-105, 105-115, 115-130 itd. Warto też zwrócić uwagę, że każdy ze słupków stał się niższy. Łączne prawdopodobieństwo musi zawsze wynosić 100%, więc gdy rozbijam tę wartość na więcej kawałków, to każdy kawałek musi być, siłą rzeczy, mniejszy. Widać to na kolejnym rysunku, gdzie nakładam na siebie szerszy i węższy histogram.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -621,7 +621,7 @@ Rysunek&nbsp;7: Po nałożeniu na siebie histogramów widać, jak się różnią
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -733,7 +733,7 @@ Rysunek&nbsp;8: Po nałożeniu na siebie histogramów widać, jak się różnią
 </div>
 <p>A co jeśli taka dokładność też mnie nie zadowala? Mogę spróbować zmniejszyć dokładność do jednego punktu. Wtedy będę mógł liczyć prawdopodobieństwo dla dowolnych widełek.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -821,7 +821,7 @@ Rysunek&nbsp;9: Ten histogram ma już bardzo wąskie słupki, bo o szerokości z
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -907,7 +907,7 @@ Rysunek&nbsp;10: Ten histogram ma już bardzo wąskie słupki, bo o szerokości 
 <p>Super, może nie jest to zbyt wygodny wykres, ale dodając do siebie słupki możemy wyliczyć prawdopodobieństwo dowolnego wyniku, np. widełek 101-103. WAIS-R pozwala nam uzyskać wyniki z dokładnością do 1 punktu, więc niżej nie ma po co schodzić. Chyba że…</p>
 <p>Owszem, nasze testy inteligencji dają wyniki z określoną dokładnością, ale zakładamy, że inteligencja istnieje naprawdę. Teoretycznie ludzie mogą się różnić inteligencją o pół punktu, ale nie mamy narzędzi, żeby to wykryć. Możemy też sobie wyobrazić, że mierzymy zmienne, które rzeczywiście są ciągłe, np. reakcję skórno-galwaniczną (wskaźnik stresu), rozszerzenie źrenic, tempo oddechu itd. Źrenice naprawdę mogą rozszerzyć się o kolejne 0,0001 mm i tylko od naszej aparatury pomiarowej zależy, czy będziemy w stanie to wykryć. Może więc istnieć sens zwężania naszych słupków jeszcze bardziej i bardziej i bardziej, aż w końcu będą one nieskończenie cienkie i zleją się&nbsp;ze sobą tworząc ciągłą linię. Taki wykres nazywamy <strong>wykresem gęstości</strong>. Gdy na osi Y mamy procenty, możemy mówić o <strong>wykresie gęstości prawdopodobieństwa</strong>.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -973,7 +973,7 @@ Rysunek&nbsp;11: Wykres gęstości prawdopodobieństwa na podstawie naszej prób
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1044,7 +1044,7 @@ Rysunek&nbsp;12: Wykres gęstości prawdopodobieństwa na podstawie naszej prób
 </div>
 <p>Powyższy wykres gęstości jest ilustracją naszej próbki. Każda taka próbka będzie się różniła co do szczegółów, więc i wykresy gęstości mogą wyglądać różnie. Nasza próbka liczyła sobie 2000 osób, ale możemy się domyślać, że próbka 3000 osób da dokładniejsze wyniki. 4000 osób da jeszcze dokładniejsze wyniki. 10 000 osób jeszcze dokładniejsze itd. Ostatecznie taki rozkład będzie się zbliżał do równiutkiego, regularnego kształtu zwanego <strong>krzywą dzwonową</strong>. Rozkład o takim kształcie nazywamy <strong>rozkładem normalnym</strong>.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1132,7 +1132,7 @@ Rysunek&nbsp;13: Wykres gęstości prawdopodobieństwa z rozkładu normalnego ma
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1224,7 +1224,7 @@ Rysunek&nbsp;14: Wykres gęstości prawdopodobieństwa z rozkładu normalnego ma
 <h1 data-number="2"><span class="header-section-number">2</span> Gęstość prawdopodobieństwa <em>vs</em>. prawdopodobieństwo</h1>
 <p>Dokładny wykres gęstości prawdopodobieństwa pozwala nam liczyć prawdopodobieństwo dla dowolnych zakresów z dowolną dokładnością. Zyskaliśmy więc olbrzymie możliwości! Czai się&nbsp;tutaj jednak pewna pułapka. Gdy patrzymy na nasz wykres gęstości, chciałoby się powiedzieć, że szansa na to, że ktoś będzie miał inteligencję równą 100 wynosi ok. 2,5%.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1340,7 +1340,7 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1461,7 +1461,7 @@ font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </div>
 <p>Z tym wnioskowaniem jest jednak pewien znaczący problem, który prezentuje tabela 1.</p>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">points <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1742,7 +1742,7 @@ Tabela&nbsp;1: Wartości z osi Y dla IQ między 95 a 105 co 0.25.
 <h2 data-number="3.1" class="anchored" data-anchor-id="szacowanie-prostokątami-riemanna"><span class="header-section-number">3.1</span> Szacowanie prostokątami Riemanna</h2>
 <p>Załóżmy ponownie, że chcemy policzyć, jaka część populacji wykazuje inteligencję między 95 a 105. Od razu podam odpowiedź – 26,11%. Nic nam po samej odpowiedzi, jeśli nie umiemy tego liczyć, ale miejmy to w głowie. Za moment będziemy określać te wartości z pewnym przybliżeniem, więc dobrze jest znać dokładną wartość, żeby móc stwierdzić, czy dobrze przybliżyliśmy. Zaznaczmy sobie na wykresie przestrzeń, o którą&nbsp;nam chodzi.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">normal <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1863,7 +1863,7 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -1968,7 +1968,7 @@ font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </div>
 <p>Żeby odczytać prawdopodobieństwo z takiego wykresu, musimy oszacować, wielkość przestrzeni, którą zaznaczyłem na czerwono. Wielkość przestrzeni, czyli… pole. Na czerwono zaznaczony jest prawie prostokąt, tylko ma brzuszek na górze. Jeśli będę mógł oszacować pole tego prostokąta, to to <strong>pole właśnie będzie naszym prawdopodobieństwem</strong>. Jak więc to zrobić? Bardzo z grubsza możemy brzuszek zignorować i udawać, że jest to rzeczywiście prostokąt.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2074,7 +2074,7 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2183,7 +2183,7 @@ font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 <p><img src="https://latex.codecogs.com/png.latex?%0AP%20%5Capprox%200.02659%20%5Ctimes%2010%20=%200,2659%20=%2026,59%5C%25%0A"></p>
 <p>Nieźle! Pomimo tak zgrubnego oszacowania, błąd wynosi mniej niż 1 punkt procentowy. Tworzy nam się więc schemat – wystarczy pomnożyć gęstość prawdopodobieństwa przez szerokość widełek i wyjdzie! Co nie? No i tak, i nie. Powyższy przykład pokazuje, że czasem to zadziała. Zobaczmy jednak, co się&nbsp;stanie, jak będziemy chcieli tak oszacować wartość dla szerszego przedziału 70-130.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2289,7 +2289,7 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2396,7 +2396,7 @@ font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </div>
 <p>Wysokość się nie zmieniła, zaś szerokość wzrosła do 60. Przemnożenie tych wartości da nam prawdopodobieństwo 159,58%. No.&nbsp;Przesadziliśmy odrobinę. Jak widać na wykresie, nasz prostokąt wystaje poza krzywą tak bardzo, że aż jego pole jest większe niż 100%. To może zmieńmy strategię i wciśnijmy nasz prostokąt pod krzywą, żeby na pewno nie wystawał?</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2502,7 +2502,7 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2610,7 +2610,7 @@ font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 <p>Wysokość tego prostokąta równa jest gęstości prawdopodobieństwa w punktach 70 i 130. Nie jest istotne, który wybierzemy, bo rozkład normalny jest symetryczny. Ponieważ oba te są tak samo oddalone od środka (o 30 punktów), mają taką samą wysokość. Policzenie pola naszego prostokąta ujawnia nam to, co widać już na oko, czyli że pole jest znacznie zaniżone, bowiem wychodzi <img src="https://latex.codecogs.com/png.latex?P%20%5Capprox%2060%20%5Ctimes%200,0036%20=%200,216%20=%2021,6%5C%25">. Wiemy więc tyle, że nasze pole jest nie mniejsze niż 0,216 i nie większe niż 1,6. Super. Tyle to widzę na oko.</p>
 <p>Możemy jednak zmienić strategię i zamiast wyznaczać pole jednego dużego prostokąta, podzielić go wiele małych. Na przykład nasz przedział możemy rozbić na 7 prostokątów po 10<sup>1</sup>. W ten sposób wykres gęstości zaczyna trochę przypominać histogram, ale trzeba pamiętać, że po to rysujemy prostokąty, żeby policzyć pole. Wartość z osi Y ciągle nie jest prawdopodobieństwem.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1">riemann <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -2724,7 +2724,7 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -2824,7 +2824,7 @@ font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 <p>Szacowanie pola pod krzywą za pomocą prostokątów Riemanna, czyli to, co zrobiliśmy wyżej, to stara i skuteczna metoda. Jeśli chcemy otrzymać naprawdę dokładne wartości, możemy dzielić pole na setki, tysiące, miliony prostokątów i uzyskać przez to dowolną dokładność naszego oszacowania. Technicznie jednak żadna z tych wartości nie będzie doskonale dokładna. Nie ma to praktycznego znaczenia, ale jeśli chcemy zachować matematyczną czystość, musimy skorzystać z pewnego szczególnego zapisu.</p>
 <p>Wiemy już, że prostokąty pod krzywą są nieskończenie cienkie. Wiemy też, że wzór na pole prostokąta to długość razy szerokość. Spójrzmy na taki „nieskończenie” cienki prostokąt.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2930,7 +2930,7 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -3051,7 +3051,7 @@ font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 <h1 data-number="4"><span class="header-section-number">4</span> Dystrybuanta rozkładu normalnego</h1>
 <p>Wiemy więc już, jak zapisywać i jak szacować wartości prawdopodobieństwa z rozkładu normalnego. Jest to jednak czynność na tyle powszechna, że ma swoje własne, szczególne drogi na skróty. Najważniejszą z nich jest tak zwana <strong>dystrybuanta</strong>. Za tą straszną nazwą kryje się w miarę prosta idea, jaką jest suma krocząca prawdopodobieństwa. Co to znaczy? Załóżmy, że chcemy policzyć prawdopodobieństwo wylosowania osoby z IQ poniżej 85. Na wykresie ta powierzchnia wygląda to tak:</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -3150,7 +3150,7 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -3279,7 +3279,7 @@ font-style: inherit;">15</span>)</span></code></pre></div>
 <h2 data-number="4.2" class="anchored" data-anchor-id="większe-niż"><span class="header-section-number">4.2</span> Większe niż</h2>
 <p>Możemy też odpowiadać na pytania odwrotne, np. jakie jest prawdopodobieństwo, że losowo wybrany człowiek klasyfikuje się do Mensy (czyli ma IQ <em>powyżej</em> 130)? Na wykresie wygląda to tak:</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -3378,7 +3378,7 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb35" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -3551,7 +3551,7 @@ font-style: inherit;">FALSE</span>)</span></code></pre></div>
 <p>Wiele kalkulatorów pozwala na policzenie wartości według danych widełek, ale część pozwala tylko na liczenie czystej dystrybuanty czyli prawdopodobieństwa, że wartość będzie <em>mniejsza</em> niż zadana. Na wykresie od naszej wartości w lewo. Możemy jednak wykorzystać dystrybuantę do policzenia odsetka populacji <em>pomiędzy</em> jakimiś wartościami. Robimy to w dwóch krokach.</p>
 <p>Po pierwsze, liczymy wartość dystrybuanty dla górnych widełek, czyli w naszym przypadku 115.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb42" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -3650,7 +3650,7 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -3754,7 +3754,7 @@ font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </div>
 <p>Następnie liczymy dystrybuantę&nbsp;dla dolnych widełek, czyli w tym wypadku 85.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb44" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -3874,7 +3874,7 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb45" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -3999,7 +3999,7 @@ font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </div>
 <p>A na koniec odejmujemy jedno od drugiego.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb46" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -4096,7 +4096,7 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb47" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -4319,7 +4319,7 @@ font-style: inherit;">FALSE</span>)</span></code></pre></div>
 <section id="korzystanie" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="korzystanie"><span class="header-section-number">4.6</span> Korzystanie</h2>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb54" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1">norm_table <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -4898,7 +4898,7 @@ Tabela&nbsp;2: Przykładowa tablica dystrybuanty rozkładu normalnego z zaznaczo
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign*%7D%0AZ(125)%20&amp;%20=%20%5Cfrac%7B125%20-%20100%7D%7B15%7D%20=%20%5Cfrac%7B25%7D%7B15%7D%20%5Capprox%201,67%20%5C%5C%0AZ(80)%20&amp;%20=%20%5Cfrac%7B80%20-%20100%7D%7B15%7D%20=%20%5Cfrac%7B-20%7D%7B15%7D%20%5Capprox%20-1,33%0A%5Cend%7Balign*%7D%0A"></p>
 <p>Teraz możemy odczytać stosowne wartości dystrybuanty z tabeli. Zacznijmy od górnych widełek. Z lewej strony szukam wartości 1,6 i patrzę w kolumnę oznaczoną 0,07, bo razem daje to 1,67. Więcej problemu sprawi wartość -1,33, bo jest ujemna, zaś tabela składa się&nbsp;z wartości dodatnich. Jednak wiemy, że rozkład normalny jest symetryczny, czyli wartość przy <img src="https://latex.codecogs.com/png.latex?Z%20=%20-1,33"> będzie taka sama, jak odwrotność wartości dla <img src="https://latex.codecogs.com/png.latex?Z%20=%201,33">. Słowny opis jest mało zrozumiały, więc posłużmy się wykresem.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb55" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -5053,7 +5053,7 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb56" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -5215,7 +5215,7 @@ font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 <p>W ten sposób możemy odczytać, że górne widełki mają wartość dystrybuanty <img src="https://latex.codecogs.com/png.latex?P(x%20%3C%201,67)%20=%200,9525">, zaś dolne <img src="https://latex.codecogs.com/png.latex?P(x%20%3C%20-1,33)%20=%201%20-%200,9082%20=%200,0918">. Teraz możemy odjąć jedno od drugiego, żeby otrzymać prawdopodobieństwo, że wylosowane IQ będzie między 80 a 125.</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign*%7D%0AP(80%20%3C%20IQ%20%3C%20125)%20&amp;%20=%20%5C%5C%0A=%20P(-1,33%20%3C%20Z(IQ)%20%3C%201,67)%20&amp;%20=%20%5C%5C%0A&amp;%20=%200,9525%20-%200,0918%20=%20%5C%5C%0A&amp;%20=%200,8607%0A%5Cend%7Balign*%7D%0A"></p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb57" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -5331,7 +5331,7 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb58" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -8816,7 +8816,7 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 <li><p>Malchut</p></li>
 </ol>
 </blockquote>
-<p>Możemy zaznaczyć każdy numerek i wykonać tę nudną, mechaniczną pracę. Ale im więcej elementów na liście, tym zmarnuje nam to więcej czasu. Gdybyśmy mogli powiedzieć komputerowi „na początku każdego wersu jest liczba, kropka i spacja – usuń je", oszczędziłoby nam to czas. I tutaj właśnie przychodzą nam w sukurs wyrażenia regularne. Jest to zestaw kodów pozwalających nam zapisać takie rzeczy jak „początek wiersza" (<code>^</code>) i „jedna lub więcej dowolna liczba" (<code>\d+</code>), dzięki czemu możemy jednym kliknięciem usunąć nasze liczby w całym tekście.</p>
+<p>Możemy zaznaczyć każdy numerek i wykonać tę nudną, mechaniczną pracę. Ale im więcej elementów na liście, tym zmarnuje nam to więcej czasu. Gdybyśmy mogli powiedzieć komputerowi „na początku każdego wersu jest liczba, kropka i spacja – usuń je”, oszczędziłoby nam to czas. I tutaj właśnie przychodzą nam w sukurs wyrażenia regularne. Jest to zestaw kodów pozwalających nam zapisać takie rzeczy jak „początek wiersza” (<code>^</code>) i „jedna lub więcej dowolna liczba” (<code>\d+</code>), dzięki czemu możemy jednym kliknięciem usunąć nasze liczby w całym tekście.</p>
 <p>Jako drugi, bardziej złożony przykład wezmę swoją specyficzną potrzebę. Ostatnio poprawiałem linki do innych wpisów na tym blogu. Wcześniej używałem linków do stron, które wyglądały tak:</p>
 <blockquote class="blockquote">
 <p>Więcej można przeczytać w tekście o [podstawach R](https://nieobliczalne.pl/posts/podstawy_R.html).</p>
@@ -16783,7 +16783,7 @@ font-style: inherit;">40</span>)</span></code></pre></div>
 <p>Tym samym zachęcam do dalszej nauki! Jeśli opanowaliście elementy zawarte w tym tekście, macie solidny fundament, by zrozumieć takie książki jak polecana przeze mnie na wstępie publikacja „Język R. Kompletny zestaw narzędzi dla analityków danych” <span class="citation" data-cites="wickham2020">(Wickham &amp; Grolemund, 2020)</span>. Zaznaczam tylko, że ten tekst jest od tej książki nowszy, więc czasem pojawią się rozbieżności. W kilku miejscach wspominałem, że to, co opisuję, to nowinka, ale co do wielu rzeczy już nawet nie pamiętam, że były kiedyś nowe. Zawsze jednak pierwszym, podstawowym źródłem powinna być dokumentacja (zawsze aktualna), a dopiero potem StackOverflow.</p>
 <p>Jeśli czytasz to teraz, oznacza to, że ten tekst to praca w toku. Za każdą informację zwrotną będę wdzięczny. Jeśli coś było niejasne, jeśli coś powinienem wyjaśnić szerzej albo prościej, jeśli czegoś mocno zabrakło, to można (trzeba!) do mnie pisać na <a href="mailto:kuba23031999@gmail.com">kuba23031999@gmail.com</a>.</p>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Pokaż całość kodu z analizy</summary>
 <div class="sourceCode cell-code" id="cb96" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -17402,7 +17402,7 @@ Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>
 
 
 <div id="setup" class="cell" data-execution_count="1">
-<details>
+<details class="code-fold">
 <summary>Pokaż kod</summary>
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
@@ -17830,7 +17830,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 <p>Permutacje to zmiany kolejności, kombinacje to unikalne podzbiory. Jeśli zaczniemy robić permutacje unikalnych podzbiorów, wyjdą nam wariacje. Albo patrząc inaczej – permutacje to wariacje <img src="https://latex.codecogs.com/png.latex?V%5En_n">. Permutacje i wariacje możemy liczyć kreskami i silnią. Liczbę kombinacji uzyskamy dzieląc liczbę wariacji po <em>k</em> elementów przez liczbę permutacji <em>k</em>. Powstały wzór oznacza się symbolem Newtona <img src="https://latex.codecogs.com/png.latex?%5Cbinom%7Bn%7D%7Bk%7D">. Pomocny może okazać się poniższy schemat.</p>
 <!-- ![](./ilustracje/kombinatoryka-flowchart.svg){fig-align="center"} -->
 <div class="cell" data-fig-responsive="true" data-fig-width="80%">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><span class="in" style="color: #5E5E5E;
 background-color: null;

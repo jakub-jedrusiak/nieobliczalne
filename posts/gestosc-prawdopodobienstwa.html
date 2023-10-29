@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.424">
+<meta name="generator" content="quarto-1.4.449">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -159,7 +159,7 @@ cookieconsent.run({
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
@@ -1188,7 +1188,7 @@ cookieconsent.run({
 <h1 data-number="1"><span class="header-section-number">1</span> Histogramy i gęstość prawdopodobieństwa</h1>
 <p>Wyobraźmy sobie, że losujemy 2000 osób i robimy im test inteligencji, np. WAIS-R. Jedno takie badanie trwa 60-90 minut, więc po ponad roku nierobienia niczego innego mamy całą dużą bazę wyników surowych. Przeliczamy, jak naszym badanym poszło, patrzymy w tabelki z normami i dla każdej osoby badanej uzyskujemy wynik na specjalnej skali do wyrażania inteligencji. Skala ta jest zrobiona tak, żeby światowa średnia inteligencja zawsze wynosiła <span class="math inline">\(\mu = 100\)</span>, a odchylenie standardowe <span class="math inline">\(\sigma = 15\)</span>. Na razie nie jest ważne, czym jest odchylenie standardowe matematycznie (zainteresowanym polecam <a href="../posts/procent-wariancji.html">wpis o wariancji</a>). Chodzi w nim mniej więcej o to, że większość populacji (około <span class="math inline">\(\frac{2}{3}\)</span>) ma wyniki między 85 a 115, czyli 100±15. Wyniki przedstawiamy na histogramie.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p_tys <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">IQ =</span> <span class="fu">rnorm</span>(<span class="dv">2000</span>, <span class="dv">100</span>, <span class="dv">15</span>))</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
@@ -1211,7 +1211,7 @@ Rysunek&nbsp;1: Histogram inteligencji w próbie 2000 osób. Wynik na osi Y to l
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">20</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
@@ -1235,7 +1235,7 @@ Rysunek&nbsp;2: Histogram inteligencji w próbie 2000 osób. Wynik na osi Y to l
 <p>Jak czytać coś takiego? Każdy słupek to pewne widełki. Tutaj ustawiłem te widełki na szerokość 20 punktów. I tak na przykład środkowy słupek to widełki 90-110. Z osi Y naszego histogramu możemy odczytać, że takich osób w naszej próbce było trochę ponad 900. W widełkach 70-90 i 110-130 uplasowało się trochę po prawie 500 osób itd. Fakt, że w histogramie każdy słupek reprezentuje wartości od-do jest niepozorny, ale potem okaże się bardzo ważny.</p>
 <p>Zamiast prezentować bezwzględne liczby możemy użyć proporcji. Trochę ponad 900 osób to w naszej próbce trochę mniej niż 50%. Jest to wygodne, ponieważ odcina trochę sam histogram od wielkości próby. Ponieważ próba ma być tylko przybliżeniem prawdziwej populacji, to ostatecznie nie interesuje nas, ile osób w próbie miało inteligencję między 90 a 110, tylko jaki procent osób w całej Polsce ma inteligencję między 90 a 110. Z naszej próby możemy wnioskować, że takich osób jest trochę mniej niż 50%.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count <span class="sc">/</span> <span class="fu">sum</span>(count))), <span class="at">binwidth =</span> <span class="dv">20</span>, <span class="at">fill =</span> <span class="st">"gray95"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
@@ -1257,7 +1257,7 @@ Rysunek&nbsp;3: Tym razem na osi Y umieściłem nie liczebność danej grupy, a 
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count <span class="sc">/</span> <span class="fu">sum</span>(count))), <span class="at">binwidth =</span> <span class="dv">20</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
@@ -1282,7 +1282,7 @@ Rysunek&nbsp;4: Tym razem na osi Y umieściłem nie liczebność danej grupy, a 
 <p>Słupki możemy też do siebie dodawać, np. skoro widełki 90-110 mają prawdopodobieństwo 47%, a widełki 110-130 mają prawdopodobieństwo 24%, to łącznie widełki 90-130 mają prawdopodobieństwo 71%.</p>
 <p>Możemy jednak być niezadowoleni z tej dokładności. Co jeśli chcę określić, jaką mam szansę znaleźć osobę z węższych widełek, np. 95-105? Nasze słupki są zbyt szerokie, żeby to stwierdzić, ale możemy je zawęzić i uzyskać dokładniejszy obraz.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count <span class="sc">/</span> <span class="fu">sum</span>(count))), <span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">fill =</span> <span class="st">"gray95"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
@@ -1304,7 +1304,7 @@ Rysunek&nbsp;5: Zmniejszenie szerokości słupków (tutaj do 10) sprawia, że hi
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count <span class="sc">/</span> <span class="fu">sum</span>(count))), <span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
@@ -1327,7 +1327,7 @@ Rysunek&nbsp;6: Zmniejszenie szerokości słupków (tutaj do 10) sprawia, że hi
 </div>
 <p>Na powyższym rysunku każdy słupek ma szerokość 10, więc nasze widełki skurczyły się do 95-105, 105-115, 115-130 itd. Warto też zwrócić uwagę, że każdy ze słupków stał się niższy. Łączne prawdopodobieństwo musi zawsze wynosić 100%, więc gdy rozbijam tę wartość na więcej kawałków, to każdy kawałek musi być, siłą rzeczy, mniejszy. Widać to na kolejnym rysunku, gdzie nakładam na siebie szerszy i węższy histogram.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count <span class="sc">/</span> <span class="fu">sum</span>(count))), <span class="at">binwidth =</span> <span class="dv">20</span>, <span class="at">fill =</span> <span class="st">"gray95"</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
@@ -1350,7 +1350,7 @@ Rysunek&nbsp;7: Po nałożeniu na siebie histogramów widać, jak się różnią
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count <span class="sc">/</span> <span class="fu">sum</span>(count))), <span class="at">binwidth =</span> <span class="dv">20</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
@@ -1374,7 +1374,7 @@ Rysunek&nbsp;8: Po nałożeniu na siebie histogramów widać, jak się różnią
 </div>
 <p>A co jeśli taka dokładność też mnie nie zadowala? Mogę spróbować zmniejszyć dokładność do jednego punktu. Wtedy będę mógł liczyć prawdopodobieństwo dla dowolnych widełek.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count <span class="sc">/</span> <span class="fu">sum</span>(count))), <span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"gray95"</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
@@ -1396,7 +1396,7 @@ Rysunek&nbsp;9: Ten histogram ma już bardzo wąskie słupki, bo o szerokości z
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count <span class="sc">/</span> <span class="fu">sum</span>(count))), <span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
@@ -1420,7 +1420,7 @@ Rysunek&nbsp;10: Ten histogram ma już bardzo wąskie słupki, bo o szerokości 
 <p>Super, może nie jest to zbyt wygodny wykres, ale dodając do siebie słupki możemy wyliczyć prawdopodobieństwo dowolnego wyniku, np. widełek 101-103. WAIS-R pozwala nam uzyskać wyniki z dokładnością do 1 punktu, więc niżej nie ma po co schodzić. Chyba że…</p>
 <p>Owszem, nasze testy inteligencji dają wyniki z określoną dokładnością, ale zakładamy, że inteligencja istnieje naprawdę. Teoretycznie ludzie mogą się różnić inteligencją o pół punktu, ale nie mamy narzędzi, żeby to wykryć. Możemy też sobie wyobrazić, że mierzymy zmienne, które rzeczywiście są ciągłe, np. reakcję skórno-galwaniczną (wskaźnik stresu), rozszerzenie źrenic, tempo oddechu itd. Źrenice naprawdę mogą rozszerzyć się o kolejne 0,0001 mm i tylko od naszej aparatury pomiarowej zależy, czy będziemy w stanie to wykryć. Może więc istnieć sens zwężania naszych słupków jeszcze bardziej i bardziej i bardziej, aż w końcu będą one nieskończenie cienkie i zleją się&nbsp;ze sobą tworząc ciągłą linię. Taki wykres nazywamy <strong>wykresem gęstości</strong>. Gdy na osi Y mamy procenty, możemy mówić o <strong>wykresie gęstości prawdopodobieństwa</strong>.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"gray95"</span>) <span class="sc">+</span></span>
@@ -1442,7 +1442,7 @@ Rysunek&nbsp;11: Wykres gęstości prawdopodobieństwa na podstawie naszej prób
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"#595959"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
@@ -1465,7 +1465,7 @@ Rysunek&nbsp;12: Wykres gęstości prawdopodobieństwa na podstawie naszej prób
 </div>
 <p>Powyższy wykres gęstości jest ilustracją naszej próbki. Każda taka próbka będzie się różniła co do szczegółów, więc i wykresy gęstości mogą wyglądać różnie. Nasza próbka liczyła sobie 2000 osób, ale możemy się domyślać, że próbka 3000 osób da dokładniejsze wyniki. 4000 osób da jeszcze dokładniejsze wyniki. 10 000 osób jeszcze dokładniejsze itd. Ostatecznie taki rozkład będzie się zbliżał do równiutkiego, regularnego kształtu zwanego <strong>krzywą dzwonową</strong>. Rozkład o takim kształcie nazywamy <strong>rozkładem normalnym</strong>.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_area</span>(<span class="at">stat =</span> <span class="st">"function"</span>, <span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>), <span class="at">fill =</span> <span class="st">"gray95"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
@@ -1487,7 +1487,7 @@ Rysunek&nbsp;13: Wykres gęstości prawdopodobieństwa z rozkładu normalnego ma
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_area</span>(<span class="at">stat =</span> <span class="st">"function"</span>, <span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>), <span class="at">fill =</span> <span class="st">"#595959"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
@@ -1513,7 +1513,7 @@ Rysunek&nbsp;14: Wykres gęstości prawdopodobieństwa z rozkładu normalnego ma
 <h1 data-number="2"><span class="header-section-number">2</span> Gęstość prawdopodobieństwa <em>vs</em>. prawdopodobieństwo</h1>
 <p>Dokładny wykres gęstości prawdopodobieństwa pozwala nam liczyć prawdopodobieństwo dla dowolnych zakresów z dowolną dokładnością. Zyskaliśmy więc olbrzymie możliwości! Czai się&nbsp;tutaj jednak pewna pułapka. Gdy patrzymy na nasz wykres gęstości, chciałoby się powiedzieć, że szansa na to, że ktoś będzie miał inteligencję równą 100 wynosi ok. 2,5%.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_area</span>(<span class="at">stat =</span> <span class="st">"function"</span>, <span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>), <span class="at">fill =</span> <span class="st">"gray95"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
@@ -1527,7 +1527,7 @@ Rysunek&nbsp;14: Wykres gęstości prawdopodobieństwa z rozkładu normalnego ma
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_area</span>(<span class="at">stat =</span> <span class="st">"function"</span>, <span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>), <span class="at">fill =</span> <span class="st">"#595959"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
@@ -1542,7 +1542,7 @@ Rysunek&nbsp;14: Wykres gęstości prawdopodobieństwa z rozkładu normalnego ma
 </div>
 <p>Z tym wnioskowaniem jest jednak pewien znaczący problem, który prezentuje tabela <a href="#tbl-likelihood" class="quarto-xref">1</a>.</p>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">X =</span> <span class="fu">seq</span>(<span class="dv">95</span>, <span class="dv">105</span>, <span class="fl">0.25</span>), <span class="at">Y =</span> <span class="fu">dnorm</span>(X, <span class="dv">100</span>, <span class="dv">15</span>))</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1791,7 +1791,7 @@ Tabela&nbsp;1: Wartości z osi Y dla IQ między 95 a 105 co 0.25.
 <h2 data-number="3.1" class="anchored" data-anchor-id="szacowanie-prostokątami-riemanna"><span class="header-section-number">3.1</span> Szacowanie prostokątami Riemanna</h2>
 <p>Załóżmy ponownie, że chcemy policzyć, jaka część populacji wykazuje inteligencję między 95 a 105. Od razu podam odpowiedź – 26,11%. Nic nam po samej odpowiedzi, jeśli nie umiemy tego liczyć, ale miejmy to w głowie. Za moment będziemy określać te wartości z pewnym przybliżeniem, więc dobrze jest znać dokładną wartość, żeby móc stwierdzić, czy dobrze przybliżyliśmy. Zaznaczmy sobie na wykresie przestrzeń, o którą&nbsp;nam chodzi.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>normal <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">stat =</span> <span class="st">"function"</span>, <span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>))</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1808,7 +1808,7 @@ Tabela&nbsp;1: Wartości z osi Y dla IQ między 95 a 105 co 0.25.
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># definicja zmiennej `normal` w trybie dziennym</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
@@ -1825,7 +1825,7 @@ Tabela&nbsp;1: Wartości z osi Y dla IQ między 95 a 105 co 0.25.
 </div>
 <p>Żeby odczytać prawdopodobieństwo z takiego wykresu, musimy oszacować, wielkość przestrzeni, którą zaznaczyłem na czerwono. Wielkość przestrzeni, czyli… pole. Na czerwono zaznaczony jest prawie prostokąt, tylko ma brzuszek na górze. Jeśli będę mógł oszacować pole tego prostokąta, to to <strong>pole właśnie będzie naszym prawdopodobieństwem</strong>. Jak więc to zrobić? Bardzo z grubsza możemy brzuszek zignorować i udawać, że jest to rzeczywiście prostokąt.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"gray95"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
@@ -1839,7 +1839,7 @@ Tabela&nbsp;1: Wartości z osi Y dla IQ między 95 a 105 co 0.25.
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"#595959"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
@@ -1858,7 +1858,7 @@ P \approx 0.02659 \times 10 = 0,2659 = 26,59\%
 \]</span></p>
 <p>Nieźle! Pomimo tak zgrubnego oszacowania, błąd wynosi mniej niż 1 punkt procentowy. Tworzy nam się więc schemat – wystarczy pomnożyć gęstość prawdopodobieństwa przez szerokość widełek i wyjdzie! Co nie? No i tak, i nie. Powyższy przykład pokazuje, że czasem to zadziała. Zobaczmy jednak, co się&nbsp;stanie, jak będziemy chcieli tak oszacować wartość dla szerszego przedziału 70-130.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"gray95"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
@@ -1872,7 +1872,7 @@ P \approx 0.02659 \times 10 = 0,2659 = 26,59\%
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"#595959"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
@@ -1887,7 +1887,7 @@ P \approx 0.02659 \times 10 = 0,2659 = 26,59\%
 </div>
 <p>Wysokość się nie zmieniła, zaś szerokość wzrosła do 60. Przemnożenie tych wartości da nam prawdopodobieństwo 159,58%. No.&nbsp;Przesadziliśmy odrobinę. Jak widać na wykresie, nasz prostokąt wystaje poza krzywą tak bardzo, że aż jego pole jest większe niż 100%. To może zmieńmy strategię i wciśnijmy nasz prostokąt pod krzywą, żeby na pewno nie wystawał?</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"gray95"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
@@ -1901,7 +1901,7 @@ P \approx 0.02659 \times 10 = 0,2659 = 26,59\%
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"#595959"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
@@ -1917,7 +1917,7 @@ P \approx 0.02659 \times 10 = 0,2659 = 26,59\%
 <p>Wysokość tego prostokąta równa jest gęstości prawdopodobieństwa w punktach 70 i 130. Nie jest istotne, który wybierzemy, bo rozkład normalny jest symetryczny. Ponieważ oba te są tak samo oddalone od środka (o 30 punktów), mają taką samą wysokość. Policzenie pola naszego prostokąta ujawnia nam to, co widać już na oko, czyli że pole jest znacznie zaniżone, bowiem wychodzi <span class="math inline">\(P \approx 60 \times 0,0036 = 0,216 = 21,6\%\)</span>. Wiemy więc tyle, że nasze pole jest nie mniejsze niż 0,216 i nie większe niż 1,6. Super. Tyle to widzę na oko.</p>
 <p>Możemy jednak zmienić strategię i zamiast wyznaczać pole jednego dużego prostokąta, podzielić go wiele małych. Na przykład nasz przedział możemy rozbić na 7 prostokątów po 10<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. W ten sposób wykres gęstości zaczyna trochę przypominać histogram, ale trzeba pamiętać, że po to rysujemy prostokąty, żeby policzyć pole. Wartość z osi Y ciągle nie jest prawdopodobieństwem.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>riemann <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">X =</span> <span class="fu">seq</span>(<span class="dv">70</span>, <span class="dv">130</span>, <span class="dv">10</span>), <span class="at">Y =</span> <span class="fu">dnorm</span>(X, <span class="dv">100</span>, <span class="dv">15</span>))</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1933,7 +1933,7 @@ P \approx 0.02659 \times 10 = 0,2659 = 26,59\%
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># definicja zmiennej `riemann` w trybie dziennym</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
@@ -1955,7 +1955,7 @@ P \approx 0.02659 \times 10 = 0,2659 = 26,59\%
 <p>Szacowanie pola pod krzywą za pomocą prostokątów Riemanna, czyli to, co zrobiliśmy wyżej, to stara i skuteczna metoda. Jeśli chcemy otrzymać naprawdę dokładne wartości, możemy dzielić pole na setki, tysiące, miliony prostokątów i uzyskać przez to dowolną dokładność naszego oszacowania. Technicznie jednak żadna z tych wartości nie będzie doskonale dokładna. Nie ma to praktycznego znaczenia, ale jeśli chcemy zachować matematyczną czystość, musimy skorzystać z pewnego szczególnego zapisu.</p>
 <p>Wiemy już, że prostokąty pod krzywą są nieskończenie cienkie. Wiemy też, że wzór na pole prostokąta to długość razy szerokość. Spójrzmy na taki „nieskończenie” cienki prostokąt.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"gray95"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
@@ -1969,7 +1969,7 @@ P \approx 0.02659 \times 10 = 0,2659 = 26,59\%
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"#595959"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
@@ -2010,7 +2010,7 @@ P (95 &lt; IQ &lt; 105) = \int^{105}_{95} \mathcal{N}(IQ;\ 100,\ 15^2) dIQ
 <h1 data-number="4"><span class="header-section-number">4</span> Dystrybuanta rozkładu normalnego</h1>
 <p>Wiemy więc już, jak zapisywać i jak szacować wartości prawdopodobieństwa z rozkładu normalnego. Jest to jednak czynność na tyle powszechna, że ma swoje własne, szczególne drogi na skróty. Najważniejszą z nich jest tak zwana <strong>dystrybuanta</strong>. Za tą straszną nazwą kryje się w miarę prosta idea, jaką jest suma krocząca prawdopodobieństwa. Co to znaczy? Załóżmy, że chcemy policzyć prawdopodobieństwo wylosowania osoby z IQ poniżej 85. Na wykresie ta powierzchnia wygląda to tak:</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"gray95"</span>) <span class="sc">+</span></span>
@@ -2025,7 +2025,7 @@ P (95 &lt; IQ &lt; 105) = \int^{105}_{95} \mathcal{N}(IQ;\ 100,\ 15^2) dIQ
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"#595959"</span>) <span class="sc">+</span></span>
@@ -2060,7 +2060,7 @@ P(IQ &lt; 85) = \int^{85}_{-\infty} \mathcal{N}(x;\ 100,\ 15^2) dx
 <h2 data-number="4.2" class="anchored" data-anchor-id="większe-niż"><span class="header-section-number">4.2</span> Większe niż</h2>
 <p>Możemy też odpowiadać na pytania odwrotne, np. jakie jest prawdopodobieństwo, że losowo wybrany człowiek klasyfikuje się do Mensy (czyli ma IQ <em>powyżej</em> 130)? Na wykresie wygląda to tak:</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"gray95"</span>) <span class="sc">+</span></span>
@@ -2075,7 +2075,7 @@ P(IQ &lt; 85) = \int^{85}_{-\infty} \mathcal{N}(x;\ 100,\ 15^2) dx
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"#595959"</span>) <span class="sc">+</span></span>
@@ -2118,7 +2118,7 @@ P(IQ &lt; 85) = \int^{85}_{-\infty} \mathcal{N}(x;\ 100,\ 15^2) dx
 <p>Wiele kalkulatorów pozwala na policzenie wartości według danych widełek, ale część pozwala tylko na liczenie czystej dystrybuanty czyli prawdopodobieństwa, że wartość będzie <em>mniejsza</em> niż zadana. Na wykresie od naszej wartości w lewo. Możemy jednak wykorzystać dystrybuantę do policzenia odsetka populacji <em>pomiędzy</em> jakimiś wartościami. Robimy to w dwóch krokach.</p>
 <p>Po pierwsze, liczymy wartość dystrybuanty dla górnych widełek, czyli w naszym przypadku 115.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"gray95"</span>) <span class="sc">+</span></span>
@@ -2133,7 +2133,7 @@ P(IQ &lt; 85) = \int^{85}_{-\infty} \mathcal{N}(x;\ 100,\ 15^2) dx
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"#595959"</span>) <span class="sc">+</span></span>
@@ -2149,7 +2149,7 @@ P(IQ &lt; 85) = \int^{85}_{-\infty} \mathcal{N}(x;\ 100,\ 15^2) dx
 </div>
 <p>Następnie liczymy dystrybuantę&nbsp;dla dolnych widełek, czyli w tym wypadku 85.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"gray95"</span>) <span class="sc">+</span></span>
@@ -2165,7 +2165,7 @@ P(IQ &lt; 85) = \int^{85}_{-\infty} \mathcal{N}(x;\ 100,\ 15^2) dx
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"#595959"</span>) <span class="sc">+</span></span>
@@ -2182,7 +2182,7 @@ P(IQ &lt; 85) = \int^{85}_{-\infty} \mathcal{N}(x;\ 100,\ 15^2) dx
 </div>
 <p>A na koniec odejmujemy jedno od drugiego.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"gray95"</span>) <span class="sc">+</span></span>
@@ -2197,7 +2197,7 @@ P(IQ &lt; 85) = \int^{85}_{-\infty} \mathcal{N}(x;\ 100,\ 15^2) dx
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_tys, <span class="fu">aes</span>(IQ)) <span class="sc">+</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exec</span>(geom_area, <span class="sc">!!!</span>normal, <span class="at">fill =</span> <span class="st">"#595959"</span>) <span class="sc">+</span></span>
@@ -2294,7 +2294,7 @@ Z(x) = \frac{x - \mu}{\sigma}
 <section id="korzystanie" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="korzystanie"><span class="header-section-number">4.6</span> Korzystanie</h2>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>norm_table <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fl">3.09</span>, <span class="at">by =</span> <span class="fl">0.01</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pnorm</span>() <span class="sc">%&gt;%</span></span>
@@ -2760,7 +2760,7 @@ Z(80) &amp; = \frac{80 - 100}{15} = \frac{-20}{15} \approx -1,33
 \]</span></p>
 <p>Teraz możemy odczytać stosowne wartości dystrybuanty z tabeli. Zacznijmy od górnych widełek. Z lewej strony szukam wartości 1,6 i patrzę w kolumnę oznaczoną 0,07, bo razem daje to 1,67. Więcej problemu sprawi wartość -1,33, bo jest ujemna, zaś tabela składa się&nbsp;z wartości dodatnich. Jednak wiemy, że rozkład normalny jest symetryczny, czyli wartość przy <span class="math inline">\(Z = -1,33\)</span> będzie taka sama, jak odwrotność wartości dla <span class="math inline">\(Z = 1,33\)</span>. Słowny opis jest mało zrozumiały, więc posłużmy się wykresem.</p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">tibble</span>(<span class="at">X =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">3.2</span>, <span class="fl">3.2</span>, <span class="fl">0.01</span>)), <span class="fu">aes</span>(X)) <span class="sc">+</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_area</span>(<span class="at">stat =</span> <span class="st">"function"</span>, <span class="at">fun =</span> dnorm, <span class="at">fill =</span> <span class="st">"gray95"</span>) <span class="sc">+</span></span>
@@ -2777,7 +2777,7 @@ Z(80) &amp; = \frac{80 - 100}{15} = \frac{-20}{15} \approx -1,33
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">tibble</span>(<span class="at">X =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">3.2</span>, <span class="fl">3.2</span>, <span class="fl">0.01</span>)), <span class="fu">aes</span>(X)) <span class="sc">+</span></span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_area</span>(<span class="at">stat =</span> <span class="st">"function"</span>, <span class="at">fun =</span> dnorm, <span class="at">fill =</span> <span class="st">"#595959"</span>) <span class="sc">+</span></span>
@@ -2804,7 +2804,7 @@ P(80 &lt; IQ &lt; 125) &amp; = \\
 \end{align*}
 \]</span></p>
 <div class="cell light-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">tibble</span>(<span class="at">X =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">3.2</span>, <span class="fl">3.2</span>, <span class="fl">0.01</span>)), <span class="fu">aes</span>(X)) <span class="sc">+</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_area</span>(<span class="at">stat =</span> <span class="st">"function"</span>, <span class="at">fun =</span> dnorm, <span class="at">fill =</span> <span class="st">"gray95"</span>) <span class="sc">+</span></span>
@@ -2820,7 +2820,7 @@ P(80 &lt; IQ &lt; 125) &amp; = \\
 </div>
 </div>
 <div class="cell dark-mode">
-<details>
+<details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">tibble</span>(<span class="at">X =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">3.2</span>, <span class="fl">3.2</span>, <span class="fl">0.01</span>)), <span class="fu">aes</span>(X)) <span class="sc">+</span></span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_area</span>(<span class="at">stat =</span> <span class="st">"function"</span>, <span class="at">fun =</span> dnorm, <span class="at">fill =</span> <span class="st">"#595959"</span>) <span class="sc">+</span></span>
