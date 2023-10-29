@@ -1,0 +1,38 @@
+---
+title: "Automatyzacja ankiet w Google Forms"
+subtitle: "Praktyczne wprowadzenie do Google Apps Script"
+description: "Czy kiedykolwiek miałeś(-aś) do zrobienia wielgachną ankietę, gdzie tylko przeklejałeś(-aś) pytania z Excela? Albo ankietę, gdzie masz serię identycznych pytań, w których zmieniają się tylko pojedyncze elementy, na przykład liczby albo obrazki? Ja miałem tak nie raz. A naprawdę nie znoszę takiej mechanicznej pracy. Jak się jednak okazuje, można takie zadania zautomatyzować. Kilka linijek szczególnego rodzaju kodu zwanego Apps Script pozwala nam zaoszczędzić wielu godzin ślęczenia przed komputerem."
+image: "./headers/google-apps-script.webp"
+twitter-card:
+    image: "/headers/google-apps-script.jpeg"
+date: "2023-11-05"
+draft: true
+categories:
+    - Narzędzia
+---
+
+Na wstępie dziękuję Oli Zielińskiej za nieświadome zainspirowanie mnie do zagłębienia się w temat.
+
+Zapadła mi w pamięć jedna szczególna sytuacja. Przygotowywaliśmy wtedy z zespołem badanie, w którym osoba badana miała oceniać obrazki [@jedrusiak2023]. Każdy obrazek był na oddzielnej stronie, do każdego było to samo polecenie i odpowiedzi (z podaną w nawiasie liczbą pozostałych obrazków), a jedyne, co się zmieniało, to sam obrazek. Obrazków było 30. I siedziałem, i przeklejałem te obrazki. Nie była to skomplikowana procedura, ale strasznie się dłużąca, ze względu na powoli otwierające się okna, przesyłające się obrazki, usuwanie obrazków poprzednich. Ale siedziałem i pisałem. A potem się zorientowałem, że zrobiłem literówkę w poleceniu. I musiałem jeszcze przejść przez 30 stron ankiety i poprawić tę samą literówkę. A powtarzałem już wiele razy na tej stronie i powtórzę raz jeszcze – nie znoszę takiej roboty. Przysięgam, dostaję szewskiej pasji, jak mam robić coś tak bezsensownego[^1]. Tworzyłem nawet własne rozwiązania tego problemu (nazwałem to [Veles](https://docs.velesweb.org/), jeszcze się tworzy), ale niedawno się dowiedziałem, że znane i lubiane Formularze Google mają możliwości, dzięki którym bezsensowną pracę można znacząco ściąć.
+
+[^1]: Przy komputerze przynajmniej. Mechaniczne czynności ogólnie mnie nie denerwują. Na jednych warsztatach spędziłem kiedyś 2 godziny rozdzielając w ciszy ryż, kaszę i groch. Było to zaskakująco relaksujące.
+
+# Google Apps Script
+
+# JavaScript
+
+# Działania w Arkuszach
+
+# Działania na Dysku
+
+# Działania w Formularzach
+
+# Praktyczne przykłady
+
+## Ankieta z poleceniami z Excela
+
+## Ankieta z oceną obrazków
+
+# Bonus: biblioteka kwestionariuszy
+
+# Podsumowanie
