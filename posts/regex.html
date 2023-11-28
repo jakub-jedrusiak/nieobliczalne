@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.449">
+<meta name="generator" content="quarto-1.4.513">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1190,10 +1190,20 @@ cookieconsent.run({
 <p>[Ss]tatysty(ka|ki|ce|kę|ką|ko)</p>
 </blockquote>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/kUE7Db/1"><img src="ilustracje/regex/or.png" class="img-fluid" alt="Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej."></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kUE7Db/1"><img src="ilustracje/regex/or.png" class="img-fluid figure-img" alt="Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej."></a></p>
+<figcaption>Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej.</figcaption>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/kUE7Db/1"><img src="ilustracje/regex/or_dark.png" class="img-fluid" alt="Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej."></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kUE7Db/1"><img src="ilustracje/regex/or_dark.png" class="img-fluid figure-img" alt="Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej."></a></p>
+<figcaption>Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej.</figcaption>
+</figure>
+</div>
 </div>
 <p>Rozbijmy ten przykład na czynniki pierwsze. Po pierwsze mamy <code>[Ss]</code>. Nawiasy kwadratowe oznaczają, że wyrażenie ma wyszukiwać jeden ze znaków wewnątrz nich. W tym wypadku dopasuje zarówno duże, jak i małe S. Mogę tam też zapisywać przedziały typu <code>[0-9]</code> albo <code>[A-Za-z]</code>. Możemy też powiedzieć „wszystko poza znakami ze zbioru”, co zrobimy pisząc <code>^</code>, np. <code>[^0-9]</code> dopasuje wszystko, co <em>nie jest</em> cyfrą.</p>
 <p>Dalej mamy zwykłą część słowa „statystyka” i nawiasy. RegEx domyślnie ignoruje nawiasy (tj. nie wyszukuje ich). Służą one jako znaki specjalne do tworzenia grup, o których więcej później. Wewnątrz nawiasu wypisałem końcówki, które mają być dopasowane. Każdą końcówkę rozdzieliłem pionową kreską, co oznacza „albo to, albo to, albo to…“.</p>
@@ -1216,10 +1226,18 @@ cookieconsent.run({
 </blockquote>
 <p>Odpowiednie wyrażenie regularne mogłoby brzmieć <code>^\d\.</code>. Po kropce jest tam spacja, którą silnik uporczywie mi usuwa, dlatego na stronie jej nie widać.</p>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/WVPWt4/1"><img src="ilustracje/regex/anchors.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/WVPWt4/1"><img src="ilustracje/regex/anchors.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/WVPWt4/1"><img src="ilustracje/regex/anchors_dark.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/WVPWt4/1"><img src="ilustracje/regex/anchors_dark.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <p>Zwróćmy uwagę na kilka rzeczy. Po pierwsze, to wyrażenie nie dopasowało liczby „1.” w treści 3. punktu. Wynika to z tego, że dodaliśmy <code>^</code> na początku wyrażenia. Liczby, które nie są na początku linijki nie są przez to dopasowywane. Po drugie, musiałem przed kropką dodać ukośnik. Wynika to z faktu, że kropka to znak specjalny (oznacza dowolny znak) i jeśli chcemy wyszukać dosłowną kropkę, musimy wykorzystać lewy ukośnik.</p>
 </section>
@@ -1233,10 +1251,18 @@ cookieconsent.run({
 <p>[A-Z]\w+</p>
 </blockquote>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/uzD28P/1"><img src="ilustracje/regex/repeat.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/uzD28P/1"><img src="ilustracje/regex/repeat.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/uzD28P/1"><img src="ilustracje/regex/repeat_dark.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/uzD28P/1"><img src="ilustracje/regex/repeat_dark.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <p>Znak <code>+</code> oznacza tutaj „jeden lub więcej”, a więc <code>\w+</code> oznacza „jedna litera lub więcej”. Operatorów podobnych do <code>+</code> jest więcej i możemy je zobaczyć w tabelce.</p>
 <table class="table">
@@ -1281,35 +1307,67 @@ cookieconsent.run({
 <p>\(.+\)</p>
 </blockquote>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/kDdEiE/1"><img src="ilustracje/regex/greedy_1.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kDdEiE/1"><img src="ilustracje/regex/greedy_1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/kDdEiE/1"><img src="ilustracje/regex/greedy_1_dark.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kDdEiE/1"><img src="ilustracje/regex/greedy_1_dark.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <p>Dziwne. Czemu takie długie wyszło? W naszym wyrażeniu regularnym wykorzystałem nawiasy (z lewym ukośnikiem, bo nawiasy to znak specjalny) oraz sekwencję <code>.+</code> oznaczającą „jeden dowolny znak lub więcej”. Domyślnie jednak <code>+</code> jest chciwy (<em>greedy</em>) i wyszuka <strong>najdłuższe możliwe sekwencje</strong>. Oznacza to, że zaznaczył wszystko między pierwszym nawiasem otwierającym i ostatnim nawiasem zamykającym. W końcu nawiasy zamykające łapią się do kategorii dowolnych znaków. Żeby temu przeciwdziałać, zamiast <code>.+</code> możemy użyć <code>.+?</code>.</p>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/kDdEiE/2"><img src="ilustracje/regex/greedy_2.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kDdEiE/2"><img src="ilustracje/regex/greedy_2.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/kDdEiE/2"><img src="ilustracje/regex/greedy_2_dark.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kDdEiE/2"><img src="ilustracje/regex/greedy_2_dark.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <p>Jest już lepiej! Problem jednak powodują w tym wypadku puste nawiasy. Nasze wyrażenie regularne wymaga, by między nawiasami coś było. Takie właśnie sekwencje znajduje w przypadku zapisu <code>()</code>. Nawias zamykający jest po prosu kolejnym znakiem, czyli łapie się jako <code>.</code>, a dopasowanie kończy dopiero kolejny nawias zamykający.</p>
 <p>Rozwiązania widzę tutaj dwa. Po pierwsze można wykorzystać <em>lookarounds</em>, żeby pustych nawiasów nie dopasowywać. Pozwolą one też dopasować tekst <em>wewnątrz</em> nawiasów bez samych nawiasów. Nie chcę jednak wchodzić tak głęboko, dlatego zainteresowanych odsyłam <a href="https://www.rexegg.com/regex-lookarounds.html">tutaj</a>. Po drugie możemy umożliwić dopasowywanie też pustych nawiasów zastępując operator „jeden lub więcej” (<code>+</code>) operatorem „zero lub więcej” (<code>*</code>). Pamiętajmy jednak o chciwości tych operatorów i dodajmy jeszcze <code>?</code>.</p>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/kDdEiE/3"><img src="ilustracje/regex/greedy_3.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kDdEiE/3"><img src="ilustracje/regex/greedy_3.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/kDdEiE/3"><img src="ilustracje/regex/greedy_3_dark.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kDdEiE/3"><img src="ilustracje/regex/greedy_3_dark.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 </section>
 <section id="grupy-i-zastępowanie" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Grupy i zastępowanie</h1>
 <p>Zazwyczaj po to wyszukujemy tekst, żeby zastąpić go innym. Jak to jednak zrobić, jeśli mamy takie fragmenty tekstu jak <code>.+</code>? Nie mogę wpisać w pole z tekstem do podstawienia <code>.+</code>, bo dostanę dosłowną kropkę i plus. Program musi dokładnie wiedzieć, co w dane miejsce wstawić. Załóżmy, że w poprzednim przykładzie chcemy zamienić nawiasy okrągłe na kwadratowe. Jak to zrobić? Za pomocą grup.</p>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/q6PCek/1"><img src="ilustracje/regex/groups_1.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/q6PCek/1"><img src="ilustracje/regex/groups_1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/q6PCek/1"><img src="ilustracje/regex/groups_1_dark.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/q6PCek/1"><img src="ilustracje/regex/groups_1_dark.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <p>Jak to zrobiłem? Najpierw w wyszukiwaniu zmieniłem sekwencję <code>\(.*?\)</code> w <code>\((.*?)\)</code>. Innymi słowy otoczyłem <code>.*?</code> dodatkową parą nawiasów. Na screenie zaznaczone są na zielono. Znaki w nawiasach tworzą grupy. Grupy po to są nam potrzebne, żebyśmy mogli je potem wykorzystywać do zastępowania tekstu<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Zwróćmy uwagę na tekst w drugim polu, gdzie wpisałem <code>[$1]</code>. Oznacza to „tekst z pierwszej grupy (<code>$1</code>) w nawiasach kwadratowych”. Czyli bierzemy wnętrze naszego pierwotnego nawiasu (grupę 1.) i otaczamy je nawiasami kwadratowymi. Nawiasy okrągłe nie są częścią grupy, więc nie pojawiają się w tekście po zmianie.</p>
 <p>Odwołania do grup mogą wyglądać różnie w różnych wersjach RegEx. W tym wypadku użyłem <code>$1</code>, ale możemy się też spotkać z innymi oznaczeniami, przede wszystkim <code>\1</code>. Zależy to od programu.</p>
@@ -1329,10 +1387,18 @@ cookieconsent.run({
 <p>](./$1.qmd)</p>
 </blockquote>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="ilustracje/regex/main_problem.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="ilustracje/regex/main_problem.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="ilustracje/regex/main_problem_dark.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="ilustracje/regex/main_problem_dark.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <p>Zaczynam zamykającym nawiasem kwadratowym, bo hiperlinki w markdown są formatowane jako <code>[tekst](link)</code>. Dalej otwieram dosłowny nawias okrągły i w nim dowolny tekst. Mogłem napisać dokładny link, bo to o ten i żaden inny tekst mi chodzi, ale nie chciało mi się&nbsp;pisać. Zabezpieczyłem się przed złymi dopasowaniami słowem „posts”. Po nim znajduje się prawy ukośnik i dowolne znaki, czyli wewnętrzna nazwa danego wpisu. <code>posts/.+</code> jest też grupą, dlatego jest w nawiasach. Wyrażenie zakończone jest rozszerzeniem <code>.html</code> i nawiasem zamykającym. Całość zastępuję swoją grupą <code>posts/nazwa_wpisu</code> poprzedzoną tekstem <code>./</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> i zakończoną rozszerzeniem <code>.qmd</code>. Całość otaczam odpowiednimi nawiasami.</p>
 <p>Czy mogłem zrobić to lepiej? Oczywiście! Tylko po co? Te sekwencje muszą być <strong>użytkowe</strong>. Nie musimy się starać, żeby były odporne na błędy i działały w każdym wypadku. To są rzeczy, które pisze się szybko, wykorzystuje i kasuje. Nie muszą być idealne, <strong>muszą być napisane sprawnie i działać tu i teraz, w tym konkretnym przypadku</strong>. W końcu po to uczymy się wyrażeń regularnych, żeby oszczędzić sobie pracy, a nie jej przysporzyć. Jeśli robimy coś często i chcemy to zachować na przyszłość, to może wtedy warto się bawić w szlifowanie. Podobnie jeśli wyrażenie regularne jest częścią skryptu. Mimo wszystko w większości przypadków piszemy wyrażenia regularne <strong>na jeden raz</strong> i warto o tym pamiętać.</p>
@@ -1673,8 +1739,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
         typesetMath(container);
         return container.innerHTML

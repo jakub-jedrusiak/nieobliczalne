@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.449">
+<meta name="generator" content="quarto-1.4.513">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1686,7 +1686,11 @@ cookieconsent.run({
 </span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="metaprogramowanie_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="metaprogramowanie_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wykresik</span>(USArrests, UrbanPop, Murder)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1695,7 +1699,11 @@ cookieconsent.run({
 </span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="metaprogramowanie_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="metaprogramowanie_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Ta czynność, którą tutaj wykonałem, nazywa się <em>deparsing</em>. Skoro istnieje <em>deparsing</em>, to pewnie istnieje też <em>parsing</em>. Rzeczywiście, istnieje i jest to czynność odwrotna – dostajemy dosłowny ciąg znaków typu <code>"sum(x)"</code> i przekształcamy go w prawdziwe wywołanie <code>sum(x)</code>. W zależności od tego, co chcemy otrzymać, możemy użyć funkcji <code>parse_expr()</code> lub <code>parse_quo()</code>.</p>
@@ -2090,8 +2098,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
         typesetMath(container);
         return container.innerHTML

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.449">
+<meta name="generator" content="quarto-1.4.513">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -2421,7 +2421,11 @@ Rysunek&nbsp;3: Przykład użycia <code>questionr</code>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_diamonds, <span class="fu">aes</span>(carat, price))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="podstawy_R_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="podstawy_R_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Jak widzimy, powstał nam pusty wykres. To jest właśnie układ współrzędnych, o którym mówiłem wcześniej.</p>
@@ -2435,7 +2439,11 @@ Rysunek&nbsp;3: Przykład użycia <code>questionr</code>
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_diamonds, <span class="fu">aes</span>(carat, price)) <span class="sc">+</span></span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="podstawy_R_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="podstawy_R_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Wygląda na to, że im większy diament, tym droższy. Bez zaskoczenia. Możemy do naszego wykresy dołożyć linię trendu jako kolejny <em>geom</em> – <code>geom_smooth</code>. Jeśli chcemy mieć prostą linię, musimy ustawić argument <code>method = "lm"</code>, co jest skrótem od <em>linear model</em>.</p>
@@ -2448,7 +2456,11 @@ Rysunek&nbsp;3: Przykład użycia <code>questionr</code>
 </span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="podstawy_R_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="podstawy_R_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Szare pole wokół niebieskiej linii to przedział ufności. Możemy go wyłączyć ustawiając <code>se = FALSE</code>. Przy tej okazji powiedzmy sobie jeszcze raz o estetykach i atrybutach. Mogę chcieć, żeby kolor mojego punktu zależał od jakości wyszlifowania brylantu z kolumny <code>cut</code>. Ponieważ jest to związek wyglądu z danymi, to jest to estetyka i ustawiam ją wewnątrz <code>aes</code>. Mogę to <code>aes</code> wrzucić albo do funkcji <code>ggplot</code>, jak robiłem wcześniej, albo też do funkcji <code>geom_point</code>, bo to jej mapowanie dotyczy. Zwyczajowo argumenty X i Y w <code>aes</code> mogą być nienazwane, ale wszystkie inne już powinny. Mogę też zmienić kolor linii trendu z niebieskiego na czarny i zrobić ją trochę cieńszą. Jest to zmiana wyglądu, ale arbitralna, bez związku z danymi. Jest to więc atrybut i ustawiam go poza <code>aes</code>, wewnątrz funkcji, której ten atrybut dotyczy. Zobaczmy to.</p>
@@ -2461,7 +2473,11 @@ Rysunek&nbsp;3: Przykład użycia <code>questionr</code>
 </span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="podstawy_R_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="podstawy_R_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -2483,7 +2499,11 @@ Rysunek&nbsp;3: Przykład użycia <code>questionr</code>
 </span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="podstawy_R_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="podstawy_R_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Jeśli chcemy zmienić etykiety wartości z legendy, mamy dwie opcje – albo przekodujemy te etykiety bezpośrednio w bazie danych, chociażby zaprzęgając do pracy <code>questionr</code> (zob. <a href="#sec-questionr" class="quarto-xref">5.5.1.1.1</a>), albo użyjemy jednej z funkcji <code>scale_*_discrete</code> i jej argumentu <code>labels</code>, gdzie zamiast gwiazdki piszemy nazwę naszej estetyki. Szlif naszych diamentów jest zmapowany do estetyki <code>colour</code>, więc użyjemy funkcji <code>scale_colour_discrete</code>.</p>
@@ -2503,7 +2523,11 @@ Rysunek&nbsp;3: Przykład użycia <code>questionr</code>
 </span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="podstawy_R_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="podstawy_R_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -2529,7 +2553,11 @@ Rysunek&nbsp;3: Przykład użycia <code>questionr</code>
 <span id="cb67-14"><a href="#cb67-14" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
 <span id="cb67-15"><a href="#cb67-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_apa</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="podstawy_R_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="podstawy_R_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Drugi motyw nie jest szałowo popularny w społeczności, ale bardzo go lubię. Żeby zadziałał, musimy wcześniej zainstalować u siebie pakiety <code>grid</code>, <code>scales</code> i <code>ggthemes</code>. Spojrzenie w repozytorium pozwoli nam stwierdzić, że nie jest to pakiet, a po prostu zbiór plików. Wchodzimy więc w plik <code>ggplot_theme_Publication-2.R</code>, klikamy <code>raw</code> i kopiujemy link. Następnie użyjemy komendy <code>source</code>, która pozwala nam uruchamiać kod z innych plików .R w naszym skrypcie, jak podamy ich ścieżkę lub link do nich. Cały kod mógłby więc wyglądać tak:</p>
@@ -2554,7 +2582,11 @@ Rysunek&nbsp;3: Przykład użycia <code>questionr</code>
 </span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="podstawy_R_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="podstawy_R_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -2581,7 +2613,11 @@ Rysunek&nbsp;3: Przykład użycia <code>questionr</code>
 <span id="cb69-16"><a href="#cb69-16" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
 <span id="cb69-17"><a href="#cb69-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(cut))</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="podstawy_R_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="podstawy_R_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Powyżej wykres, który stworzyłem w <code>equisse</code>. Warto jednak zwrócić uwagę na jego niedoskonałości, takie jak brak polskich tłumaczeń typów szlifu. Pewnym wyjaśnieniem może być dla nas nazwa francuskiego słowa <em>equisse</em> – szkic. Takie narzędzia jak <code>equisse</code> nie zwalniają nas całkowicie z umiejętności kodowania wykresów, ale pozwalają wygodnie tworzyć <em>szkice</em> naszego kodu. Ten szkic mogę pozmieniać, np. zamieniając <code>theme_bw</code> na <code>theme_Publication</code> i dodając polskie tłumaczenia. Nieco inaczej, niż wcześniej, bo <code>facet_wrap</code> nie jest estetyką, więc sposób dodawania do niego niestandardowych etykiet znalazłem w dokumentacji.</p>
@@ -2614,7 +2650,11 @@ Rysunek&nbsp;3: Przykład użycia <code>questionr</code>
 <span id="cb70-26"><a href="#cb70-26" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb70-27"><a href="#cb70-27" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="podstawy_R_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid" style="width:100.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="podstawy_R_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Wykresy to olbrzymi temat, który tutaj tylko liznęliśmy z wierzchu. Sądzę jednak, że ta wiedza wystarczy, żeby – z pomocą dokumentacji i Google – być w stanie powoli rozbudowywać swoje umiejętności z zakresu <code>ggplot2</code>. Zwłaszcza, że tworzenie dobrych wykresów do trudna sztuka, co skutecznie udowadnia plebiscyt na najgorszy wykres roku organizowany przez dr. Przemysława Biecka na <a href="http://smarterpoland.pl/index.php/2021/12/plebiscyt-na-najgorszy-wykres-roku-2021/">jego stronie</a>. W tym miejscu mogę polecić jego książkę „Wykresy od kuchni”, <a href="https://betaandbit.github.io/Wykresy/">dostępną za darmo</a> i okraszoną kodem R, który posłużył do wygenerowania jego wykresów.</p>
@@ -3548,8 +3588,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
         typesetMath(container);
         return container.innerHTML

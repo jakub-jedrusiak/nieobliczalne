@@ -9,7 +9,7 @@
 <link>https://nieobliczalne.pl/</link>
 <atom:link href="https://nieobliczalne.pl/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.449</generator>
+<generator>quarto-1.4.513</generator>
 <lastBuildDate>Sat, 28 Oct 2023 22:00:00 GMT</lastBuildDate>
 <item>
   <title>Rozkłady próbkowania i rozkłady \(t\)</title>
@@ -147,7 +147,11 @@ background-color: null;
 font-style: inherit;">theme_main</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/rozklady-probkowania_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/rozklady-probkowania_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Widzimy, że najwięcej osób wykazało inteligencję blisko środka rozkładu. Średnia inteligencja wyniosła <strong>w tej konkretnej próbie</strong> 97.6, co zaznaczyłem pionową kreską. To, co widzimy na rysunku, to <strong>rozkład zmiennej</strong> w próbie. Pobraliśmy próbkę, zmierzyliśmy inteligencję, narysowaliśmy rozkład. To, co widzimy na obrazku, odnosi się tylko do naszej konkretnej próby. Może przypominać rzeczywisty rozkład inteligencji w populacji (i przypomina), ale może to odwzorowanie może być dalekie od doskonałości. Istnieje więc jakiś <strong>rozkład zmiennej w populacji</strong>, który staramy się przybliżyć za pomocą <strong>rozkładu zmiennej w próbie</strong>. Im próba bardziej liczna, tym rozkład zmiennej bliższy prawdziwemu rozkładowi w populacji. Wydaje się to naturalne.</p>
@@ -272,7 +276,11 @@ background-color: null;
 font-style: inherit;">theme_main</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/rozklady-probkowania_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/rozklady-probkowania_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Wylosowaliśmy więc 100 różnych próbek, w każdej zmierzyliśmy średnią inteligencję. Na histogramie widać, że średnie w pobliżu 100 rzeczywiście pojawiały się częściej, niż te dalsze od 100. Średnia średnia wyniosła tutaj 99.9, zaś jej odchylenie standardowe 1.5, czyli zazwyczaj próbki miały średnią między 98.5 a 101.4. Zwróćmy jednak uwagę, że robiąc ten wykres, spłaszczyliśmy każdą próbkę 100 osób do jednej tylko liczby – średniej inteligencji. Ten wykres nie mówi nam więc nic na temat tego, jak wyglądał rozkład zmiennej w każdej próbce. On nam mówi tylko i aż tyle, jak często próbka 100 osób miała jaką średnią. Taki rozkład nazywamy <strong>rozkładem próbkowania</strong>. Rozkład próbkowania to rozkład średnich z <strong>różnych prób</strong> i jest czymś zupełnie innym niż rozkład zmiennej w próbie czy w populacji. I to rozróżnienie jest powalająco istotne.</p>
@@ -343,7 +351,11 @@ background-color: null;
 font-style: inherit;">theme_main</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/rozklady-probkowania_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/rozklady-probkowania_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Z pobieram z tego rozkładu losową próbkę 100 osób. Wychodzi mi średni dochód 1185. Spoko. Pobieram kolejne 100 osób i tym razem dostaję średni dochód 1448. Robię tak jeszcze bardzo dużo razy, więc ostatecznie mam zapisane w Excelu bardzo dużo średnich. Gdy z tych średnich, nie z pojedynczych obserwacji, zrobię histogram, dostanę coś takiego.</p>
@@ -456,7 +468,11 @@ background-color: null;
 font-style: inherit;">theme_main</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/rozklady-probkowania_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/rozklady-probkowania_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Ten rozkład wygląda zupełnie inaczej, niż rozkład wyjściowy. Dlaczego? Bo rozkład wyjściowy to rozkład zmiennej, a to na obrazku to rozkład średnich, jakie wychodzą w różnych próbkach, czyli rozkład próbkowania. Wielkość pojedynczej próbki wynosi 100, czyli więcej niż 15, a więc rozkład próbkowania wyszedł normalny. To jest pierwsze, co mówi nam CLT.</p>
@@ -2055,7 +2071,11 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell dark-mode">
@@ -2175,7 +2195,11 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Z tym wnioskowaniem jest jednak pewien znaczący problem, który prezentuje tabela 1.</p>
@@ -2578,7 +2602,11 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell dark-mode">
@@ -2682,7 +2710,11 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Żeby odczytać prawdopodobieństwo z takiego wykresu, musimy oszacować, wielkość przestrzeni, którą zaznaczyłem na czerwono. Wielkość przestrzeni, czyli… pole. Na czerwono zaznaczony jest prawie prostokąt, tylko ma brzuszek na górze. Jeśli będę mógł oszacować pole tego prostokąta, to to <strong>pole właśnie będzie naszym prawdopodobieństwem</strong>. Jak więc to zrobić? Bardzo z grubsza możemy brzuszek zignorować i udawać, że jest to rzeczywiście prostokąt.</p>
@@ -2789,7 +2821,11 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell dark-mode">
@@ -2895,7 +2931,11 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Szerokość tego prostokąta wynosi 10 (bo od 95 do 105 na osi X), zaś jego wysokość odczytujemy z osi Y, czyli jest taka, jak gęstość prawdopodobieństwa dla <img src="https://latex.codecogs.com/png.latex?x%20=%20100">. Odczytywanie tej wielkości z wykresu szybko robi się niepraktyczne, dlatego możemy ją wyliczyć. Możemy to zrobić podstawiając bezpośrednio do wzoru (który wygląda tak strasznie, że go nie pokażę), wykorzystując funkcję <code>dnorm(100, 100, 15)</code> w R (pierwszy argument to wartość, drugi to średnia, trzeci odchylenie standardowe), korzystając z <a href="https://www.danielsoper.com/statcalc/calculator.aspx?id=54">internetowego kalkulatora</a> albo kalkulatora naukowego. Możemy teraz skorzystać ze wzoru na pole prostokąta i, po wybiciu się&nbsp;z flashbacków ze szkoły podstawowej, otrzymać wynik:</p>
@@ -3004,7 +3044,11 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell dark-mode">
@@ -3110,7 +3154,11 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Wysokość się nie zmieniła, zaś szerokość wzrosła do 60. Przemnożenie tych wartości da nam prawdopodobieństwo 159,58%. No.&nbsp;Przesadziliśmy odrobinę. Jak widać na wykresie, nasz prostokąt wystaje poza krzywą tak bardzo, że aż jego pole jest większe niż 100%. To może zmieńmy strategię i wciśnijmy nasz prostokąt pod krzywą, żeby na pewno nie wystawał?</p>
@@ -3217,7 +3265,11 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell dark-mode">
@@ -3323,7 +3375,11 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Wysokość tego prostokąta równa jest gęstości prawdopodobieństwa w punktach 70 i 130. Nie jest istotne, który wybierzemy, bo rozkład normalny jest symetryczny. Ponieważ oba te są tak samo oddalone od środka (o 30 punktów), mają taką samą wysokość. Policzenie pola naszego prostokąta ujawnia nam to, co widać już na oko, czyli że pole jest znacznie zaniżone, bowiem wychodzi <img src="https://latex.codecogs.com/png.latex?P%20%5Capprox%2060%20%5Ctimes%200,0036%20=%200,216%20=%2021,6%5C%25">. Wiemy więc tyle, że nasze pole jest nie mniejsze niż 0,216 i nie większe niż 1,6. Super. Tyle to widzę na oko.</p>
@@ -3439,7 +3495,11 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell dark-mode">
@@ -3532,7 +3592,11 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Nasze prostokąty mają środki w punktach 70, 80, 90, 100, 110, 120 i 130. Gdy policzymy gęstość prawdopodobieństwa dla każdego z tych punktów i przemnożymy przez szerokość 10, to wychodzi nam pole <img src="https://latex.codecogs.com/png.latex?P%20%5Capprox%200,9826%20=%2098,26%5C%25">. Wartość prawdziwa to <img src="https://latex.codecogs.com/png.latex?P%20%5Capprox%200,9545">, więc błąd ewidentnie zmalał. I maleje bardziej, gdy narysujemy jeszcze cieńsze prostokąty.</p>
@@ -3645,7 +3709,11 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell dark-mode">
@@ -3751,7 +3819,11 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Wysokość tego prostokąta to gęstość prawdopodobieństwa dla <img src="https://latex.codecogs.com/png.latex?IQ%20=%20100">. Możemy zapisać to pewną przerażająco wyglądającą notacją <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BN%7D(100;%5C%20100,%5C%2015%5E2)">. Oznacza to „wartość rozkładu normalnego o średniej <img src="https://latex.codecogs.com/png.latex?%5Cmu%20=%20100"> i wariancji <img src="https://latex.codecogs.com/png.latex?%5Csigma%5E2%20=%2015%5E2"> w punkcie <img src="https://latex.codecogs.com/png.latex?x%20=%20100">”. Każdy rozkład normalny daje się dokładnie opisać dwiema liczbami – średnią i odchyleniem standardowym. Jak znam te dwie rzeczy, mogę liczyć. Warto zwrócić uwagę, że podajemy w tej notacji wariancję, a nie odchylenie standardowe, ale (jak pamiętamy z wpisu o <a href="../posts/procent-wariancji.html">wariancji</a>) wariancja to odchylenie standardowe podniesione do kwadratu.</p>
@@ -3865,7 +3937,11 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell dark-mode">
@@ -3968,7 +4044,11 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Możemy wykorzystać nowo poznaną notację całkową, żeby wyrazić, co chcemy zrobić:</p>
@@ -4093,7 +4173,11 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell dark-mode">
@@ -4196,7 +4280,11 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Możemy to ugryźć na dwa sposoby. Jeśli nasz kalkulator nam to umożliwia, możemy przełączyć dystrybuantę na jej lustrzane odbicie, czyli wprost powiedzieć, żeby wyrzuciła nam wartości <em>większe</em> niż 130 zamiast zwyczajnych mniejszych. W R możemy to zrobić ustawiając argument <code>lower.tail = FALSE</code>.</p>
@@ -4365,7 +4453,11 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell dark-mode">
@@ -4468,7 +4560,11 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Następnie liczymy dystrybuantę&nbsp;dla dolnych widełek, czyli w tym wypadku 85.</p>
@@ -4589,7 +4685,11 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell dark-mode">
@@ -4713,7 +4813,11 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>A na koniec odejmujemy jedno od drugiego.</p>
@@ -4811,7 +4915,11 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell dark-mode">
@@ -4912,7 +5020,11 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>W R możemy to zrobić tak:</p>
@@ -4941,7 +5053,12 @@ font-style: inherit;">15</span>)</span></code></pre></div>
 </div>
 </div>
 <p>Jak widzimy, można z grubsza powiedzieć, że w rozkładzie normalnym ±1 odchylenie standardowe przekłada się na <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B2%7D%7B3%7D"> populacji albo <img src="https://latex.codecogs.com/png.latex?P(%5Cmu%20%5Cpm%201%5Csigma)%20=%2068,2%5C%25">. Na tej samej zasadzie <img src="https://latex.codecogs.com/png.latex?P(%5Cmu%20%5Cpm%202%5Csigma)%20=%2095,4%5C%25"> i <img src="https://latex.codecogs.com/png.latex?P(%5Cmu%20%5Cpm%203%5Csigma)%20=%2099,5%5C%25">. Ta intuicja bywa nazywana <strong>prawem trzech sigm</strong>.</p>
-<p><a href="https://commons.wikimedia.org/wiki/File:Standard_deviation_diagram.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Standard_deviation_diagram.svg" title="M. W. Toews, CC BY 2.5 <https://creativecommons.org/licenses/by/2.5>, via Wikimedia Commons" class="img-fluid" style="width:100.0%" alt="Standard deviation diagram"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://commons.wikimedia.org/wiki/File:Standard_deviation_diagram.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Standard_deviation_diagram.svg" title="M. W. Toews, CC BY 2.5 <https://creativecommons.org/licenses/by/2.5>, via Wikimedia Commons" class="img-fluid figure-img" style="width:100.0%" alt="Standard deviation diagram"></a></p>
+<figcaption>Rycina ilustrująca prawo trzech sigm na Wikipedii</figcaption>
+</figure>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5768,7 +5885,11 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell dark-mode">
@@ -5927,7 +6048,11 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Obszary zaznaczone na czerwono są identyczne. Możemy więc policzyć wartość dla -1,33 stosując sztuczkę z podrozdziału 4.3. – wziąć wartość dla 1,33 i odjąć ją od jedności. Otrzymamy w ten sposób powierzchnię z prawej, która jest taka sama, jak powierzchnia z lewej.</p>
@@ -6046,7 +6171,11 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell dark-mode">
@@ -6166,7 +6295,11 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Jak wygląda dokładność tego wyniku w porównaniu do tego wyrzucanego przez R? Całkiem nieźle. Rozbieżności pojawiają się&nbsp;dopiero na czwartym miejscu po przecinku.</p>
@@ -9565,10 +9698,20 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 <p>[Ss]tatysty(ka|ki|ce|kę|ką|ko)</p>
 </blockquote>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/kUE7Db/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/or.png" class="img-fluid" alt="Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej."></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kUE7Db/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/or.png" class="img-fluid figure-img" alt="Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej."></a></p>
+<figcaption>Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej.</figcaption>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/kUE7Db/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/or_dark.png" class="img-fluid" alt="Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej."></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kUE7Db/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/or_dark.png" class="img-fluid figure-img" alt="Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej."></a></p>
+<figcaption>Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej.</figcaption>
+</figure>
+</div>
 </div>
 <p>Rozbijmy ten przykład na czynniki pierwsze. Po pierwsze mamy <code>[Ss]</code>. Nawiasy kwadratowe oznaczają, że wyrażenie ma wyszukiwać jeden ze znaków wewnątrz nich. W tym wypadku dopasuje zarówno duże, jak i małe S. Mogę tam też zapisywać przedziały typu <code>[0-9]</code> albo <code>[A-Za-z]</code>. Możemy też powiedzieć „wszystko poza znakami ze zbioru”, co zrobimy pisząc <code>^</code>, np. <code>[^0-9]</code> dopasuje wszystko, co <em>nie jest</em> cyfrą.</p>
 <p>Dalej mamy zwykłą część słowa „statystyka” i nawiasy. RegEx domyślnie ignoruje nawiasy (tj. nie wyszukuje ich). Służą one jako znaki specjalne do tworzenia grup, o których więcej później. Wewnątrz nawiasu wypisałem końcówki, które mają być dopasowane. Każdą końcówkę rozdzieliłem pionową kreską, co oznacza „albo to, albo to, albo to…“.</p>
@@ -9591,10 +9734,18 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 </blockquote>
 <p>Odpowiednie wyrażenie regularne mogłoby brzmieć <code>^\d\.</code>. Po kropce jest tam spacja, którą silnik uporczywie mi usuwa, dlatego na stronie jej nie widać.</p>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/WVPWt4/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/anchors.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/WVPWt4/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/anchors.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/WVPWt4/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/anchors_dark.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/WVPWt4/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/anchors_dark.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <p>Zwróćmy uwagę na kilka rzeczy. Po pierwsze, to wyrażenie nie dopasowało liczby „1.” w treści 3. punktu. Wynika to z tego, że dodaliśmy <code>^</code> na początku wyrażenia. Liczby, które nie są na początku linijki nie są przez to dopasowywane. Po drugie, musiałem przed kropką dodać ukośnik. Wynika to z faktu, że kropka to znak specjalny (oznacza dowolny znak) i jeśli chcemy wyszukać dosłowną kropkę, musimy wykorzystać lewy ukośnik.</p>
 </section>
@@ -9608,10 +9759,18 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 <p>[A-Z]\w+</p>
 </blockquote>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/uzD28P/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/repeat.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/uzD28P/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/repeat.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/uzD28P/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/repeat_dark.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/uzD28P/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/repeat_dark.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <p>Znak <code>+</code> oznacza tutaj „jeden lub więcej”, a więc <code>\w+</code> oznacza „jedna litera lub więcej”. Operatorów podobnych do <code>+</code> jest więcej i możemy je zobaczyć w tabelce.</p>
 <table class="table">
@@ -9656,35 +9815,67 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 <p>\(.+\)</p>
 </blockquote>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/kDdEiE/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_1.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kDdEiE/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/kDdEiE/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_1_dark.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kDdEiE/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_1_dark.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <p>Dziwne. Czemu takie długie wyszło? W naszym wyrażeniu regularnym wykorzystałem nawiasy (z lewym ukośnikiem, bo nawiasy to znak specjalny) oraz sekwencję <code>.+</code> oznaczającą „jeden dowolny znak lub więcej”. Domyślnie jednak <code>+</code> jest chciwy (<em>greedy</em>) i wyszuka <strong>najdłuższe możliwe sekwencje</strong>. Oznacza to, że zaznaczył wszystko między pierwszym nawiasem otwierającym i ostatnim nawiasem zamykającym. W końcu nawiasy zamykające łapią się do kategorii dowolnych znaków. Żeby temu przeciwdziałać, zamiast <code>.+</code> możemy użyć <code>.+?</code>.</p>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/kDdEiE/2"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_2.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kDdEiE/2"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_2.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/kDdEiE/2"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_2_dark.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kDdEiE/2"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_2_dark.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <p>Jest już lepiej! Problem jednak powodują w tym wypadku puste nawiasy. Nasze wyrażenie regularne wymaga, by między nawiasami coś było. Takie właśnie sekwencje znajduje w przypadku zapisu <code>()</code>. Nawias zamykający jest po prosu kolejnym znakiem, czyli łapie się jako <code>.</code>, a dopasowanie kończy dopiero kolejny nawias zamykający.</p>
 <p>Rozwiązania widzę tutaj dwa. Po pierwsze można wykorzystać <em>lookarounds</em>, żeby pustych nawiasów nie dopasowywać. Pozwolą one też dopasować tekst <em>wewnątrz</em> nawiasów bez samych nawiasów. Nie chcę jednak wchodzić tak głęboko, dlatego zainteresowanych odsyłam <a href="https://www.rexegg.com/regex-lookarounds.html">tutaj</a>. Po drugie możemy umożliwić dopasowywanie też pustych nawiasów zastępując operator „jeden lub więcej” (<code>+</code>) operatorem „zero lub więcej” (<code>*</code>). Pamiętajmy jednak o chciwości tych operatorów i dodajmy jeszcze <code>?</code>.</p>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/kDdEiE/3"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_3.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kDdEiE/3"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_3.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/kDdEiE/3"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_3_dark.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/kDdEiE/3"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_3_dark.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 </section>
 <section id="grupy-i-zastępowanie" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Grupy i zastępowanie</h1>
 <p>Zazwyczaj po to wyszukujemy tekst, żeby zastąpić go innym. Jak to jednak zrobić, jeśli mamy takie fragmenty tekstu jak <code>.+</code>? Nie mogę wpisać w pole z tekstem do podstawienia <code>.+</code>, bo dostanę dosłowną kropkę i plus. Program musi dokładnie wiedzieć, co w dane miejsce wstawić. Załóżmy, że w poprzednim przykładzie chcemy zamienić nawiasy okrągłe na kwadratowe. Jak to zrobić? Za pomocą grup.</p>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/q6PCek/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/groups_1.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/q6PCek/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/groups_1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/q6PCek/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/groups_1_dark.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/q6PCek/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/groups_1_dark.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <p>Jak to zrobiłem? Najpierw w wyszukiwaniu zmieniłem sekwencję <code>\(.*?\)</code> w <code>\((.*?)\)</code>. Innymi słowy otoczyłem <code>.*?</code> dodatkową parą nawiasów. Na screenie zaznaczone są na zielono. Znaki w nawiasach tworzą grupy. Grupy po to są nam potrzebne, żebyśmy mogli je potem wykorzystywać do zastępowania tekstu<sup>2</sup>. Zwróćmy uwagę na tekst w drugim polu, gdzie wpisałem <code>[$1]</code>. Oznacza to „tekst z pierwszej grupy (<code>$1</code>) w nawiasach kwadratowych”. Czyli bierzemy wnętrze naszego pierwotnego nawiasu (grupę 1.) i otaczamy je nawiasami kwadratowymi. Nawiasy okrągłe nie są częścią grupy, więc nie pojawiają się w tekście po zmianie.</p>
 <p>Odwołania do grup mogą wyglądać różnie w różnych wersjach RegEx. W tym wypadku użyłem <code>$1</code>, ale możemy się też spotkać z innymi oznaczeniami, przede wszystkim <code>\1</code>. Zależy to od programu.</p>
@@ -9704,10 +9895,18 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 <p>](./$1.qmd)</p>
 </blockquote>
 <div class="light-mode">
-<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/main_problem.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/main_problem.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <div class="dark-mode">
-<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/main_problem_dark.png" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/main_problem_dark.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </div>
 <p>Zaczynam zamykającym nawiasem kwadratowym, bo hiperlinki w markdown są formatowane jako <code>[tekst](link)</code>. Dalej otwieram dosłowny nawias okrągły i w nim dowolny tekst. Mogłem napisać dokładny link, bo to o ten i żaden inny tekst mi chodzi, ale nie chciało mi się&nbsp;pisać. Zabezpieczyłem się przed złymi dopasowaniami słowem „posts”. Po nim znajduje się prawy ukośnik i dowolne znaki, czyli wewnętrzna nazwa danego wpisu. <code>posts/.+</code> jest też grupą, dlatego jest w nawiasach. Wyrażenie zakończone jest rozszerzeniem <code>.html</code> i nawiasem zamykającym. Całość zastępuję swoją grupą <code>posts/nazwa_wpisu</code> poprzedzoną tekstem <code>./</code><sup>3</sup> i zakończoną rozszerzeniem <code>.qmd</code>. Całość otaczam odpowiednimi nawiasami.</p>
 <p>Czy mogłem zrobić to lepiej? Oczywiście! Tylko po co? Te sekwencje muszą być <strong>użytkowe</strong>. Nie musimy się starać, żeby były odporne na błędy i działały w każdym wypadku. To są rzeczy, które pisze się szybko, wykorzystuje i kasuje. Nie muszą być idealne, <strong>muszą być napisane sprawnie i działać tu i teraz, w tym konkretnym przypadku</strong>. W końcu po to uczymy się wyrażeń regularnych, żeby oszczędzić sobie pracy, a nie jej przysporzyć. Jeśli robimy coś często i chcemy to zachować na przyszłość, to może wtedy warto się bawić w szlifowanie. Podobnie jeśli wyrażenie regularne jest częścią skryptu. Mimo wszystko w większości przypadków piszemy wyrażenia regularne <strong>na jeden raz</strong> i warto o tym pamiętać.</p>
@@ -12146,7 +12345,11 @@ font-style: inherit;">wykresik</span>(iris, Sepal.Width, Sepal.Length)</span></c
 </span></code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/metaprogramowanie_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/metaprogramowanie_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"></span>
 <span id="cb27-2"><span class="fu" style="color: #4758AB;
@@ -12157,7 +12360,11 @@ font-style: inherit;">wykresik</span>(USArrests, UrbanPop, Murder)</span></code>
 </span></code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/metaprogramowanie_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/metaprogramowanie_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Ta czynność, którą tutaj wykonałem, nazywa się <em>deparsing</em>. Skoro istnieje <em>deparsing</em>, to pewnie istnieje też <em>parsing</em>. Rzeczywiście, istnieje i jest to czynność odwrotna – dostajemy dosłowny ciąg znaków typu <code>"sum(x)"</code> i przekształcamy go w prawdziwe wywołanie <code>sum(x)</code>. W zależności od tego, co chcemy otrzymać, możemy użyć funkcji <code>parse_expr()</code> lub <code>parse_quo()</code>.</p>
@@ -16041,7 +16248,11 @@ font-style: inherit;">ggplot</span>(df_diamonds, <span class="fu" style="color: 
 background-color: null;
 font-style: inherit;">aes</span>(carat, price))</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Jak widzimy, powstał nam pusty wykres. To jest właśnie układ współrzędnych, o którym mówiłem wcześniej.</p>
@@ -16063,7 +16274,11 @@ font-style: inherit;">+</span></span>
 background-color: null;
 font-style: inherit;">geom_point</span>()</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Wygląda na to, że im większy diament, tym droższy. Bez zaskoczenia. Możemy do naszego wykresy dołożyć linię trendu jako kolejny <em>geom</em> – <code>geom_smooth</code>. Jeśli chcemy mieć prostą linię, musimy ustawić argument <code>method = "lm"</code>, co jest skrótem od <em>linear model</em>.</p>
@@ -16092,7 +16307,11 @@ font-style: inherit;">"lm"</span>)</span></code></pre></div>
 </span></code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Szare pole wokół niebieskiej linii to przedział ufności. Możemy go wyłączyć ustawiając <code>se = FALSE</code>. Przy tej okazji powiedzmy sobie jeszcze raz o estetykach i atrybutach. Mogę chcieć, żeby kolor mojego punktu zależał od jakości wyszlifowania brylantu z kolumny <code>cut</code>. Ponieważ jest to związek wyglądu z danymi, to jest to estetyka i ustawiam ją wewnątrz <code>aes</code>. Mogę to <code>aes</code> wrzucić albo do funkcji <code>ggplot</code>, jak robiłem wcześniej, albo też do funkcji <code>geom_point</code>, bo to jej mapowanie dotyczy. Zwyczajowo argumenty X i Y w <code>aes</code> mogą być nienazwane, ale wszystkie inne już powinny. Mogę też zmienić kolor linii trendu z niebieskiego na czarny i zrobić ją trochę cieńszą. Jest to zmiana wyglądu, ale arbitralna, bez związku z danymi. Jest to więc atrybut i ustawiam go poza <code>aes</code>, wewnątrz funkcji, której ten atrybut dotyczy. Zobaczmy to.</p>
@@ -16135,7 +16354,11 @@ font-style: inherit;">"black"</span>)</span></code></pre></div>
 </span></code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -16207,7 +16430,11 @@ font-style: inherit;">"Cena brylantu w zależności od masy"</span></span>
 </span></code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Jeśli chcemy zmienić etykiety wartości z legendy, mamy dwie opcje – albo przekodujemy te etykiety bezpośrednio w bazie danych, chociażby zaprzęgając do pracy <code>questionr</code> (zob. 5.5.1.1.1), albo użyjemy jednej z funkcji <code>scale_*_discrete</code> i jej argumentu <code>labels</code>, gdzie zamiast gwiazdki piszemy nazwę naszej estetyki. Szlif naszych diamentów jest zmapowany do estetyki <code>colour</code>, więc użyjemy funkcji <code>scale_colour_discrete</code>.</p>
@@ -16295,7 +16522,11 @@ font-style: inherit;">"Idealny"</span>))</span></code></pre></div>
 </span></code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -16397,7 +16628,11 @@ font-style: inherit;">+</span></span>
 background-color: null;
 font-style: inherit;">theme_apa</span>()</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Drugi motyw nie jest szałowo popularny w społeczności, ale bardzo go lubię. Żeby zadziałał, musimy wcześniej zainstalować u siebie pakiety <code>grid</code>, <code>scales</code> i <code>ggthemes</code>. Spojrzenie w repozytorium pozwoli nam stwierdzić, że nie jest to pakiet, a po prostu zbiór plików. Wchodzimy więc w plik <code>ggplot_theme_Publication-2.R</code>, klikamy <code>raw</code> i kopiujemy link. Następnie użyjemy komendy <code>source</code>, która pozwala nam uruchamiać kod z innych plików .R w naszym skrypcie, jak podamy ich ścieżkę lub link do nich. Cały kod mógłby więc wyglądać tak:</p>
@@ -16498,7 +16733,11 @@ font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </span></code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -16611,7 +16850,11 @@ font-style: inherit;">facet_wrap</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">vars</span>(cut))</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Powyżej wykres, który stworzyłem w <code>equisse</code>. Warto jednak zwrócić uwagę na jego niedoskonałości, takie jak brak polskich tłumaczeń typów szlifu. Pewnym wyjaśnieniem może być dla nas nazwa francuskiego słowa <em>equisse</em> – szkic. Takie narzędzia jak <code>equisse</code> nie zwalniają nas całkowicie z umiejętności kodowania wykresów, ale pozwalają wygodnie tworzyć <em>szkice</em> naszego kodu. Ten szkic mogę pozmieniać, np. zamieniając <code>theme_bw</code> na <code>theme_Publication</code> i dodając polskie tłumaczenia. Nieco inaczej, niż wcześniej, bo <code>facet_wrap</code> nie jest estetyką, więc sposób dodawania do niego niestandardowych etykiet znalazłem w dokumentacji.</p>
@@ -16768,7 +17011,11 @@ font-style: inherit;">"Idealny"</span></span>
 <span id="cb70-26">        )</span>
 <span id="cb70-27">    )</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid" style="width:100.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/podstawy_R_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Wykresy to olbrzymi temat, który tutaj tylko liznęliśmy z wierzchu. Sądzę jednak, że ta wiedza wystarczy, żeby – z pomocą dokumentacji i Google – być w stanie powoli rozbudowywać swoje umiejętności z zakresu <code>ggplot2</code>. Zwłaszcza, że tworzenie dobrych wykresów do trudna sztuka, co skutecznie udowadnia plebiscyt na najgorszy wykres roku organizowany przez dr. Przemysława Biecka na <a href="http://smarterpoland.pl/index.php/2021/12/plebiscyt-na-najgorszy-wykres-roku-2021/">jego stronie</a>. W tym miejscu mogę polecić jego książkę „Wykresy od kuchni”, <a href="https://betaandbit.github.io/Wykresy/">dostępną za darmo</a> i okraszoną kodem R, który posłużył do wygenerowania jego wykresów.</p>
@@ -18729,10 +18976,10 @@ Tabela&nbsp;1: Średnie wyniki IQ są zawsze trochę inne, ale rzadko są daleki
 <p>Zaczynamy zauważać, że wyniki za każdym razem były trochę inne, ale zawsze lądowały w pobliżu 100. Innymi słowy średnie bliskie 100 pojawiały się często, a średnie dalekie od 100 pojawiały się rzadko. Nie mamy na przykład ani jednego wyniku mniejszego niż 95, a w zakresie 99-101 mieści się 47% wszystkich uzyskanych średnich. Możemy zrobić nawet wykres, jak często pojawiały się jakie średnie.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-iq-means-histogram" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
+<div id="fig-iq-means-histogram" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-iq-means-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://nieobliczalne.pl/posts/p-value_files/figure-html/fig-iq-means-histogram-1.png" class="img-fluid quarto-figure-center figure-img" width="672">
+<img src="https://nieobliczalne.pl/posts/p-value_files/figure-html/fig-iq-means-histogram-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-iq-means-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;1: Im wyższy słupek, tym średnia z tego zakresu pojawiała się częściej w naszym zbiorze 1000 średnich. Jak widać, średnie koncentrują się dookoła wyniku 100 IQ.
@@ -18838,10 +19085,10 @@ Tabela&nbsp;2: Możemy wiele razy powtórzyć nasz eksperyment, a różnice za k
 <p>Podstawą do różnicy była tu średnia inteligencja kobiet, więc ujemna różnica oznacza, że mężczyźni okazali się mniej inteligentni, zaś dodatnia, że bardziej. Tak jak w przypadku tabeli 1., niektóre różnice są większe, niektóre mniejsze, ale ich rozkład nie jest przypadkowy. Wrzućmy nasze różnice na wykres.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-iq-diffs-histogram" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
+<div id="fig-iq-diffs-histogram" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-iq-diffs-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://nieobliczalne.pl/posts/p-value_files/figure-html/fig-iq-diffs-histogram-1.png" class="img-fluid quarto-figure-center figure-img" width="672">
+<img src="https://nieobliczalne.pl/posts/p-value_files/figure-html/fig-iq-diffs-histogram-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-iq-diffs-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;2: Różnice w średnich bywały większe lub mniejsze, ale oscylowały wokół zera.
@@ -18913,10 +19160,10 @@ mean of x mean of y
 <p>Zobaczmy to na przykładzie. Pokazywałem wcześniej (na rysunku 1) wyniki symulacji, gdzie braliśmy 100 osób, liczyliśmy ich średnią inteligencję. Powtórzyliśmy to 1000 razy i patrzyliśmy, jak często pojawiają się dane średnie. Teraz zrobimy to samo, ale każda pojedyncza próbka będzie składała się z 1000 osób.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-iq-stderr-histogram" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
+<div id="fig-iq-stderr-histogram" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-iq-stderr-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://nieobliczalne.pl/posts/p-value_files/figure-html/fig-iq-stderr-histogram-1.png" class="img-fluid quarto-figure-center figure-img" width="672">
+<img src="https://nieobliczalne.pl/posts/p-value_files/figure-html/fig-iq-stderr-histogram-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-iq-stderr-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;3: Jak często pojawiały się dane średnie, gdy w jednym rzucie badaliśmy 100 osób (mała próba) albo 1000 osób (duża próba).
@@ -19095,10 +19342,10 @@ Tabela&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza.
 <p>Dla takich danych możemy policzyć całkiem sporo rzeczy. Łatwiej jest jednak zrozumieć dane, jak się je rzeczywiście widzi. Spróbujmy więc stworzyć wykres. Chcielibyśmy wiedzieć, jaki jest związek wielkości pająka z niepokojem, jaki wywołuje<sup>1</sup>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
+<div id="fig-scatter-anxiety" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
+<img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
 <figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza, tyle że na wykresie.
@@ -19110,10 +19357,10 @@ Rysunek&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza, tyle że na wykres
 <p>Widzimy więc wyraźnie, że im większy pająk, tym większy lęk wywołuje. Ale z tym wnioskiem wybiegliśmy sporo w przyszłość. Zazwyczaj w pierwszym odruchu robimy coś znacznie prostszego – liczymy średnią. Średni niepokój wyniósł tutaj dokładnie 10. Szybkie spojrzenie w tabelę pozwala nam stwierdzić, że żaden badany takiego wyniku niepokoju nie uzyskał i niezbyt nas to dziwi. W końcu to tylko średnia, żaden prawdziwy wynik nie musi mieć dokładnie średniej wartości. Jak w znienawidzonym przez statystyków kawale o średniej liczbie nóg na spacerze z psem. Rozumiemy więc, że średnia tylko w pewnym przybliżeniu oddaje cały zbiór danych, a konkretne wartości mogą się od średniej mniej lub bardziej odchylać. Te odchylenia możemy nanieść na wykres.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-mean" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
+<div id="fig-scatter-anxiety-mean" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-mean-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
+<img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-mean-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
 <figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;2: Średnia to rodzaj modelu, czyli narzędzia do przewidywania danych. Żaden z naszych pająków nie wywoływał średniego niepokoju, każdy punkt ma większe lub mniejsze odchylenie od średniej.
@@ -19196,10 +19443,10 @@ Tabela&nbsp;2: Każdy punkt ma swoje odchylenie od średniej, które możemy pol
 <p>Średnia gwarantuje mi, że pomylę się tak mało, jak to tylko możliwe, czyli że sumarycznie przerywane kreski na wykresie będą tak krótkie, jak się da. Średnia jest więc modelem niedoskonałym (bo ma błąd), ale lepszym niż jakakolwiek inna pojedyncza liczba (bo ma najmniejszy błąd).</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-15" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
+<div id="fig-scatter-anxiety-15" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-15-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
+<img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
 <figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;3: Modelem mogłaby być dowolna liczba, jeśli się uprzeć, ale żadna pojedyncza liczba nie będzie miała tak małych odchyleń, jak średnia.
@@ -19237,10 +19484,10 @@ Rysunek&nbsp;3: Modelem mogłaby być dowolna liczba, jeśli się uprzeć, ale �
 <p>Wiemy już bardzo dokładnie czym jest wariancja i jaki ma związek ze średnią. Ale nie oszukujmy się, jesteśmy w stanie wymyślić lepsze modele niż średnia. Od samego początku korci nas, żeby na wykresie niepokoju od wielkości pająka narysować piękną, skośną, rosnącą linię, która będzie zależała nie tylko od wartości niepokoju, ale również od wielkości pająka. Przecież od razu widać, że pasowałaby do naszych danych znacznie bardziej.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-lm" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
+<div id="fig-scatter-anxiety-lm" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-lm-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
+<img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-lm-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
 <figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;4: Linia rosnąca sugeruje nam, że im większy pająk, tym większy niepokój wywołuje. Na pierwszy rzut oka widać, że odchylenia są mniejsze, niż przy średniej.
@@ -19335,10 +19582,10 @@ Tabela&nbsp;3: Nowy model magicznie przewiduje niepokój z wielkości pająka (x
 <p>Możemy wyobrazić sobie, że pojawia nam się nowa osoba badana, która pająków nie boi się w ogóle, co pokazałem na wykresie. Jak to wpływa na nasz model?</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-lm2" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
+<div id="fig-scatter-anxiety-lm2" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-lm2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-lm2-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
+<img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-lm2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
 <figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-lm2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;5: Nowa osoba badana, która nie boi się pająków wcale, nie przystaje do naszego modelu. Może to sugerować, że nasz model jest adekwatny tylko dla pewnej grupy osób (czyli możemy stworzyć bardziej złożony model, który weźmie to pod uwagę) albo że odważny badany kłamie (i powinien zostać wykluczony z bazy).
@@ -19367,10 +19614,10 @@ Rysunek&nbsp;5: Nowa osoba badana, która nie boi się pająków wcale, nie przy
 <p>Można zauważyć ciekawą rzecz związaną z obliczaniem <img src="https://latex.codecogs.com/png.latex?SS_M">. Jak się okazuje, <img src="https://latex.codecogs.com/png.latex?SS_M"> da się policzyć bez liczenia <img src="https://latex.codecogs.com/png.latex?SS_T"> i <img src="https://latex.codecogs.com/png.latex?SS_R">. <img src="https://latex.codecogs.com/png.latex?SS_M"> uzyskujemy, jeśli zignorujemy obserwacje i zsumujemy kwadraty różnic między średnią a nowym modelem. Zaznaczyłem te różnice na poniższym wykresie przerywanymi liniami.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-ssm" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
+<div id="fig-scatter-anxiety-ssm" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-ssm-1.png" class="img-fluid quarto-figure-center figure-img" style="width:85.0%">
+<img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-ssm-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
 <figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;6: <img src="https://latex.codecogs.com/png.latex?SS_M"> można szybciej policzyć za pomocą odchyleń modelu od średniej, czyli kresek między średnią wartościami przewidywanymi przez nasz nowy model.
