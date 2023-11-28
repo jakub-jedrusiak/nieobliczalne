@@ -1229,7 +1229,7 @@ Tabela&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza.
 <p>Dla takich danych możemy policzyć całkiem sporo rzeczy. Łatwiej jest jednak zrozumieć dane, jak się je rzeczywiście widzi. Spróbujmy więc stworzyć wykres. Chcielibyśmy wiedzieć, jaki jest związek wielkości pająka z niepokojem, jaki wywołuje<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
@@ -1244,7 +1244,7 @@ Rysunek&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza, tyle że na wykres
 <p>Widzimy więc wyraźnie, że im większy pająk, tym większy lęk wywołuje. Ale z tym wnioskiem wybiegliśmy sporo w przyszłość. Zazwyczaj w pierwszym odruchu robimy coś znacznie prostszego – liczymy średnią. Średni niepokój wyniósł tutaj dokładnie 10. Szybkie spojrzenie w tabelę pozwala nam stwierdzić, że żaden badany takiego wyniku niepokoju nie uzyskał i niezbyt nas to dziwi. W końcu to tylko średnia, żaden prawdziwy wynik nie musi mieć dokładnie średniej wartości. Jak w znienawidzonym przez statystyków kawale o średniej liczbie nóg na spacerze z psem. Rozumiemy więc, że średnia tylko w pewnym przybliżeniu oddaje cały zbiór danych, a konkretne wartości mogą się od średniej mniej lub bardziej odchylać. Te odchylenia możemy nanieść na wykres.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-mean" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-mean" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-mean-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
@@ -1332,7 +1332,7 @@ Tabela&nbsp;2: Każdy punkt ma swoje odchylenie od średniej, które możemy pol
 <p>Średnia gwarantuje mi, że pomylę się tak mało, jak to tylko możliwe, czyli że sumarycznie przerywane kreski na wykresie będą tak krótkie, jak się da. Średnia jest więc modelem niedoskonałym (bo ma błąd), ale lepszym niż jakakolwiek inna pojedyncza liczba (bo ma najmniejszy błąd).</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-15" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-15" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
@@ -1373,13 +1373,51 @@ SS_T = \sum_{i=1}^N S_i^2 = \sum_{i=1}^N (x_i - \bar x)^2
 <li><p>Wykorzystaliśmy całkowitą sumę kwadratów do policzenia <strong>wariancji</strong> (średniej z kwadratów odchyleń) w taki sposób, że podzieliliśmy <span class="math inline">\(SS_T\)</span> przez <span class="math inline">\(N-1\)</span> (stopnie swobody). Nie mogliśmy podzielić <span class="math inline">\(SS_T\)</span> przez <span class="math inline">\(N\)</span>, bo to zaniżyłoby prawdziwą wariancję w populacji.</p></li>
 <li><p>Wyciągnęliśmy pierwiastek z wariacji, żeby wreszcie dostać średnie odchylenie, które nazywamy <strong>odchyleniem standardowym</strong>.</p></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zadanie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Załóżmy, że powtórzyliśmy nasze badanie na kolejnych 8 osobach i otrzymaliśmy następujące wyniki kwestionariusza lęku: 5, 8, 8, 8, 5, 6, 5, 3 Nie przejmuj się na razie wielkością pająków. Policz wariancję i odchylenie standardowe tych danych.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+\begin{aligned}
+\sigma^2 &amp;= \frac{\sum^N_{i = 1} (x_i - \bar x)^2}{N-1}  = \\
+&amp;= \frac{(5-6)^2 + (8-6)^2 + (8-6)^2 + (8-6)^2 + (5-6)^2 + (6-6)^2 + (5-6)^2 + (3-6)^2}{8-1} = \\
+&amp;= \frac{1 + 4 + 4 + 4 + 1 + 0 + 1 + 9}{7} = \\
+&amp;= \frac{24}{7} \approx 3,43
+\end{aligned}
+\]</span> <span class="math display">\[
+\sigma = \sqrt{3,43} \approx 1,85
+\]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="średnia-to-nie-wszystko" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="średnia-to-nie-wszystko"><span class="header-section-number">3</span> Średnia to nie wszystko</h2>
 <p>Wiemy już bardzo dokładnie czym jest wariancja i jaki ma związek ze średnią. Ale nie oszukujmy się, jesteśmy w stanie wymyślić lepsze modele niż średnia. Od samego początku korci nas, żeby na wykresie niepokoju od wielkości pająka narysować piękną, skośną, rosnącą linię, która będzie zależała nie tylko od wartości niepokoju, ale również od wielkości pająka. Przecież od razu widać, że pasowałaby do naszych danych znacznie bardziej.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-lm" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-lm" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-lm-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
@@ -1481,7 +1519,7 @@ R^2 = \frac{SS_M}{SS_T} = \frac{SS_T - SS_R}{SS_T}
 <p>Możemy wyobrazić sobie, że pojawia nam się nowa osoba badana, która pająków nie boi się w ogóle, co pokazałem na wykresie. Jak to wpływa na nasz model?</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-lm2" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-lm2" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-lm2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-lm2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
@@ -1515,7 +1553,7 @@ F = \frac{MS_M}{MS_R}
 <p>Można zauważyć ciekawą rzecz związaną z obliczaniem <span class="math inline">\(SS_M\)</span>. Jak się okazuje, <span class="math inline">\(SS_M\)</span> da się policzyć bez liczenia <span class="math inline">\(SS_T\)</span> i <span class="math inline">\(SS_R\)</span>. <span class="math inline">\(SS_M\)</span> uzyskujemy, jeśli zignorujemy obserwacje i zsumujemy kwadraty różnic między średnią a nowym modelem. Zaznaczyłem te różnice na poniższym wykresie przerywanymi liniami.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-ssm" class="quarto-figure quarto-figure-center anchored" width="85%" data-fig-align="center">
+<div id="fig-scatter-anxiety-ssm" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="procent-wariancji_files/figure-html/fig-scatter-anxiety-ssm-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
