@@ -7,6 +7,8 @@ Tutaj znajduje się lista tekstów z tego bloga, posegregowane tematycznie. Stat
 
 # Statystyka
 
+Problemy ze statystyką? Zleć mi analizy statystyczne. [Sprawdź tutaj!](https://www.statystycznie.org/)
+
 1.  [Wariancja](./posts/procent-wariancji.qmd) -- co to jest wariancja, jak się ją wyjaśnia i co to jest model.
 
 2.  [Testy statystyczne i wartość *p*](./posts/p-value.qmd) -- jak działają testy statystyczne, co to jest *p* i jak je interpretować.
