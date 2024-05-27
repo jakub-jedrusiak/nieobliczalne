@@ -17,6 +17,8 @@ website:
         text: Spis treści
       - href: newsletter.qmd
         text: Subskrybuj
+      - href: "https://www.statystycznie.org/"
+        text: Zlecenia na analizy
       - href: about.qmd
         text: O mnie
     right: 
