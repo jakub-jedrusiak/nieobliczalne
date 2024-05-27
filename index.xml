@@ -9,7 +9,7 @@
 <link>https://nieobliczalne.pl/</link>
 <atom:link href="https://nieobliczalne.pl/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.513</generator>
+<generator>quarto-1.5.39</generator>
 <lastBuildDate>Sat, 28 Oct 2023 22:00:00 GMT</lastBuildDate>
 <item>
   <title>Rozkłady próbkowania i rozkłady \(t\)</title>
@@ -722,7 +722,7 @@ Odpowiedź
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2">
 <div id="ref-borch-jacobsen2021" class="csl-entry">
 Borch-Jacobsen, M. (2021). <em>Freud’s patients: a book of lives</em>. London: Reaktion Books.
 </div>
@@ -732,7 +732,7 @@ Mori, K., Inatomi, S., Ouchi, K., Azumi, Y., &amp; Tuchida, T. (2009). Improving
 <div id="ref-wackerly2008" class="csl-entry">
 Wackerly, D. D., Mendenhall, W., &amp; Scheaffer, R. L. (2008). <em>Mathematical statistics with applications</em> (Seventh edition). Belmont: Thomson Brooks/Cole.
 </div>
-</div></section><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Sprawa jest nieco bardziej skomplikowana. Prawdą jest, że odpowiednio duża próbka <em>wystarczy</em>, żeby uznać, że rozkład próbkowania jest normalny, ale może on być normalny też dla mniejszych prób, jeśli rozkład <em>zmiennej</em> też jest normalny. I tak na przykład próbka 10 wyników w teście inteligencji też będzie miała normalny rozkład próbkowania, bo inteligencja rozkłada się normalnie. Ale w praktyce badań naukowych takie rozważania to bicie piany – nikt nie będzie robił badania ilościowego z próbką 10 osób. Jedyny moment, kiedy może się to przydać, to gdy niezbyt duża próbka zostanie jeszcze podzielona na podgrupy i okaże się np. że mężczyzn jest mniej niż 15 (w badaniach psychologicznych nierzadkie zjawisko!). Uzyskanie istotności statystycznej z taką próbką i tak będzie trudne, ale założenie normalności rozkładu próbkowania nie zostanie złamane.↩︎</p></li>
@@ -740,7 +740,7 @@ Wackerly, D. D., Mendenhall, W., &amp; Scheaffer, R. L. (2008). <em>Mathematical
 <li id="fn3"><p>Albo, w statystycznej nowomowie, <em>wyestymowane</em>.↩︎</p></li>
 <li id="fn4"><p>W rzeczywistości rozkłady <em>t</em> to cała grupa nieco różniących się od siebie w szczegółach rozkładów, z których najbardziej znany jest rozkład <em>t</em>-Studenta. <em>Student</em> to pseudonim Williama S. Gosseta, który opracował ten rozkład, żeby móc testować partie piwa Guinness. Gosset chciał, żeby różnice między piwem wzorcowym a każdą partią wypuszczaną na rynek <em>nie były</em> istotne statystycznie.↩︎</p></li>
 </ol>
-</aside></div> ]]></description>
+</section></div> ]]></description>
   <category>Statystyka</category>
   <guid>https://nieobliczalne.pl/posts/rozklady-probkowania.html</guid>
   <pubDate>Sat, 28 Oct 2023 22:00:00 GMT</pubDate>
@@ -828,12 +828,12 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-histogram-1" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-histogram-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-histogram-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/fig-histogram-1-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-histogram-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histogram-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;1: Histogram inteligencji w próbie 2000 osób. Wynik na osi Y to liczba osób, których inteligencja mieści się w danych widełkach. Szerokość jednego słupka to 20 punktów.
 </figcaption>
 </figure>
@@ -890,12 +890,12 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-histogram-1-dark" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-histogram-1-dark" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-histogram-1-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/fig-histogram-1-dark-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-histogram-1-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histogram-1-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;2: Histogram inteligencji w próbie 2000 osób. Wynik na osi Y to liczba osób, których inteligencja mieści się w danych widełkach. Szerokość jednego słupka to 20 punktów.
 </figcaption>
 </figure>
@@ -976,12 +976,12 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-histogram-2" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-histogram-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-histogram-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/fig-histogram-2-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-histogram-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histogram-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;3: Tym razem na osi Y umieściłem nie liczebność danej grupy, a jaki procent stanowi ona w całej próbie.
 </figcaption>
 </figure>
@@ -1056,12 +1056,12 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-histogram-2-dark" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-histogram-2-dark" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-histogram-2-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/fig-histogram-2-dark-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-histogram-2-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histogram-2-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;4: Tym razem na osi Y umieściłem nie liczebność danej grupy, a jaki procent stanowi ona w całej próbie.
 </figcaption>
 </figure>
@@ -1143,12 +1143,12 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-histogram-3" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-histogram-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-histogram-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/fig-histogram-3-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-histogram-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histogram-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;5: Zmniejszenie szerokości słupków (tutaj do 10) sprawia, że histogram jest dokładniejszy. Każdy słupek z osobna ma też mniejsze prawdopodobieństwo.
 </figcaption>
 </figure>
@@ -1223,12 +1223,12 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-histogram-3-dark" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-histogram-3-dark" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-histogram-3-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/fig-histogram-3-dark-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-histogram-3-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histogram-3-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;6: Zmniejszenie szerokości słupków (tutaj do 10) sprawia, że histogram jest dokładniejszy. Każdy słupek z osobna ma też mniejsze prawdopodobieństwo.
 </figcaption>
 </figure>
@@ -1343,12 +1343,12 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-histogram-4" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-histogram-4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-histogram-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/fig-histogram-4-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-histogram-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histogram-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;7: Po nałożeniu na siebie histogramów widać, jak się różnią.
 </figcaption>
 </figure>
@@ -1454,12 +1454,12 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-histogram-4-dark" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-histogram-4-dark" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-histogram-4-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/fig-histogram-4-dark-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-histogram-4-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histogram-4-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;8: Po nałożeniu na siebie histogramów widać, jak się różnią.
 </figcaption>
 </figure>
@@ -1543,12 +1543,12 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-histogram-5" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-histogram-5" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-histogram-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/fig-histogram-5-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-histogram-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histogram-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;9: Ten histogram ma już bardzo wąskie słupki, bo o szerokości zaledwie 1 punktu. Maksymalne prawdopodobieństwo wynosi już poniżej 3%.
 </figcaption>
 </figure>
@@ -1627,12 +1627,12 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-histogram-5-dark" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-histogram-5-dark" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-histogram-5-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/fig-histogram-5-dark-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-histogram-5-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histogram-5-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;10: Ten histogram ma już bardzo wąskie słupki, bo o szerokości zaledwie 1 punktu. Maksymalne prawdopodobieństwo wynosi już poniżej 3%.
 </figcaption>
 </figure>
@@ -1695,12 +1695,12 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-density-1" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-density-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-density-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/fig-density-1-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-density-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-density-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;11: Wykres gęstości prawdopodobieństwa na podstawie naszej próbki, który możemy rozumieć jako histogram ze słupkami tak cienkimi, że zlewają się w jedno pole.
 </figcaption>
 </figure>
@@ -1765,12 +1765,12 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-density-1-dark" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-density-1-dark" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-density-1-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/fig-density-1-dark-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-density-1-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-density-1-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;12: Wykres gęstości prawdopodobieństwa na podstawie naszej próbki, który możemy rozumieć jako histogram ze słupkami tak cienkimi, że zlewają się w jedno pole.
 </figcaption>
 </figure>
@@ -1854,12 +1854,12 @@ background-color: null;
 font-style: inherit;">theme_Publication</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-density-2" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-density-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-density-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/fig-density-2-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-density-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-density-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;13: Wykres gęstości prawdopodobieństwa z rozkładu normalnego ma kształt krzywej dzwonowej.
 </figcaption>
 </figure>
@@ -1942,12 +1942,12 @@ background-color: null;
 font-style: inherit;">theme_dark_blue</span>()</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-density-2-dark" class="quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-density-2-dark" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-density-2-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa_files/figure-html/fig-density-2-dark-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-density-2-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-density-2-dark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;14: Wykres gęstości prawdopodobieństwa z rozkładu normalnego ma kształt krzywej dzwonowej.
 </figcaption>
 </figure>
@@ -2242,14 +2242,14 @@ font-style: inherit;">row.names =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 </details>
-<div id="tbl-likelihood" class="cell anchored">
+<div id="tbl-likelihood" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-likelihood-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-likelihood-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Tabela&nbsp;1: Wartości z osi Y dla IQ między 95 a 105 co 0.25.
 </figcaption>
 <div aria-describedby="tbl-likelihood-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="cell table table-sm table-striped small" data-quarto-postprocess="true">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -5294,14 +5294,14 @@ font-style: inherit;">bold =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 </details>
-<div id="tbl-tablica-rozkladu-normalnego" class="cell anchored">
+<div id="tbl-tablica-rozkladu-normalnego" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-tablica-rozkladu-normalnego-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tablica-rozkladu-normalnego-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Tabela&nbsp;2: Przykładowa tablica dystrybuanty rozkładu normalnego z zaznaczonymi wartościami dla <em>Z</em> = 1,67 i <em>Z</em> = 1,33.
 </figcaption>
 <div aria-describedby="tbl-tablica-rozkladu-normalnego-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="cell table table-sm table-striped small" data-quarto-postprocess="true">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -6427,7 +6427,7 @@ font-style: inherit;">15</span>)</span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Zakładając, że prostokąty mają dotykać wykresu środkiem górnej krawędzi, skrajne prostokąty będą wystawały poza krzywą 5 punktów w prawo i 5 punktów w lewo, stąd dodatkowe 10 na przedziale. Inne metody szacowania obejmują prostokąty dotykające wykresu rogiem (prawym lub lewym) albo nawet zastąpienie prostokątów trapezami.↩︎</p></li>
@@ -6435,7 +6435,7 @@ font-style: inherit;">15</span>)</span></code></pre></div>
 <li id="fn3"><p>Ja wykorzystam tutaj R, ale możesz skorzystać z podlinkowanego <a href="https://www.danielsoper.com/statcalc/calculator.aspx?id=53">kalkulatora</a>. Przy tej okazji polecam swoje <a href="../posts/podstawy_R.html">wprowadzenie do R</a> oraz rozważenie kupna kalkulatora naukowego z opcją liczenia dystrybuanty. Ja używam Casio fx-991CEX i sobie chwalę. Teraz zastępuje go druga edycja Casio fx-991ES PLUS.↩︎</p></li>
 <li id="fn4"><p>Nie biorę żadnej odpowiedzialności za to stwierdzenie.↩︎</p></li>
 </ol>
-</aside></div> ]]></description>
+</section></div> ]]></description>
   <category>Statystyka</category>
   <category>Matematyka</category>
   <guid>https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa.html</guid>
@@ -6641,9 +6641,11 @@ Maszyna licząca pole kwadratu
 </div>
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> nazwa_funkcji(to_co_wrzucamy):</span>
 <span id="cb1-2">  <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> działanie funkcji</span></code></pre></div>
 </div>
 </div>
@@ -6657,6 +6659,7 @@ font-style: inherit;">return</span> działanie funkcji</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(to_co_wrzucamy) {</span>
 <span id="cb2-2">    działanie funkcji</span>
 <span id="cb2-3">}</span></code></pre></div>
@@ -6670,9 +6673,11 @@ font-style: inherit;">function</span>(to_co_wrzucamy) {</span>
 </div>
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> m(b):</span>
 <span id="cb3-2">  <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> b <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
@@ -6689,6 +6694,7 @@ font-style: inherit;">3</span></span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(b) {</span>
 <span id="cb4-2">  b <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -6745,9 +6751,11 @@ Odpowiedź
 </div>
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> c(l):</span>
 <span id="cb5-2">  <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> l <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
@@ -6764,6 +6772,7 @@ font-style: inherit;">4</span></span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(l) { <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># w R jest już funkcja c(), więc trzeba zmienić nazwę</span></span>
@@ -6785,9 +6794,11 @@ font-style: inherit;">4</span></span>
 </div>
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> t(l):</span>
 <span id="cb7-2">  <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span> <span class="op" style="color: #5E5E5E;
@@ -6804,6 +6815,7 @@ font-style: inherit;">*</span> l</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(l) { <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># w R jest już funkcja t(), więc trzeba zmienić nazwę</span></span>
@@ -6825,9 +6837,11 @@ font-style: inherit;">*</span> l</span>
 </div>
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> d(l):</span>
 <span id="cb9-2">  <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
@@ -6848,6 +6862,7 @@ font-style: inherit;">1</span></span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(l) {</span>
 <span id="cb10-2">  <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -6871,9 +6886,11 @@ font-style: inherit;">1</span></span>
 </div>
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> j(l):</span>
 <span id="cb11-2">  <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> (l <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
@@ -6890,9 +6907,11 @@ font-style: inherit;"># lub po uproszczeniu</span></span>
 <span id="cb11-5"></span>
 <span id="cb11-6"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> j(l):</span>
 <span id="cb11-7">  <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
@@ -6913,6 +6932,7 @@ font-style: inherit;">2</span></span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(l) {</span>
 <span id="cb12-2">  (l <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -6933,6 +6953,7 @@ font-style: inherit;"># lub po uproszczeniu</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(l) {</span>
 <span id="cb12-8">  <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -6956,9 +6977,11 @@ font-style: inherit;">2</span></span>
 </div>
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> s(l):</span>
 <span id="cb13-2">  <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> l <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
@@ -6975,6 +6998,7 @@ font-style: inherit;">7</span></span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(l) {</span>
 <span id="cb14-2">  l <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -6994,9 +7018,11 @@ font-style: inherit;">7</span></span>
 </div>
 <div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> p(l):</span>
 <span id="cb15-2">  <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5</span></span></code></pre></div>
@@ -7011,6 +7037,7 @@ font-style: inherit;">5</span></span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(l) {</span>
 <span id="cb16-2">  <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -7329,7 +7356,7 @@ Odpowiedź
 </section>
 
 
-<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>W gimnazjum wciskali nam kit, że będziemy się uczyć programowania w HTML. Nie da się <em>programować</em>&nbsp;w HTML, bo HTML nie ma funkcji, pętli, zmiennych ani innych rzeczy, które pozwalają cokolwiek rzeczywiście zaprogramować. Jeśli chcemy programować cokolwiek na stronach internetowych, użyjemy JavaScript, gdzie wszystkie te rzeczy są.↩︎</p></li>
@@ -7337,7 +7364,7 @@ Odpowiedź
 <li id="fn3"><p>Spróbuj to samo wyrazić językiem algebraicznym.↩︎</p></li>
 <li id="fn4"><p>Używam terminu „dodawanie”, bo odejmowanie to dodawanie liczb ujemnych.↩︎</p></li>
 </ol>
-</aside></div> ]]></description>
+</section></div> ]]></description>
   <category>Statystyka</category>
   <category>Matematyka</category>
   <guid>https://nieobliczalne.pl/posts/funkcje.html</guid>
@@ -7440,7 +7467,7 @@ font-style: inherit;">"University of Wrocław"</span></span>
 </div>
 </div>
 <p>Po pierwsze znacznik <code>Author</code> zmieniamy na <code>Authors@R</code> i to niezależnie od liczby autorów. Jeśli autor jest jeden, podajemy go za pomocą funkcji <code>person()</code>. Podstawowe informacje to imię w pierwszym argumencie<sup>3</sup>, nazwisko w drugim. Tych argumentów nie musimy nazywać. Dalej mamy inne informacje, które już nazwać warto. <code>email</code> jaki jest, każdy widzi. <code>role</code> to opis funkcji osoby w tworzeniu pakietu. Używamy tutaj kodów opisanych w dokumentacji funkcji <code>person()</code>. Kilka podstawowych kodów ról wymieniam w tabeli poniżej. Jak widać w przykładzie, każda osoba może mieć więcej niż jedną rolę. Kolejnym polem jest <code>comment</code>, który <em>zawsze</em> podajemy w postaci nazwanego wektora. Podstawowymi informacjami, które możemy tutaj umieścić, są numer ORCiD oraz afiliacja.</p>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 16%">
 <col style="width: 16%">
@@ -7861,6 +7888,7 @@ font-style: inherit;">use_github_action_check_standard</span>()</span></code></p
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, group, ...) {</span>
 <span id="cb10-2">  kolumny_do_policzenia <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -7965,6 +7993,7 @@ font-style: inherit;">is.na</span>(x))</span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, group, ...) {</span>
 <span id="cb11-2">  kolumny_do_policzenia <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -8342,9 +8371,11 @@ font-style: inherit;"># coś, co nie jest ramką danych</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df) {</span>
 <span id="cb15-4">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
@@ -8559,6 +8590,7 @@ font-style: inherit;">"Złamano {.strong {sum(365, 248)}} postanowień. Ostrzega
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, id_column) {</span>
 <span id="cb29-2">    id_column <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -8568,6 +8600,7 @@ font-style: inherit;">enquo</span>(id_column)</span>
 <span id="cb29-3"></span>
 <span id="cb29-4">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">!</span>rlang<span class="sc" style="color: #5E5E5E;
@@ -8663,12 +8696,14 @@ font-style: inherit;"># Tutaj komendy składające się&nbsp;na test</span></spa
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, group, ...) {</span>
 <span id="cb32-2">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># check if df is a dataframe</span></span>
 <span id="cb32-3">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
@@ -9181,6 +9216,7 @@ font-style: inherit;">"test-coverage"</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>() {</span>
 <span id="cb37-2">    app_dir <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -9195,6 +9231,7 @@ background-color: null;
 font-style: inherit;">"mtscr"</span>)</span>
 <span id="cb37-3">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> (app_dir <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="st" style="color: #20794D;
@@ -9624,7 +9661,7 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Funkcje <code>install_*()</code> zapewnia też mniejszy pakiet <code>remotes</code>, który jest praktycznie wycinkiem z <code>devtools</code>. Jeśli mamy <code>devtools</code>, nie potrzebujemy <code>remotes</code>.↩︎</p></li>
@@ -9634,7 +9671,7 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 <li id="fn5"><p>Jeśli nie wiesz, czym jest GitHub i po co go używać, przeczytaj <a href="./posts/git.qmd">ten wpis</a>.↩︎</p></li>
 <li id="fn6"><p>Możesz też ręcznie wytworzyć odpowiedni plik .R w folderze <code>R</code>.↩︎</p></li>
 </ol>
-</aside></div> ]]></description>
+</section></div> ]]></description>
   <category>R</category>
   <guid>https://nieobliczalne.pl/posts/pakiety-w-R.html</guid>
   <pubDate>Thu, 25 May 2023 22:00:00 GMT</pubDate>
@@ -9734,18 +9771,10 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 </blockquote>
 <p>Odpowiednie wyrażenie regularne mogłoby brzmieć <code>^\d\.</code>. Po kropce jest tam spacja, którą silnik uporczywie mi usuwa, dlatego na stronie jej nie widać.</p>
 <div class="light-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/WVPWt4/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/anchors.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/WVPWt4/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/anchors.png" class="img-fluid"></a></p>
 </div>
 <div class="dark-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/WVPWt4/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/anchors_dark.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/WVPWt4/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/anchors_dark.png" class="img-fluid"></a></p>
 </div>
 <p>Zwróćmy uwagę na kilka rzeczy. Po pierwsze, to wyrażenie nie dopasowało liczby „1.” w treści 3. punktu. Wynika to z tego, że dodaliśmy <code>^</code> na początku wyrażenia. Liczby, które nie są na początku linijki nie są przez to dopasowywane. Po drugie, musiałem przed kropką dodać ukośnik. Wynika to z faktu, że kropka to znak specjalny (oznacza dowolny znak) i jeśli chcemy wyszukać dosłowną kropkę, musimy wykorzystać lewy ukośnik.</p>
 </section>
@@ -9759,21 +9788,13 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 <p>[A-Z]\w+</p>
 </blockquote>
 <div class="light-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/uzD28P/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/repeat.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/uzD28P/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/repeat.png" class="img-fluid"></a></p>
 </div>
 <div class="dark-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/uzD28P/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/repeat_dark.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/uzD28P/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/repeat_dark.png" class="img-fluid"></a></p>
 </div>
 <p>Znak <code>+</code> oznacza tutaj „jeden lub więcej”, a więc <code>\w+</code> oznacza „jedna litera lub więcej”. Operatorów podobnych do <code>+</code> jest więcej i możemy je zobaczyć w tabelce.</p>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Operator</th>
@@ -9815,67 +9836,35 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 <p>\(.+\)</p>
 </blockquote>
 <div class="light-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/kDdEiE/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_1.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/kDdEiE/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_1.png" class="img-fluid"></a></p>
 </div>
 <div class="dark-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/kDdEiE/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_1_dark.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/kDdEiE/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_1_dark.png" class="img-fluid"></a></p>
 </div>
 <p>Dziwne. Czemu takie długie wyszło? W naszym wyrażeniu regularnym wykorzystałem nawiasy (z lewym ukośnikiem, bo nawiasy to znak specjalny) oraz sekwencję <code>.+</code> oznaczającą „jeden dowolny znak lub więcej”. Domyślnie jednak <code>+</code> jest chciwy (<em>greedy</em>) i wyszuka <strong>najdłuższe możliwe sekwencje</strong>. Oznacza to, że zaznaczył wszystko między pierwszym nawiasem otwierającym i ostatnim nawiasem zamykającym. W końcu nawiasy zamykające łapią się do kategorii dowolnych znaków. Żeby temu przeciwdziałać, zamiast <code>.+</code> możemy użyć <code>.+?</code>.</p>
 <div class="light-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/kDdEiE/2"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_2.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/kDdEiE/2"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_2.png" class="img-fluid"></a></p>
 </div>
 <div class="dark-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/kDdEiE/2"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_2_dark.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/kDdEiE/2"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_2_dark.png" class="img-fluid"></a></p>
 </div>
 <p>Jest już lepiej! Problem jednak powodują w tym wypadku puste nawiasy. Nasze wyrażenie regularne wymaga, by między nawiasami coś było. Takie właśnie sekwencje znajduje w przypadku zapisu <code>()</code>. Nawias zamykający jest po prosu kolejnym znakiem, czyli łapie się jako <code>.</code>, a dopasowanie kończy dopiero kolejny nawias zamykający.</p>
 <p>Rozwiązania widzę tutaj dwa. Po pierwsze można wykorzystać <em>lookarounds</em>, żeby pustych nawiasów nie dopasowywać. Pozwolą one też dopasować tekst <em>wewnątrz</em> nawiasów bez samych nawiasów. Nie chcę jednak wchodzić tak głęboko, dlatego zainteresowanych odsyłam <a href="https://www.rexegg.com/regex-lookarounds.html">tutaj</a>. Po drugie możemy umożliwić dopasowywanie też pustych nawiasów zastępując operator „jeden lub więcej” (<code>+</code>) operatorem „zero lub więcej” (<code>*</code>). Pamiętajmy jednak o chciwości tych operatorów i dodajmy jeszcze <code>?</code>.</p>
 <div class="light-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/kDdEiE/3"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_3.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/kDdEiE/3"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_3.png" class="img-fluid"></a></p>
 </div>
 <div class="dark-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/kDdEiE/3"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_3_dark.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/kDdEiE/3"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/greedy_3_dark.png" class="img-fluid"></a></p>
 </div>
 </section>
 <section id="grupy-i-zastępowanie" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Grupy i zastępowanie</h1>
 <p>Zazwyczaj po to wyszukujemy tekst, żeby zastąpić go innym. Jak to jednak zrobić, jeśli mamy takie fragmenty tekstu jak <code>.+</code>? Nie mogę wpisać w pole z tekstem do podstawienia <code>.+</code>, bo dostanę dosłowną kropkę i plus. Program musi dokładnie wiedzieć, co w dane miejsce wstawić. Załóżmy, że w poprzednim przykładzie chcemy zamienić nawiasy okrągłe na kwadratowe. Jak to zrobić? Za pomocą grup.</p>
 <div class="light-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/q6PCek/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/groups_1.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/q6PCek/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/groups_1.png" class="img-fluid"></a></p>
 </div>
 <div class="dark-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/q6PCek/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/groups_1_dark.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/q6PCek/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/groups_1_dark.png" class="img-fluid"></a></p>
 </div>
 <p>Jak to zrobiłem? Najpierw w wyszukiwaniu zmieniłem sekwencję <code>\(.*?\)</code> w <code>\((.*?)\)</code>. Innymi słowy otoczyłem <code>.*?</code> dodatkową parą nawiasów. Na screenie zaznaczone są na zielono. Znaki w nawiasach tworzą grupy. Grupy po to są nam potrzebne, żebyśmy mogli je potem wykorzystywać do zastępowania tekstu<sup>2</sup>. Zwróćmy uwagę na tekst w drugim polu, gdzie wpisałem <code>[$1]</code>. Oznacza to „tekst z pierwszej grupy (<code>$1</code>) w nawiasach kwadratowych”. Czyli bierzemy wnętrze naszego pierwotnego nawiasu (grupę 1.) i otaczamy je nawiasami kwadratowymi. Nawiasy okrągłe nie są częścią grupy, więc nie pojawiają się w tekście po zmianie.</p>
 <p>Odwołania do grup mogą wyglądać różnie w różnych wersjach RegEx. W tym wypadku użyłem <code>$1</code>, ale możemy się też spotkać z innymi oznaczeniami, przede wszystkim <code>\1</code>. Zależy to od programu.</p>
@@ -9895,18 +9884,10 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 <p>](./$1.qmd)</p>
 </blockquote>
 <div class="light-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/main_problem.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/main_problem.png" class="img-fluid"></a></p>
 </div>
 <div class="dark-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/main_problem_dark.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/main_problem_dark.png" class="img-fluid"></a></p>
 </div>
 <p>Zaczynam zamykającym nawiasem kwadratowym, bo hiperlinki w markdown są formatowane jako <code>[tekst](link)</code>. Dalej otwieram dosłowny nawias okrągły i w nim dowolny tekst. Mogłem napisać dokładny link, bo to o ten i żaden inny tekst mi chodzi, ale nie chciało mi się&nbsp;pisać. Zabezpieczyłem się przed złymi dopasowaniami słowem „posts”. Po nim znajduje się prawy ukośnik i dowolne znaki, czyli wewnętrzna nazwa danego wpisu. <code>posts/.+</code> jest też grupą, dlatego jest w nawiasach. Wyrażenie zakończone jest rozszerzeniem <code>.html</code> i nawiasem zamykającym. Całość zastępuję swoją grupą <code>posts/nazwa_wpisu</code> poprzedzoną tekstem <code>./</code><sup>3</sup> i zakończoną rozszerzeniem <code>.qmd</code>. Całość otaczam odpowiednimi nawiasami.</p>
 <p>Czy mogłem zrobić to lepiej? Oczywiście! Tylko po co? Te sekwencje muszą być <strong>użytkowe</strong>. Nie musimy się starać, żeby były odporne na błędy i działały w każdym wypadku. To są rzeczy, które pisze się szybko, wykorzystuje i kasuje. Nie muszą być idealne, <strong>muszą być napisane sprawnie i działać tu i teraz, w tym konkretnym przypadku</strong>. W końcu po to uczymy się wyrażeń regularnych, żeby oszczędzić sobie pracy, a nie jej przysporzyć. Jeśli robimy coś często i chcemy to zachować na przyszłość, to może wtedy warto się bawić w szlifowanie. Podobnie jeśli wyrażenie regularne jest częścią skryptu. Mimo wszystko w większości przypadków piszemy wyrażenia regularne <strong>na jeden raz</strong> i warto o tym pamiętać.</p>
@@ -9942,14 +9923,14 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>W rzeczywistości RegEx ma do tego specjalne operatory, ale nie chcę wchodzić tak głęboko.↩︎</p></li>
 <li id="fn2"><p>Ewentualnie możemy ich użyć do stosowania operatorów do całych grup, np. <code>(foo)+</code> dopasuje jedno całe słowo „foo” lub ich więcej. Bez nawiasu <code>+</code> odnosiłby się tylko do litery „o”.↩︎</p></li>
 <li id="fn3"><p>Warto zauważyć, że w polu, w którym wpisujemy tekst, którym zastępujemy nasze dopasowania, nie musimy już <em>escape’ować</em> znaków specjalnych. Tam już wszystkie znaki są dosłowne.↩︎</p></li>
 </ol>
-</aside></div> ]]></description>
+</section></div> ]]></description>
   <category>Narzędzia</category>
   <guid>https://nieobliczalne.pl/posts/regex.html</guid>
   <pubDate>Fri, 19 May 2023 22:00:00 GMT</pubDate>
@@ -10091,12 +10072,12 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Jestem przekonany, że to kwestia czasu, patrząc na to, jak już teraz działa GitHub Copilot i jak zapowiada się GitHub Copilot X. Być może, gdy to czytasz, konflikty potrafią się już rozwiązywać same.↩︎</p></li>
 </ol>
-</aside></div> ]]></description>
+</section></div> ]]></description>
   <category>Narzędzia</category>
   <category>R</category>
   <guid>https://nieobliczalne.pl/posts/git.html</guid>
@@ -10289,8 +10270,10 @@ Jak to jest być SKRYBĄ?</code></pre>
 <div id="937700db" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
@@ -10329,8 +10312,10 @@ MMPI_10</code></pre>
 <div id="3b35b44b" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
@@ -10370,6 +10355,7 @@ background-color: null;
 font-style: inherit;">1</span></span>
 <span id="cb16-2"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">while</span> i <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;=</span> <span class="dv" style="color: #AD0000;
@@ -10468,8 +10454,10 @@ font-style: inherit;">"At times I think I am no good at all."</span></span>
 <div id="3bda2639" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> item <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> RSES:</span>
 <span id="cb20-2">    <span class="bu" style="color: null;
 background-color: null;
@@ -10602,8 +10590,10 @@ q: At times I think I am no good at all.
 <div id="84bf3d2e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> item <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">enumerate</span>(RSES):</span>
@@ -10795,8 +10785,10 @@ font-style: inherit;">11</span>)</span>
 <span id="cb28-4"></span>
 <span id="cb28-5"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
@@ -10923,8 +10915,10 @@ font-style: inherit;">11</span>)</span>
 <span id="cb30-4"></span>
 <span id="cb30-5"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
@@ -10982,8 +10976,10 @@ font-style: inherit;">import</span> datetime</span>
 <span id="cb31-2"></span>
 <span id="cb31-3"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
@@ -11060,7 +11056,7 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Ciekawostką może być tutaj wczesny kalendarz hebrajski. Kalendarz hebrajski jest księżycowy, ma 12 miesięcy, ale w latach przestępnych dodawany jest 13. miesiąc – adar szeni. Takich lat przestępnych musi przypaść 7 w ciągu 19 lat. Obecnie jest to skodyfikowane (zob. cykl Metona), ale początkowo nie wiadomo było, które konkretnie lata w cyklu mają być przestępne i było to <em>ad hoc</em> ustalane przez społeczność żydowską. Tym samym lata przestępne pojawiały się znienacka i data wcale nie zmieniała się w przewidywalny sposób. Miało to poważne konsekwencje dla daty Wielkanocy, bo zanim został ustalony stabilny wzór (Wielkanocy, nie lat przestępnych w kalendarzu żydowskim, to nadeszło później), nigdy nie wiadomo było, kiedy wypadnie 14 nisan, czyli rocznica śmierci Jezusa według kalendarza żydowskiego.↩︎</p></li>
@@ -11069,7 +11065,7 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 <li id="fn4"><p>Sam korzystam z linuksa (<em>I use arch, BTW</em>), ale nie łudzę się – większość osób, które to czytają, to windowsiarze. W linuksie operator <code>&gt;</code> działa identycznie.↩︎</p></li>
 <li id="fn5"><p>Sprawdziłem, taki skrypt generuje u mnie 30 lat rozpiski w 47 milisekund (!), a gotowy plik ma 310 kB.↩︎</p></li>
 </ol>
-</aside></div> ]]></description>
+</section></div> ]]></description>
   <category>Python</category>
   <category>Nauka</category>
   <category>Narzędzia</category>
@@ -11094,6 +11090,7 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, group, ...) {</span>
 <span id="cb1-2">  df <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -11423,6 +11420,7 @@ font-style: inherit;">sum</span>(x)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(liczba, niecny_fortel) {</span>
 <span id="cb7-2">    <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -11433,6 +11431,7 @@ background-color: null;
 font-style: inherit;">3</span>)</span>
 <span id="cb7-3">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> (liczba <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
@@ -11490,6 +11489,7 @@ font-style: inherit;">12</span>, to_nie_istnieje)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, group, ...) {</span>
 <span id="cb10-2">  df <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -11612,6 +11612,7 @@ font-style: inherit;">x =</span> liczba)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, group, ...) {</span>
 <span id="cb13-2">  df <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -11752,6 +11753,7 @@ font-style: inherit;">5</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(argument) {</span>
 <span id="cb16-4">    x <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -11806,6 +11808,7 @@ font-style: inherit;">5</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(liczba) {</span>
 <span id="cb18-6">    x <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -11842,6 +11845,7 @@ font-style: inherit;">10</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, col) {</span>
 <span id="cb19-2">    kolumna <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -11879,6 +11883,7 @@ font-style: inherit;">head</span>()</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, col) {</span>
 <span id="cb20-2">    kolumna <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -11922,6 +11927,7 @@ font-style: inherit;">head</span>()</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(x) {</span>
 <span id="cb21-2">    x_quo <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -11980,6 +11986,7 @@ font-style: inherit;">quo_vs_enquo</span>(argument)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, col) {</span>
 <span id="cb22-2">    kolumna <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -12023,6 +12030,7 @@ font-style: inherit;">head</span>()</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, col) {</span>
 <span id="cb23-2">    df <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -12062,6 +12070,7 @@ font-style: inherit;">head</span>()</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, group, ...) {</span>
 <span id="cb24-2">  kolumny_do_policzenia <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -12170,6 +12179,7 @@ font-style: inherit;">opisowe</span>(iris, Species, Sepal.Width, Sepal.Length)</
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, col, ...) {</span>
 <span id="cb25-2">    grupy <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -12219,6 +12229,7 @@ font-style: inherit;">srednia_z_kolumny</span>(iris, Sepal.Length, Species)</spa
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, X, Y) {</span>
 <span id="cb26-2">    X <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -12379,6 +12390,7 @@ font-style: inherit;">wykresik</span>(USArrests, UrbanPop, Murder)</span></code>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df, id_column, item_column, score_column) {</span>
 <span id="cb28-2">  id_column <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -12484,6 +12496,7 @@ background-color: null;
 font-style: inherit;">list</span>()</span>
 <span id="cb30-2"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> (<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"all_max"</span> <span class="sc" style="color: #5E5E5E;
@@ -12504,6 +12517,7 @@ font-style: inherit;">"max(.all_max)"</span>)</span>
 <span id="cb30-5"></span>
 <span id="cb30-6"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> (<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"all_top2"</span> <span class="sc" style="color: #5E5E5E;
@@ -12566,7 +12580,7 @@ font-style: inherit;">all_of</span>(groups)</span>
 </section>
 
 
-<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Czasami będziemy musieli wykorzystać <code>lst()</code>. Będą to przypadki, w których np. najpierw policzymy liczbę wszystkich przypadków w bazie (<code>N = n</code>), potem liczbę braków danych (<code>`NA` = is.na</code>), a na koniec chcemy policzyć procent brakujących (<code>p_NA = `NA` / N</code>). Chcemy więc wykorzystać nowo stworzone kolumny do stworzenia kolejnej. Zwykłe <code>list()</code> tego nie uciągnie i musimy użyć <code>lst()</code> z pakietu <code>tibble</code>.↩︎</p></li>
@@ -12585,7 +12599,7 @@ font-style: inherit;">5</span>,])</span></code></pre></div>
 <li id="fn6"><p>…<em>my baby shot me down</em>.↩︎</p></li>
 <li id="fn7"><p>CRAN nie lubi, jak używa się obiektów, które nie mają globalnych definicji, dlatego krzyczał na mnie, że nie ma czegoś takiego jak <code>.all_top2</code>. Ja wiedziałem, że jest w bazie danych, kod działał, bo to potem trafiało do <code>summarise()</code>, ale CRAN ma swoje zasady. Dlatego podałem to jako string, który jest przerabiany na wyrażenie (<em>parsing</em>).↩︎</p></li>
 </ol>
-</aside></div> ]]></description>
+</section></div> ]]></description>
   <guid>https://nieobliczalne.pl/posts/metaprogramowanie.html</guid>
   <pubDate>Thu, 04 May 2023 22:00:00 GMT</pubDate>
   <media:content url="https://nieobliczalne.pl/posts/headers/metaprogramowanie.webp" medium="image" type="image/webp"/>
@@ -12651,7 +12665,7 @@ font-style: inherit;">5</span>,])</span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Zapytany o przepisywanie AI Rabbi odpowiada:</p>
@@ -12663,7 +12677,7 @@ font-style: inherit;">5</span>,])</span></code></pre></div>
 <li id="fn2"><p>Gdy to piszę, co jakiś czas strona proponuje 40% zniżki, co zmniejsza cenę za pierwszy rok do ok. 230 zł.↩︎</p></li>
 <li id="fn3"><p>Dobry kurs specyfiki pisania w nauce od dr Kristin Sainani z Uniwersytetu Stanforda znajdziemy <a href="https://www.coursera.org/learn/sciwrite?">tutaj</a>.↩︎</p></li>
 </ol>
-</aside></div> ]]></description>
+</section></div> ]]></description>
   <category>Nauka</category>
   <guid>https://nieobliczalne.pl/posts/ai-research.html</guid>
   <pubDate>Fri, 28 Apr 2023 22:00:00 GMT</pubDate>
@@ -13082,6 +13096,7 @@ font-style: inherit;">"unique_quiet"</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(df) {</span>
 <span id="cb8-2">    metryczka <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -13338,8 +13353,10 @@ font-style: inherit;"># pusta lista na przyszłość</span></span>
 <span id="cb11-3"></span>
 <span id="cb11-4"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
@@ -13386,8 +13403,10 @@ font-style: inherit;"># pusta lista na przyszłość</span></span>
 <span id="cb12-3"></span>
 <span id="cb12-4"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> bazy_lista) {</span>
 <span id="cb12-5">    bazy <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -13436,6 +13455,7 @@ font-style: inherit;">15</span>)</span>
 <span id="cb13-2"></span>
 <span id="cb13-3"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">while</span> (<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">mean</span>(liczby) <span class="sc" style="color: #5E5E5E;
@@ -13484,11 +13504,11 @@ font-style: inherit;">round</span>()</span>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2">
 <div id="ref-kowal_predictors_2022" class="csl-entry">
 Kowal, M., Sorokowski, P., Pisanski, K., Valentova, J. V., Varella, M. A. C., Frederick, D. A., … Zumárraga-Espinosa, M. (2022). Predictors of enhancing human physical attractiveness: <span>Data</span> from 93 countries. <em>Evolution and Human Behavior</em>, <em>43</em>(6), 455–474. <a href="https://doi.org/10.1016/j.evolhumbehav.2022.08.003">https://doi.org/10.1016/j.evolhumbehav.2022.08.003</a>
 </div>
-</div></section><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Którą serdecznie pozdrawiam.↩︎</p></li>
@@ -13498,7 +13518,7 @@ Kowal, M., Sorokowski, P., Pisanski, K., Valentova, J. V., Varella, M. A. C., Fr
 <li id="fn5"><p>Funkcja niżej mogłaby być zapisana równie dobrze jako <code>lapply(bazy_lista, read_csv, show_col_types = FALSE, name_repair = "unique_quiet")</code>, ale <code>map</code>, a głównie jej pochodne, mają bardziej przejrzystą i konsekwentną konwencję nazywania.↩︎</p></li>
 <li id="fn6"><p>Od jakiegoś czasu tidyverse wycofuje się z tej konwencji dodawania argumentów. Jeśli mamy jakieś dodatkowe argumenty do dodania, powinniśmy zrobić to w postaci <a href="podstawy_R#sec-lambda.qmd">funkcji anonimowej</a>. Tym sposobem powinniśmy byli zapisać raczej <code>map(bazy_lista, \(x) {read_csv(x, show_col_types = FALSE, name_repair = "unique_quiet")})</code>.↩︎</p></li>
 </ol>
-</aside></div> ]]></description>
+</section></div> ]]></description>
   <category>R</category>
   <guid>https://nieobliczalne.pl/posts/automatyzacja.html</guid>
   <pubDate>Tue, 07 Mar 2023 23:00:00 GMT</pubDate>
@@ -13532,12 +13552,12 @@ Kowal, M., Sorokowski, P., Pisanski, K., Valentova, J. V., Varella, M. A. C., Fr
 <ol start="6" type="1">
 <li>Wykresy. Wspominałem o tym wyżej, ale wykresy są warte osobnego punktu. Możliwości Excela w tym zakresie są ograniczone. Dla przykładu wykres poniżej prezentuje wyniki pewnego badania w którym mierzono homofobię u ludzi różniących się obecnością manipulacji i poziomem cechy psychologicznej zwanej normatywną męskością. Wykres jest dość skomplikowany. Zawiera trzy zmienne dychotomiczne, co daje łącznie 8 kolumn w grupach po 4 i 2 na wspólnych osiach. Nie powiem, że zrobić taki wykres jest łatwo, bo dobre opanowanie <code>ggplot2</code> trochę zajmuje, ale gdy już opanujemy, co jest do opanowania, to hulaj dusza. Nawet najbardziej skomplikowane wykresy stają się możliwe. Gdy połączyć to z możliwościami dawanymi przez programistyczną warstwę R, łatwe staje się wytworzenie serii pasujących do siebie stylem wykresów o tych samych wymiarach. Pozwala to uzyskać pełną spójność bez ręcznego poprawiania szczególików.</li>
 </ol>
-<div id="fig-homofobia" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-homofobia" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-homofobia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/ilustracje/homofobia.svg" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-homofobia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-homofobia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;1: Homofobia u mężczyzn o zagrożonej i niezagrożonej męskości, w zależności od tego, jak wysoką mieli tzw. normatywną męskość. Gdy dodać to tego jeszcze podział na dwa rodzaje homofobii, robią się z tego trzy podziały i osiem różnych kolumn ze wspólnymi osiami, legendą i kolorami. Zrobienie tego w Excelu, o ile w ogóle możliwe, byłoby bardzo trudne.
 </figcaption>
 </figure>
@@ -13819,12 +13839,12 @@ font-style: inherit;">"dane/podstawy-R/complex_database.csv"</span>)</span></cod
 </span></code></pre>
 </div>
 </div>
-<div id="fig-readr" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-readr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-readr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/ilustracje/readr_gif.gif" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-readr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-readr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;2: Przykład wykorzystania narzędzia do importu danych.
 </figcaption>
 </figure>
@@ -13883,7 +13903,7 @@ font-style: inherit;">"Mężczyzna"</span>)</span></code></pre></div>
 <p>Druga kwestia to podział na linijki. Rozbiłem tę komendę na dwie linijki dla czytelności, ale spokojnie mógłbym zapisać to w jednej linijce. Warto jednak pisać kod tak, żeby dało się go potem łatwo czytać. RStudio podpowiada nam też wcięcia, żebyśmy widzieli, że te linijki tworzą jedną całość. W podrozdziale 9 powiem więcej o formatowaniu kodu.</p>
 <p>Ta komenda oznacza „weź zmienną <code>df</code>, wrzuć ją do komendy <code>filter</code> i zostaw tylko te przypadki, w których w kolumnie <code>Płeć</code> jest wartość <code>"Mężczyzna"</code>.” Nazwy kolumn piszemy bez cudzysłowu, ale jeśli wartość komórki to tekst, to zawsze piszemy go w cudzysłowie. Inaczej R pomyśli, że podajemy mu jakąś zmienną, z której ma dopiero odczytać, co ma być w kolumnie <code>Płeć</code>. Nam chodzi o dosłowny tekst <code>"Mężczyzna"</code>.</p>
 <p>Ostatecznie zostaje operator logiczny. Dlaczego piszę <code>==</code> zamiast <code>=</code>? W programowaniu znak <code>=</code> służy do przypisywania wartości do zmiennych. Zapis <code>a = 5</code> oznacza „niech <code>a</code> ma wartość 5”. Sprawdzenie <em>czy</em> <code>a</code> ma wartość 5 odbywa się poprzez komendę <code>a == 5</code>. Konsola wyrzuci nam wtedy <code>TRUE</code>, <code>FALSE</code> albo <code>BŁĄD: nie znaleziono obiektu 'a'</code>. Kilka innych operatorów logicznych prezentuje tabela.</p>
-<table class="table">
+<table class="caption-top table">
 <caption>Część operatorów logicznych dostępnych w R.</caption>
 <colgroup>
 <col style="width: 25%">
@@ -14258,7 +14278,7 @@ font-style: inherit;">"H_"</span>), parse_number)</span>
 <span id="cb21-8">    )</span></code></pre></div>
 </div>
 <p>Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery. Gdy używam zestaw, mam na myśli, że trzeba je wpakować w funkcję <code>c()</code> (od <em>concatenate</em>), np. <code>c(1, 8, 10:16)</code>. Możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu <code>tidy-select</code>. Tutaj akurat użyłem <code>starts_with("H_")</code>, żeby powiedzieć <code>across</code>, że chodzi mi o wszystkie kolumny, których nazwy zaczynają się od <code>H_</code>. Te same funkcje możemy wykorzystywać w funkcji <code>select</code> przy wybieraniu kolumn (por. Sekcja&nbsp;5.1.2). Kilka innych tego typu funkcji umieściłem w tabeli.</p>
-<table class="table">
+<table class="caption-top table">
 <caption>Funkcje pomocnicze do <code>select</code> i <code>across</code>.</caption>
 <colgroup>
 <col style="width: 33%">
@@ -14567,6 +14587,7 @@ font-style: inherit;">-</span> x})</span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(wynik) {</span>
 <span id="cb25-2">    <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -14603,6 +14624,7 @@ font-style: inherit;">12</span>)</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(wynik, od_czego) {</span>
 <span id="cb28-2">    od_czego <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -14726,6 +14748,7 @@ font-style: inherit;">across</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">c</span>(H_5, H_7), <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(wynik) <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">7</span> <span class="sc" style="color: #5E5E5E;
@@ -15355,12 +15378,12 @@ font-style: inherit;">"Wyższe"</span></span>
 <span id="cb38-14">        )</span>
 <span id="cb38-15">)</span></code></pre></div>
 </div>
-<div id="fig-questionr" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-questionr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-questionr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/ilustracje/questionr_gif.gif" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-questionr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-questionr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;3: Przykład użycia <code>questionr</code>
 </figcaption>
 </figure>
@@ -17461,12 +17484,12 @@ font-style: inherit;"># każdą powtórz 3 razy, a całość 2 razy</span></span
 <section id="styler" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="styler"><span class="header-section-number">9.1</span> <code>styler</code></h2>
 <p>Pierwszy z tych narzędzi to <code>styler</code>, który sam poprawia wiele aspektów kodu, w tym wiele oczywistych błędów. Instalujemy go jak każdy inny pakiet (<code>install.packages("styler")</code>). Po zainstalowaniu menu Addins wzbogaca się o kilka opcji, z których najważniejsza to <em>style active file</em><sup>35</sup>. Podczas pracy uruchamiam to co jakiś czas i zazwyczaj znajdują się jakieś przeoczenia.</p>
-<div id="fig-styler" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-styler" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-styler-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/ilustracje/styler_gif.gif" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-styler-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-styler-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;4: Przykład wykorzystania <code>styler</code>
 </figcaption>
 </figure>
@@ -17475,12 +17498,12 @@ Rysunek&nbsp;4: Przykład wykorzystania <code>styler</code>
 <section id="lintr" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="lintr"><span class="header-section-number">9.2</span> <code>lintr</code></h2>
 <p><code>styler</code> nie poprawia wszystkich błędów, bo byłoby to zbyt destrukcyjne. Na szczęście <code>lintr</code> może nam większość z nich wypomnieć. Dla każdego naszego projektu powinniśmy raz uruchomić komendę <code>lintr::use_lintr(type = "tidyverse")</code>. Spowoduje to wytworzenie w folderze pliku o nazwie <code>.lintr</code>. Zawiera on konfigurację <code>lintr</code> dla danego projektu. Za jego pomocą będziemy mogli tę konfigurację również zmieniać.</p>
-<div id="fig-lintr" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-lintr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-lintr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/ilustracje/lintr_gif.gif" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-lintr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lintr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;5: Przykład wykorzystania <code>lintr</code>
 </figcaption>
 </figure>
@@ -18299,7 +18322,7 @@ font-style: inherit;">eta_squared</span>()</span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2">
 <div id="ref-field2012" class="csl-entry">
 Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
 </div>
@@ -18309,7 +18332,7 @@ Wickham, H., &amp; Grolemund, G. (2020). <em>J<span>ę</span>zyk R: kompletny ze
 <div id="ref-wilkinson_grammar_2005" class="csl-entry">
 Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>. New York: Springer-Verlag. <a href="https://doi.org/10.1007/0-387-28695-0">https://doi.org/10.1007/0-387-28695-0</a>
 </div>
-</div></section><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Drugim najpopularniejszym jest R.↩︎</p></li>
@@ -18351,7 +18374,7 @@ Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>
 <li id="fn37"><p>Scratch to bardzo przyjemne, darmowe, rysunkowo-blokowe narzędzie do ćwiczenia programowania stworzone przez naukowców z MIT. Nie jest ono specyficzne dla żadnego języka, ale może być dobrym wprowadzeniem do programowania w ogóle. Nie wymaga pisania kodu, a opiera się w całości na przeciąganiu myszką bloczków. Dzięki temu można oswoić się z różnymi ideami w programowaniu, takimi jak funkcje, zmienne itd., bez zaprzątania głowy składnią konkretnego języka.↩︎</p></li>
 <li id="fn38"><p>Należy się upwenić, że te osoby kochają nas wystarczająco, żeby być gotowymi na to poświęcenie.↩︎</p></li>
 </ol>
-</aside></div> ]]></description>
+</section></div> ]]></description>
   <category>Statystyka</category>
   <category>R</category>
   <guid>https://nieobliczalne.pl/posts/podstawy_R.html</guid>
@@ -18381,6 +18404,7 @@ font-style: inherit;">as</span> pd</span>
 <span id="cb1-3"></span>
 <span id="cb1-4"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> variations(iterable, subset_length):</span>
 <span id="cb1-5">    <span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -18391,8 +18415,10 @@ font-style: inherit;">=</span> pd.DataFrame([<span class="bu" style="color: null
 background-color: null;
 font-style: inherit;">list</span>(itertools.permutations(x)) <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> x <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> itertools.combinations(iterable, subset_length)])</span>
 <span id="cb1-7">    df.index <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -18422,6 +18448,7 @@ background-color: null;
 font-style: inherit;">1</span>)</span>
 <span id="cb1-9">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> df</span></code></pre></div>
 </details>
 </div>
@@ -18457,7 +18484,7 @@ font-style: inherit;">"E"</span>]</span></code></pre></div>
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -18578,7 +18605,7 @@ font-style: inherit;">2</span>)</span></code></pre></div>
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -18656,7 +18683,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -18795,7 +18822,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 <h1 data-number="5"><span class="header-section-number">5</span> Podsumowanie</h1>
 <p>Permutacje to zmiany kolejności, kombinacje to unikalne podzbiory. Jeśli zaczniemy robić permutacje unikalnych podzbiorów, wyjdą nam wariacje. Albo patrząc inaczej – permutacje to wariacje <img src="https://latex.codecogs.com/png.latex?V%5En_n">. Permutacje i wariacje możemy liczyć kreskami i silnią. Liczbę kombinacji uzyskamy dzieląc liczbę wariacji po <em>k</em> elementów przez liczbę permutacji <em>k</em>. Powstały wzór oznacza się symbolem Newtona <img src="https://latex.codecogs.com/png.latex?%5Cbinom%7Bn%7D%7Bk%7D">. Pomocny może okazać się poniższy schemat.</p>
 <!-- ![](./ilustracje/kombinatoryka-flowchart.svg){fig-align="center"} -->
-<div class="cell" data-fig-responsive="true" data-fig-width="80%">
+<div class="cell" data-fig-responsive="true" data-fig-width="80%" data-layout-align="default">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><span class="in" style="color: #5E5E5E;
@@ -18861,6 +18888,7 @@ font-style: inherit;">```</span></span></code></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart TD
     START(START) --&gt; zbior
@@ -18878,6 +18906,7 @@ font-style: inherit;">```</span></span></code></pre></div>
         V_powtorzenia --&gt;|Nie| V_koniec(wariacja bez powrótrzeń)
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -18909,14 +18938,14 @@ font-style: inherit;">```</span></span></code></pre></div>
 <p>Nie ufamy swoim wnioskom, więc postanawiamy powtórzyć badanie. Ponownie pobieramy próbkę 100 kobiet i 100 mężczyzn, ponownie wykonujemy WAIS-R i ponownie liczymy średnie. Ciekawe. Tym razem średnia dla kobiet wyniosła 101, a dla mężczyzn… 98. Nie dość, że różnica wzrosła, to jeszcze się odwróciła. Ale jak to? Losowaliśmy z tej samej populacji. Dlaczego nagle średnia inteligencja w naszych próbkach jest inna?</p>
 <p>Ten przykład stał się nierealny, gdy od niechcenia samodzielnie przeprowadziliśmy WAIS-R 200 osobom. Popuśćmy wodze fantazji jeszcze luźniej. Wyobraźmy sobie, że jesteśmy szalonym dyktatorem dużego państwa i mamy nieograniczone zasoby. Zaskoczeni naszymi wynikami, chcemy sprawdzić, czy kolejne średnie też będą się od siebie różniły. Badamy więc 1000 próbek po 100 osób każda. Mamy na swoim komputerze 1000 średnich, które przeglądamy. Kilka spośród nich pokazałem w tabeli 1.</p>
 <div class="cell" data-layout-align="center">
-<div id="tbl-iq-means" class="cell anchored" data-layout-align="center">
+<div id="tbl-iq-means" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-iq-means-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-iq-means-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Tabela&nbsp;1: Średnie wyniki IQ są zawsze trochę inne, ale rzadko są dalekie od 100.
 </figcaption>
 <div aria-describedby="tbl-iq-means-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table cell table-sm table-striped small" data-quarto-postprocess="true">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">lp</th>
@@ -18976,12 +19005,12 @@ Tabela&nbsp;1: Średnie wyniki IQ są zawsze trochę inne, ale rzadko są daleki
 <p>Zaczynamy zauważać, że wyniki za każdym razem były trochę inne, ale zawsze lądowały w pobliżu 100. Innymi słowy średnie bliskie 100 pojawiały się często, a średnie dalekie od 100 pojawiały się rzadko. Nie mamy na przykład ani jednego wyniku mniejszego niż 95, a w zakresie 99-101 mieści się 47% wszystkich uzyskanych średnich. Możemy zrobić nawet wykres, jak często pojawiały się jakie średnie.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-iq-means-histogram" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
+<div id="fig-iq-means-histogram" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-iq-means-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/p-value_files/figure-html/fig-iq-means-histogram-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-iq-means-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iq-means-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;1: Im wyższy słupek, tym średnia z tego zakresu pojawiała się częściej w naszym zbiorze 1000 średnich. Jak widać, średnie koncentrują się dookoła wyniku 100 IQ.
 </figcaption>
 </figure>
@@ -18996,14 +19025,14 @@ Rysunek&nbsp;1: Im wyższy słupek, tym średnia z tego zakresu pojawiała się 
 <p>I teraz robi się ciekawie. To jest skomplikowane, warto tutaj zwolnić. Jeśli to się zrozumie, to zrozumie się całą wielką logikę testów statystycznych. Spróbujmy więc nieco się zagłębić. Jesteśmy w końcu w pięknej, abstrakcyjnej sytuacji, gdzie mamy do swojej dyspozycji 1000 średnich z różnych próbek. Na rysunku 1. widzimy, że większość naszych średnich mieści się mniej więcej w granicach 98-102. Uzyskać przez przypadek średnią 105 byłoby bardzo trudno. Uzyskać średnią 115 jest praktycznie niemożliwe. Ale już średnią 101 przez przypadek uzyskać jest bardzo łatwo.</p>
 <p>Możemy to ugryźć od innej strony. Jestem w końcu szalonym, bogatym dyktatorem dużego państwa, więc znowu robię olbrzymie badania i powtarzam nasz pierwotny eksperyment 1000 razy. Czyli losuję 1000 próbek po 100 mężczyzn, 1000 próbek po 100 kobiet, mierzę inteligencję i liczę różnicę. Efektem jest zbiór danych, którego fragment znajdziemy w tabeli 2.</p>
 <div class="cell" data-layout-align="center">
-<div id="tbl-iq-diffs" class="cell anchored" data-layout-align="center">
+<div id="tbl-iq-diffs" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-iq-diffs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-iq-diffs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Tabela&nbsp;2: Możemy wiele razy powtórzyć nasz eksperyment, a różnice za każdym razem będą inne.
 </figcaption>
 <div aria-describedby="tbl-iq-diffs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table cell table-sm table-striped small" data-quarto-postprocess="true">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">lp</th>
@@ -19085,12 +19114,12 @@ Tabela&nbsp;2: Możemy wiele razy powtórzyć nasz eksperyment, a różnice za k
 <p>Podstawą do różnicy była tu średnia inteligencja kobiet, więc ujemna różnica oznacza, że mężczyźni okazali się mniej inteligentni, zaś dodatnia, że bardziej. Tak jak w przypadku tabeli 1., niektóre różnice są większe, niektóre mniejsze, ale ich rozkład nie jest przypadkowy. Wrzućmy nasze różnice na wykres.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-iq-diffs-histogram" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
+<div id="fig-iq-diffs-histogram" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-iq-diffs-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/p-value_files/figure-html/fig-iq-diffs-histogram-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-iq-diffs-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iq-diffs-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;2: Różnice w średnich bywały większe lub mniejsze, ale oscylowały wokół zera.
 </figcaption>
 </figure>
@@ -19160,12 +19189,12 @@ mean of x mean of y
 <p>Zobaczmy to na przykładzie. Pokazywałem wcześniej (na rysunku 1) wyniki symulacji, gdzie braliśmy 100 osób, liczyliśmy ich średnią inteligencję. Powtórzyliśmy to 1000 razy i patrzyliśmy, jak często pojawiają się dane średnie. Teraz zrobimy to samo, ale każda pojedyncza próbka będzie składała się z 1000 osób.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-iq-stderr-histogram" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
+<div id="fig-iq-stderr-histogram" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-iq-stderr-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/p-value_files/figure-html/fig-iq-stderr-histogram-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-iq-stderr-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iq-stderr-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;3: Jak często pojawiały się dane średnie, gdy w jednym rzucie badaliśmy 100 osób (mała próba) albo 1000 osób (duża próba).
 </figcaption>
 </figure>
@@ -19217,7 +19246,7 @@ Rysunek&nbsp;3: Jak często pojawiały się dane średnie, gdy w jednym rzucie b
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2">
 <div id="ref-bem2011" class="csl-entry">
 Bem, D. J. (2011). Feeling the future: Experimental evidence for anomalous retroactive influences on cognition and affect. <em>Journal of Personality and Social Psychology</em>, <em>100</em>, 407–425. <a href="https://doi.org/10.1037/a0021524">https://doi.org/10.1037/a0021524</a>
 </div>
@@ -19230,7 +19259,7 @@ Engber, D. (2017). Daryl Bem proved ESP is real: Which means science is broken. 
 <div id="ref-wilkes2017" class="csl-entry">
 Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>... i sam sobie wymy<span>ś</span>l matematyk<span>ę</span></em>. Warszawa: Prószy<span>ń</span>ski Media.
 </div>
-</div></section><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Zdaję sobie sprawę, że „pewność” i jej zmiany pasują bardziej do analiz bayesowskich niż testów, ale tego typu przykłady znacznie łatwiej jest zrozumieć niż bardziej abstrakcyjny `dobór prób z populacji. Do większej abstrakcji przejdę później.↩︎</p></li>
@@ -19251,7 +19280,7 @@ Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>..
 <li id="fn14"><p>Dlatego osobiście wolę nazwy „błąd fałszywego alarmu” (myślałem, że coś było, ale tak naprawdę tego nie było) i „błąd chybienia” (coś naprawdę było, ale to przegapiłem).↩︎</p></li>
 <li id="fn15"><p>Nie dla wszystkich badań to będzie prawda. W psychologii, jeśli coś wpływa na zachowanie absolutnie minimalnie, to równie dobrze możemy to zignorować, bo <em>de facto</em> nie ma znaczenia. Ale na przykład w fizyce minimalny wpływ może być kluczowy, jeśli ma udowodnić, że jakaś siła rzeczywiście istnieje. Czasem też zjawiska bardzo rzadkie są cenne, bo udowadniają nam, że coś jest w ogóle możliwe.↩︎</p></li>
 </ol>
-</aside></div> ]]></description>
+</section></div> ]]></description>
   <category>Statystyka</category>
   <guid>https://nieobliczalne.pl/posts/p-value.html</guid>
   <pubDate>Tue, 20 Sep 2022 22:00:00 GMT</pubDate>
@@ -19283,14 +19312,14 @@ Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>..
 <h2 data-number="1" class="anchored" data-anchor-id="średnia-jako-model"><span class="header-section-number">1</span> Średnia jako model</h2>
 <p>By zrozumieć sens odziedziczalności (i podobnych tworów) w kontekście wyjaśniania wariancji, musimy najpierw powiedzieć sobie coś o tym, czym jest owa tajemnicza wariancja. Wykorzystamy do tego spreparowany zbiór danych nt. związku wielkości pająków z niepokojem odczuwanym przez obserwatorów<span class="citation" data-cites="field2012">(na podstawie: Field, Miles, &amp; Field, 2012)</span>. Wyobraźmy sobie, że wielkość pająka wyrażono na Międzynarodowej Skali Wielkości Pająków, zaś niepokój mierzono kwestionariuszowo. Dane zebrano w tabeli poniżej.</p>
 <div class="cell" data-layout-align="center">
-<div id="tbl-spiders" class="cell anchored" data-layout-align="center">
+<div id="tbl-spiders" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-spiders-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-spiders-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Tabela&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza.
 </figcaption>
 <div aria-describedby="tbl-spiders-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table cell table-sm table-striped small" data-quarto-postprocess="true">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
@@ -19342,12 +19371,12 @@ Tabela&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza.
 <p>Dla takich danych możemy policzyć całkiem sporo rzeczy. Łatwiej jest jednak zrozumieć dane, jak się je rzeczywiście widzi. Spróbujmy więc stworzyć wykres. Chcielibyśmy wiedzieć, jaki jest związek wielkości pająka z niepokojem, jaki wywołuje<sup>1</sup>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
+<div id="fig-scatter-anxiety" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza, tyle że na wykresie.
 </figcaption>
 </figure>
@@ -19357,12 +19386,12 @@ Rysunek&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza, tyle że na wykres
 <p>Widzimy więc wyraźnie, że im większy pająk, tym większy lęk wywołuje. Ale z tym wnioskiem wybiegliśmy sporo w przyszłość. Zazwyczaj w pierwszym odruchu robimy coś znacznie prostszego – liczymy średnią. Średni niepokój wyniósł tutaj dokładnie 10. Szybkie spojrzenie w tabelę pozwala nam stwierdzić, że żaden badany takiego wyniku niepokoju nie uzyskał i niezbyt nas to dziwi. W końcu to tylko średnia, żaden prawdziwy wynik nie musi mieć dokładnie średniej wartości. Jak w znienawidzonym przez statystyków kawale o średniej liczbie nóg na spacerze z psem. Rozumiemy więc, że średnia tylko w pewnym przybliżeniu oddaje cały zbiór danych, a konkretne wartości mogą się od średniej mniej lub bardziej odchylać. Te odchylenia możemy nanieść na wykres.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-mean" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
+<div id="fig-scatter-anxiety-mean" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-mean-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;2: Średnia to rodzaj modelu, czyli narzędzia do przewidywania danych. Żaden z naszych pająków nie wywoływał średniego niepokoju, każdy punkt ma większe lub mniejsze odchylenie od średniej.
 </figcaption>
 </figure>
@@ -19373,14 +19402,14 @@ Rysunek&nbsp;2: Średnia to rodzaj modelu, czyli narzędzia do przewidywania dan
 <p><img src="https://latex.codecogs.com/png.latex?%0AS_i%20=%20x_i%20-%20%5Cbar%20x%0A"></p>
 <p>gdzie <img src="https://latex.codecogs.com/png.latex?S_i"> to odchylenie, <img src="https://latex.codecogs.com/png.latex?x_i"> to wartość konkretnego punktu, a <img src="https://latex.codecogs.com/png.latex?%5Cbar%20x"> to średnia. Pozioma kreska nad czymś zawsze oznacza średnią. Dla każdego punktu moglibyśmy policzyć takie odchylenie i dopisać sobie je do tabeli.</p>
 <div class="cell" data-layout-align="center">
-<div id="tbl-spider-residual" class="cell anchored" data-layout-align="center">
+<div id="tbl-spider-residual" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-spider-residual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-spider-residual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Tabela&nbsp;2: Każdy punkt ma swoje odchylenie od średniej, które możemy policzyć. Dodatnie odchylenia oznaczają, że wartość jest wyższa od średniej, a ujemne, że jest niższa.
 </figcaption>
 <div aria-describedby="tbl-spider-residual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table cell table-sm table-striped small" data-quarto-postprocess="true">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
@@ -19443,12 +19472,12 @@ Tabela&nbsp;2: Każdy punkt ma swoje odchylenie od średniej, które możemy pol
 <p>Średnia gwarantuje mi, że pomylę się tak mało, jak to tylko możliwe, czyli że sumarycznie przerywane kreski na wykresie będą tak krótkie, jak się da. Średnia jest więc modelem niedoskonałym (bo ma błąd), ale lepszym niż jakakolwiek inna pojedyncza liczba (bo ma najmniejszy błąd).</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-15" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
+<div id="fig-scatter-anxiety-15" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;3: Modelem mogłaby być dowolna liczba, jeśli się uprzeć, ale żadna pojedyncza liczba nie będzie miała tak małych odchyleń, jak średnia.
 </figcaption>
 </figure>
@@ -19515,12 +19544,12 @@ Odpowiedź
 <p>Wiemy już bardzo dokładnie czym jest wariancja i jaki ma związek ze średnią. Ale nie oszukujmy się, jesteśmy w stanie wymyślić lepsze modele niż średnia. Od samego początku korci nas, żeby na wykresie niepokoju od wielkości pająka narysować piękną, skośną, rosnącą linię, która będzie zależała nie tylko od wartości niepokoju, ale również od wielkości pająka. Przecież od razu widać, że pasowałaby do naszych danych znacznie bardziej.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-lm" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
+<div id="fig-scatter-anxiety-lm" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-lm-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;4: Linia rosnąca sugeruje nam, że im większy pająk, tym większy niepokój wywołuje. Na pierwszy rzut oka widać, że odchylenia są mniejsze, niż przy średniej.
 </figcaption>
 </figure>
@@ -19530,14 +19559,14 @@ Rysunek&nbsp;4: Linia rosnąca sugeruje nam, że im większy pająk, tym większ
 <p>Od razu lepiej. Od początku chcieliśmy móc powiedzieć, że im większy pająk, tym większy niepokój, a teraz mamy tego dowód. W końcu ta linia ewidentnie pasuje do danych lepiej – na pierwszy rzut oka widać, że odchylenia są mniejsze. No właśnie! Dzięki łamaniu sobie głowy nad odchyleniami od średniej zyskaliśmy sposób na stwierdzenie, czy jakiś model jest lepszy od średniej, czy nie – wystarczy sprawdzić, czy odchylenia zrobiły się istotnie mniejsze.</p>
 <p>Spróbujmy więc zrobić dla tych nowych odchyleń to samo, co zrobiliśmy dla odchyleń od średniej. Ponieważ samo wyznaczanie wartości tych odchyleń wymaga bardziej złożonych obliczeń ze wzoru na prostą, po prostu je podam (bo policzył je za mnie program statystyczny). Powiem tylko, że procedura jest identyczna, jak w przypadku liczenia <img src="https://latex.codecogs.com/png.latex?SS_T">, ale licząc odchylenia zamiast wartości średniej (która poprzednio była naszym modelem) odejmujemy wartość, którą przewiduje nasz nowy, lepszy model, a którą w tabeli oznaczyłem jako <img src="https://latex.codecogs.com/png.latex?x_M">. Podnosimy więc wartości odchyleń (oznaczone w tabeli <img src="https://latex.codecogs.com/png.latex?S_R">) do kwadratu, sumujemy i wychodzi nam w zaokrągleniu <img src="https://latex.codecogs.com/png.latex?SS_R%20=%2029,98">. <img src="https://latex.codecogs.com/png.latex?SS_R"> oznacza <em>residual sum of squares</em> i w gruncie rzeczy mówi nam o tych odchyleniach, które ciągle są, które nie zniknęły, mimo że nowy model jest lepszy.</p>
 <div class="cell" data-layout-align="center">
-<div id="tbl-lm-resid" class="cell anchored" data-layout-align="center">
+<div id="tbl-lm-resid" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-lm-resid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-lm-resid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Tabela&nbsp;3: Nowy model magicznie przewiduje niepokój z wielkości pająka (xM), ale nie robi tego doskonale. Tak jak dla średniej, możemy policzyć, jak wartość prawdziwa odchyla się od tej z modelu.
 </figcaption>
 <div aria-describedby="tbl-lm-resid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table cell table-sm table-striped small" data-quarto-postprocess="true">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
@@ -19613,12 +19642,12 @@ Tabela&nbsp;3: Nowy model magicznie przewiduje niepokój z wielkości pająka (x
 <p>Możemy wyobrazić sobie, że pojawia nam się nowa osoba badana, która pająków nie boi się w ogóle, co pokazałem na wykresie. Jak to wpływa na nasz model?</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-lm2" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
+<div id="fig-scatter-anxiety-lm2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-lm2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-lm2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-lm2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-lm2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;5: Nowa osoba badana, która nie boi się pająków wcale, nie przystaje do naszego modelu. Może to sugerować, że nasz model jest adekwatny tylko dla pewnej grupy osób (czyli możemy stworzyć bardziej złożony model, który weźmie to pod uwagę) albo że odważny badany kłamie (i powinien zostać wykluczony z bazy).
 </figcaption>
 </figure>
@@ -19645,12 +19674,12 @@ Rysunek&nbsp;5: Nowa osoba badana, która nie boi się pająków wcale, nie przy
 <p>Można zauważyć ciekawą rzecz związaną z obliczaniem <img src="https://latex.codecogs.com/png.latex?SS_M">. Jak się okazuje, <img src="https://latex.codecogs.com/png.latex?SS_M"> da się policzyć bez liczenia <img src="https://latex.codecogs.com/png.latex?SS_T"> i <img src="https://latex.codecogs.com/png.latex?SS_R">. <img src="https://latex.codecogs.com/png.latex?SS_M"> uzyskujemy, jeśli zignorujemy obserwacje i zsumujemy kwadraty różnic między średnią a nowym modelem. Zaznaczyłem te różnice na poniższym wykresie przerywanymi liniami.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-scatter-anxiety-ssm" class="quarto-figure quarto-figure-center anchored" data-fig-align="center" width="85%">
+<div id="fig-scatter-anxiety-ssm" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatter-anxiety-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/procent-wariancji_files/figure-html/fig-scatter-anxiety-ssm-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-anxiety-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;6: <img src="https://latex.codecogs.com/png.latex?SS_M"> można szybciej policzyć za pomocą odchyleń modelu od średniej, czyli kresek między średnią wartościami przewidywanymi przez nasz nowy model.
 </figcaption>
 </figure>
@@ -19659,14 +19688,14 @@ Rysunek&nbsp;6: <img src="https://latex.codecogs.com/png.latex?SS_M"> można szy
 </div>
 <p>Można to przetestować za pomocą danych z tabeli niżej. <img src="https://latex.codecogs.com/png.latex?x_M"> to wartość przewidywana przez model, a <img src="https://latex.codecogs.com/png.latex?S_M"> to różnica między modelem a średnim niepokojem. Podniesienie wartości <img src="https://latex.codecogs.com/png.latex?S_M"> do kwadratu i zsumowanie ich daje w wyniku nasze <img src="https://latex.codecogs.com/png.latex?SS_M">.</p>
 <div class="cell" data-layout-align="center">
-<div id="tbl-lm-ssm" class="cell anchored" data-layout-align="center">
+<div id="tbl-lm-ssm" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-lm-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-lm-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Tabela&nbsp;4: Podstawą do policzenia SSM mogą być odchylenia modelu od średniej SM. Trzeba je policzyć dla każdego punktu, podnieść do kwadratu i dodać.
 </figcaption>
 <div aria-describedby="tbl-lm-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table cell table-sm table-striped small" data-quarto-postprocess="true">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
@@ -19741,14 +19770,14 @@ Tabela&nbsp;4: Podstawą do policzenia SSM mogą być odchylenia modelu od śred
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2">
 <div id="ref-field2012" class="csl-entry">
 Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
 </div>
 <div id="ref-plomin2001" class="csl-entry">
 Plomin, R., DeFries, J., McClearn, G., &amp; McGuffin, P. (2001). <em>Genetyka zachowania</em>. Warszawa: Wydawnictwo Naukowe PWN.
 </div>
-</div></section><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Wszystko, co napiszę dalej o średniej, mogłoby równie dobrze być pokazane na innym wykresie. To, że na oś poziomą wrzuciłem wielkość pająka wynika tylko ze względów estetycznych. Mógłbym te punkty rozrzucić losowo. Zauważ, że aż do podrozdziału <em>Średnia to nie wszystko</em> nie będę używał wielkości pająka w obliczeniach.↩︎</p></li>
@@ -19764,7 +19793,7 @@ Plomin, R., DeFries, J., McClearn, G., &amp; McGuffin, P. (2001). <em>Genetyka z
 <li id="fn10"><p>Gdy Bill Gates wchodzi do pubu, średnia pensja (i jej odchylenie standardowe!) osób w pubie nagle dramatycznie skacze, mimo że nikt ze zgromadzonych nie czuje się bogatszy. Niemniej sam jeden Bill Gates nie miałby tak wielkiego wpływu na średnią pensję wszystkich mieszkańców Polski. Tak samo jedna piątka nie zmieni za bardzo średniej z 20 ocen, ale może całkowicie zmienić średnią z 3 ocen. Modele oparte o dużą liczbę obserwacji są więc stabilniejsze.↩︎</p></li>
 <li id="fn11"><p>Tak naprawdę potrzeba nam sporo więcej niż 1, żeby uznać model na wiarygodny. Statystyka <img src="https://latex.codecogs.com/png.latex?F"> musi <em>istotnie</em> odchylać się od 1. Musimy mieć co najmniej 95% pewności, że <img src="https://latex.codecogs.com/png.latex?F"> jest większe od 1. Ale prawdopodobieństwo trudno się liczy, zależy od liczby obserwacji i w ogóle bez sensu się tym zajmować, bo program statystyczny nam to pokaże.↩︎</p></li>
 </ol>
-</aside></div> ]]></description>
+</section></div> ]]></description>
   <category>Statystyka</category>
   <guid>https://nieobliczalne.pl/posts/procent-wariancji.html</guid>
   <pubDate>Wed, 18 May 2022 22:00:00 GMT</pubDate>
@@ -19814,12 +19843,12 @@ Plomin, R., DeFries, J., McClearn, G., &amp; McGuffin, P. (2001). <em>Genetyka z
 </ul>
 <p>Ponadto, wymieniają oni dwa rodzaje powtarzania – utrzymujące i opracowujące [elaboracja; <span class="citation" data-cites="zimbardo_psychologia_2017">Zimbardo i in. (2017)</span>]. Zasadniczą różnicą pomiędzy tymi dwoma jest dokonywanie zmian w utrzymywanych w pamięci informacjach. Przy powtarzaniu utrzymującym, informacje nie ulegają żadnym zmianom, podczas gdy powtarzanie opracowujące zakłada poznawcze zniekształcanie informacji. Głębokość przetworzenia przekłada się na skuteczność zapamiętywania – im dana informacja zostanie bardziej przetworzona, tym skuteczniejsze będzie zapamiętywanie <span class="citation" data-cites="craik_levels_1972">(np. Craik &amp; Lockhart, 1972)</span>.</p>
 <p>Dobrym sposobem opracowywania informacji jest tworzenie analogii <span class="citation" data-cites="halpern_analogies_1990">(Halpern, Hansen, &amp; Riefer, 1990)</span>. Łączą to, co już uczeń wie lub potrafi sobie wyobrazić z informacjami nowymi i abstrakcyjnymi. Za przykład możemy przywołać porównanie elektronów na powłokach elektronowych do piłeczki na schodach. Tak jak piłeczka może wylądować na pierwszym, drugim, trzecim schodku, tak nigdy nie zatrzyma się pomiędzy schodkami. Tak samo elektron może mieć różną energię, ale zawsze będzie na jakiejś powłoce, nigdy pomiędzy <span class="citation" data-cites="campbell_biologia_2016">(na podstawie: Campbell i in., 2016)</span>. Tworzenie analogii pomaga także rozwijać zdolności twórczego myślenia <span class="citation" data-cites="szmidt_abc_2019">(Szmidt, 2019)</span>.</p>
-<div id="fig-analogia" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-analogia" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-analogia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/ilustracje/uczenie-sie/rysunek-1.jpg" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-analogia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-analogia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;1: Analogia – przykład opracowywania informacji (© OpenStax na licencji CC BY 4.0)
 </figcaption>
 </figure>
@@ -19961,12 +19990,12 @@ Rysunek&nbsp;1: Analogia – przykład opracowywania informacji (© OpenStax na 
 <p><strong><em>Image Occlusion Enhanced.</em></strong> Jest to dodatek, dzięki któremu można w prosty sposób tworzyć fiszki obrazkowe z luką (patrz Rysunek&nbsp;1). Uczeń może za jego pomocą nauczyć się rozpoznawać elementy schematów. Szczególnie użyteczne dla przedmiotów przyrodniczych, gdzie można użyć obrazów zamiast opisów (np. ryciny anatomiczne, mapy).</p>
 <p><img src="https://nieobliczalne.pl/posts/ilustracje/uczenie-sie/rysunek-2.png" class="img-fluid" alt="Przykład fiszki wykonanej za pomocą Image Occlusion Enhanced (na podstawie: Hoser, 1996, s. 134)">{!fig-image}</p>
 <p><strong><em>Review Heatmap.</em></strong> Jest to dodatek, który dodaje do głównego ekranu Anki schemat, na którym kolorem zaznaczone są dni, w których przeglądano karty. Im więcej kart przejrzano w danym dniu, tym ciemniejszy jest kolor (patrz Rysunek&nbsp;2). Poza tym podaje średnią ilość dziennie przeglądanych kart, czy dni, w jakie z rzędu uczeń dokonywał powtórek. Chęć nieprzerywania tej passy może okazać się bodźcem motywującym do codziennych powtórek. Co więcej metaanaliza Harkina i współpracowników <span class="citation" data-cites="harkin_does_2016">(2016)</span> wskazuje, że monitorowanie swoich postępów znacząco zwiększa skuteczność osiągania celów.</p>
-<div id="fig-heatmap" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-heatmap" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://nieobliczalne.pl/posts/ilustracje/uczenie-sie/rysunek-3.png" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;2: Schemat Review Heatmap (materiały własne)
 </figcaption>
 </figure>
@@ -19978,7 +20007,7 @@ Rysunek&nbsp;2: Schemat Review Heatmap (materiały własne)
 <section id="podsumowanie" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Podsumowanie</h1>
 <p>Chciałbym ponownie zaznacyć, że istnieje duże zapotrzebowanie na skuteczne metody uczenia się w społeczności uczniowskiej. Fundamentem skutecznego uczenia się jest elaboracja, czyli opracowywanie materiału. Trzy opisane wyżej metody w pewien sposób wymuszają na uczniu elaborację. Na zasadzie dodawania, największą skutecznością będzie się odznaczało korzystanie ze wszystkich trzech metod, wykorzystywanych zależnie od uczonego materiału. Metodę należy też dobrać do rodzaju uczonego materiału – metoda miejsc skuteczna jest w uczeniu się na pamięć, ale nie sprawi, że uczeń lepiej zrozumie koncepcję teoretyczną. Cele i skrótowe opisy omawianych tu technik uczenia się zostały zebrane w Tabeli 1.</p>
-<table class="table">
+<table class="caption-top table">
 <caption>Cele i istota omówionych technik uczenia się.</caption>
 <colgroup>
 <col style="width: 25%">
@@ -20017,7 +20046,7 @@ Rysunek&nbsp;2: Schemat Review Heatmap (materiały własne)
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2">
 <div id="ref-aslan_is_2015" class="csl-entry">
 Aslan, S. (2015). Is <span>Learning</span> by <span>Teaching</span> <span>Effective</span> in <span>Gaining</span> 21st <span>Century</span> <span>Skills</span>? <span>The</span> <span>Views</span> of <span>Pre</span>-<span>Service</span> <span>Science</span> <span>Teachers</span>. <em>Educational Sciences: Theory &amp; Practice</em>. <a href="https://doi.org/10.12738/estp.2016.1.0019">https://doi.org/10.12738/estp.2016.1.0019</a>
 </div>

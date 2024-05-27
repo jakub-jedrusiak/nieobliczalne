@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.513">
+<meta name="generator" content="quarto-1.5.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jakub Jędrusiak">
 <meta name="description" content="Jest takie narzędzie, które nie ma szerokiej publiczności poza światem technicznym, a pozwala oszczędzić naprawdę dużo czasu. Całkowicie poważnie twierdzę że powinno ono być nauczane w szkole, razem z obsługą programów do pisania. Sądzę, że przyda się ono każdemu, kto cokolwiek pisze na komputerze, nieważne, czy jest to profesor, księgowa czy zwykły Kowalski. Mowa tutaj o wyrażeniach regularnych (Regular Expressions, RegEx), które przybliżam w tym tekście.">
 
-<title>Nieobliczalne - Znajdź i zmień to narzędzie ostateczne</title>
+<title>Nieobliczalne – Znajdź i zmień to narzędzie ostateczne</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,6 +67,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "więcej dopasowań w tym dokumencie",
     "search-more-matches-text": "więcej dopasowań w tym dokumencie",
     "search-clear-button-title": "Wyczyść",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Anuluj",
     "search-submit-button-title": "Zatwierdź",
     "search-label": "Szukaj"
@@ -132,7 +133,7 @@ cookieconsent.run({
     </a>
   </div>
             <div id="quarto-search" class="" title="Szukaj"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Przełącz nawigację" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Przełącz nawigację" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -150,6 +151,10 @@ cookieconsent.run({
 <span class="menu-text">Subskrybuj</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="https://www.statystycznie.org/"> 
+<span class="menu-text">Zlecenia na analizy</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../about.html"> 
 <span class="menu-text">O mnie</span></a>
   </li>  
@@ -162,7 +167,7 @@ cookieconsent.run({
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
@@ -1226,18 +1231,10 @@ cookieconsent.run({
 </blockquote>
 <p>Odpowiednie wyrażenie regularne mogłoby brzmieć <code>^\d\.</code>. Po kropce jest tam spacja, którą silnik uporczywie mi usuwa, dlatego na stronie jej nie widać.</p>
 <div class="light-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/WVPWt4/1"><img src="ilustracje/regex/anchors.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/WVPWt4/1"><img src="ilustracje/regex/anchors.png" class="img-fluid"></a></p>
 </div>
 <div class="dark-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/WVPWt4/1"><img src="ilustracje/regex/anchors_dark.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/WVPWt4/1"><img src="ilustracje/regex/anchors_dark.png" class="img-fluid"></a></p>
 </div>
 <p>Zwróćmy uwagę na kilka rzeczy. Po pierwsze, to wyrażenie nie dopasowało liczby „1.” w treści 3. punktu. Wynika to z tego, że dodaliśmy <code>^</code> na początku wyrażenia. Liczby, które nie są na początku linijki nie są przez to dopasowywane. Po drugie, musiałem przed kropką dodać ukośnik. Wynika to z faktu, że kropka to znak specjalny (oznacza dowolny znak) i jeśli chcemy wyszukać dosłowną kropkę, musimy wykorzystać lewy ukośnik.</p>
 </section>
@@ -1251,21 +1248,13 @@ cookieconsent.run({
 <p>[A-Z]\w+</p>
 </blockquote>
 <div class="light-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/uzD28P/1"><img src="ilustracje/regex/repeat.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/uzD28P/1"><img src="ilustracje/regex/repeat.png" class="img-fluid"></a></p>
 </div>
 <div class="dark-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/uzD28P/1"><img src="ilustracje/regex/repeat_dark.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/uzD28P/1"><img src="ilustracje/regex/repeat_dark.png" class="img-fluid"></a></p>
 </div>
 <p>Znak <code>+</code> oznacza tutaj „jeden lub więcej”, a więc <code>\w+</code> oznacza „jedna litera lub więcej”. Operatorów podobnych do <code>+</code> jest więcej i możemy je zobaczyć w tabelce.</p>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Operator</th>
@@ -1307,67 +1296,35 @@ cookieconsent.run({
 <p>\(.+\)</p>
 </blockquote>
 <div class="light-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/kDdEiE/1"><img src="ilustracje/regex/greedy_1.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/kDdEiE/1"><img src="ilustracje/regex/greedy_1.png" class="img-fluid"></a></p>
 </div>
 <div class="dark-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/kDdEiE/1"><img src="ilustracje/regex/greedy_1_dark.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/kDdEiE/1"><img src="ilustracje/regex/greedy_1_dark.png" class="img-fluid"></a></p>
 </div>
 <p>Dziwne. Czemu takie długie wyszło? W naszym wyrażeniu regularnym wykorzystałem nawiasy (z lewym ukośnikiem, bo nawiasy to znak specjalny) oraz sekwencję <code>.+</code> oznaczającą „jeden dowolny znak lub więcej”. Domyślnie jednak <code>+</code> jest chciwy (<em>greedy</em>) i wyszuka <strong>najdłuższe możliwe sekwencje</strong>. Oznacza to, że zaznaczył wszystko między pierwszym nawiasem otwierającym i ostatnim nawiasem zamykającym. W końcu nawiasy zamykające łapią się do kategorii dowolnych znaków. Żeby temu przeciwdziałać, zamiast <code>.+</code> możemy użyć <code>.+?</code>.</p>
 <div class="light-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/kDdEiE/2"><img src="ilustracje/regex/greedy_2.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/kDdEiE/2"><img src="ilustracje/regex/greedy_2.png" class="img-fluid"></a></p>
 </div>
 <div class="dark-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/kDdEiE/2"><img src="ilustracje/regex/greedy_2_dark.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/kDdEiE/2"><img src="ilustracje/regex/greedy_2_dark.png" class="img-fluid"></a></p>
 </div>
 <p>Jest już lepiej! Problem jednak powodują w tym wypadku puste nawiasy. Nasze wyrażenie regularne wymaga, by między nawiasami coś było. Takie właśnie sekwencje znajduje w przypadku zapisu <code>()</code>. Nawias zamykający jest po prosu kolejnym znakiem, czyli łapie się jako <code>.</code>, a dopasowanie kończy dopiero kolejny nawias zamykający.</p>
 <p>Rozwiązania widzę tutaj dwa. Po pierwsze można wykorzystać <em>lookarounds</em>, żeby pustych nawiasów nie dopasowywać. Pozwolą one też dopasować tekst <em>wewnątrz</em> nawiasów bez samych nawiasów. Nie chcę jednak wchodzić tak głęboko, dlatego zainteresowanych odsyłam <a href="https://www.rexegg.com/regex-lookarounds.html">tutaj</a>. Po drugie możemy umożliwić dopasowywanie też pustych nawiasów zastępując operator „jeden lub więcej” (<code>+</code>) operatorem „zero lub więcej” (<code>*</code>). Pamiętajmy jednak o chciwości tych operatorów i dodajmy jeszcze <code>?</code>.</p>
 <div class="light-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/kDdEiE/3"><img src="ilustracje/regex/greedy_3.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/kDdEiE/3"><img src="ilustracje/regex/greedy_3.png" class="img-fluid"></a></p>
 </div>
 <div class="dark-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/kDdEiE/3"><img src="ilustracje/regex/greedy_3_dark.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/kDdEiE/3"><img src="ilustracje/regex/greedy_3_dark.png" class="img-fluid"></a></p>
 </div>
 </section>
 <section id="grupy-i-zastępowanie" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Grupy i zastępowanie</h1>
 <p>Zazwyczaj po to wyszukujemy tekst, żeby zastąpić go innym. Jak to jednak zrobić, jeśli mamy takie fragmenty tekstu jak <code>.+</code>? Nie mogę wpisać w pole z tekstem do podstawienia <code>.+</code>, bo dostanę dosłowną kropkę i plus. Program musi dokładnie wiedzieć, co w dane miejsce wstawić. Załóżmy, że w poprzednim przykładzie chcemy zamienić nawiasy okrągłe na kwadratowe. Jak to zrobić? Za pomocą grup.</p>
 <div class="light-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/q6PCek/1"><img src="ilustracje/regex/groups_1.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/q6PCek/1"><img src="ilustracje/regex/groups_1.png" class="img-fluid"></a></p>
 </div>
 <div class="dark-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/q6PCek/1"><img src="ilustracje/regex/groups_1_dark.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/q6PCek/1"><img src="ilustracje/regex/groups_1_dark.png" class="img-fluid"></a></p>
 </div>
 <p>Jak to zrobiłem? Najpierw w wyszukiwaniu zmieniłem sekwencję <code>\(.*?\)</code> w <code>\((.*?)\)</code>. Innymi słowy otoczyłem <code>.*?</code> dodatkową parą nawiasów. Na screenie zaznaczone są na zielono. Znaki w nawiasach tworzą grupy. Grupy po to są nam potrzebne, żebyśmy mogli je potem wykorzystywać do zastępowania tekstu<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Zwróćmy uwagę na tekst w drugim polu, gdzie wpisałem <code>[$1]</code>. Oznacza to „tekst z pierwszej grupy (<code>$1</code>) w nawiasach kwadratowych”. Czyli bierzemy wnętrze naszego pierwotnego nawiasu (grupę 1.) i otaczamy je nawiasami kwadratowymi. Nawiasy okrągłe nie są częścią grupy, więc nie pojawiają się w tekście po zmianie.</p>
 <p>Odwołania do grup mogą wyglądać różnie w różnych wersjach RegEx. W tym wypadku użyłem <code>$1</code>, ale możemy się też spotkać z innymi oznaczeniami, przede wszystkim <code>\1</code>. Zależy to od programu.</p>
@@ -1387,18 +1344,10 @@ cookieconsent.run({
 <p>](./$1.qmd)</p>
 </blockquote>
 <div class="light-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="ilustracje/regex/main_problem.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="ilustracje/regex/main_problem.png" class="img-fluid"></a></p>
 </div>
 <div class="dark-mode">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="ilustracje/regex/main_problem_dark.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
+<p><a href="https://regex101.com/r/Ub7uVB/1"><img src="ilustracje/regex/main_problem_dark.png" class="img-fluid"></a></p>
 </div>
 <p>Zaczynam zamykającym nawiasem kwadratowym, bo hiperlinki w markdown są formatowane jako <code>[tekst](link)</code>. Dalej otwieram dosłowny nawias okrągły i w nim dowolny tekst. Mogłem napisać dokładny link, bo to o ten i żaden inny tekst mi chodzi, ale nie chciało mi się&nbsp;pisać. Zabezpieczyłem się przed złymi dopasowaniami słowem „posts”. Po nim znajduje się prawy ukośnik i dowolne znaki, czyli wewnętrzna nazwa danego wpisu. <code>posts/.+</code> jest też grupą, dlatego jest w nawiasach. Wyrażenie zakończone jest rozszerzeniem <code>.html</code> i nawiasem zamykającym. Całość zastępuję swoją grupą <code>posts/nazwa_wpisu</code> poprzedzoną tekstem <code>./</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> i zakończoną rozszerzeniem <code>.qmd</code>. Całość otaczam odpowiednimi nawiasami.</p>
 <p>Czy mogłem zrobić to lepiej? Oczywiście! Tylko po co? Te sekwencje muszą być <strong>użytkowe</strong>. Nie musimy się starać, żeby były odporne na błędy i działały w każdym wypadku. To są rzeczy, które pisze się szybko, wykorzystuje i kasuje. Nie muszą być idealne, <strong>muszą być napisane sprawnie i działać tu i teraz, w tym konkretnym przypadku</strong>. W końcu po to uczymy się wyrażeń regularnych, żeby oszczędzić sobie pracy, a nie jej przysporzyć. Jeśli robimy coś często i chcemy to zachować na przyszłość, to może wtedy warto się bawić w szlifowanie. Podobnie jeśli wyrażenie regularne jest częścią skryptu. Mimo wszystko w większości przypadków piszemy wyrażenia regularne <strong>na jeden raz</strong> i warto o tym pamiętać.</p>
@@ -1434,14 +1383,14 @@ cookieconsent.run({
 </section>
 
 
-<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>W rzeczywistości RegEx ma do tego specjalne operatory, ale nie chcę wchodzić tak głęboko.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Ewentualnie możemy ich użyć do stosowania operatorów do całych grup, np. <code>(foo)+</code> dopasuje jedno całe słowo „foo” lub ich więcej. Bez nawiasu <code>+</code> odnosiłby się tylko do litery „o”.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Warto zauważyć, że w polu, w którym wpisujemy tekst, którym zastępujemy nasze dopasowania, nie musimy już <em>escape’ować</em> znaków specjalnych. Tam już wszystkie znaki są dosłowne.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</aside></div></main> <!-- /main -->
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1621,18 +1570,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1664,7 +1602,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/nieobliczalne\.pl");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1699,7 +1677,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1714,27 +1696,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
@@ -1749,10 +1710,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             break;
           }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -1761,8 +1726,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -1995,7 +1967,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 
-<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/regex.qmd" class="toc-action"><i class="bi bi-github"></i>Edytuj tę stronę</a></li><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action"><i class="bi empty"></i>Zgłoś problem</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.513">
+<meta name="generator" content="quarto-1.5.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jakub Jędrusiak">
 <meta name="description" content="Pisanie analiz statystycznych w R jest coraz bardziej powszechne. Nie bez powodu. W R da się zrobić wszystko, jest darmowe i pozwala na automatyzację. Jak zacząć uczyć się R? Odpowiadam na to w tym tekście.">
 
-<title>Nieobliczalne - Podstawy programowania w R</title>
+<title>Nieobliczalne – Podstawy programowania w R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -121,6 +121,7 @@ div.csl-indent {
     "search-more-match-text": "więcej dopasowań w tym dokumencie",
     "search-more-matches-text": "więcej dopasowań w tym dokumencie",
     "search-clear-button-title": "Wyczyść",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Anuluj",
     "search-submit-button-title": "Zatwierdź",
     "search-label": "Szukaj"
@@ -158,8 +159,35 @@ cookieconsent.run({
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/cascadia-code">
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles/styles.css">
 <meta property="og:title" content="Nieobliczalne - Podstawy programowania w R">
@@ -188,7 +216,7 @@ cookieconsent.run({
     </a>
   </div>
             <div id="quarto-search" class="" title="Szukaj"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Przełącz nawigację" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Przełącz nawigację" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -206,6 +234,10 @@ cookieconsent.run({
 <span class="menu-text">Subskrybuj</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="https://www.statystycznie.org/"> 
+<span class="menu-text">Zlecenia na analizy</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../about.html"> 
 <span class="menu-text">O mnie</span></a>
   </li>  
@@ -218,7 +250,7 @@ cookieconsent.run({
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
@@ -1287,12 +1319,12 @@ cookieconsent.run({
 <ol start="6" type="1">
 <li>Wykresy. Wspominałem o tym wyżej, ale wykresy są warte osobnego punktu. Możliwości Excela w tym zakresie są ograniczone. Dla przykładu wykres poniżej prezentuje wyniki pewnego badania w którym mierzono homofobię u ludzi różniących się obecnością manipulacji i poziomem cechy psychologicznej zwanej normatywną męskością. Wykres jest dość skomplikowany. Zawiera trzy zmienne dychotomiczne, co daje łącznie 8 kolumn w grupach po 4 i 2 na wspólnych osiach. Nie powiem, że zrobić taki wykres jest łatwo, bo dobre opanowanie <code>ggplot2</code> trochę zajmuje, ale gdy już opanujemy, co jest do opanowania, to hulaj dusza. Nawet najbardziej skomplikowane wykresy stają się możliwe. Gdy połączyć to z możliwościami dawanymi przez programistyczną warstwę R, łatwe staje się wytworzenie serii pasujących do siebie stylem wykresów o tych samych wymiarach. Pozwala to uzyskać pełną spójność bez ręcznego poprawiania szczególików.</li>
 </ol>
-<div id="fig-homofobia" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-homofobia" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-homofobia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="./ilustracje/homofobia.svg" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-homofobia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-homofobia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;1: Homofobia u mężczyzn o zagrożonej i niezagrożonej męskości, w zależności od tego, jak wysoką mieli tzw. normatywną męskość. Gdy dodać to tego jeszcze podział na dwa rodzaje homofobii, robią się z tego trzy podziały i osiem różnych kolumn ze wspólnymi osiami, legendą i kolorami. Zrobienie tego w Excelu, o ile w ogóle możliwe, byłoby bardzo trudne.
 </figcaption>
 </figure>
@@ -1454,12 +1486,12 @@ Rysunek&nbsp;1: Homofobia u mężczyzn o zagrożonej i niezagrożonej męskości
 </span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
 </div>
 </div>
-<div id="fig-readr" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-readr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-readr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="./ilustracje/readr_gif.gif" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-readr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-readr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;2: Przykład wykorzystania narzędzia do importu danych.
 </figcaption>
 </figure>
@@ -1510,7 +1542,7 @@ Rysunek&nbsp;2: Przykład wykorzystania narzędzia do importu danych.
 <p>Druga kwestia to podział na linijki. Rozbiłem tę komendę na dwie linijki dla czytelności, ale spokojnie mógłbym zapisać to w jednej linijce. Warto jednak pisać kod tak, żeby dało się go potem łatwo czytać. RStudio podpowiada nam też wcięcia, żebyśmy widzieli, że te linijki tworzą jedną całość. W podrozdziale <a href="#sec-formatting" class="quarto-xref">9</a> powiem więcej o formatowaniu kodu.</p>
 <p>Ta komenda oznacza „weź zmienną <code>df</code>, wrzuć ją do komendy <code>filter</code> i zostaw tylko te przypadki, w których w kolumnie <code>Płeć</code> jest wartość <code>"Mężczyzna"</code>.” Nazwy kolumn piszemy bez cudzysłowu, ale jeśli wartość komórki to tekst, to zawsze piszemy go w cudzysłowie. Inaczej R pomyśli, że podajemy mu jakąś zmienną, z której ma dopiero odczytać, co ma być w kolumnie <code>Płeć</code>. Nam chodzi o dosłowny tekst <code>"Mężczyzna"</code>.</p>
 <p>Ostatecznie zostaje operator logiczny. Dlaczego piszę <code>==</code> zamiast <code>=</code>? W programowaniu znak <code>=</code> służy do przypisywania wartości do zmiennych. Zapis <code>a = 5</code> oznacza „niech <code>a</code> ma wartość 5”. Sprawdzenie <em>czy</em> <code>a</code> ma wartość 5 odbywa się poprzez komendę <code>a == 5</code>. Konsola wyrzuci nam wtedy <code>TRUE</code>, <code>FALSE</code> albo <code>BŁĄD: nie znaleziono obiektu 'a'</code>. Kilka innych operatorów logicznych prezentuje tabela.</p>
-<table class="table">
+<table class="caption-top table">
 <caption>Część operatorów logicznych dostępnych w R.</caption>
 <colgroup>
 <col style="width: 25%">
@@ -1641,7 +1673,7 @@ Rysunek&nbsp;2: Przykład wykorzystania narzędzia do importu danych.
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery. Gdy używam zestaw, mam na myśli, że trzeba je wpakować w funkcję <code>c()</code> (od <em>concatenate</em>), np. <code>c(1, 8, 10:16)</code>. Możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu <code>tidy-select</code>. Tutaj akurat użyłem <code>starts_with("H_")</code>, żeby powiedzieć <code>across</code>, że chodzi mi o wszystkie kolumny, których nazwy zaczynają się od <code>H_</code>. Te same funkcje możemy wykorzystywać w funkcji <code>select</code> przy wybieraniu kolumn (por. <a href="#sec-select" class="quarto-xref">Sekcja&nbsp;5.1.2</a>). Kilka innych tego typu funkcji umieściłem w tabeli.</p>
-<table class="table">
+<table class="caption-top table">
 <caption>Funkcje pomocnicze do <code>select</code> i <code>across</code>.</caption>
 <colgroup>
 <col style="width: 33%">
@@ -1930,12 +1962,12 @@ Rysunek&nbsp;2: Przykład wykorzystania narzędzia do importu danych.
 <span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fig-questionr" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-questionr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-questionr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="./ilustracje/questionr_gif.gif" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-questionr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-questionr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;3: Przykład użycia <code>questionr</code>
 </figcaption>
 </figure>
@@ -2928,12 +2960,12 @@ Rysunek&nbsp;3: Przykład użycia <code>questionr</code>
 <section id="styler" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="styler"><span class="header-section-number">9.1</span> <code>styler</code></h2>
 <p>Pierwszy z tych narzędzi to <code>styler</code>, który sam poprawia wiele aspektów kodu, w tym wiele oczywistych błędów. Instalujemy go jak każdy inny pakiet (<code>install.packages("styler")</code>). Po zainstalowaniu menu Addins wzbogaca się o kilka opcji, z których najważniejsza to <em>style active file</em><a href="#fn35" class="footnote-ref" id="fnref35" role="doc-noteref"><sup>35</sup></a>. Podczas pracy uruchamiam to co jakiś czas i zazwyczaj znajdują się jakieś przeoczenia.</p>
-<div id="fig-styler" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-styler" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-styler-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="./ilustracje/styler_gif.gif" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-styler-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-styler-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;4: Przykład wykorzystania <code>styler</code>
 </figcaption>
 </figure>
@@ -2942,12 +2974,12 @@ Rysunek&nbsp;4: Przykład wykorzystania <code>styler</code>
 <section id="lintr" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="lintr"><span class="header-section-number">9.2</span> <code>lintr</code></h2>
 <p><code>styler</code> nie poprawia wszystkich błędów, bo byłoby to zbyt destrukcyjne. Na szczęście <code>lintr</code> może nam większość z nich wypomnieć. Dla każdego naszego projektu powinniśmy raz uruchomić komendę <code>lintr::use_lintr(type = "tidyverse")</code>. Spowoduje to wytworzenie w folderze pliku o nazwie <code>.lintr</code>. Zawiera on konfigurację <code>lintr</code> dla danego projektu. Za jego pomocą będziemy mogli tę konfigurację również zmieniać.</p>
-<div id="fig-lintr" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-lintr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-lintr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="./ilustracje/lintr_gif.gif" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-lintr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lintr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Rysunek&nbsp;5: Przykład wykorzystania <code>lintr</code>
 </figcaption>
 </figure>
@@ -3238,7 +3270,7 @@ Rysunek&nbsp;5: Przykład wykorzystania <code>lintr</code>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografia</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-field2012" class="csl-entry" role="listitem">
 Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Los Angeles London New Delhi Singapore Washington, DC: Sage.
 </div>
@@ -3248,7 +3280,7 @@ Wickham, H., &amp; Grolemund, G. (2020). <em>J<span>ę</span>zyk R: kompletny ze
 <div id="ref-wilkinson_grammar_2005" class="csl-entry" role="listitem">
 Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>. New York: Springer-Verlag. <a href="https://doi.org/10.1007/0-387-28695-0">https://doi.org/10.1007/0-387-28695-0</a>
 </div>
-</div></section><aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
 
 <ol>
 <li id="fn1"><p>Drugim najpopularniejszym jest R.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -3290,7 +3322,7 @@ Wilkinson, L. (2005). <em>The <span>Grammar</span> of <span>Graphics</span></em>
 <li id="fn37"><p>Scratch to bardzo przyjemne, darmowe, rysunkowo-blokowe narzędzie do ćwiczenia programowania stworzone przez naukowców z MIT. Nie jest ono specyficzne dla żadnego języka, ale może być dobrym wprowadzeniem do programowania w ogóle. Nie wymaga pisania kodu, a opiera się w całości na przeciąganiu myszką bloczków. Dzięki temu można oswoić się z różnymi ideami w programowaniu, takimi jak funkcje, zmienne itd., bez zaprzątania głowy składnią konkretnego języka.<a href="#fnref37" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn38"><p>Należy się upwenić, że te osoby kochają nas wystarczająco, żeby być gotowymi na to poświęcenie.<a href="#fnref38" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</aside></div></main> <!-- /main -->
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -3470,18 +3502,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -3513,7 +3534,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/nieobliczalne\.pl");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -3548,7 +3609,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -3563,27 +3628,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
@@ -3598,10 +3642,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             break;
           }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -3610,8 +3658,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -3844,7 +3899,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 
-<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/podstawy_R.qmd" class="toc-action"><i class="bi bi-github"></i>Edytuj tę stronę</a></li><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action"><i class="bi empty"></i>Zgłoś problem</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
