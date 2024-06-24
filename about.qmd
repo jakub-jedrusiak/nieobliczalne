@@ -1,5 +1,5 @@
 ---
-title: "Jakub Jędrusiak"
+title: "mgr Jakub Jędrusiak"
 image: ./posts/headers/profile.jpg
 about:
   template: jolla
@@ -15,7 +15,7 @@ notice: |
     @jedrusiak_tworczosc_2021, @burzynski_czarny_2020
 ---
 
-Student psychologii Uniwersytetu Wrocławskiego. Zainteresowany psychologią procesów poznawczych i wnioskowaniem statystycznym, w tym wykorzystaniem R i pythona w nauce. Zwolennik Open Science.
+Psycholog, absolwent Uniwersytetu Wrocławskiego. Zainteresowany psychologią procesów poznawczych i wnioskowaniem statystycznym, w tym wykorzystaniem R i pythona w nauce. Zwolennik Open Science.
 
 # Publikacje {#publikacje}
 
