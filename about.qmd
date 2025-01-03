@@ -12,10 +12,10 @@ about:
     - text: ORCID
       href: https://orcid.org/0000-0002-6481-8210
 notice: |
-    @jedrusiak_tworczosc_2021, @burzynski_czarny_2020
+    @jedrusiak_tworczosc_2021, @burzynski_czarny_2020, @jedrusiak_uprzedzenia_2023, @jedrusiak_openscoring_2024, @jedrusiak_recalling_2024
 ---
 
-Psycholog, absolwent Uniwersytetu Wrocławskiego. Zainteresowany psychologią procesów poznawczych i wnioskowaniem statystycznym, w tym wykorzystaniem R i pythona w nauce. Zwolennik Open Science.
+Psycholog, absolwent Uniwersytetu Wrocławskiego. Zainteresowany psychologią procesów poznawczych i wnioskowaniem statystycznym, w tym wykorzystaniem R i Pythona w nauce. Zwolennik Open Science.
 
 # Publikacje {#publikacje}
 
