@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.45">
+<meta name="generator" content="quarto-1.7.5">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,12 +74,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ff4371ef257df69894857e99c6ad0d06.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-dec4957386d03255e1655963b31d62d3.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-6f11e013ef2159314a6684fe37c0a947.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-8478d30dfbc6d593d506683630068ccb.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -176,11 +176,11 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../styles/styles.css">
-<meta property="og:title" content="Nieobliczalne - Kombinatoryka">
+<meta property="og:title" content="Kombinatoryka – Nieobliczalne">
 <meta property="og:description" content="Ile wykonano uścisków dłoni w pomieszczeniu, w którym jest 100 osób? Omawiam tutaj trzy podstawowe pojęcia kombinatoryki – wariacje, kombinacje i permutacje.">
 <meta property="og:image" content="https://nieobliczalne.pl/posts/headers/kombinatoryka.webp">
 <meta property="og:site_name" content="Nieobliczalne">
-<meta name="twitter:title" content="Nieobliczalne - Kombinatoryka">
+<meta name="twitter:title" content="Kombinatoryka – Nieobliczalne">
 <meta name="twitter:description" content="Ile wykonano uścisków dłoni w pomieszczeniu, w którym jest 100 osób? Omawiam tutaj trzy podstawowe pojęcia kombinatoryki – wariacje, kombinacje i permutacje.">
 <meta name="twitter:image" content="https://nieobliczalne.pl/headers/kombinatoryka.jpeg">
 <meta name="twitter:creator" content="@jakub_jedrusiak">
@@ -1613,24 +1613,24 @@ C^k_n = \frac{\frac{n!}{(n-k)!}}{k!} = \frac{n!}{k!(n-k)!} = \binom{n}{k}
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{mermaid}</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">%%| fig-responsive: true</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="in">%%| fig-width: 80%</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="in">%%| code-fold: true</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="in">%%| code-summary: "Pokaż kod"</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="in">flowchart TD</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="in">    START(START) --&gt; zbior</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="in">    zbior[/Mam zbiór, z którym chcę coś zrobić/] --&gt;</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="in">    kolejnosc{Czy kolejność ma znaczenie?}</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="in">    kolejnosc --&gt;|Nie| C[kombinacja]</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="in">        C --&gt; C_powtorzenia{Czy elementy mogą się powtarzać?}</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="in">        C_powtorzenia --&gt;|Tak| C_powtorzenia_koniec(kombinacja z powtórzeniami)</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="in">        C_powtorzenia --&gt;|Nie| C_koniec(kombinacja bez powrótrzeń)</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="in">    kolejnosc --&gt;|Tak| V[wariacja]</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="in">        V --&gt; V_calosc{Czy wykorzystuję cały zbiór?}</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="in">        V_calosc --&gt;|Tak| P(permutacja)</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="in">        V_calosc --&gt;|Nie| V_powtorzenia{Czy elementy mogą się powtarzać?}</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="in">        V_powtorzenia --&gt;|Tak| V_powtorzenia_koniec(wariacja z powtórzeniami)</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="in">        V_powtorzenia --&gt;|Nie| V_koniec(wariacja bez powrótrzeń)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>%%| fig-responsive: true</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>%%| fig-width: <span class="dv">80</span>%</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>%%| code-fold: true</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>%%| code-summary: <span class="ot">"</span><span class="st">Pokaż kod</span><span class="ot">"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>flowchart TD</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    START(START) --&gt; zbior</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    zbior[<span class="ot">/Mam zbiór, z którym chcę coś zrobić/</span>] --&gt;</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    kolejnosc{Czy kolejność ma znaczenie?}</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    kolejnosc --&gt;|Nie| C[kombinacja]</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        C --&gt; C_powtorzenia{Czy elementy mogą się powtarzać?}</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        C_powtorzenia --&gt;|Tak| C_powtorzenia_koniec(kombinacja z powtórzeniami)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        C_powtorzenia --&gt;|Nie| C_koniec(kombinacja bez powrótrzeń)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    kolejnosc --&gt;|Tak| V[wariacja]</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        V --&gt; V_calosc{Czy wykorzystuję cały zbiór?}</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        V_calosc --&gt;|Tak| P(permutacja)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        V_calosc --&gt;|Nie| V_powtorzenia{Czy elementy mogą się powtarzać?}</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        V_powtorzenia --&gt;|Tak| V_powtorzenia_koniec(wariacja z powtórzeniami)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        V_powtorzenia --&gt;|Nie| V_koniec(wariacja bez powrótrzeń)</span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
@@ -1889,8 +1889,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -2001,7 +1999,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -2227,10 +2224,55 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<script src="https://giscus.app/client.js" data-repo="jakub-jedrusiak/nieobliczalne" data-repo-id="R_kgDOHBIy6A" data-category="General" data-category-id="DIC_kwDOHBIy6M4CUvlw" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
-</script>
 <input type="hidden" id="giscus-base-theme" value="dark">
 <input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+function loadGiscusWhenReady() {
+  // Function to get the theme based on body class
+  const getTheme = () => {
+    const baseTheme = document.getElementById('giscus-base-theme').value;
+    const altTheme = document.getElementById('giscus-alt-theme').value;
+    return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+  };
+  // Create the Giscus script and add it to the desired location
+  const loadGiscus = () => {
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "jakub-jedrusiak/nieobliczalne";
+    script.dataset.repoId = "R_kgDOHBIy6A";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOHBIy6M4CUvlw";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  };
+  // MutationObserver to detect when the 'quarto-light' or 'quarto-dark' class is added to the body
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === "attributes" && mutation.attributeName === "class") {
+        if (document.body.classList.contains('quarto-light') || document.body.classList.contains('quarto-dark')) {
+          loadGiscus();
+          observer.disconnect(); // Stop observing once Giscus is loaded
+          break;
+        }
+      }
+    }
+  });
+  // Start observing the body for class attribute changes
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+}
+loadGiscusWhenReady();
+</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

@@ -9,7 +9,7 @@
 <link>https://nieobliczalne.pl/</link>
 <atom:link href="https://nieobliczalne.pl/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.5.45</generator>
+<generator>quarto-1.7.5</generator>
 <lastBuildDate>Sat, 28 Oct 2023 22:00:00 GMT</lastBuildDate>
 <item>
   <title>Rozkłady próbkowania i rozkłady \(t\)</title>
@@ -7784,12 +7784,20 @@ font-style: inherit;">`all_top2`</span>. A value for a participant is the maximu
 <span id="cb7-3"><span class="in" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">```{r}</span></span>
-<span id="cb7-4"><span class="in" style="color: #5E5E5E;
+<span id="cb7-4"><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">library("mtscr")</span></span>
-<span id="cb7-5"><span class="in" style="color: #5E5E5E;
+font-style: inherit;">library</span>(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">data("mtscr_creativity", package = "mtscr")</span></span>
+font-style: inherit;">"mtscr"</span>)</span>
+<span id="cb7-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mtscr_creativity"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">package =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mtscr"</span>)</span>
 <span id="cb7-6"><span class="in" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">```</span></span></code></pre></div>
@@ -9737,7 +9745,7 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 <div class="light-mode">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://regex101.com/r/kUE7Db/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/or.png" class="img-fluid figure-img" alt="Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej."></a></p>
+<p><a href="https://regex101.com/r/kUE7Db/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/or.png" class="img-fluid figure-img"></a></p>
 <figcaption>Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej.</figcaption>
 </figure>
 </div>
@@ -9745,7 +9753,7 @@ font-style: inherit;"># zaktualizuj README.md</span></span></code></pre></div>
 <div class="dark-mode">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://regex101.com/r/kUE7Db/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/or_dark.png" class="img-fluid figure-img" alt="Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej."></a></p>
+<p><a href="https://regex101.com/r/kUE7Db/1"><img src="https://nieobliczalne.pl/posts/ilustracje/regex/or_dark.png" class="img-fluid figure-img"></a></p>
 <figcaption>Wszystkie przykłady wykorzystują RegEx101. Klikając w screen, przeniesiesz się do RegEx101, żeby przejrzeć dany przykład dokładniej.</figcaption>
 </figure>
 </div>
@@ -18828,60 +18836,34 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><span class="in" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">```{mermaid}</span></span>
-<span id="cb6-2"><span class="in" style="color: #5E5E5E;
+<span id="cb6-2">%%| fig-responsive: true</span>
+<span id="cb6-3">%%| fig-width: <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">%%| fig-responsive: true</span></span>
-<span id="cb6-3"><span class="in" style="color: #5E5E5E;
+font-style: inherit;">80</span>%</span>
+<span id="cb6-4">%%| code-fold: true</span>
+<span id="cb6-5">%%| code-summary: <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">%%| fig-width: 80%</span></span>
-<span id="cb6-4"><span class="in" style="color: #5E5E5E;
+font-style: inherit;">"</span><span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">%%| code-fold: true</span></span>
-<span id="cb6-5"><span class="in" style="color: #5E5E5E;
+font-style: inherit;">Pokaż kod</span><span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">%%| code-summary: "Pokaż kod"</span></span>
-<span id="cb6-6"><span class="in" style="color: #5E5E5E;
+font-style: inherit;">"</span></span>
+<span id="cb6-6">flowchart TD</span>
+<span id="cb6-7">    START(START) --&gt; zbior</span>
+<span id="cb6-8">    zbior[<span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">flowchart TD</span></span>
-<span id="cb6-7"><span class="in" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    START(START) --&gt; zbior</span></span>
-<span id="cb6-8"><span class="in" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    zbior[/Mam zbiór, z którym chcę coś zrobić/] --&gt;</span></span>
-<span id="cb6-9"><span class="in" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    kolejnosc{Czy kolejność ma znaczenie?}</span></span>
-<span id="cb6-10"><span class="in" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    kolejnosc --&gt;|Nie| C[kombinacja]</span></span>
-<span id="cb6-11"><span class="in" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">        C --&gt; C_powtorzenia{Czy elementy mogą się powtarzać?}</span></span>
-<span id="cb6-12"><span class="in" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">        C_powtorzenia --&gt;|Tak| C_powtorzenia_koniec(kombinacja z powtórzeniami)</span></span>
-<span id="cb6-13"><span class="in" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">        C_powtorzenia --&gt;|Nie| C_koniec(kombinacja bez powrótrzeń)</span></span>
-<span id="cb6-14"><span class="in" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">    kolejnosc --&gt;|Tak| V[wariacja]</span></span>
-<span id="cb6-15"><span class="in" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">        V --&gt; V_calosc{Czy wykorzystuję cały zbiór?}</span></span>
-<span id="cb6-16"><span class="in" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">        V_calosc --&gt;|Tak| P(permutacja)</span></span>
-<span id="cb6-17"><span class="in" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">        V_calosc --&gt;|Nie| V_powtorzenia{Czy elementy mogą się powtarzać?}</span></span>
-<span id="cb6-18"><span class="in" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">        V_powtorzenia --&gt;|Tak| V_powtorzenia_koniec(wariacja z powtórzeniami)</span></span>
-<span id="cb6-19"><span class="in" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">        V_powtorzenia --&gt;|Nie| V_koniec(wariacja bez powrótrzeń)</span></span>
+font-style: inherit;">/Mam zbiór, z którym chcę coś zrobić/</span>] --&gt;</span>
+<span id="cb6-9">    kolejnosc{Czy kolejność ma znaczenie?}</span>
+<span id="cb6-10">    kolejnosc --&gt;|Nie| C[kombinacja]</span>
+<span id="cb6-11">        C --&gt; C_powtorzenia{Czy elementy mogą się powtarzać?}</span>
+<span id="cb6-12">        C_powtorzenia --&gt;|Tak| C_powtorzenia_koniec(kombinacja z powtórzeniami)</span>
+<span id="cb6-13">        C_powtorzenia --&gt;|Nie| C_koniec(kombinacja bez powrótrzeń)</span>
+<span id="cb6-14">    kolejnosc --&gt;|Tak| V[wariacja]</span>
+<span id="cb6-15">        V --&gt; V_calosc{Czy wykorzystuję cały zbiór?}</span>
+<span id="cb6-16">        V_calosc --&gt;|Tak| P(permutacja)</span>
+<span id="cb6-17">        V_calosc --&gt;|Nie| V_powtorzenia{Czy elementy mogą się powtarzać?}</span>
+<span id="cb6-18">        V_powtorzenia --&gt;|Tak| V_powtorzenia_koniec(wariacja z powtórzeniami)</span>
+<span id="cb6-19">        V_powtorzenia --&gt;|Nie| V_koniec(wariacja bez powrótrzeń)</span>
 <span id="cb6-20"><span class="in" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">```</span></span></code></pre></div>
@@ -19507,37 +19489,6 @@ Rysunek&nbsp;3: Modelem mogłaby być dowolna liczba, jeśli się uprzeć, ale �
 <li><p>Wykorzystaliśmy całkowitą sumę kwadratów do policzenia <strong>wariancji</strong> (średniej z kwadratów odchyleń) w taki sposób, że podzieliliśmy <img src="https://latex.codecogs.com/png.latex?SS_T"> przez <img src="https://latex.codecogs.com/png.latex?N-1"> (stopnie swobody). Nie mogliśmy podzielić <img src="https://latex.codecogs.com/png.latex?SS_T"> przez <img src="https://latex.codecogs.com/png.latex?N">, bo to zaniżyłoby prawdziwą wariancję w populacji.</p></li>
 <li><p>Wyciągnęliśmy pierwiastek z wariacji, żeby wreszcie dostać średnie odchylenie, które nazywamy <strong>odchyleniem standardowym</strong>.</p></li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Zadanie
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Załóżmy, że powtórzyliśmy nasze badanie na kolejnych 8 osobach i otrzymaliśmy następujące wyniki kwestionariusza lęku:</p>
-<p>5, 8, 8, 8, 5, 6, 5, 3</p>
-<p>Nie przejmuj się na razie wielkością pająków. Policz wariancję i odchylenie standardowe tych danych.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Odpowiedź
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Csigma%5E2%20&amp;=%20%5Cfrac%7B%5Csum%5EN_%7Bi%20=%201%7D%20(x_i%20-%20%5Cbar%20x)%5E2%7D%7BN-1%7D%20%20=%20%5C%5C%0A&amp;=%20%5Cfrac%7B(5-6)%5E2%20+%20(8-6)%5E2%20+%20(8-6)%5E2%20+%20(8-6)%5E2%20+%20(5-6)%5E2%20+%20(6-6)%5E2%20+%20(5-6)%5E2%20+%20(3-6)%5E2%7D%7B8-1%7D%20=%20%5C%5C%0A&amp;=%20%5Cfrac%7B1%20+%204%20+%204%20+%204%20+%201%20+%200%20+%201%20+%209%7D%7B7%7D%20=%20%5C%5C%0A&amp;=%20%5Cfrac%7B24%7D%7B7%7D%20%5Capprox%203,43%0A%5Cend%7Baligned%7D%0A"> <img src="https://latex.codecogs.com/png.latex?%0A%5Csigma%20=%20%5Csqrt%7B3,43%7D%20%5Capprox%201,85%0A"></p>
-</div>
-</div>
-</div>
 </section>
 <section id="średnia-to-nie-wszystko" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="średnia-to-nie-wszystko"><span class="header-section-number">3</span> Średnia to nie wszystko</h2>

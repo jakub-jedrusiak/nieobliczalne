@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.45">
+<meta name="generator" content="quarto-1.7.5">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -60,12 +60,12 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ff4371ef257df69894857e99c6ad0d06.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-dec4957386d03255e1655963b31d62d3.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-6f11e013ef2159314a6684fe37c0a947.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-8478d30dfbc6d593d506683630068ccb.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -158,11 +158,11 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../styles/styles.css">
-<meta property="og:title" content="Nieobliczalne - Wyjaśnianie wariancji i test F">
+<meta property="og:title" content="Wyjaśnianie wariancji i test F – Nieobliczalne">
 <meta property="og:description" content="Co to znaczy, że geny wyjaśniają 90% wariancji wzrostu? Że z moich 170 cm wzrostu 153 cm zawdzięczam genom, a pozostałe 17 cm środowisku? Czym w ogóle jest wariancja? Odpowiem na to pytanie, jak i wprowadzę pojęcie modelu i jego testowania.">
 <meta property="og:image" content="https://nieobliczalne.pl/posts/headers/procent-wariancji.webp">
 <meta property="og:site_name" content="Nieobliczalne">
-<meta name="twitter:title" content="Nieobliczalne - Wyjaśnianie wariancji i test F">
+<meta name="twitter:title" content="Wyjaśnianie wariancji i test F – Nieobliczalne">
 <meta name="twitter:description" content="Co to znaczy, że geny wyjaśniają 90% wariancji wzrostu? Że z moich 170 cm wzrostu 153 cm zawdzięczam genom, a pozostałe 17 cm środowisku? Czym w ogóle jest wariancja? Odpowiem na to pytanie, jak i wprowadzę pojęcie modelu i jego testowania.">
 <meta name="twitter:image" content="https://nieobliczalne.pl/headers/procent-wariancji.jpeg">
 <meta name="twitter:creator" content="@jakub_jedrusiak">
@@ -1405,46 +1405,6 @@ SS_T = \sum_{i=1}^N S_i^2 = \sum_{i=1}^N (x_i - \bar x)^2
 <li><p>Wykorzystaliśmy całkowitą sumę kwadratów do policzenia <strong>wariancji</strong> (średniej z kwadratów odchyleń) w taki sposób, że podzieliliśmy <span class="math inline">\(SS_T\)</span> przez <span class="math inline">\(N-1\)</span> (stopnie swobody). Nie mogliśmy podzielić <span class="math inline">\(SS_T\)</span> przez <span class="math inline">\(N\)</span>, bo to zaniżyłoby prawdziwą wariancję w populacji.</p></li>
 <li><p>Wyciągnęliśmy pierwiastek z wariacji, żeby wreszcie dostać średnie odchylenie, które nazywamy <strong>odchyleniem standardowym</strong>.</p></li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Zadanie
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Załóżmy, że powtórzyliśmy nasze badanie na kolejnych 8 osobach i otrzymaliśmy następujące wyniki kwestionariusza lęku:</p>
-<p>5, 8, 8, 8, 5, 6, 5, 3</p>
-<p>Nie przejmuj się na razie wielkością pająków. Policz wariancję i odchylenie standardowe tych danych.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Odpowiedź
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><span class="math display">\[
-\begin{aligned}
-\sigma^2 &amp;= \frac{\sum^N_{i = 1} (x_i - \bar x)^2}{N-1}  = \\
-&amp;= \frac{(5-6)^2 + (8-6)^2 + (8-6)^2 + (8-6)^2 + (5-6)^2 + (6-6)^2 + (5-6)^2 + (3-6)^2}{8-1} = \\
-&amp;= \frac{1 + 4 + 4 + 4 + 1 + 0 + 1 + 9}{7} = \\
-&amp;= \frac{24}{7} \approx 3,43
-\end{aligned}
-\]</span> <span class="math display">\[
-\sigma = \sqrt{3,43} \approx 1,85
-\]</span></p>
-</div>
-</div>
-</div>
 </section>
 <section id="średnia-to-nie-wszystko" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="średnia-to-nie-wszystko"><span class="header-section-number">3</span> Średnia to nie wszystko</h2>
@@ -1935,8 +1895,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -2047,7 +2005,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -2273,10 +2230,55 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<script src="https://giscus.app/client.js" data-repo="jakub-jedrusiak/nieobliczalne" data-repo-id="R_kgDOHBIy6A" data-category="General" data-category-id="DIC_kwDOHBIy6M4CUvlw" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
-</script>
 <input type="hidden" id="giscus-base-theme" value="dark">
 <input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+function loadGiscusWhenReady() {
+  // Function to get the theme based on body class
+  const getTheme = () => {
+    const baseTheme = document.getElementById('giscus-base-theme').value;
+    const altTheme = document.getElementById('giscus-alt-theme').value;
+    return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+  };
+  // Create the Giscus script and add it to the desired location
+  const loadGiscus = () => {
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "jakub-jedrusiak/nieobliczalne";
+    script.dataset.repoId = "R_kgDOHBIy6A";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOHBIy6M4CUvlw";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  };
+  // MutationObserver to detect when the 'quarto-light' or 'quarto-dark' class is added to the body
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === "attributes" && mutation.attributeName === "class") {
+        if (document.body.classList.contains('quarto-light') || document.body.classList.contains('quarto-dark')) {
+          loadGiscus();
+          observer.disconnect(); // Stop observing once Giscus is loaded
+          break;
+        }
+      }
+    }
+  });
+  // Start observing the body for class attribute changes
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+}
+loadGiscusWhenReady();
+</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
