@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.5">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,8 +23,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -35,7 +36,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -69,17 +70,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href=".././styles/logo.svg" rel="icon" type="image/svg+xml">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
-<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ff4371ef257df69894857e99c6ad0d06.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-dec4957386d03255e1655963b31d62d3.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-6f11e013ef2159314a6684fe37c0a947.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-8478d30dfbc6d593d506683630068ccb.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-d7f6f572a82b0b2a80a128f43c88eb00.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-8965ebbc8342c82b623d01c5e5f3f7e4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-d7f6f572a82b0b2a80a128f43c88eb00.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -152,7 +157,169 @@ cookieconsent.run({
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -160,7 +327,8 @@ cookieconsent.run({
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src=".././styles/logo.png" alt="" class="navbar-logo">
+    <img src=".././styles/logo.png" alt="" class="navbar-logo light-content">
+    <img src=".././styles/logo.png" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Nieobliczalne</span>
@@ -1141,6 +1309,7 @@ cookieconsent.run({
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Metaprogramowanie w R</h1>
@@ -1182,7 +1351,7 @@ cookieconsent.run({
 <h1 data-number="1"><span class="header-section-number">1</span> Przykład motywacyjny</h1>
 <p>Wyobraźmy sobie, że chcemy napisać własną funkcję, która będzie za nas odwalać jakąś głupią robotę. Możemy na przykład mieć jakiś skomplikowany proces modelowania, który zawsze wygląda podobnie. Prostszy przykład – załóżmy, że zawsze liczymy dokładnie taki sam zestaw statystyk opisowych i chcemy mieć już funkcję na przyszłość, która policzy je nam sama. Dokładnie tak zrobiłem, jak na III roku psychologii miałem kolokwium ze statystyki. Zapiszmy więc taką funkcję.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
@@ -1198,7 +1367,7 @@ cookieconsent.run({
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      )</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Przejdźmy sobie przez tę funkcję krok po kroku. Po pierwsze dałem jej 3 argumenty – <code>df</code>, <code>group</code> i tajemnicze <code>…</code>. <code>df</code> To baza danych, <code>group</code> to kolumna, po której chcemy agregować dane (patrz <a href="./posts/podstawy_R.qmd#sec-summarise">tutaj</a>). Ostatni argument to tzw. <em>ellipsis</em> czyli wielokropek i czasem spotykamy go w dokumentacji, np. w funkcji <code>select()</code>. W wielokropku chodzi o to, że mogę tam wsadzić dowolną liczbę rzeczy, np. dowolnie wiele nazw kolumn. W naszym wypadku będziemy wrzucać tam nazwy kolumn, dla których chcemy liczyć nasze statystyki. Nie wiemy, czy będzie to jedna kolumna, 10 kolumn, czy wyrażenie <code>tidyselect</code> (np. <code>starts_with("H")</code>) więc używamy wielokropka.</p>
 <p>Bazę danych grupujemy i wrzucamy do funkcji agregującej <code>summarise()</code>. Ponieważ chcemy wykonać wiele razy ten sam zestaw obliczeń na wielu kolumnach, korzystamy z <code>across()</code> (patrz <a href="./posts/podstawy_R.qmd#sec-across">tutaj</a>). Dalej <code>across()</code> przyjmuje listę funkcji, które chcemy zastosować. Listę, czyli wszystkie komendy zamykam w <code>list()</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Większość funkcji podaję jako funkcje anonimowe (patrz <a href="./posts/podstawy_R.qmd#sec-lambda">tutaj</a>), bo albo muszę podać dodatkowe argumenty, albo to funkcje kombinowane, np. <code>\(x) sum(!is.na(x))</code>.</p>
@@ -1210,7 +1379,7 @@ cookieconsent.run({
 </ol>
 <p>Taka funkcja powinna działać. Jeśli uruchomimy ją w konsoli na konkretnym przykładzie, to zadziała.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
@@ -1224,8 +1393,8 @@ cookieconsent.run({
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">NA</span><span class="st">`</span> <span class="ot">=</span> \(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x)) <span class="co"># liczba brakujących</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      )</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 3 × 13</span>
 <span style="color: #555555;">#&gt;</span>   <span style="font-weight: bold;">Species</span>    <span style="font-weight: bold;">Sepal.Length_N</span> <span style="font-weight: bold;">Sepal.Length_M</span> <span style="font-weight: bold;">Sepal.Length_SD</span> <span style="font-weight: bold;">Sepal.Length_A</span>
 <span style="color: #555555;">#&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>               <span style="color: #555555; font-style: italic;">&lt;int&gt;</span>          <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
@@ -1235,18 +1404,18 @@ cookieconsent.run({
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># ℹ 8 more variables: </span><span style="color: #555555; font-weight: bold;">Sepal.Length_K</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Length_NA</span><span style="color: #555555;"> &lt;int&gt;,</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">Sepal.Width_N</span><span style="color: #555555;"> &lt;int&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Width_M</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Width_SD</span><span style="color: #555555;"> &lt;dbl&gt;,</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">Sepal.Width_A</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Width_K</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Width_NA</span><span style="color: #555555;"> &lt;int&gt;</span>
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Nie jest to może najładniejsza tabela, ale jest. Spróbujmy jednak to samo wywołać za pomocą naszej funkcji, która przecież niby robi to samo.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">opisowe</span>(iris, Species, Sepal.Length, Sepal.Width)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">opisowe</span>(iris, Species, Sepal.Length, Sepal.Width)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in `group_by()`:</span><span style="color: #BB0000;">
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00;">!</span><span style="color: #BB0000;"> Must group by variables found in `.data`.
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> ✖ Column `group` is not found.
-</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</span></code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Ups. Nie działa. Ale czemu? Błąd mówi, że <code>group_by()</code> nie znalazło kolumny o nazwie <code>group</code>. I bardzo słusznie, że nie znalazło, bo nie ma takiej kolumny w <code>iris</code>. Ale w ogóle nie miało jej szukać! Miało szukać kolumny <code>Species</code>, którą podaliśmy jako argument? Dlaczego <code>group_by()</code> szuka kolumny <code>group</code>?</p>
 </section>
@@ -1256,10 +1425,10 @@ cookieconsent.run({
 <p>Jednocześnie nie jest to coś, co większość useRów musi rozumieć. Taka potrzeba pojawia się zazwyczaj głęboko, późno, gdy chcemy usprawnić nasz kod własnymi funkcjami<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> albo musimy napisać jakiś pakiet. Zazwyczaj pierwszy raz, kiedy chcemy napisać funkcję robiącą wykres w <code>ggplot2</code> i się blokujemy. Wtedy znajdujemy na StackOverflow informację, że trzeba nazwy kolumn wziąć w podwójne klamry (np. <code>{column}</code>) i tyle nam wystarczy, nie musimy zajmować się tym głębiej. Do czasu, kiedy jednak musimy.</p>
 <p>Skąd więc biorą się problemy takie jak w przykładzie? To jest cena, którą płacimy za wygodne pisanie kodu. W klasycznym R, gdy chcemy coś policzyć, musimy wykorzystywać pełne nazwy kolumn. Podobnie gdy coś filtrujemy.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>iris[iris<span class="sc">$</span>Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>, <span class="fu">c</span>(<span class="st">"Species"</span>, <span class="st">"Sepal.Length"</span>)] <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 118 × 2</span>
 <span style="color: #555555;">#&gt;</span>    <span style="font-weight: bold;">Species</span> <span style="font-weight: bold;">Sepal.Length</span>
 <span style="color: #555555;">#&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
@@ -1274,16 +1443,16 @@ cookieconsent.run({
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 9</span> setosa           5.1
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">10</span> setosa           5.4
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># ℹ 108 more rows</span>
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Powyższa funkcja filtruje wiersze, w których <code>Sepal.Length</code> jest większe niż 5 oraz wybiera tylko kolumny <code>Species</code> i <code>Sepal.Length</code>. Zapis ten jest zwięzły, ale niewygodny w pisaniu i jeszcze trudniejszy w czytaniu. Całość przekonwertowałem jeszcze na <code>tibble</code>, żeby się ładniej wyświetlało. Dokładnie ten sam efekt uzyskamy pisząc:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Species, Sepal.Length) <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 118 × 2</span>
 <span style="color: #555555;">#&gt;</span>    <span style="font-weight: bold;">Species</span> <span style="font-weight: bold;">Sepal.Length</span>
 <span style="color: #555555;">#&gt;</span>    <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
@@ -1298,18 +1467,18 @@ cookieconsent.run({
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"> 9</span> setosa           5.1
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">10</span> setosa           5.4
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># ℹ 108 more rows</span>
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>I to da się czytać! Wszystko jest jasne, ładne i wygodne w pisaniu. Dlatego uwielbiam tidyverse i uważam, że to od tidyverse należy zaczynać naukę R. Klasyczny R jest bardzo informatyczny, nieznośny w czytaniu i pisaniu i trudno się go uczyć, zwłaszcza jako pierwszego kontaktu z programowaniem.</p>
 <p>Zauważmy jednak pewien szczegół w tym zapisie. Nazwy kolumn są tutaj zapisane tak, jak wszystkie inne obiekty. Nie są to dosłowne ciągi znaków, nie są to pojedyncze kolumny (<code>iris$Species</code>), to są po prostu nazwy. Nie jest to typowe zachowanie w R. Jeśli zrobimy coś takiego:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] 36
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>…to R widząc wewnątrz <code>sum()</code> coś, co wygląda jak obiekt, próbuje ten obiekt znaleźć i wstawić do funkcji. Dzięki temu efekt jest ten sam, co w przypadku zapisu <code>sum(1:8)</code>. Możemy sobie wyobrazić, że wstawiając do funkcji <code>x</code> dajemy R pudełeczko, w którym zamknięte są liczby od 1 do 8. Gdy R ma policzyć sumę, naturalnie otwiera to pudełeczko, wyciąga te liczby i sumuje.</p>
 </section>
@@ -1317,7 +1486,7 @@ cookieconsent.run({
 <h1 data-number="3"><span class="header-section-number">3</span> <em>Lazy evaluation</em></h1>
 <p>Co ciekawe otwiera to pudełeczko dopiero wtedy, gdy już koniecznie musi, bo każemy mu coś z tym zrobić.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>oszukujemy <span class="ot">&lt;-</span> <span class="cf">function</span>(liczba, niecny_fortel) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>oszukujemy <span class="ot">&lt;-</span> <span class="cf">function</span>(liczba, niecny_fortel) {</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(liczba <span class="sc">+</span> <span class="dv">3</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (liczba <span class="sc">&gt;</span> <span class="dv">10</span>) {</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(niecny_fortel)</span>
@@ -1326,23 +1495,23 @@ cookieconsent.run({
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>jakas_liczba <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">oszukujemy</span>(jakas_liczba, to_nie_istnieje)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">oszukujemy</span>(jakas_liczba, to_nie_istnieje)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] 8
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Po zdefiniowaniu funkcji daliśmy R dwa pudełeczka. Jedno z etykietą <code>jakas_liczba</code>, drugie z etykietą <code>niecny_fortel</code>. Wydaliśmy polecenie wykonania naszej instrukcji z tymi dwoma pudełeczkami. Po pierwsze R miał w konsoli wydrukować zawartość pierwszego pudełeczka powiększoną o 3, co też zrobił. Żeby to zrobić, musiał to pierwsze pudełeczko otworzyć i znalazł tam 5, w związku z czym wydrukował 8. Następnie przeszedł do instrukcji warunkowej. Sprawdził czy podana przez nas liczba (tj. 5) jest większa niż 10. Że nie jest, to zignorował całkowicie, co było w klamrach. Zwróćmy uwagę, że funkcja zakończyła pracę bez błędu. Dlaczego miałby pojawić się błąd? Bo zmienna <code>to_nie_istnieje</code>, bez zaskoczenia, nie istnieje. Używając naszej metafory, daliśmy R puste pudełeczko. Ale R się nie zorientował, bo w ogóle nie musiał tego pudełeczka otwierać. Co się stanie, jeśli otworzy?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oszukujemy</span>(<span class="dv">12</span>, to_nie_istnieje)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oszukujemy</span>(<span class="dv">12</span>, to_nie_istnieje)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] 15
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
-<div class="sourceCode">
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> Error in eval(expr, envir, enclos): nie znaleziono obiektu 'to_nie_istnieje'
-</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</span></code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Tym razem podaliśmy liczbę 12. Ponieważ 12 jest większe niż 10, R odczytał polecenie, że ma zawartość drugiego pudełka wydrukować w konsoli. Otworzył więc to pudełko, zorientował się, że jest puste i wtedy dopiero zaczął krzyczeć. Ta właściwość R, że otwiera pudełka dopiero wtedy, gdy są potrzebne, określana jest jako <em>lazy evaluation</em>. Za moment pokażę, jak możemy to wykorzystać.</p>
 </section>
@@ -1356,7 +1525,7 @@ cookieconsent.run({
 <h1 data-number="5"><span class="header-section-number">5</span> Niejednoznaczność i <code>{ }</code></h1>
 <p>Nie wchodźmy na ten moment w szczegóły, <em>a propos</em> tego, jak działają funkcje tidyverse. Przyjmijmy na ten moment, że potrafią one traktować coś, co inne funkcje uznałyby za obiekt, jako nazwę kolumny. To rodzi nam potencjał do pewnej niejednoznaczności. Kiedy piszemy <code>iris$Sepal.Length</code>, to może jest to niewygodne, ale nie ma wątpliwości, o co nam chodzi. Niejednoznaczność pojawiła się po raz pierwszy, gdy w naszej funkcji <code>opisowe</code> zapisaliśmy <code>group_by(group)</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="co"># tutaj funkcja wariuje</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
@@ -1372,31 +1541,31 @@ cookieconsent.run({
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>      )</span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Gdy zapisaliśmy tę instrukcję, nasza funkcja zwariowała, bo poszła następującą logiką: muszę w bazie danych <code>iris</code> znaleźć kolumnę <code>group</code>. Normalnie zadziałałoby to świetnie. W końcu dokładnie o to nam chodzi, gdy piszemy na przykład <code>iris %&gt;% group_by(Species)</code> – w bazie danych <code>iris</code> pogrupuj po kolumnie <code>Species</code>. Tym razem nie chodzi nam jednak o kolumnę <code>group</code> a właśnie o obiekt <code>group</code> i to, co w sobie zawiera – nazwę kolumny <code>Species</code>.</p>
 <p>Rozszerzmy trochę naszą metaforę z pudełkami. Gdy wywołujemy funkcję, tak naprawdę mamy dwa pudełka. Lepiej to widać, jak zapiszemy naszą funkcję tak:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Przypadek 1.</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="at">x =</span> <span class="dv">100</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Przypadek 1.</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="at">x =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] 2
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Przypadek 2.</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>liczba <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="at">x =</span> liczba)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="at">x =</span> liczba)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] 2
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Efekt działania obu tych wywołań jest taki sam – jest nim logarytm dziesiętny ze 100, czyli 2. W pierwszym wypadku wpakowaliśmy 100 do funkcji bezpośrednio. Innymi słowy do pudełka z napisem <code>x</code> wpakowaliśmy liczbę 100. <code>x</code> To nazwa (jedynego) argumentu funkcji <code>log10()</code>. W drugim przypadku wpakowaliśmy liczbę 100 do pudełka z napisem <code>liczba</code> i dopiero to pudełko chcemy włożyć do pudełka <code>x</code>. Ale R nie lubi matrioszek. R nie włoży pudełka do pudełka. Zanim R włoży coś do pudełka <code>x</code>, to to rozpakuje. Do samego końca. To jest standardowy mechanizm ewaluacji – rozpakuj do końca, aż nie dostaniesz czegoś konkretnego. Jeśli pudełko <code>liczba</code> byłoby puste, R miałby problem.</p>
 <p>Funkcje korzystające z Tidy Eval działają trochę inaczej. Gdy R przynosi im pudełko <code>x</code>, wyciąga z niego pudełko <code>liczba</code> i mówi “O, drugie pudełko. Czekaj, rozpakuję ci to”, na co taka funkcja <code>group_by()</code> odpowiada “Nie, spoko, poradzę sobie”. Dlatego R podaje jej samo pudełko <code>liczba</code>. Funkcja <code>group_by()</code> bierze to pudełko, czyta etykietę i wie, że ma szukać w bazie danych kolumny, co się nazywa “liczba”. Skąd wie, to pomińmy na teraz. Można więc powiedzieć, że standardowa ewaluacja to “rozpakowuj do końca”, a Tidy Eval to “nie rozpakowuj”.</p>
 <p>Problem pojawia się wtedy, gdy piszemy własną funkcję, gdzie chcemy wykorzystać funkcję z Tidy Eval. Gdy w naszej funkcji <code>opisowe</code> wywołujemy <code>group_by(group)</code>, to <code>group_by()</code> posłusznie nie rozpakowuje <code>group</code>, tylko szuka <code>group</code> w bazie danych. Chcemy więc powiedzieć funkcji <code>group_by()</code> “Nie, nie. To rozpakuj, to jest argument.”. Właśnie to uzyskamy za pomocą operatora <code>{ }</code> (czytane <em>curly curly</em>). <code>group_by()</code> będzie wiedziało, że to jest do rozpakowania. Dokonajmy więc pierwszej modyfikacji naszej funkcji <code>opisowe</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{ group }}) <span class="sc">%&gt;%</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
@@ -1414,8 +1583,8 @@ cookieconsent.run({
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="fu">opisowe</span>(iris, Species, Sepal.Width, Sepal.Length)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="fu">opisowe</span>(iris, Species, Sepal.Width, Sepal.Length)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00; font-weight: bold;">Error</span><span style="color: #BB0000; font-weight: bold;"> in `summarise()`:</span><span style="color: #BB0000;">
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">ℹ</span><span style="color: #BB0000;"> In argument: `across(...)`.
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #00BBBB;">ℹ</span><span style="color: #BB0000;"> In group 1: `Species = setosa`.
@@ -1423,8 +1592,8 @@ cookieconsent.run({
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00;">!</span><span style="color: #BB0000;"> Can't compute column `Sepal.Width_N`.
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BB0000; font-weight: bold;">Caused by error:</span><span style="color: #BB0000;">
 </span><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> </span><span style="color: #BBBB00;">!</span><span style="color: #BB0000;"> nie znaleziono obiektu 'Sepal.Length'
-</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</span></code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Może i ciągle nie działa, ale dostaliśmy inny błąd! To naprawdę jest powód do radości, jak się robi cokolwiek związanego z komputerami.</p>
 <p>Jeśli chodzi o formatowanie, to mogę to zapisać jako <code>{group}</code> albo <code>{ group }</code>. Zazwyczaj nie stawiamy spacji po nawiasach, ale operator <code>{ }</code> jest wyjątkiem. Obie formy zadziałają, ale żeby podkreślić szczególne działanie tego operatora <a href="https://style.tidyverse.org/syntax.html?q=%7B%7B#embracing"><em>The tidyverse style guide</em></a> zaleca, by stawiać te spacje.</p>
@@ -1438,45 +1607,45 @@ cookieconsent.run({
 <h1 data-number="7"><span class="header-section-number">7</span> <code>expr()</code> i <code>quo()</code></h1>
 <p>Najbardziej bazową funkcją wykonującą <em>quoting</em> jest funkcja <code>expr()</code>. Jeśli wrzucamy do niej jakieś wyrażenie, zwraca ona nam to wyrażenie w „rozbrojonej” (w naszej metaforze zaklejonej taśmą) formie.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="dv">5</span> <span class="sc">+</span> <span class="dv">3</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(<span class="dv">5</span> <span class="sc">+</span> <span class="dv">3</span>)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> 5 + 3
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(jakis_argument <span class="sc">+</span> <span class="dv">3</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expr</span>(jakis_argument <span class="sc">+</span> <span class="dv">3</span>)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> jakis_argument + 3
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Pierwsze wywołanie zwraca nam dosłowne <code>5 + 3</code>, a nie <code>8</code> ponieważ <code>expr()</code> zatrzymuje wykonywanie dodawania. To wyrażenie jest teraz <em>quoted</em> i żeby dostać 8, musimy je wywołać ręcznie. Zwróćmy uwagę, że drugie wyrażenie też się wykonuje i zwraca dosłownie <code>jakis_argument + 3</code> mimo, że takiej zmiennej nie ma przypisanej. Dzieje się tak dlatego, że odpakowanie pudełka z napisem <code>jakis_argument</code> również zostało zatrzymane.</p>
 <p>Drugą funkcją wykonującą <em>quoting</em> jest <code>quo()</code>. Co ciekawe, nie jest to skrót od <em>quoting</em> a od <em>quosure</em> czyli <em>quoted closure</em>. Od <code>expr()</code> różni się tym, że poza wyrażeniem zapisuje też jego <strong>środowisko</strong> (<em>environment</em>). Środowisko to zbiór zmiennych, w otoczeniu których wykonywana jest funkcja. Innymi słowy to w środowisku zapisywana jest informacja, że <code>x = 5</code>, gdy robimy <code>x &lt;- 5</code> i to ze środowiska ten <code>x</code> jest brany, kiedy trzeba potem trzeba znaleźć jego wartość. Można to sobie wyobrazić jako różne półki, na których stoją pudełka ze zmiennymi. Dla zobrazowania zagadka.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>razy_argument <span class="ot">&lt;-</span> <span class="cf">function</span>(argument) {</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">*</span> argument</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">razy_argument</span>(<span class="dv">2</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">razy_argument</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Jaki będzie wynik działania tej funkcji? <code>10</code> czy <code>200</code>? Pytanie brzmi, co nasza funkcja potraktuje jako <code>x</code> – 5 czy 200? Jest to pytanie o tzw. <em>scope</em> czy też zasięg funkcji, ale można na to spojrzeć też jak na pytanie o środowisko. Z której półki funkcja weźmie pudełko z napisem <code>x</code>? Odpowiedź brzmi – z najbliższej. W tym wypadku najbliższa półka to środowisko samej funkcji, czyli <code>x = 100</code>, a więc wynik to <code>200</code>. Zachęcam do zastanowienia się, co będzie wynikiem <code>razy_argument(x)</code>? Odpowiedź można sprawdzić w swojej konsoli.</p>
 <p>Obiekt typu <em>quosure</em> zapisuje więc nie tylko wyrażenie, ale też informację, w jakim środowisku zostało to wyrażenie zatrzymane. Załóżmy, że stworzyliśmy takie wyrażenie w środowisku globalnym.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>nasz_quosure <span class="ot">&lt;-</span> <span class="fu">quo</span>(<span class="fu">sum</span>(x))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>nasz_quosure <span class="ot">&lt;-</span> <span class="fu">quo</span>(<span class="fu">sum</span>(x))</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>nasz_quosure</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>nasz_quosure</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="font-weight: bold;">&lt;quosure&gt;</span>
 <span style="color: #555555;">#&gt;</span> expr: ^sum(x)
 <span style="color: #555555;">#&gt;</span> env:  global
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Widzimy, że poza samym wyrażeniem <code>sum(x)</code> <em>quosure</em> zawiera też informację o środowisku. Jeśli teraz wykonamy to wyrażenie (o tym jak wykonywać będzie później), to R weźmie <code>x</code> zawsze z półki <code>global</code>, a nie z najbliższej.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>quosure_z_x <span class="ot">&lt;-</span> <span class="fu">quo</span>(x)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>quosure_z_x <span class="ot">&lt;-</span> <span class="fu">quo</span>(x)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1485,41 +1654,41 @@ cookieconsent.run({
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval_tidy</span>(quosure_z_x) <span class="sc">+</span> <span class="dv">2</span> <span class="co"># ewaluacja quosure ręcznie</span></span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">dodaj_dwa</span>(<span class="dv">10</span>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">dodaj_dwa</span>(<span class="dv">10</span>)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] 7
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="enquo-quos-i-enquos-oraz-pokrewne" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> <code>enquo()</code>, <code>quos()</code> i <code>enquos()</code> oraz pokrewne</h1>
 <p>Obie te funkcje posiadają swoje funkcje pokrewne. Funkcja z przedrostkiem <em>en-</em> służy do zatrzymywania argumentów funkcji. Dlatego częściej będziemy wykorzystywać <code>enquo()</code> i <code>enexpr()</code> niż <code>quo()</code> i <code>expr()</code>. Funkcja <code>enquo()</code> nie jest tak drastyczna w zatrzymywaniu. Funkcja <code>quo()</code> zatrzymuje kod natychmiast, a funkcja <code>enquo()</code> raz chociaż wyjmuje coś z pudełka. Zobaczmy to na praktycznym przykładzie.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_quo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_quo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    kolumna <span class="ot">&lt;-</span> <span class="fu">quo</span>(col)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">!!</span>kolumna) <span class="co"># wykrzykniki wykonują, nie przejmuj się</span></span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wybierz_z_quo</span>(iris, Species) <span class="sc">%&gt;%</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> Error in eval(expr, envir, enclos): nie znaleziono obiektu 'Species'
-</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</span></code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Gdy próbujemy wykonać <code>quo(col)</code>, próbuje się ono wykonać do końca, czyli dostajemy to samo, jakbyśmy napisali po prostu <code>select(df, col)</code>. Efekt, który chcemy uzyskać, uzyskamy z funkcją <code>enquo()</code> która służy konkretnie do chwytania argumentów.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    kolumna <span class="ot">&lt;-</span> <span class="fu">enquo</span>(col)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">!!</span>kolumna) <span class="co"># wykrzykniki wykonują, nie przejmuj się</span></span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wybierz_z_enquo</span>(iris, Species) <span class="sc">%&gt;%</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span>   Species
 <span style="color: #555555;">#&gt;</span> 1  setosa
 <span style="color: #555555;">#&gt;</span> 2  setosa
@@ -1527,12 +1696,12 @@ cookieconsent.run({
 <span style="color: #555555;">#&gt;</span> 4  setosa
 <span style="color: #555555;">#&gt;</span> 5  setosa
 <span style="color: #555555;">#&gt;</span> 6  setosa
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Jak widzimy, tym razem kod się wykonał. Funkcja <code>quo()</code> zatrzymuje więc otwieranie pudełek w danym momencie, ale gdy każe jej się je otwierać, będzie otwierała do końca. Funkcja <code>enquo()</code>, gdy wykonana, otworzy tylko to, co jest w tym pudełku schowane i nie otwierając dalej przekaże zawartość <code>select()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>quo_vs_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>quo_vs_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    x_quo <span class="ot">&lt;-</span> <span class="fu">quo</span>(x)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    x_enquo <span class="ot">&lt;-</span> <span class="fu">enquo</span>(x)</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -1543,8 +1712,8 @@ cookieconsent.run({
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(x_quo)</span>
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="fu">quo_vs_enquo</span>(argument)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="fu">quo_vs_enquo</span>(argument)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> [1] "enquo(x):"
 <span style="color: #555555;">#&gt;</span> <span style="font-weight: bold;">&lt;quosure&gt;</span>
 <span style="color: #555555;">#&gt;</span> expr: ^argument
@@ -1553,8 +1722,8 @@ cookieconsent.run({
 <span style="color: #555555;">#&gt;</span> <span style="font-weight: bold;">&lt;quosure&gt;</span>
 <span style="color: #555555;">#&gt;</span> expr: <span style="color: #0000BB;">^x</span>
 <span style="color: #555555;">#&gt;</span> env:  <span style="color: #0000BB;">0x55ac0242f938</span>
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Jak widzimy, <code>enquo()</code> zatrzymało to co chcemy, czyli <code>argument</code>, a szybkie w zatrzymywaniu <code>quo()</code> zatrzymało samo <code>x</code>. Dodatkowo <code>enquo()</code> wiedziało, że chodzi o argument ze środowiska <code>global</code>, a <code>quo()</code> zatrzymało <code>x</code> w środowisku funkcji. Mówiąc krótko – jeśli chcemy zatrzymać argument funkcji, zawsze używajmy <code>enquo()</code> albo <code>enexpr()</code> (lepiej <code>enquo()</code>).</p>
 <p>Drugą pokrewną funkcję otrzymamy dodają do <code>quo()</code> lub <code>expr()</code> przyrostek <em>-s</em>. Otrzymane w ten sposób funkcje <code>quos()</code> i <code>exprs()</code> tym się różnią od swoich korzeni, że mogą zatrzymywać wiele pudełek naraz i przechowywać je w postaci listy. Przydaje się to przede wszystkim, gdy mamy jako argument wielokropek <code>...</code>, w którym z definicji może być wiele rzeczy.</p>
@@ -1564,15 +1733,15 @@ cookieconsent.run({
 <h1 data-number="9"><span class="header-section-number">9</span> <code>!!</code> i <code>!!!</code></h1>
 <p>Wbrew pozorom tytuł tego podrozdziału to nie próba odwzorowania emocji czytającego, tylko rzeczywiście wykorzystywane operatory. Wiemy już, jak ręcznie zaklejać pudełka tak, żeby R ich sam nie otwierał w złym momencie. Teraz musimy wiedzieć, jak kazać mu je otworzyć, kiedy potrzebujemy. Podstawowym operatorem mówiącym „otwórz” jest <code>!!</code> czytane <em>bang-bang</em><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. Możemy więc wcześniej zaklejone pudełko otworzyć strzelając do niego.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    kolumna <span class="ot">&lt;-</span> <span class="fu">enquo</span>(col)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">!!</span>kolumna) <span class="co"># wykrzykniki wykonują, teraz się przejmuj</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wybierz_z_enquo</span>(iris, Species) <span class="sc">%&gt;%</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span>   Species
 <span style="color: #555555;">#&gt;</span> 1  setosa
 <span style="color: #555555;">#&gt;</span> 2  setosa
@@ -1580,19 +1749,19 @@ cookieconsent.run({
 <span style="color: #555555;">#&gt;</span> 4  setosa
 <span style="color: #555555;">#&gt;</span> 5  setosa
 <span style="color: #555555;">#&gt;</span> 6  setosa
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Co ciekawe, równie dobrze moglibyśmy zapisać:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>wybierz_z_enquo <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col) {</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">!!</span><span class="fu">enquo</span>(col))</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wybierz_z_enquo</span>(iris, Species) <span class="sc">%&gt;%</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span>   Species
 <span style="color: #555555;">#&gt;</span> 1  setosa
 <span style="color: #555555;">#&gt;</span> 2  setosa
@@ -1600,13 +1769,13 @@ cookieconsent.run({
 <span style="color: #555555;">#&gt;</span> 4  setosa
 <span style="color: #555555;">#&gt;</span> 5  setosa
 <span style="color: #555555;">#&gt;</span> 6  setosa
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>…czyli za jednym zamachem (hehe) zatrzymać otwierające pudełka R i otworzyć to pudełko już na pewno wewnątrz <code>select()</code>. Zwróćmy uwagę, że to jest dokładnie to, co robił operator <code>{ }</code>, który w gruncie rzeczy jest wygodniejszym zapisem <code>!!enquo()</code>.</p>
 <p>Poza zwykłym <em>bang-bang</em> <code>!!</code> mamy też <em>bang-bang-bang</em> <code>!!!</code> i to nawet nie jest żart. Przypomnij sobie funkcję <code>enquos()</code>, która zatrzymywała wiele argumentów naraz w postaci listy. Jeśli coś takiego spróbujemy odpakować, to dostaniemy listę. Często zaś nie chcemy dostać listy, tylko samą jej zawartość po kolei. Innymi słowy chcę dostać <code>select(iris, Sepal.Width, Sepal.Length)</code>, a nie <code>select(iris, list(Sepal.Width, Sepal.Length))</code>. Do tego służy właśnie <code>!!!</code>, który bierze listę zatrzymanych wyrażeń, tnie ją na pojedyncze pudełka i każde z nich otwiera. Tym samym to jest dokładnie to, co przyda nam się do załatwienia argumentu <code>...</code> w naszej funkcji <code>opisowe</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>opisowe <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group, ...) {</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  kolumny_do_policzenia <span class="ot">&lt;-</span> <span class="fu">enquos</span>(...)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
@@ -1626,8 +1795,8 @@ cookieconsent.run({
 <span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="fu">opisowe</span>(iris, Species, Sepal.Width, Sepal.Length)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="fu">opisowe</span>(iris, Species, Sepal.Width, Sepal.Length)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 3 × 13</span>
 <span style="color: #555555;">#&gt;</span>   <span style="font-weight: bold;">Species</span> <span style="font-weight: bold;">Sepal.Width_N</span> <span style="font-weight: bold;">Sepal.Width_M</span> <span style="font-weight: bold;">Sepal.Width_SD</span> <span style="font-weight: bold;">Sepal.Width_A</span> <span style="font-weight: bold;">Sepal.Width_K</span>
 <span style="color: #555555;">#&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #555555; font-style: italic;">&lt;int&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
@@ -1637,28 +1806,28 @@ cookieconsent.run({
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># ℹ 7 more variables: </span><span style="color: #555555; font-weight: bold;">Sepal.Width_NA</span><span style="color: #555555;"> &lt;int&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Length_N</span><span style="color: #555555;"> &lt;int&gt;,</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">Sepal.Length_M</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Length_SD</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Length_A</span><span style="color: #555555;"> &lt;dbl&gt;,</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">#   </span><span style="color: #555555; font-weight: bold;">Sepal.Length_K</span><span style="color: #555555;"> &lt;dbl&gt;, </span><span style="color: #555555; font-weight: bold;">Sepal.Length_NA</span><span style="color: #555555;"> &lt;int&gt;</span>
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>W tym wypadku nasze <code>kolumny_do_policzenia</code> pojawiają się wewnątrz <code>across()</code>, więc musiałem użyć <code>c()</code> (patrz <a href="./posts/podstawy_R.qmd#sec-across">tutaj</a>). Inny przykład, bardziej typowy wyglądałby tak:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>srednia_z_kolumny <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col, ...) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>srednia_z_kolumny <span class="ot">&lt;-</span> <span class="cf">function</span>(df, col, ...) {</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    grupy <span class="ot">&lt;-</span> <span class="fu">enquos</span>(...)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(<span class="sc">!!!</span>grupy) <span class="sc">%&gt;%</span></span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">M =</span> <span class="fu">mean</span>({{ col }}))</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">srednia_z_kolumny</span>(iris, Sepal.Length, Species)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">srednia_z_kolumny</span>(iris, Sepal.Length, Species)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span> <span style="color: #555555;"># A tibble: 3 × 2</span>
 <span style="color: #555555;">#&gt;</span>   <span style="font-weight: bold;">Species</span>        <span style="font-weight: bold;">M</span>
 <span style="color: #555555;">#&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">1</span> setosa      5.01
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">2</span> versicolor  5.94
 <span style="color: #555555;">#&gt;</span> <span style="color: #555555;">3</span> virginica   6.59
-</code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>W tym wypadku używamy <code>enquos()</code>, żeby zatrzymać listę kolumn, po których będziemy grupować, a następnie rozpakowujemy ją już wewnątrz funkcji <code>group_by()</code>. <code>...</code> zawiera wiele rzeczy, więc używam <code>enquos()</code> i <code>!!!</code> zamiast <code>enquo()</code> i <code>!!</code>. Ponieważ w <code>group_by()</code> wypisuję grupy po prostu po przecinku, to nie muszę nic dokładać.</p>
 <p>Co ważne, operatory <code>!!</code> i <code>!!!</code> działają tylko w funkcjach, które same z siebie wykorzystują Tidy Eval. Jeśli naprawdę i absolutnie jest konieczność, żeby wykonać <em>unquoting</em> w innej funkcji, to warto się upewnić, czy string nie zadziała i użyć <code>as_label()</code>. Funkcje bez Tidy Eval i tak nie potrafią operować na suchych nazwach kolumn, więc i tak by wyrzuciły błąd, że obiektu nie znaleziono. Jeśli jednak konieczność z jakiegoś powodu nie ustępuje, najpewniej rozwiązaniem jest tutaj funkcja <code>eval_tidy()</code>.</p>
@@ -1667,7 +1836,7 @@ cookieconsent.run({
 <h1 data-number="10"><span class="header-section-number">10</span> <em>Parsing</em> i <em>deparsing</em></h1>
 <p>Ostatnie operacje, które tutaj omówię, to <em>parsing</em> i <em>deparsing</em>. Czasami chcemy zmienić naszą, powiedzmy, nazwę kolumny w surowy tekst. Dla przykładu, piszemy funkcję generującą wykres i chcemy wykorzystać jakoś nazwę kolumny, żeby podpisać osie. Załóżmy, że chcemy zamienić wcześniej kropki na spacje, więc domyślne opcje zwracane przez <code>ggplot2</code> nie są wystarczające. Musimy mieć więc dostęp do nazwy kolumny, którą użytkownik podał jako argument, ale nazwy jako tekst. Dokonać tego mogą nawet trzy funkcje – <code>as_label()</code>, <code>as_name()</code> i <code>expr_text()</code>. Różnią się pewnymi technikaliami, którymi nie ma co zaprzątać sobie głowy na początkowym etapie. Jako pewien skrót mogę powiedzieć – najlepiej jest użyć <code>as_label()</code>, a jeśli będzie potrzeba, to można zacząć ogarniać użycie innych funkcji. Obie te funkcje przyjmują obiekty typu <code>expr</code> albo <code>quo</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>wykresik <span class="ot">&lt;-</span> <span class="cf">function</span>(df, X, Y) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>wykresik <span class="ot">&lt;-</span> <span class="cf">function</span>(df, X, Y) {</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    X <span class="ot">&lt;-</span> <span class="fu">enquo</span>(X)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    Y <span class="ot">&lt;-</span> <span class="fu">enquo</span>(Y)</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -1685,11 +1854,11 @@ cookieconsent.run({
 <span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_Publication</span>() <span class="co"># koundy/ggplot_theme_Publication na GitHubie</span></span>
 <span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="fu">wykresik</span>(iris, Sepal.Width, Sepal.Length)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="fu">wykresik</span>(iris, Sepal.Width, Sepal.Length)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> `geom_smooth()` using formula = 'y ~ x'
-</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</span></code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1697,12 +1866,12 @@ cookieconsent.run({
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wykresik</span>(USArrests, UrbanPop, Murder)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wykresik</span>(USArrests, UrbanPop, Murder)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode">
 <pre class="sourceCode code-with-copy"><code class="sourceCode"><span style="color: #555555;">#&gt;</span><span style="color: #BB0000;"> `geom_smooth()` using formula = 'y ~ x'
-</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre>
-</div>
+</span></code></pre>
+</div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1719,7 +1888,7 @@ cookieconsent.run({
 <section id="wywoływanie-funkcji-z-zatrzymanymi-argumentami" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="wywoływanie-funkcji-z-zatrzymanymi-argumentami"><span class="header-section-number">11.1</span> Wywoływanie funkcji z zatrzymanymi argumentami</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mtscr_model <span class="ot">&lt;-</span> <span class="cf">function</span>(df, id_column, item_column, score_column) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mtscr_model <span class="ot">&lt;-</span> <span class="cf">function</span>(df, id_column, item_column, score_column) {</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  id_column <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">ensym</span>(id_column)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  item_column <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">ensym</span>(item_column)</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  score_column <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">ensym</span>(score_column)</span>
@@ -1731,14 +1900,14 @@ cookieconsent.run({
 <span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!!</span>score_column,</span>
 <span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">minimal =</span> <span class="cn">TRUE</span></span>
 <span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Użyłem tu <code>ensym()</code>, ale spokojnie mogłoby być <code>enquo()</code>. Funkcja wywołuje inną funkcję z pakietu, żeby przygotować dane do modelowania. Wszystkie nazwy kolumn na początku „rozbrajam” i ponownie „uzbrajam” już wewnątrz <code>mtscr_prepare()</code>. Jeśli byłby to tylko ten fragment kodu, mógłbym użyć operatora <code>{ }</code>, ale potem potrzebowałem wersji ręcznie „rozbrojonej”.</p>
 </section>
 <section id="formuły-z-nazw-kolumn" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="formuły-z-nazw-kolumn"><span class="header-section-number">11.2</span> Formuły z nazw kolumn</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>formulas[[i]] <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">as.formula</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>formulas[[i]] <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">as.formula</span>(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">".z_score ~ -1 + "</span>,</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    rlang<span class="sc">::</span><span class="fu">as_name</span>(item_column),</span>
@@ -1748,14 +1917,14 @@ cookieconsent.run({
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    rlang<span class="sc">::</span><span class="fu">as_name</span>(id_column),</span>
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">")"</span></span>
 <span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Tutaj wykorzystuję <code>as_name()</code>, żeby połączyć nazwy kolumn w jedną formułę potrzebną potem do modelu. Równie dobrze mógłbym użyć <code>as_label()</code>. Wyniki zapisuję na liście <code>formulas</code>.</p>
 </section>
 <section id="warunkowa-lista-argumentów-do-summarise" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="warunkowa-lista-argumentów-do-summarise"><span class="header-section-number">11.3</span> Warunkowa lista argumentów do <code>summarise()</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>args <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>args <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">"all_max"</span> <span class="sc">%in%</span> model_type) {</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  args[[<span class="st">".all_max"</span>]] <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">parse_expr</span>(<span class="st">"max(.all_max)"</span>)</span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -1768,7 +1937,7 @@ cookieconsent.run({
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!!!</span>args,</span>
 <span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> dplyr<span class="sc">::</span><span class="fu">all_of</span>(groups)</span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Z tego jestem zadowolony. To fragment funkcji, która daje różne instrukcje do <code>summarise()</code> w zależności od tego, czy w argumencie <code>model_type</code> jest <code>"all_max"</code>, <code>"all_top2"</code> czy <code>c("all_max", "all_top2")</code>. Kolejne instrukcje zapisuję na liście <code>args</code>, którą potem otwieram operatorem <code>!!!</code> (bo to lista). Używam tutaj też <code>parse_expr()</code>, ale to z przyczyn technicznych związanych z pakietami<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> raczej, niż z programowaniem. Mógłbym użyć też <code>expr(max(.all_max))</code>. Na pewno nie używam tutaj <code>enexpr()</code>, bo to nie są argumenty, tylko nazwy kolumn zapisane na sztywno.</p>
 </section>
@@ -1800,387 +1969,263 @@ cookieconsent.run({
 <li id="fn3"><p>Bo każde jedno zagadnienie języka R najgłębiej opisuje Hadley Wickham. Zresztą jest to człowiek odpowiedzialny za pół tidyverse. Jeśli jest jakieś nazwisko ze świata R, które useR powinien znać, to jest to właśnie Hadley Wickham.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Swoją drogą, jeśli dotarliście na swojej drodze do punktu, w którym zaczynacie pisać własne funkcje i używacie ich często, to polecam oszczędzić sobie frustracji na przyszłość i od razu zorganizować te funkcje w postaci pakietu. Nie mówię, żeby go od razu wypuszczać w świat, choćby na GitHubie, ale sama struktura i dokumentacja znacząco ułatwiają życie w przyszłości. Planuję napisać na ten temat trochę więcej w przyszłości, ale podstawowym źródłem informacji w tym zakresie jest książka – a jakże – Hadleya Wickhama <a href="https://r-pkgs.org/"><em>R Packages</em></a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Ewentualnie, jeśli chcemy trzymać się klasycznego R, możemy użyć dziś już nieco zapomnianej funkcji <code>with()</code>, która każe R najpierw wejść do pudła <code>iris</code> i operować tym, co tam w tym pudle znajdzie. Mówiąc językiem, który wyjaśnię później, zmuszamy R do zmiany <em>środowiska</em>. Przykład wykorzystania <code>with()</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(iris, iris[Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>,])</span></code><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(iris, iris[Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>,])</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 <a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></li>
 <li id="fn6"><p>…<em>my baby shot me down</em>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>CRAN nie lubi, jak używa się obiektów, które nie mają globalnych definicji, dlatego krzyczał na mnie, że nie ma czegoś takiego jak <code>.all_top2</code>. Ja wiedziałem, że jest w bazie danych, kod działał, bo to potem trafiało do <code>summarise()</code>, ale CRAN ma swoje zasady. Dlatego podałem to jako string, który jest przerabiany na wyrażenie (<em>parsing</em>).<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
       return false;
     }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Skopiowano!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Skopiowano!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Skopiowano!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Skopiowano!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/nieobliczalne\.pl");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nieobliczalne\.pl");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -2188,197 +2233,174 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <input type="hidden" id="giscus-base-theme" value="dark">
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <script>
-function loadGiscusWhenReady() {
-  // Function to get the theme based on body class
-  const getTheme = () => {
-    const baseTheme = document.getElementById('giscus-base-theme').value;
-    const altTheme = document.getElementById('giscus-alt-theme').value;
-    return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
-  };
-  // Create the Giscus script and add it to the desired location
-  const loadGiscus = () => {
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
     const script = document.createElement("script");
     script.src = "https://giscus.app/client.js";
     script.async = true;
@@ -2395,26 +2417,8 @@ function loadGiscusWhenReady() {
     script.crossOrigin = "anonymous";
     // Append the script to the desired div instead of at the end of the body
     document.getElementById("quarto-content").appendChild(script);
-  };
-  // MutationObserver to detect when the 'quarto-light' or 'quarto-dark' class is added to the body
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type === "attributes" && mutation.attributeName === "class") {
-        if (document.body.classList.contains('quarto-light') || document.body.classList.contains('quarto-dark')) {
-          loadGiscus();
-          observer.disconnect(); // Stop observing once Giscus is loaded
-          break;
-        }
-      }
-    }
-  });
-  // Start observing the body for class attribute changes
-  observer.observe(document.body, {
-    attributes: true,
-    attributeFilter: ["class"],
-  });
-}
-loadGiscusWhenReady();
+  }
+  loadGiscus();
 </script>
 </div> <!-- /content -->
 <footer class="footer">
