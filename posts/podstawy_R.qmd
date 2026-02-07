@@ -279,7 +279,7 @@ Zacznijmy od tego, że w naszej bazie zostawimy tylko mężczyzn. Wszystkie kome
 ```{r}
 #| eval: false
 df %>%
-    filter(Płeć == "Mężczyzna")
+  filter(Płeć == "Mężczyzna")
 ```
 
 Dobra, co to jest `%>%`? Nie było o tym mowy. Owszem, nie było, ale to bardzo wygodna rzecz. Nazywa się *pipe* (tłumaczone jako *potok*, bo *rura* nieładnie brzmi). Mówi mniej więcej „wrzuć to do tego". W naszym przykładzie `df %>% filter()` oznacza „wrzuć bazę danych `df` do funkcji `filter`", czyli dokładnie to samo, co `filter(df)`. Po co więc w ogóle bawić się w potoki? Bo pozwalają nam wygodnie łączyć komendy w ciągi, jak zobaczymy za chwilę. Do wstawiania potoków służy nam wygodny skrót klawiszowy Ctrl+Shift+M, który jest chyba najczęściej stosowanym skrótem przy pisaniu dowolnego programu.
@@ -310,8 +310,8 @@ Odfiltrowaliśmy więc nie-mężczyzn. Kolejny problem to cała seria niepotrzeb
 ```{r}
 #| eval: false
 df %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18)
+  filter(Płeć == "Mężczyzna") %>%
+  select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18)
 ```
 
 Po pierwsze zauważmy, że wystarczyło dodać potok i kolejną komendę. Teraz cała nasza instrukcja oznacza „Weź `df`, odfiltruj mężczyzn i potem wybierz kolumny `Id`, `Wiek (ukończony w latach)`, `Wykształcenie` oraz kolumny od 9. do 18.". Do tego więc służą potoki -- pozwalają naraz wykonać całą serię modyfikacji tego samego obiektu.
@@ -323,8 +323,8 @@ Ewentualnie możemy chcieć powiedzieć, żeby zostawić wszystkie kolumny *poza
 ```{r}
 #| eval: false
 df %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(-(2:5), -`Wyrażam świadomą i dobrowolną zgodę na udział w badaniu.`)
+  filter(Płeć == "Mężczyzna") %>%
+  select(-(2:5), -`Wyrażam świadomą i dobrowolną zgodę na udział w badaniu.`)
 ```
 
 ## Zmiana nazw kolumn z `dplyr::rename` i `purrr::set_names` {#sec-rename}
@@ -338,9 +338,9 @@ Z selekcji istniejących infromacji przejdźmy do dodawania nowych. Zacznijmy mo
 ```{r}
 #| eval: false
 df %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
-    set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_"))
+  filter(Płeć == "Mężczyzna") %>%
+  select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
+  set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_"))
 ```
 
 Co znowu namieszałem? Czemu znowu coś utrudniam? Cóż, żeby ułatwić. O ile kolejne nazwy `"id"`, `"wiek"` i `"wyksztalcenie"` rozumieją się same przez się, to do czego służy tutaj funkcja `paste`? Jeśli zerkniemy w bazę danych, zauważymy, że kolejne 10 kolumn to to samo pytanie „Takie widoki w przestrzeni publicznej są normalne". Odpowiedź na to pytanie (znajdujące się pod obrazkiem neutralnym lub przedstawiającym parę jednopłciową) traktowaliśmy jako wskaźnik homofobii. Jest bardzo częste, że czyszcząc dane z badania mamy serię odpowiedzi z jednego kwestionariusza. Zazwyczaj wszystkie te pytania nazywamy według jednej konwencji np. wszystkie odpowiedzi z kwestionariusza TIPI nazywamy `TIPI_1`, `TIPI_2`, `TIPI_3` itd. Ale po co pisać te etykiety ręcznie, skoro możemy je wygenerować? Do tego służy funkcja `paste`. Jeśli widzimy jakąś funkcję zagnieżdżoną w innej funkcji, a nie wiemy, jaką funkcję tam spełnia, można spróbować samą tę wewnętrzną funkcję wpisać w konsolę i zobaczyć, co robi.
@@ -362,10 +362,10 @@ Funkcja `mutate` to ogólna funkcja, za pomocą której modyfikujemy kolumny alb
 ```{r}
 #| eval: false
 zmienna_z_danymi %>%
-    mutate(
-        kolumna_do_modyfikacji = jakas_funkcja(kolumna_do_modyfikacji),
-        nowa_kolumna = inna_funkcja(jak_stworzyc_nowa_kolumne)
-    )
+  mutate(
+    kolumna_do_modyfikacji = jakas_funkcja(kolumna_do_modyfikacji),
+    nowa_kolumna = inna_funkcja(jak_stworzyc_nowa_kolumne)
+  )
 ```
 
 `mutate` służy do tworzenia nowych kolumn. Możemy ją jednak wykorzystywać do modyfikowania kolumn już istniejących, bo jeśli nowa kolumna ma taką samą nazwę, jak stara, to nowa zastępuje starą. W naszym przykładzie chcemy do kolumny `wiek` zastosować funkcję `parse_number`, która pozbywa się z komórek wszystkiego, poza pierwszą napotkaną liczbą[^podstawy_r-15]. Taka instrukcja będzie wyglądała następująco:
@@ -375,12 +375,12 @@ zmienna_z_danymi %>%
 ```{r}
 #| eval: false
 df %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
-    set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
-    mutate(
-        wiek = parse_number(wiek)
-    )
+  filter(Płeć == "Mężczyzna") %>%
+  select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
+  set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
+  mutate(
+    wiek = parse_number(wiek)
+  )
 ```
 
 ### Przekształcanie wielu kolumn jednocześnie z `dplyr::across` {#sec-across}
@@ -390,13 +390,13 @@ Po wykonaniu tej funkcji widzimy, że cała kolumna jest już numeryczna. To sam
 ```{r}
 #| eval: false
 df %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
-    set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
-    mutate(
-        wiek = parse_number(wiek),
-        across(starts_with("H_"), parse_number)
-    )
+  filter(Płeć == "Mężczyzna") %>%
+  select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
+  set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
+  mutate(
+    wiek = parse_number(wiek),
+    across(starts_with("H_"), parse_number)
+  )
 ```
 
 Pierwszą rzeczą, którą ta funkcja przyjmuje, jest zestaw kolumn. Można je wskazać na różne sposoby, np. wypisać ich nazwy albo numery. Gdy używam zestaw, mam na myśli, że trzeba je wpakować w funkcję `c()` (od *concatenate*), np. `c(1, 8, 10:16)`. Możemy też użyć jednej z cudownych funkcji pomocniczych z zestawu `tidy-select`. Tutaj akurat użyłem `starts_with("H_")`, żeby powiedzieć `across`, że chodzi mi o wszystkie kolumny, których nazwy zaczynają się od `H_`. Te same funkcje możemy wykorzystywać w funkcji `select` przy wybieraniu kolumn (por. @sec-select). Kilka innych tego typu funkcji umieściłem w tabeli.
@@ -432,14 +432,14 @@ Ponieważ jest to modyfikacja kolumny, użyjemy funkcji `mutate`. Załóżmy, ż
 ```{r}
 #| eval: false
 df %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
-    set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
-    mutate(
-        wiek = parse_number(wiek),
-        across(H_1:H_10, parse_number),
-        H_5 = 7 - H_5
-    )
+  filter(Płeć == "Mężczyzna") %>%
+  select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
+  set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
+  mutate(
+    wiek = parse_number(wiek),
+    across(H_1:H_10, parse_number),
+    H_5 = 7 - H_5
+  )
 ```
 
 Niektórzy lubią tworzyć nowe kolumny na odwróconą punktację, my jednak po prostu zastąpiliśmy oryginalną kolumnę `H_5`. Zawsze można jednak użyć innej nazwy, np. `H_5_odwr =`. Jeśli chcemy odwrócić wiele kolumn, możemy użyć `across`. Załóżmy, że `H_7` też ma odwróconą punktację. W takim wypadku nasz kod mógłby wyglądać tak:
@@ -447,15 +447,15 @@ Niektórzy lubią tworzyć nowe kolumny na odwróconą punktację, my jednak po 
 ```{r}
 #| eval: false
 df %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
-    set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
-    mutate(
-        wiek = parse_number(wiek),
-        across(H_1:H_10, parse_number),
-        H_5 = 7 - H_5,
-        H_7 = 7 - H_7
-    )
+  filter(Płeć == "Mężczyzna") %>%
+  select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
+  set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
+  mutate(
+    wiek = parse_number(wiek),
+    across(H_1:H_10, parse_number),
+    H_5 = 7 - H_5,
+    H_7 = 7 - H_7
+  )
 ```
 
 Jeśli mamy wielki kwestionariusz i nie chce nam się 100 razy pisać tego samego, możemy użyć `across`:
@@ -463,14 +463,16 @@ Jeśli mamy wielki kwestionariusz i nie chce nam się 100 razy pisać tego sameg
 ```{r}
 #| eval: false
 df %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
-    set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
-    mutate(
-        wiek = parse_number(wiek),
-        across(H_1:H_10, parse_number),
-        across(c(H_5, H_7), \(x) {7 - x})
-    )
+  filter(Płeć == "Mężczyzna") %>%
+  select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
+  set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
+  mutate(
+    wiek = parse_number(wiek),
+    across(H_1:H_10, parse_number),
+    across(c(H_5, H_7), \(x) {
+      7 - x
+    })
+  )
 ```
 
 Pierwszym argumentem jest zestaw kolumn, dlatego nazwy kolumn opakowałem w `c()`. `select` czy `filter` nie potrzebowały, żeby robić takie zestawy, ale wiele funkcji (zwłaszcza spoza `tidyverse`) tego wymaga. Co z drugim argumentem, czyli funkcją? Tutaj wchodzimy głębiej w programistyczne meandry. Można, oczywiście, zostać przy wersji bez `across`, ale odważnych zapraszam do świata funkcji anonimowych.
@@ -481,7 +483,7 @@ Drugi argument w `across` to funkcja, jakiej `across` ma użyć do przekształce
 
 ```{r}
 odejmij_od_7 <- function(wynik) {
-    7 - wynik
+  7 - wynik
 }
 ```
 
@@ -497,7 +499,7 @@ Jeśli mamy kilka kwestionariuszy z odwróconą punktacją, każdy z inną skal�
 
 ```{r}
 odejmij_od <- function(wynik, od_czego) {
-    od_czego - wynik
+  od_czego - wynik
 }
 
 odejmij_od(3, 7)
@@ -510,14 +512,14 @@ Bardziej ogólna funkcja wymaga podania drugiego argumentu, tzn. od czego trzeba
 ```{r}
 #| eval: false
 df %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
-    set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
-    mutate(
-        wiek = parse_number(wiek),
-        across(H_1:H_10, parse_number),
-        across(c(H_5, H_7), odejmij_od, od_czego = 7)
-    )
+  filter(Płeć == "Mężczyzna") %>%
+  select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
+  set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
+  mutate(
+    wiek = parse_number(wiek),
+    across(H_1:H_10, parse_number),
+    across(c(H_5, H_7), odejmij_od, od_czego = 7)
+  )
 ```
 
 Tutaj nam się to nie przyda, ale nic nie stoi na przeszkodzie, żeby wewnątrz funkcji używać innych funkcji i wielokrotnie używane serie komend przerabiać na pojedynczą komendę. Hadley Wickham wykorzystuje zasadę, że jeśli kopiujesz kod więcej niż dwa razy, to znaczy, że trzeba zrobić z niego funkcję.
@@ -546,7 +548,9 @@ Jak wspomniałem w jednym z przypisów, dokumentacja `dplyr` od niedawna sugeruj
 across(c(H_5, H_7), odejmij_od, od_czego = 7)
 
 # dobrze
-across(c(H_5, H_7), \(x) {odejmij_od(x, od_czego = 7)})
+across(c(H_5, H_7), \(x) {
+  odejmij_od(x, od_czego = 7)
+})
 ```
 
 #### Problem z Tidy Evaluation
@@ -566,15 +570,15 @@ Załóżmy, że homofobię będziemy liczyć poprzez dodanie `H_1` + `H_2` + `H_
 ```{r}
 #| eval: false
 df %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
-    set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
-    mutate(
-        wiek = parse_number(wiek),
-        across(H_1:H_10, parse_number),
-        across(c(H_5, H_7), ~ 7 - .x),
-        H_suma = H_1 + H_2 + H_3 + H_4 + H_5 + H_6 + H_7 + H_8 + H_9 + H_10
-    )
+  filter(Płeć == "Mężczyzna") %>%
+  select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
+  set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
+  mutate(
+    wiek = parse_number(wiek),
+    across(H_1:H_10, parse_number),
+    across(c(H_5, H_7), ~ 7 - .x),
+    H_suma = H_1 + H_2 + H_3 + H_4 + H_5 + H_6 + H_7 + H_8 + H_9 + H_10
+  )
 ```
 
 Jak można się domyślić, istnieje sposób niewymagający tyle pisania, które w skomplikowanych bazach i długich kwestionariuszach naprawdę może być długotrwałe i uciążliwe. `tidyverse` ratuje nas tutaj funkcją `pick`[^podstawy_r-18], a bazowy R dokłada funkcję `rowSums` (i `rowMeans`). Wystarczy, że do funkcji `rowSums` wrzucimy, które kolumny chcemy zsumować, wskazując je właśnie za pomocą `pick` i ewentualnie funkcji pomocniczych, tak jak robiliśmy w `select` (por. [-@sec-select]) i `across` (por. [-@sec-across]).
@@ -584,15 +588,15 @@ Jak można się domyślić, istnieje sposób niewymagający tyle pisania, które
 ```{r}
 #| eval: false
 df %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
-    set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
-    mutate(
-        wiek = parse_number(wiek),
-        across(H_1:H_10, parse_number),
-        across(c(H_5, H_7), ~ 7 - .x),
-        H_suma = rowSums(pick(H_1:H_10))
-    )
+  filter(Płeć == "Mężczyzna") %>%
+  select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
+  set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
+  mutate(
+    wiek = parse_number(wiek),
+    across(H_1:H_10, parse_number),
+    across(c(H_5, H_7), ~ 7 - .x),
+    H_suma = rowSums(pick(H_1:H_10))
+  )
 ```
 
 ### Kategoryzowanie przypadków i przekodowywanie z `dplyr::case_when` {#sec-casewhen}
@@ -602,10 +606,10 @@ Czasem zdarza się, że chcemy podzielić dane ilościowe (np. wiek, wzrost, szc
 ```{r}
 #| eval: false
 case_when(
-    warunek_1 ~ wartosc_jesli_prawda,
-    warunek_2 ~ wartosc_jesli_prawda,
-    warunek_3 ~ wartosc_jesli_prawda,
-    .default = wartosc_dla_calej_reszty
+  warunek_1 ~ wartosc_jesli_prawda,
+  warunek_2 ~ wartosc_jesli_prawda,
+  warunek_3 ~ wartosc_jesli_prawda,
+  .default = wartosc_dla_calej_reszty
 )
 ```
 
@@ -616,20 +620,20 @@ Funkcja po kolei sprawdza warunki. Jeśli natrafi na jakiś spełniony warunek, 
 ```{r}
 #| eval: false
 df %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
-    set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
-    mutate(
-        wiek = parse_number(wiek),
-        across(H_1:H_10, parse_number),
-        across(c(H_5, H_7), ~ 7 - .x),
-        H_suma = rowSums(pick(H_1:H_10)),
-        wyksztalcenie_grupa = case_when(
-            wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
-            wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
-            .default = wyksztalcenie
-        )
+  filter(Płeć == "Mężczyzna") %>%
+  select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
+  set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
+  mutate(
+    wiek = parse_number(wiek),
+    across(H_1:H_10, parse_number),
+    across(c(H_5, H_7), ~ 7 - .x),
+    H_suma = rowSums(pick(H_1:H_10)),
+    wyksztalcenie_grupa = case_when(
+      wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
+      wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
+      .default = wyksztalcenie
     )
+  )
 ```
 
 W tym wypadku `case_when`, idąc wiersz po wierszu, sprawdza, czy w kolumnie `wyksztalcenie` nie znajduje się wartość `"Średnie"`. Jeśli tak, to w tworzonej właśnie kolumnie `wyksztalcenie_grupa` wstawia wartość `"Ponadpodstawowe"` i przechodzi do kolejnego wiersza. Jeśli wykształcenie nie jest średnie, to sprawdza, czy jest zawodowe i w razie czego również wstawia `"Ponadpodstawowe"`. Jeśli nie jest ani średnie, ani zawodowe, to wstawia to, co akurat jest w kolumnie `wyksztalcenie`, czyli dla osób z wykształceniem podstawowym wstawia `"Podstawowe"`, a dla osób z wykształceniem wyższym `"Wyższe"`[^podstawy_r-20]. W ten sposób z 4 kategorii wykształcenia zrobiły nam się 3. W podobny sposób przekodowywalibyśmy klucz w ankiecie na liczby, np. pisząc `H_1 == "Zdecydowanie się zgadzam" ~ 6`. Możemy ułatwić sobie to przekodowywanie za pomocą `questionr`, który opisuję w podrozdziale [-@sec-questionr].
@@ -651,26 +655,26 @@ Czynniki (*factors*) to rodzaj danych, za pomocą których przechowujemy tekst, 
 ```{r}
 #| eval: false
 df %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
-    set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
-    mutate(
-        wiek = parse_number(wiek),
-        across(H_1:H_10, parse_number),
-        across(c(H_5, H_7), ~ 7 - .x),
-        H_suma = rowSums(pick(H_1:H_10)),
-        wyksztalcenie_grupa = case_when(
-            wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
-            wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
-            .default = wyksztalcenie
-        ),
-        wyksztalcenie = factor(
-            wyksztalcenie,
-            levels = c("Podstawowe", "Zawodowe", "Średnie", "Wyższe"),
-            ordered = TRUE
-            )
-    ) %>%
-    arrange(desc(wyksztalcenie), wiek)
+  filter(Płeć == "Mężczyzna") %>%
+  select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
+  set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
+  mutate(
+    wiek = parse_number(wiek),
+    across(H_1:H_10, parse_number),
+    across(c(H_5, H_7), ~ 7 - .x),
+    H_suma = rowSums(pick(H_1:H_10)),
+    wyksztalcenie_grupa = case_when(
+      wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
+      wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
+      .default = wyksztalcenie
+    ),
+    wyksztalcenie = factor(
+      wyksztalcenie,
+      levels = c("Podstawowe", "Zawodowe", "Średnie", "Wyższe"),
+      ordered = TRUE
+    )
+  ) %>%
+  arrange(desc(wyksztalcenie), wiek)
 ```
 
 Komendę `factor` dla czytelności rozbiłem tutaj na trzy linijki, ale -- oczywiście -- można ją całą zapisać w jednej. Po pierwsze wskazałem, że na factor przerobiona ma być kolumna `wyksztalcenie`. Po drugie wskazałem, jakie wykształcenie może mieć wartości, zbierając je w jeden zestaw funkcją `c` i wrzucając do argumentu `levels`. Na koniec poinformowałem R, że w kolejność jest tutaj ważna, dopisując `ordered = TRUE`. Jeśli tak przerobione dane posortujemy, zobaczymy, że baza rzeczywiście zaczyna się od wykształcenia wyższego.
@@ -684,19 +688,22 @@ Przy okazji czynników chciałbym wspomnieć o pierwszym dodatku (*addin*) do RS
 ```{r}
 #| eval: false
 mutate(
-        wiek = parse_number(wiek),
-        across(H_1:H_10, parse_number),
-        across(c(H_5, H_7), ~ 7 - .x),
-        H_suma = rowSums(pick(H_1:H_10)),
-        wyksztalcenie_grupa = case_when(
-            wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
-            wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
-            .default = wyksztalcenie
-        ),
-        wyksztalcenie = fct_relevel(
-            wyksztalcenie,
-            "Podstawowe", "Zawodowe", "Średnie", "Wyższe"
-        )
+  wiek = parse_number(wiek),
+  across(H_1:H_10, parse_number),
+  across(c(H_5, H_7), ~ 7 - .x),
+  H_suma = rowSums(pick(H_1:H_10)),
+  wyksztalcenie_grupa = case_when(
+    wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
+    wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
+    .default = wyksztalcenie
+  ),
+  wyksztalcenie = fct_relevel(
+    wyksztalcenie,
+    "Podstawowe",
+    "Zawodowe",
+    "Średnie",
+    "Wyższe"
+  )
 )
 ```
 
@@ -710,11 +717,11 @@ Możemy chcieć mieć nasze kolumny w określonej kolejności. Są zasadniczo dw
 #| eval: false
 # z użyciem relocate
 df %>%
-    relocate(H_suma, .before = H_1)
+  relocate(H_suma, .before = H_1)
 
 # z użyciem select
 df %>%
-    select(id, wiek, wyksztalcenie, H_suma, everything())
+  select(id, wiek, wyksztalcenie, H_suma, everything())
 ```
 
 Jeśli przestawiamy kolumny z użyciem `relocate`, powinniśmy ustawić argument `.before` albo `.after`. Oba wymagają nazwy kolumny przed którą lub po której chcemy mieć naszą kolumnę. Jeśli nie ustawimy żadnego, nasze kolumny zostaną przeniesione na początek tabeli. Jeśli używamy `select`, musimy wpisać kolejność naszych kolumn ręcznie. Zastanawiające może być użycie przeze mnie `everything()`. W tym kontekście znaczy ono „i potem cała reszta".
@@ -725,27 +732,27 @@ W ten sposób uzyskaliśmy cały kod czyszczący. Mamy ów kod zapisany w naszym
 
 ```{r}
 df <- df %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
-    set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
-    mutate(
-        wiek = parse_number(wiek),
-        across(H_1:H_10, parse_number),
-        across(c(H_5, H_7), ~ 7 - .x),
-        H_suma = rowSums(pick(H_1:H_10)),
-        wyksztalcenie_grupa = case_when(
-            wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
-            wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
-            .default = wyksztalcenie
-        ),
-        wyksztalcenie = factor(
-            wyksztalcenie,
-            levels = c("Podstawowe", "Zawodowe", "Średnie", "Wyższe"),
-            ordered = TRUE
-            )
-    ) %>%
-    arrange(desc(wyksztalcenie), wiek) %>%
-    relocate(H_suma, .before = H_1)
+  filter(Płeć == "Mężczyzna") %>%
+  select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
+  set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
+  mutate(
+    wiek = parse_number(wiek),
+    across(H_1:H_10, parse_number),
+    across(c(H_5, H_7), ~ 7 - .x),
+    H_suma = rowSums(pick(H_1:H_10)),
+    wyksztalcenie_grupa = case_when(
+      wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
+      wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
+      .default = wyksztalcenie
+    ),
+    wyksztalcenie = factor(
+      wyksztalcenie,
+      levels = c("Podstawowe", "Zawodowe", "Średnie", "Wyższe"),
+      ordered = TRUE
+    )
+  ) %>%
+  arrange(desc(wyksztalcenie), wiek) %>%
+  relocate(H_suma, .before = H_1)
 ```
 
 Kod ten możemy uruchomić dla dowolnej ilości danych, w dowolnym momencie. Jest wielokrotnego użytku i spokojnie możemy go wykorzystać, kiedy baza się rozrośnie. Nie musimy go wtedy pisać od nowa, a wystarczy, że go uruchomimy. Co więcej, mogę wpaść jeszcze na jakiś pomysł i dopisać linijkę na samym początku, nie musząc całej reszty robić od nowa. Sprawmy sobie tę przyjemność i zerknijmy na naszą wyczyszczoną bazę.
@@ -768,14 +775,14 @@ Gdy mamy już bazę, zazwyczaj chcemy policzyć pewne statystyki dla podgrup os�
 
 ```{r}
 df %>%
-    group_by(wyksztalcenie) %>%
-    summarise(
-        n = n(),
-        H_M = mean(H_suma),
-        H_SD = sd(H_suma),
-        H_Me = median(H_suma),
-        V = H_SD / H_M
-    )
+  group_by(wyksztalcenie) %>%
+  summarise(
+    n = n(),
+    H_M = mean(H_suma),
+    H_SD = sd(H_suma),
+    H_Me = median(H_suma),
+    V = H_SD / H_M
+  )
 ```
 
 Jak widzimy, dostaliśmy tabelkę z wykształceniem i wskazanymi statystykami. Funkcja `n` zliczyła nam przypadki osób z poszczególnym wykształceniem, `mean` policzyła średnią, `sd` odchylenie standardowe, a `median` medianę. `V` to tzw. współczynnik zmienności. Co to jest, nie jest teraz szczególnie ważne. Policzyłem to tutaj, żeby pokazać, że w obliczeniach możemy też wpisywać niestandardowe operacje (jak dzielenie) bez żadnych strasznych funkcji anonimowych, a także że możemy wziąć wartości z innych kolumn jako argumenty do naszych przekształceń. Tutaj `V` to odchylenie standardowe średniej homofobii (`H_SD`) podzielone przez samą średnią (`H_M`). Każdą kolumnę mogliśmy nazwać wedle życzenia. Jak dowiemy się w podrozdziale [-@sec-get_summary_stats], istnieją funkcje, które najpopularniejsze zastawy statystyk opisowych liczą za nas.
@@ -784,17 +791,19 @@ Tak robiliśmy to zawsze, jednak `dplyr` 1.1.0. wprowadził inny sposób grupowa
 
 ```{r}
 # załadowanie danych z sieci
-df_scream <- read_csv("https://raw.githubusercontent.com/profandyfield/discovr/master/data-raw/csv_files/escape.csv")
+df_scream <- read_csv(
+  "https://raw.githubusercontent.com/profandyfield/discovr/master/data-raw/csv_files/escape.csv"
+)
 
 # podejrzenie, jak dane wyglądają
 glimpse(df_scream)
 
 # pogrupowanie i zliczenie średniej liczby krzyków
 df_scream %>%
-    summarise(
-        M = mean(screams),
-        .by = c(song_type, songwriter)
-    )
+  summarise(
+    M = mean(screams),
+    .by = c(song_type, songwriter)
+  )
 ```
 
 Kolumny do grupowania podałem jako zestaw, czyli wewnątrz `c()`. Zgrupowane w ten sposób dane pokazują nam, że Andy pisze bardziej krzykliwe piosenki od Malcolma, ale różnica powiększa się, gdy chodzi o piosenki symfoniczne.
@@ -807,22 +816,22 @@ Terminy te odnoszą się do sposobu, w jaki składujemy dane. Format szeroki jes
 
 ```{r}
 df_wide <- df %>% # zapiszę to jako df_wide, na później
-    select(id, H_1:H_5) %>%
-    mutate(id = 1:nrow(df)) %>% # poprawiam id, żeby były kolejne liczby, zmiana kosmetyczna
-    arrange(id) # sortuję wg id
+  select(id, H_1:H_5) %>%
+  mutate(id = 1:nrow(df)) %>% # poprawiam id, żeby były kolejne liczby, zmiana kosmetyczna
+  arrange(id) # sortuję wg id
 
 df_wide %>% # zapisane dane trzeba jeszcze wyświetlić
-    head(n = 5) # tylko 5 pierwszych wierszy
+  head(n = 5) # tylko 5 pierwszych wierszy
 ```
 
 Są to typowe dane w formacie szerokim. Żeby jednak zrozumieć różnicę, między formatem długim, a szerokim, trzeba jeszcze zobaczyć dane długie. Stwórzmy więc takie.
 
 ```{r}
 df_long <- df_wide %>%
-    pivot_longer(H_1:H_5, names_to = "pytanie", values_to = "ocena")
+  pivot_longer(H_1:H_5, names_to = "pytanie", values_to = "ocena")
 
 df_long %>%
-    head(n = 10)
+  head(n = 10)
 ```
 
 Zacznę od skomentowania samych danych, a potem wyjaśnię funkcję. Dane w formacie długim mają oddzielne kolumny na numer pytania i odpowiedź. Pięć kolumn z odpowiedziami na pytania z formatu szerokiego zmieniliśmy w dwie. Powoduje to jednak, że każda osoba badana ma teraz pięć wierszy -- w każdym odpowiedź na tylko jedno pytanie. Najpierw następuje 5 wierszy osoby z id 1, potem 5 wierszy osoby z id 2 itd. Widać więc dlaczego formaty te nazywają się szeroki i długi. Szeroki ma wiele kolumn, a mało wierszy (1 na osobę), długi mało kolumn, a wiele wierszy (1 na każde pytanie).
@@ -833,11 +842,11 @@ Po co nam taki format? Zawiera te same informacje, co format szeroki, a trudniej
 
 ```{r}
 df_long %>%
-    summarise(
-        M = mean(ocena),
-        SD = sd(ocena),
-        .by = c(pytanie)
-    )
+  summarise(
+    M = mean(ocena),
+    SD = sd(ocena),
+    .by = c(pytanie)
+  )
 ```
 
 Nawet częściej, niż do grupowania po pytaniach, wykorzystujemy format długi do wykresów. Jak się przekonamy dalej (w podrozdziale [-@sec-ggplot]), w gramatyce grafik (*The Grammar of Graphics*) do jednego obiektu na wykresie możemy przypisać tylko jedną kolumnę. Jeśli więc chcemy zrobić wykres słupkowy np. wyników *przed* i *po*, to do osi X przypiszemy kolumnę z etykietami, a do osi Y kolumnę z wynikami. Nie da się więc sensownie zrobić wykresu, jeśli wyniki *przed* i *po* mamy w osobnych kolumnach.
@@ -847,7 +856,7 @@ Omówmy więc funkcję, której użyłem do zmiany formatu. Kiedyś robiło się
 ```{r}
 #| eval: false
 df_long %>%
-    pivot_wider(names_from = "pytanie", values_from = "ocena")
+  pivot_wider(names_from = "pytanie", values_from = "ocena")
 ```
 
 `pivot_wider` ma prostszą składnię, ponieważ nie trzeba w niej wskazywać zakresu kolumn do rozwinięcia, a jedynie gdzie znajdują się nazwy kolumn, a gdzie ich wartości. Robimy to odpowiednio argumentami `names_from` i `values_from`. Jeśli jakiejś wartości nie ma w formacie długim (np. gdy osoba z numerem 4 nie odpowiedziała na pytanie 2, to w formacie długim może nie być wiersza `4 H_2`), to `pivot_wider` automatycznie wstawi w tę komórkę `NA`[^podstawy_r-24]. Zdarza się, że funkcji tej musimy użyć dlatego, że niektóre programy generują dane w formacie długim.
@@ -864,7 +873,10 @@ Jak więc takie bazy połączyć? Wykorzystajmy tutaj dwie bazy zawierające tes
 
 ```{r}
 db_test <- read_csv("./dane/podstawy-R/join-test.csv", show_col_types = FALSE)
-db_retest <- read_csv("./dane/podstawy-R/join-retest.csv", show_col_types = FALSE)
+db_retest <- read_csv(
+  "./dane/podstawy-R/join-retest.csv",
+  show_col_types = FALSE
+)
 
 db_test
 
@@ -879,11 +891,11 @@ Ja przyłączę retest do bazy z wynikami pierwszego testu. Widzę jednak dwa pr
 
 ```{r}
 db_joined <- db_test %>%
-    left_join(
-        db_retest,
-        by = join_by(ID == Subject),
-        suffix = c("", "_retest")
-    )
+  left_join(
+    db_retest,
+    by = join_by(ID == Subject),
+    suffix = c("", "_retest")
+  )
 
 db_joined
 ```
@@ -975,15 +987,15 @@ Do liczenia statystyk opisowych w `rstatix` wykorzystujemy funkcję `get_summary
 library("rstatix")
 
 get_summary_stats(df) %>%
-    mutate(v = sd / mean) # dodaję współczynnik zmienności
+  mutate(v = sd / mean) # dodaję współczynnik zmienności
 ```
 
 Jeśli chcemy otrzymać statysyki opisowe dla zgrupowanych danych, czyli np. osobno dla każdego poziomu wykształcenia, wystarczy, że przed użyciem funkcji `get_summary_stats` zgrupujemy dane funkcją `group_by`. W chwili, kiedy to piszę, funkcje `rstatix` nie posiadają argumentu `.by`. Jako przykład wykorzystam bazę `df_scream` z podrozdziału [-@sec-summarise].
 
 ```{r}
 df_scream %>%
-    group_by(songwriter, song_type) %>%
-    get_summary_stats()
+  group_by(songwriter, song_type) %>%
+  get_summary_stats()
 ```
 
 ## Tabele liczności z `rstatix::freq_table` {#sec-freq_table}
@@ -1075,23 +1087,23 @@ Do tworzenia wykresów punktowych mamy dwa rodzaje obiektów *geom* -- `geom_poi
 
 ```{r}
 ggplot(df_diamonds, aes(carat, price)) +
-    geom_point()
+  geom_point()
 ```
 
 Wygląda na to, że im większy diament, tym droższy. Bez zaskoczenia. Możemy do naszego wykresy dołożyć linię trendu jako kolejny *geom* -- `geom_smooth`. Jeśli chcemy mieć prostą linię, musimy ustawić argument `method = "lm"`, co jest skrótem od *linear model*.
 
 ```{r}
 ggplot(df_diamonds, aes(carat, price)) +
-    geom_point() +
-    geom_smooth(method = "lm")
+  geom_point() +
+  geom_smooth(method = "lm")
 ```
 
 Szare pole wokół niebieskiej linii to przedział ufności. Możemy go wyłączyć ustawiając `se = FALSE`. Przy tej okazji powiedzmy sobie jeszcze raz o estetykach i atrybutach. Mogę chcieć, żeby kolor mojego punktu zależał od jakości wyszlifowania brylantu z kolumny `cut`. Ponieważ jest to związek wyglądu z danymi, to jest to estetyka i ustawiam ją wewnątrz `aes`. Mogę to `aes` wrzucić albo do funkcji `ggplot`, jak robiłem wcześniej, albo też do funkcji `geom_point`, bo to jej mapowanie dotyczy. Zwyczajowo argumenty X i Y w `aes` mogą być nienazwane, ale wszystkie inne już powinny. Mogę też zmienić kolor linii trendu z niebieskiego na czarny i zrobić ją trochę cieńszą. Jest to zmiana wyglądu, ale arbitralna, bez związku z danymi. Jest to więc atrybut i ustawiam go poza `aes`, wewnątrz funkcji, której ten atrybut dotyczy. Zobaczmy to.
 
 ```{r}
 ggplot(df_diamonds, aes(carat, price, colour = cut)) +
-    geom_point() +
-    geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black")
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black")
 ```
 
 ## Tytuły osi i wykresu (`labs`) {#sec-labs}
@@ -1100,14 +1112,14 @@ Kolejną rzeczą, którą moglibyśmy chcieć zmienić, są tytuły osi. Możemy
 
 ```{r}
 ggplot(df_diamonds, aes(carat, price, colour = cut)) +
-    geom_point() +
-    geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black") +
-    labs(
-        x = "Masa [karaty]",
-        y = "Cena [$]",
-        colour = "Szlif",
-        title = "Cena brylantu w zależności od masy"
-    )
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black") +
+  labs(
+    x = "Masa [karaty]",
+    y = "Cena [$]",
+    colour = "Szlif",
+    title = "Cena brylantu w zależności od masy"
+  )
 
 ```
 
@@ -1115,15 +1127,17 @@ Jeśli chcemy zmienić etykiety wartości z legendy, mamy dwie opcje -- albo prz
 
 ```{r}
 ggplot(df_diamonds, aes(carat, price, colour = cut)) +
-    geom_point() +
-    geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black") +
-    labs(
-        x = "Masa [karaty]",
-        y = "Cena [$]",
-        colour = "Szlif",
-        title = "Cena brylantu w zależności od masy"
-    ) +
-    scale_colour_discrete(labels = c("Zadowalający", "Dobry", "Bardzo dobry", "Premium", "Idealny"))
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black") +
+  labs(
+    x = "Masa [karaty]",
+    y = "Cena [$]",
+    colour = "Szlif",
+    title = "Cena brylantu w zależności od masy"
+  ) +
+  scale_colour_discrete(
+    labels = c("Zadowalający", "Dobry", "Bardzo dobry", "Premium", "Idealny")
+  )
 ```
 
 ## Wygląd wykresów (`theme_*`) {#sec-theme}
@@ -1139,38 +1153,40 @@ Ogólny styl wykresu ustala się za pomocą elementów zaczynających się słó
 library("papaja")
 
 ggplot(df_diamonds, aes(carat, price, colour = cut)) +
-    geom_point() +
-    geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black") +
-    labs(
-        x = "Masa [karaty]",
-        y = "Cena [$]",
-        colour = "Szlif",
-        title = "Cena brylantu w zależności od masy"
-    ) +
-    scale_colour_discrete(
-        labels = c("Zadowalający", "Dobry", "Bardzo dobry", "Premium", "Idealny")
-    ) +
-    theme_apa()
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black") +
+  labs(
+    x = "Masa [karaty]",
+    y = "Cena [$]",
+    colour = "Szlif",
+    title = "Cena brylantu w zależności od masy"
+  ) +
+  scale_colour_discrete(
+    labels = c("Zadowalający", "Dobry", "Bardzo dobry", "Premium", "Idealny")
+  ) +
+  theme_apa()
 ```
 
 Drugi motyw nie jest szałowo popularny w społeczności, ale bardzo go lubię. Żeby zadziałał, musimy wcześniej zainstalować u siebie pakiety `grid`, `scales` i `ggthemes`. Spojrzenie w repozytorium pozwoli nam stwierdzić, że nie jest to pakiet, a po prostu zbiór plików. Wchodzimy więc w plik `ggplot_theme_Publication-2.R`, klikamy `raw` i kopiujemy link. Następnie użyjemy komendy `source`, która pozwala nam uruchamiać kod z innych plików .R w naszym skrypcie, jak podamy ich ścieżkę lub link do nich. Cały kod mógłby więc wyglądać tak:
 
 ```{r}
-source("https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R")
+source(
+  "https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R"
+)
 
 ggplot(df_diamonds, aes(carat, price, colour = cut)) +
-    geom_point() +
-    geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black") +
-    labs(
-        x = "Masa [karaty]",
-        y = "Cena [$]",
-        colour = "Szlif",
-        title = "Cena brylantu w zależności od masy"
-    ) +
-    scale_colour_discrete(
-        labels = c("Zadowalający", "Dobry", "Bardzo dobry", "Premium", "Idealny"),
-    ) +
-    theme_Publication()
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.5, colour = "black") +
+  labs(
+    x = "Masa [karaty]",
+    y = "Cena [$]",
+    colour = "Szlif",
+    title = "Cena brylantu w zależności od masy"
+  ) +
+  scale_colour_discrete(
+    labels = c("Zadowalający", "Dobry", "Bardzo dobry", "Premium", "Idealny"),
+  ) +
+  theme_Publication()
 ```
 
 ## `esquisse` {#sec-esquisse}
@@ -1185,22 +1201,22 @@ Instalujemy `esquisse` jak każdy inny pakiet (`install.packages("esquisse")`). 
 
 ```{r}
 ggplot(df_diamonds) +
-    aes(x = carat, y = price, colour = clarity) +
-    geom_point(shape = "diamond", size = 2L) +
-    scale_color_brewer(palette = "YlOrRd", direction = 1) +
-    labs(
-        x = "Masa [karaty]",
-        y = "Cena [$]",
-        title = "Cena diamentów od ich masy według szlifu",
-        caption = "Źródło danych: ggplot2",
-        color = "Przejrzystość"
-    ) +
-    theme_bw() +
-    theme(
-        legend.position = "bottom",
-        plot.title = element_text(face = "bold")
-    ) +
-    facet_wrap(vars(cut))
+  aes(x = carat, y = price, colour = clarity) +
+  geom_point(shape = "diamond", size = 2L) +
+  scale_color_brewer(palette = "YlOrRd", direction = 1) +
+  labs(
+    x = "Masa [karaty]",
+    y = "Cena [$]",
+    title = "Cena diamentów od ich masy według szlifu",
+    caption = "Źródło danych: ggplot2",
+    color = "Przejrzystość"
+  ) +
+  theme_bw() +
+  theme(
+    legend.position = "bottom",
+    plot.title = element_text(face = "bold")
+  ) +
+  facet_wrap(vars(cut))
 ```
 
 Powyżej wykres, który stworzyłem w `equisse`. Warto jednak zwrócić uwagę na jego niedoskonałości, takie jak brak polskich tłumaczeń typów szlifu. Pewnym wyjaśnieniem może być dla nas nazwa francuskiego słowa *equisse* -- szkic. Takie narzędzia jak `equisse` nie zwalniają nas całkowicie z umiejętności kodowania wykresów, ale pozwalają wygodnie tworzyć *szkice* naszego kodu. Ten szkic mogę pozmieniać, np. zamieniając `theme_bw` na `theme_Publication` i dodając polskie tłumaczenia. Nieco inaczej, niż wcześniej, bo `facet_wrap` nie jest estetyką, więc sposób dodawania do niego niestandardowych etykiet znalazłem w dokumentacji.
@@ -1210,32 +1226,33 @@ Powyżej wykres, który stworzyłem w `equisse`. Warto jednak zwrócić uwagę n
 #| fig-height: 8
 #| out-width: 100%
 ggplot(df_diamonds) +
-    aes(x = carat, y = price, colour = clarity) +
-    geom_point(shape = "diamond", size = 2L) +
-    scale_color_brewer(palette = "YlOrRd", direction = 1) +
-    labs(
-        x = "Masa [karaty]",
-        y = "Cena [$]",
-        title = "Cena diamentów od ich masy według szlifu",
-        caption = "Źródło danych: ggplot2",
-        color = "Przejrzystość"
-    ) +
-    theme_Publication() +
-    theme(
-        legend.position = "bottom",
-        plot.title = element_text(face = "bold")
-    ) +
-    facet_wrap(
-        vars(cut),
-        labeller = labeller(cut = c(
-            "Fair" = "Zadowalający",
-            "Good" = "Dobry",
-            "Very Good" = "Bardzo dobry",
-            "Premium" = "Premium",
-            "Ideal" = "Idealny"
-            )
-        )
+  aes(x = carat, y = price, colour = clarity) +
+  geom_point(shape = "diamond", size = 2L) +
+  scale_color_brewer(palette = "YlOrRd", direction = 1) +
+  labs(
+    x = "Masa [karaty]",
+    y = "Cena [$]",
+    title = "Cena diamentów od ich masy według szlifu",
+    caption = "Źródło danych: ggplot2",
+    color = "Przejrzystość"
+  ) +
+  theme_Publication() +
+  theme(
+    legend.position = "bottom",
+    plot.title = element_text(face = "bold")
+  ) +
+  facet_wrap(
+    vars(cut),
+    labeller = labeller(
+      cut = c(
+        "Fair" = "Zadowalający",
+        "Good" = "Dobry",
+        "Very Good" = "Bardzo dobry",
+        "Premium" = "Premium",
+        "Ideal" = "Idealny"
+      )
     )
+  )
 ```
 
 Wykresy to olbrzymi temat, który tutaj tylko liznęliśmy z wierzchu. Sądzę jednak, że ta wiedza wystarczy, żeby -- z pomocą dokumentacji i Google -- być w stanie powoli rozbudowywać swoje umiejętności z zakresu `ggplot2`. Zwłaszcza, że tworzenie dobrych wykresów do trudna sztuka, co skutecznie udowadnia plebiscyt na najgorszy wykres roku organizowany przez dr. Przemysława Biecka na [jego stronie](http://smarterpoland.pl/index.php/2021/12/plebiscyt-na-najgorszy-wykres-roku-2021/). W tym miejscu mogę polecić jego książkę „Wykresy od kuchni”, [dostępną za darmo](https://betaandbit.github.io/Wykresy/) i okraszoną kodem R, który posłużył do wygenerowania jego wykresów.
@@ -1254,7 +1271,7 @@ glimpse(iris)
 
 # tworzymy model
 lm_price <- iris %>%
-    lm(Petal.Length ~ Sepal.Length + Sepal.Width, data = .)
+  lm(Petal.Length ~ Sepal.Length + Sepal.Width, data = .)
 
 # próbujemy wyświetlić
 lm_price
@@ -1327,8 +1344,8 @@ t_test(df_scream, screams ~ songwriter)
 
 # test korelacji na zgrupowanych danych
 iris %>%
-    group_by(Species) %>%
-    cor_test(Sepal.Length, Sepal.Width)
+  group_by(Species) %>%
+  cor_test(Sepal.Length, Sepal.Width)
 
 # ANOVA
 anova_test(diamonds, price ~ cut + color + clarity)
@@ -1341,8 +1358,8 @@ cohens_d(df_scream, screams ~ songwriter)
 
 # wielkość efektu eta^2
 diamonds %>%
-    aov(price ~ cut + color + clarity, .) %>%
-    eta_squared()
+  aov(price ~ cut + color + clarity, .) %>%
+  eta_squared()
 ```
 
 Dodatkowo `rstatix` dostarcza nam wygodą funkcję `add_significance`, która do obiektu z modelem zgodnym z `broom` dodaje kolumnę z gwiazdkami istotności wartości $p$. Domyślne ustawienia są takie same jak dla funkcji `cor_mark_significance`[^podstawy_r-31] i również można je modyfikować (por. [-@sec-cor_mat]).
@@ -1351,8 +1368,8 @@ Dodatkowo `rstatix` dostarcza nam wygodą funkcję `add_significance`, która do
 
 ```{r}
 lm_price %>%
-    tidy() %>%
-    add_significance()
+  tidy() %>%
+  add_significance()
 ```
 
 Nie są to wszystkie funkcje, które oferuje `rstatix` i zachęcam do zerknięcia do [repozytorium `rstatix` na GitHubie](https://github.com/kassambara/rstatix), gdzie autor umieścił długą listę dostępnych funkcji ze streszczeniem ich działania.
@@ -1363,7 +1380,7 @@ Ostatnia rzecz, którą chciałbym napisać w tym tekście, dotyczy formatowania
 
 ```{r}
 set.seed(123)
-(rep(round(runif(5,1,10),0),times=2,each=3)->My.own_NUMBERS)
+(rep(round(runif(5, 1, 10), 0), times = 2, each = 3) -> My.own_NUMBERS)
 ```
 
 Powyższy kod działa, czyli spełnia swoją funkcję, ale wygląda paskudnie. Sprawia to, że jeśli się nie wie, co ten kod robi, to jest to ciężko rozszyfrować. Jednak wszystko staje się prostsze, jeśli napiszemy go w sposób czystszy.
@@ -1372,25 +1389,21 @@ Powyższy kod działa, czyli spełnia swoją funkcję, ale wygląda paskudnie. S
 set.seed(123)
 
 (my_own_numbers <- runif(5, min = 1, max = 10) %>% # wylosuj 5 liczb między 1 a 10
-    round(0) %>% # zaokrąglij do całości
-    rep(times = 2, each = 3)) # każdą powtórz 3 razy, a całość 2 razy
+  round(0) %>% # zaokrąglij do całości
+  rep(times = 2, each = 3)) # każdą powtórz 3 razy, a całość 2 razy
 ```
 
 Kod ten od razu jest czytelniejszy, milszy dla oka, mimo że efekt jego działania jest identyczny. Sądzę, że łatwiej jest od razu nasiąkać dobrymi praktykami i standardami, od samego początku nauki, niż potem rugować złe przyzwyczajenia. A skąd mamy wiedzieć, jakie to są „dobre praktyki"? Cóż, standardy wewnętrzne to jedna sprawa, ale takie standardy trzeba ustalać w każdym zespole od nowa. Na szczęście istnieje pewna baza, fundament, standard który -- według mnie -- powinna znać każda osoba programująca w R, czyli standard `tidyverse`. Jeśli znamy te standardy, możemy je potraktować jako bazę dla standardów wewnętrznych. Nie umówiliśmy się, jak powinien wyglądać ten kod? To napiszę zgodnie ze standardem. Jeśli z powodu osobistej preferencji odchodzimy od standardów, robimy to wtedy świadomie. Poradnik formatowania kodu zgodnie z `tidyverse` znajdziemy [tutaj](https://style.tidyverse.org).
 
 Pamiętanie o wszystkich standardach podczas pisania kodu jest trudne, zwłaszcza na początku. Na szczęście mamy narzędzia, które nam w tym pomogą.
 
-## `styler` {#styler}
+## `Air` {#air}
 
-Pierwszy z tych narzędzi to `styler`, który sam poprawia wiele aspektów kodu, w tym wiele oczywistych błędów. Instalujemy go jak każdy inny pakiet (`install.packages("styler")`). Po zainstalowaniu menu Addins wzbogaca się o kilka opcji, z których najważniejsza to *style active file*[^podstawy_r-32]. Podczas pracy uruchamiam to co jakiś czas i zazwyczaj znajdują się jakieś przeoczenia.
-
-![Przykład wykorzystania `styler`](./ilustracje/styler_gif.gif){#fig-styler}
-
-[^podstawy_r-32]: To samo możemy uzyskać używając komendy `styler::style_file("ścieżka/do/pliku")`.
+Współczesnym narzędziem do utrzymywania porządku w kodzie R jest [Air](https://posit-dev.github.io/air/). To proste narzędzie zdejmuej z nas potrzebę myślenia o wyglądzie naszego kodu. Dobrze ustawiony Air sprawia, że za każdym razem, gdy zapisujemy nasz plik, kod jest automatycznie formatowany w zgodzie ze standardami. By skorzystać z Air, musimy pobrać go używając terminala. Możemy to zrobić bezpośrednio w RStudio, przełączając się z zakładki `Console` na zakładkę `Terminal`. W to okno należy wkleić komendę, którą znajdziemy [na stronie Air](https://posit-dev.github.io/air/cli.html). Teraz należy wyłączyć i włączyć RStudio, by pewne zmienne systemowe mogły się odświeżyć. Air jest już zainstalowany i dostępny. By podłączyć Air do Rstudio, musimy dowiedzieć się, gdzie konkretnie został on zainstalowany. Dowiemy się tego znowu korzystając z zakłdaki `Terminal`. Na Windowsie wykorzystujemy komendę `where air`, zaś na Linux/MacOS `which air`. Po kliknięciu Enter, wyświetli nam się dokładna ścieżka do Air. Kopiujemy ją. Następnie wchodzimy w ustawienia RStudio, Tools → Global Options → Code i zakładka Formatting. Tam z rozwijanej listy przy "Code formatter" wybieramy "External". Wyświetli nam się możliwość ustawienia "Reformat command". Wklejamy tam wcześniej skopiowaną ścieżkę do Air i po spacji dopisujemy słowo "format", np. ostatecznie uzykamy `/home/jakub/.local/bin/air format`. Co ważne, jeśli w ścieżce macie jakiekolwiek spacje, musicie ująć ją w podwójne cudzysłowy, np. `"/home/jakub jedrusiak/.local/bin/air" format`. Wreszcie przełączamy się do zakładki "Saving" i zaznaczamy opcję "Reformat documents on save". Gotowe! Teraz za każdym razem, gdy zapisujemy plik, staje się on ładny, czytelny i przede wszystkim spójny.
 
 ## `lintr` {#lintr}
 
-`styler` nie poprawia wszystkich błędów, bo byłoby to zbyt destrukcyjne. Na szczęście `lintr` może nam większość z nich wypomnieć. Dla każdego naszego projektu powinniśmy raz uruchomić komendę `lintr::use_lintr(type = "tidyverse")`. Spowoduje to wytworzenie w folderze pliku o nazwie `.lintr`. Zawiera on konfigurację `lintr` dla danego projektu. Za jego pomocą będziemy mogli tę konfigurację również zmieniać.
+`Air` nie poprawia wszystkich błędów, bo byłoby to zbyt destrukcyjne. Na szczęście `lintr` może nam większość z nich wypomnieć. Dla każdego naszego projektu powinniśmy raz uruchomić komendę `lintr::use_lintr(type = "tidyverse")`. Spowoduje to wytworzenie w folderze pliku o nazwie `.lintr`. Zawiera on konfigurację `lintr` dla danego projektu. Za jego pomocą będziemy mogli tę konfigurację również zmieniać.
 
 ![Przykład wykorzystania `lintr`](./ilustracje/lintr_gif.gif){#fig-lintr}
 
@@ -1400,18 +1413,18 @@ Zmiana dokonuje się przez wpisanie do pliku `.lintr`[^podstawy_r-33] odpowiedni
 
 ```{r}
 #| eval: false
-linters: linters_with_defaults()
-encoding: "UTF-8"
+linters:linters_with_defaults()
+encoding:"UTF-8"
 ```
 
 By zmienić limit znaków, należy przekształcić go w ten sposób:
 
 ```{r}
 #| eval: false
-linters: linters_with_defaults(
-    line_length_linter(120)
+linters:linters_with_defaults(
+  line_length_linter(120)
 )
-encoding: "UTF-8"
+encoding:"UTF-8"
 ```
 
 Gdzie 120 to nowy limit znaków. W podobny sposób możemy zmienić wymagany styl nazywania obiektów. Standardem `tidyverse` jest snake_case, czyli nazywanie małymi literami, oddzielając słowa podkreślnikiem. Poza tym wyróżniamy jeszcze camelCase, czyli każde słowo składowe wielką literą poza pierwszym, PascalCase, czyli każde słowo wielką literą (choć czasem *Pascal case* też nazywa się *camel case* lub *upper camel case*), kebab-case, czyli oddzielanie słów myślnikiem i dot.notation, czyli oddzielanie słów kropką, żeby wymienić te bardziej znane. Żaden ze stylów nie jest zły, jednal jak już się zdecydujemy na jeden, powinniśmy się go trzymać.
@@ -1449,28 +1462,28 @@ Ale wpadłem na to, bo już mi się to przydarzyło. To, swoją drogą, częsty 
 ```{r}
 #| error: true
 df %>%
-    selcet(H_1:H_3)
+  selcet(H_1:H_3)
 ```
 
 Powyższa komenda zwraca błąd `could not find function "selcet"`, co może zdarzyć się w dwóch sytuacjach -- nie załadowaliśmy pakietu, w którym ta funkcja się znajduje, albo zrobiliśmy literówkę. Tutaj uważne przeczytanie wskazuje na tę drugą ewentualność, zamieniłem literki miejscami.
 
 ```{r}
 df %>%
-    mutate(
-        H_suma = sum(pick(H_1:H_10)),
-        .after = id
-    )
+  mutate(
+    H_suma = sum(pick(H_1:H_10)),
+    .after = id
+  )
 ```
 
 Powyższy przykład na nas nie krzyczy, wykonuje się, jednak nie działa tak, jak byśmy chcieli. Celem tego kodu było uzyskanie sumy kolumn od H1 do H10 dla każdej osoby badanej, jak robiliśmy w podrozdziale [-@sec-pick]. Jednak kod nie działa tak, jak byśmy chcieli. W każdej komórce kolumny `H_suma` znajduje się ta sama wartość. Zaskakująco duża. Wynika to z tego, że R domyślnie myśli kolumnami, nie wierszami. Gdy więc każemy mu sumować kolumny od `H1` do `H10`, to sumuje *całe* kolumny i w każdą komórkę wrzuca tę sumę. Jeśli chcemy policzyć sumę dla każdego wiersza z osobna, to musimy albo użyć funkcji `rowSums` zamiast zwykłego `sum`, albo wcześniej przepuścić przez funkcję `rowwise()`, czego nie robiliśmy wcześniej.
 
 ```{r}
 df %>%
-    rowwise() %>%
-    mutate(
-        H_suma = sum(pick(H_1:H_10)),
-        .after = id
-    )
+  rowwise() %>%
+  mutate(
+    H_suma = sum(pick(H_1:H_10)),
+    .after = id
+  )
 ```
 
 Ostatecznie orientujemy się, że gdzieś w naszym kodzie jest błąd i musimy go rozwiązać. Musimy jednak wiedzieć dokładnie jaka funkcja ten błąd powoduje. Jeśli jest to błąd uniemożliwiający wykonanie kodu, konsola postara się nas poinformować, gdzie ten błąd się znajduje. Gorzej w przypadku drugiej kategorii błędów. Tutaj musimy mocniej się postarać. Czytanie kodu to podstawowa metoda, ale mamy też narzędzia, które mogą nam w tym pomóc.
@@ -1482,8 +1495,8 @@ Gdy piszemy całą serię funkcji połączonych potokami, możemy mieć problem 
 ```{r}
 #| error: true
 df %>%
-    select(id, H_1:H_10) %>%
-    filter(wiek > 40)
+  select(id, H_1:H_10) %>%
+  filter(wiek > 40)
 ```
 
 Błąd zwraca nam tutaj funkcja `filter`, jednak błąd popełniliśmy w funkcji `select` -- nie możemy odfiltrować osób w wieku powyżej 40 roku życia, jeśli w naszej bazie nie ma już kolumny `wiek`. Tutaj możemy to szybko zauważyć, ale w dłuższych ciągach potoków może nie być to takie oczywiste. Zazwyczaj zacznaczamy wtedy kolejne kroki i patrzymy jak nasza baza się zmienia.
@@ -1495,12 +1508,12 @@ df
 
 # Potem to
 df %>%
-    select(id, H_1:H_10)
+  select(id, H_1:H_10)
 
 # Na koniec to
 df %>%
-    select(id, H_1:H_10) %>%
-    filter(wiek > 40)
+  select(id, H_1:H_10) %>%
+  filter(wiek > 40)
 ```
 
 Zazwyczaj robimy to ręcznie, ale mamy też użyteczne narzędzie służące właśnie wyświetleniu kolejnych kroków ciągu potoków. Jest to dodatek do RStudio `ViewPipeSteps`. Po zainstalowaniu możemy wykorzystać to narzędzie zaznaczając swój ciąg i wybierając odpowiednią opcję z menu Addins. Otworzy to w kolejnych kartach (albo wydrukuje konsoli) kolejne kroki ciągu funkcji połączonych potokami. Często pozwala to na zidentyfikowanie kroku, w którym pojawia się błąd.
@@ -1544,7 +1557,7 @@ Jeśli czytasz to teraz, oznacza to, że ten tekst to praca w toku. Za każdą i
 #| eval: false
 #| code-fold: true
 #| code-summary: "Pokaż całość kodu z analizy"
- 
+
 # Przygotowanie ----
 
 ## Ładowanie bibliotek ----
@@ -1553,101 +1566,110 @@ library("tidyverse")
 library("broom")
 library("rstatix")
 
-source("https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R") # motyw do wykresów
+source(
+  "https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R"
+) # motyw do wykresów
 
 ## Ładowanie danych ----
 
-df_raw <- read_csv("https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/complex_database.csv")
+df_raw <- read_csv(
+  "https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/complex_database.csv"
+)
 
-df_KTR_test <- read_csv("https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/join-test.csv")
+df_KTR_test <- read_csv(
+  "https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/join-test.csv"
+)
 
-df_KTR_retest <- read_csv("[./dane/podstawy-R/join-retest.csv](https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/join-retest.csv)")
+df_KTR_retest <- read_csv(
+  "[./dane/podstawy-R/join-retest.csv](https://raw.githubusercontent.com/jakub-jedrusiak/jakub-jedrusiak.github.io/main/statystyka/dane/podstawy-R/join-retest.csv)"
+)
 
 # Data wrangling ----
 
 ## Czyszczenie ----
 
 df <- df_raw %>%
-    filter(Płeć == "Mężczyzna") %>%
-    select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
-    set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
-    mutate(
-        wiek = parse_number(wiek),
-        across(H_1:H_10, parse_number),
-        across(c(H_5, H_7), ~ 7 - .x),
-        H_suma = rowSums(pick(H_1:H_10)),
-        wyksztalcenie_grupa = case_when(
-            wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
-            wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
-            .default = wyksztalcenie
-        ),
-        wyksztalcenie = factor(
-            wyksztalcenie,
-            levels = c("Podstawowe", "Zawodowe", "Średnie", "Wyższe"),
-            ordered = TRUE
-            )
-    ) %>%
-    arrange(desc(wyksztalcenie), wiek) %>%
-    relocate(H_suma, .before = H_1)
+  filter(Płeć == "Mężczyzna") %>%
+  select(ID, `Wiek (ukończony w latach)`, Wykształcenie, 9:18) %>%
+  set_names("id", "wiek", "wyksztalcenie", paste("H", 1:10, sep = "_")) %>%
+  mutate(
+    wiek = parse_number(wiek),
+    across(H_1:H_10, parse_number),
+    across(c(H_5, H_7), ~ 7 - .x),
+    H_suma = rowSums(pick(H_1:H_10)),
+    wyksztalcenie_grupa = case_when(
+      wyksztalcenie == "Średnie" ~ "Ponadpodstawowe",
+      wyksztalcenie == "Zawodowe" ~ "Ponadpodstawowe",
+      .default = wyksztalcenie
+    ),
+    wyksztalcenie = factor(
+      wyksztalcenie,
+      levels = c("Podstawowe", "Zawodowe", "Średnie", "Wyższe"),
+      ordered = TRUE
+    )
+  ) %>%
+  arrange(desc(wyksztalcenie), wiek) %>%
+  relocate(H_suma, .before = H_1)
 
 ## Dołączanie retestu ----
 
 df_KTR <- df_KTR_test %>%
-    left_join(
-        df_KTR_retest,
-        by = join_by(ID == Subject),
-        suffix = c("", "_retest")
-    )
+  left_join(
+    df_KTR_retest,
+    by = join_by(ID == Subject),
+    suffix = c("", "_retest")
+  )
 
 # Analiza ----
 
 ## Eksploracja ----
 
 descr <- df %>%
-    get_summary_stats() %>%
-    mutate(v = sd / mean)
+  get_summary_stats() %>%
+  mutate(v = sd / mean)
 
 descr_wyksztalcenie <- df %>%
-    group_by(wyksztalcenie) %>%
-    get_summary_stats()
+  group_by(wyksztalcenie) %>%
+  get_summary_stats()
 
 freq_wyksztalcenie <- freq_table(df, wyksztalcenie)
 
 corr_matrix <- df_KTR %>%
-    cor_mat(-ID) %>%
-    cor_mark_significant()
+  cor_mat(-ID) %>%
+  cor_mark_significant()
 
 ## Wykresy ----
 
 plot_price <- diamonds %>%
-    slice_sample(100) %>%
-    ggplot() +
-        aes(x = carat, y = price, colour = clarity) +
-        geom_point(shape = "diamond", size = 2L) +
-        scale_color_brewer(palette = "YlOrRd", direction = 1) +
-        labs(
-            x = "Masa [karaty]",
-            y = "Cena [$]",
-            title = "Cena diamentów od ich masy według szlifu",
-            caption = "Źródło danych: ggplot2",
-            color = "Przejrzystość"
-        ) +
-        theme_Publication() +
-        theme(
-            legend.position = "bottom",
-            plot.title = element_text(face = "bold")
-        ) +
-        facet_wrap(
-            vars(cut),
-            labeller = labeller(cut = c(
-                "Fair" = "Zadowalający",
-                "Good" = "Dobry",
-                "Very Good" = "Bardzo dobry",
-                "Premium" = "Premium",
-                "Ideal" = "Idealny"
-                )
-            )
-        )
+  slice_sample(100) %>%
+  ggplot() +
+  aes(x = carat, y = price, colour = clarity) +
+  geom_point(shape = "diamond", size = 2L) +
+  scale_color_brewer(palette = "YlOrRd", direction = 1) +
+  labs(
+    x = "Masa [karaty]",
+    y = "Cena [$]",
+    title = "Cena diamentów od ich masy według szlifu",
+    caption = "Źródło danych: ggplot2",
+    color = "Przejrzystość"
+  ) +
+  theme_Publication() +
+  theme(
+    legend.position = "bottom",
+    plot.title = element_text(face = "bold")
+  ) +
+  facet_wrap(
+    vars(cut),
+    labeller = labeller(
+      cut = c(
+        "Fair" = "Zadowalający",
+        "Good" = "Dobry",
+        "Very Good" = "Bardzo dobry",
+        "Premium" = "Premium",
+        "Ideal" = "Idealny"
+      )
+    )
+  )
 
 ## Testy statystyczne ----
 
@@ -1658,8 +1680,8 @@ anova_diamons <- anova_test(diamonds, price ~ cut + color + clarity)
 tukey_hsd(diamonds, price ~ cut + color + clarity) # post-hoc
 
 eta_diamonds <- diamonds %>%
-    aov(price ~ cut + color + clarity, .) %>%
-    eta_squared()
+  aov(price ~ cut + color + clarity, .) %>%
+  eta_squared()
 ```
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licencja Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Ten utwór jest dostępny na <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">licencji Creative Commons Uznanie autorstwa-Użycie niekomercyjne-Na tych samych warunkach 4.0 Międzynarodowe</a>.
