@@ -11,20 +11,13 @@ about:
       href: https://www.researchgate.net/profile/Jakub_Jedrusiak
     - text: ORCID
       href: https://orcid.org/0000-0002-6481-8210
-notice: |
-    @jedrusiak_tworczosc_2021, @burzynski_czarny_2020, @jedrusiak_uprzedzenia_2023, @jedrusiak_openscoring_2024, @jedrusiak_recalling_2024
 ---
 
-Psycholog, absolwent Uniwersytetu Wrocławskiego. Zainteresowany psychologią procesów poznawczych i wnioskowaniem statystycznym, w tym wykorzystaniem R i Pythona w nauce. Zwolennik Open Science.
-
-# Publikacje {#publikacje}
-
-::: {#refs}
-:::
+Psycholog, absolwent Uniwersytetu Wrocławskiego. Członek [Creative Behavior Lab](https://creativity-lab.pl/). Zainteresowany psychologią twórczości, zwłaszcza w kontekście procesów poznawczych. Wielbiciel R, zwolennik Pythona i JS. Fan Open Science.
 
 # Fonty {#fonty}
 
-Fonty użyte na tej stronie:
+Fonty użyte na tym blogu:
 
 Tekst główny -- [Open Sans]{style="font-family: \"Open Sans\";"}
 
