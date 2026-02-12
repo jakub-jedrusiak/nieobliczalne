@@ -10,7 +10,75 @@
 <atom:link href="https://nieobliczalne.pl/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Sat, 28 Oct 2023 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 11 Feb 2026 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Proxy – Uniwersytet Wrocławski</title>
+  <dc:creator>Jakub Jędrusiak</dc:creator>
+  <link>https://nieobliczalne.pl/posts/uwr-proxy.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Po pierwsze rzeczywiście trzeba wypełnić formularz na <a href="https://www.bu.uni.wroc.pl/uslugi-online/proxy">stronie Biblioteki UWr</a>. Po jakimś czasie, zazwyczaj w ciągu godziny, otrzymujemy mailem dane do logowania. Będą nam potrzebne za moment.</p>
+<p>Po drugie, instalujemy odpowiedni dodatek do przeglądarki. Pozwoli nam on automatycznie przełączać się na proxy na tych stronach, na których może nam to dać dostęp (w tym IBUK Libra). My tutaj zastosujemy dodatek, który nazywa się SwitchyOmega 3 (ZeroOmega). Ta trójka jest ważna, bo wiele przeglądarek ma na stronach z dodatkami starą wersję, bez trójki, która nie działa. Poniżej linki do najpopularniejszych przeglądarek:</p>
+<ul>
+<li><strong>Chrome/Edge/Opera/inne na Chromium:</strong> <a href="https://chromewebstore.google.com/detail/pfnededegaaopdmhkdmcofjmoldfiped" class="uri">https://chromewebstore.google.com/detail/pfnededegaaopdmhkdmcofjmoldfiped</a></li>
+<li><strong>Firefox:</strong> <a href="https://addons.mozilla.org/pl/firefox/addon/zeroomega/" class="uri">https://addons.mozilla.org/pl/firefox/addon/zeroomega/</a></li>
+<li><strong>Safari:</strong> nie mam pojęcia, jak tego nawet szukać, ale pewnie jest (jak nie, to dość łatwo użyć innego analoicznego dodatku)</li>
+</ul>
+<p>Po trzecie, wchodzimy w ustawienia dodatku, w zakładkę Import/Export. Tam w pole „Restore from online” wklejamy poniższy link i klikamy przycisk Restore.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1">https://jakubjedrusiak.pl/uwrproxy</span></code></pre></div></div>
+<p>Pod tym linkiem znajduje się zestaw ustawień, który przygotowałem i który w całości przygotuje SwitchyOmega do pracy z proxy UWr – ustawi odpowiednie IP wraz z odpowiednią listą stron. Gdy klikniemy guzik, wszystkie odpowiednie ustawienia same się zaimportują.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/uwr-proxy/switchy-config.png" class="img-fluid figure-img"></p>
+<figcaption>Jak automatycznie ustawić SwitchyOmega tak, żeby działał z proxy UWr.</figcaption>
+</figure>
+</div>
+<p>Po czwarte, musimy podać nasze hasło. W tym celu wchodzimy w nowo utworzony profil UWr w panelu po lewej, klikamy ikonę kłódki i w wyskakującym okienku wpisujemy dane, które dostaliśmy mailem. <strong>Nie te, którymi logujemy się do poczty czy USOS, tylko te, które system proxy wysłał nam po wypełnieniu formularza.</strong> Zatwierdzamy i gotowe.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/uwr-proxy/uwr-password.png" class="img-fluid figure-img"></p>
+<figcaption>Należy wpisać login i hasło wysłane nam mailem przez system.</figcaption>
+</figure>
+</div>
+<p>Teraz po wejściu na strony czasopism powinniśmy automatycznie uzysać dostęp do pełnych wersji artykułów, za dostęp do których UWr zapłacił. Podobnie bez logowania mamy dostęp do zasobów UWr w IBUK Libra. Jeśli na jakiejś stronie, na której proxy powinno zadziałać, nie działa, możemy dodać ją samodzielnie za pomocą menu dodatku (czasem schowanym w menu rozszerzeń w przeglądarce, zazwyczaj ikona puzzla). Jeśli to coś da, można napisać mi maila, to dodam do swojej listy dla innych.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/uwr-proxy/add-proxy.png" class="img-fluid figure-img"></p>
+<figcaption>Dodawanie strony do proxy UWr</figcaption>
+</figure>
+</div>
+<p>Może się zdarzyć, że przy próbie wejścia na jakąś stronę nagle przeglądarka poprosi nas o login i hasło. Wtedy należy spróbować odświeżyć stronę. Jeśli nie pomoże, prawdopodobnie hasło wygasło. W takim wypadku na mailu uniwersyteckim powinniśmy mieć już maila, że dostęp do proxy wygasł i link, za pomocą którego możemy ten dostęp odświeżyć. Po kilku minutach od kliknięcia dostaniemy nowe hasło, które należy wkleić w tym samym miejscu, co poprzednie. Jeśli nagle jakieś strony w ogóle się nie ładują, warto spóbować w menu dodatku przełączyć się na chwilę na <code>[System Proxy]</code>. Jeśli zaczęło działać, to znaczy, że konfiguracja jest błędna.</p>
+<p>Moim zdaniem Uniwersytet powinien założyć coś w stylu EZproxy i ułatwić nam wszystkim życie.</p>
+<section id="zaawansowane" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Zaawansowane</h1>
+<p>Tutaj parę bardziej technicznych informacji, jakby ktoś chciał skorzystać z innego dodatku lub własnej konfiguracji.</p>
+<p>Proxy UWr to proxy <code>HTTP</code>.</p>
+<p>IP:</p>
+<pre><code>156.17.58.23</code></pre>
+<p>Port:</p>
+<pre><code>8070</code></pre>
+<p>Udostępniam też surową listę stron, gdzie proxy UWr może się przydać, w stylu AutoProxy, żeby można było sobie skopiować:</p>
+<blockquote class="blockquote">
+<p><a href="https://jakubjedrusiak.pl/scienceproxy" class="uri">https://jakubjedrusiak.pl/scienceproxy</a></p>
+</blockquote>
+<p>Dla osób potrafiących z tego korzystać, dorzucam też wyeksportowany ze SwitchyOmega plik PAC. Link jest tak ustawiony, że można go wrzucać jako URL w konfiguratorze systemowym:</p>
+<blockquote class="blockquote">
+<p><a href="https://jakubjedrusiak.pl/uwr.pac" class="uri">https://jakubjedrusiak.pl/uwr.pac</a></p>
+</blockquote>
+
+
+</section>
+
+ ]]></description>
+  <category>Narzędzia</category>
+  <guid>https://nieobliczalne.pl/posts/uwr-proxy.html</guid>
+  <pubDate>Wed, 11 Feb 2026 23:00:00 GMT</pubDate>
+  <media:content url="https://nieobliczalne.pl/posts/headers/uwr-proxy.webp" medium="image" type="image/webp"/>
+</item>
 <item>
   <title>Rozkłady próbkowania i rozkłady \(t\)</title>
   <dc:creator>Jakub Jędrusiak</dc:creator>

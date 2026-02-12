@@ -5,51 +5,23 @@
     <lastmod>2026-02-07T10:50:35.835Z</lastmod>
   </url>
   <url>
-    <loc>https://nieobliczalne.pl/posts/rozklady-probkowania.html</loc>
+    <loc>https://nieobliczalne.pl/posts/uczenie-sie.html</loc>
     <lastmod>2026-02-07T10:50:35.835Z</lastmod>
   </url>
   <url>
-    <loc>https://nieobliczalne.pl/posts/regex.html</loc>
+    <loc>https://nieobliczalne.pl/posts/procent-wariancji.html</loc>
     <lastmod>2026-02-07T10:50:35.835Z</lastmod>
   </url>
   <url>
-    <loc>https://nieobliczalne.pl/posts/powtarzalny-tekst.html</loc>
-    <lastmod>2026-02-07T10:50:35.835Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/podstawy_R.html</loc>
-    <lastmod>2026-02-07T11:23:17.526Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/p-value.html</loc>
+    <loc>https://nieobliczalne.pl/posts/pakiety-w-R.html</loc>
     <lastmod>2026-02-07T10:50:35.832Z</lastmod>
   </url>
   <url>
-    <loc>https://nieobliczalne.pl/posts/kombinatoryka.html</loc>
+    <loc>https://nieobliczalne.pl/posts/metaprogramowanie.html</loc>
     <lastmod>2026-02-07T10:50:35.832Z</lastmod>
   </url>
   <url>
-    <loc>https://nieobliczalne.pl/posts/git.html</loc>
-    <lastmod>2026-02-07T10:50:35.772Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/funkcje.html</loc>
-    <lastmod>2026-02-07T10:50:35.772Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/posts/ai-research.html</loc>
-    <lastmod>2026-02-07T10:50:35.772Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/index.html</loc>
-    <lastmod>2026-02-07T10:50:35.772Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/about.html</loc>
-    <lastmod>2026-02-07T10:55:03.142Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nieobliczalne.pl/newsletter.html</loc>
+    <loc>https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa.html</loc>
     <lastmod>2026-02-07T10:50:35.772Z</lastmod>
   </url>
   <url>
@@ -57,23 +29,55 @@
     <lastmod>2026-02-07T10:50:35.772Z</lastmod>
   </url>
   <url>
-    <loc>https://nieobliczalne.pl/posts/gestosc-prawdopodobienstwa.html</loc>
+    <loc>https://nieobliczalne.pl/newsletter.html</loc>
     <lastmod>2026-02-07T10:50:35.772Z</lastmod>
   </url>
   <url>
-    <loc>https://nieobliczalne.pl/posts/metaprogramowanie.html</loc>
+    <loc>https://nieobliczalne.pl/about.html</loc>
+    <lastmod>2026-02-07T10:55:03.142Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/index.html</loc>
+    <lastmod>2026-02-07T10:50:35.772Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/ai-research.html</loc>
+    <lastmod>2026-02-07T10:50:35.772Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/funkcje.html</loc>
+    <lastmod>2026-02-07T10:50:35.772Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/git.html</loc>
+    <lastmod>2026-02-07T10:50:35.772Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/kombinatoryka.html</loc>
     <lastmod>2026-02-07T10:50:35.832Z</lastmod>
   </url>
   <url>
-    <loc>https://nieobliczalne.pl/posts/pakiety-w-R.html</loc>
+    <loc>https://nieobliczalne.pl/posts/p-value.html</loc>
     <lastmod>2026-02-07T10:50:35.832Z</lastmod>
   </url>
   <url>
-    <loc>https://nieobliczalne.pl/posts/procent-wariancji.html</loc>
+    <loc>https://nieobliczalne.pl/posts/podstawy_R.html</loc>
+    <lastmod>2026-02-07T11:23:17.526Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/powtarzalny-tekst.html</loc>
     <lastmod>2026-02-07T10:50:35.835Z</lastmod>
   </url>
   <url>
-    <loc>https://nieobliczalne.pl/posts/uczenie-sie.html</loc>
+    <loc>https://nieobliczalne.pl/posts/regex.html</loc>
     <lastmod>2026-02-07T10:50:35.835Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/rozklady-probkowania.html</loc>
+    <lastmod>2026-02-07T10:50:35.835Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nieobliczalne.pl/posts/uwr-proxy.html</loc>
+    <lastmod>2026-02-12T13:53:16.036Z</lastmod>
   </url>
 </urlset>
