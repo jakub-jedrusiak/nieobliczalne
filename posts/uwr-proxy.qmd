@@ -13,6 +13,8 @@ categories:
     - Narzędzia
 ---
 
+# Instrukcja
+
 Po pierwsze rzeczywiście trzeba wypełnić formularz na [stronie Biblioteki UWr](https://www.bu.uni.wroc.pl/uslugi-online/proxy). Po jakimś czasie, zazwyczaj w ciągu godziny, otrzymujemy mailem dane do logowania. Będą nam potrzebne za moment.
 
 Po drugie, instalujemy odpowiedni dodatek do przeglądarki. Pozwoli nam on automatycznie przełączać się na proxy na tych stronach, na których może nam to dać dostęp (w tym IBUK Libra). My tutaj zastosujemy dodatek, który nazywa się SwitchyOmega 3 (ZeroOmega). Ta trójka jest ważna, bo wiele przeglądarek ma na stronach z dodatkami starą wersję, bez trójki, która nie działa. Poniżej linki do najpopularniejszych przeglądarek:
