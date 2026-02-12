@@ -1,0 +1,70 @@
+---
+title: Proxy – Uniwersytet Wrocławski
+subtitle: Jak sensownie ustawić dostęp
+description: Uniwersytet Wrocławski daje dostęp do dużej liczby artykułów naukowych, baz artykułów typu EBSCO, IBUK Libra itd. By uzyskać dostęp należy wypełnić stosowny formularz na stronie Biblioteki UWr i potem, co trudniejsze, skonfigurować przeglądarkę. Oficjalna instrukcja zakłada, żeby specjalnie zainstalować całą nową przeglądarkę tylko na dostęp przez proxy. To jest podejście strasznie naokoło, niewygodne i archaiczne. W tej nieoficjalnej instrukcji pokażę, jak najłatwiej i najszybciej podłączyć proxy do naszej istniejącej przeglądarki w taki sposób, by automatycznie łączyło interesujące nas strony.
+image: "./headers/uwr-proxy.webp"
+twitter-card:
+    image: "/headers/uwr-proxy.jpeg"
+date: "2026-02-12"
+code-fold: true
+execute: 
+  warning: false
+categories:
+    - Narzędzia
+---
+
+Po pierwsze rzeczywiście trzeba wypełnić formularz na [stronie Biblioteki UWr](https://www.bu.uni.wroc.pl/uslugi-online/proxy). Po jakimś czasie, zazwyczaj w ciągu godziny, otrzymujemy mailem dane do logowania. Będą nam potrzebne za moment.
+
+Po drugie, instalujemy odpowiedni dodatek do przeglądarki. Pozwoli nam on automatycznie przełączać się na proxy na tych stronach, na których może nam to dać dostęp (w tym IBUK Libra). My tutaj zastosujemy dodatek, który nazywa się SwitchyOmega 3 (ZeroOmega). Ta trójka jest ważna, bo wiele przeglądarek ma na stronach z dodatkami starą wersję, bez trójki, która nie działa. Poniżej linki do najpopularniejszych przeglądarek:
+
+-   **Chrome/Edge/Opera/inne na Chromium:** <https://chromewebstore.google.com/detail/pfnededegaaopdmhkdmcofjmoldfiped>
+-   **Firefox:** <https://addons.mozilla.org/pl/firefox/addon/zeroomega/>
+-   **Safari:** nie mam pojęcia, jak tego nawet szukać, ale pewnie jest (jak nie, to dość łatwo użyć innego analoicznego dodatku)
+
+Po trzecie, wchodzimy w ustawienia dodatku, w zakładkę Import/Export. Tam w pole „Restore from online” wklejamy poniższy link i klikamy przycisk Restore.
+
+``` html
+https://jakubjedrusiak.pl/uwrproxy
+```
+
+Pod tym linkiem znajduje się zestaw ustawień, który przygotowałem i który w całości przygotuje SwitchyOmega do pracy z proxy UWr – ustawi odpowiednie IP wraz z odpowiednią listą stron. Gdy klikniemy guzik, wszystkie odpowiednie ustawienia same się zaimportują.
+
+![Jak automatycznie ustawić SwitchyOmega tak, żeby działał z proxy UWr.](ilustracje/uwr-proxy/switchy-config.png){fig-align="center"}
+
+Po czwarte, musimy podać nasze hasło. W tym celu wchodzimy w nowo utworzony profil UWr w panelu po lewej, klikamy ikonę kłódki i w wyskakującym okienku wpisujemy dane, które dostaliśmy mailem. **Nie te, którymi logujemy się do poczty czy USOS, tylko te, które system proxy wysłał nam po wypełnieniu formularza.** Zatwierdzamy i gotowe.
+
+![Należy wpisać login i hasło wysłane nam mailem przez system.](ilustracje/uwr-proxy/uwr-password.png){fig-align="center"}
+
+Teraz po wejściu na strony czasopism powinniśmy automatycznie uzysać dostęp do pełnych wersji artykułów, za dostęp do których UWr zapłacił. Podobnie bez logowania mamy dostęp do zasobów UWr w IBUK Libra. Jeśli na jakiejś stronie, na której proxy powinno zadziałać, nie działa, możemy dodać ją samodzielnie za pomocą menu dodatku (czasem schowanym w menu rozszerzeń w przeglądarce, zazwyczaj ikona puzzla). Jeśli to coś da, można napisać mi maila, to dodam do swojej listy dla innych.
+
+![Dodawanie strony do proxy UWr](ilustracje/uwr-proxy/add-proxy.png){fig-align="center"}
+
+Może się zdarzyć, że przy próbie wejścia na jakąś stronę nagle przeglądarka poprosi nas o login i hasło. Wtedy należy spróbować odświeżyć stronę. Jeśli nie pomoże, prawdopodobnie hasło wygasło. W takim wypadku na mailu uniwersyteckim powinniśmy mieć już maila, że dostęp do proxy wygasł i link, za pomocą którego możemy ten dostęp odświeżyć. Po kilku minutach od kliknięcia dostaniemy nowe hasło, które należy wkleić w tym samym miejscu, co poprzednie. Jeśli nagle jakieś strony w ogóle się nie ładują, warto spóbować w menu dodatku przełączyć się na chwilę na `[System Proxy]`. Jeśli zaczęło działać, to znaczy, że konfiguracja jest błędna.
+
+Moim zdaniem Uniwersytet powinien założyć coś w stylu EZproxy i ułatwić nam wszystkim życie.
+
+# Zaawansowane
+
+Tutaj parę bardziej technicznych informacji, jakby ktoś chciał skorzystać z innego dodatku lub własnej konfiguracji.
+
+Proxy UWr to proxy `HTTP`.
+
+IP:
+
+```         
+156.17.58.23
+```
+
+Port:
+
+```         
+8070
+```
+
+Udostępniam też surową listę stron, gdzie proxy UWr może się przydać, w stylu AutoProxy, żeby można było sobie skopiować:
+
+> <https://jakubjedrusiak.pl/scienceproxy>
+
+Dla osób potrafiących z tego korzystać, dorzucam też wyeksportowany ze SwitchyOmega plik PAC. Link jest tak ustawiony, że można go wrzucać jako URL w konfiguratorze systemowym:
+
+> <https://jakubjedrusiak.pl/uwr.pac>
