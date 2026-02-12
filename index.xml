@@ -21,6 +21,8 @@
 
 
 
+<section id="instrukcja" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Instrukcja</h1>
 <p>Po pierwsze rzeczywiście trzeba wypełnić formularz na <a href="https://www.bu.uni.wroc.pl/uslugi-online/proxy">stronie Biblioteki UWr</a>. Po jakimś czasie, zazwyczaj w ciągu godziny, otrzymujemy mailem dane do logowania. Będą nam potrzebne za moment.</p>
 <p>Po drugie, instalujemy odpowiedni dodatek do przeglądarki. Pozwoli nam on automatycznie przełączać się na proxy na tych stronach, na których może nam to dać dostęp (w tym IBUK Libra). My tutaj zastosujemy dodatek, który nazywa się SwitchyOmega 3 (ZeroOmega). Ta trójka jest ważna, bo wiele przeglądarek ma na stronach z dodatkami starą wersję, bez trójki, która nie działa. Poniżej linki do najpopularniejszych przeglądarek:</p>
 <ul>
@@ -53,8 +55,9 @@
 </div>
 <p>Może się zdarzyć, że przy próbie wejścia na jakąś stronę nagle przeglądarka poprosi nas o login i hasło. Wtedy należy spróbować odświeżyć stronę. Jeśli nie pomoże, prawdopodobnie hasło wygasło. W takim wypadku na mailu uniwersyteckim powinniśmy mieć już maila, że dostęp do proxy wygasł i link, za pomocą którego możemy ten dostęp odświeżyć. Po kilku minutach od kliknięcia dostaniemy nowe hasło, które należy wkleić w tym samym miejscu, co poprzednie. Jeśli nagle jakieś strony w ogóle się nie ładują, warto spóbować w menu dodatku przełączyć się na chwilę na <code>[System Proxy]</code>. Jeśli zaczęło działać, to znaczy, że konfiguracja jest błędna.</p>
 <p>Moim zdaniem Uniwersytet powinien założyć coś w stylu EZproxy i ułatwić nam wszystkim życie.</p>
-<section id="zaawansowane" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Zaawansowane</h1>
+</section>
+<section id="zaawansowane" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Zaawansowane</h1>
 <p>Tutaj parę bardziej technicznych informacji, jakby ktoś chciał skorzystać z innego dodatku lub własnej konfiguracji.</p>
 <p>Proxy UWr to proxy <code>HTTP</code>.</p>
 <p>IP:</p>
