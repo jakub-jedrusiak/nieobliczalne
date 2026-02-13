@@ -93,6 +93,16 @@ $$
 
 Czyli wariacji po 3 elementy jest w naszym przykładzie 3 razy więcej, niż wariacji po 2 elementy.
 
+Tym samym omówione wyżej permutacje możemy rozumieć jako takie wariacje, gdzie wykorzystujemy wszystkie elementy zbioru. I to jest *clou* tej terminologii -- za każdym razem, kiedy w takim przetasowaniu zbioru kolejność ma znaczenie, mówimy o wariacjach, zaś permutacja to szczególny przypadek wariacji. Permutacje są wariacjami.
+
+::: {.callout-warning}
+## Terminologia angielska
+
+To, co napisałem wyżej, jest prawdą po polsku, francusku, niemiecku, rosyjsku, ale nie po angielsku. Historycznie Anglicy uprościli tę terminologię. U nas wariacje to szerokie pojęcie, a permutacje to szczególny przypadek wariacji, gdzie nie rozbijamy zbioru na mniejsze części. Anglicy pozbyli się pojęcia wariacji i wszędzie tam, gdzie kolejność ma znaczenie, używają pojęcia *permutation*. O ile wiem, nie ma po angielsku szczególnej nazwy na zmianę kolejności wszystkich elementów zbioru. Może narzucać się słowo *variations*, ale we współczesnych angielskich podręcznikach do matematyki ten termin na ogół nie pada w ogóle. Co ciekawe, Włosi i Hiszpanie mają tutaj jeszcze większy chaos, bo mieszają uproszczoną i „pełną” klasyfikację.
+
+Sytuacja języka angielskiego jest o tyle ważna, że **kalkulatory naukowe** wykorzystują angielską notację. Jeśli na kalkulatorze naukowym chcemy policzyć liczbę 2-elementowych wariacji 10-elementowego zbioru, to wklepiemy w kalkulator *10P2* (*out of 10 elements permute 2*). Mimo że po polsku nie nazwiemy czegoś takiego permutacją, użyjemy przycisku *nPk*, a nie *nVk*, bo takiego po prostu nie ma. Jeśli chce my policzyć permutację 10-elementowego zbioru w sensie ścisłym, to wystarczy, że wklepiemy *10P10*, bo permutacja to po prostu wariacja ze wszystkimi elementami. Także obcując z kalkulatorem i ewentialnie angielską literaturą, należy pamiętać, że u nich *permutations* nie mają tej szczególnej właściwości, że obejmują wszystkie elementy, tylko dotyczą wszystkich przetasowań kolejności, z rozbijaniem albo bez.
+:::
+
 # Kombinacje
 
 Możemy zwrócić uwagę, że tabela powyżej ma ściśle określoną strukturę. W pierwszym wierszu wszystkie podzbiory składają się z literek A, B i C ułożonych na różne sposoby. Można więc powiedzieć, że podzbiory w każdym wierszu są dla siebie *permutacjami*, bo składają się z tych samych elementów, różnią się tylko kolejnością. Każda kolumna zawiera unikalne zestawy literek. Widzimy więc, że ze zbioru 5 literek możemy wybrać 10 różnych zestawów literek, a w każdym z tych zestawów można ułożyć literki na 6 sposobów, co daje łącznie 60 wariacji. Wariacje możemy więc uzyskać tak, że weźmiemy wszystkie unikalne mniejsze zestawy literek, a potem rozpiszemy permutacje każdego z tych zestawów. Takie unikalne zestawy literek, bez zwracania uwagi na ich kolejność, to *kombinacje*. W tabeli każdy wiersz to pełny zestaw kombinacji. Wynika nam z tego inny wzór na liczbę wariacji:
