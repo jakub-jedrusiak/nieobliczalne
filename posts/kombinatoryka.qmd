@@ -26,7 +26,7 @@ def variations(iterable, subset_length):
     return df
 ```
 
-Kombinatoryka to część matematyki zajmująca się modyfikacjami zbiorów. Weźmy sobie zbiór 5 pierwszych liter alfabetu i nazwijmy go Z jak zbiór. Zacznę od skomplikowanie brzmiącego wstępu, a potem wyjaśnię to na przykładach.
+Kombinatoryka to część matematyki zajmująca się modyfikacjami zbiorów. Weźmy sobie zbiór 5 pierwszych liter alfabetu i nazwijmy go $Z$ jak zbiór. Zacznę od skomplikowanie brzmiącego wstępu, a potem wyjaśnię to na przykładach.
 
 ``` {python}
 Z = ["A", "B", "C", "D", "E"]
@@ -35,15 +35,15 @@ Z = ["A", "B", "C", "D", "E"]
 Z tym zbiorem mogę zrobić kilka rzeczy. Mogę go zacząć rozbijać na mniejsze zbiory. Mogę zacząć przestawiać w nim elementy. Mogę najpierw rozbić go na mniejsze zbiory, a potem przestawiać elementy w tych małych zbiorach. Każda z tych akcji ma swoją własną nazwę. Jeżeli mówię, że:
 
 - **permutuję** – zmieniam kolejność elementów;
-- **kombinuję** – rozbijam swój zbiór na mniejsze zbiory (*combine* – łączyć; łączę stare elementy na nowo).
+- **kombinuję** – łączę elementy swojego zbioru w mniejsze zbiory (*combine* – łączyć; łączę stare elementy na nowo).
 
-Kiedy robię permutacje, z góry zakładam, że kolejność ma znaczenie. Jest wiele sytuacji, w których kolejność ma znaczenie, ale są też sytuacje, w których liczy się tylko to, *jakie* mam elementy, a nie *w jakiej są kolejności*. Dla przykładu nieważne, czy w losowaniu Lotto wyciągnięto 2, 5, 7 czy 7, 5, 2 – jeśli mamy te liczby na swoim kuponie, możemy dostać nagrodę. Jeśli kolejność ma znaczenie, mówimy o wariacjach, a jeśli znaczenia nie ma, mówimy o kombinacjach.
+Kiedy robię permutacje, z góry zakładam, że kolejność ma znaczenie. Jest wiele sytuacji, w których kolejność ma znaczenie, ale są też sytuacje, w których liczy się tylko to, *jakie* mam elementy, a nie *w jakiej są kolejności*. Dla przykładu nieważne, czy w losowaniu Lotto wyciągnięto 2, 5, 7 czy 7, 5, 2 – jeśli mamy te liczby na swoim kuponie, możemy dostać nagrodę. Jeśli kolejność ma znaczenie, mówimy o *wariacjach*, a jeśli znaczenia nie ma, mówimy o *kombinacjach*.
 
-Przed chwilą mówiłem, że zmiana kolejności to permutacja, a potem nagle używam słowa wariacja. Istnieje pomiędzy nimi pewna różnica, polegająca na tym, czy zmieniam kolejność w całym naszym zbiorze, czy wcześniej rozbijam go na mniejsze zbiory. Słowem *permutacja* określamy zmiany kolejności w całym zbiorze, zaś o *wariacjach* mówimy wtedy, gdy przed zmianą kolejności rozbijamy nasz zbiór na mniejsze zbiory.
+Przed chwilą mówiłem, że zmiana kolejności to permutacja, a potem nagle używam słowa wariacja. Istnieje pomiędzy nimi pewna różnica. Polega ona na tym, czy zmieniam kolejność w całym naszym zbiorze, czy może mogę wcześniej rozbić go na mniejsze zbiory. Słowem *permutacja* określamy zmiany kolejności w całym zbiorze, czyli „przemieszanie” zbioru bez usuwania niczego, zaś o *wariacjach* mówimy wtedy, gdy przed zmianą kolejności wolno jeszcze rozbić nam nasz zbór na miejsze kawałki. Powinno się to rozjaśnić, jak omówimy te trzy pojęcia po kolei.
 
 # Permutacje
 
-Omówmy to na przykładzie naszego zbioru liter od A do E. Permutacja tego zbioru będzie wyglądała tak:
+Omówmy to na przykładzie naszego zbioru liter od A do E. Permutacje tego zbioru będą wyglądały tak:
 
 ``` {python}
 pd.DataFrame(itertools.permutations(Z))
@@ -55,9 +55,13 @@ $$
 P_n = n!
 $$
 
+Permutacje opisują nam wszystkie problemy, gdzie zastanawiamy się ile istnieje możliwych kolejności elementów, np. na ile sposobów grupa ludzi może się ustawić w kolejce do sklepu. Nikogo nie wyrzucamy z kolejki, nikogo nie dokładamy, drzwi do sklepu są tylko jedne, więc i jedna kolejka. Możemy tylko zmieniać kolejność.
+
 # Wariacje
 
-Ciekawie zaczyna się robić, gdy przed zmianą kolejności chcemy jeszcze rozbić nasz zbiór na mniejsze zbiory. Dla przykładu możemy sobie wyobrazić, że chcemy z naszego zbioru 5 liter wybrać wszystkie możliwe zbiory po 2 litery, np. AB, AC, AD itd. Mamy do dyspozycji mniej miejsca, niż liter w zbiorze. Liczenie czegoś takiego jest analogiczne. Na pierwszym miejscu może pojawić się 1 z 5 liter, na drugim tylko 1 z 4: $V^2_5 = 5 \times 4 = 20$. Powinno więc istnieć 20 takich zbiorów. Wypiszmy je wszystkie.
+Ciekawie zaczyna się robić, gdy przed zmianą kolejności chcemy jeszcze rozbić nasz zbiór na mniejsze zbiory. Są to dwie czynności – z dużej grupy wyróżniamy mniejszą podgrupę, którą potem ustawiamy w określonej kolejności. Kolejność ciągle ma znaczenie, ale nie wszyscy się łapią.
+
+Dla przykładu możemy sobie wyobrazić, że chcemy z naszego zbioru 5 liter wybrać wszystkie możliwe zbiory po 2 litery, np. AB, AC, AD itd. Mamy do dyspozycji mniej miejsca, niż liter w zbiorze. Liczenie czegoś takiego jest analogiczne. Na pierwszym miejscu może pojawić się 1 z 5 liter, na drugim tylko 1 z 4: $V^2_5 = 5 \times 4 = 20$. Powinno więc istnieć 20 takich zbiorów. Wypiszmy je wszystkie.
 
 ``` {python}
 variations(Z, 2)
