@@ -9,7 +9,7 @@
 <link>https://nieobliczalne.pl/</link>
 <atom:link href="https://nieobliczalne.pl/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.8.25</generator>
+<generator>quarto-1.9.19</generator>
 <lastBuildDate>Wed, 11 Feb 2026 23:00:00 GMT</lastBuildDate>
 <item>
   <title>Proxy – Uniwersytet Wrocławski</title>
@@ -2329,7 +2329,7 @@ Tabela&nbsp;1: Wartości z osi Y dla IQ między 95 a 105 co 0.25.
 </figcaption>
 <div aria-describedby="tbl-likelihood-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<table class="cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -5379,7 +5379,7 @@ Tabela&nbsp;2: Przykładowa tablica dystrybuanty rozkładu normalnego z zaznaczo
 </figcaption>
 <div aria-describedby="tbl-tablica-rozkladu-normalnego-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<table class="cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -13042,7 +13042,7 @@ font-style: inherit;"># zamień id na losowe znaki</span></span>
 </div>
 <p>Z ciekawszych rzeczy wykorzystuję tutaj funkcję <code>stri_rand_strings</code> z pakietu <code>stringi</code>, żeby zmienić ID osoby badanej. ID nie musi tutaj nic znaczyć, ma być po prostu unikalne, a z tym mamy tutaj problem, bo się wcześniej nie umówiliśmy na żaden określony sposób kodowania. Dlatego na tym etapie mogę zastąpić inicjały losowym ciągiem 5 znaków, zapewniając tym samym, że w ostatecznej bazie identyfikatory będą unikalne. Jest to też sposób na anonimizację bazy danych.</p>
 <p>Uzyskaliśmy w ten sposób jeden wyczyszczony wiersz. Jeszcze tylko 34…</p>
-<p>I jak mamy to zrobić? Mamy ten sam kod skopiować jeszcze 34 razy, zamieniając tylko nazwę&nbsp;pliku? A co jeśli mam 1000 osób? A co jeśli jestem Martą Kowal<sup>1</sup> i mam do przeanalizowania (ponad) 93 158 osób <span class="citation" data-cites="kowal_predictors_2022">(Kowal i in., 2022)</span>? Kopiowanie kodu nigdy nie jest dobrą drogą. Jeśli często kopiujemy kod, powinniśmy zrobić z niego funkcję. Jeśli tę samą funkcję chcemy zastosować do wielu obiektów, powinniśmy użyć list albo pętli.</p>
+<p>I jak mamy to zrobić? Mamy ten sam kod skopiować jeszcze 34 razy, zamieniając tylko nazwę&nbsp;pliku? A co jeśli mam 1000 osób? A co jeśli jestem Martą Kowal<sup>1</sup> i mam do przeanalizowania (ponad) 93 158 osób <span class="citation" data-cites="kowal_predictors_2022">(Kowal et al., 2022)</span>? Kopiowanie kodu nigdy nie jest dobrą drogą. Jeśli często kopiujemy kod, powinniśmy zrobić z niego funkcję. Jeśli tę samą funkcję chcemy zastosować do wielu obiektów, powinniśmy użyć list albo pętli.</p>
 </section>
 <section id="listy" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Listy</h1>
@@ -19014,7 +19014,7 @@ Tabela&nbsp;1: Średnie wyniki IQ są zawsze trochę inne, ale rzadko są daleki
 </figcaption>
 <div aria-describedby="tbl-iq-means-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<table class="table cell caption-top table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">lp</th>
@@ -19099,7 +19099,7 @@ Tabela&nbsp;2: Możemy wiele razy powtórzyć nasz eksperyment, a różnice za k
 </figcaption>
 <div aria-describedby="tbl-iq-diffs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<table class="table cell caption-top table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">lp</th>
@@ -19363,15 +19363,15 @@ Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>..
 
 <p>W psychologii można spotkać się z przytaczaniem wartości odziedziczalności. Możemy, dla przykładu, przeczytać, że wzrost jest odziedziczalny w 90% <span class="citation" data-cites="plomin2001">(Plomin, DeFries, McClearn, &amp; McGuffin, 2001)</span>. Ale co to znaczy? Że z moich 170 cm wzrostu 153 cm zawdzięczam genom, a pozostałe 17 cm środowisku? To jest bez sensu. Czy odziedziczalność powie mi, czy byłem skazany na bycie niskim od początku albo czy dało się tego uniknąć? W <em>Genetyce zachowania</em> możemy przeczytać, że odziedziczalność to:</p>
 <blockquote class="blockquote">
-<p>Część zmienności fenotypowej pomiędzy osobnikami, która może być przypisana różnicom genetycznym w określonej populacji <span class="citation" data-cites="plomin2001">(Plomin i in., 2001, s. 401)</span>.</p>
+<p>Część zmienności fenotypowej pomiędzy osobnikami, która może być przypisana różnicom genetycznym w określonej populacji <span class="citation" data-cites="plomin2001">(Plomin et al., 2001, s. 401)</span>.</p>
 </blockquote>
 <p>W innym miejscu spotykamy uszczegółowienie:</p>
 <blockquote class="blockquote">
-<p>Odziedziczalność to odsetek (część) wariancji fenotypowej, którą można przypisać różnicom genetycznym pomiędzy jednostkami <span class="citation" data-cites="plomin2001">(Plomin i in., 2001, s. 104)</span>.</p>
+<p>Odziedziczalność to odsetek (część) wariancji fenotypowej, którą można przypisać różnicom genetycznym pomiędzy jednostkami <span class="citation" data-cites="plomin2001">(Plomin et al., 2001, s. 104)</span>.</p>
 </blockquote>
 <p>Po którym następuje groźnie brzmiące ostrzeżenie:</p>
 <blockquote class="blockquote">
-<p>Odziedziczalność odnosi się do wkładu genetycznego do różnic indywidualnych (wariancji), a nie do fenotypu pojedynczej jednostki <span class="citation" data-cites="plomin2001">(Plomin i in., 2001, s. 106)</span>.</p>
+<p>Odziedziczalność odnosi się do wkładu genetycznego do różnic indywidualnych (wariancji), a nie do fenotypu pojedynczej jednostki <span class="citation" data-cites="plomin2001">(Plomin et al., 2001, s. 106)</span>.</p>
 </blockquote>
 <p>Łatwo jest zrozumieć, że istnieje jakieś nieporozumienie co do tego, czym jest odziedziczalność. Widzimy wyraźnie, że odziedziczalność nie ma oznaczać ograniczeń, jakie biologia narzuca na jednostkę, ale że jest to miara, która w jakiś sposób dotyczy całej populacji. Pojawia się tajemnicza wariancja, co powoduje mroczne skojarzenia z matematyką. Ale ciągle możemy mieć wątpliwości co do tego, co ma znaczyć, że wzrost jest odziedziczalny w 90%? Bez tła statystycznego powyższe wyjaśnienia właściwie nic nie wyjaśniają. Ale na ich podstawie możemy wyrazić myśl o wzroście tak: czynniki genetyczne wyjaśniają 90% wariancji w zakresie wzrostu w populacji. I tak dochodzimy do <em>clou</em> tego tekstu – co to znaczy, że coś wyjaśnia 90% wariancji?</p>
 <section id="średnia-jako-model" class="level2" data-number="1">
@@ -19385,7 +19385,7 @@ Tabela&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza.
 </figcaption>
 <div aria-describedby="tbl-spiders-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<table class="table cell caption-top table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
@@ -19473,7 +19473,7 @@ Tabela&nbsp;2: Każdy punkt ma swoje odchylenie od średniej, które możemy pol
 </figcaption>
 <div aria-describedby="tbl-spider-residual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<table class="table cell caption-top table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
@@ -19597,7 +19597,7 @@ Tabela&nbsp;3: Nowy model magicznie przewiduje niepokój z wielkości pająka (x
 </figcaption>
 <div aria-describedby="tbl-lm-resid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<table class="table cell caption-top table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
@@ -19724,7 +19724,7 @@ Tabela&nbsp;4: Podstawą do policzenia SSM mogą być odchylenia modelu od śred
 </figcaption>
 <div aria-describedby="tbl-lm-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<table class="table cell caption-top table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
@@ -19869,8 +19869,8 @@ Plomin, R., DeFries, J., McClearn, G., &amp; McGuffin, P. (2001). <em>Genetyka z
 <li>Informacji, która wiąże się z wcześniejszym doświadczeniem, jak w przypadku owych danych na temat dzieciństwa muzyka, na którego koncercie byliśmy w zeszłym tygodniu.</li>
 <li>Informacji, którą powtarzamy, jak materiał przeglądany przed egzaminem.”</li>
 </ul>
-<p>Ponadto, wymieniają oni dwa rodzaje powtarzania – utrzymujące i opracowujące [elaboracja; <span class="citation" data-cites="zimbardo_psychologia_2017">Zimbardo i in. (2017)</span>]. Zasadniczą różnicą pomiędzy tymi dwoma jest dokonywanie zmian w utrzymywanych w pamięci informacjach. Przy powtarzaniu utrzymującym, informacje nie ulegają żadnym zmianom, podczas gdy powtarzanie opracowujące zakłada poznawcze zniekształcanie informacji. Głębokość przetworzenia przekłada się na skuteczność zapamiętywania – im dana informacja zostanie bardziej przetworzona, tym skuteczniejsze będzie zapamiętywanie <span class="citation" data-cites="craik_levels_1972">(np. Craik &amp; Lockhart, 1972)</span>.</p>
-<p>Dobrym sposobem opracowywania informacji jest tworzenie analogii <span class="citation" data-cites="halpern_analogies_1990">(Halpern, Hansen, &amp; Riefer, 1990)</span>. Łączą to, co już uczeń wie lub potrafi sobie wyobrazić z informacjami nowymi i abstrakcyjnymi. Za przykład możemy przywołać porównanie elektronów na powłokach elektronowych do piłeczki na schodach. Tak jak piłeczka może wylądować na pierwszym, drugim, trzecim schodku, tak nigdy nie zatrzyma się pomiędzy schodkami. Tak samo elektron może mieć różną energię, ale zawsze będzie na jakiejś powłoce, nigdy pomiędzy <span class="citation" data-cites="campbell_biologia_2016">(na podstawie: Campbell i in., 2016)</span>. Tworzenie analogii pomaga także rozwijać zdolności twórczego myślenia <span class="citation" data-cites="szmidt_abc_2019">(Szmidt, 2019)</span>.</p>
+<p>Ponadto, wymieniają oni dwa rodzaje powtarzania – utrzymujące i opracowujące [elaboracja; <span class="citation" data-cites="zimbardo_psychologia_2017">Zimbardo et al. (2017)</span>]. Zasadniczą różnicą pomiędzy tymi dwoma jest dokonywanie zmian w utrzymywanych w pamięci informacjach. Przy powtarzaniu utrzymującym, informacje nie ulegają żadnym zmianom, podczas gdy powtarzanie opracowujące zakłada poznawcze zniekształcanie informacji. Głębokość przetworzenia przekłada się na skuteczność zapamiętywania – im dana informacja zostanie bardziej przetworzona, tym skuteczniejsze będzie zapamiętywanie <span class="citation" data-cites="craik_levels_1972">(np. Craik &amp; Lockhart, 1972)</span>.</p>
+<p>Dobrym sposobem opracowywania informacji jest tworzenie analogii <span class="citation" data-cites="halpern_analogies_1990">(Halpern, Hansen, &amp; Riefer, 1990)</span>. Łączą to, co już uczeń wie lub potrafi sobie wyobrazić z informacjami nowymi i abstrakcyjnymi. Za przykład możemy przywołać porównanie elektronów na powłokach elektronowych do piłeczki na schodach. Tak jak piłeczka może wylądować na pierwszym, drugim, trzecim schodku, tak nigdy nie zatrzyma się pomiędzy schodkami. Tak samo elektron może mieć różną energię, ale zawsze będzie na jakiejś powłoce, nigdy pomiędzy <span class="citation" data-cites="campbell_biologia_2016">(na podstawie: Campbell et al., 2016)</span>. Tworzenie analogii pomaga także rozwijać zdolności twórczego myślenia <span class="citation" data-cites="szmidt_abc_2019">(Szmidt, 2019)</span>.</p>
 <div id="fig-analogia" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-analogia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -19899,8 +19899,8 @@ Rysunek&nbsp;1: Analogia – przykład opracowywania informacji (© OpenStax na 
 </section>
 <section id="instrukcja" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="instrukcja"><span class="header-section-number">2.2</span> Instrukcja</h2>
-<p>Pierwszym krokiem w korzystaniu z pałacu pamięci jest wytworzenie skojarzeń. Już samo tworzenie skojarzeń, jako forma elaboracji, pozwala na zwiększenie poziomu zapamiętywania informacji <span class="citation" data-cites="atkinson_application_1975">(Atkinson &amp; Raugh, 1975)</span>. Dobre skojarzenia powinny przetwarzać oryginalną informację (np. przy zapamiętywaniu listy zakupów, majonezu nie powinien reprezentować rzeczywisty majonez, a na przykład wizja kury w donicy z rzepakiem) i pobudzać emocjonalnie <span class="citation" data-cites="zimbardo_psychologia_2017">(Zimbardo i in., 2017)</span>. Jako relatywnie łatwy sposób stworzenia symboli zawierających ładunek emocjonalny można wskazać (1) tworzenie symboli zabawnych lub (2) nawiązujących do seksualności człowieka. Dzięki tzw. efektowi odniesienia do ja, lepiej będą zapamiętane także informacje odniesione do samego siebie (<span class="citation" data-cites="rogers_self-reference_1977">Rogers, Kuiper, &amp; Kirker (1977)</span> za: <span class="citation" data-cites="wojciszke_psychologia_2019">Wojciszke (2019)</span>).</p>
-<p>Drugim krokiem jest wybór znanego miejsca lub drogi z jednego miejsca do drugiego i umieszczenie tam uprzednio skonstruowanych symboli. Prawdopodobnie pozwala to na wykorzystanie podwójnej funkcji hipokampu, który związany jest z tworzeniem wspomnień oraz pamięcią przestrzenną <span class="citation" data-cites="maguire_routes_2003">(Maguire i in., 2003)</span>. Jeśli symbole umieszcza się w pomieszczeniu, sugeruję umieszczanie i odczytywanie ich zawsze w tej samej kolejności, tzn. np. zgodnie z ruchem wskazówek zegara.</p>
+<p>Pierwszym krokiem w korzystaniu z pałacu pamięci jest wytworzenie skojarzeń. Już samo tworzenie skojarzeń, jako forma elaboracji, pozwala na zwiększenie poziomu zapamiętywania informacji <span class="citation" data-cites="atkinson_application_1975">(Atkinson &amp; Raugh, 1975)</span>. Dobre skojarzenia powinny przetwarzać oryginalną informację (np. przy zapamiętywaniu listy zakupów, majonezu nie powinien reprezentować rzeczywisty majonez, a na przykład wizja kury w donicy z rzepakiem) i pobudzać emocjonalnie <span class="citation" data-cites="zimbardo_psychologia_2017">(Zimbardo et al., 2017)</span>. Jako relatywnie łatwy sposób stworzenia symboli zawierających ładunek emocjonalny można wskazać (1) tworzenie symboli zabawnych lub (2) nawiązujących do seksualności człowieka. Dzięki tzw. efektowi odniesienia do ja, lepiej będą zapamiętane także informacje odniesione do samego siebie (<span class="citation" data-cites="rogers_self-reference_1977">Rogers, Kuiper, &amp; Kirker (1977)</span> za: <span class="citation" data-cites="wojciszke_psychologia_2019">Wojciszke (2019)</span>).</p>
+<p>Drugim krokiem jest wybór znanego miejsca lub drogi z jednego miejsca do drugiego i umieszczenie tam uprzednio skonstruowanych symboli. Prawdopodobnie pozwala to na wykorzystanie podwójnej funkcji hipokampu, który związany jest z tworzeniem wspomnień oraz pamięcią przestrzenną <span class="citation" data-cites="maguire_routes_2003">(Maguire et al., 2003)</span>. Jeśli symbole umieszcza się w pomieszczeniu, sugeruję umieszczanie i odczytywanie ich zawsze w tej samej kolejności, tzn. np. zgodnie z ruchem wskazówek zegara.</p>
 <p>W końcu – przypominanie sobie polega na wyobrażeniu sobie miejsca, w którym wcześniej umieszczono symbole. By lepiej zobrazować, jak można praktycznie wykorzystać metodę pałacu pamięci, omówię ją na przykładzie.</p>
 </section>
 <section id="przykład" class="level2" data-number="2.3">
@@ -19956,7 +19956,7 @@ Rysunek&nbsp;1: Analogia – przykład opracowywania informacji (© OpenStax na 
 </section>
 <section id="skuteczność-1" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="skuteczność-1"><span class="header-section-number">4.2</span> Skuteczność</h2>
-<p>Wykorzystanie fiszek pozwala na zapamiętanie większej liczby informacji niż wielokrotne powtórki przy takim samym czasie przeznaczonym na naukę, co jest prawdą zarówno dla fiszek elektronicznych <span class="citation" data-cites="schmidmaier_using_2011">(Schmidmaier i in., 2011)</span>, jak i tradycyjnych <span class="citation" data-cites="vaughn_diagnosing_2011">(Vaughn &amp; Rawson, 2011)</span>. Ponadto piśmiennictwo sugeruje, że testowanie własnej wiedzy, na którym opiera się technika fiszek, zwiększa skuteczność uczenia się <span class="citation" data-cites="roediger_test-enhanced_2006">(np. Roediger &amp; Karpicke, 2006)</span> i wydłuża czas przechowywania informacji <span class="citation" data-cites="larsen_repeated_2009">(Larsen, Butler, &amp; Roediger III, 2009)</span> w stosunku do zwykłych rozłożonych powtórek z wielokrotnym czytaniem. Należy zaznaczyć, że już samo rozłożenie powtórek zdaje się zwiększać długoterminową skuteczność nauki, w stosunku do nauki skomasowanej <span class="citation" data-cites="bahrick_retention_1987">(Bahrick &amp; Phelphs, 1987)</span>, takiej jak „zarywanie nocki” przed sprawdzianem.</p>
+<p>Wykorzystanie fiszek pozwala na zapamiętanie większej liczby informacji niż wielokrotne powtórki przy takim samym czasie przeznaczonym na naukę, co jest prawdą zarówno dla fiszek elektronicznych <span class="citation" data-cites="schmidmaier_using_2011">(Schmidmaier et al., 2011)</span>, jak i tradycyjnych <span class="citation" data-cites="vaughn_diagnosing_2011">(Vaughn &amp; Rawson, 2011)</span>. Ponadto piśmiennictwo sugeruje, że testowanie własnej wiedzy, na którym opiera się technika fiszek, zwiększa skuteczność uczenia się <span class="citation" data-cites="roediger_test-enhanced_2006">(np. Roediger &amp; Karpicke, 2006)</span> i wydłuża czas przechowywania informacji <span class="citation" data-cites="larsen_repeated_2009">(Larsen, Butler, &amp; Roediger III, 2009)</span> w stosunku do zwykłych rozłożonych powtórek z wielokrotnym czytaniem. Należy zaznaczyć, że już samo rozłożenie powtórek zdaje się zwiększać długoterminową skuteczność nauki, w stosunku do nauki skomasowanej <span class="citation" data-cites="bahrick_retention_1987">(Bahrick &amp; Phelphs, 1987)</span>, takiej jak „zarywanie nocki” przed sprawdzianem.</p>
 </section>
 <section id="jak-robić-skuteczne-fiszki" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="jak-robić-skuteczne-fiszki"><span class="header-section-number">4.3</span> Jak robić skuteczne fiszki?</h2>
