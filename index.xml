@@ -9,8 +9,129 @@
 <link>https://nieobliczalne.pl/</link>
 <atom:link href="https://nieobliczalne.pl/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.9.19</generator>
-<lastBuildDate>Wed, 11 Feb 2026 23:00:00 GMT</lastBuildDate>
+<generator>quarto-1.8.25</generator>
+<lastBuildDate>Tue, 24 Feb 2026 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Printoscope – WNHiP UWr</title>
+  <dc:creator>Jakub Jędrusiak</dc:creator>
+  <link>https://nieobliczalne.pl/posts/uwr-printoscope.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="instrukcja" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Instrukcja</h1>
+<p>Zacznę od instrukcji dla Windowsa, a potem opiszę, jak uzyskać to samo na Linuxie (zakładam, że do celów archiwizacyjnych, bo wątpię, żeby ktoś miał ten problem poza mną). MacOS nie opiszę, bo nie mam i nie lubię, natomiast jak ktoś ma, chce poszukać i jeszcze mu się uda, proszę o sygnał, to dopiszę.</p>
+<section id="windows" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="windows"><span class="header-section-number">1.1</span> Windows</h2>
+<p>Dodanie drukarki sprowadza się do czterech zadań:</p>
+<ol type="1">
+<li><p>Podłączenie się do VPN UWr.</p></li>
+<li><p>Dodanie do Menedżera poświadczeń danych logowania do Office.</p></li>
+<li><p>Dodanie odpowiedniej drukarki do systemu.</p></li>
+<li><p>Ustawienie PIN w systemie, by wydruk móc rzeczywiście odebrać.</p></li>
+</ol>
+<section id="vpn-uwr-przez-globalprotect" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="vpn-uwr-przez-globalprotect"><span class="header-section-number">1.1.1</span> VPN UWr przez GlobalProtect</h3>
+<p>Do VPN połączymy się za pomocą znanego i nielubianego GlobalProtect. Najłatwiej wejść na stronę <a href="https://vpn.uwr.edu.pl/">vpn.uwr.edu.pl</a>, w prawym górnym rogu wybrać GlobalProtect Agent, pobrać i zainstalować (zapewne wersja 64-bit jest odpowiednia). Po zainstalowaniu program się uruchamia jako niewielkie okienko proszące o link. Wpisujemy tam:</p>
+<pre class="{html}"><code>vpn.uwr.edu.pl</code></pre>
+<p>Po potwierdzeniu otworzy nam się okno przeglądarki, w którym możemy się zalogować danymi do Office’a. Gdy GlobalProtect przemieli nasze żądanie, dopuści nas do wewnętrznej sieci UWr.</p>
+</section>
+<section id="dodanie-poświadczeń" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="dodanie-poświadczeń"><span class="header-section-number">1.1.2</span> Dodanie poświadczeń</h3>
+<p>Windows musi wiedzieć, z jakimi danymi podłączyć się do drukarki, bo liczba drukowanych kartek jest powiązana z osobą. Dlatego musimy go poinformować o naszych danych logowania. Niestety standardowy monit, który może się pojawić przy próbie dodania drukarki, wariuje w kontakcie z naszym uniwersytetem i jego zewnętrzym logowaniem, dlatego musimy go ominąć. W tym celu użyjemy Menedżera poświadczeń (<em>Credentials manager</em>). Wyszukujemy go wpisując jego nazwę w menu start lub znajdujemy w Panelu sterowania (w sekcji o użytkownikach). Po wejściu wybieramy <em>Poświadczenia systemu Windows</em> i dodajemy nowe poświadczenie. W polu na adres wpisujemy<sup>1</sup>:</p>
+<pre class="{html}"><code>printsrv-wnhp</code></pre>
+<p>Nazwa użytkownika może być podchwytliwa, bo wymaga nazwy domeny i niekoniecznie jest tożsama z mailem. Doktoranci używają swojego numeru indeksu, podczas gdy pracownicy używają tajemniczego identyfikatora złożonego z pierwszej litery imienia i całego nazwiska, być może z jakimiś dodatkami. Nie wiem, jakie dokładnie reguły tym rządzą. Najpeweniejszy sposób, na dowiedzenie się tego, to przyjście do wydziałowego budynku i zalogowanie się na którymś z lokalnych komputerów, tam otworzenie wiersza polecenia i użycie komendy <code>whoami</code>. Przypadkiem odkryłem też, że jeśli jesteśmy podłączeni do VPN i wejdziemy na stronę <a href="http://printoscope.misc.local.uwr.edu.pl">http://printoscope.misc.local.uwr.edu.pl</a> (zwróćcie uwagę na http zamiast https), to nazwa użytkownika się wyświetla w komunikacie o błędzie. Niezależnie jaka ona jest, koniecznie trzeba ją poprzedzić członem <code>aduwr\</code>, np. <code>aduwr\jjedrusiak</code> lub <code>aduwr\315695</code>.</p>
+<p>Wreszcie hasło to po prostu hasło do Office’a. Po wpisaniu wszystkich danych potwierdzamy.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/uwr-printoscope/credentials_manager.png" class="img-fluid figure-img"></p>
+<figcaption>Przykładowa konfiguracja Menedżera poświadczeń pod Printoscope</figcaption>
+</figure>
+</div>
+</section>
+<section id="dodawanie-drukarki-do-systemu" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="dodawanie-drukarki-do-systemu"><span class="header-section-number">1.1.3</span> Dodawanie drukarki do systemu</h3>
+<p>Teraz możemy dodać drukarkę. Robimy to standardowo, wchodząc w menu drukarek i klikając przycisk dodawania drukarki. Po chwili wyświetli się opcja dodania drukarki, której nie ma na liście. Klikamy ją, wybieramy drukarkę współdzieloną i w polu tekstowym wpisujemy:</p>
+<pre class="{html}"><code>\\printsrv-wnhp\Printoscope</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/uwr-printoscope/adding_printer.png" class="img-fluid figure-img"></p>
+<figcaption>Dodawanie drukarki Printoscope na Windows 11</figcaption>
+</figure>
+</div>
+<p>Po wyklikaniu <em>Dalej</em> odpowiednią liczbę razy, drukarkę powinniśmy mieć już dodaną i o ile jesteśmy połączeni z VPN, możemy drukować własne dokumenty. Polecam jednak dostosować domyślne ustawienia drukarki, żeby na pewno drukowała na A4 i nie na czarno-biało, co zrobimy w odpowiednim menu Windowsa.</p>
+</section>
+<section id="dodanie-pin-do-printoscope" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4" class="anchored" data-anchor-id="dodanie-pin-do-printoscope"><span class="header-section-number">1.1.4</span> Dodanie PIN do Printoscope</h3>
+<p>Jeśli jednak spróbujemy wysłać dokument do druku i podejdziemy do drukarki, nie znajdziemy tam naszych dokumentów. By rzeczywiście się wydrukowały, musimy zatwierdzić je na samej drukarce. Żeby jednak nie musieć wpisywać swojego maila i hasła na niewygodnym ekranie drukarki, warto jest ustawić sobie PIN. Można to zrobić wchodząc na <a href="http://printoscope.uwr.edu.pl/">http://printoscope.uwr.edu.pl/</a> (musimy być podłączeni do VPN) i logując się danymi do Office’a. Dodajemy PIN i gotowe – możemy go wpisywać na ekranie drukarki zamiast loginu i hasła. Gdy stoimy przy drukarce, wciskamy mocno guzik uruchamiający na prawym boku ekranu (przynajmniej w modelu stojącym w IPs tak jest), logujemy się wpisując PIN, wybieramy kafelek <em>Druk</em> i w menu, które się wtedy wyświetli, zobaczymy nazwę domumentu, który wcześniej wysłaliśmy z naszego komputera. Raz jeszcze zatwierdzamy i wtedy dopiero otrzymujemy swoje dokumenty. Dzięki temu możemy wykorzystać dowolną podłączoną do systemu drukarkę na całym WNHiP, niekoniecznie tę, do której jesteśmy przyzwyczajeni<sup>2</sup>.</p>
+<section id="bonus-karty-zbliżeniowe" class="level4" data-number="1.1.4.1">
+<h4 data-number="1.1.4.1" class="anchored" data-anchor-id="bonus-karty-zbliżeniowe"><span class="header-section-number">1.1.4.1</span> Bonus: karty zbliżeniowe</h4>
+<p>Panel Printoscope daje też możliwość logowania się do drukarek kartą pracowniczą zamisast hasłem czy PIN. Nie mam takiej karty, ale z ciekawości spróbowałem zamiast karty pracowniczej dodać swoją legitymację doktorancką i inne karty zbliżeniowe. W tym celu pobrałem aplikację <a href="https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&amp;hl=pl">NFC Tools</a> i przyłożyłem do telefonu swoją legitymację. Uzyskałem w ten sposób numer seryjny, który przepisałem do Printoscope bez dwukropków (czyli jeśli numer seryjny byłby 12:34:56:78, to w Printoscope wpisałem 12345678). Po dodaniu podszedłem do drukarki, przyłożyłem legitymację w odpowiednim miejscu i rzeczywiście to zadziałało! Teraz legitymacja zastępuje mi PIN czy hasło. Muszę tylko zabrać kartę od czytnika dosć szybko, po pierwszym piśnięcu drukarki, bo inaczej wylogowuje. Spróbowałem tego samego z dowodem osobistym i kartą bankową, ale te niestety (albo stety) nie zadziałały. Wygląda na to, że muszą to być proste karty zbliżeniowe typu właśnie legitymacja, karta parkingowa, brelok do domofonu, może Multisport albo Urbancard. Warto przetestować. Jeśli NFC Tools po przyłożeniu karty pokazują rozaj taga <code>Mifare Classic 1k</code> lub standard <code>ISO 14443A</code>, to powinno zadziałać. Inne trzeba po prostu sprawdzić, a jak komuś zależy, to <a href="https://allegro.pl/listing?string=mifare%20classic%201k&amp;order=d">czysta karta zbliżeniowa</a> kosztuje 2-6 zł.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nieobliczalne.pl/posts/ilustracje/uwr-printoscope/karta.jpg" class="img-fluid figure-img"></p>
+<figcaption>Zamiast PIN można użyć prostej karty zbliżeniowej, takiej jak legitymacja doktorancka</figcaption>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="linux" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="linux"><span class="header-section-number">1.2</span> Linux</h2>
+<p>Workflow na Linuxie jest bardzo podobny, jak na Windowsie, tylko nieco bardziej upierdliwy w kilku miejscach, bo Printoscope to Windows Print Server, a standardy kompatybilności i otwartości Microsoft znamy.</p>
+<section id="vpn-uwr-przez-globalprotect-1" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="vpn-uwr-przez-globalprotect-1"><span class="header-section-number">1.2.1</span> VPN UWr przez GlobalProtect</h3>
+<p>Do VPN też potrzebujemy GlobalProtect w jakiejś formie. Konkrety zależą od dystrybucji, ale niestety zwykły Openconnect nie radzi sobie z logowaniem przez Office. Osobiście użyłem <a href="https://github.com/yuezk/GlobalProtect-openconnect">GlobalProtect-openconnect</a>, który istnieje w wersji Debian/Ubuntu czy Arch (jest w AUR). Procedura jest właściwie identyczna, co w przypadku zwykłego GlobalProtect, czyli link <code>vpn.uwr.edu.pl</code> i logowanie danymi Office’a. Interfejs graficzny ma trial 10 dni, ale narzędzie CLI działa i potem (por. dokumentacja).</p>
+</section>
+<section id="dodanie-poświadczeń-1" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="dodanie-poświadczeń-1"><span class="header-section-number">1.2.2</span> Dodanie poświadczeń</h3>
+<p>To jest ten bardziej irytujący moment. Samba w Windowsie potrafi sama znaleźć <code>\\printsrv-wnhp</code>, jednak Linux potrzebuje rzeczywistego adresu IP. Nie wiem, czy wolno jest mi tutaj go podać, więc na wszelki wypadek opiszę tylko metodę, jak go znaleźć (choć zawsze można do mnie napisać). Niestety potrzbujemy do tego podłączonego do VPN UWr komputera z Windowsem lub maszynę wirtualną (z zainstalowanym GlobalProtect). Może być jeden z komputerów na miejscu, to będzie można przy okazji upewnić się co do nazwy użytkownika. By poznać prawdziwy adres IP tej lokalizacji siecowej, musimy w wiersz polecenia (nie PowerShell, a zwykłe cmd) wpisać następującą komendę:</p>
+<pre class="{cmd}"><code>net use \\printsrv-wnhp /user:aduwr\NAZWA_UŻYTKOWNIKA</code></pre>
+<p>Jak pisałem przy Windowsie, nazwa użytkownika jest podchwytliwa i można ją uzyskać używając komendy <code>whoami</code> na lokalnym komputerze lub przez VPN wchodząc w link, który podałem wyżej (o ile tego nie naprawili, bo to wygląda jak błąd). Jeśli ta komenda rozwiązała się poprawne, nawiązaliśmy połączenie. Teraz musimy sprawdzić IP poprzez:</p>
+<pre class="{cmd}"><code>netstat -ano | findstr 445</code></pre>
+<p>Jeśli wszystko poszło dobrze, to obok słowa ESTABLISHED zobaczymy interesujący nas adres IP z portem 445 (coś w stylu <code>127.0.0.1:445</code>, gdzie część przed dwukropkiem to właściwy adres IP). Zapisujemy go sobie (bez portu) i wracamy do Linuxa.</p>
+</section>
+<section id="dodawanie-drukarki-do-systemu-1" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="dodawanie-drukarki-do-systemu-1"><span class="header-section-number">1.2.3</span> Dodawanie drukarki do systemu</h3>
+<p>By dodać drukarkę do systemu, musimy wiedzieć jeszcze, gdzie jest plik PPD ze sterownikiem drukarki. Interesujący nas sterownik to <code>Generic PCL 6/PCL XL Printer Foomatic/pxlcolor</code>. Najważniejsze elementy tej nazwy to <code>PCL 6</code> i <code>pxlcolor</code>, pozostałe kawałki ujdą. By znaleźć ten plik w naszym własnym systemie, używamy komendy:</p>
+<pre class="{bash}"><code>lpinfo -m | grep -i pcl | grep -i pxlcolor</code></pre>
+<p>Powinniśmy dostać nazwę pliku z rozszerzeniem <code>.ppd</code>. Kopiujemy ją (bez opisu, tylko od początku linijki do rozszerzenia .ppd). W moim systemie potrzebna nazwa to <code>foomatic:Generic-PCL_6_PCL_XL_Printer-pxlcolor.ppd</code>. W razie czego można użyć nowszego lub innego sterownika Generic, ale warto się zorientować, jaki powinien zadziałać. Wreszcie łączymy to wszystko w całość, dodając drukarkę poleceniem:</p>
+<pre class="{bash}"><code>sudo lpadmin -p Printoscope \
+  -E \
+  -v "smb://ADUWR;NASZ_LOGIN@ADRES_IP_Z_POPRZEDNIEGO_KROKU/Printoscope" \
+  -m "NAZWA_PLIKU_PPD"</code></pre>
+<p>Oczywiście podstawiamy nasz login (już bez <code>aduwr\</code>, bo to jest już przed średnikiem), poznany wcześniej adres IP i nazwę pliku PPD. Po dodaniu przestawiamy domyślny rozmiar papieru na A4 i tryb na zwykły (żeby nie było zawsze czarno-biało). Najłatwej zrobić to w systemowym graficznym menu drukarek. Moja komenda (ze zmienionym dla bezpieczeństwa IP) wyglądała ostatecznie tak:</p>
+<pre class="{bash}"><code>sudo lpadmin -p Printoscope \
+  -E \
+  -v "smb://ADUWR;315695@127.0.0.1/Printoscope" \
+  -m "foomatic:Generic-PCL_6_PCL_XL_Printer-pxlcolor.ppd"</code></pre>
+<p>Drukowanie z Linuxa ma jedną znaczącą wadę – serwer drukowania nie widzi nazw dokumentów, które wysyłamy do druku i wszystkie oznacza <code>Remote Downlevel Document</code>. Nie brzmi to strasznie, ale sprawia, że jak wyślemy jeden dokument do druku, to musimy go wydrukować lub usunąć na ekranie drukarki, zanim będziemy mogli wydrukować kolejny. Nie znalazłem jeszcze obejścia dla tego problemu.</p>
+</section>
+<section id="dodanie-pin-do-printoscope-1" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="dodanie-pin-do-printoscope-1"><span class="header-section-number">1.2.4</span> Dodanie PIN do Printoscope</h3>
+<p>Kwestia PIN i kart zbliżeniowych wygląda identycznie jak przy Windowsie, więc odsyłam tam. Trzeba to zrobić, chyba że ktoś chce na klawiaturze na ekranie drukarki wpisywać maila i hasło do Office’a.</p>
+
+
+</section>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Przypisy</h2>
+
+<ol>
+<li id="fn1"><p>Niestety nie wiem, jakie są analogiczne adresy innych wydziałów.↩︎</p></li>
+<li id="fn2"><p>Patrząc na adresy IP zauważyłem, że do Printoscope podłączone są też drukarki spoza WNHiP. Jeśli będę w okolicy jakiejś, sprawdzę, czy dokumenty wysłane na <code>printsrv-wnhp/Printoscope</code> również się tam pojawiają.↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>Narzędzia</category>
+  <guid>https://nieobliczalne.pl/posts/uwr-printoscope.html</guid>
+  <pubDate>Tue, 24 Feb 2026 23:00:00 GMT</pubDate>
+  <media:content url="https://nieobliczalne.pl/posts/headers/uwr-printoscope.webp" medium="image" type="image/webp"/>
+</item>
 <item>
   <title>Proxy – Uniwersytet Wrocławski</title>
   <dc:creator>Jakub Jędrusiak</dc:creator>
@@ -24,7 +145,7 @@
 <section id="instrukcja" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Instrukcja</h1>
 <p>Po pierwsze rzeczywiście trzeba wypełnić formularz na <a href="https://www.bu.uni.wroc.pl/uslugi-online/proxy">stronie Biblioteki UWr</a>. Po jakimś czasie, zazwyczaj w ciągu godziny, otrzymujemy mailem dane do logowania. Będą nam potrzebne za moment.</p>
-<p>Po drugie, instalujemy odpowiedni dodatek do przeglądarki. Pozwoli nam on automatycznie przełączać się na proxy na tych stronach, na których może nam to dać dostęp (w tym IBUK Libra). My tutaj zastosujemy dodatek, który nazywa się SwitchyOmega 3 (ZeroOmega). Ta trójka jest ważna, bo wiele przeglądarek ma na stronach z dodatkami starą wersję, bez trójki, która nie działa. Poniżej linki do wersji dla najpopularniejszych przeglądarek:</p>
+<p>Po drugie, instalujemy odpowiedni dodatek do przeglądarki. Pozwoli nam on automatycznie przełączać się na proxy na tych stronach, na których może to dać nam rozszerzony dostęp (w tym IBUK Libra). Konkretnie zastosujemy dodatek, który nazywa się SwitchyOmega 3 (ZeroOmega). Ta trójka jest ważna, bo wiele przeglądarek ma na stronach z rozszerzeniami starą wersję, bez trójki, która nie działa. Poniżej linki do wersji dla najpopularniejszych przeglądarek:</p>
 <ul>
 <li><strong>Chrome/Edge/Opera/inne na Chromium:</strong> <a href="https://chromewebstore.google.com/detail/pfnededegaaopdmhkdmcofjmoldfiped" class="uri">https://chromewebstore.google.com/detail/pfnededegaaopdmhkdmcofjmoldfiped</a></li>
 <li><strong>Firefox:</strong> <a href="https://addons.mozilla.org/pl/firefox/addon/zeroomega/" class="uri">https://addons.mozilla.org/pl/firefox/addon/zeroomega/</a></li>
@@ -46,7 +167,7 @@
 <figcaption>Należy wpisać login i hasło wysłane nam mailem przez system.</figcaption>
 </figure>
 </div>
-<p>Jeśli wszystko zadziałało, to przy próbie wejścia do EBSCO przez <a href="http://search.ebscohost.com/">ten link</a>, nie powinniśmy widzieć prośby o zalogowanie się, tylko od razu możliwość wyboru wyszukiwarki i informację, że mamy dostęp dzięki Uniwersytetowi Wrocławskiemu.</p>
+<p>Jeśli wszystko zadziałało, to przy próbie wejścia do EBSCO przez <a href="http://search.ebscohost.com/">ten link</a> nie powinniśmy widzieć prośby o zalogowanie się, tylko od razu możliwość wyboru wyszukiwarki wraz z informacją, że dostęp mamy dzięki Uniwersytetowi Wrocławskiemu.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://nieobliczalne.pl/posts/ilustracje/uwr-proxy/ebsco.png" class="img-fluid figure-img"></p>
@@ -60,7 +181,7 @@
 <figcaption>Dodawanie strony do proxy UWr</figcaption>
 </figure>
 </div>
-<p>Może się zdarzyć, że przy próbie wejścia na jakąś stronę nagle przeglądarka poprosi nas o login i hasło. <strong>Wtedy należy spróbować odświeżyć stronę.</strong> Jeśli nie pomoże, prawdopodobnie hasło wygasło. W takim wypadku na mailu uniwersyteckim powinniśmy mieć już maila, że dostęp do proxy wygasł i link, za pomocą którego możemy ten dostęp odświeżyć. Po kilku minutach od kliknięcia w link dostaniemy nowe hasło, które należy wkleić w tym samym miejscu, co poprzednie. Jeśli nagle jakieś strony w ogóle się nie ładują, warto spóbować w menu dodatku przełączyć się na chwilę na <code>[System Proxy]</code>. Jeśli zaczęło działać, to znaczy, że konfiguracja jest błędna. Jeśli nic to nie zmieniło, problem jest gdzieś indziej i należy wrócić do ustawienia <code>auto switch</code>.</p>
+<p>Może się zdarzyć, że przy próbie wejścia na jakąś stronę nagle przeglądarka poprosi nas o login i hasło. <strong>Wtedy należy spróbować odświeżyć stronę.</strong> Jeśli to nie pomoże, prawdopodobnie hasło wygasło. W takim wypadku na Outlooku powinniśmy mieć już maila, że dostęp do proxy wygasł i link, za pomocą którego możemy ten dostęp odświeżyć. Po kilku minutach od kliknięcia w link dostaniemy nowe hasło, które należy wkleić w tym samym miejscu, co poprzednie. Jeśli nagle jakieś strony w ogóle się nie ładują, warto spóbować w menu dodatku przełączyć się na chwilę na <code>[System Proxy]</code>. Jeśli zaczęło działać, to znaczy, że konfiguracja jest błędna. Jeśli nic to nie zmieniło, problem jest gdzieś indziej i należy wrócić do ustawienia <code>auto switch</code>.</p>
 <p>Moim zdaniem Uniwersytet powinien założyć coś w stylu EZproxy i ułatwić nam wszystkim życie.</p>
 </section>
 <section id="zaawansowane" class="level1" data-number="2">
@@ -2329,7 +2450,7 @@ Tabela&nbsp;1: Wartości z osi Y dla IQ między 95 a 105 co 0.25.
 </figcaption>
 <div aria-describedby="tbl-likelihood-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="cell caption-top table table-sm table-striped small">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -5379,7 +5500,7 @@ Tabela&nbsp;2: Przykładowa tablica dystrybuanty rozkładu normalnego z zaznaczo
 </figcaption>
 <div aria-describedby="tbl-tablica-rozkladu-normalnego-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="cell caption-top table table-sm table-striped small">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -13042,7 +13163,7 @@ font-style: inherit;"># zamień id na losowe znaki</span></span>
 </div>
 <p>Z ciekawszych rzeczy wykorzystuję tutaj funkcję <code>stri_rand_strings</code> z pakietu <code>stringi</code>, żeby zmienić ID osoby badanej. ID nie musi tutaj nic znaczyć, ma być po prostu unikalne, a z tym mamy tutaj problem, bo się wcześniej nie umówiliśmy na żaden określony sposób kodowania. Dlatego na tym etapie mogę zastąpić inicjały losowym ciągiem 5 znaków, zapewniając tym samym, że w ostatecznej bazie identyfikatory będą unikalne. Jest to też sposób na anonimizację bazy danych.</p>
 <p>Uzyskaliśmy w ten sposób jeden wyczyszczony wiersz. Jeszcze tylko 34…</p>
-<p>I jak mamy to zrobić? Mamy ten sam kod skopiować jeszcze 34 razy, zamieniając tylko nazwę&nbsp;pliku? A co jeśli mam 1000 osób? A co jeśli jestem Martą Kowal<sup>1</sup> i mam do przeanalizowania (ponad) 93 158 osób <span class="citation" data-cites="kowal_predictors_2022">(Kowal et al., 2022)</span>? Kopiowanie kodu nigdy nie jest dobrą drogą. Jeśli często kopiujemy kod, powinniśmy zrobić z niego funkcję. Jeśli tę samą funkcję chcemy zastosować do wielu obiektów, powinniśmy użyć list albo pętli.</p>
+<p>I jak mamy to zrobić? Mamy ten sam kod skopiować jeszcze 34 razy, zamieniając tylko nazwę&nbsp;pliku? A co jeśli mam 1000 osób? A co jeśli jestem Martą Kowal<sup>1</sup> i mam do przeanalizowania (ponad) 93 158 osób <span class="citation" data-cites="kowal_predictors_2022">(Kowal i in., 2022)</span>? Kopiowanie kodu nigdy nie jest dobrą drogą. Jeśli często kopiujemy kod, powinniśmy zrobić z niego funkcję. Jeśli tę samą funkcję chcemy zastosować do wielu obiektów, powinniśmy użyć list albo pętli.</p>
 </section>
 <section id="listy" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Listy</h1>
@@ -19014,7 +19135,7 @@ Tabela&nbsp;1: Średnie wyniki IQ są zawsze trochę inne, ale rzadko są daleki
 </figcaption>
 <div aria-describedby="tbl-iq-means-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table cell caption-top table-sm table-striped small">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">lp</th>
@@ -19099,7 +19220,7 @@ Tabela&nbsp;2: Możemy wiele razy powtórzyć nasz eksperyment, a różnice za k
 </figcaption>
 <div aria-describedby="tbl-iq-diffs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table cell caption-top table-sm table-striped small">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">lp</th>
@@ -19363,15 +19484,15 @@ Wilkes, J. (2017). <em>Spal pracowni<span>ę</span> matematyczn<span>ą</span>..
 
 <p>W psychologii można spotkać się z przytaczaniem wartości odziedziczalności. Możemy, dla przykładu, przeczytać, że wzrost jest odziedziczalny w 90% <span class="citation" data-cites="plomin2001">(Plomin, DeFries, McClearn, &amp; McGuffin, 2001)</span>. Ale co to znaczy? Że z moich 170 cm wzrostu 153 cm zawdzięczam genom, a pozostałe 17 cm środowisku? To jest bez sensu. Czy odziedziczalność powie mi, czy byłem skazany na bycie niskim od początku albo czy dało się tego uniknąć? W <em>Genetyce zachowania</em> możemy przeczytać, że odziedziczalność to:</p>
 <blockquote class="blockquote">
-<p>Część zmienności fenotypowej pomiędzy osobnikami, która może być przypisana różnicom genetycznym w określonej populacji <span class="citation" data-cites="plomin2001">(Plomin et al., 2001, s. 401)</span>.</p>
+<p>Część zmienności fenotypowej pomiędzy osobnikami, która może być przypisana różnicom genetycznym w określonej populacji <span class="citation" data-cites="plomin2001">(Plomin i in., 2001, s. 401)</span>.</p>
 </blockquote>
 <p>W innym miejscu spotykamy uszczegółowienie:</p>
 <blockquote class="blockquote">
-<p>Odziedziczalność to odsetek (część) wariancji fenotypowej, którą można przypisać różnicom genetycznym pomiędzy jednostkami <span class="citation" data-cites="plomin2001">(Plomin et al., 2001, s. 104)</span>.</p>
+<p>Odziedziczalność to odsetek (część) wariancji fenotypowej, którą można przypisać różnicom genetycznym pomiędzy jednostkami <span class="citation" data-cites="plomin2001">(Plomin i in., 2001, s. 104)</span>.</p>
 </blockquote>
 <p>Po którym następuje groźnie brzmiące ostrzeżenie:</p>
 <blockquote class="blockquote">
-<p>Odziedziczalność odnosi się do wkładu genetycznego do różnic indywidualnych (wariancji), a nie do fenotypu pojedynczej jednostki <span class="citation" data-cites="plomin2001">(Plomin et al., 2001, s. 106)</span>.</p>
+<p>Odziedziczalność odnosi się do wkładu genetycznego do różnic indywidualnych (wariancji), a nie do fenotypu pojedynczej jednostki <span class="citation" data-cites="plomin2001">(Plomin i in., 2001, s. 106)</span>.</p>
 </blockquote>
 <p>Łatwo jest zrozumieć, że istnieje jakieś nieporozumienie co do tego, czym jest odziedziczalność. Widzimy wyraźnie, że odziedziczalność nie ma oznaczać ograniczeń, jakie biologia narzuca na jednostkę, ale że jest to miara, która w jakiś sposób dotyczy całej populacji. Pojawia się tajemnicza wariancja, co powoduje mroczne skojarzenia z matematyką. Ale ciągle możemy mieć wątpliwości co do tego, co ma znaczyć, że wzrost jest odziedziczalny w 90%? Bez tła statystycznego powyższe wyjaśnienia właściwie nic nie wyjaśniają. Ale na ich podstawie możemy wyrazić myśl o wzroście tak: czynniki genetyczne wyjaśniają 90% wariancji w zakresie wzrostu w populacji. I tak dochodzimy do <em>clou</em> tego tekstu – co to znaczy, że coś wyjaśnia 90% wariancji?</p>
 <section id="średnia-jako-model" class="level2" data-number="1">
@@ -19385,7 +19506,7 @@ Tabela&nbsp;1: Wielkość pająka i niepokój, jaki wzbudza.
 </figcaption>
 <div aria-describedby="tbl-spiders-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table cell caption-top table-sm table-striped small">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
@@ -19473,7 +19594,7 @@ Tabela&nbsp;2: Każdy punkt ma swoje odchylenie od średniej, które możemy pol
 </figcaption>
 <div aria-describedby="tbl-spider-residual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table cell caption-top table-sm table-striped small">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
@@ -19597,7 +19718,7 @@ Tabela&nbsp;3: Nowy model magicznie przewiduje niepokój z wielkości pająka (x
 </figcaption>
 <div aria-describedby="tbl-lm-resid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table cell caption-top table-sm table-striped small">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
@@ -19724,7 +19845,7 @@ Tabela&nbsp;4: Podstawą do policzenia SSM mogą być odchylenia modelu od śred
 </figcaption>
 <div aria-describedby="tbl-lm-ssm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="table cell caption-top table-sm table-striped small">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">wielkość pająka</th>
@@ -19869,8 +19990,8 @@ Plomin, R., DeFries, J., McClearn, G., &amp; McGuffin, P. (2001). <em>Genetyka z
 <li>Informacji, która wiąże się z wcześniejszym doświadczeniem, jak w przypadku owych danych na temat dzieciństwa muzyka, na którego koncercie byliśmy w zeszłym tygodniu.</li>
 <li>Informacji, którą powtarzamy, jak materiał przeglądany przed egzaminem.”</li>
 </ul>
-<p>Ponadto, wymieniają oni dwa rodzaje powtarzania – utrzymujące i opracowujące [elaboracja; <span class="citation" data-cites="zimbardo_psychologia_2017">Zimbardo et al. (2017)</span>]. Zasadniczą różnicą pomiędzy tymi dwoma jest dokonywanie zmian w utrzymywanych w pamięci informacjach. Przy powtarzaniu utrzymującym, informacje nie ulegają żadnym zmianom, podczas gdy powtarzanie opracowujące zakłada poznawcze zniekształcanie informacji. Głębokość przetworzenia przekłada się na skuteczność zapamiętywania – im dana informacja zostanie bardziej przetworzona, tym skuteczniejsze będzie zapamiętywanie <span class="citation" data-cites="craik_levels_1972">(np. Craik &amp; Lockhart, 1972)</span>.</p>
-<p>Dobrym sposobem opracowywania informacji jest tworzenie analogii <span class="citation" data-cites="halpern_analogies_1990">(Halpern, Hansen, &amp; Riefer, 1990)</span>. Łączą to, co już uczeń wie lub potrafi sobie wyobrazić z informacjami nowymi i abstrakcyjnymi. Za przykład możemy przywołać porównanie elektronów na powłokach elektronowych do piłeczki na schodach. Tak jak piłeczka może wylądować na pierwszym, drugim, trzecim schodku, tak nigdy nie zatrzyma się pomiędzy schodkami. Tak samo elektron może mieć różną energię, ale zawsze będzie na jakiejś powłoce, nigdy pomiędzy <span class="citation" data-cites="campbell_biologia_2016">(na podstawie: Campbell et al., 2016)</span>. Tworzenie analogii pomaga także rozwijać zdolności twórczego myślenia <span class="citation" data-cites="szmidt_abc_2019">(Szmidt, 2019)</span>.</p>
+<p>Ponadto, wymieniają oni dwa rodzaje powtarzania – utrzymujące i opracowujące [elaboracja; <span class="citation" data-cites="zimbardo_psychologia_2017">Zimbardo i in. (2017)</span>]. Zasadniczą różnicą pomiędzy tymi dwoma jest dokonywanie zmian w utrzymywanych w pamięci informacjach. Przy powtarzaniu utrzymującym, informacje nie ulegają żadnym zmianom, podczas gdy powtarzanie opracowujące zakłada poznawcze zniekształcanie informacji. Głębokość przetworzenia przekłada się na skuteczność zapamiętywania – im dana informacja zostanie bardziej przetworzona, tym skuteczniejsze będzie zapamiętywanie <span class="citation" data-cites="craik_levels_1972">(np. Craik &amp; Lockhart, 1972)</span>.</p>
+<p>Dobrym sposobem opracowywania informacji jest tworzenie analogii <span class="citation" data-cites="halpern_analogies_1990">(Halpern, Hansen, &amp; Riefer, 1990)</span>. Łączą to, co już uczeń wie lub potrafi sobie wyobrazić z informacjami nowymi i abstrakcyjnymi. Za przykład możemy przywołać porównanie elektronów na powłokach elektronowych do piłeczki na schodach. Tak jak piłeczka może wylądować na pierwszym, drugim, trzecim schodku, tak nigdy nie zatrzyma się pomiędzy schodkami. Tak samo elektron może mieć różną energię, ale zawsze będzie na jakiejś powłoce, nigdy pomiędzy <span class="citation" data-cites="campbell_biologia_2016">(na podstawie: Campbell i in., 2016)</span>. Tworzenie analogii pomaga także rozwijać zdolności twórczego myślenia <span class="citation" data-cites="szmidt_abc_2019">(Szmidt, 2019)</span>.</p>
 <div id="fig-analogia" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-analogia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -19899,8 +20020,8 @@ Rysunek&nbsp;1: Analogia – przykład opracowywania informacji (© OpenStax na 
 </section>
 <section id="instrukcja" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="instrukcja"><span class="header-section-number">2.2</span> Instrukcja</h2>
-<p>Pierwszym krokiem w korzystaniu z pałacu pamięci jest wytworzenie skojarzeń. Już samo tworzenie skojarzeń, jako forma elaboracji, pozwala na zwiększenie poziomu zapamiętywania informacji <span class="citation" data-cites="atkinson_application_1975">(Atkinson &amp; Raugh, 1975)</span>. Dobre skojarzenia powinny przetwarzać oryginalną informację (np. przy zapamiętywaniu listy zakupów, majonezu nie powinien reprezentować rzeczywisty majonez, a na przykład wizja kury w donicy z rzepakiem) i pobudzać emocjonalnie <span class="citation" data-cites="zimbardo_psychologia_2017">(Zimbardo et al., 2017)</span>. Jako relatywnie łatwy sposób stworzenia symboli zawierających ładunek emocjonalny można wskazać (1) tworzenie symboli zabawnych lub (2) nawiązujących do seksualności człowieka. Dzięki tzw. efektowi odniesienia do ja, lepiej będą zapamiętane także informacje odniesione do samego siebie (<span class="citation" data-cites="rogers_self-reference_1977">Rogers, Kuiper, &amp; Kirker (1977)</span> za: <span class="citation" data-cites="wojciszke_psychologia_2019">Wojciszke (2019)</span>).</p>
-<p>Drugim krokiem jest wybór znanego miejsca lub drogi z jednego miejsca do drugiego i umieszczenie tam uprzednio skonstruowanych symboli. Prawdopodobnie pozwala to na wykorzystanie podwójnej funkcji hipokampu, który związany jest z tworzeniem wspomnień oraz pamięcią przestrzenną <span class="citation" data-cites="maguire_routes_2003">(Maguire et al., 2003)</span>. Jeśli symbole umieszcza się w pomieszczeniu, sugeruję umieszczanie i odczytywanie ich zawsze w tej samej kolejności, tzn. np. zgodnie z ruchem wskazówek zegara.</p>
+<p>Pierwszym krokiem w korzystaniu z pałacu pamięci jest wytworzenie skojarzeń. Już samo tworzenie skojarzeń, jako forma elaboracji, pozwala na zwiększenie poziomu zapamiętywania informacji <span class="citation" data-cites="atkinson_application_1975">(Atkinson &amp; Raugh, 1975)</span>. Dobre skojarzenia powinny przetwarzać oryginalną informację (np. przy zapamiętywaniu listy zakupów, majonezu nie powinien reprezentować rzeczywisty majonez, a na przykład wizja kury w donicy z rzepakiem) i pobudzać emocjonalnie <span class="citation" data-cites="zimbardo_psychologia_2017">(Zimbardo i in., 2017)</span>. Jako relatywnie łatwy sposób stworzenia symboli zawierających ładunek emocjonalny można wskazać (1) tworzenie symboli zabawnych lub (2) nawiązujących do seksualności człowieka. Dzięki tzw. efektowi odniesienia do ja, lepiej będą zapamiętane także informacje odniesione do samego siebie (<span class="citation" data-cites="rogers_self-reference_1977">Rogers, Kuiper, &amp; Kirker (1977)</span> za: <span class="citation" data-cites="wojciszke_psychologia_2019">Wojciszke (2019)</span>).</p>
+<p>Drugim krokiem jest wybór znanego miejsca lub drogi z jednego miejsca do drugiego i umieszczenie tam uprzednio skonstruowanych symboli. Prawdopodobnie pozwala to na wykorzystanie podwójnej funkcji hipokampu, który związany jest z tworzeniem wspomnień oraz pamięcią przestrzenną <span class="citation" data-cites="maguire_routes_2003">(Maguire i in., 2003)</span>. Jeśli symbole umieszcza się w pomieszczeniu, sugeruję umieszczanie i odczytywanie ich zawsze w tej samej kolejności, tzn. np. zgodnie z ruchem wskazówek zegara.</p>
 <p>W końcu – przypominanie sobie polega na wyobrażeniu sobie miejsca, w którym wcześniej umieszczono symbole. By lepiej zobrazować, jak można praktycznie wykorzystać metodę pałacu pamięci, omówię ją na przykładzie.</p>
 </section>
 <section id="przykład" class="level2" data-number="2.3">
@@ -19956,7 +20077,7 @@ Rysunek&nbsp;1: Analogia – przykład opracowywania informacji (© OpenStax na 
 </section>
 <section id="skuteczność-1" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="skuteczność-1"><span class="header-section-number">4.2</span> Skuteczność</h2>
-<p>Wykorzystanie fiszek pozwala na zapamiętanie większej liczby informacji niż wielokrotne powtórki przy takim samym czasie przeznaczonym na naukę, co jest prawdą zarówno dla fiszek elektronicznych <span class="citation" data-cites="schmidmaier_using_2011">(Schmidmaier et al., 2011)</span>, jak i tradycyjnych <span class="citation" data-cites="vaughn_diagnosing_2011">(Vaughn &amp; Rawson, 2011)</span>. Ponadto piśmiennictwo sugeruje, że testowanie własnej wiedzy, na którym opiera się technika fiszek, zwiększa skuteczność uczenia się <span class="citation" data-cites="roediger_test-enhanced_2006">(np. Roediger &amp; Karpicke, 2006)</span> i wydłuża czas przechowywania informacji <span class="citation" data-cites="larsen_repeated_2009">(Larsen, Butler, &amp; Roediger III, 2009)</span> w stosunku do zwykłych rozłożonych powtórek z wielokrotnym czytaniem. Należy zaznaczyć, że już samo rozłożenie powtórek zdaje się zwiększać długoterminową skuteczność nauki, w stosunku do nauki skomasowanej <span class="citation" data-cites="bahrick_retention_1987">(Bahrick &amp; Phelphs, 1987)</span>, takiej jak „zarywanie nocki” przed sprawdzianem.</p>
+<p>Wykorzystanie fiszek pozwala na zapamiętanie większej liczby informacji niż wielokrotne powtórki przy takim samym czasie przeznaczonym na naukę, co jest prawdą zarówno dla fiszek elektronicznych <span class="citation" data-cites="schmidmaier_using_2011">(Schmidmaier i in., 2011)</span>, jak i tradycyjnych <span class="citation" data-cites="vaughn_diagnosing_2011">(Vaughn &amp; Rawson, 2011)</span>. Ponadto piśmiennictwo sugeruje, że testowanie własnej wiedzy, na którym opiera się technika fiszek, zwiększa skuteczność uczenia się <span class="citation" data-cites="roediger_test-enhanced_2006">(np. Roediger &amp; Karpicke, 2006)</span> i wydłuża czas przechowywania informacji <span class="citation" data-cites="larsen_repeated_2009">(Larsen, Butler, &amp; Roediger III, 2009)</span> w stosunku do zwykłych rozłożonych powtórek z wielokrotnym czytaniem. Należy zaznaczyć, że już samo rozłożenie powtórek zdaje się zwiększać długoterminową skuteczność nauki, w stosunku do nauki skomasowanej <span class="citation" data-cites="bahrick_retention_1987">(Bahrick &amp; Phelphs, 1987)</span>, takiej jak „zarywanie nocki” przed sprawdzianem.</p>
 </section>
 <section id="jak-robić-skuteczne-fiszki" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="jak-robić-skuteczne-fiszki"><span class="header-section-number">4.3</span> Jak robić skuteczne fiszki?</h2>

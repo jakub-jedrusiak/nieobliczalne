@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.19">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,9 +11,6 @@
 
 <title>Listy, pętle i automatyzacja w R – Nieobliczalne</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -100,14 +97,14 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3f61aac59b63c3a2d0e87c59ee7d0662.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-16d4f45e73e79269d5f4ab1d9a7bfc95.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3f61aac59b63c3a2d0e87c59ee7d0662.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4f7950cb0c4aa550f8dacebcf42dcfc3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-b23cf6360b1a0b560aee4cabb43e88b1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-4f7950cb0c4aa550f8dacebcf42dcfc3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d7f6f572a82b0b2a80a128f43c88eb00.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-8965ebbc8342c82b623d01c5e5f3f7e4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-d7f6f572a82b0b2a80a128f43c88eb00.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -168,7 +165,7 @@ cookieconsent.run({
 <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/cascadia-code">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -1496,7 +1493,7 @@ window.Quarto = {
 </div>
 <p>Z ciekawszych rzeczy wykorzystuję tutaj funkcję <code>stri_rand_strings</code> z pakietu <code>stringi</code>, żeby zmienić ID osoby badanej. ID nie musi tutaj nic znaczyć, ma być po prostu unikalne, a z tym mamy tutaj problem, bo się wcześniej nie umówiliśmy na żaden określony sposób kodowania. Dlatego na tym etapie mogę zastąpić inicjały losowym ciągiem 5 znaków, zapewniając tym samym, że w ostatecznej bazie identyfikatory będą unikalne. Jest to też sposób na anonimizację bazy danych.</p>
 <p>Uzyskaliśmy w ten sposób jeden wyczyszczony wiersz. Jeszcze tylko 34…</p>
-<p>I jak mamy to zrobić? Mamy ten sam kod skopiować jeszcze 34 razy, zamieniając tylko nazwę&nbsp;pliku? A co jeśli mam 1000 osób? A co jeśli jestem Martą Kowal<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> i mam do przeanalizowania (ponad) 93 158 osób <span class="citation" data-cites="kowal_predictors_2022">(<a href="#ref-kowal_predictors_2022" role="doc-biblioref">Kowal et al., 2022</a>)</span>? Kopiowanie kodu nigdy nie jest dobrą drogą. Jeśli często kopiujemy kod, powinniśmy zrobić z niego funkcję. Jeśli tę samą funkcję chcemy zastosować do wielu obiektów, powinniśmy użyć list albo pętli.</p>
+<p>I jak mamy to zrobić? Mamy ten sam kod skopiować jeszcze 34 razy, zamieniając tylko nazwę&nbsp;pliku? A co jeśli mam 1000 osób? A co jeśli jestem Martą Kowal<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> i mam do przeanalizowania (ponad) 93 158 osób <span class="citation" data-cites="kowal_predictors_2022">(<a href="#ref-kowal_predictors_2022" role="doc-biblioref">Kowal i in., 2022</a>)</span>? Kopiowanie kodu nigdy nie jest dobrą drogą. Jeśli często kopiujemy kod, powinniśmy zrobić z niego funkcję. Jeśli tę samą funkcję chcemy zastosować do wielu obiektów, powinniśmy użyć list albo pętli.</p>
 </section>
 <section id="listy" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Listy</h1>
