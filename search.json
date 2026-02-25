@@ -1096,7 +1096,7 @@
     "href": "posts/uwr-printoscope.html",
     "title": "Printoscope – WNHiP UWr",
     "section": "",
-    "text": "Zacznę od instrukcji dla Windowsa, a potem opiszę, jak uzyskać to samo na Linuxie (zakładam, że do celów archiwizacyjnych, bo wątpię, żeby ktoś miał ten problem poza mną). MacOS nie opiszę, bo nie mam i nie lubię, natomiast jak ktoś ma, chce poszukać i jeszcze mu się uda, proszę o sygnał, to dopiszę."
+    "text": "Zacznę od instrukcji dla Windowsa, a potem opiszę, jak uzyskać to samo na Linuxie (zakładam, że do celów archiwizacyjnych, bo wątpię, żeby ktoś miał ten problem poza mną). MacOS nie opiszę, bo nie mam i nie lubię, natomiast jak ktoś ma, chce poszukać i jeszcze mu się uda, proszę o sygnał, to dopiszę. Mój pobieżny research wskazuje, że instrukcja na Linux powinna zadziałać też na MacOS, tylko zamiast lpinfo i lpadmin trzeba napisać /usr/sbin/lpinfo i /usr/sbin/lpadmin. Zdaje się, że można też całkowicie pominąć ręczne wskazywanie pliku PPD."
   },
   {
     "objectID": "posts/uwr-printoscope.html#vpn-uwr-przez-globalprotect",

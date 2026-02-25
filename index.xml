@@ -21,7 +21,7 @@
 
 
 
-<p>Zacznę od instrukcji dla Windowsa, a potem opiszę, jak uzyskać to samo na Linuxie (zakładam, że do celów archiwizacyjnych, bo wątpię, żeby ktoś miał ten problem poza mną). MacOS nie opiszę, bo nie mam i nie lubię, natomiast jak ktoś ma, chce poszukać i jeszcze mu się uda, proszę o sygnał, to dopiszę.</p>
+<p>Zacznę od instrukcji dla Windowsa, a potem opiszę, jak uzyskać to samo na Linuxie (zakładam, że do celów archiwizacyjnych, bo wątpię, żeby ktoś miał ten problem poza mną). MacOS nie opiszę, bo nie mam i nie lubię, natomiast jak ktoś ma, chce poszukać i jeszcze mu się uda, proszę o sygnał, to dopiszę. Mój pobieżny research wskazuje, że instrukcja na Linux powinna zadziałać też na MacOS, tylko zamiast <code>lpinfo</code> i <code>lpadmin</code> trzeba napisać <code>/usr/sbin/lpinfo</code> i <code>/usr/sbin/lpadmin</code>. Zdaje się, że można też całkowicie pominąć ręczne wskazywanie pliku PPD.</p>
 <section id="windows" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Windows</h1>
 <p>Dodanie drukarki sprowadza się do czterech zadań:</p>
