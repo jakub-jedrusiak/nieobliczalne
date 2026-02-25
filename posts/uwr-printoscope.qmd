@@ -1,7 +1,7 @@
 ---
 title: Printoscope – WNHiP UWr
 subtitle: Jak okiełznać pracowniczy system drukowania
-description: Wydział Nauk Historycznych i Pedagogicznych Uniwersytetu Wrocławskiego założył dziwny system wydziałowych drukarek, który nazywa się Printoscope. Namordowałem się strasznie próbując sprawić, żeby zadziałał, więc piszę ten wpis, żeby udokumentować, czego się dowiedziałem. Co prawda dotyczy to tylko pracowników i doktorantów, ale to tym bardziej oznacza, że grono osób, którym będzie się chciało z tym użerać, jest wąskie. Oto więc instrukcja jak z prywatnego komputera podłączyć się do Printoscope WNHiP UWr.
+description: Wydział Nauk Historycznych i Pedagogicznych Uniwersytetu Wrocławskiego (wraz z innymi wydziałami) założył dziwny system drukarek, który nazywa się Printoscope. Namordowałem się strasznie próbując sprawić, żeby zadziałał z mojego własnego komputera, bo w Instytucie Psychologii mało kto korzysta z lokalnych komputerów., Piszę ten wpis, żeby udokumentować, czego się dowiedziałem. Co prawda dotyczy to tylko pracowników i doktorantów, ale to tym bardziej oznacza, że grono osób, którym chciałoby się z tym użerać i jeszce dzielić się doświadzeniem, jest wąskie. Oto więc instrukcja jak z prywatnego komputera podłączyć się do Printoscope WNHiP UWr.
 image: "./headers/uwr-printoscope.webp"
 twitter-card:
     image: "/headers/uwr-printoscope.jpeg"
@@ -13,11 +13,9 @@ categories:
     - Narzędzia
 ---
 
-# Instrukcja
+Zacznę od instrukcji dla Windowsa, a potem opiszę, jak uzyskać to samo na Linuxie (zakładam, że do celów archiwizacyjnych, bo wątpię, żeby ktoś miał ten problem poza mną). MacOS nie opiszę, bo nie mam i nie lubię, natomiast jak ktoś ma, chce poszukać i jeszcze mu się uda, proszę o sygnał, to dopiszę. Mój pobieżny research wskazuje, że instrukcja na Linux powinna zadziałać też na MacOS, tylko zamiast `lpinfo` i `lpadmin` trzeba napisać `/usr/sbin/lpinfo` i `/usr/sbin/lpadmin`. Zdaje się, że można też całkowicie pominąć ręczne wskazywanie pliku PPD.
 
-Zacznę od instrukcji dla Windowsa, a potem (zakładam, że do celów archiwizacyjnych, bo wątpię, żeby ktoś miał ten problem poza mną) opiszę, jak uzyskać to samo na Linuxie. MacOS nie opiszę, bo nie mam i nie lubię, natomiast jak ktoś ma i chce poszukać, proszę o sygnał, to dopiszę.
-
-## Windows
+# Windows
 
 Dodanie drukarki sprowadza się do czterech zadań:
 
@@ -29,7 +27,7 @@ Dodanie drukarki sprowadza się do czterech zadań:
 
 4. Ustawienie PIN w systemie, by wydruk móc rzeczywiście odebrać.
 
-### VPN UWr przez GlobalProtect
+## VPN UWr przez GlobalProtect
 
 Do VPN połączymy się za pomocą znanego i nielubianego GlobalProtect. Najłatwiej wejść na stronę [vpn.uwr.edu.pl](https://vpn.uwr.edu.pl/), w prawym górnym rogu wybrać GlobalProtect Agent, pobrać i zainstalować (zapewne wersja 64-bit jest odpowiednia). Po zainstalowaniu program się uruchamia jako niewielkie okienko proszące o link. Wpisujemy tam:
 
@@ -39,9 +37,9 @@ vpn.uwr.edu.pl
 
 Po potwierdzeniu otworzy nam się okno przeglądarki, w którym możemy się zalogować danymi do Office'a. Gdy GlobalProtect przemieli nasze żądanie, dopuści nas do wewnętrznej sieci UWr.
 
-### Dodanie poświadczeń
+## Dodanie poświadczeń
 
-Windows musi wiedzieć, z jakimi danymi podłączyć się do drukarki. Dlatego musimy go poinformować o naszych danych logowania. Niestety standardowy monit, który może się pojawić przy próbie dodania drukarki, wariuje w kontakcie z naszym uniwersytetem, dlatego musimy go ominąć. W tym celu użyjemy Menedżera poświadczeń (*Credentials manager*). Wyszukujemy go w menu lub w Panelu sterowania. Po wejściu wybieramy *Poświadczenia systemu Windows* i dodajemy nowe poświadczenie. W polu na adres wpisujemy[^1]:
+Windows musi wiedzieć, z jakimi danymi podłączyć się do drukarki, bo liczba drukowanych kartek jest powiązana z osobą. Dlatego musimy go poinformować o naszych danych logowania. Niestety standardowy monit, który może się pojawić przy próbie dodania drukarki, wariuje w kontakcie z naszym uniwersytetem i jego zewnętrzym logowaniem, dlatego musimy go ominąć. W tym celu użyjemy Menedżera poświadczeń (*Credentials manager*). Wyszukujemy go wpisując jego nazwę w menu start lub znajdujemy w Panelu sterowania (w sekcji o użytkownikach). Po wejściu wybieramy *Poświadczenia systemu Windows* i dodajemy nowe poświadczenie. W polu na adres wpisujemy[^1]:
 
 ```{html}
 printsrv-wnhp
@@ -49,15 +47,15 @@ printsrv-wnhp
 
 [^1]: Niestety nie wiem, jakie są analogiczne adresy innych wydziałów.
 
-Nazwa użytkownika może być podchwytliwa, bo wymaga nazwy domeny i niekoniecznie jest tożsama z mailem. Doktoranci używają swojego numeru indeksu, podczas gdy pracownicy używają bliżej identyfikatora z pierwszej litery imienia i nazwiska. Nie wiem, jakie dokładnie reguły tym rządzą. Najpeweniejszy sposób to przyjście i zalogowanie się na którymś z lokalnych komputerów, otworzenie wiersza polecenia i użycie komendy `whoami`. Przypadkiem odkryłem też, że jeśli jesteśmy podłączeni do VPN i wejdziemy na stronę [http://printoscope.misc.local.uwr.edu.pl](http://printoscope.misc.local.uwr.edu.pl) (zwróćcie uwagę na http zamiast https), to nazwa użytkownika się wyświetla w komunikacie o błędzie. Niezależnie jaka ona jest, koniecznie trzeba ją poprzedzić członem `aduwr\`, np. `aduwr\jjedrusiak` lub `aduwr\315695`.
+Nazwa użytkownika może być podchwytliwa, bo wymaga nazwy domeny i niekoniecznie jest tożsama z mailem. Doktoranci używają swojego numeru indeksu, podczas gdy pracownicy używają tajemniczego identyfikatora złożonego z pierwszej litery imienia i całego nazwiska, być może z jakimiś dodatkami. Nie wiem, jakie dokładnie reguły tym rządzą. Najpeweniejszy sposób, na dowiedzenie się tego, to przyjście do wydziałowego budynku i zalogowanie się na którymś z lokalnych komputerów, tam otworzenie wiersza polecenia i użycie komendy `whoami`. Przypadkiem odkryłem też, że jeśli jesteśmy podłączeni do VPN i wejdziemy na stronę [http://printoscope.misc.local.uwr.edu.pl](http://printoscope.misc.local.uwr.edu.pl) (zwróćcie uwagę na http zamiast https), to nazwa użytkownika się wyświetla w komunikacie o błędzie. Niezależnie jaka ona jest, koniecznie trzeba ją poprzedzić członem `aduwr\`, np. `aduwr\jjedrusiak` lub `aduwr\315695`.
 
 Wreszcie hasło to po prostu hasło do Office'a. Po wpisaniu wszystkich danych potwierdzamy.
 
 ![Przykładowa konfiguracja Menedżera poświadczeń pod Printoscope](ilustracje/uwr-printoscope/credentials_manager.png){fig-align="center"}
 
-### Dodawanie drukarki do systemu
+## Dodawanie drukarki do systemu
 
-Teraz możemy dodać drukarkę. Robimy to standardowo, wchodząc w menu drukarek i klikając przycisk dodawania drukarki. Po chwili wyświetli się opcja dodania drukarki, której nie ma na liście. Klikamy ją, wybieramy drukarkę współdzieloną i w polu tekstowym wpisujemy:
+Teraz możemy dodać drukarkę. Robimy to standardowo, wchodząc (po podłączeniu do VPN) w menu drukarek i klikając przycisk dodawania drukarki. Po chwili wyświetli się opcja dodania drukarki, której nie ma na liście. Klikamy ją, wybieramy drukarkę współdzieloną i w polu tekstowym wpisujemy:
 
 ```{html}
 \\printsrv-wnhp\Printoscope
@@ -65,49 +63,53 @@ Teraz możemy dodać drukarkę. Robimy to standardowo, wchodząc w menu drukarek
 
 ![Dodawanie drukarki Printoscope na Windows 11](ilustracje/uwr-printoscope/adding_printer.png){fig-align="center"}
 
-Po wyklikaniu *Dalej* odpowiednią liczbę razy, drukarkę powinniśmy mieć już dodaną i o ile jesteśmy połączeni z VPN, możemy wysyłać na nią swoje dokumenty. Polecam jednak dostosować domyślne ustawienia drukarki, żeby na pewno drukowała na A4 i nie na czarno-biało.
+Po wyklikaniu *Dalej* odpowiednią liczbę razy, drukarkę powinniśmy mieć już dodaną i o ile jesteśmy połączeni z VPN, możemy drukować własne dokumenty. Polecam jednak dostosować domyślne ustawienia drukarki, żeby na pewno drukowała na A4 i nie na czarno-biało, co zrobimy w odpowiednim menu Windowsa.
 
-### Dodanie PIN do Printoscope
+## Dodanie PIN do Printoscope
 
-Jeśli jednak spróbujemy wysłać dokument do druku i podejdziemy do drukarki, nie znajdziemy tam naszych dokumentów. By rzeczywiście się wydrukowały, musimy zatwierdzić je na samej drukarce. Żeby jednak nie musieć wpisywać swojego maila i hasła na niewygodnym ekranie drukarki, warto jest ustawić sobie PIN. Można to zrobić wchodząc na [http://printoscope.uwr.edu.pl/](http://printoscope.uwr.edu.pl/) (musimy być podłączeni do VPN) i logując się danymi do Office'a. Dodajemy PIN i gotowe -- możemy go wpisywać na ekranie drukarki zamiast loginu i hasła. Gdy stoimy przy drukarce, logujemy się wpisując PIN, wybieramy kafelek *Druk* i w menu, które się wtedy wyświetli, zobaczymy nazwę domumentu, który wcześniej wysłaliśmy do druku. Raz jeszcze zatwierdzamy i wreszcie otrzymujemy swoje dokumenty.
+Jeśli jednak spróbujemy wysłać dokument do druku i podejdziemy do drukarki, nie znajdziemy tam naszych dokumentów. By rzeczywiście się wydrukowały, musimy zatwierdzić je na samej drukarce. Żeby jednak nie musieć wpisywać swojego maila i hasła na niewygodnym ekranie drukarki, warto jest ustawić sobie PIN. Można to zrobić wchodząc na [http://printoscope.uwr.edu.pl/](http://printoscope.uwr.edu.pl/) (musimy być podłączeni do VPN) i logując się danymi do Office'a. Dodajemy PIN i gotowe -- możemy go wpisywać na ekranie drukarki zamiast loginu i hasła. Gdy stoimy przy drukarce, wciskamy mocno guzik uruchamiający na prawym boku ekranu (przynajmniej w modelu stojącym w IPs tak jest), logujemy się wpisując PIN, wybieramy kafelek *Druk* i w menu, które się wtedy wyświetli, zobaczymy nazwę domumentu, który wcześniej wysłaliśmy z naszego komputera. Raz jeszcze zatwierdzamy i wtedy dopiero otrzymujemy swoje dokumenty. Dzięki temu możemy wykorzystać dowolną podłączoną do systemu drukarkę na całym WNHiP, niekoniecznie tę, do której jesteśmy przyzwyczajeni[^2].
 
-#### Bonus: karty zbliżeniowe
+[^2]: Patrząc na adresy IP zauważyłem, że do Printoscope podłączone są też drukarki spoza WNHiP. Jeśli będę w okolicy jakiejś, sprawdzę, czy dokumenty wysłane na `printsrv-wnhp/Printoscope` również się tam pojawiają.
 
-Panel Printoscope daje możliwość logowania się do drukarek kartą pracowniczą. Nie mam takiej karty, ale z ciekawości spróbowałem dodać inne karty zbliżeniowe, które mam. W tym celu pobrałem aplikację [NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=pl) i przyłożyłem do telefonu swoją legitymację doktorancką. Uzyskałem w ten sposób numer seryjny, który przepisałem do Printoscope bez dwukropków (czyli jeśli numer seryjny był 12:34:56:78, to w Printoscope wpisałem 12345678). Sprawdziłem i rzeczywiście działa! Teraz przykładam legitymację do czytnika na drukarce i to zastępuje mi PIN czy hasło. Spróbowałem zrobić to samo z dowodem osobistym i kartą bankową i o dziwo też zadziałało.
+### Bonus: karty zbliżeniowe
 
-## Linux
+Panel Printoscope daje też możliwość logowania się do drukarek kartą pracowniczą zamisast hasłem czy PIN. Nie mam takiej karty, ale z ciekawości spróbowałem zamiast karty pracowniczej dodać swoją legitymację doktorancką i inne karty zbliżeniowe. W tym celu pobrałem aplikację [NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=pl) i przyłożyłem do telefonu swoją legitymację. Uzyskałem w ten sposób numer seryjny, który przepisałem do Printoscope bez dwukropków (czyli jeśli numer seryjny byłby 12:34:56:78, to w Printoscope wpisałem 12345678). Po dodaniu podszedłem do drukarki, przyłożyłem legitymację w odpowiednim miejscu i rzeczywiście to zadziałało! Teraz legitymacja zastępuje mi PIN czy hasło. Muszę tylko zabrać kartę od czytnika dosć szybko, po pierwszym piśnięcu drukarki, bo inaczej wylogowuje. Spróbowałem tego samego z dowodem osobistym i kartą bankową, ale te niestety (albo stety) nie zadziałały. Wygląda na to, że muszą to być proste karty zbliżeniowe typu właśnie legitymacja, karta parkingowa, brelok do domofonu, może Multisport albo Urbancard. Warto przetestować. Jeśli NFC Tools po przyłożeniu karty pokazują rozaj taga `Mifare Classic 1k` lub standard `ISO 14443A`, to powinno zadziałać. Inne trzeba po prostu sprawdzić, a jak komuś zależy, to [czysta karta zbliżeniowa](https://allegro.pl/listing?string=mifare%20classic%201k&order=d) kosztuje 2-6 zł.
 
-Workflow na Linuxie jest bardzo podobny, jak na Windowsie, tylko nieco bardziej upierdliwy w kilku miejscach.
+![Zamiast PIN można użyć prostej karty zbliżeniowej, takiej jak legitymacja doktorancka](ilustracje/uwr-printoscope/karta.jpg){fig-align="center"}
 
-### VPN UWr przez GlobalProtect
+# Linux
 
-Do VPN też potrzebujemy GlobalProtect w jakiejś formie. Konkrety zależą od dystrybucji, ale niestety zwykły Openconnect nie radzi sobie z logowaniem przez Office. Osobiście użyłem [GlobalProtect-openconnect](https://github.com/yuezk/GlobalProtect-openconnect). Procedura jest właściwie identyczna, co w przypadku zwykłego GlobalProtect, czyli link `vpn.uwr.edu.pl` i logowanie danymi Office'a.
+Workflow na Linuxie jest bardzo podobny, jak na Windowsie, tylko nieco bardziej upierdliwy w kilku miejscach, bo Printoscope to Windows Print Server, a standardy kompatybilności i otwartości Microsoft znamy.
 
-### Dodanie poświadczeń
+## VPN UWr przez GlobalProtect
 
-To jest ten bardziej irytujący moment. Samba w Windowsie potrafi sama znaleźć `\\printsrv-wnhp`, jednak Linux potrzebuje rzeczywistego adresu IP. Nie wiem, czy wolno jest mi tutaj go podać, więc na wszelki wypadek opiszę tylko metodę, jak go znaleźć (choć zawsze można do mnie napisać). Niestety potrzbujemy do tego podłączonego do VPN UWr komputera z Windowsem. Może być jeden z komputerów na miejscu, to będzie można przy okazji upewnić się co do nazwy użytkownika. By poznać prawdziwy adres IP tej lokalizacji siecowej, musimy w wiersz polecenia (nie PowerShell, a zwykłe cmd) wpisać następującą komendę:
+Do VPN też potrzebujemy GlobalProtect w jakiejś formie. Konkrety zależą od dystrybucji, ale niestety zwykły Openconnect nie radzi sobie z logowaniem przez Office. Osobiście użyłem [GlobalProtect-openconnect](https://github.com/yuezk/GlobalProtect-openconnect), który istnieje w wersji Debian/Ubuntu czy Arch (jest w AUR). Procedura jest właściwie identyczna, co w przypadku zwykłego GlobalProtect, czyli link `vpn.uwr.edu.pl` i logowanie danymi Office'a. Interfejs graficzny ma trial 10 dni, ale narzędzie CLI działa i potem (por. dokumentacja).
+
+## Dodanie poświadczeń
+
+To jest ten bardziej irytujący moment. Samba w Windowsie potrafi sama znaleźć `\\printsrv-wnhp`, jednak Linux potrzebuje rzeczywistego adresu IP. Nie wiem, czy wolno jest mi tutaj go podać, więc na wszelki wypadek opiszę tylko metodę, jak go znaleźć (choć zawsze można do mnie napisać). Niestety potrzbujemy do tego podłączonego do VPN UWr komputera z Windowsem lub maszynę wirtualną (z zainstalowanym GlobalProtect). Może być jeden z komputerów na miejscu, to będzie można przy okazji upewnić się co do nazwy użytkownika. By poznać prawdziwy adres IP tej lokalizacji siecowej, musimy w wiersz polecenia (nie PowerShell, a zwykłe cmd) wpisać następującą komendę:
 
 ```{cmd}
 net use \\printsrv-wnhp /user:aduwr\NAZWA_UŻYTKOWNIKA
 ```
 
-Jak pisałem przy Windowsie, nazwa użytkownika jest podchwytliwa i można ją uzyskać używając komendy `whoami` na lokalnym komputerze lub przez VPN wchodząc w link, który podałem wyżej. Jeśli ta komenda rozwiązała się poprawne, nawiązaliśmy połączenie. Teraz musimy sprawdzić IP poprzez:
+Jak pisałem przy Windowsie, nazwa użytkownika jest podchwytliwa i można ją uzyskać używając komendy `whoami` na lokalnym komputerze lub przez VPN wchodząc w link, który podałem wyżej (o ile tego nie naprawili, bo to wygląda jak błąd). Jeśli ta komenda rozwiązała się poprawne, nawiązaliśmy połączenie. Teraz musimy sprawdzić IP poprzez:
 
 ```{cmd}
 netstat -ano | findstr 445
 ```
 
-Jeśli wszystko poszło dobrze, to obok słowa ESTABLISHED zobaczymy interesujący nas adres IP z portem 445. Zapisujemy go sobie (bez portu) i wracamy do Linuxa.
+Jeśli wszystko poszło dobrze, to obok słowa ESTABLISHED zobaczymy interesujący nas adres IP z portem 445 (coś w stylu `127.0.0.1:445`, gdzie część przed dwukropkiem to właściwy adres IP). Zapisujemy go sobie (bez portu) i wracamy do Linuxa.
 
-### Dodawanie drukarki do systemu
+## Dodawanie drukarki do systemu
 
-By dodać drukarkę do systemu, musimy wiedzieć jeszcze, gdzie jest plik PPD ze sterownikiem drukarki. Interesujący nas sterownik to `Generic PCL 6/PCL XL Printer Foomatic/pxlcolor`. Najważniejsze elementy tej nazwy to `PCL 6` i `pxlcolor`. By znaleźć ten plik w naszym własnym systemie, używamy komendy:
+By dodać drukarkę do systemu, musimy wiedzieć jeszcze, gdzie jest plik PPD ze sterownikiem drukarki. Interesujący nas sterownik to `Generic PCL 6/PCL XL Printer Foomatic/pxlcolor`. Najważniejsze elementy tej nazwy to `PCL 6` i `pxlcolor`, pozostałe kawałki ujdą. By znaleźć ten plik w naszym własnym systemie, używamy komendy:
 
 ```{bash}
 lpinfo -m | grep -i pcl | grep -i pxlcolor
 ```
 
-Powinniśmy dostać nazwę pliku z rozszerzeniem `.ppd`. Kopiujemy ją (bez opisu, tylko od początku linijki do rozszerzenia .ppd). W moim systemie potrzebna nazwa to `foomatic:Generic-PCL_6_PCL_XL_Printer-pxlcolor.ppd`. W razie czego można użyć nowszego sterownika. Wreszcie łączymy to wszystko w całość dodając drukarkę poleceniem:
+Powinniśmy dostać nazwę pliku z rozszerzeniem `.ppd`. Kopiujemy ją (bez opisu, tylko od początku linijki do rozszerzenia .ppd). W moim systemie potrzebna nazwa to `foomatic:Generic-PCL_6_PCL_XL_Printer-pxlcolor.ppd`. W razie czego można użyć nowszego lub innego sterownika Generic, ale warto się zorientować, jaki powinien zadziałać. Wreszcie łączymy to wszystko w całość, dodając drukarkę poleceniem:
 
 ```{bash}
 sudo lpadmin -p Printoscope \
@@ -116,7 +118,7 @@ sudo lpadmin -p Printoscope \
   -m "NAZWA_PLIKU_PPD"
 ```
 
-Oczywiście login (już bez `aduwr\`, bo jest przed średnikiem), poznany wcześniej adres IP i nazwę pliku PPD podstawiamy. Po dodaniu, najłatwiej w systemowym menu drukarek, przestawiamy domyślny rozmiar papieru na A4 i tryb na zwykły (żeby nie było zawsze czarno-biało). Moja komenda (ze zmienionym dla bezpieczeństwa IP) wyglądała ostatecznie tak:
+Oczywiście podstawiamy nasz login (już bez `aduwr\`, bo to jest już przed średnikiem), poznany wcześniej adres IP i nazwę pliku PPD. Po dodaniu przestawiamy domyślny rozmiar papieru na A4 i tryb na zwykły (żeby nie było zawsze czarno-biało). Najłatwej zrobić to w systemowym graficznym menu drukarek. Moja komenda (ze zmienionym dla bezpieczeństwa IP) wyglądała ostatecznie tak:
 
 ```{bash}
 sudo lpadmin -p Printoscope \
@@ -125,8 +127,8 @@ sudo lpadmin -p Printoscope \
   -m "foomatic:Generic-PCL_6_PCL_XL_Printer-pxlcolor.ppd"
 ```
 
-Drukowanie z Linuxa ma jedną znaczącą wadę – serwer drukowania nie widzi nazw dokumentów, które wysyłamy do druku i wszystkie oznacza `Remote Downlevel Document`. Nie brzmi to strasznie, ale sprawia, że jak wyślemy jeden dokument do druku, to musimy go wydrukować lub usunąć na ekranie drukarki zanim będziemy mogli wydrukować kolejny. Nie znalazłem jeszcze obejścia dla tego problemu.
+Drukowanie z Linuxa ma jedną znaczącą wadę – serwer drukowania nie widzi nazw dokumentów, które wysyłamy do druku i wszystkie oznacza `Remote Downlevel Document`. Nie brzmi to strasznie, ale sprawia, że jak wyślemy jeden dokument do druku, to musimy go wydrukować lub usunąć na ekranie drukarki, zanim będziemy mogli wydrukować kolejny. Nie znalazłem jeszcze obejścia dla tego problemu.
 
-### Dodanie PIN do Printoscope
+## Dodanie PIN do Printoscope
 
-Kwestia PIN i kart zbliżeniowych wygląda identycznie jak to, co napisałem przy Windowsie, więc to też trzeba jeszcze zrobić.
+Kwestia PIN i kart zbliżeniowych wygląda identycznie jak przy Windowsie, więc odsyłam tam. Trzeba to zrobić, chyba że ktoś chce na klawiaturze na ekranie drukarki wpisywać maila i hasło do Office'a.
