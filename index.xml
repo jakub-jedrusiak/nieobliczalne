@@ -34,14 +34,14 @@
 <section id="vpn-uwr-przez-globalprotect" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="vpn-uwr-przez-globalprotect"><span class="header-section-number">1.1</span> VPN UWr przez GlobalProtect</h2>
 <p>Do VPN połączymy się za pomocą znanego i nielubianego GlobalProtect. Najłatwiej wejść na stronę <a href="https://vpn.uwr.edu.pl/">vpn.uwr.edu.pl</a>, w prawym górnym rogu wybrać GlobalProtect Agent, pobrać i zainstalować (zapewne wersja 64-bit jest odpowiednia). Po zainstalowaniu program się uruchamia jako niewielkie okienko proszące o link. Wpisujemy tam:</p>
-<pre class="{html}"><code>vpn.uwr.edu.pl</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1">vpn.uwr.edu.pl</span></code></pre></div></div>
 <p>Po potwierdzeniu otworzy nam się okno przeglądarki, w którym możemy się zalogować danymi do Office’a. Gdy GlobalProtect przemieli nasze żądanie, dopuści nas do wewnętrznej sieci UWr.</p>
 </section>
 <section id="dodanie-poświadczeń" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="dodanie-poświadczeń"><span class="header-section-number">1.2</span> Dodanie poświadczeń</h2>
 <p>Windows musi wiedzieć, z jakimi danymi podłączyć się do drukarki, bo liczba drukowanych kartek jest powiązana z osobą. Dlatego musimy go poinformować o naszych danych logowania. Niestety standardowy monit, który może się pojawić przy próbie dodania drukarki, wariuje w kontakcie z naszym uniwersytetem i jego zewnętrzym logowaniem, dlatego musimy go ominąć. W tym celu użyjemy Menedżera poświadczeń (<em>Credentials manager</em>). Wyszukujemy go wpisując jego nazwę w menu start lub znajdujemy w Panelu sterowania (w sekcji o użytkownikach). Po wejściu wybieramy <em>Poświadczenia systemu Windows</em> i dodajemy nowe poświadczenie. W polu na adres wpisujemy<sup>1</sup>:</p>
-<pre class="{html}"><code>printsrv-wnhp</code></pre>
-<p>Nazwa użytkownika może być podchwytliwa, bo wymaga nazwy domeny i niekoniecznie jest tożsama z mailem. Doktoranci używają swojego numeru indeksu, podczas gdy pracownicy używają tajemniczego identyfikatora złożonego z pierwszej litery imienia i całego nazwiska, być może z jakimiś dodatkami. Nie wiem, jakie dokładnie reguły tym rządzą. Najpeweniejszy sposób, na dowiedzenie się tego, to przyjście do wydziałowego budynku i zalogowanie się na którymś z lokalnych komputerów, tam otworzenie wiersza polecenia i użycie komendy <code>whoami</code>. Przypadkiem odkryłem też, że jeśli jesteśmy podłączeni do VPN i wejdziemy na stronę <a href="http://printoscope.misc.local.uwr.edu.pl">http://printoscope.misc.local.uwr.edu.pl</a> (zwróćcie uwagę na http zamiast https), to nazwa użytkownika się wyświetla w komunikacie o błędzie. Niezależnie jaka ona jest, koniecznie trzeba ją poprzedzić członem <code>aduwr\</code>, np. <code>aduwr\jjedrusiak</code> lub <code>aduwr\315695</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1">printsrv-wnhp</span></code></pre></div></div>
+<p>Nazwa użytkownika może być podchwytliwa, bo wymaga nazwy domeny i niekoniecznie jest tożsama z mailem. Doktoranci używają swojego numeru indeksu, podczas gdy pracownicy używają tajemniczego identyfikatora złożonego z pierwszej litery imienia i całego nazwiska, być może z jakimiś dodatkami. Nie wiem, jakie dokładnie reguły tym rządzą. Najpeweniejszy sposób, na dowiedzenie się tego, to przyjście do wydziałowego budynku i zalogowanie się na którymś z lokalnych komputerów, tam otworzenie wiersza polecenia i użycie komendy <code>whoami</code>. Przypadkiem odkryłem też, że jeśli jesteśmy podłączeni do VPN i wejdziemy na stronę <a href="http://printoscope.misc.local.uwr.edu.pl" class="uri">http://printoscope.misc.local.uwr.edu.pl</a> (zwróćcie uwagę na http zamiast https), to nazwa użytkownika się wyświetla w komunikacie o błędzie. Niezależnie jaka ona jest, koniecznie trzeba ją poprzedzić członem <code>aduwr\</code>, np. <code>aduwr\jjedrusiak</code> lub <code>aduwr\315695</code>.</p>
 <p>Wreszcie hasło to po prostu hasło do Office’a. Po wpisaniu wszystkich danych potwierdzamy.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -53,7 +53,7 @@
 <section id="dodawanie-drukarki-do-systemu" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="dodawanie-drukarki-do-systemu"><span class="header-section-number">1.3</span> Dodawanie drukarki do systemu</h2>
 <p>Teraz możemy dodać drukarkę. Robimy to standardowo, wchodząc (po podłączeniu do VPN) w menu drukarek i klikając przycisk dodawania drukarki. Po chwili wyświetli się opcja dodania drukarki, której nie ma na liście. Klikamy ją, wybieramy drukarkę współdzieloną i w polu tekstowym wpisujemy:</p>
-<pre class="{html}"><code>\\printsrv-wnhp\Printoscope</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1">\\printsrv-wnhp\Printoscope</span></code></pre></div></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://nieobliczalne.pl/posts/ilustracje/uwr-printoscope/adding_printer.png" class="img-fluid figure-img"></p>
@@ -64,7 +64,7 @@
 </section>
 <section id="dodanie-pin-do-printoscope" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="dodanie-pin-do-printoscope"><span class="header-section-number">1.4</span> Dodanie PIN do Printoscope</h2>
-<p>Jeśli jednak spróbujemy wysłać dokument do druku i podejdziemy do drukarki, nie znajdziemy tam naszych dokumentów. By rzeczywiście się wydrukowały, musimy zatwierdzić je na samej drukarce. Żeby jednak nie musieć wpisywać swojego maila i hasła na niewygodnym ekranie drukarki, warto jest ustawić sobie PIN. Można to zrobić wchodząc na <a href="http://printoscope.uwr.edu.pl/">http://printoscope.uwr.edu.pl/</a> (musimy być podłączeni do VPN) i logując się danymi do Office’a. Dodajemy PIN i gotowe – możemy go wpisywać na ekranie drukarki zamiast loginu i hasła. Gdy stoimy przy drukarce, wciskamy mocno guzik uruchamiający na prawym boku ekranu (przynajmniej w modelu stojącym w IPs tak jest), logujemy się wpisując PIN, wybieramy kafelek <em>Druk</em> i w menu, które się wtedy wyświetli, zobaczymy nazwę domumentu, który wcześniej wysłaliśmy z naszego komputera. Raz jeszcze zatwierdzamy i wtedy dopiero otrzymujemy swoje dokumenty. Dzięki temu możemy wykorzystać dowolną podłączoną do systemu drukarkę na całym WNHiP, niekoniecznie tę, do której jesteśmy przyzwyczajeni<sup>2</sup>.</p>
+<p>Jeśli jednak spróbujemy wysłać dokument do druku i podejdziemy do drukarki, nie znajdziemy tam naszych dokumentów. By rzeczywiście się wydrukowały, musimy zatwierdzić je na samej drukarce. Żeby jednak nie musieć wpisywać swojego maila i hasła na niewygodnym ekranie drukarki, warto jest ustawić sobie PIN. Można to zrobić wchodząc na <a href="http://printoscope.uwr.edu.pl/" class="uri">http://printoscope.uwr.edu.pl/</a> (musimy być podłączeni do VPN) i logując się danymi do Office’a. Dodajemy PIN i gotowe – możemy go wpisywać na ekranie drukarki zamiast loginu i hasła. Gdy stoimy przy drukarce, wciskamy mocno guzik uruchamiający na prawym boku ekranu (przynajmniej w modelu stojącym w IPs tak jest), logujemy się wpisując PIN, wybieramy kafelek <em>Druk</em> i w menu, które się wtedy wyświetli, zobaczymy nazwę domumentu, który wcześniej wysłaliśmy z naszego komputera. Raz jeszcze zatwierdzamy i wtedy dopiero otrzymujemy swoje dokumenty. Dzięki temu możemy wykorzystać dowolną podłączoną do systemu drukarkę na całym WNHiP, niekoniecznie tę, do której jesteśmy przyzwyczajeni<sup>2</sup>.</p>
 <section id="bonus-karty-zbliżeniowe" class="level3" data-number="1.4.1">
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="bonus-karty-zbliżeniowe"><span class="header-section-number">1.4.1</span> Bonus: karty zbliżeniowe</h3>
 <p>Panel Printoscope daje też możliwość logowania się do drukarek kartą pracowniczą zamisast hasłem czy PIN. Nie mam takiej karty, ale z ciekawości spróbowałem zamiast karty pracowniczej dodać swoją legitymację doktorancką i inne karty zbliżeniowe. W tym celu pobrałem aplikację <a href="https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&amp;hl=pl">NFC Tools</a> i przyłożyłem do telefonu swoją legitymację. Uzyskałem w ten sposób numer seryjny, który przepisałem do Printoscope bez dwukropków (czyli jeśli numer seryjny byłby 12:34:56:78, to w Printoscope wpisałem 12345678). Po dodaniu podszedłem do drukarki, przyłożyłem legitymację w odpowiednim miejscu i rzeczywiście to zadziałało! Teraz legitymacja zastępuje mi PIN czy hasło. Muszę tylko zabrać kartę od czytnika dosć szybko, po pierwszym piśnięcu drukarki, bo inaczej wylogowuje. Spróbowałem tego samego z dowodem osobistym i kartą bankową, ale te niestety (albo stety) nie zadziałały. Wygląda na to, że muszą to być proste karty zbliżeniowe typu właśnie legitymacja, karta parkingowa, brelok do domofonu, może Multisport albo Urbancard. Warto przetestować. Jeśli NFC Tools po przyłożeniu karty pokazują rozaj taga <code>Mifare Classic 1k</code> lub standard <code>ISO 14443A</code>, to powinno zadziałać. Inne trzeba po prostu sprawdzić, a jak komuś zależy, to <a href="https://allegro.pl/listing?string=mifare%20classic%201k&amp;order=d">czysta karta zbliżeniowa</a> kosztuje 2-6 zł.</p>
@@ -87,25 +87,93 @@
 <section id="dodanie-poświadczeń-1" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="dodanie-poświadczeń-1"><span class="header-section-number">2.2</span> Dodanie poświadczeń</h2>
 <p>To jest ten bardziej irytujący moment. Samba w Windowsie potrafi sama znaleźć <code>\\printsrv-wnhp</code>, jednak Linux potrzebuje rzeczywistego adresu IP. Nie wiem, czy wolno jest mi tutaj go podać, więc na wszelki wypadek opiszę tylko metodę, jak go znaleźć (choć zawsze można do mnie napisać). Niestety potrzbujemy do tego podłączonego do VPN UWr komputera z Windowsem lub maszynę wirtualną (z zainstalowanym GlobalProtect). Może być jeden z komputerów na miejscu, to będzie można przy okazji upewnić się co do nazwy użytkownika. By poznać prawdziwy adres IP tej lokalizacji siecowej, musimy w wiersz polecenia (nie PowerShell, a zwykłe cmd) wpisać następującą komendę:</p>
-<pre class="{cmd}"><code>net use \\printsrv-wnhp /user:aduwr\NAZWA_UŻYTKOWNIKA</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb4-1">net use \\printsrv-wnhp <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">/user:</span>aduwr\NAZWA_UŻYTKOWNIKA</span></code></pre></div></div>
 <p>Jak pisałem przy Windowsie, nazwa użytkownika jest podchwytliwa i można ją uzyskać używając komendy <code>whoami</code> na lokalnym komputerze lub przez VPN wchodząc w link, który podałem wyżej (o ile tego nie naprawili, bo to wygląda jak błąd). Jeśli ta komenda rozwiązała się poprawne, nawiązaliśmy połączenie. Teraz musimy sprawdzić IP poprzez:</p>
-<pre class="{cmd}"><code>netstat -ano | findstr 445</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb5-1">netstat <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-ano</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">|</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">findstr</span> 445</span></code></pre></div></div>
 <p>Jeśli wszystko poszło dobrze, to obok słowa ESTABLISHED zobaczymy interesujący nas adres IP z portem 445 (coś w stylu <code>127.0.0.1:445</code>, gdzie część przed dwukropkiem to właściwy adres IP). Zapisujemy go sobie (bez portu) i wracamy do Linuxa.</p>
 </section>
 <section id="dodawanie-drukarki-do-systemu-1" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="dodawanie-drukarki-do-systemu-1"><span class="header-section-number">2.3</span> Dodawanie drukarki do systemu</h2>
 <p>By dodać drukarkę do systemu, musimy wiedzieć jeszcze, gdzie jest plik PPD ze sterownikiem drukarki. Interesujący nas sterownik to <code>Generic PCL 6/PCL XL Printer Foomatic/pxlcolor</code>. Najważniejsze elementy tej nazwy to <code>PCL 6</code> i <code>pxlcolor</code>, pozostałe kawałki ujdą. By znaleźć ten plik w naszym własnym systemie, używamy komendy:</p>
-<pre class="{bash}"><code>lpinfo -m | grep -i pcl | grep -i pxlcolor</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">lpinfo</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-m</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">grep</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-i</span> pcl <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">grep</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-i</span> pxlcolor</span></code></pre></div></div>
 <p>Powinniśmy dostać nazwę pliku z rozszerzeniem <code>.ppd</code>. Kopiujemy ją (bez opisu, tylko od początku linijki do rozszerzenia .ppd). W moim systemie potrzebna nazwa to <code>foomatic:Generic-PCL_6_PCL_XL_Printer-pxlcolor.ppd</code>. W razie czego można użyć nowszego lub innego sterownika Generic, ale warto się zorientować, jaki powinien zadziałać. Wreszcie łączymy to wszystko w całość, dodając drukarkę poleceniem:</p>
-<pre class="{bash}"><code>sudo lpadmin -p Printoscope \
-  -E \
-  -v "smb://ADUWR;NASZ_LOGIN@ADRES_IP_Z_POPRZEDNIEGO_KROKU/Printoscope" \
-  -m "NAZWA_PLIKU_PPD"</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sudo</span> lpadmin <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-p</span> Printoscope <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb7-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-E</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb7-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-v</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"smb://ADUWR;NASZ_LOGIN@ADRES_IP_Z_POPRZEDNIEGO_KROKU/Printoscope"</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb7-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-m</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"NAZWA_PLIKU_PPD"</span></span></code></pre></div></div>
 <p>Oczywiście podstawiamy nasz login (już bez <code>aduwr\</code>, bo to jest już przed średnikiem), poznany wcześniej adres IP i nazwę pliku PPD. Po dodaniu przestawiamy domyślny rozmiar papieru na A4 i tryb na zwykły (żeby nie było zawsze czarno-biało). Najłatwej zrobić to w systemowym graficznym menu drukarek. Moja komenda (ze zmienionym dla bezpieczeństwa IP) wyglądała ostatecznie tak:</p>
-<pre class="{bash}"><code>sudo lpadmin -p Printoscope \
-  -E \
-  -v "smb://ADUWR;315695@127.0.0.1/Printoscope" \
-  -m "foomatic:Generic-PCL_6_PCL_XL_Printer-pxlcolor.ppd"</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sudo</span> lpadmin <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-p</span> Printoscope <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb8-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-E</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb8-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-v</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"smb://ADUWR;315695@127.0.0.1/Printoscope"</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb8-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-m</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"foomatic:Generic-PCL_6_PCL_XL_Printer-pxlcolor.ppd"</span></span></code></pre></div></div>
 <p>Drukowanie z Linuxa ma jedną znaczącą wadę – serwer drukowania nie widzi nazw dokumentów, które wysyłamy do druku i wszystkie oznacza <code>Remote Downlevel Document</code>. Nie brzmi to strasznie, ale sprawia, że jak wyślemy jeden dokument do druku, to musimy go wydrukować lub usunąć na ekranie drukarki, zanim będziemy mogli wydrukować kolejny. Nie znalazłem jeszcze obejścia dla tego problemu.</p>
 </section>
 <section id="dodanie-pin-do-printoscope-1" class="level2" data-number="2.4">
