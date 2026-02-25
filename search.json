@@ -1117,7 +1117,7 @@
     "href": "posts/uwr-printoscope.html#dodawanie-drukarki-do-systemu",
     "title": "Printoscope – WNHiP UWr",
     "section": "1.3 Dodawanie drukarki do systemu",
-    "text": "1.3 Dodawanie drukarki do systemu\nTeraz możemy dodać drukarkę. Robimy to standardowo, wchodząc w menu drukarek i klikając przycisk dodawania drukarki. Po chwili wyświetli się opcja dodania drukarki, której nie ma na liście. Klikamy ją, wybieramy drukarkę współdzieloną i w polu tekstowym wpisujemy:\n\\\\printsrv-wnhp\\Printoscope\n\n\n\nDodawanie drukarki Printoscope na Windows 11\n\n\nPo wyklikaniu Dalej odpowiednią liczbę razy, drukarkę powinniśmy mieć już dodaną i o ile jesteśmy połączeni z VPN, możemy drukować własne dokumenty. Polecam jednak dostosować domyślne ustawienia drukarki, żeby na pewno drukowała na A4 i nie na czarno-biało, co zrobimy w odpowiednim menu Windowsa."
+    "text": "1.3 Dodawanie drukarki do systemu\nTeraz możemy dodać drukarkę. Robimy to standardowo, wchodząc po podłączeniu do VPN w menu drukarek i klikając przycisk dodawania drukarki. Po chwili wyświetli się opcja dodania drukarki, której nie ma na liście. Klikamy ją, wybieramy drukarkę współdzieloną i w polu tekstowym wpisujemy:\n\\\\printsrv-wnhp\\Printoscope\n\n\n\nDodawanie drukarki Printoscope na Windows 11\n\n\nPo wyklikaniu Dalej odpowiednią liczbę razy, drukarkę powinniśmy mieć już dodaną i o ile jesteśmy połączeni z VPN, możemy drukować własne dokumenty. Polecam jednak dostosować domyślne ustawienia drukarki, żeby na pewno drukowała na A4 i nie na czarno-biało, co zrobimy w odpowiednim menu Windowsa."
   },
   {
     "objectID": "posts/uwr-printoscope.html#dodanie-pin-do-printoscope",
