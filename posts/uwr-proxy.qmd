@@ -39,13 +39,13 @@ Po czwarte, musimy podać nasze hasło. W tym celu wchodzimy w nowo utworzony pr
 
 Jeśli wszystko zadziałało, to przy próbie wejścia do EBSCO przez [ten link](http://search.ebscohost.com/) nie powinniśmy widzieć prośby o zalogowanie się, tylko od razu możliwość wyboru wyszukiwarki wraz z informacją, że dostęp mamy dzięki Uniwersytetowi Wrocławskiemu.
 
-![Jeśli proxy działa, to to jest to, co powinniśmy zobaczyć po wejścu na <http://search.ebscohost.com/>](ilustracje/uwr-proxy/ebsco.png){fig-align="center"}
+![Jeśli proxy działa, to to jest to, co powinniśmy zobaczyć po wejściu na <http://search.ebscohost.com/>](ilustracje/uwr-proxy/ebsco.png){fig-align="center"}
 
-Teraz po wejściu na strony czasopism, które UWr subskrybuje, powinniśmy automatycznie uzysać dostęp do pełnych wersji artykułów. Podobnie **bez logowania** mamy dostęp do zasobów UWr w IBUK Libra. Jeśli na jakiejś stronie, na której proxy powinno zadziałać, nie włącza się automatycznie, możemy dodać taką stronę dodać samodzielnie do naszych ustawień za pomocą menu SwitchyOmega (czasem schowanym w menu rozszerzeń w przeglądarce, zazwyczaj pod ikoną puzzla). Jeśli przełączenie się na proxy coś da, można napisać mi maila, to dodam tę stronę do swojej listy, by inni też mogli skorzystać. Moje zmiany będą się automatycznie synchronizować u wszystkich korzystających z tej instrukcji.
+Teraz po wejściu na strony czasopism, które UWr subskrybuje, powinniśmy automatycznie uzyskać dostęp do pełnych wersji artykułów. Podobnie **bez logowania** mamy dostęp do zasobów UWr w IBUK Libra. Jeśli na jakiejś stronie, na której proxy powinno zadziałać, nie włącza się automatycznie, możemy dodać taką stronę dodać samodzielnie do naszych ustawień za pomocą menu SwitchyOmega (czasem schowanym w menu rozszerzeń w przeglądarce, zazwyczaj pod ikoną puzzla). Jeśli przełączenie się na proxy coś da, można napisać mi maila, to dodam tę stronę do swojej listy, by inni też mogli skorzystać. Moje zmiany będą się automatycznie synchronizować u wszystkich korzystających z tej instrukcji.
 
 ![Dodawanie strony do proxy UWr](ilustracje/uwr-proxy/add-proxy.png){fig-align="center"}
 
-Może się zdarzyć, że przy próbie wejścia na jakąś stronę nagle przeglądarka poprosi nas o login i hasło. **Wtedy należy spróbować odświeżyć stronę.** Jeśli to nie pomoże, prawdopodobnie hasło wygasło. W takim wypadku na Outlooku powinniśmy mieć już maila, że dostęp do proxy wygasł i link, za pomocą którego możemy ten dostęp odświeżyć. Po kilku minutach od kliknięcia w link dostaniemy nowe hasło, które należy wkleić w tym samym miejscu, co poprzednie. Jeśli nagle jakieś strony w ogóle się nie ładują, warto spóbować w menu dodatku przełączyć się na chwilę na `[System Proxy]`. Jeśli zaczęło działać, to znaczy, że konfiguracja jest błędna. Jeśli nic to nie zmieniło, problem jest gdzieś indziej i należy wrócić do ustawienia `auto switch`.
+Może się zdarzyć, że przy próbie wejścia na jakąś stronę nagle przeglądarka poprosi nas o login i hasło. **Wtedy należy spróbować odświeżyć stronę.** Jeśli to nie pomoże, prawdopodobnie hasło wygasło. W takim wypadku na Outlooku powinniśmy mieć już maila, że dostęp do proxy wygasł i link, za pomocą którego możemy ten dostęp odświeżyć. Po kilku minutach od kliknięcia w link dostaniemy nowe hasło, które należy wkleić w tym samym miejscu, co poprzednie. Jeśli nagle jakieś strony w ogóle się nie ładują, warto spróbować w menu dodatku przełączyć się na chwilę na `[System Proxy]`. Jeśli zaczęło działać, to znaczy, że konfiguracja jest błędna. Jeśli nic to nie zmieniło, problem jest gdzieś indziej i należy wrócić do ustawienia `auto switch`.
 
 Moim zdaniem Uniwersytet powinien założyć coś w stylu EZproxy i ułatwić nam wszystkim życie.
 
@@ -57,13 +57,13 @@ Proxy UWr to proxy `HTTP`.
 
 **IP:**
 
-```         
+``` html
 156.17.58.23
 ```
 
 **Port:**
 
-```         
+``` html
 8070
 ```
 
