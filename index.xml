@@ -83,15 +83,53 @@
 <section id="vpn-uwr-przez-globalprotect-1" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="vpn-uwr-przez-globalprotect-1"><span class="header-section-number">2.1</span> VPN UWr przez GlobalProtect</h2>
 <p>Do VPN też potrzebujemy GlobalProtect w jakiejś formie. Konkrety zależą od dystrybucji, ale niestety zwykły Openconnect nie radzi sobie z logowaniem przez Office. Osobiście użyłem <a href="https://github.com/yuezk/GlobalProtect-openconnect">GlobalProtect-openconnect</a>, który istnieje w wersji Debian/Ubuntu czy Arch (jest w AUR). Procedura jest właściwie identyczna, co w przypadku zwykłego GlobalProtect, czyli link <code>vpn.uwr.edu.pl</code> i logowanie danymi Office’a. Interfejs graficzny ma trial 10 dni, ale narzędzie CLI działa i potem (por. dokumentacja).</p>
+<div id="resolvectl" class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Ostrzeżenie</span>Problemy z <code>systemd-resolved</code> w Arch
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>W Arch Linux (i poddystrybucjach typu Manjaro) czasem VPN może działać losowo – czasem tak, czasem nie. To wynika z konfiguracji DNS. Jeśli są z tym problemy, to warto jest otworzyć konfigurację NetworkManagera:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sudo</span> nano /etc/NetworkManager/NetworkManager.conf</span></code></pre></div></div>
+<p>Dodać tam lub zamienić sekcję:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">[main]</span></span>
+<span id="cb5-2"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">dns</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>systemd-resolved</span></code></pre></div></div>
+<p>Następnie uruchomić <code>systemd-resolved</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sudo</span> systemctl enable <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--now</span> systemd-resolved</span></code></pre></div></div>
+<p>I podłączyć pliki konfiguracyjne:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sudo</span> ln <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-sf</span> /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf</span></code></pre></div></div>
+<p>Teraz powinno działać konsekwentnie.</p>
+</div>
+</div>
 </section>
 <section id="dodanie-poświadczeń-1" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="dodanie-poświadczeń-1"><span class="header-section-number">2.2</span> Dodanie poświadczeń</h2>
 <p>To jest ten bardziej irytujący moment. Samba w Windowsie potrafi sama znaleźć <code>\\printsrv-wnhp</code>, jednak Linux potrzebuje rzeczywistego adresu IP. Nie wiem, czy wolno jest mi tutaj go podać, więc na wszelki wypadek opiszę tylko metodę, jak go znaleźć (choć zawsze można do mnie napisać). Niestety potrzebujemy do tego podłączonego do VPN UWr komputera z Windowsem lub maszynę wirtualną (z zainstalowanym GlobalProtect). Może być jeden z komputerów na miejscu, to będzie można przy okazji upewnić się co do nazwy użytkownika. By poznać prawdziwy adres IP tej lokalizacji sieciowej, musimy w wiersz polecenia (nie PowerShell, a zwykłe cmd) wpisać następującą komendę:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb4-1">net use \\printsrv-wnhp <span class="at" style="color: #657422;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb8-1">net use \\printsrv-wnhp <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">/user:</span>aduwr\NAZWA_UŻYTKOWNIKA</span></code></pre></div></div>
 <p>Jak pisałem przy Windowsie, nazwa użytkownika jest podchwytliwa i można ją uzyskać używając komendy <code>whoami</code> na lokalnym komputerze lub przez VPN wchodząc w link, który podałem wyżej (o ile tego nie naprawili, bo to wygląda jak błąd). Jeśli ta komenda rozwiązała się poprawne, nawiązaliśmy połączenie. Teraz musimy sprawdzić IP poprzez:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb5-1">netstat <span class="at" style="color: #657422;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb9-1">netstat <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-ano</span> <span class="kw" style="color: #003B4F;
 background-color: null;
@@ -105,7 +143,7 @@ font-style: inherit;">findstr</span> 445</span></code></pre></div></div>
 <section id="dodawanie-drukarki-do-systemu-1" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="dodawanie-drukarki-do-systemu-1"><span class="header-section-number">2.3</span> Dodawanie drukarki do systemu</h2>
 <p>By dodać drukarkę do systemu, musimy wiedzieć jeszcze, gdzie jest plik PPD ze sterownikiem drukarki. Interesujący nas sterownik to <code>Generic PCL 6/PCL XL Printer Foomatic/pxlcolor</code>. Najważniejsze elementy tej nazwy to <code>PCL 6</code> i <code>pxlcolor</code>, pozostałe kawałki ujdą. By znaleźć ten plik w naszym własnym systemie, używamy komendy:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">lpinfo</span> <span class="at" style="color: #657422;
 background-color: null;
@@ -125,51 +163,51 @@ font-style: inherit;">grep</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-i</span> pxlcolor</span></code></pre></div></div>
 <p>Powinniśmy dostać nazwę pliku z rozszerzeniem <code>.ppd</code>. Kopiujemy ją (bez opisu, tylko od początku linijki do rozszerzenia .ppd). W moim systemie potrzebna nazwa to <code>foomatic:Generic-PCL_6_PCL_XL_Printer-pxlcolor.ppd</code>. W razie czego można użyć nowszego lub innego sterownika Generic, ale warto się zorientować, jaki powinien zadziałać. Wreszcie łączymy to wszystko w całość, dodając drukarkę poleceniem:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">sudo</span> lpadmin <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-p</span> Printoscope <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">\</span></span>
-<span id="cb7-2">  <span class="at" style="color: #657422;
+<span id="cb11-2">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-E</span> <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">\</span></span>
-<span id="cb7-3">  <span class="at" style="color: #657422;
+<span id="cb11-3">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-v</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"smb://ADUWR;NASZ_LOGIN@ADRES_IP_Z_POPRZEDNIEGO_KROKU/Printoscope"</span> <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">\</span></span>
-<span id="cb7-4">  <span class="at" style="color: #657422;
+<span id="cb11-4">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"NAZWA_PLIKU_PPD"</span></span></code></pre></div></div>
 <p>Oczywiście podstawiamy nasz login (już bez <code>aduwr\</code>, bo to jest już przed średnikiem), poznany wcześniej adres IP i nazwę pliku PPD. Po dodaniu przestawiamy domyślny rozmiar papieru na A4 i tryb na zwykły (żeby nie było zawsze czarno-biało). Najłatwiej zrobić to w systemowym graficznym menu drukarek. Moja komenda (ze zmienionym dla bezpieczeństwa IP) wyglądała ostatecznie tak:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">sudo</span> lpadmin <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-p</span> Printoscope <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">\</span></span>
-<span id="cb8-2">  <span class="at" style="color: #657422;
+<span id="cb12-2">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-E</span> <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">\</span></span>
-<span id="cb8-3">  <span class="at" style="color: #657422;
+<span id="cb12-3">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-v</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"smb://ADUWR;315695@127.0.0.1/Printoscope"</span> <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">\</span></span>
-<span id="cb8-4">  <span class="at" style="color: #657422;
+<span id="cb12-4">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-m</span> <span class="st" style="color: #20794D;
 background-color: null;
