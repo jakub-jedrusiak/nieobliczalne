@@ -85,6 +85,37 @@ Workflow na Linuxie jest bardzo podobny, jak na Windowsie, tylko nieco bardziej 
 
 Do VPN też potrzebujemy GlobalProtect w jakiejś formie. Konkrety zależą od dystrybucji, ale niestety zwykły Openconnect nie radzi sobie z logowaniem przez Office. Osobiście użyłem [GlobalProtect-openconnect](https://github.com/yuezk/GlobalProtect-openconnect), który istnieje w wersji Debian/Ubuntu czy Arch (jest w AUR). Procedura jest właściwie identyczna, co w przypadku zwykłego GlobalProtect, czyli link `vpn.uwr.edu.pl` i logowanie danymi Office'a. Interfejs graficzny ma trial 10 dni, ale narzędzie CLI działa i potem (por. dokumentacja).
 
+::: {#resolvectl .callout-warning}
+## Problemy z `systemd-resolved` w Arch
+
+W Arch Linux (i poddystrybucjach typu Manjaro) czasem VPN może działać losowo -- czasem tak, czasem nie. To wynika z konfiguracji DNS. Jeśli są z tym problemy, to warto jest otworzyć konfigurację NetworkManagera:
+
+``` bash
+sudo nano /etc/NetworkManager/NetworkManager.conf
+```
+
+Dodać tam lub zamienić sekcję:
+
+``` bash
+[main]
+dns=systemd-resolved
+```
+
+Następnie uruchomić `systemd-resolved`:
+
+``` bash
+sudo systemctl enable --now systemd-resolved
+```
+
+I podłączyć pliki konfiguracyjne:
+
+``` bash
+sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+```
+
+Teraz powinno działać konsekwentnie.
+:::
+
 ## Dodanie poświadczeń
 
 To jest ten bardziej irytujący moment. Samba w Windowsie potrafi sama znaleźć `\\printsrv-wnhp`, jednak Linux potrzebuje rzeczywistego adresu IP. Nie wiem, czy wolno jest mi tutaj go podać, więc na wszelki wypadek opiszę tylko metodę, jak go znaleźć (choć zawsze można do mnie napisać). Niestety potrzebujemy do tego podłączonego do VPN UWr komputera z Windowsem lub maszynę wirtualną (z zainstalowanym GlobalProtect). Może być jeden z komputerów na miejscu, to będzie można przy okazji upewnić się co do nazwy użytkownika. By poznać prawdziwy adres IP tej lokalizacji sieciowej, musimy w wiersz polecenia (nie PowerShell, a zwykłe cmd) wpisać następującą komendę:
