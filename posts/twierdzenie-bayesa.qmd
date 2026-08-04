@@ -1,10 +1,10 @@
 ---
 title: Twierdzenie Bayesa
-description: Wyobraźmy sobie, że przychodzi do naszego gabinetu pacjent. Przeprowadzamy wywiad, stawiamy diagnozę i przypominamy sobie, że niedawno czytaliśmy niepokojącą statystykę – 30% ofiar przemocy wykształca to właśnie zaburzenie, podczas gdy w całej populacji występuje ono tylko u 10% ludzi. Czy należy przeprowadzić wywiad w tym kierunku? Jaka jest szansa, że pacjent rzeczywiście jest ofiarą przemocy? Chciałoby się powiedzieć, że jest 30% szans, ale jeśli tak by było, to z faktu, że 95% złodziei jest praworęczna, wynikałoby, że 95% praworęcznych to złodzieje. Jeśli chcemy „odwrócić prawdopodobieństwo” i wnoskować o doświadczeniu przemocy na podstawie diagnozy, musimy zastosować twierdzenie Bayesa.
+description: Wyobraźmy sobie, że przychodzi do naszego gabinetu pacjent. Przeprowadzamy wywiad, stawiamy diagnozę i przypominamy sobie, że niedawno czytaliśmy niepokojącą statystykę – 30% ofiar przemocy wykształca to właśnie zaburzenie, podczas gdy w całej populacji występuje ono tylko u 10% ludzi. Czy należy przeprowadzić wywiad w tym kierunku? Jaka jest szansa, że pacjent rzeczywiście jest ofiarą przemocy? Chciałoby się powiedzieć, że jest 30% szans, ale jeśli tak by było, to z faktu, że 95% złodziei jest praworęczna, wynikałoby, że 95% praworęcznych to złodzieje. Jeśli chcemy „odwrócić prawdopodobieństwo” i wnioskować o doświadczeniu przemocy na podstawie diagnozy, musimy zastosować twierdzenie Bayesa.
 image: ./headers/twierdzenie-bayesa.webp
 twitter-card:
     image: "/headers/twierdzenie-bayesa.jpeg"
-date: "2026-08-04"
+date: "2026-08-05"
 freeze: auto
 code-fold: true
 categories:
@@ -14,22 +14,204 @@ categories:
 draft: true
 ---
 
-Z danych przedstawionych w treści zadania wiemy, że 30% ofiar przemocy ma to zaburzenie. Pytanie o szansę, że nasz chory pacjent jest ofiarą przemocy, to pytanie jaka część chorych na tę chorobę to ofiary przemocy. Znamy odsetek chorych pośród ofiar, chcemy znać odsetek ofiar pośród chorych. Jeśli prawie wszyscy chorzy to ofiary przemocy, to nasz chorujący pacjent pewnie też był ofiarą. Jeśli ofiary przemocy nie chorują na tę chorobę, to nasz pacjent (skoto jest chory) pewnie też na nią nie choruje. Jeśli nie ma zależności, tzn. odsetek ofiar przemocy jest taki sam w grupie chorych, jak i w grupie zdrowych, to nic nam informacja o chorobie nie powie. Tutaj zostało nam powiedziane, że na tę chorobę choruje 10% całej populacji, ale aż 30% ofiar przemocy. Populacja składa się więc z czterech grup – chorujące ofiary przemocy, zdrowe ofiary przemocy, chorujące nie-ofiary przemocy i zdrowe nie-ofiary przemocy. Cztery prostokąty różnej wielkości. Dane mo Chcemy wiedzieć, jaka część CHORUJĄCYCH to ofiary przemocy, więc musimy podzielić chorujące ofiary przemocy przez wszystkich chorujących. Tak się liczy procenty, procenty to ułamki, dlatego nie lubię uczenia ludzi procentów (tylko) za pomocą proporcji. Innymi słowy musimy wywalić oba prostokąty oznaczające ludzi zdrowych, z pozostałych dwóch ułożyć jedną figurę, i powiedzieć, jak duża część tej nowej figury to ofiary przemocy.
+# Szacowanie prawdopodobieństwa
+
+Z danych przedstawionych w treści zadania wiemy, że 30% ofiar przemocy ma to zaburzenie. Z góry zaznaczam, że dane są kompletnie wymyślone. Pytanie o szansę, że nasz chory pacjent jest ofiarą przemocy, to pytanie jaka część chorych na tę chorobę to ofiary przemocy. Znamy odsetek chorych pośród ofiar, chcemy znać odsetek ofiar pośród chorych. Jeśli prawie wszyscy chorzy to ofiary przemocy, to nasz chorujący pacjent pewnie też był ofiarą. Jeśli ofiary przemocy nie chorują na tę chorobę, to nasz pacjent (skoro jest chory) pewnie też nie jest ofiarą przemocy. Jeśli nie ma zależności, tzn. odsetek ofiar przemocy jest taki sam w grupie chorych, jak i w grupie zdrowych, to nic nam informacja o chorobie nie powie.
+
+Tutaj zostało nam powiedziane, że na tę chorobę choruje 10% całej populacji, ale aż 30% ofiar przemocy. Populacja składa się więc z czterech grup – chorujące ofiary przemocy, zdrowe ofiary przemocy, chorujące nie-ofiary przemocy i zdrowe nie-ofiary przemocy. Cztery prostokąty różnej wielkości. Dane mo Chcemy wiedzieć, jaka część CHORUJĄCYCH to ofiary przemocy, więc musimy podzielić chorujące ofiary przemocy przez wszystkich chorujących. Tak się liczy procenty, procenty to ułamki, dlatego nie lubię uczenia ludzi procentów (tylko) za pomocą proporcji. Innymi słowy musimy wywalić oba prostokąty oznaczające ludzi zdrowych, z pozostałych dwóch ułożyć jedną figurę, i powiedzieć, jak duża część tej nowej figury to ofiary przemocy.
 
 $$
 P(\text{ofiara} | \text{choruje}) = \frac{\text{chorujące ofiary}}{\text{wszyscy chorzy}}
 $$
 
-Tę notację czytamy „prawdopodobieństwo, że osoba jest ofiarą, jeśli wiemy, że choruje”. Wiemy, że nasza nowa figura to łącznie 10%, bo tak zostało powiedziane w zadaniu. Co ważne – 10% wszystkich, nie tylko nie-ofiar, to jest suma chorujących ofiar i chorujących nie-ofiar. Pozostaje więc policzyć, ile jest chorujących ofiar. Tego nie wiemy, ale wiemy, że to 30% wszystkich ofiar. Wszystkie ofiary to jest inny zestaw, wszystkie ofiary to chorujące ofiary + zdrowe ofiary. Ten zestaw to 3% całego dużego prostokąta, co również zostało nam dane w zadaniu. Wyobrażam sobie, że trzymam papierowy prostokąt o polu 3, który oznacza wszystkie ofiary. Odcinam nożyczkami 30% tego kawałka, oddzielając w ten sposób chorujące ofiary przemocy od zdrowych. Jakie pole ma ten odcięty kawałek? 30% z 3%, więc $3\% \times 30\% = 0.03 \times 0.30 = 0.009 = 0.9\%$. Chorujące ofiary przemocy stanowią 0.9% całego prostokąta. Odsuwam zdrowe ofiary przemocy, przysuwam chorujące nie-ofiary przemocy i w ten sposób mam przed sobą wszystkich chorujących w dwóch kawałkach, które w sumie stanowiły 10% dużego prostokąta. Najpierw oddzieliłem chorujących od innych ofiar przemocy, a potem połączyłem z resztą chorujących. Ponieważ reszta prostokąta mi zniknęła, pisanie o procentach może być mylące. Procent jest zawsze z czegoś i trzeba wiedzieć z czego, bo inaczej bardzo łatwo się pogubić. Wcześniej liczba 100% oznaczała cały prostokąt, a nowa figura to 10% całego prostokąta. Jaką część nowej figury stanowi moje 0.9%? Będzie to 0.9% w całości, która stanowi 10%, więc dzielę $\frac{0.9}{10} = 0.09 = 9\%$. To są już nowe procenty. Odcięty przeze mnie fragment stanowił 0.9% całego dużego prostokąta, ale 9% mojej nowej figury. Innymi słowy chorujące na tę chorobę ofiary przemocy to 0.9% wszystkich ludzi, ale już 9% wszystkich chorujących.
+Tę notację czytamy „prawdopodobieństwo, że osoba jest ofiarą, jeśli wiemy, że choruje”. Wiemy, że nasza nowa figura to łącznie 10%, bo tak zostało powiedziane w zadaniu. Co ważne – 10% wszystkich, nie tylko nie-ofiar, to jest suma chorujących ofiar i chorujących nie-ofiar. Pozostaje więc policzyć, ile jest chorujących ofiar. Tego nie wiemy, ale wiemy, że to 30% wszystkich ofiar.
+
+Wszystkie ofiary to jest inny zestaw, wszystkie ofiary to chorujące ofiary + zdrowe ofiary. Ten zestaw to 3% całego dużego prostokąta, co również zostało nam dane w zadaniu. Wyobrażam sobie, że trzymam papierowy prostokąt o polu 3, który oznacza wszystkie ofiary. Odcinam nożyczkami 30% tego kawałka, oddzielając w ten sposób chorujące ofiary przemocy od zdrowych. Jakie pole ma ten odcięty kawałek? 30% z 3%, więc $3\% \times 30\% = 0.03 \times 0.30 = 0.009 = 0.9\%$. Chorujące ofiary przemocy stanowią 0.9% całego prostokąta. Odsuwam zdrowe ofiary przemocy, przysuwam chorujące nie-ofiary przemocy i w ten sposób mam przed sobą wszystkich chorujących w dwóch kawałkach, które w sumie stanowiły 10% dużego prostokąta. Najpierw oddzieliłem chorujących od innych ofiar przemocy, a potem połączyłem z resztą chorujących. Ponieważ reszta prostokąta mi zniknęła, pisanie o procentach może być mylące. Procent jest zawsze z czegoś i trzeba wiedzieć z czego, bo inaczej bardzo łatwo się pogubić. Wcześniej liczba 100% oznaczała cały prostokąt, a nowa figura to 10% całego prostokąta. Jaką część nowej figury stanowi moje 0.9%? Będzie to 0.9% w całości, która stanowi 10%, więc dzielę $\frac{0.9}{10} = 0.09 = 9\%$. To są już nowe procenty. Odcięty przeze mnie fragment stanowił 0.9% całego dużego prostokąta, ale 9% mojej nowej figury. Innymi słowy chorujące na tę chorobę ofiary przemocy to 0.9% wszystkich ludzi, ale już 9% wszystkich chorujących.
 
 To jest stała procedura, tzn. oddziel kawałek z jednej grupy, dołóż do reszty drugiej grupy i podziel pole kawałka przez łącze pole całości. Jeśli mam notację $P(A|B)$, czyli prawdopodobieństwo A, jeśli wiem, że B, to najpierw muszę ze wszystkich A oddzielić tych, którzy *jednocześnie* należą do B, a potem podzielić przez *wszystkich* należących do B. To, co na lewo od pionowej kreski, muszę pociąć i podzielić przez to, co na prawo. Muszę więc umieć policzyć, ile mam A, którzy jednocześnie należą do B (np. 30% z 3%) oraz ile łącznie mam B (np. 10%). Czasem wiemy od razu, ile łącznie jest B, ale czasem trzeba to policzyć. W końcu B też jest w dwóch kawałkach, chorujące ofiary policzyliśmy, a czasem trzeba wprost policzyć chorujące nie-ofiary i dodać. Na przykład jeśli zamiast tamtych danych dostałbym informację, że 5% ludzi bez doświadczenia przemocy choruje, to żeby dostać całość B musiałbym policzyć 5% z 97% (wszyscy minus ogólny odsetek ofiar) i dodać do 0.9%, które policzyłem wcześniej. Potnij co po lewej i podziel przez to, co po prawej. Pionowa kreska nawet może się skojarzyć z kreską ułamkową, a że jest nadziana na sztorc, to A się trochę rozedrze, jak na nią skoczy.
 
-Jak założymy, że ofiary przemocy to 3% populacji, to automatycznie ludzie chorujący na tę chorobę po przemocy to 30% z 3%, czyli $0.03 \times 0.30 = 0.009 = 0.9\%$ wszystkich ludzi. Nie obchodzą nas jednak wszyscy ludzie, tylko ludzie chorujący na tę chorobę, czyli – załóżmy – 10% całej populacji. Żeby więc wiedzieć, jaką część chorujących stanowią chorzy poprzemocowi, dzielę odsetek poprzemocowych przez wszystkich chorych, czyli moje 0.9% przez 10%. Dostaję $0.009 \div 0.1 = 0.09 = 9\%$. Wcześniej szacowaliśmy 3% prawdopodobieństwo, że pacjent jest ofiarą przemocy, a teraz mamy 9%. Ciągle nie jest to wielkie prawdopodobieństwo, ale wzrosło znacząco. Nasza pierwotna ocena, czyli że jest 3% szans na bycie ofiarą przemocy, to tzw. prawdopodobieństwo *a priori* (ang. *prior*), a nasza nowa ocena, czyli 9%, to tzw. prawdopodobieństwo *a posteriori* (ang. *posterior*).
+Nie ukrywam, że moje wyjaśnienie jest w dużej mierze inspirowane animowanym dowodem wykonanym przez świetnego YouTube'owego twórcę 3blue1brown. Zresztą mogę się inspirować, te wpisy to dla mnie głównie notatki do siebie. Jeśli to czytasz i nie jesteś mną, pozdrawiam. Jeśli jesteś mną, to też pozdrawiam. Tak czy inaczej, warto ten filmik obejrzeć, żeby rzeczywiście te kwadraty zobaczyć.
 
-Możemy też porównać względne ryzyko. 30% ofiar przemocy wykształca to zaburzenie. Jak policzyliśmy, to 0.9% populacji chorych to ofiary przemocy, czyli 9.1% chorych nie doświadczyło przemocy. Jaki jest więc odsetek ludzi, którzy nie doświadczyli przemocy, a choruje? Nie 9.1%, bo to znowu ten sam błąd co z praworęcznymi złodziejami. Ci ludzie to 9.1% wszystkich, a więc ofiar i nie-ofiar łącznie, a nie tylko nie-ofiar. Same nie-ofiary to 97% wszystkich, więc choruje $\frac{9.1}{97} = 9.38\%$ nie-ofiar. Choruje więc 30% ofiar i 9.38% nie-ofiar. Ryzyko wykształcenia choroby jest więc $BF = \frac{30}{9.38} \approx 3.2$ razy wyższe u ofiar niż u nie-ofiar. Nie-ofiary ciągle stanową znaczącą większość chorych, ale wynika to z faktu, że ofiar jest mało. Mniejsza grupa obarczona większym ryzykiem. Dlatego właśnie mimo tak większego ryzyka w tej grupie, prawdopodobieństwo ciągle jest względnie niskie.
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/HZGCoVF3YvM?si=rXxs7m7--FnDUri-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Bardzo łatwo jest zapomnieć, że mamy tutaj cztery podgrupy – zdrowe ofiary, chore ofiary, zdrowe nie-ofiary, chore nie-ofiary. Jak skupiamy się na samych chorych, to musimy pamiętać, że ogólne liczby dotyczą wszystkich, więc musimy je skalować, jak schodzimy poziom wyżej albo poziom niżej. Główna część tego twierdzenia to właśnie to przechodzenie z całości populacji do podgrupy i z podgrupy do całości. Dlatego najlepiej wyobrazić to sobie graficznie, jako kwadrat 1×1, gdzie jeden bok oznacza doświadczenie przemocy, a drugi wykształcenie choroby. Doświadczenie przemocy podzielone jest 97% do 3%, wykształcenie choroby 90% do 10%. Mając taką strukturę, łatwo możemy policzyć wielkość każdego mniejszego prostokąta, ale też nagle zacząć rozpatrywać tylko jakiś jego fragment i zamiast zadawać pytania o cały prostokąt, zadajemy pytania o dany fragment.
+# Aktualizowanie pewności
 
-Wybrałem ten przykład, bo wydaje mi się użyteczny w praktyce (plus naprawdę kiedyś to liczyłem dla podparcia swojego argumentu i wtedy zrozumiałem twierdzenie Bayesa), ale to twierdzenie pozwala nam odwrócić dowolne prawdopodobieństwo. Innym przykładem może być prawdopodobieństwo, że ktoś ma COVID, jeśli szybki test wykrywa chorobę u 70% chorych, ale daje wynik pozytywny też dla 0.5% zdrowych. Jeśli choruje 1%, to będzie to będziemy musieli podzielić odsetek populacji, u której test poprawnie by wykrył chorobę ($70\% \times 1\%$), przez odsetek wszystkich, u których da wynik pozytywny (chorzy z pozytywnym + zdrowi z pozytywnym, $70\% \times 1\% + 0.5\% \times 99\%$). Prawdopodobieństwo wyniosłoby więc $P(COVID | wynik dodatni) = \frac{0.007}{0.007 + 0.00495} \approx 59\%$. Oznacza to, że jeśli miało się wynik pozytywny, to było 59% prawdopodobieństwa, że rzeczywiście było się chorym. Z drugiej strony jak widzimy wynik ujemny, to prawdopodobieństwo bycia chorym spada do $P(COVID | wynik negatywny) = \frac{0.3 \times 0.01}{0.3 \times 0.01 + 0.995 \times 0.99} \approx 0.3\%$.
+Początkowo uznaliśmy więc, że ryzyko, że nasz pacjent rzeczywiście jest ofiarą przemocy, wynosi 3%. Był to nasz najlepszy strzał, bo tyle wynosi odsetek ofiar przemocy w populacji (a przynajmniej tak wymyśliłem do zadania). Innymi słowy szansa wyniosła 3:97 – 3 ofiary przemocy na każde 97 osób, które miały szczęście nimi nie być. Matematycznie *szansa* to właśnie stosunek prawdopodobieństwa prawdy do fałszu, wyników pozytywnych do negatywnych itd. Mówi nam, jak bardziej lub mniej prawdopodobny jest wynik pozytywny od negatywnego (jakkolwiek je zdefiniujemy). Nasze 3% nazwiemy prawdopodobieństwem *a priori* (ang. *prior*).
+
+Trzeba zwrócić uwagę, że licznik w naszym równaniu, tj. ten pocięty pasek prawdopodobieństwa, liczymy poprzez przemnożenie tego ogólnego prawdopodobieństwa *a priori* ($P(A)$) przez odsetek A spełniający warunek B ($P(B|A)$). Że całe $P(B)$ (czyli wszyscy spełniający warunek B, a więc suma spełniających warunek A i niespełniających warunku A, dodane pocięte kawałki) wynosi mniej niż 100% (w naszym przykładzie 10%), to ciężko mówić o prawdopodobieństwie, bo ono musi sumować się do 100%, jeśli wyczerpuje wszystkie możliwości (a tutaj wyczerpuje). Dlatego dzielimy nasz iloczyn przez $P(B)$ i mamy prawdopodobieństwo.
+
+Wynikiem tego działania było u nas 9% – tak powinniśmy szacować prawdopodobieństwo, że nasz pacjent był ofiarą przemocy, jeśli wiemy, że wykazuje to szczególne zaburzenie. To zaktualizowane oszacowanie nazywamy prawdopodobieństwem *a posteriori*(ang. *posterior*). Dane zmuszają nas do aktualizacji naszego oszacowania. Innymi słowy, szanse wzrastają z 3:97 do 9:91 (0,031 do 0,099).
+
+# Czynnik Bayesa
+
+Możemy też porównać względne ryzyko. 30% ofiar przemocy wykształca to zaburzenie, a w całej populacji dotyka ono 10%. Cała populacja to zarówno ofiary, jak i nie-ofiary. Możemy policzyć, jaką u jakiej części nie-ofiar pojawia się to zaburzenie. Nie-ofiary stanowią 97% całej populacji i 91% populacji cierpiących na to zaburzenie (bo 9% to ofiary). Także odłączam grupę chorujących nie-ofiar od grupy wszystkich chorujących ($10\% \times 91\% = 9.1\%$) i liczę, jaka to część wszystkich nie-ofiar ($\frac{9.1}{97} = 9.4\%$).
+
+Czyli ofiary przemocy mają 30% ryzyka, że wykształcą to zaburzenie, a osoby, które nie doświadczyły przemocy, zaledwie 9.4%. Czyli procentowe ryzyko jest u ofiar przemocy $K = \frac{30}{9.4} = 3.19$ razy większe niż u nie-ofiar. Porównajmy też, ile razy wzrastają szanse, w momencie postawienia diagnozy – nie prawdopodobieństwo, a szanse. Jak pisałem wyżej, szanse wzrastają wtedy z 3:97 do 9:91, a więc $K = \frac{9:91}{3:97} \approx 3.19$. Ten sam wynik nie jest przypadkowy – stosunek szans *a posteriori* do *a priori* będzie taki sam, jak iloraz ryzyk między tymi grupami. Liczba ta nazywa się **czynnikiem Bayesa** (*Bayes factor*).
+
+Obie perspektywy pozwalają nam znaleźć nasz $BF$, a jest on o tyle użyteczny, że występuje zależność *a priori* × BF = *a posteriori* (skoro $BF = \frac{\text{szanse a posteriori}}{\text{szanse a priori}}$). Czynnik Bayesa pokazuje potencjalnie ważny efekt, ale nie należy go mylić z prawdopodobieństwem *a posteriori* – w momencie, kiedy postawiliśmy diagnozę, nasze oszacowanie szansy wzrosło ponad trzykrotnie, ale prawdopodobieństwo ciągle wynosi 9%. Wynika to z faktu, że bycie ofiarą jest rzadkie samo z siebie. Ostatecznie więc możemy wskazać na dwa równoważne wzory na BF:
+
+$$
+BF = \frac{\text{szanse a posteriori}}{\text{szanse a priori}}
+$$
+oraz
+
+$$
+BF = \frac{P(B|A)}{P(B|\lnot A)}
+$$
+
+gdzie B to choroba, a A to bycie ofiarą przemocy.Dowód na równoważność tych wzorów poniżej.
+
+::: {.callout-note collapse="true" title="Dowód: aktualizacja szans za pomocą ilorazu wiarygodności"}
+
+Niech $(A)$ oznacza rozważane zdarzenie lub hipotezę, a $(B)$ zaobserwowaną informację.
+
+Prawdopodobieństwo zdarzenia zapisujemy jako $(P(A))$, natomiast jego **szanse** definiujemy jako:
+
+$$
+\operatorname{odds}(A)
+:=
+\frac{P(A)}{P(\neg A)}.
+$$
+
+Analogicznie szanse a posteriori, czyli szanse zdarzenia $(A)$ po zaobserwowaniu $(B)$, wynoszą:
+
+$$
+\operatorname{odds}(A \mid B)
+:=
+\frac{P(A \mid B)}{P(\neg A \mid B)}.
+$$
+
+Z twierdzenia Bayesa:
+
+$$
+P(A \mid B)
+=
+\frac{P(B \mid A)P(A)}{P(B)}.
+$$
+
+Analogicznie dla zdarzenia przeciwnego:
+
+$$
+P(\neg A \mid B)
+=
+\frac{P(B \mid \neg A)P(\neg A)}{P(B)}.
+$$
+
+Dzieląc pierwsze równanie przez drugie, otrzymujemy:
+
+$$
+\frac{P(A \mid B)}
+     {P(\neg A \mid B)}
+=
+\frac{
+  \dfrac{P(B \mid A)P(A)}{P(B)}
+}{
+  \dfrac{P(B \mid \neg A)P(\neg A)}{P(B)}
+}.
+$$
+
+Po skróceniu wspólnego czynnika $(P(B))$:
+
+$$
+\frac{P(A \mid B)}
+     {P(\neg A \mid B)}
+=
+\frac{P(B \mid A)P(A)}
+     {P(B \mid \neg A)P(\neg A)}.
+$$
+
+Rozdzielamy iloczyny:
+
+$$
+\frac{P(A \mid B)}
+     {P(\neg A \mid B)}
+=
+\frac{P(A)}
+     {P(\neg A)}
+\cdot
+\frac{P(B \mid A)}
+     {P(B \mid \neg A)}.
+$$
+
+Korzystając z definicji szans, dostajemy:
+
+$$
+\operatorname{odds}(A \mid B)
+=
+\operatorname{odds}(A)
+\cdot
+\frac{P(B \mid A)}
+     {P(B \mid \neg A)}.
+$$
+
+Po podzieleniu obu stron przez $(\operatorname{odds}(A))$:
+
+$$
+\boxed{
+\frac{\operatorname{odds}(A \mid B)}
+     {\operatorname{odds}(A)}
+=
+\frac{P(B \mid A)}
+     {P(B \mid \neg A)}
+}
+$$
+
+Oznacza to, że stosunek szans a posteriori do szans a priori jest równy ilorazowi wiarygodności informacji $(B)$ przy założeniu $(A)$ i $(\neg A)$.
+:::
+
+# Bayesowskie porównywanie hipotez
+
+Ten stosunek ma zaskakująco duże możliwości, jeśli uznamy go za rodzaj **porównania hipotez**. Co mam na myśli? Zaobserwowaliśmy, że nasz pacjent cierpi na to konkretne zaburzenie. Możemy postawić dwie hipotezy:
+
+$$
+H_0: \text{Pacjent nie był ofiarą przemocy} \\
+H_1: \text{Pacjent był ofiarą przemocy}
+$$
+
+Pytanie brzmi – która z tych hipotez **lepiej przewiduje dane**? W każdej z tych hipotez jest zaszyte prawdopodobieństwo choroby. Choroba wystąpiła. Która z tych hipotez bardziej pasuje do naszych obserwacji? Jak bardzo lepiej? To jest zupełnie inna logika testowania hipotez niż w klasycznej statystyce. Klasyczna statystyka zakłada, że istnieje jakaś prawdziwa wartość parametru, a dane, które otrzymaliśmy, to zaszumione odbicie tej prawdziwej wartości. Jak to napisałem, przyszło mi do głowy określenie „statystyka platońska”. W perspektywie bayesowskiej to dane są prawdziwe (w końcu się wydarzyły!), a różne wartości parametrów (tj. różne hipotezy) mają konkurować, która najlepiej je wyjaśnia. Która z tych hipotez daje większe prawdopodobieństwo uzyskania dokładnie takich danych?
+
+$$
+BF_{10} = \frac{P(B|H_1)}{P(B|H_0)}
+$$
+
+Ponieważ $H_1$ to u nas po prostu bycie ofiarą, czyli $A$, a $H_0$ to niebycie ofiarą, czyli $\neg A$, to jest to po prostu czynnik Bayesa! Piszemy $BF_{10}$ bo porównujemy $H_1$ względem $H_0$. Ponieważ w naszym przykładzie $BF \approx 3.2$, to porównanie tych dwóch hipotez wskazuje, że nasze dane są ponad trzykrotnie bardziej prawdopodobne przy $H_1$ niż przy $H_0$.
+
+Nie należy się jednak spieszyć z przyjmowaniem takiej hipotezy. I tak, piszę o przyjmowaniu, bo statystyka bayesowska pozwala nam rzeczywiście przyjąć hipotezę alternatywną zamiast tylko odrzucać hipotezę zerową. Mimo że nasza hipoteza alternatywna przewiduje dane ponad trzykrotnie lepiej, to trzeba wziąć pod uwagę, że wyjściowe prawdopodobieństwo bycia ofiarą przemocy wynosi w naszym zadaniu 3%. Jest to zjawisko ciągle stosunkowo rzadkie. Zastosowanie tego czynnika pozwala nam oszacować rzeczywiste prawdopodobieństwo, że pacjent jest ofiarą – liczyliśmy je wyżej i wynosi 9%. Najważniejszym źródłem dla naszych decyzji jest właśnie ta liczba – prawdopodobieństwo *a posteriori*. 9% że jest ofiarą do 91%, że nią nie jest. Kiedy więc bierzemy pod uwagę prawdopodobieństwo *a priori*, hipoteza, że pacjent nie jest ofiarą przemocy, jest ciągle 10 razy bardziej prawdopodobna.
+
+Jednak czynnik Bayesa ma tę przyjemną właściwość, że nawet jak się okaże, że odsetek ofiar przemocy jest w społeczeństwie inny niż zakładaliśmy (wyższy albo niższy), to dopóki ryzyko zachorowania u ofiar będzie 30% a u nie-ofiar 9.4%, wartość BF się nie zmieni. Innymi słowy prawdopodobieństwo *a priori* może zostać zaktualizowane, ale szanse *a posteriori* to ciągle szanse *a priori* × BF. Prawdopodobieństwo *a priori* może zmienić się nie tylko dlatego, że zaktualizuje się oszacowanie powszechności przemocy w populacji. Nasze wstępne oszacowanie dla tego pacjenta może się zmienić też dlatego, że zbieramy różne poszlaki na temat tej konkretnej osoby. Dla tego pacjenta możemy szacować prawdopodobieństwo bycia ofiarą przemocy na wejściu nawet na 10%, na podstawie naszego doświadczenia. Przy takim oszacowaniu szanse *a posteriori* wyniosą $\frac{1}{9} \times 3.2 = \frac{16}{45}$, a więc prawdopodobieństwo wyniesie $P(A|B) = \frac{16}{45 + 16} \approx 26%$.
+
+W ten sposób dowody za i przeciw kumulują się, by dostarczyć nam sensownego oszacowanie ryzyka. W tym prostym przykładzie można to prawdopodobieństwo policzyć na kartce, ale przy prawdziwych hipotezach badawczych, gdzie możemy mieć ciągłe rozkłady, wiele parametrów itd. sposób liczenia prawdopodobieństwa *a posteriori* szybko robi się bardziej skomplikowany, chociaż jego logika jest taka sama.
+
+Powinniśmy więc taką hipotezę przyjąć czy odrzucić? Piękno statystyki bayesowskiej na tym polega dostaliśmy nasze prawdopodobieństwo – 9%. Mnie taki poziom pewności nie satysfakcjonuje, ale każe zachować ostrożność. Koszty pomyłki mogą być bowiem bardzo duże. Jeśli uda nam się je skwantyfikować, możemy je włączyć do równania i wziąć matematycznie ująć to, że preferujemy konkretny rodzaj błędu, bo wiąże się z mniejszymi kosztami. Ostatecznie prawdopodobieństwo *a posteriori* mocno zależy od prawdopodobieństwa *a priori*, ale istnieją zgrubne reguły interpretowania BF samego w sobie, jako siły argumentu. Im większa siła argumentu, tym większy sceptycyzm pokona. I odwrotnie, im większy sceptycyzm, tym silniejszych dowodów potrzeba. W tabelce klasyczne reguły interpretacji BF wg Jeffreys'a, które jednak trzeba traktować bardzo zgrubnie, bo to jednak modyfikator prawdopodobieństwa *a priori*.
+
+```{r}
+#| echo: false
+
+tibble::tribble(
+  ~"BF"    , ~"Interpretacja"                            ,
+  "< 1"    , "Odwróć ułamek i sprawdź jeszcze raz"       ,
+  "1"      , "Brak dowodów, posterior wygląda jak prior" ,
+  "1-3"    , "Dowody słabe, anegdotyczne"                ,
+  "3-10"   , "Dowody umiarkowane"                        ,
+  "10-30"  , "Dowody silne"                              ,
+  "30-100" , "Dowody bardzo silne"                       ,
+  "> 100"  , "Dowody ekstremalnie silne"
+) |>
+  knitr::kable()
+```
+
+# Przyjęcie hipotezy zerowej
+
+Statystyka bayesowska pozwala na jeszcze jedną rzecz, która w klasycznej statystyce jest niemożliwa, a której często bardzo potrzebujemy, więc udajemy, że da się to zrobić na podstawie wartości *p*. Statystyka bayesowska pozwala nam przyjąć hipotezę zerową. Nie jej nie odrzucać, tylko rzeczywiście ją przyjąć.
+
+Widziałem już plakaty czy wystąpienia, gdzie badacz uzyskał coś w rodzaju $p = 0.625$ i interpretował to tak, jakby było 62.5% szans, że hipoteza zerowa jest prawdziwa. W końcu nie mogę jej odrzucić, więc uznaję, że efektu nie ma! Dokładnie tego samego uczymy studentów, jak pokazujemy im testy normalności rozkładu, mieszając im przy okazji mocno w głowach. Mówimy im wtedy „Jeśli macie $p > 0.05$, to zakładacie, że mamy normalność”, a potem kiedy interpretują już swoje właściwe wyniki, tłuczemy im do głów, że hipotezy zerowej nie da się przyjąć. Gdzie *de facto* przecież to tutaj robimy, jak udajemy, że $p > 0.05$ to dowód na rzecz normalności. Ba, jak wychodzi $p = 0.06$, czyli tylko 6%  szans, że pod hipotezą zerową powstałyby takie dane, to jeśli to test normalności, to mówimy im „nie odrzucamy hipotezy zerowej, zakładamy więc normalność” (znowu – przecież tak nie wolno!), a jak takie samo $p$ wyjdzie im w regresji, to mówimy im, żeby pisali, że wyniki są „istotne na poziomie trendu” i pisali dyskusję tak, jakby były prawdziwe, tylko użyli ostrożniejszego ryzyka. A jaka jest szansa, że ten wynik jest prawdziwy? Jak wypada hipoteza alternatywna na tle zerowej? Nie wiemy, nie liczymy tego, a moglibyśmy, jakbyśmy ustalili sensowny *prior* i wyliczyli BF.
+
+Jak działa przyjmowanie hipotezy zerowej? Tak samo jak przyjmowanie hipotezy alternatywnej. Jeśli $BF_{10}$ ma wartość mniejszą od 1, to ją odwracamy. Dostajemy wtedy $BF_{01}$ czyli miarę, ile razy bardziej prawdopodobne są nasze dane pod $H_0$ w porównaniu do $H_1$. Potem wyliczamy prawdopodobieństwo *a posteriori* i interpretujemy. Zobaczymy to w kolejnym przykładzie.
+
+# Drugi przykład i zadania
+
+Wybrałem powyższy przykład z powikłaniami po doświadczeniu przemocy, bo wydaje mi się dobrze pokazywać, że nawet taka dość abstrakcyjna na pierwszy rzut oka matematyka może mieć praktyczne zastosowanie w pracy psychologa nie tylko naukowca. Plus naprawdę kiedyś liczyłem dokładnie takie zadanie dla podparcia swojego argumentu i wtedy zrozumiałem twierdzenie Bayesa. Co zabawne, prawdopodobieństwo *a posteriori* uparcie wychodziło mi w okolicach 150%. Rzecz niemożliwa, więc 15 razy sprawdzałem czy na pewno nie pomieszałem procentów, oznaczeń i wszystkich innych elementów. Potem dopiero się zorientowałem, że według sprawdzanych przeze mnie danych, osób wykształcających zaburzenie po przemocy jest więcej niż wszystkich osób z tym zaburzeniem łącznie. Kiedy już go zrozumiałem, bardzo mnie ten wniosek ucieszył, bo pozwolił mi elegancko podważyć te dane. Mogłem powiedzieć, że jeśli te dane byłyby prawdziwe, to w populacji musiałoby być znacznie więcej osób z tym zaburzeniem, niż jest w rzeczywistości. Dziś pewnie potraktowałbym te dane jak hipotezę i próbował liczbowo wyrazić, jak bardzo jest nieprawdopodobna. Teraz przejdźmy do innego przykładu.
+
+Innym przykładem może być prawdopodobieństwo, że ktoś ma COVID, jeśli szybki test wykrywa chorobę u 70% chorych, ale daje wynik pozytywny też dla 0.5% zdrowych. Jeśli choruje 1%, to będzie to będziemy musieli podzielić odsetek populacji, u której test poprawnie by wykrył chorobę ($70\% \times 1\%$), przez odsetek wszystkich, u których da wynik pozytywny (chorzy z pozytywnym + zdrowi z pozytywnym, $70\% \times 1\% + 0.5\% \times 99\%$). Prawdopodobieństwo wyniosłoby więc $P(COVID | wynik dodatni) = \frac{0.007}{0.007 + 0.00495} \approx 59\%$. Oznacza to, że jeśli miało się wynik pozytywny, to było 59% prawdopodobieństwa, że rzeczywiście było się chorym. Z drugiej strony jak widzimy wynik ujemny, to prawdopodobieństwo bycia chorym spada do $P(COVID | wynik negatywny) = \frac{0.3 \times 0.01}{0.3 \times 0.01 + 0.995 \times 0.99} \approx 0.3\%$.
 
 Jak widzieliśmy wynik pozytywny, szanse, że jest się chorym (przy naszych zaokrągleniach), wzrastały $BF = \frac{59:41}{1:99} \approx 142$ razy! Najpierw było znacznie bardziej prawdopodobne, że jesteśmy zdrowi (1 do 99), a potem trend się odwrócił i zakażenie było wręcz bardziej prawdopodobne od bycia zdrowym (59 do 41). Z kolei jak widziało się wynik negatywny, szansa na bycie chorym „wzrosła $BF = \frac{3:997}{1:100} \approx 0.3$-krotnie”, co dziwnie brzmi przy ułamkach mniejszych od 1, więc zastosować odwrotność – nie „wzorsła”, a spadła $\frac{1}{0.3} \approx 3.33$-krotnie!
