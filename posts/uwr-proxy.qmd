@@ -19,9 +19,9 @@ Po pierwsze rzeczywiście trzeba wypełnić formularz na [stronie Biblioteki UWr
 
 Po drugie, instalujemy odpowiedni dodatek do przeglądarki. Pozwoli nam on automatycznie przełączać się na proxy na tych stronach, na których może to dać nam rozszerzony dostęp (w tym IBUK Libra). Konkretnie zastosujemy dodatek, który nazywa się SwitchyOmega 3 (ZeroOmega). Ta trójka jest ważna, bo wiele przeglądarek ma na stronach z rozszerzeniami starą wersję, bez trójki, która nie działa. Poniżej linki do wersji dla najpopularniejszych przeglądarek:
 
--   **Chrome/Edge/Opera/inne na Chromium:** <https://chromewebstore.google.com/detail/pfnededegaaopdmhkdmcofjmoldfiped>
--   **Firefox:** <https://addons.mozilla.org/pl/firefox/addon/zeroomega/>
--   **Safari:** nie mam pojęcia, jak tego nawet szukać, ale pewnie jest (jak nie, to dość łatwo użyć innego analoicznego dodatku)
+- **Chrome/Edge/Opera/inne na Chromium:** <https://chromewebstore.google.com/detail/pfnededegaaopdmhkdmcofjmoldfiped>
+- **Firefox:** <https://addons.mozilla.org/pl/firefox/addon/zeroomega/>
+- **Safari:** nie mam pojęcia, jak tego nawet szukać, ale pewnie jest (jak nie, to dość łatwo użyć innego analoicznego dodatku)
 
 Po trzecie, wchodzimy w ustawienia dodatku, w zakładkę Import/Export. Tam w pole „Restore from online” wklejamy poniższy link i klikamy przycisk Restore.
 
