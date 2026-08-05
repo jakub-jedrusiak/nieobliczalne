@@ -1,2 +1,2555 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"></html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jakub Jędrusiak">
+<meta name="description" content="Wyobraźmy sobie, że przychodzi do naszego gabinetu pacjent. Przeprowadzamy wywiad, stawiamy diagnozę i przypominamy sobie, że niedawno czytaliśmy niepokojącą statystykę – 30% ofiar przemocy wykształca to właśnie zaburzenie, podczas gdy w całej populacji występuje ono tylko u 10% ludzi. Czy należy przeprowadzić wywiad w tym kierunku? Jaka jest szansa, że pacjent rzeczywiście jest ofiarą przemocy? Chciałoby się&nbsp;powiedzieć, że jest 30% szans, ale jeśli tak by było, to z faktu, że 95% złodziei jest praworęczna, wynikałoby, że 95% praworęcznych to złodzieje. Jeśli chcemy „odwrócić prawdopodobieństwo” i wnioskować o doświadczeniu przemocy na podstawie diagnozy, musimy zastosować twierdzenie Bayesa.">
+
+<title>Twierdzenie Bayesa i bayesowskie porównywanie hipotez – Nieobliczalne</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href=".././styles/logo.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8acf395fcf900b3fafc8ab677c82ba48.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-863296abb59a81e9bcc0d4e9e69bb4ce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-8acf395fcf900b3fafc8ab677c82ba48.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Brak wyników",
+    "search-matching-documents-text": "dopasowane dokumenty",
+    "search-copy-link-title": "Kopiuj link do wyszukiwania",
+    "search-hide-matches-text": "Ukryj dodatkowe dopasowania",
+    "search-more-match-text": "więcej dopasowań w tym dokumencie",
+    "search-more-matches-text": "więcej dopasowań w tym dokumencie",
+    "search-clear-button-title": "Wyczyść",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Anuluj",
+    "search-submit-button-title": "Zatwierdź",
+    "search-label": "Szukaj"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-FKTMH2V23V"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-FKTMH2V23V', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"headline",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"pl"
+  });
+});
+</script> 
+  
+<script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3239011499449859" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/cascadia-code">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles/styles.css">
+<meta property="og:title" content="Twierdzenie Bayesa i bayesowskie porównywanie hipotez – Nieobliczalne">
+<meta property="og:description" content="Wyobraźmy sobie, że przychodzi do naszego gabinetu pacjent. Przeprowadzamy wywiad, stawiamy diagnozę i przypominamy sobie, że niedawno czytaliśmy niepokojącą statystykę – 30% ofiar przemocy wykształca to właśnie zaburzenie, podczas gdy w całej populacji występuje ono tylko u 10% ludzi. Czy należy przeprowadzić wywiad w tym kierunku? Jaka jest szansa, że pacjent rzeczywiście jest ofiarą przemocy? Chciałoby się&nbsp;powiedzieć, że jest 30% szans, ale jeśli tak by było, to z faktu, że 95% złodziei jest praworęczna, wynikałoby, że 95% praworęcznych to złodzieje. Jeśli chcemy „odwrócić prawdopodobieństwo” i wnioskować o doświadczeniu przemocy na podstawie diagnozy, musimy zastosować twierdzenie Bayesa.">
+<meta property="og:image" content="https://nieobliczalne.pl/posts/headers/twierdzenie-bayesa.webp">
+<meta property="og:site_name" content="Nieobliczalne">
+<meta name="twitter:title" content="Twierdzenie Bayesa i bayesowskie porównywanie hipotez – Nieobliczalne">
+<meta name="twitter:description" content="Wyobraźmy sobie, że przychodzi do naszego gabinetu pacjent. Przeprowadzamy wywiad, stawiamy diagnozę i przypominamy sobie, że niedawno czytaliśmy niepokojącą statystykę – 30% ofiar przemocy wykształca to właśnie zaburzenie, podczas gdy w całej populacji występuje ono tylko u 10% ludzi. Czy należy przeprowadzić wywiad w tym kierunku? Jaka jest szansa, że pacjent rzeczywiście jest ofiarą przemocy? Chciałoby się&nbsp;powiedzieć, że jest 30% szans, ale jeśli tak by było, to z faktu, że 95% złodziei jest praworęczna, wynikałoby, że 95% praworęcznych to złodzieje. Jeśli chcemy „odwrócić prawdopodobieństwo” i wnioskować o doświadczeniu przemocy na podstawie diagnozy, musimy zastosować twierdzenie Bayesa.">
+<meta name="twitter:image" content="https://nieobliczalne.pl/headers/twierdzenie-bayesa.jpeg">
+<meta name="twitter:creator" content="@jakub_jedrusiak">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src=".././styles/logo.png" alt="" class="navbar-logo light-content">
+    <img src=".././styles/logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Nieobliczalne</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Szukaj"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Przełącz nawigację" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Strona główna</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../toc.html"> 
+<span class="menu-text">Spis treści</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../newsletter.html"> 
+<span class="menu-text">Subskrybuj</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">O mnie</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="../index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Na tej stronie</h2>
+   
+  <ul>
+  <li><a href="#szacowanie-prawdopodobieństwa" id="toc-szacowanie-prawdopodobieństwa" class="nav-link active" data-scroll-target="#szacowanie-prawdopodobieństwa"><span class="header-section-number">1</span> Szacowanie prawdopodobieństwa</a></li>
+  <li><a href="#aktualizowanie-pewności" id="toc-aktualizowanie-pewności" class="nav-link" data-scroll-target="#aktualizowanie-pewności"><span class="header-section-number">2</span> Aktualizowanie pewności</a></li>
+  <li><a href="#czynnik-bayesa" id="toc-czynnik-bayesa" class="nav-link" data-scroll-target="#czynnik-bayesa"><span class="header-section-number">3</span> Czynnik Bayesa</a></li>
+  <li><a href="#bayesowskie-porównywanie-hipotez" id="toc-bayesowskie-porównywanie-hipotez" class="nav-link" data-scroll-target="#bayesowskie-porównywanie-hipotez"><span class="header-section-number">4</span> Bayesowskie porównywanie hipotez</a></li>
+  <li><a href="#przyjęcie-hipotezy-zerowej" id="toc-przyjęcie-hipotezy-zerowej" class="nav-link" data-scroll-target="#przyjęcie-hipotezy-zerowej"><span class="header-section-number">5</span> Przyjęcie hipotezy zerowej</a></li>
+  <li><a href="#drugi-przykład" id="toc-drugi-przykład" class="nav-link" data-scroll-target="#drugi-przykład"><span class="header-section-number">6</span> Drugi przykład</a>
+  <ul class="collapse">
+  <li><a href="#adam-wynik-pozytywny" id="toc-adam-wynik-pozytywny" class="nav-link" data-scroll-target="#adam-wynik-pozytywny"><span class="header-section-number">6.1</span> Adam – wynik pozytywny</a>
+  <ul class="collapse">
+  <li><a href="#metoda-1-z-twierdzenia-bayesa" id="toc-metoda-1-z-twierdzenia-bayesa" class="nav-link" data-scroll-target="#metoda-1-z-twierdzenia-bayesa"><span class="header-section-number">6.1.1</span> Metoda 1: z twierdzenia Bayesa</a></li>
+  <li><a href="#metoda-2-bf-i-a-posteriori-przez-bf" id="toc-metoda-2-bf-i-a-posteriori-przez-bf" class="nav-link" data-scroll-target="#metoda-2-bf-i-a-posteriori-przez-bf"><span class="header-section-number">6.1.2</span> Metoda 2: BF i <em>a posteriori</em> przez BF</a></li>
+  </ul></li>
+  <li><a href="#ewa-wynik-negatywny" id="toc-ewa-wynik-negatywny" class="nav-link" data-scroll-target="#ewa-wynik-negatywny"><span class="header-section-number">6.2</span> Ewa – wynik negatywny</a>
+  <ul class="collapse">
+  <li><a href="#metoda-1-twierdzenie-bayesa" id="toc-metoda-1-twierdzenie-bayesa" class="nav-link" data-scroll-target="#metoda-1-twierdzenie-bayesa"><span class="header-section-number">6.2.1</span> Metoda 1: twierdzenie Bayesa</a></li>
+  <li><a href="#metoda-2-bf-i-a-posteriori-przez-bf-1" id="toc-metoda-2-bf-i-a-posteriori-przez-bf-1" class="nav-link" data-scroll-target="#metoda-2-bf-i-a-posteriori-przez-bf-1"><span class="header-section-number">6.2.2</span> Metoda 2: BF i <em>a posteriori</em> przez BF</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#aktualizacja-priorów" id="toc-aktualizacja-priorów" class="nav-link" data-scroll-target="#aktualizacja-priorów"><span class="header-section-number">7</span> Aktualizacja priorów</a></li>
+  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">8</span> Podsumowanie</a></li>
+  <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania"><span class="header-section-number">9</span> Zadania</a>
+  <ul class="collapse">
+  <li><a href="#zadanie-1a." id="toc-zadanie-1a." class="nav-link" data-scroll-target="#zadanie-1a."><span class="header-section-number">9.1</span> Zadanie 1a.</a></li>
+  <li><a href="#zadanie-1b." id="toc-zadanie-1b." class="nav-link" data-scroll-target="#zadanie-1b."><span class="header-section-number">9.2</span> Zadanie 1b.</a></li>
+  <li><a href="#zadanie-1c." id="toc-zadanie-1c." class="nav-link" data-scroll-target="#zadanie-1c."><span class="header-section-number">9.3</span> Zadanie 1c*.</a></li>
+  <li><a href="#zadanie-2a." id="toc-zadanie-2a." class="nav-link" data-scroll-target="#zadanie-2a."><span class="header-section-number">9.4</span> Zadanie 2a.</a></li>
+  <li><a href="#zadanie-2b." id="toc-zadanie-2b." class="nav-link" data-scroll-target="#zadanie-2b."><span class="header-section-number">9.5</span> Zadanie 2b.</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/twierdzenie-bayesa.qmd" class="toc-action"><i class="bi bi-github"></i>Edytuj tę stronę</a></li><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action"><i class="bi empty"></i>Zgłoś problem</a></li></ul></div></nav>
+    <div class="quarto-margin-footer"><div class="margin-footer-item">
+<style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
+    <style type="text/css">
+    /* LOADER */
+    .ml-form-embedSubmitLoad {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+    }
+
+    .g-recaptcha {
+    transform: scale(0.53);
+    -webkit-transform: scale(0.53);
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    height: 42px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+
+    .ml-form-embedSubmitLoad:after {
+      content: " ";
+      display: block;
+      width: 11px;
+      height: 11px;
+      margin: 1px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+    border-color: #ffffff #ffffff #ffffff transparent;
+    animation: ml-form-embedSubmitLoad 1.2s linear infinite;
+    }
+    @keyframes ml-form-embedSubmitLoad {
+      0% {
+      transform: rotate(0deg);
+      }
+      100% {
+      transform: rotate(360deg);
+      }
+    }
+      #mlb2-5266475.ml-form-embedContainer {
+        box-sizing: border-box;
+        display: table;
+        margin: 0 auto;
+        position: static;
+        width: 100% !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer h4,
+      #mlb2-5266475.ml-form-embedContainer p,
+      #mlb2-5266475.ml-form-embedContainer span,
+      #mlb2-5266475.ml-form-embedContainer button {
+        text-transform: none !important;
+        letter-spacing: normal !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper {
+        background-color: #6E6E6E;
+        
+        border-width: 0px;
+        border-color: transparent;
+        border-radius: 10px;
+        border-style: solid;
+        box-sizing: border-box;
+        display: inline-block !important;
+        margin: 0;
+        padding: 0;
+        position: relative;
+              }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper.embedPopup,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper.embedDefault { width: 200px; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper.embedForm { max-width: 200px; width: 100%; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-align-left { text-align: left; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-align-center { text-align: center; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-align-default { display: table-cell !important; vertical-align: middle !important; text-align: center !important; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-align-right { text-align: right; }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedHeader img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        height: auto;
+        margin: 0 auto !important;
+        max-width: 100%;
+        width: undefinedpx;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody {
+        padding: 20px 20px 0 20px;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody.ml-form-embedBodyHorizontal {
+        padding-bottom: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent {
+        text-align: left;
+        margin: 0 0 20px 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent h4,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent h4 {
+        color: #ffffff;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        font-weight: 400;
+        margin: 0 0 10px 0;
+        text-align: left;
+        word-break: break-word;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p {
+        color: #ffffff;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        margin: 0 0 10px 0;
+        text-align: left;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ul,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ul,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol {
+        color: #ffffff;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol ol,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol ol {
+        list-style-type: lower-alpha;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol ol ol,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol ol ol {
+        list-style-type: lower-roman;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p a,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p a {
+        color: #000000;
+        text-decoration: underline;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group {
+        text-align: left!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group label {
+        margin-bottom: 5px;
+        color: #333333;
+        font-size: 14px;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-weight: bold; font-style: normal; text-decoration: none;;
+        display: inline-block;
+        line-height: 20px;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p:last-child,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p:last-child {
+        margin: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form {
+        margin: 0;
+        width: 100%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
+        margin: 0 0 20px 0;
+        width: 100%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
+        float: left;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent.horozintalForm {
+        margin: 0;
+        padding: 0 0 20px 0;
+        width: 100%;
+        height: auto;
+        float: left;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow {
+        margin: 0 0 10px 0;
+        width: 100%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-last-item {
+        margin: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-formfieldHorizintal {
+        margin: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input {
+        background-color: #ffffff !important;
+        color: #333333 !important;
+        border-color: #cccccc;
+        border-radius: 4px !important;
+        border-style: solid !important;
+        border-width: 1px !important;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px !important;
+        height: auto;
+        line-height: 21px !important;
+        margin-bottom: 0;
+        margin-top: 0;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 10px 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-webkit-input-placeholder,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::-webkit-input-placeholder { color: #333333; }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-moz-placeholder,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::-moz-placeholder { color: #333333; }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-ms-input-placeholder,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input:-ms-input-placeholder { color: #333333; }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-moz-placeholder,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input:-moz-placeholder { color: #333333; }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow textarea, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow textarea {
+        background-color: #ffffff !important;
+        color: #333333 !important;
+        border-color: #cccccc;
+        border-radius: 4px !important;
+        border-style: solid !important;
+        border-width: 1px !important;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px !important;
+        height: auto;
+        line-height: 21px !important;
+        margin-bottom: 0;
+        margin-top: 0;
+        padding: 10px 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
+          border-color: #cccccc!important;
+          background-color: #ffffff!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input.custom-control-input[type="checkbox"]{
+        box-sizing: border-box;
+        padding: 0;
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+        margin-top: 5px;
+        margin-left: -1.5rem;
+        overflow: visible;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
+        border-radius: 4px!important;
+      }
+
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox input[type=checkbox]:checked~.label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked~.custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input:checked~.custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked~.label-description::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input:checked~.custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox input[type=checkbox]:checked~.label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked~.label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::before  {
+          border-color: #000000!important;
+          background-color: #000000!important;
+          color: #ffffff!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::after {
+           top: 2px;
+           box-sizing: border-box;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+           top: 0px!important;
+           box-sizing: border-box!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+        top: 0px!important;
+           box-sizing: border-box!important;
+      }
+
+       #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::after {
+            top: 0px!important;
+            box-sizing: border-box!important;
+            position: absolute;
+            left: -1.5rem;
+            display: block;
+            width: 1rem;
+            height: 1rem;
+            content: "";
+       }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before {
+        top: 0px!important;
+        box-sizing: border-box!important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-control-label::before {
+          position: absolute;
+          top: 4px;
+          left: -1.5rem;
+          display: block;
+          width: 16px;
+          height: 16px;
+          pointer-events: none;
+          content: "";
+          background-color: #ffffff;
+          border: #adb5bd solid 1px;
+          border-radius: 50%;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-control-label::after {
+          position: absolute;
+          top: 2px!important;
+          left: -1.5rem;
+          display: block;
+          width: 1rem;
+          height: 1rem;
+          content: "";
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
+          position: absolute;
+          top: 4px;
+          left: -1.5rem;
+          display: block;
+          width: 16px;
+          height: 16px;
+          pointer-events: none;
+          content: "";
+          background-color: #ffffff;
+          border: #adb5bd solid 1px;
+          border-radius: 50%;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after {
+          position: absolute;
+          top: 0px!important;
+          left: -1.5rem;
+          display: block;
+          width: 1rem;
+          height: 1rem;
+          content: "";
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+          position: absolute;
+          top: 0px!important;
+          left: -1.5rem;
+          display: block;
+          width: 1rem;
+          height: 1rem;
+          content: "";
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-radio .custom-control-label::after {
+          background: no-repeat 50%/50% 50%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-checkbox .custom-control-label::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::after, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+          background: no-repeat 50%/50% 50%;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-control, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-control {
+        position: relative;
+        display: block;
+        min-height: 1.5rem;
+        padding-left: 1.5rem;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-input, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input {
+          position: absolute;
+          z-index: -1;
+          opacity: 0;
+          box-sizing: border-box;
+          padding: 0;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label {
+          color: #000000;
+          font-size: 12px!important;
+          font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+          line-height: 22px;
+          margin-bottom: 0;
+          position: relative;
+          vertical-align: top;
+          font-style: normal;
+          font-weight: 700;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-select, #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-select {
+        background-color: #ffffff !important;
+        color: #333333 !important;
+        border-color: #cccccc;
+        border-radius: 4px !important;
+        border-style: solid !important;
+        border-width: 1px !important;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px !important;
+        line-height: 20px !important;
+        margin-bottom: 0;
+        margin-top: 0;
+        padding: 10px 28px 10px 12px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+        height: auto;
+        display: inline-block;
+        vertical-align: middle;
+        background: url('https://assets.mlcdn.com/ml/images/default/dropdown.svg') no-repeat right .75rem center/8px 10px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow {
+        height: auto;
+        width: 100%;
+        float: left;
+      }
+      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { width: 70%; float: left; }
+      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal { width: 30%; float: left; }
+      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal.labelsOn { padding-top: 25px;  }
+      .ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields { box-sizing: border-box; float: left; padding-right: 10px;  }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input {
+        background-color: #ffffff;
+        color: #333333;
+        border-color: #cccccc;
+        border-radius: 4px;
+        border-style: solid;
+        border-width: 1px;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 0;
+        margin-top: 0;
+        padding: 10px 10px;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-y: initial;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button {
+        background-color: #000000 !important;
+        border-color: #000000;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 4px;
+        box-shadow: none;
+        color: #ffffff !important;
+        cursor: pointer;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 14px !important;
+        font-weight: 700;
+        line-height: 20px;
+        margin: 0 !important;
+        padding: 10px !important;
+        width: 100%;
+        height: auto;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button:hover {
+        background-color: #333333 !important;
+        border-color: #333333 !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type="checkbox"] {
+        box-sizing: border-box;
+        padding: 0;
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+        margin-top: 5px;
+        margin-left: -1.5rem;
+        overflow: visible;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description {
+        color: #000000;
+        display: block;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        text-align: left;
+        margin-bottom: 0;
+        position: relative;
+        vertical-align: top;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label {
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        display: block;
+        min-height: 24px;
+        padding-left: 24px;
+
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label a {
+        color: #000000;
+        text-decoration: underline;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p {
+        color: #000000 !important;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
+        font-size: 12px !important;
+        font-weight: normal !important;
+        line-height: 18px !important;
+        padding: 0 !important;
+        margin: 0 5px 0 0 !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p:last-child {
+        margin: 0;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit {
+        margin: 0 0 20px 0;
+        float: left;
+        width: 100%;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button {
+        background-color: #000000 !important;
+        border: none !important;
+        border-radius: 4px !important;
+        box-shadow: none !important;
+        color: #ffffff !important;
+        cursor: pointer;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        line-height: 21px !important;
+        height: auto;
+        padding: 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button.loading {
+        display: none;
+      }
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button:hover {
+        background-color: #333333 !important;
+      }
+      .ml-subscribe-close {
+        width: 30px;
+        height: 30px;
+        background: url('https://assets.mlcdn.com/ml/images/default/modal_close.png') no-repeat;
+        background-size: 30px;
+        cursor: pointer;
+        margin-top: -10px;
+        margin-right: -10px;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      .ml-error input, .ml-error textarea, .ml-error select {
+        border-color: red!important;
+      }
+
+      .ml-error .custom-checkbox-radio-list {
+        border: 1px solid red !important;
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      .ml-error .label-description,
+      .ml-error .label-description p,
+      .ml-error .label-description p a,
+      .ml-error label:first-child {
+        color: #ff0000 !important;
+      }
+
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow.ml-error .label-description p,
+      #mlb2-5266475.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow.ml-error .label-description p:first-letter {
+        color: #ff0000 !important;
+      }
+            @media only screen and (max-width: 200px){
+
+        .ml-form-embedWrapper.embedDefault, .ml-form-embedWrapper.embedPopup { width: 100%!important; }
+        .ml-form-formContent.horozintalForm { float: left!important; }
+        .ml-form-formContent.horozintalForm .ml-form-horizontalRow { height: auto!important; width: 100%!important; float: left!important; }
+        .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { width: 100%!important; }
+        .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal > div { padding-right: 0px!important; padding-bottom: 10px; }
+        .ml-form-formContent.horozintalForm .ml-button-horizontal { width: 100%!important; }
+        .ml-form-formContent.horozintalForm .ml-button-horizontal.labelsOn { padding-top: 0px!important; }
+
+      }
+    </style>
+
+    
+  
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+      
+        
+        
+      
+
+      
+        
+        
+      
+
+      
+
+            
+            
+            
+            
+            
+            
+      
+
+      
+
+      
+        
+        
+         
+        
+        
+      
+
+        
+        
+        
+        
+        
+        
+      
+
+       
+
+        
+        
+        
+        
+        
+        
+        
+       
+
+
+      
+        
+        
+        
+        
+  
+
+
+
+  
+        
+        
+        
+      
+
+
+      
+    
+    
+    
+    
+    
+  
+
+  
+        
+        
+        
+        
+        
+      
+
+      
+        
+        
+        
+        
+        
+      
+
+      
+        
+        
+        
+        
+        
+      
+
+       
+
+        
+        
+        
+        
+       
+
+       
+        
+        
+        
+        
+      
+
+      
+        
+        
+        
+        
+        
+        
+        
+       
+
+    
+
+    
+
+
+      
+
+
+      
+
+      
+      
+
+      
+
+      
+
+
+
+
+
+    
+
+      
+    <div id="mlb2-5266475" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-5266475">
+      <div class="ml-form-align-center ">
+        <div class="ml-form-embedWrapper embedForm">
+
+          
+          
+
+          <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+
+            <div class="ml-form-embedContent" style=" ">
+              
+                <h4>Bądź na bieżąco</h4>
+                <p>Otrzymuj maila, gdy pojawią się nowe wpisy</p>
+              
+            </div>
+
+            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/447540/forms/88779935637833443/subscribe" data-code="" method="post" target="_blank">
+              <div class="ml-form-formContent">
+                
+
+                  
+                  <div class="ml-form-fieldRow ml-last-item">
+                    <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+
+                      
+
+
+                      <!-- input -->
+                      <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Email" autocomplete="email">
+                      <!-- /input -->
+
+                      <!-- textarea -->
+                      
+                      <!-- /textarea -->
+
+                      <!-- select -->
+                      
+                      <!-- /select -->
+
+                      <!-- checkboxes -->
+            
+            <!-- /checkboxes -->
+
+                      <!-- radio -->
+                      
+                      <!-- /radio -->
+
+                      <!-- countries -->
+                      
+                      <!-- /countries -->
+
+
+
+
+
+                    </div>
+                  </div>
+                
+              </div>
+
+              
+
+              <!-- Privacy policy -->
+              
+              <!-- /Privacy policy -->
+
+              
+
+              
+
+              
+
+
+
+<div class="ml-form-recaptcha ml-validate-required" style="float: left;">
+                <style type="text/css">
+  .ml-form-recaptcha {
+    margin-bottom: 20px;
+  }
+
+  .ml-form-recaptcha.ml-error iframe {
+    border: solid 1px #ff0000;
+  }
+
+  @media screen and (max-width: 480px) {
+    .ml-form-recaptcha {
+      width: 220px!important
+    }
+    .g-recaptcha {
+      transform: scale(0.78);
+      -webkit-transform: scale(0.78);
+      transform-origin: 0 0;
+      -webkit-transform-origin: 0 0;
+    }
+  }
+</style>
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+  <div class="g-recaptcha" data-sitekey="6Lf1KHQUAAAAAFNKEX1hdSWCS3mRMv4FlFaNslaD"></div>
+</div>
+
+
+              
+              <input type="hidden" name="ml-submit" value="1">
+
+              <div class="ml-form-embedSubmit">
+                
+                  <button type="submit" class="primary">Subskrybuj</button>
+                
+                <button disabled="disabled" style="display: none;" type="button" class="loading">
+                  <div class="ml-form-embedSubmitLoad"></div>
+                  <span class="sr-only">Loading...</span>
+                </button>
+              </div>
+
+              
+              <input type="hidden" name="anticsrf" value="true">
+            </form>
+          </div>
+
+          <div class="ml-form-successBody row-success" style="display: none">
+
+            <div class="ml-form-successContent">
+              
+                <h4>Sprawdź maila</h4>
+                <p>Link z potwierdzeniem znajdziesz na swoim mailu. Jeśli go tam nie ma, sprawdź spam.</p>
+              
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+
+  
+  
+  <script>
+    function ml_webform_success_5266475() {
+      var $ = ml_jQuery || jQuery;
+      $('.ml-subscribe-form-5266475 .row-success').show();
+      $('.ml-subscribe-form-5266475 .row-form').hide();
+    }
+      </script>
+  
+  
+      <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v08a893c96141fbc55feeeeac1fda7508" type="text/javascript"></script>
+        <script>
+            fetch("https://assets.mailerlite.com/jsonp/447540/forms/88779935637833443/track-view")
+        </script>
+</div></div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Twierdzenie Bayesa i bayesowskie porównywanie hipotez</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Statystyka</div>
+    <div class="quarto-category">Matematyka</div>
+    <div class="quarto-category">Bayes</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Wyobraźmy sobie, że przychodzi do naszego gabinetu pacjent. Przeprowadzamy wywiad, stawiamy diagnozę i przypominamy sobie, że niedawno czytaliśmy niepokojącą statystykę – 30% ofiar przemocy wykształca to właśnie zaburzenie, podczas gdy w całej populacji występuje ono tylko u 10% ludzi. Czy należy przeprowadzić wywiad w tym kierunku? Jaka jest szansa, że pacjent rzeczywiście jest ofiarą przemocy? Chciałoby się&nbsp;powiedzieć, że jest 30% szans, ale jeśli tak by było, to z faktu, że 95% złodziei jest praworęczna, wynikałoby, że 95% praworęcznych to złodzieje. Jeśli chcemy „odwrócić prawdopodobieństwo” i wnioskować o doświadczeniu przemocy na podstawie diagnozy, musimy zastosować twierdzenie Bayesa.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jakub Jędrusiak </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Opublikowano</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">5 sierpnia 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Szybko ustalmy notację, tutaj tabela z definicjami i przykładami:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Notacja</th>
+<th style="text-align: left;">Wyjaśnienie</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(P(A)\)</span></td>
+<td style="text-align: left;">Prawdopodobieństwo A</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(P(A \cap B)\)</span></td>
+<td style="text-align: left;">Prawdopodobieństwo A i jednocześnie B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(P(\text{grypa} \cap \text{szczepionka})\)</span></td>
+<td style="text-align: left;">Prawdopodobieństwo, że ktoś i ma grypę, i się szczepił (odsetek takich osób w całej populacji)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(P(A \mid B)\)</span></td>
+<td style="text-align: left;">Prawdopodobieństwo A jeśli B (albo wśród spełniających warunek B)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(P(\text{grypa} \mid \text{szczepionka})\)</span></td>
+<td style="text-align: left;">Prawdopodobieństwo grypy jeśli się ktoś zaszczepił (odsetek zachorowań tylko wśród szczepionych)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(P(\lnot A)\)</span></td>
+<td style="text-align: left;">Prawdopodobieństwo, że nie A (czyli <span class="math inline">\(1 - P(A)\)</span>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(P(\lnot \text{grypa})\)</span></td>
+<td style="text-align: left;">Prawdopodobieństwo, że ktoś nie ma grypy (jest zdrowy, łączny odsetek zdrowych w populacji)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(O(A)\)</span></td>
+<td style="text-align: left;">Szansa na A, czyli na ile A jest bardziej prawdopodobne od alternatyw (<span class="math inline">\(\frac{P(A)}{P(\lnot A)}\)</span>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="szacowanie-prawdopodobieństwa" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Szacowanie prawdopodobieństwa</h1>
+<p>Nie ukrywam, że moje wyjaśnienie jest w dużej mierze inspirowane animowanym dowodem wykonanym przez świetnego YouTube’owego twórcę 3blue1brown. Zresztą mogę się inspirować, te wpisy to dla mnie głównie notatki do siebie. Jeśli to czytasz i nie jesteś mną, pozdrawiam. Jeśli jesteś mną, to też pozdrawiam. Tak czy inaczej, warto ten filmik obejrzeć, żeby rzeczywiście te kwadraty, o których piszę niżej, zobaczyć.</p>
+<div id="3blue1brownVideo" class="text-center">
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/HZGCoVF3YvM?si=rXxs7m7--FnDUri-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
+</iframe>
+</div>
+<p>Z danych przedstawionych w treści zadania wiemy, że 30% ofiar przemocy ma to zaburzenie. Z góry zaznaczam, że dane są kompletnie wymyślone. Pytanie o szansę, że nasz chory pacjent jest ofiarą przemocy, to pytanie jaka część chorych na tę chorobę to ofiary przemocy. Znamy odsetek chorych pośród ofiar, chcemy znać odsetek ofiar pośród chorych. Jeśli prawie wszyscy chorzy to ofiary przemocy, to nasz chorujący pacjent pewnie też był ofiarą. Jeśli ofiary przemocy nie chorują na tę chorobę, to nasz pacjent (skoro jest chory) pewnie też nie jest ofiarą przemocy. Jeśli nie ma zależności, tzn. odsetek ofiar przemocy jest taki sam w grupie chorych, jak i w grupie zdrowych, to nic nam informacja o chorobie nie powie.</p>
+<p>Tutaj zostało nam powiedziane, że na tę chorobę choruje 10% całej populacji, ale aż 30% ofiar przemocy. Populacja składa się więc z czterech grup – chorujące ofiary przemocy, zdrowe ofiary przemocy, chorujące nie-ofiary przemocy i zdrowe nie-ofiary przemocy. Cztery prostokąty różnej wielkości. Chcemy wiedzieć, jaka część CHORUJĄCYCH to ofiary przemocy, więc musimy podzielić chorujące ofiary przemocy przez wszystkich chorujących. Tak się liczy procenty, procenty to ułamki, dlatego nie lubię uczenia ludzi procentów (tylko) za pomocą proporcji. Innymi słowy musimy wywalić oba prostokąty oznaczające ludzi zdrowych, z pozostałych dwóch ułożyć jedną figurę, i powiedzieć, jak duża część tej nowej figury to ofiary przemocy.</p>
+<p><span class="math display">\[
+P(\text{ofiara} \mid \text{choruje}) = \frac{\text{chorujące ofiary}}{\text{wszyscy chorzy}} = \frac{\text{ryzyko u ofiar} \times \text{odsetek ofiar}}{\text{wszyscy chorzy}}
+\]</span></p>
+<p>Tę notację czytamy „prawdopodobieństwo, że osoba jest ofiarą, jeśli wiemy, że choruje”. Wiemy, że nasza nowa figura to łącznie 10%, bo tak zostało powiedziane w zadaniu. Co ważne – 10% wszystkich, nie tylko nie-ofiar, to jest suma chorujących ofiar i chorujących nie-ofiar. Pozostaje więc policzyć, ile jest chorujących ofiar. Tego nie wiemy, ale wiemy, że to 30% wszystkich ofiar.</p>
+<p>Wszystkie ofiary to jest inny zestaw, wszystkie ofiary to chorujące ofiary + zdrowe ofiary. Ten zestaw to 3% całego dużego prostokąta, co również zostało nam dane w zadaniu. Wyobrażam sobie, że trzymam papierowy prostokąt o polu 3, który oznacza wszystkie ofiary. Odcinam nożyczkami 30% tego kawałka, oddzielając w ten sposób chorujące ofiary przemocy od zdrowych. Jakie pole ma ten odcięty kawałek? 30% z 3%, więc:</p>
+<p><span class="math display">\[
+3\% \times 30\% = 0.03 \times 0.30 = 0.009 = 0.9\%
+\]</span></p>
+<p>Chorujące ofiary przemocy stanowią 0.9% całego prostokąta. Odsuwam zdrowe ofiary przemocy, przysuwam chorujące nie-ofiary przemocy i w ten sposób mam przed sobą wszystkich chorujących w dwóch kawałkach, które w sumie stanowiły 10% dużego prostokąta. Najpierw oddzieliłem chorujących od innych ofiar przemocy, a potem połączyłem z resztą chorujących. Ponieważ reszta prostokąta mi zniknęła, pisanie o procentach może być mylące. Procent jest zawsze z czegoś i trzeba wiedzieć z czego, bo inaczej bardzo łatwo się pogubić. Wcześniej liczba 100% oznaczała cały prostokąt, a nowa figura to 10% całego prostokąta. Jaką część nowej figury stanowi moje 0.9%? Będzie to 0.9% w całości, która stanowi 10%, więc dzielę:</p>
+<p><span class="math display">\[
+\frac{0.9}{10} = 0.09 = 9\%
+\]</span></p>
+<p>To są już nowe procenty. Odcięty przeze mnie fragment stanowił 0.9% całego dużego prostokąta, ale 9% mojej nowej figury. Innymi słowy chorujące na tę chorobę ofiary przemocy to 0.9% wszystkich ludzi, ale już 9% wszystkich chorujących.</p>
+<p>To jest stała procedura, tzn. oddziel kawałek z jednej grupy, dołóż do reszty drugiej grupy i podziel pole kawałka przez łącze pole całości. Jeśli mam notację <span class="math inline">\(P(A \mid B)\)</span>, czyli prawdopodobieństwo A, jeśli wiem, że B, to najpierw muszę ze wszystkich A oddzielić tych, którzy <em>jednocześnie</em> należą do B, a potem podzielić przez <em>wszystkich</em> należących do B. To, co na lewo od pionowej kreski, muszę pociąć i podzielić przez to, co na prawo. Muszę więc umieć policzyć, ile mam A, którzy jednocześnie należą do B (np. 30% z 3%) oraz ile łącznie mam B (np. 10%). Czasem wiemy od razu, ile łącznie jest B, ale czasem trzeba to policzyć. W końcu B też jest w dwóch kawałkach, chorujące ofiary policzyliśmy, a czasem trzeba wprost policzyć chorujące nie-ofiary i dodać. Na przykład jeśli zamiast tamtych danych dostałbym informację, że 5% ludzi bez doświadczenia przemocy choruje, to żeby dostać całość B musiałbym policzyć 5% z 97% (wszyscy minus ogólny odsetek ofiar) i dodać do 0.9%, które policzyłem wcześniej. Potnij co po lewej i podziel przez to, co po prawej. Pionowa kreska nawet może się skojarzyć z kreską ułamkową, a że jest nadziana na sztorc, to A się trochę rozedrze, jak na nią skoczy.</p>
+<p>I <em>pro forma</em> zapiszę to twierdzenie, ale muszę przyznać, że jak próbowałem je zrozumieć na literkach, a potem go używać, to wszytko mi się plątało. Forma graficzna i wyłożona przeze mnie wyżej logika z rozdzieraniem pozwoliły mi dopiero swobodnie korzystać ze wzoru. Polecam rzeczywiście najpierw wyrobić intuicję.</p>
+<p><span class="math display">\[
+P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{P(B \mid A) \times P(A)}{P(B)}
+\]</span></p>
+<p>Nieco przyjemniejsze jest w formie równości iloczynów:</p>
+<p><span class="math display">\[
+P(A \mid B) \times P(B) = P(B \mid A) \times P(A)
+\]</span></p>
+<p>W tej postaci mogę je odnieść do interpretacji graficznej. Czytam je tak: przypadki A w grupie B to ta sama część całej populacji co przypadki B w grupie A. Graficznie to ma sens, bo to jest ten sam kawałek naszego kwadratu, tylko po lewej rozumiany jako „z całości B odcinam A”, a po prawej „z całości A odcinam B”. Ładnie to pokazuje grafika z Among Us z angielskiej Wikipedii.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Bayes_theorem_assassin.svg" class="img-fluid figure-img" alt="A geometric visualisation of Bayes' theorem by CMG Lee. The thumbnails denote the number of each corresponding condition and case, the probability being the fraction of each thumbnail that is shaded. Similar reasoning can be used to show that P(Ā|B) = ⁠ P(B|Ā) P(Ā) / P(B) ⁠ etc."></p>
+<figcaption>Cmglee, CC BY-SA 4.0 <a href="https://creativecommons.org/licenses/by-sa/4.0" class="uri">https://creativecommons.org/licenses/by-sa/4.0</a>, Wikimedia Commons</figcaption>
+</figure>
+</div>
+</section>
+<section id="aktualizowanie-pewności" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Aktualizowanie pewności</h1>
+<p>Początkowo uznaliśmy więc, że ryzyko, że nasz pacjent rzeczywiście jest ofiarą przemocy, wynosi 3%. Był to nasz najlepszy strzał, bo tyle wynosi odsetek ofiar przemocy w populacji (a przynajmniej tak wymyśliłem do zadania). Innymi słowy szansa wyniosła 3:97 – 3 ofiary przemocy na każde 97 osób, które miały szczęście nimi nie być. Matematycznie <em>szansa</em> to właśnie stosunek prawdopodobieństwa prawdy do fałszu, wyników pozytywnych do negatywnych itd. Mówi nam, jak bardziej lub mniej prawdopodobny jest wynik pozytywny od negatywnego (jakkolwiek je zdefiniujemy). Nasze 3% nazwiemy prawdopodobieństwem <em>a priori</em> (ang. <em>prior</em>).</p>
+<p>Trzeba zwrócić uwagę, że licznik w naszym równaniu, tj. ten pocięty pasek prawdopodobieństwa, liczymy poprzez przemnożenie tego ogólnego prawdopodobieństwa <em>a priori</em> (<span class="math inline">\(P(A)\)</span>) przez odsetek A spełniający warunek B (<span class="math inline">\(P(B \mid A)\)</span>). Że całe <span class="math inline">\(P(B)\)</span> (czyli wszyscy spełniający warunek B, a więc suma spełniających warunek A i niespełniających warunku A, dodane pocięte kawałki) wynosi mniej niż 100% (w naszym przykładzie 10%), to ciężko mówić o prawdopodobieństwie, bo ono musi sumować się do 100%, jeśli wyczerpuje wszystkie możliwości (a tutaj wyczerpuje). Dlatego dzielimy nasz iloczyn przez <span class="math inline">\(P(B)\)</span> i mamy prawdopodobieństwo.</p>
+<p>Wynikiem tego działania było u nas 9% – tak powinniśmy szacować prawdopodobieństwo, że nasz pacjent był ofiarą przemocy, jeśli wiemy, że wykazuje to szczególne zaburzenie. To zaktualizowane oszacowanie nazywamy prawdopodobieństwem <em>a posteriori</em> (ang. <em>posterior</em>). Dane zmuszają nas do aktualizacji naszego oszacowania. Innymi słowy, szanse wzrastają z 3:97 do 9:91 (0,031 do 0,099).</p>
+</section>
+<section id="czynnik-bayesa" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Czynnik Bayesa</h1>
+<p>Możemy też porównać względne ryzyko. 30% ofiar przemocy wykształca to zaburzenie, a w całej populacji dotyka ono 10%. Cała populacja to zarówno ofiary, jak i nie-ofiary. Możemy policzyć, jaką u jakiej części nie-ofiar pojawia się to zaburzenie. Nie-ofiary stanowią 97% całej populacji i 91% populacji cierpiących na to zaburzenie (bo 9% to ofiary). Także odłączam grupę chorujących nie-ofiar od grupy wszystkich chorujących (<span class="math inline">\(10\% \times 91\% = 9.1\%\)</span>) i liczę, jaka to część wszystkich nie-ofiar (<span class="math inline">\(\frac{9.1}{97} = 9.4\%\)</span>).</p>
+<p>Czyli ofiary przemocy mają 30% ryzyka, że wykształcą to zaburzenie, a osoby, które nie doświadczyły przemocy, zaledwie 9.4%. Czyli procentowe ryzyko jest u ofiar przemocy</p>
+<p><span class="math display">\[
+K = \frac{30}{9.4} = 3.19
+\]</span></p>
+<p>…razy większe niż u nie-ofiar. Porównajmy też, ile razy wzrastają szanse, w momencie postawienia diagnozy – nie prawdopodobieństwo, a szanse. Jak pisałem wyżej, szanse wzrastają wtedy z 3:97 do 9:91, a więc:</p>
+<p><span class="math display">\[
+BF = \frac{9:91}{3:97} \approx 3.19
+\]</span></p>
+<p>Ten sam wynik nie jest przypadkowy – stosunek szans <em>a posteriori</em> do <em>a priori</em> będzie taki sam, jak iloraz ryzyk między tymi grupami. Liczba ta nazywa się <strong>czynnikiem Bayesa</strong> (<em>Bayes factor</em>).</p>
+<p>Obie perspektywy pozwalają nam znaleźć nasz <span class="math inline">\(BF\)</span>, a jest on o tyle użyteczny, że występuje zależność <em>a priori</em> × BF = <em>a posteriori</em> (skoro <span class="math inline">\(BF = \frac{\text{szanse a posteriori}}{\text{szanse a priori}}\)</span>). Czynnik Bayesa pokazuje potencjalnie ważny efekt, ale nie należy go mylić z prawdopodobieństwem <em>a posteriori</em> – w momencie, kiedy postawiliśmy diagnozę, nasze oszacowanie szansy wzrosło ponad trzykrotnie, ale prawdopodobieństwo ciągle wynosi 9%. Wynika to z faktu, że bycie ofiarą jest rzadkie samo z siebie. Ostatecznie więc możemy wskazać na dwa równoważne wzory na BF:</p>
+<p><span class="math display">\[
+BF = \frac{\text{szanse a posteriori}}{\text{szanse a priori}}
+\]</span></p>
+<p>oraz</p>
+<p><span class="math display">\[
+BF = \frac{P(B \mid A)}{P(B \mid \lnot A)}
+\]</span></p>
+<p>gdzie B to choroba, a A to bycie ofiarą przemocy. Dowód na równoważność tych wzorów poniżej.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Dowód: aktualizacja szans za pomocą ilorazu wiarygodności">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Wskazówka</span>Dowód: aktualizacja szans za pomocą ilorazu wiarygodności
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Niech <span class="math inline">\((A)\)</span> oznacza rozważane zdarzenie lub hipotezę, a <span class="math inline">\((B)\)</span> zaobserwowaną informację.</p>
+<p>Prawdopodobieństwo zdarzenia zapisujemy jako <span class="math inline">\((P(A))\)</span>, natomiast jego <strong>szanse</strong> definiujemy jako:</p>
+<p><span class="math display">\[
+\operatorname{O}(A)
+:=
+\frac{P(A)}{P(\neg A)}.
+\]</span></p>
+<p>Analogicznie szanse a posteriori, czyli szanse zdarzenia <span class="math inline">\((A)\)</span> po zaobserwowaniu <span class="math inline">\((B)\)</span>, wynoszą:</p>
+<p><span class="math display">\[
+\operatorname{O}(A \mid B)
+:=
+\frac{P(A \mid B)}{P(\neg A \mid B)}.
+\]</span></p>
+<p>Z twierdzenia Bayesa:</p>
+<p><span class="math display">\[
+P(A \mid B)
+=
+\frac{P(B \mid A)P(A)}{P(B)}.
+\]</span></p>
+<p>Analogicznie dla zdarzenia przeciwnego:</p>
+<p><span class="math display">\[
+P(\neg A \mid B)
+=
+\frac{P(B \mid \neg A)P(\neg A)}{P(B)}.
+\]</span></p>
+<p>Dzieląc pierwsze równanie przez drugie, otrzymujemy:</p>
+<p><span class="math display">\[
+\frac{P(A \mid B)}
+     {P(\neg A \mid B)}
+=
+\frac{
+  \dfrac{P(B \mid A)P(A)}{P(B)}
+}{
+  \dfrac{P(B \mid \neg A)P(\neg A)}{P(B)}
+}.
+\]</span></p>
+<p>Po skróceniu wspólnego czynnika <span class="math inline">\((P(B))\)</span>:</p>
+<p><span class="math display">\[
+\frac{P(A \mid B)}
+     {P(\neg A \mid B)}
+=
+\frac{P(B \mid A)P(A)}
+     {P(B \mid \neg A)P(\neg A)}.
+\]</span></p>
+<p>Rozdzielamy iloczyny:</p>
+<p><span class="math display">\[
+\frac{P(A \mid B)}
+     {P(\neg A \mid B)}
+=
+\frac{P(A)}
+     {P(\neg A)}
+\cdot
+\frac{P(B \mid A)}
+     {P(B \mid \neg A)}.
+\]</span></p>
+<p>Korzystając z definicji szans, dostajemy:</p>
+<p><span class="math display">\[
+\operatorname{O}(A \mid B)
+=
+\operatorname{O}(A)
+\cdot
+\frac{P(B \mid A)}
+     {P(B \mid \neg A)}.
+\]</span></p>
+<p>Po podzieleniu obu stron przez <span class="math inline">\((\operatorname{O}(A))\)</span>:</p>
+<p><span class="math display">\[
+\boxed{
+\frac{\operatorname{O}(A \mid B)}
+     {\operatorname{O}(A)}
+=
+\frac{P(B \mid A)}
+     {P(B \mid \neg A)}
+}
+\]</span></p>
+<p>Oznacza to, że stosunek szans a posteriori do szans a priori jest równy ilorazowi wiarygodności informacji <span class="math inline">\((B)\)</span> przy założeniu <span class="math inline">\((A)\)</span> i <span class="math inline">\((\neg A)\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="bayesowskie-porównywanie-hipotez" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Bayesowskie porównywanie hipotez</h1>
+<p>Ten stosunek ma zaskakująco duże możliwości, jeśli uznamy go za rodzaj <strong>porównania hipotez</strong>. Co mam na myśli? Zaobserwowaliśmy, że nasz pacjent cierpi na to konkretne zaburzenie. Możemy postawić dwie hipotezy:</p>
+<p><span class="math display">\[
+H_0: \text{Pacjent nie był ofiarą przemocy} \\
+H_1: \text{Pacjent był ofiarą przemocy}
+\]</span></p>
+<p>Pytanie brzmi – która z tych hipotez <strong>lepiej przewiduje dane</strong>? W każdej z tych hipotez jest zaszyte prawdopodobieństwo choroby. Choroba wystąpiła. Która z tych hipotez bardziej pasuje do naszych obserwacji? Jak bardzo lepiej? To jest zupełnie inna logika testowania hipotez niż w klasycznej statystyce. Klasyczna statystyka zakłada, że istnieje jakaś prawdziwa wartość parametru, a dane, które otrzymaliśmy, to zaszumione odbicie tej prawdziwej wartości. Jak to napisałem, przyszło mi do głowy określenie „statystyka platońska”. W perspektywie bayesowskiej to dane są prawdziwe (w końcu się wydarzyły!), a różne wartości parametrów (tj. różne hipotezy) mają konkurować, która najlepiej je wyjaśnia. Która z tych hipotez daje większe prawdopodobieństwo uzyskania dokładnie takich danych?</p>
+<p><span class="math display">\[
+BF_{10} = \frac{P(B \mid H_1)}{P(B \mid H_0)}
+\]</span></p>
+<p>Ponieważ <span class="math inline">\(H_1\)</span> to u nas po prostu bycie ofiarą, czyli <span class="math inline">\(A\)</span>, a <span class="math inline">\(H_0\)</span> to niebycie ofiarą, czyli <span class="math inline">\(\neg A\)</span>, to jest to po prostu czynnik Bayesa! Piszemy <span class="math inline">\(BF_{10}\)</span> bo porównujemy <span class="math inline">\(H_1\)</span> względem <span class="math inline">\(H_0\)</span>. Ponieważ w naszym przykładzie <span class="math inline">\(BF \approx 3.2\)</span>, to porównanie tych dwóch hipotez wskazuje, że nasze dane są ponad trzykrotnie bardziej prawdopodobne przy <span class="math inline">\(H_1\)</span> niż przy <span class="math inline">\(H_0\)</span>.</p>
+<p>Nie należy się jednak spieszyć z przyjmowaniem takiej hipotezy. I tak, piszę o przyjmowaniu, bo statystyka bayesowska pozwala nam rzeczywiście przyjąć hipotezę alternatywną zamiast tylko odrzucać hipotezę zerową. Mimo że nasza hipoteza alternatywna przewiduje dane ponad trzykrotnie lepiej, to trzeba wziąć pod uwagę, że wyjściowe prawdopodobieństwo bycia ofiarą przemocy wynosi w naszym zadaniu 3%. Jest to zjawisko ciągle stosunkowo rzadkie. Zastosowanie tego czynnika pozwala nam oszacować rzeczywiste prawdopodobieństwo, że pacjent jest ofiarą – liczyliśmy je wyżej i wynosi 9%. Najważniejszym źródłem dla naszych decyzji jest właśnie ta liczba – prawdopodobieństwo <em>a posteriori</em>. 9% że jest ofiarą do 91%, że nią nie jest. Kiedy więc bierzemy pod uwagę prawdopodobieństwo <em>a priori</em>, hipoteza, że pacjent nie jest ofiarą przemocy, jest ciągle 10 razy bardziej prawdopodobna.</p>
+<p>Jednak czynnik Bayesa ma tę przyjemną właściwość, że nawet jak się okaże, że odsetek ofiar przemocy jest w społeczeństwie inny niż zakładaliśmy (wyższy albo niższy), to dopóki ryzyko zachorowania u ofiar będzie 30% a u nie-ofiar 9.4%, wartość BF się nie zmieni. Innymi słowy prawdopodobieństwo <em>a priori</em> może zostać zaktualizowane, ale szanse <em>a posteriori</em> to ciągle szanse <em>a priori</em> × BF. Prawdopodobieństwo <em>a priori</em> może zmienić się nie tylko dlatego, że zaktualizuje się oszacowanie powszechności przemocy w populacji. Nasze wstępne oszacowanie dla tego pacjenta może się zmienić też dlatego, że zbieramy różne poszlaki na temat tej konkretnej osoby. Dla tego pacjenta możemy szacować prawdopodobieństwo bycia ofiarą przemocy na wejściu nawet na 10%, na podstawie naszego doświadczenia. Przy takim oszacowaniu szanse <em>a posteriori</em> wyniosą:</p>
+<p><span class="math display">\[
+O(\text{ten pacjent doświadczył przemocy} \mid \text{zaburzenie}) = \\
+O(\text{szanse a priori}) \times BF_{10} = \\
+\frac{1}{9} \times 3.2 = \frac{16}{45}
+\]</span></p>
+<p>…a więc prawdopodobieństwo wyniesie:</p>
+<p><span class="math display">\[
+P(\text{ten pacjent doświadczył przemocy} \mid \text{zaburzenie}) = \\
+\frac{16}{45 + 16} \approx 26\%
+\]</span></p>
+<p>W ten sposób dowody za i przeciw kumulują się, by dostarczyć&nbsp;nam sensownego oszacowanie ryzyka. W tym prostym przykładzie można to prawdopodobieństwo policzyć na kartce, ale przy prawdziwych hipotezach badawczych, gdzie możemy mieć ciągłe rozkłady, wiele parametrów itd. sposób liczenia prawdopodobieństwa <em>a posteriori</em> szybko robi się bardziej skomplikowany, chociaż jego logika jest taka sama.</p>
+<p>Powinniśmy więc taką hipotezę przyjąć czy odrzucić? Piękno statystyki bayesowskiej na tym polega dostaliśmy nasze prawdopodobieństwo – 9%. Mnie taki poziom pewności nie satysfakcjonuje, ale każe zachować ostrożność. Koszty pomyłki mogą być bowiem bardzo duże. Jeśli uda nam się je skwantyfikować, możemy je włączyć do równania i wziąć matematycznie ująć to, że preferujemy konkretny rodzaj błędu, bo wiąże się z mniejszymi kosztami. Ostatecznie prawdopodobieństwo <em>a posteriori</em> mocno zależy od prawdopodobieństwa <em>a priori</em>, ale istnieją zgrubne reguły interpretowania BF samego w sobie, jako siły argumentu. Im większa siła argumentu, tym większy sceptycyzm pokona. I odwrotnie, im większy sceptycyzm, tym silniejszych dowodów potrzeba. W tabelce klasyczne reguły interpretacji BF <span class="citation" data-cites="jeffreys1998">(<a href="#ref-jeffreys1998" role="doc-biblioref">Jeffreys, 1998</a>)</span>, które jednak trzeba traktować bardzo zgrubnie, bo to jednak modyfikator prawdopodobieństwa <em>a priori</em>. Najprostsza reguła to wybrać tę hipotezę, która ma więcej niż 50% prawdopodobieństwa.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">BF</th>
+<th style="text-align: left;">Interpretacja</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">&lt; 1</td>
+<td style="text-align: left;">Odwróć ułamek i sprawdź jeszcze raz</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Brak dowodów, posterior wygląda jak prior</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1-3</td>
+<td style="text-align: left;">Dowody słabe, anegdotyczne</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3-10</td>
+<td style="text-align: left;">Dowody umiarkowane</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">10-30</td>
+<td style="text-align: left;">Dowody silne</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">30-100</td>
+<td style="text-align: left;">Dowody bardzo silne</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&gt; 100</td>
+<td style="text-align: left;">Dowody ekstremalnie silne</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="przyjęcie-hipotezy-zerowej" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Przyjęcie hipotezy zerowej</h1>
+<p>Statystyka bayesowska pozwala na jeszcze jedną rzecz, która w klasycznej statystyce jest niemożliwa, a której często bardzo potrzebujemy, więc udajemy, że da się to zrobić na podstawie wartości <em>p</em>. Statystyka bayesowska pozwala nam przyjąć hipotezę zerową. Nie jej nie odrzucać, tylko rzeczywiście ją przyjąć.</p>
+<p>Widziałem już plakaty czy wystąpienia, gdzie badacz uzyskał coś w rodzaju <span class="math inline">\(p = 0.625\)</span> i interpretował to tak, jakby było 62.5% szans, że hipoteza zerowa jest prawdziwa. W końcu nie mogę jej odrzucić, więc uznaję, że efektu nie ma! Dokładnie tego samego uczymy studentów, jak pokazujemy im testy normalności rozkładu, mieszając im przy okazji mocno w głowach. Mówimy im wtedy „Jeśli macie <span class="math inline">\(p &gt; 0.05\)</span>, to zakładacie, że mamy normalność”, a potem kiedy interpretują już swoje właściwe wyniki, tłuczemy im do głów, że hipotezy zerowej nie da się przyjąć. Gdzie <em>de facto</em> przecież to tutaj robimy, jak udajemy, że <span class="math inline">\(p &gt; 0.05\)</span> to dowód na rzecz normalności. Ba, jak wychodzi <span class="math inline">\(p = 0.06\)</span>, czyli tylko 6% szans, że pod hipotezą zerową powstałyby takie dane, to jeśli to test normalności, to mówimy im „nie odrzucamy hipotezy zerowej, zakładamy więc normalność” (znowu – przecież tak nie wolno!), a jak takie samo <span class="math inline">\(p\)</span> wyjdzie im w regresji, to mówimy im, żeby pisali, że wyniki są „istotne na poziomie trendu” i pisali dyskusję tak, jakby były prawdziwe, tylko użyli ostrożniejszego ryzyka. A jaka jest szansa, że ten wynik jest prawdziwy? Jak wypada hipoteza alternatywna na tle zerowej? Nie wiemy, nie liczymy tego, a moglibyśmy, jakbyśmy ustalili sensowny <em>prior</em> i wyliczyli BF.</p>
+<p>Jak działa przyjmowanie hipotezy zerowej? Tak samo jak przyjmowanie hipotezy alternatywnej. Jeśli <span class="math inline">\(BF_{10}\)</span> ma wartość mniejszą od 1, to ją odwracamy. Dostajemy wtedy <span class="math inline">\(BF_{01}\)</span> czyli miarę, ile razy bardziej prawdopodobne są nasze dane pod <span class="math inline">\(H_0\)</span> w porównaniu do <span class="math inline">\(H_1\)</span>. Potem wyliczamy prawdopodobieństwo <em>a posteriori</em> i interpretujemy. Zobaczymy to w kolejnym przykładzie.</p>
+</section>
+<section id="drugi-przykład" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Drugi przykład</h1>
+<p>Wybrałem powyższy przykład z powikłaniami po doświadczeniu przemocy, bo wydaje mi się dobrze pokazywać, że nawet taka dość abstrakcyjna na pierwszy rzut oka matematyka może mieć praktyczne zastosowanie w pracy psychologa nie tylko naukowca. Plus naprawdę kiedyś liczyłem dokładnie takie zadanie dla podparcia swojego argumentu i wtedy zrozumiałem twierdzenie Bayesa. Co zabawne, prawdopodobieństwo <em>a posteriori</em> uparcie wychodziło mi w okolicach 150%. Rzecz niemożliwa, więc 15 razy sprawdzałem czy na pewno nie pomieszałem procentów, oznaczeń i wszystkich innych elementów. Potem dopiero się zorientowałem, że według sprawdzanych przeze mnie danych, osób wykształcających zaburzenie po przemocy jest więcej niż wszystkich osób z tym zaburzeniem łącznie. Kiedy już go zrozumiałem, bardzo mnie ten wniosek ucieszył, bo pozwolił mi elegancko podważyć te dane. Mogłem powiedzieć, że jeśli te dane byłyby prawdziwe, to w populacji musiałoby być znacznie więcej osób z tym zaburzeniem, niż jest w rzeczywistości. Dziś pewnie potraktowałbym te dane jak hipotezę i próbował liczbowo wyrazić, jak bardzo jest nieprawdopodobna. Teraz przejdźmy do innego przykładu.</p>
+<p>Wyobraźmy sobie szybki test na grypę, który poprawnie wykrywa zakażenie u 70% chorych, ale daje też wynik fałszywie pozytywny u 1% zdrowych. Aktualnie zakażone jest 5% populacji. Rozpatrzmy dwa przypadki – Adam widzi wynik pozytywny, Ewa negatywny. Zadanie polega na tym, żeby ustalić, jakie jest prawdopodobieństwo, że Adam i Ewa mają grypę.</p>
+<section id="adam-wynik-pozytywny" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="adam-wynik-pozytywny"><span class="header-section-number">6.1</span> Adam – wynik pozytywny</h2>
+<section id="metoda-1-z-twierdzenia-bayesa" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="metoda-1-z-twierdzenia-bayesa"><span class="header-section-number">6.1.1</span> Metoda 1: z twierdzenia Bayesa</h3>
+<p>Musimy policzyć, z jakim prawdopodobieństwem Adam ma grypę, biorąc pod uwagę, że wyszedł mu wynik pozytywny. Innymi słowy jak częsta jest grypa wśród ludzi z wynikiem pozytywnym. Zapiszemy to jako <span class="math inline">\(P(\text{grypa} \mid +)\)</span>. Prawdopodobieństwo <em>a priori</em> wynosi <span class="math inline">\(P(\text{grypa}) = 5\%\)</span>. Zgodnie z naszą procedurą, najpierw rozcinamy zbiór ludzi z grypą tak, żeby dowiedzieć, jaka część populacji to zakażeni z wynikiem pozytywnym. Zakażonych jest 5%, a 70% spośród nich ma wynik pozytywny, więc mnożę:</p>
+<p><span class="math display">\[
+P(\text{grypa}) \times P(+ \mid \text{grypa}) = 0.05 \times 0.70 = 0.035
+\]</span></p>
+<p>Teraz muszę to przeskalować, żeby się dowiedzieć, jaka to część wszystkich ludzi z wynikiem pozytywnym. Na grupę ludzi z wynikiem pozytywnym składają się chorzy i zdrowi. Dostaliśmy informację, że 1% zdrowych otrzyma wynik pozytywny, a zdrowych jest 95%. Mnożymy więc:</p>
+<p><span class="math display">\[
+P(\text{brak grypy}) \times P(+ \mid \text{brak grypy}) = 0.95 \times 0.01 = 0.0095
+\]</span></p>
+<p>Policzyliśmy więc, że wynik chorzy z wynikiem pozytywnym to 3.5% całej populacji, a zdrowi z wynikiem pozytywnym to 0.95% całej populacji. Oznacza to, że wynik pozytywny uzyskałoby:</p>
+<p><span class="math display">\[
+P(+) = 3.5\% + 0.95\% = 4.45\%
+\]</span></p>
+<p>…całej populacji. Odpowiedzmy sobie wreszcie – jaką część ludzi z wynikiem pozytywnym stanowią rzeczywiście chorzy? 3.5% z 4.45%, więc:</p>
+<p><span class="math display">\[
+P(\text{grypa} \mid +) = \frac{P(\text{grypa}) \times P(+ \mid \text{grypa})}{P(+)} = \frac{3.5}{4.45} \approx 0.7865 = 78.65\%
+\]</span></p>
+<p>Adam jest więc chory na 79%, czyli znacznie więcej niż początkowe 5%. To jest nasze prawdopodobieństwo <em>a posteriori</em>.</p>
+</section>
+<section id="metoda-2-bf-i-a-posteriori-przez-bf" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="metoda-2-bf-i-a-posteriori-przez-bf"><span class="header-section-number">6.1.2</span> Metoda 2: BF i <em>a posteriori</em> przez BF</h3>
+<p>Mogliśmy policzyć to też na inny sposób. Wiemy, że <span class="math inline">\(BF\)</span> zmienia szanse <em>a priori</em> w szanse <em>a posteriori</em>. Znamy też wzór na <span class="math inline">\(BF\)</span>, gdzie porównujemy prawdopodobieństwo obserwacji danych (tj. pozytywnego wyniku testu) w dwóch hipotezach – że Adam nie ma grypy (<span class="math inline">\(H_0\)</span>) i że ją ma (<span class="math inline">\(H_1\)</span>). Prawdopodobieństwo wyniku pozytywnego w grypie zostało dane w zadaniu i wynosi <span class="math inline">\(P(+ \mid \text{grypa}) = 70\%\)</span>. A jak ktoś nie ma grypy? To też zostało dane w zadaniu, <span class="math inline">\(P(+ \mid \text{brak grypy}) = 1\%\)</span>. Policzmy z tego <span class="math inline">\(BF_{10}\)</span>:</p>
+<p><span class="math display">\[
+BF_{10} = \frac{P(+ \mid \text{grypa})}{P(+ \mid \text{brak grypy})} = \frac{0.7}{0.01} = 70
+\]</span></p>
+<p>Pojawienie się wyniku pozytywnego jest 70 razy bardziej prawdopodobne, jeśli ta grypa jest, niż jak jej nie ma. Coś takiego można było zauważyć od razu, w końcu to jest 1% <em>vs</em> 70%. To jest bardzo silny dowód grypy. Co prawda już policzyliśmy prawdopodobieństwo <em>a posteriori</em>, ale mając BF możemy je uzyskać nawet łatwiej. Najpierw przeliczmy prawdopodobieństwo <em>a priori</em> na szanse. Ono wynosiło <span class="math inline">\(P(\text{grypa}) = 5\%\)</span> Szansa, czyli stosunek wyniku pozytywnego do negatywnego, wynoszą więc:</p>
+<p><span class="math display">\[
+O(\text{grypa}) = \frac{5}{95} = \frac{1}{19} \approx 0.053
+\]</span></p>
+<p>Na wejściu brak grypy jest więc 19 razy bardziej prawdopodobny niż grypa. Przeskalujmy to teraz wykorzystując BF:</p>
+<p><span class="math display">\[
+O(\text{grypa} \mid +) = O(\text{grypa}) \times BF_{10} = \frac{1}{19} \times 70 = \frac{70}{19} \approx 3.68
+\]</span></p>
+<p>Szansa wzrasta 70-krotnie i <em>a posteriori</em> grypa jest prawie cztery razy bardziej prawdopodobna niż jej brak. Przeliczmy to na prawdopodobieństwo:</p>
+<p><span class="math display">\[
+P(\text{grypa} \mid +) = \frac{70}{19 + 70} = \frac{70}{89} \approx 0.7865 = 78.65\%
+\]</span></p>
+<p>Identycznie jak bezpośrednio z twierdzenia Bayesa.</p>
+</section>
+</section>
+<section id="ewa-wynik-negatywny" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="ewa-wynik-negatywny"><span class="header-section-number">6.2</span> Ewa – wynik negatywny</h2>
+<p>Teraz co z Ewą? Ewa zobaczyła wynik negatywny, ale ciągle się martwi, bo wie, że szybkie testy bywają niedokładne. Jakie jest więc prawdopodobieństwo, że mimo to jest chora? Przypomnijmy, prawdopodobieństwo <em>a priori</em> wynosi 5%. Najbardziej będzie nas tutaj interesował czynnik Bayesa, ale <em>pro forma</em> policzmy <em>a posteriori</em> też z twierdzenia Bayesa.</p>
+<section id="metoda-1-twierdzenie-bayesa" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="metoda-1-twierdzenie-bayesa"><span class="header-section-number">6.2.1</span> Metoda 1: twierdzenie Bayesa</h3>
+<p><span class="math display">\[
+P(\text{grypa} \mid -) = \frac{P(- \mid \text{grypa}) \times P(\text{grypa})}{P(-)}
+\]</span></p>
+<p>Skoro w grypie mam 70% szans na wynik pozytywny, to mam automatycznie 30% na wynik negatywny. Ponieważ chorych jest 5%, mogę od razu obliczyć licznik, czyli odsetek chorych z wynikiem negatywnym w całej populacji:</p>
+<p><span class="math display">\[
+P(- \cap \text{grypa}) = P(- \mid \text{grypa}) \times P(\text{grypa}) = \\
+0.3 \times 0.05 = 0.015 = 1.5\%
+\]</span></p>
+<p>Zdrowi (95% populacji) mają 99% prawdopodobieństwa uzyskania wyniku negatywnego (bo tylko 1% wyników jest fałszywie pozytywnych), więc zdrowych z wynikiem negatywnym w całej populacji jest:</p>
+<p><span class="math display">\[
+P(- \cap \text{brak grypy}) = P(- \mid \text{brak grypy}) \times P(\text{brak grypy}) = \\
+0.99 \times 0.95 = 0.9405 = 94.05\%
+\]</span></p>
+<p>Cała populacja to zdrowi i chorzy, więc łączne prawdopodobieństwo zobaczenia wyniku negatywnego to suma tego prawdopodobieństwa u zdrowych i chorych:</p>
+<p><span class="math display">\[
+P(-) = 0.015 + 0.9405 = 0.9555 = 95.55\%
+\]</span></p>
+<p>Mogliśmy to zrobić mądrzej, jeślibyśmy pamiętali, że ogólne prawdopodobieństwo wyniku pozytywnego to <span class="math inline">\(P(+) = 4.45\%\)</span>, bo przez to <span class="math inline">\(P(-) = 100\% - 4.45\% = 95.55\%\)</span>. Także jaką część wszystkich wyników negatywnych stanowią wyniki fałszywie negatywne?</p>
+<p><span class="math display">\[
+P(\text{grypa} \mid -) = \frac{P(\text{grypa} \cap -)}{P(-)} = \frac{0.015}{0.9555} = \frac{10}{637} \approx 1.57\%
+\]</span></p>
+<p>Ewa ma więc 1.57% prawdopodobieństwa, że jest chora, czyli mniej niż poprzednie 5%. W języku szans, szansa na chorobę jest jak 10:637, albo też jest prawie 63 razy bardziej prawdopodobne, że jest zdrowa.</p>
+</section>
+<section id="metoda-2-bf-i-a-posteriori-przez-bf-1" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="metoda-2-bf-i-a-posteriori-przez-bf-1"><span class="header-section-number">6.2.2</span> Metoda 2: BF i <em>a posteriori</em> przez BF</h3>
+<p>Porównujemy prawdopodobieństwo, że Ewa jest zdrowa do prawdopodobieństwa, że jest chora, a więc prawdopodobieństwo uzyskania wyniku negatywnego (bo to są nasze dane) w zdrowiu i w chorobie (w radości i smutku, w bogactwie i ubóstwie). Wypiszmy hipotezy wprost:</p>
+<p><span class="math display">\[
+H_0: \text{Ewa jest zdrowa} \\
+H_1: \text{Ewa jest chora}
+\]</span></p>
+<p>Jak ktoś jest chory, to zobaczy wynik negatywny w <span class="math inline">\(P(- \mid H_0) = 30\%\)</span> przypadków, a jak jest zdrowy, w <span class="math inline">\(P(- \mid H_1) = 99\%\)</span> przypadków. Czynnik Bayesa porównuje <span class="math inline">\(H_1\)</span> względem <span class="math inline">\(H_0\)</span>:</p>
+<p><span class="math display">\[
+BF_{10} = \frac{P(- \mid H_1)}{P(- \mid H_0)} = \frac{0.3}{0.99} = \frac{10}{33} \approx 0.3
+\]</span></p>
+<p>To nie jest prawdopodobieństwo! To jest czynnik Bayesa, czyli jak zmieniło się nasze oszacowanie prawdopodobieństwa po teście. Szanse <em>a priori</em> możemy przemnożyć przez tę właśnie liczbą, a mnożenie przez ułamki między 0 a 1 sprawia, że liczba robi się mniejsza. <span class="math inline">\(H_0\)</span> lepiej przewiduje dane niż <span class="math inline">\(H_1\)</span>. Możemy więc odwrócić ten ułamek, żeby wiedzieć, ile razy lepiej.</p>
+<p><span class="math display">\[
+BF_{01} = \frac{P(- \mid H_0)}{P(- \mid H_1)} = \frac{0.99}{0.3} = \frac{33}{10} = 3.3
+\]</span></p>
+<p>Sam z siebie taki współczynnik oznacza umiarkowany dowód, ale trzeba wziąć pod uwagę, że wstępna szansa na bycie zdrowym to 95:5 (19:1)! Nasz czynnik Bayesa tylko zwiększa te szanse do:</p>
+<p><span class="math display">\[
+O(\text{brak grypy} \mid -) = \frac{19}{1} \times 3.3 = \frac{62.7}{1}
+\]</span></p>
+<p>Zdrowie jest dla Ewy 62.7 bardziej prawdopodobne niż choroba (a właściwie brak grypy niż grypa). Konkretne prawdopodobieństwo grypy, co już policzyliśmy metodą pierwszą, to zaledwie:</p>
+<p><span class="math display">\[
+P(\text{grypa} \mid -) = 1 - \frac{62.7}{63.7} = 1.57\%
+\]</span></p>
+<p>Ewa może mieć 98.4% pewności, że nie ma grypy.</p>
+</section>
+</section>
+</section>
+<section id="aktualizacja-priorów" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Aktualizacja priorów</h1>
+<p>Można się zapytać, dlaczego Ewa w ogóle robiła test, skoro już na wejściu miała 95% pewności, że jest zdrowa. Zdrowi ludzie zazwyczaj nie robią testów na grypę dla pewności. Ewa może uznać, że 5% to mało, bo jest sezon grypowy i co najmniej 15% populacji ma grypę. Ewa w ten sposób podważa nasze oszacowane prawdopodobieństwo <em>a priori</em>. Ba, nie musi odnosić się do rozpowszechnienia grypy w populacji. Może stwierdzić, że czuje się słabo i zaczyna ją boleć gardło. Ostatecznie, ważąc wszystkie za i przeciw, Ewa może oszacować szanse, że ma grypę na 40 do 60 (2:3).</p>
+<p>Statystyka klasyczna nie ma dla Ewy odpowiedzi. Nie da się jej odnieść do jednostki, pozwala wyciągnąć tylko wnioski populacyjne. Trzeba by było przeszukać literaturę i znaleźć układ tych objawów, oszacować parametry i zrobić setkę innych rzeczy, które pozwolą nam oszacować wstępne prawdopodobieństwo, że Ewa ma grypę. A potem do modelu trzeba by było dorzucić jeszcze fakt, że test wyszedł negatywny i po poradzeniu sobie z nieuchronną współliniowością, dostalibyśmy jakieś oszacowanie ryzyka, w które Ewa i tak by nie uwierzyła, bo nie bierze pod uwagę faktu, że Adam ma grypę. Nie mówiąc już o tym, że Ewa zna swój organizm na sposoby, których masowe badania nie ujmą. Każdy z nas naprawdę potrafi coś o sobie powiedzieć, lekarz (jak i psycholog) też przeprowadza wywiad i stawia indywidualną diagnozę na podstawie doświadczeń. Owszem, ludzie różnią się adekwatnością tych założeń, ale nie sprawia to, że powinniśmy je z gruntu odrzucać – nie ma ogólnego powodu, żeby uznać, że Ewa nie wie o czym mówi, jak stwierdza, że na 40% ma grypę. Statystyka bayesowska posiada jednak szczególną moc, żeby dać Ewie jakieś wnioski niezależnie od tego w jaki sposób i na ile oszacowała wstępne prawdopodobieństwo.</p>
+<p>Zauważmy, że czynnik Bayesa oszacowaliśmy na podstawie parametrów testu – prawdopodobieństwo wyniku negatywnego przy chorobie i przy braku choroby, podzielone przez siebie. Jeśli Ewa nie podważa proporcji wyników prawdziwie i fałszywie negatywnych, to wartość <span class="math inline">\(BF\)</span> się nie zmienia. Inne czynniki mogą szanse podwyższać (ból gardła, chory mąż) i obniżać (szczepienie, brak gorączki) w oszacowaniu Ewy, ale <span class="math inline">\(BF\)</span> pozostaje stały. <span class="math inline">\(BF\)</span> to skalar szans, tzn. niezależnie jakie te szanse są, BF zmienia je w przewidywalny sposób. Skoro tutaj <span class="math inline">\(BF_{01} = 3.3\)</span>, to negatywny wynik testu musi zwiększyć szacowaną szansę na zdrowie (albo chociaż brak grypy) ponad trzykrotnie. Jak więc powinny zmienić się szanse Ewy? Policzmy szanse na brak grypy, bo to trochę przyjemniejsze liczby.</p>
+<p><span class="math display">\[
+O(\text{brak grypy} \mid -) = O(\text{brak grypy})_{\text{wg Ewy}} \times BF_{01} = \frac{3}{2} \times 3.3 = \frac{99}{20} = \frac{4.95}{1}
+\]</span></p>
+<p>Szanse, że Ewa nie ma grypy w świetle negatywnego wyniku testu, korzystając z jej własnych oszacowań, to prawie 5 do 1. Przeliczmy to na prawdopodobieństwo:</p>
+<p><span class="math display">\[
+P(\text{brak grypy} \mid -) = \frac{4.95}{5.95} \approx 83\%
+\]</span></p>
+<p>Z 60% pewności Ewy zrobiło się 83%. A co jeśli na wstępie Ewa uznałaby, że na 70% ma grypę? Może jej objawy się zaostrzyły. Szanse zmienią się następująco:</p>
+<p><span class="math display">\[
+O(\text{brak grypy} \mid -) = O(\text{brak grypy})_{\text{po zaostrzeniu}} \times BF_{01} = \frac{3}{7} \times 3.3 = \frac{99}{70}
+\]</span></p>
+<p>Szanse ciągle są większe niż 1, więc test ciągle powinien przekonać Ewę, że nie ma grypy – jest to bardziej prawdopodobna opcja. Jakie konkretnie jest prawdopodobieństwo, że Ewa jednak nie ma grypy?</p>
+<p><span class="math display">\[
+P(\text{brak grypy} \mid -) =  \frac{99}{70 + 99} = 58.6\%
+\]</span></p>
+<p>Ewa może być tylko niewiele bardziej przekonana, że nie ma grypy, niż że ma, mimo testu.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Wzór na posterior z BF">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Adnotacja</span>Wzór na posterior z BF
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Zanim przejdę dalej, dla naszej wygody wyprowadzę wzór, żeby prawdopodobieństwo <em>a priori</em> przekształcać w <em>a posteriori</em> bez liczenia szans.</p>
+<p><span class="math display">\[
+P(A \mid B) = \frac{BF \times P(A)}{BF \times P(A) + (1 - P(A))}
+\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Dowód">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Wskazówka</span>Dowód
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Zaczynamy od definicji szans <em>a priori</em> i <em>a posteriori</em> dla zdarzenia <span class="math inline">\(A\)</span> pod warunkiem <span class="math inline">\(B\)</span>:</p>
+<p><span class="math display">\[
+O(A) = \frac{P(A)}{1 - P(A)}, \qquad
+O(A \mid B) = \frac{P(A \mid B)}{1 - P(A \mid B)}
+\]</span></p>
+<p>Wiemy już (patrz dowód wyżej), że <span class="math inline">\(BF\)</span> przekształca szanse <em>a priori</em> w szanse <em>a posteriori</em>:</p>
+<p><span class="math display">\[
+O(A \mid B) = BF \times O(A)
+\]</span></p>
+<p>Podstawiając definicję szans po obu stronach:</p>
+<p><span class="math display">\[
+\frac{P(A \mid B)}{1 - P(A \mid B)} = BF \times \frac{P(A)}{1 - P(A)}
+\]</span></p>
+<p>Chcemy wyliczyć <span class="math inline">\(P(A \mid B)\)</span>, więc pozbywamy się mianowników, mnożąc obie strony przez <span class="math inline">\(1 - P(A \mid B)\)</span> oraz <span class="math inline">\(1 - P(A)\)</span>:</p>
+<p><span class="math display">\[
+P(A \mid B) \times (1 - P(A)) = BF \times P(A) \times (1 - P(A \mid B))
+\]</span></p>
+<p>Rozdzielamy iloczyny po obu stronach:</p>
+<p><span class="math display">\[
+P(A \mid B) - P(A \mid B) \times P(A) = BF \times P(A) - BF \times P(A) \times P(A \mid B)
+\]</span></p>
+<p>Zbieramy wszystkie wyrazy zawierające <span class="math inline">\(P(A \mid B)\)</span> po lewej stronie:</p>
+<p><span class="math display">\[
+P(A \mid B) - P(A \mid B) \times P(A) + BF \times P(A) \times P(A \mid B) = BF \times P(A)
+\]</span></p>
+<p>Wyłączamy <span class="math inline">\(P(A \mid B)\)</span> przed nawias:</p>
+<p><span class="math display">\[
+P(A \mid B) \times \big(1 - P(A) + BF \times P(A)\big) = BF \times P(A)
+\]</span></p>
+<p>Zauważmy, że <span class="math inline">\(1 - P(A) + BF \times P(A) = BF \times P(A) + (1 - P(A))\)</span>, więc dzieląc obie strony przez ten nawias, dostajemy:</p>
+<p><span class="math display">\[
+\boxed{
+P(A \mid B) = \frac{BF \times P(A)}{BF \times P(A) + (1 - P(A))}
+}
+\]</span></p>
+<p>Co należało pokazać.</p>
+</div>
+</div>
+</div>
+<p>Zdefiniujmy go sobie w R i sprawdźmy, czy poprawnie policzyłby poprzedni przykład:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>posterior_from_bf <span class="ot">&lt;-</span> <span class="cf">function</span>(prior, bf) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  bf <span class="sc">*</span> prior <span class="sc">/</span> (bf <span class="sc">*</span> prior <span class="sc">+</span> <span class="dv">1</span> <span class="sc">-</span> prior)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_from_bf</span>(<span class="fl">0.3</span>, <span class="fl">3.3</span>)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5857988</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>A co jeśli Ewa cierpi na zaburzenie typu GAD i już przy pierwszym kaszlu ma 99% pewności, że to grypa? Reguła jest identyczna, chociaż wykorzystajmy może <span class="math inline">\(BF_{10} = \frac{10}{33}\)</span> i tym razem policzmy prawdopodobieństwo, że rzeczywiście ma grypę.</p>
+<p><span class="math display">\[
+P(\text{grypa}|-)_{GAD} = \frac{\frac{10}{33} \times 0.99}{\frac{10}{33} \times 0.99 + 0.01} \approx 96.77\%
+\]</span></p>
+<p>Mimo negatywnego wyniku testu Ewy nie udało się przekonać, że nie ma grypy. Spadek prawdopodobieństwa jest malutki, bo wstępna pewność Ewy jest tak wielka. Dowód, który byłby przekonujący przy niższym oszacowaniu, tutaj niczego nie zmienia. W moim przykładzie przekonanie to było nierealistyczne, wynikające z procesu chorobowego, ale ono może być realistyczne. Lekarz, który zebrał na tyle dowodów, że też ma bardzo wysoką pewność, co do diagnozy, też może zlekceważyć wynik szybkiego testu, ale jego nie nazwiemy „nieobiektywnym” czy „nieracjonalnym”.</p>
+<p>Dlatego mówię, że <span class="math inline">\(BF\)</span> to siła dowodu. Im mniej wiarygodne twierdzenie, tym lepszych dowodów żąda. <span class="math inline">\(BF\)</span> to matematyczny wyraz tego właśnie niekontrowersyjnego stwierdzenia. Tak właśnie powinniśmy traktować tabelkę do interpretacji <span class="math inline">\(BF\)</span>, którą wrzuciłem wyżej – siła dowodu, ale siła działa zawsze względem jakiegoś prawdopodobieństwa <em>a priori</em> – im jest większa, tym większego sceptyka przekona. Sceptycyzm może mieć silne podstawy w dowodach – z tej perspektywy im większy <span class="math inline">\(BF\)</span> tym lepiej przeciwstawia się kontrargumentom.</p>
+</section>
+<section id="podsumowanie" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Podsumowanie</h1>
+<p>Co miało być tylko ramką we wpisie o przedziałach ufności, który właśnie przygotowuję, nagle urosło do rozmiarów olbrzymich. Jest to dla mnie – tak jak dla większości badaczy, mam wrażenie – nowa wiedza. Każdy gdzieś słyszał o statystyce bayesowskiej, że jest <em>prior</em> i <em>posterior</em> i że nie ma tam wartości <em>p</em>. Kojarzy się jako coś z gruntu subiektywnego, jako wielka filozofia mająca uzasadniać <em>p</em>-hacking. Jednak im więcej na ten temat wiem, tym bardziej widzę, że tak nie jest. A z pewnością wiem więcej teraz niż wiedziałem, jak zaczynałem ten tekst pisać. Podsumujmy sobie, co z tego wpisu wynika.</p>
+<ol type="1">
+<li>Wyciąganie wniosków na podstawie danych nie jest łatwe. Intuicyjnie, gdy dostrzegamy u kogoś określony zestaw cech — zwłaszcza tych charakterystycznych — przypisujemy tę osobę do określonej grupy. Jednak nawet jeśli wszyscy członkowie tej grupy posiadają takie cechy, nasze wnioskowanie może być błędne, jeżeli cechy te są równie częste w innych grupach. Zdanie „Ten naród uwielbia swoje jedzenie i uważa rodzinę za istotną wartość” może opisywać Polaków, ale równie dobrze może odnosić się do Włochów, Brazylijczyków czy Koreańczyków. Na podstawie przynależności do grupy można często trafnie wnioskować o cechach ludzi, którzy do niej należą, ale na podstawie samych cech często trudno jest ustalić, do której konkretnie grupy należy dana osoba. Podobnie jest z danymi – stosunkowo łatwo jest przewidywać, jakie dane mogą pochodzić z danego rozkładu, ale ocena, na ile prawdopodobne są poszczególne hipotezy (np. o przynależności) w świetle danych, wymaga uwzględnienia szerszego obrazu. Inaczej ze zdania „95% złodziei jest praworęcznych” wywnioskujemy, że 95% praworęcznych to złodzieje.</li>
+<li>Ten szerszy obraz składa się z tego, na ile dobrze inne hipotezy przewidują dane, a to zaś wymaga znajomości innych prawdopodobieństw, by móc obliczyć dopasowanie hipotez do danych. Podstawową procedurę opisuje twierdzenie Bayesa – żeby ocenić, jak prawdopodobny jest wniosek na podstawie przesłanki, musimy wiedzieć, jak często przypadki, do których pasuje dany wniosek, zdarzają się <strong>na tle wszystkich</strong>, którzy spełniają daną przesłankę. Robimy to rozdzierając mentalny kwadrat, żeby oddzielić tych, do których pasuje dany wniosek i jednocześnie spełniają tę przesłankę, a potem dzielimy przez liczbę wszystkich, którzy spełniają tę przesłankę.</li>
+<li>Możemy porównywać hipotezy poprzez patrzenie, jak dobrze dopasowane są do danych. Stosunek tego, jak bardzo prawdopodobne są te dane pod jedną i drugą hipotezą, określamy jako czynnik Bayesa (<em>Bayes factor</em>, <span class="math inline">\(BF\)</span>). Jak porównujemy, jak wypada <span class="math inline">\(H_1\)</span> na tle <span class="math inline">\(H_0\)</span>, oznaczymy to jako <span class="math inline">\(BF_{10}\)</span>.</li>
+<li>Czynnik Bayesa opisuje względne dopasowanie hipotez do danych, ale także to, jak powinny zaktualizować się szanse pod wpływem nowych informacji czynników. Im większa jego wartość, tym silniejszym kontrargumentom potrafi się&nbsp;przeciwstawić.</li>
+<li>Sam czynnik Bayesa nie może jednak powiedzieć, jakie jest prawdopodobieństwo, że dana hipoteza jest prawdziwa. Do tego musimy mieć jakiekolwiek pojęcie, na ile ta hipoteza jest prawdopodobna <em>a priori</em>. Ten fragment często wzbudza lęk, ale tak naprawdę potrafi ustabilizować naszą hipotezę, żeby słabe dowody nie mogły nas łatwo zwieść. To właśnie <em>prior</em> pozwala nam ustrzec się przed stwierdzeniami typu „Polacy kradną częściej niż Brytyjczycy, a że jesteś Polakiem, to pewnie też kradniesz” – nawet jeśli Polacy rzeczywiście kradliby częściej (co odbiłoby się na <span class="math inline">\(BF\)</span>), to <em>prior</em> matematycznie uwzględnia poprawkę na to, że zasadniczo niewiele ludzi kradnie.</li>
+<li>Statystyka bayesowska liczy dopasowanie hipotez do danych. Statystyka klasyczna też przyjmuje jakiś rozkład prawdopodobieństwa na wejściu (zazwyczaj normalny rozkład próbkowania ze średnią 0), ale potem zwraca naszą uwagę na <em>niedopasowanie</em> zamiast dopasowania – jeśli jest zbyt duże (<span class="math inline">\(p &lt; 0.05\)</span>) odrzucamy hipotezę zerową. Standardowo nie porównuje więc pozytywnego dopasowania dwóch hipotez (zwłaszcza przy szacowaniu parametrów), więc nie posiada odpowiednika <span class="math inline">\(BF\)</span>. Kiedy mamy <span class="math inline">\(BF\)</span>, możemy szanse <em>a priori</em> przemnożyć przez ten współczynnik i otrzymać szanse <em>a posteriori</em>, czyli szanse, że dana hipoteza rzeczywiście jest prawdziwa, jeśli potwierdziliśmy prawdziwość określonych przesłanek. Dzięki takiemu ujęciu hipoteza zerowa zyskuje moc przewidywania danych, a przez to statystyka bayesowska zdolna jest dostarczyć dowodów na jej prawdziwość, zamiast tylko na <em>brak możliwości jej odrzucenia</em>.</li>
+<li>Prawdopodobieństwo <em>a priori</em> może płynnie uwzględnić wiele różnych czynników, w tym trudnych do precyzyjnego sformalizowania. W ten sposób statystyka bayesowska pozwala sprawnie zmieniać oszacowania, gdy napływają nowe informacje, ale też testować zarówno jasny scenariusz, jak i czarny scenariusz.</li>
+</ol>
+<p>Statystyka bayesowska to cały oddzielny świat, który ma własne problemy i założenia, ale też własne możliwości. Samo rozszerzenie rozkładów <em>a priori</em> i <em>a posteriori</em> o rozkłady ciągłe, a także dodanie do modelu więcej niż jednej obserwacji sprawia, że rzecz bardzo szybko robi się ekscytująca. O ile – tak jak ja – jest się nerdem.</p>
+</section>
+<section id="zadania" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Zadania</h1>
+<p>Jak mnie samemu udowodniło pisanie tego posta, nic nie pozwala tak dobrze zrozumieć materiału jak rozwiązanie paru problemów. Kilka takich problemów zostawiam tutaj wraz z proponowanymi odpowiedziami. Jeśli ktoś dotarł do tego miejsca – zaklinam, nie pozwól tej wiedzy zmarnować się w pamięci krótkotrwałej. Inaczej tak jak ja będziesz się uczyć tego na nowo co parę miesięcy, nigdy nie uzyskując prawdziwego rozumienia.</p>
+<section id="zadanie-1a." class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="zadanie-1a."><span class="header-section-number">9.1</span> Zadanie 1a.</h2>
+<p>Ewa ocenia prawdopodobieństwo, że ma grypę, na 5%. Zamówiła wypasiony, drogi test, który poprawnie wykrywa chorobę u 85% chorych i tylko w 0.5% przypadków daje wyniki fałszywie pozytywne. Wykonała ten test i zobaczyła wynik negatywny. Jakie jest prawdopodobieństwo, że jednak jest chora? Użyj i metody z twierdzeniem Bayesa, i metody z BF. Sprawdź, czy z obu metod wychodzi takie samo prawdopodobieństwo <em>a posteriori</em>. Policz <span class="math inline">\(BF_{01}\)</span> i zinterpretuj, jak silnym dowodem braku grypy jest negatywny wynik tego testu.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Adnotacja</span>Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Z twierdzenia Bayesa:</p>
+<p><span class="math display">\[
+P(\text{grypa} \mid -) = \frac{0.15 \times 0.05}{0.15 \times 0.05 + 0.995 \times 0.95} = \frac{30}{3811} \approx \boxed{0.79\%}
+\]</span></p>
+<p>Z czynnika Bayesa:</p>
+<p><span class="math display">\[
+BF_{10} = \frac{0.15}{0.995} = \frac{30}{199} \approx 0.1508 \\
+\]</span></p>
+<p>Poprzez szanse, łatwiej będzie policzyć szanse zdrowia:</p>
+<p><span class="math display">\[
+O(\text{zdrowie} \mid -) = \frac{95}{5} \times \frac{199}{30} = \frac{3781}{30} \approx 126 \\
+P(\text{zdrowie} \mid -) = \frac{3781}{3781 + 30} \approx 99.2128\% \\
+P(\text{grypa} \mid -) = 100\% - 99.2128\% \approx \boxed{0.79\%}
+\]</span></p>
+<p>Wychodzi to samo z obu metod. Można też ominąć szanse:</p>
+<p><span class="math display">\[
+P(\text{grypa} \mid -) = \frac{0.1508 \times 0.05}{0.1508 \times 0.05 + 0.95} \approx \boxed{0.79\%}
+\]</span></p>
+<p>Wszędzie wychodzi to samo. To teraz <span class="math inline">\(BF_{01}\)</span>.</p>
+<p><span class="math display">\[
+BF_{01} = \frac{199}{30} \approx 6.63
+\]</span></p>
+<p>Możemy negatywny wynik testu zinterpretować jako umiarkowanie silny dowód, że grypy nie ma (ale trzeba pamiętać, że to nie jest <em>a posteriori</em> i umiarkowanie silny dowód może być ciągle za słaby, jeśli <em>a priori</em> grypy jest wysokie).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="zadanie-1b." class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="zadanie-1b."><span class="header-section-number">9.2</span> Zadanie 1b.</h2>
+<p>Lekarz Ewy po gruntownym wywiadzie stwierdził, że jest na 95% pewny, że Ewa ma grypę. Wtedy Ewa powiedziała mu o negatywnych wynikach wypasionego testu. Jak powinna zmienić się ocena lekarza? Zignoruj jego urażoną dumę.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Adnotacja</span>Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Prawdopodobieństwo <em>a posteriori</em> bezpośrednio z BF obliczonego w poprzednim podpunkcie:</p>
+<p><span class="math display">\[
+P(\text{grypa} \mid -)_{\text{lekarz}} = \frac{0.1508 \times 0.95}{0.1508 \times 0.95 + 0.05} \approx \boxed{74.13\%}
+\]</span></p>
+<p>Lekarz prawdopodobnie nie odrzuci hipotezy o grypie – przy jego <em>a priori</em> jest ona ciągle bardziej prawdopodobna.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="zadanie-1c." class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="zadanie-1c."><span class="header-section-number">9.3</span> Zadanie 1c*.</h2>
+<p>BONUS: spróbuj znaleźć takie przykładowe parametry testu na grypę, żeby wynik negatywny przekonał nawet kogoś pewnego na 99%.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Adnotacja</span>Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Skoro <span class="math inline">\(BF\)</span> to też stosunek szans <em>a posteriori</em> do <em>a priori</em>, to możemy znaleźć takie <span class="math inline">\(BF\)</span>, żeby <em>a posteriori</em> dla zdrowia wyniosło co najmniej 50%:</p>
+<p><span class="math display">\[
+BF_{01\ \text{docelowe}} = \frac{50:50}{1:99} = 99
+\]</span></p>
+<p>Teraz jest to kwestia znalezienia takiego zestawu czułości <span class="math inline">\(P(- \mid H_1)\)</span> i specyficzności <span class="math inline">\(P(- \mid H_0)\)</span>, żeby ich iloraz wyniósł co najmniej 99. To są dwie niewiadome, a tylko jedna dana, więc poprawnych zestawów jest nieskończenie wiele (bo dla każdego A znajdę takie B, żeby iloraz był 50). W zadaniu jednak jest, żeby znaleźć zestaw przykładowy. Mogę więc np. założyć, że odsetek wyników fałszywie pozytywnych zostawię na 0.5%, ale podwyższę szansę poprawnego wykrycia (czy też obniżę szansę niewykrycia).</p>
+<p><span class="math display">\[
+\begin{aligned}
+BF_{01} = \frac{0.995}{P(- \mid H_1)} = 99 &amp;&amp; \mid \times P(- \mid H_1) \\
+0.995 = 99 P(- \mid H_1) &amp;&amp; \mid \div 99 \\
+\boxed{P(- \mid H_1) \approx 1\%}
+\end{aligned}
+\]</span></p>
+<p>Czyli test musiałby poprawnie wykryć co najmniej 99% zakażeń.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="zadanie-2a." class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="zadanie-2a."><span class="header-section-number">9.4</span> Zadanie 2a.</h2>
+<p>Jaskółki latają nisko w 25% dni z dobrą pogodą i w 40% dni, kiedy pada. Właśnie zobaczyłeś(-aś) jaskółkę latającą nisko. Zakładając, że bazowe prawdopodobieństwo deszczu to 20%, oblicz prawdopodobieństwo, że będzie padać.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Adnotacja</span>Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Zrobię od razu z czynnika Bayesa:</p>
+<p><span class="math display">\[
+BF_{10} = \frac{0.4}{0.25} = 1.6 \\
+P(\text{deszcz} \mid \text{niski lot}) = \frac{1.6 \times 0.2}{1.6 \times 0.2 + 0.8} \approx \boxed{28.6\%}
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="zadanie-2b." class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="zadanie-2b."><span class="header-section-number">9.5</span> Zadanie 2b.</h2>
+<p>Korzystając z tych samych założeń, oblicz prawdopodobieństwo, że nie będzie padać, jeśli jaskółki latają wysoko.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Adnotacja</span>Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Teraz obserwujemy, że jaskółki latają wysoko, więc musimy policzyć nowe <span class="math inline">\(BF\)</span>. Nie możemy po prostu odwrócić BF jak dane są inne, bo hipotezy zmieniły swoje dopasowanie do danych. Wybiorę <span class="math inline">\(BF_{01}\)</span>, bo ostatecznie mamy policzyć prawdopodobieństwo, że nie będzie padać.</p>
+<p><span class="math display">\[
+BF_{01} = \frac{0.75}{0.6} = 1.25\\
+P(\text{pogoda} \mid \text{wysoki lot}) = \frac{0.8 \times 1.25}{0.8 \times 1.25 + 0.2} \approx \boxed{83.3\%}
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level1 unnumbered">
+
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-clayton2021" class="csl-entry" role="listitem">
+Clayton, A. (2021). <em>Bernoulli’s fallacy: statistical illogic and the crisis of modern science</em>. New York: Columbia University Press.
+</div>
+<div id="ref-field2026" class="csl-entry" role="listitem">
+Field, A. P. (2026). <em>Discovering <span>Statistics</span> <span>Using</span> <span>R</span> and <span>RStudio</span></em>. London: SAGE Publications.
+</div>
+<div id="ref-jeffreys1998" class="csl-entry" role="listitem">
+Jeffreys, H. (1998). <em>The Theory of Probability</em>. OUP Oxford.
+</div>
+<div id="ref-nicenboim2025" class="csl-entry" role="listitem">
+Nicenboim, B., Schad, D. J., &amp; Vasishth, S. (2025). <em>Introduction to Bayesian Data Analysis for Cognitive Science</em> (1. wyd.). Boca Raton: Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9780429342646">https://doi.org/10.1201/9780429342646</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Skopiowano!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Skopiowano!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nieobliczalne\.pl");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="dark">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "jakub-jedrusiak/nieobliczalne";
+    script.dataset.repoId = "R_kgDOHBIy6A";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOHBIy6M4CUvlw";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/edit/main/posts/twierdzenie-bayesa.qmd" class="toc-action"><i class="bi bi-github"></i>Edytuj tę stronę</a></li><li><a href="https://github.com/jakub-jedrusiak/nieobliczalne/issues/new" class="toc-action"><i class="bi empty"></i>Zgłoś problem</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

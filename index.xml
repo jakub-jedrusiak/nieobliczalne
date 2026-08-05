@@ -10,7 +10,540 @@
 <atom:link href="https://nieobliczalne.pl/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Tue, 24 Feb 2026 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 04 Aug 2026 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Twierdzenie Bayesa i bayesowskie porównywanie hipotez</title>
+  <dc:creator>Jakub Jędrusiak</dc:creator>
+  <link>https://nieobliczalne.pl/posts/twierdzenie-bayesa.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Szybko ustalmy notację, tutaj tabela z definicjami i przykładami:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Notacja</th>
+<th style="text-align: left;">Wyjaśnienie</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?P(A)"></td>
+<td style="text-align: left;">Prawdopodobieństwo A</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?P(A%20%5Ccap%20B)"></td>
+<td style="text-align: left;">Prawdopodobieństwo A i jednocześnie B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?P(%5Ctext%7Bgrypa%7D%20%5Ccap%20%5Ctext%7Bszczepionka%7D)"></td>
+<td style="text-align: left;">Prawdopodobieństwo, że ktoś i ma grypę, i się szczepił (odsetek takich osób w całej populacji)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?P(A%20%5Cmid%20B)"></td>
+<td style="text-align: left;">Prawdopodobieństwo A jeśli B (albo wśród spełniających warunek B)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?P(%5Ctext%7Bgrypa%7D%20%5Cmid%20%5Ctext%7Bszczepionka%7D)"></td>
+<td style="text-align: left;">Prawdopodobieństwo grypy jeśli się ktoś zaszczepił (odsetek zachorowań tylko wśród szczepionych)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?P(%5Clnot%20A)"></td>
+<td style="text-align: left;">Prawdopodobieństwo, że nie A (czyli <img src="https://latex.codecogs.com/png.latex?1%20-%20P(A)">)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?P(%5Clnot%20%5Ctext%7Bgrypa%7D)"></td>
+<td style="text-align: left;">Prawdopodobieństwo, że ktoś nie ma grypy (jest zdrowy, łączny odsetek zdrowych w populacji)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?O(A)"></td>
+<td style="text-align: left;">Szansa na A, czyli na ile A jest bardziej prawdopodobne od alternatyw (<img src="https://latex.codecogs.com/png.latex?%5Cfrac%7BP(A)%7D%7BP(%5Clnot%20A)%7D">)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="szacowanie-prawdopodobieństwa" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Szacowanie prawdopodobieństwa</h1>
+<p>Nie ukrywam, że moje wyjaśnienie jest w dużej mierze inspirowane animowanym dowodem wykonanym przez świetnego YouTube’owego twórcę 3blue1brown. Zresztą mogę się inspirować, te wpisy to dla mnie głównie notatki do siebie. Jeśli to czytasz i nie jesteś mną, pozdrawiam. Jeśli jesteś mną, to też pozdrawiam. Tak czy inaczej, warto ten filmik obejrzeć, żeby rzeczywiście te kwadraty, o których piszę niżej, zobaczyć.</p>
+<div id="3blue1brownVideo" class="text-center">
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/HZGCoVF3YvM?si=rXxs7m7--FnDUri-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
+</iframe>
+</div>
+<p>Z danych przedstawionych w treści zadania wiemy, że 30% ofiar przemocy ma to zaburzenie. Z góry zaznaczam, że dane są kompletnie wymyślone. Pytanie o szansę, że nasz chory pacjent jest ofiarą przemocy, to pytanie jaka część chorych na tę chorobę to ofiary przemocy. Znamy odsetek chorych pośród ofiar, chcemy znać odsetek ofiar pośród chorych. Jeśli prawie wszyscy chorzy to ofiary przemocy, to nasz chorujący pacjent pewnie też był ofiarą. Jeśli ofiary przemocy nie chorują na tę chorobę, to nasz pacjent (skoro jest chory) pewnie też nie jest ofiarą przemocy. Jeśli nie ma zależności, tzn. odsetek ofiar przemocy jest taki sam w grupie chorych, jak i w grupie zdrowych, to nic nam informacja o chorobie nie powie.</p>
+<p>Tutaj zostało nam powiedziane, że na tę chorobę choruje 10% całej populacji, ale aż 30% ofiar przemocy. Populacja składa się więc z czterech grup – chorujące ofiary przemocy, zdrowe ofiary przemocy, chorujące nie-ofiary przemocy i zdrowe nie-ofiary przemocy. Cztery prostokąty różnej wielkości. Chcemy wiedzieć, jaka część CHORUJĄCYCH to ofiary przemocy, więc musimy podzielić chorujące ofiary przemocy przez wszystkich chorujących. Tak się liczy procenty, procenty to ułamki, dlatego nie lubię uczenia ludzi procentów (tylko) za pomocą proporcji. Innymi słowy musimy wywalić oba prostokąty oznaczające ludzi zdrowych, z pozostałych dwóch ułożyć jedną figurę, i powiedzieć, jak duża część tej nowej figury to ofiary przemocy.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bofiara%7D%20%5Cmid%20%5Ctext%7Bchoruje%7D)%20=%20%5Cfrac%7B%5Ctext%7Bchoruj%C4%85ce%20ofiary%7D%7D%7B%5Ctext%7Bwszyscy%20chorzy%7D%7D%20=%20%5Cfrac%7B%5Ctext%7Bryzyko%20u%20ofiar%7D%20%5Ctimes%20%5Ctext%7Bodsetek%20ofiar%7D%7D%7B%5Ctext%7Bwszyscy%20chorzy%7D%7D%0A"></p>
+<p>Tę notację czytamy „prawdopodobieństwo, że osoba jest ofiarą, jeśli wiemy, że choruje”. Wiemy, że nasza nowa figura to łącznie 10%, bo tak zostało powiedziane w zadaniu. Co ważne – 10% wszystkich, nie tylko nie-ofiar, to jest suma chorujących ofiar i chorujących nie-ofiar. Pozostaje więc policzyć, ile jest chorujących ofiar. Tego nie wiemy, ale wiemy, że to 30% wszystkich ofiar.</p>
+<p>Wszystkie ofiary to jest inny zestaw, wszystkie ofiary to chorujące ofiary + zdrowe ofiary. Ten zestaw to 3% całego dużego prostokąta, co również zostało nam dane w zadaniu. Wyobrażam sobie, że trzymam papierowy prostokąt o polu 3, który oznacza wszystkie ofiary. Odcinam nożyczkami 30% tego kawałka, oddzielając w ten sposób chorujące ofiary przemocy od zdrowych. Jakie pole ma ten odcięty kawałek? 30% z 3%, więc:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A3%5C%25%20%5Ctimes%2030%5C%25%20=%200.03%20%5Ctimes%200.30%20=%200.009%20=%200.9%5C%25%0A"></p>
+<p>Chorujące ofiary przemocy stanowią 0.9% całego prostokąta. Odsuwam zdrowe ofiary przemocy, przysuwam chorujące nie-ofiary przemocy i w ten sposób mam przed sobą wszystkich chorujących w dwóch kawałkach, które w sumie stanowiły 10% dużego prostokąta. Najpierw oddzieliłem chorujących od innych ofiar przemocy, a potem połączyłem z resztą chorujących. Ponieważ reszta prostokąta mi zniknęła, pisanie o procentach może być mylące. Procent jest zawsze z czegoś i trzeba wiedzieć z czego, bo inaczej bardzo łatwo się pogubić. Wcześniej liczba 100% oznaczała cały prostokąt, a nowa figura to 10% całego prostokąta. Jaką część nowej figury stanowi moje 0.9%? Będzie to 0.9% w całości, która stanowi 10%, więc dzielę:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7B0.9%7D%7B10%7D%20=%200.09%20=%209%5C%25%0A"></p>
+<p>To są już nowe procenty. Odcięty przeze mnie fragment stanowił 0.9% całego dużego prostokąta, ale 9% mojej nowej figury. Innymi słowy chorujące na tę chorobę ofiary przemocy to 0.9% wszystkich ludzi, ale już 9% wszystkich chorujących.</p>
+<p>To jest stała procedura, tzn. oddziel kawałek z jednej grupy, dołóż do reszty drugiej grupy i podziel pole kawałka przez łącze pole całości. Jeśli mam notację <img src="https://latex.codecogs.com/png.latex?P(A%20%5Cmid%20B)">, czyli prawdopodobieństwo A, jeśli wiem, że B, to najpierw muszę ze wszystkich A oddzielić tych, którzy <em>jednocześnie</em> należą do B, a potem podzielić przez <em>wszystkich</em> należących do B. To, co na lewo od pionowej kreski, muszę pociąć i podzielić przez to, co na prawo. Muszę więc umieć policzyć, ile mam A, którzy jednocześnie należą do B (np. 30% z 3%) oraz ile łącznie mam B (np. 10%). Czasem wiemy od razu, ile łącznie jest B, ale czasem trzeba to policzyć. W końcu B też jest w dwóch kawałkach, chorujące ofiary policzyliśmy, a czasem trzeba wprost policzyć chorujące nie-ofiary i dodać. Na przykład jeśli zamiast tamtych danych dostałbym informację, że 5% ludzi bez doświadczenia przemocy choruje, to żeby dostać całość B musiałbym policzyć 5% z 97% (wszyscy minus ogólny odsetek ofiar) i dodać do 0.9%, które policzyłem wcześniej. Potnij co po lewej i podziel przez to, co po prawej. Pionowa kreska nawet może się skojarzyć z kreską ułamkową, a że jest nadziana na sztorc, to A się trochę rozedrze, jak na nią skoczy.</p>
+<p>I <em>pro forma</em> zapiszę to twierdzenie, ale muszę przyznać, że jak próbowałem je zrozumieć na literkach, a potem go używać, to wszytko mi się plątało. Forma graficzna i wyłożona przeze mnie wyżej logika z rozdzieraniem pozwoliły mi dopiero swobodnie korzystać ze wzoru. Polecam rzeczywiście najpierw wyrobić intuicję.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(A%20%5Cmid%20B)%20=%20%5Cfrac%7BP(A%20%5Ccap%20B)%7D%7BP(B)%7D%20=%20%5Cfrac%7BP(B%20%5Cmid%20A)%20%5Ctimes%20P(A)%7D%7BP(B)%7D%0A"></p>
+<p>Nieco przyjemniejsze jest w formie równości iloczynów:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(A%20%5Cmid%20B)%20%5Ctimes%20P(B)%20=%20P(B%20%5Cmid%20A)%20%5Ctimes%20P(A)%0A"></p>
+<p>W tej postaci mogę je odnieść do interpretacji graficznej. Czytam je tak: przypadki A w grupie B to ta sama część całej populacji co przypadki B w grupie A. Graficznie to ma sens, bo to jest ten sam kawałek naszego kwadratu, tylko po lewej rozumiany jako „z całości B odcinam A”, a po prawej „z całości A odcinam B”. Ładnie to pokazuje grafika z Among Us z angielskiej Wikipedii.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Bayes_theorem_assassin.svg" class="img-fluid figure-img" alt="A geometric visualisation of Bayes' theorem by CMG Lee. The thumbnails denote the number of each corresponding condition and case, the probability being the fraction of each thumbnail that is shaded. Similar reasoning can be used to show that P(Ā|B) = ⁠ P(B|Ā) P(Ā) / P(B) ⁠ etc."></p>
+<figcaption>Cmglee, CC BY-SA 4.0 <a href="https://creativecommons.org/licenses/by-sa/4.0" class="uri">https://creativecommons.org/licenses/by-sa/4.0</a>, Wikimedia Commons</figcaption>
+</figure>
+</div>
+</section>
+<section id="aktualizowanie-pewności" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Aktualizowanie pewności</h1>
+<p>Początkowo uznaliśmy więc, że ryzyko, że nasz pacjent rzeczywiście jest ofiarą przemocy, wynosi 3%. Był to nasz najlepszy strzał, bo tyle wynosi odsetek ofiar przemocy w populacji (a przynajmniej tak wymyśliłem do zadania). Innymi słowy szansa wyniosła 3:97 – 3 ofiary przemocy na każde 97 osób, które miały szczęście nimi nie być. Matematycznie <em>szansa</em> to właśnie stosunek prawdopodobieństwa prawdy do fałszu, wyników pozytywnych do negatywnych itd. Mówi nam, jak bardziej lub mniej prawdopodobny jest wynik pozytywny od negatywnego (jakkolwiek je zdefiniujemy). Nasze 3% nazwiemy prawdopodobieństwem <em>a priori</em> (ang. <em>prior</em>).</p>
+<p>Trzeba zwrócić uwagę, że licznik w naszym równaniu, tj. ten pocięty pasek prawdopodobieństwa, liczymy poprzez przemnożenie tego ogólnego prawdopodobieństwa <em>a priori</em> (<img src="https://latex.codecogs.com/png.latex?P(A)">) przez odsetek A spełniający warunek B (<img src="https://latex.codecogs.com/png.latex?P(B%20%5Cmid%20A)">). Że całe <img src="https://latex.codecogs.com/png.latex?P(B)"> (czyli wszyscy spełniający warunek B, a więc suma spełniających warunek A i niespełniających warunku A, dodane pocięte kawałki) wynosi mniej niż 100% (w naszym przykładzie 10%), to ciężko mówić o prawdopodobieństwie, bo ono musi sumować się do 100%, jeśli wyczerpuje wszystkie możliwości (a tutaj wyczerpuje). Dlatego dzielimy nasz iloczyn przez <img src="https://latex.codecogs.com/png.latex?P(B)"> i mamy prawdopodobieństwo.</p>
+<p>Wynikiem tego działania było u nas 9% – tak powinniśmy szacować prawdopodobieństwo, że nasz pacjent był ofiarą przemocy, jeśli wiemy, że wykazuje to szczególne zaburzenie. To zaktualizowane oszacowanie nazywamy prawdopodobieństwem <em>a posteriori</em> (ang. <em>posterior</em>). Dane zmuszają nas do aktualizacji naszego oszacowania. Innymi słowy, szanse wzrastają z 3:97 do 9:91 (0,031 do 0,099).</p>
+</section>
+<section id="czynnik-bayesa" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Czynnik Bayesa</h1>
+<p>Możemy też porównać względne ryzyko. 30% ofiar przemocy wykształca to zaburzenie, a w całej populacji dotyka ono 10%. Cała populacja to zarówno ofiary, jak i nie-ofiary. Możemy policzyć, jaką u jakiej części nie-ofiar pojawia się to zaburzenie. Nie-ofiary stanowią 97% całej populacji i 91% populacji cierpiących na to zaburzenie (bo 9% to ofiary). Także odłączam grupę chorujących nie-ofiar od grupy wszystkich chorujących (<img src="https://latex.codecogs.com/png.latex?10%5C%25%20%5Ctimes%2091%5C%25%20=%209.1%5C%25">) i liczę, jaka to część wszystkich nie-ofiar (<img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B9.1%7D%7B97%7D%20=%209.4%5C%25">).</p>
+<p>Czyli ofiary przemocy mają 30% ryzyka, że wykształcą to zaburzenie, a osoby, które nie doświadczyły przemocy, zaledwie 9.4%. Czyli procentowe ryzyko jest u ofiar przemocy</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AK%20=%20%5Cfrac%7B30%7D%7B9.4%7D%20=%203.19%0A"></p>
+<p>…razy większe niż u nie-ofiar. Porównajmy też, ile razy wzrastają szanse, w momencie postawienia diagnozy – nie prawdopodobieństwo, a szanse. Jak pisałem wyżej, szanse wzrastają wtedy z 3:97 do 9:91, a więc:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ABF%20=%20%5Cfrac%7B9:91%7D%7B3:97%7D%20%5Capprox%203.19%0A"></p>
+<p>Ten sam wynik nie jest przypadkowy – stosunek szans <em>a posteriori</em> do <em>a priori</em> będzie taki sam, jak iloraz ryzyk między tymi grupami. Liczba ta nazywa się <strong>czynnikiem Bayesa</strong> (<em>Bayes factor</em>).</p>
+<p>Obie perspektywy pozwalają nam znaleźć nasz <img src="https://latex.codecogs.com/png.latex?BF">, a jest on o tyle użyteczny, że występuje zależność <em>a priori</em> × BF = <em>a posteriori</em> (skoro <img src="https://latex.codecogs.com/png.latex?BF%20=%20%5Cfrac%7B%5Ctext%7Bszanse%20a%20posteriori%7D%7D%7B%5Ctext%7Bszanse%20a%20priori%7D%7D">). Czynnik Bayesa pokazuje potencjalnie ważny efekt, ale nie należy go mylić z prawdopodobieństwem <em>a posteriori</em> – w momencie, kiedy postawiliśmy diagnozę, nasze oszacowanie szansy wzrosło ponad trzykrotnie, ale prawdopodobieństwo ciągle wynosi 9%. Wynika to z faktu, że bycie ofiarą jest rzadkie samo z siebie. Ostatecznie więc możemy wskazać na dwa równoważne wzory na BF:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ABF%20=%20%5Cfrac%7B%5Ctext%7Bszanse%20a%20posteriori%7D%7D%7B%5Ctext%7Bszanse%20a%20priori%7D%7D%0A"></p>
+<p>oraz</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ABF%20=%20%5Cfrac%7BP(B%20%5Cmid%20A)%7D%7BP(B%20%5Cmid%20%5Clnot%20A)%7D%0A"></p>
+<p>gdzie B to choroba, a A to bycie ofiarą przemocy. Dowód na równoważność tych wzorów poniżej.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Dowód: aktualizacja szans za pomocą ilorazu wiarygodności">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Wskazówka</span>Dowód: aktualizacja szans za pomocą ilorazu wiarygodności
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Niech <img src="https://latex.codecogs.com/png.latex?(A)"> oznacza rozważane zdarzenie lub hipotezę, a <img src="https://latex.codecogs.com/png.latex?(B)"> zaobserwowaną informację.</p>
+<p>Prawdopodobieństwo zdarzenia zapisujemy jako <img src="https://latex.codecogs.com/png.latex?(P(A))">, natomiast jego <strong>szanse</strong> definiujemy jako:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Coperatorname%7BO%7D(A)%0A:=%0A%5Cfrac%7BP(A)%7D%7BP(%5Cneg%20A)%7D.%0A"></p>
+<p>Analogicznie szanse a posteriori, czyli szanse zdarzenia <img src="https://latex.codecogs.com/png.latex?(A)"> po zaobserwowaniu <img src="https://latex.codecogs.com/png.latex?(B)">, wynoszą:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Coperatorname%7BO%7D(A%20%5Cmid%20B)%0A:=%0A%5Cfrac%7BP(A%20%5Cmid%20B)%7D%7BP(%5Cneg%20A%20%5Cmid%20B)%7D.%0A"></p>
+<p>Z twierdzenia Bayesa:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(A%20%5Cmid%20B)%0A=%0A%5Cfrac%7BP(B%20%5Cmid%20A)P(A)%7D%7BP(B)%7D.%0A"></p>
+<p>Analogicznie dla zdarzenia przeciwnego:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Cneg%20A%20%5Cmid%20B)%0A=%0A%5Cfrac%7BP(B%20%5Cmid%20%5Cneg%20A)P(%5Cneg%20A)%7D%7BP(B)%7D.%0A"></p>
+<p>Dzieląc pierwsze równanie przez drugie, otrzymujemy:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7BP(A%20%5Cmid%20B)%7D%0A%20%20%20%20%20%7BP(%5Cneg%20A%20%5Cmid%20B)%7D%0A=%0A%5Cfrac%7B%0A%20%20%5Cdfrac%7BP(B%20%5Cmid%20A)P(A)%7D%7BP(B)%7D%0A%7D%7B%0A%20%20%5Cdfrac%7BP(B%20%5Cmid%20%5Cneg%20A)P(%5Cneg%20A)%7D%7BP(B)%7D%0A%7D.%0A"></p>
+<p>Po skróceniu wspólnego czynnika <img src="https://latex.codecogs.com/png.latex?(P(B))">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7BP(A%20%5Cmid%20B)%7D%0A%20%20%20%20%20%7BP(%5Cneg%20A%20%5Cmid%20B)%7D%0A=%0A%5Cfrac%7BP(B%20%5Cmid%20A)P(A)%7D%0A%20%20%20%20%20%7BP(B%20%5Cmid%20%5Cneg%20A)P(%5Cneg%20A)%7D.%0A"></p>
+<p>Rozdzielamy iloczyny:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7BP(A%20%5Cmid%20B)%7D%0A%20%20%20%20%20%7BP(%5Cneg%20A%20%5Cmid%20B)%7D%0A=%0A%5Cfrac%7BP(A)%7D%0A%20%20%20%20%20%7BP(%5Cneg%20A)%7D%0A%5Ccdot%0A%5Cfrac%7BP(B%20%5Cmid%20A)%7D%0A%20%20%20%20%20%7BP(B%20%5Cmid%20%5Cneg%20A)%7D.%0A"></p>
+<p>Korzystając z definicji szans, dostajemy:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Coperatorname%7BO%7D(A%20%5Cmid%20B)%0A=%0A%5Coperatorname%7BO%7D(A)%0A%5Ccdot%0A%5Cfrac%7BP(B%20%5Cmid%20A)%7D%0A%20%20%20%20%20%7BP(B%20%5Cmid%20%5Cneg%20A)%7D.%0A"></p>
+<p>Po podzieleniu obu stron przez <img src="https://latex.codecogs.com/png.latex?(%5Coperatorname%7BO%7D(A))">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cboxed%7B%0A%5Cfrac%7B%5Coperatorname%7BO%7D(A%20%5Cmid%20B)%7D%0A%20%20%20%20%20%7B%5Coperatorname%7BO%7D(A)%7D%0A=%0A%5Cfrac%7BP(B%20%5Cmid%20A)%7D%0A%20%20%20%20%20%7BP(B%20%5Cmid%20%5Cneg%20A)%7D%0A%7D%0A"></p>
+<p>Oznacza to, że stosunek szans a posteriori do szans a priori jest równy ilorazowi wiarygodności informacji <img src="https://latex.codecogs.com/png.latex?(B)"> przy założeniu <img src="https://latex.codecogs.com/png.latex?(A)"> i <img src="https://latex.codecogs.com/png.latex?(%5Cneg%20A)">.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="bayesowskie-porównywanie-hipotez" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Bayesowskie porównywanie hipotez</h1>
+<p>Ten stosunek ma zaskakująco duże możliwości, jeśli uznamy go za rodzaj <strong>porównania hipotez</strong>. Co mam na myśli? Zaobserwowaliśmy, że nasz pacjent cierpi na to konkretne zaburzenie. Możemy postawić dwie hipotezy:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AH_0:%20%5Ctext%7BPacjent%20nie%20by%C5%82%20ofiar%C4%85%20przemocy%7D%20%5C%5C%0AH_1:%20%5Ctext%7BPacjent%20by%C5%82%20ofiar%C4%85%20przemocy%7D%0A"></p>
+<p>Pytanie brzmi – która z tych hipotez <strong>lepiej przewiduje dane</strong>? W każdej z tych hipotez jest zaszyte prawdopodobieństwo choroby. Choroba wystąpiła. Która z tych hipotez bardziej pasuje do naszych obserwacji? Jak bardzo lepiej? To jest zupełnie inna logika testowania hipotez niż w klasycznej statystyce. Klasyczna statystyka zakłada, że istnieje jakaś prawdziwa wartość parametru, a dane, które otrzymaliśmy, to zaszumione odbicie tej prawdziwej wartości. Jak to napisałem, przyszło mi do głowy określenie „statystyka platońska”. W perspektywie bayesowskiej to dane są prawdziwe (w końcu się wydarzyły!), a różne wartości parametrów (tj. różne hipotezy) mają konkurować, która najlepiej je wyjaśnia. Która z tych hipotez daje większe prawdopodobieństwo uzyskania dokładnie takich danych?</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ABF_%7B10%7D%20=%20%5Cfrac%7BP(B%20%5Cmid%20H_1)%7D%7BP(B%20%5Cmid%20H_0)%7D%0A"></p>
+<p>Ponieważ <img src="https://latex.codecogs.com/png.latex?H_1"> to u nas po prostu bycie ofiarą, czyli <img src="https://latex.codecogs.com/png.latex?A">, a <img src="https://latex.codecogs.com/png.latex?H_0"> to niebycie ofiarą, czyli <img src="https://latex.codecogs.com/png.latex?%5Cneg%20A">, to jest to po prostu czynnik Bayesa! Piszemy <img src="https://latex.codecogs.com/png.latex?BF_%7B10%7D"> bo porównujemy <img src="https://latex.codecogs.com/png.latex?H_1"> względem <img src="https://latex.codecogs.com/png.latex?H_0">. Ponieważ w naszym przykładzie <img src="https://latex.codecogs.com/png.latex?BF%20%5Capprox%203.2">, to porównanie tych dwóch hipotez wskazuje, że nasze dane są ponad trzykrotnie bardziej prawdopodobne przy <img src="https://latex.codecogs.com/png.latex?H_1"> niż przy <img src="https://latex.codecogs.com/png.latex?H_0">.</p>
+<p>Nie należy się jednak spieszyć z przyjmowaniem takiej hipotezy. I tak, piszę o przyjmowaniu, bo statystyka bayesowska pozwala nam rzeczywiście przyjąć hipotezę alternatywną zamiast tylko odrzucać hipotezę zerową. Mimo że nasza hipoteza alternatywna przewiduje dane ponad trzykrotnie lepiej, to trzeba wziąć pod uwagę, że wyjściowe prawdopodobieństwo bycia ofiarą przemocy wynosi w naszym zadaniu 3%. Jest to zjawisko ciągle stosunkowo rzadkie. Zastosowanie tego czynnika pozwala nam oszacować rzeczywiste prawdopodobieństwo, że pacjent jest ofiarą – liczyliśmy je wyżej i wynosi 9%. Najważniejszym źródłem dla naszych decyzji jest właśnie ta liczba – prawdopodobieństwo <em>a posteriori</em>. 9% że jest ofiarą do 91%, że nią nie jest. Kiedy więc bierzemy pod uwagę prawdopodobieństwo <em>a priori</em>, hipoteza, że pacjent nie jest ofiarą przemocy, jest ciągle 10 razy bardziej prawdopodobna.</p>
+<p>Jednak czynnik Bayesa ma tę przyjemną właściwość, że nawet jak się okaże, że odsetek ofiar przemocy jest w społeczeństwie inny niż zakładaliśmy (wyższy albo niższy), to dopóki ryzyko zachorowania u ofiar będzie 30% a u nie-ofiar 9.4%, wartość BF się nie zmieni. Innymi słowy prawdopodobieństwo <em>a priori</em> może zostać zaktualizowane, ale szanse <em>a posteriori</em> to ciągle szanse <em>a priori</em> × BF. Prawdopodobieństwo <em>a priori</em> może zmienić się nie tylko dlatego, że zaktualizuje się oszacowanie powszechności przemocy w populacji. Nasze wstępne oszacowanie dla tego pacjenta może się zmienić też dlatego, że zbieramy różne poszlaki na temat tej konkretnej osoby. Dla tego pacjenta możemy szacować prawdopodobieństwo bycia ofiarą przemocy na wejściu nawet na 10%, na podstawie naszego doświadczenia. Przy takim oszacowaniu szanse <em>a posteriori</em> wyniosą:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AO(%5Ctext%7Bten%20pacjent%20do%C5%9Bwiadczy%C5%82%20przemocy%7D%20%5Cmid%20%5Ctext%7Bzaburzenie%7D)%20=%20%5C%5C%0AO(%5Ctext%7Bszanse%20a%20priori%7D)%20%5Ctimes%20BF_%7B10%7D%20=%20%5C%5C%0A%5Cfrac%7B1%7D%7B9%7D%20%5Ctimes%203.2%20=%20%5Cfrac%7B16%7D%7B45%7D%0A"></p>
+<p>…a więc prawdopodobieństwo wyniesie:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bten%20pacjent%20do%C5%9Bwiadczy%C5%82%20przemocy%7D%20%5Cmid%20%5Ctext%7Bzaburzenie%7D)%20=%20%5C%5C%0A%5Cfrac%7B16%7D%7B45%20+%2016%7D%20%5Capprox%2026%5C%25%0A"></p>
+<p>W ten sposób dowody za i przeciw kumulują się, by dostarczyć&nbsp;nam sensownego oszacowanie ryzyka. W tym prostym przykładzie można to prawdopodobieństwo policzyć na kartce, ale przy prawdziwych hipotezach badawczych, gdzie możemy mieć ciągłe rozkłady, wiele parametrów itd. sposób liczenia prawdopodobieństwa <em>a posteriori</em> szybko robi się bardziej skomplikowany, chociaż jego logika jest taka sama.</p>
+<p>Powinniśmy więc taką hipotezę przyjąć czy odrzucić? Piękno statystyki bayesowskiej na tym polega dostaliśmy nasze prawdopodobieństwo – 9%. Mnie taki poziom pewności nie satysfakcjonuje, ale każe zachować ostrożność. Koszty pomyłki mogą być bowiem bardzo duże. Jeśli uda nam się je skwantyfikować, możemy je włączyć do równania i wziąć matematycznie ująć to, że preferujemy konkretny rodzaj błędu, bo wiąże się z mniejszymi kosztami. Ostatecznie prawdopodobieństwo <em>a posteriori</em> mocno zależy od prawdopodobieństwa <em>a priori</em>, ale istnieją zgrubne reguły interpretowania BF samego w sobie, jako siły argumentu. Im większa siła argumentu, tym większy sceptycyzm pokona. I odwrotnie, im większy sceptycyzm, tym silniejszych dowodów potrzeba. W tabelce klasyczne reguły interpretacji BF <span class="citation" data-cites="jeffreys1998">(Jeffreys, 1998)</span>, które jednak trzeba traktować bardzo zgrubnie, bo to jednak modyfikator prawdopodobieństwa <em>a priori</em>. Najprostsza reguła to wybrać tę hipotezę, która ma więcej niż 50% prawdopodobieństwa.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">BF</th>
+<th style="text-align: left;">Interpretacja</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">&lt; 1</td>
+<td style="text-align: left;">Odwróć ułamek i sprawdź jeszcze raz</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Brak dowodów, posterior wygląda jak prior</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1-3</td>
+<td style="text-align: left;">Dowody słabe, anegdotyczne</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3-10</td>
+<td style="text-align: left;">Dowody umiarkowane</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">10-30</td>
+<td style="text-align: left;">Dowody silne</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">30-100</td>
+<td style="text-align: left;">Dowody bardzo silne</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&gt; 100</td>
+<td style="text-align: left;">Dowody ekstremalnie silne</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="przyjęcie-hipotezy-zerowej" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Przyjęcie hipotezy zerowej</h1>
+<p>Statystyka bayesowska pozwala na jeszcze jedną rzecz, która w klasycznej statystyce jest niemożliwa, a której często bardzo potrzebujemy, więc udajemy, że da się to zrobić na podstawie wartości <em>p</em>. Statystyka bayesowska pozwala nam przyjąć hipotezę zerową. Nie jej nie odrzucać, tylko rzeczywiście ją przyjąć.</p>
+<p>Widziałem już plakaty czy wystąpienia, gdzie badacz uzyskał coś w rodzaju <img src="https://latex.codecogs.com/png.latex?p%20=%200.625"> i interpretował to tak, jakby było 62.5% szans, że hipoteza zerowa jest prawdziwa. W końcu nie mogę jej odrzucić, więc uznaję, że efektu nie ma! Dokładnie tego samego uczymy studentów, jak pokazujemy im testy normalności rozkładu, mieszając im przy okazji mocno w głowach. Mówimy im wtedy „Jeśli macie <img src="https://latex.codecogs.com/png.latex?p%20%3E%200.05">, to zakładacie, że mamy normalność”, a potem kiedy interpretują już swoje właściwe wyniki, tłuczemy im do głów, że hipotezy zerowej nie da się przyjąć. Gdzie <em>de facto</em> przecież to tutaj robimy, jak udajemy, że <img src="https://latex.codecogs.com/png.latex?p%20%3E%200.05"> to dowód na rzecz normalności. Ba, jak wychodzi <img src="https://latex.codecogs.com/png.latex?p%20=%200.06">, czyli tylko 6% szans, że pod hipotezą zerową powstałyby takie dane, to jeśli to test normalności, to mówimy im „nie odrzucamy hipotezy zerowej, zakładamy więc normalność” (znowu – przecież tak nie wolno!), a jak takie samo <img src="https://latex.codecogs.com/png.latex?p"> wyjdzie im w regresji, to mówimy im, żeby pisali, że wyniki są „istotne na poziomie trendu” i pisali dyskusję tak, jakby były prawdziwe, tylko użyli ostrożniejszego ryzyka. A jaka jest szansa, że ten wynik jest prawdziwy? Jak wypada hipoteza alternatywna na tle zerowej? Nie wiemy, nie liczymy tego, a moglibyśmy, jakbyśmy ustalili sensowny <em>prior</em> i wyliczyli BF.</p>
+<p>Jak działa przyjmowanie hipotezy zerowej? Tak samo jak przyjmowanie hipotezy alternatywnej. Jeśli <img src="https://latex.codecogs.com/png.latex?BF_%7B10%7D"> ma wartość mniejszą od 1, to ją odwracamy. Dostajemy wtedy <img src="https://latex.codecogs.com/png.latex?BF_%7B01%7D"> czyli miarę, ile razy bardziej prawdopodobne są nasze dane pod <img src="https://latex.codecogs.com/png.latex?H_0"> w porównaniu do <img src="https://latex.codecogs.com/png.latex?H_1">. Potem wyliczamy prawdopodobieństwo <em>a posteriori</em> i interpretujemy. Zobaczymy to w kolejnym przykładzie.</p>
+</section>
+<section id="drugi-przykład" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Drugi przykład</h1>
+<p>Wybrałem powyższy przykład z powikłaniami po doświadczeniu przemocy, bo wydaje mi się dobrze pokazywać, że nawet taka dość abstrakcyjna na pierwszy rzut oka matematyka może mieć praktyczne zastosowanie w pracy psychologa nie tylko naukowca. Plus naprawdę kiedyś liczyłem dokładnie takie zadanie dla podparcia swojego argumentu i wtedy zrozumiałem twierdzenie Bayesa. Co zabawne, prawdopodobieństwo <em>a posteriori</em> uparcie wychodziło mi w okolicach 150%. Rzecz niemożliwa, więc 15 razy sprawdzałem czy na pewno nie pomieszałem procentów, oznaczeń i wszystkich innych elementów. Potem dopiero się zorientowałem, że według sprawdzanych przeze mnie danych, osób wykształcających zaburzenie po przemocy jest więcej niż wszystkich osób z tym zaburzeniem łącznie. Kiedy już go zrozumiałem, bardzo mnie ten wniosek ucieszył, bo pozwolił mi elegancko podważyć te dane. Mogłem powiedzieć, że jeśli te dane byłyby prawdziwe, to w populacji musiałoby być znacznie więcej osób z tym zaburzeniem, niż jest w rzeczywistości. Dziś pewnie potraktowałbym te dane jak hipotezę i próbował liczbowo wyrazić, jak bardzo jest nieprawdopodobna. Teraz przejdźmy do innego przykładu.</p>
+<p>Wyobraźmy sobie szybki test na grypę, który poprawnie wykrywa zakażenie u 70% chorych, ale daje też wynik fałszywie pozytywny u 1% zdrowych. Aktualnie zakażone jest 5% populacji. Rozpatrzmy dwa przypadki – Adam widzi wynik pozytywny, Ewa negatywny. Zadanie polega na tym, żeby ustalić, jakie jest prawdopodobieństwo, że Adam i Ewa mają grypę.</p>
+<section id="adam-wynik-pozytywny" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="adam-wynik-pozytywny"><span class="header-section-number">6.1</span> Adam – wynik pozytywny</h2>
+<section id="metoda-1-z-twierdzenia-bayesa" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="metoda-1-z-twierdzenia-bayesa"><span class="header-section-number">6.1.1</span> Metoda 1: z twierdzenia Bayesa</h3>
+<p>Musimy policzyć, z jakim prawdopodobieństwem Adam ma grypę, biorąc pod uwagę, że wyszedł mu wynik pozytywny. Innymi słowy jak częsta jest grypa wśród ludzi z wynikiem pozytywnym. Zapiszemy to jako <img src="https://latex.codecogs.com/png.latex?P(%5Ctext%7Bgrypa%7D%20%5Cmid%20+)">. Prawdopodobieństwo <em>a priori</em> wynosi <img src="https://latex.codecogs.com/png.latex?P(%5Ctext%7Bgrypa%7D)%20=%205%5C%25">. Zgodnie z naszą procedurą, najpierw rozcinamy zbiór ludzi z grypą tak, żeby dowiedzieć, jaka część populacji to zakażeni z wynikiem pozytywnym. Zakażonych jest 5%, a 70% spośród nich ma wynik pozytywny, więc mnożę:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bgrypa%7D)%20%5Ctimes%20P(+%20%5Cmid%20%5Ctext%7Bgrypa%7D)%20=%200.05%20%5Ctimes%200.70%20=%200.035%0A"></p>
+<p>Teraz muszę to przeskalować, żeby się dowiedzieć, jaka to część wszystkich ludzi z wynikiem pozytywnym. Na grupę ludzi z wynikiem pozytywnym składają się chorzy i zdrowi. Dostaliśmy informację, że 1% zdrowych otrzyma wynik pozytywny, a zdrowych jest 95%. Mnożymy więc:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bbrak%20grypy%7D)%20%5Ctimes%20P(+%20%5Cmid%20%5Ctext%7Bbrak%20grypy%7D)%20=%200.95%20%5Ctimes%200.01%20=%200.0095%0A"></p>
+<p>Policzyliśmy więc, że wynik chorzy z wynikiem pozytywnym to 3.5% całej populacji, a zdrowi z wynikiem pozytywnym to 0.95% całej populacji. Oznacza to, że wynik pozytywny uzyskałoby:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(+)%20=%203.5%5C%25%20+%200.95%5C%25%20=%204.45%5C%25%0A"></p>
+<p>…całej populacji. Odpowiedzmy sobie wreszcie – jaką część ludzi z wynikiem pozytywnym stanowią rzeczywiście chorzy? 3.5% z 4.45%, więc:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bgrypa%7D%20%5Cmid%20+)%20=%20%5Cfrac%7BP(%5Ctext%7Bgrypa%7D)%20%5Ctimes%20P(+%20%5Cmid%20%5Ctext%7Bgrypa%7D)%7D%7BP(+)%7D%20=%20%5Cfrac%7B3.5%7D%7B4.45%7D%20%5Capprox%200.7865%20=%2078.65%5C%25%0A"></p>
+<p>Adam jest więc chory na 79%, czyli znacznie więcej niż początkowe 5%. To jest nasze prawdopodobieństwo <em>a posteriori</em>.</p>
+</section>
+<section id="metoda-2-bf-i-a-posteriori-przez-bf" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="metoda-2-bf-i-a-posteriori-przez-bf"><span class="header-section-number">6.1.2</span> Metoda 2: BF i <em>a posteriori</em> przez BF</h3>
+<p>Mogliśmy policzyć to też na inny sposób. Wiemy, że <img src="https://latex.codecogs.com/png.latex?BF"> zmienia szanse <em>a priori</em> w szanse <em>a posteriori</em>. Znamy też wzór na <img src="https://latex.codecogs.com/png.latex?BF">, gdzie porównujemy prawdopodobieństwo obserwacji danych (tj. pozytywnego wyniku testu) w dwóch hipotezach – że Adam nie ma grypy (<img src="https://latex.codecogs.com/png.latex?H_0">) i że ją ma (<img src="https://latex.codecogs.com/png.latex?H_1">). Prawdopodobieństwo wyniku pozytywnego w grypie zostało dane w zadaniu i wynosi <img src="https://latex.codecogs.com/png.latex?P(+%20%5Cmid%20%5Ctext%7Bgrypa%7D)%20=%2070%5C%25">. A jak ktoś nie ma grypy? To też zostało dane w zadaniu, <img src="https://latex.codecogs.com/png.latex?P(+%20%5Cmid%20%5Ctext%7Bbrak%20grypy%7D)%20=%201%5C%25">. Policzmy z tego <img src="https://latex.codecogs.com/png.latex?BF_%7B10%7D">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ABF_%7B10%7D%20=%20%5Cfrac%7BP(+%20%5Cmid%20%5Ctext%7Bgrypa%7D)%7D%7BP(+%20%5Cmid%20%5Ctext%7Bbrak%20grypy%7D)%7D%20=%20%5Cfrac%7B0.7%7D%7B0.01%7D%20=%2070%0A"></p>
+<p>Pojawienie się wyniku pozytywnego jest 70 razy bardziej prawdopodobne, jeśli ta grypa jest, niż jak jej nie ma. Coś takiego można było zauważyć od razu, w końcu to jest 1% <em>vs</em> 70%. To jest bardzo silny dowód grypy. Co prawda już policzyliśmy prawdopodobieństwo <em>a posteriori</em>, ale mając BF możemy je uzyskać nawet łatwiej. Najpierw przeliczmy prawdopodobieństwo <em>a priori</em> na szanse. Ono wynosiło <img src="https://latex.codecogs.com/png.latex?P(%5Ctext%7Bgrypa%7D)%20=%205%5C%25"> Szansa, czyli stosunek wyniku pozytywnego do negatywnego, wynoszą więc:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AO(%5Ctext%7Bgrypa%7D)%20=%20%5Cfrac%7B5%7D%7B95%7D%20=%20%5Cfrac%7B1%7D%7B19%7D%20%5Capprox%200.053%0A"></p>
+<p>Na wejściu brak grypy jest więc 19 razy bardziej prawdopodobny niż grypa. Przeskalujmy to teraz wykorzystując BF:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AO(%5Ctext%7Bgrypa%7D%20%5Cmid%20+)%20=%20O(%5Ctext%7Bgrypa%7D)%20%5Ctimes%20BF_%7B10%7D%20=%20%5Cfrac%7B1%7D%7B19%7D%20%5Ctimes%2070%20=%20%5Cfrac%7B70%7D%7B19%7D%20%5Capprox%203.68%0A"></p>
+<p>Szansa wzrasta 70-krotnie i <em>a posteriori</em> grypa jest prawie cztery razy bardziej prawdopodobna niż jej brak. Przeliczmy to na prawdopodobieństwo:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bgrypa%7D%20%5Cmid%20+)%20=%20%5Cfrac%7B70%7D%7B19%20+%2070%7D%20=%20%5Cfrac%7B70%7D%7B89%7D%20%5Capprox%200.7865%20=%2078.65%5C%25%0A"></p>
+<p>Identycznie jak bezpośrednio z twierdzenia Bayesa.</p>
+</section>
+</section>
+<section id="ewa-wynik-negatywny" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="ewa-wynik-negatywny"><span class="header-section-number">6.2</span> Ewa – wynik negatywny</h2>
+<p>Teraz co z Ewą? Ewa zobaczyła wynik negatywny, ale ciągle się martwi, bo wie, że szybkie testy bywają niedokładne. Jakie jest więc prawdopodobieństwo, że mimo to jest chora? Przypomnijmy, prawdopodobieństwo <em>a priori</em> wynosi 5%. Najbardziej będzie nas tutaj interesował czynnik Bayesa, ale <em>pro forma</em> policzmy <em>a posteriori</em> też z twierdzenia Bayesa.</p>
+<section id="metoda-1-twierdzenie-bayesa" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="metoda-1-twierdzenie-bayesa"><span class="header-section-number">6.2.1</span> Metoda 1: twierdzenie Bayesa</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bgrypa%7D%20%5Cmid%20-)%20=%20%5Cfrac%7BP(-%20%5Cmid%20%5Ctext%7Bgrypa%7D)%20%5Ctimes%20P(%5Ctext%7Bgrypa%7D)%7D%7BP(-)%7D%0A"></p>
+<p>Skoro w grypie mam 70% szans na wynik pozytywny, to mam automatycznie 30% na wynik negatywny. Ponieważ chorych jest 5%, mogę od razu obliczyć licznik, czyli odsetek chorych z wynikiem negatywnym w całej populacji:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(-%20%5Ccap%20%5Ctext%7Bgrypa%7D)%20=%20P(-%20%5Cmid%20%5Ctext%7Bgrypa%7D)%20%5Ctimes%20P(%5Ctext%7Bgrypa%7D)%20=%20%5C%5C%0A0.3%20%5Ctimes%200.05%20=%200.015%20=%201.5%5C%25%0A"></p>
+<p>Zdrowi (95% populacji) mają 99% prawdopodobieństwa uzyskania wyniku negatywnego (bo tylko 1% wyników jest fałszywie pozytywnych), więc zdrowych z wynikiem negatywnym w całej populacji jest:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(-%20%5Ccap%20%5Ctext%7Bbrak%20grypy%7D)%20=%20P(-%20%5Cmid%20%5Ctext%7Bbrak%20grypy%7D)%20%5Ctimes%20P(%5Ctext%7Bbrak%20grypy%7D)%20=%20%5C%5C%0A0.99%20%5Ctimes%200.95%20=%200.9405%20=%2094.05%5C%25%0A"></p>
+<p>Cała populacja to zdrowi i chorzy, więc łączne prawdopodobieństwo zobaczenia wyniku negatywnego to suma tego prawdopodobieństwa u zdrowych i chorych:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(-)%20=%200.015%20+%200.9405%20=%200.9555%20=%2095.55%5C%25%0A"></p>
+<p>Mogliśmy to zrobić mądrzej, jeślibyśmy pamiętali, że ogólne prawdopodobieństwo wyniku pozytywnego to <img src="https://latex.codecogs.com/png.latex?P(+)%20=%204.45%5C%25">, bo przez to <img src="https://latex.codecogs.com/png.latex?P(-)%20=%20100%5C%25%20-%204.45%5C%25%20=%2095.55%5C%25">. Także jaką część wszystkich wyników negatywnych stanowią wyniki fałszywie negatywne?</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bgrypa%7D%20%5Cmid%20-)%20=%20%5Cfrac%7BP(%5Ctext%7Bgrypa%7D%20%5Ccap%20-)%7D%7BP(-)%7D%20=%20%5Cfrac%7B0.015%7D%7B0.9555%7D%20=%20%5Cfrac%7B10%7D%7B637%7D%20%5Capprox%201.57%5C%25%0A"></p>
+<p>Ewa ma więc 1.57% prawdopodobieństwa, że jest chora, czyli mniej niż poprzednie 5%. W języku szans, szansa na chorobę jest jak 10:637, albo też jest prawie 63 razy bardziej prawdopodobne, że jest zdrowa.</p>
+</section>
+<section id="metoda-2-bf-i-a-posteriori-przez-bf-1" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="metoda-2-bf-i-a-posteriori-przez-bf-1"><span class="header-section-number">6.2.2</span> Metoda 2: BF i <em>a posteriori</em> przez BF</h3>
+<p>Porównujemy prawdopodobieństwo, że Ewa jest zdrowa do prawdopodobieństwa, że jest chora, a więc prawdopodobieństwo uzyskania wyniku negatywnego (bo to są nasze dane) w zdrowiu i w chorobie (w radości i smutku, w bogactwie i ubóstwie). Wypiszmy hipotezy wprost:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AH_0:%20%5Ctext%7BEwa%20jest%20zdrowa%7D%20%5C%5C%0AH_1:%20%5Ctext%7BEwa%20jest%20chora%7D%0A"></p>
+<p>Jak ktoś jest chory, to zobaczy wynik negatywny w <img src="https://latex.codecogs.com/png.latex?P(-%20%5Cmid%20H_0)%20=%2030%5C%25"> przypadków, a jak jest zdrowy, w <img src="https://latex.codecogs.com/png.latex?P(-%20%5Cmid%20H_1)%20=%2099%5C%25"> przypadków. Czynnik Bayesa porównuje <img src="https://latex.codecogs.com/png.latex?H_1"> względem <img src="https://latex.codecogs.com/png.latex?H_0">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ABF_%7B10%7D%20=%20%5Cfrac%7BP(-%20%5Cmid%20H_1)%7D%7BP(-%20%5Cmid%20H_0)%7D%20=%20%5Cfrac%7B0.3%7D%7B0.99%7D%20=%20%5Cfrac%7B10%7D%7B33%7D%20%5Capprox%200.3%0A"></p>
+<p>To nie jest prawdopodobieństwo! To jest czynnik Bayesa, czyli jak zmieniło się nasze oszacowanie prawdopodobieństwa po teście. Szanse <em>a priori</em> możemy przemnożyć przez tę właśnie liczbą, a mnożenie przez ułamki między 0 a 1 sprawia, że liczba robi się mniejsza. <img src="https://latex.codecogs.com/png.latex?H_0"> lepiej przewiduje dane niż <img src="https://latex.codecogs.com/png.latex?H_1">. Możemy więc odwrócić ten ułamek, żeby wiedzieć, ile razy lepiej.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ABF_%7B01%7D%20=%20%5Cfrac%7BP(-%20%5Cmid%20H_0)%7D%7BP(-%20%5Cmid%20H_1)%7D%20=%20%5Cfrac%7B0.99%7D%7B0.3%7D%20=%20%5Cfrac%7B33%7D%7B10%7D%20=%203.3%0A"></p>
+<p>Sam z siebie taki współczynnik oznacza umiarkowany dowód, ale trzeba wziąć pod uwagę, że wstępna szansa na bycie zdrowym to 95:5 (19:1)! Nasz czynnik Bayesa tylko zwiększa te szanse do:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AO(%5Ctext%7Bbrak%20grypy%7D%20%5Cmid%20-)%20=%20%5Cfrac%7B19%7D%7B1%7D%20%5Ctimes%203.3%20=%20%5Cfrac%7B62.7%7D%7B1%7D%0A"></p>
+<p>Zdrowie jest dla Ewy 62.7 bardziej prawdopodobne niż choroba (a właściwie brak grypy niż grypa). Konkretne prawdopodobieństwo grypy, co już policzyliśmy metodą pierwszą, to zaledwie:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bgrypa%7D%20%5Cmid%20-)%20=%201%20-%20%5Cfrac%7B62.7%7D%7B63.7%7D%20=%201.57%5C%25%0A"></p>
+<p>Ewa może mieć 98.4% pewności, że nie ma grypy.</p>
+</section>
+</section>
+</section>
+<section id="aktualizacja-priorów" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Aktualizacja priorów</h1>
+<p>Można się zapytać, dlaczego Ewa w ogóle robiła test, skoro już na wejściu miała 95% pewności, że jest zdrowa. Zdrowi ludzie zazwyczaj nie robią testów na grypę dla pewności. Ewa może uznać, że 5% to mało, bo jest sezon grypowy i co najmniej 15% populacji ma grypę. Ewa w ten sposób podważa nasze oszacowane prawdopodobieństwo <em>a priori</em>. Ba, nie musi odnosić się do rozpowszechnienia grypy w populacji. Może stwierdzić, że czuje się słabo i zaczyna ją boleć gardło. Ostatecznie, ważąc wszystkie za i przeciw, Ewa może oszacować szanse, że ma grypę na 40 do 60 (2:3).</p>
+<p>Statystyka klasyczna nie ma dla Ewy odpowiedzi. Nie da się jej odnieść do jednostki, pozwala wyciągnąć tylko wnioski populacyjne. Trzeba by było przeszukać literaturę i znaleźć układ tych objawów, oszacować parametry i zrobić setkę innych rzeczy, które pozwolą nam oszacować wstępne prawdopodobieństwo, że Ewa ma grypę. A potem do modelu trzeba by było dorzucić jeszcze fakt, że test wyszedł negatywny i po poradzeniu sobie z nieuchronną współliniowością, dostalibyśmy jakieś oszacowanie ryzyka, w które Ewa i tak by nie uwierzyła, bo nie bierze pod uwagę faktu, że Adam ma grypę. Nie mówiąc już o tym, że Ewa zna swój organizm na sposoby, których masowe badania nie ujmą. Każdy z nas naprawdę potrafi coś o sobie powiedzieć, lekarz (jak i psycholog) też przeprowadza wywiad i stawia indywidualną diagnozę na podstawie doświadczeń. Owszem, ludzie różnią się adekwatnością tych założeń, ale nie sprawia to, że powinniśmy je z gruntu odrzucać – nie ma ogólnego powodu, żeby uznać, że Ewa nie wie o czym mówi, jak stwierdza, że na 40% ma grypę. Statystyka bayesowska posiada jednak szczególną moc, żeby dać Ewie jakieś wnioski niezależnie od tego w jaki sposób i na ile oszacowała wstępne prawdopodobieństwo.</p>
+<p>Zauważmy, że czynnik Bayesa oszacowaliśmy na podstawie parametrów testu – prawdopodobieństwo wyniku negatywnego przy chorobie i przy braku choroby, podzielone przez siebie. Jeśli Ewa nie podważa proporcji wyników prawdziwie i fałszywie negatywnych, to wartość <img src="https://latex.codecogs.com/png.latex?BF"> się nie zmienia. Inne czynniki mogą szanse podwyższać (ból gardła, chory mąż) i obniżać (szczepienie, brak gorączki) w oszacowaniu Ewy, ale <img src="https://latex.codecogs.com/png.latex?BF"> pozostaje stały. <img src="https://latex.codecogs.com/png.latex?BF"> to skalar szans, tzn. niezależnie jakie te szanse są, BF zmienia je w przewidywalny sposób. Skoro tutaj <img src="https://latex.codecogs.com/png.latex?BF_%7B01%7D%20=%203.3">, to negatywny wynik testu musi zwiększyć szacowaną szansę na zdrowie (albo chociaż brak grypy) ponad trzykrotnie. Jak więc powinny zmienić się szanse Ewy? Policzmy szanse na brak grypy, bo to trochę przyjemniejsze liczby.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AO(%5Ctext%7Bbrak%20grypy%7D%20%5Cmid%20-)%20=%20O(%5Ctext%7Bbrak%20grypy%7D)_%7B%5Ctext%7Bwg%20Ewy%7D%7D%20%5Ctimes%20BF_%7B01%7D%20=%20%5Cfrac%7B3%7D%7B2%7D%20%5Ctimes%203.3%20=%20%5Cfrac%7B99%7D%7B20%7D%20=%20%5Cfrac%7B4.95%7D%7B1%7D%0A"></p>
+<p>Szanse, że Ewa nie ma grypy w świetle negatywnego wyniku testu, korzystając z jej własnych oszacowań, to prawie 5 do 1. Przeliczmy to na prawdopodobieństwo:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bbrak%20grypy%7D%20%5Cmid%20-)%20=%20%5Cfrac%7B4.95%7D%7B5.95%7D%20%5Capprox%2083%5C%25%0A"></p>
+<p>Z 60% pewności Ewy zrobiło się 83%. A co jeśli na wstępie Ewa uznałaby, że na 70% ma grypę? Może jej objawy się zaostrzyły. Szanse zmienią się następująco:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AO(%5Ctext%7Bbrak%20grypy%7D%20%5Cmid%20-)%20=%20O(%5Ctext%7Bbrak%20grypy%7D)_%7B%5Ctext%7Bpo%20zaostrzeniu%7D%7D%20%5Ctimes%20BF_%7B01%7D%20=%20%5Cfrac%7B3%7D%7B7%7D%20%5Ctimes%203.3%20=%20%5Cfrac%7B99%7D%7B70%7D%0A"></p>
+<p>Szanse ciągle są większe niż 1, więc test ciągle powinien przekonać Ewę, że nie ma grypy – jest to bardziej prawdopodobna opcja. Jakie konkretnie jest prawdopodobieństwo, że Ewa jednak nie ma grypy?</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bbrak%20grypy%7D%20%5Cmid%20-)%20=%20%20%5Cfrac%7B99%7D%7B70%20+%2099%7D%20=%2058.6%5C%25%0A"></p>
+<p>Ewa może być tylko niewiele bardziej przekonana, że nie ma grypy, niż że ma, mimo testu.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Wzór na posterior z BF">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Adnotacja</span>Wzór na posterior z BF
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Zanim przejdę dalej, dla naszej wygody wyprowadzę wzór, żeby prawdopodobieństwo <em>a priori</em> przekształcać w <em>a posteriori</em> bez liczenia szans.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(A%20%5Cmid%20B)%20=%20%5Cfrac%7BBF%20%5Ctimes%20P(A)%7D%7BBF%20%5Ctimes%20P(A)%20+%20(1%20-%20P(A))%7D%0A"></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Dowód">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Wskazówka</span>Dowód
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Zaczynamy od definicji szans <em>a priori</em> i <em>a posteriori</em> dla zdarzenia <img src="https://latex.codecogs.com/png.latex?A"> pod warunkiem <img src="https://latex.codecogs.com/png.latex?B">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AO(A)%20=%20%5Cfrac%7BP(A)%7D%7B1%20-%20P(A)%7D,%20%5Cqquad%0AO(A%20%5Cmid%20B)%20=%20%5Cfrac%7BP(A%20%5Cmid%20B)%7D%7B1%20-%20P(A%20%5Cmid%20B)%7D%0A"></p>
+<p>Wiemy już (patrz dowód wyżej), że <img src="https://latex.codecogs.com/png.latex?BF"> przekształca szanse <em>a priori</em> w szanse <em>a posteriori</em>:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AO(A%20%5Cmid%20B)%20=%20BF%20%5Ctimes%20O(A)%0A"></p>
+<p>Podstawiając definicję szans po obu stronach:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7BP(A%20%5Cmid%20B)%7D%7B1%20-%20P(A%20%5Cmid%20B)%7D%20=%20BF%20%5Ctimes%20%5Cfrac%7BP(A)%7D%7B1%20-%20P(A)%7D%0A"></p>
+<p>Chcemy wyliczyć <img src="https://latex.codecogs.com/png.latex?P(A%20%5Cmid%20B)">, więc pozbywamy się mianowników, mnożąc obie strony przez <img src="https://latex.codecogs.com/png.latex?1%20-%20P(A%20%5Cmid%20B)"> oraz <img src="https://latex.codecogs.com/png.latex?1%20-%20P(A)">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(A%20%5Cmid%20B)%20%5Ctimes%20(1%20-%20P(A))%20=%20BF%20%5Ctimes%20P(A)%20%5Ctimes%20(1%20-%20P(A%20%5Cmid%20B))%0A"></p>
+<p>Rozdzielamy iloczyny po obu stronach:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(A%20%5Cmid%20B)%20-%20P(A%20%5Cmid%20B)%20%5Ctimes%20P(A)%20=%20BF%20%5Ctimes%20P(A)%20-%20BF%20%5Ctimes%20P(A)%20%5Ctimes%20P(A%20%5Cmid%20B)%0A"></p>
+<p>Zbieramy wszystkie wyrazy zawierające <img src="https://latex.codecogs.com/png.latex?P(A%20%5Cmid%20B)"> po lewej stronie:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(A%20%5Cmid%20B)%20-%20P(A%20%5Cmid%20B)%20%5Ctimes%20P(A)%20+%20BF%20%5Ctimes%20P(A)%20%5Ctimes%20P(A%20%5Cmid%20B)%20=%20BF%20%5Ctimes%20P(A)%0A"></p>
+<p>Wyłączamy <img src="https://latex.codecogs.com/png.latex?P(A%20%5Cmid%20B)"> przed nawias:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(A%20%5Cmid%20B)%20%5Ctimes%20%5Cbig(1%20-%20P(A)%20+%20BF%20%5Ctimes%20P(A)%5Cbig)%20=%20BF%20%5Ctimes%20P(A)%0A"></p>
+<p>Zauważmy, że <img src="https://latex.codecogs.com/png.latex?1%20-%20P(A)%20+%20BF%20%5Ctimes%20P(A)%20=%20BF%20%5Ctimes%20P(A)%20+%20(1%20-%20P(A))">, więc dzieląc obie strony przez ten nawias, dostajemy:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cboxed%7B%0AP(A%20%5Cmid%20B)%20=%20%5Cfrac%7BBF%20%5Ctimes%20P(A)%7D%7BBF%20%5Ctimes%20P(A)%20+%20(1%20-%20P(A))%7D%0A%7D%0A"></p>
+<p>Co należało pokazać.</p>
+</div>
+</div>
+</div>
+<p>Zdefiniujmy go sobie w R i sprawdźmy, czy poprawnie policzyłby poprzedni przykład:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">posterior_from_bf <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(prior, bf) {</span>
+<span id="cb1-2">  bf <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> prior <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> (bf <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> prior <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> prior)</span>
+<span id="cb1-3">}</span>
+<span id="cb1-4"></span>
+<span id="cb1-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">posterior_from_bf</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.3</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5857988</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>A co jeśli Ewa cierpi na zaburzenie typu GAD i już przy pierwszym kaszlu ma 99% pewności, że to grypa? Reguła jest identyczna, chociaż wykorzystajmy może <img src="https://latex.codecogs.com/png.latex?BF_%7B10%7D%20=%20%5Cfrac%7B10%7D%7B33%7D"> i tym razem policzmy prawdopodobieństwo, że rzeczywiście ma grypę.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bgrypa%7D%7C-)_%7BGAD%7D%20=%20%5Cfrac%7B%5Cfrac%7B10%7D%7B33%7D%20%5Ctimes%200.99%7D%7B%5Cfrac%7B10%7D%7B33%7D%20%5Ctimes%200.99%20+%200.01%7D%20%5Capprox%2096.77%5C%25%0A"></p>
+<p>Mimo negatywnego wyniku testu Ewy nie udało się przekonać, że nie ma grypy. Spadek prawdopodobieństwa jest malutki, bo wstępna pewność Ewy jest tak wielka. Dowód, który byłby przekonujący przy niższym oszacowaniu, tutaj niczego nie zmienia. W moim przykładzie przekonanie to było nierealistyczne, wynikające z procesu chorobowego, ale ono może być realistyczne. Lekarz, który zebrał na tyle dowodów, że też ma bardzo wysoką pewność, co do diagnozy, też może zlekceważyć wynik szybkiego testu, ale jego nie nazwiemy „nieobiektywnym” czy „nieracjonalnym”.</p>
+<p>Dlatego mówię, że <img src="https://latex.codecogs.com/png.latex?BF"> to siła dowodu. Im mniej wiarygodne twierdzenie, tym lepszych dowodów żąda. <img src="https://latex.codecogs.com/png.latex?BF"> to matematyczny wyraz tego właśnie niekontrowersyjnego stwierdzenia. Tak właśnie powinniśmy traktować tabelkę do interpretacji <img src="https://latex.codecogs.com/png.latex?BF">, którą wrzuciłem wyżej – siła dowodu, ale siła działa zawsze względem jakiegoś prawdopodobieństwa <em>a priori</em> – im jest większa, tym większego sceptyka przekona. Sceptycyzm może mieć silne podstawy w dowodach – z tej perspektywy im większy <img src="https://latex.codecogs.com/png.latex?BF"> tym lepiej przeciwstawia się kontrargumentom.</p>
+</section>
+<section id="podsumowanie" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Podsumowanie</h1>
+<p>Co miało być tylko ramką we wpisie o przedziałach ufności, który właśnie przygotowuję, nagle urosło do rozmiarów olbrzymich. Jest to dla mnie – tak jak dla większości badaczy, mam wrażenie – nowa wiedza. Każdy gdzieś słyszał o statystyce bayesowskiej, że jest <em>prior</em> i <em>posterior</em> i że nie ma tam wartości <em>p</em>. Kojarzy się jako coś z gruntu subiektywnego, jako wielka filozofia mająca uzasadniać <em>p</em>-hacking. Jednak im więcej na ten temat wiem, tym bardziej widzę, że tak nie jest. A z pewnością wiem więcej teraz niż wiedziałem, jak zaczynałem ten tekst pisać. Podsumujmy sobie, co z tego wpisu wynika.</p>
+<ol type="1">
+<li>Wyciąganie wniosków na podstawie danych nie jest łatwe. Intuicyjnie, gdy dostrzegamy u kogoś określony zestaw cech — zwłaszcza tych charakterystycznych — przypisujemy tę osobę do określonej grupy. Jednak nawet jeśli wszyscy członkowie tej grupy posiadają takie cechy, nasze wnioskowanie może być błędne, jeżeli cechy te są równie częste w innych grupach. Zdanie „Ten naród uwielbia swoje jedzenie i uważa rodzinę za istotną wartość” może opisywać Polaków, ale równie dobrze może odnosić się do Włochów, Brazylijczyków czy Koreańczyków. Na podstawie przynależności do grupy można często trafnie wnioskować o cechach ludzi, którzy do niej należą, ale na podstawie samych cech często trudno jest ustalić, do której konkretnie grupy należy dana osoba. Podobnie jest z danymi – stosunkowo łatwo jest przewidywać, jakie dane mogą pochodzić z danego rozkładu, ale ocena, na ile prawdopodobne są poszczególne hipotezy (np. o przynależności) w świetle danych, wymaga uwzględnienia szerszego obrazu. Inaczej ze zdania „95% złodziei jest praworęcznych” wywnioskujemy, że 95% praworęcznych to złodzieje.</li>
+<li>Ten szerszy obraz składa się z tego, na ile dobrze inne hipotezy przewidują dane, a to zaś wymaga znajomości innych prawdopodobieństw, by móc obliczyć dopasowanie hipotez do danych. Podstawową procedurę opisuje twierdzenie Bayesa – żeby ocenić, jak prawdopodobny jest wniosek na podstawie przesłanki, musimy wiedzieć, jak często przypadki, do których pasuje dany wniosek, zdarzają się <strong>na tle wszystkich</strong>, którzy spełniają daną przesłankę. Robimy to rozdzierając mentalny kwadrat, żeby oddzielić tych, do których pasuje dany wniosek i jednocześnie spełniają tę przesłankę, a potem dzielimy przez liczbę wszystkich, którzy spełniają tę przesłankę.</li>
+<li>Możemy porównywać hipotezy poprzez patrzenie, jak dobrze dopasowane są do danych. Stosunek tego, jak bardzo prawdopodobne są te dane pod jedną i drugą hipotezą, określamy jako czynnik Bayesa (<em>Bayes factor</em>, <img src="https://latex.codecogs.com/png.latex?BF">). Jak porównujemy, jak wypada <img src="https://latex.codecogs.com/png.latex?H_1"> na tle <img src="https://latex.codecogs.com/png.latex?H_0">, oznaczymy to jako <img src="https://latex.codecogs.com/png.latex?BF_%7B10%7D">.</li>
+<li>Czynnik Bayesa opisuje względne dopasowanie hipotez do danych, ale także to, jak powinny zaktualizować się szanse pod wpływem nowych informacji czynników. Im większa jego wartość, tym silniejszym kontrargumentom potrafi się&nbsp;przeciwstawić.</li>
+<li>Sam czynnik Bayesa nie może jednak powiedzieć, jakie jest prawdopodobieństwo, że dana hipoteza jest prawdziwa. Do tego musimy mieć jakiekolwiek pojęcie, na ile ta hipoteza jest prawdopodobna <em>a priori</em>. Ten fragment często wzbudza lęk, ale tak naprawdę potrafi ustabilizować naszą hipotezę, żeby słabe dowody nie mogły nas łatwo zwieść. To właśnie <em>prior</em> pozwala nam ustrzec się przed stwierdzeniami typu „Polacy kradną częściej niż Brytyjczycy, a że jesteś Polakiem, to pewnie też kradniesz” – nawet jeśli Polacy rzeczywiście kradliby częściej (co odbiłoby się na <img src="https://latex.codecogs.com/png.latex?BF">), to <em>prior</em> matematycznie uwzględnia poprawkę na to, że zasadniczo niewiele ludzi kradnie.</li>
+<li>Statystyka bayesowska liczy dopasowanie hipotez do danych. Statystyka klasyczna też przyjmuje jakiś rozkład prawdopodobieństwa na wejściu (zazwyczaj normalny rozkład próbkowania ze średnią 0), ale potem zwraca naszą uwagę na <em>niedopasowanie</em> zamiast dopasowania – jeśli jest zbyt duże (<img src="https://latex.codecogs.com/png.latex?p%20%3C%200.05">) odrzucamy hipotezę zerową. Standardowo nie porównuje więc pozytywnego dopasowania dwóch hipotez (zwłaszcza przy szacowaniu parametrów), więc nie posiada odpowiednika <img src="https://latex.codecogs.com/png.latex?BF">. Kiedy mamy <img src="https://latex.codecogs.com/png.latex?BF">, możemy szanse <em>a priori</em> przemnożyć przez ten współczynnik i otrzymać szanse <em>a posteriori</em>, czyli szanse, że dana hipoteza rzeczywiście jest prawdziwa, jeśli potwierdziliśmy prawdziwość określonych przesłanek. Dzięki takiemu ujęciu hipoteza zerowa zyskuje moc przewidywania danych, a przez to statystyka bayesowska zdolna jest dostarczyć dowodów na jej prawdziwość, zamiast tylko na <em>brak możliwości jej odrzucenia</em>.</li>
+<li>Prawdopodobieństwo <em>a priori</em> może płynnie uwzględnić wiele różnych czynników, w tym trudnych do precyzyjnego sformalizowania. W ten sposób statystyka bayesowska pozwala sprawnie zmieniać oszacowania, gdy napływają nowe informacje, ale też testować zarówno jasny scenariusz, jak i czarny scenariusz.</li>
+</ol>
+<p>Statystyka bayesowska to cały oddzielny świat, który ma własne problemy i założenia, ale też własne możliwości. Samo rozszerzenie rozkładów <em>a priori</em> i <em>a posteriori</em> o rozkłady ciągłe, a także dodanie do modelu więcej niż jednej obserwacji sprawia, że rzecz bardzo szybko robi się ekscytująca. O ile – tak jak ja – jest się nerdem.</p>
+</section>
+<section id="zadania" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Zadania</h1>
+<p>Jak mnie samemu udowodniło pisanie tego posta, nic nie pozwala tak dobrze zrozumieć materiału jak rozwiązanie paru problemów. Kilka takich problemów zostawiam tutaj wraz z proponowanymi odpowiedziami. Jeśli ktoś dotarł do tego miejsca – zaklinam, nie pozwól tej wiedzy zmarnować się w pamięci krótkotrwałej. Inaczej tak jak ja będziesz się uczyć tego na nowo co parę miesięcy, nigdy nie uzyskując prawdziwego rozumienia.</p>
+<section id="zadanie-1a." class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="zadanie-1a."><span class="header-section-number">9.1</span> Zadanie 1a.</h2>
+<p>Ewa ocenia prawdopodobieństwo, że ma grypę, na 5%. Zamówiła wypasiony, drogi test, który poprawnie wykrywa chorobę u 85% chorych i tylko w 0.5% przypadków daje wyniki fałszywie pozytywne. Wykonała ten test i zobaczyła wynik negatywny. Jakie jest prawdopodobieństwo, że jednak jest chora? Użyj i metody z twierdzeniem Bayesa, i metody z BF. Sprawdź, czy z obu metod wychodzi takie samo prawdopodobieństwo <em>a posteriori</em>. Policz <img src="https://latex.codecogs.com/png.latex?BF_%7B01%7D"> i zinterpretuj, jak silnym dowodem braku grypy jest negatywny wynik tego testu.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Adnotacja</span>Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Z twierdzenia Bayesa:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bgrypa%7D%20%5Cmid%20-)%20=%20%5Cfrac%7B0.15%20%5Ctimes%200.05%7D%7B0.15%20%5Ctimes%200.05%20+%200.995%20%5Ctimes%200.95%7D%20=%20%5Cfrac%7B30%7D%7B3811%7D%20%5Capprox%20%5Cboxed%7B0.79%5C%25%7D%0A"></p>
+<p>Z czynnika Bayesa:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ABF_%7B10%7D%20=%20%5Cfrac%7B0.15%7D%7B0.995%7D%20=%20%5Cfrac%7B30%7D%7B199%7D%20%5Capprox%200.1508%20%5C%5C%0A"></p>
+<p>Poprzez szanse, łatwiej będzie policzyć szanse zdrowia:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AO(%5Ctext%7Bzdrowie%7D%20%5Cmid%20-)%20=%20%5Cfrac%7B95%7D%7B5%7D%20%5Ctimes%20%5Cfrac%7B199%7D%7B30%7D%20=%20%5Cfrac%7B3781%7D%7B30%7D%20%5Capprox%20126%20%5C%5C%0AP(%5Ctext%7Bzdrowie%7D%20%5Cmid%20-)%20=%20%5Cfrac%7B3781%7D%7B3781%20+%2030%7D%20%5Capprox%2099.2128%5C%25%20%5C%5C%0AP(%5Ctext%7Bgrypa%7D%20%5Cmid%20-)%20=%20100%5C%25%20-%2099.2128%5C%25%20%5Capprox%20%5Cboxed%7B0.79%5C%25%7D%0A"></p>
+<p>Wychodzi to samo z obu metod. Można też ominąć szanse:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bgrypa%7D%20%5Cmid%20-)%20=%20%5Cfrac%7B0.1508%20%5Ctimes%200.05%7D%7B0.1508%20%5Ctimes%200.05%20+%200.95%7D%20%5Capprox%20%5Cboxed%7B0.79%5C%25%7D%0A"></p>
+<p>Wszędzie wychodzi to samo. To teraz <img src="https://latex.codecogs.com/png.latex?BF_%7B01%7D">.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ABF_%7B01%7D%20=%20%5Cfrac%7B199%7D%7B30%7D%20%5Capprox%206.63%0A"></p>
+<p>Możemy negatywny wynik testu zinterpretować jako umiarkowanie silny dowód, że grypy nie ma (ale trzeba pamiętać, że to nie jest <em>a posteriori</em> i umiarkowanie silny dowód może być ciągle za słaby, jeśli <em>a priori</em> grypy jest wysokie).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="zadanie-1b." class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="zadanie-1b."><span class="header-section-number">9.2</span> Zadanie 1b.</h2>
+<p>Lekarz Ewy po gruntownym wywiadzie stwierdził, że jest na 95% pewny, że Ewa ma grypę. Wtedy Ewa powiedziała mu o negatywnych wynikach wypasionego testu. Jak powinna zmienić się ocena lekarza? Zignoruj jego urażoną dumę.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Adnotacja</span>Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Prawdopodobieństwo <em>a posteriori</em> bezpośrednio z BF obliczonego w poprzednim podpunkcie:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bgrypa%7D%20%5Cmid%20-)_%7B%5Ctext%7Blekarz%7D%7D%20=%20%5Cfrac%7B0.1508%20%5Ctimes%200.95%7D%7B0.1508%20%5Ctimes%200.95%20+%200.05%7D%20%5Capprox%20%5Cboxed%7B74.13%5C%25%7D%0A"></p>
+<p>Lekarz prawdopodobnie nie odrzuci hipotezy o grypie – przy jego <em>a priori</em> jest ona ciągle bardziej prawdopodobna.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="zadanie-1c." class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="zadanie-1c."><span class="header-section-number">9.3</span> Zadanie 1c*.</h2>
+<p>BONUS: spróbuj znaleźć takie przykładowe parametry testu na grypę, żeby wynik negatywny przekonał nawet kogoś pewnego na 99%.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Adnotacja</span>Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Skoro <img src="https://latex.codecogs.com/png.latex?BF"> to też stosunek szans <em>a posteriori</em> do <em>a priori</em>, to możemy znaleźć takie <img src="https://latex.codecogs.com/png.latex?BF">, żeby <em>a posteriori</em> dla zdrowia wyniosło co najmniej 50%:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ABF_%7B01%5C%20%5Ctext%7Bdocelowe%7D%7D%20=%20%5Cfrac%7B50:50%7D%7B1:99%7D%20=%2099%0A"></p>
+<p>Teraz jest to kwestia znalezienia takiego zestawu czułości <img src="https://latex.codecogs.com/png.latex?P(-%20%5Cmid%20H_1)"> i specyficzności <img src="https://latex.codecogs.com/png.latex?P(-%20%5Cmid%20H_0)">, żeby ich iloraz wyniósł co najmniej 99. To są dwie niewiadome, a tylko jedna dana, więc poprawnych zestawów jest nieskończenie wiele (bo dla każdego A znajdę takie B, żeby iloraz był 50). W zadaniu jednak jest, żeby znaleźć zestaw przykładowy. Mogę więc np. założyć, że odsetek wyników fałszywie pozytywnych zostawię na 0.5%, ale podwyższę szansę poprawnego wykrycia (czy też obniżę szansę niewykrycia).</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0ABF_%7B01%7D%20=%20%5Cfrac%7B0.995%7D%7BP(-%20%5Cmid%20H_1)%7D%20=%2099%20&amp;&amp;%20%5Cmid%20%5Ctimes%20P(-%20%5Cmid%20H_1)%20%5C%5C%0A0.995%20=%2099%20P(-%20%5Cmid%20H_1)%20&amp;&amp;%20%5Cmid%20%5Cdiv%2099%20%5C%5C%0A%5Cboxed%7BP(-%20%5Cmid%20H_1)%20%5Capprox%201%5C%25%7D%0A%5Cend%7Baligned%7D%0A"></p>
+<p>Czyli test musiałby poprawnie wykryć co najmniej 99% zakażeń.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="zadanie-2a." class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="zadanie-2a."><span class="header-section-number">9.4</span> Zadanie 2a.</h2>
+<p>Jaskółki latają nisko w 25% dni z dobrą pogodą i w 40% dni, kiedy pada. Właśnie zobaczyłeś(-aś) jaskółkę latającą nisko. Zakładając, że bazowe prawdopodobieństwo deszczu to 20%, oblicz prawdopodobieństwo, że będzie padać.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Adnotacja</span>Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Zrobię od razu z czynnika Bayesa:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ABF_%7B10%7D%20=%20%5Cfrac%7B0.4%7D%7B0.25%7D%20=%201.6%20%5C%5C%0AP(%5Ctext%7Bdeszcz%7D%20%5Cmid%20%5Ctext%7Bniski%20lot%7D)%20=%20%5Cfrac%7B1.6%20%5Ctimes%200.2%7D%7B1.6%20%5Ctimes%200.2%20+%200.8%7D%20%5Capprox%20%5Cboxed%7B28.6%5C%25%7D%0A"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="zadanie-2b." class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="zadanie-2b."><span class="header-section-number">9.5</span> Zadanie 2b.</h2>
+<p>Korzystając z tych samych założeń, oblicz prawdopodobieństwo, że nie będzie padać, jeśli jaskółki latają wysoko.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Adnotacja</span>Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Teraz obserwujemy, że jaskółki latają wysoko, więc musimy policzyć nowe <img src="https://latex.codecogs.com/png.latex?BF">. Nie możemy po prostu odwrócić BF jak dane są inne, bo hipotezy zmieniły swoje dopasowanie do danych. Wybiorę <img src="https://latex.codecogs.com/png.latex?BF_%7B01%7D">, bo ostatecznie mamy policzyć prawdopodobieństwo, że nie będzie padać.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ABF_%7B01%7D%20=%20%5Cfrac%7B0.75%7D%7B0.6%7D%20=%201.25%5C%5C%0AP(%5Ctext%7Bpogoda%7D%20%5Cmid%20%5Ctext%7Bwysoki%20lot%7D)%20=%20%5Cfrac%7B0.8%20%5Ctimes%201.25%7D%7B0.8%20%5Ctimes%201.25%20+%200.2%7D%20%5Capprox%20%5Cboxed%7B83.3%5C%25%7D%0A"></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level1 unnumbered">
+
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2">
+<div id="ref-clayton2021" class="csl-entry">
+Clayton, A. (2021). <em>Bernoulli’s fallacy: statistical illogic and the crisis of modern science</em>. New York: Columbia University Press.
+</div>
+<div id="ref-field2026" class="csl-entry">
+Field, A. P. (2026). <em>Discovering <span>Statistics</span> <span>Using</span> <span>R</span> and <span>RStudio</span></em>. London: SAGE Publications.
+</div>
+<div id="ref-jeffreys1998" class="csl-entry">
+Jeffreys, H. (1998). <em>The Theory of Probability</em>. OUP Oxford.
+</div>
+<div id="ref-nicenboim2025" class="csl-entry">
+Nicenboim, B., Schad, D. J., &amp; Vasishth, S. (2025). <em>Introduction to Bayesian Data Analysis for Cognitive Science</em> (1. wyd.). Boca Raton: Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9780429342646">https://doi.org/10.1201/9780429342646</a>
+</div>
+</div></section></div> ]]></description>
+  <category>Statystyka</category>
+  <category>Matematyka</category>
+  <category>Bayes</category>
+  <guid>https://nieobliczalne.pl/posts/twierdzenie-bayesa.html</guid>
+  <pubDate>Tue, 04 Aug 2026 22:00:00 GMT</pubDate>
+  <media:content url="https://nieobliczalne.pl/posts/headers/twierdzenie-bayesa.webp" medium="image" type="image/webp"/>
+</item>
 <item>
   <title>Printoscope – WNHiP UWr</title>
   <dc:creator>Jakub Jędrusiak</dc:creator>

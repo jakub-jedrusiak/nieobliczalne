@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/twierdzenie-bayesa.html",
       "/posts/uwr-printoscope.html",
       "/posts/uwr-proxy.html",
       "/posts/rozklady-probkowania.html",

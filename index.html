@@ -175,10 +175,10 @@ window.Quarto = {
 
 <link rel="stylesheet" href="styles/styles.css">
 <link rel="alternate" type="application/rss+xml" title="Nieobliczalne" href="index.xml" data-external="1"><meta property="og:title" content="Nieobliczalne">
-<meta property="og:image" content="https://nieobliczalne.pl/posts/headers/uwr-printoscope.webp">
+<meta property="og:image" content="https://nieobliczalne.pl/posts/headers/twierdzenie-bayesa.webp">
 <meta property="og:site_name" content="Nieobliczalne">
 <meta name="twitter:title" content="Nieobliczalne">
-<meta name="twitter:image" content="https://nieobliczalne.pl/posts/headers/uwr-printoscope.webp">
+<meta name="twitter:image" content="https://nieobliczalne.pl/posts/headers/twierdzenie-bayesa.webp">
 <meta name="twitter:creator" content="@jakub_jedrusiak">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -403,7 +403,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Kategorie</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Wszystkie <span class="quarto-category-count">(17)</span></div><div class="category" data-category="TWF0ZW1hdHlrYQ==">Matematyka <span class="quarto-category-count">(3)</span></div><div class="category" data-category="TmFyeiVDNCU5OWR6aWE=">Narzędzia <span class="quarto-category-count">(5)</span></div><div class="category" data-category="TmF1a2E=">Nauka <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UHN5Y2hvbG9naWE=">Psychologia <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(4)</span></div><div class="category" data-category="U3RhdHlzdHlrYQ==">Statystyka <span class="quarto-category-count">(6)</span></div></div><div class="quarto-margin-footer"><div class="margin-footer-item">
+    <h5 class="quarto-listing-category-title">Kategorie</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Wszystkie <span class="quarto-category-count">(18)</span></div><div class="category" data-category="QmF5ZXM=">Bayes <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWF0ZW1hdHlrYQ==">Matematyka <span class="quarto-category-count">(4)</span></div><div class="category" data-category="TmFyeiVDNCU5OWR6aWE=">Narzędzia <span class="quarto-category-count">(5)</span></div><div class="category" data-category="TmF1a2E=">Nauka <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UHN5Y2hvbG9naWE=">Psychologia <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(4)</span></div><div class="category" data-category="U3RhdHlzdHlrYQ==">Statystyka <span class="quarto-category-count">(7)</span></div></div><div class="quarto-margin-footer"><div class="margin-footer-item">
 <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1683642");</style>
     <style type="text/css">
     /* LOADER */
@@ -1344,7 +1344,44 @@ window.Quarto = {
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="TmFyeiVDNCU5OWR6aWE=" data-listing-date-sort="1771974000000" data-listing-file-modified-sort="1772450276762" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1538">
+<div class="quarto-post image-right" data-index="0" data-categories="U3RhdHlzdHlrYSUyQ01hdGVtYXR5a2ElMkNCYXllcw==" data-listing-date-sort="1785880800000" data-listing-file-modified-sort="1785965703415" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="36" data-listing-word-count-sort="7131">
+<div class="thumbnail"><a href="./posts/twierdzenie-bayesa.html" class="no-external">
+
+<img loading="lazy" src="./posts/headers/twierdzenie-bayesa.webp" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/twierdzenie-bayesa.html" class="no-external">Twierdzenie Bayesa i bayesowskie porównywanie hipotez</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/twierdzenie-bayesa.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U3RhdHlzdHlrYQ=='); return false;">Statystyka</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWF0ZW1hdHlrYQ=='); return false;">Matematyka</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmF5ZXM='); return false;">Bayes</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/twierdzenie-bayesa.html" class="no-external">
+<p>Wyobraźmy sobie, że przychodzi do naszego gabinetu pacjent. Przeprowadzamy wywiad, stawiamy diagnozę i przypominamy sobie, że niedawno czytaliśmy niepokojącą statystykę – 30% ofiar przemocy wykształca to właśnie zaburzenie, podczas gdy w całej populacji występuje ono tylko u 10% ludzi. Czy należy przeprowadzić wywiad w tym kierunku? Jaka jest szansa, że pacjent rzeczywiście jest ofiarą przemocy? Chciałoby się&nbsp;powiedzieć, że jest 30% szans, ale jeśli tak by było, to z faktu, że 95% złodziei jest praworęczna, wynikałoby, że 95% praworęcznych to złodzieje. Jeśli chcemy „odwrócić prawdopodobieństwo” i wnioskować o doświadczeniu przemocy na podstawie diagnozy, musimy zastosować twierdzenie Bayesa.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/twierdzenie-bayesa.html" class="no-external">
+<div class="listing-date">
+5 sierpnia 2026
+</div>
+<div class="listing-author">
+Jakub Jędrusiak
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="TmFyeiVDNCU5OWR6aWE=" data-listing-date-sort="1771974000000" data-listing-file-modified-sort="1772450276762" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1538">
 <div class="thumbnail"><a href="./posts/uwr-printoscope.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/uwr-printoscope.webp" class="thumbnail-image">
@@ -1377,7 +1414,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="TmFyeiVDNCU5OWR6aWE=" data-listing-date-sort="1770850800000" data-listing-file-modified-sort="1785929122769" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="584">
+<div class="quarto-post image-right" data-index="2" data-categories="TmFyeiVDNCU5OWR6aWE=" data-listing-date-sort="1770850800000" data-listing-file-modified-sort="1785929122769" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="584">
 <div class="thumbnail"><a href="./posts/uwr-proxy.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/uwr-proxy.webp" class="thumbnail-image">
@@ -1410,7 +1447,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="U3RhdHlzdHlrYQ==" data-listing-date-sort="1698530400000" data-listing-file-modified-sort="1770461435835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="28" data-listing-word-count-sort="5483">
+<div class="quarto-post image-right" data-index="3" data-categories="U3RhdHlzdHlrYQ==" data-listing-date-sort="1698530400000" data-listing-file-modified-sort="1770461435835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="28" data-listing-word-count-sort="5483">
 <div class="thumbnail"><a href="./posts/rozklady-probkowania.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/rozklady-probkowania.webp" class="thumbnail-image">
@@ -1443,7 +1480,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="U3RhdHlzdHlrYSUyQ01hdGVtYXR5a2E=" data-listing-date-sort="1693087200000" data-listing-file-modified-sort="1770461435772" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="39" data-listing-word-count-sort="7710">
+<div class="quarto-post image-right" data-index="4" data-categories="U3RhdHlzdHlrYSUyQ01hdGVtYXR5a2E=" data-listing-date-sort="1693087200000" data-listing-file-modified-sort="1770461435772" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="39" data-listing-word-count-sort="7710">
 <div class="thumbnail"><a href="./posts/gestosc-prawdopodobienstwa.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/gestosc-prawdopodobienstwa.webp" class="thumbnail-image">
@@ -1478,7 +1515,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="U3RhdHlzdHlrYSUyQ01hdGVtYXR5a2E=" data-listing-date-sort="1690408800000" data-listing-file-modified-sort="1770461435772" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="23" data-listing-word-count-sort="4544">
+<div class="quarto-post image-right" data-index="5" data-categories="U3RhdHlzdHlrYSUyQ01hdGVtYXR5a2E=" data-listing-date-sort="1690408800000" data-listing-file-modified-sort="1770461435772" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="23" data-listing-word-count-sort="4544">
 <div class="thumbnail"><a href="./posts/funkcje.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/funkcje.webp" class="thumbnail-image">
@@ -1513,7 +1550,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="Ug==" data-listing-date-sort="1685052000000" data-listing-file-modified-sort="1770461435832" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="42" data-listing-word-count-sort="8266">
+<div class="quarto-post image-right" data-index="6" data-categories="Ug==" data-listing-date-sort="1685052000000" data-listing-file-modified-sort="1770461435832" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="42" data-listing-word-count-sort="8266">
 <div class="thumbnail"><a href="./posts/pakiety-w-R.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/pakiety-w-R.webp" class="thumbnail-image">
@@ -1546,7 +1583,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="TmFyeiVDNCU5OWR6aWE=" data-listing-date-sort="1684533600000" data-listing-file-modified-sort="1770461435835" data-listing-date-modified-sort="1697493600000" data-listing-reading-time-sort="16" data-listing-word-count-sort="3141">
+<div class="quarto-post image-right" data-index="7" data-categories="TmFyeiVDNCU5OWR6aWE=" data-listing-date-sort="1684533600000" data-listing-file-modified-sort="1770461435835" data-listing-date-modified-sort="1697493600000" data-listing-reading-time-sort="16" data-listing-word-count-sort="3141">
 <div class="thumbnail"><a href="./posts/regex.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/regex.webp" class="thumbnail-image">
@@ -1579,7 +1616,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="TmFyeiVDNCU5OWR6aWElMkNS" data-listing-date-sort="1684101600000" data-listing-file-modified-sort="1770461435772" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2784">
+<div class="quarto-post image-right" data-index="8" data-categories="TmFyeiVDNCU5OWR6aWElMkNS" data-listing-date-sort="1684101600000" data-listing-file-modified-sort="1770461435772" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2784">
 <div class="thumbnail"><a href="./posts/git.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/git.webp" class="thumbnail-image">
@@ -1614,7 +1651,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="UHl0aG9uJTJDTmF1a2ElMkNOYXJ6JUM0JTk5ZHppYQ==" data-listing-date-sort="1683842400000" data-listing-file-modified-sort="1770461435835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3592">
+<div class="quarto-post image-right" data-index="9" data-categories="UHl0aG9uJTJDTmF1a2ElMkNOYXJ6JUM0JTk5ZHppYQ==" data-listing-date-sort="1683842400000" data-listing-file-modified-sort="1770461435835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3592">
 <div class="thumbnail"><a href="./posts/powtarzalny-tekst.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/powtarzalny-tekst.webp" class="thumbnail-image">
@@ -1651,7 +1688,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-listing-date-sort="1683237600000" data-listing-file-modified-sort="1770461435832" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5334">
+<div class="quarto-post image-right" data-index="10" data-listing-date-sort="1683237600000" data-listing-file-modified-sort="1770461435832" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5334">
 <div class="thumbnail"><a href="./posts/metaprogramowanie.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/metaprogramowanie.webp" class="thumbnail-image">
@@ -1679,7 +1716,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="TmF1a2E=" data-listing-date-sort="1682719200000" data-listing-file-modified-sort="1770461435772" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1333">
+<div class="quarto-post image-right" data-index="11" data-categories="TmF1a2E=" data-listing-date-sort="1682719200000" data-listing-file-modified-sort="1770461435772" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1333">
 <div class="thumbnail"><a href="./posts/ai-research.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/ai-research.webp" class="thumbnail-image">
@@ -1712,7 +1749,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="Ug==" data-listing-date-sort="1678230000000" data-listing-file-modified-sort="1770461435772" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3094">
+<div class="quarto-post image-right" data-index="12" data-categories="Ug==" data-listing-date-sort="1678230000000" data-listing-file-modified-sort="1770461435772" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3094">
 <div class="thumbnail"><a href="./posts/automatyzacja.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/automatyzacja.webp" class="thumbnail-image">
@@ -1745,7 +1782,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-categories="U3RhdHlzdHlrYSUyQ1I=" data-listing-date-sort="1676934000000" data-listing-file-modified-sort="1770463397526" data-listing-date-modified-sort="1677711600000" data-listing-reading-time-sort="112" data-listing-word-count-sort="22307">
+<div class="quarto-post image-right" data-index="13" data-categories="U3RhdHlzdHlrYSUyQ1I=" data-listing-date-sort="1676934000000" data-listing-file-modified-sort="1770463397526" data-listing-date-modified-sort="1677711600000" data-listing-reading-time-sort="112" data-listing-word-count-sort="22307">
 <div class="thumbnail"><a href="./posts/podstawy_R.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/podstawy_R.webp" class="thumbnail-image">
@@ -1780,7 +1817,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-categories="TWF0ZW1hdHlrYQ==" data-listing-date-sort="1676588400000" data-listing-file-modified-sort="1771970304761" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1811">
+<div class="quarto-post image-right" data-index="14" data-categories="TWF0ZW1hdHlrYQ==" data-listing-date-sort="1676588400000" data-listing-file-modified-sort="1771970304761" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1811">
 <div class="thumbnail"><a href="./posts/kombinatoryka.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/kombinatoryka.webp" class="thumbnail-image">
@@ -1813,7 +1850,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="14" data-categories="U3RhdHlzdHlrYQ==" data-listing-date-sort="1663711200000" data-listing-file-modified-sort="1770461435832" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="28" data-listing-word-count-sort="5593">
+<div class="quarto-post image-right" data-index="15" data-categories="U3RhdHlzdHlrYQ==" data-listing-date-sort="1663711200000" data-listing-file-modified-sort="1770461435832" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="28" data-listing-word-count-sort="5593">
 <div class="thumbnail"><a href="./posts/p-value.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/p-value.webp" class="thumbnail-image">
@@ -1846,7 +1883,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="15" data-categories="U3RhdHlzdHlrYQ==" data-listing-date-sort="1652911200000" data-listing-file-modified-sort="1770461435835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="24" data-listing-word-count-sort="4630">
+<div class="quarto-post image-right" data-index="16" data-categories="U3RhdHlzdHlrYQ==" data-listing-date-sort="1652911200000" data-listing-file-modified-sort="1770461435835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="24" data-listing-word-count-sort="4630">
 <div class="thumbnail"><a href="./posts/procent-wariancji.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/procent-wariancji.webp" class="thumbnail-image">
@@ -1879,7 +1916,7 @@ Jakub Jędrusiak
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="16" data-categories="UHN5Y2hvbG9naWE=" data-listing-date-sort="1581030000000" data-listing-file-modified-sort="1770461435835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="30" data-listing-word-count-sort="5854">
+<div class="quarto-post image-right" data-index="17" data-categories="UHN5Y2hvbG9naWE=" data-listing-date-sort="1581030000000" data-listing-file-modified-sort="1770461435835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="30" data-listing-word-count-sort="5854">
 <div class="thumbnail"><a href="./posts/uczenie-sie.html" class="no-external">
 
 <img loading="lazy" src="./posts/headers/uczenie-sie.webp" class="thumbnail-image">
