@@ -12,6 +12,9 @@ categories:
     - Bayes
 nocite: |
     @clayton2021, @nicenboim2025, @jhonson2022, @field2026
+header-includes:
+  - \usepackage{mathtools}
+  - \usepackage{braket}
 ---
 
 Szybko ustalmy notację, tutaj tabela z definicjami i przykładami:
@@ -538,17 +541,180 @@ Mimo negatywnego wyniku testu Ewy nie udało się przekonać, że nie ma grypy. 
 
 Dlatego mówię, że $BF$ to siła dowodu. Im mniej wiarygodne twierdzenie, tym lepszych dowodów żąda. $BF$ to matematyczny wyraz tego właśnie niekontrowersyjnego stwierdzenia. Tak właśnie powinniśmy traktować tabelkę do interpretacji $BF$, którą wrzuciłem wyżej – siła dowodu, ale siła działa zawsze względem jakiegoś prawdopodobieństwa *a priori* – im jest większa, tym większego sceptyka przekona. Sceptycyzm może mieć silne podstawy w dowodach – z tej perspektywy im większy $BF$ tym lepiej przeciwstawia się kontrargumentom.
 
+# Więcej danych, więcej hipotez
+
+Co jeśli mam więcej niż jedną obserwację? Co jeśli mam więcej niż jedną hipotezę konkurującą o moje przekonania? Omówmy to sobie na podstawie prostego zadania, do dopisania którego zainspirowała mnie książka *Bernoulli's Fallacy* [@clayton2021]. Jest to uproszczona wersja zadania wymyślonego przez samego Thomasa Bayesa.
+
+Wybieram pewną liczbę naturalną między 1 a 6. Następnie rzucam kością sześciościenną 10 razy. Przy każdym kolejnym wyniku podaję, czy wylosowana liczba jest większa od mojej liczby (W), mniejsza (M), czy jej równa (R). Poniżej przedstawiam rezultat. O jakiej liczbie pomyślałem? Jak bardzo prawdopodobne jest, że to właśnie ta liczba?
+
+Zachęcam, żeby spróbować samemu to zadanie wykonać. Ostrzegam jednak, że potrzebny będzie kalkulator naukowy (np. [online](https://mathda.com/calculator/pl) albo [apka](https://play.google.com/store/apps/details?id=advanced.scientific.calculator.calc991.plus&hl=pl-PL)) lub konsola R, bo zadanie wymaga pracy z bardzo małymi liczbami (lub notacją wykładniczą).
+
+> W, W, W, R, W, W, W, W, W, M
+
+```{r}
+#| code-fold: true
+#| title: "Kod w R symulujący rzut kośćmi"
+
+set.seed(42 * 2137)
+my_number <- 2
+
+throws <- sample(1:6, 10, replace = TRUE) # 4 6 6 2 5 6 4 4 5 1
+throws_recoded <- dplyr::case_when(
+  throws < my_number ~ "M",
+  throws == my_number ~ "R",
+  throws > my_number ~ "W"
+)
+```
+
+W pierwszej kolejności musimy pamiętać o ogólnej logice tych analiz, tzn. porównywaniu alternatywnych hipotez w tym, **na ile dobrze wyjaśniają dane**. Dla każdej z liczb na kostce możemy to policzyć. Musimy zadać sobie pytania w stylu „jakie jest prawdopodobieństwo otrzymania takiego zestawu, jeśli wymyśloną liczbą jest 3?”. Oznaczymy sobie te hipotezy jako $H_1$, $H_2$ itd. do $H_6$. Dla uproszczenia oznaczmy sobie, że ten konkretny zestaw danych, który mamy, literką $\theta$.
+
+$$
+	heta \mathrel{\mathop:}= (W, W, W, R, W, W, W, W, W, M)
+$$
+
+W pierwszej kolejności możemy odrzucić $H_1$ i $H_6$, bo gdyby moją liczbą było 1, żaden rzut nie dałby mniejszej liczby, a mamy takie w zbiorze. Podobnie 6 – gdyby to było 6, nie mogłoby się pojawić ani jedno W. Nie musimy ich wykluczać arbitralnie, jakby przeprowadzić dla nich poniższe obliczenia, prawdopodobieństwo obu tych hipotez wyszłoby 0.
+
+Zacznijmy od liczby 5. Prawdopodobieństwo wylosowania liczby większej od 5 wynosi $P(W \mid H_5) = \frac{1}{6}$, bo tylko liczba 6 jest większa. Dalej prawdopodobieństwo R, jak w każdej hipotezie, też wynosi $P(R \mid H_5) = \frac{1}{6}$. Istnieją natomiast 4 wyniki mniejsze od 5 (1, 2, 3, 4), więc jeśli moja liczba to 5, prawdopodobieństwo otrzymania M wynosi $P(M \mid H_5) = \frac{4}{6} = \frac{2}{3}$. Teraz możemy policzyć prawdopodobieństwo wylosowania całego naszego zestawu danych, jeśli wybraną liczbą faktycznie jest 5. Ponieważ to są niezależne rzuty kością, możemy po prostu przemnożyć te prawdopodobieństwa. Mógłbym to rozpisać jako mnożenie ($\frac{1}{6} \times \frac{1}{6} \times \ldots$), ale mogę oszczędzić sobie pisania zauważając, że mamy 8 wyników W, 1 wynik R i 1 wynik M, więc mogę skorzystać z potęg.
+
+$$
+P(\theta \mid H_5) = (\frac{1}{6})^8 \times (\frac{1}{6})^1 \times (\frac{4}{6})^1 = \frac{1}{15116544} \approx 6.62 \times 10^{-6}
+$$
+
+Widzimy, że te liczby bardzo szybko robią się bardzo małe. Na ogół radzimy sobie z takimi rzeczami używając logarytmów, bo mają tę przyjemną właściwość, że zamiast mnożyć, możemy wtedy liczby dodawać (bo $\log{(a \times b)} = \log{a} + \log{b}$). Tutaj zrobimy to normalnie. Policzmy więc prawdopodobieństwa dla każdej z hipotez.
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+library(dplyr)
+library(gmp) # do ułamków zwykłych
+
+tc <- table(throws_recoded)
+
+H_compare <- tibble(assumed_number = 1:6) %>%
+  mutate(
+    P_M = paste0(assumed_number - 1, "/", 6),
+    P_R = "1/6",
+    P_W = paste0(6 - assumed_number, "/", 6),
+    calc = glue::glue(
+      "(\\frac{<numerator(P_M)>}{6})^{<tc['M']>} \\times (\\frac{<numerator(P_R)>}{6})^{<tc['R']>} \\times (\\frac{<numerator(P_W)>}{6})^{<tc['W']>}",
+      .open = "<",
+      .close = ">"
+    )
+  ) %>%
+  rowwise() %>%
+  mutate(
+    P_theta = as.numeric(
+      as.bigq(P_M)^tc["M"] * as.bigq(P_R)^tc["R"] * as.bigq(P_W)^tc["W"]
+    )
+  ) %>%
+  ungroup()
+
+H_compare_for_kable <- H_compare %>%
+  mutate(
+    assumed_number = paste0("H_", assumed_number),
+    across(P_M:P_W, \(x) {
+      paste0("\\frac{", x, "}") |> stringr::str_replace("/", "}{")
+    }),
+    across(assumed_number:calc, \(x) paste0("$", x, "$"))
+  ) %>%
+  tibble::column_to_rownames("assumed_number")
+
+knitr::kable(
+  H_compare_for_kable,
+  col.names = c(
+    "$P(M \\mid H_n)$",
+    "$P(R \\mid H_n)$",
+    "$P(W \\mid H_n)$",
+    "Obliczenia",
+    "$P(\\theta \\mid H_n)$"
+  ),
+  align = "ccccr"
+)
+```
+
+Małe liczby mieszają się w oczach, więc wrzucę to na wykres:
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+library(ggplot2)
+
+H_compare %>%
+  mutate(H = paste0("H[", assumed_number, "]")) %>%
+  ggplot(aes(H, P_theta)) +
+  geom_col(fill = "#87C785FF") +
+  labs(x = NULL, y = expression(P(theta ~ "|" ~ H[n]))) +
+  scale_x_discrete(labels = scales::label_parse()) +
+  theme_minimal() +
+  theme(panel.grid.major.x = element_blank())
+```
+
+Widzimy więc, że $H_2$ najlepiej wyjaśnia dane. Ale jak prawdopodobna rzeczywiście jest? Nawet przy założeniu $H_2$ istnieje tylko ok. 0.11% szans na wygenerowanie dokładnie takiego zestawu danych. I ma to sens – przy 10 rzutach kością każdy konkretny zestaw jest rzadki. Jeśli jednak twierdzenie Bayesa nas czegoś uczy, to tego, że nie liczy się bezwzględne prawdopodobieństwo, tylko prawdopodobieństwo względem innych możliwości. Każda hipoteza przewiduje dane w jakimś stopniu (no, może poza $H_1$ i $H_6$). Zapiszmy nasze pytanie o prawdopodobieństwo hipotez właśnie w postaci twierdzenia Bayesa:
+
+$$
+P(H_n \mid \theta) = \frac{P(\theta \mid H_n) \times P(H_n)}{P(\theta)}
+$$
+
+W tabeli policzyliśmy $P(\theta \mid H_n)$ dla każdej z hipotez. Twierdzenie Bayesa podpowiada nam, że trzeba przemnożyć je przez $P(H_n)$ czyli wstępne prawdopodobieństwo każdej z hipotez, prawdopodobieństwo *a priori*. Czyli przez ile? A co jest tutaj najbardziej rozsądne? Zanim zaobserwowaliśmy dane, nie mieliśmy żadnego powodu, żeby preferować którąkolwiek z hipotez – każda z nich była równie prawdopodobna. Tym samym możemy powiedzieć, że dla każdej z postawionych hipotez $H_n$ jej prawdopodobieństwo *a priori* wyniosło $P(H_n) = \frac{1}{6}$.
+
+::: {.callout-caution title="Dygresja filozoficzna o założeniach *a priori*"}
+Wydaje się do banalne, ale wcale nie jest! Mogłoby nam się wydawać, że to *a priori* nie nakłada żadnych ograniczeń na rzeczywistość, ale jednak nakłada – wyklucza wszystkie inne hipotezy. Wyklucza na przykład, że wymyślona liczba to 7. Albo 45. Albo 3.5. Albo 0. Albo -2. I to ma sens w tym zadaniu, polecenie jest jasne, możliwe odpowiedzi to 1, 2, 3, 4, 5 albo 6. To jest nasza przestrzeń możliwości i *prior* jest w niej zamknięty. W statystyce częstościowej takie hipotezy alternatywne, które nie mają fizycznego odpowiednika w rzeczywistości, mogą być w pewien sposób brane pod uwagę przy testowaniu hipotez. Prosty przykład – załóżmy, że analizujemy masę ciała zdrowych, dorosłych ludzi. Jeśli dane są odpowiednio zaszumione, jeśli błąd standardowy jest odpowiednio duży, nagle przedział ufności może obejmować ujemne wartości masy ciała, mimo że są niemożliwe! A jeśli nie ujemne, to zupełnie absurdalne, np. 15 kg. Czasem to nie zaszkodzi, ale czasem ograniczy moc naszego testu, która mogłaby być większa, jeśli wykluczyć rzeczy niemożliwe, jak chciał Sherlock Holmes. Owszem, możemy się kłócić, gdzie postawić granicę, ale wykluczenie wszystkiego poniżej, powiedzmy, 10 kg nie powinno być kontrowersyjne, a już na pewno wykluczenie wszystkiego poniżej 0. Jeszcze łatwiej uzyskać taki efekt w psychologii rozwojowej. Jak badamy dzieci od noworodków do 3. roku życia, gdzie młodsze dzieci dominują, nagle może się okazać, że przedział ufności nie pozwala nam odrzucić ujemnej wartości wieku. Mądry jest tytuł książki *Liczby nie wiedzą, skąd pochodzą* [@francuz_liczby_2007], co się może trzymać matematycznie, nie ma żadnego namacalnego sensu. Owszem, istnieją sposoby radzenia sobie i z takimi problemami na gruncie statystyki częstościowej, ale wymaga to wiedzy, umiejętności technicznych, świadomej decyzji dotyczącej matematycznych fundamentów naszych modeli, czego nie da się zazwyczaj po prostu wyklikać w jamovi.
+
+Zakładanie czegokolwiek (zupełnie czegokolwiek) na wstępie może budzić silny emocjonalny opór u naukowców. We mnie samym budzi się szczególny rodzaj stresu, kiedy piszę, że średnia (!) masa ciała w populacji zdrowych dorosłych *na pewno* nie wynosi 10 kg i że z góry mogę taką opcję wykluczyć. W końcu może coś ważnego przegapiam? Może to jest wielkie odkrycie tylko czekające na sprawdzenie? Czy mogę wykluczyć jakąś możliwość tylko dlatego, że jest niezgodna z absolutnie wszystkim, co wiem na temat świata? To nie jest sposób działania naukowca, naukowiec musi dopuścić każdą możliwość, nieważne jak absurdalna by była. To *nieracjonalne* wykluczać cokolwiek z góry. Więc jako prawdziwy, bezstronny naukowiec, zaczynam przeglądać wyniki swojej ankiety. Widzę że ktoś zadeklarował masę ciała 5 kg. No to w praktyce wykluczam, pewnie ktoś chciał napisać 50 kg, ale się pomylił. I tyle z mojej szlachetnej bezstronności. Jeszcze inaczej, patrzę na rozkład masy ciała w mojej próbce i naprawdę wychodzi mi średnia w okolicach 20 kg. Wysyłam niesamowite odkrycie do Nature i dostaję natychmiastowy *desk reject* albo recenzent każe mi się puknąć w głowę – albo miałem najazd nieuważnych badanych, albo coś musiałem zepsuć przy kodowaniu zmiennych. Niestety niesamowite $p < 0.001$ go nie przekonuje.
+
+Nie jest to może *prior* w sensie formalnym, ale jakieś nasze *przekonania a priori* rzeczywiście stale włączamy w nasz proces naukowy, zupełnie zresztą słusznie – nazywamy to zdrowym rozsądkiem. Robimy to na etapie planowania, czyszczenia danych, dyskusji wyników, ale z jakiegoś powodu mamy duży emocjonalny opór przed zrobieniem tego na etapie samego testowania hipotez. Nie chcemy wyników skażonych zdrowym rozsądkiem i podstawową logiką. Jednak proces bayesowski dziejący się w naszych własnych głowach i tak każe nam odrzucić takie wnioski – w końcu tylko bardzo silne dowody mogą przekonać nas do bardzo nieprawdopodobnych wniosków (patrz omówienie $BF$ wyżej). Dlatego na przykład słusznie krytykujemy Marka Regnerusa, że nie wykluczył ze swojej analizy przypadków wskazujących na skrajną nieuważność osób badanych (np. badanego, który deklarował, że był aresztowany jako roczne dziecko albo badanego rzekomo mierzącego 2.3 m wzrostu przy 40 kg masy ciała) a potem wyciągał z nich silne wnioski w kwestiach, gdzie koszty pomyłki są potencjalnie bardzo duże [@cheng2015]. Nie mówię przy tym, że nie warto kwestionować własnych założeń, zwłaszcza tych oczywistych! Badam kreatywność, wiem że podważanie założeń jest ważne. W końcu to z podważania oczywistych założeń wzięły się geometrie nieeuklidesowe, duża część fizyki kwantowej czy chociażby przewrót kopernikański. Jednak wszystkie te pozytywne odkrycia miały ważną zaletę – dostarczały przekonujących dowodów.
+
+Statystyka bayesowska każe nam (nie że daje możliwość, tylko rzeczywiście nakazuje) włączać w analizę jakieś *a priori*, co budzi bardzo dużą nieufność. Moją też budziło! Mniej niż rok temu szeptałem do koleżanki na konferencji „O, zrobili analizę bayesowską, pewnie im nie wychodziło”. Jednak statystyka częstościowa tylko pozornie chroni nas przed jakimikolwiek *założeniami a priori*, bo nie uwzględnia formalnego *prawdopodobieństwa a priori*. Z tej perspektywy statystyka bayesowska nie tyle jako jedyna każe nam poczynić jakieś założenia *a priori*, których częstościowa nie czyni. Przewaga analizy bayesowskiej jest taka, że dużą i ważną część tych założeń, w postaci prawdopodobieństwa *a priori*, każe nam ujawnić wprost. W końcu w klasycznej statystyce też spotkamy wiele założeń skutecznie ukrytych w trzewiach programu statystycznego, który napisał ktoś inny, zostawiając nam ustalone przez siebie ustawienia domyślne.
+
+Włączanie założeń *a priori* rzeczywiście może być też niebezpieczne – Daryl Bem użył analizy bayesowskiej do udowodnienia, że studenci potrafią w niewielkim stopniu przewidywać przyszłość, jeśli ta zawiera treści erotyczne [@bem_must_2011]. Wtedy jednak ktoś inny mógł skrytykować Bema za to, że jego *a priori* są nierealistyczne, dobrane *post hoc* i zbyt łaskawe dla tezy [@wagenmakers_yes_2018]. Ta krytyka mogła się wydarzyć dlatego, że Bem musiał swoje *a priori* wyłożyć jawnie. Zresztą Bem sięgnął po metody bayesowskie dopiero kiedy wspomniani krytycy użyli ich do obalenia jego wniosków [@wagenmakers_why_2011], jego pierwszy artykuł udowadniał to samo z użyciem klasycznych metod [@bem_feeling_2011] – jak widać, wcale go nie uchroniły. Przemawia do mnie jednak to, że krytyka bayesowska może wprost zaatakować założenia *a priori* i sprawdzić, czy wnioski trzymają się mimo niedociągnięć, którymi jest obarczone każde badanie (stąd *Limitations* w dyskusjach).
+
+Dopiero pisząc tekst w tej ramce orientuję się, jak bardzo filozofia statystyki bayesowskiej do mnie przemówiła. Jak mam być szczery, jestem tym zaskoczony. Jednak kiedy skończę rozwiązywać to zadanie (bo rozwiązujemy zadanie, jak ktoś zapomniał), otworzę plik w R i będę analizował dane klasycznymi metodami. Dlaczego? Z dwóch powodów. Po pierwsze nie umiem robić analizy bayesowskiej na prawdziwych danych. Przyznaję otwarcie, jestem żółtodziobem jak chodzi o te tematy, ta ramka płomiennie opisuje argumenty filozoficzne, nie praktyczne. I wielu naukowców ma tak samo jak ja – nie uczy się nas podejścia bayesowskiego, nie umiemy tego robić, nie znamy dogłębnie jego filozofii, a nawet jak chcemy się nauczyć, to dobrych materiałów do nauki jest bayesowski promil w częstościowym morzu. Człowiek chce wyciągać wnioski z badań, a książka z *Introduction* w tytule na wejściu każe mu różniczkować rozkład *beta*. Po drugie, nawet jakbym rzeczywiście umiał robić te analizy (co mam nadzieję osiągnąć), to niekoniecznie będę w stanie przekonać nimi środowisko do moich wniosków – patrz powód pierwszy. Może jak się douczę, to moje nowo nabyte zaufanie do tego modelu uprawiania statystyki też się załamie. Przyznaję, że to, co napisałem w tym fragmencie jest prawdą tylko wtedy, kiedy statystykę bayesowską uprawia się dobrze, a kontrprzykłady trzymają się, kiedy statystykę częstościową uprawia się źle. Wiele z tych problemów można też naprawić nie odchodząc od statystyki częstościowej – pytanie tylko jakim kosztem. Wiem jedno – jeśli zmienię zdanie, to moje przekonania zostaną zaktualizowane na podstawie nowych danych, dostarczających mi odpowiednio silne dowody. A może i parę postów z tej podróży powstanie.
+:::
+
+Wróćmy do zadania. Ustaliliśmy już prawdopodobieństwo danych pod każdą z hipotez oraz że sensowne jest niedyskryminujące prawdopodobieństwo *a priori* $P(H_n) = \frac{1}{6}$ dla każdej z sześciu hipotez. Pozostaje nam policzyć $P(\theta)$. Wcześniej oznaczało to wszystkie możliwości, np. wszystkich ludzi z ujemnym wynikiem w teście. Teraz sprawa robi się bardziej skomplikowana, bo „wszyscy” odnosi się do całych, 10-elementowych zbiorów danych. Ostatecznie w dzieleniu chodzi o to, żeby wyskalować nasze oszacowania tak, żeby sumowały się do 100% (czyli do jedności). W zadaniu z testem na grypę musieliśmy osobno policzyć, jaką część całej populacji stanowią zdrowi z wynikiem negatywnym i chorzy z wynikiem negatywnym. W tym celu mnożyliśmy odsetek razy prawdopodobieństwo dla każdej z grup i dodawaliśmy. Identycznie możemy zrobić tutaj. Naszą przestrzeń tworzy 6 hipotez, każda z własnym stopniem wyjaśniania danych (co tutaj jest odpowiednikiem odsetka) i każda z własnym prawdopodobieństwem *a priori*. Po podstawieniu do wzoru otrzymamy więc coś takiego:
+
+$$
+P(H_n \mid \theta) = \frac{P(\theta \mid H_n) \times \frac{1}{6}}{P(\theta \mid H_1) \times \frac{1}{6} + P(\theta \mid H_2) \times \frac{1}{6} + \ldots + P(\theta \mid H_6) \times \frac{1}{6}}
+$$
+
+Kto uważny mógł już spostrzec, że i w liczniku, i w każdym składniku sumy w mianowniku, mamy czynnik $\frac{1}{6}$. Oznacza to, że może on się skrócić. Jest to szczególny przypadek, ale ma to sens. Mnożenie przez *a priori* ma wyskalować nasze składowe prawdopodobieństwa tak, żeby wziąć pod uwagę, że pewne opcje są z natury rzadsze (np. bycie ofiarą przemocy w pierwszym zadaniu). Jeśli różne opcje rzeczywiście są jednakowo reprezentowane w tej przestrzeni hipotez, to nie ma na co nakładać poprawki. W tym wypadku możemy każdą wartość z tabeli po prostu podzielić przez sumę całej kolumny.
+
+```{r}
+#| code-fold: true
+H_compare_for_kable %>%
+  select(P_theta) %>%
+  mutate(
+    P_H = P_theta / sum(P_theta),
+    P_H = paste0(
+      "$",
+      format(P_theta / sum(P_theta) * 100, digits = 2),
+      "\\%$"
+    ),
+    P_H = stringr::str_remove_all(P_H, " ")
+  ) %>%
+  knitr::kable(
+    col.names = c("$P(\\theta \\mid H_n)$", "$P(H_n \\mid \\theta)$"),
+    align = "rr"
+  )
+```
+
+I rzeczywiście, mamy ponad 82% pewności, że pomyślałem o liczbie 2. Opcje niemożliwe wykluczyły się same. Nikogo chyba nie zdziwię mówiąc, że rzeczywiście miałem na myśli liczbę 2.
+
+Zwraca uwagę brak czynnika Bayesa w każdym rozwiązaniu. Po prawdzie moglibyśmy go policzyć, dla każdej hipotezy porównując prawdopodobieństwo danej hipotezy do łącznego prawdopodobieństwa pozostałych hipotez. Pozwoliłoby nam to określić, jak wypada dana hipoteza na tle wszystkich innych naszych hipotez. Nie jest to jednak w tym wypadku wcale łatwiejsze niż to, co zrobiliśmy bezpośrednio z twierdzenia. Możemy natomiast łatwo te $BF$ policzyć, dzieląc szanse *a posteriori* przez *a priori*, jeśli same wartości $BF$ nas interesują.
+
 # Podsumowanie
 
 Co miało być tylko ramką we wpisie o przedziałach ufności, który właśnie przygotowuję, nagle urosło do rozmiarów olbrzymich. Jest to dla mnie – tak jak dla większości badaczy, mam wrażenie – nowa wiedza. Każdy gdzieś słyszał o statystyce bayesowskiej, że jest *prior* i *posterior* i że nie ma tam wartości *p*. Kojarzy się jako coś z gruntu subiektywnego, jako wielka filozofia mająca uzasadniać *p*-hacking. Jednak im więcej na ten temat wiem, tym bardziej widzę, że tak nie jest. A z pewnością wiem więcej teraz niż wiedziałem, jak zaczynałem ten tekst pisać. Podsumujmy sobie, co z tego wpisu wynika.
 
-1. Wyciąganie wniosków na podstawie danych nie jest łatwe. Intuicyjnie, gdy dostrzegamy u kogoś określony zestaw cech — zwłaszcza tych charakterystycznych — przypisujemy tę osobę do określonej grupy. Jednak nawet jeśli wszyscy członkowie tej grupy posiadają takie cechy, nasze wnioskowanie może być błędne, jeżeli cechy te są równie częste w innych grupach. Zdanie „Ten naród uwielbia swoje jedzenie i uważa rodzinę za istotną wartość” może opisywać Polaków, ale równie dobrze może odnosić się do Włochów, Brazylijczyków czy Koreańczyków. Na podstawie przynależności do grupy można często trafnie wnioskować o cechach ludzi, którzy do niej należą, ale na podstawie samych cech często trudno jest ustalić, do której konkretnie grupy należy dana osoba. Podobnie jest z danymi – stosunkowo łatwo jest przewidywać, jakie dane mogą pochodzić z danego rozkładu, ale ocena, na ile prawdopodobne są poszczególne hipotezy (np. o przynależności) w świetle danych, wymaga uwzględnienia szerszego obrazu. Inaczej ze zdania „95% złodziei jest praworęcznych” wywnioskujemy, że 95% praworęcznych to złodzieje.
-2. Ten szerszy obraz składa się z tego, na ile dobrze inne hipotezy przewidują dane, a to zaś wymaga znajomości innych prawdopodobieństw, by móc obliczyć dopasowanie hipotez do danych. Podstawową procedurę opisuje twierdzenie Bayesa – żeby ocenić, jak prawdopodobny jest wniosek na podstawie przesłanki, musimy wiedzieć, jak często przypadki, do których pasuje dany wniosek, zdarzają się **na tle wszystkich**, którzy spełniają daną przesłankę. Robimy to rozdzierając mentalny kwadrat, żeby oddzielić tych, do których pasuje dany wniosek i jednocześnie spełniają tę przesłankę, a potem dzielimy przez liczbę wszystkich, którzy spełniają tę przesłankę.
-3. Możemy porównywać hipotezy poprzez patrzenie, jak dobrze dopasowane są do danych. Stosunek tego, jak bardzo prawdopodobne są te dane pod jedną i drugą hipotezą, określamy jako czynnik Bayesa (*Bayes factor*, $BF$). Jak porównujemy, jak wypada $H_1$ na tle $H_0$, oznaczymy to jako $BF_{10}$.
-4. Czynnik Bayesa opisuje względne dopasowanie hipotez do danych, ale także to, jak powinny zaktualizować się szanse pod wpływem nowych informacji czynników. Im większa jego wartość, tym silniejszym kontrargumentom potrafi się przeciwstawić.
-5. Sam czynnik Bayesa nie może jednak powiedzieć, jakie jest prawdopodobieństwo, że dana hipoteza jest prawdziwa. Do tego musimy mieć jakiekolwiek pojęcie, na ile ta hipoteza jest prawdopodobna *a priori*. Ten fragment często wzbudza lęk, ale tak naprawdę potrafi ustabilizować naszą hipotezę, żeby słabe dowody nie mogły nas łatwo zwieść. To właśnie *prior* pozwala nam ustrzec się przed stwierdzeniami typu „Polacy kradną częściej niż Brytyjczycy, a że jesteś Polakiem, to pewnie też kradniesz” – nawet jeśli Polacy rzeczywiście kradliby częściej (co odbiłoby się na $BF$), to *prior* matematycznie uwzględnia poprawkę na to, że zasadniczo niewiele ludzi kradnie.
-6. Statystyka bayesowska liczy dopasowanie hipotez do danych. Statystyka klasyczna też przyjmuje jakiś rozkład prawdopodobieństwa na wejściu (zazwyczaj normalny rozkład próbkowania ze średnią 0), ale potem zwraca naszą uwagę na *niedopasowanie* zamiast dopasowania – jeśli jest zbyt duże ($p < 0.05$) odrzucamy hipotezę zerową. Standardowo nie porównuje więc pozytywnego dopasowania dwóch hipotez (zwłaszcza przy szacowaniu parametrów), więc nie posiada odpowiednika $BF$. Kiedy mamy $BF$, możemy szanse *a priori* przemnożyć przez ten współczynnik i otrzymać szanse *a posteriori*, czyli szanse, że dana hipoteza rzeczywiście jest prawdziwa, jeśli potwierdziliśmy prawdziwość określonych przesłanek. Dzięki takiemu ujęciu hipoteza zerowa zyskuje moc przewidywania danych, a przez to statystyka bayesowska zdolna jest dostarczyć dowodów na jej prawdziwość, zamiast tylko na *brak możliwości jej odrzucenia*.
-7. Prawdopodobieństwo *a priori* może płynnie uwzględnić wiele różnych czynników, w tym trudnych do precyzyjnego sformalizowania. W ten sposób statystyka bayesowska pozwala sprawnie zmieniać oszacowania, gdy napływają nowe informacje, ale też testować zarówno jasny scenariusz, jak i czarny scenariusz.
+1.  Wyciąganie wniosków na podstawie danych nie jest łatwe. Intuicyjnie, gdy dostrzegamy u kogoś określony zestaw cech — zwłaszcza tych charakterystycznych — przypisujemy tę osobę do określonej grupy. Jednak nawet jeśli wszyscy członkowie tej grupy posiadają takie cechy, nasze wnioskowanie może być błędne, jeżeli cechy te są równie częste w innych grupach. Zdanie „Ten naród uwielbia swoje jedzenie i uważa rodzinę za istotną wartość” może opisywać Polaków, ale równie dobrze może odnosić się do Włochów, Brazylijczyków czy Koreańczyków. Na podstawie przynależności do grupy można często trafnie wnioskować o cechach ludzi, którzy do niej należą, ale na podstawie samych cech często trudno jest ustalić, do której konkretnie grupy należy dana osoba. Podobnie jest z danymi – stosunkowo łatwo jest przewidywać, jakie dane mogą pochodzić z danego rozkładu, ale ocena, na ile prawdopodobne są poszczególne hipotezy (np. o przynależności) w świetle danych, wymaga uwzględnienia szerszego obrazu. Inaczej ze zdania „95% złodziei jest praworęcznych” wywnioskujemy, że 95% praworęcznych to złodzieje.
+2.  Ten szerszy obraz składa się z tego, na ile dobrze inne hipotezy przewidują dane, a to zaś wymaga znajomości innych prawdopodobieństw, by móc obliczyć dopasowanie hipotez do danych. Podstawową procedurę opisuje twierdzenie Bayesa – żeby ocenić, jak prawdopodobny jest wniosek na podstawie przesłanki, musimy wiedzieć, jak często przypadki, do których pasuje dany wniosek, zdarzają się **na tle wszystkich**, którzy spełniają daną przesłankę. Robimy to rozdzierając mentalny kwadrat, żeby oddzielić tych, do których pasuje dany wniosek i jednocześnie spełniają tę przesłankę, a potem dzielimy przez liczbę wszystkich, którzy spełniają tę przesłankę.
+3.  Możemy porównywać hipotezy poprzez patrzenie, jak dobrze dopasowane są do danych. Stosunek tego, jak bardzo prawdopodobne są te dane pod jedną i drugą hipotezą, określamy jako czynnik Bayesa (*Bayes factor*, $BF$). Jak porównujemy, jak wypada $H_1$ na tle $H_0$, oznaczymy to jako $BF_{10}$.
+4.  Czynnik Bayesa opisuje względne dopasowanie hipotez do danych, ale także to, jak powinny zaktualizować się szanse pod wpływem nowych informacji czynników. Im większa jego wartość, tym silniejszym kontrargumentom potrafi się przeciwstawić.
+5.  Sam czynnik Bayesa nie może jednak powiedzieć, jakie jest prawdopodobieństwo, że dana hipoteza jest prawdziwa. Do tego musimy mieć jakiekolwiek pojęcie, na ile ta hipoteza jest prawdopodobna *a priori*. Ten fragment często wzbudza lęk, ale tak naprawdę potrafi ustabilizować naszą hipotezę, żeby słabe dowody nie mogły nas łatwo zwieść. To właśnie *prior* pozwala nam ustrzec się przed stwierdzeniami typu „Polacy kradną częściej niż Brytyjczycy, a że jesteś Polakiem, to pewnie też kradniesz” – nawet jeśli Polacy rzeczywiście kradliby częściej (co odbiłoby się na $BF$), to *prior* matematycznie uwzględnia poprawkę na to, że zasadniczo niewiele ludzi kradnie.
+6.  Statystyka bayesowska liczy dopasowanie hipotez do danych. Statystyka klasyczna też przyjmuje jakiś rozkład prawdopodobieństwa na wejściu (zazwyczaj normalny rozkład próbkowania ze średnią 0), ale potem zwraca naszą uwagę na *niedopasowanie* zamiast dopasowania – jeśli jest zbyt duże ($p < 0.05$) odrzucamy hipotezę zerową. Standardowo nie porównuje więc pozytywnego dopasowania dwóch hipotez (zwłaszcza przy szacowaniu parametrów), więc nie posiada odpowiednika $BF$. Kiedy mamy $BF$, możemy szanse *a priori* przemnożyć przez ten współczynnik i otrzymać szanse *a posteriori*, czyli szanse, że dana hipoteza rzeczywiście jest prawdziwa, jeśli potwierdziliśmy prawdziwość określonych przesłanek. Dzięki takiemu ujęciu hipoteza zerowa zyskuje moc przewidywania danych, a przez to statystyka bayesowska zdolna jest dostarczyć dowodów na jej prawdziwość, zamiast tylko na *brak możliwości jej odrzucenia*.
+7.  Prawdopodobieństwo *a priori* może płynnie uwzględnić wiele różnych czynników, w tym trudnych do precyzyjnego sformalizowania. W ten sposób statystyka bayesowska pozwala sprawnie zmieniać oszacowania, gdy napływają nowe informacje, ale też testować zarówno jasny scenariusz, jak i czarny scenariusz.
 
 Statystyka bayesowska to cały oddzielny świat, który ma własne problemy i założenia, ale też własne możliwości. Samo rozszerzenie rozkładów *a priori* i *a posteriori* o rozkłady ciągłe, a także dodanie do modelu więcej niż jednej obserwacji sprawia, że rzecz bardzo szybko robi się ekscytująca. O ile – tak jak ja – jest się nerdem.
 
@@ -561,7 +727,6 @@ Jak mnie samemu udowodniło pisanie tego posta, nic nie pozwala tak dobrze zrozu
 Ewa ocenia prawdopodobieństwo, że ma grypę, na 5%. Zamówiła wypasiony, drogi test, który poprawnie wykrywa chorobę u 85% chorych i tylko w 0.5% przypadków daje wyniki fałszywie pozytywne. Wykonała ten test i zobaczyła wynik negatywny. Jakie jest prawdopodobieństwo, że jednak jest chora? Użyj i metody z twierdzeniem Bayesa, i metody z BF. Sprawdź, czy z obu metod wychodzi takie samo prawdopodobieństwo *a posteriori*. Policz $BF_{01}$ i zinterpretuj, jak silnym dowodem braku grypy jest negatywny wynik tego testu.
 
 ::: {.callout-note title="Odpowiedź" collapse="true"}
-
 Z twierdzenia Bayesa:
 
 $$
@@ -595,7 +760,6 @@ BF_{01} = \frac{199}{30} \approx 6.63
 $$
 
 Możemy negatywny wynik testu zinterpretować jako umiarkowanie silny dowód, że grypy nie ma (ale trzeba pamiętać, że to nie jest *a posteriori* i umiarkowanie silny dowód może być ciągle za słaby, jeśli *a priori* grypy jest wysokie).
-
 :::
 
 ## Zadanie 1b.
@@ -603,7 +767,6 @@ Możemy negatywny wynik testu zinterpretować jako umiarkowanie silny dowód, ż
 Lekarz Ewy po gruntownym wywiadzie stwierdził, że jest na 95% pewny, że Ewa ma grypę. Wtedy Ewa powiedziała mu o negatywnych wynikach wypasionego testu. Jak powinna zmienić się ocena lekarza? Zignoruj jego urażoną dumę.
 
 ::: {.callout-note title="Odpowiedź" collapse="true"}
-
 Prawdopodobieństwo *a posteriori* bezpośrednio z BF obliczonego w poprzednim podpunkcie:
 
 $$
@@ -611,10 +774,9 @@ P(\text{grypa} \mid -)_{\text{lekarz}} = \frac{0.1508 \times 0.95}{0.1508 \times
 $$
 
 Lekarz prawdopodobnie nie odrzuci hipotezy o grypie – przy jego *a priori* jest ona ciągle bardziej prawdopodobna.
-
 :::
 
-## Zadanie 1c*.
+## Zadanie 1c\*.
 
 BONUS: spróbuj znaleźć takie przykładowe parametry testu na grypę, żeby wynik negatywny przekonał nawet kogoś pewnego na 99%.
 
@@ -631,7 +793,6 @@ Nie da się policzyć dwóch niewiadomych za pomocą jednej danej. Trzeba ustali
 :::
 
 ::: {.callout-note title="Odpowiedź" collapse="true"}
-
 Skoro $BF$ to też stosunek szans *a posteriori* do *a priori*, to możemy znaleźć takie $BF$, żeby *a posteriori* dla zdrowia wyniosło co najmniej 50%:
 
 $$
@@ -649,7 +810,6 @@ BF_{01} = \frac{0.995}{P(- \mid H_1)} = 99 && \mid \times P(- \mid H_1) \\
 $$
 
 Czyli test musiałby poprawnie wykryć co najmniej 99% zakażeń.
-
 :::
 
 ## Zadanie 2a.
@@ -657,14 +817,12 @@ Czyli test musiałby poprawnie wykryć co najmniej 99% zakażeń.
 Jaskółki latają nisko w 25% dni z dobrą pogodą i w 40% dni, kiedy pada. Właśnie zobaczyłeś(-aś) jaskółkę latającą nisko. Zakładając, że bazowe prawdopodobieństwo deszczu to 20%, oblicz prawdopodobieństwo, że będzie padać.
 
 ::: {.callout-note title="Odpowiedź" collapse="true"}
-
 Zrobię od razu z czynnika Bayesa:
 
 $$
 BF_{10} = \frac{0.4}{0.25} = 1.6 \\
 P(\text{deszcz} \mid \text{niski lot}) = \frac{1.6 \times 0.2}{1.6 \times 0.2 + 0.8} \approx \boxed{28.6\%}
 $$
-
 :::
 
 ## Zadanie 2b.
@@ -672,13 +830,87 @@ $$
 Korzystając z tych samych założeń, oblicz prawdopodobieństwo, że nie będzie padać, jeśli jaskółki latają wysoko.
 
 ::: {.callout-note title="Odpowiedź" collapse="true"}
-
 Teraz obserwujemy, że jaskółki latają wysoko, więc musimy policzyć nowe $BF$. Nie możemy po prostu odwrócić BF jak dane są inne, bo hipotezy zmieniły swoje dopasowanie do danych. Wybiorę $BF_{01}$, bo ostatecznie mamy policzyć prawdopodobieństwo, że nie będzie padać.
 
 $$
 BF_{01} = \frac{0.75}{0.6} = 1.25\\
 P(\text{pogoda} \mid \text{wysoki lot}) = \frac{0.8 \times 1.25}{0.8 \times 1.25 + 0.2} \approx \boxed{83.3\%}
 $$
+:::
+
+## Zadanie 3.
+
+Powtórzmy nasze zadanie z kością. Załóżmy, że wybieram liczbę naturalną między 1 a 5, a następnie rzucam kością pięciościenną (*sic!*) sześciokrotnie. Za każdym razem podaję, czy wylosowana liczba jest większa (W), mniejsza (M), czy równa (R) liczbie o której myślę. Poniżej wyniki. Jaka to liczba? Jaką mamy pewność, że to właśnie ta liczba?
+
+> M, W, M, M, R, W
+
+::: {.callout-note title="Odpowiedź" collapse="true"}
+
+```{r}
+#| code-fold: true
+set.seed(42)
+my_number_e3 <- 4
+
+throws_e3 <- sample(1:5, 6, replace = TRUE) # 1 5 1 1 2 4
+throws_recoded_e3 <- dplyr::case_when(
+  throws_e3 < my_number_e3 ~ "M",
+  throws_e3 == my_number_e3 ~ "R",
+  throws_e3 > my_number_e3 ~ "W"
+)
+
+tc_e3 <- table(throws_recoded_e3)
+
+tibble(assumed_number = 1:5) %>%
+  mutate(
+    P_M = paste0(assumed_number - 1, "/", 5),
+    P_R = "1/5",
+    P_W = paste0(5 - assumed_number, "/", 5),
+    calc = glue::glue(
+      "(\\frac{<numerator(P_M)>}{5})^{<tc_e3['M']>} \\times (\\frac{<numerator(P_R)>}{5})^{<tc_e3['R']>} \\times (\\frac{<numerator(P_W)>}{5})^{<tc_e3['W']>}",
+      .open = "<",
+      .close = ">"
+    )
+  ) %>%
+  rowwise() %>%
+  mutate(
+    P_theta = as.numeric(
+      as.bigq(P_M)^tc_e3["M"] *
+        as.bigq(P_R)^tc_e3["R"] *
+        as.bigq(P_W)^tc_e3["W"]
+    )
+  ) %>%
+  ungroup() %>%
+  mutate(
+    assumed_number = paste0("H_", assumed_number),
+    across(P_M:P_W, \(x) {
+      paste0("\\frac{", x, "}") |> stringr::str_replace("/", "}{")
+    }),
+    across(assumed_number:calc, \(x) paste0("$", x, "$"))
+  ) %>%
+  tibble::column_to_rownames("assumed_number") %>%
+  mutate(
+    P_H = P_theta / sum(P_theta),
+    P_H = paste0(
+      "$",
+      format(P_theta / sum(P_theta) * 100, digits = 2),
+      "\\%$"
+    ),
+    P_H = stringr::str_remove_all(P_H, " ")
+  ) %>%
+  knitr::kable(
+    col.names = c(
+      "$P(M \\mid H_n)$",
+      "$P(R \\mid H_n)$",
+      "$P(W \\mid H_n)$",
+      "Obliczenia",
+      "$P(\\theta \\mid H_n)$",
+      "$P(H_n \\mid \\theta)$"
+    ),
+    align = "ccccrr"
+  )
+```
+
+Rzeczywiście, wybraną odpowiedzią było 4. Należy jednak pamiętać, że nawet jeśli statystyka bayesowska jest obiecująca, to ciągle jest to statystyka, a nie magiczne pudełko z którego zawsze wypada prawda. Zawsze jest szansa na błąd.
 
 :::
 
