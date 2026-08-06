@@ -226,8 +226,10 @@ Oznacza to, że stosunek szans a posteriori do szans a priori jest równy iloraz
 Ten stosunek ma zaskakująco duże możliwości, jeśli uznamy go za rodzaj **porównania hipotez**. Co mam na myśli? Zaobserwowaliśmy, że nasz pacjent cierpi na to konkretne zaburzenie. Możemy postawić dwie hipotezy:
 
 $$
-H_0: \text{Pacjent nie był ofiarą przemocy} \\
-H_1: \text{Pacjent był ofiarą przemocy}
+\begin{aligned}
+H_0 &: \text{Pacjent nie był ofiarą przemocy} \\
+H_1 &: \text{Pacjent był ofiarą przemocy}
+\end{aligned}
 $$
 
 Pytanie brzmi – która z tych hipotez **lepiej przewiduje dane**? W każdej z tych hipotez jest zaszyte prawdopodobieństwo choroby. Choroba wystąpiła. Która z tych hipotez bardziej pasuje do naszych obserwacji? Jak bardzo lepiej? To jest zupełnie inna logika testowania hipotez niż w klasycznej statystyce. Klasyczna statystyka zakłada, że istnieje jakaś prawdziwa wartość parametru, a dane, które otrzymaliśmy, to zaszumione odbicie tej prawdziwej wartości. Jak to napisałem, przyszło mi do głowy określenie „statystyka platońska”. W perspektywie bayesowskiej to dane są prawdziwe (w końcu się wydarzyły!), a różne wartości parametrów (tj. różne hipotezy) mają konkurować, która najlepiej je wyjaśnia. Która z tych hipotez daje większe prawdopodobieństwo uzyskania dokładnie takich danych?
@@ -243,16 +245,20 @@ Nie należy się jednak spieszyć z przyjmowaniem takiej hipotezy. I tak, piszę
 Jednak czynnik Bayesa ma tę przyjemną właściwość, że nawet jak się okaże, że odsetek ofiar przemocy jest w społeczeństwie inny niż zakładaliśmy (wyższy albo niższy), to dopóki ryzyko zachorowania u ofiar będzie 30% a u nie-ofiar 9.4%, wartość BF się nie zmieni. Innymi słowy prawdopodobieństwo *a priori* może zostać zaktualizowane, ale szanse *a posteriori* to ciągle szanse *a priori* × BF. Prawdopodobieństwo *a priori* może zmienić się nie tylko dlatego, że zaktualizuje się oszacowanie powszechności przemocy w populacji. Nasze wstępne oszacowanie dla tego pacjenta może się zmienić też dlatego, że zbieramy różne poszlaki na temat tej konkretnej osoby. Dla tego pacjenta możemy szacować prawdopodobieństwo bycia ofiarą przemocy na wejściu nawet na 10%, na podstawie naszego doświadczenia. Przy takim oszacowaniu szanse *a posteriori* wyniosą:
 
 $$
-O(\text{ten pacjent doświadczył przemocy} \mid \text{zaburzenie}) = \\
-O(\text{szanse a priori}) \times BF_{10} = \\
-\frac{1}{9} \times 3.2 = \frac{16}{45}
+\begin{aligned}
+O(\text{ten pacjent doświadczył przemocy} \mid \text{zaburzenie}) &= \\
+O(\text{szanse a priori}) \times BF_{10} &= \\
+\frac{1}{9} \times 3.2 &= \frac{16}{45}
+\end{aligned}
 $$
 
 …a więc prawdopodobieństwo wyniesie:
 
 $$
-P(\text{ten pacjent doświadczył przemocy} \mid \text{zaburzenie}) = \\
-\frac{16}{45 + 16} \approx 26\%
+\begin{aligned}
+P(\text{ten pacjent doświadczył przemocy} \mid \text{zaburzenie}) &= \\
+\frac{16}{45 + 16} &\approx 26\%
+\end{aligned}
 $$
 
 W ten sposób dowody za i przeciw kumulują się, by dostarczyć nam sensownego oszacowanie ryzyka. W tym prostym przykładzie można to prawdopodobieństwo policzyć na kartce, ale przy prawdziwych hipotezach badawczych, gdzie możemy mieć ciągłe rozkłady, wiele parametrów itd. sposób liczenia prawdopodobieństwa *a posteriori* szybko robi się bardziej skomplikowany, chociaż jego logika jest taka sama.
@@ -360,15 +366,19 @@ $$
 Skoro w grypie mam 70% szans na wynik pozytywny, to mam automatycznie 30% na wynik negatywny. Ponieważ chorych jest 5%, mogę od razu obliczyć licznik, czyli odsetek chorych z wynikiem negatywnym w całej populacji:
 
 $$
-P(- \cap \text{grypa}) = P(- \mid \text{grypa}) \times P(\text{grypa}) = \\
-0.3 \times 0.05 = 0.015 = 1.5\%
+\begin{aligned}
+P(- \cap \text{grypa}) &= P(- \mid \text{grypa}) \times P(\text{grypa}) = \\
+0.3 \times 0.05 &= 0.015 = 1.5\%
+\end{aligned}
 $$
 
 Zdrowi (95% populacji) mają 99% prawdopodobieństwa uzyskania wyniku negatywnego (bo tylko 1% wyników jest fałszywie pozytywnych), więc zdrowych z wynikiem negatywnym w całej populacji jest:
 
 $$
-P(- \cap \text{brak grypy}) = P(- \mid \text{brak grypy}) \times P(\text{brak grypy}) = \\
-0.99 \times 0.95 = 0.9405 = 94.05\%
+\begin{aligned}
+P(- \cap \text{brak grypy}) &= P(- \mid \text{brak grypy}) \times P(\text{brak grypy}) = \\
+0.99 \times 0.95 &= 0.9405 = 94.05\%
+\end{aligned}
 $$
 
 Cała populacja to zdrowi i chorzy, więc łączne prawdopodobieństwo zobaczenia wyniku negatywnego to suma tego prawdopodobieństwa u zdrowych i chorych:
@@ -390,8 +400,10 @@ Ewa ma więc 1.57% prawdopodobieństwa, że jest chora, czyli mniej niż poprzed
 Porównujemy prawdopodobieństwo, że Ewa jest zdrowa do prawdopodobieństwa, że jest chora, a więc prawdopodobieństwo uzyskania wyniku negatywnego (bo to są nasze dane) w zdrowiu i w chorobie (w radości i smutku, w bogactwie i ubóstwie). Wypiszmy hipotezy wprost:
 
 $$
-H_0: \text{Ewa jest zdrowa} \\
-H_1: \text{Ewa jest chora}
+\begin{aligned}
+H_0 &: \text{Ewa jest zdrowa} \\
+H_1 &: \text{Ewa jest chora}
+\end{aligned}
 $$
 
 Jak ktoś jest chory, to zobaczy wynik negatywny w $P(- \mid H_0) = 30\%$ przypadków, a jak jest zdrowy, w $P(- \mid H_1) = 99\%$ przypadków. Czynnik Bayesa porównuje $H_1$ względem $H_0$:
@@ -740,9 +752,11 @@ $$
 Poprzez szanse, łatwiej będzie policzyć szanse zdrowia:
 
 $$
-O(\text{zdrowie} \mid -) = \frac{95}{5} \times \frac{199}{30} = \frac{3781}{30} \approx 126 \\
-P(\text{zdrowie} \mid -) = \frac{3781}{3781 + 30} \approx 99.2128\% \\
-P(\text{grypa} \mid -) = 100\% - 99.2128\% \approx \boxed{0.79\%}
+\begin{aligned}
+O(\text{zdrowie} \mid -) &= \frac{95}{5} \times \frac{199}{30} = \frac{3781}{30} \approx 126 \\
+P(\text{zdrowie} \mid -) &= \frac{3781}{3781 + 30} \approx 99.2128\% \\
+P(\text{grypa} \mid -) &= 100\% - 99.2128\% \approx \boxed{0.79\%}
+\end{aligned}
 $$
 
 Wychodzi to samo z obu metod. Można też ominąć szanse:
@@ -818,8 +832,10 @@ Jaskółki latają nisko w 25% dni z dobrą pogodą i w 40% dni, kiedy pada. Wł
 Zrobię od razu z czynnika Bayesa:
 
 $$
-BF_{10} = \frac{0.4}{0.25} = 1.6 \\
-P(\text{deszcz} \mid \text{niski lot}) = \frac{1.6 \times 0.2}{1.6 \times 0.2 + 0.8} \approx \boxed{28.6\%}
+\begin{aligned}
+BF_{10} &= \frac{0.4}{0.25} = 1.6 \\
+P(\text{deszcz} \mid \text{niski lot}) &= \frac{1.6 \times 0.2}{1.6 \times 0.2 + 0.8} \approx \boxed{28.6\%}
+\end{aligned}
 $$
 :::
 
@@ -831,8 +847,10 @@ Korzystając z tych samych założeń, oblicz prawdopodobieństwo, że nie będz
 Teraz obserwujemy, że jaskółki latają wysoko, więc musimy policzyć nowe $BF$. Nie możemy po prostu odwrócić BF jak dane są inne, bo hipotezy zmieniły swoje dopasowanie do danych. Wybiorę $BF_{01}$, bo ostatecznie mamy policzyć prawdopodobieństwo, że nie będzie padać.
 
 $$
-BF_{01} = \frac{0.75}{0.6} = 1.25\\
-P(\text{pogoda} \mid \text{wysoki lot}) = \frac{0.8 \times 1.25}{0.8 \times 1.25 + 0.2} \approx \boxed{83.3\%}
+\begin{aligned}
+BF_{01} &= \frac{0.75}{0.6} = 1.25 \\
+P(\text{pogoda} \mid \text{wysoki lot}) &= \frac{0.8 \times 1.25}{0.8 \times 1.25 + 0.2} \approx \boxed{83.3\%}
+\end{aligned}
 $$
 :::
 
