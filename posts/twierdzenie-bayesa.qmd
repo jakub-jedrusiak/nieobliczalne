@@ -12,9 +12,6 @@ categories:
     - Bayes
 nocite: |
     @clayton2021, @nicenboim2025, @jhonson2022, @field2026
-header-includes:
-  - \usepackage{mathtools}
-  - \usepackage{braket}
 ---
 
 Szybko ustalmy notację, tutaj tabela z definicjami i przykładami:
@@ -23,17 +20,17 @@ Szybko ustalmy notację, tutaj tabela z definicjami i przykładami:
 #| echo: false
 
 tibble::tribble(
-  ~"Notacja"                                     , ~"Wyjaśnienie"                                                                                        ,
-  "$P(A)$"                                       , "Prawdopodobieństwo A"                                                                                ,
-  "$P(A \\cap B)$"                               , "Prawdopodobieństwo A i jednocześnie B"                                                               ,
-  "$P(\\text{grypa} \\cap \\text{szczepionka})$" , "Prawdopodobieństwo, że ktoś i ma grypę, i się szczepił (odsetek takich osób w całej populacji)"      ,
-  "$P(A \\mid B)$"                               , "Prawdopodobieństwo A jeśli B (albo wśród spełniających warunek B)"                                   ,
-  "$P(\\text{grypa} \\mid \\text{szczepionka})$" , "Prawdopodobieństwo grypy jeśli się ktoś zaszczepił (odsetek zachorowań tylko wśród szczepionych)"    ,
-  "$P(\\lnot A)$"                                , "Prawdopodobieństwo, że nie A (czyli $1 - P(A)$)"                                                     ,
-  "$P(\\lnot \\text{grypa})$"                    , "Prawdopodobieństwo, że ktoś nie ma grypy (jest zdrowy, łączny odsetek zdrowych w populacji)"         ,
-  "$O(A)$"                                       , "Szansa na A, czyli na ile A jest bardziej prawdopodobne od alternatyw ($\\frac{P(A)}{P(\\lnot A)}$)"
+    ~"Notacja", ~"Wyjaśnienie",
+    "$P(A)$", "Prawdopodobieństwo A",
+    "$P(A \\cap B)$", "Prawdopodobieństwo A i jednocześnie B",
+    "$P(\\text{grypa} \\cap \\text{szczepionka})$", "Prawdopodobieństwo, że ktoś i ma grypę, i się szczepił (odsetek takich osób w całej populacji)",
+    "$P(A \\mid B)$", "Prawdopodobieństwo A jeśli B (albo wśród spełniających warunek B)",
+    "$P(\\text{grypa} \\mid \\text{szczepionka})$", "Prawdopodobieństwo grypy jeśli się ktoś zaszczepił (odsetek zachorowań tylko wśród szczepionych)",
+    "$P(\\lnot A)$", "Prawdopodobieństwo, że nie A (czyli $1 - P(A)$)",
+    "$P(\\lnot \\text{grypa})$", "Prawdopodobieństwo, że ktoś nie ma grypy (jest zdrowy, łączny odsetek zdrowych w populacji)",
+    "$O(A)$", "Szansa na A, czyli na ile A jest bardziej prawdopodobne od alternatyw ($\\frac{P(A)}{P(\\lnot A)}$)"
 ) |>
-  knitr::kable()
+    knitr::kable()
 ```
 
 # Szacowanie prawdopodobieństwa
@@ -267,16 +264,16 @@ Powinniśmy więc taką hipotezę przyjąć czy odrzucić? Piękno statystyki ba
 #| echo: false
 
 tibble::tribble(
-  ~"BF"    , ~"Interpretacja"                            ,
-  "< 1"    , "Odwróć ułamek i sprawdź jeszcze raz"       ,
-  "1"      , "Brak dowodów, posterior wygląda jak prior" ,
-  "1-3"    , "Dowody słabe, anegdotyczne"                ,
-  "3-10"   , "Dowody umiarkowane"                        ,
-  "10-30"  , "Dowody silne"                              ,
-  "30-100" , "Dowody bardzo silne"                       ,
-  "> 100"  , "Dowody ekstremalnie silne"
+    ~"BF", ~"Interpretacja",
+    "< 1", "Odwróć ułamek i sprawdź jeszcze raz",
+    "1", "Brak dowodów, posterior wygląda jak prior",
+    "1-3", "Dowody słabe, anegdotyczne",
+    "3-10", "Dowody umiarkowane",
+    "10-30", "Dowody silne",
+    "30-100", "Dowody bardzo silne",
+    "> 100", "Dowody ekstremalnie silne"
 ) |>
-  knitr::kable()
+    knitr::kable()
 ```
 
 # Przyjęcie hipotezy zerowej
@@ -524,11 +521,12 @@ Zdefiniujmy go sobie w R i sprawdźmy, czy poprawnie policzyłby poprzedni przyk
 #| code-fold: false
 
 posterior_from_bf <- function(prior, bf) {
-  bf * prior / (bf * prior + 1 - prior)
+    bf * prior / (bf * prior + 1 - prior)
 }
 
 posterior_from_bf(0.3, 3.3)
 ```
+
 ::::
 
 A co jeśli Ewa cierpi na zaburzenie typu GAD i już przy pierwszym kaszlu ma 99% pewności, że to grypa? Reguła jest identyczna, chociaż wykorzystajmy może $BF_{10} = \frac{10}{33}$ i tym razem policzmy prawdopodobieństwo, że rzeczywiście ma grypę.
@@ -560,9 +558,9 @@ my_number <- 2
 
 throws <- sample(1:6, 10, replace = TRUE) # 4 6 6 2 5 6 4 4 5 1
 throws_recoded <- dplyr::case_when(
-  throws < my_number ~ "M",
-  throws == my_number ~ "R",
-  throws > my_number ~ "W"
+    throws < my_number ~ "M",
+    throws == my_number ~ "R",
+    throws > my_number ~ "W"
 )
 ```
 
@@ -592,44 +590,44 @@ library(gmp) # do ułamków zwykłych
 tc <- table(throws_recoded)
 
 H_compare <- tibble(assumed_number = 1:6) %>%
-  mutate(
-    P_M = paste0(assumed_number - 1, "/", 6),
-    P_R = "1/6",
-    P_W = paste0(6 - assumed_number, "/", 6),
-    calc = glue::glue(
-      "(\\frac{<numerator(P_M)>}{6})^{<tc['M']>} \\times (\\frac{<numerator(P_R)>}{6})^{<tc['R']>} \\times (\\frac{<numerator(P_W)>}{6})^{<tc['W']>}",
-      .open = "<",
-      .close = ">"
-    )
-  ) %>%
-  rowwise() %>%
-  mutate(
-    P_theta = as.numeric(
-      as.bigq(P_M)^tc["M"] * as.bigq(P_R)^tc["R"] * as.bigq(P_W)^tc["W"]
-    )
-  ) %>%
-  ungroup()
+    mutate(
+        P_M = paste0(assumed_number - 1, "/", 6),
+        P_R = "1/6",
+        P_W = paste0(6 - assumed_number, "/", 6),
+        calc = glue::glue(
+            "(\\frac{<numerator(P_M)>}{6})^{<tc['M']>} \\times (\\frac{<numerator(P_R)>}{6})^{<tc['R']>} \\times (\\frac{<numerator(P_W)>}{6})^{<tc['W']>}",
+            .open = "<",
+            .close = ">"
+        )
+    ) %>%
+    rowwise() %>%
+    mutate(
+        P_theta = as.numeric(
+            as.bigq(P_M)^tc["M"] * as.bigq(P_R)^tc["R"] * as.bigq(P_W)^tc["W"]
+        )
+    ) %>%
+    ungroup()
 
 H_compare_for_kable <- H_compare %>%
-  mutate(
-    assumed_number = paste0("H_", assumed_number),
-    across(P_M:P_W, \(x) {
-      paste0("\\frac{", x, "}") |> stringr::str_replace("/", "}{")
-    }),
-    across(assumed_number:calc, \(x) paste0("$", x, "$"))
-  ) %>%
-  tibble::column_to_rownames("assumed_number")
+    mutate(
+        assumed_number = paste0("H_", assumed_number),
+        across(P_M:P_W, \(x) {
+            paste0("\\frac{", x, "}") |> stringr::str_replace("/", "}{")
+        }),
+        across(assumed_number:calc, \(x) paste0("$", x, "$"))
+    ) %>%
+    tibble::column_to_rownames("assumed_number")
 
 knitr::kable(
-  H_compare_for_kable,
-  col.names = c(
-    "$P(M \\mid H_n)$",
-    "$P(R \\mid H_n)$",
-    "$P(W \\mid H_n)$",
-    "Obliczenia",
-    "$P(\\theta \\mid H_n)$"
-  ),
-  align = "ccccr"
+    H_compare_for_kable,
+    col.names = c(
+        "$P(M \\mid H_n)$",
+        "$P(R \\mid H_n)$",
+        "$P(W \\mid H_n)$",
+        "Obliczenia",
+        "$P(\\theta \\mid H_n)$"
+    ),
+    align = "ccccr"
 )
 ```
 
@@ -638,17 +636,18 @@ Małe liczby mieszają się w oczach, więc wrzucę to na wykres:
 ```{r}
 #| code-fold: true
 #| warning: false
+#| fig-align: center
 
 library(ggplot2)
 
 H_compare %>%
-  mutate(H = paste0("H[", assumed_number, "]")) %>%
-  ggplot(aes(H, P_theta)) +
-  geom_col(fill = "#87C785FF") +
-  labs(x = NULL, y = expression(P(theta ~ "|" ~ H[n]))) +
-  scale_x_discrete(labels = scales::label_parse()) +
-  theme_minimal() +
-  theme(panel.grid.major.x = element_blank())
+    mutate(H = paste0("H[", assumed_number, "]")) %>%
+    ggplot(aes(H, P_theta)) +
+    geom_col(fill = "#87C785FF") +
+    labs(x = NULL, y = expression(P(theta ~ "|" ~ H[n]))) +
+    scale_x_discrete(labels = scales::label_parse()) +
+    theme_minimal() +
+    theme(panel.grid.major.x = element_blank())
 ```
 
 Widzimy więc, że $H_2$ najlepiej wyjaśnia dane. Ale jak prawdopodobna rzeczywiście jest? Nawet przy założeniu $H_2$ istnieje tylko ok. 0.11% szans na wygenerowanie dokładnie takiego zestawu danych. I ma to sens – przy 10 rzutach kością każdy konkretny zestaw jest rzadki. Jeśli jednak twierdzenie Bayesa nas czegoś uczy, to tego, że nie liczy się bezwzględne prawdopodobieństwo, tylko prawdopodobieństwo względem innych możliwości. Każda hipoteza przewiduje dane w jakimś stopniu (no, może poza $H_1$ i $H_6$). Zapiszmy nasze pytanie o prawdopodobieństwo hipotez właśnie w postaci twierdzenia Bayesa:
@@ -684,20 +683,20 @@ Kto uważny mógł już spostrzec, że i w liczniku, i w każdym składniku sumy
 ```{r}
 #| code-fold: true
 H_compare_for_kable %>%
-  select(P_theta) %>%
-  mutate(
-    P_H = P_theta / sum(P_theta),
-    P_H = paste0(
-      "$",
-      format(P_theta / sum(P_theta) * 100, digits = 2),
-      "\\%$"
-    ),
-    P_H = stringr::str_remove_all(P_H, " ")
-  ) %>%
-  knitr::kable(
-    col.names = c("$P(\\theta \\mid H_n)$", "$P(H_n \\mid \\theta)$"),
-    align = "rr"
-  )
+    select(P_theta) %>%
+    mutate(
+        P_H = P_theta / sum(P_theta),
+        P_H = paste0(
+            "$",
+            format(P_theta / sum(P_theta) * 100, digits = 2),
+            "\\%$"
+        ),
+        P_H = stringr::str_remove_all(P_H, " ")
+    ) %>%
+    knitr::kable(
+        col.names = c("$P(\\theta \\mid H_n)$", "$P(H_n \\mid \\theta)$"),
+        align = "rr"
+    )
 ```
 
 I rzeczywiście, mamy ponad 82% pewności, że pomyślałem o liczbie 2. Opcje niemożliwe wykluczyły się same. Nikogo chyba nie zdziwię mówiąc, że rzeczywiście miałem na myśli liczbę 2.
@@ -853,61 +852,61 @@ my_number_e3 <- 4
 
 throws_e3 <- sample(1:5, 6, replace = TRUE) # 1 5 1 1 2 4
 throws_recoded_e3 <- dplyr::case_when(
-  throws_e3 < my_number_e3 ~ "M",
-  throws_e3 == my_number_e3 ~ "R",
-  throws_e3 > my_number_e3 ~ "W"
+    throws_e3 < my_number_e3 ~ "M",
+    throws_e3 == my_number_e3 ~ "R",
+    throws_e3 > my_number_e3 ~ "W"
 )
 
 tc_e3 <- table(throws_recoded_e3)
 
 tibble(assumed_number = 1:5) %>%
-  mutate(
-    P_M = paste0(assumed_number - 1, "/", 5),
-    P_R = "1/5",
-    P_W = paste0(5 - assumed_number, "/", 5),
-    calc = glue::glue(
-      "(\\frac{<numerator(P_M)>}{5})^{<tc_e3['M']>} \\times (\\frac{<numerator(P_R)>}{5})^{<tc_e3['R']>} \\times (\\frac{<numerator(P_W)>}{5})^{<tc_e3['W']>}",
-      .open = "<",
-      .close = ">"
+    mutate(
+        P_M = paste0(assumed_number - 1, "/", 5),
+        P_R = "1/5",
+        P_W = paste0(5 - assumed_number, "/", 5),
+        calc = glue::glue(
+            "(\\frac{<numerator(P_M)>}{5})^{<tc_e3['M']>} \\times (\\frac{<numerator(P_R)>}{5})^{<tc_e3['R']>} \\times (\\frac{<numerator(P_W)>}{5})^{<tc_e3['W']>}",
+            .open = "<",
+            .close = ">"
+        )
+    ) %>%
+    rowwise() %>%
+    mutate(
+        P_theta = as.numeric(
+            as.bigq(P_M)^tc_e3["M"] *
+                as.bigq(P_R)^tc_e3["R"] *
+                as.bigq(P_W)^tc_e3["W"]
+        )
+    ) %>%
+    ungroup() %>%
+    mutate(
+        assumed_number = paste0("H_", assumed_number),
+        across(P_M:P_W, \(x) {
+            paste0("\\frac{", x, "}") |> stringr::str_replace("/", "}{")
+        }),
+        across(assumed_number:calc, \(x) paste0("$", x, "$"))
+    ) %>%
+    tibble::column_to_rownames("assumed_number") %>%
+    mutate(
+        P_H = P_theta / sum(P_theta),
+        P_H = paste0(
+            "$",
+            format(P_theta / sum(P_theta) * 100, digits = 2),
+            "\\%$"
+        ),
+        P_H = stringr::str_remove_all(P_H, " ")
+    ) %>%
+    knitr::kable(
+        col.names = c(
+            "$P(M \\mid H_n)$",
+            "$P(R \\mid H_n)$",
+            "$P(W \\mid H_n)$",
+            "Obliczenia",
+            "$P(\\theta \\mid H_n)$",
+            "$P(H_n \\mid \\theta)$"
+        ),
+        align = "ccccrr"
     )
-  ) %>%
-  rowwise() %>%
-  mutate(
-    P_theta = as.numeric(
-      as.bigq(P_M)^tc_e3["M"] *
-        as.bigq(P_R)^tc_e3["R"] *
-        as.bigq(P_W)^tc_e3["W"]
-    )
-  ) %>%
-  ungroup() %>%
-  mutate(
-    assumed_number = paste0("H_", assumed_number),
-    across(P_M:P_W, \(x) {
-      paste0("\\frac{", x, "}") |> stringr::str_replace("/", "}{")
-    }),
-    across(assumed_number:calc, \(x) paste0("$", x, "$"))
-  ) %>%
-  tibble::column_to_rownames("assumed_number") %>%
-  mutate(
-    P_H = P_theta / sum(P_theta),
-    P_H = paste0(
-      "$",
-      format(P_theta / sum(P_theta) * 100, digits = 2),
-      "\\%$"
-    ),
-    P_H = stringr::str_remove_all(P_H, " ")
-  ) %>%
-  knitr::kable(
-    col.names = c(
-      "$P(M \\mid H_n)$",
-      "$P(R \\mid H_n)$",
-      "$P(W \\mid H_n)$",
-      "Obliczenia",
-      "$P(\\theta \\mid H_n)$",
-      "$P(H_n \\mid \\theta)$"
-    ),
-    align = "ccccrr"
-  )
 ```
 
 Rzeczywiście, wybraną odpowiedzią było 4. Należy jednak pamiętać, że nawet jeśli statystyka bayesowska jest obiecująca, to ciągle jest to statystyka, a nie magiczne pudełko z którego zawsze wypada prawda. Zawsze jest szansa na błąd.
