@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.13">
+<meta name="generator" content="quarto-1.11.1">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,10 +14,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -99,14 +102,14 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-b9bb5de7e195162b4b928ed333a06ee7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-100cd94cf99d7f5bf0fd78e0fa747d0b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-b9bb5de7e195162b4b928ed333a06ee7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-d5b4e69c7e37b49c6591bcc5116dd748.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-2655f62c70931241c821c3cd25ec806f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-d5b4e69c7e37b49c6591bcc5116dd748.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-61f1aefe35924fb8ffd06ccbba0dc1fe.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-9a2ac9ca67c13753171845a2aa3c4a6c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-61f1aefe35924fb8ffd06ccbba0dc1fe.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-2c4e96ff6d8cbc217c5de86b592d23c4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-e292a7367fc9d43c5a63ca8c673ef1eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-2c4e96ff6d8cbc217c5de86b592d23c4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -165,38 +168,6 @@ cookieconsent.run({
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/cascadia-code">
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="../styles/styles.css">
 <meta property="og:title" content="Twierdzenie Bayesa i bayesowskie porównywanie hipotez – Nieobliczalne">
 <meta property="og:description" content="Wyobraźmy sobie, że przychodzi do naszego gabinetu pacjent. Przeprowadzamy wywiad, stawiamy diagnozę i przypominamy sobie, że niedawno czytaliśmy niepokojącą statystykę – 30% ofiar przemocy wykształca to właśnie zaburzenie, podczas gdy w całej populacji występuje ono tylko u 10% ludzi. Czy należy przeprowadzić wywiad w tym kierunku? Jaka jest szansa, że pacjent rzeczywiście jest ofiarą przemocy? Chciałoby się&nbsp;powiedzieć, że jest 30% szans, ale jeśli tak by było, to z faktu, że 95% złodziei jest praworęczna, wynikałoby, że 95% praworęcznych to złodzieje. Jeśli chcemy „odwrócić prawdopodobieństwo” i wnioskować o doświadczeniu przemocy na podstawie diagnozy, musimy zastosować twierdzenie Bayesa.">
 <meta property="og:image" content="https://nieobliczalne.pl/posts/headers/twierdzenie-bayesa.webp">
@@ -206,9 +177,7 @@ window.Quarto = {
 <meta name="twitter:image" content="https://nieobliczalne.pl/headers/twierdzenie-bayesa.jpeg">
 <meta name="twitter:creator" content="@jakub_jedrusiak">
 <meta name="twitter:card" content="summary_large_image">
-</head>
-
-<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+</head><body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -370,7 +339,43 @@ window.Quarto = {
     } else {
       toggleColorMode(false);
     }
-  </script>
+  </script>\usepackage{mathtools}
+\usepackage{braket}
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles/styles.css">
+
+
+
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -450,15 +455,16 @@ window.Quarto = {
   </ul></li>
   </ul></li>
   <li><a href="#aktualizacja-priorów" id="toc-aktualizacja-priorów" class="nav-link" data-scroll-target="#aktualizacja-priorów"><span class="header-section-number">7</span> Aktualizacja priorów</a></li>
-  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">8</span> Podsumowanie</a></li>
-  <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania"><span class="header-section-number">9</span> Zadania</a>
+  <li><a href="#więcej-danych-więcej-hipotez" id="toc-więcej-danych-więcej-hipotez" class="nav-link" data-scroll-target="#więcej-danych-więcej-hipotez"><span class="header-section-number">8</span> Więcej danych, więcej hipotez</a></li>
+  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">9</span> Podsumowanie</a></li>
+  <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania"><span class="header-section-number">10</span> Zadania</a>
   <ul class="collapse">
-  <li><a href="#zadanie-1a." id="toc-zadanie-1a." class="nav-link" data-scroll-target="#zadanie-1a."><span class="header-section-number">9.1</span> Zadanie 1a.</a></li>
-  <li><a href="#zadanie-1b." id="toc-zadanie-1b." class="nav-link" data-scroll-target="#zadanie-1b."><span class="header-section-number">9.2</span> Zadanie 1b.</a></li>
-  <li><a href="#zadanie-1c." id="toc-zadanie-1c." class="nav-link" data-scroll-target="#zadanie-1c."><span class="header-section-number">9.3</span> Zadanie 1c*.</a></li>
-  <li><a href="#zadanie-2a." id="toc-zadanie-2a." class="nav-link" data-scroll-target="#zadanie-2a."><span class="header-section-number">9.4</span> Zadanie 2a.</a></li>
-  <li><a href="#zadanie-2b." id="toc-zadanie-2b." class="nav-link" data-scroll-target="#zadanie-2b."><span class="header-section-number">9.5</span> Zadanie 2b.</a></li>
-  <li><a href="#zadanie-3." id="toc-zadanie-3." class="nav-link" data-scroll-target="#zadanie-3."><span class="header-section-number">9.6</span> Zadanie 3.</a></li>
+  <li><a href="#zadanie-1a." id="toc-zadanie-1a." class="nav-link" data-scroll-target="#zadanie-1a."><span class="header-section-number">10.1</span> Zadanie 1a.</a></li>
+  <li><a href="#zadanie-1b." id="toc-zadanie-1b." class="nav-link" data-scroll-target="#zadanie-1b."><span class="header-section-number">10.2</span> Zadanie 1b.</a></li>
+  <li><a href="#zadanie-1c." id="toc-zadanie-1c." class="nav-link" data-scroll-target="#zadanie-1c."><span class="header-section-number">10.3</span> Zadanie 1c*.</a></li>
+  <li><a href="#zadanie-2a." id="toc-zadanie-2a." class="nav-link" data-scroll-target="#zadanie-2a."><span class="header-section-number">10.4</span> Zadanie 2a.</a></li>
+  <li><a href="#zadanie-2b." id="toc-zadanie-2b." class="nav-link" data-scroll-target="#zadanie-2b."><span class="header-section-number">10.5</span> Zadanie 2b.</a></li>
+  <li><a href="#zadanie-3." id="toc-zadanie-3." class="nav-link" data-scroll-target="#zadanie-3."><span class="header-section-number">10.6</span> Zadanie 3.</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -1902,8 +1908,279 @@ P(\text{grypa}|-)_{GAD} = \frac{\frac{10}{33} \times 0.99}{\frac{10}{33} \times 
 <p>Mimo negatywnego wyniku testu Ewy nie udało się przekonać, że nie ma grypy. Spadek prawdopodobieństwa jest malutki, bo wstępna pewność Ewy jest tak wielka. Dowód, który byłby przekonujący przy niższym oszacowaniu, tutaj niczego nie zmienia. W moim przykładzie przekonanie to było nierealistyczne, wynikające z procesu chorobowego, ale ono może być realistyczne. Lekarz, który zebrał na tyle dowodów, że też ma bardzo wysoką pewność, co do diagnozy, też może zlekceważyć wynik szybkiego testu, ale jego nie nazwiemy „nieobiektywnym” czy „nieracjonalnym”.</p>
 <p>Dlatego mówię, że <span class="math inline">\(BF\)</span> to siła dowodu. Im mniej wiarygodne twierdzenie, tym lepszych dowodów żąda. <span class="math inline">\(BF\)</span> to matematyczny wyraz tego właśnie niekontrowersyjnego stwierdzenia. Tak właśnie powinniśmy traktować tabelkę do interpretacji <span class="math inline">\(BF\)</span>, którą wrzuciłem wyżej – siła dowodu, ale siła działa zawsze względem jakiegoś prawdopodobieństwa <em>a priori</em> – im jest większa, tym większego sceptyka przekona. Sceptycyzm może mieć silne podstawy w dowodach – z tej perspektywy im większy <span class="math inline">\(BF\)</span> tym lepiej przeciwstawia się kontrargumentom.</p>
 </section>
-<section id="podsumowanie" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Podsumowanie</h1>
+<section id="więcej-danych-więcej-hipotez" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Więcej danych, więcej hipotez</h1>
+<p>Co jeśli mam więcej niż jedną obserwację? Co jeśli mam więcej niż jedną hipotezę konkurującą o moje przekonania? Omówmy to sobie na podstawie prostego zadania, do dopisania którego zainspirowała mnie książka <em>Bernoulli’s Fallacy</em> <span class="citation" data-cites="clayton2021">(<a href="#ref-clayton2021" role="doc-biblioref">Clayton, 2021</a>)</span>. Jest to uproszczona wersja zadania wymyślonego przez samego Thomasa Bayesa.</p>
+<p>Wybieram pewną liczbę naturalną między 1 a 6. Następnie rzucam kością sześciościenną 10 razy. Przy każdym kolejnym wyniku podaję, czy wylosowana liczba jest większa od mojej liczby (W), mniejsza (M), czy jej równa (R). Poniżej przedstawiam rezultat. O jakiej liczbie pomyślałem? Jak bardzo prawdopodobne jest, że to właśnie ta liczba?</p>
+<p>Zachęcam, żeby spróbować samemu to zadanie wykonać. Ostrzegam jednak, że potrzebny będzie kalkulator naukowy (np. <a href="https://mathda.com/calculator/pl">online</a> albo <a href="https://play.google.com/store/apps/details?id=advanced.scientific.calculator.calc991.plus&amp;hl=pl-PL">apka</a>) lub konsola R, bo zadanie wymaga pracy z bardzo małymi liczbami (lub notacją&nbsp;wykładniczą).</p>
+<blockquote class="blockquote">
+<p>W, W, W, R, W, W, W, W, W, M</p>
+</blockquote>
+<div class="cell" title="Kod w R symulujący rzut kośćmi">
+<details class="code-fold">
+<summary>Kod</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span> <span class="sc">*</span> <span class="dv">2137</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>my_number <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>throws <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="co"># 4 6 6 2 5 6 4 4 5 1</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>throws_recoded <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  throws <span class="sc">&lt;</span> my_number <span class="sc">~</span> <span class="st">"M"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  throws <span class="sc">==</span> my_number <span class="sc">~</span> <span class="st">"R"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  throws <span class="sc">&gt;</span> my_number <span class="sc">~</span> <span class="st">"W"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>W pierwszej kolejności musimy pamiętać o ogólnej logice tych analiz, tzn. porównywaniu alternatywnych hipotez w tym, <strong>na ile dobrze wyjaśniają dane</strong>. Dla każdej z liczb na kostce możemy to policzyć. Musimy zadać sobie pytania w stylu „jakie jest prawdopodobieństwo otrzymania takiego zestawu, jeśli wymyśloną liczbą jest 3?”. Oznaczymy sobie te hipotezy jako <span class="math inline">\(H_1\)</span>, <span class="math inline">\(H_2\)</span> itd. do <span class="math inline">\(H_6\)</span>. Dla uproszczenia oznaczmy sobie, że ten konkretny zestaw danych, który mamy, literką <span class="math inline">\(\theta\)</span>.</p>
+<p><span class="math display">\[
+    heta \mathrel{\mathop:}= (W, W, W, R, W, W, W, W, W, M)
+\]</span></p>
+<p>W pierwszej kolejności możemy odrzucić <span class="math inline">\(H_1\)</span> i <span class="math inline">\(H_6\)</span>, bo gdyby moją liczbą było 1, żaden rzut nie dałby mniejszej liczby, a mamy takie w zbiorze. Podobnie 6 – gdyby to było 6, nie mogłoby się pojawić ani jedno W. Nie musimy ich wykluczać arbitralnie, jakby przeprowadzić dla nich poniższe obliczenia, prawdopodobieństwo obu tych hipotez wyszłoby 0.</p>
+<p>Zacznijmy od liczby 5. Prawdopodobieństwo wylosowania liczby większej od 5 wynosi <span class="math inline">\(P(W \mid H_5) = \frac{1}{6}\)</span>, bo tylko liczba 6 jest większa. Dalej prawdopodobieństwo R, jak w każdej hipotezie, też wynosi <span class="math inline">\(P(R \mid H_5) = \frac{1}{6}\)</span>. Istnieją natomiast 4 wyniki mniejsze od 5 (1, 2, 3, 4), więc jeśli moja liczba to 5, prawdopodobieństwo otrzymania M wynosi <span class="math inline">\(P(M \mid H_5) = \frac{4}{6} = \frac{2}{3}\)</span>. Teraz możemy policzyć prawdopodobieństwo wylosowania całego naszego zestawu danych, jeśli wybraną liczbą faktycznie jest 5. Ponieważ to są niezależne rzuty kością, możemy po prostu przemnożyć te prawdopodobieństwa. Mógłbym to rozpisać jako mnożenie (<span class="math inline">\(\frac{1}{6} \times \frac{1}{6} \times \ldots\)</span>), ale mogę&nbsp;oszczędzić sobie pisania zauważając, że mamy 8 wyników W, 1 wynik R i 1 wynik M, więc mogę skorzystać z potęg.</p>
+<p><span class="math display">\[
+P(\theta \mid H_5) = (\frac{1}{6})^8 \times (\frac{1}{6})^1 \times (\frac{4}{6})^1 = \frac{1}{15116544} \approx 6.62 \times 10^{-6}
+\]</span></p>
+<p>Widzimy, że te liczby bardzo szybko robią się&nbsp;bardzo małe. Na ogół radzimy sobie z takimi rzeczami używając logarytmów, bo mają tę przyjemną właściwość, że zamiast mnożyć, możemy wtedy liczby dodawać (bo <span class="math inline">\(\log{(a \times b)} = \log{a} + \log{b}\)</span>). Tutaj zrobimy to normalnie. Policzmy więc prawdopodobieństwa dla każdej z hipotez.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Kod</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gmp) <span class="co"># do ułamków zwykłych</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>tc <span class="ot">&lt;-</span> <span class="fu">table</span>(throws_recoded)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>H_compare <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">assumed_number =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_M =</span> <span class="fu">paste0</span>(assumed_number <span class="sc">-</span> <span class="dv">1</span>, <span class="st">"/"</span>, <span class="dv">6</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_R =</span> <span class="st">"1/6"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_W =</span> <span class="fu">paste0</span>(<span class="dv">6</span> <span class="sc">-</span> assumed_number, <span class="st">"/"</span>, <span class="dv">6</span>),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">calc =</span> glue<span class="sc">::</span><span class="fu">glue</span>(</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      <span class="st">"(</span><span class="sc">\\</span><span class="st">frac{&lt;numerator(P_M)&gt;}{6})^{&lt;tc['M']&gt;} </span><span class="sc">\\</span><span class="st">times (</span><span class="sc">\\</span><span class="st">frac{&lt;numerator(P_R)&gt;}{6})^{&lt;tc['R']&gt;} </span><span class="sc">\\</span><span class="st">times (</span><span class="sc">\\</span><span class="st">frac{&lt;numerator(P_W)&gt;}{6})^{&lt;tc['W']&gt;}"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">.open =</span> <span class="st">"&lt;"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">.close =</span> <span class="st">"&gt;"</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_theta =</span> <span class="fu">as.numeric</span>(</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.bigq</span>(P_M)<span class="sc">^</span>tc[<span class="st">"M"</span>] <span class="sc">*</span> <span class="fu">as.bigq</span>(P_R)<span class="sc">^</span>tc[<span class="st">"R"</span>] <span class="sc">*</span> <span class="fu">as.bigq</span>(P_W)<span class="sc">^</span>tc[<span class="st">"W"</span>]</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>H_compare_for_kable <span class="ot">&lt;-</span> H_compare <span class="sc">%&gt;%</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">assumed_number =</span> <span class="fu">paste0</span>(<span class="st">"H_"</span>, assumed_number),</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(P_M<span class="sc">:</span>P_W, \(x) {</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste0</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">frac{"</span>, x, <span class="st">"}"</span>) <span class="sc">|&gt;</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"/"</span>, <span class="st">"}{"</span>)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    }),</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(assumed_number<span class="sc">:</span>calc, \(x) <span class="fu">paste0</span>(<span class="st">"$"</span>, x, <span class="st">"$"</span>))</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">column_to_rownames</span>(<span class="st">"assumed_number"</span>)</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  H_compare_for_kable,</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$P(M </span><span class="sc">\\</span><span class="st">mid H_n)$"</span>,</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$P(R </span><span class="sc">\\</span><span class="st">mid H_n)$"</span>,</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$P(W </span><span class="sc">\\</span><span class="st">mid H_n)$"</span>,</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Obliczenia"</span>,</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$P(</span><span class="sc">\\</span><span class="st">theta </span><span class="sc">\\</span><span class="st">mid H_n)$"</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">"ccccr"</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 47%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><span class="math inline">\(P(M \mid H_n)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P(R \mid H_n)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P(W \mid H_n)\)</span></th>
+<th style="text-align: center;">Obliczenia</th>
+<th style="text-align: right;"><span class="math inline">\(P(\theta \mid H_n)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(H_1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{0}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{5}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\frac{0}{6})^{1} \times (\frac{1}{6})^{1} \times (\frac{5}{6})^{8}\)</span></td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(H_2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{4}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\frac{1}{6})^{1} \times (\frac{1}{6})^{1} \times (\frac{4}{6})^{8}\)</span></td>
+<td style="text-align: right;">0.0010838</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(H_3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{2}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{3}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\frac{2}{6})^{1} \times (\frac{1}{6})^{1} \times (\frac{3}{6})^{8}\)</span></td>
+<td style="text-align: right;">0.0002170</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(H_4\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{3}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{2}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\frac{3}{6})^{1} \times (\frac{1}{6})^{1} \times (\frac{2}{6})^{8}\)</span></td>
+<td style="text-align: right;">0.0000127</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(H_5\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{4}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\frac{4}{6})^{1} \times (\frac{1}{6})^{1} \times (\frac{1}{6})^{8}\)</span></td>
+<td style="text-align: right;">0.0000001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(H_6\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{5}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{0}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\frac{5}{6})^{1} \times (\frac{1}{6})^{1} \times (\frac{0}{6})^{8}\)</span></td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Małe liczby mieszają się&nbsp;w oczach, więc wrzucę to na wykres:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Kod</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>H_compare <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">H =</span> <span class="fu">paste0</span>(<span class="st">"H["</span>, assumed_number, <span class="st">"]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(H, P_theta)) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#87C785FF"</span>) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">P</span>(theta <span class="sc">~</span> <span class="st">"|"</span> <span class="sc">~</span> H[n]))) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_parse</span>()) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="twierdzenie-bayesa_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Widzimy więc, że <span class="math inline">\(H_2\)</span> najlepiej wyjaśnia dane. Ale jak prawdopodobna rzeczywiście jest? Nawet przy założeniu <span class="math inline">\(H_2\)</span> istnieje tylko ok. 0.11% szans na wygenerowanie dokładnie takiego zestawu danych. I ma to sens – przy 10 rzutach kością każdy konkretny zestaw jest rzadki. Jeśli jednak twierdzenie Bayesa nas czegoś uczy, to tego, że nie liczy się bezwzględne prawdopodobieństwo, tylko prawdopodobieństwo względem innych możliwości. Każda hipoteza przewiduje dane w jakimś stopniu (no, może poza <span class="math inline">\(H_1\)</span> i <span class="math inline">\(H_6\)</span>). Zapiszmy nasze pytanie o prawdopodobieństwo hipotez właśnie w postaci twierdzenia Bayesa:</p>
+<p><span class="math display">\[
+P(H_n \mid \theta) = \frac{P(\theta \mid H_n) \times P(H_n)}{P(\theta)}
+\]</span></p>
+<p>W tabeli policzyliśmy <span class="math inline">\(P(\theta \mid H_n)\)</span> dla każdej z hipotez. Twierdzenie Bayesa podpowiada nam, że trzeba przemnożyć je przez <span class="math inline">\(P(H_n)\)</span> czyli wstępne prawdopodobieństwo każdej z hipotez, prawdopodobieństwo <em>a priori</em>. Czyli przez ile? A co jest tutaj najbardziej rozsądne? Zanim zaobserwowaliśmy dane, nie mieliśmy żadnego powodu, żeby preferować którąkolwiek z hipotez – każda z nich była równie prawdopodobna. Tym samym możemy powiedzieć, że dla każdej z postawionych hipotez <span class="math inline">\(H_n\)</span> jej prawdopodobieństwo <em>a priori</em> wyniosło <span class="math inline">\(P(H_n) = \frac{1}{6}\)</span>.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Dygresja filozoficzna o założeniach *a priori*">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Zagrożenie</span>Dygresja filozoficzna o założeniach <em>a priori</em>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Wydaje się&nbsp;do banalne, ale wcale nie jest! Mogłoby nam się wydawać, że to <em>a priori</em> nie nakłada żadnych ograniczeń na rzeczywistość, ale jednak nakłada – wyklucza wszystkie inne hipotezy. Wyklucza na przykład, że wymyślona liczba to 7. Albo 45. Albo 3.5. Albo 0. Albo -2. I to ma sens w tym zadaniu, polecenie jest jasne, możliwe odpowiedzi to 1, 2, 3, 4, 5 albo 6. To jest nasza przestrzeń możliwości i <em>prior</em> jest w niej zamknięty. W statystyce częstościowej takie hipotezy alternatywne, które nie mają fizycznego odpowiednika w rzeczywistości, mogą być w pewien sposób brane pod uwagę przy testowaniu hipotez. Prosty przykład – załóżmy, że analizujemy masę ciała zdrowych, dorosłych ludzi. Jeśli dane są odpowiednio zaszumione, jeśli błąd standardowy jest odpowiednio duży, nagle przedział ufności może obejmować ujemne wartości masy ciała, mimo że są niemożliwe! A jeśli nie ujemne, to zupełnie absurdalne, np. 15 kg. Czasem to nie zaszkodzi, ale czasem ograniczy moc naszego testu, która mogłaby być większa, jeśli wykluczyć rzeczy niemożliwe, jak chciał Sherlock Holmes. Owszem, możemy się kłócić, gdzie postawić granicę, ale wykluczenie wszystkiego poniżej, powiedzmy, 10 kg nie powinno być kontrowersyjne, a już na pewno wykluczenie wszystkiego poniżej 0. Jeszcze łatwiej uzyskać taki efekt w psychologii rozwojowej. Jak badamy dzieci od noworodków do 3. roku życia, gdzie młodsze dzieci dominują, nagle może się okazać, że przedział ufności nie pozwala nam odrzucić ujemnej wartości wieku. Mądry jest tytuł książki <em>Liczby nie wiedzą, skąd pochodzą</em> <span class="citation" data-cites="francuz_liczby_2007">(<a href="#ref-francuz_liczby_2007" role="doc-biblioref">Francuz &amp; Mackiewicz, 2007</a>)</span>, co się może trzymać matematycznie, nie ma żadnego namacalnego sensu. Owszem, istnieją sposoby radzenia sobie i z takimi problemami na gruncie statystyki częstościowej, ale wymaga to wiedzy, umiejętności technicznych, świadomej decyzji dotyczącej matematycznych fundamentów naszych modeli, czego nie da się zazwyczaj po prostu wyklikać w jamovi.</p>
+<p>Zakładanie czegokolwiek (zupełnie czegokolwiek) na wstępie może budzić silny emocjonalny opór u naukowców. We mnie samym budzi się szczególny rodzaj stresu, kiedy piszę, że średnia (!) masa ciała w populacji zdrowych dorosłych <em>na pewno</em> nie wynosi 10 kg i że z góry mogę&nbsp;taką opcję wykluczyć. W końcu może coś ważnego przegapiam? Może to jest wielkie odkrycie tylko czekające na sprawdzenie? Czy mogę wykluczyć jakąś możliwość tylko dlatego, że jest niezgodna z absolutnie wszystkim, co wiem na temat świata? To nie jest sposób działania naukowca, naukowiec musi dopuścić każdą możliwość, nieważne jak absurdalna by była. To <em>nieracjonalne</em> wykluczać cokolwiek z góry. Więc jako prawdziwy, bezstronny naukowiec, zaczynam przeglądać wyniki swojej ankiety. Widzę że ktoś zadeklarował masę ciała 5 kg. No to w praktyce wykluczam, pewnie ktoś chciał napisać 50 kg, ale się pomylił. I tyle z mojej szlachetnej bezstronności. Jeszcze inaczej, patrzę na rozkład masy ciała w mojej próbce i naprawdę wychodzi mi średnia w okolicach 20 kg. Wysyłam niesamowite odkrycie do Nature i dostaję natychmiastowy <em>desk reject</em> albo recenzent każe mi się puknąć w głowę – albo miałem najazd nieuważnych badanych, albo coś musiałem zepsuć przy kodowaniu zmiennych. Niestety niesamowite <span class="math inline">\(p &lt; 0.001\)</span> go nie przekonuje.</p>
+<p>Nie jest to może <em>prior</em> w sensie formalnym, ale jakieś nasze <em>przekonania a priori</em> rzeczywiście stale włączamy w nasz proces naukowy, zupełnie zresztą słusznie – nazywamy to zdrowym rozsądkiem. Robimy to na etapie planowania, czyszczenia danych, dyskusji wyników, ale z jakiegoś powodu mamy duży emocjonalny opór przed zrobieniem tego na etapie samego testowania hipotez. Nie chcemy wyników skażonych zdrowym rozsądkiem i podstawową logiką. Jednak proces bayesowski dziejący się w naszych własnych głowach i tak każe nam odrzucić takie wnioski – w końcu tylko bardzo silne dowody mogą przekonać nas do bardzo nieprawdopodobnych wniosków (patrz omówienie <span class="math inline">\(BF\)</span> wyżej). Dlatego na przykład słusznie krytykujemy Marka Regnerusa, że nie wykluczył ze swojej analizy przypadków wskazujących na skrajną nieuważność osób badanych (np. badanego, który deklarował, że był aresztowany jako roczne dziecko albo badanego rzekomo mierzącego 2.3 m wzrostu przy 40 kg masy ciała) a potem wyciągał z nich silne wnioski w kwestiach, gdzie koszty pomyłki są potencjalnie bardzo duże <span class="citation" data-cites="cheng2015">(<a href="#ref-cheng2015" role="doc-biblioref">Cheng &amp; Powell, 2015</a>)</span>. Nie mówię przy tym, że nie warto kwestionować własnych założeń, zwłaszcza tych oczywistych! Badam kreatywność, wiem że podważanie założeń jest ważne. W końcu to z podważania oczywistych założeń wzięły się geometrie nieeuklidesowe, duża część fizyki kwantowej czy chociażby przewrót kopernikański. Jednak wszystkie te pozytywne odkrycia miały ważną zaletę – dostarczały przekonujących dowodów.</p>
+<p>Statystyka bayesowska każe nam (nie że daje możliwość, tylko rzeczywiście nakazuje) włączać w analizę jakieś <em>a priori</em>, co budzi bardzo dużą nieufność. Moją też budziło! Mniej niż rok temu szeptałem do koleżanki na konferencji „O, zrobili analizę bayesowską, pewnie im nie wychodziło”. Jednak statystyka częstościowa tylko pozornie chroni nas przed jakimikolwiek <em>założeniami a priori</em>, bo nie uwzględnia formalnego <em>prawdopodobieństwa a priori</em>. Z tej perspektywy statystyka bayesowska nie tyle jako jedyna każe nam poczynić jakieś założenia <em>a priori</em>, których częstościowa nie czyni. Przewaga analizy bayesowskiej jest taka, że dużą i ważną część tych założeń, w postaci prawdopodobieństwa <em>a priori</em>, każe nam ujawnić wprost. W końcu w klasycznej statystyce też spotkamy wiele założeń skutecznie ukrytych w trzewiach programu statystycznego, który napisał ktoś inny, zostawiając nam ustalone przez siebie ustawienia domyślne.</p>
+<p>Włączanie założeń <em>a priori</em> rzeczywiście może być też niebezpieczne – Daryl Bem użył analizy bayesowskiej do udowodnienia, że studenci potrafią w niewielkim stopniu przewidywać przyszłość, jeśli ta zawiera treści erotyczne <span class="citation" data-cites="bem_must_2011">(<a href="#ref-bem_must_2011" role="doc-biblioref">Bem, Utts, &amp; Johnson, 2011</a>)</span>. Wtedy jednak ktoś inny mógł skrytykować Bema za to, że jego <em>a priori</em> są nierealistyczne, dobrane <em>post hoc</em> i zbyt łaskawe dla tezy <span class="citation" data-cites="wagenmakers_yes_2018">(<a href="#ref-wagenmakers_yes_2018" role="doc-biblioref"><span class="nocase">Wagenmakers, wetzels, Borsboom, Kievit, &amp; Maas</span>, 2018</a>)</span>. Ta krytyka mogła się&nbsp;wydarzyć dlatego, że Bem musiał swoje <em>a priori</em> wyłożyć jawnie. Zresztą Bem sięgnął po metody bayesowskie dopiero kiedy wspomniani krytycy użyli ich do obalenia jego wniosków <span class="citation" data-cites="wagenmakers_why_2011">(<a href="#ref-wagenmakers_why_2011" role="doc-biblioref">Wagenmakers, Wetzels, Borsboom, &amp; Van Der Maas, 2011</a>)</span>, jego pierwszy artykuł udowadniał to samo z użyciem klasycznych metod <span class="citation" data-cites="bem_feeling_2011">(<a href="#ref-bem_feeling_2011" role="doc-biblioref">Bem, 2011</a>)</span> – jak widać, wcale go nie uchroniły. Przemawia do mnie jednak to, że krytyka bayesowska może wprost zaatakować założenia <em>a priori</em> i sprawdzić, czy wnioski trzymają się mimo niedociągnięć, którymi jest obarczone każde badanie (stąd <em>Limitations</em> w dyskusjach).</p>
+<p>Dopiero pisząc tekst w tej ramce orientuję się, jak bardzo filozofia statystyki bayesowskiej do mnie przemówiła. Jak mam być szczery, jestem tym zaskoczony. Jednak kiedy skończę rozwiązywać to zadanie (bo rozwiązujemy zadanie, jak ktoś zapomniał), otworzę plik w R i będę analizował dane klasycznymi metodami. Dlaczego? Z dwóch powodów. Po pierwsze nie umiem robić analizy bayesowskiej na prawdziwych danych. Przyznaję otwarcie, jestem żółtodziobem jak chodzi o te tematy, ta ramka płomiennie opisuje argumenty filozoficzne, nie praktyczne. I wielu naukowców ma tak samo jak ja – nie uczy się&nbsp;nas podejścia bayesowskiego, nie umiemy tego robić, nie znamy dogłębnie jego filozofii, a nawet jak chcemy się nauczyć, to dobrych materiałów do nauki jest bayesowski promil w częstościowym morzu. Człowiek chce wyciągać wnioski z badań, a książka z <em>Introduction</em> w tytule na wejściu każe mu różniczkować rozkład <em>beta</em>. Po drugie, nawet jakbym rzeczywiście umiał robić te analizy (co mam nadzieję osiągnąć), to niekoniecznie będę&nbsp;w stanie przekonać nimi środowisko do moich wniosków – patrz powód pierwszy. Może jak się douczę, to moje nowo nabyte zaufanie do tego modelu uprawiania statystyki też się załamie. Przyznaję, że to, co napisałem w tym fragmencie jest prawdą tylko wtedy, kiedy statystykę bayesowską uprawia się dobrze, a kontrprzykłady trzymają się, kiedy statystykę częstościową uprawia się źle. Wiele z tych problemów można też naprawić nie odchodząc od statystyki częstościowej – pytanie tylko jakim kosztem. Wiem jedno – jeśli zmienię zdanie, to moje przekonania zostaną&nbsp;zaktualizowane na podstawie nowych danych, dostarczających mi odpowiednio silne dowody. A może i parę postów z tej podróży powstanie.</p>
+</div>
+</div>
+<p>Wróćmy do zadania. Ustaliliśmy już prawdopodobieństwo danych pod każdą z hipotez oraz że sensowne jest niedyskryminujące prawdopodobieństwo <em>a priori</em> <span class="math inline">\(P(H_n) = \frac{1}{6}\)</span> dla każdej z sześciu hipotez. Pozostaje nam policzyć <span class="math inline">\(P(\theta)\)</span>. Wcześniej oznaczało to wszystkie możliwości, np. wszystkich ludzi z ujemnym wynikiem w teście. Teraz sprawa robi się bardziej skomplikowana, bo „wszyscy” odnosi się&nbsp;do całych, 10-elementowych zbiorów danych. Ostatecznie w dzieleniu chodzi o to, żeby wyskalować nasze oszacowania tak, żeby sumowały się do 100% (czyli do jedności). W zadaniu z testem na grypę musieliśmy osobno policzyć, jaką część całej populacji stanowią zdrowi z wynikiem negatywnym i chorzy z wynikiem negatywnym. W tym celu mnożyliśmy odsetek razy prawdopodobieństwo dla każdej z grup i dodawaliśmy. Identycznie możemy zrobić tutaj. Naszą przestrzeń tworzy 6 hipotez, każda z własnym stopniem wyjaśniania danych (co tutaj jest odpowiednikiem odsetka) i każda z własnym prawdopodobieństwem <em>a priori</em>. Po podstawieniu do wzoru otrzymamy więc coś takiego:</p>
+<p><span class="math display">\[
+P(H_n \mid \theta) = \frac{P(\theta \mid H_n) \times \frac{1}{6}}{P(\theta \mid H_1) \times \frac{1}{6} + P(\theta \mid H_2) \times \frac{1}{6} + \ldots + P(\theta \mid H_6) \times \frac{1}{6}}
+\]</span></p>
+<p>Kto uważny mógł już spostrzec, że i w liczniku, i w każdym składniku sumy w mianowniku, mamy czynnik <span class="math inline">\(\frac{1}{6}\)</span>. Oznacza to, że może on się skrócić. Jest to szczególny przypadek, ale ma to sens. Mnożenie przez <em>a priori</em> ma wyskalować nasze składowe prawdopodobieństwa tak, żeby wziąć pod uwagę, że pewne opcje są z natury rzadsze (np. bycie ofiarą przemocy w pierwszym zadaniu). Jeśli różne opcje rzeczywiście są jednakowo reprezentowane w tej przestrzeni hipotez, to nie ma na co nakładać poprawki. W tym wypadku możemy każdą wartość z tabeli po prostu podzielić przez sumę całej kolumny.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Kod</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>H_compare_for_kable <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(P_theta) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_H =</span> P_theta <span class="sc">/</span> <span class="fu">sum</span>(P_theta),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_H =</span> <span class="fu">paste0</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"$"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">format</span>(P_theta <span class="sc">/</span> <span class="fu">sum</span>(P_theta) <span class="sc">*</span> <span class="dv">100</span>, <span class="at">digits =</span> <span class="dv">2</span>),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"</span><span class="sc">\\</span><span class="st">%$"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_H =</span> stringr<span class="sc">::</span><span class="fu">str_remove_all</span>(P_H, <span class="st">" "</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"$P(</span><span class="sc">\\</span><span class="st">theta </span><span class="sc">\\</span><span class="st">mid H_n)$"</span>, <span class="st">"$P(H_n </span><span class="sc">\\</span><span class="st">mid </span><span class="sc">\\</span><span class="st">theta)$"</span>),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">"rr"</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;"><span class="math inline">\(P(\theta \mid H_n)\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(P(H_n \mid \theta)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(H_1\)</span></td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;"><span class="math inline">\(0.000\%\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(H_2\)</span></td>
+<td style="text-align: right;">0.0010838</td>
+<td style="text-align: right;"><span class="math inline">\(82.508\%\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(H_3\)</span></td>
+<td style="text-align: right;">0.0002170</td>
+<td style="text-align: right;"><span class="math inline">\(16.520\%\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(H_4\)</span></td>
+<td style="text-align: right;">0.0000127</td>
+<td style="text-align: right;"><span class="math inline">\(0.967\%\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(H_5\)</span></td>
+<td style="text-align: right;">0.0000001</td>
+<td style="text-align: right;"><span class="math inline">\(0.005\%\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(H_6\)</span></td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;"><span class="math inline">\(0.000\%\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>I rzeczywiście, mamy ponad 82% pewności, że pomyślałem o liczbie 2. Opcje niemożliwe wykluczyły się&nbsp;same. Nikogo chyba nie zdziwię mówiąc, że rzeczywiście miałem na myśli liczbę 2.</p>
+<p>Zwraca uwagę brak czynnika Bayesa w każdym rozwiązaniu. Po prawdzie moglibyśmy go policzyć, dla każdej hipotezy porównując prawdopodobieństwo danej hipotezy do łącznego prawdopodobieństwa pozostałych hipotez. Pozwoliłoby nam to określić, jak wypada dana hipoteza na tle wszystkich innych naszych hipotez. Nie jest to jednak w tym wypadku wcale łatwiejsze niż to, co zrobiliśmy bezpośrednio z twierdzenia. Możemy natomiast łatwo te <span class="math inline">\(BF\)</span> policzyć, dzieląc szanse <em>a posteriori</em> przez <em>a priori</em>, jeśli same wartości <span class="math inline">\(BF\)</span> nas interesują.</p>
+</section>
+<section id="podsumowanie" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Podsumowanie</h1>
 <p>Co miało być tylko ramką we wpisie o przedziałach ufności, który właśnie przygotowuję, nagle urosło do rozmiarów olbrzymich. Jest to dla mnie – tak jak dla większości badaczy, mam wrażenie – nowa wiedza. Każdy gdzieś słyszał o statystyce bayesowskiej, że jest <em>prior</em> i <em>posterior</em> i że nie ma tam wartości <em>p</em>. Kojarzy się jako coś z gruntu subiektywnego, jako wielka filozofia mająca uzasadniać <em>p</em>-hacking. Jednak im więcej na ten temat wiem, tym bardziej widzę, że tak nie jest. A z pewnością wiem więcej teraz niż wiedziałem, jak zaczynałem ten tekst pisać. Podsumujmy sobie, co z tego wpisu wynika.</p>
 <ol type="1">
 <li>Wyciąganie wniosków na podstawie danych nie jest łatwe. Intuicyjnie, gdy dostrzegamy u kogoś określony zestaw cech — zwłaszcza tych charakterystycznych — przypisujemy tę osobę do określonej grupy. Jednak nawet jeśli wszyscy członkowie tej grupy posiadają takie cechy, nasze wnioskowanie może być błędne, jeżeli cechy te są równie częste w innych grupach. Zdanie „Ten naród uwielbia swoje jedzenie i uważa rodzinę za istotną wartość” może opisywać Polaków, ale równie dobrze może odnosić się do Włochów, Brazylijczyków czy Koreańczyków. Na podstawie przynależności do grupy można często trafnie wnioskować o cechach ludzi, którzy do niej należą, ale na podstawie samych cech często trudno jest ustalić, do której konkretnie grupy należy dana osoba. Podobnie jest z danymi – stosunkowo łatwo jest przewidywać, jakie dane mogą pochodzić z danego rozkładu, ale ocena, na ile prawdopodobne są poszczególne hipotezy (np. o przynależności) w świetle danych, wymaga uwzględnienia szerszego obrazu. Inaczej ze zdania „95% złodziei jest praworęcznych” wywnioskujemy, że 95% praworęcznych to złodzieje.</li>
@@ -1916,14 +2193,14 @@ P(\text{grypa}|-)_{GAD} = \frac{\frac{10}{33} \times 0.99}{\frac{10}{33} \times 
 </ol>
 <p>Statystyka bayesowska to cały oddzielny świat, który ma własne problemy i założenia, ale też własne możliwości. Samo rozszerzenie rozkładów <em>a priori</em> i <em>a posteriori</em> o rozkłady ciągłe, a także dodanie do modelu więcej niż jednej obserwacji sprawia, że rzecz bardzo szybko robi się ekscytująca. O ile – tak jak ja – jest się nerdem.</p>
 </section>
-<section id="zadania" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Zadania</h1>
+<section id="zadania" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Zadania</h1>
 <p>Jak mnie samemu udowodniło pisanie tego posta, nic nie pozwala tak dobrze zrozumieć materiału jak rozwiązanie paru problemów. Kilka takich problemów zostawiam tutaj wraz z proponowanymi odpowiedziami. Jeśli ktoś dotarł do tego miejsca – zaklinam, nie pozwól tej wiedzy zmarnować się w pamięci krótkotrwałej. Inaczej tak jak ja będziesz się uczyć tego na nowo co parę miesięcy, nigdy nie uzyskując prawdziwego rozumienia.</p>
-<section id="zadanie-1a." class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="zadanie-1a."><span class="header-section-number">9.1</span> Zadanie 1a.</h2>
+<section id="zadanie-1a." class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="zadanie-1a."><span class="header-section-number">10.1</span> Zadanie 1a.</h2>
 <p>Ewa ocenia prawdopodobieństwo, że ma grypę, na 5%. Zamówiła wypasiony, drogi test, który poprawnie wykrywa chorobę u 85% chorych i tylko w 0.5% przypadków daje wyniki fałszywie pozytywne. Wykonała ten test i zobaczyła wynik negatywny. Jakie jest prawdopodobieństwo, że jednak jest chora? Użyj i metody z twierdzeniem Bayesa, i metody z BF. Sprawdź, czy z obu metod wychodzi takie samo prawdopodobieństwo <em>a posteriori</em>. Policz <span class="math inline">\(BF_{01}\)</span> i zinterpretuj, jak silnym dowodem braku grypy jest negatywny wynik tego testu.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1932,7 +2209,7 @@ P(\text{grypa}|-)_{GAD} = \frac{\frac{10}{33} \times 0.99}{\frac{10}{33} \times 
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Z twierdzenia Bayesa:</p>
 <p><span class="math display">\[
@@ -1961,11 +2238,11 @@ BF_{01} = \frac{199}{30} \approx 6.63
 </div>
 </div>
 </section>
-<section id="zadanie-1b." class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="zadanie-1b."><span class="header-section-number">9.2</span> Zadanie 1b.</h2>
+<section id="zadanie-1b." class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="zadanie-1b."><span class="header-section-number">10.2</span> Zadanie 1b.</h2>
 <p>Lekarz Ewy po gruntownym wywiadzie stwierdził, że jest na 95% pewny, że Ewa ma grypę. Wtedy Ewa powiedziała mu o negatywnych wynikach wypasionego testu. Jak powinna zmienić się ocena lekarza? Zignoruj jego urażoną dumę.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1974,7 +2251,7 @@ BF_{01} = \frac{199}{30} \approx 6.63
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Prawdopodobieństwo <em>a posteriori</em> bezpośrednio z BF obliczonego w poprzednim podpunkcie:</p>
 <p><span class="math display">\[
@@ -1985,11 +2262,11 @@ P(\text{grypa} \mid -)_{\text{lekarz}} = \frac{0.1508 \times 0.95}{0.1508 \times
 </div>
 </div>
 </section>
-<section id="zadanie-1c." class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="zadanie-1c."><span class="header-section-number">9.3</span> Zadanie 1c*.</h2>
+<section id="zadanie-1c." class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="zadanie-1c."><span class="header-section-number">10.3</span> Zadanie 1c*.</h2>
 <p>BONUS: spróbuj znaleźć takie przykładowe parametry testu na grypę, żeby wynik negatywny przekonał nawet kogoś pewnego na 99%.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Podpowiedź 1">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1998,14 +2275,14 @@ P(\text{grypa} \mid -)_{\text{lekarz}} = \frac{0.1508 \times 0.95}{0.1508 \times
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Znamy prawdopodobieństwo <em>a priori</em>. „Przekonać” może oznaczać, że prawdopodobieństwo <em>a posteriori</em> wyniesie 50%. Trzeba znaleźć takie parametry, żeby po wykonaniu obliczenia <em>a priori</em> 99% spadło do <em>a posteriori</em> 50%.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Podpowiedź 2">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2014,14 +2291,14 @@ P(\text{grypa} \mid -)_{\text{lekarz}} = \frac{0.1508 \times 0.95}{0.1508 \times
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Są dwa sposoby na policzenie <span class="math inline">\(BF\)</span>. Drugi z nich wymaga <strong>szans</strong>, a nie prawdopodobieństw.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Podpowiedź 3">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2030,14 +2307,14 @@ P(\text{grypa} \mid -)_{\text{lekarz}} = \frac{0.1508 \times 0.95}{0.1508 \times
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Nie da się policzyć dwóch niewiadomych za pomocą jednej danej. Trzeba ustalić jakieś założenie co do wartości jednej z nich. Zadanie mówi&nbsp;„przykładowe parametry”, więc założenie może być dowolne.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2046,7 +2323,7 @@ P(\text{grypa} \mid -)_{\text{lekarz}} = \frac{0.1508 \times 0.95}{0.1508 \times
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Skoro <span class="math inline">\(BF\)</span> to też stosunek szans <em>a posteriori</em> do <em>a priori</em>, to możemy znaleźć takie <span class="math inline">\(BF\)</span>, żeby <em>a posteriori</em> dla zdrowia wyniosło co najmniej 50%:</p>
 <p><span class="math display">\[
@@ -2065,33 +2342,9 @@ BF_{01} = \frac{0.995}{P(- \mid H_1)} = 99 &amp;&amp; \mid \times P(- \mid H_1) 
 </div>
 </div>
 </section>
-<section id="zadanie-2a." class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="zadanie-2a."><span class="header-section-number">9.4</span> Zadanie 2a.</h2>
+<section id="zadanie-2a." class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="zadanie-2a."><span class="header-section-number">10.4</span> Zadanie 2a.</h2>
 <p>Jaskółki latają nisko w 25% dni z dobrą pogodą i w 40% dni, kiedy pada. Właśnie zobaczyłeś(-aś) jaskółkę latającą nisko. Zakładając, że bazowe prawdopodobieństwo deszczu to 20%, oblicz prawdopodobieństwo, że będzie padać.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Adnotacja</span>Odpowiedź
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Zrobię od razu z czynnika Bayesa:</p>
-<p><span class="math display">\[
-BF_{10} = \frac{0.4}{0.25} = 1.6 \\
-P(\text{deszcz} \mid \text{niski lot}) = \frac{1.6 \times 0.2}{1.6 \times 0.2 + 0.8} \approx \boxed{28.6\%}
-\]</span></p>
-</div>
-</div>
-</div>
-</section>
-<section id="zadanie-2b." class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="zadanie-2b."><span class="header-section-number">9.5</span> Zadanie 2b.</h2>
-<p>Korzystając z tych samych założeń, oblicz prawdopodobieństwo, że nie będzie padać, jeśli jaskółki latają wysoko.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -2104,6 +2357,30 @@ P(\text{deszcz} \mid \text{niski lot}) = \frac{1.6 \times 0.2}{1.6 \times 0.2 + 
 </div>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>Zrobię od razu z czynnika Bayesa:</p>
+<p><span class="math display">\[
+BF_{10} = \frac{0.4}{0.25} = 1.6 \\
+P(\text{deszcz} \mid \text{niski lot}) = \frac{1.6 \times 0.2}{1.6 \times 0.2 + 0.8} \approx \boxed{28.6\%}
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="zadanie-2b." class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="zadanie-2b."><span class="header-section-number">10.5</span> Zadanie 2b.</h2>
+<p>Korzystając z tych samych założeń, oblicz prawdopodobieństwo, że nie będzie padać, jeśli jaskółki latają wysoko.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Adnotacja</span>Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>Teraz obserwujemy, że jaskółki latają wysoko, więc musimy policzyć nowe <span class="math inline">\(BF\)</span>. Nie możemy po prostu odwrócić BF jak dane są inne, bo hipotezy zmieniły swoje dopasowanie do danych. Wybiorę <span class="math inline">\(BF_{01}\)</span>, bo ostatecznie mamy policzyć prawdopodobieństwo, że nie będzie padać.</p>
 <p><span class="math display">\[
 BF_{01} = \frac{0.75}{0.6} = 1.25\\
@@ -2113,8 +2390,164 @@ P(\text{pogoda} \mid \text{wysoki lot}) = \frac{0.8 \times 1.25}{0.8 \times 1.25
 </div>
 </div>
 </section>
-<section id="zadanie-3." class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="zadanie-3."><span class="header-section-number">9.6</span> Zadanie 3.</h2>
+<section id="zadanie-3." class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="zadanie-3."><span class="header-section-number">10.6</span> Zadanie 3.</h2>
+<p>Powtórzmy nasze zadanie z kością. Załóżmy, że wybieram liczbę naturalną między 1 a 5, a następnie rzucam kością pięciościenną (<em>sic!</em>) sześciokrotnie. Za każdym razem podaję, czy wylosowana liczba jest większa (W), mniejsza (M), czy równa (R) liczbie o której myślę. Poniżej wyniki. Jaka to liczba? Jaką mamy pewność, że to właśnie ta liczba?</p>
+<blockquote class="blockquote">
+<p>M, W, M, M, R, W</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled" title="Odpowiedź">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Adnotacja</span>Odpowiedź
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<details class="code-fold">
+<summary>Kod</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>my_number_e3 <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>throws_e3 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">6</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="co"># 1 5 1 1 2 4</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>throws_recoded_e3 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  throws_e3 <span class="sc">&lt;</span> my_number_e3 <span class="sc">~</span> <span class="st">"M"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  throws_e3 <span class="sc">==</span> my_number_e3 <span class="sc">~</span> <span class="st">"R"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  throws_e3 <span class="sc">&gt;</span> my_number_e3 <span class="sc">~</span> <span class="st">"W"</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>tc_e3 <span class="ot">&lt;-</span> <span class="fu">table</span>(throws_recoded_e3)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">assumed_number =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_M =</span> <span class="fu">paste0</span>(assumed_number <span class="sc">-</span> <span class="dv">1</span>, <span class="st">"/"</span>, <span class="dv">5</span>),</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_R =</span> <span class="st">"1/5"</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_W =</span> <span class="fu">paste0</span>(<span class="dv">5</span> <span class="sc">-</span> assumed_number, <span class="st">"/"</span>, <span class="dv">5</span>),</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">calc =</span> glue<span class="sc">::</span><span class="fu">glue</span>(</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>      <span class="st">"(</span><span class="sc">\\</span><span class="st">frac{&lt;numerator(P_M)&gt;}{5})^{&lt;tc_e3['M']&gt;} </span><span class="sc">\\</span><span class="st">times (</span><span class="sc">\\</span><span class="st">frac{&lt;numerator(P_R)&gt;}{5})^{&lt;tc_e3['R']&gt;} </span><span class="sc">\\</span><span class="st">times (</span><span class="sc">\\</span><span class="st">frac{&lt;numerator(P_W)&gt;}{5})^{&lt;tc_e3['W']&gt;}"</span>,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">.open =</span> <span class="st">"&lt;"</span>,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">.close =</span> <span class="st">"&gt;"</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_theta =</span> <span class="fu">as.numeric</span>(</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.bigq</span>(P_M)<span class="sc">^</span>tc_e3[<span class="st">"M"</span>] <span class="sc">*</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">as.bigq</span>(P_R)<span class="sc">^</span>tc_e3[<span class="st">"R"</span>] <span class="sc">*</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">as.bigq</span>(P_W)<span class="sc">^</span>tc_e3[<span class="st">"W"</span>]</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">assumed_number =</span> <span class="fu">paste0</span>(<span class="st">"H_"</span>, assumed_number),</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(P_M<span class="sc">:</span>P_W, \(x) {</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste0</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">frac{"</span>, x, <span class="st">"}"</span>) <span class="sc">|&gt;</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="st">"/"</span>, <span class="st">"}{"</span>)</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    }),</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(assumed_number<span class="sc">:</span>calc, \(x) <span class="fu">paste0</span>(<span class="st">"$"</span>, x, <span class="st">"$"</span>))</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">column_to_rownames</span>(<span class="st">"assumed_number"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_H =</span> P_theta <span class="sc">/</span> <span class="fu">sum</span>(P_theta),</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_H =</span> <span class="fu">paste0</span>(</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>      <span class="st">"$"</span>,</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>      <span class="fu">format</span>(P_theta <span class="sc">/</span> <span class="fu">sum</span>(P_theta) <span class="sc">*</span> <span class="dv">100</span>, <span class="at">digits =</span> <span class="dv">2</span>),</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>      <span class="st">"</span><span class="sc">\\</span><span class="st">%$"</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_H =</span> stringr<span class="sc">::</span><span class="fu">str_remove_all</span>(P_H, <span class="st">" "</span>)</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>      <span class="st">"$P(M </span><span class="sc">\\</span><span class="st">mid H_n)$"</span>,</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>      <span class="st">"$P(R </span><span class="sc">\\</span><span class="st">mid H_n)$"</span>,</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>      <span class="st">"$P(W </span><span class="sc">\\</span><span class="st">mid H_n)$"</span>,</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Obliczenia"</span>,</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>      <span class="st">"$P(</span><span class="sc">\\</span><span class="st">theta </span><span class="sc">\\</span><span class="st">mid H_n)$"</span>,</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>      <span class="st">"$P(H_n </span><span class="sc">\\</span><span class="st">mid </span><span class="sc">\\</span><span class="st">theta)$"</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">"ccccrr"</span></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 41%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><span class="math inline">\(P(M \mid H_n)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P(R \mid H_n)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P(W \mid H_n)\)</span></th>
+<th style="text-align: center;">Obliczenia</th>
+<th style="text-align: right;"><span class="math inline">\(P(\theta \mid H_n)\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(P(H_n \mid \theta)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(H_1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{0}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{4}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\frac{0}{5})^{4} \times (\frac{1}{5})^{1} \times (\frac{4}{5})^{1}\)</span></td>
+<td style="text-align: right;">0.000000</td>
+<td style="text-align: right;"><span class="math inline">\(0.0\%\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(H_2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{3}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\frac{1}{5})^{4} \times (\frac{1}{5})^{1} \times (\frac{3}{5})^{1}\)</span></td>
+<td style="text-align: right;">0.000192</td>
+<td style="text-align: right;"><span class="math inline">\(2.6\%\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(H_3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{2}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{2}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\frac{2}{5})^{4} \times (\frac{1}{5})^{1} \times (\frac{2}{5})^{1}\)</span></td>
+<td style="text-align: right;">0.002048</td>
+<td style="text-align: right;"><span class="math inline">\(27.6\%\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(H_4\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{3}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\frac{3}{5})^{4} \times (\frac{1}{5})^{1} \times (\frac{1}{5})^{1}\)</span></td>
+<td style="text-align: right;">0.005184</td>
+<td style="text-align: right;"><span class="math inline">\(69.8\%\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(H_5\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{4}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{0}{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\frac{4}{5})^{4} \times (\frac{1}{5})^{1} \times (\frac{0}{5})^{1}\)</span></td>
+<td style="text-align: right;">0.000000</td>
+<td style="text-align: right;"><span class="math inline">\(0.0\%\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Rzeczywiście, wybraną odpowiedzią było 4. Należy jednak pamiętać, że nawet jeśli statystyka bayesowska jest obiecująca, to ciągle jest to statystyka, a nie magiczne pudełko z którego zawsze wypada prawda. Zawsze jest szansa na błąd.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="references" class="level1 unnumbered">
@@ -2125,17 +2558,35 @@ P(\text{pogoda} \mid \text{wysoki lot}) = \frac{0.8 \times 1.25}{0.8 \times 1.25
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-bem_feeling_2011" class="csl-entry" role="listitem">
+Bem, D. J. (2011). Feeling the future: <span>Experimental</span> evidence for anomalous retroactive influences on cognition and affect. <em>Journal of Personality and Social Psychology</em>, <em>100</em>, 407–425. <a href="https://doi.org/10.1037/a0021524">https://doi.org/10.1037/a0021524</a>
+</div>
+<div id="ref-bem_must_2011" class="csl-entry" role="listitem">
+Bem, D. J., Utts, J., &amp; Johnson, W. O. (2011). Must psychologists change the way they analyze their data? <em>Journal of Personality and Social Psychology</em>, <em>101</em>(4), 716–719. <a href="https://doi.org/10.1037/a0024777">https://doi.org/10.1037/a0024777</a>
+</div>
+<div id="ref-cheng2015" class="csl-entry" role="listitem">
+Cheng, S., &amp; Powell, B. (2015). Measurement, methods, and divergent patterns: Reassessing the effects of same-sex parents. <em>Social Science Research</em>, <em>52</em>, 615–626. <a href="https://doi.org/10.1016/j.ssresearch.2015.04.005">https://doi.org/10.1016/j.ssresearch.2015.04.005</a>
+</div>
 <div id="ref-clayton2021" class="csl-entry" role="listitem">
 Clayton, A. (2021). <em>Bernoulli’s fallacy: statistical illogic and the crisis of modern science</em>. New York: Columbia University Press.
 </div>
 <div id="ref-field2026" class="csl-entry" role="listitem">
 Field, A. P. (2026). <em>Discovering <span>Statistics</span> <span>Using</span> <span>R</span> and <span>RStudio</span></em>. London: SAGE Publications.
 </div>
+<div id="ref-francuz_liczby_2007" class="csl-entry" role="listitem">
+Francuz, P., &amp; Mackiewicz, R. (2007). <em>Liczby nie wiedzą, skąd pochodzą. <span>Przewodnik</span> po metodologii i statystyce nie tylko dla psychologów</em>. Lublin: Wydawnictwo Katolickiego Uniwersytetu Lubelskiego.
+</div>
 <div id="ref-jeffreys1998" class="csl-entry" role="listitem">
 Jeffreys, H. (1998). <em>The Theory of Probability</em>. OUP Oxford.
 </div>
 <div id="ref-nicenboim2025" class="csl-entry" role="listitem">
 Nicenboim, B., Schad, D. J., &amp; Vasishth, S. (2025). <em>Introduction to Bayesian Data Analysis for Cognitive Science</em> (1. wyd.). Boca Raton: Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9780429342646">https://doi.org/10.1201/9780429342646</a>
+</div>
+<div id="ref-wagenmakers_why_2011" class="csl-entry" role="listitem">
+Wagenmakers, E.-J., Wetzels, R., Borsboom, D., &amp; Van Der Maas, H. L. J. (2011). Why psychologists must change the way they analyze their data: <span>The</span> case of psi: <span>Comment</span> on <span>Bem</span> (2011). <em>Journal of Personality and Social Psychology</em>, <em>100</em>(3), 426–432. <a href="https://doi.org/10.1037/a0022790">https://doi.org/10.1037/a0022790</a>
+</div>
+<div id="ref-wagenmakers_yes_2018" class="csl-entry" role="listitem">
+<span class="nocase">Wagenmakers, E.-J., wetzels, ruud, Borsboom, D., Kievit, R., &amp; Maas, H. van der</span>. (2018). <em>Yes, <span>Psychologists</span> <span>Must</span> <span>Change</span> the <span>Way</span> <span>They</span> <span>Analyze</span> <span>Their</span> <span>Data</span>: <span>Clarifications</span> for <span>Bem</span>, <span>Utts</span>, and <span>Johnson</span> (2011)</em>. PsyArXiv. <a href="https://doi.org/10.31234/osf.io/tvarg">https://doi.org/10.31234/osf.io/tvarg</a>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
