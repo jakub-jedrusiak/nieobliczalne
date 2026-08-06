@@ -5,7 +5,6 @@ image: ./headers/twierdzenie-bayesa.webp
 twitter-card:
     image: "/headers/twierdzenie-bayesa.jpeg"
 date: "2026-08-05"
-freeze: auto
 categories:
     - Statystyka
     - Matematyka
