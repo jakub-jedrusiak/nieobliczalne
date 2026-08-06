@@ -618,6 +618,18 @@ Lekarz prawdopodobnie nie odrzuci hipotezy o grypie – przy jego *a priori* jes
 
 BONUS: spróbuj znaleźć takie przykładowe parametry testu na grypę, żeby wynik negatywny przekonał nawet kogoś pewnego na 99%.
 
+::: {.callout-tip title="Podpowiedź 1" collapse="true"}
+Znamy prawdopodobieństwo *a priori*. „Przekonać” może oznaczać, że prawdopodobieństwo *a posteriori* wyniesie 50%. Trzeba znaleźć takie parametry, żeby po wykonaniu obliczenia *a priori* 99% spadło do *a posteriori* 50%.
+:::
+
+::: {.callout-tip title="Podpowiedź 2" collapse="true"}
+Są dwa sposoby na policzenie $BF$. Drugi z nich wymaga **szans**, a nie prawdopodobieństw.
+:::
+
+::: {.callout-tip title="Podpowiedź 3" collapse="true"}
+Nie da się policzyć dwóch niewiadomych za pomocą jednej danej. Trzeba ustalić jakieś założenie co do wartości jednej z nich. Zadanie mówi „przykładowe parametry”, więc założenie może być dowolne.
+:::
+
 ::: {.callout-note title="Odpowiedź" collapse="true"}
 
 Skoro $BF$ to też stosunek szans *a posteriori* do *a priori*, to możemy znaleźć takie $BF$, żeby *a posteriori* dla zdrowia wyniosło co najmniej 50%:
