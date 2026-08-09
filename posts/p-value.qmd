@@ -5,7 +5,7 @@ date: "2022-09-21"
 image: ./headers/p-value.webp
 twitter-card:
     image: "/headers/p-value.jpeg"
-freeze: true
+freeze: auto
 categories:
   - Statystyka
 ---
