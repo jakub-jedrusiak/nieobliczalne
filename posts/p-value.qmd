@@ -19,17 +19,24 @@ knitr::opts_chunk$set(
   fig.align = "center",
   warning = FALSE,
   message = FALSE
-  )
+)
 
-pacman::p_load(kableExtra, tidyverse)
+library(kableExtra)
+library(tidyverse)
 
-source("https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R", echo = FALSE)
+source(
+  "https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R",
+  echo = FALSE
+)
 
-men <- readRDS("./dane/p-value/mezczyzni.RDS")
-women <- readRDS("./dane/p-value/kobiety.RDS")
-iq_means <- tibble(lp = 1:1000, IQ = readRDS("./dane/p-value/iq-means.RDS"))
-iq_diffs <- readRDS("./dane/p-value/iq-diffs.RDS")
-iq_stderr <- readRDS("./dane/p-value/iq-stderr.RDS")
+theme_Publication <- theme_Publication() %+replace%
+  theme(panel.background = element_rect(fill = "#FFFFFF"))
+
+men <- readRDS("posts/dane/p-value/mezczyzni.RDS")
+women <- readRDS("posts/dane/p-value/kobiety.RDS")
+iq_means <- tibble(lp = 1:1000, IQ = readRDS("posts/dane/p-value/iq-means.RDS"))
+iq_diffs <- readRDS("posts/dane/p-value/iq-diffs.RDS")
+iq_stderr <- readRDS("posts/dane/p-value/iq-stderr.RDS")
 ```
 
 Dla przykładu -- wychodzę z mieszkania i zamykam drzwi na klucz. Zrobiłem to odruchowo, nieuważnie, więc po chwili nie wiem już, czy zamknąłem te drzwi, czy nie. Wzbiera we mnie lęk, więc cofam się i sprawdzam. Uff, zamknąłem. W tej chwili uzyskuję chwilową pewność[^p-value-1], że drzwi są zamknięte i spokojnie wychodzę z budynku. Wspomnienie zaciera się nieco, więc moja pewność spada ze 100% do 96%. Jednak taki poziom pewności w zupełności wystarczy, żebym na pytanie „Zamknąłeś drzwi?" odpowiedział „Tak".
@@ -50,11 +57,10 @@ Ten przykład stał się nierealny, gdy od niechcenia samodzielnie przeprowadzil
 #| label: tbl-iq-means
 #| tbl-cap: Średnie wyniki IQ są zawsze trochę inne, ale rzadko są dalekie od 100.
 
-iq_means %>% 
-  head(10) %>% 
+iq_means %>%
+  head(10) %>%
   kbl(booktabs = TRUE) %>%
   kable_styling(latex_options = c("striped", "HOLD_position"))
-
 ```
 
 Zaczynamy zauważać, że wyniki za każdym razem były trochę inne, ale zawsze lądowały w pobliżu 100. Innymi słowy średnie bliskie 100 pojawiały się często, a średnie dalekie od 100 pojawiały się rzadko. Nie mamy na przykład ani jednego wyniku mniejszego niż 95, a w zakresie 99-101 mieści się 47% wszystkich uzyskanych średnich. Możemy zrobić nawet wykres, jak często pojawiały się jakie średnie.
@@ -63,11 +69,11 @@ Zaczynamy zauważać, że wyniki za każdym razem były trochę inne, ale zawsze
 #| label: fig-iq-means-histogram
 #| fig-cap: Im wyższy słupek, tym średnia z tego zakresu pojawiała się częściej w naszym zbiorze 1000 średnich. Jak widać, średnie koncentrują się dookoła wyniku 100 IQ.
 
-iq_means %>% 
+iq_means %>%
   ggplot(aes(IQ)) +
   geom_histogram(bins = 25) +
   labs(y = "Ile razy się pojawiło") +
-  theme_Publication()
+  theme_Publication
 ```
 
 Wpadamy więc na pomysł -- skoro średnie koncentrują się dookoła wyniku 100, to może prawdziwa średnia inteligencja w populacji wynosi właśnie 100? To jest bardzo rozsądne założenie. Zwłaszcza, że jeśli policzymy jedną, zbiorczą średnią dla 100 000 naszych badanych, to rzeczywiście wychodzi 100.
@@ -84,11 +90,13 @@ Możemy to ugryźć od innej strony. Jestem w końcu szalonym, bogatym dyktatore
 #| label: tbl-iq-diffs
 #| tbl-cap: Możemy wiele razy powtórzyć nasz eksperyment, a różnice za każdym razem będą inne.
 
-iq_diffs %>% 
-  head(10) %>% 
-  kbl(booktabs = TRUE, col.names = c("lp", "IQ kobiet", "IQ mężczyzn", "różnica")) %>%
+iq_diffs %>%
+  head(10) %>%
+  kbl(
+    booktabs = TRUE,
+    col.names = c("lp", "IQ kobiet", "IQ mężczyzn", "różnica")
+  ) %>%
   kable_styling(latex_options = c("striped", "HOLD_position"))
-
 ```
 
 Podstawą do różnicy była tu średnia inteligencja kobiet, więc ujemna różnica oznacza, że mężczyźni okazali się mniej inteligentni, zaś dodatnia, że bardziej. Tak jak w przypadku tabeli [-@tbl-iq-means]., niektóre różnice są większe, niektóre mniejsze, ale ich rozkład nie jest przypadkowy. Wrzućmy nasze różnice na wykres.
@@ -97,11 +105,11 @@ Podstawą do różnicy była tu średnia inteligencja kobiet, więc ujemna róż
 #| label: fig-iq-diffs-histogram
 #| fig-cap: Różnice w średnich bywały większe lub mniejsze, ale oscylowały wokół zera.
 
-iq_diffs %>% 
+iq_diffs %>%
   ggplot(aes(diff)) +
   geom_histogram(bins = 25) +
   labs(x = "Różnica w średniej inteligencji", y = "Ile razy się pojawiła") +
-  theme_Publication()
+  theme_Publication
 ```
 
 Jak widzimy, różnice oscylują wokół zera. Skoro w większości eksperymentów różnica wyniosła zero albo prawie zero, to najprawdopodobniej to jest właśnie odpowiedź -- prawdziwa różnica wynosi właśnie zero! Ale pomimo tego łatwo jest losowo uzyskać różnicę rzędu 1 punktu. Trudniej jest uzyskać różnicę rzędu 5 punktów. Przypadkowa różnica rzędu 10 punktów jest prawie niemożliwa do uzyskania.
@@ -148,14 +156,13 @@ Nie wgłębiając się za bardzo w to, jak nasz test to robi, wrzucamy do niego 
 #| label: t-test
 
 t.test(women, men)
-
 ```
 
 Najważniejsza dla nas wartość określona jest literką $p$ (*p-value*). Ta wartość znaczy to, nad czym tak bardzo się rozwodziłem we wcześniejszych akapitach -- jak łatwo byłoby uzyskać otrzymać różnicę 2 punktów przez przypadek, gdyby różnic tak naprawdę nie było? W naszym wypadku odpowiedzią jest, że taką różnicę uzyskamy w 34,6% losowych próbek. Badania Szalonego Dyktatora™ pokazały wartość 34,3%, także widzimy, że test *t*-Studenta ma naprawdę dobrą skuteczność. Z jednego powtórzenia wyczytał to, do czego szalony dyktator potrzebował tysiąca powtórzeń. Teraz pojawia się pytanie -- czy to wystarczająco mała szansa, żeby stwierdzić, że to nie przypadek? Żeby odrzucić hipotezę zerową?
 
 Na oko moglibyśmy powiedzieć, że nie. Jeśli naprawdę nie byłoby różnic, to różnicę rzędu 2 punktów albo więcej i tak dostawalibyśmy w mniej więcej co trzeciej próbce. Tak po prostu losowo. Ale jeśli $p$ wyszłoby nam 0,000001%, to raczej nie mielibyśmy wątpliwości, że to nie mógł być przypadek i różnica istnieje naprawdę. Ale co gdy $p = 8\%$? Albo $p = 4\%$? Być może dobrze by było, gdybyśmy zaczęli się zastanawiać, jak duże ryzyko błędu możemy ponieść i podejmowali tę decyzję osobno w każdym przypadku. A może powodowałoby to tylko chaos i trudności w dojściu do porozumienia, bo dla każdego naukowca duża i mała szansa znaczyłyby co innego.
 
-Tak czy inaczej musimy ustalić gdzieś punkt odcięcia. Jak małe prawdopodobieństwo jest wystarczająco małe, żeby uznać, że to nie mógł być przypadek? Taką wartość odcięcia oznaczamy $\alpha$ i w większości nauk przyjęty zwyczaj mówi, że $\alpha = 0,05$. Jeśli szansa na przypadek wynosi mniej niż 5%, to uznajemy, że to nie był przypadek. Warto zaznaczyć, że taka granica jest całkiem arbitralna. Jak każda granica, wywołuje pytania w stylu „Czyli jak szansa na przypadek wynosi 4,9%, to nie wierzę, że to przypadek, ale jak wynosi już 5,1%, to nie mogę być taki pewny?". Odpowiedź brzmi „tak". Mimo że na zdrowy rozum to nie ma sensu, to bycie blisko granicy rzeczywiście wywołuje duże emocje i część naukowców skłania do podejrzanych praktyk, żeby tylko zbić $p$ poniżej magicznego 0,05[^p-value-6].
+Tak czy inaczej musimy ustalić gdzieś punkt odcięcia. Jak małe prawdopodobieństwo jest wystarczająco małe, żeby uznać, że to nie mógł być przypadek? Taką wartość odcięcia oznaczamy $\alpha$ i w większości nauk przyjęty zwyczaj mówi, że $\alpha = 0,05$. Jeśli szansa na przypadek wynosi mniej niż 5%, to uznajemy, że to nie był przypadek. Warto zaznaczyć, że taka granica jest całkiem arbitralna. Jak każda granica, wywołuje pytania w stylu „Czyli jak szansa na przypadek wynosi 4,9%, to nie wierzę, że to przypadek, ale jak wynosi już 5,1%, to nie mogę być taki pewny?". Odpowiedź brzmi „tak". Mimo że na zdrowy rozum to nie ma sensu, to bycie blisko granicy rzeczywiście wywołuje duże emocje i część naukowców skłania do podejrzanych praktyk, żeby tylko zbić $p$ poniżej magicznego 0,05[^p-value-6]. EDIT (2026): Po latach coraz częściej widzę bardziej liberalne podejście do wartości $p$ na granicy. Nie ma już zazwyczaj problemu, żeby pisać o „efekcie na poziomie trendu”, jak próba nie jest jakoś bardzo duża, chociaż trzeba wtedy bardzo ostrożnie wyciągać wnioski.
 
 [^p-value-6]: Powody ku temu są dość poważne. Wiele czasopism naukowych po prostu nie chce przyjmować tzw. wyników zerowych, a od publikowania zależy byt naukowca. Jednym ze sposobów na takie manipulowanie wartością $p$ (tzw. *p-hacking*) jest usuwanie z bazy osób, które nagle zaczynają nam się wydawać podejrzane, bo np. za długo rozwiązywały nasz kwestionariusz. Te i podobne kontrowersje są siłą napędową prężnie rozwijającego się ruchu Open Science.
 
@@ -193,6 +200,18 @@ Ciekawe jest to, że o ile przy większości testów chcemy odrzucić hipotezę 
 
 [^p-value-9]: W praktyce jeszcze nie wszytko stracone. Często patrząc na parametry rozkładu możemy uznać, że owszem, różni się od normalnego, ale na tyle mało, że to nie ma znaczenia. Ale to jest nieco inny temat.
 
+::: {.callout-warning title="Pan Bayes protestuje"}
+Ta logika jest nieintuicyjna -- dlaczego mamy odrzucać hipotezę zerową a nie potwierdzać alternatywną? Jaką mam pewność, że hipoteza alternatywna jest prawdziwa? A co jak mam porównać kilka hipotez? Na ile niemożność odrzucenia hipotezy jest dowodem na rzecz tej hipotezy?
+
+Jakbym zamiast liczyć odchylenia od 0 liczyłbym odchylenia od 1 (co da się zrobić np. testem *t* dla pojedynczej próby), to tej hipotezy też nie mógłbym odrzucić, bo przy prawdziwej różnicy 1 też moglibyśmy takie dane łatwo uzyskać. To jest to, o czym tak naprawdę mówią tzw. przedziały ufności (*confidence intervals*) -- test *t* wyżej podaje „95% przedział ufności” [–6.17; 2.17], co oznacza, że równie dobrze nie można odrzucić hipotezy, że różnica wynosi 1, 0, –2 czy –6, ale która z nich jest najbardziej prawdopodobna? Jak bardzo jest prawdopodobna? W intuicyjnym myśleniu bardziej interesuje mnie, ile ta różnica rzeczywiście wynosi i z jakim prawdopodobieństwem, a nie ile nie wynosi! Często będziemy się zachowywać, jakby „brak możliwości odrzucenia hipotezy zerowej” był dowodem na jej prawdziwość, jak w przypadku testów normalności. Jednak na żadną z tych wątpliwości nasza statystyka nie odpowie.
+
+Druga sprawa jest taka, że nasza logika może być tutaj wadliwa. Jak znam prawdziwe parametry rozkładu, to matematyka pozwala mi przewidzieć, jak będą się zachowywać próbki z tego rozkładu, na przykład że 95% próbek 2×100 osób da mi przypadkowe różnice z grubsza między –2 a +2. Ale w prawdziwym świecie ja nie znam prawdziwych parametrów rozkładu, chcę je dopiero poznać. Mam matematyczną gwarancję, że 95% próbek da mi wartości rozsądnie bliskie prawdziwym, ale czy to oznacza, że moja konkretna, pojedyncza próbka na 95% trafiła? Albo nawet że pomyliła się niewiele? Czy z tego, że 95% złodziei jest praworęcznych możemy wnioskować, że 95% praworęcznych to złodzieje? Bardzo często wyżej wspomniane przedziały ufności tłumaczy się tak, że na 95% prawdziwa średnia jest w tym przedziale, ale to nieprawda [@morey_fallacy_2016] -- *de facto* mówią nam tylko, że żadnej wartości z przedziału nie można odrzucić przy tych danych odrzucić przy $\alpha = 0,05$.
+
+To jest rdzeń innej szkoły, która istnieje obok klasycznej statystyki (tzw. częstościowej) i nazywa się statystyką bayesowską. Opiera się ona o matematyczne twierdzenie, które na pewno pozwala odwracać prawdopodobieństwa poprawnie (tutaj -- pozwala policzyć prawdopodobieństwo prawdziwości hipotezy z prawdopodobieństwa, że stworzyłaby takie dane, jakie mamy), ale wymaga m.in. włączenia jakichś założeń *a priori* do naszego oszacowania. Bayesowskie wyciąganie wniosków to zupełnie inna filozofia, która jednak pozwala wprost porównywać hipotezy, określić prawdopodobieństwo prawdziwości danej hipotezy, a nawet wprost dostarczyć dowodów, że np. różnicy nie ma, a nie tylko, że nie możemy takiej ewentualności odrzucić. Pozwala też opracować tzw. przedziały wiarygodności (*credible intervals*), które naprawdę mają 95% pewności, że zawierają prawdziwą wartość parametru, czyli są tym, czym chcemy, żeby były przedziały ufności.
+
+Statystyka bayesowska z roku na rok staje się popularniejsza, chociaż na standardowych studiach z psychologii ciężko ją spotkać. Sam dopiero się jej zaczynam na poważnie uczyć jako doktorant, w 2026 r., kiedy dopisuję tę ramkę. Zainteresowanym polecam swój nieopierzony wpis o [twierdzeniu Bayesa](twierdzenie-bayesa.qmd) oraz książkę *Bernoulli's Fallacy* [@clayton2021].
+:::
+
 Jeśli rozumie się tę ogólną logikę testów statystycznych, zna się hipotezę zerową danego testu, potrafi się wykorzystać wartość $p$ do jej odrzucenia bądź nieodrzucania oraz potrafi się zinterpretować, co to odrzucenie znaczy w konkretnym teście, to spokojnie można iść w świat. Najtrudniejsze już za nami. Pierwszy kamień milowy właściwie mamy osiągnięty. Zanim jednak otworzymy szampana, warto się jeszcze zorientować, jak na $p$ można wpływać, kiedy badanie nam nie wychodzi i jak ma się istotność statystyczna do wielkości efektu.
 
 ## Wielkość próbki
@@ -205,14 +224,13 @@ Zobaczmy to na przykładzie. Pokazywałem wcześniej (na rysunku [-@fig-iq-means
 #| label: fig-iq-stderr-histogram
 #| fig-cap: Jak często pojawiały się dane średnie, gdy w jednym rzucie badaliśmy 100 osób (mała próba) albo 1000 osób (duża próba).
 
-iq_stderr %>% 
+iq_stderr %>%
   ggplot(aes(IQ)) +
   geom_histogram(bins = 25) +
   facet_wrap("proba") +
   labs(x = "średnie IQ", y = "Ile razy się pojawia") +
-  theme_Publication() +
+  theme_Publication +
   theme(panel.spacing.x = unit(10, "mm"))
-
 ```
 
 Na rysunku [-@fig-iq-stderr-histogram] widzimy, co się dzieje, kiedy liczebność próby zwiększa się. Kiedy próba była mała, wyniki koncentrowały się wokół prawdziwej średniej, czyli wartości 100, ale miały całkiem spory rozstrzał -- ok. 95-105. Większość wyników plasowała się wtedy w zakresie[^p-value-10] od 98,5 do 101,5. Gdy próbka była duża, wyniki ciągle koncentrowały się wokół 100, ale były znacznie mniej rozproszone. Całkowity rozstęp to ok. 98-102, a większość wyników mieści się w zakresie 99,5-100,5.
