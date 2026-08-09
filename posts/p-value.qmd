@@ -30,7 +30,7 @@ source(
 )
 
 theme_Publication <- theme_Publication() %+replace%
-  theme(panel.background = element_rect(fill = "#FFFFFF"))
+  theme(panel.background = element_rect(fill = "white"))
 
 men <- readRDS("posts/dane/p-value/mezczyzni.RDS")
 women <- readRDS("posts/dane/p-value/kobiety.RDS")
