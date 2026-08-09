@@ -7,8 +7,6 @@ Tutaj znajduje się lista tekstów z tego bloga, posegregowane tematycznie. Stat
 
 # Statystyka
 
-Problemy ze statystyką? Zleć mi analizy statystyczne. [Sprawdź tutaj!](https://www.statystycznie.org/)
-
 1.  [Wariancja](./posts/procent-wariancji.qmd) -- co to jest wariancja, jak się ją wyjaśnia i co to jest model.
 
 2.  [Testy statystyczne i wartość *p*](./posts/p-value.qmd) -- jak działają testy statystyczne, co to jest *p* i jak je interpretować.
@@ -20,6 +18,12 @@ Problemy ze statystyką? Zleć mi analizy statystyczne. [Sprawdź tutaj!](https:
 5.  [Gęstość prawdopodobieństwa](./posts/gestosc-prawdopodobienstwa.qmd) -- głębsze spojrzenie na wykresy gęstości prawdopodobieństwa i obliczenia na rozkładach normalnych.
 
 6.  [Rozkłady próbkowania](./posts/rozklady-probkowania.qmd) -- logika Centralnego Twierdzenia Granicznego i rozkładów próbkowania. Do tego omówienie rozkładów *t* i ręczne liczenie wartości *p*.
+
+# Statystyka bayesowska
+
+Od pewnego czasu ciekawi mnie statystyka bayesowska, więc można się spodziewać, że teksty o niej będą się pojawiać. Są one bardziej chaotyczne niż teksty o klasycznej statystyce, bo tyleż to poradnik, ile dziennik z mojego własnego procesu nauki. Znam się na tym znacznie gorzej niż na zwykłej statystyce częstościowej.
+
+1. [Twierdzenie Bayesa i bayesowskie porównywanie hipotez](./posts/twierdzenie-bayesa.qmd) -- podstawowe twierdzenie statystyki bayesowskiej i jak pozwala nam określać wiarygodność hipotez.
 
 # Nauka R
 

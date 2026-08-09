@@ -1,6 +1,6 @@
 ---
 title: "mgr Jakub Jędrusiak"
-image: ./posts/headers/profile.jpg
+image: ./posts/headers/profile.png
 about:
   template: jolla
   links:
@@ -13,7 +13,7 @@ about:
       href: https://orcid.org/0000-0002-6481-8210
 ---
 
-Psycholog, absolwent Uniwersytetu Wrocławskiego. Członek [Creative Behavior Lab](https://creativity-lab.pl/). Zainteresowany psychologią twórczości, zwłaszcza w kontekście procesów poznawczych. Wielbiciel R, zwolennik Pythona i JS. Fan Open Science.
+Psycholog, naukowiec, absolwent Uniwersytetu Wrocławskiego. Członek [Creative Behavior Lab](https://creativity-lab.pl/). Zainteresowany psychologią twórczości, zwłaszcza w kontekście procesów poznawczych. Wielbiciel R i podręczników Andy'ego Fielda. Fan Open Science.
 
 # Fonty {#fonty}
 
