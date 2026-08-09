@@ -32,11 +32,11 @@ source(
 theme_Publication <- theme_Publication() %+replace%
   theme(panel.background = element_rect(fill = "white"))
 
-men <- readRDS("posts/dane/p-value/mezczyzni.RDS")
-women <- readRDS("posts/dane/p-value/kobiety.RDS")
-iq_means <- tibble(lp = 1:1000, IQ = readRDS("posts/dane/p-value/iq-means.RDS"))
-iq_diffs <- readRDS("posts/dane/p-value/iq-diffs.RDS")
-iq_stderr <- readRDS("posts/dane/p-value/iq-stderr.RDS")
+men <- readRDS("dane/p-value/mezczyzni.RDS")
+women <- readRDS("dane/p-value/kobiety.RDS")
+iq_means <- tibble(lp = 1:1000, IQ = readRDS("dane/p-value/iq-means.RDS"))
+iq_diffs <- readRDS("dane/p-value/iq-diffs.RDS")
+iq_stderr <- readRDS("dane/p-value/iq-stderr.RDS")
 ```
 
 Dla przykładu -- wychodzę z mieszkania i zamykam drzwi na klucz. Zrobiłem to odruchowo, nieuważnie, więc po chwili nie wiem już, czy zamknąłem te drzwi, czy nie. Wzbiera we mnie lęk, więc cofam się i sprawdzam. Uff, zamknąłem. W tej chwili uzyskuję chwilową pewność[^p-value-1], że drzwi są zamknięte i spokojnie wychodzę z budynku. Wspomnienie zaciera się nieco, więc moja pewność spada ze 100% do 96%. Jednak taki poziom pewności w zupełności wystarczy, żebym na pytanie „Zamknąłeś drzwi?" odpowiedział „Tak".
