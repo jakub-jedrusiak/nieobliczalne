@@ -16,7 +16,16 @@ categories:
 
 knitr::opts_chunk$set(echo = FALSE, fig.align = "center", warning = FALSE, message = FALSE)
 pacman::p_load(tidyverse, knitr, kableExtra, broom, papaja, jedrusiakr)
-source("https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R", echo = FALSE)
+source("../styles/ggplot_theme_Publication-2.R", echo = FALSE)
+
+# kompatybilność ze starszymi wersjami jedrusiakr, z których usunięto apa_num_pl()
+if (!exists("apa_num_pl")) {
+  apa_num_pl <- function(x, digits = 2, add_equals = TRUE) {
+    out <- format(round(x, digits), decimal.mark = ",", trim = TRUE)
+    if (add_equals) paste("=", out) else out
+  }
+}
+
 sp_tib <- read_delim("./dane/procent-wariancji/spider_anxiety.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE) %>%
   mutate(Si = anxiety - mean(.$anxiety))
 
@@ -62,6 +71,7 @@ Dla takich danych możemy policzyć całkiem sporo rzeczy. Łatwiej jest jednak 
 
 ```{r}
 #| label: fig-scatter-anxiety
+#| classes: light-mode
 #| out-width: 85%
 #| fig-cap: Wielkość pająka i niepokój, jaki wzbudza, tyle że na wykresie.
 
@@ -70,11 +80,23 @@ sp_tib %>% ggplot(aes(x = spider_size, y = anxiety)) +
   labs(x = "wielkość pająka", y = "niepokój") +
   theme_Publication()
 ```
+```{r}
+#| label: fig-scatter-anxiety-dark
+#| classes: dark-mode
+#| out-width: 85%
+#| fig-cap: Wielkość pająka i niepokój, jaki wzbudza, tyle że na wykresie.
+
+sp_tib %>% ggplot(aes(x = spider_size, y = anxiety)) +
+  geom_point(colour = "white") +
+  labs(x = "wielkość pająka", y = "niepokój") +
+  theme_dark_blue()
+```
 
 Widzimy więc wyraźnie, że im większy pająk, tym większy lęk wywołuje. Ale z tym wnioskiem wybiegliśmy sporo w przyszłość. Zazwyczaj w pierwszym odruchu robimy coś znacznie prostszego -- liczymy średnią. Średni niepokój wyniósł tutaj dokładnie 10. Szybkie spojrzenie w tabelę pozwala nam stwierdzić, że żaden badany takiego wyniku niepokoju nie uzyskał i niezbyt nas to dziwi. W końcu to tylko średnia, żaden prawdziwy wynik nie musi mieć dokładnie średniej wartości. Jak w znienawidzonym przez statystyków kawale o średniej liczbie nóg na spacerze z psem. Rozumiemy więc, że średnia tylko w pewnym przybliżeniu oddaje cały zbiór danych, a konkretne wartości mogą się od średniej mniej lub bardziej odchylać. Te odchylenia możemy nanieść na wykres.
 
 ```{r}
 #| label: fig-scatter-anxiety-mean
+#| classes: light-mode
 #| out-width: 85%
 #| fig-cap: Średnia to rodzaj modelu, czyli narzędzia do przewidywania danych. Żaden z naszych pająków nie wywoływał średniego niepokoju, każdy punkt ma większe lub mniejsze odchylenie od średniej.
 
@@ -84,6 +106,19 @@ sp_tib %>% ggplot(aes(x = spider_size, y = anxiety)) +
   geom_segment(aes(xend = spider_size, yend = mean(sp_tib$anxiety)), size = 0.3, linetype = "dashed") +
   labs(x = "wielkość pająka", y = "niepokój") +
   theme_Publication()
+```
+```{r}
+#| label: fig-scatter-anxiety-mean-dark
+#| classes: dark-mode
+#| out-width: 85%
+#| fig-cap: Średnia to rodzaj modelu, czyli narzędzia do przewidywania danych. Żaden z naszych pająków nie wywoływał średniego niepokoju, każdy punkt ma większe lub mniejsze odchylenie od średniej.
+
+sp_tib %>% ggplot(aes(x = spider_size, y = anxiety)) +
+  geom_point(colour = "white") +
+  geom_line(aes(y = mean(sp_tib$anxiety)), colour = "white") +
+  geom_segment(aes(xend = spider_size, yend = mean(sp_tib$anxiety)), size = 0.3, linetype = "dashed", colour = "white") +
+  labs(x = "wielkość pająka", y = "niepokój") +
+  theme_dark_blue()
 ```
 
 Przerywane linie pokazują nam odchylenie każdego punktu od średniej (*residual*). Dla przykładu pierwszy punkt ma wartość niepokoju 2, więc jego odchylenie to $2 - 10 = -8$. Dlaczego na minusie? Bo pierwszy punkt jest **poniżej** średniej, więc żeby przejść od średniej do wartości tego konkretnego punktu musimy wykonać **odejmowanie**. Inny przykład -- ostatni punkt ma wartość niepokoju 15, więc jego odchylenie od średniej wynosi $15 - 10 = 5$. Tutaj odchylenie jest już dodatnie, co ma sens, bo ostatni punkt jest **powyżej** średniej, więc żeby przesunąć się od wartości średniej do wartości tego punktu musimy **dodawać**. Jak widać, żeby policzyć odchylenie, wystarczy od wartości punktu odjąć średnią. Można zapisać to matematycznie:
@@ -113,6 +148,7 @@ Jakby ktoś zapytał mnie, jak duży niepokój wywołują pająki i uparł się,
 
 ```{r}
 #| label: fig-scatter-anxiety-15
+#| classes: light-mode
 #| out-width: 85%
 #| fig-cap: Modelem mogłaby być dowolna liczba, jeśli się uprzeć, ale żadna pojedyncza liczba nie będzie miała tak małych odchyleń, jak średnia.
 
@@ -122,6 +158,19 @@ sp_tib %>% ggplot(aes(x = spider_size, y = anxiety)) +
   geom_segment(aes(xend = spider_size, yend = 15), size = 0.3, linetype = "dashed") +
   labs(x = "wielkość pająka", y = "niepokój") +
   theme_Publication()
+```
+```{r}
+#| label: fig-scatter-anxiety-15-dark
+#| classes: dark-mode
+#| out-width: 85%
+#| fig-cap: Modelem mogłaby być dowolna liczba, jeśli się uprzeć, ale żadna pojedyncza liczba nie będzie miała tak małych odchyleń, jak średnia.
+
+sp_tib %>% ggplot(aes(x = spider_size, y = anxiety)) +
+  geom_point(colour = "white") +
+  geom_line(aes(y = 15), colour = "white") +
+  geom_segment(aes(xend = spider_size, yend = 15), size = 0.3, linetype = "dashed", colour = "white") +
+  labs(x = "wielkość pająka", y = "niepokój") +
+  theme_dark_blue()
 ```
 
 ## Wariancja
@@ -203,6 +252,7 @@ Wiemy już bardzo dokładnie czym jest wariancja i jaki ma związek ze średnią
 
 ```{r}
 #| label: fig-scatter-anxiety-lm
+#| classes: light-mode
 #| out-width: 85%
 #| fig-cap: Linia rosnąca sugeruje nam, że im większy pająk, tym większy niepokój wywołuje. Na pierwszy rzut oka widać, że odchylenia są mniejsze, niż przy średniej.
 
@@ -212,6 +262,19 @@ sp_tib %>% ggplot(aes(x = spider_size, y = anxiety)) +
   geom_segment(aes(xend = spider_size, yend = augment(sp_lm)$.fitted), size = 0.3, linetype = "dashed") +
   labs(x = "wielkość pająka", y = "niepokój") +
   theme_Publication()
+```
+```{r}
+#| label: fig-scatter-anxiety-lm-dark
+#| classes: dark-mode
+#| out-width: 85%
+#| fig-cap: Linia rosnąca sugeruje nam, że im większy pająk, tym większy niepokój wywołuje. Na pierwszy rzut oka widać, że odchylenia są mniejsze, niż przy średniej.
+
+sp_tib %>% ggplot(aes(x = spider_size, y = anxiety)) +
+  geom_point(colour = "white") +
+  stat_smooth(method = "lm", se = FALSE, colour = "#7fc97f") +
+  geom_segment(aes(xend = spider_size, yend = augment(sp_lm)$.fitted), size = 0.3, linetype = "dashed", colour = "white") +
+  labs(x = "wielkość pająka", y = "niepokój") +
+  theme_dark_blue()
 ```
 
 Od razu lepiej. Od początku chcieliśmy móc powiedzieć, że im większy pająk, tym większy niepokój, a teraz mamy tego dowód. W końcu ta linia ewidentnie pasuje do danych lepiej -- na pierwszy rzut oka widać, że odchylenia są mniejsze. No właśnie! Dzięki łamaniu sobie głowy nad odchyleniami od średniej zyskaliśmy sposób na stwierdzenie, czy jakiś model jest lepszy od średniej, czy nie -- wystarczy sprawdzić, czy odchylenia zrobiły się istotnie mniejsze.
@@ -265,6 +328,7 @@ Możemy wyobrazić sobie, że pojawia nam się nowa osoba badana, która pająk�
 
 ```{r}
 #| label: fig-scatter-anxiety-lm2
+#| classes: light-mode
 #| out-width: 85%
 #| fig-cap: Nowa osoba badana, która nie boi się pająków wcale, nie przystaje do naszego modelu. Może to sugerować, że nasz model jest adekwatny tylko dla pewnej grupy osób (czyli możemy stworzyć bardziej złożony model, który weźmie to pod uwagę) albo że odważny badany kłamie (i powinien zostać wykluczony z bazy).
 
@@ -275,6 +339,20 @@ sp_tib2 %>%
   geom_segment(aes(xend = spider_size, yend = augment(sp_lm2)$.fitted), size = 0.3, linetype = "dashed") +
   labs(x = "wielkość pająka", y = "niepokój") +
   theme_Publication()
+```
+```{r}
+#| label: fig-scatter-anxiety-lm2-dark
+#| classes: dark-mode
+#| out-width: 85%
+#| fig-cap: Nowa osoba badana, która nie boi się pająków wcale, nie przystaje do naszego modelu. Może to sugerować, że nasz model jest adekwatny tylko dla pewnej grupy osób (czyli możemy stworzyć bardziej złożony model, który weźmie to pod uwagę) albo że odważny badany kłamie (i powinien zostać wykluczony z bazy).
+
+sp_tib2 %>%
+  ggplot(aes(x = spider_size, y = anxiety)) +
+  geom_point(colour = "white") +
+  stat_smooth(method = "lm", se = FALSE, colour = "#7fc97f") +
+  geom_segment(aes(xend = spider_size, yend = augment(sp_lm2)$.fitted), size = 0.3, linetype = "dashed", colour = "white") +
+  labs(x = "wielkość pająka", y = "niepokój") +
+  theme_dark_blue()
 ```
 
 Jak widzimy model się trochę pozmieniał. $R^2$ spadło dramatycznie, bo w tym drugim modelu wyniosło zaledwie 23,4%. Ale pojawienie się tego nowego, odważnego badanego nie zmieniło wyników pozostałych.
@@ -313,6 +391,7 @@ Można zauważyć ciekawą rzecz związaną z obliczaniem $SS_M$. Jak się okazu
 
 ```{r}
 #| label: fig-scatter-anxiety-ssm
+#| classes: light-mode
 #| out-width: 85%
 #| fig-cap: $SS_M$ można szybciej policzyć za pomocą odchyleń modelu od średniej, czyli kresek między średnią wartościami przewidywanymi przez nasz nowy model.
 
@@ -324,6 +403,21 @@ sp_tib %>%
   geom_segment(aes(y = mean(sp_tib$anxiety), xend = spider_size, yend = augment(sp_lm)$.fitted), size = 0.3, linetype = "dashed") +
   labs(x = "wielkość pająka", y = "niepokój") +
   theme_Publication()
+```
+```{r}
+#| label: fig-scatter-anxiety-ssm-dark
+#| classes: dark-mode
+#| out-width: 85%
+#| fig-cap: $SS_M$ można szybciej policzyć za pomocą odchyleń modelu od średniej, czyli kresek między średnią wartościami przewidywanymi przez nasz nowy model.
+
+sp_tib %>%
+  ggplot(aes(x = spider_size, y = anxiety)) +
+  geom_point(alpha = 0.5, colour = "white") +
+  stat_smooth(method = "lm", se = FALSE, colour = "#7fc97f") +
+  geom_line(aes(y = mean(sp_tib$anxiety)), colour = "white") +
+  geom_segment(aes(y = mean(sp_tib$anxiety), xend = spider_size, yend = augment(sp_lm)$.fitted), size = 0.3, linetype = "dashed", colour = "white") +
+  labs(x = "wielkość pająka", y = "niepokój") +
+  theme_dark_blue()
 ```
 
 Można to przetestować za pomocą danych z tabeli niżej. $x_M$ to wartość przewidywana przez model, a $S_M$ to różnica między modelem a średnim niepokojem. Podniesienie wartości $S_M$ do kwadratu i zsumowanie ich daje w wyniku nasze $SS_M$.

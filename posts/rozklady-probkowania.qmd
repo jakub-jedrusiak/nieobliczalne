@@ -1,11 +1,12 @@
 ---
 title: Rozkłady próbkowania i rozkłady $t$
 subtitle: Największe nieporozumienie w statystyce
-description: W tym wpisie wprowadzam bardzo ważne rozróżnienie, które uwielbia się mylić wszystkim -- od studentów po profesorów (tych mniej siedzących w statystyce). Czym innym jest rozkład zmiennej, a czym innym jest rozkład próbkowania. Co więcej, rozkłady próbkowania leżą u podstaw wnioskowania statystycznego, to koncept fundamentalny, więc warto je docenić. Są one podstawą wartości $p$. To one (a nie rozkłady zmiennych!) powinny być normalne do analiz parametrycznych. Omawiam tutaj też błąd standardowy i Centralne Twierdzenie Graniczne.
+description: W tym wpisie wprowadzam bardzo ważne rozróżnienie, które uwielbia się mylić wszystkim -- od studentów po profesorów (tych mniej siedzących w statystyce). Czym innym jest rozkład zmiennej, a czym innym jest rozkład próbkowania. Co więcej, rozkłady próbkowania leżą u podstaw wnioskowania statystycznego, to koncept fundamentalny, więc warto je docenić. Są one podstawą wartości $p$. W wielu analizach korzystamy z normalnego przybliżenia rozkładów statystyk, nawet jeśli sama zmienna nie ma rozkładu normalnego. Omawiam tutaj też błąd standardowy i Centralne Twierdzenie Graniczne.
 image: ./headers/rozklady-probkowania.webp
 twitter-card:
     image: "/headers/rozklady-probkowania.jpeg"
 date: "2023-10-29"
+date-modified: "2026-11-07"
 code-fold: true
 execute: 
   warning: false
@@ -56,6 +57,18 @@ theme_main <- function(subtitle = FALSE) {
         legend.box.spacing = unit(0, "points")
     )
 }
+
+theme_main_dark <- function(subtitle = FALSE) {
+    theme_main(subtitle) +
+        theme(
+            panel.background = element_rect(fill = "#282C33", colour = NA),
+            plot.background = element_rect(fill = "#282C33", colour = NA),
+            axis.text.x = element_text(colour = "gray85"),
+            plot.title = element_text(colour = "gray85"),
+            legend.background = element_rect(fill = "#282C33", colour = NA),
+            legend.key = element_rect(fill = "#282C33", colour = NA)
+        )
+}
 ```
 
 Sięgnijmy pamięcią do przykładu z [tekstu o wartości $p$](./p-value.qmd). Na tym tekście będziemy budować, więc zachęcam, żeby z nim zapoznać się w pierwszej kolejności. Konieczne jest też rozumienie podstaw rozkładu normalnego. Jeśli nie potrafisz obliczyć, powiedzmy, jaka część populacji ma inteligencję między 85 a 115, zachęcam do nadrobienia [tekstu o rozkładach normalnych](./gestosc-prawdopodobienstwa.qmd). Nie jest to *niezbędne* do zrozumienia większości tego tekstu, ale bardzo pomoże.
@@ -79,6 +92,7 @@ Próbka jest jednak dobra wtedy, kiedy jest losowa. Jeśli chcemy sprawdzić, il
 Załóżmy, że mamy losową próbę 100 mężczyzn i wszystkim mierzymy inteligencję. Niektórzy z tych mężczyzn mają współczynniki inteligencji 100, inni 95, jeszcze inni 105 itd. Wiedząc nieco o skali inteligencji nawet intuicyjnie będziemy czuć, że więcej ludzi będzie miało raczej przeciętną inteligencję, czyli około 100, niż 130 (co jest progiem przyjęcia do Mensy). Częstość poszczególnych wyników możemy przedstawić na histogramie (a potem dorzucić wykres gęstości, o czym mówiliśmy w [tekście o gęstości prawdopodobieństwa](./gestosc-prawdopodobienstwa.qmd)).
 
 ```{r}
+#| classes: light-mode
 ggplot(iq, aes(iq)) +
     geom_histogram(binwidth = 5, fill = "white", colour = "gray60") +
     geom_vline(xintercept = mean(iq$iq)) +
@@ -87,18 +101,29 @@ ggplot(iq, aes(iq)) +
     labs(x = "IQ", y = "Liczba przypadków") +
     theme_main()
 ```
+```{r}
+#| classes: dark-mode
+ggplot(iq, aes(iq)) +
+    geom_histogram(binwidth = 5, fill = "#282C33", colour = "gray60") +
+    geom_vline(xintercept = mean(iq$iq), colour = "white") +
+    geom_vline(xintercept = c(mean(iq$iq) - sd(iq$iq), mean(iq$iq) + sd(iq$iq)), linetype = "dashed", colour = "white") +
+    xlim(100 - 15 * 3, 100 + 15 * 3) +
+    labs(x = "IQ", y = "Liczba przypadków") +
+    theme_main_dark()
+```
 
 Widzimy, że najwięcej osób wykazało inteligencję blisko środka rozkładu. Średnia inteligencja wyniosła **w tej konkretnej próbie** `r round(mean(iq$iq), 1)`, co zaznaczyłem pionową kreską. To, co widzimy na rysunku, to **rozkład zmiennej** w próbie. Pobraliśmy próbkę, zmierzyliśmy inteligencję, narysowaliśmy rozkład. To, co widzimy na obrazku, odnosi się tylko do naszej konkretnej próby. Może przypominać rzeczywisty rozkład inteligencji w populacji (i przypomina), ale może to odwzorowanie może być dalekie od doskonałości. Istnieje więc jakiś **rozkład zmiennej w populacji**, który staramy się przybliżyć za pomocą **rozkładu zmiennej w próbie**. Im próba bardziej liczna, tym rozkład zmiennej bliższy prawdziwemu rozkładowi w populacji. Wydaje się to naturalne.
 
 Poza średnią rozkład ma swoje odchylenie standardowe. Jest to podstawowe pojęcie, chociaż nieintuicyjne przy pierwszym kontakcie. W szczegółach omawiam je w [tekście o wariancji](./procent-wariancji.qmd), ale w uproszczeniu mówi nam ono o tym, gdzie znajduje się większość ludzi. Odchylenie standardowe w naszej próbie wyniosło `r round(sd(iq$iq), 1)`, więc większość ludzi ma inteligencję między `r round(mean(iq$iq) - sd(iq$iq), 1)` a `r round(mean(iq$iq) + sd(iq$iq), 1)`, czyli średnia ± odchylenie standardowe. Jeśli teraz usłyszymy, że ktoś w teście inteligencji uzyskał wynik 130, to możemy sobie pomyśleć „dużo, aż 2 odchylenia standardowe od średniej". Tutaj zakres jednego odchylenia standardowego od średniej zaznaczyłem przerywanymi kreskami. Jeśli odchylenie standardowe jest niewielkie, to średnia ma nieduży błąd, pojedyncze obserwacje są blisko niej. Jeśli jest ono duże, możemy się spodziewać większego rozstrzału.
 
-Losowanie osób do naszego badania możemy sobie wyobrazić jako **losowanie z rozkładu zmiennej w populacji**. Rozkład zmiennej w populacji mówi nam, jakie wyniki są częstsze, jakie rzadsze. Gdy wychodzimy na ulicę i pytamy ludzi, czy chcą wziąć udział w badaniu naukowym, mówiąc po statystycznemu **losujemy z rozkładu**. Osoba jest częścią populacji, więc losuję z rozkładu zmiennej w populacji. Rozkład budują ludzie. Gdy biorę losowego człowieka i mierzę jego inteligencję, statystyka każe nam patrzeć na to tak, jakbym wylosował wynik z rozkładu inteligencji w populacji. Powtarzam się, bo to naprawdę dziwne przejście z konkretnego, namacalnego zaczepiania ludzi na ulicy do matematycznej abstrakcji. Spróbuj oswoić się z tą perspektywą, nim przejdziesz dalej, bo przyda nam się w kolejnym podrozdziale.
+Losowanie osób do naszego badania możemy sobie wyobrazić jako **losowanie z rozkładu zmiennej w populacji**. Zakładamy tutaj losowy dobór i niezależność obserwacji; samo zaczepianie ochotników na ulicy nie gwarantuje reprezentatywności próby. Rozkład zmiennej w populacji mówi nam, jakie wyniki są częstsze, jakie rzadsze. Gdy wychodzimy na ulicę i pytamy ludzi, czy chcą wziąć udział w badaniu naukowym, mówiąc po statystycznemu **losujemy z rozkładu**. Osoba jest częścią populacji, więc losuję z rozkładu zmiennej w populacji. Rozkład budują ludzie. Gdy biorę losowego człowieka i mierzę jego inteligencję, statystyka każe nam patrzeć na to tak, jakbym wylosował wynik z rozkładu inteligencji w populacji. Powtarzam się, bo to naprawdę dziwne przejście z konkretnego, namacalnego zaczepiania ludzi na ulicy do matematycznej abstrakcji. Spróbuj oswoić się z tą perspektywą, nim przejdziesz dalej, bo przyda nam się w kolejnym podrozdziale.
 
 # Rozkład próbkowania
 
 Wiemy jednak, że każda próbka może trochę różnić się średnią. W niektórych próbkach wyjdzie nam 102, w innych 98. Możemy jednak intuicyjnie czuć, że znacznie trudniej przez przypadek zebrać próbkę o średniej 130 albo 70. Raczej średnie każdej jednej próbki będą krążyć dookoła prawdziwej średniej, czyli w tym wypadku 100. Zazwyczaj nie wiemy, jaka jest prawdziwa średnia z populacji, ale jak sobie z tym poradzić powiemy później. Średnie bliżej 100 powinny pojawiać się częściej, a średnie dalej od 100 rzadziej, możemy więc zrobić 100 próbek, każda po 100 osób i zobaczyć, jak często losują nam się jakie średnie. Możemy to nanieść na histogram.
 
 ```{r}
+#| classes: light-mode
 iq_pop <- tibble(iq = map_dbl(1:100, \(x) mean(rnorm(100, 100, 15))))
 
 ggplot(iq_pop, aes(iq)) +
@@ -108,8 +133,17 @@ ggplot(iq_pop, aes(iq)) +
     labs(x = "Średnie IQ", y = "Liczba przypadków") +
     theme_main()
 ```
+```{r}
+#| classes: dark-mode
+ggplot(iq_pop, aes(iq)) +
+    geom_histogram(binwidth = 1, fill = "#282C33", colour = "gray60") +
+    geom_vline(xintercept = mean(iq_pop$iq), colour = "white") +
+    geom_vline(xintercept = c(mean(iq_pop$iq) - sd(iq_pop$iq), mean(iq_pop$iq) + sd(iq_pop$iq)), linetype = "dashed", colour = "white") +
+    labs(x = "Średnie IQ", y = "Liczba przypadków") +
+    theme_main_dark()
+```
 
-Wylosowaliśmy więc 100 różnych próbek, w każdej zmierzyliśmy średnią inteligencję. Na histogramie widać, że średnie w pobliżu 100 rzeczywiście pojawiały się częściej, niż te dalsze od 100. Średnia średnia wyniosła tutaj `r round(mean(iq_pop$iq), 1)`, zaś jej odchylenie standardowe `r round(sd(iq_pop$iq), 1)`, czyli zazwyczaj próbki miały średnią między `r round(mean(iq_pop$iq) - sd(iq_pop$iq), 1)` a `r round(mean(iq_pop$iq) + sd(iq_pop$iq), 1)`. Zwróćmy jednak uwagę, że robiąc ten wykres, spłaszczyliśmy każdą próbkę 100 osób do jednej tylko liczby -- średniej inteligencji. Ten wykres nie mówi nam więc nic na temat tego, jak wyglądał rozkład zmiennej w każdej próbce. On nam mówi tylko i aż tyle, jak często próbka 100 osób miała jaką średnią. Taki rozkład nazywamy **rozkładem próbkowania**. Rozkład próbkowania to rozkład średnich z **różnych prób** i jest czymś zupełnie innym niż rozkład zmiennej w próbie czy w populacji. I to rozróżnienie jest powalająco istotne.
+Wylosowaliśmy więc 100 różnych próbek, w każdej zmierzyliśmy średnią inteligencję. Na histogramie widać, że średnie w pobliżu 100 rzeczywiście pojawiały się częściej, niż te dalsze od 100. Średnia średnia wyniosła tutaj `r round(mean(iq_pop$iq), 1)`, zaś jej odchylenie standardowe `r round(sd(iq_pop$iq), 1)`, czyli zazwyczaj próbki miały średnią między `r round(mean(iq_pop$iq) - sd(iq_pop$iq), 1)` a `r round(mean(iq_pop$iq) + sd(iq_pop$iq), 1)`. Zwróćmy jednak uwagę, że robiąc ten wykres, spłaszczyliśmy każdą próbkę 100 osób do jednej tylko liczby -- średniej inteligencji. Ten wykres nie mówi nam więc nic na temat tego, jak wyglądał rozkład zmiennej w każdej próbce. On nam mówi tylko i aż tyle, jak często próbka 100 osób miała jaką średnią. Taki rozkład nazywamy **rozkładem próbkowania**. Tutaj interesuje nas rozkład próbkowania średniej, czyli rozkład średnich z **różnych prób**. Jest on czymś zupełnie innym niż rozkład zmiennej w próbie czy w populacji. I to rozróżnienie jest powalająco istotne.
 
 Rozkład zmiennej w próbie przypomina rozkład zmiennej w populacji. Im więcej osób w próbie, tym bardziej. Rozkład próbkowania nie musi przypominać rozkładu zmiennej w populacji, ani się do niego nie zbliża. Rozkład zmiennej w próbie składa się z pojedynczych pomiarów, rozkład próbkowania składa się ze **średnich**. Rozkład zmiennej w próbie mówi nam, jak wiele osób w naszej próbce wpada w określone widełki. Rozkład próbkowania mówi nam o tym, jak łatwo wylosować próbkę o określonej średniej. Wykorzystajmy więc perspektywę, którą podpowiedziałem na koniec poprzedniego podrozdziału. Gdy losujemy osobę z ulicy i mierzymy jej inteligencję, to losujemy ją z rozkładu zmiennej w populacji. Gdy losujemy 100 osób z ulicy i liczymy ich średnią inteligencję, to losujemy średnią z rozkładu próbkowania. **O średniej każdej próbki można myśleć jako o wylosowanej z rozkładu próbkowania**, tak jak każda osoba ze swoją inteligencją jest wylosowana z rozkładu inteligencji w populacji.
 
@@ -123,22 +157,31 @@ Teraz się zacznie robić ciekawie. Trzymaj się, już za niedługo będą przyk
 
 ## Normalność
 
-Twierdzenie to mówi nam o dwóch piekielnie ważnych rzeczach. Po pierwsze, jeśli próba jest odpowiednio duża[^1], to **każdy rozkład próbkowania jest normalny**. Odpowiednio duża oznacza tutaj według większości autorów minimum 15 osób, chociaż co bardziej konserwatywni autorzy mówią 20 albo nawet 30 osób. Podkreślam tutaj słowo **każdy**. Oznacza to, że nieważne, jak wygląda rozkład zmiennej, czy jest normalny, czy nie. Rozkład próbkowania będzie normalny. Wyobraźmy sobie, że rozkład poniżej to rozkład zarobków w pewnym państwie. Większość ludzi zarabia niedużo, ale jest też niewielka ilość ludzi zarabiająca bardzo dużo.
+Twierdzenie to mówi nam o piekielnie ważnej rzeczy. Jeśli próba jest odpowiednio duża[^1], to **rozkład próbkowania średniej można przybliżyć rozkładem normalnym**. W podstawowej wersji zakładamy niezależne obserwacje z tego samego rozkładu o skończonej, dodatniej wariancji. Nie ma jednak uniwersalnego minimum 15, 20 czy 30 osób -- potrzebna liczność zależy od rozkładu zmiennej. Im silniejsza skośność lub cięższe ogony, tym większej próby możemy potrzebować. Rozkład zmiennej nie musi więc być normalny, żeby rozkład średniej był do normalnego zbliżony. Wyobraźmy sobie, że rozkład poniżej to rozkład zarobków w pewnym państwie. Większość ludzi zarabia niedużo, ale jest też niewielka ilość ludzi zarabiająca bardzo dużo.
 
-[^1]: Sprawa jest nieco bardziej skomplikowana. Prawdą jest, że odpowiednio duża próbka *wystarczy*, żeby uznać, że rozkład próbkowania jest normalny, ale może on być normalny też dla mniejszych prób, jeśli rozkład *zmiennej* też jest normalny. I tak na przykład próbka 10 wyników w teście inteligencji też będzie miała normalny rozkład próbkowania, bo inteligencja rozkłada się normalnie. Ale w praktyce badań naukowych takie rozważania to bicie piany -- nikt nie będzie robił badania ilościowego z próbką 10 osób. Jedyny moment, kiedy może się to przydać, to gdy niezbyt duża próbka zostanie jeszcze podzielona na podgrupy i okaże się np. że mężczyzn jest mniej niż 15 (w badaniach psychologicznych nierzadkie zjawisko!). Uzyskanie istotności statystycznej z taką próbką i tak będzie trudne, ale założenie normalności rozkładu próbkowania nie zostanie złamane.
+[^1]: Jeśli rozkład zmiennej w populacji jest normalny, rozkład średniej z niezależnych obserwacji jest dokładnie normalny nawet dla małych prób. I tak na przykład średnia z 10 wyników w teście inteligencji będzie miała normalny rozkład próbkowania, jeśli przyjmiemy normalny rozkład inteligencji w populacji. Dla innych rozkładów CTG daje przybliżenie, a nie gwarancję dokładnej normalności przy określonej liczebności. Bez założenia skończonej wariancji ta wersja CTG może w ogóle nie działać.
 
 ```{r}
-rexp(10000, 0.0007) %>%
-    tibble(income = .) %>%
-    ggplot(aes(income)) +
+#| classes: light-mode
+income_pop <- tibble(income = rexp(10000, 0.0007))
+
+ggplot(income_pop, aes(income)) +
     geom_histogram(fill = "white", colour = "gray60") +
     labs(x = "Dochód", y = "Liczba przypadków") +
     theme_main()
+```
+```{r}
+#| classes: dark-mode
+ggplot(income_pop, aes(income)) +
+    geom_histogram(fill = "#282C33", colour = "gray60") +
+    labs(x = "Dochód", y = "Liczba przypadków") +
+    theme_main_dark()
 ```
 
 Z pobieram z tego rozkładu losową próbkę 100 osób. Wychodzi mi średni dochód `r round(mean(rexp(100, 0.0007)))`. Spoko. Pobieram kolejne 100 osób i tym razem dostaję średni dochód `r round(mean(rexp(100, 0.0007)))`. Robię tak jeszcze bardzo dużo razy, więc ostatecznie mam zapisane w Excelu bardzo dużo średnich. Gdy z tych średnich, nie z pojedynczych obserwacji, zrobię histogram, dostanę coś takiego.
 
 ```{r}
+#| classes: light-mode
 income <- tibble(income = map_vec(1:1000, \(x) mean(rexp(100, 0.0007))))
 
 ggplot(income, aes(income)) +
@@ -148,17 +191,26 @@ ggplot(income, aes(income)) +
     labs(x = "Średni dochód", y = "Liczba przypadków") +
     theme_main()
 ```
+```{r}
+#| classes: dark-mode
+ggplot(income, aes(income)) +
+    geom_histogram(fill = "#282C33", colour = "gray60") +
+    geom_vline(xintercept = mean(income$income), colour = "white") +
+    geom_vline(xintercept = c(mean(income$income) - sd(income$income), mean(income$income) + sd(income$income)), linetype = "dashed", colour = "white") +
+    labs(x = "Średni dochód", y = "Liczba przypadków") +
+    theme_main_dark()
+```
 
-Ten rozkład wygląda zupełnie inaczej, niż rozkład wyjściowy. Dlaczego? Bo rozkład wyjściowy to rozkład zmiennej, a to na obrazku to rozkład średnich, jakie wychodzą w różnych próbkach, czyli rozkład próbkowania. Wielkość pojedynczej próbki wynosi 100, czyli więcej niż 15, a więc rozkład próbkowania wyszedł normalny. To jest pierwsze, co mówi nam CLT.
+Ten rozkład wygląda zupełnie inaczej, niż rozkład wyjściowy. Dlaczego? Bo rozkład wyjściowy to rozkład zmiennej, a to na obrazku to rozkład średnich, jakie wychodzą w różnych próbkach, czyli rozkład próbkowania. Wielkość pojedynczej próbki wynosi 100 i w tym przykładzie rozkład próbkowania jest już zbliżony do normalnego. To ilustruje, co mówi nam CLT.
 
-Jest to założenie o tyle ważne, że idzie na przekór popularnym w naukowym świecie nieporozumieniom. W części testów (np. w teście $t$) istnieje założenie o normalności. Ta normalność dotyczy jednak nie rozkładu *zmiennej*, ale rozkładu *próbkowania*. Dane wcale nie muszą rozkładać się normalnie! Jeśli mamy te minimum 15-30 osób, to rozkład próbkowania i tak jest normalny na mocy centralnego twierdzenia granicznego. Owszem, możemy sprawdzić, czy dane rozkładają się normalnie, bo jeśli tak, to rozkład próbkowania też jest normalny, ale nawet najbardziej szalone rozkłady zmiennej mają normalne rozkłady próbkowania, o ile liczność próbki jest wystarczająca.
+Jest to o tyle ważne, że idzie na przekór popularnym w naukowym świecie nieporozumieniom. W części testów (np. w klasycznym teście $t$) istnieje założenie o normalności rozkładu zmiennej w populacji. Pozwala ono uzyskać dokładny rozkład statystyki testowej nawet przy małej próbie. Dane wcale nie muszą jednak rozkładać się idealnie normalnie, żeby test działał w dobrym przybliżeniu! Przy odpowiednio dużej próbie i spełnieniu pozostałych założeń możemy korzystać z przybliżenia uzasadnianego CTG. Sama liczebność 15-30 osób nie gwarantuje jednak, że to przybliżenie będzie wystarczająco dobre.
 
-Jeśli czytałeś(-aś) [tekst o rozkładach normalnych](./gestosc-prawdopodobienstwa.qmd), możesz się już domyślać, dlaczego to jest ważne. Jeśli wiemy, że rozkład jest normalny, to moglibyśmy powiedzieć, np. „OK, w mojej próbce dzieci karmionych kalarepą średnia inteligencja wynosi wynosi 110. Rozkład próbkowania ma średnią 100 i odchylenie standardowe 5, więc szansa na to, że taka *lub wyższa* średnia wylosuje się z rozkładu normalnego przez przypadek wynosi $\int_{110}^{\infty} \mathcal N(x;\ 100,\ 5^2) = 1 - pnorm(110,\ mean = 100,\ sd = 5) \approx 2,3\%$, a więc raczej nie jest to przypadek". Skąd jednak mam wiedzieć, jaką średnią i odchylenie standardowe ma rozkład próbkowania, jak mam tylko jedną próbkę?
+Jeśli czytałeś(-aś) [tekst o rozkładach normalnych](./gestosc-prawdopodobienstwa.qmd), możesz się już domyślać, dlaczego to jest ważne. Jeśli przy hipotezie zerowej rozkład średniej jest normalny, to moglibyśmy powiedzieć, np. „OK, w mojej próbce dzieci karmionych kalarepą średnia inteligencja wynosi 110. Rozkład próbkowania ma średnią 100 i odchylenie standardowe 5, więc szansa na to, że taka *lub wyższa* średnia wylosuje się z rozkładu normalnego przez przypadek wynosi $\int_{110}^{\infty} \mathcal N(x;\ 100,\ 5^2) = 1 - pnorm(110,\ mean = 100,\ sd = 5) \approx 2,3\%$, a więc taki wynik jest mało prawdopodobny przy tej hipotezie zerowej". Skąd jednak mam wiedzieć, jaką średnią i odchylenie standardowe ma rozkład próbkowania, jak mam tylko jedną próbkę?
 
 ::: callout-tip
 ## Zadanie
 
-Szybka powtórka z rozkładów normalnych i rozgrzewka w myśleniu o rozkładach próbkowania.
+Szybka powtórka z rozkładów normalnych i rozgrzewka w myśleniu o rozkładach próbkowania. W każdym przykładzie przyjmij normalny rozkład średniej przy rozważanej hipotezie zerowej.
 
 1.  Twoja próbka 40 osób ma średnią 121. Rozkład próbkowania ma średnią 100 i odchylenie standardowe 7. Jaka jest szansa, że próbka 40 osób będzie miała średnią 121 lub wyższą?
 
@@ -179,13 +231,13 @@ Szybka powtórka z rozkładów normalnych i rozgrzewka w myśleniu o rozkładach
 
 ## Błąd standardowy
 
-Druga rzecz, na którą pozwala nam CLT to dokładnie rozwiązanie naszego problemu. Mówi nam ono, że możemy oszacować odchylenie standardowe rozkładu próbkowania dzieląc odchylenie standardowe naszej próbki przez pierwiastek z liczby osób badanych.
+Druga rzecz, która pozwala rozwiązać nasz problem, to wzór na odchylenie standardowe rozkładu próbkowania średniej. Przy niezależnych obserwacjach z tego samego rozkładu o skończonej wariancji dzielimy odchylenie standardowe zmiennej w populacji przez pierwiastek z liczby osób badanych. Ten wzór jest dokładny i nie wymaga normalności ani CTG.
 
 $$
 SE = \frac{SD}{\sqrt{N}}
 $$
 
-Rozszyfrujmy to sobie i podajmy przykład. Skrót $SE$ oznacza **błąd standardowy**. Jest to specjalna nazwa na **odchylenie standardowe rozkładu próbkowania**. Pozwala ona odróżnić łatwo odchylenie standardowe rozkładu zmiennej, od odchylenia standardowego rozkładu próbkowania. $N$ to liczba osób w próbce. $SD$ w tym wzorze odnosi się do odchylenia standardowego *zmiennej*. Jeśli znamy prawdziwe odchylenie standardowe w populacji, to możemy je wykorzystać, ale jeśli nie (czyli zazwyczaj), to możemy je zastąpić odchyleniem standardowym naszej próbki. Jeśli sięgniesz pamięcią do wzoru na odchylenie standardowe, to możesz sobie przypomnieć, że sumę odchyleń podniesionych do kwadratu dzieliliśmy przez $N - 1$ zamiast przez $N$. Jest to takie zabezpieczenie wbudowane we wzór na odchylenie standardowe, dzięki któremu odchylenie standardowe z próby bardziej przypomina to z populacji. Dzięki temu, że dzieliliśmy przez $N - 1$ zamiast przez $N$, teraz możemy podstawiać do wzoru na błąd standardowy odchylenie standardowe z próby.
+Rozszyfrujmy to sobie i podajmy przykład. Skrót $SE$ oznacza **błąd standardowy**. Jest to specjalna nazwa na **odchylenie standardowe rozkładu próbkowania**. Pozwala ona odróżnić łatwo odchylenie standardowe rozkładu zmiennej, od odchylenia standardowego rozkładu próbkowania. $N$ to liczba osób w próbce. $SD$ w tym wzorze odnosi się do odchylenia standardowego *zmiennej*. Jeśli znamy prawdziwe odchylenie standardowe w populacji, to możemy je wykorzystać, ale jeśli nie (czyli zazwyczaj), to możemy je zastąpić odchyleniem standardowym naszej próbki. Jeśli sięgniesz pamięcią do wzoru na odchylenie standardowe, to możesz sobie przypomnieć, że sumę odchyleń podniesionych do kwadratu dzieliliśmy przez $N - 1$ zamiast przez $N$. Dzielenie przez $N - 1$ sprawia, że wariancja z próby jest nieobciążonym oszacowaniem wariancji populacyjnej. Jej pierwiastek, czyli odchylenie standardowe z próby, pozwala oszacować błąd standardowy, ale takie oszacowanie nadal jest obarczone niepewnością.
 
 Zaczęliśmy od wylosowania próbki 100 mężczyzn i zmierzeniu ich inteligencji. Wiemy, że rozkład inteligencji ma średnią 100, a więc rozkład próbkowania również ma średnią 100. Odchylenie standardowe wynosi 15, co również wiemy dlatego, że wiemy odrobinę o inteligencji. Możemy więc oszacować błąd standardowy, czyli odchylenie standardowe rozkładu próbkowania.
 
@@ -193,26 +245,24 @@ $$
 SE = \frac{SD}{\sqrt{N}} = \frac{15}{\sqrt{100}} = 1,5
 $$
 
-Przypomnijmy, że wcześniej zrobiliśmy symulację rozkładu próbkowania, losując 100 próbek po 100 osób i licząc średnie. Tak uzyskany rozkład próbkowania miał odchylenie standardowe `r round(sd(iq_pop$iq), 2)`. Jak widzimy, było to w miarę rozsądne oszacowanie, ale jeśli zamiast 100 próbek pobralibyśmy 1000, 10 000 czy 100 000, to nasz symulowany rozkład miałby odchylenie standardowe coraz bliższe 1,5. Poniżej przedstawiam 3 wykresy gęstości, które pokazują, że im więcej próbek włączymy do symulacji, tym rozkład staje się bardziej normalny, a jego odchylenie standardowe bliższe prawdziwemu. Oznacza to, że symulacja symulacją, ale pod spodem czai się jakiś *prawdziwy* rozkład próbkowania, który ma średnią 100 (równą prawdziwej średniej z populacji) i odchylenie standardowe 1,5.
+Przypomnijmy, że wcześniej zrobiliśmy symulację rozkładu próbkowania, losując 100 próbek po 100 osób i licząc średnie. Tak uzyskany rozkład próbkowania miał odchylenie standardowe `r round(sd(iq_pop$iq), 2)`. Jak widzimy, było to w miarę rozsądne oszacowanie, ale jeśli zamiast 100 próbek pobralibyśmy 1000, 10 000 czy 100 000, to nasz symulowany rozkład miałby odchylenie standardowe coraz bliższe 1,5. Im więcej próbek włączymy do symulacji, tym dokładniej jej histogram odwzoruje prawdziwy rozkład próbkowania, a oszacowane odchylenie standardowe będzie na ogół bliższe prawdziwemu. Zwiększanie liczby powtórzeń symulacji nie zmienia samego rozkładu próbkowania. Oznacza to, że symulacja symulacją, ale pod spodem czai się jakiś *prawdziwy* rozkład próbkowania, który ma średnią 100 (równą prawdziwej średniej z populacji) i odchylenie standardowe 1,5.
 
 W naszym drugim przykładzie z dochodami nie znamy prawdziwego odchylenia standardowego, ale możemy je oszacować. Załóżmy, że wylosowałem 100 osób, zapytałem o dochody i wyszło mi odchylenie standardowe 1753,93. Możemy oszacować błąd standardowy:
 
 $$
-SE = \frac{1753,93}{\sqrt{100}} \approx 175
+\hat{SE} = \frac{1753,93}{\sqrt{100}} \approx 175
 $$
 
-Jeśli wiedziałbym, że prawdziwa średnia wynosi, powiedzmy 1600 (ze średnią poradzimy sobie potem), to próbki ze średnią między 1425 i 1775 mogę uznać za zupełnie typowe (ok. 67% przypadków według prawa trzech sigm), zaś próbki ze średnią między 1250 a 1950 za zupełnie typowe (ok. 95% przypadków według prawa trzech sigm). Jeśli dzieci karmione kalarepą osiągałyby średni dochód na poziomie 2000, to miałbym mniej niż 5% szans, że ten wynik jest przypadkowy.
+Jeśli wiedziałbym, że prawdziwa średnia wynosi, powiedzmy 1600 (ze średnią poradzimy sobie potem), to próbki ze średnią między 1425 i 1775 mogę uznać za zupełnie typowe (ok. 68% przypadków przy przybliżeniu normalnym), zaś próbki ze średnią między 1250 a 1950 za zupełnie typowe (ok. 95% przypadków przy przybliżeniu normalnym). Jeśli dzieci karmione kalarepą osiągałyby średni dochód na poziomie 2000, to przy hipotezie o średniej 1600 prawdopodobieństwo uzyskania średniej 2000 lub wyższej wynosiłoby w tym przybliżeniu mniej niż 5%. Nie jest to prawdopodobieństwo, że wynik jest przypadkowy albo że hipoteza zerowa jest prawdziwa.
 
-Z tego wzoru wynika też ważny wniosek -- **im większa próbka, tym mniejszy błąd standardowy**. Możemy to sobie przedstawić na wykresach. Poniżej nałożyłem na siebie 3 histogramy. Każdy histogram to
+Z tego wzoru wynika też ważny wniosek -- **im większa próbka, tym mniejszy błąd standardowy**. 95% próbek 100 osób będzie miało średnią inteligencję między 97 a 103 ($100 \pm 2 \times 1,5$), co policzyliśmy wyżej. Różnica między 100 a 101 będzie więc typowa, bo bardzo łatwo uzyskać ją przez przypadek. Jeśli jednak nasza próbka wyniesie nie 100, a 1000 osób, to błąd standardowy spadnie do $SE = \frac{15}{\sqrt{1000}} \approx 0,47$, a więc 95% próbek będzie miało średnią między 99,06 a 100,94. Tym samym średnia 101 staje się bardziej podejrzana. Ba! Staje się istotnie różna od 100, bo przy hipotezie o średniej 100 prawdopodobieństwo uzyskania takiego lub bardziej skrajnego wyniku w próbie 1000 osób jest mniejsze niż 5%[^2]. Te widełki obejmują około 95% możliwych średnich z prób przy założonej średniej populacji. **95% przedział ufności** dla nieznanej średniej populacji konstruujemy natomiast wokół zaobserwowanej średniej z próby: $\bar{x} \pm 1,96 \times SE$, jeśli znamy odchylenie standardowe populacji i rozkład średniej jest normalny (patrz [odwrotna dystrybuanta rozkładu normalnego](./gestosc-prawdopodobienstwa.qmd#sec-inverse-norm)). W powtarzanych badaniach około 95% tak skonstruowanych przedziałów obejmowałoby prawdziwą średnią. Gdy odchylenie standardowe szacujemy z próby, zamiast 1,96 stosujemy kwantyl rozkładu $t$, który poznamy za chwilę.
 
-95% próbek 100 osób będzie miało średnią inteligencję między 97 a 103 ($100 \pm 2 \times 1,5$), co policzyliśmy wyżej. Różnica między 100 a 101 będzie więc typowa, bo bardzo łatwo uzyskać ją przez przypadek. Jeśli jednak nasza próbka wyniesie nie 100, a 1000 osób, to błąd standardowy spadnie do $SE = \frac{15}{\sqrt{1000}} \approx 0,47$, a więc 95% próbek będzie miało średnią między 99,06 a 100,94. Tym samym średnia 101 staje się bardziej podejrzana. Ba! Staje się istotnie różna od 100, bo szansa na uzyskanie jej przez przypadek w próbie 1000 osób jest mniejsza niż 5%[^2]. Takie widełki nazywamy **95% przedziałem ufności**. Jeśli chcemy uzyskać dokładnie 95% pewności, będziemy mnożyć błąd standardowy nie przez 2, jak zrobiłem to wyżej, a przez 1,96 (patrz [odwrotna dystrybuanta rozkładu normalnego](./gestosc-prawdopodobienstwa.qmd#sec-inverse-norm)).
-
-[^2]: A dokładnie wynosi $\int_{101}^\infty \mathcal N(x;\ 100,\ 0,47) \approx 1,7\%$, jeśli chcemy znać szansę uzyskania średniej 101 lub większej albo $3,3\%$, jeśli nie zakładamy, w którą stronę mężczyźni różnią się od kobiet i liczymy w obie strony.
+[^2]: Przy hipotezie zerowej dokładnie wynosi to $\int_{101}^\infty \mathcal N(x;\ 100,\ (15/\sqrt{1000})^2)\,dx \approx 1,75\%$, jeśli chcemy znać szansę uzyskania średniej 101 lub większej, albo $3,5\%$, jeśli liczymy odchylenia od 100 w obie strony.
 
 ::: callout-tip
 ## Zadanie
 
-Pewna zmienna ma rozkład o średniej 5,5. 25 dzieci karmionych kalarepą uzyskuje średnią 5,8 z odchyleniem standardowym 0,5. Jaka jest szansa, że wynik jest przypadkowy? Załóż hipotezę prawostronną (tj. że średnia u dzieci jest 5,8 albo wyższa). Oblicz 95% przedział ufności dla średniej 5,5.
+Hipoteza zerowa mówi, że średnia pewnej zmiennej w populacji wynosi 5,5. 25 dzieci karmionych kalarepą uzyskuje średnią 5,8 z odchyleniem standardowym 0,5. Jaka jest wartość $p$? Załóż hipotezę prawostronną (tj. że średnia populacyjna u dzieci jest wyższa niż 5,5). Oblicz 95% przedział ufności dla nieznanej średniej populacyjnej na podstawie tej próby. Na razie użyj przybliżenia normalnego, zakładając, że jest wystarczająco dobre; dokładniejszy rachunek z rozkładem $t$ omówimy poniżej.
 :::
 
 ::: {.callout-note collapse="true"}
@@ -221,44 +271,46 @@ Pewna zmienna ma rozkład o średniej 5,5. 25 dzieci karmionych kalarepą uzysku
 ### Błąd standardowy
 
 $$
-SE = \frac{0,5}{\sqrt{25}} = \frac{0,5}{5} = 0,1
+\hat{SE} = \frac{0,5}{\sqrt{25}} = \frac{0,5}{5} = 0,1
 $$
 
 ### Wartość $p$
 
 $$
-1 - pnorm(5.8,\ 5.5,\ 0.1) = 0,13\%
+1 - pnorm(5.8,\ 5.5,\ 0.1) \approx 0,13\%
 $$
 
 ### Przedział ufności
 
 $$
-5,5 \pm 1,96 \times 0,1 = 5,5 \pm 0,196 = 5,304 \text{ i } 5,696
+5,8 \pm 1,96 \times 0,1 = 5,8 \pm 0,196 = 5,604 \text{ i } 5,996
 $$
+
+To przybliżenia traktujące oszacowany błąd standardowy jak znany. Przy normalnym rozkładzie zmiennej dokładny rachunek z rozkładem $t$ o 24 stopniach swobody daje $p \approx 0,31\%$ i przedział $5,8 \pm 2,064 \times 0,1$, czyli od 5,594 do 6,006.
 :::
 
 # Rozkłady *t*
 
-Centralne Twierdzenie Graniczne pozwala nam sobie wyobrazić rozkład możliwych średnich, jakie da nam próbka o określonej wielkości. Co więcej, pozwala liczyć prawdopodobieństwo. Załóżmy, że mam próbkę o odchyleniu standardowym 20 i średniej 10. Próbka liczyła 100 osób, więc błąd standardowy wynosi $SE = 20 \divsymbol \sqrt{100} = 2$. Oznacza to, że np. średnią 12 lub większą wylosuję z prawdopodobieństwem $\int^\infty_{12} \mathcal{N}(x;\ 10,\ 2^2) dx \approx 15,87\%$. Jeśli jednak moja próbka będzie miała 1000 osób (i takie samo odchylenie standardowe i średnią), to mój błąd standardowy wyniesie już $SE = 20 \divsymbol \sqrt{1000} \approx 0,63$. W tym momencie szansa na wylosowanie próbki o średniej 12 lub więcej spada praktycznie do zera (zachęcam do policzenia). Pojawia się jednak pewien problem. Cicho założyłem tutaj, że średnia 10 naprawdę jest średnią z populacji. Ale w rzeczywistości przecież nie musi tak być! Średnia z mojej konkretnej próbki przecież jest obarczona losowym błędem. Może być wyższa od prawdziwej albo niższa od prawdziwej. Skąd ja mam to wiedzieć? A jeśli nie znam prawdziwej średniej, to czy rzeczywiście mogę powiedzieć cokolwiek o rozkładzie próbkowania, skoro średnia rozkładu próbkowania jest równa średniej *z populacji*? Jest na to metoda.
+Centralne Twierdzenie Graniczne pozwala nam przybliżyć rozkład możliwych średnich, jakie da nam próbka o określonej wielkości. Co więcej, pozwala liczyć przybliżone prawdopodobieństwo. Załóżmy, że sprawdzamy hipotezę o średniej populacyjnej 10, a badamy 100 dzieci karmionych kalarepą. Gdyby odchylenie standardowe w populacji wynosiło 20, błąd standardowy wynosiłby $SE = 20 / \sqrt{100} = 2$. Średnią 12 lub większą uzyskalibyśmy przy tej hipotezie z prawdopodobieństwem $\int^\infty_{12} \mathcal{N}(x;\ 10,\ 2^2)\,dx \approx 15,87\%$, korzystając z przybliżenia normalnego. Przy 1000 osób błąd standardowy spadłby do $SE = 20 / \sqrt{1000} \approx 0,63$, a prawdopodobieństwo średniej 12 lub większej byłoby znacznie mniejsze (zachęcam do policzenia). Pojawia się jednak pewien problem. Zazwyczaj nie znamy prawdziwego odchylenia standardowego w populacji -- mamy tylko jego oszacowanie z próby. Jest na to metoda.
 
-Przypomnijmy sobie, że (jeśli próbka jest odpowiednio duża) rozkład próbkowania jest normalny. Rozkłady normalne opisują dwie liczby -- średnia i odchylenie standardowe. Odchylenie standardowe rozkładu próbkowania to błąd standardowy i, jak już mówiliśmy, możemy je policzyć dzieląc odchylenie standardowe *z populacji* przez pierwiastek z wielkości próby (\$SE = \frac{\sigma}{\sqrt{N}}\$). Odchylenia standardowego z populacji nie mamy, ale wzór na odchylenie standardowe z próby ma zabezpieczenie, które pozwala użyć odchylenia standardowego z próbki zamiast tego z populacji. Chodzi o tajemnicze dzielenie przez $N - 1$ zamiast przez $N$. Dzięki temu zabiegowi możemy *szacować* błąd standardowy za pomocą tego odchylenia standardowego, które rzeczywiście mamy. To, że coś jest *oszacowane*[^3] możemy oznaczyć daszkiem -- $\hat{SE} = \frac{\hat{\sigma}}{\sqrt{N}}$. Czyli odchylenie standardowe rozkładu próbkowania (błąd standardowy) mamy oszacowane, ale średnia takiego zabezpieczenia nie zawiera. Jeśli chcemy wykorzystać średnią z próby zamiast prawdziwej średniej z populacji musimy skorzystać z pewnej sztuczki -- zamiast zwykłego rozkładu normalnego wykorzystamy rozkład *t*.
+Przypomnijmy sobie, że przy odpowiednio dużej próbie i spełnieniu warunków CTG rozkład średniej jest w przybliżeniu normalny. Rozkłady normalne opisują dwie liczby -- średnia i odchylenie standardowe. Średnią przyjmujemy zgodnie z hipotezą zerową. Odchylenie standardowe rozkładu próbkowania to błąd standardowy: $SE = \frac{\sigma}{\sqrt{N}}$. Nieznane odchylenie standardowe populacji szacujemy z próby, uzyskując $\hat{SE} = \frac{SD}{\sqrt{N}}$. To, że coś jest *oszacowane*[^3], możemy oznaczyć daszkiem. Dzielenie przez $N - 1$ we wzorze na wariancję nie usuwa jednak niepewności tego oszacowania. Jeśli w mianowniku statystyki testowej wykorzystujemy oszacowany błąd standardowy zamiast prawdziwego, musimy uwzględnić dodatkową losowość -- do tego służy rozkład *t*.
 
 [^3]: Albo, w statystycznej nowomowie, *wyestymowane*.
 
-Rozkład[^4] *t* to trochę zmodyfikowany rozkład normalny, który bierze pod uwagę fakt, że nie mamy prawdziwej średniej z populacji, tylko obarczoną losowym błędem średnią z próby. Działa on (i wygląda) bardzo podobnie do rozkładu normalnego. Ma też swoją dystrybuantę, z której możemy korzystać identycznie, jak z dystrybuanty rozkładu normalnego. W R dostaniemy się do niej funkcją `pt()` albo możemy wykorzystać jakiś [kalkulator online](https://www.danielsoper.com/statcalc/calculator.aspx?id=41). Większość kalkulatorów dystrybuanty rozkładu *t* wymaga jednak wartości *wystandaryzowanych*, czyli przemielonych wzorem $Z(x) = \frac{x - M_x}{SD}$.
+Rozkład[^4] *t* przypomina rozkład normalny, ale ma cięższe ogony. Bierze pod uwagę fakt, że nie mamy prawdziwego odchylenia standardowego populacji, tylko jego oszacowanie z próby. Przy niezależnych obserwacjach z populacji normalnej statystyka $t = \frac{\bar{x} - \mu_0}{SD/\sqrt{N}}$ ma przy hipotezie zerowej dokładnie rozkład *t*-Studenta. Przy danych nienormalnych możemy korzystać z przybliżenia, jeśli próba jest odpowiednio duża i spełnione są pozostałe założenia. Rozkład *t* ma swoją dystrybuantę, z której możemy korzystać podobnie jak z dystrybuanty rozkładu normalnego. W R dostaniemy się do niej funkcją `pt()` albo możemy wykorzystać jakiś [kalkulator online](https://www.danielsoper.com/statcalc/calculator.aspx?id=41). Kalkulatory te wymagają wartości statystyki $t$, czyli różnicy między średnią z próby a wartością z hipotezy zerowej, podzielonej przez oszacowany błąd standardowy.
 
 [^4]: W rzeczywistości rozkłady *t* to cała grupa nieco różniących się od siebie w szczegółach rozkładów, z których najbardziej znany jest rozkład *t*-Studenta. *Student* to pseudonim Williama S. Gosseta, który opracował ten rozkład, żeby móc testować partie piwa Guinness. Gosset chciał, żeby różnice między piwem wzorcowym a każdą partią wypuszczaną na rynek *nie były* istotne statystycznie.
 
-Do tego, rozkład *t*, poza średnią i odchyleniem standardowym wykorzystuje jeszcze trzeci parametr -- stopnie swobody. Pomyślmy, zadaniem rozkładu *t* jest wziąć pod uwagę, że nasza średnia z próby ma w sobie jakiś błąd. Ale wydaje się naturalne, że średnia z próby 10 osób pewnie ma większy błąd niż średnia z próby 100 osób. Rozkład *t* musi więc wiedzieć, jak duża jest nasza próba, żeby określić, jak dużą poprawkę zastosować. Stopnie swobody to złożony matematyczny potworek, który spotkaliśmy już przy wzorze na odchylenie standardowe. Nie będę tłumaczył co to jest i dlaczego, ale żeby dostać liczbę stopni swobody dla rozkładu *t*, od wielkości naszej próby odejmujemy 1. Próba 100 osób ma więc 99 stopni swobody. W praktyce jest to okienko w kalkulatorze, które trzeba uzupełnić.
+Standardowy rozkład *t* opisuje parametr zwany **stopniami swobody**. Pomyślmy, zadaniem rozkładu *t* jest wziąć pod uwagę niepewność oszacowania odchylenia standardowego. Oszacowanie z próby 10 osób jest zwykle mniej precyzyjne niż z próby 100 osób. Rozkład *t* musi więc wiedzieć, jak duża jest nasza próba, żeby określić, jak dużą poprawkę zastosować. Stopnie swobody to złożony matematyczny potworek, który spotkaliśmy już przy wzorze na odchylenie standardowe. Nie będę tłumaczył co to jest i dlaczego, ale **w teście jednopróbkowym** od wielkości naszej próby odejmujemy 1. Próba 100 osób ma więc 99 stopni swobody. W praktyce jest to okienko w kalkulatorze, które trzeba uzupełnić.
 
-Przeróbmy to na przykładzie. Weźmy naszą poprzednią próbkę 100 osób o średniej 10 i odchyleniu standardowym 20. Błąd standardowy wynosi 2 na mocy Centralnego Twierdzenia Granicznego. Załóżmy, że zmierzyliśmy to samo u dzieci karmionych kalarepą i wyszła nam średnia 12. Jaka jest szansa, że to przypadek? Rozwiązywaliśmy już takie problemy za pomocą rozkładu normalnego, teraz jednak robimy to porządnie i wykorzystujemy rozkład *t*. Chcemy sprawdzić prawdopodobieństwo przypadkowego uzyskania średniej 12 lub więcej. Najpierw standaryzuję nasz wynik 12 i wychodzi $t = \frac{12 - 10}{2} = 1$. Liczba stopni swobody to $100 - 1 = 99$. Następnie liczę $\int^\infty_1 t(x;\ 99) dx$. W R załatwi to komenda `pt(1, 99, lower.tail = FALSE)` albo `1 - pt(1, 99)`. Uzyskana wartość to $p = 15,99\%$, czyli odrobinę wyższa niż ta z rozkładu normalnego. To zawyżenie prawdopodobieństwa to właśnie poprawka na fakt, że nie mamy średniej *z populacji*, tylko z próby. Jak widać różnica nie jest duża, a to wynika z faktu, że jeśli nasza próbka to jakieś 100 lub więcej osób, to rozkłady *t* stają się naprawdę bardzo podobne do rozkładów normalnych.
+Przeróbmy to na przykładzie. Weźmy próbkę 100 dzieci karmionych kalarepą o średniej 12 i odchyleniu standardowym 20. Oszacowany błąd standardowy wynosi 2. Sprawdzamy hipotezę zerową o średniej populacyjnej 10. Jakie jest przy niej prawdopodobieństwo uzyskania takiej lub wyższej średniej? Rozwiązywaliśmy już takie problemy za pomocą rozkładu normalnego, teraz jednak uwzględniamy niepewność oszacowania odchylenia standardowego i wykorzystujemy rozkład *t*. Najpierw standaryzuję różnicę: $t = \frac{12 - 10}{2} = 1$. Liczba stopni swobody to $100 - 1 = 99$. Następnie liczę $\int^\infty_1 t(x;\ 99)\,dx$. W R załatwi to komenda `pt(1, 99, lower.tail = FALSE)` albo `1 - pt(1, 99)`. Uzyskana wartość to $p = 15,99\%$, czyli odrobinę wyższa niż ta z rozkładu normalnego. Ta różnica wynika z wykorzystania odchylenia standardowego z próby zamiast z populacji. Przy 99 stopniach swobody rozkład *t* jest już bardzo podobny do standardowego rozkładu normalnego.
 
 ::: callout-note
-## Test *t*-Studenta
+## Test *t*-Studenta dla jednej próby
 
-1.  Policz błąd standardowy.
+1.  Policz oszacowany błąd standardowy średniej.
 
-2.  Wystandaryzuj różnicę. Załóż, że prawdziwa jest średnia grupy kontrolnej.
+2.  Wystandaryzuj różnicę między średnią z próby a wartością $\mu_0$ z hipotezy zerowej.
 
 3.  Policz liczbę stopni swobody $N-1$.
 
@@ -268,10 +320,29 @@ Przeróbmy to na przykładzie. Weźmy naszą poprzednią próbkę 100 osób o ś
 
     2.  $\int^{\infty}_{x} t(x;\ df) dx$ -- dla hipotezy kierunkowej zakładającej wzrost.
 
-    3.  $1 - \int_{-x}^{x} t(x;\ df) dx$ albo inaczej $\int_{-\infty}^{-x} t(x;\ df) dx + 1 - \int_{x}^{\infty} t(x;\ df) dx$ -- dla hipotezy bezkierunkowej.
+    3.  $1 - \int_{-|x|}^{|x|} t(x;\ df) dx$ albo inaczej $\int_{-\infty}^{-|x|} t(x;\ df) dx + 1 - \int_{|x|}^{\infty} t(x;\ df) dx$ -- dla hipotezy bezkierunkowej.
 :::
 
-W rzeczywistości jest kilka rzeczy, które można zrobić lepiej, żeby odpowiedzieć na to pytanie. Związane jest to z tym, jak się modeluje różnice. Jeśli średnia dzieci karmionych kalarepą się różni, ale odchylenie standardowe jest takie samo, to możemy policzyć to tak, jak pokazałem wyżej. Nazywa się to testem *t* Studenta. Jeśli jednak nie zakładamy, że odchylenia standardowe tych dwóch populacji (ogólnej i dzieci karmionych kalarepą) są identyczne, powinniśmy **dodać wariancje** tych dwóch rozkładów, żeby uzyskać wariancję rozkładu próbkowania *różnicy*. Innymi słowy tworzymy tutaj trzeci rozkład, który nie pokazuje nam średniej w populacji ogólnej, ani średniej w populacji dzieci karmionych kalarepą, ale mówi nam, jakie różnice między próbkami z tych dwóch populacji będziemy spotykać. Różnica tutaj wyniosła 2 (na plusie). Rozkład ten może nam powiedzieć, jak łatwo dostać różnicę 2 przez przypadek albo innymi słowy jak często będziemy spotykali taką lub większą różnicę. Tutaj i dzieci karmione standardowo, i dzieci karmione kalarepą wykazały błąd standardowy 2. Wariancja to odchylenie standardowe do kwadratu, więc $2^2 + 2^2 = 8$. Jeśli chcemy mieć znowu błąd standardowy (ale tym razem *różnicy*, nie żadnej średniej), wyciągamy z tego pierwiastek $\sqrt{8} = 2 \sqrt{2} \approx 2,83$. Różnicę 2 dzielimy więc przez nowo uzyskane odchylenie $\frac{2}{2,83} = 0,71$. I dopiero tę wartość wrzucamy do dystrybuanty $p = 1 - pt(0.71,\ 99) \approx 24\%$. W takiej wersji (niezakładającej różnych wariancji) ten test nazywa się testem *t* Welcha. W R jest to domyślny test *t*, przeprowadzany jeśli nie ustawimy tego inaczej.
+W poprzednim przykładzie 10 było ustaloną wartością z hipotezy zerowej, a nie średnią z drugiej próby. Jeśli porównujemy **dwie niezależne grupy**, musimy uwzględnić niepewność obu średnich. Dotyczy to zarówno równych, jak i różnych wariancji populacji. Tworzymy tutaj trzeci rozkład, który nie pokazuje nam średniej w populacji ogólnej ani średniej w populacji dzieci karmionych kalarepą, ale mówi nam, jakie różnice między próbkami z tych dwóch populacji będziemy spotykać. Przy hipotezie zerowej o równych średnich populacyjnych ten rozkład ma średnią 0. Różnica w naszych próbach wyniosła 2 (na plusie).
+
+Jeśli zakładamy równe wariancje populacji, korzystamy z **testu *t*-Studenta dla dwóch niezależnych prób**. Najpierw wyznaczamy wspólne oszacowanie wariancji:
+
+$$
+s_p^2 = \frac{(n_1-1)SD_1^2 + (n_2-1)SD_2^2}{n_1+n_2-2}.
+$$
+
+Potem liczymy błąd standardowy różnicy $SE_{\Delta} = s_p\sqrt{1/n_1+1/n_2}$ i statystykę $t = \frac{\bar{x}_1-\bar{x}_2}{SE_{\Delta}}$. Liczba stopni swobody wynosi $n_1+n_2-2$.
+
+Jeśli nie zakładamy równych wariancji, korzystamy z **testu *t*-Welcha**. Wariancję rozkładu różnicy szacujemy, dodając kwadraty błędów standardowych obu średnich. Załóżmy, że i dzieci karmione standardowo, i dzieci karmione kalarepą zbadaliśmy w grupach po 100 osób, a w obu grupach odchylenie standardowe wyniosło 20. Obie średnie mają więc oszacowany błąd standardowy 2. Wariancja to odchylenie standardowe do kwadratu, więc $2^2 + 2^2 = 8$. Jeśli chcemy mieć znowu błąd standardowy (ale tym razem *różnicy*, nie żadnej średniej), wyciągamy z tego pierwiastek $\sqrt{8} = 2\sqrt{2} \approx 2,83$. Różnicę 2 dzielimy więc przez nowo uzyskany błąd standardowy $\frac{2}{2,83} \approx 0,71$.
+
+Stopnie swobody liczymy z przybliżenia **Welcha--Satterthwaite'a**:
+
+$$
+df = \frac{\left(\frac{SD_1^2}{n_1}+\frac{SD_2^2}{n_2}\right)^2}
+{\frac{\left(SD_1^2/n_1\right)^2}{n_1-1}+\frac{\left(SD_2^2/n_2\right)^2}{n_2-1}}.
+$$
+
+Przy równolicznych próbkach **i podobnych wariancjach** stopnie swobody wynoszą z grubsza $N-2$, gdzie $N=n_1+n_2$ to łączna liczba osób. Przy równych liczebnościach i równych wariancjach z prób otrzymujemy dokładnie $N-2$. Sama równość liczebności nie wystarcza -- przy bardzo różnych wariancjach stopni swobody będzie wyraźnie mniej. W naszym przykładzie jest ich $100+100-2=198$, więc $p = 1 - pt(2/sqrt(8),\ 198) \approx 24\%$. Tutaj test Studenta dałby identyczny wynik. Test Welcha nie wymaga założenia równości wariancji; w R jest to domyślny test *t* dla dwóch niezależnych prób.
 
 ::: callout-note
 ## Test *t*-Welcha
@@ -282,9 +353,9 @@ W rzeczywistości jest kilka rzeczy, które można zrobić lepiej, żeby odpowie
 
 3.  Wyciągnij z otrzymanej wariancji pierwiastek, żeby uzyskać błąd standardowy rozkładu różnic.
 
-4.  Wystandaryzuj różnicę. Załóż, że prawdziwa jest średnia grupy kontrolnej. Wykorzystaj błąd standardowy rozkładu różnic.
+4.  Wystandaryzuj różnicę między średnimi, zakładając w hipotezie zerowej równość średnich populacyjnych. Wykorzystaj błąd standardowy rozkładu różnic.
 
-5.  Policz liczbę stopni swobody $N-1$.
+5.  Policz liczbę stopni swobody z powyższego wzoru Welcha--Satterthwaite'a.
 
 6.  Policz wartość dystrybuanty rozkładu *t*:
 
@@ -292,15 +363,15 @@ W rzeczywistości jest kilka rzeczy, które można zrobić lepiej, żeby odpowie
 
     2.  $\int^{\infty}_{x} t(x;\ df) dx$ -- dla hipotezy kierunkowej zakładającej wzrost.
 
-    3.  $1 - \int_{-x}^{x} t(x;\ df) dx$ albo inaczej $\int_{-\infty}^{-x} t(x;\ df) dx + 1 - \int_{x}^{\infty} t(x;\ df) dx$ -- dla hipotezy bezkierunkowej.
+    3.  $1 - \int_{-|x|}^{|x|} t(x;\ df) dx$ albo inaczej $\int_{-\infty}^{-|x|} t(x;\ df) dx + 1 - \int_{|x|}^{\infty} t(x;\ df) dx$ -- dla hipotezy bezkierunkowej.
 :::
 
 ::: callout-tip
 ## Zadanie
 
-Załóżmy, że badamy, jak soplówka jeżowata (taki grzyb) wpływa na funkcje poznawcze. Wykorzystamy sobie prawdziwe dane z badań Moriego i współpracowników [-@mori2009]. Zbadaliśmy 2 grupy po 15 osób. Przez 16 tygodni jednej grupie podawaliśmy placebo, a drugiej soplówkę jeżowatą. Na koniec zmierzyliśmy ich funkcje poznawcze standaryzowanym testem. Po 16 tygodniach, w grupie eksperymentalnej średni wynik w teście funkcji poznawczych wyniósł $M_{eksp.} = 27,4$ ($SD_{eksp.} = 1,6$), zaś w grupie kontrolnej $M_{kont.} = 25,4$ ($SD_{kont.} = 4$). Czy różnica jest istotna statystycznie (czyli czy prawdopodobieństwo uzyskania tego wyniku przypadkowo wynosi mniej niż 5%)?
+Załóżmy, że badamy, jak soplówka jeżowata (taki grzyb) wpływa na funkcje poznawcze. Wykorzystamy sobie prawdziwe dane z badań Moriego i współpracowników [-@mori2009]. Zbadaliśmy 2 grupy po 15 osób. Przez 16 tygodni jednej grupie podawaliśmy placebo, a drugiej soplówkę jeżowatą. Na koniec zmierzyliśmy ich funkcje poznawcze standaryzowanym testem. Po 16 tygodniach, w grupie eksperymentalnej średni wynik w teście funkcji poznawczych wyniósł $M_{eksp.} = 27,4$ ($SD_{eksp.} = 1,6$), zaś w grupie kontrolnej $M_{kont.} = 25,4$ ($SD_{kont.} = 4$). Czy różnica jest istotna statystycznie (czyli czy przy hipotezie o równych średnich populacyjnych prawdopodobieństwo uzyskania takiego lub bardziej skrajnego wyniku wynosi mniej niż 5%)?
 
-1.  Policz z założeniem (ewidentnie fałszywym), że grupy mają identyczną wariancję równą wariancji grupy kontrolnej.
+1.  Policz z założeniem, że populacje mają identyczną wariancję, mimo wyraźnej różnicy wariancji w próbach. Oszacuj wspólną wariancję na podstawie obu prób.
 
     1.  Załóż hipotezę kierunkową, że soplówka jeżowata *zwiększa* skuteczność w testach funkcji poznawczych (różnica taka jaka jest lub wyższa).
 
@@ -318,29 +389,45 @@ Załóżmy, że badamy, jak soplówka jeżowata (taki grzyb) wpływa na funkcje 
 
 ### 1.
 
-Najpierw liczę błąd standardowy: $$
-SE = \frac{4}{\sqrt{15}} = 1,03
+Najpierw liczę wspólną wariancję:
+
+$$
+s_p^2 = \frac{14 \times 4^2 + 14 \times 1,6^2}{28} = 9,28.
 $$
 
-Potem standaryzuję różnicę zakładając, że średnia z grupy kontrolnej jest prawdziwa: $$
-t = \frac{27,4 - 25,4}{1,03} = 1,94
+Potem liczę błąd standardowy różnicy:
+
 $$
+SE_{\Delta} = \sqrt{9,28}\sqrt{\frac{1}{15}+\frac{1}{15}} \approx 1,112.
+$$
+
+Standaryzuję różnicę, zakładając w hipotezie zerowej równość średnich populacyjnych:
+
+$$
+t = \frac{27,4 - 25,4}{SE_{\Delta}} \approx 1,798.
+$$
+
+Liczba stopni swobody wynosi $15+15-2=28$.
 
 #### 1.1
 
-Liczę wartość $p$ dla hipotezy kierunkowej: $$
-\int_{1,94}^{\infty} t(x;\ 14) dx = 1 - pt(1.94,\ 14) \approx 3,6\%
+Liczę wartość $p$ dla hipotezy kierunkowej:
+
+$$
+\int_{1,798}^{\infty} t(x;\ 28)\,dx = 1 - pt(1.798,\ 28) \approx 4,15\%.
 $$
 
-3,6\% to mniej niż 5\%, a więc różnica jest istotna statystycznie.
+4,15\% to mniej niż 5\%, a więc różnica jest istotna statystycznie.
 
 #### 1.2
 
-Liczę wartość $p$ dla hipotezy bezkierunkowej: $$
-1 - \int_{-1,94}^{1,94} t(x;\ 14) dx = pt(-1.94,\ 14) + 1 - pt(1.94,\ 14) \approx 7,3\%
+Liczę wartość $p$ dla hipotezy bezkierunkowej:
+
+$$
+2 \times (1 - pt(1.798,\ 28)) \approx 8,30\%.
 $$
 
-7,3\% to więcej niż 5\%, więc różnica nie jest istotna statystycznie.
+8,30\% to więcej niż 5\%, więc różnica nie jest istotna statystycznie.
 
 ### 2.
 
@@ -355,19 +442,26 @@ $$
 
 Dodaję wariancje, żeby uzyskać wariancję rozkładu różnic:
 $$
-1,03^2 + 0,41^2 = 1,229
+\frac{4^2}{15}+\frac{1,6^2}{15} \approx 1,237
 $$
 
 Wyciągam pierwiastek z wariancji, żeby uzyskać błąd standardowy rozkładu różnic:
 
 $$
-\sqrt{1,229} = 1,11
+\sqrt{1,237} \approx 1,112
 $$
 
-Standaryzuję wartość różnicy zakładając, że średnia z grupy kontrolnej jest prawdziwa:
+Standaryzuję wartość różnicy, zakładając w hipotezie zerowej równość średnich populacyjnych:
 
 $$
-t = \frac{27,4 - 25,4}{1,11} = 1,8
+t = \frac{27,4 - 25,4}{SE_{\Delta}} \approx 1,798
+$$
+
+Stopnie swobody ze wzoru Welcha--Satterthwaite'a wynoszą:
+
+$$
+df = \frac{(16/15+2,56/15)^2}
+{\frac{(16/15)^2}{14}+\frac{(2,56/15)^2}{14}} \approx 18,37.
 $$
 
 #### 2.1
@@ -375,33 +469,33 @@ $$
 Liczę wartość $p$ dla hipotezy kierunkowej:
 
 $$
-\int_{1,8}^{\infty} t(x;\ 14) dx = 1 - pt(1.8,\ 14) \approx 4,8\%
+\int_{1,798}^{\infty} t(x;\ 18,37)\,dx = 1 - pt(1.798,\ 18.37) \approx 4,43\%
 $$
 
-4,8\% to mniej niż 5\%, czyli różnica jest istotna statystycznie.
+4,43\% to mniej niż 5\%, czyli różnica jest istotna statystycznie.
 
 #### 2.2
 
 Liczę wartość $p$ dla hipotezy bezkierunkowej:
 $$
-1 - \int_{-1,8}^{1,8} t(x;\ 14) dx = pt(-1.8,\ 14) + 1 - pt(1.8,\ 14) \approx 9,3\%
+2 \times (1 - pt(1.798,\ 18.37)) \approx 8,86\%
 $$
 
-9,3\% to więcej niż 5\%, czyli różnica jest nieistotna statystycznie.
+8,86\% to więcej niż 5\%, czyli różnica jest nieistotna statystycznie.
 :::
 
 # Podsumowanie
 
 1.  Rozkład zmiennej w próbie mówi nam tylko o danej konkretnej próbie. Rozkład próbkowania mówi nam, jak wyglądają średnie we wszystkich możliwych próbach i jak łatwo jest je uzyskać.
 
-2.  Jak mówi Centralne Twierdzenie Graniczne, rozkład próbkowania jest normalny, jeśli próba liczy minimum 15 (według niektórych 30) obserwacji. Średnia tego rozkładu równa jest prawdziwej średniej z populacji.
+2.  Jak mówi Centralne Twierdzenie Graniczne, przy niezależnych obserwacjach z tego samego rozkładu o skończonej, dodatniej wariancji rozkład średniej jest dla dużych prób w przybliżeniu normalny. Nie ma uniwersalnego progu liczebności. Średnia tego rozkładu równa jest prawdziwej średniej z populacji.
 
-3.  Rozkład próbkowania ma swoje odchylenie standardowe zwane błędem standardowym, liczone ze wzoru z Centralnego Twierdzenia Granicznego $$SE = \frac{\sigma}{\sqrt{N}}$$
+3.  Rozkład próbkowania średniej ma swoje odchylenie standardowe zwane błędem standardowym, przy niezależnych obserwacjach z tego samego rozkładu o skończonej wariancji liczone ze wzoru $$SE = \frac{\sigma}{\sqrt{N}}$$
 
 4.  Z tego wzoru wynika, że im większa próba, tym błąd standardowy mniejszy, a więc średnia z próby bardziej wiarygodna.
 
-5.  Wzór na odchylenie standardowe ma w sobie poprawkę, która pozwala używać go zamiast odchylenia standardowego z populacji. Jeśli chcemy użyć średniej z próby jako średniej z populacji, musimy wykorzystać rozkład *t*.
+5.  Jeśli nie znamy odchylenia standardowego populacji, szacujemy je na podstawie próby. Rozkład *t* uwzględnia niepewność tego oszacowania w statystyce testowej. W teście dla jednej próby liczymy $t = \frac{\bar{x}-\mu_0}{SD/\sqrt{N}}$ i stosujemy $N-1$ stopni swobody. Dokładny rozkład *t* otrzymujemy przy niezależnych obserwacjach z populacji normalnej.
 
-6.  Istotność statystyczną, gdy wariancje są równe, możemy sprawdzić testem *t*-Studenta. Wartość *t* do dystrybuanty liczymy ze wzoru $$t = \frac{x - M}{SE}$$
+6.  Istotność statystyczną różnicy między dwiema niezależnymi grupami, gdy wariancje populacji są równe, możemy sprawdzić testem *t*-Studenta. Wartość *t* do dystrybuanty liczymy ze wzoru $$t = \frac{\bar{x}_1-\bar{x}_2}{s_p\sqrt{1/n_1+1/n_2}}$$ i stosujemy $n_1+n_2-2$ stopni swobody. Wspólną wariancję $s_p^2$ szacujemy na podstawie obu prób.
 
-7.  Istotność statystyczną, bez założenia jednorodności wariancji, możemy sprawdzić testem *t*-Welcha. Wartość *t* do dystrybuanty liczymy ze wzoru $$t = \frac{x - M}{\sqrt{SE_1^2 + SE_2^2}} = \frac{x - M}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}}$$
+7.  Istotność statystyczną różnicy między dwiema niezależnymi grupami, bez założenia jednorodności wariancji, możemy sprawdzić testem *t*-Welcha. Wartość *t* do dystrybuanty liczymy ze wzoru $$t = \frac{\bar{x}_1-\bar{x}_2}{\sqrt{SE_1^2 + SE_2^2}} = \frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{SD_1^2}{n_1}+\frac{SD_2^2}{n_2}}}$$ i stosujemy stopnie swobody z przybliżenia Welcha--Satterthwaite'a. Przy równolicznych próbkach i podobnych wariancjach wynoszą one z grubsza $N-2$, gdzie $N=n_1+n_2$.

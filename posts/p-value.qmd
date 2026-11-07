@@ -24,10 +24,7 @@ knitr::opts_chunk$set(
 library(kableExtra)
 library(tidyverse)
 
-source(
-  "https://raw.githubusercontent.com/koundy/ggplot_theme_Publication/master/ggplot_theme_Publication-2.R",
-  echo = FALSE
-)
+source("../styles/ggplot_theme_Publication-2.R", echo = FALSE)
 
 theme_Publication <- theme_Publication() %+replace%
   theme(panel.background = element_rect(fill = "white"))
@@ -67,6 +64,7 @@ Zaczynamy zauważać, że wyniki za każdym razem były trochę inne, ale zawsze
 
 ```{r}
 #| label: fig-iq-means-histogram
+#| classes: light-mode
 #| fig-cap: Im wyższy słupek, tym średnia z tego zakresu pojawiała się częściej w naszym zbiorze 1000 średnich. Jak widać, średnie koncentrują się dookoła wyniku 100 IQ.
 
 iq_means %>%
@@ -74,6 +72,17 @@ iq_means %>%
   geom_histogram(bins = 25) +
   labs(y = "Ile razy się pojawiło") +
   theme_Publication
+```
+```{r}
+#| label: fig-iq-means-histogram-dark
+#| classes: dark-mode
+#| fig-cap: Im wyższy słupek, tym średnia z tego zakresu pojawiała się częściej w naszym zbiorze 1000 średnich. Jak widać, średnie koncentrują się dookoła wyniku 100 IQ.
+
+iq_means %>%
+  ggplot(aes(IQ)) +
+  geom_histogram(bins = 25, colour = "white") +
+  labs(y = "Ile razy się pojawiło") +
+  theme_dark_blue()
 ```
 
 Wpadamy więc na pomysł -- skoro średnie koncentrują się dookoła wyniku 100, to może prawdziwa średnia inteligencja w populacji wynosi właśnie 100? To jest bardzo rozsądne założenie. Zwłaszcza, że jeśli policzymy jedną, zbiorczą średnią dla 100 000 naszych badanych, to rzeczywiście wychodzi 100.
@@ -103,6 +112,7 @@ Podstawą do różnicy była tu średnia inteligencja kobiet, więc ujemna róż
 
 ```{r}
 #| label: fig-iq-diffs-histogram
+#| classes: light-mode
 #| fig-cap: Różnice w średnich bywały większe lub mniejsze, ale oscylowały wokół zera.
 
 iq_diffs %>%
@@ -110,6 +120,17 @@ iq_diffs %>%
   geom_histogram(bins = 25) +
   labs(x = "Różnica w średniej inteligencji", y = "Ile razy się pojawiła") +
   theme_Publication
+```
+```{r}
+#| label: fig-iq-diffs-histogram-dark
+#| classes: dark-mode
+#| fig-cap: Różnice w średnich bywały większe lub mniejsze, ale oscylowały wokół zera.
+
+iq_diffs %>%
+  ggplot(aes(diff)) +
+  geom_histogram(bins = 25, colour = "white") +
+  labs(x = "Różnica w średniej inteligencji", y = "Ile razy się pojawiła") +
+  theme_dark_blue()
 ```
 
 Jak widzimy, różnice oscylują wokół zera. Skoro w większości eksperymentów różnica wyniosła zero albo prawie zero, to najprawdopodobniej to jest właśnie odpowiedź -- prawdziwa różnica wynosi właśnie zero! Ale pomimo tego łatwo jest losowo uzyskać różnicę rzędu 1 punktu. Trudniej jest uzyskać różnicę rzędu 5 punktów. Przypadkowa różnica rzędu 10 punktów jest prawie niemożliwa do uzyskania.
@@ -222,6 +243,7 @@ Zobaczmy to na przykładzie. Pokazywałem wcześniej (na rysunku [-@fig-iq-means
 
 ```{r}
 #| label: fig-iq-stderr-histogram
+#| classes: light-mode
 #| fig-cap: Jak często pojawiały się dane średnie, gdy w jednym rzucie badaliśmy 100 osób (mała próba) albo 1000 osób (duża próba).
 
 iq_stderr %>%
@@ -230,6 +252,19 @@ iq_stderr %>%
   facet_wrap("proba") +
   labs(x = "średnie IQ", y = "Ile razy się pojawia") +
   theme_Publication +
+  theme(panel.spacing.x = unit(10, "mm"))
+```
+```{r}
+#| label: fig-iq-stderr-histogram-dark
+#| classes: dark-mode
+#| fig-cap: Jak często pojawiały się dane średnie, gdy w jednym rzucie badaliśmy 100 osób (mała próba) albo 1000 osób (duża próba).
+
+iq_stderr %>%
+  ggplot(aes(IQ)) +
+  geom_histogram(bins = 25, colour = "white") +
+  facet_wrap("proba") +
+  labs(x = "średnie IQ", y = "Ile razy się pojawia") +
+  theme_dark_blue() +
   theme(panel.spacing.x = unit(10, "mm"))
 ```
 
