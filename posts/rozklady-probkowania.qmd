@@ -92,6 +92,7 @@ Próbka jest jednak dobra wtedy, kiedy jest losowa. Jeśli chcemy sprawdzić, il
 Załóżmy, że mamy losową próbę 100 mężczyzn i wszystkim mierzymy inteligencję. Niektórzy z tych mężczyzn mają współczynniki inteligencji 100, inni 95, jeszcze inni 105 itd. Wiedząc nieco o skali inteligencji nawet intuicyjnie będziemy czuć, że więcej ludzi będzie miało raczej przeciętną inteligencję, czyli około 100, niż 130 (co jest progiem przyjęcia do Mensy). Częstość poszczególnych wyników możemy przedstawić na histogramie (a potem dorzucić wykres gęstości, o czym mówiliśmy w [tekście o gęstości prawdopodobieństwa](./gestosc-prawdopodobienstwa.qmd)).
 
 ```{r}
+#| label: iq-sample-hist
 #| classes: light-mode
 ggplot(iq, aes(iq)) +
     geom_histogram(binwidth = 5, fill = "white", colour = "gray60") +
@@ -102,6 +103,7 @@ ggplot(iq, aes(iq)) +
     theme_main()
 ```
 ```{r}
+#| label: iq-sample-hist-dark
 #| classes: dark-mode
 ggplot(iq, aes(iq)) +
     geom_histogram(binwidth = 5, fill = "#282C33", colour = "gray60") +
@@ -123,6 +125,7 @@ Losowanie osób do naszego badania możemy sobie wyobrazić jako **losowanie z r
 Wiemy jednak, że każda próbka może trochę różnić się średnią. W niektórych próbkach wyjdzie nam 102, w innych 98. Możemy jednak intuicyjnie czuć, że znacznie trudniej przez przypadek zebrać próbkę o średniej 130 albo 70. Raczej średnie każdej jednej próbki będą krążyć dookoła prawdziwej średniej, czyli w tym wypadku 100. Zazwyczaj nie wiemy, jaka jest prawdziwa średnia z populacji, ale jak sobie z tym poradzić powiemy później. Średnie bliżej 100 powinny pojawiać się częściej, a średnie dalej od 100 rzadziej, możemy więc zrobić 100 próbek, każda po 100 osób i zobaczyć, jak często losują nam się jakie średnie. Możemy to nanieść na histogram.
 
 ```{r}
+#| label: iq-sampling-hist
 #| classes: light-mode
 iq_pop <- tibble(iq = map_dbl(1:100, \(x) mean(rnorm(100, 100, 15))))
 
@@ -134,6 +137,7 @@ ggplot(iq_pop, aes(iq)) +
     theme_main()
 ```
 ```{r}
+#| label: iq-sampling-hist-dark
 #| classes: dark-mode
 ggplot(iq_pop, aes(iq)) +
     geom_histogram(binwidth = 1, fill = "#282C33", colour = "gray60") +
@@ -162,6 +166,7 @@ Twierdzenie to mówi nam o piekielnie ważnej rzeczy. Jeśli próba jest odpowie
 [^1]: Jeśli rozkład zmiennej w populacji jest normalny, rozkład średniej z niezależnych obserwacji jest dokładnie normalny nawet dla małych prób. I tak na przykład średnia z 10 wyników w teście inteligencji będzie miała normalny rozkład próbkowania, jeśli przyjmiemy normalny rozkład inteligencji w populacji. Dla innych rozkładów CTG daje przybliżenie, a nie gwarancję dokładnej normalności przy określonej liczebności. Bez założenia skończonej wariancji ta wersja CTG może w ogóle nie działać.
 
 ```{r}
+#| label: income-hist
 #| classes: light-mode
 income_pop <- tibble(income = rexp(10000, 0.0007))
 
@@ -171,6 +176,7 @@ ggplot(income_pop, aes(income)) +
     theme_main()
 ```
 ```{r}
+#| label: income-hist-dark
 #| classes: dark-mode
 ggplot(income_pop, aes(income)) +
     geom_histogram(fill = "#282C33", colour = "gray60") +
@@ -181,6 +187,7 @@ ggplot(income_pop, aes(income)) +
 Z pobieram z tego rozkładu losową próbkę 100 osób. Wychodzi mi średni dochód `r round(mean(rexp(100, 0.0007)))`. Spoko. Pobieram kolejne 100 osób i tym razem dostaję średni dochód `r round(mean(rexp(100, 0.0007)))`. Robię tak jeszcze bardzo dużo razy, więc ostatecznie mam zapisane w Excelu bardzo dużo średnich. Gdy z tych średnich, nie z pojedynczych obserwacji, zrobię histogram, dostanę coś takiego.
 
 ```{r}
+#| label: income-sampling-hist
 #| classes: light-mode
 income <- tibble(income = map_vec(1:1000, \(x) mean(rexp(100, 0.0007))))
 
@@ -192,6 +199,7 @@ ggplot(income, aes(income)) +
     theme_main()
 ```
 ```{r}
+#| label: income-sampling-hist-dark
 #| classes: dark-mode
 ggplot(income, aes(income)) +
     geom_histogram(fill = "#282C33", colour = "gray60") +

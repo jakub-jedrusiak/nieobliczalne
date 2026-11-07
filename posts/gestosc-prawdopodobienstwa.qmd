@@ -203,6 +203,7 @@ ggplot(p_tys, aes(IQ)) +
 Dokładny wykres gęstości prawdopodobieństwa pozwala nam liczyć prawdopodobieństwo dla dowolnych zakresów z dowolną dokładnością. Zyskaliśmy więc olbrzymie możliwości! Czai się tutaj jednak pewna pułapka. Gdy patrzymy na nasz wykres gęstości, chciałoby się powiedzieć, że szansa na to, że ktoś będzie miał inteligencję równą 100 wynosi ok. 2,5%.
 
 ```{r}
+#| label: likelihood-100
 #| classes: light-mode
 ggplot(p_tys, aes(IQ)) +
     geom_area(stat = "function", fun = dnorm, args = list(mean = 100, sd = 15), fill = "gray95", colour = "black") +
@@ -212,6 +213,7 @@ ggplot(p_tys, aes(IQ)) +
     theme_Publication()
 ```
 ```{r}
+#| label: likelihood-100-dark
 #| classes: dark-mode
 ggplot(p_tys, aes(IQ)) +
     geom_area(stat = "function", fun = dnorm, args = list(mean = 100, sd = 15), fill = "#595959", colour = "white") +
@@ -250,6 +252,7 @@ Tak jak wcześniej powiedziałem, jeśli chcemy z wykresu gęstości otrzymać p
 Załóżmy ponownie, że chcemy policzyć, jaka część populacji wykazuje inteligencję między 95 a 105. Od razu podam odpowiedź -- 26,11%. Nic nam po samej odpowiedzi, jeśli nie umiemy tego liczyć, ale miejmy to w głowie. Za moment będziemy określać te wartości z pewnym przybliżeniem, więc dobrze jest znać dokładną wartość, żeby móc stwierdzić, czy dobrze przybliżyliśmy. Zaznaczmy sobie na wykresie przestrzeń, o którą nam chodzi.
 
 ```{r}
+#| label: area-95-105
 #| classes: light-mode
 normal <- list(stat = "function", fun = dnorm, args = list(mean = 100, sd = 15))
 
@@ -262,6 +265,7 @@ ggplot(p_tys, aes(IQ)) +
     theme_Publication()
 ```
 ```{r}
+#| label: area-95-105-dark
 #| classes: dark-mode
 # definicja zmiennej `normal` w trybie dziennym
 ggplot(p_tys, aes(IQ)) +
@@ -276,6 +280,7 @@ ggplot(p_tys, aes(IQ)) +
 Żeby odczytać prawdopodobieństwo z takiego wykresu, musimy oszacować, wielkość przestrzeni, którą zaznaczyłem na czerwono. Wielkość przestrzeni, czyli... pole. Na czerwono zaznaczony jest prawie prostokąt, tylko ma brzuszek na górze. Jeśli będę mógł oszacować pole tego prostokąta, to to **pole właśnie będzie naszym prawdopodobieństwem**. Jak więc to zrobić? Bardzo z grubsza możemy brzuszek zignorować i udawać, że jest to rzeczywiście prostokąt.
 
 ```{r}
+#| label: rect-95-105
 #| classes: light-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "gray95", colour = "black") +
@@ -285,6 +290,7 @@ ggplot(p_tys, aes(IQ)) +
     theme_Publication()
 ```
 ```{r}
+#| label: rect-95-105-dark
 #| classes: dark-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "#595959", colour = "white") +
@@ -303,6 +309,7 @@ $$
 Nieźle! Pomimo tak zgrubnego oszacowania, błąd wynosi mniej niż 1 punkt procentowy. Tworzy nam się więc schemat -- wystarczy pomnożyć gęstość prawdopodobieństwa przez szerokość widełek i wyjdzie! Co nie? No i tak, i nie. Powyższy przykład pokazuje, że czasem to zadziała. Zobaczmy jednak, co się stanie, jak będziemy chcieli tak oszacować wartość dla szerszego przedziału 70-130.
 
 ```{r}
+#| label: rect-70-130-over
 #| classes: light-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "gray95", colour = "black") +
@@ -312,6 +319,7 @@ ggplot(p_tys, aes(IQ)) +
     theme_Publication()
 ```
 ```{r}
+#| label: rect-70-130-over-dark
 #| classes: dark-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "#595959", colour = "white") +
@@ -324,6 +332,7 @@ ggplot(p_tys, aes(IQ)) +
 Wysokość się nie zmieniła, zaś szerokość wzrosła do 60. Przemnożenie tych wartości da nam prawdopodobieństwo 159,58%. No. Przesadziliśmy odrobinę. Jak widać na wykresie, nasz prostokąt wystaje poza krzywą tak bardzo, że aż jego pole jest większe niż 100%. To może zmieńmy strategię i wciśnijmy nasz prostokąt pod krzywą, żeby na pewno nie wystawał?
 
 ```{r}
+#| label: rect-70-130-under
 #| classes: light-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "gray95", colour = "black") +
@@ -333,6 +342,7 @@ ggplot(p_tys, aes(IQ)) +
     theme_Publication()
 ```
 ```{r}
+#| label: rect-70-130-under-dark
 #| classes: dark-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "#595959", colour = "white") +
@@ -349,6 +359,7 @@ Możemy jednak zmienić strategię i zamiast wyznaczać pole jednego dużego pro
 [^1]: Zakładając, że prostokąty mają dotykać wykresu środkiem górnej krawędzi, skrajne prostokąty będą wystawały poza krzywą 5 punktów w prawo i 5 punktów w lewo, stąd dodatkowe 10 na przedziale. Inne metody szacowania obejmują prostokąty dotykające wykresu rogiem (prawym lub lewym) albo nawet zastąpienie prostokątów trapezami.
 
 ```{r}
+#| label: riemann-70-130
 #| classes: light-mode
 riemann <- tibble(X = seq(70, 130, 10), Y = dnorm(X, 100, 15))
 
@@ -360,6 +371,7 @@ ggplot(p_tys, aes(IQ)) +
     theme_Publication()
 ```
 ```{r}
+#| label: riemann-70-130-dark
 #| classes: dark-mode
 # definicja zmiennej `riemann` w trybie dziennym
 ggplot(p_tys, aes(IQ)) +
@@ -383,6 +395,7 @@ Szacowanie pola pod krzywą za pomocą prostokątów Riemanna, czyli to, co zrob
 Wiemy już, że prostokąty pod krzywą są nieskończenie cienkie. Wiemy też, że wzór na pole prostokąta to długość razy szerokość. Spójrzmy na taki „nieskończenie” cienki prostokąt.
 
 ```{r}
+#| label: rect-thin-100
 #| classes: light-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "gray95", colour = "black") +
@@ -392,6 +405,7 @@ ggplot(p_tys, aes(IQ)) +
     theme_Publication()
 ```
 ```{r}
+#| label: rect-thin-100-dark
 #| classes: dark-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "#595959", colour = "white") +
@@ -438,6 +452,7 @@ $$
 Wiemy więc już, jak zapisywać i jak szacować wartości prawdopodobieństwa z rozkładu normalnego. Jest to jednak czynność na tyle powszechna, że ma swoje własne, szczególne drogi na skróty. Najważniejszą z nich jest tak zwana **dystrybuanta**. Za tą straszną nazwą kryje się w miarę prosta idea, jaką jest suma krocząca prawdopodobieństwa. Co to znaczy? Załóżmy, że chcemy policzyć prawdopodobieństwo wylosowania osoby z IQ poniżej 85. Na wykresie ta powierzchnia wygląda to tak:
 
 ```{r}
+#| label: cdf-below-85
 #| classes: light-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "gray95") +
@@ -448,6 +463,7 @@ ggplot(p_tys, aes(IQ)) +
     theme_Publication()
 ```
 ```{r}
+#| label: cdf-below-85-dark
 #| classes: dark-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "#595959") +
@@ -475,6 +491,7 @@ Spróbujmy wykorzystać współczesne narzędzia[^3], żeby odpowiedzieć na zad
 [^3]: Ja wykorzystam tutaj R, ale możesz skorzystać z podlinkowanego [kalkulatora](https://www.danielsoper.com/statcalc/calculator.aspx?id=53). Przy tej okazji polecam swoje [wprowadzenie do R](podstawy_R.qmd) oraz rozważenie kupna kalkulatora naukowego z opcją liczenia dystrybuanty. Ja używam Casio fx-991CEX i sobie chwalę. Teraz zastępuje go druga edycja Casio fx-991ES PLUS.
 
 ```{r}
+#| label: pnorm-85
 #| echo: true
 #| include: true
 #| code-fold: false
@@ -488,6 +505,7 @@ W ten prosty sposób otrzymaliśmy odpowiedź, że jest to około $15,87\%$.
 Możemy też odpowiadać na pytania odwrotne, np. jakie jest prawdopodobieństwo, że losowo wybrany człowiek klasyfikuje się do Mensy (czyli ma IQ *powyżej* 130)? Na wykresie wygląda to tak:
 
 ```{r}
+#| label: cdf-above-130
 #| classes: light-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "gray95") +
@@ -498,6 +516,7 @@ ggplot(p_tys, aes(IQ)) +
     theme_Publication()
 ```
 ```{r}
+#| label: cdf-above-130-dark
 #| classes: dark-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "#595959") +
@@ -511,6 +530,7 @@ ggplot(p_tys, aes(IQ)) +
 Możemy to ugryźć na dwa sposoby. Jeśli nasz kalkulator nam to umożliwia, możemy przełączyć dystrybuantę na jej lustrzane odbicie, czyli wprost powiedzieć, żeby wyrzuciła nam wartości *większe* niż 130 zamiast zwyczajnych mniejszych. W R możemy to zrobić ustawiając argument `lower.tail = FALSE`.
 
 ```{r}
+#| label: pnorm-above-130
 #| echo: true
 #| include: true
 #| code-fold: false
@@ -520,6 +540,7 @@ pnorm(130, 100, 15, lower.tail = FALSE)
 Bardziej klasyczny sposób opiera się na tym, że prawdopodobieństwo sumarycznie *musi* wynosić 1. Możemy więc (ze zwykłej dystrybuanty) policzyć prawdopodobieństwo, że IQ wynosi *mniej niż* 130, a następnie otrzymaną wartość odjąć od 1. Tak też możesz zrobić korzystając z kalkulatora internetowego.
 
 ```{r}
+#| label: pnorm-130-complement
 #| echo: true
 #| include: true
 #| code-fold: false
@@ -529,6 +550,7 @@ Bardziej klasyczny sposób opiera się na tym, że prawdopodobieństwo sumaryczn
 Swoją drogą przypomnę, że prawdopodobieństwo odpowiada tutaj odsetkowi osób w próbie lub w populacji. Możemy więc policzyć na przykład, ilu potencjalnych Mensan zamieszkuje całą Polskę.
 
 ```{r}
+#| label: mensa-count
 #| echo: true
 #| include: true
 #| code-fold: false
@@ -545,6 +567,7 @@ Wiele kalkulatorów pozwala na policzenie wartości według danych widełek, ale
 Po pierwsze, liczymy wartość dystrybuanty dla górnych widełek, czyli w naszym przypadku 115.
 
 ```{r}
+#| label: cdf-below-115
 #| classes: light-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "gray95") +
@@ -555,6 +578,7 @@ ggplot(p_tys, aes(IQ)) +
     theme_Publication()
 ```
 ```{r}
+#| label: cdf-below-115-dark
 #| classes: dark-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "#595959") +
@@ -568,6 +592,7 @@ ggplot(p_tys, aes(IQ)) +
 Następnie liczymy dystrybuantę dla dolnych widełek, czyli w tym wypadku 85.
 
 ```{r}
+#| label: cdf-115-minus-85
 #| classes: light-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "gray95") +
@@ -579,6 +604,7 @@ ggplot(p_tys, aes(IQ)) +
     theme_Publication()
 ```
 ```{r}
+#| label: cdf-115-minus-85-dark
 #| classes: dark-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "#595959") +
@@ -593,6 +619,7 @@ ggplot(p_tys, aes(IQ)) +
 A na koniec odejmujemy jedno od drugiego.
 
 ```{r}
+#| label: area-85-115
 #| classes: light-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "gray95") +
@@ -603,6 +630,7 @@ ggplot(p_tys, aes(IQ)) +
     theme_Publication()
 ```
 ```{r}
+#| label: area-85-115-dark
 #| classes: dark-mode
 ggplot(p_tys, aes(IQ)) +
     exec(geom_area, !!!normal, fill = "#595959") +
@@ -616,6 +644,7 @@ ggplot(p_tys, aes(IQ)) +
 W R możemy to zrobić tak:
 
 ```{r}
+#| label: pnorm-85-115
 #| echo: true
 #| include: true
 #| code-fold: false
@@ -661,6 +690,7 @@ Każda funkcja ma swoją funkcję odwrotną[^4]. Tak samo dystrybuanta. Do dystr
 Załóżmy, że chcemy do projektu naukowego włączyć ludzi z górnych 10% rozkładu inteligencji. Czyli jak dobrze musi wypaść w teście inteligencji dana osoba, żeby zostać włączona do projektu? Jakie minimalne IQ musi uzyskać? Na takie właśnie pytania odpowiada odwrotna dystrybuanta. Przykładowy kalkulator można znaleźć [tutaj](https://planetcalc.com/4987/), zaś w R odpowiada za nią funkcja `qnorm()`.
 
 ```{r}
+#| label: qnorm-examples
 #| echo: true
 #| include: true
 #| code-fold: false
@@ -724,6 +754,7 @@ $$
 Teraz możemy odczytać stosowne wartości dystrybuanty z tabeli. Zacznijmy od górnych widełek. Z lewej strony szukam wartości 1,6 i patrzę w kolumnę oznaczoną 0,07, bo razem daje to 1,67. Więcej problemu sprawi wartość -1,33, bo jest ujemna, zaś tabela składa się z wartości dodatnich. Jednak wiemy, że rozkład normalny jest symetryczny, czyli wartość przy $Z = -1,33$ będzie taka sama, jak odwrotność wartości dla $Z = 1,33$. Słowny opis jest mało zrozumiały, więc posłużmy się wykresem.
 
 ```{r}
+#| label: z-symmetric-tails
 #| classes: light-mode
 ggplot(tibble(X = seq(-3.2, 3.2, 0.01)), aes(X)) +
     geom_area(stat = "function", fun = dnorm, fill = "gray95") +
@@ -736,6 +767,7 @@ ggplot(tibble(X = seq(-3.2, 3.2, 0.01)), aes(X)) +
     theme_Publication()
 ```
 ```{r}
+#| label: z-symmetric-tails-dark
 #| classes: dark-mode
 ggplot(tibble(X = seq(-3.2, 3.2, 0.01)), aes(X)) +
     geom_area(stat = "function", fun = dnorm, fill = "#595959") +
@@ -762,6 +794,7 @@ P(80 < IQ < 125) & = \\
 $$
 
 ```{r}
+#| label: z-area-133-167
 #| classes: light-mode
 ggplot(tibble(X = seq(-3.2, 3.2, 0.01)), aes(X)) +
     geom_area(stat = "function", fun = dnorm, fill = "gray95") +
@@ -773,6 +806,7 @@ ggplot(tibble(X = seq(-3.2, 3.2, 0.01)), aes(X)) +
     theme_Publication()
 ```
 ```{r}
+#| label: z-area-133-167-dark
 #| classes: dark-mode
 ggplot(tibble(X = seq(-3.2, 3.2, 0.01)), aes(X)) +
     geom_area(stat = "function", fun = dnorm, fill = "#595959") +
@@ -787,6 +821,7 @@ ggplot(tibble(X = seq(-3.2, 3.2, 0.01)), aes(X)) +
 Jak wygląda dokładność tego wyniku w porównaniu do tego wyrzucanego przez R? Całkiem nieźle. Rozbieżności pojawiają się dopiero na czwartym miejscu po przecinku.
 
 ```{r}
+#| label: pnorm-z-vs-iq
 #| echo: true
 #| include: true
 #| code-fold: false
@@ -805,6 +840,7 @@ Korzystając z tablic rozkładu normalnego oblicz, jakie jest prawdopodobieństw
 ::: {.callout-note collapse="true"}
 ## Odpowiedź
 ```{r}
+#| label: pnorm-125-129
 #| echo: true
 #| include: true
 #| code-fold: false
